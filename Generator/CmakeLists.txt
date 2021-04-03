@@ -1,0 +1,11 @@
+Project(Generator)
+
+add_compile_options("/std:c++latest")
+
+aux_source_directory(. GENERATOR_SRCS)
+
+aux_source_directory(NFA_generator NFA_GENERATOR_SRCS)
+
+add_executable(Generator ${GENERATOR_SRCS} ${NFA_GENERATOR_SRCS})
+
+include_directories(${CMAKE_SOURCE_DIR}/Common ${CMAKE_SOURCE_DIR}/Config)

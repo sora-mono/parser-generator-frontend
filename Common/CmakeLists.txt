@@ -1,0 +1,3 @@
+project(Common)
+
+add_compile_options("/std:c++latest")
