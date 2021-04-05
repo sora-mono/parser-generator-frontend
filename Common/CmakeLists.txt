@@ -1,3 +1,8 @@
 project(Common)
 
 add_compile_options("/std:c++latest")
+
+file(GLOB_RECURSE COMMON_FUNCTIONS_SRC ./*.cpp)
+file(GLOB_RECURSE COMMON_FUNCTIONS_HDR ./*.h)
+
+add_library(common_functions STATIC ${COMMON_FUNCTIONS_SRC} ${COMMON_FUNCTIONS_HDR})

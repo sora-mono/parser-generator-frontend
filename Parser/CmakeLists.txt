@@ -2,8 +2,10 @@ project(Parser)
 
 add_compile_options("/std:c++latest")
 
-aux_source_directory(. Parser_SRCS)
+include_directories(${CMAKE_SOURCE_DIR}/Common ${CMAKE_SOURCE_DIR}/Config)
 
+aux_source_directory(. Parser_SRCS)
 add_executable(Parser ${Parser_SRCS})
 
-include_directories(${CMAKE_SOURCE_DIR}/Common ${CMAKE_SOURCE_DIR}/Config)
+link_directories(${PROJECT_SOURCE_DIR}/Common)
+target_link_libraries(Parser common_functions)

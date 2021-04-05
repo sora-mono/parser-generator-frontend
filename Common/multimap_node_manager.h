@@ -17,15 +17,31 @@ public:
 	~multimap_node_manager() {}
 
 	T* get_node(node_handler_t handler);
-	const std::unordered_set<node_handler_t>& get_handlers_referring_basic_node(node_handler_t handler);	//通过一个handler查询引用底层节点的所有handler
+	const std::unordered_set<node_handler_t>& get_handlers_referring_same_node(node_handler_t handler);	//通过一个handler查询引用底层节点的所有handler
 	bool is_same(node_handler_t handler1, node_handler_t handler2);
 	template<class ...Args>
 	node_handler_t emplace_node(Args&&...args);		//系统自行选择最佳位置放置节点
 	T* remove_pointer(node_handler_t handler);	//仅删除节点
 	bool remove_node(node_handler_t handler);		//删除节点并释放节点内存
 	bool merge(node_handler_t handler_dst, node_handler_t handler_src,
-		std::function<bool(T&, T&)>merge_function = node_manager<T>::default_merge_function);	//将handler_src合并到handler_dst，会调用函数merge_function
+		std::function<bool(T&, T&)>merge_function = node_manager<T>::default_merge_function_2);	//将handler_src合并到handler_dst，会调用函数merge_function
+	template<class Manager>
+	bool merge(
+		node_handler_t handler_dst,
+		node_handler_t handler_src,
+		Manager& manager,
+		const std::function<bool(T&, T&, Manager&)>& merge_function = node_manager<T>::default_merge_function_3);	//将handler_src合并到handler_dst，会调用函数merge_function
 	void swap(multimap_node_manager& manager_other);		//交换两个类的内容
+
+	bool set_merge_allowed(node_handler_t handler);		//设置节点允许合并标志
+	bool set_merge_refused(node_handler_t handler);		//设置节点禁止合并标志
+	void set_all_merge_allowed() { m_node_manager.set_all_merge_allowed(); }	//设置所有节点允许合并
+	void set_all_merge_refused() { m_node_manager.set_all_merge_refused(); }	//设置所有节点禁止合并
+	bool can_merge(node_handler_t handler);
+
+	//暂时不写，优化释放后的空间太少
+	//void remap_optimization();	//重映射所有的节点，消除node_manager空余空间
+
 	void clear();			//清除并释放所有节点
 	void clear_no_release();//清除但不释放所有节点
 	void shrink_to_fit();	//调用成员变量的shrink_to_fit
@@ -74,7 +90,7 @@ inline T* multimap_node_manager<T>::get_node(node_handler_t handler)
 
 template<class T>
 inline const std::unordered_set<typename multimap_node_manager<T>::node_handler_t>&
-multimap_node_manager<T>::get_handlers_referring_basic_node(node_handler_t handler)
+multimap_node_manager<T>::get_handlers_referring_same_node(node_handler_t handler)
 {
 	inside_index_t inside_index = get_inside_index(handler);
 	if (inside_index == -1)
@@ -122,6 +138,39 @@ multimap_node_manager<T>::emplace_node(Args && ...args)
 }
 
 template<class T>
+inline bool multimap_node_manager<T>::set_merge_allowed(node_handler_t handler)
+{
+	inside_index_t inside_index = get_inside_index(handler);
+	if (inside_index == -1)
+	{
+		return false;
+	}
+	return m_node_manager.set_merge_allowed(inside_index);
+}
+
+template<class T>
+inline bool multimap_node_manager<T>::set_merge_refused(node_handler_t handler)
+{
+	inside_index_t inside_index = get_inside_index(handler);
+	if (inside_index == -1)
+	{
+		return false;
+	}
+	return m_node_manager.set_merge_refused(inside_index);
+}
+
+template<class T>
+inline bool multimap_node_manager<T>::can_merge(node_handler_t handler)
+{
+	inside_index_t index = get_inside_index(handler);
+	if (index == -1)
+	{
+		return false;
+	}
+	return m_node_manager.can_merge(index);
+}
+
+template<class T>
 inline bool multimap_node_manager<T>::merge(node_handler_t handler_dst, node_handler_t handler_src, std::function<bool(T&, T&)>merge_function)
 {
 	inside_index_t inside_index_dst = get_inside_index(handler_dst);
@@ -131,6 +180,28 @@ inline bool multimap_node_manager<T>::merge(node_handler_t handler_dst, node_han
 		return false;
 	}
 	if (!m_node_manager.merge(inside_index_dst, inside_index_src, merge_function))
+	{
+		return false;
+	}
+	remap_handler(handler_src, inside_index_dst);
+	return true;
+}
+
+template<class T>
+template<class Manager>
+inline bool multimap_node_manager<T>::merge(
+	typename multimap_node_manager<T>::node_handler_t handler_dst,
+	typename multimap_node_manager<T>::node_handler_t handler_src,
+	Manager& manager,
+	const std::function<bool(T&, T&, Manager&)>& merge_function)
+{
+	inside_index_t inside_index_dst = get_inside_index(handler_dst);
+	inside_index_t inside_index_src = get_inside_index(handler_src);
+	if (inside_index_dst == -1 || inside_index_src == -1)
+	{
+		return false;
+	}
+	if (!m_node_manager.merge(inside_index_dst, inside_index_src, manager, merge_function))
 	{
 		return false;
 	}
