@@ -1,5 +1,2 @@
 #pragma once
-class DFA_machine
-{
-};
-
+class DFA_machine {};

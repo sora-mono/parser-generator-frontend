@@ -2,11 +2,12 @@ Project(Generator)
 
 add_compile_options("/std:c++latest")
 
-include_directories(${CMAKE_SOURCE_DIR}/Common ${CMAKE_SOURCE_DIR}/Config)
+include_directories(${CMAKE_SOURCE_DIR}/Common ${CMAKE_SOURCE_DIR}/Config ${CMAKE_SOURCE_DIR}/Generator/NfaGenerator)
 
 aux_source_directory(. GENERATOR_SRCS)
-aux_source_directory(NFA_generator NFA_GENERATOR_SRCS)
-add_executable(Generator ${GENERATOR_SRCS} ${NFA_GENERATOR_SRCS})
+aux_source_directory(NfagGenerator NFA_GENERATOR_SRCS)
+aux_source_directory(DfaGenerator DFA_GENERATOR_SRCS)
+add_executable(Generator ${GENERATOR_SRCS} ${NFA_GENERATOR_SRCS} ${DFA_GENERATOR_SRCS})
 
 link_directories(${PROJECT_SOURCE_DIR}/Common)
 target_link_libraries(Generator common_functions)

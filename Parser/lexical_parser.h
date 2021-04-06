@@ -1,6 +1,3 @@
 #pragma once
 
-class lexical_parser
-{
-};
-
+class lexical_parser {};
