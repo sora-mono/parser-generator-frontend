@@ -1,6 +1,7 @@
 #pragma once
 #include <assert.h>
 
+#include <algorithm>
 #include <stdexcept>
 #include <unordered_map>
 #include <unordered_set>
@@ -46,7 +47,7 @@ class MultimapNodeManager {
   //设置节点禁止合并标志
   bool SetNodeMergeRefused(NodeHandler handler);
   //设置所有节点允许合并，不会对未分配节点设置允许标记
-  void set_all_merge_allowed() { node_manager_.set_all_merge_allowed(); }
+  void SetAllMergeAllowed() { node_manager_.SetAllNodesMergeAllowed(); }
   //设置所有节点禁止合并
   void SetAllNodesMergeRefused() { node_manager_.SetAllNodesMergeRefused(); }
   //返回handler对应节点可合并状态
@@ -219,7 +220,7 @@ inline bool MultimapNodeManager<T>::MergeNodesWithManager(
 template <class T>
 inline bool MultimapNodeManager<T>::PreRemoveInsideNode(
     InsideIndex inside_index) {
-  if (inside_index >= node_manager_.size()) {
+  if (inside_index >= node_manager_.Size()) {
     return false;
   }
   if (referred_handlers_[inside_index].size() != 0) {
@@ -227,7 +228,7 @@ inline bool MultimapNodeManager<T>::PreRemoveInsideNode(
       auto iter = handler_to_index_.find(x);
       handler_to_index_.erase(iter);
     }
-    referred_handlers_[inside_index].Clear();
+    referred_handlers_[inside_index].clear();
   }
   return true;
 }
@@ -257,7 +258,7 @@ inline bool MultimapNodeManager<T>::RemoveNode(NodeHandler handler) {
 
 template <class T>
 inline void MultimapNodeManager<T>::Swap(MultimapNodeManager& manager_other) {
-  std::Swap(next_handler_index_, manager_other.next_handler_index_);
+  std::swap(next_handler_index_, manager_other.next_handler_index_);
   node_manager_.Swap(manager_other.node_manager_);
   referred_handlers_.Swap(manager_other.referred_handlers_);
   handler_to_index_.Swap(manager_other.handler_to_index_);
@@ -266,7 +267,7 @@ inline void MultimapNodeManager<T>::Swap(MultimapNodeManager& manager_other) {
 template <class T>
 inline bool MultimapNodeManager<T>::RemapHandler(NodeHandler handler,
                                                  InsideIndex inside_index) {
-  if (inside_index >= node_manager_.size()) {
+  if (inside_index >= node_manager_.Size()) {
     return false;
   }
   InsideIndex inside_index_old = GetInsideIndex(handler);
@@ -290,7 +291,7 @@ inline bool MultimapNodeManager<T>::RemapHandler(NodeHandler handler,
 template <class T>
 inline size_t MultimapNodeManager<T>::AddReference(NodeHandler handler,
                                                    InsideIndex inside_index) {
-  if (inside_index >= node_manager_.size()) {
+  if (inside_index >= node_manager_.Size()) {
     return -1;
   }
   referred_handlers_[inside_index].insert(handler);
@@ -300,7 +301,7 @@ inline size_t MultimapNodeManager<T>::AddReference(NodeHandler handler,
 template <class T>
 inline size_t MultimapNodeManager<T>::RemoveReference(
     NodeHandler handler, InsideIndex inside_index) {
-  if (inside_index >= node_manager_.size()) {
+  if (inside_index >= node_manager_.Size()) {
     return -1;
   }
   auto& ref_uset = referred_handlers_[inside_index];
@@ -318,20 +319,20 @@ template <class T>
 inline void MultimapNodeManager<T>::Clear() {
   next_handler_index_ = 0;
   node_manager_.Clear();
-  referred_handlers_.Clear();
-  handler_to_index_.Clear();
+  referred_handlers_.clear();
+  handler_to_index_.clear();
 }
 
 template <class T>
 inline void MultimapNodeManager<T>::ClearNoRelease() {
   next_handler_index_ = 0;
   node_manager_.ClearNoRelease();
-  referred_handlers_.Clear();
-  handler_to_index_.Clear();
+  referred_handlers_.clear();
+  handler_to_index_.clear();
 }
 
 template <class T>
 inline void MultimapNodeManager<T>::ShrinkToFit() {
   node_manager_.ShrinkToFit();
-  referred_handlers_.ShrinkToFit();
+  referred_handlers_.shrink_to_fit();
 }

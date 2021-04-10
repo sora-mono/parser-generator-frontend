@@ -1,5 +1,4 @@
 #pragma once
-
 #include <iostream>
 #include <unordered_map>
 #include <unordered_set>
@@ -12,21 +11,23 @@ class NfaGenerator {
   struct NfaNode;
   using NodeHandler = MultimapNodeManager<NfaNode>::NodeHandler;
   using NodeGather = size_t;
+  using PriorityTag = size_t;
   //前半部分为tag序号，后半部分为优先级，数字越大优先级越高
-  using TailNodeTag = std::pair<size_t, size_t>;
+  using TailNodeData = std::pair<size_t, PriorityTag>;
+
   friend bool MergeNfaNodesWithGenerator(NfaNode& node_dst, NfaNode& node_src,
                                          NfaGenerator& generator);
 
   struct NfaNode {
     NfaNode() {}
     NfaNode(const NfaNode& node)
-        : nodes_forward_(node.nodes_forward_),
-          conditionless_transfer_nodes_handler_(
-              node.conditionless_transfer_nodes_handler_) {}
+        : nodes_forward(node.nodes_forward),
+          conditionless_transfer_nodes_handler(
+              node.conditionless_transfer_nodes_handler) {}
     NfaNode(NfaNode&& node)
-        : nodes_forward_(std::move(node.nodes_forward_)),
-          conditionless_transfer_nodes_handler_(
-              std::move(node.conditionless_transfer_nodes_handler_)) {}
+        : nodes_forward(std::move(node.nodes_forward)),
+          conditionless_transfer_nodes_handler(
+              std::move(node.conditionless_transfer_nodes_handler)) {}
 
     NodeHandler GetForwardNodesHandler(char c_transfer);
     const std::unordered_set<NodeHandler>& GetUnconditionTransferNodesHandler();
@@ -42,50 +43,56 @@ class NfaGenerator {
 
     bool MergeNodesWithManager(NfaNode& node_src);
     //记录转移条件与前向节点，一个条件仅允许对应一个节点
-    std::unordered_map<char, NodeGather> nodes_forward_;
+    std::unordered_map<char, NodeGather> nodes_forward;
     //存储无条件转移节点
-    std::unordered_set<NodeHandler> conditionless_transfer_nodes_handler_;
+    std::unordered_set<NodeHandler> conditionless_transfer_nodes_handler;
   };
 
-  NfaGenerator();
+  NfaGenerator():head_node_handler_(-1) {}
   NfaGenerator(const NfaGenerator&) = delete;
   NfaGenerator(NfaGenerator&&) = delete;
 
-  const TailNodeTag get_tail_tag(NfaNode* pointer);
-  const TailNodeTag get_tail_tag(NodeHandler handler);
+  NodeHandler GetHeadNodeHandler() { return head_node_handler_; }
+
+  const TailNodeData GetTailTag(NfaNode* pointer);
+  const TailNodeData GetTailTag(NodeHandler handler);
   NfaNode* GetNode(NodeHandler handler);
   //解析正则并添加到已有NFA中，返回生成的自动机的头结点和尾节点，自动处理结尾的范围限制符号
-  std::pair<NodeHandler, NodeHandler> regex_construct(
-      std::istream& in, const TailNodeTag& tag, bool add_to_NFA_head,
+  std::pair<NodeHandler, NodeHandler> RegexConstruct(
+      std::istream& in, const TailNodeData& tag, bool add_to_NFA_head,
       bool return_when_right_bracket);
   //添加一个由字符串构成的NFA，自动处理结尾的范围限制符号
-  std::pair<NodeHandler, NodeHandler> word_construct(const std::string& str,
-                                                     const TailNodeTag& tag);
+  std::pair<NodeHandler, NodeHandler> WordConstruct(const std::string& str,
+                                                    const TailNodeData& tag);
   //合并优化，降低节点数以降低子集构造法集合大小，直接使用NFA也可以降低成本
-  void merge_optimization();
+  void MergeOptimization();
 
-  std::pair<std::unordered_set<NodeHandler>, TailNodeTag> Closure(
+  std::pair<std::unordered_set<NodeHandler>, TailNodeData> Closure(
       NodeHandler handler);
   //返回goto后的节点的闭包
-  std::pair<std::unordered_set<NodeHandler>, TailNodeTag> Goto(
+  std::pair<std::unordered_set<NodeHandler>, TailNodeData> Goto(
       NodeHandler handler_src, char c_transform);
+
+  //清除已有NFA
+  void Clear();
+
   //序列化容器用
   template <class Archive>
-  void serialize(Archive& ar, const unsigned int version = 0);
+  void Serialize(Archive& ar, const unsigned int version = 0);
 
  private:
-  bool remove_tail_node(NfaNode* pointer);
-  bool add_tail_node(NfaNode* pointer, const TailNodeTag& tag);
-  bool add_tail_node(NodeHandler handler, const TailNodeTag& tag) {
-    return add_tail_node(GetNode(handler), tag);
+  bool RemoveTailNode(NfaNode* pointer);
+  bool AddTailNode(NfaNode* pointer, const TailNodeData& tag);
+  bool AddTailNode(NodeHandler handler, const TailNodeData& tag) {
+    return AddTailNode(GetNode(handler), tag);
   }
   //生成可选字符序列，会读取]后的*,+,?等限定符
-  std::pair<NodeHandler, NodeHandler> create_switch_tree(std::istream& in);
+  std::pair<NodeHandler, NodeHandler> CreateSwitchTree(std::istream& in);
 
   //所有NFA的头结点
   NodeHandler head_node_handler_;
   //该set用来存储所有尾节点和对应单词的tag
-  std::unordered_map<NfaNode*, TailNodeTag> tail_nodes_;
+  std::unordered_map<NfaNode*, TailNodeData> tail_nodes_;
   MultimapNodeManager<NfaNode> node_manager_;
 };
 

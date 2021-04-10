@@ -32,8 +32,8 @@ class NodeManager {
   NodeHandler EmplaceNode(Args&&... args);
   //在指定位置放置节点
   template <class... Args>
-  NodeManager<T>::NodeHandler EmplaceNode_index(NodeHandler index,
-                                                Args&&... args);
+  NodeManager<T>::NodeHandler EmplaceNodeIndex(NodeHandler index,
+                                               Args&&... args);
   //在指定位置放置指针
   NodeManager<T>::NodeHandler EmplacePointerIndex(NodeHandler index,
                                                   T* pointer);
@@ -59,7 +59,7 @@ class NodeManager {
   void SetAllNodesMergeRefused();
 
   inline bool CanMerge(NodeHandler index) {
-    return index < nodes_can_merge_.size() ? nodes_can_merge_[index] : false;
+    return index < nodes_can_merge.size() ? nodes_can_merge[index] : false;
   }
   size_t Size() { return nodes_.size(); }
 
@@ -79,7 +79,7 @@ class NodeManager {
   //优化用数组，存放被删除节点对应的ID
   std::vector<NodeHandler> removed_ids_;
   //存储信息表示是否允许合并节点
-  std::vector<bool> nodes_can_merge_;
+  std::vector<bool> nodes_can_merge;
 };
 
 template <class T>
@@ -109,10 +109,10 @@ inline bool NodeManager<T>::RemoveNode(NodeHandler index) {
   removed_ids_.push_back(index);  //添加到已删除ID中
   delete nodes_[index];
   nodes_[index] = nullptr;
-  nodes_can_merge_[index] = false;
+  nodes_can_merge[index] = false;
   while (nodes_.size() > 0 && nodes_.back() == nullptr) {
     nodes_.pop_back();  //清理末尾无效ID
-    nodes_can_merge_.pop_back();
+    nodes_can_merge.pop_back();
   }
   return true;
 }
@@ -127,10 +127,10 @@ inline T* NodeManager<T>::RemovePointer(NodeHandler index) {
     return nullptr;
   }
   removed_ids_.push_back(index);
-  nodes_can_merge_[index] = false;
+  nodes_can_merge[index] = false;
   while (nodes_.size() > 0 && nodes_.back() == nullptr) {
     nodes_.pop_back();  //清理末尾无效ID
-    nodes_can_merge_.pop_back();
+    nodes_can_merge.pop_back();
   }
   return temp_pointer;
 }
@@ -153,12 +153,12 @@ inline NodeManager<T>::NodeHandler NodeManager<T>::EmplaceNode(Args&&... args) {
     index = nodes_.size();
   }
 
-  return EmplaceNode_index(index, std::forward<Args>(args)...);  //返回插入位置
+  return EmplaceNodeIndex(index, std::forward<Args>(args)...);  //返回插入位置
 }
 
 template <class T>
 template <class... Args>
-inline NodeManager<T>::NodeHandler NodeManager<T>::EmplaceNode_index(
+inline NodeManager<T>::NodeHandler NodeManager<T>::EmplaceNodeIndex(
     NodeHandler index, Args&&... args) {
   T* pointer = new T(std::forward<Args>(args)...);
   bool result = EmplacePointerIndex(index, pointer);
@@ -174,7 +174,7 @@ inline NodeManager<T>::NodeHandler NodeManager<T>::EmplacePointerIndex(
   size_t size_old = nodes_.size();
   if (index >= size_old) {
     nodes_.resize(index + 1, nullptr);
-    nodes_can_merge_.resize(index + 1, false);
+    nodes_can_merge.resize(index + 1, false);
     for (size_t i = size_old; i < index; i++) {
       removed_ids_.push_back(i);
     }
@@ -184,7 +184,7 @@ inline NodeManager<T>::NodeHandler NodeManager<T>::EmplacePointerIndex(
     return -1;
   }
   nodes_[index] = pointer;
-  nodes_can_merge_[index] = true;
+  nodes_can_merge[index] = true;
   return index;
 }
 
@@ -192,24 +192,24 @@ template <class T>
 inline void NodeManager<T>::Swap(NodeManager& manager_other) {
   nodes_.Swap(manager_other.nodes_);
   removed_ids_.Swap(manager_other.removed_ids_);
-  nodes_can_merge_.Swap(manager_other.nodes_can_merge_);
+  nodes_can_merge.Swap(manager_other.nodes_can_merge);
 }
 
 template <class T>
 inline bool NodeManager<T>::SetNodeMergeAllowed(NodeHandler index) {
-  if (index > nodes_.size() || nodes_can_merge_[index] == nullptr) {
+  if (index > nodes_.size() || nodes_can_merge[index] == nullptr) {
     return false;
   }
-  nodes_can_merge_[index] = true;
+  nodes_can_merge[index] = true;
   return true;
 }
 
 template <class T>
 inline bool NodeManager<T>::SetNodeMergeRefused(NodeHandler index) {
-  if (index > nodes_can_merge_.size() || nodes_[index] == nullptr) {
+  if (index > nodes_can_merge.size() || nodes_[index] == nullptr) {
     return false;
   }
-  nodes_can_merge_[index] = false;
+  nodes_can_merge[index] = false;
   return true;
 }
 
@@ -217,15 +217,15 @@ template <class T>
 inline void NodeManager<T>::SetAllNodesMergeAllowed() {
   for (size_t index = 0; index < nodes_.size(); index++) {
     if (nodes_[index] != nullptr) {
-      nodes_can_merge_[index] = true;
+      nodes_can_merge[index] = true;
     }
   }
 }
 
 template <class T>
 inline void NodeManager<T>::SetAllNodesMergeRefused() {
-  std::vector<bool> vec_temp(nodes_can_merge_.size(), false);
-  nodes_can_merge_.Swap(vec_temp);
+  std::vector<bool> vec_temp(nodes_can_merge.size(), false);
+  nodes_can_merge.Swap(vec_temp);
 }
 
 template <class T>
@@ -234,7 +234,7 @@ inline bool NodeManager<T>::MergeNodesWithManager(
     const std::function<bool(T&, T&)>& merge_function) {
   if (index_dst >= nodes_.size() || index_src >= nodes_.size() ||
       nodes_[index_dst] == nullptr || nodes_[index_src] == nullptr ||
-      !can_merge(index_dst) || !can_merge(index_src)) {
+      !CanMerge(index_dst) || !CanMerge(index_src)) {
     return false;
   }
   if (!merge_function(*nodes_[index_dst], *nodes_[index_src])) {
@@ -252,7 +252,7 @@ bool NodeManager<T>::MergeNodesWithManager(
     const std::function<bool(T&, T&, Manager&)>& merge_function) {
   if (index_dst >= nodes_.size() || index_src >= nodes_.size() ||
       nodes_[index_dst] == nullptr || nodes_[index_src] == nullptr ||
-      !can_merge(index_dst) || !can_merge(index_src)) {
+      !CanMerge(index_dst) || !CanMerge(index_src)) {
     return false;
   }
   if (!merge_function(*nodes_[index_dst], *nodes_[index_src], manager)) {
@@ -281,7 +281,7 @@ template <class T>
 inline void NodeManager<T>::ShrinkToFit() {
   while (nodes_.size() > 0 && nodes_.back() == nullptr) {
     nodes_.pop_back();
-    nodes_can_merge_.pop_back();
+    nodes_can_merge.pop_back();
   }
   nodes_.ShrinkToFit();
   removed_ids_.ShrinkToFit();
