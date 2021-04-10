@@ -62,7 +62,7 @@ class NodeManager {
     return index < nodes_can_merge.size() ? nodes_can_merge[index] : false;
   }
   size_t Size() { return nodes_.size(); }
-
+  size_t ItemSize();
   //清除并释放所有节点
   void Clear();
   //清除但不释放所有节点
@@ -285,4 +285,15 @@ inline void NodeManager<T>::ShrinkToFit() {
   }
   nodes_.ShrinkToFit();
   removed_ids_.ShrinkToFit();
+}
+
+template <class T>
+inline size_t NodeManager<T>::ItemSize() {
+  size_t count = 0;
+  for (auto p : nodes_) {
+    if (p != nullptr) {
+      ++count;
+    }
+  }
+  return count;
 }

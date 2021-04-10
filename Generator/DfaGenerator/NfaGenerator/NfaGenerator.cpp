@@ -75,7 +75,7 @@ NfaGenerator::Closure(NodeHandler handler) {
     uset_temp.insert(handler_now);
     auto iter = tail_nodes_.find(GetNode(handler_now));  //判断是否为尾节点
     if (iter != tail_nodes_.end()) {
-      if (tag == TailNodeData(-1, -1)) {  //以前无尾节点记录
+      if (tag == NotTailNodeTag) {  //以前无尾节点记录
         tag = iter->second;
       } else if (iter->second.second >
                  tag.second) {  //当前记录优先级大于以前的优先级
@@ -97,11 +97,11 @@ std::pair<std::unordered_set<typename NfaGenerator::NodeHandler>,
 NfaGenerator::Goto(NodeHandler handler_src, char c_transform) {
   NfaNode* pointer_node = GetNode(handler_src);
   if (pointer_node == nullptr) {
-    return std::pair(std::unordered_set<NodeHandler>(), TailNodeData(-1, -1));
+    return std::pair(std::unordered_set<NodeHandler>(), NotTailNodeTag);
   }
   NodeHandler handler = pointer_node->GetForwardNodesHandler(c_transform);
   if (handler == -1) {
-    return std::pair(std::unordered_set<NodeHandler>(), TailNodeData(-1, -1));
+    return std::pair(std::unordered_set<NodeHandler>(), NotTailNodeTag);
   }
   return Closure(handler);
 }
@@ -137,7 +137,7 @@ inline const NfaGenerator::TailNodeData NfaGenerator::GetTailTag(
     NfaNode* pointer) {
   auto iter = tail_nodes_.find(pointer);
   if (iter == tail_nodes_.end()) {
-    return TailNodeData(-1, -1);
+    return NotTailNodeTag;
   }
   return iter->second;
 }
@@ -179,7 +179,7 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
         break;
       case '(':
         std::pair(temp_head_handler, temp_tail_handler) =
-            RegexConstruct(in, TailNodeData(-1, -1), false, true);
+            RegexConstruct(in, NotTailNodeTag, false, true);
         if (temp_head_handler == -1 || temp_tail_handler == -1) {
           throw std::invalid_argument("非法正则");
         }
@@ -389,14 +389,14 @@ bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
                                 NfaGenerator& generator) {
   NfaGenerator::TailNodeData dst_tag = generator.GetTailTag(&node_dst);
   NfaGenerator::TailNodeData src_tag = generator.GetTailTag(&node_src);
-  if (dst_tag != NfaGenerator::TailNodeData(-1, -1) &&
+  if (dst_tag != NfaGenerator::NotTailNodeTag &&
       src_tag !=
-          NfaGenerator::TailNodeData(-1, -1)) {  //两个都为尾节点的节点不能合并
+          NfaGenerator::NotTailNodeTag) {  //两个都为尾节点的节点不能合并
     return false;
   }
   bool result = node_dst.MergeNodesWithManager(node_src);
   if (result) {
-    if (src_tag != NfaGenerator::TailNodeData(-1, -1)) {
+    if (src_tag != NfaGenerator::NotTailNodeTag) {
       generator.RemoveTailNode(&node_src);
       generator.AddTailNode(&node_dst, src_tag);
     }

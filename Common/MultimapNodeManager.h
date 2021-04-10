@@ -63,6 +63,11 @@ class MultimapNodeManager {
   //调用成员变量的shrink_to_fit
   void ShrinkToFit();
 
+  //返回节点个数（包括已删除但仍保留index的节点）
+  size_t Size() { return node_manager_.Size(); }
+  //返回实际节点个数
+  size_t ItemSize() { return node_manager_.ItemSize(); }
+
   //序列化容器用
   template <class Archive>
   void Serialize(Archive& ar, const unsigned int version = 0);

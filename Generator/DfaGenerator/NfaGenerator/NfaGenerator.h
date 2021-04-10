@@ -59,8 +59,8 @@ class NfaGenerator {
   NfaNode* GetNode(NodeHandler handler);
   //解析正则并添加到已有NFA中，返回生成的自动机的头结点和尾节点，自动处理结尾的范围限制符号
   std::pair<NodeHandler, NodeHandler> RegexConstruct(
-      std::istream& in, const TailNodeData& tag, bool add_to_NFA_head,
-      bool return_when_right_bracket);
+      std::istream& in, const TailNodeData& tag, bool add_to_NFA_head = true,
+      bool return_when_right_bracket = false);
   //添加一个由字符串构成的NFA，自动处理结尾的范围限制符号
   std::pair<NodeHandler, NodeHandler> WordConstruct(const std::string& str,
                                                     const TailNodeData& tag);
@@ -80,6 +80,8 @@ class NfaGenerator {
   template <class Archive>
   void Serialize(Archive& ar, const unsigned int version = 0);
 
+  //非尾节点标记
+  const static TailNodeData NotTailNodeTag;
  private:
   bool RemoveTailNode(NfaNode* pointer);
   bool AddTailNode(NfaNode* pointer, const TailNodeData& tag);
@@ -99,3 +101,5 @@ class NfaGenerator {
 bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
                                 NfaGenerator::NfaNode& node_src,
                                 NfaGenerator& generator);
+const NfaGenerator::TailNodeData NfaGenerator::NotTailNodeTag =
+    NfaGenerator::TailNodeData(-1, -1);

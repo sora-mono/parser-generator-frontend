@@ -9,7 +9,7 @@ using StringHashType = unsigned long long;
 using IntergalSetHashType = unsigned long long;
 
 const unsigned long long hash_seed = 131;  // 31 131 1313 13131 131313 etc..
-const size_t kchar_num = 256;
+const size_t kchar_num = CHAR_MAX - CHAR_MIN + 1;
 StringHashType HashString(const std::string& str);
 
 template <class T>
