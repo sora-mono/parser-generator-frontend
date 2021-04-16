@@ -5,9 +5,11 @@ add_compile_options("/std:c++latest")
 include_directories(${CMAKE_SOURCE_DIR}/Common ${CMAKE_SOURCE_DIR}/Config ${CMAKE_SOURCE_DIR}/Generator/DfaGenerator)
 
 add_subdirectory(DfaGenerator)
+add_subdirectory(LexicalGenerator)
+
 
 aux_source_directory(. GENERATOR_SRCS)
 add_executable(Generator ${GENERATOR_SRCS})
 
 link_directories(${PROJECT_SOURCE_DIR}/Common)
-target_link_libraries(Generator common_functions dfa_generator)
+target_link_libraries(Generator common_functions dfa_generator lexical_generator)

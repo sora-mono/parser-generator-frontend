@@ -9,6 +9,8 @@ add_compile_options("/std:c++latest")
 
 # 将源代码添加到此项目的可执行文件。
 
+include_directories("E:/VS shared resources/boost_1_75_0")
+
 add_subdirectory("Generator")
 add_subdirectory("Parser")
 add_subdirectory("Common")
@@ -18,3 +20,5 @@ add_subdirectory("Common")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/out")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/out")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/out")
+
+link_libraries("E:/VS shared resources/boost_1_75_0/lib")
