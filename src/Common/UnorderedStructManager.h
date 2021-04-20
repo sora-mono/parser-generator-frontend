@@ -1,9 +1,14 @@
-#pragma once
 #include <functional>
 #include <unordered_map>
 
-#include "NodeManager.h"
-#include "common.h"
+#include "Common/NodeManager.h"
+#include "Common/common.h"
+
+#ifndef COMMON_UNORDERED_STRUCT_MANAGER_H_
+#define COMMON_UNORDERED_STRUCT_MANAGER_H_
+
+namespace common {
+
 template <class T>
 struct DefaultHasher {
   size_t DoHash(const T& object) {
@@ -91,3 +96,6 @@ bool UnorderedStructManager<StructType, Hasher>::RemoveObject(
   }
   return true;
 }
+
+}  // namespace common
+#endif  // !COMMON_UNORDERED_STRUCT_MANAGER

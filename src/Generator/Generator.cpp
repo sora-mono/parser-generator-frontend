@@ -2,11 +2,11 @@
 //
 #include <iostream>
 
-#include "DfaGenerator.h"
+#include "Generator/DfaGenerator/DfaGenerator.h"
 
 int main() {
   std::cout << "Hello World!\n";
-  DfaGenerator dfa_generator;
+  generator::dfagenerator::DfaGenerator dfa_generator;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

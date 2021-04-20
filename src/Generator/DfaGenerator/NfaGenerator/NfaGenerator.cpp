@@ -1,8 +1,10 @@
-#include "NfaGenerator.h"
+#include "Generator/DfaGenerator/NfaGenerator/NfaGenerator.h"
 
 #include <algorithm>
 #include <queue>
 #include <sstream>
+
+namespace generator::dfagenerator::nfagenerator {
 
 NfaGenerator::NodeId NfaGenerator::NfaNode::GetForwardNodesHandler(
     char c_transfer) {
@@ -29,8 +31,7 @@ inline bool NfaGenerator::NfaNode::AddConditionTransfer(
   return true;
 }
 
-inline bool NfaGenerator::NfaNode::AddNoconditionTransfer(
-    NodeId node_handler) {
+inline bool NfaGenerator::NfaNode::AddNoconditionTransfer(NodeId node_handler) {
   conditionless_transfer_nodes_handler.insert(node_handler);
   return true;
 }
@@ -80,7 +81,8 @@ NfaGenerator::Closure(NodeId handler) {
       } else if (iter->second.second >
                  tag.second) {  //当前记录优先级大于以前的优先级
         tag = iter->second;
-      } else if (iter->second.second == tag.second&&iter->first!=tag.first) {
+      } else if (iter->second.second == tag.second &&
+                 iter->first != tag.first) {
         //两个尾节点标记优先级相同，对应尾节点不同
         throw std::runtime_error("两个尾节点具有相同优先级且不对应同一个节点");
       }
@@ -353,7 +355,7 @@ std::pair<NfaGenerator::NodeId, NfaGenerator::NodeId>
 NfaGenerator::CreateSwitchTree(std::istream& in) {
   NodeId head_handler = node_manager_.EmplaceNode();
   NodeId tail_handler = node_manager_.EmplaceNode();
-  char c_now,c_pre;
+  char c_now, c_pre;
   in >> c_now;
   c_pre = c_now;
   NfaNode* p_node = GetNode(head_handler);
@@ -431,3 +433,5 @@ bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
     return false;
   }
 }
+}  // namespace generator::dfagenerator::nfagenerator
+#endif  // !GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR

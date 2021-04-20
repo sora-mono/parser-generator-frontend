@@ -1,4 +1,3 @@
-#pragma once
 #include <assert.h>
 
 #include <algorithm>
@@ -6,7 +5,12 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "NodeManager.h"
+#include "Common/NodeManager.h"
+
+#ifndef COMMON_MULTIMAP_NODE_MANAGER_H_
+#define COMMON_MULTIMAP_NODE_MANAGER_H_
+
+namespace common {
 
 template <class T>
 class MultimapNodeManager {
@@ -432,3 +436,6 @@ template <class T>
 inline T* MultimapNodeManager<T>::Iterator::operator->() {
   return iter_.operator->();
 }
+
+}  // namespace common
+#endif  // !COMMON_COMMON_MULTIMAP_NODE_MANAGER

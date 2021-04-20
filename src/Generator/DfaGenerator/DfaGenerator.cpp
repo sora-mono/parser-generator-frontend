@@ -1,7 +1,11 @@
-#include "DfaGenerator.h"
+#include "Generator/DfaGenerator/DfaGenerator.h"
 
 #include <queue>
 #include <sstream>
+
+namespace generator::dfagenerator {
+using generator::dfagenerator::nfagenerator::NfaGenerator;
+using common::kCharNum;
 
 bool DfaGenerator::AddKeyword(const std::string& str, TailNodeTag tail_node_tag,
                               PriorityTag priority_tag) {
@@ -184,3 +188,4 @@ bool DfaGenerator::DfaMinimize(const std::vector<IntermediateNodeId>& handlers,
   DfaMinimizeGroupsRecursion(no_next_group, c_transform);
   return true;
 }
+}  // namespace MyNamespace

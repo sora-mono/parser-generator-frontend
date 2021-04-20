@@ -1,0 +1,3 @@
+aux_source_directory(. DFA_MACHINE_SRCS)
+
+add_library(dfa_machine ${DFA_MACHINE_SRCS})

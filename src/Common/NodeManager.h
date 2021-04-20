@@ -1,8 +1,11 @@
-#pragma once
-
 #include <functional>
 #include <stdexcept>
 #include <vector>
+
+#ifndef COMMON_NODE_MANAGER_H_
+#define COMMON_NODE_MANAGER_H_
+
+namespace common {
 
 template <class T>
 class NodeManager {
@@ -432,3 +435,6 @@ inline T* NodeManager<T>::Iterator::operator->() {
   }
   return manager_pointer_->nodes_[index_];
 }
+
+}  // namespace common
+#endif  // !COMMON_COMMON_NODE_MANAGER

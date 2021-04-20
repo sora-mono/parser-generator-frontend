@@ -1,10 +1,12 @@
-#pragma once
-
 #include <iostream>
 #include <set>
 #include <unordered_set>
 #include <vector>
 
+#ifndef COMMON_COMMON_H_
+#define COMMON_COMMON_H_
+
+namespace common {
 using StringHashType = unsigned long long;
 using IntergalSetHashType = unsigned long long;
 
@@ -41,3 +43,6 @@ requires std::is_integral_v<T> inline IntergalSetHashType HashIntergalVector(
   }
   return result;
 }
+
+}  // namespace common
+#endif  // !COMMON_COMMON_COMMON

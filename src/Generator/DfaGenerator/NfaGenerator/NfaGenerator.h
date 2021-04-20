@@ -4,12 +4,16 @@
 #include <unordered_set>
 #include <vector>
 
-#include "MultimapNodeManager.h"
+#include "Common/MultimapNodeManager.h"
 
+#ifndef GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
+#define GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
+
+namespace generator::dfagenerator::nfagenerator {
 class NfaGenerator {
  public:
   struct NfaNode;
-  using NodeId = MultimapNodeManager<NfaNode>::NodeId;
+  using NodeId = common::MultimapNodeManager<NfaNode>::NodeId;
   using NodeGather = size_t;
   using PriorityTag = size_t;
   //前半部分为tag序号，后半部分为优先级，数字越大优先级越高
@@ -48,7 +52,7 @@ class NfaGenerator {
     std::unordered_set<NodeId> conditionless_transfer_nodes_handler;
   };
 
-  NfaGenerator():head_node_handler_(-1) {}
+  NfaGenerator() : head_node_handler_(-1) {}
   NfaGenerator(const NfaGenerator&) = delete;
   NfaGenerator(NfaGenerator&&) = delete;
 
@@ -63,15 +67,14 @@ class NfaGenerator {
       bool return_when_right_bracket = false);
   //添加一个由字符串构成的NFA，自动处理结尾的范围限制符号
   std::pair<NodeId, NodeId> WordConstruct(const std::string& str,
-                                                    const TailNodeData& tag);
+                                          const TailNodeData& tag);
   //合并优化，降低节点数以降低子集构造法集合大小，直接使用NFA也可以降低成本
   void MergeOptimization();
 
-  std::pair<std::unordered_set<NodeId>, TailNodeData> Closure(
-      NodeId handler);
+  std::pair<std::unordered_set<NodeId>, TailNodeData> Closure(NodeId handler);
   //返回goto后的节点的闭包
-  std::pair<std::unordered_set<NodeId>, TailNodeData> Goto(
-      NodeId handler_src, char c_transform);
+  std::pair<std::unordered_set<NodeId>, TailNodeData> Goto(NodeId handler_src,
+                                                           char c_transform);
 
   //清除已有NFA
   void Clear();
@@ -82,6 +85,7 @@ class NfaGenerator {
 
   //非尾节点标记
   const static TailNodeData NotTailNodeTag;
+
  private:
   bool RemoveTailNode(NfaNode* pointer);
   bool AddTailNode(NfaNode* pointer, const TailNodeData& tag);
@@ -95,7 +99,7 @@ class NfaGenerator {
   NodeId head_node_handler_;
   //该set用来存储所有尾节点和对应单词的tag
   std::unordered_map<NfaNode*, TailNodeData> tail_nodes_;
-  MultimapNodeManager<NfaNode> node_manager_;
+  common::MultimapNodeManager<NfaNode> node_manager_;
 };
 
 bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
@@ -103,3 +107,5 @@ bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
                                 NfaGenerator& generator);
 const NfaGenerator::TailNodeData NfaGenerator::NotTailNodeTag =
     NfaGenerator::TailNodeData(-1, -1);
+}  // namespace generator::dfagenerator::nfagenerator
+#endif  // !GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_

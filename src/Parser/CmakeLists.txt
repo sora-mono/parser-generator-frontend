@@ -1,0 +1,14 @@
+project(Parser)
+
+add_compile_options("/std:c++latest")
+
+include_directories(${CMAKE_SOURCE_DIR}/src)
+
+add_subdirectory(DfaMachine)
+add_subdirectory(LexicalMachine)
+
+aux_source_directory(. PARSER_SRCS)
+add_executable(Parser ${PARSER_SRCS})
+
+link_directories(${CMAKE_SOURCE_DIR}/src/Common)
+target_link_libraries(Parser common_functions)

@@ -3,9 +3,16 @@
 #include <array>
 #include <map>
 
+#include "Common/UnorderedStructManager.h"
+#include "Common/common.h"
 #include "NfaGenerator/NfaGenerator.h"
-#include "UnorderedStructManager.h"
-#include "common.h"
+
+#ifndef GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
+#define GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
+
+namespace generator::dfagenerator {
+using common::NodeManager;
+using generator::dfagenerator::nfagenerator::NfaGenerator;
 
 class DfaGenerator {
   struct IntermediateDfaNode;
@@ -19,14 +26,16 @@ class DfaGenerator {
   using IntermediateNodeId = NodeManager<IntermediateDfaNode>::NodeId;
 
   struct IntergalSetHasher {
-    IntergalSetHashType DoHash(const std::unordered_set<NfaNodeId>& set) {
-      return HashIntergalUnorderedSet(set);
+    common::IntergalSetHashType DoHash(
+        const std::unordered_set<NfaNodeId>& set) {
+      return common::HashIntergalUnorderedSet(set);
     }
   };
 
-  using SetManagerType = UnorderedStructManager<SetType, IntergalSetHasher>;
+  using SetManagerType =
+      common::UnorderedStructManager<SetType, IntergalSetHasher>;
   using SetId = SetManagerType::NodeId;
-  using TransformArray = std::array<size_t, kCharNum>;
+  using TransformArray = std::array<size_t, common::kCharNum>;
   // DFA配置类型
   using DfaConfigType = std::vector<std::pair<TransformArray, TailNodeTag>>;
 
@@ -63,7 +72,7 @@ class DfaGenerator {
     void SetTailNodeData(TailNodeData data) { tail_node_data = data; }
 
     //该节点的转移条件，存储IntermediateDfaNode节点句柄
-    std::array<IntermediateNodeId, kCharNum> forward_nodes;
+    std::array<IntermediateNodeId, common::kCharNum> forward_nodes;
     TailNodeData tail_node_data;
     SetId set_handler;  //该节点对应的子集闭包
   };
@@ -146,3 +155,6 @@ inline bool DfaGenerator::DfaMinimizeGroupsRecursion(
   }
   return true;
 }
+
+}  // namespace generator::dfagenerator
+#endif  // !GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
