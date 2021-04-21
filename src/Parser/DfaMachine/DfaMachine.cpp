@@ -1,5 +1,5 @@
 #include "Parser/DfaMachine/DfaMachine.h"
 
-namespace parser::dfamachine {
+namespace frontend::parser::dfamachine {
 
 }

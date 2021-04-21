@@ -1,9 +1,10 @@
 #include "Common/NodeManager.h"
+
 #ifndef GENERATOR_LEXICALGENERATOR_LEXICALGENERATOR_H_
 #define GENERATOR_LEXICALGENERATOR_LEXICALGENERATOR_H_
 
-namespace generator::lexicalgenerator {
-using common::NodeManager;
+namespace frontend::generator::lexicalgenerator {
+using frontend::common::NodeManager;
 
 class LexicalGenerator {
  private:
@@ -30,5 +31,6 @@ class LexicalGenerator {
     std::vector<std::vector<NodeIdType>> body;
   };
 };
+
 }  // namespace generator::lexicalgenerator
 #endif  // !GENERATOR_LEXICALGENERATOR_LEXICALGENERATOR_H_

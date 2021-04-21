@@ -10,9 +10,10 @@
 #ifndef GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
 #define GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
 
-namespace generator::dfagenerator {
-using common::NodeManager;
-using generator::dfagenerator::nfagenerator::NfaGenerator;
+namespace frontend::generator::dfagenerator {
+using frontend::common::NodeManager;
+using frontend::generator::dfagenerator::nfagenerator::NfaGenerator;
+namespace common = frontend::common;
 
 class DfaGenerator {
   struct IntermediateDfaNode;

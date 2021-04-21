@@ -1,9 +1,9 @@
 #ifndef PARSER_LEXICALMACHINE_LEXICALMACHINE_H_
 #define PARSER_LEXICALMACHINE_LEXICALMACHINE_H_
 
-namespace parser::lexicalmachine {
+namespace frontend::parser::lexicalmachine {
 
 class LexicalMachine {};
 
-}  // namespace parser::lexicalmachine
+}  // namespace frontend::parser::lexicalmachine
 #endif  // !PARSER_LEXICALMACHINE_LEXICALMACHINE_H_

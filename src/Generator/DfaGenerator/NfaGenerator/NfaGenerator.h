@@ -9,7 +9,7 @@
 #ifndef GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
 #define GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
 
-namespace generator::dfagenerator::nfagenerator {
+namespace frontend::generator::dfagenerator::nfagenerator {
 class NfaGenerator {
  public:
   struct NfaNode;
@@ -107,5 +107,5 @@ bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
                                 NfaGenerator& generator);
 const NfaGenerator::TailNodeData NfaGenerator::NotTailNodeTag =
     NfaGenerator::TailNodeData(-1, -1);
-}  // namespace generator::dfagenerator::nfagenerator
+}  // namespace frontend::generator::dfagenerator::nfagenerator
 #endif  // !GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_

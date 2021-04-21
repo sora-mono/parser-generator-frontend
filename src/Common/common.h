@@ -6,7 +6,7 @@
 #ifndef COMMON_COMMON_H_
 #define COMMON_COMMON_H_
 
-namespace common {
+namespace frontend::common {
 using StringHashType = unsigned long long;
 using IntergalSetHashType = unsigned long long;
 
@@ -44,5 +44,5 @@ requires std::is_integral_v<T> inline IntergalSetHashType HashIntergalVector(
   return result;
 }
 
-}  // namespace common
+}  // namespace frontend::common
 #endif  // !COMMON_COMMON_COMMON

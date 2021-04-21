@@ -7,7 +7,7 @@
 #ifndef COMMON_UNORDERED_STRUCT_MANAGER_H_
 #define COMMON_UNORDERED_STRUCT_MANAGER_H_
 
-namespace common {
+namespace frontend::common {
 
 template <class T>
 struct DefaultHasher {
@@ -97,5 +97,5 @@ bool UnorderedStructManager<StructType, Hasher>::RemoveObject(
   return true;
 }
 
-}  // namespace common
+}  // namespace frontend::common
 #endif  // !COMMON_UNORDERED_STRUCT_MANAGER

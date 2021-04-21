@@ -3,9 +3,9 @@
 #include <queue>
 #include <sstream>
 
-namespace generator::dfagenerator {
-using generator::dfagenerator::nfagenerator::NfaGenerator;
-using common::kCharNum;
+namespace frontend::generator::dfagenerator {
+using frontend::common::kCharNum;
+using frontend::generator::dfagenerator::nfagenerator::NfaGenerator;
 
 bool DfaGenerator::AddKeyword(const std::string& str, TailNodeTag tail_node_tag,
                               PriorityTag priority_tag) {
@@ -188,4 +188,4 @@ bool DfaGenerator::DfaMinimize(const std::vector<IntermediateNodeId>& handlers,
   DfaMinimizeGroupsRecursion(no_next_group, c_transform);
   return true;
 }
-}  // namespace MyNamespace
+}  // namespace frontend::generator::dfagenerator

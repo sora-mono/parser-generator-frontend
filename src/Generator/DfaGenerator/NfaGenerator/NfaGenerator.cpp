@@ -4,7 +4,7 @@
 #include <queue>
 #include <sstream>
 
-namespace generator::dfagenerator::nfagenerator {
+namespace frontend::generator::dfagenerator::nfagenerator {
 
 NfaGenerator::NodeId NfaGenerator::NfaNode::GetForwardNodesHandler(
     char c_transfer) {
@@ -433,5 +433,5 @@ bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
     return false;
   }
 }
-}  // namespace generator::dfagenerator::nfagenerator
+}  // namespace frontend::generator::dfagenerator::nfagenerator
 #endif  // !GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR

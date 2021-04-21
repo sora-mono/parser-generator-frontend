@@ -5,7 +5,7 @@
 #ifndef COMMON_NODE_MANAGER_H_
 #define COMMON_NODE_MANAGER_H_
 
-namespace common {
+namespace frontend::common {
 
 template <class T>
 class NodeManager {
@@ -436,5 +436,5 @@ inline T* NodeManager<T>::Iterator::operator->() {
   return manager_pointer_->nodes_[index_];
 }
 
-}  // namespace common
+}  // namespace frontend::common
 #endif  // !COMMON_COMMON_NODE_MANAGER

@@ -1,5 +1,5 @@
 #include "LexicalMachine.h"
 
-namespace parser::lexicalmachine {
+namespace frontend::parser::lexicalmachine {
 
 }

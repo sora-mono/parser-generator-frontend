@@ -10,7 +10,7 @@
 #ifndef COMMON_MULTIMAP_NODE_MANAGER_H_
 #define COMMON_MULTIMAP_NODE_MANAGER_H_
 
-namespace common {
+namespace frontend::common {
 
 template <class T>
 class MultimapNodeManager {
@@ -437,5 +437,5 @@ inline T* MultimapNodeManager<T>::Iterator::operator->() {
   return iter_.operator->();
 }
 
-}  // namespace common
+}  // namespace frontend::common
 #endif  // !COMMON_COMMON_MULTIMAP_NODE_MANAGER
