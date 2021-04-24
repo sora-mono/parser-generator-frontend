@@ -16,6 +16,7 @@ struct DefaultHasher {
     size_t result = 1;
     while (iter != object.end()) {
       result *= *iter;
+      ++iter;
     }
     return result;
   }

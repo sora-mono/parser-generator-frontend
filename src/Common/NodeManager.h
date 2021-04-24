@@ -60,19 +60,24 @@ class NodeManager {
   bool IsSame(NodeId index1, NodeId index2) { return index1 == index2; }
 
   //系统自行选择最佳位置放置节点
-  template <class... Args>
+  template <class... Args,class ObjectType = T>
   NodeId EmplaceNode(Args&&... args);
+  //系统自行选择最佳位置放置基类或派生类指针
+  template<class PointerType>
+  NodeId EmplacePointer(PointerType* pointer);
   //在指定位置放置节点
-  template <class... Args>
-  NodeManager<T>::NodeId EmplaceNodeIndex(NodeId index, Args&&... args);
+  template <class... Args,class ObjectType = T>
+  NodeId EmplaceNodeIndex(NodeId index, Args&&... args);
   //在指定位置放置指针
-  NodeManager<T>::NodeId EmplacePointerIndex(NodeId index, T* pointer);
+  NodeId EmplacePointerIndex(NodeId index, T* pointer);
+
   //仅删除节点不释放节点内存
   T* RemovePointer(NodeId index);
   //删除节点并释放节点内存
   bool RemoveNode(NodeId index);
+
   //合并两个节点，合并成功会删除index_src节点
-  bool MergeNodesWithManager(NodeId index_dst, NodeId index_src,
+  bool MergeNodes(NodeId index_dst, NodeId index_src,
                              const std::function<bool(T&, T&)>& merge_function =
                                  DefaultMergeFunction2);
   //合并两个节点，合并成功会删除index_src节点
@@ -88,7 +93,7 @@ class NodeManager {
   void SetAllNodesMergeAllowed();
   void SetAllNodesMergeRefused();
 
-  inline bool CanMerge(NodeId index) {
+  bool CanMerge(NodeId index) {
     return index < nodes_can_merge.size() ? nodes_can_merge[index] : false;
   }
   size_t Size() { return nodes_.size(); }
@@ -100,16 +105,20 @@ class NodeManager {
   //调用成员变量的shrink_to_fit
   void ShrinkToFit();
 
-  //序列化容器用
-  template <class Archive>
-  void Serialize(Archive& ar, const unsigned int version = 0);
-
   T* operator[](NodeId index);
   Iterator End() { return Iterator(this, nodes_.size()); }
   Iterator Begin();
 
  private:
   friend class Iterator;
+  
+  //序列化容器用
+  template <class Archive>
+  void Serialize(Archive& ar, const unsigned int version = 0);
+
+  NodeId GetBestEmptyIndex();
+  void AddRemovedIndex(NodeId index) { removed_ids_.push_back(index); }
+
   std::vector<T*> nodes_;
   //优化用数组，存放被删除节点对应的ID
   std::vector<NodeId> removed_ids_;
@@ -135,21 +144,13 @@ inline T* NodeManager<T>::GetNode(NodeId index) {
 
 template <class T>
 inline bool NodeManager<T>::RemoveNode(NodeId index) {
-  if (index > nodes_.size()) {
+  T* removed_pointer = RemovePointer(index);
+  if (removed_pointer==nullptr) {
     return false;
-  }
-  if (nodes_[index] == nullptr) {
+  } else {
+    delete removed_pointer;
     return true;
   }
-  removed_ids_.push_back(index);  //添加到已删除ID中
-  delete nodes_[index];
-  nodes_[index] = nullptr;
-  nodes_can_merge[index] = false;
-  while (nodes_.size() > 0 && nodes_.back() == nullptr) {
-    nodes_.pop_back();  //清理末尾无效ID
-    nodes_can_merge.pop_back();
-  }
-  return true;
 }
 
 template <class T>
@@ -161,7 +162,7 @@ inline T* NodeManager<T>::RemovePointer(NodeId index) {
   if (temp_pointer == nullptr) {
     return nullptr;
   }
-  removed_ids_.push_back(index);
+  AddRemovedIndex(index);
   nodes_can_merge[index] = false;
   while (nodes_.size() > 0 && nodes_.back() == nullptr) {
     nodes_.pop_back();  //清理末尾无效ID
@@ -171,31 +172,30 @@ inline T* NodeManager<T>::RemovePointer(NodeId index) {
 }
 
 template <class T>
-template <class... Args>
+template <class... Args,class ObjectType>
 inline NodeManager<T>::NodeId NodeManager<T>::EmplaceNode(Args&&... args) {
-  NodeId index = -1;
-  if (removed_ids_.size() != 0) {
-    while (index == -1 && removed_ids_.size() != 0)  //查找有效ID
-    {
-      if (removed_ids_.back() < nodes_.size()) {
-        index = removed_ids_.back();
-      }
-      removed_ids_.pop_back();
-    }
+  NodeId index = GetBestEmptyIndex();
+  T* object_pointer = new ObjectType(std::forward<Args>(args)...);
+  NodeId result = EmplacePointerIndex(index, object_pointer);
+  if (result == -1) {
+    AddRemovedIndex(index);
+    delete object_pointer;
   }
-  if (index == -1)  //无有效已删除ID
-  {
-    index = nodes_.size();
-  }
-
-  return EmplaceNodeIndex(index, std::forward<Args>(args)...);  //返回插入位置
+  return result;
 }
 
 template <class T>
-template <class... Args>
+template <class PointerType>
+inline NodeManager<T>::NodeId NodeManager<T>::EmplacePointer(PointerType* pointer) {
+  NodeId index = GetBestEmptyIndex();
+  return EmplacePointerIndex(index, pointer);
+}
+
+template <class T>
+template <class... Args,class ObjectType>
 inline NodeManager<T>::NodeId NodeManager<T>::EmplaceNodeIndex(NodeId index,
                                                                Args&&... args) {
-  T* pointer = new T(std::forward<Args>(args)...);
+  T* pointer = new ObjectType(std::forward<Args>(args)...);
   bool result = EmplacePointerIndex(index, pointer);
   if (!result) {
     delete pointer;
@@ -264,7 +264,7 @@ inline void NodeManager<T>::SetAllNodesMergeRefused() {
 }
 
 template <class T>
-inline bool NodeManager<T>::MergeNodesWithManager(
+inline bool NodeManager<T>::MergeNodes(
     NodeId index_dst, NodeId index_src,
     const std::function<bool(T&, T&)>& merge_function) {
   if (index_dst >= nodes_.size() || index_src >= nodes_.size() ||
@@ -331,6 +331,25 @@ inline size_t NodeManager<T>::ItemSize() {
     }
   }
   return count;
+}
+
+template <class T>
+inline NodeManager<T>::NodeId NodeManager<T>::GetBestEmptyIndex() {
+  NodeId index = -1;
+  if (removed_ids_.size() != 0) {
+    while (index == -1 && removed_ids_.size() != 0)  //查找有效ID
+    {
+      if (removed_ids_.back() < nodes_.size()) {
+        index = removed_ids_.back();
+      }
+      removed_ids_.pop_back();
+    }
+  }
+  if (index == -1)  //无有效已删除ID
+  {
+    index = nodes_.size();
+  }
+  return index;
 }
 
 template <class T>
