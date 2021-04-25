@@ -1,3 +1,5 @@
+#include <assert.h>
+
 #include <functional>
 #include <stdexcept>
 #include <vector>
@@ -55,18 +57,18 @@ class NodeManager {
                                     Manager& manager) {
     return manager.MergeNodesWithManager(node_dst, node_src);
   }
-
+  //获取节点指针，永远返回有效指针，否则assert结束程序
   T* GetNode(NodeId index);
   bool IsSame(NodeId index1, NodeId index2) { return index1 == index2; }
 
   //系统自行选择最佳位置放置节点
-  template <class... Args,class ObjectType = T>
+  template <class... Args, class ObjectType = T>
   NodeId EmplaceNode(Args&&... args);
   //系统自行选择最佳位置放置基类或派生类指针
-  template<class PointerType>
+  template <class PointerType>
   NodeId EmplacePointer(PointerType* pointer);
   //在指定位置放置节点
-  template <class... Args,class ObjectType = T>
+  template <class... Args, class ObjectType = T>
   NodeId EmplaceNodeIndex(NodeId index, Args&&... args);
   //在指定位置放置指针
   NodeId EmplacePointerIndex(NodeId index, T* pointer);
@@ -78,8 +80,8 @@ class NodeManager {
 
   //合并两个节点，合并成功会删除index_src节点
   bool MergeNodes(NodeId index_dst, NodeId index_src,
-                             const std::function<bool(T&, T&)>& merge_function =
-                                 DefaultMergeFunction2);
+                  const std::function<bool(T&, T&)>& merge_function =
+                      DefaultMergeFunction2);
   //合并两个节点，合并成功会删除index_src节点
   template <class Manager>
   bool MergeNodesWithManager(NodeId index_dst, NodeId index_src,
@@ -111,7 +113,7 @@ class NodeManager {
 
  private:
   friend class Iterator;
-  
+
   //序列化容器用
   template <class Archive>
   void Serialize(Archive& ar, const unsigned int version = 0);
@@ -135,17 +137,14 @@ NodeManager<T>::~NodeManager() {
 
 template <class T>
 inline T* NodeManager<T>::GetNode(NodeId index) {
-  if (index > nodes_.size()) {
-    return nullptr;
-  } else {
-    return nodes_[index];
-  }
+  assert(index < nodes_.size()&&nodes_[index]!=nullptr);
+  return nodes_[index];
 }
 
 template <class T>
 inline bool NodeManager<T>::RemoveNode(NodeId index) {
   T* removed_pointer = RemovePointer(index);
-  if (removed_pointer==nullptr) {
+  if (removed_pointer == nullptr) {
     return false;
   } else {
     delete removed_pointer;
@@ -155,9 +154,7 @@ inline bool NodeManager<T>::RemoveNode(NodeId index) {
 
 template <class T>
 inline T* NodeManager<T>::RemovePointer(NodeId index) {
-  if (index > nodes_.size()) {
-    return nullptr;
-  }
+  assert(index < nodes_.size());
   T* temp_pointer = nodes_[index];
   if (temp_pointer == nullptr) {
     return nullptr;
@@ -172,34 +169,30 @@ inline T* NodeManager<T>::RemovePointer(NodeId index) {
 }
 
 template <class T>
-template <class... Args,class ObjectType>
+template <class... Args, class ObjectType>
 inline NodeManager<T>::NodeId NodeManager<T>::EmplaceNode(Args&&... args) {
   NodeId index = GetBestEmptyIndex();
   T* object_pointer = new ObjectType(std::forward<Args>(args)...);
   NodeId result = EmplacePointerIndex(index, object_pointer);
-  if (result == -1) {
-    AddRemovedIndex(index);
-    delete object_pointer;
-  }
+  assert(result != -1);
   return result;
 }
 
 template <class T>
 template <class PointerType>
-inline NodeManager<T>::NodeId NodeManager<T>::EmplacePointer(PointerType* pointer) {
+inline NodeManager<T>::NodeId NodeManager<T>::EmplacePointer(
+    PointerType* pointer) {
   NodeId index = GetBestEmptyIndex();
   return EmplacePointerIndex(index, pointer);
 }
 
 template <class T>
-template <class... Args,class ObjectType>
+template <class... Args, class ObjectType>
 inline NodeManager<T>::NodeId NodeManager<T>::EmplaceNodeIndex(NodeId index,
                                                                Args&&... args) {
   T* pointer = new ObjectType(std::forward<Args>(args)...);
-  bool result = EmplacePointerIndex(index, pointer);
-  if (!result) {
-    delete pointer;
-  }
+  NodeId result = EmplacePointerIndex(index, pointer);
+  assert(result != -1);
   return result;
 }
 
@@ -214,36 +207,29 @@ inline NodeManager<T>::NodeId NodeManager<T>::EmplacePointerIndex(NodeId index,
       removed_ids_.push_back(i);
     }
   }
-  if (nodes_[index] != nullptr &&
-      pointer != nodes_[index]) {  //不可以覆盖已有非空且不同的指针
-    return -1;
-  }
+  //不可以覆盖已有非空且不同的指针
+  assert(!(nodes_[index] != nullptr && nodes_[index] != pointer));
   nodes_[index] = pointer;
-  nodes_can_merge[index] = true;
   return index;
 }
 
 template <class T>
 inline void NodeManager<T>::Swap(NodeManager& manager_other) {
-  nodes_.Swap(manager_other.nodes_);
-  removed_ids_.Swap(manager_other.removed_ids_);
-  nodes_can_merge.Swap(manager_other.nodes_can_merge);
+  nodes_.swap(manager_other.nodes_);
+  removed_ids_.swap(manager_other.removed_ids_);
+  nodes_can_merge.swap(manager_other.nodes_can_merge);
 }
 
 template <class T>
 inline bool NodeManager<T>::SetNodeMergeAllowed(NodeId index) {
-  if (index > nodes_.size() || nodes_can_merge[index] == nullptr) {
-    return false;
-  }
+  assert(index < nodes_.size()&&nodes_[index]!=nullptr);
   nodes_can_merge[index] = true;
   return true;
 }
 
 template <class T>
 inline bool NodeManager<T>::SetNodeMergeRefused(NodeId index) {
-  if (index > nodes_can_merge.size() || nodes_[index] == nullptr) {
-    return false;
-  }
+  assert(index < nodes_.size()&&nodes_[index] !=nullptr);
   nodes_can_merge[index] = false;
   return true;
 }
@@ -267,12 +253,14 @@ template <class T>
 inline bool NodeManager<T>::MergeNodes(
     NodeId index_dst, NodeId index_src,
     const std::function<bool(T&, T&)>& merge_function) {
-  if (index_dst >= nodes_.size() || index_src >= nodes_.size() ||
-      nodes_[index_dst] == nullptr || nodes_[index_src] == nullptr ||
-      !CanMerge(index_dst) || !CanMerge(index_src)) {
+  T* nodeptr_dst = GetNode(index_dst);
+  T* nodeptr_src = GetNode(index_src);
+  if (!CanMerge(index_dst) || !CanMerge(index_src)) {
+    //两个节点至少有一个不可合并
     return false;
   }
   if (!merge_function(*nodes_[index_dst], *nodes_[index_src])) {
+    //合并失败
     return false;
   }
   RemoveNode(index_src);
@@ -285,12 +273,14 @@ bool NodeManager<T>::MergeNodesWithManager(
     typename NodeManager<T>::NodeId index_dst,
     typename NodeManager<T>::NodeId index_src, Manager& manager,
     const std::function<bool(T&, T&, Manager&)>& merge_function) {
-  if (index_dst >= nodes_.size() || index_src >= nodes_.size() ||
-      nodes_[index_dst] == nullptr || nodes_[index_src] == nullptr ||
-      !CanMerge(index_dst) || !CanMerge(index_src)) {
+  T* nodeptr_dst = GetNode(index_dst);
+  T* nodeptr_src = GetNode(index_src);
+  if (!CanMerge(index_dst) || !CanMerge(index_src)) {
+    //两个节点至少有一个不可合并
     return false;
   }
   if (!merge_function(*nodes_[index_dst], *nodes_[index_src], manager)) {
+    //合并失败
     return false;
   }
   RemoveNode(index_src);
@@ -354,27 +344,21 @@ inline NodeManager<T>::NodeId NodeManager<T>::GetBestEmptyIndex() {
 
 template <class T>
 inline T* NodeManager<T>::operator[](size_t index) {
-  if (index >= nodes_.size()) {
-    throw std::invalid_argument("index越界");
-  }
+  assert(index < nodes_.size());
   return nodes_[index];
 }
 
 template <class T>
 inline void NodeManager<T>::Iterator::SetIndex(size_t index) {
-  if (manager_pointer_ == nullptr) {
-    throw std::runtime_error("未绑定NodeManager");
-  }
-  if (index > manager_pointer_->nodes_.size()) {
-    throw std::invalid_argument("index越界");
-  }
+  assert(manager_pointer_ != nullptr &&
+         index < manager_pointer_->nodes_.size());
   index_ = index;
 }
 
 template <class T>
 inline NodeManager<T>::Iterator NodeManager<T>::Begin() {
   size_t index = 0;
-  while (index != nodes_.size() && GetNode(index) == nullptr) {
+  while (index <= nodes_.size() && GetNode(index) == nullptr) {
     ++index;
   }
   return Iterator(this, index);
@@ -387,12 +371,9 @@ inline NodeManager<T>::Iterator& NodeManager<T>::Iterator::operator++() {
   do {
     ++index_temp;
   } while (index_temp < nodes.size() && nodes[index_temp] == nullptr);
-  if (index_temp >= nodes.size()) {
-    throw std::runtime_error("该节点后无非空节点");
-  } else {
-    index_ = index_temp;
-    return *this;
-  }
+  assert(index_temp < nodes.size());
+  index_ = index_temp;
+  return *this;
 }
 
 template <class T>
@@ -402,9 +383,7 @@ inline NodeManager<T>::Iterator NodeManager<T>::Iterator::operator++(int) {
   do {
     ++index_temp;
   } while (index_temp < nodes.size() && nodes[index_temp] == nullptr);
-  if (index_temp >= nodes.size()) {
-    throw std::runtime_error("该节点后无非空节点");
-  }
+  assert(index_temp < nodes.size());
   std::swap(index_temp, index_);
   return Iterator(manager_pointer_, index_temp);
 }
@@ -416,12 +395,9 @@ inline NodeManager<T>::Iterator& NodeManager<T>::Iterator::operator--() {
   do {
     --index_temp;
   } while (index_temp != -1 && nodes[index_temp] == nullptr);
-  if (index_temp == -1) {
-    throw std::runtime_error("该节点前无非空节点");
-  } else {
-    index_ = index_temp;
-    return *this;
-  }
+  assert(index_temp != -1);
+  index_ = index_temp;
+  return *this;
 }
 
 template <class T>
@@ -431,28 +407,19 @@ inline NodeManager<T>::Iterator NodeManager<T>::Iterator::operator--(int) {
   do {
     --index_temp;
   } while (index_temp != -1 && nodes[index_temp] == nullptr);
-  if (index_temp == -1) {
-    throw std::runtime_error("该节点前无非空节点");
-  } else {
-    std::swap(index_temp, index_);
-    return Iterator(manager_pointer_, index_temp);
-  }
+  assert(index_temp != -1);
+  std::swap(index_temp, index_);
+  return Iterator(manager_pointer_, index_temp);
 }
 
 template <class T>
 inline T& NodeManager<T>::Iterator::operator*() {
-  if (index_ >= manager_pointer_->nodes_.size()) {
-    throw std::runtime_error("无效解引用");
-  }
-  return *manager_pointer_->nodes_[index_];
+  return *manager_pointer_->GetNode(index_);
 }
 
 template <class T>
 inline T* NodeManager<T>::Iterator::operator->() {
-  if (index_ >= manager_pointer_->nodes_.size()) {
-    throw std::runtime_error("无效解引用");
-  }
-  return manager_pointer_->nodes_[index_];
+  return manager_pointer_->GetNode(index_);
 }
 
 }  // namespace frontend::common

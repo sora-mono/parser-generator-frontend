@@ -28,12 +28,12 @@ class UnorderedStructManager {
  public:
   using NodeId = NodeManager<std::string>::NodeId;
   using ObjectHashType = size_t;
-  using HasherType = std::function<ObjectHashType(const StructType&)>;
 
   UnorderedStructManager() {}
   ~UnorderedStructManager() {}
 
-  StructType* GetNode(NodeId id) { return node_manager_.GetNode(id); }
+  //返回指向管理的对象的指针
+  StructType* GetObjectPtr(NodeId id) { return node_manager_.GetNode(id); }
   //返回值前半部分为对象是否已存在，后半部分为对象ID
   template <class T>
   std::pair<bool, NodeId> AddObject(T&& object);
@@ -44,7 +44,7 @@ class UnorderedStructManager {
     hash_to_id_.clear();
   }
   void ShrinkToFit() { node_manager_.ShrinkToFit(); }
-  std::string* operator[](NodeId id) { return GetNode(id); }
+  std::string* operator[](NodeId id) { return GetObjectPtr(id); }
 
  private:
   NodeManager<StructType> node_manager_;

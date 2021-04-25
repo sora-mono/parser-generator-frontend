@@ -80,7 +80,7 @@ class DfaGenerator {
   IntermediateDfaNode* GetIntermediateNode(IntermediateNodeId handler) {
     return node_manager_intermediate_node_.GetNode(handler);
   }
-  SetType* GetSetNode(SetId id) { return node_manager_set_.GetNode(id); }
+  SetType* GetSetNode(SetId id) { return node_manager_set_.GetObjectPtr(id); }
   //集合转移函数（子集构造法用），
   //返回值前半部分表示新集合是否已存在，后半部分为对应中间节点句柄
   std::pair<bool, IntermediateNodeId> SetGoto(SetId set_src, char c_transform);

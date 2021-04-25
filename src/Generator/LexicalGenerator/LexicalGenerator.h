@@ -48,10 +48,10 @@ class LexicalGenerator {
   //分析动作类型：规约，移入，报错，接受
   enum class ActionType { kReduction, kShift, kError, kAccept };
 
- public:
   //产生式的体的ID，使用对象存储与NodeId在variant中得以区分
   class ProductionBodyId {
    public:
+    ProductionBodyId() : production_body_id_(-1) {}
     ProductionBodyId(size_t production_body_id)
         : production_body_id_(production_body_id) {}
     operator size_t() { return production_body_id_; }
@@ -62,11 +62,17 @@ class LexicalGenerator {
   //解析产生式，仅需且必须输入一个完整的产生式
   NodeId AnalysisProduction(const std::string& str);
   //添加符号，返回符号的ID，返回-1代表符号已存在
-  SymbolId AddSymbol(const std::string& str);
+  SymbolId AddSymbol(const std::string& str) {
+    return manager_symbol_.AddObject(str).second;
+  }
   //获取符号对应ID，不存在则返回-1
-  SymbolId GetSymbolId(const std::string& str);
+  SymbolId GetSymbolId(const std::string& str) {
+    return manager_symbol_.GetObjectId(str);
+  }
   //通过符号ID查询对应字符串，不存在则返回nullptr
-  const std::string* GetSymbolString(SymbolId symbol_id);
+  const std::string* GetSymbolString(SymbolId symbol_id) {
+    return manager_symbol_.GetObjectPtr(symbol_id);
+  }
   //添加符号ID到节点ID的映射
   void AddSymbolIdToNodeIdMapping(SymbolId symbol_id, NodeId node_id);
   //新建终结节点，返回节点ID，节点已存在则返回-1
@@ -82,13 +88,14 @@ class LexicalGenerator {
   //通过符号ID查询对应节点ID，不存在则返回空vector
   std::vector<NodeId> GetNodeId(SymbolId symbol_id);
   //添加新的核心
-  //Items要求为存储CoreItem
-  template<class Items,class ForwardNodes>
-  CoreId CreateNewCore(Items&&items,ForwardNodes&&forward_nodes);
+  // Items要求为std::vector<CoreItem>或std::initialize_list<CoreItem>
+  // ForwardNodes要求为std::vector<NodeId>或std::initialize_list<NodeId>
+  template <class Items, class ForwardNodes>
+  CoreId CreateNewCore(Items&& items, ForwardNodes&& forward_nodes);
   //获取项对应内核的ID，如果不存在则插入到新项里并返回相应ID
   CoreId GetItemCoreIdOrInsert(const CoreItem& core_item);
   //添加内核项到对应内核的ID映射，如果已存在且对应core_id不等于入参则返回false
-  bool AddItemToCoreIdMapping(const CoreItem& core_item,CoreId core_id);
+  bool AddItemToCoreIdMapping(const CoreItem& core_item, CoreId core_id);
   //向项集中添加项
   CoreId AddItemToCore(const CoreItem& core_item, CoreId core_id);
   //获取核心的向前看符号集，核心不存在则返回nullptr
@@ -117,8 +124,7 @@ class LexicalGenerator {
   //构建LALR(1)配置
   void LalrConstruct();
   //对给定节点与点的位置求闭包，并将向前看符号传播出去
-  std::set<CoreItem> Closure(NodeId node_id,
-                                                  PointIndex point_index);
+  std::set<CoreItem> Closure(NodeId node_id, PointIndex point_index);
 
  private:
   class BaseNode {
@@ -193,7 +199,7 @@ class LexicalGenerator {
   class Core {
    public:
     Core() {}
-    template<class Items,class ForwardNodes>
+    template <class Items, class ForwardNodes>
     Core(Items&& items, ForwardNodes&& forward_nodes)
         : items_(std::forward<Items>(items)),
           forward_nodes_(std::forward<ForwardNodes>(forward_nodes)) {}

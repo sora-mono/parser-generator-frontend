@@ -16,43 +16,13 @@ template <class T>
 class MultimapNodeManager {
  public:
   using NodeId = size_t;
-
-  class Iterator {
-   public:
-    Iterator() {}
-    Iterator(const Iterator& iter) : iter_(iter.iter_) {}
-
-    //获取对应ID
-    const std::unordered_set<NodeId>& GetId() {
-      assert(iter_.GetId() < referred_handlers_.size());
-      return referred_handlers_[iter_.GetId()];
-    }
-
-    Iterator& operator++();
-    Iterator operator++(int);
-    Iterator& operator--();
-    Iterator operator--(int);
-    T& operator*();
-    T* operator->();
-    bool operator==(const Iterator& iter) { return iter_ == iter.iter_; }
-    bool operator!=(const Iterator& iter) { return !this->operator==(iter); }
-
-   private:
-    //设置绑定的NodeManager对象
-    void SetManagerPointer(NodeManager<T>* manager_pointer) {
-      iter_.SetManagerPointer(manager_pointer);
-    }
-    friend class MultimapNodeManager;
-    Iterator(NodeManager<T>::Iterator& iter) : iter_(iter) {}
-    void SetHandler(NodeManager<T>::NodeId handler);
-    NodeManager<T>::Iterator iter_;
-  };
+  using Iterator = NodeManager<T>::Iterator;
 
   MultimapNodeManager() {}
   MultimapNodeManager(const MultimapNodeManager&) = delete;
   MultimapNodeManager(MultimapNodeManager&&) = delete;
   ~MultimapNodeManager() {}
-
+  //获取指向有效节点的指针
   T* GetNode(NodeId handler);
   //通过一个handler查询引用底层节点的所有handler
   const std::unordered_set<NodeId>& GetHandlersReferringSameNode(
@@ -108,8 +78,8 @@ class MultimapNodeManager {
   template <class Archive>
   void Serialize(Archive& ar, const unsigned int version = 0);
 
-  Iterator Begin() { return Iterator(node_manager_.Begin); }
-  Iterator End() { return Iterator(node_manager_.End()); }
+  Iterator Begin() { return node_manager_.Begin; }
+  Iterator End() { return node_manager_.End(); }
 
   T* operator[](NodeId handler);
 
@@ -120,12 +90,13 @@ class MultimapNodeManager {
   bool RemapHandler(NodeId handler, InsideIndex inside_index);
   NodeId CreateHandler() { return next_handler_index_++; }
   //增加该handler对inside_index节点的引用记录，返回增加后引用计数
-  size_t AddReference(NodeId handler, InsideIndex inside_index);
+  void AddReference(NodeId handler, InsideIndex inside_index);
   //移除该handler对inside_index节点的引用记录，返回移除后引用计数，
   //引用计数为0时会自动删除节点
   size_t RemoveReference(NodeId handler, InsideIndex inside_index);
-  //处理移除内部节点前的步骤，如删除所有引用
+  //处理移除内部节点前的步骤，如删除所有句柄到底层ID的引用
   bool PreRemoveInsideNode(InsideIndex inside_index);
+  //获取句柄对应的底层节点
   InsideIndex GetInsideIndex(NodeId handler);
 
   //下一个handler序号值，只增不减
@@ -141,42 +112,27 @@ template <class T>
 inline typename MultimapNodeManager<T>::InsideIndex
 MultimapNodeManager<T>::GetInsideIndex(NodeId handler) {
   auto iter = handler_to_index_.find(handler);
-  if (iter == handler_to_index_.end()) {
-    return -1;
-  }
+  assert(iter != handler_to_index_.end());
   return iter->second;
 }
 
 template <class T>
 inline T* MultimapNodeManager<T>::GetNode(NodeId handler) {
   InsideIndex inside_index = GetInsideIndex(handler);
-  if (inside_index == -1) {
-    return nullptr;
-  } else {
-    return node_manager_.GetNode(inside_index);
-  }
+  return node_manager_.GetNode(inside_index);
 }
 
 template <class T>
 inline const std::unordered_set<typename MultimapNodeManager<T>::NodeId>&
 MultimapNodeManager<T>::GetHandlersReferringSameNode(NodeId handler) {
   InsideIndex inside_index = GetInsideIndex(handler);
-  if (inside_index == -1) {
-    throw std::invalid_argument("句柄无效");
-  }
   return referred_handlers_[inside_index];
 }
 
 template <class T>
 inline bool MultimapNodeManager<T>::IsSame(NodeId handler1, NodeId handler2) {
   InsideIndex inside_index1 = GetInsideIndex(handler1);
-  if (inside_index1 == -1) {
-    throw std::runtime_error("Invalid handler1");
-  }
   InsideIndex inside_index2 = GetInsideIndex(handler2);
-  if (inside_index2 == -1) {
-    throw std::runtime_error("Invalid handler2");
-  }
   return inside_index1 == inside_index2;
 }
 
@@ -187,42 +143,26 @@ inline MultimapNodeManager<T>::NodeId MultimapNodeManager<T>::EmplaceNode(
   NodeId handler = CreateHandler();
   InsideIndex inside_index =
       node_manager_.EmplaceNode(std::forward<Args>(args)...);
-  if (inside_index == -1) {
-    return -1;
-  }
-  if (AddReference(handler, inside_index) == -1) {  //添加引用记录失败
-    node_manager_.RemoveNode(inside_index);
-    return -1;
-  }
+  AddReference(handler, inside_index);
   handler_to_index_[handler] = inside_index;
-
   return handler;
 }
 
 template <class T>
 inline bool MultimapNodeManager<T>::SetNodeMergeAllowed(NodeId handler) {
   InsideIndex inside_index = GetInsideIndex(handler);
-  if (inside_index == -1) {
-    return false;
-  }
   return node_manager_.SetNodeMergeAllowed(inside_index);
 }
 
 template <class T>
 inline bool MultimapNodeManager<T>::SetNodeMergeRefused(NodeId handler) {
   InsideIndex inside_index = GetInsideIndex(handler);
-  if (inside_index == -1) {
-    return false;
-  }
   return node_manager_.SetNodeMergeRefused(inside_index);
 }
 
 template <class T>
 inline bool MultimapNodeManager<T>::CanMerge(NodeId handler) {
   InsideIndex index = GetInsideIndex(handler);
-  if (index == -1) {
-    return false;
-  }
   return node_manager_.CanMerge(index);
 }
 
@@ -232,11 +172,8 @@ inline bool MultimapNodeManager<T>::MergeNodes(
     std::function<bool(T&, T&)> merge_function) {
   InsideIndex inside_index_dst = GetInsideIndex(handler_dst);
   InsideIndex inside_index_src = GetInsideIndex(handler_src);
-  if (inside_index_dst == -1 || inside_index_src == -1) {
-    return false;
-  }
-  if (!node_manager_.MergeNodesWithManager(inside_index_dst, inside_index_src,
-                                           merge_function)) {
+  if (!node_manager_.MergeNodes(inside_index_dst, inside_index_src,
+                                merge_function)) {
     return false;
   }
   RemapHandler(handler_src, inside_index_dst);
@@ -251,9 +188,6 @@ inline bool MultimapNodeManager<T>::MergeNodesWithManager(
     const std::function<bool(T&, T&, Manager&)>& merge_function) {
   InsideIndex inside_index_dst = GetInsideIndex(handler_dst);
   InsideIndex inside_index_src = GetInsideIndex(handler_src);
-  if (inside_index_dst == -1 || inside_index_src == -1) {
-    return false;
-  }
   if (!node_manager_.MergeNodesWithManager(inside_index_dst, inside_index_src,
                                            manager, merge_function)) {
     return false;
@@ -265,12 +199,12 @@ inline bool MultimapNodeManager<T>::MergeNodesWithManager(
 template <class T>
 inline bool MultimapNodeManager<T>::PreRemoveInsideNode(
     InsideIndex inside_index) {
-  if (inside_index >= node_manager_.Size()) {
-    return false;
-  }
-  if (referred_handlers_[inside_index].size() != 0) {
-    for (auto x : referred_handlers_[inside_index]) {
-      auto iter = handler_to_index_.find(x);
+  assert(inside_index < node_manager_.Size());
+  const auto& handlers_referring_same_inside_id =
+      GetHandlersReferringSameNode(inside_index);
+  if (handlers_referring_same_inside_id.size() != 0) {
+    for (NodeId id : handlers_referring_same_inside_id) {
+      auto iter = handler_to_index_.find(id);
       handler_to_index_.erase(iter);
     }
     referred_handlers_[inside_index].clear();
@@ -281,21 +215,13 @@ inline bool MultimapNodeManager<T>::PreRemoveInsideNode(
 template <class T>
 inline T* MultimapNodeManager<T>::RemovePointer(NodeId handler) {
   InsideIndex inside_index = GetInsideIndex(handler);
-  if (inside_index == -1) {
-    return nullptr;
-  }
-  if (!PreRemoveInsideNode(inside_index)) {
-    return nullptr;
-  }
+  PreRemoveInsideNode(inside_index);
   return node_manager_.RemovePointer(inside_index);
 }
 
 template <class T>
 inline bool MultimapNodeManager<T>::RemoveNode(NodeId handler) {
   InsideIndex inside_index = GetInsideIndex(handler);
-  if (inside_index == -1) {
-    return true;
-  }
   PreRemoveInsideNode(inside_index);
   node_manager_.RemoveNode(inside_index);
   return true;
@@ -334,21 +260,16 @@ inline bool MultimapNodeManager<T>::RemapHandler(NodeId handler,
 }
 
 template <class T>
-inline size_t MultimapNodeManager<T>::AddReference(NodeId handler,
-                                                   InsideIndex inside_index) {
-  if (inside_index >= node_manager_.Size()) {
-    return -1;
-  }
+inline void MultimapNodeManager<T>::AddReference(NodeId handler,
+                                                 InsideIndex inside_index) {
+  assert(inside_index < node_manager_.Size());
   referred_handlers_[inside_index].insert(handler);
-  return referred_handlers_[inside_index].size();
 }
 
 template <class T>
 inline size_t MultimapNodeManager<T>::RemoveReference(
     NodeId handler, InsideIndex inside_index) {
-  if (inside_index >= node_manager_.Size()) {
-    return -1;
-  }
+  assert(inside_index < node_manager_.Size());
   auto& ref_uset = referred_handlers_[inside_index];
   auto iter = ref_uset.find(handler);
   if (iter != ref_uset.end()) {
@@ -385,56 +306,6 @@ inline void MultimapNodeManager<T>::ShrinkToFit() {
 template <class T>
 inline T* MultimapNodeManager<T>::operator[](NodeId handler) {
   return GetNode(handler);
-}
-
-template <class T>
-inline void MultimapNodeManager<T>::Iterator::SetHandler(
-    NodeManager<T>::NodeId handler) {
-  auto index_iter = handler_to_index_.find(handler);
-  if (index_iter == handler_to_index_.end()) {
-    throw std::invalid_argument("无效句柄");
-  }
-  iter_.SetIndex(index_iter->second);
-}
-
-template <class T>
-inline MultimapNodeManager<T>::Iterator&
-MultimapNodeManager<T>::Iterator::operator++() {
-  ++iter_;
-  return *this;
-}
-
-template <class T>
-inline MultimapNodeManager<T>::Iterator
-MultimapNodeManager<T>::Iterator::operator++(int) {
-  Iterator iter_temp = *this;
-  ++iter_;
-  return iter_temp;
-}
-
-template <class T>
-inline MultimapNodeManager<T>::Iterator&
-MultimapNodeManager<T>::Iterator::operator--() {
-  --iter_;
-  return *this;
-}
-
-template <class T>
-inline MultimapNodeManager<T>::Iterator
-MultimapNodeManager<T>::Iterator::operator--(int) {
-  Iterator iter_temp = *this;
-  --iter_;
-  return *this;
-}
-
-template <class T>
-inline T& MultimapNodeManager<T>::Iterator::operator*() {
-  return *iter_;
-}
-
-template <class T>
-inline T* MultimapNodeManager<T>::Iterator::operator->() {
-  return iter_.operator->();
 }
 
 }  // namespace frontend::common
