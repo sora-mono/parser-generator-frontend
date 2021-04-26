@@ -1,3 +1,7 @@
+include_directories(${CMAKE_SOURCE_DIR}/src)
+
+add_subdirectory(NfaGenerator)
+
 aux_source_directory(. DFA_GENERATOR_SRC)
 
 add_library(dfa_generator ${DFA_GENERATOR_SRC})

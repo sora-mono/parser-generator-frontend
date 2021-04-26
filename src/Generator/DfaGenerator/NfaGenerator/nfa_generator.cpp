@@ -1,4 +1,4 @@
-#include "Generator/DfaGenerator/NfaGenerator/NfaGenerator.h"
+#include "Generator/DfaGenerator/NfaGenerator/nfa_generator.h"
 
 #include <algorithm>
 #include <queue>

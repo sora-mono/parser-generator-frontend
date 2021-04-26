@@ -6,8 +6,8 @@
 #include <variant>
 #include <vector>
 
-#include "Common/NodeManager.h"
-#include "Common/UnorderedStructManager.h"
+#include "Common/node_manager.h"
+#include "Common/unordered_struct_manager.h"
 
 #ifndef GENERATOR_LEXICALGENERATOR_LEXICALGENERATOR_H_
 #define GENERATOR_LEXICALGENERATOR_LEXICALGENERATOR_H_
@@ -26,6 +26,7 @@ class LexicalGenerator {
   //为下面定义各种类型不得不使用前置声明
   class BaseNode;
   class ParsingTableEntry;
+  class Core;
 
   //产生式的ID
   using NodeId = NodeManager<BaseNode>::NodeId;
@@ -73,9 +74,9 @@ class LexicalGenerator {
   const std::string* GetSymbolString(SymbolId symbol_id) {
     return manager_symbol_.GetObjectPtr(symbol_id);
   }
-  //添加符号ID到节点ID的映射
+  //设置符号ID到节点ID的映射
   void AddSymbolIdToNodeIdMapping(SymbolId symbol_id, NodeId node_id);
-  //新建终结节点，返回节点ID，节点已存在则返回-1
+  //新建终结节点，返回节点ID，节点已存在且给定symbol_id不同于已有ID则返回-1
   NodeId AddTerminalNode(SymbolId symbol_id);
   //新建运算符节点，返回节点ID，节点已存在则返回-1
   NodeId AddOperatorNode(SymbolId symbol_id, AssociatityType associatity_type,
@@ -85,9 +86,14 @@ class LexicalGenerator {
   //或std::vector<std::vector<NodeId>>
   template <class T>
   NodeId AddNonTerminalNode(SymbolId symbol_id, T&& bodys);
-  //通过符号ID查询对应节点ID，不存在则返回空vector
-  std::vector<NodeId> GetNodeId(SymbolId symbol_id);
+  //通过符号ID查询对应所有节点的ID，不存在则返回空vector
+  std::vector<NodeId> GetNodeIds(SymbolId symbol_id);
   //添加新的核心
+  CoreId CreateNewCore() {
+    CoreId core_id = cores_.size();
+    cores_.emplace_back();
+    return core_id;
+  }
   // Items要求为std::vector<CoreItem>或std::initialize_list<CoreItem>
   // ForwardNodes要求为std::vector<NodeId>或std::initialize_list<NodeId>
   template <class Items, class ForwardNodes>
@@ -96,7 +102,7 @@ class LexicalGenerator {
   CoreId GetItemCoreIdOrInsert(const CoreItem& core_item);
   //添加内核项到对应内核的ID映射，如果已存在且对应core_id不等于入参则返回false
   bool AddItemToCoreIdMapping(const CoreItem& core_item, CoreId core_id);
-  //向项集中添加项
+  //向项集中添加项KPK
   CoreId AddItemToCore(const CoreItem& core_item, CoreId core_id);
   //获取核心的向前看符号集，核心不存在则返回nullptr
   const std::set<NodeId>* GetCoreFowardNodes(CoreId core_id);
@@ -127,10 +133,25 @@ class LexicalGenerator {
   std::set<CoreItem> Closure(NodeId node_id, PointIndex point_index);
 
  private:
+  //根产生式ID
+  NodeId root_production_;
+  //终结符号、非终结符号等的节点
+  NodeManager<BaseNode> manager_nodes_;
+  //管理符号
+  UnorderedStructManager<std::string, StringHasher> manager_symbol_;
+  //符号ID（manager_symbol_)返回的ID到对应节点的映射，支持一个符号对应多个节点
+  std::unordered_multimap<SymbolId, NodeId> symbol_id_to_node_id_;
+
+  //内核+非内核项集
+  std::vector<Core> cores_;
+  //项集到Cores_ ID的映射
+  std::map<CoreItem, CoreId> item_to_core_id_;
+  std::vector<ParsingTableEntry> lexical_config_parsing_table_;
+
   class BaseNode {
    public:
-    BaseNode(NodeType type, NodeId node_id, SymbolId symbol_id)
-        : base_type_(type), base_id_(node_id), base_symbol_id_(symbol_id) {}
+    BaseNode(NodeType type, SymbolId symbol_id)
+        : base_type_(type), base_symbol_id_(symbol_id) {}
     BaseNode(const BaseNode&) = delete;
     BaseNode& operator=(const BaseNode&) = delete;
 
@@ -146,17 +167,23 @@ class LexicalGenerator {
     NodeId base_id_;
     SymbolId base_symbol_id_;
   };
+
   class TerminalNode : public BaseNode {
    public:
-    TerminalNode(NodeType type, NodeId node_id, SymbolId symbol_id)
-        : BaseNode(type, node_id, symbol_id) {}
+    TerminalNode(NodeType type, SymbolId symbol_id)
+        : BaseNode(type, symbol_id) {}
+    TerminalNode(const TerminalNode&) = delete;
+    TerminalNode&operator=(const TerminalNode&) = delete;
   };
   class OperatorNode : public TerminalNode {
-    OperatorNode(NodeType type, NodeId node_id, SymbolId symbol_id,
+    OperatorNode(NodeType type, SymbolId symbol_id,
                  AssociatityType associatity_type, PriorityLevel priority_level)
-        : TerminalNode(type, node_id, symbol_id),
+        : TerminalNode(type, symbol_id),
           operator_associatity_type_(associatity_type),
           operator_priority_level_(priority_level) {}
+    OperatorNode(const OperatorNode&) = delete;
+    OperatorNode& operator=(const OperatorNode&) = delete;
+
     void SetAssociatityType(AssociatityType type) {
       operator_associatity_type_ = type;
     }
@@ -167,14 +194,24 @@ class LexicalGenerator {
     PriorityLevel GetPriorityLevel() { return operator_priority_level_; }
 
    private:
+     template<class T>
+    friend class NodeManager;
     AssociatityType operator_associatity_type_;
     PriorityLevel operator_priority_level_;
   };
+
   class NonTerminalNode : public BaseNode {
    public:
     using BodyId = size_t;
-    NonTerminalNode(NodeType type, NodeId node_id, SymbolId symbol_id)
-        : BaseNode(type, node_id, symbol_id) {}
+    NonTerminalNode(NodeType type, SymbolId symbol_id)
+        : BaseNode(type, symbol_id) {}
+    template <class T>
+    NonTerminalNode(NodeType type, SymbolId symbol_id, T&& body)
+        : BaseNode(type, symbol_id),
+          nonterminal_bodys_(std::forward<T>(body)) {}
+    NonTerminalNode(const NonTerminalNode&) = delete;
+    NonTerminalNode& operator=(const NonTerminalNode&) = delete;
+
     template <class T>
     BodyId AddBody(T&& body);
     std::vector<NodeId> GetBody(BodyId body_id) {
@@ -205,6 +242,9 @@ class LexicalGenerator {
           forward_nodes_(std::forward<ForwardNodes>(forward_nodes)) {}
     Core(const Core&) = delete;
     Core& operator=(const Core&) = delete;
+    Core(Core&& core)
+        : items_(std::move(core.items_)),
+          forward_nodes_(std::move(core.forward_nodes_)) {}
 
     void AddItem(const CoreItem& item) { items_.insert(item); }
     const std::set<CoreItem>& GetItems() { return items_; }
@@ -262,20 +302,6 @@ class LexicalGenerator {
     //移入非终结节点后转移到的产生式体序号
     std::vector<ProductionBodyId> nonterminal_node_transform_table;
   };
-  //根产生式ID
-  NodeId root_production_;
-  //终结符号、非终结符号等的节点
-  NodeManager<BaseNode> manager_nodes_;
-  //管理符号
-  UnorderedStructManager<std::string, StringHasher> manager_symbol_;
-  //符号ID（manager_symbol_)返回的ID到对应节点的映射，支持一个符号对应多个节点
-  std::unordered_multimap<SymbolId, NodeId> symbol_id_to_node_id_;
-
-  //内核+非内核项集
-  std::vector<Core> Cores_;
-  //项集到Cores_ ID的映射
-  std::map<CoreItem, CoreId> item_to_core_id_;
-  std::vector<ParsingTableEntry> lexical_config_parsing_table_;
 };
 
 template <class T>
@@ -289,6 +315,24 @@ LexicalGenerator::NonTerminalNode::AddBody(T&& body) {
   nonterminal_item_to_coreid_.emplace_back();
   nonterminal_item_to_coreid_.back().resize(point_indexs);
   return body_id;
+}
+
+template <class T>
+inline LexicalGenerator::NodeId LexicalGenerator::AddNonTerminalNode(SymbolId symbol_id,
+                                                   T&& bodys) {
+  NodeId node_id = manager_nodes_.EmplaceNode<NonTerminalNode>(
+      NodeType::kNonTerminalNode, symbol_id, std::forward<T>(bodys));
+  manager_nodes_.GetNode(node_id)->SetId(node_id);
+  return NodeId(node_id);
+}
+
+template <class Items, class ForwardNodes>
+inline LexicalGenerator::CoreId LexicalGenerator::CreateNewCore(Items&& items,
+                                              ForwardNodes&& forward_nodes) {
+  CoreId core_id= cores_.size();
+  cores_.emplace_back(std::forward<Items>(items),
+                      std::forward<ForwardNodes>(forward_nodes));
+  return core_id;
 }
 
 }  // namespace frontend::generator::lexicalgenerator

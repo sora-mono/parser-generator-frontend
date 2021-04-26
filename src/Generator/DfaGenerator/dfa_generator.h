@@ -3,9 +3,9 @@
 #include <array>
 #include <map>
 
-#include "Common/UnorderedStructManager.h"
+#include"Common/unordered_struct_manager.h"
 #include "Common/common.h"
-#include "NfaGenerator/NfaGenerator.h"
+#include "NfaGenerator/nfa_generator.h"
 
 #ifndef GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
 #define GENERATOR_DFAGENERATOR_DFAGENERATOR_H_

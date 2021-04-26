@@ -62,13 +62,13 @@ class NodeManager {
   bool IsSame(NodeId index1, NodeId index2) { return index1 == index2; }
 
   //系统自行选择最佳位置放置节点
-  template <class... Args, class ObjectType = T>
+  template <class ObjectType = T,class... Args>
   NodeId EmplaceNode(Args&&... args);
   //系统自行选择最佳位置放置基类或派生类指针
   template <class PointerType>
   NodeId EmplacePointer(PointerType* pointer);
   //在指定位置放置节点
-  template <class... Args, class ObjectType = T>
+  template <class ObjectType = T,class... Args>
   NodeId EmplaceNodeIndex(NodeId index, Args&&... args);
   //在指定位置放置指针
   NodeId EmplacePointerIndex(NodeId index, T* pointer);
@@ -117,8 +117,9 @@ class NodeManager {
   //序列化容器用
   template <class Archive>
   void Serialize(Archive& ar, const unsigned int version = 0);
-
+  //获取当前最佳可用index
   NodeId GetBestEmptyIndex();
+  //添加已移除的index
   void AddRemovedIndex(NodeId index) { removed_ids_.push_back(index); }
 
   std::vector<T*> nodes_;
@@ -169,7 +170,7 @@ inline T* NodeManager<T>::RemovePointer(NodeId index) {
 }
 
 template <class T>
-template <class... Args, class ObjectType>
+template <class ObjectType,class... Args>
 inline NodeManager<T>::NodeId NodeManager<T>::EmplaceNode(Args&&... args) {
   NodeId index = GetBestEmptyIndex();
   T* object_pointer = new ObjectType(std::forward<Args>(args)...);
@@ -187,7 +188,7 @@ inline NodeManager<T>::NodeId NodeManager<T>::EmplacePointer(
 }
 
 template <class T>
-template <class... Args, class ObjectType>
+template <class ObjectType,class... Args >
 inline NodeManager<T>::NodeId NodeManager<T>::EmplaceNodeIndex(NodeId index,
                                                                Args&&... args) {
   T* pointer = new ObjectType(std::forward<Args>(args)...);

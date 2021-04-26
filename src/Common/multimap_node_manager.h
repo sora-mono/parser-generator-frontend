@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Common/NodeManager.h"
+#include "Common/node_manager.h"
 
 #ifndef COMMON_MULTIMAP_NODE_MANAGER_H_
 #define COMMON_MULTIMAP_NODE_MANAGER_H_
@@ -238,23 +238,9 @@ inline void MultimapNodeManager<T>::Swap(MultimapNodeManager& manager_other) {
 template <class T>
 inline bool MultimapNodeManager<T>::RemapHandler(NodeId handler,
                                                  InsideIndex inside_index) {
-  if (inside_index >= node_manager_.Size()) {
-    return false;
-  }
+  assert(inside_index < node_manager_.Size());
   InsideIndex inside_index_old = GetInsideIndex(handler);
-  if (inside_index == inside_index_old) {
-    return true;
-  }
-  if (inside_index_old != -1) {
-    size_t result = RemoveReference(handler, inside_index_old);
-    assert(result != -1);
-  }
-  if (AddReference(handler, inside_index) == -1) {
-    if (inside_index_old != -1) {
-      AddReference(handler, inside_index_old);
-    }
-    return false;
-  }
+  AddReference(handler, inside_index);
   handler_to_index_[handler] = inside_index;
   return true;
 }

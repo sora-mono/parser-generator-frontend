@@ -4,7 +4,8 @@
 #include <unordered_set>
 #include <vector>
 
-#include "Common/MultimapNodeManager.h"
+#include "Common/multimap_node_manager.h"
+#include "Common/unordered_struct_manager.h"
 
 #ifndef GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
 #define GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_

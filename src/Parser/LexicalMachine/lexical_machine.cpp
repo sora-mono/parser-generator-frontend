@@ -1,4 +1,4 @@
-#include "LexicalMachine.h"
+#include "lexical_machine.h"
 
 namespace frontend::parser::lexicalmachine {
 

@@ -1,4 +1,4 @@
-#include "Generator/DfaGenerator/DfaGenerator.h"
+#include"Generator/DfaGenerator/dfa_generator.h"
 
 #include <queue>
 #include <sstream>

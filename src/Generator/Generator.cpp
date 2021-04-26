@@ -2,7 +2,8 @@
 //
 #include <iostream>
 
-#include "Generator/DfaGenerator/DfaGenerator.h"
+#include "Generator/DfaGenerator/dfa_generator.h"
+#include"LexicalGenerator/lexical_generator.h"
 
 int main() {
   std::cout << "Hello World!\n";
