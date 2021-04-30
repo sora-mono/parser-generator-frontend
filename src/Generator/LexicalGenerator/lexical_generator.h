@@ -177,7 +177,7 @@ class LexicalGenerator {
   class BaseNode {
    public:
     BaseNode(NodeType type, SymbolId symbol_id)
-        : base_type_(type), base_symbol_id_(symbol_id) {}
+        : base_type_(type), base_symbol_id_(symbol_id),base_id_(-1) {}
     BaseNode(const BaseNode&) = delete;
     BaseNode& operator=(const BaseNode&) = delete;
 
@@ -189,10 +189,13 @@ class LexicalGenerator {
     SymbolId GetSymbolId() { return base_symbol_id_; }
 
    private:
+     //节点类型
     NodeType base_type_;
+    //节点ID
     ObjectId base_id_;
+    //节点符号ID
     SymbolId base_symbol_id_;
-  };
+  }; 
 
   class TerminalNode : public BaseNode {
    public:
@@ -203,6 +206,7 @@ class LexicalGenerator {
   };
 
   class OperatorNode : public TerminalNode {
+   public:
     OperatorNode(NodeType type, SymbolId symbol_id,
                  AssociatityType associatity_type, PriorityLevel priority_level)
         : TerminalNode(type, symbol_id),
@@ -221,9 +225,11 @@ class LexicalGenerator {
     PriorityLevel GetPriorityLevel() { return operator_priority_level_; }
 
    private:
-    template <class T>
-    friend class ObjectManager;
+    //template <class T>
+    //friend class ObjectManager;
+    //运算符结合性
     AssociatityType operator_associatity_type_;
+    //运算符优先级
     PriorityLevel operator_priority_level_;
   };
 
@@ -351,7 +357,7 @@ inline LexicalGenerator::ObjectId LexicalGenerator::AddNonTerminalNode(
     SymbolId symbol_id, T&& bodys) {
   ObjectId node_id = manager_nodes_.EmplaceObject<NonTerminalNode>(
       NodeType::kNonTerminalNode, symbol_id, std::forward<T>(bodys));
-  manager_nodes_.GetObject(node_id)->SetId(node_id);
+  manager_nodes_.GetObject(node_id).SetId(node_id);
   return ObjectId(node_id);
 }
 
