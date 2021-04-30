@@ -1,8 +1,8 @@
 #include <functional>
 #include <unordered_map>
 
-#include "Common/node_manager.h"
 #include "Common/common.h"
+#include "Common/object_manager.h"
 
 #ifndef COMMON_UNORDERED_STRUCT_MANAGER_H_
 #define COMMON_UNORDERED_STRUCT_MANAGER_H_
@@ -26,41 +26,41 @@ struct DefaultHasher {
 template <class StructType, class Hasher = DefaultHasher<StructType>>
 class UnorderedStructManager {
  public:
-  using NodeId = NodeManager<std::string>::NodeId;
+  using ObjectId = ObjectManager<std::string>::ObjectId;
   using ObjectHashType = size_t;
 
   UnorderedStructManager() {}
   ~UnorderedStructManager() {}
 
-  //返回指向管理的对象的指针
-  StructType* GetObjectPtr(NodeId id) { return node_manager_.GetNode(id); }
+  //返回指向管理的对象的引用
+  StructType& GetObject(ObjectId id) { return node_manager_.GetObject(id); }
   //返回值前半部分为对象是否已存在，后半部分为对象ID
   template <class T>
-  std::pair<bool, NodeId> AddObject(T&& object);
-  NodeId GetObjectId(const StructType& object);
+  std::pair<bool, ObjectId> AddObject(T&& object);
+  ObjectId GetObjectId(const StructType& object);
   bool RemoveObject(const StructType& object);
   void Clear() {
     node_manager_.Clear();
     hash_to_id_.clear();
   }
   void ShrinkToFit() { node_manager_.ShrinkToFit(); }
-  std::string* operator[](NodeId id) { return GetObjectPtr(id); }
+  std::string& operator[](ObjectId id) { return GetObject(id); }
 
  private:
-  NodeManager<StructType> node_manager_;
-  std::unordered_multimap<ObjectHashType, NodeId> hash_to_id_;
+  ObjectManager<StructType> node_manager_;
+  std::unordered_multimap<ObjectHashType, ObjectId> hash_to_id_;
 };
 
 template <class StructType, class Hasher>
 template <class T>
 inline std::pair<bool,
-                 typename UnorderedStructManager<StructType, Hasher>::NodeId>
+                 typename UnorderedStructManager<StructType, Hasher>::ObjectId>
 UnorderedStructManager<StructType, Hasher>::AddObject(T&& object) {
   Hasher hasher;
   ObjectHashType hashed_object = hasher.DoHash(object);
-  NodeId id = GetObjectId(object);
+  ObjectId id = GetObjectId(object);
   if (id == -1) {
-    id = node_manager_.EmplaceNode(std::forward<T>(object));
+    id = node_manager_.EmplaceObject(std::forward<T>(object));
     hash_to_id_.insert(std::make_pair(hashed_object, id));
     return std::make_pair(false, id);
   } else {
@@ -69,7 +69,7 @@ UnorderedStructManager<StructType, Hasher>::AddObject(T&& object) {
 }
 
 template <class StructType, class Hasher>
-UnorderedStructManager<StructType, Hasher>::NodeId
+UnorderedStructManager<StructType, Hasher>::ObjectId
 UnorderedStructManager<StructType, Hasher>::GetObjectId(
     const StructType& object) {
   Hasher hasher;
@@ -79,7 +79,7 @@ UnorderedStructManager<StructType, Hasher>::GetObjectId(
     return -1;
   } else {
     do {
-      if (*node_manager_.GetNode(iter_begin->second) == object) {
+      if (node_manager_.GetObject(iter_begin->second) == object) {
         return iter_begin->second;
       }
       ++iter_begin;
@@ -91,7 +91,7 @@ UnorderedStructManager<StructType, Hasher>::GetObjectId(
 template <class StructType, class Hasher>
 bool UnorderedStructManager<StructType, Hasher>::RemoveObject(
     const StructType& object) {
-  NodeId id = GetObjectId(object);
+  ObjectId id = GetObjectId(object);
   if (id != -1) {
     return node_manager_.RemoveNode(id);
   }

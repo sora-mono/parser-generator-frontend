@@ -1,4 +1,4 @@
-#include"Generator/DfaGenerator/dfa_generator.h"
+#include "Generator/DfaGenerator/dfa_generator.h"
 
 #include <queue>
 #include <sstream>
@@ -47,7 +47,7 @@ bool DfaGenerator::DfaConstruct() {
     intermediate_node_handler_now = q.front();
     q.pop();
     SetId set_handler_now =
-        GetIntermediateNode(intermediate_node_handler_now)->set_handler;
+        GetIntermediateNode(intermediate_node_handler_now).set_handler;
     for (size_t i = 0; i < kCharNum; i++) {
       std::pair(result, intermediate_node_handler_temp) =
           SetGoto(set_handler_now, char(i + CHAR_MIN));
@@ -55,11 +55,10 @@ bool DfaGenerator::DfaConstruct() {
         //该字符下不可转移
         continue;
       }
-      GetIntermediateNode(intermediate_node_handler_now)->forward_nodes[i] =
+      GetIntermediateNode(intermediate_node_handler_now).forward_nodes[i] =
           intermediate_node_handler_temp;
       if (result == false) {  //如果新集合以前不存在则插入队列等待处理
-        q.push(
-            GetIntermediateNode(intermediate_node_handler_temp)->set_handler);
+        q.push(GetIntermediateNode(intermediate_node_handler_temp).set_handler);
       }
     }
   }
@@ -85,17 +84,16 @@ bool DfaGenerator::DfaMinimize() {
   std::vector<bool> logged_index(config_node_num, false);
   for (auto& p : intermediate_node_to_final_node_) {
     size_t index = p.second;
-    IntermediateDfaNode* intermediate_node = GetIntermediateNode(p.first);
-    assert(intermediate_node != nullptr);
+    IntermediateDfaNode& intermediate_node = GetIntermediateNode(p.first);
     if (logged_index[index] == false) {
       //该节点未配置
       for (size_t i = 0; i < kCharNum; i++) {
-        if (intermediate_node->forward_nodes[i] != -1) {
+        if (intermediate_node.forward_nodes[i] != -1) {
           auto iter = intermediate_node_to_final_node_.find(
-              intermediate_node->forward_nodes[i]);
+              intermediate_node.forward_nodes[i]);
           assert(iter != intermediate_node_to_final_node_.end());
           dfa_config[index].first[i] = iter->second;
-          dfa_config[index].second = intermediate_node->tail_node_data.first;
+          dfa_config[index].second = intermediate_node.tail_node_data.first;
         }
       }
       logged_index[index] = true;
@@ -114,7 +112,7 @@ std::pair<bool, DfaGenerator::IntermediateNodeId> DfaGenerator::SetGoto(
     SetId set_src, char c_transform) {
   SetType set;
   TailNodeData tail_data(-1, -1);
-  for (auto x : *GetSetNode(set_src)) {
+  for (auto x : GetSetObject(set_src)) {
     auto [set_temp, tail_data_temp] = nfa_generator_.Goto(x, c_transform);
     if (set_temp.size() == 0) {
       continue;
@@ -137,14 +135,14 @@ std::pair<bool, DfaGenerator::IntermediateNodeId> DfaGenerator::SetGoto(
 inline DfaGenerator::IntermediateNodeId DfaGenerator::IntermediateGoto(
     IntermediateNodeId handler_src, char c_transform) {
   return GetIntermediateNode(handler_src)
-      ->forward_nodes[size_t(c_transform + kCharNum) % kCharNum];
+      .forward_nodes[size_t(c_transform + kCharNum) % kCharNum];
 }
 
 inline bool DfaGenerator::SetIntermediateNodeTransform(
     IntermediateNodeId node_intermediate_src, char c_transform,
     IntermediateNodeId node_intermediate_dst) {
-  IntermediateDfaNode* node_src = GetIntermediateNode(node_intermediate_src);
-  node_src->forward_nodes[size_t(c_transform + kCharNum) % kCharNum] =
+  IntermediateDfaNode& node_src = GetIntermediateNode(node_intermediate_src);
+  node_src.forward_nodes[size_t(c_transform + kCharNum) % kCharNum] =
       node_intermediate_dst;
   return true;
 }
@@ -158,7 +156,7 @@ std::pair<bool, DfaGenerator::IntermediateNodeId> DfaGenerator::InOrInsert(
     return std::make_pair(true, iter->second);
   } else {
     IntermediateNodeId intermediate_nodeid =
-        node_manager_intermediate_node_.EmplaceNode(setid, tail_node_data);
+        node_manager_intermediate_node_.EmplaceObject(setid, tail_node_data);
     setid_to_intermediate_nodeid_.insert(
         std::make_pair(setid, intermediate_nodeid));
     return std::make_pair(false, intermediate_nodeid);
@@ -175,12 +173,11 @@ bool DfaGenerator::DfaMinimize(const std::vector<IntermediateNodeId>& handlers,
   std::map<TailNodeData, std::vector<IntermediateNodeId>> no_next_group;
   for (auto h : handlers) {
     IntermediateNodeId next_node_handler = IntermediateGoto(h, c_transform);
-    IntermediateDfaNode* node = GetIntermediateNode(h);
-    assert(node != nullptr);
+    IntermediateDfaNode& node = GetIntermediateNode(h);
     if (next_node_handler == -1) {
-      no_next_group[node->tail_node_data].push_back(h);
+      no_next_group[node.tail_node_data].push_back(h);
     } else {
-      groups[std::make_pair(next_node_handler, node->tail_node_data)].push_back(
+      groups[std::make_pair(next_node_handler, node.tail_node_data)].push_back(
           h);
     }
   }

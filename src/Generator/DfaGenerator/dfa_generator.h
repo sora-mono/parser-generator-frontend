@@ -3,15 +3,15 @@
 #include <array>
 #include <map>
 
-#include"Common/unordered_struct_manager.h"
 #include "Common/common.h"
+#include "Common/unordered_struct_manager.h"
 #include "NfaGenerator/nfa_generator.h"
 
 #ifndef GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
 #define GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
 
 namespace frontend::generator::dfagenerator {
-using frontend::common::NodeManager;
+using frontend::common::ObjectManager;
 using frontend::generator::dfagenerator::nfagenerator::NfaGenerator;
 namespace common = frontend::common;
 
@@ -22,9 +22,9 @@ class DfaGenerator {
   using TailNodeTag = NfaGenerator::TailNodeData::first_type;
   using PriorityTag = NfaGenerator::TailNodeData::second_type;
   using TailNodeData = NfaGenerator::TailNodeData;
-  using NfaNodeId = NfaGenerator::NodeId;
+  using NfaNodeId = NfaGenerator::ObjectId;
   using SetType = std::unordered_set<NfaNodeId>;
-  using IntermediateNodeId = NodeManager<IntermediateDfaNode>::NodeId;
+  using IntermediateNodeId = ObjectManager<IntermediateDfaNode>::ObjectId;
 
   struct IntergalSetHasher {
     common::IntergalSetHashType DoHash(
@@ -35,7 +35,7 @@ class DfaGenerator {
 
   using SetManagerType =
       common::UnorderedStructManager<SetType, IntergalSetHasher>;
-  using SetId = SetManagerType::NodeId;
+  using SetId = SetManagerType::ObjectId;
   using TransformArray = std::array<size_t, common::kCharNum>;
   // DFA配置类型
   using DfaConfigType = std::vector<std::pair<TransformArray, TailNodeTag>>;
@@ -77,10 +77,10 @@ class DfaGenerator {
     TailNodeData tail_node_data;
     SetId set_handler;  //该节点对应的子集闭包
   };
-  IntermediateDfaNode* GetIntermediateNode(IntermediateNodeId handler) {
-    return node_manager_intermediate_node_.GetNode(handler);
+  IntermediateDfaNode& GetIntermediateNode(IntermediateNodeId handler) {
+    return node_manager_intermediate_node_.GetObject(handler);
   }
-  SetType* GetSetNode(SetId id) { return node_manager_set_.GetObjectPtr(id); }
+  SetType& GetSetObject(SetId id) { return node_manager_set_.GetObject(id); }
   //集合转移函数（子集构造法用），
   //返回值前半部分表示新集合是否已存在，后半部分为对应中间节点句柄
   std::pair<bool, IntermediateNodeId> SetGoto(SetId set_src, char c_transform);
@@ -124,7 +124,7 @@ class DfaGenerator {
   std::unordered_map<IntermediateNodeId, size_t>
       intermediate_node_to_final_node_;
   //存储中间节点
-  NodeManager<IntermediateDfaNode> node_manager_intermediate_node_;
+  ObjectManager<IntermediateDfaNode> node_manager_intermediate_node_;
   //存储集合的哈希到节点句柄的映射
   SetManagerType node_manager_set_;
   std::unordered_map<SetId, IntermediateNodeId> setid_to_intermediate_nodeid_;
@@ -149,7 +149,7 @@ inline bool DfaGenerator::DfaMinimizeGroupsRecursion(
       for (size_t i = 1; i < vec.size(); i++) {
         intermediate_node_to_final_node_.insert(
             std::make_pair(vec[i], config_node_num));
-        node_manager_intermediate_node_.RemoveNode(vec[i]);
+        node_manager_intermediate_node_.RemoveObject(vec[i]);
       }
       ++config_node_num;
     }
@@ -157,5 +157,5 @@ inline bool DfaGenerator::DfaMinimizeGroupsRecursion(
   return true;
 }
 
-}  // namespace generator::dfagenerator
+}  // namespace frontend::generator::dfagenerator
 #endif  // !GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
