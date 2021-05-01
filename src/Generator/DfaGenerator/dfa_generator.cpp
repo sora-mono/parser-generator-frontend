@@ -3,34 +3,30 @@
 #include <queue>
 #include <sstream>
 
-namespace frontend::generator::dfagenerator {
+namespace frontend::generator::dfa_generator {
 using frontend::common::kCharNum;
-using frontend::generator::dfagenerator::nfagenerator::NfaGenerator;
+using frontend::generator::dfa_generator::nfa_generator::NfaGenerator;
 
-bool DfaGenerator::AddKeyword(const std::string& str, TailNodeTag tail_node_tag,
-                              PriorityTag priority_tag) {
-  TailNodeData result = nfa_generator_.WordConstruct(
+bool DfaGenerator::AddKeyword(const std::string& str, TailNodeId tail_node_tag,
+                              TailNodePriority priority_tag) {
+  auto [head_node_id, tail_node_id] = nfa_generator_.WordConstruct(
       str, TailNodeData(tail_node_tag, priority_tag));
-  if (result == NfaGenerator::NotTailNodeTag) {
-    return false;
-  }
+  assert(head_node_id.IsValid() && tail_node_id.IsValid());
   return true;
 }
 
 bool DfaGenerator::AddRegexpression(const std::string& str,
-                                    TailNodeTag tail_node_tag,
-                                    PriorityTag priority_tag) {
+                                    TailNodeId tail_node_tag,
+                                    TailNodePriority priority_tag) {
   std::stringstream sstream(str);
-  TailNodeData result = nfa_generator_.RegexConstruct(
+  auto [head_node_id, tail_node_id] = nfa_generator_.RegexConstruct(
       sstream, TailNodeData(tail_node_tag, priority_tag));
-  if (result == NfaGenerator::NotTailNodeTag) {
-    return false;
-  }
+  assert(head_node_id.IsValid() && tail_node_id.IsValid());
   return true;
 }
 
 bool DfaGenerator::DfaConstruct() {
-  NfaNodeId nfa_head_handler = nfa_generator_.GetHeadNodeId();
+  NfaNodeId nfa_head_handler = nfa_generator_.GetHeadNfaNodeId();
   SetType set_now;
   TailNodeData tail_data;
   std::pair(set_now, tail_data) = nfa_generator_.Closure(nfa_head_handler);
@@ -51,14 +47,15 @@ bool DfaGenerator::DfaConstruct() {
     for (size_t i = 0; i < kCharNum; i++) {
       std::pair(result, intermediate_node_handler_temp) =
           SetGoto(set_handler_now, char(i + CHAR_MIN));
-      if (intermediate_node_handler_temp == -1) {
+      if (!intermediate_node_handler_temp.IsValid()) {
         //该字符下不可转移
         continue;
       }
       GetIntermediateNode(intermediate_node_handler_now).forward_nodes[i] =
           intermediate_node_handler_temp;
-      if (result == false) {  //如果新集合以前不存在则插入队列等待处理
-        q.push(GetIntermediateNode(intermediate_node_handler_temp).set_handler);
+      if (result == false) {
+        //新集合对应的中间节点以前不存在，插入队列等待处理
+        q.push(intermediate_node_handler_temp);
       }
     }
   }
@@ -78,8 +75,8 @@ bool DfaGenerator::DfaMinimize() {
   DfaMinimize(nodes, CHAR_MIN);
   dfa_config.resize(config_node_num);
   for (auto& p : dfa_config) {
-    p.first.fill(-1);
-    p.second = -1;
+    p.first.fill(TransformArrayId::InvalidId());
+    p.second = TailNodeId::InvalidId();
   }
   std::vector<bool> logged_index(config_node_num, false);
   for (auto& p : intermediate_node_to_final_node_) {
@@ -88,7 +85,8 @@ bool DfaGenerator::DfaMinimize() {
     if (logged_index[index] == false) {
       //该节点未配置
       for (size_t i = 0; i < kCharNum; i++) {
-        if (intermediate_node.forward_nodes[i] != -1) {
+        if (intermediate_node.forward_nodes[i] !=
+            IntermediateNodeId::InvalidId()) {
           auto iter = intermediate_node_to_final_node_.find(
               intermediate_node.forward_nodes[i]);
           assert(iter != intermediate_node_to_final_node_.end());
@@ -101,7 +99,7 @@ bool DfaGenerator::DfaMinimize() {
   }
   head_index =
       intermediate_node_to_final_node_.find(head_node_intermediate_)->second;
-  head_node_intermediate_ = -1;
+  head_node_intermediate_ = IntermediateNodeId::InvalidId();
   node_manager_intermediate_node_.Clear();
   node_manager_intermediate_node_.ShrinkToFit();
   intermediate_node_to_final_node_.clear();
@@ -111,7 +109,7 @@ bool DfaGenerator::DfaMinimize() {
 std::pair<bool, DfaGenerator::IntermediateNodeId> DfaGenerator::SetGoto(
     SetId set_src, char c_transform) {
   SetType set;
-  TailNodeData tail_data(-1, -1);
+  TailNodeData tail_data(NfaGenerator::NotTailNodeTag);
   for (auto x : GetSetObject(set_src)) {
     auto [set_temp, tail_data_temp] = nfa_generator_.Goto(x, c_transform);
     if (set_temp.size() == 0) {
@@ -127,7 +125,7 @@ std::pair<bool, DfaGenerator::IntermediateNodeId> DfaGenerator::SetGoto(
     }
   }
   if (set.size() == 0) {
-    return std::pair(false, -1);
+    return std::pair(false, IntermediateNodeId::InvalidId());
   }
   return InOrInsert(set, tail_data);
 }
@@ -174,7 +172,7 @@ bool DfaGenerator::DfaMinimize(const std::vector<IntermediateNodeId>& handlers,
   for (auto h : handlers) {
     IntermediateNodeId next_node_handler = IntermediateGoto(h, c_transform);
     IntermediateDfaNode& node = GetIntermediateNode(h);
-    if (next_node_handler == -1) {
+    if (next_node_handler == IntermediateNodeId::InvalidId()) {
       no_next_group[node.tail_node_data].push_back(h);
     } else {
       groups[std::make_pair(next_node_handler, node.tail_node_data)].push_back(
@@ -185,4 +183,4 @@ bool DfaGenerator::DfaMinimize(const std::vector<IntermediateNodeId>& handlers,
   DfaMinimizeGroupsRecursion(no_next_group, c_transform);
   return true;
 }
-}  // namespace frontend::generator::dfagenerator
+}  // namespace frontend::generator::dfa_generator

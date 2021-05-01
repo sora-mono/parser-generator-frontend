@@ -11,4 +11,4 @@ aux_source_directory(. GENERATOR_SRCS)
 add_executable(Generator ${GENERATOR_SRCS})
 
 link_directories(${CMAKE_SOUREC_DIR}/src/Common)
-target_link_libraries(Generator common_functions dfa_generator lexical_generator)
+target_link_libraries(Generator common_functions nfa_generator dfa_generator lexical_generator)

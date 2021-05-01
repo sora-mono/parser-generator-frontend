@@ -4,111 +4,99 @@
 #include <queue>
 #include <sstream>
 
-namespace frontend::generator::dfagenerator::nfagenerator {
+namespace frontend::generator::dfa_generator::nfa_generator {
 
-NfaGenerator::NodeId NfaGenerator::NfaNode::GetForwardNodesHandler(
+NfaGenerator::NfaNodeId NfaGenerator::NfaNode::GetForwardNodesId(
     char c_transfer) {
   auto iter = nodes_forward.find(c_transfer);
-  if (iter == nodes_forward.end()) {
-    return -1;
-  }
+  assert(iter != nodes_forward.end());
   return iter->second;
 }
 
-inline const std::unordered_set<NfaGenerator::NodeId>&
-NfaGenerator::NfaNode::GetUnconditionTransferNodesHandler() {
-  return NfaGenerator::NfaNode::conditionless_transfer_nodes_handler;
+inline const std::unordered_set<NfaGenerator::NfaNodeId>&
+NfaGenerator::NfaNode::GetUnconditionTransferNodesId() {
+  return NfaGenerator::NfaNode::conditionless_transfer_nodes_id;
 }
 
-inline bool NfaGenerator::NfaNode::AddConditionTransfer(
-    char c_condition, NfaGenerator::NodeId node_handler) {
-  auto iter = nodes_forward.find(c_condition);
-  if (iter != nodes_forward.end() &&
-      iter->second != node_handler) {  //该条件下已有不同转移节点，不能覆盖
-    return false;
-  }
-  nodes_forward[c_condition] = node_handler;
-  return true;
+inline void NfaGenerator::NfaNode::SetConditionTransfer(
+    char c_condition, NfaGenerator::NfaNodeId node_id) {
+  nodes_forward[c_condition] = node_id;
 }
 
-inline bool NfaGenerator::NfaNode::AddNoconditionTransfer(NodeId node_handler) {
-  conditionless_transfer_nodes_handler.insert(node_handler);
-  return true;
+inline void NfaGenerator::NfaNode::AddNoconditionTransfer(
+    NfaNodeId node_id) {
+  conditionless_transfer_nodes_id.insert(node_id);
 }
 
-inline bool NfaGenerator::NfaNode::RemoveConditionalTransfer(char c_treasfer) {
+inline void NfaGenerator::NfaNode::RemoveConditionalTransfer(char c_treasfer) {
   auto iter = nodes_forward.find(c_treasfer);
   if (iter != nodes_forward.end()) {
     nodes_forward.erase(iter);
   }
-  return true;
 }
 
-inline bool NfaGenerator::NfaNode::RemoveConditionlessTransfer(
-    NodeId node_handler) {
-  if (node_handler == -1) {
-    conditionless_transfer_nodes_handler.clear();
-  } else {
-    auto iter = conditionless_transfer_nodes_handler.find(node_handler);
-    if (iter != conditionless_transfer_nodes_handler.end()) {
-      conditionless_transfer_nodes_handler.erase(iter);
-    }
+inline void NfaGenerator::NfaNode::RemoveConditionlessTransfer(
+    NfaNodeId node_id) {
+  auto iter = conditionless_transfer_nodes_id.find(node_id);
+  if (iter != conditionless_transfer_nodes_id.end()) {
+    conditionless_transfer_nodes_id.erase(iter);
   }
-  return true;
 }
 
-std::pair<std::unordered_set<typename NfaGenerator::NodeId>,
+std::pair<std::unordered_set<typename NfaGenerator::NfaNodeId>,
           typename NfaGenerator::TailNodeData>
-NfaGenerator::Closure(NodeId handler) {
-  std::unordered_set<NodeId> uset_temp =
-      node_manager_.GetHandlersReferringSameNode(handler);
-  TailNodeData tag(-1, -1);
-  std::queue<NodeId> q;
+NfaGenerator::Closure(NfaNodeId id) {
+  std::unordered_set<NfaNodeId> uset_temp =
+      node_manager_.GetIdsReferringSameObject(id);
+  TailNodeData tail_node_data(NotTailNodeTag);
+  std::queue<NfaNodeId> q;
   for (auto x : uset_temp) {
     q.push(x);
   }
   while (!q.empty()) {
-    NodeId handler_now = q.front();
+    NfaNodeId id_now = q.front();
     q.pop();
-    if (uset_temp.find(handler_now) != uset_temp.end()) {
+    if (uset_temp.find(id_now) != uset_temp.end()) {
       continue;
     }
-    uset_temp.insert(handler_now);
-    auto iter = tail_nodes_.find(GetNode(handler_now));  //判断是否为尾节点
+    uset_temp.insert(id_now);
+    auto iter = tail_nodes_.find(&GetNfaNode(id_now));  //判断是否为尾节点
     if (iter != tail_nodes_.end()) {
-      if (tag == NotTailNodeTag) {  //以前无尾节点记录
-        tag = iter->second;
-      } else if (iter->second.second >
-                 tag.second) {  //当前记录优先级大于以前的优先级
-        tag = iter->second;
-      } else if (iter->second.second == tag.second &&
-                 iter->first != tag.first) {
+      TailNodeData& tail_node_data_new = iter->second;
+      TailNodePriority priority_old = tail_node_data.second;
+      TailNodePriority priority_new = tail_node_data_new.second;
+
+      if (tail_node_data == NotTailNodeTag) {  //以前无尾节点记录
+        tail_node_data = tail_node_data_new;
+      } else if (priority_new > priority_old) {
+        //当前记录优先级大于以前的优先级
+        tail_node_data = tail_node_data_new;
+      } else if (priority_new == priority_old &&
+                 tail_node_data_new.first != tail_node_data.first) {
+        // TODO 去除异常
         //两个尾节点标记优先级相同，对应尾节点不同
         throw std::runtime_error("两个尾节点具有相同优先级且不对应同一个节点");
       }
     }
-    const std::unordered_set<NodeId> uset_nodes =
-        node_manager_.GetHandlersReferringSameNode(handler_now);
+    const std::unordered_set<NfaNodeId>& uset_nodes =
+        node_manager_.GetIdsReferringSameObject(id_now);
     for (auto x : uset_nodes) {
       q.push(x);
     }
   }
-  return std::pair<std::unordered_set<NodeId>, TailNodeData>(
-      std::move(uset_temp), std::move(tag));
+  return std::pair<std::unordered_set<NfaNodeId>, TailNodeData>(
+      std::move(uset_temp), std::move(tail_node_data));
 }
 
-std::pair<std::unordered_set<typename NfaGenerator::NodeId>,
+std::pair<std::unordered_set<typename NfaGenerator::NfaNodeId>,
           typename NfaGenerator::TailNodeData>
-NfaGenerator::Goto(NodeId handler_src, char c_transform) {
-  NfaNode* pointer_node = GetNode(handler_src);
-  if (pointer_node == nullptr) {
-    return std::pair(std::unordered_set<NodeId>(), NotTailNodeTag);
+NfaGenerator::Goto(NfaNodeId id_src, char c_transform) {
+  NfaNode& pointer_node = GetNfaNode(id_src);
+  NfaNodeId id = pointer_node.GetForwardNodesId(c_transform);
+  if (!id.IsValid()) {
+    return std::pair(std::unordered_set<NfaNodeId>(), NotTailNodeTag);
   }
-  NodeId handler = pointer_node->GetForwardNodesHandler(c_transform);
-  if (handler == -1) {
-    return std::pair(std::unordered_set<NodeId>(), NotTailNodeTag);
-  }
-  return Closure(handler);
+  return Closure(id);
 }
 
 bool NfaGenerator::NfaNode::MergeNodesWithManager(NfaNode& node_src) {
@@ -129,13 +117,13 @@ bool NfaGenerator::NfaNode::MergeNodesWithManager(NfaNode& node_src) {
     }
   }
   nodes_forward.merge(node_src.nodes_forward);
-  conditionless_transfer_nodes_handler.merge(
-      node_src.conditionless_transfer_nodes_handler);
+  conditionless_transfer_nodes_id.merge(
+      node_src.conditionless_transfer_nodes_id);
   return true;
 }
 
 NfaGenerator::NfaGenerator() {
-  head_node_handler_ = node_manager_.EmplaceNode();  //添加头结点
+  head_node_id_ = node_manager_.EmplaceObject();  //添加头结点
 }
 
 inline const NfaGenerator::TailNodeData NfaGenerator::GetTailTag(
@@ -148,49 +136,48 @@ inline const NfaGenerator::TailNodeData NfaGenerator::GetTailTag(
 }
 
 inline const NfaGenerator::TailNodeData NfaGenerator::GetTailTag(
-    NodeId handler) {
-  return GetTailTag(GetNode(handler));
+    NfaNodeId id) {
+  return GetTailTag(&GetNfaNode(id));
 }
-
-inline NfaGenerator::NfaNode* NfaGenerator::GetNode(NodeId handler) {
-  return node_manager_.GetNode(handler);
-}
-
-std::pair<NfaGenerator::NodeId, NfaGenerator::NodeId>
+// TODO 将流改成printf等函数
+std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>
 NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
                              bool add_to_NFA_head,
                              bool return_when_right_bracket) {
-  NodeId head_handler = node_manager_.EmplaceNode();
-  NodeId tail_handler = head_handler;
-  NodeId pre_tail_handler = head_handler;
+  NfaNodeId head_id = node_manager_.EmplaceObject();
+  NfaNodeId tail_id = head_id;
+  NfaNodeId pre_tail_id = head_id;
   char c_now;
   in >> c_now;
   while (c_now != '\0' && in) {
-    NodeId temp_head_handler = -1, temp_tail_handler = -1;
+    NfaNodeId temp_head_id = NfaNodeId::InvalidId(),
+              temp_tail_id = NfaNodeId::InvalidId();
     switch (c_now) {
       case '[':
         in.putback(c_now);
-        std::pair(temp_head_handler, temp_tail_handler) = CreateSwitchTree(in);
-        if (temp_head_handler == -1 || temp_tail_handler == -1) {
+        std::pair(temp_head_id, temp_tail_id) = CreateSwitchTree(in);
+        if (temp_head_id == NfaNodeId::InvalidId() ||
+            temp_tail_id == NfaNodeId::InvalidId()) {
           throw std::invalid_argument("非法正则");
         }
-        GetNode(tail_handler)->AddNoconditionTransfer(temp_tail_handler);
-        pre_tail_handler = tail_handler;
-        tail_handler = temp_tail_handler;
+        GetNfaNode(tail_id).AddNoconditionTransfer(temp_tail_id);
+        pre_tail_id = tail_id;
+        tail_id = temp_tail_id;
         break;
       case ']':
         throw std::runtime_error(
             "regex_construct函数不应该处理]字符，应交给create_switch_tree处理");
         break;
       case '(':
-        std::pair(temp_head_handler, temp_tail_handler) =
+        std::pair(temp_head_id, temp_tail_id) =
             RegexConstruct(in, NotTailNodeTag, false, true);
-        if (temp_head_handler == -1 || temp_tail_handler == -1) {
+        if (temp_head_id == NfaNodeId::InvalidId() ||
+            temp_tail_id == NfaNodeId::InvalidId()) {
           throw std::invalid_argument("非法正则");
         }
-        GetNode(tail_handler)->AddNoconditionTransfer(temp_head_handler);
-        pre_tail_handler = tail_handler;
-        tail_handler = temp_tail_handler;
+        GetNfaNode(tail_id).AddNoconditionTransfer(temp_head_id);
+        pre_tail_id = tail_id;
+        tail_id = temp_tail_id;
         break;
       case ')':
         in >> c_now;
@@ -200,26 +187,26 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
         }
         switch (c_now) {
           case '*':
-            temp_tail_handler = node_manager_.EmplaceNode();
-            GetNode(tail_handler)->AddNoconditionTransfer(temp_tail_handler);
-            GetNode(temp_tail_handler)->AddNoconditionTransfer(head_handler);
-            GetNode(head_handler)->AddNoconditionTransfer(temp_tail_handler);
-            pre_tail_handler = tail_handler;
-            tail_handler = temp_tail_handler;
+            temp_tail_id = node_manager_.EmplaceObject();
+            GetNfaNode(tail_id).AddNoconditionTransfer(temp_tail_id);
+            GetNfaNode(temp_tail_id).AddNoconditionTransfer(head_id);
+            GetNfaNode(head_id).AddNoconditionTransfer(temp_tail_id);
+            pre_tail_id = tail_id;
+            tail_id = temp_tail_id;
             break;
           case '+':
-            temp_tail_handler = node_manager_.EmplaceNode();
-            GetNode(temp_tail_handler)->AddNoconditionTransfer(head_handler);
-            GetNode(tail_handler)->AddNoconditionTransfer(head_handler);
-            pre_tail_handler = tail_handler;
-            tail_handler = temp_tail_handler;
+            temp_tail_id = node_manager_.EmplaceObject();
+            GetNfaNode(temp_tail_id).AddNoconditionTransfer(head_id);
+            GetNfaNode(tail_id).AddNoconditionTransfer(head_id);
+            pre_tail_id = tail_id;
+            tail_id = temp_tail_id;
             break;
           case '?':
-            temp_tail_handler = node_manager_.EmplaceNode();
-            GetNode(tail_handler)->AddNoconditionTransfer(temp_tail_handler);
-            GetNode(head_handler)->AddNoconditionTransfer(temp_tail_handler);
-            pre_tail_handler = tail_handler;
-            tail_handler = temp_tail_handler;
+            temp_tail_id = node_manager_.EmplaceObject();
+            GetNfaNode(tail_id).AddNoconditionTransfer(temp_tail_id);
+            GetNfaNode(head_id).AddNoconditionTransfer(temp_tail_id);
+            pre_tail_id = tail_id;
+            tail_id = temp_tail_id;
             break;
           default:
             in.putback(c_now);
@@ -230,107 +217,106 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
         }
         break;
       case '+':  //仅对单个字符生效
-        temp_tail_handler = node_manager_.EmplaceNode();
-        GetNode(tail_handler)->AddNoconditionTransfer(temp_tail_handler);
-        GetNode(pre_tail_handler)->AddNoconditionTransfer(temp_tail_handler);
-        pre_tail_handler = tail_handler;
-        tail_handler = temp_tail_handler;
+        temp_tail_id = node_manager_.EmplaceObject();
+        GetNfaNode(tail_id).AddNoconditionTransfer(temp_tail_id);
+        GetNfaNode(pre_tail_id).AddNoconditionTransfer(temp_tail_id);
+        pre_tail_id = tail_id;
+        tail_id = temp_tail_id;
         break;
       case '*':  //仅对单个字符生效
-        temp_tail_handler = node_manager_.EmplaceNode();
-        GetNode(tail_handler)->AddNoconditionTransfer(temp_tail_handler);
-        GetNode(pre_tail_handler)->AddNoconditionTransfer(temp_tail_handler);
-        GetNode(temp_tail_handler)->AddNoconditionTransfer(pre_tail_handler);
-        pre_tail_handler = tail_handler;
-        tail_handler = temp_tail_handler;
+        temp_tail_id = node_manager_.EmplaceObject();
+        GetNfaNode(tail_id).AddNoconditionTransfer(temp_tail_id);
+        GetNfaNode(pre_tail_id).AddNoconditionTransfer(temp_tail_id);
+        GetNfaNode(temp_tail_id).AddNoconditionTransfer(pre_tail_id);
+        pre_tail_id = tail_id;
+        tail_id = temp_tail_id;
         break;
       case '?':
-        temp_tail_handler = node_manager_.EmplaceNode();
-        GetNode(tail_handler)->AddNoconditionTransfer(temp_tail_handler);
-        GetNode(pre_tail_handler)->AddNoconditionTransfer(temp_tail_handler);
-        pre_tail_handler = tail_handler;
-        tail_handler = pre_tail_handler;
+        temp_tail_id = node_manager_.EmplaceObject();
+        GetNfaNode(tail_id).AddNoconditionTransfer(temp_tail_id);
+        GetNfaNode(pre_tail_id).AddNoconditionTransfer(temp_tail_id);
+        pre_tail_id = tail_id;
+        tail_id = pre_tail_id;
         break;
       case '\\':
         in >> c_now;
         if (!in || c_now == '\0') {
           throw std::invalid_argument("非法正则");
         }
-        temp_tail_handler = node_manager_.EmplaceNode();
-        GetNode(tail_handler)->AddConditionTransfer(c_now, temp_tail_handler);
-        pre_tail_handler = tail_handler;
-        tail_handler = temp_tail_handler;
+        temp_tail_id = node_manager_.EmplaceObject();
+        GetNfaNode(tail_id).SetConditionTransfer(c_now, temp_tail_id);
+        pre_tail_id = tail_id;
+        tail_id = temp_tail_id;
         break;
       default:
-        temp_tail_handler = node_manager_.EmplaceNode();
-        GetNode(tail_handler)->AddConditionTransfer(c_now, temp_tail_handler);
-        pre_tail_handler = tail_handler;
-        tail_handler = temp_tail_handler;
+        temp_tail_id = node_manager_.EmplaceObject();
+        GetNfaNode(tail_id).SetConditionTransfer(c_now, temp_tail_id);
+        pre_tail_id = tail_id;
+        tail_id = temp_tail_id;
         break;
     }
     if (c_now != '\0') {
       in >> c_now;
     }
   }
-  if (head_handler != tail_handler) {
+  if (head_id != tail_id) {
     if (add_to_NFA_head) {
-      GetNode(head_node_handler_)->AddNoconditionTransfer(head_handler);
-      AddTailNode(tail_handler, tag);
+      GetNfaNode(head_node_id_).AddNoconditionTransfer(head_id);
+      AddTailNode(tail_id, tag);
     }
   } else {
-    node_manager_.RemoveNode(head_handler);
-    head_handler = tail_handler = -1;
+    node_manager_.RemoveObject(head_id);
+    head_id = tail_id = NfaNodeId::InvalidId();
   }
-  return std::pair<NodeId, NodeId>(head_handler, tail_handler);
+  return std::make_pair(head_id, tail_id);
 }
 
-std::pair<NfaGenerator::NodeId, NfaGenerator::NodeId>
+std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>
 NfaGenerator::WordConstruct(const std::string& str, const TailNodeData& tag) {
-  if (str.size() == 0) {
-    return std::pair(-1, -1);
-  }
-  NodeId head_handler = node_manager_.EmplaceNode();
-  NodeId tail_handler = head_handler;
+  assert(str.size() != 0);
+  NfaNodeId head_id = node_manager_.EmplaceObject();
+  NfaNodeId tail_id = head_id;
   for (auto c : str) {
-    NodeId temp_handler = node_manager_.EmplaceNode();
-    GetNode(tail_handler)->AddConditionTransfer(c, temp_handler);
-    tail_handler = temp_handler;
+    NfaNodeId temp_id = node_manager_.EmplaceObject();
+    GetNfaNode(tail_id).SetConditionTransfer(c, temp_id);
+    tail_id = temp_id;
   }
-  GetNode(head_node_handler_)->AddNoconditionTransfer(head_handler);
-  AddTailNode(tail_handler, tag);
-  return std::pair(head_handler, tail_handler);
+  GetNfaNode(head_node_id_).AddNoconditionTransfer(head_id);
+  AddTailNode(tail_id, tag);
+  return std::make_pair(head_id, tail_id);
 }
 
 void NfaGenerator::MergeOptimization() {
-  node_manager_.SetAllMergeAllowed();
-  std::queue<NodeId> q;
+  node_manager_.SetAllObjectsMergeAllowed();
+  std::queue<NfaNodeId> q;
   for (auto x :
-       GetNode(head_node_handler_)->conditionless_transfer_nodes_handler) {
+       GetNfaNode(head_node_id_).conditionless_transfer_nodes_id) {
     q.push(x);
   }
   while (!q.empty()) {
-    NodeId handler_now = q.front();
+    NfaNodeId id_now = q.front();
     q.pop();
     bool merged = false;
-    bool CanMerge = node_manager_.CanMerge(handler_now);
+    bool CanMerge = node_manager_.CanMerge(id_now);
     if (!CanMerge) {
       continue;
     }
-    for (auto x : GetNode(handler_now)->conditionless_transfer_nodes_handler) {
-      merged |= node_manager_.MergeNodesWithManager<NfaGenerator>(
-          handler_now, x, *this, MergeNfaNodesWithGenerator);
+    for (auto x :
+         GetNfaNode(id_now).conditionless_transfer_nodes_id) {
+      merged |= node_manager_.MergeObjectsWithManager<NfaGenerator>(
+          id_now, x, *this, MergeNfaNodesWithGenerator);
       q.push(x);
     }
     if (merged) {
-      q.push(handler_now);
+      q.push(id_now);
     } else {
-      node_manager_.SetNodeMergeRefused(handler_now);
+      node_manager_.SetObjectMergeRefused(id_now);
     }
   }
 }
 
 void NfaGenerator::Clear() {
-  head_node_handler_ = -1;
+  head_node_id_ = NfaNodeId::InvalidId();
   tail_nodes_.clear();
   node_manager_.Clear();
 }
@@ -344,38 +330,36 @@ inline bool NfaGenerator::RemoveTailNode(NfaNode* pointer) {
 }
 
 bool NfaGenerator::AddTailNode(NfaNode* pointer, const TailNodeData& tag) {
-  if (pointer == nullptr) {
-    return false;
-  }
-  tail_nodes_.insert(std::pair(pointer, tag));
+  assert(pointer != nullptr);
+  tail_nodes_.insert(std::make_pair(pointer, tag));
   return false;
 }
 
-std::pair<NfaGenerator::NodeId, NfaGenerator::NodeId>
+std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>
 NfaGenerator::CreateSwitchTree(std::istream& in) {
-  NodeId head_handler = node_manager_.EmplaceNode();
-  NodeId tail_handler = node_manager_.EmplaceNode();
+  NfaNodeId head_id = node_manager_.EmplaceObject();
+  NfaNodeId tail_id = node_manager_.EmplaceObject();
   char c_now, c_pre;
   in >> c_now;
   c_pre = c_now;
-  NfaNode* p_node = GetNode(head_handler);
+  NfaNode& p_node = GetNfaNode(head_id);
   while (in && c_now != ']') {
     switch (c_now) {
       case '-':
         for (char c = c_pre; c != c_now; c++) {
-          p_node->AddConditionTransfer(c, tail_handler);
+          p_node.SetConditionTransfer(c, tail_id);
         }
-        p_node->AddConditionTransfer(c_now);
+        p_node.SetConditionTransfer(c_now, tail_id);
         break;
       case '\\':
         in >> c_now;
         if (!in || c_now == '\0') {
           throw std::invalid_argument("非法正则");
         }
-        p_node->AddConditionTransfer(c_now, tail_handler);
+        p_node.SetConditionTransfer(c_now, tail_id);
         break;
       default:
-        p_node->AddConditionTransfer(c_now, tail_handler);
+        p_node.SetConditionTransfer(c_now, tail_id);
         break;
     }
     c_pre = c_now;
@@ -384,39 +368,38 @@ NfaGenerator::CreateSwitchTree(std::istream& in) {
   if (c_now != ']' || !in) {
     throw std::invalid_argument("非法正则");
   }
-  if (head_handler == tail_handler) {
-    node_manager_.RemoveNode(head_handler);
+  if (head_id == tail_id) {
+    node_manager_.RemoveObject(head_id);
     throw std::invalid_argument("[]中为空");
-    return std::pair(-1, -1);
   }
 
   in >> c_now;
   if (!in) {
-    return std::pair(head_handler, tail_handler);
+    return std::pair(head_id, tail_id);
   }
   switch (c_now) {
     case '*':
-      GetNode(head_handler)->AddNoconditionTransfer(tail_handler);
-      GetNode(tail_handler)->AddNoconditionTransfer(head_handler);
+      GetNfaNode(head_id).AddNoconditionTransfer(tail_id);
+      GetNfaNode(tail_id).AddNoconditionTransfer(head_id);
       break;
     case '+':
-      GetNode(tail_handler)->AddNoconditionTransfer(head_handler);
+      GetNfaNode(tail_id).AddNoconditionTransfer(head_id);
       break;
     case '?':
-      GetNode(head_handler)->AddNoconditionTransfer(tail_handler);
+      GetNfaNode(head_id).AddNoconditionTransfer(tail_id);
       break;
     default:
       in.putback(c_now);
       break;
   }
-  return std::pair(head_handler, tail_handler);
+  return std::pair(head_id, tail_id);
 }
 
 bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
                                 NfaGenerator::NfaNode& node_src,
                                 NfaGenerator& generator) {
-  NfaGenerator::TailNodeData dst_tag = generator.GetTailTag(&node_dst);
-  NfaGenerator::TailNodeData src_tag = generator.GetTailTag(&node_src);
+  const NfaGenerator::TailNodeData& dst_tag = generator.GetTailTag(&node_dst);
+  const NfaGenerator::TailNodeData& src_tag = generator.GetTailTag(&node_src);
   if (dst_tag != NfaGenerator::NotTailNodeTag &&
       src_tag != NfaGenerator::NotTailNodeTag &&
       dst_tag.second == src_tag.second && dst_tag.first != src_tag.first) {
@@ -433,5 +416,9 @@ bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
     return false;
   }
 }
-}  // namespace frontend::generator::dfagenerator::nfagenerator
-#endif  // !GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR
+
+const NfaGenerator::TailNodeData NfaGenerator::NotTailNodeTag =
+    NfaGenerator::TailNodeData(TailNodeId::InvalidId(),
+                               TailNodePriority::InvalidId());
+
+}  // namespace frontend::generator::dfa_generator::nfa_generator

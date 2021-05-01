@@ -1,7 +1,8 @@
 #include <functional>
 #include <unordered_map>
 
-#include "Common/common.h"
+#include "Common/hash_functions.h"
+#include "Common/id_wrapper.h"
 #include "Common/object_manager.h"
 
 #ifndef COMMON_UNORDERED_STRUCT_MANAGER_H_
@@ -26,8 +27,10 @@ struct DefaultHasher {
 template <class StructType, class Hasher = DefaultHasher<StructType>>
 class UnorderedStructManager {
  public:
-  using ObjectId = ObjectManager<std::string>::ObjectId;
-  using ObjectHashType = size_t;
+  enum class WrapperLabel { kObjectHashType };
+  using ObjectId = ObjectManager<StructType>::ObjectId;
+  using ObjectHashType =
+      ExplicitIdWrapper<size_t, WrapperLabel, WrapperLabel::kObjectHashType>;
 
   UnorderedStructManager() {}
   ~UnorderedStructManager() {}
@@ -57,9 +60,9 @@ inline std::pair<bool,
                  typename UnorderedStructManager<StructType, Hasher>::ObjectId>
 UnorderedStructManager<StructType, Hasher>::AddObject(T&& object) {
   Hasher hasher;
-  ObjectHashType hashed_object = hasher.DoHash(object);
+  ObjectHashType hashed_object(hasher.DoHash(object));
   ObjectId id = GetObjectId(object);
-  if (id == -1) {
+  if (id == ObjectId::InvalidId()) {
     id = node_manager_.EmplaceObject(std::forward<T>(object));
     hash_to_id_.insert(std::make_pair(hashed_object, id));
     return std::make_pair(false, id);
@@ -73,10 +76,10 @@ UnorderedStructManager<StructType, Hasher>::ObjectId
 UnorderedStructManager<StructType, Hasher>::GetObjectId(
     const StructType& object) {
   Hasher hasher;
-  ObjectHashType hashed_string = hasher.DoHash(object);
+  ObjectHashType hashed_string(hasher.DoHash(object));
   auto [iter_begin, iter_end] = hash_to_id_.equal_range(hashed_string);
   if (iter_begin == hash_to_id_.end()) {
-    return -1;
+    return ObjectId::InvalidId();
   } else {
     do {
       if (node_manager_.GetObject(iter_begin->second) == object) {
@@ -84,7 +87,7 @@ UnorderedStructManager<StructType, Hasher>::GetObjectId(
       }
       ++iter_begin;
     } while (iter_begin != iter_end);
-    return -1;
+    return ObjectId::InvalidId();
   }
 }
 
@@ -92,7 +95,7 @@ template <class StructType, class Hasher>
 bool UnorderedStructManager<StructType, Hasher>::RemoveObject(
     const StructType& object) {
   ObjectId id = GetObjectId(object);
-  if (id != -1) {
+  if (id != ObjectId::InvalidId()) {
     return node_manager_.RemoveNode(id);
   }
   return true;
