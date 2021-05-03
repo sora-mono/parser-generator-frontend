@@ -37,9 +37,9 @@ class UnorderedStructManager {
 
   //返回指向管理的对象的引用
   StructType& GetObject(ObjectId id) { return node_manager_.GetObject(id); }
-  //返回值前半部分为对象是否已存在，后半部分为对象ID
+  //返回值前半部分为对象ID，后半部分为是否执行了插入操作
   template <class T>
-  std::pair<bool, ObjectId> AddObject(T&& object);
+  std::pair<ObjectId, bool> AddObject(T&& object);
   ObjectId GetObjectId(const StructType& object);
   bool RemoveObject(const StructType& object);
   void Clear() {
@@ -56,8 +56,8 @@ class UnorderedStructManager {
 
 template <class StructType, class Hasher>
 template <class T>
-inline std::pair<bool,
-                 typename UnorderedStructManager<StructType, Hasher>::ObjectId>
+inline std::pair<typename UnorderedStructManager<StructType, Hasher>::ObjectId,
+                 bool>
 UnorderedStructManager<StructType, Hasher>::AddObject(T&& object) {
   Hasher hasher;
   ObjectHashType hashed_object(hasher.DoHash(object));
@@ -65,9 +65,9 @@ UnorderedStructManager<StructType, Hasher>::AddObject(T&& object) {
   if (id == ObjectId::InvalidId()) {
     id = node_manager_.EmplaceObject(std::forward<T>(object));
     hash_to_id_.insert(std::make_pair(hashed_object, id));
-    return std::make_pair(false, id);
+    return std::make_pair(id, true);
   } else {
-    return std::make_pair(true, id);
+    return std::make_pair(id, false);
   }
 }
 

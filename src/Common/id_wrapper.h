@@ -26,7 +26,7 @@ class BaseIdWrapper {
   static const LabelEnum_ label = label_;
 
   BaseIdWrapper() : id_(invalid_value_) {}
-  BaseIdWrapper(IdType id) : id_(id) {}
+  explicit BaseIdWrapper(IdType id) : id_(id) {}
   BaseIdWrapper(const BaseIdWrapper& id_wrapper) : id_(id_wrapper.id_) {}
   BaseIdWrapper& operator=(const BaseIdWrapper& id_wrapper) {
     id_ = id_wrapper.id_;
@@ -43,7 +43,7 @@ class BaseIdWrapper {
   bool operator!=(const BaseIdWrapper& id_wrapper) const {
     return !operator==(id_wrapper);
   }
-  IdType GetId() const { return id_; }
+  IdType GetThisNodeId() const { return id_; }
   void SetId(IdType id) { id_ = id; }
   void Swap(BaseIdWrapper* id_wrapper) { std::swap(id_, id_wrapper->id_); }
   bool IsValid() const { return id_ != invalid_value_; }
@@ -76,13 +76,19 @@ class ExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   ExplicitIdWrapper() {}
   explicit ExplicitIdWrapper(IdType id) { MyBase::SetId(id); }
   ExplicitIdWrapper(const ExplicitIdWrapper& id_wrapper) {
-    MyBase::SetId(id_wrapper.GetId());
+    MyBase::SetId(id_wrapper.GetThisNodeId());
   }
   ExplicitIdWrapper& operator=(const ExplicitIdWrapper& id_wrapper) {
-    MyBase::SetId(id_wrapper.GetId());
+    MyBase::SetId(id_wrapper.GetThisNodeId());
     return *this;
   }
 
+  bool operator==(const ExplicitIdWrapper& id_wrapper) {
+    return MyBase::operator==(id_wrapper);
+  }
+  bool operator!=(const ExplicitIdWrapper& id_wrapper) {
+    return MyBase::operator!=(id_wrapper);
+  }
   static constexpr ExplicitIdWrapper InvalidId() {
     return ExplicitIdWrapper<IdType, LabelEnum, label>(MyBase::InvalidValue());
   }
@@ -110,14 +116,20 @@ class ExplicitIdWrapperCustomizeInvalidValue
   }
   ExplicitIdWrapperCustomizeInvalidValue(
       const ExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
-    MyBase::SetId(id_wrapper.GetId());
+    MyBase::SetId(id_wrapper.GetThisNodeId());
   }
   ExplicitIdWrapperCustomizeInvalidValue& operator=(
       const ExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
-    MyBase::SetId(id_wrapper.GetId());
+    MyBase::SetId(id_wrapper.GetThisNodeId());
     return *this;
   }
 
+  bool operator==(const ExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
+    return MyBase::operator==(id_wrapper);
+  }
+  bool operator!=(const ExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
+    return MyBase::operator!=(id_wrapper);
+  }
   static constexpr ExplicitIdWrapperCustomizeInvalidValue InvalidId() {
     return ExplicitIdWrapperCustomizeInvalidValue<IdType, LabelEnum, label,
                                                   static_cast<IdType>(-1)>(
@@ -145,13 +157,19 @@ class NonExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   NonExplicitIdWrapper() {}
   NonExplicitIdWrapper(IdType id) { MyBase::SetId(id); }
   NonExplicitIdWrapper(const NonExplicitIdWrapper& id_wrapper) {
-    MyBase::SetId(id_wrapper.GetId());
+    MyBase::SetId(id_wrapper.GetThisNodeId());
   }
   NonExplicitIdWrapper& operator=(const NonExplicitIdWrapper& id_wrapper) {
-    MyBase::SetId(id_wrapper.GetId());
+    MyBase::SetId(id_wrapper.GetThisNodeId());
     return *this;
   }
 
+  bool operator==(const NonExplicitIdWrapper& id_wrapper) {
+    return MyBase::operator==(id_wrapper);
+  }
+  bool operator!=(const NonExplicitIdWrapper& id_wrapper) {
+    return MyBase::operator!=(id_wrapper);
+  }
   static constexpr NonExplicitIdWrapper InvalidId() {
     return NonExplicitIdWrapper<IdType, LabelEnum, label>(
         MyBase::InvalidValue());
@@ -180,14 +198,20 @@ class NonExplicitIdWrapperCustomizeInvalidValue
   NonExplicitIdWrapperCustomizeInvalidValue(IdType id) { MyBase::SetId(id); }
   NonExplicitIdWrapperCustomizeInvalidValue(
       const NonExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
-    MyBase::SetId(id_wrapper.GetId());
+    MyBase::SetId(id_wrapper.GetThisNodeId());
   }
   NonExplicitIdWrapperCustomizeInvalidValue& operator=(
       const NonExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
-    MyBase::SetId(id_wrapper.GetId());
+    MyBase::SetId(id_wrapper.GetThisNodeId());
     return *this;
   }
 
+  bool operator==(const NonExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
+    return MyBase::operator==(id_wrapper);
+  }
+  bool operator!=(const NonExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
+    return MyBase::operator!=(id_wrapper);
+  }
   static constexpr NonExplicitIdWrapperCustomizeInvalidValue InvalidId() {
     return NonExplicitIdWrapperCustomizeInvalidValue<IdType, LabelEnum, label,
                                                      static_cast<IdType>(-1)>(

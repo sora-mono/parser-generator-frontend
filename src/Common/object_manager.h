@@ -8,7 +8,7 @@
 
 #ifndef COMMON_OBJECT_MANAGER_H_
 #define COMMON_OBJECT_MANAGER_H_
-
+//TODO 给可以加const的内容加const
 namespace frontend::common {
 
 template <class T>
@@ -63,8 +63,8 @@ class ObjectManager {
   }
   //获取节点引用
   T& GetObject(ObjectId id);
-  //判断两个ID是否相等
-  bool IsSame(ObjectId id1, ObjectId id2) { return id1 == id2; }
+  T& operator[](ObjectId id);
+
 
   //系统自行选择最佳位置放置对象
   template <class ObjectType = T, class... Args>
@@ -85,20 +85,28 @@ class ObjectManager {
                                Manager& manager,
                                const std::function<bool(T&, T&, Manager&)>&
                                    merge_function = DefaultMergeFunction3);
-  void Swap(ObjectManager& manager_other);
+  //查询ID对应的节点是否可合并
+  bool CanMerge(ObjectId id) {
+    assert(id < nodes_can_merge.size());
+    return nodes_can_merge[id];
+  }
 
   bool SetObjectMergeAllowed(ObjectId id);
   bool SetObjectMergeRefused(ObjectId id);
   void SetAllObjectsMergeAllowed();
   void SetAllObjectsMergeRefused();
 
-  bool CanMerge(ObjectId id) {
-    return id < nodes_can_merge.size() ? nodes_can_merge[id] : false;
-  }
+  //判断两个ID是否相等
+  bool IsSame(ObjectId id1, ObjectId id2) { return id1 == id2; }
+
+  //交换两个容器
+  void Swap(ObjectManager& manager_other);
+
   //容器大小，包含未分配节点的指针
   size_t Size() { return nodes_.size(); }
   //容器实际持有的对象数量
   size_t ItemSize();
+
   //清除并释放所有节点
   void Clear();
   //清除但不释放所有节点
@@ -108,8 +116,6 @@ class ObjectManager {
 
   Iterator End() { return Iterator(this, ObjectId(nodes_.size())); }
   Iterator Begin();
-
-  T& operator[](ObjectId id);
 
  private:
   friend class Iterator;

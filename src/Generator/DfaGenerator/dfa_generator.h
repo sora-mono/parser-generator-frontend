@@ -100,7 +100,7 @@ class DfaGenerator {
   SetType& GetSetObject(SetId id) { return node_manager_set_.GetObject(id); }
   //集合转移函数（子集构造法用），
   //返回值前半部分表示新集合是否已存在，后半部分为对应中间节点句柄
-  std::pair<bool, IntermediateNodeId> SetGoto(SetId set_src, char c_transform);
+  std::pair<IntermediateNodeId, bool> SetGoto(SetId set_src, char c_transform);
   // DFA转移函数（最小化DFA用）
   IntermediateNodeId IntermediateGoto(IntermediateNodeId dfa_src,
                                       char c_transform);
@@ -111,7 +111,7 @@ class DfaGenerator {
   //如果集合已存在则返回true，如果不存在则插入并返回false
   //返回的第一个参数为集合是否已存在
   //返回的第二个参数为对应中间节点句柄
-  std::pair<bool, IntermediateNodeId> InOrInsert(
+  std::pair<IntermediateNodeId, bool> InOrInsert(
       const SetType& uset,
       TailNodeData tail_node_data = NfaGenerator::NotTailNodeTag);
 
