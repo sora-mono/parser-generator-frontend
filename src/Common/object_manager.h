@@ -8,7 +8,7 @@
 
 #ifndef COMMON_OBJECT_MANAGER_H_
 #define COMMON_OBJECT_MANAGER_H_
-//TODO 给可以加const的内容加const
+// TODO 给可以加const的内容加const
 namespace frontend::common {
 
 template <class T>
@@ -61,31 +61,31 @@ class ObjectManager {
                                     Manager& manager) {
     return manager.MergeNodes(node_dst, node_src);
   }
-  //获取节点引用
+  // 获取节点引用
   T& GetObject(ObjectId id);
   T& operator[](ObjectId id);
 
 
-  //系统自行选择最佳位置放置对象
+  // 系统自行选择最佳位置放置对象
   template <class ObjectType = T, class... Args>
   ObjectId EmplaceObject(Args&&... args);
 
-  //仅删除节点不释放节点内存，返回指向对象的指针
+  // 仅删除节点不释放节点内存，返回指向对象的指针
   T* RemoveObjectNoDelete(ObjectId id);
-  //删除节点并释放节点内存
+  // 删除节点并释放节点内存
   bool RemoveObject(ObjectId id);
 
-  //合并两个对象，合并成功会删除id_src节点
+  // 合并两个对象，合并成功会删除id_src节点
   bool MergeObjects(ObjectId id_dst, ObjectId id_src,
                     const std::function<bool(T&, T&)>& merge_function =
                         DefaultMergeFunction2);
-  //合并两个对象，合并成功会删除id_src节点
+  // 合并两个对象，合并成功会删除id_src节点
   template <class Manager>
   bool MergeObjectsWithManager(ObjectId id_dst, ObjectId id_src,
                                Manager& manager,
                                const std::function<bool(T&, T&, Manager&)>&
                                    merge_function = DefaultMergeFunction3);
-  //查询ID对应的节点是否可合并
+  // 查询ID对应的节点是否可合并
   bool CanMerge(ObjectId id) {
     assert(id < nodes_can_merge.size());
     return nodes_can_merge[id];
@@ -96,22 +96,22 @@ class ObjectManager {
   void SetAllObjectsMergeAllowed();
   void SetAllObjectsMergeRefused();
 
-  //判断两个ID是否相等
+  // 判断两个ID是否相等
   bool IsSame(ObjectId id1, ObjectId id2) { return id1 == id2; }
 
-  //交换两个容器
+  // 交换两个容器
   void Swap(ObjectManager& manager_other);
 
-  //容器大小，包含未分配节点的指针
+  // 容器大小，包含未分配节点的指针
   size_t Size() { return nodes_.size(); }
-  //容器实际持有的对象数量
+  // 容器实际持有的对象数量
   size_t ItemSize();
 
-  //清除并释放所有节点
+  // 清除并释放所有节点
   void Clear();
-  //清除但不释放所有节点
+  // 清除但不释放所有节点
   void ClearNoRelease();
-  //调用成员变量的shrink_to_fit
+  // 调用成员变量的shrink_to_fit
   void ShrinkToFit();
 
   Iterator End() { return Iterator(this, ObjectId(nodes_.size())); }
@@ -120,24 +120,24 @@ class ObjectManager {
  private:
   friend class Iterator;
 
-  //在指定位置放置节点
+  // 在指定位置放置节点
   template <class ObjectType = T, class... Args>
   ObjectId EmplaceObjectIndex(ObjectId id, Args&&... args);
-  //在指定位置放置指针
+  // 在指定位置放置指针
   ObjectId EmplacePointerIndex(ObjectId id, T* pointer);
 
-  //序列化容器用
+  // 序列化容器用
   template <class Archive>
   void Serialize(Archive& ar, const unsigned int version = 0);
-  //获取当前最佳可用id
+  // 获取当前最佳可用id
   ObjectId GetBestEmptyIndex();
-  //添加已移除的id
+  // 添加已移除的id
   void AddRemovedIndex(ObjectId id) { removed_ids_.push_back(id); }
 
   std::vector<T*> nodes_;
-  //优化用数组，存放被删除节点对应的ID
+  // 优化用数组，存放被删除节点对应的ID
   std::vector<ObjectId> removed_ids_;
-  //存储信息表示是否允许合并节点
+  // 存储信息表示是否允许合并节点
   std::vector<bool> nodes_can_merge;
 };
 
@@ -169,7 +169,7 @@ inline T* ObjectManager<T>::RemoveObjectNoDelete(ObjectId id) {
   AddRemovedIndex(id);
   nodes_can_merge[id] = false;
   while (nodes_.size() > 0 && nodes_.back() == nullptr) {
-    nodes_.pop_back();  //清理末尾无效ID
+    nodes_.pop_back();  // 清理末尾无效ID
     nodes_can_merge.pop_back();
   }
   return temp_pointer;
@@ -207,7 +207,7 @@ inline ObjectManager<T>::ObjectId ObjectManager<T>::EmplacePointerIndex(
       removed_ids_.push_back(ObjectId(i));
     }
   }
-  //不可以覆盖已有非空且不同的指针
+  // 不可以覆盖已有非空且不同的指针
   assert(!(nodes_[id] != nullptr && nodes_[id] != pointer));
   nodes_[id] = pointer;
   return id;
@@ -256,11 +256,11 @@ inline bool ObjectManager<T>::MergeObjects(
   T& object_dst = GetObject(id_dst);
   T& object_src = GetObject(id_src);
   if (!CanMerge(id_dst) || !CanMerge(id_src)) {
-    //两个节点至少有一个不可合并
+    // 两个节点至少有一个不可合并
     return false;
   }
   if (!merge_function(object_dst, object_src)) {
-    //合并失败
+    // 合并失败
     return false;
   }
   RemoveObject(id_src);
@@ -276,11 +276,11 @@ bool ObjectManager<T>::MergeObjectsWithManager(
   T& object_dst = GetObject(id_dst);
   T& object_src = GetObject(id_src);
   if (!CanMerge(id_dst) || !CanMerge(id_src)) {
-    //两个节点至少有一个不可合并
+    // 两个节点至少有一个不可合并
     return false;
   }
   if (!merge_function(object_dst, object_src, manager)) {
-    //合并失败
+    // 合并失败
     return false;
   }
   RemoveObject(id_src);
@@ -328,7 +328,7 @@ inline ObjectManager<T>::ObjectId ObjectManager<T>::GetBestEmptyIndex() {
   ObjectId id = ObjectId::InvalidId();
   if (removed_ids_.size() != 0) {
     while (id == ObjectId::InvalidId() &&
-           removed_ids_.size() != 0)  //查找有效ID
+           removed_ids_.size() != 0)  // 查找有效ID
     {
       if (removed_ids_.back() < nodes_.size()) {
         id = removed_ids_.back();
@@ -336,7 +336,7 @@ inline ObjectManager<T>::ObjectId ObjectManager<T>::GetBestEmptyIndex() {
       removed_ids_.pop_back();
     }
   }
-  if (id == ObjectId::InvalidId())  //无有效已删除ID
+  if (id == ObjectId::InvalidId())  // 无有效已删除ID
   {
     id = ObjectId(nodes_.size());
   }
@@ -414,12 +414,12 @@ inline ObjectManager<T>::Iterator ObjectManager<T>::Iterator::operator--(int) {
 
 template <class T>
 inline T& ObjectManager<T>::Iterator::operator*() {
-  return *manager_pointer_->GetObject(id_);
+  return manager_pointer_->GetObject(id_);
 }
 
 template <class T>
 inline T* ObjectManager<T>::Iterator::operator->() {
-  return manager_pointer_->GetObject(id_);
+  return &manager_pointer_->GetObject(id_);
 }
 
 }  // namespace frontend::common

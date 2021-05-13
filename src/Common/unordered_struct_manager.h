@@ -22,7 +22,7 @@ struct DefaultHasher {
     return result;
   }
 };
-//该类用于建立stl未提供hash方法的结构的哈希存储
+// 该类用于建立stl未提供hash方法的结构的哈希存储
 
 template <class StructType, class Hasher = DefaultHasher<StructType>>
 class UnorderedStructManager {
@@ -35,9 +35,9 @@ class UnorderedStructManager {
   UnorderedStructManager() {}
   ~UnorderedStructManager() {}
 
-  //返回指向管理的对象的引用
+  // 返回指向管理的对象的引用
   StructType& GetObject(ObjectId id) { return node_manager_.GetObject(id); }
-  //返回值前半部分为对象ID，后半部分为是否执行了插入操作
+  // 返回值前半部分为对象ID，后半部分为是否执行了插入操作
   template <class T>
   std::pair<ObjectId, bool> AddObject(T&& object);
   ObjectId GetObjectId(const StructType& object);

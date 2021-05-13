@@ -48,13 +48,13 @@ bool DfaGenerator::DfaConstruct() {
       std::pair(intermediate_node_handler_temp, result) =
           SetGoto(set_handler_now, char(i + CHAR_MIN));
       if (!intermediate_node_handler_temp.IsValid()) {
-        //该字符下不可转移
+        // 该字符下不可转移
         continue;
       }
       GetIntermediateNode(intermediate_node_handler_now).forward_nodes[i] =
           intermediate_node_handler_temp;
       if (result == false) {
-        //新集合对应的中间节点以前不存在，插入队列等待处理
+        // 新集合对应的中间节点以前不存在，插入队列等待处理
         q.push(intermediate_node_handler_temp);
       }
     }
@@ -66,7 +66,7 @@ bool DfaGenerator::DfaConstruct() {
 }
 
 bool DfaGenerator::DfaMinimize() {
-  config_node_num = 0;  //清零最终有效节点数
+  config_node_num = 0;  // 清零最终有效节点数
   std::vector<IntermediateNodeId> nodes;
   for (auto iter = node_manager_intermediate_node_.Begin();
        iter != node_manager_intermediate_node_.End(); ++iter) {
@@ -83,10 +83,9 @@ bool DfaGenerator::DfaMinimize() {
     size_t index = p.second;
     IntermediateDfaNode& intermediate_node = GetIntermediateNode(p.first);
     if (logged_index[index] == false) {
-      //该节点未配置
+      // 该节点未配置
       for (size_t i = 0; i < kCharNum; i++) {
-        if (intermediate_node.forward_nodes[i] !=
-            IntermediateNodeId::InvalidId()) {
+        if (intermediate_node.forward_nodes[i].IsValid()) {
           auto iter = intermediate_node_to_final_node_.find(
               intermediate_node.forward_nodes[i]);
           assert(iter != intermediate_node_to_final_node_.end());
@@ -116,7 +115,7 @@ std::pair<DfaGenerator::IntermediateNodeId, bool> DfaGenerator::SetGoto(
       continue;
     }
     set.merge(std::move(set_temp));
-    //不存在尾节点标记或新的标记优先级大于原来的标记则修改
+    // 不存在尾节点标记或新的标记优先级大于原来的标记则修改
     if (tail_data_temp != NfaGenerator::NotTailNodeTag) {
       if (tail_data == NfaGenerator::NotTailNodeTag ||
           tail_data_temp.second > tail_data.second) {
@@ -164,11 +163,11 @@ std::pair<DfaGenerator::IntermediateNodeId, bool> DfaGenerator::InOrInsert(
 
 bool DfaGenerator::DfaMinimize(const std::vector<IntermediateNodeId>& handlers,
                                char c_transform) {
-  //存储不同分组，键值为当前转移条件下转移到的节点句柄
+  // 存储不同分组，键值为当前转移条件下转移到的节点句柄
   std::map<std::pair<IntermediateNodeId, TailNodeData>,
            std::vector<IntermediateNodeId>>
       groups;
-  //存储当前转移条件下无法转移节点
+  // 存储当前转移条件下无法转移节点
   std::map<TailNodeData, std::vector<IntermediateNodeId>> no_next_group;
   for (auto h : handlers) {
     IntermediateNodeId next_node_handler = IntermediateGoto(h, c_transform);

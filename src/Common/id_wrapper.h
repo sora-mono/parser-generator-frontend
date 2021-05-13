@@ -2,18 +2,18 @@
 #define COMMON_ID_WRAPPER_H_
 
 namespace frontend::common {
-//该头文件包含两个生成不同的ID包装类的模板类
-//占用空间与不包装相同，编译器优化够好则不会导致额外的开销
-//无参构造函数会将值赋为default_invalid_value且IsValid()返回false
+// 该头文件包含两个生成不同的ID包装类的模板类
+// 占用空间与不包装相同，编译器优化够好则不会导致额外的开销
+// 无参构造函数会将值赋为default_invalid_value且IsValid()返回false
 // default_invalid_value默认为IdType(-1)
 // TODO 特化std::swap
 
-//基础ID包装器类，用户不应使用
-//第一个参数为使用的ID类型
-//第二个参数为分发标签的枚举类型
-//第三个参数为分发标签枚举类型中的具体枚举
-//第四个参数为无效值
-//例：
+// 基础ID包装器类，用户不应使用
+// 第一个参数为使用的ID类型
+// 第二个参数为分发标签的枚举类型
+// 第三个参数为分发标签枚举类型中的具体枚举
+// 第四个参数为无效值
+// 例：
 //  enum class ExampleEnum { kExampleType };
 //  using Id = BaseIdWrapper<size_t,ExampleEnum,ExampleEnum::kExampleType,
 //                               static_cast<size_t>(-1)>;
@@ -57,8 +57,8 @@ class BaseIdWrapper {
   IdType id_;
 };
 
-//强制显示调用构造函数使用默认无效值版
-//例：
+// 强制显示调用构造函数使用默认无效值版
+// 例：
 //  enum class ExampleEnum { kExampleType };
 //  using Id = ExplicitIdWrapper<size_t,ExampleEnum,ExampleEnum::kExampleType>;
 template <class IdType_, class LabelEnum_, const LabelEnum_ label_>
@@ -94,8 +94,8 @@ class ExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   }
 };
 
-//强制显示调用构造函数不使用默认无效值版
-//例：
+// 强制显示调用构造函数不使用默认无效值版
+// 例：
 //  enum class ExampleEnum { kExampleType };
 //  using Id = ExplicitIdWrapper<size_t,ExampleEnum,ExampleEnum::kExampleType>;
 template <class IdType_, class LabelEnum_, const LabelEnum_ label_,
@@ -137,8 +137,8 @@ class ExplicitIdWrapperCustomizeInvalidValue
   }
 };
 
-//不强制显示调用构造函数使用默认无效值版
-//例：
+// 不强制显示调用构造函数使用默认无效值版
+// 例：
 //  enum class ExampleEnum { kExampleType };
 //  using Id = NonExplicitIdWrapper<size_t,ExampleEnum,
 //                                  ExampleEnum::kExampleType>;
@@ -176,8 +176,8 @@ class NonExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   }
 };
 
-//不强制显示调用构造函数不使用默认无效值版
-//例：
+// 不强制显示调用构造函数不使用默认无效值版
+// 例：
 //  enum class ExampleEnum { kExampleType };
 //  using Id = NonExplicitIdWrapper<size_t,ExampleEnum,
 //                                  ExampleEnum::kExampleType,
@@ -222,7 +222,7 @@ class NonExplicitIdWrapperCustomizeInvalidValue
 }  // namespace frontend::common
 
 namespace std {
-//具体化hash模板，否则使用unordered系列容器时编译器无法自动将类类型转换为
+// 具体化hash模板，否则使用unordered系列容器时编译器无法自动将类类型转换为
 // IdType类型导致报错
 
 template <class IdType_, class LabelEnum_, LabelEnum_ label_>

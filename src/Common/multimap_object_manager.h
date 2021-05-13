@@ -28,9 +28,9 @@ class MultimapObjectManager {
   MultimapObjectManager(const MultimapObjectManager&) = delete;
   MultimapObjectManager(MultimapObjectManager&&) = delete;
   ~MultimapObjectManager() {}
-  //获取指向有效对象的引用
+  // 获取指向有效对象的引用
   T& GetObject(ObjectId id);
-  //通过一个id查询引用相同底层对象的所有id
+  // 通过一个id查询引用相同底层对象的所有id
   const std::unordered_set<ObjectId>& GetIdsReferringSameObject(
       ObjectId object_id) {
     InsideId inside_id = GetInsideId(object_id);
@@ -39,15 +39,15 @@ class MultimapObjectManager {
 
   bool IsSame(ObjectId id1, ObjectId id2);
 
-  //系统自行选择最佳位置放置对象
+  // 系统自行选择最佳位置放置对象
   template <class... Args>
   ObjectId EmplaceObject(Args&&... args);
-  //仅删除对象不释放指针指向的内存，返回管理的指针
+  // 仅删除对象不释放指针指向的内存，返回管理的指针
   T* RemoveObjectNoDelete(ObjectId id);
-  //删除对象并释放对象内存
+  // 删除对象并释放对象内存
   bool RemoveObject(ObjectId id);
-  //将id_src合并到id_dst，
-  //合并成功则删除id_src对应的对象（二者不同前提下）
+  // 将id_src合并到id_dst，
+  // 合并成功则删除id_src对应的对象（二者不同前提下）
   bool MergeObjects(ObjectId id_dst, ObjectId id_src,
                     std::function<bool(T&, T&)> merge_function =
                         ObjectManager<T>::DefaultMergeFunction2);
@@ -56,39 +56,39 @@ class MultimapObjectManager {
       ObjectId id_dst, ObjectId id_src, Manager& manager,
       const std::function<bool(T&, T&, Manager&)>& merge_function =
           ObjectManager<T>::DefaultMergeFunction3);
-  //交换两个类的内容
+  // 交换两个类的内容
   void Swap(MultimapObjectManager& manager_other);
-  //设置对象允许合并标志
+  // 设置对象允许合并标志
   bool SetObjectMergeAllowed(ObjectId id);
-  //设置对象禁止合并标志
+  // 设置对象禁止合并标志
   bool SetObjectMergeRefused(ObjectId id);
-  //设置所有对象允许合并，不会对未分配对象设置允许标记
+  // 设置所有对象允许合并，不会对未分配对象设置允许标记
   void SetAllObjectsMergeAllowed() {
     node_manager_.SetAllObjectsMergeAllowed();
   }
-  //设置所有对象禁止合并
+  // 设置所有对象禁止合并
   void SetAllObjectsMergeRefused() {
     node_manager_.SetAllObjectsMergeRefused();
   }
-  //返回id对应对象可合并状态
+  // 返回id对应对象可合并状态
   bool CanMerge(ObjectId id);
 
-  //暂时不写，优化释放后的空间太少
-  // void remap_optimization();	//重映射所有的对象，消除node_manager空余空间
+  // 暂时不写，优化释放后的空间太少
+  // void remap_optimization();	// 重映射所有的对象，消除node_manager空余空间
 
-  //清除并释放所有对象
+  // 清除并释放所有对象
   void Clear();
-  //清除但不释放所有对象
+  // 清除但不释放所有对象
   void ClearNoRelease();
-  //调用成员变量的shrink_to_fit
+  // 调用成员变量的shrink_to_fit
   void ShrinkToFit();
 
-  //返回对象个数（包括已删除但仍保留index的对象）
+  // 返回对象个数（包括已删除但仍保留index的对象）
   size_t Size() { return node_manager_.Size(); }
-  //返回实际对象个数
+  // 返回实际对象个数
   size_t ItemSize() { return node_manager_.ItemSize(); }
 
-  //序列化容器用
+  // 序列化容器用
   template <class Archive>
   void Serialize(Archive& ar, const unsigned int version = 0);
 
@@ -98,32 +98,32 @@ class MultimapObjectManager {
   T& operator[](ObjectId id);
 
  private:
-  //通过一个id查询引用相同底层对象的所有id
+  // 通过一个id查询引用相同底层对象的所有id
   const std::unordered_set<ObjectId>& GetIdsReferringSameObject(
       InsideId inside_id) {
     return objectids_referring_same_object[inside_id];
   }
-  //将id指向的实际对象重映射为inside_id指向的对象
-  //可以接受未映射的id
+  // 将id指向的实际对象重映射为inside_id指向的对象
+  // 可以接受未映射的id
   bool RemapId(ObjectId id, InsideId inside_id);
-  //生成一个可用于分配的ID
+  // 生成一个可用于分配的ID
   ObjectId CreateId();
-  //增加一条该id对inside_id对象的引用记录，返回增加后引用计数
+  // 增加一条该id对inside_id对象的引用记录，返回增加后引用计数
   size_t AddReference(ObjectId id, InsideId inside_id);
-  //移除该id对inside_id对象的引用记录，返回移除后引用计数
-  //引用计数为0时会自动删除对象
+  // 移除该id对inside_id对象的引用记录，返回移除后引用计数
+  // 引用计数为0时会自动删除对象
   size_t RemoveReference(ObjectId id, InsideId inside_id);
-  //处理移除内部对象前的步骤，如删除所有句柄到底层ID的引用
+  // 处理移除内部对象前的步骤，如删除所有句柄到底层ID的引用
   bool PreRemoveInsideObject(InsideId inside_id);
-  //获取句柄对应的底层对象ID
+  // 获取句柄对应的底层对象ID
   InsideId GetInsideId(ObjectId id);
 
-  //下一个id序号值，只增不减
+  // 下一个id序号值，只增不减
   ObjectId next_id_index_ = ObjectId(0);
   ObjectManager<T> node_manager_;
-  //储存指向同一个底层对象的id
+  // 储存指向同一个底层对象的id
   std::vector<std::unordered_set<ObjectId>> objectids_referring_same_object;
-  //对底层id的另一层封装，使本类支持多个id指向同一个对象
+  // 对底层id的另一层封装，使本类支持多个id指向同一个对象
   std::unordered_map<ObjectId, InsideId> id_to_index_;
 };
 

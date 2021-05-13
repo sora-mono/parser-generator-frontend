@@ -60,21 +60,21 @@ NfaGenerator::Closure(NfaNodeId id) {
       continue;
     }
     uset_temp.insert(id_now);
-    auto iter = tail_nodes_.find(&GetNfaNode(id_now));  //判断是否为尾节点
+    auto iter = tail_nodes_.find(&GetNfaNode(id_now));  // 判断是否为尾节点
     if (iter != tail_nodes_.end()) {
       TailNodeData& tail_node_data_new = iter->second;
       TailNodePriority priority_old = tail_node_data.second;
       TailNodePriority priority_new = tail_node_data_new.second;
 
-      if (tail_node_data == NotTailNodeTag) {  //以前无尾节点记录
+      if (tail_node_data == NotTailNodeTag) {  // 以前无尾节点记录
         tail_node_data = tail_node_data_new;
       } else if (priority_new > priority_old) {
-        //当前记录优先级大于以前的优先级
+        // 当前记录优先级大于以前的优先级
         tail_node_data = tail_node_data_new;
       } else if (priority_new == priority_old &&
                  tail_node_data_new.first != tail_node_data.first) {
         // TODO 去除异常
-        //两个尾节点标记优先级相同，对应尾节点不同
+        // 两个尾节点标记优先级相同，对应尾节点不同
         throw std::runtime_error("两个尾节点具有相同优先级且不对应同一个节点");
       }
     }
@@ -100,7 +100,7 @@ NfaGenerator::Goto(NfaNodeId id_src, char c_transform) {
 }
 
 bool NfaGenerator::NfaNode::MergeNodesWithManager(NfaNode& node_src) {
-  if (&node_src == this) {  //相同节点合并则直接返回true
+  if (&node_src == this) {  // 相同节点合并则直接返回true
     return true;
   }
   if (nodes_forward.size() != 0 && node_src.nodes_forward.size() != 0) {
@@ -123,7 +123,7 @@ bool NfaGenerator::NfaNode::MergeNodesWithManager(NfaNode& node_src) {
 }
 
 NfaGenerator::NfaGenerator() {
-  head_node_id_ = node_manager_.EmplaceObject();  //添加头结点
+  head_node_id_ = node_manager_.EmplaceObject();  // 添加头结点
 }
 
 inline const NfaGenerator::TailNodeData NfaGenerator::GetTailTag(
@@ -216,14 +216,14 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
           c_now = '\0';
         }
         break;
-      case '+':  //仅对单个字符生效
+      case '+':  // 仅对单个字符生效
         temp_tail_id = node_manager_.EmplaceObject();
         GetNfaNode(tail_id).AddNoconditionTransfer(temp_tail_id);
         GetNfaNode(pre_tail_id).AddNoconditionTransfer(temp_tail_id);
         pre_tail_id = tail_id;
         tail_id = temp_tail_id;
         break;
-      case '*':  //仅对单个字符生效
+      case '*':  // 仅对单个字符生效
         temp_tail_id = node_manager_.EmplaceObject();
         GetNfaNode(tail_id).AddNoconditionTransfer(temp_tail_id);
         GetNfaNode(pre_tail_id).AddNoconditionTransfer(temp_tail_id);
