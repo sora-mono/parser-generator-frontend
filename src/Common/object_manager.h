@@ -65,7 +65,6 @@ class ObjectManager {
   T& GetObject(ObjectId id);
   T& operator[](ObjectId id);
 
-
   // 系统自行选择最佳位置放置对象
   template <class ObjectType = T, class... Args>
   ObjectId EmplaceObject(Args&&... args);
@@ -182,7 +181,7 @@ inline ObjectManager<T>::ObjectId ObjectManager<T>::EmplaceObject(
   ObjectId id = GetBestEmptyIndex();
   T* object_pointer = new ObjectType(std::forward<Args>(args)...);
   ObjectId result = EmplacePointerIndex(id, object_pointer);
-  assert(result != ObjectId::InvalidId());
+  assert(result.IsValid());
   return result;
 }
 
@@ -192,7 +191,7 @@ inline ObjectManager<T>::ObjectId ObjectManager<T>::EmplaceObjectIndex(
     ObjectId id, Args&&... args) {
   T* pointer = new ObjectType(std::forward<Args>(args)...);
   ObjectId result = EmplacePointerIndex(id, pointer);
-  assert(result != ObjectId::InvalidId());
+  assert(result.IsValid());
   return result;
 }
 
@@ -327,8 +326,7 @@ template <class T>
 inline ObjectManager<T>::ObjectId ObjectManager<T>::GetBestEmptyIndex() {
   ObjectId id = ObjectId::InvalidId();
   if (removed_ids_.size() != 0) {
-    while (id == ObjectId::InvalidId() &&
-           removed_ids_.size() != 0)  // 查找有效ID
+    while (!id.IsValid() && removed_ids_.size() != 0)  // 查找有效ID
     {
       if (removed_ids_.back() < nodes_.size()) {
         id = removed_ids_.back();
@@ -336,7 +334,7 @@ inline ObjectManager<T>::ObjectId ObjectManager<T>::GetBestEmptyIndex() {
       removed_ids_.pop_back();
     }
   }
-  if (id == ObjectId::InvalidId())  // 无有效已删除ID
+  if (!id.IsValid())  // 无有效已删除ID
   {
     id = ObjectId(nodes_.size());
   }
@@ -394,8 +392,8 @@ inline ObjectManager<T>::Iterator& ObjectManager<T>::Iterator::operator--() {
   auto& nodes = manager_pointer_->nodes_;
   do {
     --id_temp;
-  } while (id_temp != ObjectId::InvalidId() && nodes[id_temp] == nullptr);
-  assert(id_temp != ObjectId::InvalidId());
+  } while (id_temp.IsValid() && nodes[id_temp] == nullptr);
+  assert(id_temp.IsValid());
   id_ = id_temp;
   return *this;
 }
@@ -406,8 +404,8 @@ inline ObjectManager<T>::Iterator ObjectManager<T>::Iterator::operator--(int) {
   auto& nodes = manager_pointer_->nodes_;
   do {
     --id_temp;
-  } while (id_temp != ObjectId::InvalidId() && nodes[id_temp] == nullptr);
-  assert(id_temp != ObjectId::InvalidId());
+  } while (id_temp.IsValid() && nodes[id_temp] == nullptr);
+  assert(id_temp.IsValid());
   std::swap(id_temp, id_);
   return Iterator(manager_pointer_, id_temp);
 }

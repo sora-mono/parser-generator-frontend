@@ -1,5 +1,6 @@
 ﻿// Generator.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 // 
+
 #include <iostream>
 
 #include "Generator/DfaGenerator/dfa_generator.h"
@@ -8,6 +9,7 @@
 int main() {
   std::cout << "Hello World!\n";
   frontend::generator::dfa_generator::DfaGenerator dfa_generator;
+  frontend::generator::lexicalgenerator::LexicalGenerator lexical_generator;
 }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单

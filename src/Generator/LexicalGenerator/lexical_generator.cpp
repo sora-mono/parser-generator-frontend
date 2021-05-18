@@ -1,7 +1,7 @@
 #include "Generator/LexicalGenerator/lexical_generator.h"
 
 #include <queue>
-// TODO 将所有直接与InvalidId比较的代码改为使用IsValid()方法
+// TODO 完成AnalysisProduction
 namespace frontend::generator::lexicalgenerator {
 
 inline void LexicalGenerator::SetSymbolIdToProductionNodeIdMapping(
@@ -53,6 +53,17 @@ void LexicalGenerator::SetItemCoreId(const CoreItem& core_item,
       .SetCoreId(production_body_id, point_index, core_id);
 }
 
+std::pair<std::set<LexicalGenerator::CoreItem>::iterator, bool>
+LexicalGenerator::AddItemToCore(const CoreItem& core_item, CoreId core_id) {
+  assert(core_id.IsValid());
+  auto iterator_and_state = GetCore(core_id).AddItem(core_item);
+  if (iterator_and_state.second == true) {
+    // 以前不存在则添加映射记录
+    SetItemCoreId(core_item, core_id);
+  }
+  return iterator_and_state;
+}
+
 LexicalGenerator::CoreId LexicalGenerator::GetItemCoreId(
     const CoreItem& core_item) {
   auto [production_node_id, production_body_id, point_index] = core_item;
@@ -63,11 +74,11 @@ std::pair<LexicalGenerator::CoreId, bool>
 LexicalGenerator::GetItemCoreIdOrInsert(const CoreItem& core_item,
                                         CoreId insert_core_id) {
   CoreId core_id = GetItemCoreId(core_item);
-  if (core_id == CoreId::InvalidId()) {
-    if (insert_core_id == CoreId::InvalidId()) {
-      core_id = AddNewCore();
-    } else {
+  if (!core_id.IsValid()) {
+    if (insert_core_id.IsValid()) {
       core_id = insert_core_id;
+    } else {
+      core_id = AddNewCore();
     }
 #ifdef _DEBUG
     bool result = AddItemToCore(core_item, core_id).second;
@@ -122,7 +133,7 @@ void LexicalGenerator::CoreClosure(CoreId core_id) {
         GetProductionBodyNextNextNodeId(production_node_id, production_body_id,
                                         point_index);
     const std::unordered_set<ProductionNodeId>& forward_nodes_second_part =
-        GetFowardNodes(production_node_id, production_body_id, point_index);
+        GetForwardNodeIds(production_node_id, production_body_id, point_index);
     // 获取待生成节点的所有向前看节点
     InsideForwardNodesContainerType forward_nodes =
         First(next_next_production_node_id, forward_nodes_second_part);
@@ -141,6 +152,37 @@ void LexicalGenerator::CoreClosure(CoreId core_id) {
     }
   }
   SetCoreClosureAvailable(core_id);
+}
+
+void LexicalGenerator::SetGotoCacheEntry(
+    CoreId core_id_src, ProductionNodeId transform_production_node_id,
+    CoreId core_id_dst) {
+  assert(core_id_src.IsValid() && core_id_dst.IsValid());
+  auto [iter_begin, iter_end] = core_id_goto_core_id_.equal_range(core_id_src);
+  for (; iter_begin != iter_end; ++iter_end) {
+    // 如果已有缓存项则修改
+    if (iter_begin->second.first == transform_production_node_id) {
+      iter_begin->second.second = core_id_dst;
+      return;
+    }
+  }
+  // 不存在该条缓存则插入
+  core_id_goto_core_id_.insert(std::make_pair(
+      core_id_src, std::make_pair(transform_production_node_id, core_id_dst)));
+}
+
+LexicalGenerator::CoreId LexicalGenerator::GetGotoCacheEntry(
+    CoreId core_id_src, ProductionNodeId transform_production_node_id) {
+  assert(core_id_src.IsValid());
+  CoreId core_id_dst = CoreId::InvalidId();
+  auto [iter_begin, iter_end] = core_id_goto_core_id_.equal_range(core_id_src);
+  for (; iter_begin != iter_end; ++iter_begin) {
+    if (iter_begin->second.first == transform_production_node_id) {
+      core_id_dst = iter_begin->second.second;
+      break;
+    }
+  }
+  return core_id_dst;
 }
 
 LexicalGenerator::ProductionNodeId inline LexicalGenerator::
@@ -255,8 +297,8 @@ void LexicalGenerator::SpreadLookForwardSymbol(CoreId core_id) {
     ProductionNodeId next_production_node_id = GetProductionBodyNextNodeId(
         production_node_id, production_body_id, point_index);
     if (next_production_node_id.IsValid()) {
-      std::unordered_set<ProductionNodeId> forward_nodes =
-          GetFowardNodes(production_node_id, production_body_id, point_index);
+      std::unordered_set<ProductionNodeId> forward_nodes = GetForwardNodeIds(
+          production_node_id, production_body_id, point_index);
       // 传播向前看符号
       AddForwardNodeContainer(production_node_id, production_body_id,
                               PointIndex(point_index + 1), forward_nodes);
@@ -440,7 +482,7 @@ void LexicalGenerator::ParsingTableConstruct() {
                                      PointIndex(point_index + 1))));
       } else {
         // 无可移入节点，对所有向前看节点执行规约
-        for (auto forward_node_id : GetFowardNodes(
+        for (auto forward_node_id : GetForwardNodeIds(
                  production_node_id, production_body_id, point_index)) {
           entry_now.SetTerminalNodeActionAndTarget(
               forward_node_id, ActionType::kReduction,
@@ -483,6 +525,49 @@ LexicalGenerator::TerminalProductionNode::GetProductionNodeInBody(
   }
 }
 
+void LexicalGenerator::TerminalProductionNode::AddForwardNodeId(
+    ProductionBodyId production_body_id, PointIndex point_index,
+    ProductionNodeId forward_node_id) {
+  assert(production_body_id == 0 && point_index <= 1);
+  if (point_index == 0) {
+    AddFirstItemForwardNodeId(forward_node_id);
+  } else {
+    AddSecondItemForwardNodeId(forward_node_id);
+  }
+}
+
+const std::unordered_set<LexicalGenerator::ProductionNodeId>&
+LexicalGenerator::TerminalProductionNode::GetForwardNodeIds(
+    ProductionBodyId production_body_id, PointIndex point_index) {
+  assert(production_body_id == 0 && point_index <= 1);
+  if (point_index == 0) {
+    return GetFirstItemForwardNodeIds();
+  } else {
+    return GetSecondItemForwardNodeIds();
+  }
+}
+
+void LexicalGenerator::TerminalProductionNode::SetCoreId(
+    ProductionBodyId production_body_id, PointIndex point_index,
+    CoreId core_id) {
+  assert(production_body_id == 0 && point_index <= 1);
+  if (point_index == 0) {
+    SetFirstItemCoreId(core_id);
+  } else {
+    SetSecondItemCoreId(core_id);
+  }
+}
+
+LexicalGenerator::CoreId LexicalGenerator::TerminalProductionNode::GetCoreId(
+    ProductionBodyId production_body_id, PointIndex point_index) {
+  assert(production_body_id == 0 && point_index <= 1);
+  if (point_index == 0) {
+    return GetFirstItemCoreId();
+  } else {
+    return GetSecondItemCoreId();
+  }
+}
+
 LexicalGenerator::NonTerminalProductionNode&
 LexicalGenerator::NonTerminalProductionNode::operator=(
     NonTerminalProductionNode&& nonterminal_production_node) {
@@ -491,6 +576,47 @@ LexicalGenerator::NonTerminalProductionNode::operator=(
       std::move(nonterminal_production_node.nonterminal_bodys_);
   return *this;
 }
+
+void LexicalGenerator::NonTerminalProductionNode::ResizeProductionBodyNum(
+    size_t new_size) {
+  nonterminal_bodys_.resize(new_size);
+#ifdef USE_PRODUCTION_NODE_SHIFT_FUNCTION
+  shift_function_.resize(new_size);
+#endif  // USE_PRODUCTION_NODE_SHIFT_FUNCTION
+  forward_nodes_.resize(new_size + 1);
+  core_ids_.resize(new_size + 1);
+}
+
+void LexicalGenerator::NonTerminalProductionNode::ResizeProductionBodyNodeNum(
+    ProductionBodyId production_body_id, size_t new_size) {
+  assert(production_body_id < nonterminal_bodys_.size());
+  nonterminal_bodys_[production_body_id].resize(new_size);
+#ifdef USE_PRODUCTION_NODE_SHIFT_FUNCTION
+  shift_function_[production_body_id].resize(new_size);
+#endif  // USE_PRODUCTION_NODE_SHIFT_FUNCTION
+  forward_nodes_[production_body_id].resize(new_size + 1);
+  core_ids_[production_body_id].resize(new_size + 1);
+}
+
+#ifdef USE_PRODUCTION_NODE_SHIFT_FUNCTION
+inline void LexicalGenerator::NonTerminalProductionNode::SetShiftFunction(
+    const std::function<
+        void(const LexicalGenerator::NonTerminalProductionNode::NodeData&)>&
+        shift_function,
+    ProductionBodyId production_body_id, PointIndex point_index) {
+  assert(production_body_id < nonterminal_bodys_.size() &&
+         point_index < nonterminal_bodys_[production_body_id].size());
+  shift_function_[production_body_id][point_index] = shift_function;
+}
+const std::function<
+    void(const LexicalGenerator::NonTerminalProductionNode::NodeData&)>&
+LexicalGenerator::NonTerminalProductionNode::GetShiftFunction(
+    ProductionBodyId production_body_id, PointIndex point_index) {
+  assert(production_body_id < nonterminal_bodys_.size() &&
+         point_index < nonterminal_bodys_[production_body_id].size());
+  return shift_function_[production_body_id][point_index];
+}
+#endif  // USE_PRODUCTION_NODE_SHIFT_FUNCTION
 
 LexicalGenerator::ProductionNodeId
 LexicalGenerator::NonTerminalProductionNode::GetProductionNodeInBody(
@@ -518,8 +644,6 @@ LexicalGenerator::BaseProductionNode::operator=(
   base_type_ = std::move(base_production_node.base_type_);
   base_id_ = std::move(base_production_node.base_id_);
   base_symbol_id_ = std::move(base_production_node.base_symbol_id_);
-  base_forward_nodes_ = std::move(base_production_node.base_forward_nodes_);
-  base_core_ids_ = std::move(base_production_node.base_core_ids_);
   return *this;
 }
 

@@ -1,5 +1,7 @@
+#include <any>
 #include <array>
 #include <cassert>
+#include <functional>
 #include <map>
 #include <set>
 #include <string>
@@ -7,12 +9,24 @@
 #include <variant>
 #include <vector>
 
+#include "Common/common.h"
 #include "Common/id_wrapper.h"
 #include "Common/object_manager.h"
 #include "Common/unordered_struct_manager.h"
 
+#ifdef _DEBUG
+#define USE_PRODUCTION_NODE_SHIFT_FUNCTION
+#define USE_PRODUCTION_NODE_INIT_FUNCTION
+#define USE_PRODUCTION_NODE_REDUCTION_FUNCTION
+
+#endif  // _DEBUG
+
 #ifndef GENERATOR_LEXICALGENERATOR_LEXICALGENERATOR_H_
 #define GENERATOR_LEXICALGENERATOR_LEXICALGENERATOR_H_
+
+namespace frontend::parser::lexicalmachine {
+class LexicalMachine;
+}
 
 namespace frontend::generator::lexicalgenerator {
 using frontend::common::ObjectManager;
@@ -24,7 +38,6 @@ struct StringHasher {
   }
 };
 // TODO 添加删除未使用产生式的功能
-// TODO 添加ProductionNodeType::kEndNode
 class LexicalGenerator {
   // 为下面定义各种类型不得不使用前置声明
   class BaseProductionNode;
@@ -52,6 +65,8 @@ class LexicalGenerator {
   using ParsingTableEntryId =
       frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
                                           WrapperLabel::kParsingTableEntryId>;
+  // 语法分析表类型
+  using ParsingTableType = std::vector<ParsingTableEntry>;
   // 非终结节点内产生式编号
   using ProductionBodyId =
       frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
@@ -72,8 +87,6 @@ class LexicalGenerator {
   // 向前看符号容器（最外层容器，与产生式一一对应）
   using OutSideForwardNodesContainerType =
       std::vector<MiddleForwardNodesContainerType>;
-  // 不同项对应项集ID（CoreId）
-  using CoreIdContainerType = std::vector<std::vector<CoreId>>;
   // 内核内单个项集，参数从左到右依次为
   // 产生式节点ID，产生式体ID，产生式体中点的位置
   using CoreItem = std::tuple<ProductionNodeId, ProductionBodyId, PointIndex>;
@@ -91,8 +104,13 @@ class LexicalGenerator {
   // 分析动作类型：规约，移入，报错，接受
   enum class ActionType { kReduction, kShift, kError, kAccept };
 
+ public:
   // 解析产生式，仅需且必须输入一个完整的产生式
   ProductionNodeId AnalysisProduction(const std::string& str);
+  // 构建LALR(1)配置
+  void ParsingTableConstruct();
+
+ private:
   // 添加符号，返回符号的ID和是否执行了插入操作，执行了插入操作则返回true
   std::pair<SymbolId, bool> AddSymbol(const std::string& str) {
     return manager_symbol_.AddObject(str);
@@ -156,23 +174,11 @@ class LexicalGenerator {
   // 向项集中添加项，不要使用core.AddItem()，会导致无法更新映射记录
   // 会设置相应BaseProductionNode中该项到CoreId的记录
   std::pair<std::set<CoreItem>::iterator, bool> AddItemToCore(
-      const CoreItem& core_item, CoreId core_id) {
-    assert(core_id != CoreId::InvalidId());
-    auto iterator_and_state = GetCore(core_id).AddItem(core_item);
-    if (iterator_and_state.second == true) {
-      // 以前不存在则添加映射记录
-      SetItemCoreId(core_item, core_id);
-    }
-    return iterator_and_state;
-  }
+      const CoreItem& core_item, CoreId core_id);
   // 获取给定项对应项集的ID，使用的参数必须为有效参数
   // 未指定（不曾使用SetItemCoreId设置）则返回CoreId::InvalidId()
   CoreId GetCoreId(ProductionNodeId production_node_id,
-                   ProductionBodyId production_body_id,
-                   PointIndex point_index) {
-    return GetProductionNode(production_node_id)
-        .GetCoreId(production_body_id, point_index);
-  }
+                   ProductionBodyId production_body_id, PointIndex point_index);
   CoreId GetItemCoreId(const CoreItem& core_item);
   // 获取给定项对应项集的ID，如果不存在记录则插入到新项集里并返回相应ID
   // 返回的bool代表是否core_item不存在并成功创建并添加到新的项集
@@ -181,31 +187,26 @@ class LexicalGenerator {
   std::pair<CoreId, bool> GetItemCoreIdOrInsert(
       const CoreItem& core_item, CoreId insert_core_id = CoreId::InvalidId());
   // 获取向前看符号集
-  const InsideForwardNodesContainerType& GetFowardNodes(
+  const std::unordered_set<ProductionNodeId>& GetForwardNodeIds(
       ProductionNodeId production_node_id, ProductionBodyId production_body_id,
       PointIndex point_index) {
     return GetProductionNode(production_node_id)
         .GetForwardNodeIds(production_body_id, point_index);
   }
   // 添加向前看符号
-  void AddForwardNode(ProductionNodeId production_node_id,
-                      ProductionBodyId production_body_id,
-                      PointIndex point_index,
-                      ProductionNodeId forward_node_id) {
+  void AddForwardNodeId(ProductionNodeId production_node_id,
+                        ProductionBodyId production_body_id,
+                        PointIndex point_index,
+                        ProductionNodeId forward_node_id) {
     GetProductionNode(production_node_id)
-        .AddForwardNode(production_body_id, point_index, forward_node_id);
+        .AddForwardNodeId(production_body_id, point_index, forward_node_id);
   }
   // 添加一个容器内的所有向前看符号
   template <class Container>
   void AddForwardNodeContainer(ProductionNodeId production_node_id,
                                ProductionBodyId production_body_id,
                                PointIndex point_index,
-                               Container&& forward_nodes_container) {
-    GetProductionNode(production_node_id)
-        .AddForwardNodeContainer(
-            production_body_id, point_index,
-            std::forward<Container>(forward_nodes_container));
-  }
+                               Container&& forward_nodes_id_container);
   // 闭包操作中的first操作，如果first_node_id有效则返回仅含自己的集合
   // 无效则返回next_node_ids
   std::unordered_set<ProductionNodeId> First(
@@ -235,7 +236,7 @@ class LexicalGenerator {
   void CoreClosure(CoreId core_id);
   // 删除Goto缓存中给定core_id的所有缓存，函数执行后保证缓存不存在
   void RemoveGotoCacheEntry(CoreId core_id) {
-    assert(core_id != CoreId::InvalidId());
+    assert(core_id.IsValid());
     auto [iter_begin, iter_end] = core_id_goto_core_id_.equal_range(core_id);
     for (; iter_begin != iter_end; ++iter_begin) {
       core_id_goto_core_id_.erase(iter_begin);
@@ -244,38 +245,10 @@ class LexicalGenerator {
   // 设置一条Goto缓存
   void SetGotoCacheEntry(CoreId core_id_src,
                          ProductionNodeId transform_production_node_id,
-                         CoreId core_id_dst) {
-    assert(core_id_src != CoreId::InvalidId() &&
-           core_id_dst != CoreId::InvalidId());
-    auto [iter_begin, iter_end] =
-        core_id_goto_core_id_.equal_range(core_id_src);
-    for (; iter_begin != iter_end; ++iter_end) {
-      // 如果已有缓存项则修改
-      if (iter_begin->second.first == transform_production_node_id) {
-        iter_begin->second.second = core_id_dst;
-        return;
-      }
-    }
-    // 不存在该条缓存则插入
-    core_id_goto_core_id_.insert(std::make_pair(
-        core_id_src,
-        std::make_pair(transform_production_node_id, core_id_dst)));
-  }
+                         CoreId core_id_dst);
   // 获取一条Goto缓存，不存在则返回CoreId::InvalidId()
   CoreId GetGotoCacheEntry(CoreId core_id_src,
-                           ProductionNodeId transform_production_node_id) {
-    assert(core_id_src != CoreId::InvalidId());
-    CoreId core_id_dst = CoreId::InvalidId();
-    auto [iter_begin, iter_end] =
-        core_id_goto_core_id_.equal_range(core_id_src);
-    for (; iter_begin != iter_end; ++iter_begin) {
-      if (iter_begin->second.first == transform_production_node_id) {
-        core_id_dst = iter_begin->second.second;
-        break;
-      }
-    }
-    return core_id_dst;
-  }
+                           ProductionNodeId transform_production_node_id);
   // Goto缓存是否有效，有效返回true
   bool IsGotoCacheAvailable(CoreId core_id) {
     return GetCore(core_id).IsClosureAvailable();
@@ -334,9 +307,9 @@ class LexicalGenerator {
       ParsingTableEntryIdContainer&& entry_ids,
       std::vector<std::vector<ParsingTableEntryId>>* equivalent_ids);
   // ParsingTableMergeOptimize的子过程，分类具有相同项的语法分析表条目
-  //第一个参数为语法分析表内所有终结节点ID
-  //第二个参数为语法分析表内所有非终结节点ID
-  //返回可以合并的语法分析表条目组，所有组均有至少两个条目
+  // 第一个参数为语法分析表内所有终结节点ID
+  // 第二个参数为语法分析表内所有非终结节点ID
+  // 返回可以合并的语法分析表条目组，所有组均有至少两个条目
   std::vector<std::vector<ParsingTableEntryId>> ParsingTableEntryClassify(
       const std::vector<ProductionNodeId>& terminal_node_ids,
       const std::vector<ProductionNodeId>& nonterminal_node_ids);
@@ -347,14 +320,15 @@ class LexicalGenerator {
   // 合并语法分析表内相同的项，同时缩减语法分析表大小
   // 会将语法分析表内的项修改为新的项
   void ParsingTableMergeOptimize();
-  // 构建LALR(1)配置
-  void ParsingTableConstruct();
+  // TODO 将下面变量的引用改为直接使用lexical_config中的变量以优化性能
 
- private:
+  // 声明语法分析机为友类，便于其使用各种定义
+  friend class frontend::parser::lexicalmachine::LexicalMachine;
   // 根产生式ID
-  ProductionNodeId root_production_;
+  ProductionNodeId& root_production_ = lexical_config.root_production_node_id;
   // 管理终结符号、非终结符号等的节点
-  ObjectManager<BaseProductionNode> manager_nodes_;
+  ObjectManager<BaseProductionNode>& manager_nodes_ =
+      lexical_config.manager_nodes;
   // 管理符号
   UnorderedStructManager<std::string, StringHasher> manager_symbol_;
   // 符号ID（manager_symbol_)返回的ID到对应节点的映射，支持一个符号对应多个节点
@@ -368,8 +342,16 @@ class LexicalGenerator {
   std::multimap<CoreId, std::pair<ProductionNodeId, CoreId>>
       core_id_goto_core_id_;
   // 语法分析表
-  std::vector<ParsingTableEntry> lexical_config_parsing_table_;
+  ParsingTableType& lexical_config_parsing_table_ =
+      lexical_config.parsing_table;
+  // 写到配置文件中的数据
+  struct LexicalConfig {
+    ParsingTableType parsing_table;
+    ObjectManager<BaseProductionNode> manager_nodes;
+    ProductionNodeId root_production_node_id;
+  } lexical_config;
 
+  //所有产生式节点类都应继承自该类
   class BaseProductionNode {
    public:
     BaseProductionNode(ProductionNodeType type, SymbolId symbol_id)
@@ -381,11 +363,13 @@ class LexicalGenerator {
     BaseProductionNode(BaseProductionNode&& base_production_node)
         : base_type_(base_production_node.base_type_),
           base_id_(base_production_node.base_id_),
-          base_symbol_id_(base_production_node.base_symbol_id_),
-          base_forward_nodes_(
-              std::move(base_production_node.base_forward_nodes_)),
-          base_core_ids_(std::move(base_production_node.base_id_)) {}
+          base_symbol_id_(base_production_node.base_symbol_id_) {}
     BaseProductionNode& operator=(BaseProductionNode&& base_production_node);
+
+    struct NodeData {
+      ProductionNodeType node_type;
+      std::string node_symbol;
+    };
 
     void SetType(ProductionNodeType type) { base_type_ = type; }
     ProductionNodeType Type() const { return base_type_; }
@@ -394,62 +378,48 @@ class LexicalGenerator {
     void SetSymbolId(SymbolId id) { base_symbol_id_ = id; }
     SymbolId GetSymbolId() const { return base_symbol_id_; }
 
-    // 获取向前看节点ID集合
-    const InsideForwardNodesContainerType& GetForwardNodeIds(
-        ProductionBodyId production_body_id, PointIndex point_index) const {
-      assert(point_index < base_forward_nodes_[production_body_id].size());
-      return base_forward_nodes_[production_body_id][point_index];
+#ifdef USE_PRODUCTION_NODE_INIT_FUNCTION
+    const std::function<void()>& GetInitFunction() { return init_function_; }
+    void SetInitFunction(const std::function<void()>& init_function) {
+      init_function_ = init_function;
     }
-    // 添加向前看节点ID
-    void AddForwardNode(ProductionBodyId production_body_id,
-                        PointIndex point_index,
-                        ProductionNodeId forward_node_id) {
-      assert(point_index < base_forward_nodes_[production_body_id].size() &&
-             forward_node_id.IsValid());
-      base_forward_nodes_[production_body_id][point_index].insert(
-          forward_node_id);
+#endif  // USE_PRODUCTION_NODE_INIT_FUNCTION
+
+#ifdef USE_PRODUCTION_NODE_REDUCTION_FUNCTION
+    const std::function<void()>& GetReductionFunction() {
+      return reduction_function_;
     }
-    // 添加向前看节点ID容器
-    template <class Container>
-    void AddForwardNodeContainer(ProductionBodyId production_body_id,
-                                 PointIndex point_index,
-                                 Container&& forward_nodes_container) {
-      assert(point_index < base_forward_nodes_[production_body_id].size());
-      base_forward_nodes_[production_body_id][point_index].merge(
-          std::forward<Container>(forward_nodes_container));
+    void SetReductionFunction(const std::function<void()>& reduction_function) {
+      reduction_function_ = reduction_function;
     }
-    // 设置给定项对应的项集ID
-    void SetCoreId(ProductionBodyId production_body_id, PointIndex point_index,
-                   CoreId core_id) {
-      assert(production_body_id < base_core_ids_.size() &&
-             point_index < base_core_ids_[production_body_id].size());
-      base_core_ids_[production_body_id][point_index] = core_id;
+#endif  // USE_PRODUCTION_NODE_REDUCTION_FUNCTION
+
+#ifdef USE_PRODUCTION_NODE_USER_DATA
+    std::any& GetUserData() { return user_data_; }
+    template <class T>
+    void SetUserData(T&& user_data) {
+      user_data_ = std::forward<T>(user_data);
     }
-    // 获取给定项对应的项集ID
-    CoreId GetCoreId(ProductionBodyId production_body_id,
-                     PointIndex point_index) {
-      assert(production_body_id < base_core_ids_.size() &&
-             point_index < base_core_ids_[production_body_id].size());
-      return base_core_ids_[production_body_id][point_index];
-    }
-    // 设置产生式体大小
-    void ResizeProductionBody(size_t new_size) {
-      base_forward_nodes_.resize(new_size);
-      base_core_ids_.resize(new_size);
-    }
-    // 设置产生式体内节点数（填production_body.size()，不要+1）
-    void ResizeProductionBodyInsideNodes(ProductionBodyId production_node_id,
-                                         size_t new_size) {
-      assert(production_node_id < base_forward_nodes_.size());
-      base_forward_nodes_[production_node_id].resize(new_size + 1);
-      base_core_ids_[production_node_id].resize(new_size + 1,
-                                                CoreId::InvalidId());
-    }
+#endif  // USE_PRODUCTION_NODE_USER_DATA
+
     // 获取给定项对应的产生式ID，返回point_index后面的ID
     // point_index越界时返回ProducNodeId::InvalidId()
     // 为了支持向前看多个节点允许越界
     virtual ProductionNodeId GetProductionNodeInBody(
         ProductionBodyId production_body_id, PointIndex point_index);
+    //添加向前看节点
+    virtual void AddForwardNodeId(ProductionBodyId production_body_id,
+                                  PointIndex point_index,
+                                  ProductionNodeId forward_node_id);
+    //获取向前看节点集合
+    virtual const std::unordered_set<ProductionNodeId>& GetForwardNodeIds(
+        ProductionBodyId production_body_id, PointIndex point_index);
+    //设置项对应的核心ID
+    virtual void SetCoreId(ProductionBodyId production_body_id,
+                           PointIndex point_index, CoreId core_id);
+    //获取项对应的核心ID
+    virtual CoreId GetCoreId(ProductionBodyId production_body_id,
+                             PointIndex point_index);
 
    private:
     // 节点类型
@@ -458,21 +428,27 @@ class LexicalGenerator {
     ProductionNodeId base_id_;
     // 节点符号ID
     SymbolId base_symbol_id_;
-    // 向前看节点，分三层组成，最外层仅有一个
-    // 中间层对应ProductionBodyId，等于产生式体数目
-    // 最内层对应PointIndex，大小比对应产生式体内节点数目多1
-    OutSideForwardNodesContainerType base_forward_nodes_;
-    // 存储项对应的项集ID（CoreId）
-    CoreIdContainerType base_core_ids_;
+
+#ifdef USE_PRODUCTION_NODE_INIT_FUNCTION
+    // 建立节点时调用的函数
+    std::function<void()> init_function_;
+#endif  // USE_PRODUCTION_NODE_INIT_FUNCTION
+
+#ifdef USE_PRODUCTION_NODE_REDUCTION_FUNCTION
+    // 归并节点时调用的函数
+    std::function<void()> reduction_function_;
+#endif  // USE_PRODUCTION_NODE_REDUCTION_FUNCTION
+
+#ifdef USE_PRODUCTION_NODE_USER_DATA
+    //存储用户定义数据，可用于构造AST等
+    std::any user_data_;
+#endif  // USE_PRODUCTION_NODE_USER_DATA
   };
 
   class TerminalProductionNode : public BaseProductionNode {
    public:
     TerminalProductionNode(SymbolId symbol_id)
-        : BaseProductionNode(ProductionNodeType::kTerminalNode, symbol_id) {
-      ResizeProductionBody(1);
-      ResizeProductionBodyInsideNodes(ProductionBodyId(0), 1);
-    }
+        : BaseProductionNode(ProductionNodeType::kTerminalNode, symbol_id) {}
     TerminalProductionNode(const TerminalProductionNode&) = delete;
     TerminalProductionNode& operator=(const TerminalProductionNode&) = delete;
     TerminalProductionNode(TerminalProductionNode&& terminal_production_node)
@@ -482,9 +458,105 @@ class LexicalGenerator {
       BaseProductionNode::operator=(std::move(terminal_production_node));
       return *this;
     }
+    using NodeData = BaseProductionNode::NodeData;
+
+    // 添加向前看节点ID
+    void AddFirstItemForwardNodeId(ProductionNodeId forward_node_id) {
+      assert(forward_node_id.IsValid());
+      forward_nodes_.first.insert(forward_node_id);
+    }
+    void AddSecondItemForwardNodeId(ProductionNodeId forward_node_id) {
+      assert(forward_node_id.IsValid());
+      forward_nodes_.second.insert(forward_node_id);
+    }
+    // 添加一个容器内所有向前看节点ID
+    template <class Container>
+    void AddFirstItemForwardNodeContainer(
+        Container&& forward_nodes_id_container) {
+      assert(!forward_nodes_id_container.empty());
+      forward_nodes_.first.merge(
+          std::forward<Container>(forward_nodes_id_container));
+    }
+    template <class Container>
+    void AddSecondItemForwardNodeContainer(
+        Container&& forward_nodes_id_container) {
+      assert(!forward_nodes_id_container.empty());
+      forward_nodes_.second.merge(
+          std::forward<Container>(forward_nodes_id_container));
+    }
+    template <class Container>
+    void AddForwardNodeContainer(ProductionBodyId production_body_id,
+                                 PointIndex point_index,
+                                 Container&& forward_nodes_id_container);
+    const std::unordered_set<ProductionNodeId>& GetFirstItemForwardNodeIds() {
+      return forward_nodes_.first;
+    }
+    const std::unordered_set<ProductionNodeId>& GetSecondItemForwardNodeIds() {
+      return forward_nodes_.second;
+    }
+    // 设置给定项对应的项集ID
+    void SetFirstItemCoreId(CoreId core_id) {
+      assert(core_id.IsValid());
+      core_ids_.first = core_id;
+    }
+    void SetSecondItemCoreId(CoreId core_id) {
+      assert(core_id.IsValid());
+      core_ids_.second = core_id;
+    }
+    // 获取给定项对应的项集ID
+    CoreId GetFirstItemCoreId() { return core_ids_.first; }
+    CoreId GetSecondItemCoreId() { return core_ids_.second; }
+
+#ifdef USE_TERMINAL_NODE_SHIFT_FUNCTION
+    void SetShiftFunction(
+        const std::function<void(const NodeData&)>& shift_function) {
+      shift_function_ = shift_function;
+    }
+    //该函数留给自定义移入函数用
+    template <class T>
+    void SetShiftFunction(const std::function<T>& shift_function) {
+      shift_function_ = shift_function;
+    }
+    const std::function<void(const NodeData&)>& GetShiftFunction() {
+      return reinterpret_cast<std::function<void(const NodeData&)>&>(
+          shift_function_);
+    }
+    //该函数留给获取自定义移入函数用
+    template <class T>
+    const std::function<T>& GetShiftFunction() {
+      return shift_function_;
+    }
+#endif  // USE_PRODUCTION_NODE_SHIFT_FUNCTION
 
     virtual ProductionNodeId GetProductionNodeInBody(
         ProductionBodyId production_body_id, PointIndex point_index) override;
+    //添加向前看节点
+    virtual void AddForwardNodeId(ProductionBodyId production_body_id,
+                                  PointIndex point_index,
+                                  ProductionNodeId forward_node_id);
+    //获取向前看节点集合
+    virtual const std::unordered_set<ProductionNodeId>& GetForwardNodeIds(
+        ProductionBodyId production_body_id, PointIndex point_index);
+    //设置项对应的核心ID
+    virtual void SetCoreId(ProductionBodyId production_body_id,
+                           PointIndex point_index, CoreId core_id);
+    //获取项对应的核心ID
+    virtual CoreId GetCoreId(ProductionBodyId production_body_id,
+                             PointIndex point_index);
+
+   private:
+#ifdef USE_TERMINAL_NODE_SHIFT_FUNCTION
+    // 移入产生式时调用的函数
+    // 使用any便于操作符节点定义自己的移入函数
+    std::any shift_function_;
+#endif  // USE_PRODUCTION_NODE_SHIFT_FUNCTION
+
+    // 终结节点的两种项的向前看符号
+    std::pair<std::unordered_set<ProductionNodeId>,
+              std::unordered_set<ProductionNodeId>>
+        forward_nodes_;
+    // 两种项对应的核心ID
+    std::pair<CoreId, CoreId> core_ids_;
   };
 
   class OperatorProductionNode : public TerminalProductionNode {
@@ -505,6 +577,10 @@ class LexicalGenerator {
     OperatorProductionNode& operator=(
         OperatorProductionNode&& operator_production_node);
 
+    struct NodeData : public TerminalProductionNode::NodeData {
+      std::string symbol;
+    };
+
     void SetAssociatityType(AssociatityType type) {
       operator_associatity_type_ = type;
     }
@@ -515,6 +591,16 @@ class LexicalGenerator {
       operator_priority_level_ = level;
     }
     PriorityLevel GetPriorityLevel() const { return operator_priority_level_; }
+
+#ifdef USE_OPERATOR_NODE_SHIFT_FUNCTION
+    void SetShiftFunction(
+        const std::function<void(const NodeData&)>& shift_function) {
+      TerminalProductionNode::SetShiftFunction(shift_function);
+    }
+    const std::function<void(const NodeData&)>& GetShiftFunction() {
+      return TerminalProductionNode::GetShiftFunction();
+    }
+#endif  // USE_PRODUCTION_NODE_SHIFT_FUNCTION
 
    private:
     // 运算符结合性
@@ -541,20 +627,88 @@ class LexicalGenerator {
     NonTerminalProductionNode& operator=(
         NonTerminalProductionNode&& nonterminal_production_node);
 
+    //重新设置产生式体数目，会同时设置相关数据
+    void ResizeProductionBodyNum(size_t new_size);
+    //重新设置产生式体里节点数目，会同时设置相关数据
+    void ResizeProductionBodyNodeNum(ProductionBodyId production_body_id,
+                                     size_t new_size);
+    //添加一个产生式体，要求IdType为一个vector，按序存储产生式节点ID
     template <class IdType>
     ProductionBodyId AddBody(IdType&& body);
     const ProductionBodyType& GetBody(ProductionBodyId body_id) const {
       return nonterminal_bodys_[body_id];
     }
     const BodyContainerType& GetAllBody() const { return nonterminal_bodys_; }
+    // 添加一个容器内所有向前看节点ID
+    template <class Container>
+    void AddForwardNodeContainer(ProductionBodyId production_body_id,
+                                 PointIndex point_index,
+                                 Container&& forward_nodes_container) {
+      assert(point_index < forward_nodes_[production_body_id].size());
+      forward_nodes_[production_body_id][point_index].merge(
+          std::forward<Container>(forward_nodes_container));
+    }
+
+#ifdef USE_PRODUCTION_NODE_SHIFT_FUNCTION
+    //设置移入时调用的函数，应由语法分析机运行时设定
+    void SetShiftFunction(
+        const std::function<void(const NodeData&)>& shift_function,
+        ProductionBodyId production_body_id, PointIndex point_index);
+    const std::function<void(const NodeData&)>& GetShiftFunction(
+        ProductionBodyId production_body_id, PointIndex point_index);
+#endif  // USE_PRODUCTION_NODE_SHIFT_FUNCTION
 
     virtual ProductionNodeId GetProductionNodeInBody(
         ProductionBodyId production_body_id, PointIndex point_index) override;
+    //添加向前看节点
+    virtual void AddForwardNodeId(ProductionBodyId production_body_id,
+                                  PointIndex point_index,
+                                  ProductionNodeId forward_node_id) {
+      assert(point_index < forward_nodes_[production_body_id].size() &&
+             forward_node_id.IsValid());
+      forward_nodes_[production_body_id][point_index].insert(forward_node_id);
+    }
+    //获取向前看节点集合
+    virtual const std::unordered_set<ProductionNodeId>& GetForwardNodeIds(
+        ProductionBodyId production_body_id, PointIndex point_index) {
+      assert(point_index < forward_nodes_[production_body_id].size());
+      return forward_nodes_[production_body_id][point_index];
+    }
+    //设置项对应的核心ID
+    virtual void SetCoreId(ProductionBodyId production_body_id,
+                           PointIndex point_index, CoreId core_id) {
+      assert(production_body_id < core_ids_.size() &&
+             point_index < core_ids_[production_body_id].size());
+      core_ids_[production_body_id][point_index] = core_id;
+    }
+    // 获取项对应的核心ID
+    virtual CoreId GetCoreId(ProductionBodyId production_body_id,
+                             PointIndex point_index) {
+      assert(production_body_id < core_ids_.size() &&
+             point_index < core_ids_[production_body_id].size());
+      return core_ids_[production_body_id][point_index];
+    }
 
    private:
     // 外层vector存该非终结符号下各个产生式的体
     // 内层vector存该产生式的体里含有的各个符号对应的节点ID
     BodyContainerType nonterminal_bodys_;
+
+#ifdef USE_PRODUCTION_NODE_SHIFT_FUNCTION
+    // 移入节点时调用的函数
+    // 外层大小等于产生式体数目
+    // 内层大小等于该条产生式体内节点数目，不+1
+    std::vector<std::vector<std::function<void(const NodeData&)>>>
+        shift_function_;
+#endif  // USE_PRODUCTION_NODE_SHIFT_FUNCTION
+
+    // 向前看节点，分两层组成
+    // 外层对应ProductionBodyId，等于产生式体数目
+    // 内层对应PointIndex，大小比对应产生式体内节点数目多1
+    std::vector<std::vector<std::unordered_set<ProductionNodeId>>>
+        forward_nodes_;
+    // 存储项对应的核心ID
+    std::vector<std::vector<CoreId>> core_ids_;
   };
 
   // 文件尾节点
@@ -692,10 +846,24 @@ LexicalGenerator::NonTerminalProductionNode::AddBody(IdType&& body) {
   // 将输入插入到产生式体向量中，无删除相同产生式功能
   nonterminal_bodys_.emplace_back(std::forward<IdType>(body));
   // 为产生式体的所有不同位置的点对应的向前看符号留出空间
-  ResizeProductionBody(nonterminal_bodys_.size());
+  ResizeProductionBodyNum(nonterminal_bodys_.size());
   // 为不同点的位置留出空间
-  ResizeProductionBodyInsideNodes(body.size());
+  ResizeProductionBodyNodeNum(body_id, body.size());
   return body_id;
+}
+
+template <class Container>
+inline void LexicalGenerator::TerminalProductionNode::AddForwardNodeContainer(
+    ProductionBodyId production_body_id, PointIndex point_index,
+    Container&& forward_nodes_id_container) {
+  assert(production_body_id == 0 && point_index <= 1);
+  if (point_index == 0) {
+    AddFirstItemForwardNodeContainer(
+        std::forward<Container>(forward_nodes_id_container));
+  } else {
+    AddSecondItemForwardNodeContainer(
+        std::forward<Container>(forward_nodes_id_container));
+  }
 }
 
 template <class IdType>
@@ -786,6 +954,31 @@ inline void LexicalGenerator::ParsingTableNonTerminalNodeClassify(
                                          std::move(vec.second), equivalent_ids);
       }
     }
+  }
+}
+
+template <class Container>
+inline void LexicalGenerator::AddForwardNodeContainer(
+    ProductionNodeId production_node_id, ProductionBodyId production_body_id,
+    PointIndex point_index, Container&& forward_nodes_container) {
+  BaseProductionNode& production_node = GetProductionNode(production_node_id);
+  switch (production_node.Type()) {
+    case ProductionNodeType::kTerminalNode:
+    case ProductionNodeType::kOperatorNode:
+      static_cast<TerminalProductionNode&>(production_node)
+          .AddForwardNodeContainer(
+              production_body_id, point_index,
+              std::forward<Container>(forward_nodes_container));
+      break;
+    case ProductionNodeType::kNonTerminalNode:
+      static_cast<NonTerminalProductionNode&>(production_node)
+          .AddForwardNodeContainer(
+              production_body_id, point_index,
+              std::forward<Container>(forward_nodes_container));
+      break;
+    default:
+      assert(false);
+      break;
   }
 }
 

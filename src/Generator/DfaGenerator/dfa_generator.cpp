@@ -46,13 +46,13 @@ bool DfaGenerator::DfaConstruct() {
         GetIntermediateNode(intermediate_node_handler_now).set_handler;
     for (size_t i = 0; i < kCharNum; i++) {
       std::pair(intermediate_node_handler_temp, result) =
-          SetGoto(set_handler_now, char(i + CHAR_MIN));
+          SetGoto(set_handler_now, static_cast<char>(i + CHAR_MIN));
       if (!intermediate_node_handler_temp.IsValid()) {
         // 该字符下不可转移
         continue;
       }
-      GetIntermediateNode(intermediate_node_handler_now).forward_nodes[i] =
-          intermediate_node_handler_temp;
+      GetIntermediateNode(intermediate_node_handler_now)
+          .forward_nodes[static_cast<char>(i)] = intermediate_node_handler_temp;
       if (result == false) {
         // 新集合对应的中间节点以前不存在，插入队列等待处理
         q.push(intermediate_node_handler_temp);
@@ -85,11 +85,15 @@ bool DfaGenerator::DfaMinimize() {
     if (logged_index[index] == false) {
       // 该节点未配置
       for (size_t i = 0; i < kCharNum; i++) {
-        if (intermediate_node.forward_nodes[i].IsValid()) {
-          auto iter = intermediate_node_to_final_node_.find(
-              intermediate_node.forward_nodes[i]);
+        // 寻找有效节点并设置语法分析表中对应项
+        // 从最小的char开始
+        IntermediateNodeId next_node_id =
+            intermediate_node.forward_nodes[static_cast<char>(i + CHAR_MIN)];
+        if (next_node_id.IsValid()) {
+          auto iter = intermediate_node_to_final_node_.find(next_node_id);
           assert(iter != intermediate_node_to_final_node_.end());
-          dfa_config[index].first[i] = iter->second;
+          dfa_config[index].first[static_cast<char>(i + CHAR_MIN)] =
+              iter->second;
           dfa_config[index].second = intermediate_node.tail_node_data.first;
         }
       }
@@ -170,13 +174,12 @@ bool DfaGenerator::DfaMinimize(const std::vector<IntermediateNodeId>& handlers,
   // 存储当前转移条件下无法转移节点
   std::map<TailNodeData, std::vector<IntermediateNodeId>> no_next_group;
   for (auto h : handlers) {
-    IntermediateNodeId next_node_handler = IntermediateGoto(h, c_transform);
+    IntermediateNodeId next_node_id = IntermediateGoto(h, c_transform);
     IntermediateDfaNode& node = GetIntermediateNode(h);
-    if (next_node_handler == IntermediateNodeId::InvalidId()) {
-      no_next_group[node.tail_node_data].push_back(h);
+    if (next_node_id.IsValid()) {
+      groups[std::make_pair(next_node_id, node.tail_node_data)].push_back(h);
     } else {
-      groups[std::make_pair(next_node_handler, node.tail_node_data)].push_back(
-          h);
+      no_next_group[node.tail_node_data].push_back(h);
     }
   }
   DfaMinimizeGroupsRecursion(groups, c_transform);

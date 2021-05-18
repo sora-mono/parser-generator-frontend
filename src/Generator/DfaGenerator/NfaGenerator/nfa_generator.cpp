@@ -23,8 +23,7 @@ inline void NfaGenerator::NfaNode::SetConditionTransfer(
   nodes_forward[c_condition] = node_id;
 }
 
-inline void NfaGenerator::NfaNode::AddNoconditionTransfer(
-    NfaNodeId node_id) {
+inline void NfaGenerator::NfaNode::AddNoconditionTransfer(NfaNodeId node_id) {
   conditionless_transfer_nodes_id.insert(node_id);
 }
 
@@ -135,8 +134,7 @@ inline const NfaGenerator::TailNodeData NfaGenerator::GetTailTag(
   return iter->second;
 }
 
-inline const NfaGenerator::TailNodeData NfaGenerator::GetTailTag(
-    NfaNodeId id) {
+inline const NfaGenerator::TailNodeData NfaGenerator::GetTailTag(NfaNodeId id) {
   return GetTailTag(&GetNfaNode(id));
 }
 // TODO 将流改成printf等函数
@@ -156,8 +154,7 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
       case '[':
         in.putback(c_now);
         std::pair(temp_head_id, temp_tail_id) = CreateSwitchTree(in);
-        if (temp_head_id == NfaNodeId::InvalidId() ||
-            temp_tail_id == NfaNodeId::InvalidId()) {
+        if (!(temp_head_id.IsValid() && temp_tail_id.IsValid())) {
           throw std::invalid_argument("非法正则");
         }
         GetNfaNode(tail_id).AddNoconditionTransfer(temp_tail_id);
@@ -171,8 +168,7 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
       case '(':
         std::pair(temp_head_id, temp_tail_id) =
             RegexConstruct(in, NotTailNodeTag, false, true);
-        if (temp_head_id == NfaNodeId::InvalidId() ||
-            temp_tail_id == NfaNodeId::InvalidId()) {
+        if (!(temp_head_id.IsValid() && temp_tail_id.IsValid())) {
           throw std::invalid_argument("非法正则");
         }
         GetNfaNode(tail_id).AddNoconditionTransfer(temp_head_id);
@@ -289,8 +285,7 @@ NfaGenerator::WordConstruct(const std::string& str, const TailNodeData& tag) {
 void NfaGenerator::MergeOptimization() {
   node_manager_.SetAllObjectsMergeAllowed();
   std::queue<NfaNodeId> q;
-  for (auto x :
-       GetNfaNode(head_node_id_).conditionless_transfer_nodes_id) {
+  for (auto x : GetNfaNode(head_node_id_).conditionless_transfer_nodes_id) {
     q.push(x);
   }
   while (!q.empty()) {
@@ -301,8 +296,7 @@ void NfaGenerator::MergeOptimization() {
     if (!CanMerge) {
       continue;
     }
-    for (auto x :
-         GetNfaNode(id_now).conditionless_transfer_nodes_id) {
+    for (auto x : GetNfaNode(id_now).conditionless_transfer_nodes_id) {
       merged |= node_manager_.MergeObjectsWithManager<NfaGenerator>(
           id_now, x, *this, MergeNfaNodesWithGenerator);
       q.push(x);

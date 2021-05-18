@@ -3,20 +3,22 @@
 #include <unordered_set>
 #include <vector>
 
-#include"Common/id_wrapper.h"
+#include "Common/common.h"
+#include "Common/id_wrapper.h"
 
 #ifndef COMMON_HASH_FUNCTIONS_H_
 #define COMMON_HASH_FUNCTIONS_H_
 
 namespace frontend::common {
-enum class WrapperLabel { kStringHashType,kIntergalSetHashType };
+enum class WrapperLabel { kStringHashType, kIntergalSetHashType };
 using StringHashType = NonExplicitIdWrapper<unsigned long long, WrapperLabel,
-                                         WrapperLabel::kStringHashType>;
-using IntergalSetHashType = NonExplicitIdWrapper<unsigned long long, WrapperLabel,
-                                              WrapperLabel::kIntergalSetHashType>;
+                                            WrapperLabel::kStringHashType>;
+using IntergalSetHashType =
+    NonExplicitIdWrapper<unsigned long long, WrapperLabel,
+                         WrapperLabel::kIntergalSetHashType>;
 
-const unsigned long long hash_seed = 131;  // 31 131 1313 13131 131313 etc..
-const size_t kCharNum = CHAR_MAX - CHAR_MIN + 1;
+constexpr unsigned long long hash_seed = 131;  // 31 131 1313 13131 131313 etc..
+
 StringHashType HashString(const std::string& str);
 
 template <class IdType>

@@ -3,7 +3,7 @@
 #include <array>
 #include <map>
 
-#include "Common/hash_functions.h"
+#include "Common/common.h"
 #include "Common/id_wrapper.h"
 #include "Common/unordered_struct_manager.h"
 #include "NfaGenerator/nfa_generator.h"
@@ -18,6 +18,21 @@ namespace common = frontend::common;
 
 class DfaGenerator {
   struct IntermediateDfaNode;
+  // 管理转移表用，仅用于DfaGenerator，为了避免使用char作下标时使用负下标
+  template <class T, size_t size>
+  requires(size <= frontend::common::kCharNum) class TransformArrayManager {
+   public:
+    TransformArrayManager() {}
+
+    T& operator[](char c) {
+      return transform_array_[(c + frontend::common::kCharNum) %
+                              frontend::common::kCharNum];
+    }
+    void fill(const T& fill_object) { transform_array_.fill(fill_object); }
+
+   private:
+    std::array<T, size> transform_array_;
+  };
 
  public:
   // 尾节点数据
@@ -50,8 +65,9 @@ class DfaGenerator {
   using TransformArrayId =
       frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
                                           WrapperLabel::kTransformArrayId>;
-  // DFA状态转移表
-  using TransformArray = std::array<TransformArrayId, common::kCharNum>;
+  // 状态转移表
+  using TransformArray =
+      TransformArrayManager<TransformArrayId, frontend::common::kCharNum>;
   // DFA配置类型
   using DfaConfigType = std::vector<std::pair<TransformArray, TailNodeId>>;
 
@@ -90,7 +106,7 @@ class DfaGenerator {
     void SetTailNodeData(TailNodeData data) { tail_node_data = data; }
 
     // 该节点的转移条件，存储IntermediateDfaNode节点句柄
-    std::array<IntermediateNodeId, common::kCharNum> forward_nodes;
+    TransformArrayManager<IntermediateNodeId, common::kCharNum> forward_nodes;
     TailNodeData tail_node_data;
     SetId set_handler;  // 该节点对应的子集闭包
   };
@@ -118,9 +134,14 @@ class DfaGenerator {
   // 对handlers数组中的句柄作最小化处理，从c_transform转移条件开始
   bool DfaMinimize(const std::vector<IntermediateNodeId>& handlers,
                    char c_transform);
+  // DfaMinimize的子过程，处理它生成的分类表
+  // 并对每一个需要继续分类的组调用DfaMinimize()
+  // 分类完成的节点会添加旧节点ID到新节点ID的映射
+  // 会添加保留的节点到新节点的映射
+  // 并删除多余的等效节点，仅保留一个
   template <class IdType>
   bool DfaMinimizeGroupsRecursion(
-      std::map<IdType, std::vector<IntermediateNodeId>> groups,
+      const std::map<IdType, std::vector<IntermediateNodeId>>& groups,
       char c_transform);
 
   // 序列化保存DFA配置用
@@ -150,10 +171,10 @@ class DfaGenerator {
 
 template <class IdType>
 inline bool DfaGenerator::DfaMinimizeGroupsRecursion(
-    std::map<IdType, std::vector<IntermediateNodeId>> groups,
+    const std::map<IdType, std::vector<IntermediateNodeId>>& groups,
     char c_transform) {
   for (auto& p : groups) {
-    std::vector<IntermediateNodeId>& vec = p.second;
+    const std::vector<IntermediateNodeId>& vec = p.second;
     if (vec.size() == 1) {
       intermediate_node_to_final_node_.insert(
           std::make_pair(vec.front(), config_node_num));
