@@ -125,7 +125,7 @@ NfaGenerator::NfaGenerator() {
   head_node_id_ = node_manager_.EmplaceObject();  // 添加头结点
 }
 
-inline const NfaGenerator::TailNodeData NfaGenerator::GetTailTag(
+inline const NfaGenerator::TailNodeData NfaGenerator::GetTailNodeData(
     NfaNode* pointer) {
   auto iter = tail_nodes_.find(pointer);
   if (iter == tail_nodes_.end()) {
@@ -134,8 +134,9 @@ inline const NfaGenerator::TailNodeData NfaGenerator::GetTailTag(
   return iter->second;
 }
 
-inline const NfaGenerator::TailNodeData NfaGenerator::GetTailTag(NfaNodeId id) {
-  return GetTailTag(&GetNfaNode(id));
+inline const NfaGenerator::TailNodeData NfaGenerator::GetTailNodeData(
+    NfaNodeId id) {
+  return GetTailNodeData(&GetNfaNode(id));
 }
 // TODO 将流改成printf等函数
 std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>
@@ -392,8 +393,10 @@ NfaGenerator::CreateSwitchTree(std::istream& in) {
 bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
                                 NfaGenerator::NfaNode& node_src,
                                 NfaGenerator& generator) {
-  const NfaGenerator::TailNodeData& dst_tag = generator.GetTailTag(&node_dst);
-  const NfaGenerator::TailNodeData& src_tag = generator.GetTailTag(&node_src);
+  const NfaGenerator::TailNodeData& dst_tag =
+      generator.GetTailNodeData(&node_dst);
+  const NfaGenerator::TailNodeData& src_tag =
+      generator.GetTailNodeData(&node_src);
   if (dst_tag != NfaGenerator::NotTailNodeTag &&
       src_tag != NfaGenerator::NotTailNodeTag &&
       dst_tag.second == src_tag.second && dst_tag.first != src_tag.first) {
@@ -412,7 +415,6 @@ bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
 }
 
 const NfaGenerator::TailNodeData NfaGenerator::NotTailNodeTag =
-    NfaGenerator::TailNodeData(TailNodeId::InvalidId(),
-                               TailNodePriority::InvalidId());
+    NfaGenerator::TailNodeData(SavedData(), TailNodePriority::InvalidId());
 
 }  // namespace frontend::generator::dfa_generator::nfa_generator

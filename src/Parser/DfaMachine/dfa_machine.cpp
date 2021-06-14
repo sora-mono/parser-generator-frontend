@@ -38,7 +38,8 @@ DfaMachine::ReturnData DfaMachine::GetNextNode() {
         }
         break;
       case '\n':
-        ++line_;
+        // 行数+1
+        SetLine(GetLine() + 1);
         break;
       default:
         break;
@@ -52,12 +53,13 @@ DfaMachine::ReturnData DfaMachine::GetNextNode() {
     }
   }
 Return:
+  return_data.line = GetLine();
   if (transform_array_id == start_id_) {
     // 到达文件结尾
-    return_data.tail_node_id = TailNodeId::InvalidId();
+    return_data.saved_data = GetSavedDataEndOfFile();
   } else {
     return_data.symbol = std::move(symbol);
-    return_data.tail_node_id = dfa_config_[transform_array_id].second;
+    return_data.saved_data = dfa_config_[transform_array_id].second;
   }
   return return_data;
 }

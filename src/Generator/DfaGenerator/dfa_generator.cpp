@@ -7,20 +7,21 @@ namespace frontend::generator::dfa_generator {
 using frontend::common::kCharNum;
 using frontend::generator::dfa_generator::nfa_generator::NfaGenerator;
 
-bool DfaGenerator::AddKeyword(const std::string& str, TailNodeId tail_node_tag,
+bool DfaGenerator::AddKeyword(const std::string& str,
+                              const SavedData& saved_data,
                               TailNodePriority priority_tag) {
-  auto [head_node_id, tail_node_id] = nfa_generator_.WordConstruct(
-      str, TailNodeData(tail_node_tag, priority_tag));
+  auto [head_node_id, tail_node_id] =
+      nfa_generator_.WordConstruct(str, TailNodeData(saved_data, priority_tag));
   assert(head_node_id.IsValid() && tail_node_id.IsValid());
   return true;
 }
 
 bool DfaGenerator::AddRegexpression(const std::string& str,
-                                    TailNodeId tail_node_tag,
-                                    TailNodePriority priority_tag) {
+                                    const SavedData& saved_data,
+                                    TailNodePriority priority) {
   std::stringstream sstream(str);
   auto [head_node_id, tail_node_id] = nfa_generator_.RegexConstruct(
-      sstream, TailNodeData(tail_node_tag, priority_tag));
+      sstream, TailNodeData(saved_data, priority));
   assert(head_node_id.IsValid() && tail_node_id.IsValid());
   return true;
 }
@@ -76,7 +77,6 @@ bool DfaGenerator::DfaMinimize() {
   dfa_config.resize(config_node_num);
   for (auto& p : dfa_config) {
     p.first.fill(TransformArrayId::InvalidId());
-    p.second = TailNodeId::InvalidId();
   }
   std::vector<bool> logged_index(config_node_num, false);
   for (auto& p : intermediate_node_to_final_node_) {
@@ -136,14 +136,14 @@ std::pair<DfaGenerator::IntermediateNodeId, bool> DfaGenerator::SetGoto(
 inline DfaGenerator::IntermediateNodeId DfaGenerator::IntermediateGoto(
     IntermediateNodeId handler_src, char c_transform) {
   return GetIntermediateNode(handler_src)
-      .forward_nodes[size_t(c_transform + kCharNum) % kCharNum];
+      .forward_nodes[c_transform];
 }
 
 inline bool DfaGenerator::SetIntermediateNodeTransform(
     IntermediateNodeId node_intermediate_src, char c_transform,
     IntermediateNodeId node_intermediate_dst) {
   IntermediateDfaNode& node_src = GetIntermediateNode(node_intermediate_src);
-  node_src.forward_nodes[size_t(c_transform + kCharNum) % kCharNum] =
+  node_src.forward_nodes[c_transform] =
       node_intermediate_dst;
   return true;
 }
@@ -173,17 +173,19 @@ bool DfaGenerator::DfaMinimize(const std::vector<IntermediateNodeId>& handlers,
       groups;
   // 存储当前转移条件下无法转移节点
   std::map<TailNodeData, std::vector<IntermediateNodeId>> no_next_group;
-  for (auto h : handlers) {
-    IntermediateNodeId next_node_id = IntermediateGoto(h, c_transform);
-    IntermediateDfaNode& node = GetIntermediateNode(h);
+  for (auto handler : handlers) {
+    IntermediateNodeId next_node_id = IntermediateGoto(handler, c_transform);
+    IntermediateDfaNode& node = GetIntermediateNode(handler);
     if (next_node_id.IsValid()) {
-      groups[std::make_pair(next_node_id, node.tail_node_data)].push_back(h);
+      groups[std::make_pair(next_node_id, node.tail_node_data)].push_back(
+          handler);
     } else {
-      no_next_group[node.tail_node_data].push_back(h);
+      no_next_group[node.tail_node_data].push_back(handler);
     }
   }
   DfaMinimizeGroupsRecursion(groups, c_transform);
   DfaMinimizeGroupsRecursion(no_next_group, c_transform);
   return true;
 }
+
 }  // namespace frontend::generator::dfa_generator

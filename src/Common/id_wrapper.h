@@ -37,6 +37,11 @@ class BaseIdWrapper {
   operator IdType&() { return const_cast<IdType&>(operator const IdType_&()); }
   operator const IdType&() const { return id_; }
 
+  BaseIdWrapper& operator++() {
+    ++id_;
+    return *this;
+  }
+  BaseIdWrapper operator++(int) { return BaseIdWrapper(id_++); }
   bool operator==(const BaseIdWrapper& id_wrapper) const {
     return id_ == id_wrapper.id_;
   }
@@ -75,14 +80,18 @@ class ExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
 
   ExplicitIdWrapper() {}
   explicit ExplicitIdWrapper(IdType id) { MyBase::SetId(id); }
-  ExplicitIdWrapper(const ExplicitIdWrapper& id_wrapper) {
-    MyBase::SetId(id_wrapper.GetThisNodeId());
-  }
-  ExplicitIdWrapper& operator=(const ExplicitIdWrapper& id_wrapper) {
-    MyBase::SetId(id_wrapper.GetThisNodeId());
+  ExplicitIdWrapper(const MyBase& id_wrapper) : MyBase(id_wrapper) {}
+  ExplicitIdWrapper& operator=(const MyBase& id_wrapper) {
+    MyBase::operator=(id_wrapper);
     return *this;
   }
 
+  ExplicitIdWrapper& operator++() {
+    return static_cast<ExplicitIdWrapper&>(++static_cast<MyBase&>(*this));
+  }
+  ExplicitIdWrapper operator++(int) {
+    return static_cast<ExplicitIdWrapper>(static_cast<MyBase>(*this)++);
+  }
   bool operator==(const ExplicitIdWrapper& id_wrapper) {
     return MyBase::operator==(id_wrapper);
   }
@@ -124,6 +133,14 @@ class ExplicitIdWrapperCustomizeInvalidValue
     return *this;
   }
 
+  ExplicitIdWrapperCustomizeInvalidValue& operator++() {
+    return static_cast<ExplicitIdWrapperCustomizeInvalidValue&>(
+        ++static_cast<MyBase&>(*this));
+  }
+  ExplicitIdWrapperCustomizeInvalidValue operator++(int) {
+    return static_cast<ExplicitIdWrapperCustomizeInvalidValue>(
+        static_cast<MyBase&>(*this)++);
+  }
   bool operator==(const ExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
     return MyBase::operator==(id_wrapper);
   }
@@ -164,6 +181,12 @@ class NonExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
     return *this;
   }
 
+  NonExplicitIdWrapper& operator++() {
+    return static_cast<NonExplicitIdWrapper&>(++static_cast<MyBase&>(*this));
+  }
+  NonExplicitIdWrapper operator++(int) {
+    return static_cast<NonExplicitIdWrapper>(static_cast<MyBase&>(*this)++);
+  }
   bool operator==(const NonExplicitIdWrapper& id_wrapper) {
     return MyBase::operator==(id_wrapper);
   }
@@ -206,6 +229,14 @@ class NonExplicitIdWrapperCustomizeInvalidValue
     return *this;
   }
 
+  NonExplicitIdWrapperCustomizeInvalidValue& operator++() {
+    return static_cast<NonExplicitIdWrapperCustomizeInvalidValue&>(
+        ++static_cast<MyBase&>(*this));
+  }
+  NonExplicitIdWrapperCustomizeInvalidValue operator++(int) {
+    return static_cast<NonExplicitIdWrapperCustomizeInvalidValue>(
+        static_cast<MyBase&>(*this)++);
+  }
   bool operator==(const NonExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
     return MyBase::operator==(id_wrapper);
   }

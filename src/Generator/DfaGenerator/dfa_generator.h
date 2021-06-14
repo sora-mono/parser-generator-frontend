@@ -11,6 +11,10 @@
 #ifndef GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
 #define GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
 
+namespace frontend::parser::dfamachine {
+class DfaMachine;
+}
+
 namespace frontend::generator::dfa_generator {
 using frontend::common::ObjectManager;
 using frontend::generator::dfa_generator::nfa_generator::NfaGenerator;
@@ -37,9 +41,11 @@ class DfaGenerator {
  public:
   // 尾节点数据
   using TailNodeData = NfaGenerator::TailNodeData;
-  // 尾节点ID
-  using TailNodeId = TailNodeData::first_type;
-  // 尾节点优先级
+  // 解析出单词后随单词返回的用户定义的数据
+  using SavedData = TailNodeData::first_type;
+  // 尾节点优先级，数字越大优先级越高，所有表达式体都有该参数
+  // 与运算符节点的优先级意义不同
+  // 该优先级决定在多个正则同时匹配成功时选择哪个正则得出词和附属数据
   using TailNodePriority = TailNodeData::second_type;
   // Nfa节点ID
   using NfaNodeId = NfaGenerator::NfaNodeId;
@@ -69,18 +75,24 @@ class DfaGenerator {
   using TransformArray =
       TransformArrayManager<TransformArrayId, frontend::common::kCharNum>;
   // DFA配置类型
-  using DfaConfigType = std::vector<std::pair<TransformArray, TailNodeId>>;
+  using DfaConfigType = std::vector<std::pair<TransformArray, SavedData>>;
 
   DfaGenerator() : head_node_intermediate_(IntermediateNodeId::InvalidId()) {}
   DfaGenerator(const DfaGenerator&) = delete;
   DfaGenerator(DfaGenerator&&) = delete;
 
   // 添加关键字
-  bool AddKeyword(const std::string& str, TailNodeId tail_node_tag,
+  bool AddKeyword(const std::string& str,const SavedData& tail_node_tag,
                   TailNodePriority priority_tag);
   // 添加正则
-  bool AddRegexpression(const std::string& str, TailNodeId tail_node_tag,
+  bool AddRegexpression(const std::string& str, const SavedData& saved_data,
                         TailNodePriority priority_tag);
+  // 设置遇到文件尾时返回的数据
+  void SetSavedDataEndOfFile(const SavedData& saved_data) {
+    file_end_saved_data_ = saved_data;
+  }
+  // 获取遇到文件尾时返回的数据
+  const SavedData& GetSavedDataEndOfFile() { return file_end_saved_data_; }
   // 构建DFA
   bool DfaConstruct();
   // 构建最小化DFA
@@ -91,6 +103,7 @@ class DfaGenerator {
   bool ConfigConstruct();
 
  private:
+  friend class DfaMachine;
   struct IntermediateDfaNode {
     IntermediateDfaNode(SetId handler = SetId::InvalidId(),
                         TailNodeData data = NfaGenerator::NotTailNodeTag)
@@ -148,10 +161,12 @@ class DfaGenerator {
   template <class Archive>
   void Serialize(Archive& ar, const unsigned int version = 0);
 
-  // DFA配置
+  // DFA配置，写入文件
   DfaConfigType dfa_config;
-  // 头结点序号
+  // 头结点序号，写入文件
   TransformArrayId head_index;
+  // 遇到文件尾时返回的数据，写入文件
+  SavedData file_end_saved_data_;
 
   NfaGenerator nfa_generator_;
   // 中间节点头结点句柄

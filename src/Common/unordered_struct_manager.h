@@ -22,6 +22,7 @@ struct DefaultHasher {
     return result;
   }
 };
+// TODO 设置使用std::string时的特化
 // 该类用于建立stl未提供hash方法的结构的哈希存储
 
 template <class StructType, class Hasher = DefaultHasher<StructType>>
@@ -50,6 +51,11 @@ class UnorderedStructManager {
   std::string& operator[](ObjectId id) { return GetObject(id); }
 
  private:
+  ObjectHashType DoHash(const StructType& object) {
+    Hasher hasher;
+    return ObjectHashType(hasher.DoHash(object));
+  }
+
   ObjectManager<StructType> node_manager_;
   std::unordered_multimap<ObjectHashType, ObjectId> hash_to_id_;
 };
@@ -59,8 +65,7 @@ template <class T>
 inline std::pair<typename UnorderedStructManager<StructType, Hasher>::ObjectId,
                  bool>
 UnorderedStructManager<StructType, Hasher>::AddObject(T&& object) {
-  Hasher hasher;
-  ObjectHashType hashed_object(hasher.DoHash(object));
+  ObjectHashType hashed_object(DoHash(object));
   ObjectId id = GetObjectId(object);
   if (id == ObjectId::InvalidId()) {
     id = node_manager_.EmplaceObject(std::forward<T>(object));
@@ -75,20 +80,16 @@ template <class StructType, class Hasher>
 UnorderedStructManager<StructType, Hasher>::ObjectId
 UnorderedStructManager<StructType, Hasher>::GetObjectId(
     const StructType& object) {
-  Hasher hasher;
-  ObjectHashType hashed_string(hasher.DoHash(object));
+  ObjectHashType hashed_string(DoHash(object));
   auto [iter_begin, iter_end] = hash_to_id_.equal_range(hashed_string);
-  if (iter_begin == hash_to_id_.end()) {
-    return ObjectId::InvalidId();
-  } else {
-    do {
-      if (node_manager_.GetObject(iter_begin->second) == object) {
-        return iter_begin->second;
-      }
-      ++iter_begin;
-    } while (iter_begin != iter_end);
-    return ObjectId::InvalidId();
+  ObjectId return_id = ObjectId::InvalidId();
+  while (iter_begin != iter_end) {
+    if (node_manager_.GetObject(iter_begin->second) == object) {
+      return_id = iter_begin->second;
+    }
+    ++iter_begin;
   }
+  return return_id;
 }
 
 template <class StructType, class Hasher>
@@ -96,6 +97,14 @@ bool UnorderedStructManager<StructType, Hasher>::RemoveObject(
     const StructType& object) {
   ObjectId id = GetObjectId(object);
   if (id != ObjectId::InvalidId()) {
+    auto [iter_begin, iter_end] = hash_to_id_.equal_range(DoHash(object));
+    while (iter_begin!=iter_end) {
+      if (node_manager_.GetObject(iter_begin->second) == object) {
+        hash_to_id_.erase(iter_begin);
+        break;
+      }
+      ++iter_begin;
+    }
     return node_manager_.RemoveNode(id);
   }
   return true;
