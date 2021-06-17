@@ -44,9 +44,9 @@ inline void NfaGenerator::NfaNode::RemoveConditionlessTransfer(
 
 std::pair<std::unordered_set<typename NfaGenerator::NfaNodeId>,
           typename NfaGenerator::TailNodeData>
-NfaGenerator::Closure(NfaNodeId id) {
+NfaGenerator::Closure(NfaNodeId production_node_id) {
   std::unordered_set<NfaNodeId> uset_temp =
-      node_manager_.GetIdsReferringSameObject(id);
+      node_manager_.GetIdsReferringSameObject(production_node_id);
   TailNodeData tail_node_data(NotTailNodeTag);
   std::queue<NfaNodeId> q;
   for (auto x : uset_temp) {
@@ -91,11 +91,11 @@ std::pair<std::unordered_set<typename NfaGenerator::NfaNodeId>,
           typename NfaGenerator::TailNodeData>
 NfaGenerator::Goto(NfaNodeId id_src, char c_transform) {
   NfaNode& pointer_node = GetNfaNode(id_src);
-  NfaNodeId id = pointer_node.GetForwardNodesId(c_transform);
-  if (!id.IsValid()) {
+  NfaNodeId production_node_id = pointer_node.GetForwardNodesId(c_transform);
+  if (!production_node_id.IsValid()) {
     return std::pair(std::unordered_set<NfaNodeId>(), NotTailNodeTag);
   }
-  return Closure(id);
+  return Closure(production_node_id);
 }
 
 bool NfaGenerator::NfaNode::MergeNodesWithManager(NfaNode& node_src) {
@@ -135,8 +135,8 @@ inline const NfaGenerator::TailNodeData NfaGenerator::GetTailNodeData(
 }
 
 inline const NfaGenerator::TailNodeData NfaGenerator::GetTailNodeData(
-    NfaNodeId id) {
-  return GetTailNodeData(&GetNfaNode(id));
+    NfaNodeId production_node_id) {
+  return GetTailNodeData(&GetNfaNode(production_node_id));
 }
 // TODO 将流改成printf等函数
 std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>

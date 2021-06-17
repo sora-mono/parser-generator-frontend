@@ -38,7 +38,6 @@ using ProcessFunctionClassId = frontend::common::ObjectManager<
 #define USE_SHIFT_FUNCTION
 #define USE_REDUCT_FUNCTION
 #define USE_USER_DEFINED_FILE
-#define USE_USER_DATA
 #define USE_AMBIGUOUS_GRAMMAR
 
 #endif  // _DEBUG

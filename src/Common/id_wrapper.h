@@ -26,7 +26,7 @@ class BaseIdWrapper {
   static const LabelEnum_ label = label_;
 
   BaseIdWrapper() : id_(invalid_value_) {}
-  explicit BaseIdWrapper(IdType id) : id_(id) {}
+  explicit BaseIdWrapper(IdType production_node_id) : id_(production_node_id) {}
   BaseIdWrapper(const BaseIdWrapper& id_wrapper) : id_(id_wrapper.id_) {}
   BaseIdWrapper& operator=(const BaseIdWrapper& id_wrapper) {
     id_ = id_wrapper.id_;
@@ -49,7 +49,7 @@ class BaseIdWrapper {
     return !operator==(id_wrapper);
   }
   IdType GetThisNodeId() const { return id_; }
-  void SetId(IdType id) { id_ = id; }
+  void SetId(IdType production_node_id) { id_ = production_node_id; }
   void Swap(BaseIdWrapper* id_wrapper) { std::swap(id_, id_wrapper->id_); }
   bool IsValid() const { return id_ != invalid_value_; }
   static constexpr IdType InvalidValue() { return invalid_value_; }
@@ -79,7 +79,7 @@ class ExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   static const LabelEnum label = MyBase::label;
 
   ExplicitIdWrapper() {}
-  explicit ExplicitIdWrapper(IdType id) { MyBase::SetId(id); }
+  explicit ExplicitIdWrapper(IdType production_node_id) { MyBase::SetId(production_node_id); }
   ExplicitIdWrapper(const MyBase& id_wrapper) : MyBase(id_wrapper) {}
   ExplicitIdWrapper& operator=(const MyBase& id_wrapper) {
     MyBase::operator=(id_wrapper);
@@ -120,8 +120,8 @@ class ExplicitIdWrapperCustomizeInvalidValue
   static const LabelEnum label = MyBase::label;
 
   ExplicitIdWrapperCustomizeInvalidValue() {}
-  explicit ExplicitIdWrapperCustomizeInvalidValue(IdType id) {
-    MyBase::SetId(id);
+  explicit ExplicitIdWrapperCustomizeInvalidValue(IdType production_node_id) {
+    MyBase::SetId(production_node_id);
   }
   ExplicitIdWrapperCustomizeInvalidValue(
       const ExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
@@ -172,7 +172,7 @@ class NonExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   static const LabelEnum label = MyBase::label;
 
   NonExplicitIdWrapper() {}
-  NonExplicitIdWrapper(IdType id) { MyBase::SetId(id); }
+  NonExplicitIdWrapper(IdType production_node_id) { MyBase::SetId(production_node_id); }
   NonExplicitIdWrapper(const NonExplicitIdWrapper& id_wrapper) {
     MyBase::SetId(id_wrapper.GetThisNodeId());
   }
@@ -218,7 +218,7 @@ class NonExplicitIdWrapperCustomizeInvalidValue
   static const LabelEnum label = MyBase::label;
 
   NonExplicitIdWrapperCustomizeInvalidValue() {}
-  NonExplicitIdWrapperCustomizeInvalidValue(IdType id) { MyBase::SetId(id); }
+  NonExplicitIdWrapperCustomizeInvalidValue(IdType production_node_id) { MyBase::SetId(production_node_id); }
   NonExplicitIdWrapperCustomizeInvalidValue(
       const NonExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
     MyBase::SetId(id_wrapper.GetThisNodeId());

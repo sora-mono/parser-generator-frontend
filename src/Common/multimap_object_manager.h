@@ -29,7 +29,7 @@ class MultimapObjectManager {
   MultimapObjectManager(MultimapObjectManager&&) = delete;
   ~MultimapObjectManager() {}
   // 获取指向有效对象的引用
-  T& GetObject(ObjectId id);
+  T& GetObject(ObjectId production_node_id);
   // 通过一个id查询引用相同底层对象的所有id
   const std::unordered_set<ObjectId>& GetIdsReferringSameObject(
       ObjectId object_id) {
@@ -43,9 +43,9 @@ class MultimapObjectManager {
   template <class... Args>
   ObjectId EmplaceObject(Args&&... args);
   // 仅删除对象不释放指针指向的内存，返回管理的指针
-  T* RemoveObjectNoDelete(ObjectId id);
+  T* RemoveObjectNoDelete(ObjectId production_node_id);
   // 删除对象并释放对象内存
-  bool RemoveObject(ObjectId id);
+  bool RemoveObject(ObjectId production_node_id);
   // 将id_src合并到id_dst，
   // 合并成功则删除id_src对应的对象（二者不同前提下）
   bool MergeObjects(ObjectId id_dst, ObjectId id_src,
@@ -59,9 +59,9 @@ class MultimapObjectManager {
   // 交换两个类的内容
   void Swap(MultimapObjectManager& manager_other);
   // 设置对象允许合并标志
-  bool SetObjectMergeAllowed(ObjectId id);
+  bool SetObjectMergeAllowed(ObjectId production_node_id);
   // 设置对象禁止合并标志
-  bool SetObjectMergeRefused(ObjectId id);
+  bool SetObjectMergeRefused(ObjectId production_node_id);
   // 设置所有对象允许合并，不会对未分配对象设置允许标记
   void SetAllObjectsMergeAllowed() {
     node_manager_.SetAllObjectsMergeAllowed();
@@ -71,7 +71,7 @@ class MultimapObjectManager {
     node_manager_.SetAllObjectsMergeRefused();
   }
   // 返回id对应对象可合并状态
-  bool CanMerge(ObjectId id);
+  bool CanMerge(ObjectId production_node_id);
 
   // 暂时不写，优化释放后的空间太少
   // void remap_optimization();	// 重映射所有的对象，消除node_manager空余空间
@@ -95,7 +95,7 @@ class MultimapObjectManager {
   Iterator Begin() { return node_manager_.Begin(); }
   Iterator End() { return node_manager_.End(); }
 
-  T& operator[](ObjectId id);
+  T& operator[](ObjectId production_node_id);
 
  private:
   // 通过一个id查询引用相同底层对象的所有id
@@ -105,18 +105,18 @@ class MultimapObjectManager {
   }
   // 将id指向的实际对象重映射为inside_id指向的对象
   // 可以接受未映射的id
-  bool RemapId(ObjectId id, InsideId inside_id);
+  bool RemapId(ObjectId production_node_id, InsideId inside_id);
   // 生成一个可用于分配的ID
   ObjectId CreateId();
   // 增加一条该id对inside_id对象的引用记录，返回增加后引用计数
-  size_t AddReference(ObjectId id, InsideId inside_id);
+  size_t AddReference(ObjectId production_node_id, InsideId inside_id);
   // 移除该id对inside_id对象的引用记录，返回移除后引用计数
   // 引用计数为0时会自动删除对象
-  size_t RemoveReference(ObjectId id, InsideId inside_id);
+  size_t RemoveReference(ObjectId production_node_id, InsideId inside_id);
   // 处理移除内部对象前的步骤，如删除所有句柄到底层ID的引用
   bool PreRemoveInsideObject(InsideId inside_id);
   // 获取句柄对应的底层对象ID
-  InsideId GetInsideId(ObjectId id);
+  InsideId GetInsideId(ObjectId production_node_id);
 
   // 下一个id序号值，只增不减
   ObjectId next_id_index_ = ObjectId(0);
@@ -129,15 +129,15 @@ class MultimapObjectManager {
 
 template <class T>
 inline typename MultimapObjectManager<T>::InsideId
-MultimapObjectManager<T>::GetInsideId(ObjectId id) {
-  auto iter = id_to_index_.find(id);
+MultimapObjectManager<T>::GetInsideId(ObjectId production_node_id) {
+  auto iter = id_to_index_.find(production_node_id);
   assert(iter != id_to_index_.end());
   return iter->second;
 }
 
 template <class T>
-inline T& MultimapObjectManager<T>::GetObject(ObjectId id) {
-  InsideId inside_id = GetInsideId(id);
+inline T& MultimapObjectManager<T>::GetObject(ObjectId production_node_id) {
+  InsideId inside_id = GetInsideId(production_node_id);
   return node_manager_.GetObject(inside_id);
 }
 
@@ -153,28 +153,28 @@ template <class T>
 template <class... Args>
 inline MultimapObjectManager<T>::ObjectId
 MultimapObjectManager<T>::EmplaceObject(Args&&... args) {
-  ObjectId id = CreateId();
+  ObjectId production_node_id = CreateId();
   InsideId inside_id = node_manager_.EmplaceObject(std::forward<Args>(args)...);
-  AddReference(id, inside_id);
-  id_to_index_[id] = inside_id;
-  return id;
+  AddReference(production_node_id, inside_id);
+  id_to_index_[production_node_id] = inside_id;
+  return production_node_id;
 }
 
 template <class T>
-inline bool MultimapObjectManager<T>::SetObjectMergeAllowed(ObjectId id) {
-  InsideId inside_id = GetInsideId(id);
+inline bool MultimapObjectManager<T>::SetObjectMergeAllowed(ObjectId production_node_id) {
+  InsideId inside_id = GetInsideId(production_node_id);
   return node_manager_.SetObjectMergeAllowed(inside_id);
 }
 
 template <class T>
-inline bool MultimapObjectManager<T>::SetObjectMergeRefused(ObjectId id) {
-  InsideId inside_id = GetInsideId(id);
+inline bool MultimapObjectManager<T>::SetObjectMergeRefused(ObjectId production_node_id) {
+  InsideId inside_id = GetInsideId(production_node_id);
   return node_manager_.SetObjectMergeRefused(inside_id);
 }
 
 template <class T>
-inline bool MultimapObjectManager<T>::CanMerge(ObjectId id) {
-  InsideId index = GetInsideId(id);
+inline bool MultimapObjectManager<T>::CanMerge(ObjectId production_node_id) {
+  InsideId index = GetInsideId(production_node_id);
   return node_manager_.CanMerge(index);
 }
 
@@ -215,8 +215,8 @@ inline bool MultimapObjectManager<T>::PreRemoveInsideObject(
   const auto& ids_referring_same_inside_id =
       GetIdsReferringSameObject(inside_id);
   if (ids_referring_same_inside_id.size() != 0) {
-    for (ObjectId id : ids_referring_same_inside_id) {
-      auto iter = id_to_index_.find(id);
+    for (ObjectId production_node_id : ids_referring_same_inside_id) {
+      auto iter = id_to_index_.find(production_node_id);
       id_to_index_.erase(iter);
     }
     objectids_referring_same_object[inside_id].clear();
@@ -225,15 +225,15 @@ inline bool MultimapObjectManager<T>::PreRemoveInsideObject(
 }
 
 template <class T>
-inline T* MultimapObjectManager<T>::RemoveObjectNoDelete(ObjectId id) {
-  InsideId inside_id = GetInsideId(id);
+inline T* MultimapObjectManager<T>::RemoveObjectNoDelete(ObjectId production_node_id) {
+  InsideId inside_id = GetInsideId(production_node_id);
   PreRemoveInsideObject(inside_id);
   return node_manager_.RemovePointer(inside_id);
 }
 
 template <class T>
-inline bool MultimapObjectManager<T>::RemoveObject(ObjectId id) {
-  InsideId inside_id = GetInsideId(id);
+inline bool MultimapObjectManager<T>::RemoveObject(ObjectId production_node_id) {
+  InsideId inside_id = GetInsideId(production_node_id);
   PreRemoveInsideObject(inside_id);
   node_manager_.RemoveObject(inside_id);
   return true;
@@ -249,12 +249,12 @@ inline void MultimapObjectManager<T>::Swap(
 }
 
 template <class T>
-inline bool MultimapObjectManager<T>::RemapId(ObjectId id,
+inline bool MultimapObjectManager<T>::RemapId(ObjectId production_node_id,
                                                    InsideId inside_id) {
   assert(inside_id < node_manager_.Size());
-  InsideId inside_id_old = GetInsideId(id);
-  AddReference(id, inside_id);
-  id_to_index_[id] = inside_id;
+  InsideId inside_id_old = GetInsideId(production_node_id);
+  AddReference(production_node_id, inside_id);
+  id_to_index_[production_node_id] = inside_id;
   return true;
 }
 
@@ -267,19 +267,19 @@ MultimapObjectManager<T>::CreateId() {
 }
 
 template <class T>
-inline size_t MultimapObjectManager<T>::AddReference(ObjectId id,
+inline size_t MultimapObjectManager<T>::AddReference(ObjectId production_node_id,
                                                      InsideId inside_id) {
   assert(inside_id < node_manager_.Size());
-  objectids_referring_same_object[inside_id].insert(id);
+  objectids_referring_same_object[inside_id].insert(production_node_id);
   return objectids_referring_same_object[inside_id].size();
 }
 
 template <class T>
-inline size_t MultimapObjectManager<T>::RemoveReference(ObjectId id,
+inline size_t MultimapObjectManager<T>::RemoveReference(ObjectId production_node_id,
                                                         InsideId inside_id) {
   assert(inside_id < node_manager_.Size());
   auto& ref_uset = objectids_referring_same_object[inside_id];
-  auto iter = ref_uset.find(id);
+  auto iter = ref_uset.find(production_node_id);
   if (iter != ref_uset.end()) {
     if (ref_uset.size() == 1) {
       node_manager_.RemoveObject(inside_id);
@@ -312,8 +312,8 @@ inline void MultimapObjectManager<T>::ShrinkToFit() {
 }
 
 template <class T>
-inline T& MultimapObjectManager<T>::operator[](ObjectId id) {
-  return GetObject(id);
+inline T& MultimapObjectManager<T>::operator[](ObjectId production_node_id) {
+  return GetObject(production_node_id);
 }
 
 }  // namespace frontend::common

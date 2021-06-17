@@ -88,11 +88,11 @@ class DfaGenerator {
   bool AddRegexpression(const std::string& str, const SavedData& saved_data,
                         TailNodePriority priority_tag);
   // 设置遇到文件尾时返回的数据
-  void SetSavedDataEndOfFile(const SavedData& saved_data) {
+  void SetEndOfFileSavedData(const SavedData& saved_data) {
     file_end_saved_data_ = saved_data;
   }
   // 获取遇到文件尾时返回的数据
-  const SavedData& GetSavedDataEndOfFile() { return file_end_saved_data_; }
+  const SavedData& GetEndOfFileSavedData() { return file_end_saved_data_; }
   // 构建DFA
   bool DfaConstruct();
   // 构建最小化DFA
@@ -126,7 +126,7 @@ class DfaGenerator {
   IntermediateDfaNode& GetIntermediateNode(IntermediateNodeId handler) {
     return node_manager_intermediate_node_.GetObject(handler);
   }
-  SetType& GetSetObject(SetId id) { return node_manager_set_.GetObject(id); }
+  SetType& GetSetObject(SetId production_node_id) { return node_manager_set_.GetObject(production_node_id); }
   // 集合转移函数（子集构造法用），
   // 返回值前半部分表示新集合是否已存在，后半部分为对应中间节点句柄
   std::pair<IntermediateNodeId, bool> SetGoto(SetId set_src, char c_transform);

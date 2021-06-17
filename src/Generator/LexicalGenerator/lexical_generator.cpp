@@ -23,12 +23,12 @@ inline LexicalGenerator::ProductionNodeId LexicalGenerator::AddTerminalNode(
     }
     // 需要添加一个新的终结节点
     production_node_id = SubAddTerminalNode(node_symbol_id, body_symbol_id);
-    frontend::generator::dfa_generator::DfaGenerator::SavedData saved_data;
-    saved_data.id = production_node_id;
-    saved_data.node_type = ProductionNodeType::kTerminalNode;
-    saved_data.process_function_class_id = ProcessFunctionClassId::InvalidId();
+    frontend::generator::dfa_generator::DfaGenerator::SavedData saved_data_;
+    saved_data_.production_node_id = production_node_id;
+    saved_data_.node_type = ProductionNodeType::kTerminalNode;
+    saved_data_.process_function_class_id = ProcessFunctionClassId::InvalidId();
     // 向DFA生成器注册关键词
-    dfa_generator_.AddRegexpression(body_symbol, saved_data, node_priority);
+    dfa_generator_.AddRegexpression(body_symbol, saved_data_, node_priority);
   } else {
     // 该终结节点的内容已存在，不应重复添加
     production_node_id = GetProductionNodeIdFromBodySymbolId(body_symbol_id);
@@ -62,7 +62,7 @@ inline LexicalGenerator::ProductionNodeId LexicalGenerator::SubAddTerminalNode(
 #ifdef USE_AMBIGUOUS_GRAMMAR
 inline LexicalGenerator::ProductionNodeId LexicalGenerator::AddOperatorNode(
     const std::string& operator_symbol, AssociatityType associatity_type,
-    PriorityLevel priority_level, ProcessFunctionClassId class_id) {
+    OperatorPriority priority_level, ProcessFunctionClassId class_id) {
   auto [operator_symbol_id, inserted] = AddBodySymbol(operator_symbol);
   assert(operator_symbol_id.IsValid());
   if (!inserted) [[unlikely]] {
@@ -80,15 +80,15 @@ inline LexicalGenerator::ProductionNodeId LexicalGenerator::AddOperatorNode(
   ProductionNodeId operator_node_id = SubAddOperatorNode(
       operator_symbol_id, associatity_type, priority_level, class_id);
   assert(operator_node_id.IsValid());
-  frontend::generator::dfa_generator::DfaGenerator::SavedData saved_data;
-  saved_data.id = operator_node_id;
-  saved_data.node_type = ProductionNodeType::kOperatorNode;
-  saved_data.process_function_class_id = class_id;
-  saved_data.associate_type = associatity_type;
-  saved_data.priority = priority_level;
+  frontend::generator::dfa_generator::DfaGenerator::SavedData saved_data_;
+  saved_data_.production_node_id = operator_node_id;
+  saved_data_.node_type = ProductionNodeType::kOperatorNode;
+  saved_data_.process_function_class_id = class_id;
+  saved_data_.associate_type = associatity_type;
+  saved_data_.priority = priority_level;
   // 向DFA生成器注册关键词
   dfa_generator_.AddKeyword(
-      operator_symbol, saved_data,
+      operator_symbol, saved_data_,
       frontend::generator::dfa_generator::DfaGenerator::TailNodePriority(
           priority_level));
   return operator_node_id;
@@ -96,7 +96,7 @@ inline LexicalGenerator::ProductionNodeId LexicalGenerator::AddOperatorNode(
 
 inline LexicalGenerator::ProductionNodeId LexicalGenerator::SubAddOperatorNode(
     SymbolId node_symbol_id, AssociatityType associatity_type,
-    PriorityLevel priority_level, ProcessFunctionClassId class_id) {
+    OperatorPriority priority_level, ProcessFunctionClassId class_id) {
   ProductionNodeId node_id =
       manager_nodes_.EmplaceObject<OperatorProductionNode>(
           node_symbol_id, node_symbol_id, associatity_type, priority_level,
@@ -198,8 +198,8 @@ LexicalGenerator::GetProductionNodeIdFromNodeSymbol(SymbolId symbol_id) {
   return iter->second;
 }
 
-inline void LexicalGenerator::SetItemCoreId(const CoreItem& core_item,
-                                            CoreId core_id) {
+inline void LexicalGenerator::SetItemToCoreIdMapping(const CoreItem& core_item,
+                                                     CoreId core_id) {
   assert(core_id.IsValid());
   auto [production_node_id, production_body_id, point_index] = core_item;
   GetProductionNode(production_node_id)
@@ -212,7 +212,7 @@ LexicalGenerator::AddItemToCore(const CoreItem& core_item, CoreId core_id) {
   auto iterator_and_state = GetCore(core_id).AddItem(core_item);
   if (iterator_and_state.second == true) {
     // 以前不存在则添加映射记录
-    SetItemCoreId(core_item, core_id);
+    SetItemToCoreIdMapping(core_item, core_id);
   }
   return iterator_and_state;
 }
@@ -243,9 +243,8 @@ LexicalGenerator::GetItemCoreIdOrInsert(const CoreItem& core_item,
       core_id = AddNewCore();
     }
 #ifdef _DEBUG
-    bool result = AddItemToCore(core_item, core_id).second;
     // 必须插入
-    assert(result == true);
+    assert(AddItemToCore(core_item, core_id).second);
 #else
     AddItemToCore(core_item, core_id);
 #endif  // _DEBUG
@@ -282,8 +281,7 @@ LexicalGenerator::GetNonTerminalNodeFirstNodes(
   return return_set;
 }
 
- std::unordered_set<LexicalGenerator::ProductionNodeId>
-LexicalGenerator::First(
+std::unordered_set<LexicalGenerator::ProductionNodeId> LexicalGenerator::First(
     ProductionNodeId production_node_id, ProductionBodyId production_body_id,
     PointIndex point_index,
     const std::unordered_set<ProductionNodeId>& next_node_ids) {
@@ -349,8 +347,18 @@ void LexicalGenerator::CoreClosure(CoreId core_id) {
         GetForwardNodeIds(production_node_id, production_body_id, point_index);
     // 获取待生成节点的所有向前看节点
     std::unordered_set<ProductionNodeId> forward_nodes =
-        First(production_node_id, production_body_id,
-              point_index, forward_nodes_second_part);
+        First(production_node_id, production_body_id, point_index,
+              forward_nodes_second_part);
+    if (next_production_node.CouldBeEmpty()) {
+      // 下一个移入的节点可以为空
+      auto [could_be_empty_item_iter, item_inserted] = AddItemToCore(
+          CoreItem(production_node_id, production_body_id, ++point_index),
+          core_id);
+      if (item_inserted) {
+        // 新插入了项，加入队列处理
+        items_waiting_process.push(&*could_be_empty_item_iter);
+      }
+    }
     const BodyContainerType& bodys = next_production_node.GetAllBody();
     for (size_t i = 0; i < bodys.size(); i++) {
       // 将要展开的节点的每个产生式体加到该项集里，点在最左边
@@ -413,7 +421,7 @@ LexicalGenerator::GetProductionBodyNextNextNodeId(
     ProductionNodeId production_node_id, ProductionBodyId production_body_id,
     PointIndex point_index) {
   return GetProductionNodeIdInBody(production_node_id, production_body_id,
-                                   PointIndex(point_index + 1));
+                                   ++point_index);
 }
 
 std::pair<LexicalGenerator::CoreId, bool> LexicalGenerator::ItemGoto(
@@ -461,8 +469,8 @@ std::pair<LexicalGenerator::CoreId, bool> LexicalGenerator::Goto(
     return std::make_pair(
         GetGotoCacheEntry(core_id_src, transform_production_node_id), false);
   }
-  // 缓存无效，清除该core_id对应所有的缓存
-  RemoveGotoCacheEntry(core_id_src);
+  //// 缓存无效，清除该core_id对应所有的缓存
+  // RemoveGotoCacheEntry(core_id_src);
   // 是否新建core标志
   bool core_constructed = false;
   CoreId core_id_dst = CoreId::InvalidId();
@@ -511,6 +519,7 @@ std::pair<LexicalGenerator::CoreId, bool> LexicalGenerator::Goto(
 }
 
 void LexicalGenerator::SpreadLookForwardSymbol(CoreId core_id) {
+  CoreClosure(core_id);
   const auto& items = GetCoreItems(core_id);
   for (auto& item : items) {
     auto [production_node_id, production_body_id, point_index] = item;
@@ -586,21 +595,22 @@ void LexicalGenerator::RemapParsingTableEntryId(
         moved_entry_to_new_entry_id) {
   for (auto& entry : lexical_config_parsing_table_) {
     //处理终结节点的动作
-    for (auto& action_and_target : entry.GetAllTerminalNodeActionAndTarget()) {
+    for (auto& action_and_attached_data :
+         entry.GetAllTerminalNodeActionAndAttachedData()) {
       ParsingTableEntryId old_entry_id, new_entry_id;
-      switch (action_and_target.second.first) {
+      switch (action_and_attached_data.second.action_type) {
         case ActionType::kAccept:
         case ActionType::kError:
         case ActionType::kReduction:
+          // 这三种操作携带的附属数据不含entryID
           break;
         case ActionType::kShift:
-          old_entry_id = *std::get_if<ParsingTableEntryId>(
-              &action_and_target.second.second);
+          old_entry_id = action_and_attached_data.second.GetShiftAttachedData()
+                             .next_entry_id;
           new_entry_id = moved_entry_to_new_entry_id.find(old_entry_id)->second;
           // 更新为新的条目ID
-          entry.SetTerminalNodeActionAndTarget(action_and_target.first,
-                                               action_and_target.second.first,
-                                               new_entry_id);
+          entry.SetTerminalNodeActionAndAttachedData(
+              action_and_attached_data.first, ActionType::kShift, new_entry_id);
           break;
         default:
           assert(false);
@@ -626,19 +636,22 @@ void LexicalGenerator::ParsingTableMergeOptimize() {
       static_cast<size_t>(ProductionNodeType::kOperatorNode);
   size_t nonterminal_index =
       static_cast<size_t>(ProductionNodeType::kNonTerminalNode);
-  for (auto id : classified_production_node_ids[operator_index]) {
+  for (auto production_node_id :
+       classified_production_node_ids[operator_index]) {
     // 将所有运算符类节点添加到终结节点表里，构成完整的终结节点表
-    classified_production_node_ids[terminal_index].push_back(id);
+    classified_production_node_ids[terminal_index].push_back(
+        production_node_id);
   }
   std::vector<std::vector<ParsingTableEntryId>> classified_ids =
       ParsingTableEntryClassify(
           classified_production_node_ids[terminal_index],
           classified_production_node_ids[nonterminal_index]);
-  // 存储被删除的旧条目到相同条目的映射
+  // 存储所有旧条目到新条目的映射
   std::unordered_map<ParsingTableEntryId, ParsingTableEntryId>
       old_entry_id_to_new_entry_id;
   for (auto& entry_ids : classified_ids) {
-    // 添加被删除的旧条目到相同条目的映射
+    // 添加被合并的旧条目到相同条目的映射
+    // 重复的条目只保留返回数组中的第一条，其余的全部映射到该条
     ParsingTableEntryId new_id = entry_ids.front();
     for (auto old_id : entry_ids) {
       assert(old_entry_id_to_new_entry_id.find(old_id) ==
@@ -652,37 +665,41 @@ void LexicalGenerator::ParsingTableMergeOptimize() {
   // 开始合并
   assert(lexical_config_parsing_table_.size() > 0);
   // 下一个要处理的条目
-  ParsingTableEntryId index_next_process_entry(0);
+  ParsingTableEntryId next_process_entry_index(0);
   // 下一个插入位置
-  ParsingTableEntryId index_next_insert(0);
+  ParsingTableEntryId next_insert_position_index(0);
   // 类似快排分类的算法
-  // 寻找被合并的条目
-  while (index_next_process_entry < lexical_config_parsing_table_.size()) {
-    if (old_entry_id_to_new_entry_id.find(index_next_process_entry) ==
+  // 寻找没有被合并的条目并紧凑排列在vector低下标一侧
+  while (next_process_entry_index < lexical_config_parsing_table_.size()) {
+    if (old_entry_id_to_new_entry_id.find(next_process_entry_index) ==
         old_entry_id_to_new_entry_id.end()) {
       // 该条目保留
-      if (index_next_insert != index_next_process_entry) {
-        // 需要移动
-        lexical_config_parsing_table_[index_next_insert] =
-            std::move(lexical_config_parsing_table_[index_next_process_entry]);
+      if (next_insert_position_index != next_process_entry_index) {
+        // 需要移动到新位置保持vector紧凑
+        lexical_config_parsing_table_[next_insert_position_index] =
+            std::move(lexical_config_parsing_table_[next_process_entry_index]);
       }
       // 重映射保留条目的新位置
-      moved_entry_to_new_entry_id[index_next_process_entry] = index_next_insert;
-      ++index_next_insert;
+      moved_entry_to_new_entry_id[next_process_entry_index] =
+          next_insert_position_index;
+      ++next_insert_position_index;
     }
-    ++index_next_process_entry;
+    ++next_process_entry_index;
   }
   for (auto& item : old_entry_id_to_new_entry_id) {
-    // 重映射已删除条目到新条目
+    // 重映射已被合并条目到保留的唯一条目
+    // 与重映射保留条目的新位置的操作一起构成完整的条目重映射表
+    // 所有旧条目都拥有自己对应的新条目，被合并的条目映射到
     assert(moved_entry_to_new_entry_id.find(item.second) !=
            moved_entry_to_new_entry_id.end());
+    // item.first是旧entry的ID，item.second是保留下来的entry的ID
     moved_entry_to_new_entry_id[item.first] =
         moved_entry_to_new_entry_id[item.second];
   }
   // 至此每一个条目都有了新条目的映射
   // 释放多余空间
   old_entry_id_to_new_entry_id.clear();
-  lexical_config_parsing_table_.resize(index_next_insert + 1);
+  lexical_config_parsing_table_.resize(next_insert_position_index);
   // 将所有旧ID更新为新ID
   RemapParsingTableEntryId(moved_entry_to_new_entry_id);
 }
@@ -742,7 +759,9 @@ void LexicalGenerator::AnalysisProductionConfig(const std::string& file_name) {
       case 3:
         // 普通产生式定义区
         AnalysisNonTerminalProduction(temp);
+        break;
       default:
+        assert(false);
         break;
     }
   }
@@ -801,21 +820,10 @@ void LexicalGenerator::AnalysisOperatorProduction(const std::string& str) {
     return;
   }
 
-#ifdef USE_INIT_FUNCTION
-  // 运算符初始化函数
-  operator_data.init_function = match_result[4].str();
-#endif  // USE_INIT_FUNCTION
-
-#ifdef USE_SHIFT_FUNCTION
-  operator_data.shift_functions = GetFunctionsName(match_result[5].str());
-#endif  // USE_SHIFT_FUNCTION
-
-#ifdef USE_REDUCT_FUNCTION
-  operator_data.reduct_function = match_result[6].str();
-#endif  // USE_REDUCT_FUNCTION
+  operator_data.reduct_function = match_result[4].str();
 
 #ifdef USE_USER_DEFINED_FILE
-  operator_data.include_files = GetFilesName(match_result[7].str());
+  operator_data.include_files = GetFilesName(match_result[5].str());
 #endif  // USE_USER_DEFINED_FILE
   PrintOperatorNodeConstructData(std::move(operator_data));
 }
@@ -839,17 +847,9 @@ void lexicalgenerator::LexicalGenerator::AnalysisNonTerminalProduction(
   } else {
     node_data.use_same_process_function_class = false;
   }
-#ifdef USE_INIT_FUNCTION
-  node_data.init_function = match_result[3].str();
-#endif  // USE_INIT_FUNCTION
-#ifdef USE_SHIFT_FUNCTION
-  node_data.shift_functions = GetFunctionsName(match_result[4].str());
-#endif  // USE_SHIFT_FUNCTION
-#ifdef USE_REDUCT_FUNCTION
-  node_data.reduct_function = match_result[5].str();
-#endif  // USE_REDUCT_FUNCTION
+  node_data.reduct_function = match_result[3].str();
 #ifdef USE_USER_DEFINED_FILE
-  node_data.include_files = GetFilesName(match_result[6].str());
+  node_data.include_files = GetFilesName(match_result[4].str());
 #endif  // USE_USER_DEFINED_FILE
   PrintNonTerminalNodeConstructData(std::move(node_data));
 }
@@ -889,7 +889,7 @@ void LexicalGenerator::ParsingTableConstruct() {
                  production_node_id, production_body_id, point_index)) {
           ProcessFunctionClassId class_id =
               GetProcessFunctionClass(production_node_id, production_body_id);
-          entry.SetTerminalNodeActionAndTarget(
+          entry.SetTerminalNodeActionAndAttachedData(
               forward_node_id, ActionType::kReduction,
               std::make_pair(production_node_id, class_id));
         }
@@ -910,7 +910,7 @@ void LexicalGenerator::ParsingTableConstruct() {
         break;
       case ProductionNodeType::kTerminalNode:
       case ProductionNodeType::kOperatorNode:
-        entry->SetTerminalNodeActionAndTarget(
+        entry->SetTerminalNodeActionAndAttachedData(
             next_shift_node_id, ActionType::kShift, target_entry_id);
         break;
       default:
@@ -1092,6 +1092,7 @@ void LexicalGenerator::PrintOperatorNodeConstructData(OperatorData&& data) {
   if (data.associatity_type == "L") {
     data.associatity_type = "AssociatityType::kLeftAssociate";
   } else {
+    assert(data.associatity_type == "R");
     data.associatity_type = "AssociatityType::kRightAssociate";
   }
   fprintf(GetConfigConstructFilePointer(),
@@ -1110,13 +1111,13 @@ void LexicalGenerator::PrintOperatorNodeConstructData(OperatorData&& data) {
   fprintf(function_file, "// 运算符： %s\n// 结合性：%s\n// 优先级：%s\n",
           data.operator_symbol.c_str(), data.associatity_type.c_str(),
           data.priority.c_str());
-  PrintProcessFunction(function_file, data);
-  fprintf(function_file, " private:\n");
 #ifdef USE_USER_DEFINED_FILE
   for (size_t i = 0; i < data.include_files.size(); i++) {
     fprintf(function_file, "  #include\"%s\"\n", data.include_files[i].c_str());
   }
 #endif  // USE_USER_DEFINED_FILE
+  PrintProcessFunction(function_file, data);
+  fprintf(function_file, " private:\n");
   fprintf(function_file, "}\n");
 }
 
@@ -1300,7 +1301,8 @@ LexicalGenerator::NonTerminalProductionNode::GetProductionNodeInBody(
 inline LexicalGenerator::ParsingTableEntry&
 LexicalGenerator::ParsingTableEntry::operator=(
     ParsingTableEntry&& parsing_table_entry) {
-  action_and_target_ = std::move(parsing_table_entry.action_and_target_);
+  action_and_attached_data_ =
+      std::move(parsing_table_entry.action_and_attached_data_);
   nonterminal_node_transform_table_ =
       std::move(parsing_table_entry.nonterminal_node_transform_table_);
   return *this;
@@ -1341,13 +1343,10 @@ const std::regex LexicalGenerator::terminal_node_regex_(
     R"!(^\s*([a-zA-Z][a-zA-Z0-9_]*)\s*->\s*(\S+)\s*$)!");
 const std::regex LexicalGenerator::operator_node_regex_(
     R"(^\s*(\S+)\s*@\s*([1-9][0-9]*)\s*@\s*([LR])\s*\{\s*([a-zA-Z_])"
-    R"([a-zA-Z0-9_]*)?\s*,?\s*(?:\[\s*([^\]]+)\s*\])?\s*,?\s*([a-zA-Z_])"
-    R"([a-zA-Z0-9_]*)?\s*\}\s*(?:\{\s*([^\}]+)\s*\})?\s*$)");
+    R"([a-zA-Z0-9_]*)\s*\}\s*(?:\{\s*([^\}]+)\s*\})?\s*$)");
 const std::regex LexicalGenerator::nonterminal_node_regex_(
     R"(^\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*->\s*([^=]+)\s*(?:=>\s*\{\s*)"
-    R"(((?:[a-zA-Z_][a-zA-Z0-9_]*)|@)?\s*,?\s*(?:\[\s*([^\]]+)\s*\])?)"
-    R"(\s*,?\s*((?:[a-zA-Z_][a-zA-Z0-9_]*)|@)?\s*\})?\s*(?:\{\s*(.+)\s*\})?)"
-    R"(\s*$)");
+    R"(([a-zA-Z_][a-zA-Z0-9_]*)\s*\})\s*(?:\{\s*([^\}]+)\s*\})?\s*$)");
 const std::regex LexicalGenerator::keyword_regex_(R"!("(\S*)")!");
 const std::regex LexicalGenerator::body_symbol_regex_(
     R"((")?([a-zA-Z_][a-zA-Z0-9_]*)(\1))");

@@ -27,7 +27,7 @@ class NfaGenerator {
   // 用户定义数据（由用户传入，在检测到相应节点时返回）
   struct SavedData {
     bool operator==(const SavedData& saved_data) const {
-      return (id == saved_data.id && node_type == saved_data.node_type &&
+      return (production_node_id == saved_data.production_node_id && node_type == saved_data.node_type &&
               process_function_class_id == saved_data.process_function_class_id
 #ifdef USE_AMBIGUOUS_GRAMMAR
               && associate_type == saved_data.associate_type &&
@@ -40,14 +40,14 @@ class NfaGenerator {
     }
     // 产生式节点ID，前向声明无法引用嵌套类，所以无法引用源类型
     // 应保证ID是唯一的，且一个ID对应的其余项唯一
-    size_t id;
+    size_t production_node_id;
     // 节点类型
     frontend::common::ProductionNodeType node_type;
-    // 包装用户定义的函数类的对象的ID
-    frontend::common::ProcessFunctionClassId process_function_class_id;
 
-    //以下两项仅对二义性文法的操作符有效
+    //以下三项仅对二义性文法的操作符有效
 #ifdef USE_AMBIGUOUS_GRAMMAR
+    // 包装用户定义的函数类的对象的ID，应有两个函数
+    frontend::common::ProcessFunctionClassId process_function_class_id;
     // 结合性
     frontend::common::AssociatityType associate_type;
     // 优先级
@@ -104,8 +104,8 @@ class NfaGenerator {
   NfaNodeId GetHeadNfaNodeId() { return head_node_id_; }
 
   const TailNodeData GetTailNodeData(NfaNode* pointer);
-  const TailNodeData GetTailNodeData(NfaNodeId id);
-  NfaNode& GetNfaNode(NfaNodeId id) { return node_manager_.GetObject(id); }
+  const TailNodeData GetTailNodeData(NfaNodeId production_node_id);
+  NfaNode& GetNfaNode(NfaNodeId production_node_id) { return node_manager_.GetObject(production_node_id); }
   // 解析正则并添加到已有NFA中，返回生成的自动机的头结点和尾节点，自动处理结尾的范围限制符号
   std::pair<NfaNodeId, NfaNodeId> RegexConstruct(
       std::istream& in, const TailNodeData& tag, bool add_to_NFA_head = true,
@@ -116,7 +116,7 @@ class NfaGenerator {
   // 合并优化，降低节点数以降低子集构造法集合大小，直接使用NFA也可以降低成本
   void MergeOptimization();
 
-  std::pair<std::unordered_set<NfaNodeId>, TailNodeData> Closure(NfaNodeId id);
+  std::pair<std::unordered_set<NfaNodeId>, TailNodeData> Closure(NfaNodeId production_node_id);
   // 返回goto后的节点的闭包
   std::pair<std::unordered_set<NfaNodeId>, TailNodeData> Goto(NfaNodeId id_src,
                                                               char c_transform);
@@ -134,8 +134,8 @@ class NfaGenerator {
  private:
   bool RemoveTailNode(NfaNode* pointer);
   bool AddTailNode(NfaNode* pointer, const TailNodeData& tag);
-  bool AddTailNode(NfaNodeId id, const TailNodeData& tag) {
-    return AddTailNode(&GetNfaNode(id), tag);
+  bool AddTailNode(NfaNodeId production_node_id, const TailNodeData& tag) {
+    return AddTailNode(&GetNfaNode(production_node_id), tag);
   }
   // 生成可选字符序列，会读取]后的*,+,?等限定符
   std::pair<NfaNodeId, NfaNodeId> CreateSwitchTree(std::istream& in);
@@ -154,11 +154,11 @@ bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
 // 使用需满足结构体内注释的条件
 inline bool operator<(const NfaGenerator::SavedData& left,
                       const NfaGenerator::SavedData& right) {
-  return left.id < right.id;
+  return left.production_node_id < right.production_node_id;
 }
 inline bool operator>(const NfaGenerator::SavedData& left,
                       const NfaGenerator::SavedData& right) {
-  return left.id > right.id;
+  return left.production_node_id > right.production_node_id;
 }
 
 }  // namespace frontend::generator::dfa_generator::nfa_generator

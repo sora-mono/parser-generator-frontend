@@ -14,10 +14,10 @@ bool DfaMachine::SetInputFile(const std::string filename) {
   }
 }
 
-DfaMachine::ReturnData DfaMachine::GetNextNode() {
+DfaMachine::ReturnData DfaMachine::GetNextWord() {
   std::string symbol;
   ReturnData return_data;
-  return_data.line = line_;
+  return_data.line_ = line_;
   // 当前状态转移表ID
   TransformArrayId transform_array_id = start_id_;
   while (true) {
@@ -25,9 +25,6 @@ DfaMachine::ReturnData DfaMachine::GetNextNode() {
     if (ferror(file_)) {
       fprintf(stderr, "读取输入文件出错，请检查文件\n");
       abort();
-    }
-    if (feof(file_)) {
-      break;
     }
     // 判断特殊情况
     switch (c) {
@@ -47,21 +44,19 @@ DfaMachine::ReturnData DfaMachine::GetNextNode() {
     symbol += c;
     TransformArrayId next_id = dfa_config_[transform_array_id].first[c];
     if (!next_id.IsValid()) {
-      goto Return;
+      break;
     } else {
       transform_array_id = next_id;
     }
   }
 Return:
-  return_data.line = GetLine();
-  if (transform_array_id == start_id_) {
+  if (feof(file_)) {
     // 到达文件结尾
-    return_data.saved_data = GetSavedDataEndOfFile();
+    return ReturnData(GetEndOfFileSavedData(), GetLine(), std::move(symbol));
   } else {
-    return_data.symbol = std::move(symbol);
-    return_data.saved_data = dfa_config_[transform_array_id].second;
+    return ReturnData(dfa_config_[transform_array_id].second, GetLine(),
+                      std::move(symbol));
   }
-  return return_data;
 }
 
 }  // namespace frontend::parser::dfamachine

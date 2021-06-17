@@ -37,7 +37,7 @@ class UnorderedStructManager {
   ~UnorderedStructManager() {}
 
   // 返回指向管理的对象的引用
-  StructType& GetObject(ObjectId id) { return node_manager_.GetObject(id); }
+  StructType& GetObject(ObjectId production_node_id) { return node_manager_.GetObject(production_node_id); }
   // 返回值前半部分为对象ID，后半部分为是否执行了插入操作
   template <class T>
   std::pair<ObjectId, bool> AddObject(T&& object);
@@ -48,7 +48,7 @@ class UnorderedStructManager {
     hash_to_id_.clear();
   }
   void ShrinkToFit() { node_manager_.ShrinkToFit(); }
-  std::string& operator[](ObjectId id) { return GetObject(id); }
+  std::string& operator[](ObjectId production_node_id) { return GetObject(production_node_id); }
 
  private:
   ObjectHashType DoHash(const StructType& object) {
@@ -66,13 +66,13 @@ inline std::pair<typename UnorderedStructManager<StructType, Hasher>::ObjectId,
                  bool>
 UnorderedStructManager<StructType, Hasher>::AddObject(T&& object) {
   ObjectHashType hashed_object(DoHash(object));
-  ObjectId id = GetObjectId(object);
-  if (id == ObjectId::InvalidId()) {
-    id = node_manager_.EmplaceObject(std::forward<T>(object));
-    hash_to_id_.insert(std::make_pair(hashed_object, id));
-    return std::make_pair(id, true);
+  ObjectId production_node_id = GetObjectId(object);
+  if (production_node_id == ObjectId::InvalidId()) {
+    production_node_id = node_manager_.EmplaceObject(std::forward<T>(object));
+    hash_to_id_.insert(std::make_pair(hashed_object, production_node_id));
+    return std::make_pair(production_node_id, true);
   } else {
-    return std::make_pair(id, false);
+    return std::make_pair(production_node_id, false);
   }
 }
 
@@ -95,8 +95,8 @@ UnorderedStructManager<StructType, Hasher>::GetObjectId(
 template <class StructType, class Hasher>
 bool UnorderedStructManager<StructType, Hasher>::RemoveObject(
     const StructType& object) {
-  ObjectId id = GetObjectId(object);
-  if (id != ObjectId::InvalidId()) {
+  ObjectId production_node_id = GetObjectId(object);
+  if (production_node_id != ObjectId::InvalidId()) {
     auto [iter_begin, iter_end] = hash_to_id_.equal_range(DoHash(object));
     while (iter_begin!=iter_end) {
       if (node_manager_.GetObject(iter_begin->second) == object) {
@@ -105,7 +105,7 @@ bool UnorderedStructManager<StructType, Hasher>::RemoveObject(
       }
       ++iter_begin;
     }
-    return node_manager_.RemoveNode(id);
+    return node_manager_.RemoveNode(production_node_id);
   }
   return true;
 }
