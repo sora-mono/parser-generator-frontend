@@ -35,14 +35,14 @@ bool LexicalMachine::Parse(const std::string& filename) {
 
 void LexicalMachine::TerminalWordWaitingShift(
     std::queue<ParsingData>* parsing_data, ParsingData* parsing_data_now) {
-  const ActionAndAttachedData& action_and_attached_data = GetActionAndTarget(
+  const ActionAndAttachedData& action_and_attached_data = *GetActionAndTarget(
       parsing_data_now->parsing_table_entry_id,
       ProductionNodeId(
           GetWaitingShiftWordData().saved_data_.production_node_id));
-  switch (action_and_attached_data.action_type) {
+  switch (action_and_attached_data.action_type_) {
     [[unlikely]] case ActionType::kAccept : break;
     [[unlikely]] case ActionType::kError : break;
-    case ActionType::kReduction:
+    case ActionType::kReduct:
       TerminalWordReduct(action_and_attached_data, parsing_data,
                          parsing_data_now);
       break;
@@ -52,6 +52,11 @@ void LexicalMachine::TerminalWordWaitingShift(
           GetWaitingShiftWordData().saved_data_.production_node_id);
       TerminalWordShift(action_and_attached_data, parsing_data,
                         parsing_data_now);
+      break;
+    case ActionType::kShiftReduct:
+      // 待移入的单词必须是运算符，运算符优先级必须不为0
+      assert(GetWaitingShiftWordData().saved_data_.priority != 0);
+
       break;
     default:
       assert(false);
@@ -65,14 +70,13 @@ inline void LexicalMachine::TerminalWordShift(
   // 将当前的状态压入栈，需要调用者设置移入的节点号
   parsing_data->push(*parsing_data_now);
   // 更新状态为移入该节点后到达的条目
-  parsing_data_now->parsing_table_entry_id = action_and_target.GetShiftAttachedData().next_entry_id;
+  parsing_data_now->parsing_table_entry_id =
+      action_and_target.GetShiftAttachedData().next_entry_id_;
   GetNextWord();
 }
 
 void LexicalMachine::TerminalWordReduct(
     const ActionAndAttachedData& action_and_target,
-    std::queue<ParsingData>* parsing_data, ParsingData* parsing_data_now) {
-
-}
+    std::queue<ParsingData>* parsing_data, ParsingData* parsing_data_now) {}
 
 }  // namespace frontend::parser::lexicalmachine

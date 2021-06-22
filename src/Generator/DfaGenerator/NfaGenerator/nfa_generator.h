@@ -28,7 +28,7 @@ class NfaGenerator {
   struct SavedData {
     bool operator==(const SavedData& saved_data) const {
       return (production_node_id == saved_data.production_node_id && node_type == saved_data.node_type &&
-              process_function_class_id == saved_data.process_function_class_id
+              process_function_class_id_ == saved_data.process_function_class_id_
 #ifdef USE_AMBIGUOUS_GRAMMAR
               && associate_type == saved_data.associate_type &&
               priority == saved_data.priority
@@ -47,7 +47,7 @@ class NfaGenerator {
     //以下三项仅对二义性文法的操作符有效
 #ifdef USE_AMBIGUOUS_GRAMMAR
     // 包装用户定义的函数类的对象的ID，应有两个函数
-    frontend::common::ProcessFunctionClassId process_function_class_id;
+    frontend::common::ProcessFunctionClassId process_function_class_id_;
     // 结合性
     frontend::common::AssociatityType associate_type;
     // 优先级

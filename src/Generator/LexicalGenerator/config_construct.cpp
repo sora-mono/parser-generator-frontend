@@ -1,3 +1,5 @@
+#include"lexical_generator.h"
+
 namespace frontend::generator::lexicalgenerator {
 void LexicalGenerator::ConfigConstruct() {
 }

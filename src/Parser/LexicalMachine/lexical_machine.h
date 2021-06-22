@@ -82,12 +82,13 @@ class LexicalMachine {
     return root_parsing_entry_id_;
   }
   // 获取用户定义的处理操作的对象
-  ProcessFunctionInterface& GetProcessFunctionClass(
+  ProcessFunctionInterface& GetProcessFunctionClassId(
     ProcessFunctionClassId class_id) {
     return manager_process_function_class_[class_id];
   }
   // 获取在该终结节点条件下的动作（移入/规约）和附属数据
-  const ActionAndAttachedData& GetActionAndTarget(ParsingTableEntryId src_entry_id,
+  // 不存在该转移条件则返回空指针
+  const ActionAndAttachedData* GetActionAndTarget(ParsingTableEntryId src_entry_id,
                                             ProductionNodeId node_id) const {
     assert(src_entry_id.IsValid());
     return parsing_table_[src_entry_id].AtTerminalNode(node_id);
@@ -96,7 +97,7 @@ class LexicalMachine {
   ParsingTableEntryId GetNextEntryId(ParsingTableEntryId src_entry_id,
                                      ProductionNodeId node_id) const {
     assert(src_entry_id.IsValid());
-    return parsing_table_[src_entry_id].ShiftNonTerminalNode(node_id);
+    return parsing_table_[src_entry_id].AtNonTerminalNode(node_id);
   }
   // 处理待移入单词是终结节点的情况
   // 自动处理移入和归并，归并后自动执行一次移入非终结节点和GetNextWord()

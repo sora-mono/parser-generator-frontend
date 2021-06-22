@@ -122,7 +122,7 @@ class MultimapObjectManager {
   ObjectId next_id_index_ = ObjectId(0);
   ObjectManager<T> node_manager_;
   // 储存指向同一个底层对象的id
-  std::vector<std::unordered_set<ObjectId>> objectids_referring_same_object;
+  std::unordered_map<InsideId,std::unordered_set<ObjectId>> objectids_referring_same_object;
   // 对底层id的另一层封装，使本类支持多个id指向同一个对象
   std::unordered_map<ObjectId, InsideId> id_to_index_;
 };
