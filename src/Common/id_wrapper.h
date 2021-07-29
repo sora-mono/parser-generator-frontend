@@ -1,6 +1,10 @@
 #ifndef COMMON_ID_WRAPPER_H_
 #define COMMON_ID_WRAPPER_H_
 
+#include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/access.hpp>
+#include <boost/serialization/export.hpp>
+
 namespace frontend::common {
 // 该头文件包含两个生成不同的ID包装类的模板类
 // 占用空间与不包装相同，编译器优化够好则不会导致额外的开销
@@ -32,7 +36,7 @@ class BaseIdWrapper {
     id_ = id_wrapper.id_;
     return *this;
   }
-  ~BaseIdWrapper() {}
+  virtual ~BaseIdWrapper() {}
 
   operator IdType&() { return const_cast<IdType&>(operator const IdType_&()); }
   operator const IdType&() const { return id_; }
@@ -59,6 +63,13 @@ class BaseIdWrapper {
   }
 
  private:
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, const unsigned int version) {
+    ar& id_;
+  }
+
   IdType id_;
 };
 
@@ -79,7 +90,9 @@ class ExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   static const LabelEnum label = MyBase::label;
 
   ExplicitIdWrapper() {}
-  explicit ExplicitIdWrapper(IdType production_node_id) { MyBase::SetId(production_node_id); }
+  explicit ExplicitIdWrapper(IdType production_node_id) {
+    MyBase::SetId(production_node_id);
+  }
   ExplicitIdWrapper(const MyBase& id_wrapper) : MyBase(id_wrapper) {}
   ExplicitIdWrapper& operator=(const MyBase& id_wrapper) {
     MyBase::operator=(id_wrapper);
@@ -100,6 +113,13 @@ class ExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   }
   static constexpr ExplicitIdWrapper InvalidId() {
     return ExplicitIdWrapper<IdType, LabelEnum, label>(MyBase::InvalidValue());
+  }
+
+ private:
+  friend class boost::serialization::access;
+  template <class Archive>
+  void serialize(Archive& ar, const unsigned int version) {
+    ar& boost::serialization::base_object<MyBase>(*this);
   }
 };
 
@@ -152,6 +172,13 @@ class ExplicitIdWrapperCustomizeInvalidValue
                                                   static_cast<IdType>(-1)>(
         MyBase::InvalidValue());
   }
+
+ private:
+  friend class boost::serialization::access;
+  template <class Archive>
+  void serialize(Archive& ar, const unsigned int version) {
+    ar& boost::serialization::base_object<MyBase>(*this);
+  }
 };
 
 // 不强制显示调用构造函数使用默认无效值版
@@ -172,7 +199,9 @@ class NonExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   static const LabelEnum label = MyBase::label;
 
   NonExplicitIdWrapper() {}
-  NonExplicitIdWrapper(IdType production_node_id) { MyBase::SetId(production_node_id); }
+  NonExplicitIdWrapper(IdType production_node_id) {
+    MyBase::SetId(production_node_id);
+  }
   NonExplicitIdWrapper(const NonExplicitIdWrapper& id_wrapper) {
     MyBase::SetId(id_wrapper.GetThisNodeId());
   }
@@ -197,6 +226,13 @@ class NonExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
     return NonExplicitIdWrapper<IdType, LabelEnum, label>(
         MyBase::InvalidValue());
   }
+
+ private:
+  friend class boost::serialization::access;
+  template <class Archive>
+  void serialize(Archive& ar, const unsigned int version) {
+    ar& boost::serialization::base_object<MyBase>(*this);
+  }
 };
 
 // 不强制显示调用构造函数不使用默认无效值版
@@ -218,7 +254,9 @@ class NonExplicitIdWrapperCustomizeInvalidValue
   static const LabelEnum label = MyBase::label;
 
   NonExplicitIdWrapperCustomizeInvalidValue() {}
-  NonExplicitIdWrapperCustomizeInvalidValue(IdType production_node_id) { MyBase::SetId(production_node_id); }
+  NonExplicitIdWrapperCustomizeInvalidValue(IdType production_node_id) {
+    MyBase::SetId(production_node_id);
+  }
   NonExplicitIdWrapperCustomizeInvalidValue(
       const NonExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
     MyBase::SetId(id_wrapper.GetThisNodeId());
@@ -247,6 +285,13 @@ class NonExplicitIdWrapperCustomizeInvalidValue
     return NonExplicitIdWrapperCustomizeInvalidValue<IdType, LabelEnum, label,
                                                      static_cast<IdType>(-1)>(
         MyBase::InvalidValue());
+  }
+
+ private:
+  friend class boost::serialization::access;
+  template <class Archive>
+  void serialize(Archive& ar, const unsigned int version) {
+    ar& boost::serialization::base_object<MyBase>(*this);
   }
 };
 
@@ -323,4 +368,5 @@ struct hash<frontend::common::NonExplicitIdWrapperCustomizeInvalidValue<
   }
 };
 }  // namespace std
+
 #endif  // !COMMON_ID_WRAPPER

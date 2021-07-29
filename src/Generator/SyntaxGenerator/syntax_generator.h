@@ -1,38 +1,40 @@
+#ifndef GENERATOR_SYNTAXGENERATOR_SYNTAXGENERATOR_H_
+#define GENERATOR_SYNTAXGENERATOR_SYNTAXGENERATOR_H_
+
 #include <any>
-#include <array>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/array.hpp>
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/map.hpp>
+#include <boost/serialization/serialization.hpp>
+#include <boost/serialization/set.hpp>
+#include <boost/serialization/split_member.hpp>
+#include <boost/serialization/string.hpp>
+#include <boost/serialization/variant.hpp>
+#include <boost/serialization/vector.hpp>
 #include <cassert>
+#include <fstream>
 #include <functional>
-#include <map>
 #include <regex>
-#include <set>
-#include <string>
 #include <tuple>
-#include <variant>
-#include <vector>
 
 #include "Common/common.h"
 #include "Common/id_wrapper.h"
 #include "Common/object_manager.h"
 #include "Common/unordered_struct_manager.h"
+#include "Config/ProductionConfig/user_defined_header_files.h"
 #include "Generator/DfaGenerator/dfa_generator.h"
+#include "process_functions_classes.h"
+#include "user_defined_function_and_data_register.h"
 
-#ifndef GENERATOR_LEXICALGENERATOR_LEXICALGENERATOR_H_
-#define GENERATOR_LEXICALGENERATOR_LEXICALGENERATOR_H_
-
-namespace frontend::parser::lexicalmachine {
-class LexicalMachine;
+namespace frontend::parser::syntaxmachine {
+class SyntaxMachine;
 }
 
 // TODO 添加删除未使用产生式的功能
-namespace frontend::generator::lexicalgenerator {
+namespace frontend::generator::syntaxgenerator {
 using frontend::common::ObjectManager;
 using frontend::common::UnorderedStructManager;
-
-struct StringHasher {
-  frontend::common::StringHashType DoHash(const std::string& str) {
-    return frontend::common::HashString(str);
-  }
-};
 
 // 接口类，所有用户定义函数均从该类派生
 class ProcessFunctionInterface {
@@ -47,24 +49,41 @@ class ProcessFunctionInterface {
   };
   // 非终结节点的内容
   struct NonTerminalWordData {
-    UserData user_data;
+    NonTerminalWordData() = default;
+    NonTerminalWordData(UserData&& user_data)
+        : user_data_(std::move(user_data)) {}
+    NonTerminalWordData(NonTerminalWordData&&) = default;
+    NonTerminalWordData(const NonTerminalWordData&) = default;
+    NonTerminalWordData& operator=(const NonTerminalWordData&) = default;
+    UserData user_data_;
   };
   // 存储产生式中单个节点所携带的信息
-  struct WordData {
+  struct WordDataToUser {
     // 仅有非终结节点和终结节点两种可能
     frontend::common::ProductionNodeType node_type;
     // 该单词的数据
-    std::variant<TerminalWordData, NonTerminalWordData> word_data;
+    boost::variant<TerminalWordData, NonTerminalWordData> word_data_to_user_;
+    TerminalWordData& GetTerminalWordData() {
+      return boost::get<TerminalWordData>(word_data_to_user_);
+    }
+    NonTerminalWordData& GetNonTerminalWordData() {
+      return boost::get<NonTerminalWordData>(word_data_to_user_);
+    }
+    template <class T>
+    void SetWordData(T&& word_data) {
+      word_data_to_user_ = word_data;
+    }
   };
-
-#ifdef USE_REDUCT_FUNCTION
   // 参数标号越低入栈时间越晚
-  // 返回的值作为移入该产生式规约得到的非终结符号的值
-  virtual UserData Reduct(std::vector<WordData>&& user_data) = 0;
-#endif  // USE_REDUCT_FUNCTION
+  // 返回的值作为移入该产生式规约得到的非终结符号下一次参与规约传递的参数
+  // 空规约节点的node_type是ProductionNodeType::kEndNode
+  virtual UserData Reduct(std::vector<WordDataToUser>&& user_data_) = 0;
+  // 序列化用
+  virtual void serialize(boost::archive::binary_oarchive& ar,
+                         const unsigned int version) {}
 };
 
-class LexicalGenerator {
+class SyntaxGenerator {
   class BaseProductionNode;
   class ParsingTableEntry;
   class Core;
@@ -81,6 +100,10 @@ class LexicalGenerator {
   using ProductionNodeType = frontend::common::ProductionNodeType;
   // 核心项ID
   using CoreId = ObjectManager<Core>::ObjectId;
+  // 语法分析表条目ID
+  using ParsingTableEntryId =
+      frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
+                                          WrapperLabel::kParsingTableEntryId>;
 
 #ifdef USE_AMBIGUOUS_GRAMMAR
   // 运算符优先级，数字越大优先级越高，仅对运算符节点有效
@@ -91,14 +114,13 @@ class LexicalGenerator {
                                           WrapperLabel::kPriorityLevel>;
 #endif  // USE_AMBIGUOUS_GRAMMAR
 
+  // 词法分析中词的优先级
+  using WordPriority =
+      frontend::generator::dfa_generator::DfaGenerator::WordPriority;
   // 点的位置
   using PointIndex =
       frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
                                           WrapperLabel::kPointIndex>;
-  // 语法分析表条目ID
-  using ParsingTableEntryId =
-      frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
-                                          WrapperLabel::kParsingTableEntryId>;
   // 语法分析表类型
   using ParsingTableType = std::vector<ParsingTableEntry>;
   // 非终结节点内产生式编号
@@ -112,7 +134,8 @@ class LexicalGenerator {
   // 产生式容器
   using BodyContainerType = std::vector<ProductionBodyType>;
   // 符号ID
-  using SymbolId = UnorderedStructManager<std::string, StringHasher>::ObjectId;
+  using SymbolId =
+      UnorderedStructManager<std::string, std::hash<std::string>>::ObjectId;
   // 向前看符号容器（最内层容器，由ProductionBodyId和PointIndex共同决定）
   using InsideForwardNodesContainerType = std::unordered_set<ProductionNodeId>;
   // 向前看符号容器（中间层容器，由ProductionBodyId决定）
@@ -125,7 +148,8 @@ class LexicalGenerator {
   // 产生式节点ID，产生式体ID，产生式体中点的位置
   using CoreItem = std::tuple<ProductionNodeId, ProductionBodyId, PointIndex>;
   // 包装用户自定义函数和数据的类的已分配对象ID
-  using ProcessFunctionClassId = frontend::common::ProcessFunctionClassId;
+  using ProcessFunctionClassId = frontend::common::ObjectManager<
+      frontend::generator::syntaxgenerator::ProcessFunctionInterface>::ObjectId;
   // 管理包装用户自定义函数和数据的类的已分配对象的容器
   using ProcessFunctionClassManagerType =
       ObjectManager<ProcessFunctionInterface>;
@@ -138,7 +162,7 @@ class LexicalGenerator {
   // 运算符数据
   struct OperatorData {
     std::string operator_symbol;
-    std::string priority;
+    std::string operator_priority;
     std::string associatity_type;
     std::string reduct_function;
 #ifdef USE_USER_DEFINED_FILE
@@ -164,11 +188,8 @@ class LexicalGenerator {
   };
 
  public:
-  LexicalGenerator() {
-    OpenConfigFile();
-    ClearNodeNum();
-  }
-  ~LexicalGenerator() { CloseConfigFile(); }
+  SyntaxGenerator() { SyntaxGeneratorInit(); }
+  ~SyntaxGenerator() { CloseConfigFile(); }
 
   // 解析关键字
   void AnalysisKeyWord(const std::string& str);
@@ -176,7 +197,8 @@ class LexicalGenerator {
   void AnalysisProductionConfig(const std::string& file_name);
   // 解析终结节点产生式，仅需且必须输入一个完整的产生式
   // 普通终结节点默认优先级为0（最低）
-  void AnalysisTerminalProduction(const std::string& str, size_t priority = 0);
+  void AnalysisTerminalProduction(const std::string& str,
+                                  size_t operator_priority = 0);
   // 解析运算符产生式，仅需且必须输入一个完整的产生式
   void AnalysisOperatorProduction(const std::string& str);
   // 解析非终结节点产生式，仅需且必须输入一个完整的产生式
@@ -185,11 +207,16 @@ class LexicalGenerator {
   void ConfigConstruct();
   // 构建LALR(1)配置
   void ParsingTableConstruct();
+  // 初始化
+  void SyntaxGeneratorInit();
 
  private:
   FILE*& GetConfigConstructFilePointer() { return config_construct_code_file_; }
   FILE*& GetProcessFunctionClassFilePointer() {
     return process_function_class_file_;
+  }
+  FILE*& GetUserDefinedFunctionAndDataRegisterFilePointer() {
+    return user_defined_function_and_data_register_file_;
   }
   // 打开配置文件
   void OpenConfigFile();
@@ -198,7 +225,7 @@ class LexicalGenerator {
   // 获取一个节点编号
   int GetNodeNum() { return node_num_++; }
   // 复位节点编号
-  void ClearNodeNum() { node_num_ = 0; }
+  void NodeNumInit() { node_num_ = 0; }
   // 将字符串视作包含多个终结符号体，并按顺序提取出来
   // 每组中的bool代表是否为终结节点体，根据两侧是否有"来判断
   // 返回的string中没有双引号
@@ -214,8 +241,8 @@ class LexicalGenerator {
   // 向配置文件中写入生成终结节点的操作
   void PrintTerminalNodeConstructData(std::string&& node_symbol,
                                       std::string&& body_symbol,
-                                      size_t priority);
-  // 子过程，向配置文件写入init_function, shift_function和reduct_function
+                                      size_t operator_priority);
+  // 子过程，向配置文件写入Reduct函数
   // data中函数名为空则返回false
   template <class T>
   bool PrintProcessFunction(FILE* function_file, const T& data);
@@ -294,6 +321,14 @@ class LexicalGenerator {
     return GetProductionNode(production_node_id)
         .GetProductionNodeInBody(production_body_id, point_index);
   }
+  // 设置根产生式ID
+  void SetRootProductionNodeId(ProductionNodeId root_production_node_id) {
+    root_production_node_id_ = root_production_node_id;
+  }
+  // 获取根产生式ID
+  ProductionNodeId GetRootProductionNodeId() {
+    return root_production_node_id_;
+  }
   // 添加包装处理函数的类对象
   template <class ProcessFunctionClass>
   ProcessFunctionClassId CreateProcessFunctionClassObject() {
@@ -301,19 +336,22 @@ class LexicalGenerator {
         .EmplaceObject<ProcessFunctionClass>();
   }
   // 获取包装处理函数和数据的类的对象ID
-  ProcessFunctionClassId GetProcessFunctionClassId(
+  ProcessFunctionClassId GetProcessFunctionClass(
       ProductionNodeId production_node_id,
       ProductionBodyId production_body_id) {
-    return GetProductionNode(production_node_id)
-        .GetBodyProcessFunctionClassId(production_body_id);
+    NonTerminalProductionNode& production_node =
+        static_cast<NonTerminalProductionNode&>(
+            GetProductionNode(production_node_id));
+    assert(production_node.Type() == ProductionNodeType::kNonTerminalNode);
+    return production_node.GetBodyProcessFunctionClassId(production_body_id);
   }
   // 添加因为产生式体未定义而导致不能继续添加的非终结节点
   // 第一个参数为未定义的产生式名
   // 其余三个参数同AddNonTerminalNode
   // 函数会复制一份副本，无需保持原来的参数的生命周期
   void AddUnableContinueNonTerminalNode(
-      const std::string& undefined_symbol, const std::string& node_symbol,
-      const std::vector<std::pair<std::string, bool>>& subnode_symbols,
+      const std::string& undefined_symbol, std::string&& node_symbol,
+      std::vector<std::string>&& subnode_symbols,
       ProcessFunctionClassId class_id);
   // 检查给定的节点生成后是否可以重启因为部分产生式体未定义而搁置的
   // 非终结产生式添加过程
@@ -325,13 +363,14 @@ class LexicalGenerator {
   // 添加关键字，自动创建同名终结节点
   void AddKeyWord(const std::string& key_word);
   // 新建终结节点，返回节点ID
+  // 该函数用于声明终结产生式的正则定义
   // 节点已存在且给定symbol_id不同于已有ID则返回ProductionNodeId::InvalidId()
-  // 第三个参数是节点优先级，0保留为普通词的优先级，1保留为关键字的优先级
-  // 其余的优先级可以供定义操作符用或其它用途
+  // 第三个参数是词优先级，0保留为普通词的优先级，1保留为运算符优先级
+  // 2保留为关键字优先级，其余的优先级尚未指定
+  // ！！！词优先级与运算符优先级不同，请注意区分！！！
   ProductionNodeId AddTerminalNode(
       const std::string& node_symbol, const std::string& body_symbol,
-      frontend::generator::dfa_generator::DfaGenerator::TailNodePriority
-          node_priority);
+      WordPriority node_priority = WordPriority(0));
   // 子过程，仅用于创建节点
   // 自动更新节点名ID到节点ID的映射
   // 自动更新节点体ID到节点ID的映射
@@ -341,17 +380,10 @@ class LexicalGenerator {
 
 #ifdef USE_AMBIGUOUS_GRAMMAR
   // 新建运算符节点，返回节点ID，节点已存在则返回ProductionNodeId::InvalidId()
-  // 拆成模板函数和非模板函数为了降低代码生成量，阻止代码膨胀
-  // 下面两个函数均可直接调用，class_id是包装用户定义函数和数据的类的对象ID
   // 默认添加的运算符词法分析优先级等于运算符优先级
-  template <class ProcessFunctionClass>
   ProductionNodeId AddOperatorNode(const std::string& operator_symbol,
                                    AssociatityType associatity_type,
                                    OperatorPriority priority_level);
-  ProductionNodeId AddOperatorNode(const std::string& operator_symbol,
-                                   AssociatityType associatity_type,
-                                   OperatorPriority priority_level,
-                                   ProcessFunctionClassId class_id);
   // 子过程，仅用于创建节点
   // 运算符节点名同运算符名
   // 自动更新节点名ID到节点ID的映射表
@@ -359,8 +391,7 @@ class LexicalGenerator {
   // 自动为节点类设置节点ID
   ProductionNodeId SubAddOperatorNode(SymbolId node_symbol_id,
                                       AssociatityType associatity_type,
-                                      OperatorPriority priority_level,
-                                      ProcessFunctionClassId class_id);
+                                      OperatorPriority priority_level);
 #endif  // USE_AMBIGUOUS_GRAMMAR
 
   // 新建非终结节点，返回节点ID，节点已存在则不会创建新的节点
@@ -370,18 +401,18 @@ class LexicalGenerator {
   // 下面两个函数均可直接调用，class_id是包装用户定义函数和数据的类的对象ID
   template <class ProcessFunctionClass>
   ProductionNodeId AddNonTerminalNode(
-      const std::string& node_symbol,
-      const std::vector<std::string>& subnode_symbols);
+      std::string&& node_symbol, std::vector<std::string>&& subnode_symbols);
   ProductionNodeId AddNonTerminalNode(
-      const std::string& node_symbol,
-      const std::vector<std::pair<std::string, bool>>& subnode_symbols,
+      std::string&& node_symbol, std::vector<std::string>&& subnode_symbols,
       ProcessFunctionClassId class_id);
   // 子过程，仅用于创建节点
   // 自动更新节点名ID到节点ID的映射表
   // 自动为节点类设置节点ID
   ProductionNodeId SubAddNonTerminalNode(SymbolId symbol_id);
-  //// 新建文件尾节点，返回节点ID
-  // ProductionNodeId AddEndNode(SymbolId symbol_id = SymbolId::InvalidId());
+  // 新建文件尾节点，返回节点ID
+  ProductionNodeId AddEndNode();
+  // 设置产生式根节点
+  void SetRootProduction(const std::string& production_node_name);
 
   // 获取节点
   BaseProductionNode& GetProductionNode(ProductionNodeId production_node_id) {
@@ -393,7 +424,7 @@ class LexicalGenerator {
     assert(symbol_id.IsValid());
     return GetProductionNode(production_node_id);
   }
-  BaseProductionNode& GetProductionNodeBodySymbolId(SymbolId symbol_id) {
+  BaseProductionNode& GetProductionNodeBodyFromSymbolId(SymbolId symbol_id) {
     ProductionNodeId production_node_id =
         GetProductionNodeIdFromBodySymbolId(symbol_id);
     assert(symbol_id.IsValid());
@@ -416,13 +447,11 @@ class LexicalGenerator {
     static_cast<NonTerminalProductionNode&>(GetProductionNode(node_id))
         .AddBody(std::forward<IdType>(body));
   }
-  // 通过符号ID查询对应节点的ID，需要保证ID有效
-  ProductionNodeId GetProductionNodeIdFromNodeSymbol(SymbolId symbol_id);
   // 添加一条语法分析表条目
   ParsingTableEntryId AddParsingTableEntry() {
     ParsingTableEntryId parsing_table_entry_id(
-        lexical_config_parsing_table_.size());
-    lexical_config_parsing_table_.emplace_back();
+        syntax_config_parsing_table_.size());
+    syntax_config_parsing_table_.emplace_back();
     return parsing_table_entry_id;
   }
   // 获取core_id对应产生式项集
@@ -493,12 +522,13 @@ class LexicalGenerator {
   // 获取语法分析表条目
   ParsingTableEntry& GetParsingTableEntry(
       ParsingTableEntryId production_node_id) {
-    assert(production_node_id < lexical_config_parsing_table_.size());
-    return lexical_config_parsing_table_[production_node_id];
+    assert(production_node_id < syntax_config_parsing_table_.size());
+    return syntax_config_parsing_table_[production_node_id];
   }
-  // 设置根产生式ID
-  void SetRootProductionId(ProductionNodeId root_production) {
-    root_production_ = root_production;
+  // 设置根语法分析表条目ID
+  void SetRootParsingTableEntryId(
+      ParsingTableEntryId root_parsing_table_entry_id) {
+    root_parsing_table_entry_id_ = root_parsing_table_entry_id;
   }
   // 设置项集闭包有效（避免每次Goto都求闭包）
   // 仅应由CoreClosure调用
@@ -511,12 +541,8 @@ class LexicalGenerator {
   // 对给定核心项求闭包，结果存在原位置
   // 自动添加所有当前位置可以空规约的项的后续项
   void CoreClosure(CoreId core_id);
-  // 获取该项的向前看节点ID，如果不存在则返回ProductionNodeId::InvalidId()
-  ProductionNodeId GetProductionBodyNextNextNodeId(
-      ProductionNodeId production_node_id, ProductionBodyId production_body_id,
-      PointIndex point_index);
-  // 传播向前看符号
-  void SpreadLookForwardSymbol(CoreId core_id);
+  // 传播向前看符号，同时在传播过程中构建语法分析表
+  void SpreadLookForwardSymbolAndConstructParsingTableEntry(CoreId core_id);
   // 对所有产生式节点按照ProductionNodeType分类
   // 返回array内的vector内类型对应的下标为ProductionNodeType内类型的值
   std::array<std::vector<ProductionNodeId>, sizeof(ProductionNodeType)>
@@ -554,8 +580,23 @@ class LexicalGenerator {
   // 会将语法分析表内的项修改为新的项
   void ParsingTableMergeOptimize();
 
+  // boost-serialization用来保存语法分析表配置的函数
+  template <class Archive>
+  void save(Archive& ar, const unsigned int version) const;
+  BOOST_SERIALIZATION_SPLIT_MEMBER()
+
+  // 将语法分析表配置写入文件
+  void SaveConfig() {
+    std::ofstream config_file("user_defined_function_and_data_register.h");
+    boost::archive::binary_oarchive oarchive(config_file);
+    dfa_generator_.SaveConfig();
+    oarchive << *this;
+  }
+
   // 声明语法分析机为友类，便于其使用各种定义
-  friend class frontend::parser::lexicalmachine::LexicalMachine;
+  friend class frontend::parser::syntaxmachine::SyntaxMachine;
+  // 序列化需要
+  friend class boost::serialization::access;
 
   // 终结节点产生式定义
   static const std::regex terminal_node_regex_;
@@ -574,7 +615,10 @@ class LexicalGenerator {
 
   // Generator生成的包装用户定义函数数据的类的源码文件
   FILE* process_function_class_file_ = nullptr;
-  // 存储Generator生成的配置生成代码文件
+  // boost序列化派生类时需要注册派生类具体类型
+  // 该文件里储存用户定义的函数数据对象类型的声明
+  FILE* user_defined_function_and_data_register_file_ = nullptr;
+  // Generator生成的外围数据加载代码文件(ConfigConstruct函数的具体实现)
   FILE* config_construct_code_file_ = nullptr;
   // 对节点编号，便于区分不同节点对应的类
   // 该值仅用于生成配置代码中生成包装用户定义函数数据的类
@@ -586,17 +630,15 @@ class LexicalGenerator {
   // ProcessFunctionClassId是给定的包装用户定义函数数据的类的对象ID
   std::unordered_multimap<
       std::string,
-      std::tuple<std::string, std::vector<std::pair<std::string, bool>>,
-                 ProcessFunctionClassId>>
+      std::tuple<std::string, std::vector<std::string>, ProcessFunctionClassId>>
       undefined_productions_;
-  // 根产生式ID
-  ProductionNodeId root_production_;
   // 管理终结符号、非终结符号等的节点
   ObjectManager<BaseProductionNode> manager_nodes_;
-  // 管理产生式名的符号
-  UnorderedStructManager<std::string, StringHasher> manager_node_symbol_;
-  // 管理终结节点产生式体的符号
-  UnorderedStructManager<std::string, StringHasher>
+  // 存储产生式名(终结/非终结/运算符）的符号
+  UnorderedStructManager<std::string, std::hash<std::string>>
+      manager_node_symbol_;
+  // 存储终结节点产生式体的符号，用来防止多次添加同一正则
+  UnorderedStructManager<std::string, std::hash<std::string>>
       manager_terminal_body_symbol_;
   // 产生式名ID到对应产生式节点的映射
   std::unordered_map<SymbolId, ProductionNodeId> node_symbol_id_to_node_id_;
@@ -608,12 +650,14 @@ class LexicalGenerator {
   // 语法分析表ID到核心ID的映射
   std::unordered_map<ParsingTableEntryId, CoreId>
       parsing_table_entry_id_to_core_id_;
+  // 根产生式条目ID
+  ProductionNodeId root_production_node_id_;
   // 初始语法分析表条目ID，配置写入文件
-  ParsingTableEntryId root_entry_id_;
+  ParsingTableEntryId root_parsing_table_entry_id_;
   // DFA配置生成器，配置写入文件
   frontend::generator::dfa_generator::DfaGenerator dfa_generator_;
   // 语法分析表，配置写入文件
-  ParsingTableType lexical_config_parsing_table_;
+  ParsingTableType syntax_config_parsing_table_;
   // 用户自定义函数和数据的类的对象，配置写入文件
   ProcessFunctionClassManagerType manager_process_function_class_;
 
@@ -631,6 +675,7 @@ class LexicalGenerator {
           base_id_(base_production_node.base_id_),
           base_symbol_id_(base_production_node.base_symbol_id_) {}
     BaseProductionNode& operator=(BaseProductionNode&& base_production_node);
+    virtual ~BaseProductionNode() {}
 
     struct NodeData {
       ProductionNodeType node_type;
@@ -654,9 +699,6 @@ class LexicalGenerator {
     // 返回点右边的产生式ID，不存在则返回ProductionNodeId::InvalidId()
     virtual ProductionNodeId GetProductionNodeInBody(
         ProductionBodyId production_body_id, PointIndex point_index) = 0;
-    // 获取包装用户自定义函数数据的类的对象ID
-    virtual ProcessFunctionClassId GetBodyProcessFunctionClassId(
-        ProductionBodyId production_body_id) = 0;
 
    private:
     // 节点类型
@@ -696,11 +738,6 @@ class LexicalGenerator {
     // 在越界时也有返回值为了支持获取下一个/下下个体内节点的操作
     virtual ProductionNodeId GetProductionNodeInBody(
         ProductionBodyId production_body_id, PointIndex point_index) override;
-    virtual ProcessFunctionClassId GetBodyProcessFunctionClassId(
-        ProductionBodyId body_id) {
-      assert(false);
-      return ProcessFunctionClassId::InvalidId();
-    }
 
    private:
     // 产生式体名
@@ -708,38 +745,28 @@ class LexicalGenerator {
   };
 
 #ifdef USE_AMBIGUOUS_GRAMMAR
-  class OperatorProductionNode : public TerminalProductionNode {
+  class OperatorProductionNode : public BaseProductionNode {
    public:
-    OperatorProductionNode(SymbolId node_symbol_id, SymbolId body_symbol_id,
+    OperatorProductionNode(SymbolId node_symbol_id,
                            AssociatityType associatity_type,
-                           OperatorPriority priority_level,
-                           ProcessFunctionClassId process_function_class_id_)
-        : TerminalProductionNode(node_symbol_id, body_symbol_id),
+                           OperatorPriority priority_level)
+        : BaseProductionNode(ProductionNodeType::kOperatorNode, node_symbol_id),
           operator_associatity_type_(associatity_type),
-          operator_priority_level_(priority_level),
-          process_function_class_id_(process_function_class_id_) {}
+          operator_priority_level_(priority_level) {}
     OperatorProductionNode(const OperatorProductionNode&) = delete;
     OperatorProductionNode& operator=(const OperatorProductionNode&) = delete;
     OperatorProductionNode(OperatorProductionNode&& operator_production_node)
-        : TerminalProductionNode(std::move(operator_production_node)),
+        : BaseProductionNode(std::move(operator_production_node)),
           operator_associatity_type_(
               std::move(operator_production_node.operator_associatity_type_)),
           operator_priority_level_(
-              std::move(operator_production_node.operator_priority_level_)),
-          process_function_class_id_(
-              std::move(operator_production_node.process_function_class_id_)) {}
+              std::move(operator_production_node.operator_priority_level_)) {}
     OperatorProductionNode& operator=(
         OperatorProductionNode&& operator_production_node);
 
     struct NodeData : public TerminalProductionNode::NodeData {
       std::string symbol_;
     };
-    void SetProcessFunctionClassId(ProcessFunctionClassId class_id) {
-      process_function_class_id_ = class_id;
-    }
-    ProcessFunctionClassId GetProcessFunctionClassId() {
-      return process_function_class_id_;
-    }
     void SetAssociatityType(AssociatityType type) {
       operator_associatity_type_ = type;
     }
@@ -752,11 +779,9 @@ class LexicalGenerator {
     OperatorPriority GetPriorityLevel() const {
       return operator_priority_level_;
     }
-
-    virtual ProcessFunctionClassId GetBodyProcessFunctionClassId(
-        ProductionBodyId production_body_id) {
-      assert(production_body_id == 0);
-      return GetProcessFunctionClassId();
+    virtual ProductionNodeId GetProductionNodeInBody(
+        ProductionBodyId production_body_id, PointIndex point_index) {
+      assert(false);
     }
 
    private:
@@ -764,8 +789,6 @@ class LexicalGenerator {
     AssociatityType operator_associatity_type_;
     // 运算符优先级
     OperatorPriority operator_priority_level_;
-    // 用户定义处理函数类的ID
-    ProcessFunctionClassId process_function_class_id_;
   };
 #endif  // USE_AMBIGUOUS_GRAMMAR
 
@@ -831,7 +854,7 @@ class LexicalGenerator {
     virtual ProductionNodeId GetProductionNodeInBody(
         ProductionBodyId production_body_id, PointIndex point_index) override;
     // 返回给定产生式体ID对应的ProcessFunctionClass的ID
-    virtual ProcessFunctionClassId GetBodyProcessFunctionClassId(
+    ProcessFunctionClassId GetBodyProcessFunctionClassId(
         ProductionBodyId body_id) {
       assert(body_id < process_function_class_ids_.size());
       return process_function_class_ids_[body_id];
@@ -847,19 +870,32 @@ class LexicalGenerator {
     bool empty_body_ = false;
   };
 
-  //// 文件尾节点
-  // class EndNode : public BaseProductionNode {
-  // public:
-  //  EndNode(SymbolId symbol_id)
-  //      : BaseProductionNode(ProductionNodeType::kEndNode, symbol_id) {}
-  //  EndNode(const EndNode&) = delete;
-  //  EndNode& operator=(const EndNode&) = delete;
-  //  EndNode(EndNode&& end_node) : BaseProductionNode(std::move(end_node)) {}
-  //  EndNode& operator=(EndNode&& end_node) {
-  //    BaseProductionNode::operator=(std::move(end_node));
-  //    return *this;
-  //  }
-  //};
+  // 文件尾节点
+  class EndNode : public BaseProductionNode {
+   public:
+    EndNode()
+        : BaseProductionNode(ProductionNodeType::kEndNode,
+                             SymbolId::InvalidId()) {}
+    EndNode(const EndNode&) = delete;
+    EndNode& operator=(const EndNode&) = delete;
+    EndNode(EndNode&& end_node) : BaseProductionNode(std::move(end_node)) {}
+    EndNode& operator=(EndNode&& end_node) {
+      BaseProductionNode::operator=(std::move(end_node));
+      return *this;
+    }
+    virtual ProductionNodeId GetProductionNodeInBody(
+        ProductionBodyId production_body_id, PointIndex point_index) {
+      assert(false);
+      return ProductionNodeId::InvalidId();
+    }
+    // 获取包装用户自定义函数数据的类的对象ID
+    virtual ProcessFunctionClassId GetBodyProcessFunctionClassId(
+        ProductionBodyId production_body_id) {
+      assert(false);
+      return ProcessFunctionClassId::InvalidId();
+    }
+  };
+
   // 项集与向前看符号
   class Core {
    public:
@@ -957,11 +993,27 @@ class LexicalGenerator {
    public:
     // 执行移入动作时的附属数据
     struct ShiftAttachedData {
+      friend class boost::serialization::access;
+
+      template <class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+        ar& next_entry_id_;
+      }
+
       // 移入该单词后转移到的语法分析表条目ID
       ParsingTableEntryId next_entry_id_;
     };
     // 执行规约动作时的附属数据
     struct ReductAttachedData {
+      friend class boost::serialization::access;
+
+      template <class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+        ar& reducted_nonterminal_node_id_;
+        ar& process_function_class_id_;
+        ar& production_body_;
+      }
+
       // 规约后得到的非终结节点的ID
       ProductionNodeId reducted_nonterminal_node_id_;
       // 执行规约操作时使用的对象的ID
@@ -974,6 +1026,14 @@ class LexicalGenerator {
 #ifdef USE_AMBIGUOUS_GRAMMAR
     // 使用二义性文法时对一个单词既可以移入也可以规约
     struct ShiftReductAttachedData {
+      friend class boost::serialization::access;
+
+      template <class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+        ar& shift_attached_data_;
+        ar& reduct_attached_data_;
+      }
+
       ShiftAttachedData shift_attached_data_;
       ReductAttachedData reduct_attached_data_;
     };
@@ -990,7 +1050,7 @@ class LexicalGenerator {
 
 #ifdef USE_AMBIGUOUS_GRAMMAR
       const ShiftReductAttachedData& GetShiftReductAttachedData() const {
-        return *std::get_if<ShiftReductAttachedData>(&attached_data_);
+        return boost::get<ShiftReductAttachedData>(attached_data_);
       }
       // 已有的ReductAttachedData补上ShiftAttachedData
       // 转换成ShiftReductAttachedData
@@ -1022,7 +1082,7 @@ class LexicalGenerator {
       }
 
       ActionType action_type_;
-      std::variant<
+      boost::variant<
 #ifdef USE_AMBIGUOUS_GRAMMAR
           ShiftReductAttachedData,
 #endif  // USE_AMBIGUOUS_GRAMMAR
@@ -1031,6 +1091,14 @@ class LexicalGenerator {
      private:
       // 只有ParsingTableEntry可以调用非const函数
       friend class ParsingTableEntry;
+      friend class boost::serialization::access;
+
+      template <class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+        ar& action_type_;
+        ar& attached_data_;
+      }
+
       ShiftAttachedData& GetShiftAttachedData() {
         return const_cast<ShiftAttachedData&>(
             static_cast<const ActionAndAttachedData&>(*this)
@@ -1106,6 +1174,14 @@ class LexicalGenerator {
     }
 
    private:
+    friend class boost::serialization::access;
+
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version) {
+      ar& action_and_attached_data_;
+      ar& nonterminal_node_transform_table_;
+    }
+
     // 只有自身可以修改原始数据结构，外来请求要走接口
     ActionAndTargetContainer& GetAllActionAndAttachedData() {
       return const_cast<ActionAndTargetContainer&>(
@@ -1131,8 +1207,8 @@ class LexicalGenerator {
   };
 };
 template <class IdType>
-inline LexicalGenerator::ProductionBodyId
-LexicalGenerator::NonTerminalProductionNode::AddBody(IdType&& body) {
+inline SyntaxGenerator::ProductionBodyId
+SyntaxGenerator::NonTerminalProductionNode::AddBody(IdType&& body) {
   ProductionBodyId body_id(nonterminal_bodys_.size());
   // 将输入插入到产生式体向量中，无删除相同产生式功能
   nonterminal_bodys_.emplace_back(std::forward<IdType>(body));
@@ -1144,42 +1220,32 @@ LexicalGenerator::NonTerminalProductionNode::AddBody(IdType&& body) {
 }
 
 template <class T>
-inline bool LexicalGenerator::PrintProcessFunction(FILE* function_file,
-                                                   const T& data) {
+inline bool SyntaxGenerator::PrintProcessFunction(FILE* function_file,
+                                                  const T& data) {
+  assert(function_file != nullptr);
   if (data.reduct_function.empty()) {
     fprintf(stderr, "Warning: 产生式未提供规约函数\n");
     return false;
   }
-  fprintf(
-      function_file,
-      " virtual ProcessFunctionInterface::UserData Reduct() { return %s(); }\n",
-      data.reduct_function.c_str());
+  fprintf(function_file,
+          " virtual ProcessFunctionInterface::UserData "
+          "Reduct(std::vector<WordDataToUser>&& user_data_) { return "
+          "%s(user_data_); }\n",
+          data.reduct_function.c_str());
   return true;
 }
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
 template <class ProcessFunctionClass>
-inline LexicalGenerator::ProductionNodeId LexicalGenerator::AddOperatorNode(
-    const std::string& operator_symbol, AssociatityType associatity_type,
-    OperatorPriority priority_level) {
+inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
+    std::string&& node_symbol, std::vector<std::string>&& subnode_symbols) {
   ProcessFunctionClassId class_id =
       CreateProcessFunctionClassObject<ProcessFunctionClass>();
-  return AddOperatorNode(operator_symbol, associatity_type, priority_level,
-                         class_id);
-}
-#endif  // USE_AMBIGUOUS_GRAMMAR
-
-template <class ProcessFunctionClass>
-inline LexicalGenerator::ProductionNodeId LexicalGenerator::AddNonTerminalNode(
-    const std::string& node_symbol,
-    const std::vector<std::string>& subnode_symbols) {
-  ProcessFunctionClassId class_id =
-      CreateProcessFunctionClassObject<ProcessFunctionClass>();
-  return AddNonTerminalNode(node_symbol, subnode_symbols, class_id);
+  return AddNonTerminalNode(std::move(node_symbol), std::move(subnode_symbols),
+                            class_id);
 }
 
 template <class ParsingTableEntryIdContainer>
-inline void LexicalGenerator::ParsingTableTerminalNodeClassify(
+inline void SyntaxGenerator::ParsingTableTerminalNodeClassify(
     const std::vector<ProductionNodeId>& terminal_node_ids, size_t index,
     ParsingTableEntryIdContainer&& entry_ids,
     std::vector<std::vector<ParsingTableEntryId>>* equivalent_ids) {
@@ -1216,7 +1282,7 @@ inline void LexicalGenerator::ParsingTableTerminalNodeClassify(
 }
 
 template <class ParsingTableEntryIdContainer>
-inline void LexicalGenerator::ParsingTableNonTerminalNodeClassify(
+inline void SyntaxGenerator::ParsingTableNonTerminalNodeClassify(
     const std::vector<ProductionNodeId>& nonterminal_node_ids, size_t index,
     ParsingTableEntryIdContainer&& entry_ids,
     std::vector<std::vector<ParsingTableEntryId>>* equivalent_ids) {
@@ -1249,8 +1315,19 @@ inline void LexicalGenerator::ParsingTableNonTerminalNodeClassify(
   }
 }
 
+template <class Archive>
+inline void SyntaxGenerator::save(Archive& ar,
+                                  const unsigned int version) const {
+  ar << root_parsing_table_entry_id_;
+  ar << syntax_config_parsing_table_.size();
+  for (auto& item : syntax_config_parsing_table_) {
+    ar << item;
+  }
+  ar << manager_process_function_class_;
+}
+
 template <class AttachedData>
-void LexicalGenerator::ParsingTableEntry::SetTerminalNodeActionAndAttachedData(
+void SyntaxGenerator::ParsingTableEntry::SetTerminalNodeActionAndAttachedData(
     ProductionNodeId node_id, ActionType action_type,
     AttachedData&& attached_data) {
 #ifdef USE_AMBIGUOUS_GRAMMAR
@@ -1275,17 +1352,17 @@ void LexicalGenerator::ParsingTableEntry::SetTerminalNodeActionAndAttachedData(
       std::forward<AttachedData>(attached_data));
 #else
   ActionAndAttachedData& data = action_and_attached_data_[node_id];
-  data.action_type_ = action_type_;
+  data.action_type_ = action_type;
   data.SetAttachedData(std::forward<AttachedData>(attached_data));
 #endif  // USE_AMBIGUOUS_GRAMMAR
 }
 
 template <class ForwardNodeIdContainer>
 inline std::pair<
-    std::map<LexicalGenerator::CoreItem,
-             std::unordered_set<LexicalGenerator::ProductionNodeId>>::iterator,
+    std::map<SyntaxGenerator::CoreItem,
+             std::unordered_set<SyntaxGenerator::ProductionNodeId>>::iterator,
     bool>
-LexicalGenerator::Core::AddItemAndForwardNodeIds(
+SyntaxGenerator::Core::AddItemAndForwardNodeIds(
     const CoreItem& item, ForwardNodeIdContainer&& forward_node_ids) {
   SetClosureNotAvailable();
   auto iter = item_and_forward_node_ids_.find(item);
@@ -1300,49 +1377,57 @@ LexicalGenerator::Core::AddItemAndForwardNodeIds(
   }
 }
 
-inline const LexicalGenerator::ParsingTableEntry::ShiftAttachedData&
-LexicalGenerator::ParsingTableEntry::ActionAndAttachedData::
+inline const SyntaxGenerator::ParsingTableEntry::ShiftAttachedData&
+SyntaxGenerator::ParsingTableEntry::ActionAndAttachedData::
     GetShiftAttachedData() const {
   switch (action_type_) {
     break;
     case ActionType::kShift:
-      return *std::get_if<ShiftAttachedData>(&attached_data_);
+      return boost::get<ShiftAttachedData>(attached_data_);
       break;
+
+#ifdef USE_AMBIGUOUS_GRAMMAR
     case ActionType::kShiftReduct:
-      return std::get_if<ShiftReductAttachedData>(&attached_data_)
-          ->shift_attached_data_;
+      return boost::get<ShiftReductAttachedData>(attached_data_)
+          .shift_attached_data_;
       break;
+#endif  // USE_AMBIGUOUS_GRAMMAR
+
     case ActionType::kError:
     case ActionType::kAccept:
     case ActionType::kReduct:
     default:
       assert(false);
       // 防止警告：不是所有的控件路径都返回值
-      return *std::get_if<ShiftAttachedData>(&attached_data_);
+      return boost::get<ShiftAttachedData>(attached_data_);
       break;
   }
 }
 
-inline const LexicalGenerator::ParsingTableEntry::ReductAttachedData&
-LexicalGenerator::ParsingTableEntry::ActionAndAttachedData::
+inline const SyntaxGenerator::ParsingTableEntry::ReductAttachedData&
+SyntaxGenerator::ParsingTableEntry::ActionAndAttachedData::
     GetReductAttachedData() const {
   switch (action_type_) {
     case ActionType::kReduct:
-      return *std::get_if<ReductAttachedData>(&attached_data_);
+      return boost::get<ReductAttachedData>(attached_data_);
       break;
+
+#ifdef USE_AMBIGUOUS_GRAMMAR
     case ActionType::kShiftReduct:
-      return std::get_if<ShiftReductAttachedData>(&attached_data_)
-          ->reduct_attached_data_;
+      return boost::get<ShiftReductAttachedData>(attached_data_)
+          .reduct_attached_data_;
       break;
+#endif  // USE_AMBIGUOUS_GRAMMAR
+
     case ActionType::kShift:
     case ActionType::kError:
     case ActionType::kAccept:
     default:
       assert(false);
-      return *std::get_if<ReductAttachedData>(&attached_data_);
+      // 防止警告：不是所有的控件路径都返回值
+      return boost::get<ReductAttachedData>(attached_data_);
       break;
   }
 }
-
-}  // namespace frontend::generator::lexicalgenerator
-#endif  // !GENERATOR_LEXICALGENERATOR_LEXICALGENERATOR_H_
+}  // namespace frontend::generator::syntaxgenerator
+#endif  // !GENERATOR_SYNTAXGENERATOR_SYNTAXGENERATOR_H_

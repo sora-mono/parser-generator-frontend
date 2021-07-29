@@ -1,6 +1,6 @@
 ﻿#include "Common/hash_functions.h"
 
-#include <string>
+#include <boost/serialization/string.hpp>
 
 namespace frontend::common {
 StringHashType HashString(const std::string& str) {

@@ -1,13 +1,17 @@
+#ifndef COMMON_OBJECT_MANAGER_H_
+#define COMMON_OBJECT_MANAGER_H_
+
 #include <assert.h>
 
+#include <boost/serialization/export.hpp>
+#include <boost/serialization/serialization.hpp>
+#include <boost/serialization/split_member.hpp>
+#include <boost/serialization/vector.hpp>
 #include <functional>
 #include <stdexcept>
-#include <vector>
 
 #include "Common/id_wrapper.h"
 
-#ifndef COMMON_OBJECT_MANAGER_H_
-#define COMMON_OBJECT_MANAGER_H_
 // TODO 给可以加const的内容加const
 namespace frontend::common {
 
@@ -86,8 +90,8 @@ class ObjectManager {
                                    merge_function = DefaultMergeFunction3);
   // 查询ID对应的节点是否可合并
   bool CanMerge(ObjectId id) {
-    assert(id < nodes_can_merge.size());
-    return nodes_can_merge[id];
+    assert(id < nodes_can_merge_.size());
+    return nodes_can_merge_[id];
   }
 
   bool SetObjectMergeAllowed(ObjectId id);
@@ -106,8 +110,8 @@ class ObjectManager {
   // 容器实际持有的对象数量
   size_t ItemSize();
 
-  // 清除并释放所有节点
-  void Clear();
+  // 初始化，如果容器中存在节点则全部释放
+  void ObjectManagerInit();
   // 清除但不释放所有节点
   void ClearNoRelease();
   // 调用成员变量的shrink_to_fit
@@ -118,6 +122,15 @@ class ObjectManager {
 
  private:
   friend class Iterator;
+  friend class boost::serialization::access;
+
+  // 序列化
+  template <class Archive>
+  void serialize(Archive& ar, const unsigned int version) {
+    ar& nodes_;
+    ar& removed_ids_;
+    ar& nodes_can_merge_;
+  }
 
   // 在指定位置放置节点
   template <class ObjectType = T, class... Args>
@@ -125,9 +138,6 @@ class ObjectManager {
   // 在指定位置放置指针
   ObjectId EmplacePointerIndex(ObjectId id, T* pointer);
 
-  // 序列化容器用
-  template <class Archive>
-  void Serialize(Archive& ar, const unsigned int version = 0);
   // 获取当前最佳可用id
   ObjectId GetBestEmptyIndex();
   // 添加已移除的id
@@ -137,7 +147,7 @@ class ObjectManager {
   // 优化用数组，存放被删除节点对应的ID
   std::vector<ObjectId> removed_ids_;
   // 存储信息表示是否允许合并节点
-  std::vector<bool> nodes_can_merge;
+  std::vector<bool> nodes_can_merge_;
 };
 
 template <class T>
@@ -164,12 +174,13 @@ template <class T>
 inline T* ObjectManager<T>::RemoveObjectNoDelete(ObjectId id) {
   assert(id < nodes_.size());
   T* temp_pointer = nodes_[id];
+  nodes_[id] = nullptr;
   assert(temp_pointer != nullptr);
   AddRemovedIndex(id);
-  nodes_can_merge[id] = false;
+  nodes_can_merge_[id] = false;
   while (nodes_.size() > 0 && nodes_.back() == nullptr) {
     nodes_.pop_back();  // 清理末尾无效ID
-    nodes_can_merge.pop_back();
+    nodes_can_merge_.pop_back();
   }
   return temp_pointer;
 }
@@ -201,7 +212,7 @@ inline ObjectManager<T>::ObjectId ObjectManager<T>::EmplacePointerIndex(
   size_t size_old = nodes_.size();
   if (id >= size_old) {
     nodes_.resize(id + 1, nullptr);
-    nodes_can_merge.resize(id + 1, false);
+    nodes_can_merge_.resize(id + 1, false);
     for (size_t i = size_old; i < id; i++) {
       removed_ids_.push_back(ObjectId(i));
     }
@@ -216,20 +227,20 @@ template <class T>
 inline void ObjectManager<T>::Swap(ObjectManager& manager_other) {
   nodes_.swap(manager_other.nodes_);
   removed_ids_.swap(manager_other.removed_ids_);
-  nodes_can_merge.swap(manager_other.nodes_can_merge);
+  nodes_can_merge_.swap(manager_other.nodes_can_merge_);
 }
 
 template <class T>
 inline bool ObjectManager<T>::SetObjectMergeAllowed(ObjectId id) {
   assert(id < nodes_.size() && nodes_[id] != nullptr);
-  nodes_can_merge[id] = true;
+  nodes_can_merge_[id] = true;
   return true;
 }
 
 template <class T>
 inline bool ObjectManager<T>::SetObjectMergeRefused(ObjectId id) {
   assert(id < nodes_.size() && nodes_[id] != nullptr);
-  nodes_can_merge[id] = false;
+  nodes_can_merge_[id] = false;
   return true;
 }
 
@@ -237,15 +248,15 @@ template <class T>
 inline void ObjectManager<T>::SetAllObjectsMergeAllowed() {
   for (size_t id = 0; id < nodes_.size(); id++) {
     if (nodes_[id] != nullptr) {
-      nodes_can_merge[id] = true;
+      nodes_can_merge_[id] = true;
     }
   }
 }
 
 template <class T>
 inline void ObjectManager<T>::SetAllObjectsMergeRefused() {
-  std::vector<bool> vec_temp(nodes_can_merge.size(), false);
-  nodes_can_merge.Swap(vec_temp);
+  std::vector<bool> vec_temp(nodes_can_merge_.size(), false);
+  nodes_can_merge_.Swap(vec_temp);
 }
 
 template <class T>
@@ -287,7 +298,7 @@ bool ObjectManager<T>::MergeObjectsWithManager(
 }
 
 template <class T>
-inline void ObjectManager<T>::Clear() {
+inline void ObjectManager<T>::ObjectManagerInit() {
   for (auto p : nodes_) {
     delete p;
   }
@@ -305,7 +316,7 @@ template <class T>
 inline void ObjectManager<T>::ShrinkToFit() {
   while (nodes_.size() > 0 && nodes_.back() == nullptr) {
     nodes_.pop_back();
-    nodes_can_merge.pop_back();
+    nodes_can_merge_.pop_back();
   }
   nodes_.shrink_to_fit();
   removed_ids_.shrink_to_fit();

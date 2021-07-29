@@ -1,3 +1,0 @@
-aux_source_directory(. LEXICAL_GENERATOR_SRCS)
-
-add_library(lexical_generator ${LEXICAL_GENERATOR_SRCS})

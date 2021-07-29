@@ -1,21 +1,18 @@
+#ifndef COMMON_HASH_FUNCTIONS_H_
+#define COMMON_HASH_FUNCTIONS_H_
+
+#include <boost/serialization/set.hpp>
+#include <boost/serialization/unordered_set.hpp>
+#include <boost/serialization/vector.hpp>
 #include <iostream>
-#include <set>
-#include <unordered_set>
-#include <vector>
 
 #include "Common/common.h"
 #include "Common/id_wrapper.h"
 
-#ifndef COMMON_HASH_FUNCTIONS_H_
-#define COMMON_HASH_FUNCTIONS_H_
-
 namespace frontend::common {
 enum class WrapperLabel { kStringHashType, kIntergalSetHashType };
-using StringHashType = NonExplicitIdWrapper<unsigned long long, WrapperLabel,
-                                            WrapperLabel::kStringHashType>;
-using IntergalSetHashType =
-    NonExplicitIdWrapper<unsigned long long, WrapperLabel,
-                         WrapperLabel::kIntergalSetHashType>;
+using StringHashType = size_t;
+using IntergalSetHashType = size_t;
 
 constexpr unsigned long long hash_seed = 131;  // 31 131 1313 13131 131313 etc..
 

@@ -1,0 +1,3 @@
+aux_source_directory(. SYNTAX_MACHINE_SRCS)
+
+add_library(syntax_machine ${SYNTAX_MACHINE_SRCS})

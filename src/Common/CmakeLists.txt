@@ -1,9 +1,10 @@
 project(Common)
 
-include_directories(${CMAKE_SOURCE_DIR}/src)
 add_compile_options("/std:c++latest")
 
-file(GLOB_RECURSE COMMON_FUNCTIONS_SRC ./*.cpp)
-file(GLOB_RECURSE COMMON_FUNCTIONS_HDR ./*.h)
+include_directories(${CMAKE_SOURCE_DIR}/src)
 
-add_library(common_functions STATIC ${COMMON_FUNCTIONS_SRC} ${COMMON_FUNCTIONS_HDR}   "common.h")
+aux_source_directory(. COMMON_FUNCTIONS_SRC)
+
+add_library(common_functions ${COMMON_FUNCTIONS_SRC})
+target_link_libraries(common_functions CONAN_PKG::boost)

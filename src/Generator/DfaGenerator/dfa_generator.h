@@ -1,15 +1,13 @@
-#pragma once
+#ifndef GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
+#define GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
 
-#include <array>
-#include <map>
+#include <boost/serialization/array.hpp>
+#include <boost/serialization/map.hpp>
 
 #include "Common/common.h"
 #include "Common/id_wrapper.h"
 #include "Common/unordered_struct_manager.h"
 #include "NfaGenerator/nfa_generator.h"
-
-#ifndef GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
-#define GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
 
 namespace frontend::parser::dfamachine {
 class DfaMachine;
@@ -35,18 +33,25 @@ class DfaGenerator {
     void fill(const T& fill_object) { transform_array_.fill(fill_object); }
 
    private:
+    friend class boost::serialization::access;
+
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version) {
+      ar& transform_array_;
+    }
+
     std::array<T, size> transform_array_;
   };
 
  public:
   // 尾节点数据
   using TailNodeData = NfaGenerator::TailNodeData;
-  // 解析出单词后随单词返回的用户定义的数据
-  using SavedData = TailNodeData::first_type;
+  // 解析出单词后随单词返回的附属数据
+  using WordAttachedData = TailNodeData::first_type;
   // 尾节点优先级，数字越大优先级越高，所有表达式体都有该参数
   // 与运算符节点的优先级意义不同
   // 该优先级决定在多个正则同时匹配成功时选择哪个正则得出词和附属数据
-  using TailNodePriority = TailNodeData::second_type;
+  using WordPriority = TailNodeData::second_type;
   // Nfa节点ID
   using NfaNodeId = NfaGenerator::NfaNodeId;
   // 子集构造法使用的集合的类型
@@ -55,7 +60,7 @@ class DfaGenerator {
   using IntermediateNodeId = ObjectManager<IntermediateDfaNode>::ObjectId;
 
   struct IntergalSetHasher {
-    common::IntergalSetHashType DoHash(
+    common::IntergalSetHashType operator()(
         const std::unordered_set<NfaNodeId>& set) {
       return common::HashIntergalUnorderedSet(set);
     }
@@ -75,35 +80,51 @@ class DfaGenerator {
   using TransformArray =
       TransformArrayManager<TransformArrayId, frontend::common::kCharNum>;
   // DFA配置类型
-  using DfaConfigType = std::vector<std::pair<TransformArray, SavedData>>;
+  using DfaConfigType =
+      std::vector<std::pair<TransformArray, WordAttachedData>>;
 
-  DfaGenerator() : head_node_intermediate_(IntermediateNodeId::InvalidId()) {}
+  DfaGenerator() {}
   DfaGenerator(const DfaGenerator&) = delete;
   DfaGenerator(DfaGenerator&&) = delete;
 
+  // 初始化
+  void DfaInit();
+
   // 添加关键字
-  bool AddKeyword(const std::string& str,const SavedData& tail_node_tag,
-                  TailNodePriority priority_tag);
+  bool AddKeyword(const std::string& str, const WordAttachedData& tail_node_tag,
+                  WordPriority priority_tag);
   // 添加正则
-  bool AddRegexpression(const std::string& str, const SavedData& saved_data,
-                        TailNodePriority priority_tag);
+  bool AddRegexpression(const std::string& str,
+                        const WordAttachedData& saved_data,
+                        WordPriority priority_tag);
   // 设置遇到文件尾时返回的数据
-  void SetEndOfFileSavedData(const SavedData& saved_data) {
-    file_end_saved_data_ = saved_data;
+  void SetEndOfFileSavedData(const WordAttachedData&& saved_data) {
+    file_end_saved_data_ = std::move(saved_data);
   }
   // 获取遇到文件尾时返回的数据
-  const SavedData& GetEndOfFileSavedData() { return file_end_saved_data_; }
+  const WordAttachedData& GetEndOfFileSavedData() {
+    return file_end_saved_data_;
+  }
   // 构建DFA
   bool DfaConstruct();
   // 构建最小化DFA
   bool DfaMinimize();
   // 重新进行完整构建过程
   bool DfaReconstrcut() { return DfaConstruct() && DfaMinimize(); }
-  // 将配置写入Config/DFA Config文件夹下DFA.conf
-  bool ConfigConstruct();
+  // 保存配置
+  void SaveConfig();
 
  private:
   friend class DfaMachine;
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive& ar, const unsigned int version) {
+    ar& dfa_config;
+    ar& head_index;
+    ar& file_end_saved_data_;
+  }
+
   struct IntermediateDfaNode {
     IntermediateDfaNode(SetId handler = SetId::InvalidId(),
                         TailNodeData data = NfaGenerator::NotTailNodeTag)
@@ -123,10 +144,13 @@ class DfaGenerator {
     TailNodeData tail_node_data;
     SetId set_handler;  // 该节点对应的子集闭包
   };
+
   IntermediateDfaNode& GetIntermediateNode(IntermediateNodeId handler) {
     return node_manager_intermediate_node_.GetObject(handler);
   }
-  SetType& GetSetObject(SetId production_node_id) { return node_manager_set_.GetObject(production_node_id); }
+  SetType& GetSetObject(SetId production_node_id) {
+    return node_manager_set_.GetObject(production_node_id);
+  }
   // 集合转移函数（子集构造法用），
   // 返回值前半部分表示新集合是否已存在，后半部分为对应中间节点句柄
   std::pair<IntermediateNodeId, bool> SetGoto(SetId set_src, char c_transform);
@@ -157,16 +181,12 @@ class DfaGenerator {
       const std::map<IdType, std::vector<IntermediateNodeId>>& groups,
       char c_transform);
 
-  // 序列化保存DFA配置用
-  template <class Archive>
-  void Serialize(Archive& ar, const unsigned int version = 0);
-
   // DFA配置，写入文件
   DfaConfigType dfa_config;
   // 头结点序号，写入文件
   TransformArrayId head_index;
   // 遇到文件尾时返回的数据，写入文件
-  SavedData file_end_saved_data_;
+  WordAttachedData file_end_saved_data_;
 
   NfaGenerator nfa_generator_;
   // 中间节点头结点句柄
@@ -179,8 +199,9 @@ class DfaGenerator {
       intermediate_node_to_final_node_;
   // 存储中间节点
   ObjectManager<IntermediateDfaNode> node_manager_intermediate_node_;
-  // 存储集合的哈希到节点句柄的映射
+  // 子集构造法使用的集合的管理器
   SetManagerType node_manager_set_;
+  // 存储集合的哈希到节点句柄的映射
   std::unordered_map<SetId, IntermediateNodeId> setid_to_intermediate_nodeid_;
 };
 

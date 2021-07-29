@@ -1,24 +1,18 @@
-﻿# CMakeList.txt: C-parser-generator-frontend 的 CMake 项目，在此处包括源代码并定义
+﻿# CMakeList.txt: parser-generator-frontend 的 CMake 项目，在此处包括源代码并定义
 # 项目特定的逻辑。
 #
 cmake_minimum_required (VERSION 3.8)
 
-project ("C-parser-generator-frontend")
+project ("parser-generator-frontend")
 
 add_compile_options("/std:c++latest")
 
 # 将源代码添加到此项目的可执行文件。
 
-include_directories("E:/VS shared resources/boost_1_75_0")
-
-add_subdirectory("src/Common")
-add_subdirectory("src/Generator")
-add_subdirectory("src/Parser")
+add_subdirectory("src")
 
 # TODO: 如有需要，请添加测试并安装目标。
 
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/out")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/out")
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/out")
-
-link_libraries("E:/VS shared resources/boost_1_75_0/lib")

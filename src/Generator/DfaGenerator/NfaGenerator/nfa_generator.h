@@ -1,16 +1,16 @@
+#ifndef GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
+#define GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
+
 #include <any>
+#include <boost/serialization/unordered_map.hpp>
+#include <boost/serialization/unordered_set.hpp>
+#include <boost/serialization/vector.hpp>
 #include <iostream>
-#include <unordered_map>
-#include <unordered_set>
-#include <vector>
 
 #include "Common/common.h"
 #include "Common/id_wrapper.h"
 #include "Common/multimap_object_manager.h"
 #include "Common/unordered_struct_manager.h"
-
-#ifndef GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
-#define GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
 
 namespace frontend::generator::dfa_generator::nfa_generator {
 class NfaGenerator {
@@ -21,21 +21,36 @@ class NfaGenerator {
   // NfaNode在管理类中的ID
   using NfaNodeId = frontend::common::MultimapObjectManager<NfaNode>::ObjectId;
   // 符号优先级
-  using TailNodePriority =
+  using WordPriority =
       frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
                                           WrapperLabel::kTailNodePriority>;
-  // 用户定义数据（由用户传入，在检测到相应节点时返回）
-  struct SavedData {
-    bool operator==(const SavedData& saved_data) const {
-      return (production_node_id == saved_data.production_node_id && node_type == saved_data.node_type &&
-              process_function_class_id_ == saved_data.process_function_class_id_
+  // 附属数据（在检测到相应单词时返回）
+  struct WordAttachedData {
+    friend class boost::serialization::access;
+
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version) {
+      ar& production_node_id;
+      ar& node_type;
+      ar& process_function_class_id_;
 #ifdef USE_AMBIGUOUS_GRAMMAR
-              && associate_type == saved_data.associate_type &&
-              priority == saved_data.priority
+      ar& associate_type;
+      ar& operator_priority;
+#endif  // USE_AMBIGUOUS_GRAMMAR
+    }
+
+    bool operator==(const WordAttachedData& saved_data) const {
+      return (
+          production_node_id == saved_data.production_node_id &&
+          node_type == saved_data.node_type &&
+          process_function_class_id_ == saved_data.process_function_class_id_
+#ifdef USE_AMBIGUOUS_GRAMMAR
+          && associate_type == saved_data.associate_type &&
+          operator_priority == saved_data.operator_priority
 #endif  // USE_AMBIGUOUS_GRAMMAR
       );
     }
-    bool operator!=(const SavedData& saved_data) const {
+    bool operator!=(const WordAttachedData& saved_data) const {
       return !operator==(saved_data);
     }
     // 产生式节点ID，前向声明无法引用嵌套类，所以无法引用源类型
@@ -43,19 +58,19 @@ class NfaGenerator {
     size_t production_node_id;
     // 节点类型
     frontend::common::ProductionNodeType node_type;
+    // 包装用户定义的函数类的对象的ID
+    size_t process_function_class_id_;
 
-    //以下三项仅对二义性文法的操作符有效
+    //以下两项仅对二义性文法的操作符有效
 #ifdef USE_AMBIGUOUS_GRAMMAR
-    // 包装用户定义的函数类的对象的ID，应有两个函数
-    frontend::common::ProcessFunctionClassId process_function_class_id_;
     // 结合性
     frontend::common::AssociatityType associate_type;
-    // 优先级
-    size_t priority;
+    // 运算符优先级
+    size_t operator_priority;
 #endif  // USE_AMBIGUOUS_GRAMMAR
   };
   // 前半部分为用户定义数据，后半部分为优先级，数字越大优先级越高
-  using TailNodeData = std::pair<SavedData, TailNodePriority>;
+  using TailNodeData = std::pair<WordAttachedData, WordPriority>;
 
   // 合并两个NFA节点
   // TODO 了解这个友元函数是否必要
@@ -97,7 +112,7 @@ class NfaGenerator {
     std::unordered_set<NfaNodeId> conditionless_transfer_nodes_id;
   };
 
-  NfaGenerator();
+  NfaGenerator() {}
   NfaGenerator(const NfaGenerator&) = delete;
   NfaGenerator(NfaGenerator&&) = delete;
 
@@ -105,28 +120,27 @@ class NfaGenerator {
 
   const TailNodeData GetTailNodeData(NfaNode* pointer);
   const TailNodeData GetTailNodeData(NfaNodeId production_node_id);
-  NfaNode& GetNfaNode(NfaNodeId production_node_id) { return node_manager_.GetObject(production_node_id); }
+  NfaNode& GetNfaNode(NfaNodeId production_node_id) {
+    return node_manager_.GetObject(production_node_id);
+  }
   // 解析正则并添加到已有NFA中，返回生成的自动机的头结点和尾节点，自动处理结尾的范围限制符号
   std::pair<NfaNodeId, NfaNodeId> RegexConstruct(
-      std::istream& in, const TailNodeData& tag, bool add_to_NFA_head = true,
-      bool return_when_right_bracket = false);
+      std::istream& in, const TailNodeData& tag, const bool add_to_NFA_head = true,
+      const bool return_when_right_bracket = false);
   // 添加一个由字符串构成的NFA，自动处理结尾的范围限制符号
   std::pair<NfaNodeId, NfaNodeId> WordConstruct(const std::string& str,
                                                 const TailNodeData& tag);
   // 合并优化，降低节点数以降低子集构造法集合大小，直接使用NFA也可以降低成本
   void MergeOptimization();
 
-  std::pair<std::unordered_set<NfaNodeId>, TailNodeData> Closure(NfaNodeId production_node_id);
+  std::pair<std::unordered_set<NfaNodeId>, TailNodeData> Closure(
+      NfaNodeId production_node_id);
   // 返回goto后的节点的闭包
   std::pair<std::unordered_set<NfaNodeId>, TailNodeData> Goto(NfaNodeId id_src,
                                                               char c_transform);
 
-  // 清除已有NFA
-  void Clear();
-
-  // 序列化容器用
-  template <class Archive>
-  void Serialize(Archive& ar, const unsigned int version = 0);
+  // NFA初始化
+  void NfaInit();
 
   // 非尾节点标记
   static const TailNodeData NotTailNodeTag;
@@ -152,14 +166,15 @@ bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
                                 NfaGenerator& generator);
 // 为了SavedData可以参与排序，实际该结构并没有逻辑顺序
 // 使用需满足结构体内注释的条件
-inline bool operator<(const NfaGenerator::SavedData& left,
-                      const NfaGenerator::SavedData& right) {
+inline bool operator<(const NfaGenerator::WordAttachedData& left,
+                      const NfaGenerator::WordAttachedData& right) {
   return left.production_node_id < right.production_node_id;
 }
-inline bool operator>(const NfaGenerator::SavedData& left,
-                      const NfaGenerator::SavedData& right) {
+inline bool operator>(const NfaGenerator::WordAttachedData& left,
+                      const NfaGenerator::WordAttachedData& right) {
   return left.production_node_id > right.production_node_id;
 }
 
 }  // namespace frontend::generator::dfa_generator::nfa_generator
+
 #endif  // !GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_

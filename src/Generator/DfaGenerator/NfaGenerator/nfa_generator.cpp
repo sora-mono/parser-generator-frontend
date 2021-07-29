@@ -1,8 +1,11 @@
-#include "Generator/DfaGenerator/NfaGenerator/nfa_generator.h"
+#include "nfa_generator.h"
 
 #include <algorithm>
 #include <queue>
 #include <sstream>
+
+#include "Generator/DfaGenerator/NfaGenerator/nfa_generator.h"
+#include "nfa_generator.h"
 
 namespace frontend::generator::dfa_generator::nfa_generator {
 
@@ -59,13 +62,15 @@ NfaGenerator::Closure(NfaNodeId production_node_id) {
       continue;
     }
     uset_temp.insert(id_now);
-    auto iter = tail_nodes_.find(&GetNfaNode(id_now));  // 判断是否为尾节点
+    auto iter = tail_nodes_.find(&GetNfaNode(id_now));
+    // 判断是否为尾节点
     if (iter != tail_nodes_.end()) {
       TailNodeData& tail_node_data_new = iter->second;
-      TailNodePriority priority_old = tail_node_data.second;
-      TailNodePriority priority_new = tail_node_data_new.second;
+      WordPriority priority_old = tail_node_data.second;
+      WordPriority priority_new = tail_node_data_new.second;
 
-      if (tail_node_data == NotTailNodeTag) {  // 以前无尾节点记录
+      if (tail_node_data == NotTailNodeTag) {
+        // 以前无尾节点记录
         tail_node_data = tail_node_data_new;
       } else if (priority_new > priority_old) {
         // 当前记录优先级大于以前的优先级
@@ -98,6 +103,13 @@ NfaGenerator::Goto(NfaNodeId id_src, char c_transform) {
   return Closure(production_node_id);
 }
 
+void NfaGenerator::NfaInit() {
+  head_node_id_ = NfaNodeId::InvalidId();
+  tail_nodes_.clear();
+  node_manager_.MultimapObjectManagerInit();
+  head_node_id_ = node_manager_.EmplaceObject();  // 添加头结点
+}
+
 bool NfaGenerator::NfaNode::MergeNodesWithManager(NfaNode& node_src) {
   if (&node_src == this) {  // 相同节点合并则直接返回true
     return true;
@@ -121,10 +133,6 @@ bool NfaGenerator::NfaNode::MergeNodesWithManager(NfaNode& node_src) {
   return true;
 }
 
-NfaGenerator::NfaGenerator() {
-  head_node_id_ = node_manager_.EmplaceObject();  // 添加头结点
-}
-
 inline const NfaGenerator::TailNodeData NfaGenerator::GetTailNodeData(
     NfaNode* pointer) {
   auto iter = tail_nodes_.find(pointer);
@@ -141,8 +149,8 @@ inline const NfaGenerator::TailNodeData NfaGenerator::GetTailNodeData(
 // TODO 将流改成printf等函数
 std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>
 NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
-                             bool add_to_NFA_head,
-                             bool return_when_right_bracket) {
+                             const bool add_to_NFA_head,
+                             const bool return_when_right_bracket) {
   NfaNodeId head_id = node_manager_.EmplaceObject();
   NfaNodeId tail_id = head_id;
   NfaNodeId pre_tail_id = head_id;
@@ -228,20 +236,31 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
         pre_tail_id = tail_id;
         tail_id = temp_tail_id;
         break;
-      case '?':
+      case '?':  // 仅对单个字符生效
         temp_tail_id = node_manager_.EmplaceObject();
         GetNfaNode(tail_id).AddNoconditionTransfer(temp_tail_id);
         GetNfaNode(pre_tail_id).AddNoconditionTransfer(temp_tail_id);
         pre_tail_id = tail_id;
         tail_id = pre_tail_id;
         break;
-      case '\\':
+      case '\\': // 仅对单个字符生效
         in >> c_now;
         if (!in || c_now == '\0') {
           throw std::invalid_argument("非法正则");
         }
         temp_tail_id = node_manager_.EmplaceObject();
         GetNfaNode(tail_id).SetConditionTransfer(c_now, temp_tail_id);
+        pre_tail_id = tail_id;
+        tail_id = temp_tail_id;
+        break;
+      case '.':  // 仅对单个字符生效
+        temp_tail_id = node_manager_.EmplaceObject();
+        for (char transform_char = CHAR_MIN; transform_char != CHAR_MAX;
+             ++transform_char) {
+          GetNfaNode(tail_id).SetConditionTransfer(transform_char,
+                                                   temp_tail_id);
+        }
+        GetNfaNode(tail_id).SetConditionTransfer(CHAR_MAX, temp_tail_id);
         pre_tail_id = tail_id;
         tail_id = temp_tail_id;
         break;
@@ -308,12 +327,6 @@ void NfaGenerator::MergeOptimization() {
       node_manager_.SetObjectMergeRefused(id_now);
     }
   }
-}
-
-void NfaGenerator::Clear() {
-  head_node_id_ = NfaNodeId::InvalidId();
-  tail_nodes_.clear();
-  node_manager_.Clear();
 }
 
 inline bool NfaGenerator::RemoveTailNode(NfaNode* pointer) {
@@ -415,6 +428,7 @@ bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
 }
 
 const NfaGenerator::TailNodeData NfaGenerator::NotTailNodeTag =
-    NfaGenerator::TailNodeData(SavedData(), TailNodePriority::InvalidId());
+    NfaGenerator::TailNodeData(WordAttachedData(),
+                               WordPriority::InvalidId());
 
 }  // namespace frontend::generator::dfa_generator::nfa_generator

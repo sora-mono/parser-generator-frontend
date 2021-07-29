@@ -7,7 +7,19 @@
       "inheritEnvironments": [ "msvc_x64_x64" ],
       "buildRoot": "${projectDir}\\out\\build\\${name}",
       "installRoot": "${projectDir}\\out\\install\\${name}",
-      "ctestCommandArgs": ""
+      "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "CMAKE_SHARED_LINKER_FLAGS_DEBUG",
+          "value": "/debug /INCREMENTAL",
+          "type": "STRING"
+        },
+        {
+          "name": "CMAKE_SHARED_LINKER_FLAGS",
+          "value": "/machine:x64",
+          "type": "STRING"
+        }
+      ]
     },
     {
       "name": "x64-Release",

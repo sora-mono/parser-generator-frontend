@@ -1,15 +1,30 @@
-#include "Generator/DfaGenerator/dfa_generator.h"
+#include "dfa_generator.h"
 
-#include <queue>
+#include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/queue.hpp>
+#include <fstream>
 #include <sstream>
 
 namespace frontend::generator::dfa_generator {
 using frontend::common::kCharNum;
 using frontend::generator::dfa_generator::nfa_generator::NfaGenerator;
 
+void DfaGenerator::DfaInit() {
+  dfa_config.clear();
+  head_index = TransformArrayId::InvalidId();
+  file_end_saved_data_ = WordAttachedData();
+  nfa_generator_.NfaInit();
+  head_node_intermediate_ = IntermediateNodeId::InvalidId();
+  config_node_num = 0;
+  intermediate_node_to_final_node_.clear();
+  node_manager_intermediate_node_.ObjectManagerInit();
+  node_manager_set_.StructManagerInit();
+  setid_to_intermediate_nodeid_.clear();
+}
+
 bool DfaGenerator::AddKeyword(const std::string& str,
-                              const SavedData& saved_data,
-                              TailNodePriority priority_tag) {
+                              const WordAttachedData& saved_data,
+                              WordPriority priority_tag) {
   auto [head_node_id, tail_node_id] =
       nfa_generator_.WordConstruct(str, TailNodeData(saved_data, priority_tag));
   assert(head_node_id.IsValid() && tail_node_id.IsValid());
@@ -17,11 +32,11 @@ bool DfaGenerator::AddKeyword(const std::string& str,
 }
 
 bool DfaGenerator::AddRegexpression(const std::string& str,
-                                    const SavedData& saved_data,
-                                    TailNodePriority priority) {
+                                    const WordAttachedData& saved_data,
+                                    WordPriority operator_priority) {
   std::stringstream sstream(str);
   auto [head_node_id, tail_node_id] = nfa_generator_.RegexConstruct(
-      sstream, TailNodeData(saved_data, priority));
+      sstream, TailNodeData(saved_data, operator_priority));
   assert(head_node_id.IsValid() && tail_node_id.IsValid());
   return true;
 }
@@ -60,7 +75,7 @@ bool DfaGenerator::DfaConstruct() {
       }
     }
   }
-  node_manager_set_.Clear();
+  node_manager_set_.StructManagerInit();
   node_manager_set_.ShrinkToFit();
   setid_to_intermediate_nodeid_.clear();
   return true;
@@ -103,7 +118,7 @@ bool DfaGenerator::DfaMinimize() {
   head_index =
       intermediate_node_to_final_node_.find(head_node_intermediate_)->second;
   head_node_intermediate_ = IntermediateNodeId::InvalidId();
-  node_manager_intermediate_node_.Clear();
+  node_manager_intermediate_node_.ObjectManagerInit();
   node_manager_intermediate_node_.ShrinkToFit();
   intermediate_node_to_final_node_.clear();
   return true;
@@ -135,16 +150,14 @@ std::pair<DfaGenerator::IntermediateNodeId, bool> DfaGenerator::SetGoto(
 
 inline DfaGenerator::IntermediateNodeId DfaGenerator::IntermediateGoto(
     IntermediateNodeId handler_src, char c_transform) {
-  return GetIntermediateNode(handler_src)
-      .forward_nodes[c_transform];
+  return GetIntermediateNode(handler_src).forward_nodes[c_transform];
 }
 
 inline bool DfaGenerator::SetIntermediateNodeTransform(
     IntermediateNodeId node_intermediate_src, char c_transform,
     IntermediateNodeId node_intermediate_dst) {
   IntermediateDfaNode& node_src = GetIntermediateNode(node_intermediate_src);
-  node_src.forward_nodes[c_transform] =
-      node_intermediate_dst;
+  node_src.forward_nodes[c_transform] = node_intermediate_dst;
   return true;
 }
 
@@ -186,6 +199,11 @@ bool DfaGenerator::DfaMinimize(const std::vector<IntermediateNodeId>& handlers,
   DfaMinimizeGroupsRecursion(groups, c_transform);
   DfaMinimizeGroupsRecursion(no_next_group, c_transform);
   return true;
+}
+void DfaGenerator::SaveConfig() {
+  std::ofstream ofile("dfa_config.conf");
+  boost::archive::binary_oarchive oarchive(ofile);
+  oarchive << *this;
 }
 
 }  // namespace frontend::generator::dfa_generator

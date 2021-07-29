@@ -1,0 +1,6 @@
+Project(SyntaxGenerator)
+
+aux_source_directory(. SYNTAX_GENERATOR_SRCS)
+
+add_library(syntax_generator ${SYNTAX_GENERATOR_SRCS} "syntax_generate.h")
+target_link_libraries(syntax_generator CONAN_PKG::boost dfa_generator)
