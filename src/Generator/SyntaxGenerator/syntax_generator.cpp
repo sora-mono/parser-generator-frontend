@@ -56,20 +56,24 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddOperatorNode(
     const std::string& operator_symbol, AssociatityType associatity_type,
     OperatorPriority priority_level) {
   // 运算符产生式名与运算符相同
-  auto[operator_node_symbol_id, operator_node_symbol_inserted] = AddNodeSymbol(operator_symbol);
+  auto [operator_node_symbol_id, operator_node_symbol_inserted] =
+      AddNodeSymbol(operator_symbol);
   if (!operator_node_symbol_inserted) [[unlikely]] {
     fprintf(stderr, "syntax_generator error:运算符：%s 已定义\n",
             operator_symbol.c_str());
     return ProductionNodeId::InvalidId();
   }
-  auto[operator_body_symbol_id, operator_body_symbol_inserted] = AddBodySymbol(operator_symbol);
+  auto [operator_body_symbol_id, operator_body_symbol_inserted] =
+      AddBodySymbol(operator_symbol);
   if (!operator_body_symbol_inserted) {
-    fprintf(stderr, "syntax_generator error:运算符：%s 已在DFA中添加，无法定义为运算符\n",
-            operator_symbol.c_str());
+    fprintf(
+        stderr,
+        "syntax_generator error:运算符：%s 已在DFA中添加，无法定义为运算符\n",
+        operator_symbol.c_str());
     return ProductionNodeId::InvalidId();
   }
-  ProductionNodeId operator_node_id =
-      SubAddOperatorNode(operator_node_symbol_id, associatity_type, priority_level);
+  ProductionNodeId operator_node_id = SubAddOperatorNode(
+      operator_node_symbol_id, associatity_type, priority_level);
   assert(operator_node_id.IsValid());
   frontend::generator::dfa_generator::DfaGenerator::WordAttachedData
       word_attached_data_;
@@ -870,8 +874,9 @@ void SyntaxGenerator::CheckNonTerminalNodeCanContinue(
       while (iter_begin != iter_end) {
         auto& [node_symbol, node_body_ptr, process_function_class_id_] =
             iter_begin->second;
-        ProductionNodeId node_id = AddNonTerminalNode(std::move(node_symbol), std::move(node_body_ptr),
-                           process_function_class_id_);
+        ProductionNodeId node_id =
+            AddNonTerminalNode(std::move(node_symbol), std::move(node_body_ptr),
+                               process_function_class_id_);
         if (node_id.IsValid()) {
           // 成功添加非终结节点，删除该条记录
           auto temp_iter = iter_begin;
@@ -1174,9 +1179,9 @@ SyntaxGenerator::Core& SyntaxGenerator::Core::operator=(Core&& core) {
 
 void SyntaxGenerator::ConfigConstruct() {
   // 下面的宏将包含的文件中用户定义的产生式转化为产生式构建配置
-  // 如AddTerminalNode、AddTerminalNode等
+  // 如AddTerminalNode、AddNonTerminalNode等
 #define GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_
-  #include"Config/ProductionConfig/production_config-inc.h"
+#include "Config/ProductionConfig/production_config-inc.h"
 #undef GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_
 }
 

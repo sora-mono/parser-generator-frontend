@@ -19,8 +19,10 @@
 // 修饰非终结节点产生式名以获取包装Reduct函数用的类名
 #define NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,   \
                                              production_body_seq) \
-  production_symbol##production_body_seq##_
+  (production_symbol##production_body_seq##_)
 
+// 以下定义除GENERATOR_DEFINE_NONTERMINAL_PRODUCTION特殊说明外
+// 字符串类参数均需要写成字符串形式
 // 关键字定义
 #ifdef GENERATOR_DEFINE_KEY_WORD
 #undef GENERATOR_DEFINE_KEY_WORD
@@ -49,9 +51,9 @@
 
 // 非终结节点定义，产生式体部分请使用初始化列表书写法
 // 例：{"production_body1","production_body2"}
+// 四个参数都不在两侧加双引号
 // production_body_seq是产生式体编号
-// 每一个相同的产生式名下各产生式体编号必须不同，仅可使用非负整数
-// 如：0,1,2,3...
+// 每一个相同的产生式名下各产生式体编号必须不同，可使用[a-zA-Z0-9_]+
 // 该编号用于区分不同的产生式体并为其构建相应的包装函数
 #ifdef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
@@ -65,29 +67,28 @@
 #ifdef GENERATOR_DEFINE_KEY_WORD
 #undef GENERATOR_DEFINE_KEY_WORD
 #endif  // GENERATOR_DEFINE_KEY_WORD
-#define GENERATOR_DEFINE_KEY_WORD(key_word) AddKeyWord((key_word))
+#define GENERATOR_DEFINE_KEY_WORD(key_word) AddKeyWord((key_word));
 
 #ifdef GENERATOR_DEFINE_OPERATOR
 #undef GENERATOR_DEFINE_OPERATOR
 #endif  // GENERATOR_DEFINE_OPERATOR
 #define GENERATOR_DEFINE_OPERATOR(operator_symbol, operator_associatity, \
                                   operator_priority)                     \
-  AddOperatorNode((#operator_symbol),                                    \
-                  (ProductionNodeType::operator_associatity),            \
-                  (OperatorPriority(operator_priority)))
+  AddOperatorNode((operator_symbol), (operator_associatity),             \
+                  (OperatorPriority(operator_priority)));
 
 #ifdef GENERATOR_DEFINE_ROOT_PRODUCTION
 #undef GENERATOR_DEFINE_ROOT_PRODUCTION
 #endif  // GENERATOR_DEFINE_ROOT_PRODUCTION
 #define GENERATOR_DEFINE_ROOT_PRODUCTION(production_symbol) \
-  SetRootProduction((#production_symbol))
+  SetRootProduction((production_symbol));
 
 #ifdef GENERATOR_DEFINE_TERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_TERMINAL_PRODUCTION
 #endif  // GENERATOR_DEFINE_TERMINAL_PRODUCTION
 #define GENERATOR_DEFINE_TERMINAL_PRODUCTION(production_symbol, \
                                              production_body)   \
-  AddTerminalNode((#production_symbol), (#production_body))
+  AddTerminalNode((production_symbol), (production_body));
 
 #ifdef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
@@ -96,7 +97,7 @@
     production_symbol, production_body, reduct_function, production_body_seq) \
   AddNonTerminalNode<NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(                    \
       production_symbol, production_body_seq)>((#production_symbol),          \
-                                               (production_body))
+                                               (production_body));
 
 #elif defined GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_
 
@@ -111,13 +112,13 @@
       : public ProcessFunctionInterface {                                     \
    public:                                                                    \
     virtual ProcessFunctionInterface::UserData Reduct(                        \
-        std::vector<WordDataToUser>&& user_data) override {                   \
+        std::vector<ProcessFunctionInterface::WordDataToUser>&& user_data)    \
+        override {                                                            \
       return reduct_function(std::move(user_data));                           \
     }                                                                         \
   };
 
-#elif defined \
-    GENERATOR_SYNTAXGENERATOR_USER_DEFINED_FUNCTION_AND_DATA_REGISTER_
+#elif defined GENERATOR_SYNTAXGENERATOR_USER_DEFINED_FUNCTION_AND_DATA_REGISTER_
 
 #ifdef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION

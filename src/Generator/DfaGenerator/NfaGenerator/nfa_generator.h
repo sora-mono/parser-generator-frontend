@@ -2,9 +2,9 @@
 #define GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
 
 #include <any>
-#include <boost/serialization/unordered_map.hpp>
-#include <boost/serialization/unordered_set.hpp>
-#include <boost/serialization/vector.hpp>
+#include <unordered_map>
+#include <unordered_set>
+#include <vector>
 #include <iostream>
 
 #include "Common/common.h"

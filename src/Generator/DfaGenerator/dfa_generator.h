@@ -59,15 +59,8 @@ class DfaGenerator {
   // 中间节点ID
   using IntermediateNodeId = ObjectManager<IntermediateDfaNode>::ObjectId;
 
-  struct IntergalSetHasher {
-    common::IntergalSetHashType operator()(
-        const std::unordered_set<NfaNodeId>& set) {
-      return common::HashIntergalUnorderedSet(set);
-    }
-  };
-
   using SetManagerType =
-      common::UnorderedStructManager<SetType, IntergalSetHasher>;
+      common::UnorderedStructManager<SetType>;
   // 子集构造法得到的子集的ID
   using SetId = SetManagerType::ObjectId;
   // 分发标签

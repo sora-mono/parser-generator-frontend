@@ -1,10 +1,1 @@
-project(Common)
-
-add_compile_options("/std:c++latest")
-
 include_directories(${CMAKE_SOURCE_DIR}/src)
-
-aux_source_directory(. COMMON_FUNCTIONS_SRC)
-
-add_library(common_functions ${COMMON_FUNCTIONS_SRC})
-target_link_libraries(common_functions CONAN_PKG::boost)

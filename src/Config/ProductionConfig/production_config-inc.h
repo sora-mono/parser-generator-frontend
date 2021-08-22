@@ -1,4 +1,14 @@
 #include"Generator/SyntaxGenerator/syntax_generate.h"
+#include"Common/common.h"
+// 提供运算符结合性枚举定义
+using ProductionAssociatityType = frontend::common::AssociatityType;
+// 在这里插入用户定义的头文件
+
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("Id", R"([a-zA-Z_][a-zA-Z0-9_])")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("Num", R"([0-9]*(\.[0-9]*)?)")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("Str", R"(.*)")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("Character", R"('.')")
+
 
 //id-> [_a-zA-Z][_0-9a-zA-Z]*
 //immediate_value-> -?([1-9][0-9]*|0)(.[0-9]*)?

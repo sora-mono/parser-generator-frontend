@@ -4,7 +4,6 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <functional>
 
-#include "Common/hash_functions.h"
 #include "Common/id_wrapper.h"
 #include "Common/object_manager.h"
 
@@ -13,11 +12,9 @@ namespace frontend::common {
 template <class T>
 struct DefaultHasher {
   size_t operator()(const T& object) {
-    auto iter = object.begin();
     size_t result = 1;
-    while (iter != object.end()) {
-      result *= *iter;
-      ++iter;
+    for (auto x : object) {
+      result *= x;
     }
     return result;
   }
