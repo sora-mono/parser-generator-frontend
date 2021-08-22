@@ -29,19 +29,19 @@ class ProcessFunctionInterface {
   };
   // 存储产生式中单个节点所携带的信息
   struct WordDataToUser {
-    // 仅有非终结节点和终结节点两种可能
-    frontend::common::ProductionNodeType node_type;
     // 该单词的数据
-    boost::variant<TerminalWordData, NonTerminalWordData> word_data_to_user_;
+    // 空规约节点存储NonTerminalWordData
+    // 其中NonTerminalWordData::user_data_为空
+    boost::variant<TerminalWordData, NonTerminalWordData> word_data_to_user;
     TerminalWordData& GetTerminalWordData() {
-      return boost::get<TerminalWordData>(word_data_to_user_);
+      return boost::get<TerminalWordData>(word_data_to_user);
     }
     NonTerminalWordData& GetNonTerminalWordData() {
-      return boost::get<NonTerminalWordData>(word_data_to_user_);
+      return boost::get<NonTerminalWordData>(word_data_to_user);
     }
     template <class T>
-    void SetWordData(T&& word_data) {
-      word_data_to_user_ = word_data;
+    void SetWordDataToUser(T&& word_data) {
+      word_data_to_user = word_data;
     }
   };
 

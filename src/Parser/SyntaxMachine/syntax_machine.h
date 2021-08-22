@@ -10,8 +10,7 @@
 namespace frontend::parser::syntaxmachine {
 
 class SyntaxMachine {
-  using SyntaxGenerator =
-      frontend::generator::syntaxgenerator::SyntaxGenerator;
+  using SyntaxGenerator = frontend::generator::syntaxgenerator::SyntaxGenerator;
   using DfaMachine = frontend::parser::dfamachine::DfaMachine;
 
  public:
@@ -47,7 +46,7 @@ class SyntaxMachine {
   // 移入时使用的数据
   using ShiftAttachedData =
       SyntaxGenerator::ParsingTableEntry::ShiftAttachedData;
-  // 归并时使用的数据
+  // 归约时使用的数据
   using ReductAttachedData =
       SyntaxGenerator::ParsingTableEntry::ReductAttachedData;
   // 传递给用户的单个单词的数据
@@ -65,11 +64,11 @@ class SyntaxMachine {
   struct ParsingData {
     // 当前语法分析表条目ID
     ParsingTableEntryId parsing_table_entry_id;
-    // 在parsing_table_entry_id条目的基础上移入的单词的ID
+    // 在parsing_table_entry_id条目的基础上移入的产生式节点的ID
     // 提供该项为了支持空规约功能
     ProductionNodeId shift_node_id;
-    // 终结节点数据或非终结节点规约后用户返回的数据
-    WordDataToUser word_data_to_user_;
+    // 移入的终结节点数据或非终结节点规约后用户返回的数据
+    WordDataToUser word_data_to_user;
 
 #ifdef USE_AMBIGUOUS_GRAMMAR
     // 非运算符优先级为0
@@ -119,16 +118,13 @@ class SyntaxMachine {
   }
   std::stack<ParsingData>& GetParsingStack() { return parsing_stack_; }
   ParsingData& GetParsingDataNow() { return parsing_data_now_; }
-  
+
 #ifdef USE_AMBIGUOUS_GRAMMAR
-  OperatorPriority& GetOperatorPriorityNow() { return operator_priority_now_; }
+  OperatorPriority& GetOperatorPriorityNow() {
+    return parsing_data_now_.operator_priority;
+  }
 #endif  // USE_AMBIGUOUS_GRAMMAR
 
-  // 弹出解析用数据栈顶端的数据到parsing_data_now
-  void PopParsingStack() {
-    GetParsingDataNow() = std::move(GetParsingStack().top());
-    GetParsingStack().pop();
-  }
   // 放回当前待处理单词
   void PutbackWordNow() {
     dfa_machine_.PutbackWord(std::move(GetWaitingProcessWordInfo()));
@@ -165,11 +161,6 @@ class SyntaxMachine {
   std::stack<ParsingData> parsing_stack_;
   // 当前解析用数据
   ParsingData parsing_data_now_;
-
-#ifdef USE_AMBIGUOUS_GRAMMAR
-  // 当前优先级
-  OperatorPriority operator_priority_now_;
-#endif  // USE_AMBIGUOUS_GRAMMAR
 };
 
 }  // namespace frontend::parser::syntaxmachine
