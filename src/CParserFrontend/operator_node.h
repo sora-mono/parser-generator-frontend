@@ -198,7 +198,7 @@ class VarietyOperatorNode : public OperatorNodeInterface {
   static bool CheckVarietyTypeValid(const TypeInterface& variety_type);
 
  private:
-  // 变量名
+  // 变量名，出错提示时用
   const std::string* variety_name_;
   // 变量类型
   std::shared_ptr<const TypeInterface> variety_type_;

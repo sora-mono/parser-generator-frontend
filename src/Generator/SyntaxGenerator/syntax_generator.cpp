@@ -103,7 +103,7 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::SubAddOperatorNode(
 
 inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
     std::string&& node_symbol, std::vector<std::string>&& subnode_symbols,
-    ProcessFunctionClassId class_id) {
+    ProcessFunctionClassId class_id, bool could_empty_reduct) {
   assert(!node_symbol.empty() && !subnode_symbols.empty() &&
          class_id.IsValid());
   std::vector<ProductionNodeId> node_ids;
@@ -121,7 +121,8 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
   NonTerminalProductionNode& production_node =
       static_cast<NonTerminalProductionNode&>(
           GetProductionNode(production_node_id));
-  if (subnode_symbols.front() == "@") {
+  if (could_empty_reduct) {
+    // 该产生式可以被空规约
     production_node.SetProductionCouldBeEmpty();
     return production_node_id;
   }
@@ -145,7 +146,8 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
       // 产生式节点未定义
       // 添加待处理记录
       AddUnableContinueNonTerminalNode(subnode_symbol, std::move(node_symbol),
-                                       std::move(subnode_symbols), class_id);
+                                       std::move(subnode_symbols), class_id,
+                                       could_empty_reduct);
     }
     node_ids.push_back(subproduction_node_id);
   }
@@ -857,12 +859,13 @@ std::vector<std::string> SyntaxGenerator::GetFilesName(const std::string& str) {
 
 void SyntaxGenerator::AddUnableContinueNonTerminalNode(
     const std::string& undefined_symbol, std::string&& node_symbol,
-    std::vector<std::string>&& subnode_symbols,
-    ProcessFunctionClassId class_id) {
+    std::vector<std::string>&& subnode_symbols, ProcessFunctionClassId class_id,
+    bool could_empty_reduct) {
   // 使用insert因为可能有多个产生式依赖同一个未定义的产生式
-  undefined_productions_.insert(std::make_pair(
-      undefined_symbol, std::make_tuple(std::move(node_symbol),
-                                        std::move(subnode_symbols), class_id)));
+  undefined_productions_.emplace(
+      undefined_symbol,
+      std::make_tuple(std::move(node_symbol), std::move(subnode_symbols),
+                      class_id, could_empty_reduct));
 }
 
 void SyntaxGenerator::CheckNonTerminalNodeCanContinue(
@@ -872,11 +875,11 @@ void SyntaxGenerator::CheckNonTerminalNodeCanContinue(
         undefined_productions_.equal_range(node_symbol);
     if (iter_begin != undefined_productions_.end()) {
       while (iter_begin != iter_end) {
-        auto& [node_symbol, node_body_ptr, process_function_class_id_] =
-            iter_begin->second;
+        auto& [node_symbol, node_body_ptr, process_function_class_id_,
+               could_empty_reduct] = iter_begin->second;
         ProductionNodeId node_id =
             AddNonTerminalNode(std::move(node_symbol), std::move(node_body_ptr),
-                               process_function_class_id_);
+                               process_function_class_id_, could_empty_reduct);
         if (node_id.IsValid()) {
           // 成功添加非终结节点，删除该条记录
           auto temp_iter = iter_begin;
@@ -894,11 +897,16 @@ void SyntaxGenerator::CheckUndefinedProductionRemained() {
   if (!undefined_productions_.empty()) {
     // 仍存在未定义产生式
     for (auto& item : undefined_productions_) {
-      auto& [node_symbol, node_bodys, class_id] = item.second;
+      auto& [node_symbol, node_bodys, class_id, could_empty_reduct] =
+          item.second;
+      if (could_empty_reduct) {
+        fprintf(stderr, "(可以空规约）");
+      }
       fprintf(stderr, "产生式：%s\n产生式体：", node_symbol.c_str());
       for (auto& body : node_bodys) {
         fprintf(stderr, "%s ", body.c_str());
       }
+
       fprintf(stderr, "中\n产生式：%s 未定义\n", item.first.c_str());
     }
   }

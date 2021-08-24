@@ -9,6 +9,14 @@
 #include "operator_node.h"
 // 作用域系统
 namespace c_parser_frontend::action_scope_system {
+enum class DefineVarietyResult {
+  // 可以添加的情况
+  kNew,           // 新增指针，该节点不曾存储指针
+  kShiftToStack,  // 该节点以前存储了一个指针，现在存储第二个，转化为指针栈
+  kAddToStack,    // 向指针栈中添加一个指针
+  // 不可以添加的情况
+  kReDefine,  // 重定义
+};
 class VarietyScopeSystem {
   using OperatorNodeInterface =
       c_parser_frontend::operator_node::OperatorNodeInterface;
@@ -26,14 +34,7 @@ class VarietyScopeSystem {
         std::pair<std::shared_ptr<VarietyOperatorNode>, ActionScopeLevelType>;
     // 存储多个指针的类型
     using PointerStackType = std::stack<SinglePointerType>;
-    enum class AddVarietyResult {
-      // 可以添加的情况
-      kNew,           // 新增指针，该节点不曾存储指针
-      kShiftToStack,  // 该节点以前存储了一个指针，现在存储第二个，转化为指针栈
-      kAddToStack,    // 向指针栈中添加一个指针
-      // 不可以添加的情况
-      kReDefine  // 重定义
-    };
+
     VarietyData() = default;
     template <class Data>
     VarietyData(Data&& data) : variety_data_(std::forward<Data>(data)) {}
@@ -41,7 +42,7 @@ class VarietyScopeSystem {
     // 添加一条数据，如需转换成栈则自动执行
     // 建议先创建空节点后调用该函数，可以提升性能
     // 返回值含义见该类型定义处
-    AddVarietyResult AddVarietyData(
+    DefineVarietyResult AddVarietyData(
         std::shared_ptr<VarietyOperatorNode>&& operator_node,
         ActionScopeLevelType action_scope_level);
     // 弹出最顶层数据，自动处理转换
@@ -49,6 +50,10 @@ class VarietyScopeSystem {
     bool PopTopData();
     // 获取顶层数据
     VarietyScopeSystem::VarietyData::SinglePointerType& GetTopData();
+    // 判断容器是否未存储任何指针
+    bool Empty() {
+      return std::get_if<std::monostate>(&variety_data_) == nullptr;
+    }
 
    private:
     auto& GetVarietyData() { return variety_data_; }
@@ -60,9 +65,8 @@ class VarietyScopeSystem {
   };
 
  public:
-  using AddVarietyResult = VarietyData::AddVarietyResult;
   // 存储不同作用域变量的结构
-  using ActionScopeType = std::unordered_map<std::string, VarietyData>;
+  using ActionScopeContainerType = std::unordered_map<std::string, VarietyData>;
 
   VarietyScopeSystem() { VarietyScopeSystemInit(); }
 
@@ -79,12 +83,18 @@ class VarietyScopeSystem {
     assert(inserted == true);
     variety_stack_.emplace(std::move(iter));
   }
-  // 添加一个变量，level代表该变量外花括号的层数，0代表全局变量
-  // 返回true代表成功添加，false代表重定义
+  // 定义一个变量，level代表该变量外花括号的层数，0代表全局变量
+  // 返回指向插入位置的迭代器与插入的结果，结果含义见定义
   template <class VarietyName>
-  AddVarietyResult AddVariety(
+  std::pair<ActionScopeContainerType::const_iterator, DefineVarietyResult> DefineVariety(
       VarietyName&& variety_name,
       std::shared_ptr<VarietyOperatorNode>&& operator_node_pointer);
+  // 声明一个变量，保证返回的迭代器有效且管理节点存在，但不会添加变量指针
+  // 添加变量指针请使用AddVarietyDefine()
+  // 返回指向插入位置的迭代器
+  template <class VarietyName>
+  ActionScopeContainerType::const_iterator AnnounceVariety(
+      VarietyName&& variety_name);
   // 返回指向变量节点的智能指针和变量是否存在
   std::pair<std::shared_ptr<VarietyOperatorNode>, bool> GetVariety(
       const std::string& variety_name);
@@ -104,7 +114,7 @@ class VarietyScopeSystem {
  private:
   // 弹出所有高于给定作用域等级的变量
   void PopVarietyOverLevel(ActionScopeLevelType level);
-  ActionScopeType& GetVarietyNameToOperatorNodePointer() {
+  ActionScopeContainerType& GetVarietyNameToOperatorNodePointer() {
     return variety_name_to_operator_node_pointer_;
   }
   auto& GetVarietyStack() { return variety_stack_; }
@@ -112,25 +122,27 @@ class VarietyScopeSystem {
   // 存储变量名和对应同名不同作用域变量
   // 键值为变量名，值使用variant因为变量覆盖情况较少
   // 在发生覆盖时创建变量栈转换结构可以降低内存占用和stack的性能消耗
-  ActionScopeType variety_name_to_operator_node_pointer_;
+  ActionScopeContainerType variety_name_to_operator_node_pointer_;
   // 按顺序存储添加的变量，用来支持作用域结束后清除该作用域内全部变量功能
   // iterator指向变量和对应数据
-  std::stack<ActionScopeType::iterator> variety_stack_;
+  std::stack<ActionScopeContainerType::iterator> variety_stack_;
   // 存储当前作用域等级，全局变量为0级，每个{}增加一级
   ActionScopeLevelType action_scope_level;
 };
 template <class VarietyName>
-inline VarietyScopeSystem::AddVarietyResult VarietyScopeSystem::AddVariety(
+inline std::pair<VarietyScopeSystem::ActionScopeContainerType::const_iterator,
+                 DefineVarietyResult>
+VarietyScopeSystem::DefineVariety(
     VarietyName&& variety_name,
     std::shared_ptr<VarietyOperatorNode>&& operator_node_pointer) {
   auto [iter, inserted] = GetVarietyNameToOperatorNodePointer().emplace(
       std::forward<VarietyName>(variety_name), VarietyData());
-  AddVarietyResult add_variety_result = iter->second.AddVarietyData(
+  DefineVarietyResult add_variety_result = iter->second.AddVarietyData(
       std::move(operator_node_pointer), GetActionScopeLevel());
   switch (add_variety_result) {
-    case VarietyData::AddVarietyResult::kNew:
-    case VarietyData::AddVarietyResult::kAddToStack:
-    case VarietyData::AddVarietyResult::kShiftToStack:
+    case DefineVarietyResult::kNew:
+    case DefineVarietyResult::kAddToStack:
+    case DefineVarietyResult::kShiftToStack:
       // 全局变量不会被弹出，无需入栈
       if (GetActionScopeLevel() != 0) [[likely]] {
         // 添加该节点的信息，以便作用域失效时精确弹出
@@ -139,13 +151,20 @@ inline VarietyScopeSystem::AddVarietyResult VarietyScopeSystem::AddVariety(
         GetVarietyStack().emplace(std::move(iter));
       }
       break;
-    case VarietyData::AddVarietyResult::kReDefine:
+    case DefineVarietyResult::kReDefine:
       break;
     default:
       assert(false);
       break;
   }
-  return add_variety_result;
+  return std::make_pair(std::move(iter), add_variety_result);
+}
+template <class VarietyName>
+inline VarietyScopeSystem::ActionScopeContainerType::const_iterator
+VarietyScopeSystem::AnnounceVariety(VarietyName&& variety_name) {
+  return GetVarietyNameToOperatorNodePointer()
+      .emplace(std::forward<VarietyName>(variety_name), VarietyData())
+      .first;
 }
 }  // namespace c_parser_frontend::action_scope_system
 

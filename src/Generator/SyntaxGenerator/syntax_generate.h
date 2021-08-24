@@ -38,8 +38,8 @@
 
 // 根产生式定义，需要在给定产生式被正式添加后使用
 // （即该产生式所依赖的全部节点都能够添加后）
-#ifdef GENERATOR_DEFINE_OPERATOR
-#undef GENERATOR_DEFINE_OPERATOR
+#ifdef GENERATOR_DEFINE_ROOT_PRODUCTION
+#undef GENERATOR_DEFINE_ROOT_PRODUCTION
 #endif  // GENERATOR_DEFINE_OPERATOR
 #define GENERATOR_DEFINE_ROOT_PRODUCTION(production_symbol)
 
@@ -52,14 +52,18 @@
 // 非终结节点定义，产生式体部分请使用初始化列表书写法
 // 例：{"production_body1","production_body2"}
 // 四个参数都不在两侧加双引号
+// reduct_function是规约用函数
 // production_body_seq是产生式体编号
 // 每一个相同的产生式名下各产生式体编号必须不同，可使用[a-zA-Z0-9_]+
 // 该编号用于区分不同的产生式体并为其构建相应的包装函数
+// could_empty_reduct表示该产生式是否可以空规约
+// 所有规约到同一个production_symbol的产生式体中只需出现一次
 #ifdef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #endif  // GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
-#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION( \
-    production_symbol, production_body, reduct_function, production_body_seq)
+#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                              \
+    production_symbol, production_body, reduct_function, production_body_seq, \
+    could_empty_reduct)
 
 // 这部分对三种需要产生式信息的文件特化
 #ifdef GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_
@@ -94,10 +98,11 @@
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #endif  // GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                              \
-    production_symbol, production_body, reduct_function, production_body_seq) \
+    production_symbol, production_body, reduct_function, production_body_seq, \
+    could_empty_reduct)                                                       \
   AddNonTerminalNode<NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(                    \
-      production_symbol, production_body_seq)>((#production_symbol),          \
-                                               (production_body));
+      production_symbol, production_body_seq)>(                               \
+      (#production_symbol), (production_body), (could_empty_reduct));
 
 #elif defined GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_
 
@@ -106,7 +111,8 @@
 #endif  // GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 
 #define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                              \
-    production_symbol, production_body, reduct_function, production_body_seq) \
+    production_symbol, production_body, reduct_function, production_body_seq, \
+    could_empty_reduct)                                                       \
   class NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,               \
                                              production_body_seq)             \
       : public ProcessFunctionInterface {                                     \
@@ -125,7 +131,8 @@
 #endif  // GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 
 #define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                              \
-    production_symbol, production_body, reduct_function, production_body_seq) \
+    production_symbol, production_body, reduct_function, production_body_seq, \
+    could_empty_reduct)                                                       \
   BOOST_CLASS_EXPORT_GUID(                                                    \
       frontend::generator::syntaxgenerator::                                  \
           NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,             \

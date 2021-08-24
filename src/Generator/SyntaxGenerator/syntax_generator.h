@@ -304,9 +304,11 @@ class SyntaxGenerator {
   // 其余三个参数同AddNonTerminalNode
   // 函数会复制一份副本，无需保持原来的参数的生命周期
   void AddUnableContinueNonTerminalNode(
-      const std::string& undefined_symbol, std::string&& node_symbol,
+      const std::string& undefined_symbol,
+ std::string&& node_symbol,
+
       std::vector<std::string>&& subnode_symbols,
-      ProcessFunctionClassId class_id);
+      ProcessFunctionClassId class_id, bool could_empty_reduct);
   // 检查给定的节点生成后是否可以重启因为部分产生式体未定义而搁置的
   // 非终结产生式添加过程
   void CheckNonTerminalNodeCanContinue(const std::string& node_symbol);
@@ -350,15 +352,17 @@ class SyntaxGenerator {
 
   // 新建非终结节点，返回节点ID，节点已存在则不会创建新的节点
   // node_symbol为产生式名，subnode_symbols是产生式体
+  // could_empty_reduct代表是否可以空规约
   // class_id是已添加的包装用户自定义函数和数据的类的对象ID
   // 拆成模板函数和非模板函数为了降低代码生成量，阻止代码膨胀
   // 下面两个函数均可直接调用，class_id是包装用户定义函数和数据的类的对象ID
   template <class ProcessFunctionClass>
   ProductionNodeId AddNonTerminalNode(
-      std::string&& node_symbol, std::vector<std::string>&& subnode_symbols);
+      std::string&& node_symbol, std::vector<std::string>&& subnode_symbols,
+      bool could_empty_reduct);
   ProductionNodeId AddNonTerminalNode(
       std::string&& node_symbol, std::vector<std::string>&& subnode_symbols,
-      ProcessFunctionClassId class_id);
+      ProcessFunctionClassId class_id, bool could_empty_reduct);
   // 子过程，仅用于创建节点
   // 自动更新节点名ID到节点ID的映射表
   // 自动为节点类设置节点ID
@@ -582,9 +586,10 @@ class SyntaxGenerator {
   // tuple内的std::string是非终结产生式名
   // const std::vector<std::pair<std::string, bool>>*存储已有的产生式体信息
   // ProcessFunctionClassId是给定的包装用户定义函数数据的类的对象ID
-  std::unordered_multimap<
-      std::string,
-      std::tuple<std::string, std::vector<std::string>, ProcessFunctionClassId>>
+  // bool是是否可以空规约标记
+  std::unordered_multimap<std::string,
+                          std::tuple<std::string, std::vector<std::string>,
+                                     ProcessFunctionClassId, bool>>
       undefined_productions_;
   // 管理终结符号、非终结符号等的节点
   ObjectManager<BaseProductionNode> manager_nodes_;
@@ -1191,11 +1196,12 @@ inline bool SyntaxGenerator::PrintProcessFunction(FILE* function_file,
 
 template <class ProcessFunctionClass>
 inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
-    std::string&& node_symbol, std::vector<std::string>&& subnode_symbols) {
+    std::string&& node_symbol, std::vector<std::string>&& subnode_symbols,
+    bool could_empty_reduct) {
   ProcessFunctionClassId class_id =
       CreateProcessFunctionClassObject<ProcessFunctionClass>();
   return AddNonTerminalNode(std::move(node_symbol), std::move(subnode_symbols),
-                            class_id);
+                            class_id, could_empty_reduct);
 }
 
 template <class ParsingTableEntryIdContainer>
@@ -1289,9 +1295,9 @@ void SyntaxGenerator::ParsingTableEntry::SetTerminalNodeActionAndAttachedData(
   auto iter = action_and_attached_data_.find(node_id);
   if (iter == action_and_attached_data_.end()) {
     // 新插入转移节点
-    action_and_attached_data_.emplace(std::make_pair(
+    action_and_attached_data_.emplace(
         node_id, ActionAndAttachedData(
-                     action_type, std::forward<AttachedData>(attached_data))));
+                     action_type, std::forward<AttachedData>(attached_data)));
     return;
   }
   // 待插入的转移条件已存在

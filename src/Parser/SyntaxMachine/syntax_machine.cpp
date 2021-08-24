@@ -51,36 +51,49 @@ void SyntaxMachine::TerminalWordWaitingProcess() {
     case ActionType::kShift:
       ShiftTerminalWord(action_and_attached_data);
       break;
-
-#ifdef USE_AMBIGUOUS_GRAMMAR
     case ActionType::kShiftReduct: {
-      // 该项仅在待移入单词为运算符时有效
-      // 运算符优先级必须不为0
+      // 需要根据实际情况判断移入还是规约
       auto& terminal_node_info =
           GetWaitingProcessWordInfo().word_attached_data_;
-      OperatorPriority& priority_now = GetOperatorPriorityNow();
-      assert(terminal_node_info.node_type ==
-                 ProductionNodeType::kOperatorNode &&
-             terminal_node_info.operator_priority != 0);
-      if (priority_now > terminal_node_info.operator_priority) {
-        // 当前优先级高于待处理的运算符的优先级，执行规约操作
-        Reduct(action_and_attached_data);
-      } else if (priority_now == terminal_node_info.operator_priority) {
-        // 当前优先级等于待处理的运算符的优先级，需要判定结合性
-        if (terminal_node_info.associate_type ==
-            AssociatityType::kLeftToRight) {
-          // 运算符为从左到右结合，执行规约操作
-          Reduct(action_and_attached_data);
-        } else {
-          // 运算符为从右到左结合，执行移入操作
-          ShiftTerminalWord(action_and_attached_data);
+      switch (terminal_node_info.node_type) {
+        case ProductionNodeType::kTerminalNode:
+          // 非运算符节点使用贪心策略，防止有公共前缀的产生式只有最短的那条有效
+          return ShiftTerminalWord(action_and_attached_data);
+          break;
+        case ProductionNodeType::kOperatorNode: {
+          // 运算符优先级必须不为0
+          OperatorPriority& priority_now = GetOperatorPriorityNow();
+          assert(terminal_node_info.node_type ==
+                     ProductionNodeType::kOperatorNode &&
+                 terminal_node_info.operator_priority != 0);
+          if (priority_now > terminal_node_info.operator_priority) {
+            // 当前优先级高于待处理的运算符的优先级，执行规约操作
+            Reduct(action_and_attached_data);
+          } else if (priority_now == terminal_node_info.operator_priority) {
+            // 当前优先级等于待处理的运算符的优先级，需要判定结合性
+            if (terminal_node_info.associate_type ==
+                AssociatityType::kLeftToRight) {
+              // 运算符为从左到右结合，执行规约操作
+              Reduct(action_and_attached_data);
+            } else {
+              // 运算符为从右到左结合，执行移入操作
+              ShiftTerminalWord(action_and_attached_data);
+            }
+          } else {
+            // 当前优先级低于待处理的运算符的优先级，执行移入操作
+            ShiftTerminalWord(action_and_attached_data);
+          }
         }
-      } else {
-        // 当前优先级低于待处理的运算符的优先级，执行移入操作
-        ShiftTerminalWord(action_and_attached_data);
+        break;
+        case ProductionNodeType::kEndNode:
+          // EndNode在转移表里的动作只能规约不能移入
+        case ProductionNodeType::kNonTerminalNode:
+          // NonTerminalNode在产生后就被Reduct函数调用ShiftNonTerminalNode消耗
+        default:
+          assert(false);
+          break;
       }
-    } break;
-#endif  // USE_AMBIGUOUS_GRAMMAR
+    }
 
     default:
       assert(false);

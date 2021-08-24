@@ -4,7 +4,7 @@ namespace c_parser_frontend::action_scope_system {
 // 建议先创建空节点后调用该函数，可以提升性能
 // 返回值含义见该类型定义处
 
-inline VarietyScopeSystem::VarietyData::AddVarietyResult
+inline DefineVarietyResult
 VarietyScopeSystem::VarietyData::AddVarietyData(
     std::shared_ptr<VarietyOperatorNode>&& operator_node,
     ActionScopeLevelType action_scope_level) {
@@ -15,14 +15,14 @@ VarietyScopeSystem::VarietyData::AddVarietyData(
     // 未存储任何东西，向variety_data_中存储单个指针
     variety_data.emplace<SinglePointerType>(std::move(operator_node),
                                             action_scope_level);
-    return AddVarietyResult::kNew;
+    return DefineVarietyResult::kNew;
   } else {
     auto* single_object = std::get_if<SinglePointerType>(&variety_data);
     if (single_object != nullptr) [[likely]] {
       // 检查是否存在重定义
       if (single_object->second == action_scope_level) [[unlikely]] {
         // 该作用域等级已经定义同名变量
-        return AddVarietyResult::kReDefine;
+        return DefineVarietyResult::kReDefine;
       }
       // 原来存储单个shared_ptr，新增一个指针转化为指针栈
       // 将原来的存储方式改为栈存储
@@ -33,18 +33,18 @@ VarietyScopeSystem::VarietyData::AddVarietyData(
       stack_pointer->emplace(std::move(operator_node), action_scope_level);
       // 重新设置variety_data的内容
       variety_data = std::move(stack_pointer);
-      return AddVarietyResult::kShiftToStack;
+      return DefineVarietyResult::kShiftToStack;
     } else {
       // 检查是否存在重定义
       if (single_object->second == action_scope_level) [[unlikely]] {
         // 该作用域等级已经定义同名变量
-        return AddVarietyResult::kReDefine;
+        return DefineVarietyResult::kReDefine;
       }
       auto& stack_pointer =
           *std::get_if<std::unique_ptr<PointerStackType>>(&variety_data);
       // 已经建立指针栈，向指针栈中添加给定指针
       stack_pointer->emplace(std::move(operator_node), action_scope_level);
-      return AddVarietyResult::kAddToStack;
+      return DefineVarietyResult::kAddToStack;
     }
   }
 }

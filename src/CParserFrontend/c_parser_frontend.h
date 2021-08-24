@@ -10,17 +10,19 @@
 #include "type_system.h"
 
 namespace c_parser_frontend {
-// 引用一些类型的定义
-using c_parser_frontend::action_scope_system::VarietyScopeSystem;
-using AddVarietyResult = c_parser_frontend::action_scope_system::
-    VarietyScopeSystem::AddVarietyResult;
-using c_parser_frontend::flow_control::FunctionDefine;
-using c_parser_frontend::operator_node::VarietyOperatorNode;
-using c_parser_frontend::type_system::StructOrBasicType;
-using c_parser_frontend::type_system::TypeInterface;
-using c_parser_frontend::type_system::TypeSystem;
 
 class CParserFrontend {
+  // 引用一些类型的定义
+  using DefineVarietyResult =
+      c_parser_frontend::action_scope_system::DefineVarietyResult;
+  using VarietyScopeSystem =
+      c_parser_frontend::action_scope_system::VarietyScopeSystem;
+  using FunctionDefine = c_parser_frontend::flow_control::FunctionDefine;
+  using VarietyOperatorNode =
+      c_parser_frontend::operator_node::VarietyOperatorNode;
+  using StructOrBasicType = c_parser_frontend::type_system::StructOrBasicType;
+  using TypeInterface = c_parser_frontend::type_system::TypeInterface;
+  using TypeSystem = c_parser_frontend::type_system::TypeSystem;
   using AddTypeResult = TypeSystem::AddTypeResult;
   using GetTypeResult = TypeSystem::GetTypeResult;
 
@@ -50,12 +52,19 @@ class CParserFrontend {
     return variety_system.GetActionScopeLevel();
   }
   // 添加变量
-  // 返回添加结果
-  AddVarietyResult AddVariety(
-      std::string&& variety_name,
-      std::shared_ptr<VarietyOperatorNode>&& operator_node) {
-    return variety_system.AddVariety(std::move(variety_name),
-                                     std::move(operator_node));
+  // 返回指向插入位置的迭代器与添加结果，添加结果意义见定义
+  std::pair<VarietyScopeSystem::ActionScopeContainerType::const_iterator,
+            DefineVarietyResult>
+  DefineVariety(std::string&& variety_name,
+                std::shared_ptr<VarietyOperatorNode>&& operator_node) {
+    return variety_system.DefineVariety(std::move(variety_name),
+                                        std::move(operator_node));
+  }
+  // 声明变量，返回指向插入位置的迭代器
+  // 保证插入节点有效且管理节点存在
+  VarietyScopeSystem::ActionScopeContainerType::const_iterator AnnounceVariety(
+      std ::string&& variety_name) {
+    return variety_system.AnnounceVariety(std::move(variety_name));
   }
   std::pair<std::shared_ptr<VarietyOperatorNode>, bool> GetVariety(
       const std::string& variety_name) {
@@ -95,7 +104,7 @@ class CParserFrontend {
 // 如果添加失败则返回函数数据的控制权
 
 template <class FunctionName>
-inline std::pair<std::unique_ptr<FunctionDefine>, bool>
+inline std::pair<std::unique_ptr<CParserFrontend::FunctionDefine>, bool>
 CParserFrontend::AddFunctionAnnounce(
     FunctionName&& function_name,
     std::unique_ptr<FunctionDefine>&& function_announce_data) {
@@ -120,7 +129,7 @@ CParserFrontend::AddFunctionAnnounce(
 // 如果添加失败则返回函数数据的控制权
 
 template <class FunctionName>
-inline std::pair<std::unique_ptr<FunctionDefine>,
+inline std::pair<std::unique_ptr<CParserFrontend::FunctionDefine>,
                  CParserFrontend::AddFunctionDefineResult>
 CParserFrontend::AddFunctionDefine(
     FunctionName&& function_name,

@@ -412,7 +412,8 @@ class UnionType : public TypeInterface {
   using UnionContainerType = std::unordered_map<
       std::string, std::pair<ConstTag, std::shared_ptr<const TypeInterface>>>;
 
-  UnionType() : TypeInterface(StructOrBasicType::kUnion) {}
+  UnionType()
+      : TypeInterface(StructOrBasicType::kUnion), union_name_(nullptr) {}
   UnionType(const std::string* union_name,
             std::shared_ptr<TypeInterface>&& next_node_pointer)
       : TypeInterface(StructOrBasicType::kUnion, std::move(next_node_pointer)),
@@ -517,7 +518,8 @@ class EnumType : public TypeInterface {
     auto iter = GetEnumMembers().find(member_name);
     return std::make_pair(iter, iter != GetEnumMembers().end());
   }
-  // 根据成员个数和最大index计算
+  // TODO 实现函数
+  // 根据成员个数和最大index计算存储所需的类型
   void CalculateContainerType();
   std::shared_ptr<const TypeInterface> GetContainerTypePointer() const {
     return container_type_;
@@ -632,6 +634,11 @@ class CommonlyUsedTypeGenerator {
 
 class TypeSystem {
  public:
+  using TypeNodeContainerType = std::unordered_map<
+      std::string,
+      std::variant<
+          std::monostate, std::shared_ptr<const TypeInterface>,
+          std::unique_ptr<std::vector<std::shared_ptr<const TypeInterface>>>>>;
   // 添加类型时返回的状态
   enum class AddTypeResult {
     // 成功添加的情况
@@ -670,14 +677,9 @@ class TypeSystem {
   // 保存类型名到类型链的映射
   // 匿名结构不保存在这里，由该结构声明的变量维护类型链
   // 当存储多个同名类型时值将转换为指向vector的指针，通过vector保存同名类型
-  // 使用vector保存时应将StructOrBasicType::kBasic类型放在第一个位置
+  // 使用vector保存时如果存在则应将StructOrBasicType::kBasic类型放在第一个位置
   // 可以避免查找全部指针，加速标准类型查找规则查找速度
-  std::unordered_map<
-      std::string,
-      std::variant<
-          std::monostate, std::shared_ptr<const TypeInterface>,
-          std::unique_ptr<std::vector<std::shared_ptr<const TypeInterface>>>>>
-      type_name_to_node_;
+  TypeNodeContainerType type_name_to_node_;
 };
 
 template <class TypeName>
