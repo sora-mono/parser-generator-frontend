@@ -113,7 +113,6 @@ inline void SyntaxMachine::ShiftTerminalWord(
   TerminalWordData terminal_word_data;
   // 设置待移入节点的字符串和所在行数
   terminal_word_data.word = word_info.symbol_;
-  terminal_word_data.line = word_info.line_;
   // 添加待移入节点信息到当前解析用信息
   parsing_data_now.word_data_to_user.SetWordDataToUser(
       std::move(terminal_word_data));

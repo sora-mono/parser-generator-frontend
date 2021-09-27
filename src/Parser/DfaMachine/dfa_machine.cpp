@@ -1,5 +1,11 @@
 #include "Parser/DfaMachine/dfa_machine.h"
 
+#include <format>
+namespace frontend::parser {
+thread_local size_t line_ = 0;
+thread_local size_t column_ = 0;
+}  // namespace frontend::parser
+
 namespace frontend::parser::dfamachine {
 bool DfaMachine::SetInputFile(const std::string filename) {
   FILE* file;
@@ -21,13 +27,12 @@ DfaMachine::WordInfo DfaMachine::GetNextWord() {
   }
   std::string symbol;
   WordInfo return_data;
-  return_data.line_ = line_;
   // 当前状态转移表ID
   TransformArrayId transform_array_id = start_id_;
   while (true) {
     char c = fgetc(file_);
     if (ferror(file_)) {
-      fprintf(stderr, "读取输入文件出错，请检查文件\n");
+      std::cerr << std::format("读取输入文件出错，请检查文件\n") << std::endl;
       abort();
     }
     // 判断特殊情况
@@ -41,11 +46,14 @@ DfaMachine::WordInfo DfaMachine::GetNextWord() {
       case '\n':
         // 行数+1
         SetLine(GetLine() + 1);
+        // 重置列数为0
+        SetColumn(0);
         break;
       default:
         break;
     }
     symbol += c;
+    SetColumn(GetColumn() + 1);
     TransformArrayId next_array_id = dfa_config_[transform_array_id].first[c];
     if (!next_array_id.IsValid()) {
       break;
@@ -56,10 +64,9 @@ DfaMachine::WordInfo DfaMachine::GetNextWord() {
 Return:
   if (feof(file_)) {
     // 到达文件结尾
-    return WordInfo(GetEndOfFileSavedData(), GetLine(), std::move(symbol));
+    return WordInfo(GetEndOfFileSavedData(), std::move(symbol));
   } else {
-    return WordInfo(dfa_config_[transform_array_id].second, GetLine(),
-                      std::move(symbol));
+    return WordInfo(dfa_config_[transform_array_id].second, std::move(symbol));
   }
 }
 

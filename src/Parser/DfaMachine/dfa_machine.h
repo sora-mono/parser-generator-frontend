@@ -3,6 +3,15 @@
 
 #include "Generator/DfaGenerator/dfa_generator.h"
 
+namespace frontend::parser {
+// 线程全局变量，存储当前解析到的行数
+// 从0开始计数
+extern thread_local size_t line_;
+// 线程全局变量，存储当前解析到的列数
+// 从0开始计数
+extern thread_local size_t column_;
+}  // namespace frontend::parser
+
 namespace frontend::parser::dfamachine {
 
 class DfaMachine {
@@ -19,23 +28,18 @@ class DfaMachine {
   struct WordInfo {
     WordInfo() = default;
     template <class SavedDataType>
-    WordInfo(SavedDataType&& saved_data, size_t line, std::string&& symbol_)
+    WordInfo(SavedDataType&& saved_data, std::string&& symbol_)
         : word_attached_data_(std::forward<SavedDataType>(saved_data)),
-          line_(line),
           symbol_(std::move(symbol_)) {}
     WordInfo(WordInfo&& return_data)
         : word_attached_data_(std::move(return_data.word_attached_data_)),
-          line_(std::move(return_data.line_)),
           symbol_(std::move(return_data.symbol_)) {}
     WordInfo& operator=(WordInfo&& return_data) {
       word_attached_data_ = std::move(return_data.word_attached_data_);
-      line_ = std::move(return_data.line_);
       symbol_ = std::move(return_data.symbol_);
       return *this;
     }
     WordAttachedData word_attached_data_;
-    // 单词所在行
-    size_t line_;
     // 获取到的单词
     std::string symbol_;
   };
@@ -45,9 +49,14 @@ class DfaMachine {
   // 如果遇到了文件结尾则返回tail_node_id = WordAttachedData::InvalidId()
   WordInfo GetNextWord();
   // 获取当前行数
-  size_t GetLine() { return line_; }
+  static size_t GetLine() { return line_; }
   // 设置当前行数
-  void SetLine(size_t line_) { line_ = line_; }
+  static void SetLine(size_t line) { line_ = line; }
+  // 获取当前列数
+  static size_t GetColumn() { return column_; }
+  // 设置当前列数
+  static void SetColumn(size_t column) { column_ = column; }
+
   // 重置状态
   void Reset() {
     file_ = nullptr;
@@ -77,8 +86,6 @@ class DfaMachine {
   WordAttachedData file_end_saved_data_;
   // 当前输入文件
   FILE* file_;
-  //当前行，从0开始计数，获取到每个回车后+1
-  size_t line_ = 0;
   // 保存放回单词的数组
   std::vector<WordInfo> putback_words_;
 };

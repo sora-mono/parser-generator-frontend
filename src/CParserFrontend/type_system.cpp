@@ -1,12 +1,49 @@
 #include "type_system.h"
 
 namespace c_parser_frontend::type_system {
+BuiltInType CalculateBuiltInType(const std::string& value) {
+  // 转换过程中转换的字符数
+  size_t converted_characters;
+  uint64_t integer_value = std::stoull(value, &converted_characters);
+  if (converted_characters == value.size()) {
+    // 全部转换，value代表整数
+    if (integer_value <= UINT16_MAX) {
+      if (integer_value <= UINT8_MAX) {
+        return BuiltInType::kInt8;
+      } else {
+        return BuiltInType::kInt16;
+      }
+    } else {
+      if (integer_value <= UINT32_MAX) {
+        return BuiltInType::kInt32;
+      } else {
+        // C语言不支持long long
+        return BuiltInType::kVoid;
+      }
+    }
+  } else {
+    // 未全部转换，可能是浮点数也可能是超出最大支持数值大小
+    long double float_value = std::stold(value, &converted_characters);
+    if (converted_characters != value.size()) [[unlikely]] {
+      // 超出最大支持数值大小
+      return BuiltInType::kVoid;
+    }
+    if (float_value <= FLT_MAX) {
+      return BuiltInType::kFloat32;
+    } else if (float_value <= DBL_MAX) {
+      return BuiltInType::kFloat64;
+    } else {
+      // C语言不支持long double
+      return BuiltInType::kVoid;
+    }
+  }
+}
 bool operator==(const std::shared_ptr<TypeInterface>& type_interface1,
                 const std::shared_ptr<TypeInterface>& type_interface2) {
   return *type_interface1 == *type_interface2;
 }
 
-std::pair<std::shared_ptr<const TypeInterface>, TypeSystem::GetTypeResult>
+std::pair<std::shared_ptr<const TypeInterface>, GetTypeResult>
 TypeSystem::GetType(const std::string& type_name,
                     StructOrBasicType type_prefer) {
   auto iter = GetTypeNameToNode().find(type_name);
@@ -14,53 +51,22 @@ TypeSystem::GetType(const std::string& type_name,
     return std::make_pair(std::shared_ptr<TypeInterface>(),
                           GetTypeResult::kTypeNameNotFound);
   }
-  std::shared_ptr<const TypeInterface>* shared_pointer =
-      std::get_if<std::shared_ptr<const TypeInterface>>(&iter->second);
-  if (shared_pointer != nullptr) [[likely]] {
-    // 仅存储1个指针
-    if (type_prefer == StructOrBasicType::kNotSpecified ||
-        (*shared_pointer)->GetType() == type_prefer) [[likely]] {
-      // 无类型选择倾向或者类型选择倾向符合
-      return std::make_pair(*shared_pointer, GetTypeResult::kSuccess);
-    } else {
-      // 没有匹配的类型选择倾向
-      return std::make_pair(std::shared_ptr<TypeInterface>(),
-                            GetTypeResult::kNoMatchTypePrefer);
-    }
-  } else {
-    // 存储多个指针
-    auto& vector_pointer = *std::get_if<
-        std::unique_ptr<std::vector<std::shared_ptr<const TypeInterface>>>>(
-        &iter->second);
-    // 判断是否指定类型选择倾向
-    if (type_prefer == StructOrBasicType::kNotSpecified) [[likely]] {
-      if (vector_pointer->front()->GetType() == StructOrBasicType::kBasic) {
-        // 优先匹配kBasic
-        return std::make_pair(vector_pointer->front(),
-                              GetTypeResult::kSuccess);
-      } else {
-        // vector中没有kBasic，并且一定存储至少两个指针，这些指针同级
-        return std::make_pair(std::shared_ptr<TypeInterface>(),
-                              GetTypeResult::kSeveralSameLevelMatches);
-      }
-    } else {
-      // 遍历vector搜索与给定类型选择倾向相同的指针
-      for (auto& pointer : *vector_pointer) {
-        if (pointer->GetType() == type_prefer) [[unlikely]] {
-          return std::make_pair(pointer, GetTypeResult::kSuccess);
-        }
-      }
-      // 没有匹配的类型选择倾向
-      return std::make_pair(std::shared_ptr<TypeInterface>(),
-                            GetTypeResult::kNoMatchTypePrefer);
-    }
+  return iter->second.GetType(type_prefer);
+}
+
+bool TypeSystem::RemoveEmptyNode(const std::string& empty_node_to_remove_name) {
+  auto iter = GetTypeNameToNode().find(empty_node_to_remove_name);
+  if (iter != GetTypeNameToNode().end() && iter->second.Empty()) [[likely]] {
+    GetTypeNameToNode().erase(iter);
+    return true;
   }
+  return false;
 }
 
 inline AssignableCheckResult BasicType::CanBeAssignedBy(
-    std::shared_ptr<const TypeInterface>&& type_interface) const {
+    const TypeInterface& type_interface) const {
   // 初步检查用来赋值的类型
-  switch (type_interface->GetType()) {
+  switch (type_interface.GetType()) {
     // 基础类型只能用基础类型赋值
     // c语言中不能使用初始化列表初始化基础类型（存疑）
     case StructOrBasicType::kBasic:
@@ -69,12 +75,16 @@ inline AssignableCheckResult BasicType::CanBeAssignedBy(
       // 该类型仅可出现在根据类型名获取类型操作中
       assert(false);
       break;
+    case StructOrBasicType::kInitializeList:
+      // 初始化列表，交给operator_node处理
+      return AssignableCheckResult::kInitializeList;
+      break;
     default:
       return AssignableCheckResult::kCanNotConvert;
       break;
   }
   // 检查转换方法
-  const BasicType& basic_type = static_cast<const BasicType&>(*type_interface);
+  const BasicType& basic_type = static_cast<const BasicType&>(type_interface);
   // 检查符号类型
   if (GetSignTag() != basic_type.GetSignTag()) [[unlikely]] {
     if (GetSignTag() == SignTag::kSigned) {
@@ -97,6 +107,39 @@ inline AssignableCheckResult BasicType::CanBeAssignedBy(
   }
 }
 
+inline size_t BasicType::GetTypeStoreSize() const {
+  switch (GetBuiltInType()) {
+    case BuiltInType::kInt1:
+      // x86下bool类型也要使用1个字节
+      return 1;
+      break;
+    case BuiltInType::kInt8:
+      return 1;
+      break;
+    case BuiltInType::kInt16:
+      return 2;
+      break;
+    case BuiltInType::kInt32:
+      return 4;
+      break;
+    case BuiltInType::kFloat32:
+      return 4;
+      break;
+    case BuiltInType::kFloat64:
+      return 8;
+      break;
+    case BuiltInType::kVoid:
+      // 用于void指针
+      return 4;
+      break;
+    default:
+      assert(false);
+      // 防止警告
+      return size_t();
+      break;
+  }
+}
+
 inline bool BasicType::IsSameObject(const TypeInterface& type_interface) const {
   // this == &basic_type是优化手段，类型系统设计思路是尽可能多的共享一条类型链
   // 所以容易出现指向同一个节点的情况
@@ -107,39 +150,50 @@ inline bool BasicType::IsSameObject(const TypeInterface& type_interface) const {
              GetSignTag() == basic_type.GetSignTag();
 }
 
-inline bool FunctionType::IsSameObject(
+inline AssignableCheckResult FunctionType::CanBeAssignedBy(
     const TypeInterface& type_interface) const {
-  // this == &type_interface是优化手段
-  // 类型系统设计思路是尽可能多的共享一条类型链
-  // 所以容易出现指向同一个节点的情况
-  if (this == &type_interface) [[likely]] {
-    return true;
-  }
+  // 在赋值给函数指针的过程中调用
+  // 函数类型只能使用函数赋值
+  // 初步检查基础数据是否相同
   if (TypeInterface::IsSameObject(type_interface)) [[likely]] {
-    if (GetFunctionName().empty()) {
-      // 函数指针的一个节点，函数名置空
-      // 函数指针需要比较参数和返回值
-      const FunctionType& function_type =
-          static_cast<const FunctionType&>(type_interface);
-      return function_type.GetFunctionName().empty() &&
-             GetArgumentTypes() == function_type.GetArgumentTypes() &&
-             GetReturnTypeReference() == function_type.GetReturnTypeReference();
-    } else {
-      // 函数声明/函数调用/函数定义的一个节点
-      // C语言不支持函数重载，所以只需判断函数名是否相同
-      return GetFunctionName() ==
-             static_cast<const FunctionType&>(type_interface).GetFunctionName();
+    // 检查函数签名是否相同
+    if (IsSameSignature(static_cast<const FunctionType&>(type_interface)))
+        [[likely]] {
+      return AssignableCheckResult::kNonConvert;
     }
   }
+  return AssignableCheckResult::kCanNotConvert;
 }
 
+
+// 返回是否为函数声明（函数声明中不存在任何流程控制语句）
+
+inline bool FunctionType::IsFunctionAnnounce() const {
+  return GetSentences().empty();
+}
+
+inline bool FunctionType::IsSameObject(
+    const TypeInterface& type_interface) const {
+  // 函数类型唯一，只有指向同一个FunctionType对象才是同一个函数
+  return this == &type_interface;
+}
+
+// 检查给定语句是否可以作为函数内出现的语句
+
 inline AssignableCheckResult PointerType::CanBeAssignedBy(
-    std::shared_ptr<const TypeInterface>&& type_interface) const {
+    const TypeInterface& type_interface) const {
   // 初步检查用来赋值的类型
-  switch (type_interface->GetType()) {
+  switch (type_interface.GetType()) {
     case StructOrBasicType::kBasic:
-      // 仅当值为0时可以赋值给指针
-      return AssignableCheckResult::kMayBeZeroToPointer;
+      // 如果是浮点数则一定不能转换为指针
+      // 检查是否为整数
+      if (static_cast<const BasicType&>(type_interface).GetBuiltInType() <
+          BuiltInType::kFloat32) [[likely]] {
+        // 仅当值为0时可以赋值给指针
+        return AssignableCheckResult::kMayBeZeroToPointer;
+      } else {
+        return AssignableCheckResult::kCanNotConvert;
+      }
       break;
     case StructOrBasicType::kPointer:
       break;
@@ -150,14 +204,20 @@ inline AssignableCheckResult PointerType::CanBeAssignedBy(
     case StructOrBasicType::kFunction:
       // 函数可以作为一级函数指针对待
       {
-        // 将用来赋值的函数转换为函数指针形式
-        std::shared_ptr<const TypeInterface> function_pointer =
-            FunctionType::ConvertToFunctionPointer(std::move(type_interface));
-        // 不使用尾递归优化防止function_pointer被提前释放
-        AssignableCheckResult check_result = CanBeAssignedBy(
-            std::shared_ptr<const TypeInterface>(function_pointer));
-        return check_result;
+        const FunctionType& next_node =
+            static_cast<const FunctionType&>(GetNextNodeReference());
+        // 检查是否下一个节点为函数节点
+        if (next_node.GetType() == StructOrBasicType::kFunction) [[likely]] {
+          return next_node.CanBeAssignedBy(type_interface);
+        } else {
+          // 函数名只能作为一重函数指针使用
+          return AssignableCheckResult::kCanNotConvert;
+        }
       }
+      break;
+    case StructOrBasicType::kInitializeList:
+      // 初始化列表在operator_node中检查
+      return AssignableCheckResult::kInitializeList;
       break;
     default:
       return AssignableCheckResult::kCanNotConvert;
@@ -165,7 +225,7 @@ inline AssignableCheckResult PointerType::CanBeAssignedBy(
   }
   // 检查const情况
   const PointerType& pointer_type =
-      static_cast<const PointerType&>(*type_interface);
+      static_cast<const PointerType&>(type_interface);
   switch (static_cast<int>(GetConstTag()) -
           static_cast<int>(pointer_type.GetConstTag())) {
     case -1:
@@ -181,77 +241,120 @@ inline AssignableCheckResult PointerType::CanBeAssignedBy(
     default:
       assert(false);
   }
-  switch (GetNextNodeReference().GetType()) {
-    case StructOrBasicType::kPointer:
-      // 下一个节点是指针，则继续比较
-      return GetNextNodeReference().CanBeAssignedBy(
-          type_interface->GetNextNodePointer());
-    default:
-      // 下一个节点不是指针则比较是否为相同类型
-      if (GetNextNodeReference() == type_interface->GetNextNodeReference())
-          [[likely]] {
-        return AssignableCheckResult::kNonConvert;
-      } else if (type_interface->GetNextNodeReference().GetType() !=
-                     StructOrBasicType::kPointer &&
-                 GetNextNodeReference() ==
-                     *CommonlyUsedTypeGenerator::GetBasicType<
-                         BuiltInType::kVoid, SignTag::kUnsigned>()) {
-        // 被赋值的对象为void指针，赋值的对象为同等维数指针
-        return AssignableCheckResult::kConvertToVoidPointer;
-      }
-      break;
+  auto assignable_check_result = GetNextNodeReference().CanBeAssignedBy(
+      type_interface.GetNextNodeReference());
+  // 检查是否为将指针赋值给同等维数的void指针的过程
+  if (assignable_check_result == AssignableCheckResult::kCanNotConvert)
+      [[unlikely]] {
+    if (GetNextNodeReference() ==
+        *CommonlyUsedTypeGenerator::GetBasicType<BuiltInType::kVoid,
+                                                 SignTag::kUnsigned>())
+        [[likely]] {
+      // 被赋值的对象为void指针，赋值的对象为同等维数指针
+      assignable_check_result = AssignableCheckResult::kConvertToVoidPointer;
+    }
+  }
+  return assignable_check_result;
+}
+
+inline size_t PointerType::TypeSizeOf() const {
+  size_t array_size = GetArraySize();
+  assert(array_size != -1);
+  if (array_size == 0) {
+    // 纯指针，直接返回指针大小
+    return PointerType::GetTypeStoreSize();
+  } else {
+    // 指向数组的指针，各维度大小相乘，最后乘以基础单元大小
+    return array_size * GetNextNodeReference().TypeSizeOf();
   }
 }
 
-bool StructType::IsSameObject(const TypeInterface& type_interface) const {
-  // this == &type_interface是优化手段
-  // 类型系统设计思路是尽可能多的共享一条类型链
-  // 所以容易出现指向同一个节点的情况
-  if (this == &type_interface) [[likely]] {
-    // 二者共用一个节点
-    return true;
-  } else if (TypeInterface::IsSameObject(type_interface)) [[likely]] {
-    const StructType& struct_type =
-        static_cast<const StructType&>(type_interface);
-    const std::string* struct_name_this = GetStructName();
-    const std::string* struct_name_argument = struct_type.GetStructName();
-    if (struct_name_this != nullptr) [[likely]] {
-      if (struct_name_argument != nullptr) [[likely]] {
-        // 二者都是具名结构体
-        // C语言中具名结构体根据名字区分
-        return *struct_name_this == *struct_name_argument;
-      }
-    } else if (struct_name_argument == nullptr) {
-      // 二者都是匿名结构体
-      return GetStructMembers() == struct_type.GetStructMembers();
-    }
+inline AssignableCheckResult StructType::CanBeAssignedBy(
+    const TypeInterface& type_interface) const {
+  if (type_interface.GetType() == StructOrBasicType::kInitializeList)
+      [[likely]] {
+    // 赋值用的类型为初始化列表，交给opreator_node处理
+    return AssignableCheckResult::kInitializeList;
+  } else {
+    return *this == type_interface ? AssignableCheckResult::kNonConvert
+                                   : AssignableCheckResult::kCanNotConvert;
   }
-  return false;
 }
 
-bool UnionType::IsSameObject(const TypeInterface& type_interface) const {
-  // this == &type_interface是优化手段
-  // 类型系统设计思路是尽可能多的共享一条类型链
-  // 所以容易出现指向同一个节点的情况
-  if (this == &type_interface) [[likely]] {
-    // 二者共用一个节点
-    return true;
-  } else if (TypeInterface::IsSameObject(type_interface)) [[likely]] {
-    const UnionType& union_type = static_cast<const UnionType&>(type_interface);
-    const std::string* union_name_this = GetUnionName();
-    const std::string* union_name_argument = union_type.GetUnionName();
-    if (union_name_this != nullptr) [[likely]] {
-      if (union_name_argument != nullptr) [[likely]] {
-        // 二者都是具名共用体
-        // C语言中具名共用体根据名字区分
-        return *union_name_this == *union_name_argument;
-      }
-    } else if (union_name_argument == nullptr) {
-      // 二者都是匿名结构体
-      return GetUnionMembers() == union_type.GetUnionMembers();
+inline size_t StructType::GetTypeStoreSize() const {
+  // 扫描结构体以获取最大的成员
+  const auto& struct_members = GetStructureMembers();
+  // C语言空结构体大小为0
+  // C++空结构体大小为1
+  size_t biggest_member_size = 0;
+  for (const auto& member : struct_members) {
+    size_t member_size = member.first->GetTypeStoreSize();
+    if (member_size > biggest_member_size) {
+      biggest_member_size = member_size;
     }
   }
-  return false;
+  // 获取系统基本字节单位与结构体最大成员的最小值作为字节对齐的单位
+  size_t aligen_size = std::min(size_t(4), biggest_member_size);
+  // C语言空结构体大小为0
+  size_t struct_size = 0;
+  // 填写结构体大小
+  for (const auto& member : struct_members) {
+    // 距离对齐剩余的空间
+    size_t rest_space_to_member_align = struct_size % aligen_size;
+    // 存储该成员需要的空间
+    size_t type_store_size = member.first->TypeSizeOf();
+    // 如果该成员所需空间大于距离对齐的空间，则这部分空间作为填充空间
+    if (rest_space_to_member_align < type_store_size) {
+      struct_size += aligen_size - rest_space_to_member_align;
+    }
+    // 已经对齐，增加存储所需的空间
+    struct_size += type_store_size;
+  }
+  return struct_size;
+}
+
+inline AssignableCheckResult UnionType::CanBeAssignedBy(
+    const TypeInterface& type_interface) const {
+  if (type_interface.GetType() == StructOrBasicType::kInitializeList)
+      [[unlikely]] {
+    return AssignableCheckResult::kInitializeList;
+  } else {
+    return *this == type_interface ? AssignableCheckResult::kNonConvert
+                                   : AssignableCheckResult::kCanNotConvert;
+  }
+}
+
+inline size_t UnionType::GetTypeStoreSize() const {
+  // 扫描共用体以获取最大的成员
+  const auto& union_members = GetStructureMembers();
+  // C语言空共用体大小为0
+  // C++空共用体大小为1
+  size_t biggest_member_size = 0;
+  for (const auto& member : union_members) {
+    size_t member_size = member.first->TypeSizeOf();
+    if (member_size > biggest_member_size) {
+      biggest_member_size = member_size;
+    }
+  }
+  // 获取系统基本字节单位与结构体最大成员的最小值作为字节对齐的单位
+  size_t aligen_size = std::min(size_t(4), biggest_member_size);
+  size_t rest_space_to_aligen = biggest_member_size % aligen_size;
+  if (rest_space_to_aligen != 0) {
+    return biggest_member_size + aligen_size - rest_space_to_aligen;
+  } else {
+    return biggest_member_size;
+  }
+}
+
+inline AssignableCheckResult EnumType::CanBeAssignedBy(
+    const TypeInterface& type_interface) const {
+  if (type_interface.GetType() == StructOrBasicType::kInitializeList)
+      [[unlikely]] {
+    return AssignableCheckResult::kInitializeList;
+  } else {
+    return *this == type_interface ? AssignableCheckResult::kNonConvert
+                                   : AssignableCheckResult::kCanNotConvert;
+  }
 }
 
 bool EnumType::IsSameObject(const TypeInterface& type_interface) const {
@@ -301,9 +404,8 @@ inline bool PointerType::IsSameObject(
                  static_cast<const PointerType&>(type_interface).GetConstTag();
 }
 
-std::shared_ptr<TypeInterface>
-CommonlyUsedTypeGenerator::GetBasicTypeNotTemplate(BuiltInType built_in_type,
-                                                   SignTag sign_tag) {
+std::shared_ptr<BasicType> CommonlyUsedTypeGenerator::GetBasicTypeNotTemplate(
+    BuiltInType built_in_type, SignTag sign_tag) {
   switch (built_in_type) {
     case BuiltInType::kVoid:
       switch (sign_tag) {
@@ -318,91 +420,78 @@ CommonlyUsedTypeGenerator::GetBasicTypeNotTemplate(BuiltInType built_in_type,
           break;
       }
       break;
-    case BuiltInType::kBool:
+    case BuiltInType::kInt1:
       switch (sign_tag) {
         case c_parser_frontend::type_system::SignTag::kSigned:
-          return GetBasicType<BuiltInType::kBool, SignTag::kSigned>();
+          return GetBasicType<BuiltInType::kInt1, SignTag::kSigned>();
           break;
         case c_parser_frontend::type_system::SignTag::kUnsigned:
-          return GetBasicType<BuiltInType::kBool, SignTag::kUnsigned>();
+          return GetBasicType<BuiltInType::kInt1, SignTag::kUnsigned>();
           break;
         default:
           assert(false);
           break;
       }
       break;
-    case BuiltInType::kChar:
+    case BuiltInType::kInt8:
       switch (sign_tag) {
         case c_parser_frontend::type_system::SignTag::kSigned:
-          return GetBasicType<BuiltInType::kChar, SignTag::kSigned>();
+          return GetBasicType<BuiltInType::kInt8, SignTag::kSigned>();
           break;
         case c_parser_frontend::type_system::SignTag::kUnsigned:
-          return GetBasicType<BuiltInType::kChar, SignTag::kUnsigned>();
+          return GetBasicType<BuiltInType::kInt8, SignTag::kUnsigned>();
           break;
         default:
           assert(false);
           break;
       }
       break;
-    case BuiltInType::kShort:
+    case BuiltInType::kInt16:
       switch (sign_tag) {
         case c_parser_frontend::type_system::SignTag::kSigned:
-          return GetBasicType<BuiltInType::kShort, SignTag::kSigned>();
+          return GetBasicType<BuiltInType::kInt16, SignTag::kSigned>();
           break;
         case c_parser_frontend::type_system::SignTag::kUnsigned:
-          return GetBasicType<BuiltInType::kShort, SignTag::kUnsigned>();
+          return GetBasicType<BuiltInType::kInt16, SignTag::kUnsigned>();
           break;
         default:
           assert(false);
           break;
       }
       break;
-    case BuiltInType::kInt:
+    case BuiltInType::kInt32:
       switch (sign_tag) {
         case c_parser_frontend::type_system::SignTag::kSigned:
-          return GetBasicType<BuiltInType::kInt, SignTag::kSigned>();
+          return GetBasicType<BuiltInType::kInt32, SignTag::kSigned>();
           break;
         case c_parser_frontend::type_system::SignTag::kUnsigned:
-          return GetBasicType<BuiltInType::kInt, SignTag::kUnsigned>();
+          return GetBasicType<BuiltInType::kInt32, SignTag::kUnsigned>();
           break;
         default:
           assert(false);
           break;
       }
       break;
-    case BuiltInType::kLong:
+    case BuiltInType::kFloat32:
       switch (sign_tag) {
         case c_parser_frontend::type_system::SignTag::kSigned:
-          return GetBasicType<BuiltInType::kLong, SignTag::kSigned>();
+          return GetBasicType<BuiltInType::kFloat32, SignTag::kSigned>();
           break;
         case c_parser_frontend::type_system::SignTag::kUnsigned:
-          return GetBasicType<BuiltInType::kLong, SignTag::kUnsigned>();
+          return GetBasicType<BuiltInType::kFloat32, SignTag::kUnsigned>();
           break;
         default:
           assert(false);
           break;
       }
       break;
-    case BuiltInType::kFloat:
+    case BuiltInType::kFloat64:
       switch (sign_tag) {
         case c_parser_frontend::type_system::SignTag::kSigned:
-          return GetBasicType<BuiltInType::kFloat, SignTag::kSigned>();
+          return GetBasicType<BuiltInType::kFloat64, SignTag::kSigned>();
           break;
         case c_parser_frontend::type_system::SignTag::kUnsigned:
-          return GetBasicType<BuiltInType::kFloat, SignTag::kUnsigned>();
-          break;
-        default:
-          assert(false);
-          break;
-      }
-      break;
-    case BuiltInType::kDouble:
-      switch (sign_tag) {
-        case c_parser_frontend::type_system::SignTag::kSigned:
-          return GetBasicType<BuiltInType::kDouble, SignTag::kSigned>();
-          break;
-        case c_parser_frontend::type_system::SignTag::kUnsigned:
-          return GetBasicType<BuiltInType::kDouble, SignTag::kUnsigned>();
+          return GetBasicType<BuiltInType::kFloat64, SignTag::kUnsigned>();
           break;
         default:
           assert(false);
@@ -420,8 +509,8 @@ CommonlyUsedTypeGenerator::GetBasicTypeNotTemplate(BuiltInType built_in_type,
 std::pair<std::shared_ptr<const TypeInterface>,
           DeclineMathematicalComputeTypeResult>
 TypeInterface::DeclineMathematicalComputeResult(
-    std::shared_ptr<const TypeInterface>&& left_compute_type,
-    std::shared_ptr<const TypeInterface>&& right_compute_type) {
+    const std::shared_ptr<const TypeInterface>& left_compute_type,
+    const std::shared_ptr<const TypeInterface>& right_compute_type) {
   switch (left_compute_type->GetType()) {
     case StructOrBasicType::kBasic: {
       switch (right_compute_type->GetType()) {
@@ -430,22 +519,22 @@ TypeInterface::DeclineMathematicalComputeResult(
               static_cast<long long>(right_compute_type->GetType())) {
             // 右侧类型提升至左侧
             return std::make_pair(
-                std::move(left_compute_type),
+                left_compute_type,
                 DeclineMathematicalComputeTypeResult::kConvertToLeft);
           } else {
             // 左侧类型提升至右侧
             return std::make_pair(
-                std::move(right_compute_type),
+                right_compute_type,
                 DeclineMathematicalComputeTypeResult::kConvertToRight);
           }
           break;
         case StructOrBasicType::kPointer:
           // 指针与偏移量组合
           if (static_cast<long long>(left_compute_type->GetType()) <
-              static_cast<long long>(BuiltInType::kFloat)) [[likely]] {
+              static_cast<long long>(BuiltInType::kFloat32)) [[likely]] {
             // 偏移量是整型，可以作为指针的偏移量
             return std::make_pair(
-                std::move(right_compute_type),
+                right_compute_type,
                 DeclineMathematicalComputeTypeResult::kLeftOffsetRightPointer);
           } else {
             // 浮点数类型的偏移量不适用于指针
@@ -466,10 +555,10 @@ TypeInterface::DeclineMathematicalComputeResult(
         case StructOrBasicType::kBasic:
           // 指针与偏移量组合
           if (static_cast<long long>(right_compute_type->GetType()) <
-              static_cast<long long>(BuiltInType::kFloat)) [[likely]] {
+              static_cast<long long>(BuiltInType::kFloat32)) [[likely]] {
             // 偏移量是整型，可以作为指针的偏移量
             return std::make_pair(
-                std::move(left_compute_type),
+                left_compute_type,
                 DeclineMathematicalComputeTypeResult::kLeftPointerRightOffset);
           } else {
             // 浮点数类型的偏移量不适用于指针
@@ -497,6 +586,112 @@ TypeInterface::DeclineMathematicalComputeResult(
           DeclineMathematicalComputeTypeResult::kLeftNotComputableType);
       break;
   }
+}
+
+std::pair<std::shared_ptr<const TypeInterface>, GetTypeResult>
+TypeSystem::TypeData::GetType(StructOrBasicType type_prefer) const {
+  if (std::get_if<std::monostate>(&type_data_) != nullptr) [[unlikely]] {
+    // 未存储任何节点，等效于该名称对应的类型不存在
+    return std::make_pair(std::shared_ptr<TypeInterface>(),
+                          GetTypeResult::kTypeNameNotFound);
+  }
+  const std::shared_ptr<const TypeInterface>* shared_pointer =
+      std::get_if<std::shared_ptr<const TypeInterface>>(&type_data_);
+  if (shared_pointer != nullptr) [[likely]] {
+    // 仅存储1个指针
+    if (type_prefer == StructOrBasicType::kNotSpecified ||
+        (*shared_pointer)->GetType() == type_prefer) [[likely]] {
+      // 无类型选择倾向或者类型选择倾向符合
+      return std::make_pair(*shared_pointer, GetTypeResult::kSuccess);
+    } else {
+      // 没有匹配的类型选择倾向
+      return std::make_pair(std::shared_ptr<TypeInterface>(),
+                            GetTypeResult::kNoMatchTypePrefer);
+    }
+  } else {
+    // 存储多个指针
+    auto& vector_pointer = *std::get_if<
+        std::unique_ptr<std::vector<std::shared_ptr<const TypeInterface>>>>(
+        &type_data_);
+    // 判断是否指定类型选择倾向
+    if (type_prefer == StructOrBasicType::kNotSpecified) [[likely]] {
+      if (vector_pointer->front()->GetType() == StructOrBasicType::kBasic) {
+        // 优先匹配kBasic
+        return std::make_pair(vector_pointer->front(), GetTypeResult::kSuccess);
+      } else {
+        // vector中没有kBasic，并且一定存储至少两个指针，这些指针同级
+        return std::make_pair(std::shared_ptr<const TypeInterface>(),
+                              GetTypeResult::kSeveralSameLevelMatches);
+      }
+    } else {
+      // 遍历vector搜索与给定类型选择倾向相同的指针
+      for (auto& pointer : *vector_pointer) {
+        if (pointer->GetType() == type_prefer) [[unlikely]] {
+          return std::make_pair(pointer, GetTypeResult::kSuccess);
+        }
+      }
+      // 没有匹配的类型选择倾向
+      return std::make_pair(std::shared_ptr<const TypeInterface>(),
+                            GetTypeResult::kNoMatchTypePrefer);
+    }
+  }
+}
+
+// 检查两种类型是否属于同一大类
+// StructOrBasicType::kBasic和StructOrBasicType::kPointer属于同一大类
+// 除此以外类型单独成一大类
+
+inline bool TypeSystem::TypeData::IsSameKind(StructOrBasicType type1,
+                                             StructOrBasicType type2) {
+  unsigned long long type1_ = static_cast<unsigned long long>(type1);
+  unsigned long long type2_ = static_cast<unsigned long long>(type2);
+  constexpr unsigned long long kBasicType =
+      static_cast<unsigned long long>(StructOrBasicType::kBasic);
+  constexpr unsigned long long kPointerType =
+      static_cast<unsigned long long>(StructOrBasicType::kPointer);
+  // 第二部分的运算用来检测是否均属于kPointer/kBasic
+  return type1 == type2 || ((type1_ ^ kBasicType) |
+                            (type1_ ^ kPointerType) & (type2_ ^ kBasicType) |
+                            (type2_ ^ kPointerType));
+}
+
+// 返回MemberIndex::InvalidId()代表不存在该成员
+
+inline StructureTypeInterface::StructureMemberContainer::MemberIndex
+StructureTypeInterface::StructureMemberContainer::GetMemberIndex(
+    const std::string& member_name) const {
+  auto iter = member_name_to_index_.find(member_name);
+  if (iter != member_name_to_index_.end()) [[likely]] {
+    return iter->second;
+  } else {
+    return MemberIndex::InvalidId();
+  }
+}
+
+inline bool StructureTypeInterface::IsSameObject(
+    const TypeInterface& type_interface) const {
+  // this == &type_interface是优化手段
+  // 类型系统设计思路是尽可能多的共享一条类型链
+  // 所以容易出现指向同一个节点的情况
+  if (this == &type_interface) [[likely]] {
+    // 二者共用一个节点
+    return true;
+  } else if (TypeInterface::IsSameObject(type_interface)) [[likely]] {
+    const StructType& struct_type =
+        static_cast<const StructType&>(type_interface);
+    const std::string* structure_name_this = GetStructureName();
+    const std::string* structure_name_argument = struct_type.GetStructName();
+    if (structure_name_this != nullptr) [[likely]] {
+      if (structure_name_argument != nullptr) [[likely]] {
+        // 二者都是具名结构
+        // C语言中具名结构根据名字区分
+        return *structure_name_this == *structure_name_argument;
+      }
+    }
+    // 二者都是匿名结构
+    // 如果匿名结构相同则二者使用相同的类型指针，在第一个if就返回
+  }
+  return false;
 }
 
 }  // namespace c_parser_frontend::type_system

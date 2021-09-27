@@ -118,9 +118,9 @@
       : public ProcessFunctionInterface {                                     \
    public:                                                                    \
     virtual ProcessFunctionInterface::UserData Reduct(                        \
-        std::vector<ProcessFunctionInterface::WordDataToUser>&& user_data)    \
+        std::vector<ProcessFunctionInterface::WordDataToUser>&& word_data)    \
         override {                                                            \
-      return reduct_function(std::move(user_data));                           \
+      return reduct_function(std::move(word_data));                           \
     }                                                                         \
   };
 

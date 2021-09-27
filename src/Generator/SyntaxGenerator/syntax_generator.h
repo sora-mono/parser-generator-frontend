@@ -1031,9 +1031,9 @@ class SyntaxGenerator {
       }
 #endif  // USE_AMBIGUOUS_GRAMMAR
 
-      template <class T>
-      void SetAttachedData(T&& attached_data) {
-        attached_data_ = std::forward<T>(attached_data);
+      template <class BasicObjectType>
+      void SetAttachedData(BasicObjectType&& attached_data) {
+        attached_data_ = std::forward<BasicObjectType>(attached_data);
       }
       // 用来支持将ActionAndAttachedData作为map键值的操作
       bool operator<(const ActionAndAttachedData& right) const {
@@ -1188,8 +1188,8 @@ inline bool SyntaxGenerator::PrintProcessFunction(FILE* function_file,
   }
   fprintf(function_file,
           " virtual ProcessFunctionInterface::UserData "
-          "Reduct(std::vector<WordDataToUser>&& user_data_) { return "
-          "%s(user_data_); }\n",
+          "Reduct(std::vector<WordDataToUser>&& user_returned_data) { return "
+          "%s(user_returned_data); }\n",
           data.reduct_function.c_str());
   return true;
 }

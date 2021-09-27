@@ -52,7 +52,8 @@ class BaseIdWrapper {
   bool operator!=(const BaseIdWrapper& id_wrapper) const {
     return !operator==(id_wrapper);
   }
-  IdType GetThisNodeId() const { return id_; }
+  // 获取未包装的原始值
+  IdType GetThisNodeValue() const { return id_; }
   void SetId(IdType production_node_id) { id_ = production_node_id; }
   void Swap(BaseIdWrapper* id_wrapper) { std::swap(id_, id_wrapper->id_); }
   bool IsValid() const { return id_ != invalid_value_; }

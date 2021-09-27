@@ -76,7 +76,6 @@ class SyntaxMachine {
 #endif  // USE_AMBIGUOUS_GRAMMAR
   };
 
-  SyntaxMachine();
   SyntaxMachine(const SyntaxMachine&) = delete;
   SyntaxMachine& operator=(SyntaxMachine&&) = delete;
 

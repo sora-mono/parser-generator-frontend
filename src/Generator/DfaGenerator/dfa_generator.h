@@ -21,16 +21,18 @@ namespace common = frontend::common;
 class DfaGenerator {
   struct IntermediateDfaNode;
   // 管理转移表用，仅用于DfaGenerator，为了避免使用char作下标时使用负下标
-  template <class T, size_t size>
+  template <class BasicObjectType, size_t size>
   requires(size <= frontend::common::kCharNum) class TransformArrayManager {
    public:
     TransformArrayManager() {}
 
-    T& operator[](char c) {
+    BasicObjectType& operator[](char c) {
       return transform_array_[(c + frontend::common::kCharNum) %
                               frontend::common::kCharNum];
     }
-    void fill(const T& fill_object) { transform_array_.fill(fill_object); }
+    void fill(const BasicObjectType& fill_object) {
+      transform_array_.fill(fill_object);
+    }
 
    private:
     friend class boost::serialization::access;
@@ -40,7 +42,7 @@ class DfaGenerator {
       ar& transform_array_;
     }
 
-    std::array<T, size> transform_array_;
+    std::array<BasicObjectType, size> transform_array_;
   };
 
  public:
@@ -59,8 +61,7 @@ class DfaGenerator {
   // 中间节点ID
   using IntermediateNodeId = ObjectManager<IntermediateDfaNode>::ObjectId;
 
-  using SetManagerType =
-      common::UnorderedStructManager<SetType>;
+  using SetManagerType = common::UnorderedStructManager<SetType>;
   // 子集构造法得到的子集的ID
   using SetId = SetManagerType::ObjectId;
   // 分发标签
@@ -76,7 +77,7 @@ class DfaGenerator {
   using DfaConfigType =
       std::vector<std::pair<TransformArray, WordAttachedData>>;
 
-  DfaGenerator() {}
+  DfaGenerator() = default;
   DfaGenerator(const DfaGenerator&) = delete;
   DfaGenerator(DfaGenerator&&) = delete;
 
@@ -91,7 +92,7 @@ class DfaGenerator {
                         const WordAttachedData& saved_data,
                         WordPriority priority_tag);
   // 设置遇到文件尾时返回的数据
-  void SetEndOfFileSavedData(const WordAttachedData&& saved_data) {
+  void SetEndOfFileSavedData(WordAttachedData&& saved_data) {
     file_end_saved_data_ = std::move(saved_data);
   }
   // 获取遇到文件尾时返回的数据

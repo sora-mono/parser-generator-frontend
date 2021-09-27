@@ -1,3 +1,6 @@
+#include <format>
+
+#include "Parser/DfaMachine/dfa_machine.h"
 #include "action_scope_system.h"
 namespace c_parser_frontend::action_scope_system {
 // 添加一条数据，如需转换成栈则自动执行
@@ -5,22 +8,21 @@ namespace c_parser_frontend::action_scope_system {
 // 返回值含义见该类型定义处
 
 inline DefineVarietyResult
-VarietyScopeSystem::VarietyData::AddVarietyData(
-    std::shared_ptr<VarietyOperatorNode>&& operator_node,
-    ActionScopeLevelType action_scope_level) {
+ActionScopeSystem::VarietyData::AddVarietyData(
+    const std::shared_ptr<const VarietyOperatorNode>& operator_node,
+    ActionScopeLevelType action_scope_level_) {
   auto& variety_data = GetVarietyData();
   std::monostate* empty_status_pointer =
       std::get_if<std::monostate>(&variety_data);
   if (empty_status_pointer != nullptr) [[likely]] {
     // 未存储任何东西，向variety_data_中存储单个指针
-    variety_data.emplace<SinglePointerType>(std::move(operator_node),
-                                            action_scope_level);
+    variety_data.emplace<SinglePointerType>(operator_node, action_scope_level_);
     return DefineVarietyResult::kNew;
   } else {
     auto* single_object = std::get_if<SinglePointerType>(&variety_data);
     if (single_object != nullptr) [[likely]] {
       // 检查是否存在重定义
-      if (single_object->second == action_scope_level) [[unlikely]] {
+      if (single_object->second == action_scope_level_) [[unlikely]] {
         // 该作用域等级已经定义同名变量
         return DefineVarietyResult::kReDefine;
       }
@@ -30,25 +32,25 @@ VarietyScopeSystem::VarietyData::AddVarietyData(
       // 添加原有的指针
       stack_pointer->emplace(std::move(*single_object));
       // 添加新增的指针
-      stack_pointer->emplace(std::move(operator_node), action_scope_level);
+      stack_pointer->emplace(operator_node, action_scope_level_);
       // 重新设置variety_data的内容
       variety_data = std::move(stack_pointer);
       return DefineVarietyResult::kShiftToStack;
     } else {
+      auto& stack_pointer =
+          *std::get_if<std::unique_ptr<PointerStackType>>(&variety_data);
       // 检查是否存在重定义
-      if (single_object->second == action_scope_level) [[unlikely]] {
+      if (stack_pointer->top().second == action_scope_level_) [[unlikely]] {
         // 该作用域等级已经定义同名变量
         return DefineVarietyResult::kReDefine;
       }
-      auto& stack_pointer =
-          *std::get_if<std::unique_ptr<PointerStackType>>(&variety_data);
       // 已经建立指针栈，向指针栈中添加给定指针
-      stack_pointer->emplace(std::move(operator_node), action_scope_level);
+      stack_pointer->emplace(operator_node, action_scope_level_);
       return DefineVarietyResult::kAddToStack;
     }
   }
 }
-bool VarietyScopeSystem::VarietyData::PopTopData() {
+bool ActionScopeSystem::VarietyData::PopTopData() {
   auto& variety_data = GetVarietyData();
   auto* single_pointer = std::get_if<SinglePointerType>(&variety_data);
   if (single_pointer != nullptr) [[likely]] {
@@ -68,40 +70,177 @@ bool VarietyScopeSystem::VarietyData::PopTopData() {
   }
 }
 
-VarietyScopeSystem::VarietyData::SinglePointerType&
-VarietyScopeSystem::VarietyData::GetTopData() {
+std::pair<ActionScopeSystem::VarietyData::SinglePointerType, bool>
+ActionScopeSystem::VarietyData::GetTopData() {
   auto& variety_data = GetVarietyData();
+  if (std::get_if<std::monostate>(&variety_data) != nullptr) [[unlikely]] {
+    // 该节点未存储任何变量指针
+    return std::make_pair(SinglePointerType(), false);
+  }
   auto* single_pointer = std::get_if<SinglePointerType>(&variety_data);
   if (single_pointer != nullptr) [[likely]] {
-    return *single_pointer;
+    return std::make_pair(*single_pointer, true);
   } else {
-    return (*std::get_if<std::unique_ptr<PointerStackType>>(&variety_data))
-        ->top();
+    return std::make_pair(
+        (*std::get_if<std::unique_ptr<PointerStackType>>(&variety_data))->top(),
+        true);
   }
 }
 
-std::pair<std::shared_ptr<VarietyScopeSystem::VarietyOperatorNode>, bool>
-VarietyScopeSystem::GetVariety(const std::string& variety_name) {
+std::pair<std::shared_ptr<const ActionScopeSystem::VarietyOperatorNode>,
+          bool>
+ActionScopeSystem::GetVariety(const std::string& variety_name) {
   auto iter = GetVarietyNameToOperatorNodePointer().find(variety_name);
   if (iter != GetVarietyNameToOperatorNodePointer().end()) [[likely]] {
-    return std::make_pair(iter->second.GetTopData().first, true);
+    auto [pointer_data, has_pointer] = iter->second.GetTopData();
+    return std::make_pair(pointer_data.first, has_pointer);
   } else {
     return std::make_pair(std::shared_ptr<VarietyOperatorNode>(), false);
   }
 }
 
-void VarietyScopeSystem::PopVarietyOverLevel(ActionScopeLevelType level) {
-  auto& variety_stack = GetVarietyStack();
-  // 因为存在哨兵，所以无需判断栈是否为空
-  while (variety_stack.top()->second.GetTopData().second > level) {
-    bool should_erase_this_node = variety_stack.top()->second.PopTopData();
-    if (should_erase_this_node) [[likely]] {
-      // 该变量名并不与任何节点绑定
-      // 删除该数据节点
-      GetVarietyNameToOperatorNodePointer().erase(variety_stack.top());
-    }
-    variety_stack.pop();
+bool ActionScopeSystem::CreateFunctionTypeVarietyAndPush(
+    const std::shared_ptr<c_parser_frontend::type_system::FunctionType>&
+        function_type) {
+  if (GetActionScopeLevel() != 0) [[unlikely]] {
+    // 函数只能定义在0级（全局）作用域
+    return false;
   }
+  auto iter = AnnounceVarietyName(function_type->GetFunctionName());
+  auto function_type_variety = std::make_shared<VarietyOperatorNode>(
+      &iter->first, c_parser_frontend::operator_node::ConstTag::kConst,
+      c_parser_frontend::operator_node::LeftRightValueTag::kLeftValue);
+  bool result =
+      function_type_variety->SetVarietyTypeNoCheckFunctionType(function_type);
+  assert(result);
+  auto [ignore_iter, define_variety_result] =
+      DefineVariety(function_type->GetFunctionName(), function_type_variety);
+  return define_variety_result != DefineVarietyResult::kReDefine;
+}
+
+void ActionScopeSystem::SetFunctionToConstruct(
+    const std::shared_ptr<c_parser_frontend::type_system::FunctionType>&
+        function_type) {
+  // 添加全局的函数类型变量，用于函数指针赋值
+  bool result = CreateFunctionTypeVarietyAndPush(function_type);
+  if (!result) [[unlikely]] {
+    std::cerr << std::format("行数{:} 列数{:} 函数内部不能声明函数",
+                             frontend::parser::line_, frontend::parser::column_)
+              << std::endl;
+    exit(-1);
+  }
+  AddActionScopeLevel();
+  // 添加函数定义流程控制语句
+  flow_control_stack_.emplace(std::make_pair(
+      std::make_unique<c_parser_frontend::flow_control::FunctionDefine>(
+          function_type),
+      GetActionScopeLevel()));
+  // 将函数参数添加到作用域中
+  for (auto& argument_node : function_type->GetArguments()) {
+    const std::string* argument_name =
+        argument_node.variety_operator_node->GetVarietyNamePointer();
+    // 如果参数有名则添加到作用域中
+    if (argument_name != nullptr) [[likely]] {
+      DefineVariety(*argument_name, std::shared_ptr<const VarietyOperatorNode>(
+                                        argument_node.variety_operator_node));
+    }
+  }
+}
+
+// 将构建中的流程控制节点压栈，自动增加一级作用域等级
+
+inline bool ActionScopeSystem::PushFlowControlSentence(
+    std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
+        flow_control_sentence) {
+  if (flow_control_stack_.empty()) {
+    return false;
+  }
+  // 先提升作用域等级，后设置流程控制语句的作用域等级
+  AddActionScopeLevel();
+  flow_control_stack_.emplace(
+      std::make_pair(std::move(flow_control_sentence), GetActionScopeLevel()));
+}
+
+bool ActionScopeSystem::RemoveEmptyNode(
+    const std::string& empty_node_to_remove_name) {
+  auto iter =
+      variety_name_to_operator_node_pointer_.find(empty_node_to_remove_name);
+  // 目标节点空，删除节点
+  if (iter != variety_name_to_operator_node_pointer_.end() &&
+      iter->second.Empty()) [[likely]] {
+    variety_name_to_operator_node_pointer_.erase(iter);
+    return true;
+  }
+  return false;
+}
+
+// 将if流程控制语句转化为if-else语句
+// 如果顶层控制语句不为if则返回false
+// 将if流程控制语句转化为if-else语句
+// 如果顶层控制语句不为if则返回false
+
+inline bool ActionScopeSystem::ConvertIfSentenceToIfElseSentence() {
+  assert(flow_control_stack_.top().first->GetFlowType() ==
+         c_parser_frontend::flow_control::FlowType::kIfSentence);
+  static_cast<c_parser_frontend::flow_control::IfSentence&>(
+      *flow_control_stack_.top().first)
+      .ConvertToIfElse();
+}
+
+// 向switch语句中添加普通case
+// 如果当前顶层控制语句不为switch则返回false
+
+inline bool ActionScopeSystem::AddSwitchSimpleCase(
+    const std::shared_ptr<
+        c_parser_frontend::flow_control::BasicTypeInitializeOperatorNode>&
+        case_value) {
+  if (GetTopFlowControlSentence().GetFlowType() !=
+      c_parser_frontend::flow_control::FlowType::kSwitchSentence) [[unlikely]] {
+    return false;
+  }
+  return static_cast<c_parser_frontend::flow_control::SwitchSentence&>(
+             GetTopFlowControlSentence())
+      .AddSimpleCase(case_value);
+}
+
+inline bool ActionScopeSystem::AddSwitchDefaultCase() {
+  if (GetTopFlowControlSentence().GetFlowType() !=
+      c_parser_frontend::flow_control::FlowType::kSwitchSentence) [[unlikely]] {
+    return false;
+  }
+  return static_cast<c_parser_frontend::flow_control::SwitchSentence&>(
+             GetTopFlowControlSentence())
+      .AddDefaultCase();
+}
+
+// 向switch语句中添加普通case
+// 如果当前顶层控制语句不为switch则返回false
+
+// 向当前活跃的函数内执行的语句尾部附加语句
+// 返回是否添加成功，添加失败则不修改参数
+// 如果当前无流程控制语句则返回false
+
+inline bool ActionScopeSystem::AddSentence(
+    std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
+        sentence) {
+  if (flow_control_stack_.empty()) [[unlikely]] {
+    return false;
+  }
+  return flow_control_stack_.top().first->AddMainSentence(std::move(sentence));
+}
+
+// 添加待执行语句的集合
+// 返回是否添加成功，添加失败则不修改参数
+// 如果当前无流程控制语句则返回false
+
+inline bool ActionScopeSystem::AddSentences(
+    std::list<std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>>&&
+        sentence_container) {
+  if (flow_control_stack_.empty()) [[unlikely]] {
+    return false;
+  }
+  return flow_control_stack_.top().first->AddMainSentences(
+      std::move(sentence_container));
 }
 
 }  // namespace c_parser_frontend::action_scope_system

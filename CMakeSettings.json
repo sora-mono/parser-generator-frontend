@@ -21,7 +21,7 @@
         },
         {
           "name": "CMAKE_CXX_FLAGS_DEBUG",
-          "value": "/MTd /Zi /Ob0 /Od /RTC1",
+          "value": "/MDd /Zi /Ob0 /Od /RTC1 /W3",
           "type": "STRING"
         },
         {
