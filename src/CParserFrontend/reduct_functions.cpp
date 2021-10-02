@@ -381,7 +381,7 @@ std::any IdOrEquivenceInBrackets(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
   return std::move(word_data[1].GetNonTerminalWordData().user_returned_data);
 }
-EnumReturnData NotEmptyEnumArgumentsIdInit(
+EnumReturnData NotEmptyEnumArgumentsIdBase(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
   std::string& enum_member_name = word_data.front().GetTerminalWordData().word;
@@ -392,7 +392,7 @@ EnumReturnData NotEmptyEnumArgumentsIdInit(
   assert(inserted);
   return enum_return_data;
 }
-EnumReturnData NotEmptyEnumArgumentsIdAssignNumInit(
+EnumReturnData NotEmptyEnumArgumentsIdAssignNumBase(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
   std::string& enum_member_name = word_data[0].GetTerminalWordData().word;
@@ -421,7 +421,8 @@ EnumReturnData NotEmptyEnumArgumentsIdAssignNumInit(
   }
   return enum_return_data;
 }
-std::any NotEmptyEnumArgumentsId(std::vector<WordDataToUser>&& word_data) {
+std::any NotEmptyEnumArgumentsIdExtend(
+    std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
   EnumReturnData& data_before = std::any_cast<EnumReturnData&>(
       word_data[0].GetNonTerminalWordData().user_returned_data);
@@ -439,7 +440,7 @@ std::any NotEmptyEnumArgumentsId(std::vector<WordDataToUser>&& word_data) {
   }
   return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
 }
-std::any NotEmptyEnumArgumentsIdAssignNum(
+std::any NotEmptyEnumArgumentsIdAssignNumExtend(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 5);
   EnumReturnData& data_before = std::any_cast<EnumReturnData&>(
@@ -690,26 +691,49 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeEnumAnnounce(
   return std::make_pair(std::move(type_pointer), const_tag);
 }
 
-std::any FunctionRelaventBasePartFunctionInit(
+std::any FunctionRelaventBasePartFunctionInitBase(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
-  // IdOrEquivence产生式规约得到的数据
+  // 可能声明匿名函数指针作为函数形参
+  if (!word_data[0].GetNonTerminalWordData().user_returned_data.has_value())
+      [[unlikely]] {
+    std::cerr << std::format("行数{:} 无法声明匿名函数", GetLine())
+              << std::endl;
+    exit(-1);
+  } else {
+    // IdOrEquivence产生式规约得到的数据
+    std::shared_ptr<ObjectConstructData>& construct_data =
+        std::any_cast<std::shared_ptr<ObjectConstructData>&>(
+            word_data[0].GetNonTerminalWordData().user_returned_data);
+    // 设置构建数据，在构建函数参数时使用
+    function_type_construct_data = construct_data;
+  }
+  // 创建匿名函数类型并设置函数参数
+  auto result = function_type_construct_data
+                    ->AttachSingleNodeToTailNodeEmplace<FunctionType>(nullptr);
+  // 检查添加结果
+  if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
+    VarietyOrFunctionConstructError(
+        result, function_type_construct_data->GetObjectName());
+  }
+  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+}
+
+std::any FunctionRelaventBasePartFunctionInitExtend(
+    std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 2);
   std::shared_ptr<ObjectConstructData>& construct_data =
       std::any_cast<std::shared_ptr<ObjectConstructData>&>(
           word_data[0].GetNonTerminalWordData().user_returned_data);
   // 设置构建数据，在构建函数参数时使用
   function_type_construct_data = construct_data;
-  if (construct_data->GetObjectName().empty()) [[unlikely]] {
-    // C语言中函数不能匿名
-    std::cerr << std::format("行数：{:} 函数不可匿名", GetLine()) << std::endl;
-    exit(-1);
-  }
   // 创建匿名函数类型并设置函数参数
-  auto result =
-      construct_data->AttachSingleNodeToTailNodeEmplace<FunctionType>(nullptr);
+  auto result = function_type_construct_data
+                    ->AttachSingleNodeToTailNodeEmplace<FunctionType>(nullptr);
   // 检查添加结果
   if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
-    VarietyOrFunctionConstructError(result, construct_data->GetObjectName());
+    VarietyOrFunctionConstructError(
+        result, function_type_construct_data->GetObjectName());
   }
   return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
 }
@@ -754,9 +778,21 @@ std::shared_ptr<FlowInterface> FunctionRelavent(
 std::shared_ptr<FlowInterface> SingleAnnounceNoAssignVariety(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
+  if (!word_data[1].GetNonTerminalWordData().user_returned_data.has_value())
+      [[unlikely]] {
+    std::cerr << std::format("行数{:} 列数{:} 语法错误", GetLine(), GetColumn())
+              << std::endl;
+    exit(-1);
+  }
   std::shared_ptr<ObjectConstructData>& construct_data =
       std::any_cast<std::shared_ptr<ObjectConstructData>&>(
           word_data[1].GetNonTerminalWordData().user_returned_data);
+  if (construct_data->GetObjectName().empty()) [[unlikely]] {
+    std::cerr << std::format("行数{:} 列数{:} 声明的变量必须有名", GetLine(),
+                             GetColumn())
+              << std::endl;
+    exit(-1);
+  }
   auto [final_type, const_tag_before_final_type] =
       std::any_cast<std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&>(
           word_data[0].GetNonTerminalWordData().user_returned_data);
@@ -827,14 +863,16 @@ std::any NotEmptyFunctionPointerArgumentsBase(
       break;
     case FlowType::kFunctionDefine:
       // 函数不能作为函数声明时的参数
-      std::cerr << std::format(
-                       "行数{:} 函数不能作为声明时函数参数,"
-                       "请使用函数指针\n此诊断出现在函数{:}处",
-                       GetLine(),
-                       static_cast<FunctionDefine&>(*flow_control_node)
-                           .GetFunctionTypeReference()
-                           .GetFunctionName())
-                << std::endl;
+      std::cerr
+          << std::format(
+                 "行数{:} 函数不能作为声明时函数参数,"
+                 "请使用函数指针\n此诊断出现在函数{:}处",
+                 GetLine(),
+                 static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
+                     *flow_control_node)
+                     .GetFunctionTypeReference()
+                     .GetFunctionName())
+          << std::endl;
       exit(-1);
       break;
     default:
@@ -860,14 +898,16 @@ std::any NotEmptyFunctionPointerArgumentsExtend(
       break;
     case FlowType::kFunctionDefine:
       // 函数不能作为函数的参数
-      std::cerr << std::format(
-                       "行数{:} 函数不能作为声明时函数参数,"
-                       "请使用函数指针\n此诊断出现在函数{:}处",
-                       GetLine(),
-                       static_cast<FunctionDefine&>(*flow_control_node)
-                           .GetFunctionTypeReference()
-                           .GetFunctionName())
-                << std::endl;
+      std::cerr
+          << std::format(
+                 "行数{:} 函数不能作为声明时函数参数,"
+                 "请使用函数指针\n此诊断出现在函数{:}处",
+                 GetLine(),
+                 static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
+                     *flow_control_node)
+                     .GetFunctionTypeReference()
+                     .GetFunctionName())
+          << std::endl;
       exit(-1);
       break;
     default:
@@ -888,8 +928,8 @@ std::any FunctionRelaventArguments(std::vector<WordDataToUser>&& word_data) {
       word_data.front().GetNonTerminalWordData().user_returned_data);
 }
 
-std::shared_ptr<FunctionDefine> FunctionDefineHead(
-    std::vector<WordDataToUser>&& word_data) {
+std::shared_ptr<c_parser_frontend::flow_control::FunctionDefine>
+FunctionDefineHead(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
   auto& function_head = std::any_cast<std::shared_ptr<FlowInterface>&>(
       word_data[0].GetNonTerminalWordData().user_returned_data);
@@ -907,14 +947,17 @@ std::shared_ptr<FunctionDefine> FunctionDefineHead(
       break;
   }
   std::shared_ptr<FunctionType> function_type =
-      static_cast<FunctionDefine&>(*function_head).GetFunctionTypePointer();
+      static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
+          *function_head)
+          .GetFunctionTypePointer();
   // 设置当前待构建函数
   parser_frontend.SetFunctionToConstruct(
       std::shared_ptr<FunctionType>(function_type));
-  return std::static_pointer_cast<FunctionDefine>(function_head);
+  return std::static_pointer_cast<
+      c_parser_frontend::flow_control::FunctionDefine>(function_head);
 }
 
-std::any FunctionDefineMain(std::vector<WordDataToUser>&& word_data) {
+std::any FunctionDefine(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
   // 添加函数内语句已经在Sentences构建过程中完成
   // 只需清理作用域
@@ -1937,6 +1980,61 @@ AssignableSuffixMinus(std::vector<WordDataToUser>&& word_data) {
       std::move(flow_control_node_container));
 }
 
+std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithValue(
+    std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 2);
+  auto& [return_target, sentences_to_get_assignable] = std::any_cast<
+      std::pair<std::shared_ptr<const OperatorNodeInterface>,
+                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
+      word_data[1].GetNonTerminalWordData().user_returned_data);
+  auto return_flow_control_node = std::make_unique<Return>();
+  auto active_function = parser_frontend.GetActiveFunctionPointer();
+  if (active_function == nullptr) [[unlikely]] {
+    std::cerr << std::format("行数{:} 列数{:} 当前不处于函数内，无法返回",
+                             GetLine(), GetColumn())
+              << std::endl;
+    exit(-1);
+  }
+  bool result =
+      return_flow_control_node->SetReturnTarget(active_function, return_target);
+  if (!result) [[unlikely]] {
+    std::cerr << std::format(
+                     "行数{:} 列数{:} "
+                     "无法返回该类型的值，给定类型无法转换为函数{:}返回的类型",
+                     GetLine(), GetColumn(), active_function->GetFunctionName())
+              << std::endl;
+    exit(-1);
+  }
+  sentences_to_get_assignable->emplace_back(
+      std::move(return_flow_control_node));
+  return std::move(sentences_to_get_assignable);
+}
+
+std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithoutValue(
+    std::vector<WordDataToUser>&& word_data) {
+  auto sentences_to_get_assignable =
+      std::make_shared<std::list<std::unique_ptr<FlowInterface>>>();
+  auto return_flow_control_node = std::make_unique<Return>();
+  auto active_function = parser_frontend.GetActiveFunctionPointer();
+  if (active_function == nullptr) [[unlikely]] {
+    std::cerr << std::format("行数{:} 列数{:} 当前不处于函数内，无法返回",
+                             GetLine(), GetColumn())
+              << std::endl;
+    exit(-1);
+  }
+  bool result =
+      return_flow_control_node->SetReturnTarget(active_function, nullptr);
+  if (!result) [[unlikely]] {
+    std::cerr << std::format("行数{:} 列数{:} 函数{:}无法返回空值", GetLine(),
+                             GetColumn(), active_function->GetFunctionName())
+              << std::endl;
+    exit(-1);
+  }
+  sentences_to_get_assignable->emplace_back(
+      std::move(return_flow_control_node));
+  return std::move(sentences_to_get_assignable);
+}
+
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 TemaryOperator(std::vector<WordDataToUser>&& word_data) {
@@ -2123,6 +2221,55 @@ std::any AssignablesExtend(std::vector<WordDataToUser>&& word_data) {
   return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
 }
 
+std::shared_ptr<std::unique_ptr<Jmp>> Break(
+    std::vector<WordDataToUser>&& word_data) {
+  auto& top_flow_control_sentence = static_cast<ConditionBlockInterface&>(
+      parser_frontend.GetTopFlowControlSentence());
+  switch (top_flow_control_sentence.GetFlowType()) {
+    case FlowType::kDoWhileSentence:
+    case FlowType::kWhileSentence:
+    case FlowType::kForSentence:
+    case FlowType::kSwitchSentence:
+      return std::make_shared<std::unique_ptr<Jmp>>(std::make_unique<Jmp>(
+          top_flow_control_sentence.GetSentenceEndLabel()));
+      break;
+    default:
+      std::cerr
+          << std::format(
+                 "行数{:} 列数{:} 无法跳出非for/while/do-while/switch语句",
+                 GetLine(), GetColumn())
+          << std::endl;
+      exit(-1);
+      // 防止警告
+      return std::shared_ptr<std::unique_ptr<Jmp>>();
+      break;
+  }
+}
+
+std::shared_ptr<std::unique_ptr<Jmp>> Continue(
+    std::vector<WordDataToUser>&& word_data) {
+  auto& top_flow_control_sentence = static_cast<LoopSentenceInterface&>(
+      parser_frontend.GetTopFlowControlSentence());
+  switch (top_flow_control_sentence.GetFlowType()) {
+    case FlowType::kDoWhileSentence:
+    case FlowType::kWhileSentence:
+    case FlowType::kForSentence:
+      return std::make_shared<std::unique_ptr<Jmp>>(std::make_unique<Jmp>(
+          top_flow_control_sentence.GetLoopMainBlockEndLabel()));
+      break;
+    default:
+      std::cerr
+          << std::format(
+                 "行数{:} 列数{:} 无法在非for/while/do-while语句中使用continue",
+                 GetLine(), GetColumn())
+          << std::endl;
+      exit(-1);
+      // 防止警告
+      return std::shared_ptr<std::unique_ptr<Jmp>>();
+      break;
+  }
+}
+
 std::any SingleStatementAssignable(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
   auto& [ignore_assignable, flow_control_node_container] = std::any_cast<
@@ -2155,6 +2302,38 @@ std::any SingleStatementAnnounce(std::vector<WordDataToUser>&& word_data) {
               << std::endl;
     exit(-1);
   }
+  return std::any();
+}
+
+std::any SingleStatementReturn(std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 1);
+  auto& sentences_to_get_return_node = *std::any_cast<
+      std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&>(
+      word_data.front().GetNonTerminalWordData().user_returned_data);
+  bool result =
+      parser_frontend.AddSentences(std::move(sentences_to_get_return_node));
+  // 所有报错应在这步规约前进行
+  assert(result);
+  return std::any();
+}
+
+std::any SingleStatementBreak(std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 1);
+  auto& jmp_sentence = *std::any_cast<std::shared_ptr<std::unique_ptr<Jmp>>&>(
+      word_data.front().GetNonTerminalWordData().user_returned_data);
+  bool result = parser_frontend.AddSentence(std::move(jmp_sentence));
+  // 所有报错应在这步规约前进行
+  assert(result);
+  return std::any();
+}
+
+std::any SingleStatementContinue(std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 1);
+  auto& jmp_sentence = *std::any_cast<std::shared_ptr<std::unique_ptr<Jmp>>&>(
+      word_data.front().GetNonTerminalWordData().user_returned_data);
+  bool result = parser_frontend.AddSentence(std::move(jmp_sentence));
+  // 所有报错应在这步规约前进行
+  assert(result);
   return std::any();
 }
 
@@ -2349,7 +2528,8 @@ std::any RootAnnounce(std::vector<WordDataToUser>&& word_data) {
       // 函数声明
       auto [ignore_iter, announce_result] =
           parser_frontend.AnnounceFunctionType(
-              static_cast<FunctionDefine&>(*flow_control_node)
+              static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
+                  *flow_control_node)
                   .GetFunctionTypePointer());
       CheckAddTypeResult(announce_result);
     } break;
@@ -2445,7 +2625,8 @@ ObjectConstructData::ConstructObject(
     // 获取变量名指针后设置函数名
     function_type_chain->SetFunctionName(&iter->first);
     // 构建函数定义（FunctionDefine流程）
-    ConstructBasicObjectPart<FunctionDefine>(std::move(function_type_chain));
+    ConstructBasicObjectPart<c_parser_frontend::flow_control::FunctionDefine>(
+        std::move(function_type_chain));
   } else {
     // 要构建的类型为变量，无需额外转换
     // 声明待添加变量

@@ -64,7 +64,7 @@ class NfaGenerator {
     //以下两项仅对二义性文法的操作符有效
 #ifdef USE_AMBIGUOUS_GRAMMAR
     // 结合性
-    frontend::common::AssociatityType associate_type;
+    frontend::common::OperatorAssociatityType associate_type;
     // 运算符优先级
     size_t operator_priority;
 #endif  // USE_AMBIGUOUS_GRAMMAR

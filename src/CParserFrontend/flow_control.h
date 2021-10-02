@@ -1,6 +1,7 @@
 #ifndef CPARSERFRONTEND_FLOW_CONTROL_H_
 #define CPARSERFRONTEND_FLOW_CONTROL_H_
 
+#include <format>
 #include <list>
 #include <memory>
 #include <unordered_map>
@@ -120,7 +121,8 @@ class Label : public FlowInterface {
 // 跳转指令
 class Jmp : public FlowInterface {
  public:
-  Jmp() : FlowInterface(FlowType::kJmp) {}
+  Jmp(std::unique_ptr<Label>&& target_label)
+      : FlowInterface(FlowType::kJmp), target_label_(std::move(target_label)) {}
 
   virtual bool AddMainSentence(
       std::unique_ptr<FlowInterface>&& sentence) override {
@@ -160,18 +162,31 @@ class Return : public FlowInterface {
     return false;
   }
 
-  void SetReturnTarget(
-      const std::shared_ptr<const OperatorNodeInterface>& return_target) {
-    return_target_ = return_target;
-  }
+  // 设置从中返回的函数和返回的值，如果不存在返回值则提供nullptr作为参数
+  bool SetReturnTarget(
+      const std::shared_ptr<const c_parser_frontend::type_system::FunctionType>
+          function_to_return_from,
+      const std::shared_ptr<const OperatorNodeInterface>& return_target =
+          nullptr);
 
   std::shared_ptr<const OperatorNodeInterface> GetReturnValuePointer() const {
     return return_target_;
   }
+  std::shared_ptr<const c_parser_frontend::type_system::FunctionType>
+  GetFunctionToReturnFromPointer() const {
+    return function_to_return_from_;
+  }
+  const c_parser_frontend::type_system::FunctionType&
+  GetFunctionToReturnFromReference() const {
+    return *function_to_return_from_;
+  }
 
  private:
   // 要返回的值，nullptr代表无返回值
-  std::shared_ptr<const OperatorNodeInterface> return_target_;
+  std::shared_ptr<const OperatorNodeInterface> return_target_ = nullptr;
+  // 从该函数返回
+  std::shared_ptr<const c_parser_frontend::type_system::FunctionType>
+      function_to_return_from_;
 };
 
 // 条件控制块基类（if,for,while等）
@@ -200,6 +215,16 @@ class ConditionBlockInterface : public FlowInterface {
   // 返回是否添加成功
   bool AddSentences(std::list<std::unique_ptr<FlowInterface>>&& sentences);
   const auto& GetSentences() const { return main_block_; }
+  // 获取块起始处标签
+  std::unique_ptr<Label> GetSentenceStartLabel() const {
+    return std::make_unique<Label>(std::format("condition_block_{:}_start",
+                                               GetFlowId().GetThisNodeValue()));
+  }
+  // 获取块结束处标签
+  std::unique_ptr<Label> GetSentenceEndLabel() const {
+    return std::make_unique<Label>(
+        std::format("condition_block_{:}_end", GetFlowId().GetThisNodeValue()));
+  }
 
   // 默认对循环条件节点进行类型检查的函数
   // 返回给定节点是否可以作为条件分支类语句的条件
@@ -350,6 +375,23 @@ class LoopSentenceInterface : public ConditionBlockInterface {
            flow_type == FlowType::kWhileSentence ||
            flow_type == FlowType::kForSentence);
   }
+
+ public:
+  // 获取循环块循环条件判断开始处标签
+  virtual std::unique_ptr<Label> GetLoopConditionStartLabel() const = 0;
+  // 获取循环块循环条件判断结束处标签
+  virtual std::unique_ptr<Label> GetLoopConditionEndLabel() const = 0;
+
+  // 获取循环块主块开始处标签
+  std::unique_ptr<Label> GetLoopMainBlockStartLabel() const {
+    return std::make_unique<Label>(std::format("loop_main_block_{:}_start",
+                                               GetFlowId().GetThisNodeValue()));
+  }
+  // 获取循环主块结尾处标签
+  std::unique_ptr<Label> GetLoopMainBlockEndLabel() const {
+    return std::make_unique<Label>(
+        std::format("loop_main_block_{:}_end", GetFlowId().GetThisNodeValue()));
+  }
 };
 
 class WhileSentenceInterface : public LoopSentenceInterface {
@@ -373,6 +415,12 @@ class WhileSentence : public WhileSentenceInterface {
       std::list<std::unique_ptr<FlowInterface>>&& sentences) override {
     return AddSentences(std::move(sentences));
   }
+  virtual std::unique_ptr<Label> GetLoopConditionStartLabel() const override {
+    return GetSentenceStartLabel();
+  }
+  virtual std::unique_ptr<Label> GetLoopConditionEndLabel() const override {
+    return GetLoopMainBlockStartLabel();
+  }
 };
 
 class DoWhileSentence : public WhileSentenceInterface {
@@ -387,6 +435,12 @@ class DoWhileSentence : public WhileSentenceInterface {
       std::list<std::unique_ptr<FlowInterface>>&& sentences) override {
     return AddSentences(std::move(sentences));
   }
+  virtual std::unique_ptr<Label> GetLoopConditionStartLabel() const override {
+    return GetLoopMainBlockEndLabel();
+  }
+  virtual std::unique_ptr<Label> GetLoopConditionEndLabel() const override {
+    return GetLoopMainBlockEndLabel();
+  }
 };
 
 class ForSentence : public LoopSentenceInterface {
@@ -400,6 +454,12 @@ class ForSentence : public LoopSentenceInterface {
   virtual bool AddMainSentences(
       std::list<std::unique_ptr<FlowInterface>>&& sentences) override {
     return AddSentences(std::move(sentences));
+  }
+  virtual std::unique_ptr<Label> GetLoopConditionStartLabel() const override {
+    return GetSentenceStartLabel();
+  }
+  virtual std::unique_ptr<Label> GetLoopConditionEndLabel() const override {
+    return GetLoopMainBlockStartLabel();
   }
 
   // 添加for语句执行前的内容
@@ -502,10 +562,12 @@ class FlowControlSystem {
       const std::shared_ptr<FunctionType>& active_function) {
     active_function_ = active_function;
   }
-  std::shared_ptr<FunctionType> GetActiveFunctionPointer() const {
+  std::shared_ptr<const FunctionType> GetActiveFunctionPointer() const {
     return active_function_;
   }
-  FunctionType& GetActiveFunctionReference() const { return *active_function_; }
+  const FunctionType& GetActiveFunctionReference() const {
+    return *active_function_;
+  }
   // 完成函数构建后调用
   void FinishFunctionConstruct() {
     functions_.emplace_back(std::move(active_function_));

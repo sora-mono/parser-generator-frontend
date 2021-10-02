@@ -1,7 +1,5 @@
 #include "flow_control.h"
 
-#include <format>
-
 #include "action_scope_system.h"
 namespace c_parser_frontend::flow_control {
 // 添加一条函数内执行的语句（按出现顺序添加）
@@ -274,6 +272,52 @@ SwitchSentence::GetDefaultLabel(const SwitchSentence& switch_sentence) {
   // switch主体内使用的标签
   auto label_in_body = std::make_unique<Label>(std::move(label_name));
   return std::make_pair(std::move(label_for_jmp), std::move(label_in_body));
+}
+bool Return::SetReturnTarget(
+    const std::shared_ptr<const c_parser_frontend::type_system::FunctionType>
+        function_to_return_from,
+    const std::shared_ptr<const OperatorNodeInterface>& return_target) {
+  assert(function_to_return_from != nullptr);
+  if (return_target == nullptr) {
+    auto& function_return_type =
+        function_to_return_from->GetReturnTypeReference();
+    if (function_return_type.GetType() == StructOrBasicType::kBasic &&
+        static_cast<const c_parser_frontend::type_system::BasicType&>(
+            function_return_type)
+                .GetBuiltInType() ==
+            c_parser_frontend::type_system::BuiltInType::kVoid) [[likely]] {
+      // 函数无返回值
+      return_target_ = return_target;
+      function_to_return_from_ = function_to_return_from;
+      return true;
+    } else {
+      return false;
+    }
+  }
+  // 构建临时变量用于调用CheckAssignable函数
+  c_parser_frontend::operator_node::VarietyOperatorNode
+      temp_node_to_be_assigned(
+          nullptr, ConstTag::kNonConst,
+          c_parser_frontend::operator_node::LeftRightValueTag::kLeftValue);
+  bool result = temp_node_to_be_assigned.SetVarietyType(
+      function_to_return_from->GetReturnTypePointer());
+  assert(result);
+  switch (c_parser_frontend::operator_node::AssignOperatorNode::CheckAssignable(
+      temp_node_to_be_assigned, *return_target, true)) {
+    case AssignableCheckResult::kZeroConvertToPointer:
+    case AssignableCheckResult::kUpperConvert:
+    case AssignableCheckResult::kConvertToVoidPointer:
+    case AssignableCheckResult::kNonConvert:
+    case AssignableCheckResult::kSignedToUnsigned:
+    case AssignableCheckResult::kUnsignedToSigned:
+      return_target_ = return_target;
+      function_to_return_from_ = function_to_return_from;
+      return true;
+      break;
+    default:
+      return false;
+      break;
+  }
 }
 }  // namespace c_parser_frontend::flow_control
 

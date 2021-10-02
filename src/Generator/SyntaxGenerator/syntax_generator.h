@@ -24,9 +24,6 @@
 #include "Common/unordered_struct_manager.h"
 #include "Generator/DfaGenerator/dfa_generator.h"
 #include "process_function_interface.h"
-#include "process_functions_classes.h"
-#include "syntax_generate.h"
-#include "user_defined_function_and_data_register.h"
 
 namespace frontend::parser::syntaxmachine {
 class SyntaxMachine;
@@ -108,7 +105,7 @@ class SyntaxGenerator {
   using ProcessFunctionClassManagerType =
       ObjectManager<ProcessFunctionInterface>;
   // 运算符结合类型：左结合，右结合
-  using AssociatityType = frontend::common::AssociatityType;
+  using OperatorAssociatityType = frontend::common::OperatorAssociatityType;
   // 分析动作类型：规约，移入，移入和规约，报错，接受
   enum class ActionType { kReduct, kShift, kShiftReduct, kError, kAccept };
 
@@ -304,11 +301,10 @@ class SyntaxGenerator {
   // 其余三个参数同AddNonTerminalNode
   // 函数会复制一份副本，无需保持原来的参数的生命周期
   void AddUnableContinueNonTerminalNode(
-      const std::string& undefined_symbol,
- std::string&& node_symbol,
+      const std::string& undefined_symbol, std::string&& node_symbol,
 
       std::vector<std::string>&& subnode_symbols,
-      ProcessFunctionClassId class_id, bool could_empty_reduct);
+      ProcessFunctionClassId class_id);
   // 检查给定的节点生成后是否可以重启因为部分产生式体未定义而搁置的
   // 非终结产生式添加过程
   void CheckNonTerminalNodeCanContinue(const std::string& node_symbol);
@@ -338,7 +334,7 @@ class SyntaxGenerator {
   // 新建运算符节点，返回节点ID，节点已存在则返回ProductionNodeId::InvalidId()
   // 默认添加的运算符词法分析优先级等于运算符优先级
   ProductionNodeId AddOperatorNode(const std::string& operator_symbol,
-                                   AssociatityType associatity_type,
+                                   OperatorAssociatityType associatity_type,
                                    OperatorPriority priority_level);
   // 子过程，仅用于创建节点
   // 运算符节点名同运算符名
@@ -346,7 +342,7 @@ class SyntaxGenerator {
   // 自动更新节点体ID到节点ID的映射
   // 自动为节点类设置节点ID
   ProductionNodeId SubAddOperatorNode(SymbolId node_symbol_id,
-                                      AssociatityType associatity_type,
+                                      OperatorAssociatityType associatity_type,
                                       OperatorPriority priority_level);
 #endif  // USE_AMBIGUOUS_GRAMMAR
 
@@ -358,11 +354,14 @@ class SyntaxGenerator {
   // 下面两个函数均可直接调用，class_id是包装用户定义函数和数据的类的对象ID
   template <class ProcessFunctionClass>
   ProductionNodeId AddNonTerminalNode(
-      std::string&& node_symbol, std::vector<std::string>&& subnode_symbols,
-      bool could_empty_reduct);
+      std::string&& node_symbol, std::vector<std::string>&& subnode_symbols);
   ProductionNodeId AddNonTerminalNode(
       std::string&& node_symbol, std::vector<std::string>&& subnode_symbols,
-      ProcessFunctionClassId class_id, bool could_empty_reduct);
+      ProcessFunctionClassId class_id);
+  // 设置非终结节点可以空规约
+  // 必须保证给定名称节点存在且为非终结产生式名
+  void SetNonTerminalNodeCouldEmptyReduct(
+      const std::string& nonterminal_node_symbol);
   // 子过程，仅用于创建节点
   // 自动更新节点名ID到节点ID的映射表
   // 自动为节点类设置节点ID
@@ -584,12 +583,13 @@ class SyntaxGenerator {
   // 存储引用的未定义产生式
   // key是未定义的产生式名
   // tuple内的std::string是非终结产生式名
-  // const std::vector<std::pair<std::string, bool>>*存储已有的产生式体信息
+  // std::tuple<std::string, std::vector<std::string>,ProcessFunctionClassId>
+  //     存储已有的产生式体信息
   // ProcessFunctionClassId是给定的包装用户定义函数数据的类的对象ID
   // bool是是否可以空规约标记
-  std::unordered_multimap<std::string,
-                          std::tuple<std::string, std::vector<std::string>,
-                                     ProcessFunctionClassId, bool>>
+  std::unordered_multimap<
+      std::string,
+      std::tuple<std::string, std::vector<std::string>, ProcessFunctionClassId>>
       undefined_productions_;
   // 管理终结符号、非终结符号等的节点
   ObjectManager<BaseProductionNode> manager_nodes_;
@@ -707,7 +707,7 @@ class SyntaxGenerator {
   class OperatorProductionNode : public BaseProductionNode {
    public:
     OperatorProductionNode(SymbolId node_symbol_id,
-                           AssociatityType associatity_type,
+                           OperatorAssociatityType associatity_type,
                            OperatorPriority priority_level)
         : BaseProductionNode(ProductionNodeType::kOperatorNode, node_symbol_id),
           operator_associatity_type_(associatity_type),
@@ -726,10 +726,10 @@ class SyntaxGenerator {
     struct NodeData : public TerminalProductionNode::NodeData {
       std::string symbol_;
     };
-    void SetAssociatityType(AssociatityType type) {
+    void SetAssociatityType(OperatorAssociatityType type) {
       operator_associatity_type_ = type;
     }
-    AssociatityType GetAssociatityType() const {
+    OperatorAssociatityType GetAssociatityType() const {
       return operator_associatity_type_;
     }
     void SetPriorityLevel(OperatorPriority level) {
@@ -741,11 +741,13 @@ class SyntaxGenerator {
     virtual ProductionNodeId GetProductionNodeInBody(
         ProductionBodyId production_body_id, PointIndex point_index) {
       assert(false);
+      // 防止警告
+      return ProductionNodeId();
     }
 
    private:
     // 运算符结合性
-    AssociatityType operator_associatity_type_;
+    OperatorAssociatityType operator_associatity_type_;
     // 运算符优先级
     OperatorPriority operator_priority_level_;
   };
@@ -804,7 +806,7 @@ class SyntaxGenerator {
     const BodyContainerType& GetAllBody() const { return nonterminal_bodys_; }
     // 获取全部产生式体ID
     std::vector<ProductionBodyId> GetAllBodyIds() const;
-    // 设置该产生式不可以为空
+    // 设置该产生式不可以空规约
     void SetProductionShouldNotEmpty() { empty_body_ = false; }
     void SetProductionCouldBeEmpty() { empty_body_ = true; }
     // 查询该产生式是否可以为空
@@ -1196,12 +1198,27 @@ inline bool SyntaxGenerator::PrintProcessFunction(FILE* function_file,
 
 template <class ProcessFunctionClass>
 inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
-    std::string&& node_symbol, std::vector<std::string>&& subnode_symbols,
-    bool could_empty_reduct) {
+    std::string&& node_symbol, std::vector<std::string>&& subnode_symbols) {
   ProcessFunctionClassId class_id =
       CreateProcessFunctionClassObject<ProcessFunctionClass>();
   return AddNonTerminalNode(std::move(node_symbol), std::move(subnode_symbols),
-                            class_id, could_empty_reduct);
+                            class_id);
+}
+
+// 向项集中添加项和相应的向前看符号，可以传入单个未包装ID
+// 如果该项已存在则仅添加向前看符号
+
+template <class ForwardNodeIdContainer>
+inline std::pair<
+    std::map<SyntaxGenerator::CoreItem,
+             std::unordered_set<SyntaxGenerator::ProductionNodeId>>::iterator,
+    bool>
+SyntaxGenerator::AddItemAndForwardNodeIdsToCore(
+    CoreId core_id, const CoreItem& core_item,
+    ForwardNodeIdContainer&& forward_node_ids) {
+  assert(core_id.IsValid());
+  return GetCore(core_id).AddItemAndForwardNodeIds(
+      core_item, std::forward<ForwardNodeIdContainer>(forward_node_ids));
 }
 
 template <class ParsingTableEntryIdContainer>

@@ -25,7 +25,7 @@ class SyntaxMachine {
 
 #ifdef USE_AMBIGUOUS_GRAMMAR
   // 运算符结合性
-  using AssociatityType = SyntaxGenerator::AssociatityType;
+  using OperatorAssociatityType = SyntaxGenerator::OperatorAssociatityType;
 #endif  // USE_AMBIGUOUS_GRAMMAR
 
   // 用户定义的分析用函数、数据对象的管理器

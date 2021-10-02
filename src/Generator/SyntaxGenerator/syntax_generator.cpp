@@ -2,8 +2,10 @@
 
 #include <queue>
 
+#include "syntax_generator.h"
+
 namespace frontend::generator::syntaxgenerator {
-inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddTerminalNode(
+SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddTerminalNode(
     const std::string& node_symbol, const std::string& body_symbol,
     WordPriority node_priority) {
   auto [node_symbol_id, node_symbol_inserted] = AddNodeSymbol(node_symbol);
@@ -52,8 +54,8 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::SubAddTerminalNode(
 }
 
 #ifdef USE_AMBIGUOUS_GRAMMAR
-inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddOperatorNode(
-    const std::string& operator_symbol, AssociatityType associatity_type,
+SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddOperatorNode(
+    const std::string& operator_symbol, OperatorAssociatityType associatity_type,
     OperatorPriority priority_level) {
   // 运算符产生式名与运算符相同
   auto [operator_node_symbol_id, operator_node_symbol_inserted] =
@@ -89,7 +91,7 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddOperatorNode(
 }
 
 inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::SubAddOperatorNode(
-    SymbolId node_symbol_id, AssociatityType associatity_type,
+    SymbolId node_symbol_id, OperatorAssociatityType associatity_type,
     OperatorPriority priority_level) {
   ProductionNodeId node_id =
       manager_nodes_.EmplaceObject<OperatorProductionNode>(
@@ -101,9 +103,9 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::SubAddOperatorNode(
 }
 #endif  // USE_AMBIGUOUS_GRAMMAR
 
-inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
+SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
     std::string&& node_symbol, std::vector<std::string>&& subnode_symbols,
-    ProcessFunctionClassId class_id, bool could_empty_reduct) {
+    ProcessFunctionClassId class_id) {
   assert(!node_symbol.empty() && !subnode_symbols.empty() &&
          class_id.IsValid());
   std::vector<ProductionNodeId> node_ids;
@@ -121,11 +123,6 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
   NonTerminalProductionNode& production_node =
       static_cast<NonTerminalProductionNode&>(
           GetProductionNode(production_node_id));
-  if (could_empty_reduct) {
-    // 该产生式可以被空规约
-    production_node.SetProductionCouldBeEmpty();
-    return production_node_id;
-  }
   for (auto& subnode_symbol : subnode_symbols) {
     // 将产生式体的所有产生式名转换为节点ID
     ProductionNodeId subproduction_node_id;
@@ -146,8 +143,7 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
       // 产生式节点未定义
       // 添加待处理记录
       AddUnableContinueNonTerminalNode(subnode_symbol, std::move(node_symbol),
-                                       std::move(subnode_symbols), class_id,
-                                       could_empty_reduct);
+                                       std::move(subnode_symbols), class_id);
     }
     node_ids.push_back(subproduction_node_id);
   }
@@ -155,6 +151,17 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
   ProductionBodyId body_id = production_node.AddBody(std::move(node_ids));
   production_node.SetBodyProcessFunctionClassId(body_id, class_id);
   return production_node_id;
+}
+
+void SyntaxGenerator::SetNonTerminalNodeCouldEmptyReduct(
+    const std::string& nonterminal_node_symbol) {
+  ProductionNodeId nonterminal_node_id =
+      GetProductionNodeIdFromNodeSymbol(nonterminal_node_symbol);
+  assert(nonterminal_node_id.IsValid());
+  NonTerminalProductionNode& nonterminal_production_node =
+      static_cast<NonTerminalProductionNode&>(
+          GetProductionNode(nonterminal_node_id));
+  nonterminal_production_node.SetProductionCouldBeEmpty();
 }
 
 inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::SubAddNonTerminalNode(
@@ -178,19 +185,6 @@ void SyntaxGenerator::SetRootProduction(
       GetProductionNodeIdFromNodeSymbol(production_node_symbol);
   assert(production_node_id.IsValid());
   SetRootProductionNodeId(production_node_id);
-}
-
-template <class ForwardNodeIdContainer>
-inline std::pair<
-    std::map<SyntaxGenerator::CoreItem,
-             std::unordered_set<SyntaxGenerator::ProductionNodeId>>::iterator,
-    bool>
-SyntaxGenerator::AddItemAndForwardNodeIdsToCore(
-    CoreId core_id, const CoreItem& core_item,
-    ForwardNodeIdContainer&& forward_node_ids) {
-  assert(core_id.IsValid());
-  return GetCore(core_id).AddItemAndForwardNodeIds(
-      core_item, std::forward<ForwardNodeIdContainer>(forward_node_ids));
 }
 
 std::unordered_set<SyntaxGenerator::ProductionNodeId>
@@ -859,13 +853,12 @@ std::vector<std::string> SyntaxGenerator::GetFilesName(const std::string& str) {
 
 void SyntaxGenerator::AddUnableContinueNonTerminalNode(
     const std::string& undefined_symbol, std::string&& node_symbol,
-    std::vector<std::string>&& subnode_symbols, ProcessFunctionClassId class_id,
-    bool could_empty_reduct) {
+    std::vector<std::string>&& subnode_symbols,
+    ProcessFunctionClassId class_id) {
   // 使用insert因为可能有多个产生式依赖同一个未定义的产生式
   undefined_productions_.emplace(
-      undefined_symbol,
-      std::make_tuple(std::move(node_symbol), std::move(subnode_symbols),
-                      class_id, could_empty_reduct));
+      undefined_symbol, std::make_tuple(std::move(node_symbol),
+                                        std::move(subnode_symbols), class_id));
 }
 
 void SyntaxGenerator::CheckNonTerminalNodeCanContinue(
@@ -875,11 +868,11 @@ void SyntaxGenerator::CheckNonTerminalNodeCanContinue(
         undefined_productions_.equal_range(node_symbol);
     if (iter_begin != undefined_productions_.end()) {
       while (iter_begin != iter_end) {
-        auto& [node_symbol, node_body_ptr, process_function_class_id_,
-               could_empty_reduct] = iter_begin->second;
+        auto& [node_symbol, node_body_ptr, process_function_class_id_] =
+            iter_begin->second;
         ProductionNodeId node_id =
             AddNonTerminalNode(std::move(node_symbol), std::move(node_body_ptr),
-                               process_function_class_id_, could_empty_reduct);
+                               process_function_class_id_);
         if (node_id.IsValid()) {
           // 成功添加非终结节点，删除该条记录
           auto temp_iter = iter_begin;
@@ -897,11 +890,7 @@ void SyntaxGenerator::CheckUndefinedProductionRemained() {
   if (!undefined_productions_.empty()) {
     // 仍存在未定义产生式
     for (auto& item : undefined_productions_) {
-      auto& [node_symbol, node_bodys, class_id, could_empty_reduct] =
-          item.second;
-      if (could_empty_reduct) {
-        fprintf(stderr, "(可以空规约）");
-      }
+      auto& [node_symbol, node_bodys, class_id] = item.second;
       fprintf(stderr, "产生式：%s\n产生式体：", node_symbol.c_str());
       for (auto& body : node_bodys) {
         fprintf(stderr, "%s ", body.c_str());
@@ -947,10 +936,10 @@ void SyntaxGenerator::PrintOperatorNodeConstructData(OperatorData&& data) {
                            data.associatity_type + data.operator_priority;
   // 重新编码输出的结合性字符串
   if (data.associatity_type == "L") {
-    data.associatity_type = "AssociatityType::kLeftAssociate";
+    data.associatity_type = "OperatorAssociatityType::kLeftAssociate";
   } else {
     assert(data.associatity_type == "R");
-    data.associatity_type = "AssociatityType::kRightAssociate";
+    data.associatity_type = "OperatorAssociatityType::kRightAssociate";
   }
   fprintf(GetConfigConstructFilePointer(),
           "// 运算符： %s\n// 结合性：%s\n// 优先级：%s\n",
@@ -958,7 +947,7 @@ void SyntaxGenerator::PrintOperatorNodeConstructData(OperatorData&& data) {
           data.operator_priority.c_str());
   fprintf(
       GetConfigConstructFilePointer(),
-      "AddOperatorNode<%s>(\"%s\",AssociatityType(%s),PriorityLevel(%s));\n",
+      "AddOperatorNode<%s>(\"%s\",OperatorAssociatityType(%s),PriorityLevel(%s));\n",
       class_name.c_str(), data.operator_symbol.c_str(),
       data.associatity_type.c_str(), data.operator_priority.c_str());
   FILE* function_file = GetProcessFunctionClassFilePointer();
@@ -1183,14 +1172,6 @@ SyntaxGenerator::Core& SyntaxGenerator::Core::operator=(Core&& core) {
   parsing_table_entry_id_ = std::move(core.parsing_table_entry_id_);
   item_and_forward_node_ids_ = std::move(core.item_and_forward_node_ids_);
   return *this;
-}
-
-void SyntaxGenerator::ConfigConstruct() {
-  // 下面的宏将包含的文件中用户定义的产生式转化为产生式构建配置
-  // 如AddTerminalNode、AddNonTerminalNode等
-#define GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_
-#include "Config/ProductionConfig/production_config-inc.h"
-#undef GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_
 }
 
 const std::regex SyntaxGenerator::terminal_node_regex_(

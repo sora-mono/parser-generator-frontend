@@ -12,7 +12,7 @@ constexpr size_t kCharNum = CHAR_MAX - CHAR_MIN + 1;
 // 普通产生式区
 constexpr size_t kFunctionPartSize = 4;
 // 运算符结合类型：左结合，右结合
-enum class AssociatityType { kLeftToRight, kRightToRight };
+enum class OperatorAssociatityType { kLeftToRight, kRightToRight };
 // 节点类型：终结符号，运算符，非终结符号，文件尾节点
 // 为了支持ClassfiyProductionNodes，允许自定义项的值
 // 如果自定义项的值则所有项的值都必须小于sizeof(ProductionNodeType)

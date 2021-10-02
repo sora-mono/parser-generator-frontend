@@ -72,7 +72,7 @@ void SyntaxMachine::TerminalWordWaitingProcess() {
           } else if (priority_now == terminal_node_info.operator_priority) {
             // 当前优先级等于待处理的运算符的优先级，需要判定结合性
             if (terminal_node_info.associate_type ==
-                AssociatityType::kLeftToRight) {
+                OperatorAssociatityType::kLeftToRight) {
               // 运算符为从左到右结合，执行规约操作
               Reduct(action_and_attached_data);
             } else {

@@ -1,0 +1,179 @@
+终结产生式
+Id -> [a-zA-Z_][a-zA-Z0-9_]*
+Num -> [0-9]*(\.[0-9]*)?
+Str -> ".*"
+Character -> '..?'
+
+非终结产生式
+SingleConstexprValue -> Char
+SingleConstexprValue -> Str "[" Num "]"
+SingleConstexprValue -> Num
+SingleConstexprValue -> Str
+FundamentalType -> "char"
+FundamentalType -> "short"
+FundamentalType -> "int"
+FundamentalType -> "long"
+FundamentalType -> "float"
+FundamentalType -> "double"
+FundamentalType -> "void"
+SignTag  -> "signed"
+SignTag -> "unsigned"
+ConstTag -> "const"
+IdOrEquivence -> ConstTag Id
+IdOrEquivence -> ConstTag
+IdOrEquivence -> IdOrEquivence "[" Num "]"
+IdOrEquivence -> IdOrEquivence "[" "]"
+IdOrEquivence -> Consttag "*" IdOrEquivence
+IdOrEquivence -> "(" IdOrEquivence ")"
+NotEmptyEnumArguments -> Id
+NotEmptyEnumArguments -> Id "=" Num
+NotEmptyEnumArguments -> NotEmptyEnumArguments "," Id
+NotEmptyEnumArguments -> NotEmptyEnumArguments "," Id "=" Num
+EnumArguments -> NotEmptyEnumArguments
+Enum -> "enum" Id "{" EnumArguments "}"
+Enum -> "enum" "{" EnumArguments "}"
+EnumAnnounce -> "enum" Id
+StructureAnnounce -> "struct" Id
+StructureAnnounce -> "union" Id
+StructureDefineHead -> "struct"
+StructureDefineHead -> "union"
+StructureDefineHead -> StructureAnnounce
+StructureDefineInitHead -> StructureDefineHead "{"
+StructureDefine -> StructureDefineInitHead StructureBody "}"
+StructType -> StructureDefine
+StructType -> StructAnnounce
+BasicType -> ConstTag SignTag FundamentalType
+BasicType -> ConstTag StructType
+BasicType -> ConstTag Id
+BasicType -> ConstTag EnumAnnounce
+FunctionRelaventBasePartFunctionInit -> IdOrEquivence "("
+FunctionRelaventBasePartFunctionInit -> FunctionRelaventBasePart "("
+FunctionRelaventBasePart -> FunctionRelaventBasePartFunctionInit FunctionRelaventArguments ")"
+FunctionRelaventBasePart -> ConstTag "*" FunctionRelaventBasePart
+FunctionRelaventBasePart -> "(" FunctionRelaventBasePart ")"
+FunctionRelavent -> BasicType FunctionRelaventBasePart
+SingleAnnounceNoAssign -> BasicType IdOrEquivence
+SingleAnnounceNoAssign -> FunctionRelavent
+TypeDef -> "typedef" SingleAnnounceNoAssign
+NotEmptyFunctionPointerArguments -> SingleAnnounceNoAssign
+NotEmptyFunctionPointerArguments -> NotEmptyFunctionPointerArguments "," SingleAnnounceNoAssign
+FunctionRelaventArguments -> NotEmptyFunctionPointerArguments
+FunctionDefineHead -> FunctionRelavent "{"
+FunctionDefine -> FunctionDefineHead Sentences "}"
+SingleStructureBody -> SingleAnnounceNoAssign
+SingleStructureBody -> SingleStructureBody "," Id
+NotEmptyStructureBody -> SingleStructureBody
+NotEmptyStructureBody -> NotEmptyStructureBody SingleStructureBody ";"
+StructureBody -> NotEmptyStructureBody
+InitializeList -> "{" InitializeListArguments "}"
+SingleInitializeListArgument -> SingleConstexprValue
+SingleInitializeListArgument -> InitializeList
+InitializeListArguments -> SingleInitializeListArgument
+InitializeListArguments -> InitializeListArguments "," SingleInitializeListArgument
+AnnounceAssignable -> Assignable
+AnnounceAssignable -> InitializeList
+SingleAnnounceAndAssign -> SingleAnnounceNoAssign
+SingleAnnounceAndAssign -> SingleAnnounceNoAssign "=" AnnounceAssignable
+SingleAnnounceAndAssign -> SingleAnnounceAndAssign "," Id
+SingleAnnounceAndAssign -> SingleAnnounceAndAssign "," Id "=" AnnounceAssignable
+Type -> BasicType
+Type -> FunctionRelavent
+MathematicalOperator -> "+"
+MathematicalOperator -> "-"
+MathematicalOperator -> "*"
+MathematicalOperator -> "/"
+MathematicalOperator -> "%"
+MathematicalOperator -> "<<"
+MathematicalOperator -> ">>"
+MathematicalOperator -> "&"
+MathematicalOperator -> "|"
+MathematicalOperator -> "^"
+MathematicalOperator -> "!"
+MathematicalAndAssignOperator -> "+="
+MathematicalAndAssignOperator -> "-="
+MathematicalAndAssignOperator -> "*="
+MathematicalAndAssignOperator -> "/="
+MathematicalAndAssignOperator -> "%="
+MathematicalAndAssignOperator -> "<<="
+MathematicalAndAssignOperator -> ">>="
+MathematicalAndAssignOperator -> "&="
+MathematicalAndAssignOperator -> "|="
+MathematicalAndAssignOperator -> "^="
+LogicalOperator -> "&&"
+LogicalOperator -> "||"
+LogicalOperator -> ">"
+LogicalOperator -> ">="
+LogicalOperator -> "<"
+LogicalOperator -> "<="
+LogicalOperator -> "=="
+LogicalOperator -> "!="
+Assignable -> SingleConstexprValue
+Assignable -> Id
+Assignable -> TemaryOperator
+Assignable -> FunctionCall
+Assignable -> "sizeof" "(" Type ")"
+Assignable -> "sizeof" "(" Assignable ")"
+Assignable -> Assignable "." Id
+Assignable -> Assignable "->" Id
+Assignable -> "(" Assignable ")"
+Assignable -> "(" Type ")" Assignable
+Assignable -> Assignable MathematicalOperator Assignable
+Assignable -> Assignable MathematicalAndAssignOperator Assignable
+Assignable -> Assignable LogicalOperator Assignable
+Assignable -> "!" Assignable
+Assignable -> "~" Assignable
+Assignable -> "&" Assignable
+Assignable -> "*" Assignable
+Assignable -> Assignable "[" Assignable "]"
+Assignable -> "++" Assignable
+Assignable -> "--" Assignable
+Assignable -> Assignable "++"
+Assignable -> Assignable "--"
+Return -> "return" Assignable
+Return -> "return"
+TemaryOperator -> Assignable "?" Assignable ":" Assignable
+NotEmptyFunctionCallArguments -> Assignable
+NotEmptyFunctionCallArguments -> NotEmptyFunctionCallArguments "," Assignable
+FunctionCallArguments -> NotEmptyFunctionCallArguments
+FunctionCallInit -> Assignable "("
+FunctionCall -> FunctionCallInit FunctionCallArguments ")"
+Assignables -> Assignable
+Assignables -> Assignables "," Assignable
+Break -> "break" ";"
+Continue -> "continue" ";"
+SingleStatement -> If
+SingleStatement -> DoWhile
+SingleStatement -> While
+SingleStatement -> For
+SingleStatement -> Switch
+SingleStatement -> Assignable ";"
+SingleStatement -> SingleAnnounceAndAssign ";"
+SingleStatement -> Return
+SingleStatement -> Break
+SingleStatement -> Continue
+IfCondition -> "if" "(" Assignable ")"
+IfWithElse -> IfCondition ProcessControlSentenceBody "else"
+If->IfWithElse ProcessControlSentenceBody
+If -> IfCondition ProcessControlSentenceBody
+ForRenewSentences -> Assignables ";"
+ForInitSentence -> Assignables ";"
+ForInitSentence -> SingleAnnounceAndAssign ";"
+ForInitHead -> "for"
+ForHead -> ForInitHead "(" ForInitSentence Assignable ForRenewSentences ")"
+For -> ForHead ProcessControlSentenceBody
+WhileInitHead -> "while" "(" Assignable ")"
+While -> WhileInitHead ProcessControlSentenceBody
+DoWhileInitHead -> "do"
+DoWhile -> DoWhileInitHead ProcessControlSentenceBody while "(" Assignable ")" ";"
+SwitchCaseSimple -> "case" SingleConstexprValue ":"
+SwitchCaseSimple -> "default" ":"
+SingleSwitchStatement -> SwitchCase
+SingleSwitchStatement -> Statements
+SwitchStatements -> SwitchStatements SingleSwitchStatement
+SwitchCondition -> "switch" "(" Assignable ")"
+Switch -> SwitchCondition "{" SwitchStatements "}"
+Statements -> Statements SingleStatement
+
+根产生式
+Root -> Root FunctionDefine
+Root -> Root SingleAnnounceNoAssign ";"

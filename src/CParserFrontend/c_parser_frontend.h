@@ -139,6 +139,13 @@ class CParserFrontend {
   FlowInterface& GetTopFlowControlSentence() {
     return action_scope_system_.GetTopFlowControlSentence();
   }
+  // 获取当前活跃函数
+  std::shared_ptr<const FunctionType> GetActiveFunctionPointer() const {
+    return flow_control_system_.GetActiveFunctionPointer();
+  }
+  const FunctionType& GetActiveFunctionReference() const {
+    return flow_control_system_.GetActiveFunctionReference();
+  }
   // 向当前活跃的函数内执行的语句尾部附加语句
   // 返回是否添加成功，添加失败则不修改参数
   // 如果当前无流程控制语句则返回false
@@ -182,12 +189,6 @@ class CParserFrontend {
     flow_control_system_.FinishFunctionConstruct();
     // 向类型系统中插入函数类型
     DefineFunctionType(function_type);
-  }
-  FunctionType& GetActiveFunctionReference() const {
-    return flow_control_system_.GetActiveFunctionReference();
-  }
-  std::shared_ptr<FunctionType> GetActiveFunctionPointer() const {
-    return flow_control_system_.GetActiveFunctionPointer();
   }
   // 类型系统
   TypeSystem type_system_;
