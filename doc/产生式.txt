@@ -122,6 +122,7 @@ Assignable -> Assignable MathematicalAndAssignOperator Assignable
 Assignable -> Assignable LogicalOperator Assignable
 Assignable -> "!" Assignable
 Assignable -> "~" Assignable
+Assignable -> "-" Assignable
 Assignable -> "&" Assignable
 Assignable -> "*" Assignable
 Assignable -> Assignable "[" Assignable "]"

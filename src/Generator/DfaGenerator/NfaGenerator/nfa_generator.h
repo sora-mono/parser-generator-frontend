@@ -2,10 +2,10 @@
 #define GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
 
 #include <any>
+#include <iostream>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
-#include <iostream>
 
 #include "Common/common.h"
 #include "Common/id_wrapper.h"
@@ -20,7 +20,7 @@ class NfaGenerator {
   enum class WrapperLabel { kTailNodePriority, kTailNodeId };
   // NfaNode在管理类中的ID
   using NfaNodeId = frontend::common::MultimapObjectManager<NfaNode>::ObjectId;
-  // 符号优先级
+  // 符号优先级，与运算符优先级不同
   using WordPriority =
       frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
                                           WrapperLabel::kTailNodePriority>;
@@ -33,26 +33,32 @@ class NfaGenerator {
       ar& production_node_id;
       ar& node_type;
       ar& process_function_class_id_;
-#ifdef USE_AMBIGUOUS_GRAMMAR
-      ar& associate_type;
-      ar& operator_priority;
-#endif  // USE_AMBIGUOUS_GRAMMAR
+      ar& binary_operator_associate_type;
+      ar& binary_operator_priority;
+      ar& unary_operator_priority;
     }
 
     bool operator==(const WordAttachedData& saved_data) const {
-      return (
-          production_node_id == saved_data.production_node_id &&
-          node_type == saved_data.node_type &&
-          process_function_class_id_ == saved_data.process_function_class_id_
-#ifdef USE_AMBIGUOUS_GRAMMAR
-          && associate_type == saved_data.associate_type &&
-          operator_priority == saved_data.operator_priority
-#endif  // USE_AMBIGUOUS_GRAMMAR
-      );
+      return (production_node_id == saved_data.production_node_id &&
+              node_type == saved_data.node_type &&
+              process_function_class_id_ ==
+                  saved_data.process_function_class_id_ &&
+              binary_operator_associate_type ==
+                  saved_data.binary_operator_associate_type &&
+              binary_operator_priority == saved_data.binary_operator_priority &&
+              unary_operator_associate_type ==
+                  saved_data.unary_operator_associate_type &&
+              unary_operator_priority == saved_data.unary_operator_priority);
     }
     bool operator!=(const WordAttachedData& saved_data) const {
       return !operator==(saved_data);
     }
+
+    // 根据上一个操作是否为规约判断使用左侧单目运算符优先级还是双目运算符优先级
+    // 返回获取到的结合类型和优先级
+    std::pair<frontend::common::OperatorAssociatityType, size_t>
+    GetAssociatityTypeAndPriority(bool is_last_operate_reduct) const;
+
     // 产生式节点ID，前向声明无法引用嵌套类，所以无法引用源类型
     // 应保证ID是唯一的，且一个ID对应的其余项唯一
     size_t production_node_id;
@@ -60,16 +66,20 @@ class NfaGenerator {
     frontend::common::ProductionNodeType node_type;
     // 包装用户定义的函数类的对象的ID
     size_t process_function_class_id_;
-
-    //以下两项仅对二义性文法的操作符有效
-#ifdef USE_AMBIGUOUS_GRAMMAR
-    // 结合性
-    frontend::common::OperatorAssociatityType associate_type;
-    // 运算符优先级
-    size_t operator_priority;
-#endif  // USE_AMBIGUOUS_GRAMMAR
+    // 以下三项仅对运算符有效，非运算符请使用默认值以保持==和!=语义
+    // 双目运算符结合性
+    frontend::common::OperatorAssociatityType binary_operator_associate_type =
+        frontend::common::OperatorAssociatityType::kLeftToRight;
+    // 双目运算符优先级
+    size_t binary_operator_priority = -1;
+    // 左侧单目运算符结合性
+    frontend::common::OperatorAssociatityType unary_operator_associate_type =
+        frontend::common::OperatorAssociatityType::kLeftToRight;
+    // 左侧单目运算符优先级
+    size_t unary_operator_priority = -1;
   };
-  // 前半部分为用户定义数据，后半部分为优先级，数字越大优先级越高
+  // 尾节点数据，内容为该单词所附带的属性
+  // 前半部分为用户定义数据，后半部分为单词优先级，数字越大优先级越高
   using TailNodeData = std::pair<WordAttachedData, WordPriority>;
 
   // 合并两个NFA节点
@@ -125,11 +135,12 @@ class NfaGenerator {
   }
   // 解析正则并添加到已有NFA中，返回生成的自动机的头结点和尾节点，自动处理结尾的范围限制符号
   std::pair<NfaNodeId, NfaNodeId> RegexConstruct(
-      std::istream& in, const TailNodeData& tag, const bool add_to_NFA_head = true,
+      std::istream& in, const TailNodeData& tag,
+      const bool add_to_NFA_head = true,
       const bool return_when_right_bracket = false);
   // 添加一个由字符串构成的NFA，自动处理结尾的范围限制符号
   std::pair<NfaNodeId, NfaNodeId> WordConstruct(const std::string& str,
-                                                const TailNodeData& tag);
+                                                TailNodeData&& tail_node_data);
   // 合并优化，降低节点数以降低子集构造法集合大小，直接使用NFA也可以降低成本
   void MergeOptimization();
 

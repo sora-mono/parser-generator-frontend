@@ -28,7 +28,7 @@ DfaMachine::WordInfo DfaMachine::GetNextWord() {
   std::string symbol;
   WordInfo return_data;
   // 当前状态转移表ID
-  TransformArrayId transform_array_id = start_id_;
+  TransformArrayId transform_array_id = root_index_;
   while (true) {
     char c = fgetc(file_);
     if (ferror(file_)) {

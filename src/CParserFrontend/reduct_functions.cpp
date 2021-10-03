@@ -1666,7 +1666,7 @@ AssignableLogicalOperate(std::vector<WordDataToUser>&& word_data) {
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 AssignableNot(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
+  assert(word_data.size() == 2);
   auto& [sub_assignable_node, flow_control_node_container] = std::any_cast<
       std::pair<std::shared_ptr<const OperatorNodeInterface>,
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
@@ -1692,18 +1692,45 @@ AssignableNot(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableNegative(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
+AssignableLogicalNegative(std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 2);
   auto& [sub_assignable_node, flow_control_node_container] = std::any_cast<
       std::pair<std::shared_ptr<const OperatorNodeInterface>,
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
       word_data[1].GetNonTerminalWordData().user_returned_data);
   auto not_operator_node = std::make_shared<MathematicalOperatorNode>(
-      MathematicalOperation::kNegative);
+      MathematicalOperation::kLogicalNegative);
   bool check_result =
       not_operator_node->SetLeftOperatorNode(sub_assignable_node);
   if (!check_result) [[unlikely]] {
     std::cerr << std::format("行数{:}，列数{:} 无法进行按位取反运算", GetLine(),
+                             GetColumn())
+              << std::endl;
+    exit(-1);
+  }
+  auto flow_control_node = std::make_unique<SimpleSentence>();
+  check_result = flow_control_node->SetSentenceOperateNode(not_operator_node);
+  assert(check_result);
+  flow_control_node_container->emplace_back(std::move(flow_control_node));
+  // 返回运算得到的节点而不是运算节点
+  return std::make_pair(not_operator_node->GetResultOperatorNode(),
+                        std::move(flow_control_node_container));
+}
+
+std::pair<std::shared_ptr<const OperatorNodeInterface>,
+          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
+AssignableMathematicalNegative(std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 2);
+  auto& [sub_assignable_node, flow_control_node_container] = std::any_cast<
+      std::pair<std::shared_ptr<const OperatorNodeInterface>,
+                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
+      word_data[1].GetNonTerminalWordData().user_returned_data);
+  auto not_operator_node = std::make_shared<MathematicalOperatorNode>(
+      MathematicalOperation::kMathematicalNegative);
+  bool check_result =
+      not_operator_node->SetLeftOperatorNode(sub_assignable_node);
+  if (!check_result) [[unlikely]] {
+    std::cerr << std::format("行数{:}，列数{:} 无法进行取负运算", GetLine(),
                              GetColumn())
               << std::endl;
     exit(-1);

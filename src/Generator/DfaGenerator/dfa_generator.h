@@ -84,13 +84,13 @@ class DfaGenerator {
   // 初始化
   void DfaInit();
 
-  // 添加关键字
-  bool AddKeyword(const std::string& str, const WordAttachedData& tail_node_tag,
-                  WordPriority priority_tag);
+  // 添加单词
+  bool AddWord(const std::string& word, WordAttachedData&& word_attached_data,
+               WordPriority priority_tag);
   // 添加正则
-  bool AddRegexpression(const std::string& str,
-                        const WordAttachedData& saved_data,
-                        WordPriority priority_tag);
+  bool AddRegexpression(const std::string& regex_str,
+                        WordAttachedData&& regex_attached_data,
+                        WordPriority regex_priority);
   // 设置遇到文件尾时返回的数据
   void SetEndOfFileSavedData(WordAttachedData&& saved_data) {
     file_end_saved_data_ = std::move(saved_data);
@@ -106,18 +106,19 @@ class DfaGenerator {
   // 重新进行完整构建过程
   bool DfaReconstrcut() { return DfaConstruct() && DfaMinimize(); }
   // 保存配置
-  void SaveConfig();
+  void SaveConfig() const;
 
  private:
   friend class DfaMachine;
   friend class boost::serialization::access;
 
   template <class Archive>
-  void serialize(Archive& ar, const unsigned int version) {
-    ar& dfa_config;
-    ar& head_index;
-    ar& file_end_saved_data_;
+  void save(Archive& ar, const unsigned int version) const {
+    ar << dfa_config_;
+    ar << root_index_;
+    ar << file_end_saved_data_;
   }
+  BOOST_SERIALIZATION_SPLIT_MEMBER()
 
   struct IntermediateDfaNode {
     IntermediateDfaNode(SetId handler = SetId::InvalidId(),
@@ -176,9 +177,9 @@ class DfaGenerator {
       char c_transform);
 
   // DFA配置，写入文件
-  DfaConfigType dfa_config;
+  DfaConfigType dfa_config_;
   // 头结点序号，写入文件
-  TransformArrayId head_index;
+  TransformArrayId root_index_;
   // 遇到文件尾时返回的数据，写入文件
   WordAttachedData file_end_saved_data_;
 

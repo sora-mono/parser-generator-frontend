@@ -10,8 +10,8 @@ using frontend::common::kCharNum;
 using frontend::generator::dfa_generator::nfa_generator::NfaGenerator;
 
 void DfaGenerator::DfaInit() {
-  dfa_config.clear();
-  head_index = TransformArrayId::InvalidId();
+  dfa_config_.clear();
+  root_index_ = TransformArrayId::InvalidId();
   file_end_saved_data_ = WordAttachedData();
   nfa_generator_.NfaInit();
   head_node_intermediate_ = IntermediateNodeId::InvalidId();
@@ -22,21 +22,21 @@ void DfaGenerator::DfaInit() {
   setid_to_intermediate_nodeid_.clear();
 }
 
-bool DfaGenerator::AddKeyword(const std::string& str,
-                              const WordAttachedData& saved_data,
-                              WordPriority priority_tag) {
-  auto [head_node_id, tail_node_id] =
-      nfa_generator_.WordConstruct(str, TailNodeData(saved_data, priority_tag));
+bool DfaGenerator::AddWord(const std::string& word,
+                           WordAttachedData&& word_attached_data,
+                           WordPriority word_priority) {
+  auto [head_node_id, tail_node_id] = nfa_generator_.WordConstruct(
+      word, TailNodeData(std::move(word_attached_data), word_priority));
   assert(head_node_id.IsValid() && tail_node_id.IsValid());
   return true;
 }
 
-bool DfaGenerator::AddRegexpression(const std::string& str,
-                                    const WordAttachedData& saved_data,
-                                    WordPriority operator_priority) {
-  std::stringstream sstream(str);
+bool DfaGenerator::AddRegexpression(const std::string& regex_str,
+                                    WordAttachedData&& regex_attached_data,
+                                    WordPriority regex_priority) {
+  std::stringstream sstream(regex_str);
   auto [head_node_id, tail_node_id] = nfa_generator_.RegexConstruct(
-      sstream, TailNodeData(saved_data, operator_priority));
+      sstream, TailNodeData(std::move(regex_attached_data), regex_priority));
   assert(head_node_id.IsValid() && tail_node_id.IsValid());
   return true;
 }
@@ -89,8 +89,8 @@ bool DfaGenerator::DfaMinimize() {
     nodes.push_back(iter.GetId());
   }
   DfaMinimize(nodes, CHAR_MIN);
-  dfa_config.resize(config_node_num);
-  for (auto& p : dfa_config) {
+  dfa_config_.resize(config_node_num);
+  for (auto& p : dfa_config_) {
     p.first.fill(TransformArrayId::InvalidId());
   }
   std::vector<bool> logged_index(config_node_num, false);
@@ -107,15 +107,15 @@ bool DfaGenerator::DfaMinimize() {
         if (next_node_id.IsValid()) {
           auto iter = intermediate_node_to_final_node_.find(next_node_id);
           assert(iter != intermediate_node_to_final_node_.end());
-          dfa_config[index].first[static_cast<char>(i + CHAR_MIN)] =
+          dfa_config_[index].first[static_cast<char>(i + CHAR_MIN)] =
               iter->second;
-          dfa_config[index].second = intermediate_node.tail_node_data.first;
+          dfa_config_[index].second = intermediate_node.tail_node_data.first;
         }
       }
       logged_index[index] = true;
     }
   }
-  head_index =
+  root_index_ =
       intermediate_node_to_final_node_.find(head_node_intermediate_)->second;
   head_node_intermediate_ = IntermediateNodeId::InvalidId();
   node_manager_intermediate_node_.ObjectManagerInit();
@@ -200,8 +200,8 @@ bool DfaGenerator::DfaMinimize(const std::vector<IntermediateNodeId>& handlers,
   DfaMinimizeGroupsRecursion(no_next_group, c_transform);
   return true;
 }
-void DfaGenerator::SaveConfig() {
-  std::ofstream ofile("dfa_config.conf");
+void DfaGenerator::SaveConfig() const {
+  std::ofstream ofile(frontend::common::kDfaConfigFileName);
   boost::archive::binary_oarchive oarchive(ofile);
   oarchive << *this;
 }

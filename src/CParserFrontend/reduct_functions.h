@@ -943,7 +943,11 @@ AssignableNot(std::vector<WordDataToUser>&& word_data);
 // Assignable -> "~" Assignable
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableNegative(std::vector<WordDataToUser>&& word_data);
+AssignableLogicalNegative(std::vector<WordDataToUser>&& word_data);
+// Assignable -> "-" Assignable
+std::pair<std::shared_ptr<const OperatorNodeInterface>,
+          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
+AssignableMathematicalNegative(std::vector<WordDataToUser>&& word_data);
 // Assignable -> "&" Assignable
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>

@@ -69,18 +69,16 @@ class SyntaxMachine {
     ProductionNodeId shift_node_id;
     // 移入的终结节点数据或非终结节点规约后用户返回的数据
     WordDataToUser word_data_to_user;
-
-#ifdef USE_AMBIGUOUS_GRAMMAR
     // 非运算符优先级为0
     OperatorPriority operator_priority = OperatorPriority(0);
-#endif  // USE_AMBIGUOUS_GRAMMAR
   };
 
+  SyntaxMachine() { LoadConfig(); }
   SyntaxMachine(const SyntaxMachine&) = delete;
   SyntaxMachine& operator=(SyntaxMachine&&) = delete;
 
   // 加载配置
-  void LoadConfig(const std::string& filename);
+  void LoadConfig();
   // 设置DFA返回的数据
   void SetDfaReturnData(WordInfo&& dfa_return_data) {
     dfa_return_data_ = std::move(dfa_return_data);
@@ -107,27 +105,40 @@ class SyntaxMachine {
   const ActionAndAttachedData* GetActionAndTarget(
       ParsingTableEntryId src_entry_id, ProductionNodeId node_id) const {
     assert(src_entry_id.IsValid());
-    return parsing_table_[src_entry_id].AtTerminalNode(node_id);
+    return syntax_parsing_table_[src_entry_id].AtTerminalNode(node_id);
   }
   // 获取移入该非终结节点后到达的产生式条目
   ParsingTableEntryId GetNextEntryId(ParsingTableEntryId src_entry_id,
                                      ProductionNodeId node_id) const {
     assert(src_entry_id.IsValid());
-    return parsing_table_[src_entry_id].AtNonTerminalNode(node_id);
+    return syntax_parsing_table_[src_entry_id].AtNonTerminalNode(node_id);
   }
   std::stack<ParsingData>& GetParsingStack() { return parsing_stack_; }
   ParsingData& GetParsingDataNow() { return parsing_data_now_; }
-
-#ifdef USE_AMBIGUOUS_GRAMMAR
   OperatorPriority& GetOperatorPriorityNow() {
     return parsing_data_now_.operator_priority;
   }
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
   // 放回当前待处理单词
   void PutbackWordNow() {
     dfa_machine_.PutbackWord(std::move(GetWaitingProcessWordInfo()));
   }
+
+  // 分析代码文件
+  bool Parse(const std::string& filename);
+
+ private:
+  // 允许序列化类访问
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void load(Archive& ar, const unsigned int version) {
+    ar >> root_parsing_entry_id_;
+    // 转除const以允许序列化代码读取配置
+    ar >> const_cast<SyntaxGenerator::ParsingTableType&>(syntax_parsing_table_);
+    ar >> manager_process_function_class_;
+  }
+  BOOST_SERIALIZATION_SPLIT_MEMBER()
   // 处理待移入单词是终结节点的情况
   // 自动处理移入和归并，归并后执行一次移入非终结节点后执行GetNextWord()
   void TerminalWordWaitingProcess();
@@ -141,10 +152,10 @@ class SyntaxMachine {
   // reducted_nonterminal_node_id是规约后得到的非终结产生式ID
   void ShiftNonTerminalWord(NonTerminalWordData&& non_terminal_word_data,
                             ProductionNodeId reducted_nonterminal_node_id);
-  // 分析代码文件
-  bool Parse(const std::string& filename);
+  void SetLastOperateIsReduct() { last_operate_is_reduct_ = true; }
+  void SetLastOperateIsNotReduct() { last_operate_is_reduct_ = false; }
+  bool LastOperateIsReduct() const { return last_operate_is_reduct_; }
 
- private:
   // DFA分析机
   frontend::parser::dfamachine::DfaMachine dfa_machine_;
   // 根分析表条目ID
@@ -152,7 +163,7 @@ class SyntaxMachine {
   // 用户定义的分析用函数、数据对象的管理器
   ProcessFunctionClassManagerType manager_process_function_class_;
   // 语法分析表，只有加载配置时可以修改
-  const SyntaxGenerator::ParsingTableType parsing_table_;
+  const SyntaxGenerator::ParsingTableType syntax_parsing_table_;
 
   // DFA返回的数据
   WordInfo dfa_return_data_;
@@ -160,6 +171,9 @@ class SyntaxMachine {
   std::stack<ParsingData> parsing_stack_;
   // 当前解析用数据
   ParsingData parsing_data_now_;
+  // 标记上次操作是否为规约操作
+  // 用来支持运算符优先级时同一个运算符可以细分为左侧单目运算符和双目运算符功能
+  bool last_operate_is_reduct_ = true;
 };
 
 }  // namespace frontend::parser::syntaxmachine

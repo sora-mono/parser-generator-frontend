@@ -142,7 +142,7 @@ inline bool MathematicalOperatorNode::SetLeftOperatorNode(
     const std::shared_ptr<const OperatorNodeInterface>& left_operator_node) {
   switch (GetMathematicalOperation()) {
     case MathematicalOperation::kNot:
-    case MathematicalOperation::kNegative: {
+    case MathematicalOperation::kLogicalNegative: {
       // 按位取反和逻辑非为一元运算符，结果类型与运算数类型相同
       auto compute_result_node = std::make_shared<VarietyOperatorNode>(
           nullptr, ConstTag::kNonConst, LeftRightValueTag::kRightValue);
@@ -168,7 +168,7 @@ MathematicalOperatorNode::SetRightOperatorNode(
     const std::shared_ptr<const OperatorNodeInterface>& right_operator_node) {
   switch (GetMathematicalOperation()) {
     case MathematicalOperation::kNot:
-    case MathematicalOperation::kNegative:
+    case MathematicalOperation::kLogicalNegative:
       // 一元运算符不应调用此函数
       assert(false);
       break;

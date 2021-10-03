@@ -43,47 +43,72 @@ GENERATOR_DEFINE_KEY_WORD("case")
 GENERATOR_DEFINE_KEY_WORD("default")
 
 // 运算符
-GENERATOR_DEFINE_OPERATOR(",", OperatorAssociatityType::kLeftToRight, 1)
-GENERATOR_DEFINE_OPERATOR("+=", OperatorAssociatityType::kRightToRight, 2)
-GENERATOR_DEFINE_OPERATOR("-=", OperatorAssociatityType::kRightToRight, 2)
-GENERATOR_DEFINE_OPERATOR("*=", OperatorAssociatityType::kRightToRight, 2)
-GENERATOR_DEFINE_OPERATOR("/=", OperatorAssociatityType::kRightToRight, 2)
-GENERATOR_DEFINE_OPERATOR("%=", OperatorAssociatityType::kRightToRight, 2)
-GENERATOR_DEFINE_OPERATOR("<<=", OperatorAssociatityType::kRightToRight, 2)
-GENERATOR_DEFINE_OPERATOR(">>=", OperatorAssociatityType::kRightToRight, 2)
-GENERATOR_DEFINE_OPERATOR("&=", OperatorAssociatityType::kRightToRight, 2)
-GENERATOR_DEFINE_OPERATOR("|=", OperatorAssociatityType::kRightToRight, 2)
-GENERATOR_DEFINE_OPERATOR("^=", OperatorAssociatityType::kRightToRight, 2)
-GENERATOR_DEFINE_OPERATOR("?", OperatorAssociatityType::kRightToRight, 3)
-GENERATOR_DEFINE_OPERATOR("||", OperatorAssociatityType::kLeftToRight, 4)
-GENERATOR_DEFINE_OPERATOR("&&", OperatorAssociatityType::kLeftToRight, 5)
-GENERATOR_DEFINE_OPERATOR("|", OperatorAssociatityType::kLeftToRight, 6)
-GENERATOR_DEFINE_OPERATOR("^", OperatorAssociatityType::kLeftToRight, 7)
-GENERATOR_DEFINE_OPERATOR("&", OperatorAssociatityType::kLeftToRight, 8)
-GENERATOR_DEFINE_OPERATOR("!=",OperatorAssociatityType::kLeftToRight,9)
-GENERATOR_DEFINE_OPERATOR("==",OperatorAssociatityType::kLeftToRight,9)
-GENERATOR_DEFINE_OPERATOR(">",OperatorAssociatityType::kLeftToRight,10)
-GENERATOR_DEFINE_OPERATOR(">=",OperatorAssociatityType::kLeftToRight,10)
-GENERATOR_DEFINE_OPERATOR("<",OperatorAssociatityType::kLeftToRight,10)
-GENERATOR_DEFINE_OPERATOR("<=",OperatorAssociatityType::kLeftToRight,10)
-GENERATOR_DEFINE_OPERATOR("<<",OperatorAssociatityType::kLeftToRight,11 )
-GENERATOR_DEFINE_OPERATOR(">>",OperatorAssociatityType::kLeftToRight,11)
-GENERATOR_DEFINE_OPERATOR("+",OperatorAssociatityType::kLeftToRight,12  )
-GENERATOR_DEFINE_OPERATOR("-",OperatorAssociatityType::kLeftToRight,12  )
-GENERATOR_DEFINE_OPERATOR("*",OperatorAssociatityType::kLeftToRight,13  )
-GENERATOR_DEFINE_OPERATOR("/",OperatorAssociatityType::kLeftToRight,13  )
-GENERATOR_DEFINE_OPERATOR("%",OperatorAssociatityType::kLeftToRight,13  )
-GENERATOR_DEFINE_OPERATOR("++",OperatorAssociatityType::kRightToRight,14)
-GENERATOR_DEFINE_OPERATOR("--",OperatorAssociatityType::kRightToRight,14)
-GENERATOR_DEFINE_OPERATOR("&",OperatorAssociatityType::kRightToRight,14)
-GENERATOR_DEFINE_OPERATOR("!",OperatorAssociatityType::kRightToRight,14)
-GENERATOR_DEFINE_OPERATOR("~",OperatorAssociatityType::kRightToRight,14)
-GENERATOR_DEFINE_OPERATOR("sizeof",OperatorAssociatityType::kRightToRight,14)
-GENERATOR_DEFINE_OPERATOR(".",OperatorAssociatityType::kRightToRight,15)
-GENERATOR_DEFINE_OPERATOR("->",OperatorAssociatityType::kRightToRight,15)
-GENERATOR_DEFINE_OPERATOR("[",OperatorAssociatityType::kRightToRight,15)
-GENERATOR_DEFINE_OPERATOR("(",OperatorAssociatityType::kRightToRight,15)
-
+GENERATOR_DEFINE_BINARY_OPERATOR(",", OperatorAssociatityType::kLeftToRight, 1)
+GENERATOR_DEFINE_BINARY_OPERATOR("+=", OperatorAssociatityType::kRightToLeft, 2)
+GENERATOR_DEFINE_BINARY_OPERATOR("-=", OperatorAssociatityType::kRightToLeft, 2)
+GENERATOR_DEFINE_BINARY_OPERATOR("*=", OperatorAssociatityType::kRightToLeft, 2)
+GENERATOR_DEFINE_BINARY_OPERATOR("/=", OperatorAssociatityType::kRightToLeft, 2)
+GENERATOR_DEFINE_BINARY_OPERATOR("%=", OperatorAssociatityType::kRightToLeft, 2)
+GENERATOR_DEFINE_BINARY_OPERATOR("<<=", OperatorAssociatityType::kRightToLeft,
+                                 2)
+GENERATOR_DEFINE_BINARY_OPERATOR(">>=", OperatorAssociatityType::kRightToLeft,
+                                 2)
+GENERATOR_DEFINE_BINARY_OPERATOR("&=", OperatorAssociatityType::kRightToLeft, 2)
+GENERATOR_DEFINE_BINARY_OPERATOR("|=", OperatorAssociatityType::kRightToLeft, 2)
+GENERATOR_DEFINE_BINARY_OPERATOR("^=", OperatorAssociatityType::kRightToLeft, 2)
+GENERATOR_DEFINE_BINARY_OPERATOR("?", OperatorAssociatityType::kRightToLeft, 3)
+GENERATOR_DEFINE_BINARY_OPERATOR("||", OperatorAssociatityType::kLeftToRight, 4)
+GENERATOR_DEFINE_BINARY_OPERATOR("&&", OperatorAssociatityType::kLeftToRight, 5)
+GENERATOR_DEFINE_BINARY_OPERATOR("|", OperatorAssociatityType::kLeftToRight, 6)
+GENERATOR_DEFINE_BINARY_OPERATOR("^", OperatorAssociatityType::kLeftToRight, 7)
+GENERATOR_DEFINE_BINARY_UNARY_OPERATOR("&",
+                                       OperatorAssociatityType::kLeftToRight, 8,
+                                       OperatorAssociatityType::kRightToLeft,
+                                       14)
+GENERATOR_DEFINE_BINARY_OPERATOR("!=", OperatorAssociatityType::kLeftToRight, 9)
+GENERATOR_DEFINE_BINARY_OPERATOR("==", OperatorAssociatityType::kLeftToRight, 9)
+GENERATOR_DEFINE_BINARY_OPERATOR(">", OperatorAssociatityType::kLeftToRight, 10)
+GENERATOR_DEFINE_BINARY_OPERATOR(">=", OperatorAssociatityType::kLeftToRight,
+                                 10)
+GENERATOR_DEFINE_BINARY_OPERATOR("<", OperatorAssociatityType::kLeftToRight, 10)
+GENERATOR_DEFINE_BINARY_OPERATOR("<=", OperatorAssociatityType::kLeftToRight,
+                                 10)
+GENERATOR_DEFINE_BINARY_OPERATOR("<<", OperatorAssociatityType::kLeftToRight,
+                                 11)
+GENERATOR_DEFINE_BINARY_OPERATOR(">>", OperatorAssociatityType::kLeftToRight,
+                                 11)
+GENERATOR_DEFINE_BINARY_OPERATOR("+", OperatorAssociatityType::kLeftToRight, 12)
+GENERATOR_DEFINE_BINARY_UNARY_OPERATOR("-",
+                                       OperatorAssociatityType::kLeftToRight,
+                                       12,
+                                       OperatorAssociatityType::kRightToLeft,
+                                       14)
+GENERATOR_DEFINE_BINARY_UNARY_OPERATOR("*",
+                                       OperatorAssociatityType::kLeftToRight,
+                                       13,
+                                       OperatorAssociatityType::kRightToLeft,
+                                       14)
+GENERATOR_DEFINE_BINARY_OPERATOR("/", OperatorAssociatityType::kLeftToRight, 13)
+GENERATOR_DEFINE_BINARY_OPERATOR("%", OperatorAssociatityType::kLeftToRight, 13)
+GENERATOR_DEFINE_BINARY_UNARY_OPERATOR("++",
+                                       OperatorAssociatityType::kRightToLeft,
+                                       14,
+                                       OperatorAssociatityType::kRightToLeft,
+                                       14)
+GENERATOR_DEFINE_BINARY_UNARY_OPERATOR("--",
+                                       OperatorAssociatityType::kRightToLeft,
+                                       14,
+                                       OperatorAssociatityType::kRightToLeft,
+                                       14)
+GENERATOR_DEFINE_UNARY_OPERATOR("!", OperatorAssociatityType::kRightToLeft, 14)
+GENERATOR_DEFINE_UNARY_OPERATOR("~", OperatorAssociatityType::kRightToLeft, 14)
+GENERATOR_DEFINE_UNARY_OPERATOR("sizeof", OperatorAssociatityType::kRightToLeft,
+                                14)
+GENERATOR_DEFINE_BINARY_OPERATOR(".", OperatorAssociatityType::kRightToLeft, 15)
+GENERATOR_DEFINE_BINARY_OPERATOR("->", OperatorAssociatityType::kRightToLeft,
+                                 15)
+GENERATOR_DEFINE_BINARY_OPERATOR("[", OperatorAssociatityType::kRightToLeft, 15)
+GENERATOR_DEFINE_BINARY_OPERATOR("(", OperatorAssociatityType::kRightToLeft, 15)
 
 // 非终结产生式
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
@@ -332,7 +357,7 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleAnnounceAndAssign,
     c_parser_frontend::parse_functions::SingleAnnounceAndAssignNoAssignExtend,
-    2, {"SingleAnnounceAndAssign",",", "Id"})
+    2, {"SingleAnnounceAndAssign", ",", "Id"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleAnnounceAndAssign,
     c_parser_frontend::parse_functions::SingleAnnounceAndAssignWithAssignExtend,
@@ -491,28 +516,32 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Assignable, c_parser_frontend::parse_functions::AssignableNot, 13,
     {"!", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignableNegative, 14,
-    {"~", "Assignable"})
+    Assignable, c_parser_frontend::parse_functions::AssignableLogicalNegative,
+    14, {"~", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignableObtainAddress, 15,
+    Assignable,
+    c_parser_frontend::parse_functions::AssignableMathematicalNegative, 15,
+    {"-", "Assignable"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    Assignable, c_parser_frontend::parse_functions::AssignableObtainAddress, 16,
     {"&", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignableDereference, 16,
+    Assignable, c_parser_frontend::parse_functions::AssignableDereference, 17,
     {"*", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignableArrayAccess, 17,
+    Assignable, c_parser_frontend::parse_functions::AssignableArrayAccess, 18,
     {"Assignable", "[", "Assignable", "]"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignablePrefixPlus, 18,
+    Assignable, c_parser_frontend::parse_functions::AssignablePrefixPlus, 19,
     {"++", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignablePrefixMinus, 19,
+    Assignable, c_parser_frontend::parse_functions::AssignablePrefixMinus, 20,
     {"--", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignableSuffixPlus, 20,
+    Assignable, c_parser_frontend::parse_functions::AssignableSuffixPlus, 21,
     {"Assignable", "++"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignableSuffixMinus, 21,
+    Assignable, c_parser_frontend::parse_functions::AssignableSuffixMinus, 22,
     {"Assignable", "--"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Return, c_parser_frontend::parse_functions::ReturnWithValue, 0,

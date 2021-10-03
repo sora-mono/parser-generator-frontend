@@ -1,7 +1,11 @@
 #ifndef PARSER_DFAMACHINE_DFAMACHINE_H_
 #define PARSER_DFAMACHINE_DFAMACHINE_H_
 
+#include <fstream>
+
+#include "Common/common.h"
 #include "Generator/DfaGenerator/dfa_generator.h"
+#include "boost/archive/binary_iarchive.hpp"
 
 namespace frontend::parser {
 // 线程全局变量，存储当前解析到的行数
@@ -21,7 +25,7 @@ class DfaMachine {
   using TransformArrayId = DfaGenerator::TransformArrayId;
 
  public:
-  DfaMachine() { LoadConfig(); }
+  DfaMachine() {}
   DfaMachine(const DfaMachine&) = delete;
   DfaMachine& operator=(const DfaMachine&) = delete;
 
@@ -72,14 +76,27 @@ class DfaMachine {
   void PutbackWord(WordInfo&& word_info) {
     putback_words_.emplace_back(std::move(word_info));
   }
+  // 加载配置
+  void LoadConfig() {
+    std::ifstream config_file(frontend::common::kDfaConfigFileName);
+    boost::archive::binary_iarchive iarchive(config_file);
+    iarchive >> *this;
+  }
 
  private:
-  // TODO 将加载配置功能单独提取出来放到一个类中
-  // 加载配置
-  void LoadConfig();
+  // 允许序列化类访问成员
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void load(Archive& ar, const unsigned int version) {
+    ar >> dfa_config_;
+    ar >> root_index_;
+    ar >> file_end_saved_data_;
+  }
+  BOOST_SERIALIZATION_SPLIT_MEMBER()
 
   // 起始DFA分析表ID
-  TransformArrayId start_id_;
+  TransformArrayId root_index_;
   // DFA配置
   DfaConfigType dfa_config_;
   // 遇到文件尾时返回的数据

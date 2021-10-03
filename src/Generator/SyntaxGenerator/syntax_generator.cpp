@@ -53,10 +53,10 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::SubAddTerminalNode(
   return node_id;
 }
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
-SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddOperatorNode(
-    const std::string& operator_symbol, OperatorAssociatityType associatity_type,
-    OperatorPriority priority_level) {
+SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddBinaryOperatorNode(
+    const std::string& operator_symbol,
+    OperatorAssociatityType binary_operator_associatity_type,
+    OperatorPriority binary_operator_priority_level) {
   // 运算符产生式名与运算符相同
   auto [operator_node_symbol_id, operator_node_symbol_inserted] =
       AddNodeSymbol(operator_symbol);
@@ -75,17 +75,102 @@ SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddOperatorNode(
     return ProductionNodeId::InvalidId();
   }
   ProductionNodeId operator_node_id = SubAddOperatorNode(
-      operator_node_symbol_id, associatity_type, priority_level);
+      operator_node_symbol_id, binary_operator_associatity_type,
+      binary_operator_priority_level);
   assert(operator_node_id.IsValid());
   frontend::generator::dfa_generator::DfaGenerator::WordAttachedData
-      word_attached_data_;
-  word_attached_data_.production_node_id = operator_node_id;
-  word_attached_data_.node_type = ProductionNodeType::kOperatorNode;
-  word_attached_data_.associate_type = associatity_type;
-  word_attached_data_.operator_priority = priority_level;
+      word_attached_data;
+  word_attached_data.production_node_id = operator_node_id;
+  word_attached_data.node_type = ProductionNodeType::kOperatorNode;
+  word_attached_data.binary_operator_associate_type =
+      binary_operator_associatity_type;
+  word_attached_data.binary_operator_priority = binary_operator_priority_level;
   // 向DFA生成器注册关键词
-  dfa_generator_.AddKeyword(
-      operator_symbol, word_attached_data_,
+  dfa_generator_.AddWord(
+      operator_symbol, std::move(word_attached_data),
+      frontend::generator::dfa_generator::DfaGenerator::WordPriority(1));
+  return operator_node_id;
+}
+
+SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddUnaryOperatorNode(
+    const std::string& operator_symbol,
+    OperatorAssociatityType unary_operator_associatity_type,
+    OperatorPriority unary_operator_priority_level) {
+  // 运算符产生式名与运算符相同
+  auto [operator_node_symbol_id, operator_node_symbol_inserted] =
+      AddNodeSymbol(operator_symbol);
+  if (!operator_node_symbol_inserted) [[unlikely]] {
+    fprintf(stderr, "syntax_generator error:运算符：%s 已定义\n",
+            operator_symbol.c_str());
+    return ProductionNodeId::InvalidId();
+  }
+  auto [operator_body_symbol_id, operator_body_symbol_inserted] =
+      AddBodySymbol(operator_symbol);
+  if (!operator_body_symbol_inserted) {
+    fprintf(
+        stderr,
+        "syntax_generator error:运算符：%s 已在DFA中添加，无法定义为运算符\n",
+        operator_symbol.c_str());
+    return ProductionNodeId::InvalidId();
+  }
+  ProductionNodeId operator_node_id = SubAddOperatorNode(
+      operator_node_symbol_id, unary_operator_associatity_type,
+      unary_operator_priority_level);
+  assert(operator_node_id.IsValid());
+  frontend::generator::dfa_generator::DfaGenerator::WordAttachedData
+      word_attached_data;
+  word_attached_data.production_node_id = operator_node_id;
+  word_attached_data.node_type = ProductionNodeType::kOperatorNode;
+  word_attached_data.unary_operator_associate_type =
+      unary_operator_associatity_type;
+  word_attached_data.unary_operator_priority = unary_operator_priority_level;
+  // 向DFA生成器注册关键词
+  dfa_generator_.AddWord(
+      operator_symbol, std::move(word_attached_data),
+      frontend::generator::dfa_generator::DfaGenerator::WordPriority(1));
+  return operator_node_id;
+}
+
+SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddBinaryUnaryOperatorNode(
+    const std::string& operator_symbol,
+    OperatorAssociatityType binary_operator_associatity_type,
+    OperatorPriority binary_operator_priority_level,
+    OperatorAssociatityType unary_operator_associatity_type,
+    OperatorPriority unary_operator_priority_level) {
+  // 运算符产生式名与运算符相同
+  auto [operator_node_symbol_id, operator_node_symbol_inserted] =
+      AddNodeSymbol(operator_symbol);
+  if (!operator_node_symbol_inserted) [[unlikely]] {
+    fprintf(stderr, "syntax_generator error:运算符：%s 已定义\n",
+            operator_symbol.c_str());
+    return ProductionNodeId::InvalidId();
+  }
+  auto [operator_body_symbol_id, operator_body_symbol_inserted] =
+      AddBodySymbol(operator_symbol);
+  if (!operator_body_symbol_inserted) {
+    fprintf(
+        stderr,
+        "syntax_generator error:运算符：%s 已在DFA中添加，无法定义为运算符\n",
+        operator_symbol.c_str());
+    return ProductionNodeId::InvalidId();
+  }
+  ProductionNodeId operator_node_id = SubAddOperatorNode(
+      operator_node_symbol_id, unary_operator_associatity_type,
+      unary_operator_priority_level);
+  assert(operator_node_id.IsValid());
+  frontend::generator::dfa_generator::DfaGenerator::WordAttachedData
+      word_attached_data;
+  word_attached_data.production_node_id = operator_node_id;
+  word_attached_data.node_type = ProductionNodeType::kOperatorNode;
+  word_attached_data.binary_operator_associate_type =
+      binary_operator_associatity_type;
+  word_attached_data.binary_operator_priority = binary_operator_priority_level;
+  word_attached_data.unary_operator_associate_type =
+      unary_operator_associatity_type;
+  word_attached_data.unary_operator_priority = unary_operator_priority_level;
+  // 向DFA生成器注册关键词
+  dfa_generator_.AddWord(
+      operator_symbol, std::move(word_attached_data),
       frontend::generator::dfa_generator::DfaGenerator::WordPriority(1));
   return operator_node_id;
 }
@@ -101,7 +186,6 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::SubAddOperatorNode(
   SetBodySymbolIdToProductionNodeIdMapping(node_symbol_id, node_id);
   return node_id;
 }
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
 SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
     std::string&& node_symbol, std::vector<std::string>&& subnode_symbols,
@@ -434,8 +518,8 @@ SyntaxGenerator::ParsingTableEntryClassify(
   std::vector<std::vector<ParsingTableEntryId>> terminal_classify_result,
       final_classify_result;
   std::vector<ParsingTableEntryId> entry_ids;
-  entry_ids.reserve(syntax_config_parsing_table_.size());
-  for (size_t i = 0; i < syntax_config_parsing_table_.size(); i++) {
+  entry_ids.reserve(syntax_parsing_table_.size());
+  for (size_t i = 0; i < syntax_parsing_table_.size(); i++) {
     // 添加所有待分类的语法分析表条目ID
     entry_ids.push_back(ParsingTableEntryId(i));
   }
@@ -451,7 +535,7 @@ SyntaxGenerator::ParsingTableEntryClassify(
 inline void SyntaxGenerator::RemapParsingTableEntryId(
     const std::unordered_map<ParsingTableEntryId, ParsingTableEntryId>&
         moved_entry_id_to_new_entry_id) {
-  for (auto& entry : syntax_config_parsing_table_) {
+  for (auto& entry : syntax_parsing_table_) {
     entry.ResetEntryId(moved_entry_id_to_new_entry_id);
   }
 }
@@ -492,21 +576,21 @@ void SyntaxGenerator::ParsingTableMergeOptimize() {
   std::unordered_map<ParsingTableEntryId, ParsingTableEntryId>
       moved_entry_to_new_entry_id;
   // 开始合并
-  assert(syntax_config_parsing_table_.size() > 0);
+  assert(syntax_parsing_table_.size() > 0);
   // 下一个要处理的条目
   ParsingTableEntryId next_process_entry_index(0);
   // 下一个插入位置
   ParsingTableEntryId next_insert_position_index(0);
   // 类似快排分类的算法
   // 寻找没有被合并的条目并紧凑排列在vector低下标一侧
-  while (next_process_entry_index < syntax_config_parsing_table_.size()) {
+  while (next_process_entry_index < syntax_parsing_table_.size()) {
     if (old_entry_id_to_new_entry_id.find(next_process_entry_index) ==
         old_entry_id_to_new_entry_id.end()) {
       // 该条目保留
       if (next_insert_position_index != next_process_entry_index) {
         // 需要移动到新位置保持vector紧凑
-        syntax_config_parsing_table_[next_insert_position_index] =
-            std::move(syntax_config_parsing_table_[next_process_entry_index]);
+        syntax_parsing_table_[next_insert_position_index] =
+            std::move(syntax_parsing_table_[next_process_entry_index]);
       }
       // 重映射保留条目的新位置
       moved_entry_to_new_entry_id[next_process_entry_index] =
@@ -528,7 +612,7 @@ void SyntaxGenerator::ParsingTableMergeOptimize() {
   // 至此每一个条目都有了新条目的映射
   // 释放多余空间
   old_entry_id_to_new_entry_id.clear();
-  syntax_config_parsing_table_.resize(next_insert_position_index);
+  syntax_parsing_table_.resize(next_insert_position_index);
   // 将所有旧ID更新为新ID
   RemapParsingTableEntryId(moved_entry_to_new_entry_id);
 }
@@ -602,8 +686,8 @@ void SyntaxGenerator::AnalysisProductionConfig(const std::string& file_name) {
   }
 }
 
-void SyntaxGenerator::AnalysisTerminalProduction(const std::string& str,
-                                                 size_t operator_priority) {
+void SyntaxGenerator::AnalysisTerminalProduction(
+    const std::string& str, size_t binary_operator_priority) {
   std::smatch match_result;
   std::regex_match(str, match_result, terminal_node_regex_);
   if (match_result.size() < 3) [[unlikely]] {
@@ -623,7 +707,7 @@ void SyntaxGenerator::AnalysisTerminalProduction(const std::string& str,
     return;
   }
   PrintTerminalNodeConstructData(std::move(node_symbol), std::move(body_symbol),
-                                 operator_priority);
+                                 binary_operator_priority);
 }
 
 #ifdef USE_AMBIGUOUS_GRAMMAR
@@ -642,15 +726,15 @@ void SyntaxGenerator::AnalysisOperatorProduction(const std::string& str) {
     return;
   }
   // 运算符优先级
-  operator_data.operator_priority = match_result[2].str();
-  if (operator_data.operator_priority.empty()) {
+  operator_data.binary_operator_priority = match_result[2].str();
+  if (operator_data.binary_operator_priority.empty()) {
     fprintf(stderr, "运算符：%s 优先级缺失\n",
-            operator_data.operator_priority.c_str());
+            operator_data.binary_operator_priority.c_str());
     return;
   }
   // 运算符结合性
-  operator_data.associatity_type = match_result[3].str();
-  if (operator_data.associatity_type.empty()) {
+  operator_data.binary_operator_associatity_type = match_result[3].str();
+  if (operator_data.binary_operator_associatity_type.empty()) {
     fprintf(stderr, "运算符：%s 运算符结合性缺失\n",
             operator_data.operator_symbol.c_str());
     return;
@@ -727,7 +811,7 @@ void SyntaxGenerator::SyntaxGeneratorInit() {
   root_production_node_id_ = ProductionNodeId::InvalidId();
   root_parsing_table_entry_id_ = ParsingTableEntryId::InvalidId();
   dfa_generator_.DfaInit();
-  syntax_config_parsing_table_.clear();
+  syntax_parsing_table_.clear();
   manager_process_function_class_.ObjectManagerInit();
   OpenConfigFile();
 }
@@ -915,17 +999,17 @@ void SyntaxGenerator::PrintKeyWordConstructData(const std::string& keyword) {
           keyword.c_str());
 }
 
-void SyntaxGenerator::PrintTerminalNodeConstructData(std::string&& node_symbol,
-                                                     std::string&& body_symbol,
-                                                     size_t operator_priority) {
+void SyntaxGenerator::PrintTerminalNodeConstructData(
+    std::string&& node_symbol, std::string&& body_symbol,
+    size_t binary_operator_priority) {
   fprintf(GetConfigConstructFilePointer(),
           "// 终结节点名：%s\n// 终结节点体：%s\n // 优先级：%llu",
           node_symbol.c_str(), body_symbol.c_str(),
-          static_cast<unsigned long long>(operator_priority));
+          static_cast<unsigned long long>(binary_operator_priority));
   fprintf(GetConfigConstructFilePointer(),
           "AddTerminalNode(\"%s\", \"%s\", PriorityLevel(%s));\n",
           node_symbol.c_str(), body_symbol.c_str(),
-          std::to_string(operator_priority).c_str());
+          std::to_string(binary_operator_priority).c_str());
 }
 
 #ifdef USE_AMBIGUOUS_GRAMMAR
@@ -933,31 +1017,37 @@ void SyntaxGenerator::PrintOperatorNodeConstructData(OperatorData&& data) {
   // 分配一个编号
   int operator_num = GetNodeNum();
   std::string class_name = class_name + std::to_string(operator_num) +
-                           data.associatity_type + data.operator_priority;
+                           data.binary_operator_associatity_type +
+                           data.binary_operator_priority;
   // 重新编码输出的结合性字符串
-  if (data.associatity_type == "L") {
-    data.associatity_type = "OperatorAssociatityType::kLeftAssociate";
+  if (data.binary_operator_associatity_type == "L") {
+    data.binary_operator_associatity_type =
+        "OperatorAssociatityType::kLeftAssociate";
   } else {
-    assert(data.associatity_type == "R");
-    data.associatity_type = "OperatorAssociatityType::kRightAssociate";
+    assert(data.binary_operator_associatity_type == "R");
+    data.binary_operator_associatity_type =
+        "OperatorAssociatityType::kRightAssociate";
   }
   fprintf(GetConfigConstructFilePointer(),
           "// 运算符： %s\n// 结合性：%s\n// 优先级：%s\n",
-          data.operator_symbol.c_str(), data.associatity_type.c_str(),
-          data.operator_priority.c_str());
-  fprintf(
-      GetConfigConstructFilePointer(),
-      "AddOperatorNode<%s>(\"%s\",OperatorAssociatityType(%s),PriorityLevel(%s));\n",
-      class_name.c_str(), data.operator_symbol.c_str(),
-      data.associatity_type.c_str(), data.operator_priority.c_str());
+          data.operator_symbol.c_str(),
+          data.binary_operator_associatity_type.c_str(),
+          data.binary_operator_priority.c_str());
+  fprintf(GetConfigConstructFilePointer(),
+          "AddBinaryOperatorNode<%s>(\"%s\",OperatorAssociatityType(%s),"
+          "PriorityLevel(%s));\n",
+          class_name.c_str(), data.operator_symbol.c_str(),
+          data.binary_operator_associatity_type.c_str(),
+          data.binary_operator_priority.c_str());
   FILE* function_file = GetProcessFunctionClassFilePointer();
   // TODO 去掉运算符的处理函数
   fprintf(function_file,
           "class %s : public ProcessFunctionInterface {\n public:\n",
           class_name.c_str());
   fprintf(function_file, "// 运算符： %s\n// 结合性：%s\n// 优先级：%s\n",
-          data.operator_symbol.c_str(), data.associatity_type.c_str(),
-          data.operator_priority.c_str());
+          data.operator_symbol.c_str(),
+          data.binary_operator_associatity_type.c_str(),
+          data.binary_operator_priority.c_str());
 #ifdef USE_USER_DEFINED_FILE
   for (size_t i = 0; i < data.include_files.size(); i++) {
     fprintf(function_file, "  #include\"%s\"\n", data.include_files[i].c_str());

@@ -1,7 +1,13 @@
 #include "syntax_machine.h"
 
+#include <format>
 namespace frontend::parser::syntaxmachine {
-
+void SyntaxMachine::LoadConfig() {
+  std::ifstream config_file(frontend::common::kSyntaxConfigFileName);
+  boost::archive::binary_iarchive iarchive(config_file);
+  dfa_machine_.LoadConfig();
+  iarchive >> *this;
+}
 bool SyntaxMachine::Parse(const std::string& filename) {
   bool result = dfa_machine_.SetInputFile(filename);
   if (result == false) [[unlikely]] {
@@ -42,9 +48,13 @@ void SyntaxMachine::TerminalWordWaitingProcess() {
       GetParsingDataNow().parsing_table_entry_id, production_node_to_shift_id);
   switch (action_and_attached_data.action_type_) {
     // TODO 添加接受时的后续处理
-    [[unlikely]] case ActionType::kAccept : break;
+    [[unlikely]] case ActionType::kAccept : exit(0);
+    break;
     // TODO 添加错误处理功能
-    [[unlikely]] case ActionType::kError : break;
+    [[unlikely]] case ActionType::kError : std::cerr << std::format("语法错误")
+                                                     << std::endl;
+    exit(-1);
+    break;
     case ActionType::kReduct:
       Reduct(action_and_attached_data);
       break;
@@ -58,20 +68,22 @@ void SyntaxMachine::TerminalWordWaitingProcess() {
       switch (terminal_node_info.node_type) {
         case ProductionNodeType::kTerminalNode:
           // 非运算符节点使用贪心策略，防止有公共前缀的产生式只有最短的那条有效
-          return ShiftTerminalWord(action_and_attached_data);
+          ShiftTerminalWord(action_and_attached_data);
           break;
         case ProductionNodeType::kOperatorNode: {
           // 运算符优先级必须不为0
-          OperatorPriority& priority_now = GetOperatorPriorityNow();
+          OperatorPriority priority_now = GetOperatorPriorityNow();
           assert(terminal_node_info.node_type ==
-                     ProductionNodeType::kOperatorNode &&
-                 terminal_node_info.operator_priority != 0);
-          if (priority_now > terminal_node_info.operator_priority) {
+                 ProductionNodeType::kOperatorNode);
+          auto [operator_associate_type, operator_priority] =
+              terminal_node_info.GetAssociatityTypeAndPriority(
+                  LastOperateIsReduct());
+          if (priority_now > operator_priority) {
             // 当前优先级高于待处理的运算符的优先级，执行规约操作
             Reduct(action_and_attached_data);
-          } else if (priority_now == terminal_node_info.operator_priority) {
+          } else if (priority_now == operator_priority) {
             // 当前优先级等于待处理的运算符的优先级，需要判定结合性
-            if (terminal_node_info.associate_type ==
+            if (operator_associate_type ==
                 OperatorAssociatityType::kLeftToRight) {
               // 运算符为从左到右结合，执行规约操作
               Reduct(action_and_attached_data);
@@ -83,8 +95,7 @@ void SyntaxMachine::TerminalWordWaitingProcess() {
             // 当前优先级低于待处理的运算符的优先级，执行移入操作
             ShiftTerminalWord(action_and_attached_data);
           }
-        }
-        break;
+        } break;
         case ProductionNodeType::kEndNode:
           // EndNode在转移表里的动作只能规约不能移入
         case ProductionNodeType::kNonTerminalNode:
@@ -122,20 +133,22 @@ inline void SyntaxMachine::ShiftTerminalWord(
   parsing_data_now.parsing_table_entry_id =
       action_and_target.GetShiftAttachedData().next_entry_id_;
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
   // 如果移入了运算符则更新优先级为新的优先级
   if (word_info.word_attached_data_.node_type ==
       ProductionNodeType::kOperatorNode) {
-    parsing_data_now.operator_priority =
-        OperatorPriority(word_info.word_attached_data_.operator_priority);
+    parsing_data_now.operator_priority = OperatorPriority(
+        word_info.word_attached_data_
+            .GetAssociatityTypeAndPriority(LastOperateIsReduct())
+            .second);
   } else {
     // 否则使用原来的优先级
     parsing_data_now.operator_priority =
         GetParsingStack().top().operator_priority;
   }
-#endif  // USE_AMBIGUOUS_GRAMMAR
   // 获取下一个单词
   GetNextWord();
+  // 执行了移入操作，需要设置上一步为非规约操作
+  SetLastOperateIsNotReduct();
 }
 
 void SyntaxMachine::Reduct(const ActionAndAttachedData& action_and_target) {
@@ -172,6 +185,8 @@ void SyntaxMachine::Reduct(const ActionAndAttachedData& action_and_target) {
   ShiftNonTerminalWord(
       process_function_object.Reduct(std::move(word_data_to_user)),
       action_and_target.GetReductAttachedData().reducted_nonterminal_node_id_);
+  // 执行了一次完整的规约操作，需要设置上一步执行了规约操作的标记
+  SetLastOperateIsReduct();
 }
 
 void SyntaxMachine::ShiftNonTerminalWord(
@@ -187,11 +202,9 @@ void SyntaxMachine::ShiftNonTerminalWord(
   GetParsingStack().emplace(std::move(parsing_data_now));
   parsing_data_now.parsing_table_entry_id = next_entry_id;
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
   // 重设当前优先级为移入该节点时的优先级
   parsing_data_now.operator_priority =
       GetParsingStack().top().operator_priority;
-#endif  // USE_AMBIGUOUS_GRAMMAR
 }
 
 }  // namespace frontend::parser::syntaxmachine

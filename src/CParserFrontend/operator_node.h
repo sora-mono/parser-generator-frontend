@@ -22,18 +22,19 @@ enum class GeneralOperationType {
 };
 // 数学运算符
 enum class MathematicalOperation {
-  kOr,          // |（按位或）
-  kXor,         // ^（按位异或）
-  kAnd,         // &（按位与）
-  kLeftShift,   // <<（左移）
-  kRightShift,  // >>（右移）
-  kPlus,        // +（加）
-  kMinus,       // -（减）
-  kMultiple,    // *（乘）
-  kDivide,      // /（除）
-  kMod,         // %（求模）
-  kNegative,    // ~（按位取反）
-  kNot,         // !（逻辑非）
+  kOr,                    // |（按位或）
+  kXor,                   // ^（按位异或）
+  kAnd,                   // &（按位与）
+  kLeftShift,             // <<（左移）
+  kRightShift,            // >>（右移）
+  kPlus,                  // +（加）
+  kMinus,                 // -（减）
+  kMultiple,              // *（乘）
+  kDivide,                // /（除）
+  kMod,                   // %（求模）
+  kLogicalNegative,       // ~（按位取反）
+  kMathematicalNegative,  // -（取负）
+  kNot,                   // !（逻辑非）
 };
 // 数学与赋值运算符
 enum class MathematicalAndAssignOperation {
@@ -110,11 +111,11 @@ class OperatorNodeInterface {
       frontend::common::ExplicitIdWrapper<size_t, IdWrapper,
                                           IdWrapper::kOperatorNodeId>;
 
-  OperatorNodeInterface(GeneralOperationType general_operator_type):
-      general_operator_type_(general_operator_type) {}
+  OperatorNodeInterface(GeneralOperationType general_operator_type)
+      : general_operator_type_(general_operator_type) {}
   // 复制构造函数不复制节点编号而是生成新的编号
-  OperatorNodeInterface(const OperatorNodeInterface& operator_node):
-      general_operator_type_(operator_node.general_operator_type_) {}
+  OperatorNodeInterface(const OperatorNodeInterface& operator_node)
+      : general_operator_type_(operator_node.general_operator_type_) {}
   virtual ~OperatorNodeInterface();
 
   OperatorNodeInterface& operator=(const OperatorNodeInterface& old_interface) {

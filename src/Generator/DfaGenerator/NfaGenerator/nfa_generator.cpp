@@ -243,7 +243,7 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
         pre_tail_id = tail_id;
         tail_id = pre_tail_id;
         break;
-      case '\\': // 仅对单个字符生效
+      case '\\':  // 仅对单个字符生效
         in >> c_now;
         if (!in || c_now == '\0') {
           throw std::invalid_argument("非法正则");
@@ -288,7 +288,8 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
 }
 
 std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>
-NfaGenerator::WordConstruct(const std::string& str, const TailNodeData& tag) {
+NfaGenerator::WordConstruct(const std::string& str,
+                            TailNodeData&& tail_node_data) {
   assert(str.size() != 0);
   NfaNodeId head_id = node_manager_.EmplaceObject();
   NfaNodeId tail_id = head_id;
@@ -298,7 +299,7 @@ NfaGenerator::WordConstruct(const std::string& str, const TailNodeData& tag) {
     tail_id = temp_id;
   }
   GetNfaNode(head_node_id_).AddNoconditionTransfer(head_id);
-  AddTailNode(tail_id, tag);
+  AddTailNode(tail_id, std::move(tail_node_data));
   return std::make_pair(head_id, tail_id);
 }
 
@@ -428,7 +429,38 @@ bool MergeNfaNodesWithGenerator(NfaGenerator::NfaNode& node_dst,
 }
 
 const NfaGenerator::TailNodeData NfaGenerator::NotTailNodeTag =
-    NfaGenerator::TailNodeData(WordAttachedData(),
-                               WordPriority::InvalidId());
+    NfaGenerator::TailNodeData(WordAttachedData(), WordPriority::InvalidId());
+
+
+// 根据上一个操作是否为规约判断使用左侧单目运算符优先级还是双目运算符优先级
+// 返回获取到的结合类型和优先级
+
+inline std::pair<frontend::common::OperatorAssociatityType, size_t>
+NfaGenerator::WordAttachedData::GetAssociatityTypeAndPriority(
+    bool is_last_operate_reduct) const {
+  assert(node_type == frontend::common::ProductionNodeType::kOperatorNode);
+  if (binary_operator_priority != -1) {
+    if (unary_operator_priority != -1) {
+      // 两种语义均存在
+      if (is_last_operate_reduct) {
+        // 上次操作为规约，应使用左侧单目运算符语义
+        return std::make_pair(unary_operator_associate_type,
+                              unary_operator_priority);
+      } else {
+        // 上次操作为移入，应使用双目运算符语义
+        return std::make_pair(binary_operator_associate_type,
+                              binary_operator_priority);
+      }
+    } else {
+      // 仅存在双目运算符语义，直接返回
+      return std::make_pair(binary_operator_associate_type,
+                            binary_operator_priority);
+    }
+  } else {
+    // 仅存在单目运算符语义，直接返回
+    return std::make_pair(unary_operator_associate_type,
+                          unary_operator_priority);
+  }
+}
 
 }  // namespace frontend::generator::dfa_generator::nfa_generator

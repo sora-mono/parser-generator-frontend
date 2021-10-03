@@ -29,15 +29,39 @@
 #endif  // !GENERATOR_DEFINE_KEY_WORD
 #define GENERATOR_DEFINE_KEY_WORD(key_word)
 
-// 添加运算符
+// 添加双目运算符
 // 输入参数从左到右：运算符符号，结合性（枚举OperatorAssociatityType），优先级
-// 例：GENERATOR_DEFINE_OPERATOR("example_symbol",
-//                               OperatorAssociatityType::kLeftToRight, 2)
-#ifdef GENERATOR_DEFINE_OPERATOR
-#undef GENERATOR_DEFINE_OPERATOR
-#endif  // !GENERATOR_DEFINE_OPERATOR
-#define GENERATOR_DEFINE_OPERATOR(operator_symbol, operator_associatity, \
-                                  operator_priority)
+// 例：GENERATOR_DEFINE_BINARY_OPERATOR("example_symbol",
+//                                      OperatorAssociatityType::kLeftToRight,
+//                                      2)
+#ifdef GENERATOR_DEFINE_BINARY_OPERATOR
+#undef GENERATOR_DEFINE_BINARY_OPERATOR
+#endif  // !GENERATOR_DEFINE_BINARY_OPERATOR
+#define GENERATOR_DEFINE_BINARY_OPERATOR( \
+    operator_symbol, binary_operator_associatity, binary_operator_priority)
+// 添加左侧单目运算符
+// 输入参数从左到右：运算符符号，结合性（枚举OperatorAssociatityType），优先级
+// 例：GENERATOR_DEFINE_UNARY_OPERATOR("example_symbol",
+//                                      OperatorAssociatityType::kLeftToRight,
+//                                      2)
+#ifdef GENERATOR_DEFINE_UNARY_OPERATOR
+#undef GENERATOR_DEFINE_UNARY_OPERATOR
+#endif  // !GENERATOR_DEFINE_UNARY_OPERATOR
+#define GENERATOR_DEFINE_UNARY_OPERATOR( \
+    operator_symbol, unary_operator_associatity, unary_operator_priority)
+// 添加左侧单目和双目运算符
+// 不可以使用GENERATOR_DEFINE_UNARY_OPERATOR和GENERATOR_DEFINE_BINARY_OPERATOR
+// 组合声明同时支持左侧单目和双目的运算符，必须使用该宏一次性声明两种
+// 输入参数从左到右：运算符符号，结合性（枚举OperatorAssociatityType），优先级
+// 例：GENERATOR_DEFINE_BINARY_UNARY_OPERATOR("example_symbol",
+//                                      OperatorAssociatityType::kLeftToRight,
+//                                      2)
+#ifdef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
+#undef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
+#endif  // !GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
+#define GENERATOR_DEFINE_BINARY_UNARY_OPERATOR(                             \
+    operator_symbol, binary_operator_associatity, binary_operator_priority, \
+    unary_operator_associatity, unary_operator_priority)
 
 // 定义终结节点，production_body为正则表达式
 // 例：GENERATOR_DEFINE_TERMINAL_PRODUCTION(example_symbol,
@@ -81,7 +105,7 @@
 // 例：GENERATOR_DEFINE_ROOT_PRODUCTION(example_symbol)
 #ifdef GENERATOR_DEFINE_ROOT_PRODUCTION
 #undef GENERATOR_DEFINE_ROOT_PRODUCTION
-#endif  // GENERATOR_DEFINE_OPERATOR
+#endif  // GENERATOR_DEFINE_BINARY_OPERATOR
 #define GENERATOR_DEFINE_ROOT_PRODUCTION(production_symbol)
 
 // 这部分对三种需要产生式信息的文件特化
@@ -98,13 +122,33 @@
 #endif  // GENERATOR_DEFINE_KEY_WORD
 #define GENERATOR_DEFINE_KEY_WORD(key_word) AddKeyWord(key_word);
 
-#ifdef GENERATOR_DEFINE_OPERATOR
-#undef GENERATOR_DEFINE_OPERATOR
-#endif  // GENERATOR_DEFINE_OPERATOR
-#define GENERATOR_DEFINE_OPERATOR(operator_symbol, operator_associatity,   \
-                                  operator_priority)                       \
-  AddOperatorNode(operator_symbol, frontend::common::operator_associatity, \
-                  OperatorPriority(operator_priority));
+#ifdef GENERATOR_DEFINE_BINARY_OPERATOR
+#undef GENERATOR_DEFINE_BINARY_OPERATOR
+#endif  // GENERATOR_DEFINE_BINARY_OPERATOR
+#define GENERATOR_DEFINE_BINARY_OPERATOR(                                   \
+    operator_symbol, binary_operator_associatity, binary_operator_priority) \
+  AddBinaryOperatorNode(operator_symbol,                                    \
+                        frontend::common::binary_operator_associatity,      \
+                        OperatorPriority(binary_operator_priority));
+#ifdef GENERATOR_DEFINE_UNARY_OPERATOR
+#undef GENERATOR_DEFINE_UNARY_OPERATOR
+#endif  // GENERATOR_DEFINE_UNARY_OPERATOR
+#define GENERATOR_DEFINE_UNARY_OPERATOR(                                  \
+    operator_symbol, unary_operator_associatity, unary_operator_priority) \
+  AddUnaryOperatorNode(operator_symbol,                                   \
+                       frontend::common::unary_operator_associatity,      \
+                       OperatorPriority(unary_operator_priority));
+#ifdef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
+#undef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
+#endif  // !GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
+#define GENERATOR_DEFINE_BINARY_UNARY_OPERATOR(                             \
+    operator_symbol, binary_operator_associatity, binary_operator_priority, \
+    unary_operator_associatity, unary_operator_priority)                    \
+  AddBinaryUnaryOperatorNode(operator_symbol,                               \
+                             frontend::common::binary_operator_associatity, \
+                             OperatorPriority(binary_operator_priority),    \
+                             frontend::common::unary_operator_associatity,  \
+                             OperatorPriority(unary_operator_priority))
 
 #ifdef GENERATOR_DEFINE_TERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_TERMINAL_PRODUCTION

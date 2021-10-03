@@ -113,8 +113,8 @@ class SyntaxGenerator {
   // 运算符数据
   struct OperatorData {
     std::string operator_symbol;
-    std::string operator_priority;
-    std::string associatity_type;
+    std::string binary_operator_priority;
+    std::string binary_operator_associatity_type;
     std::string reduct_function;
 #ifdef USE_USER_DEFINED_FILE
     std::vector<std::string> include_files;
@@ -149,7 +149,7 @@ class SyntaxGenerator {
   // 解析终结节点产生式，仅需且必须输入一个完整的产生式
   // 普通终结节点默认优先级为0（最低）
   void AnalysisTerminalProduction(const std::string& str,
-                                  size_t operator_priority = 0);
+                                  size_t binary_operator_priority = 0);
   // 解析运算符产生式，仅需且必须输入一个完整的产生式
   void AnalysisOperatorProduction(const std::string& str);
   // 解析非终结节点产生式，仅需且必须输入一个完整的产生式
@@ -192,7 +192,7 @@ class SyntaxGenerator {
   // 向配置文件中写入生成终结节点的操作
   void PrintTerminalNodeConstructData(std::string&& node_symbol,
                                       std::string&& body_symbol,
-                                      size_t operator_priority);
+                                      size_t binary_operator_priority);
   // 子过程，向配置文件写入Reduct函数
   // data中函数名为空则返回false
   template <class T>
@@ -331,11 +331,31 @@ class SyntaxGenerator {
                                       SymbolId body_symbol_id);
 
 #ifdef USE_AMBIGUOUS_GRAMMAR
-  // 新建运算符节点，返回节点ID，节点已存在则返回ProductionNodeId::InvalidId()
-  // 默认添加的运算符词法分析优先级等于运算符优先级
-  ProductionNodeId AddOperatorNode(const std::string& operator_symbol,
-                                   OperatorAssociatityType associatity_type,
-                                   OperatorPriority priority_level);
+  // 新建双目运算符节点，返回节点ID
+  // 节点已存在则返回ProductionNodeId::InvalidId()
+  // 默认添加的运算符词法分析优先级高于普通终结产生式低于关键字
+  ProductionNodeId AddBinaryOperatorNode(
+      const std::string& operator_symbol,
+      OperatorAssociatityType binary_operator_associatity_type,
+      OperatorPriority binary_operator_priority_level);
+  // 新建左侧单目运算符节点，返回节点ID
+  // 节点已存在则返回ProductionNodeId::InvalidId()
+  // 默认添加的运算符词法分析优先级高于普通终结产生式低于关键字
+  // 提供左侧单目运算符版本
+  ProductionNodeId AddUnaryOperatorNode(
+      const std::string& operator_symbol,
+      OperatorAssociatityType unary_operator_associatity_type,
+      OperatorPriority unary_operator_priority_level);
+  // 新建复用的左侧单目和双目运算符节点，返回节点ID
+  // 节点已存在则返回ProductionNodeId::InvalidId()
+  // 默认添加的运算符词法分析优先级高于普通终结产生式低于关键字
+  // 提供左侧单目运算符版本
+  ProductionNodeId AddBinaryUnaryOperatorNode(
+      const std::string& operator_symbol,
+      OperatorAssociatityType binary_operator_associatity_type,
+      OperatorPriority binary_operator_priority_level,
+      OperatorAssociatityType unary_operator_associatity_type,
+      OperatorPriority unary_operator_priority_level);
   // 子过程，仅用于创建节点
   // 运算符节点名同运算符名
   // 自动更新节点名ID到节点ID的映射表
@@ -406,9 +426,8 @@ class SyntaxGenerator {
   }
   // 添加一条语法分析表条目
   ParsingTableEntryId AddParsingTableEntry() {
-    ParsingTableEntryId parsing_table_entry_id(
-        syntax_config_parsing_table_.size());
-    syntax_config_parsing_table_.emplace_back();
+    ParsingTableEntryId parsing_table_entry_id(syntax_parsing_table_.size());
+    syntax_parsing_table_.emplace_back();
     return parsing_table_entry_id;
   }
   // 获取core_id对应产生式项集
@@ -479,8 +498,8 @@ class SyntaxGenerator {
   // 获取语法分析表条目
   ParsingTableEntry& GetParsingTableEntry(
       ParsingTableEntryId production_node_id) {
-    assert(production_node_id < syntax_config_parsing_table_.size());
-    return syntax_config_parsing_table_[production_node_id];
+    assert(production_node_id < syntax_parsing_table_.size());
+    return syntax_parsing_table_[production_node_id];
   }
   // 设置根语法分析表条目ID
   void SetRootParsingTableEntryId(
@@ -543,8 +562,8 @@ class SyntaxGenerator {
   BOOST_SERIALIZATION_SPLIT_MEMBER()
 
   // 将语法分析表配置写入文件
-  void SaveConfig() {
-    std::ofstream config_file("user_defined_function_and_data_register.h");
+  void SaveConfig() const {
+    std::ofstream config_file(frontend::common::kSyntaxConfigFileName);
     boost::archive::binary_oarchive oarchive(config_file);
     dfa_generator_.SaveConfig();
     oarchive << *this;
@@ -552,7 +571,7 @@ class SyntaxGenerator {
 
   // 声明语法分析机为友类，便于其使用各种定义
   friend class frontend::parser::syntaxmachine::SyntaxMachine;
-  // 序列化需要
+  // 允许序列化类访问
   friend class boost::serialization::access;
 
   // 终结节点产生式定义
@@ -616,7 +635,7 @@ class SyntaxGenerator {
   // DFA配置生成器，配置写入文件
   frontend::generator::dfa_generator::DfaGenerator dfa_generator_;
   // 语法分析表，配置写入文件
-  ParsingTableType syntax_config_parsing_table_;
+  ParsingTableType syntax_parsing_table_;
   // 用户自定义函数和数据的类的对象，配置写入文件
   ProcessFunctionClassManagerType manager_process_function_class_;
 
@@ -1043,12 +1062,10 @@ class SyntaxGenerator {
       }
 
       ActionType action_type_;
-      boost::variant<
-#ifdef USE_AMBIGUOUS_GRAMMAR
-          ShiftReductAttachedData,
-#endif  // USE_AMBIGUOUS_GRAMMAR
-          ShiftAttachedData, ReductAttachedData>
+      boost::variant<ShiftReductAttachedData, ShiftAttachedData,
+                     ReductAttachedData>
           attached_data_;
+
      private:
       // 只有ParsingTableEntry可以调用非const函数
       friend class ParsingTableEntry;
@@ -1070,13 +1087,11 @@ class SyntaxGenerator {
             static_cast<const ActionAndAttachedData&>(*this)
                 .GetReductAttachedData());
       }
-#ifdef USE_AMBIGUOUS_GRAMMAR
       ShiftReductAttachedData& GetShiftReductAttachedData() {
         return const_cast<ShiftReductAttachedData&>(
             static_cast<const ActionAndAttachedData&>(*this)
                 .GetShiftReductAttachedData());
       }
-#endif  // USE_AMBIGUOUS_GRAMMAR
     };
     // 动作为规约时存储包装调用函数的类的对象的ID和规约后得到的非终结产生式ID
     // 产生式ID用于确定如何在规约后产生的非终结产生式条件下转移
@@ -1296,10 +1311,7 @@ template <class Archive>
 inline void SyntaxGenerator::save(Archive& ar,
                                   const unsigned int version) const {
   ar << root_parsing_table_entry_id_;
-  ar << syntax_config_parsing_table_.size();
-  for (auto& item : syntax_config_parsing_table_) {
-    ar << item;
-  }
+  ar << syntax_parsing_table_;
   ar << manager_process_function_class_;
 }
 
