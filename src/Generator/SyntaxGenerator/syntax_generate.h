@@ -1,6 +1,6 @@
 // 该文件的目的是为了去除执行generator生成编译所需代码这一步
 // 通过宏在定义产生式时生成代码，定义产生式后就可以编译运行generator生成配置
-// 该文件需要被三个文件包含，并在三个文件中相同的宏生成不同代码
+// 该文件需要被两个文件包含，并在两个文件中相同的宏生成不同代码
 
 // 下面的宏保证该宏定义最终仅被process_functions_classes.h
 // user_defined_function_and_data_register.h和config_construct.cpp包含
@@ -9,7 +9,8 @@
 // 这么写为了使用户在编辑器里可以看到宏声明
 // 并且可以仅写一次产生式就能在多个文件中生成所需代码
 // 该头文件必须在使用宏之前被包含
-// （最简单的方法是放在production_config-inc.h第一行）
+// 用户定义头文件请在user_defined_functions.h中添加
+// 禁止在production_config-inc.h中添加
 
 // 这部分声明用户定义产生式用的宏的原型
 // 同时还原这些宏为无实现，防止不同文件对宏的特化冲突或忘记#undef等问题
@@ -18,9 +19,15 @@
 // 从而避免宏生成时表达式计算结果错误等问题
 
 // 修饰非终结节点产生式名以获取包装Reduct函数用的类名
+// 返回非字符串版本
 #define NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,   \
                                              production_body_seq) \
   production_symbol##production_body_seq##_
+// 修饰非终结节点产生式名以获取包装Reduct函数用的类名
+// 返回字符串版本
+#define NONTERMINAL_PRODUCTION_SYMBOL_MODIFY_STR(production_symbol,   \
+                                                 production_body_seq) \
+#production_symbol## #production_body_seq##"_"
 
 // 定义关键字
 // 例：GENERATOR_DEFINE_KEY_WORD("example_key_word")
@@ -110,12 +117,12 @@
 
 // 这部分对三种需要产生式信息的文件特化
 #ifdef GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_
-// 定义该宏以屏蔽用来允许使用IntelliSense而包含的头文件
-// production_config-inc.h在config_construct.cpp中生成函数内内容
-// 在函数定义内包含头文件会导致大量奇怪错误
-#define SHIELD_HEADERS_FOR_INTELLISENSE
+
 // 防止重复包含
 #ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER_END
+// 定义该宏以屏蔽用来允许使用IntelliSense而包含的头文件
+// 在函数定义内包含头文件会导致大量奇怪错误
+#define SHIELD_HEADERS_FOR_INTELLISENSE
 
 #ifdef GENERATOR_DEFINE_KEY_WORD
 #undef GENERATOR_DEFINE_KEY_WORD
@@ -148,7 +155,7 @@
                              frontend::common::binary_operator_associatity, \
                              OperatorPriority(binary_operator_priority),    \
                              frontend::common::unary_operator_associatity,  \
-                             OperatorPriority(unary_operator_priority))
+                             OperatorPriority(unary_operator_priority));
 
 #ifdef GENERATOR_DEFINE_TERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_TERMINAL_PRODUCTION
@@ -201,10 +208,15 @@
         override {                                                         \
       return reduct_function(std::move(word_data));                        \
     }                                                                      \
+                                                                           \
+   private:                                                                \
+    friend class boost::serialization::access;                             \
+    template <class Archive>                                               \
+    void serialize(Archive& ar, const unsigned int version) {}             \
   };
 #endif
 
-#elif defined GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER
+#ifdef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER
 // 防止重复包含
 #ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER_END
 
@@ -212,29 +224,28 @@
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #endif  // GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 
-#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                              \
-    production_symbol, production_body, reduct_function, production_body_seq, \
-    ...)                                                                      \
-  BOOST_CLASS_EXPORT_GUID(                                                    \
-      frontend::generator::syntaxgenerator::                                  \
-          NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,             \
-                                               production_body_seq),          \
-      "frontend::generator::"                                                 \
-      "syntaxgenerator::" #NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(              \
+#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                     \
+    production_symbol, reduct_function, production_body_seq, ...)    \
+  BOOST_CLASS_EXPORT_GUID(                                           \
+      frontend::generator::syntaxgenerator::                         \
+          NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,    \
+                                               production_body_seq), \
+      "frontend::generator::"                                        \
+      "syntaxgenerator::" NONTERMINAL_PRODUCTION_SYMBOL_MODIFY_STR(  \
           production_symbol, production_body_seq))
+#endif
 #endif
 
 #else
 
 #error 该文件仅且必须最终被Generator/SyntaxGenerator下的\
 process_functions_classes.h \
-process_functions_classes_register.h \
 config_construct.cpp所包含
 
 #endif
 
 // 为了使用Intellisense在这个宏里包含需要的头文件
-// 此处的头文件在config_construct.cpp中会被忽略
+// 此处的头文件在代码生成过程中会被忽略
 // 用户请在user_defined_functions.h内添加自己定义的头文件
 #ifndef SHIELD_HEADERS_FOR_INTELLISENSE
 #include "Common/common.h"

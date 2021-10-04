@@ -159,8 +159,8 @@ class CParserFrontend {
       std::list<std::unique_ptr<FlowInterface> >&& sentence_container) {
     return action_scope_system_.AddSentences(std::move(sentence_container));
   }
-  bool ConvertIfSentenceToIfElseSentence() {
-    return action_scope_system_.ConvertIfSentenceToIfElseSentence();
+  void ConvertIfSentenceToIfElseSentence() {
+    action_scope_system_.ConvertIfSentenceToIfElseSentence();
   }
   // 添加switch普通分支选项
   // 返回是否添加成功

@@ -56,7 +56,7 @@ class FlowInterface {
                                                      IdWrapper::kFlowNodeId>;
 
   FlowInterface(FlowType flow_type) : flow_type_(flow_type){};
-  virtual ~FlowInterface();
+  virtual ~FlowInterface() {}
 
   // 向主流程中添加语句
   virtual bool AddMainSentence(std::unique_ptr<FlowInterface>&& sentence) = 0;

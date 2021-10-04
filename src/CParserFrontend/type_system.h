@@ -139,7 +139,7 @@ class TypeInterface {
   TypeInterface(StructOrBasicType type,
                 const std::shared_ptr<const TypeInterface>& next_type_node)
       : type_(type), next_type_node_(next_type_node) {}
-  virtual ~TypeInterface();
+  virtual ~TypeInterface() {}
 
   // 比较两个类型是否完全相同，会自动调用下一级比较函数
   virtual bool operator==(const TypeInterface& type_interface) const {
@@ -399,7 +399,7 @@ class FunctionType : public TypeInterface {
   }
 
   // 返回是否为函数声明（函数声明中不存在任何流程控制语句）
-  bool IsFunctionAnnounce() const;
+  bool IsFunctionAnnounce() const { return GetSentences().empty(); }
   // 只检查函数签名是否相同，不检查函数名和函数内执行的语句
   bool IsSameSignature(const FunctionType& function_type) const {
     return GetFunctionName() == function_type.GetFunctionName() &&
@@ -407,7 +407,10 @@ class FunctionType : public TypeInterface {
            GetReturnTypeReference() == function_type.GetReturnTypeReference();
   }
   // 不比较函数内执行的语句
-  bool IsSameObject(const TypeInterface& type_interface) const;
+  bool IsSameObject(const TypeInterface& type_interface) const {
+    // 函数类型唯一，只有指向同一个FunctionType对象才是同一个函数
+    return this == &type_interface;
+  }
 
   void SetReturnTypePointer(
       const std::shared_ptr<const TypeInterface>& return_type) {

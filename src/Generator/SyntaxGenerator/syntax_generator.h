@@ -139,8 +139,17 @@ class SyntaxGenerator {
   };
 
  public:
-  SyntaxGenerator() { SyntaxGeneratorInit(); }
+  SyntaxGenerator() {
+    SyntaxGeneratorInit();
+    ConfigConstruct();
+    ParsingTableConstruct();
+    // ±£´æÅäÖÃ
+    SaveConfig();
+  }
+  SyntaxGenerator(const SyntaxGenerator&) = delete;
   ~SyntaxGenerator() { CloseConfigFile(); }
+
+  SyntaxGenerator& operator=(const SyntaxGenerator&) = delete;
 
   // ½âÎö¹Ø¼ü×Ö
   void AnalysisKeyWord(const std::string& str);

@@ -8,7 +8,7 @@ namespace c_parser_frontend::flow_control {
 
 // 检查给定语句是否可以作为函数内出现的语句
 
-inline bool SimpleSentence::SetSentenceOperateNode(
+bool SimpleSentence::SetSentenceOperateNode(
     const std::shared_ptr<OperatorNodeInterface>& sentence_operate_node) {
   if (CheckOperatorNodeValid(*sentence_operate_node)) [[likely]] {
     sentence_operate_node_ = sentence_operate_node;
@@ -41,8 +41,7 @@ inline bool SimpleSentence::CheckOperatorNodeValid(
 // 如果是FlowType::kIfSentence则添加到true_branch
 // 如果是FlowType::kIfElseSentence则添加到false_branch
 
-inline bool IfSentence::AddMainSentence(
-    std::unique_ptr<FlowInterface>&& sentence) {
+bool IfSentence::AddMainSentence(std::unique_ptr<FlowInterface>&& sentence) {
   if (GetFlowType() == FlowType::kIfSentence) [[likely]] {
     return AddTrueBranchSentence(std::move(sentence));
   } else {
@@ -51,7 +50,7 @@ inline bool IfSentence::AddMainSentence(
   }
 }
 
-inline bool IfSentence::AddMainSentences(
+bool IfSentence::AddMainSentences(
     std::list<std::unique_ptr<FlowInterface>>&& sentences) {
   if (GetFlowType() == FlowType::kIfSentence) [[likely]] {
     return AddTrueBranchSentences(std::move(sentences));
@@ -134,7 +133,7 @@ bool ForSentence::AddForRenewSentences(
 
 // 向主块内添加语句，做参数检查，如果参数检查不通过则不添加
 
-inline bool ConditionBlockInterface::SetCondition(
+bool ConditionBlockInterface::SetCondition(
     const std::shared_ptr<const OperatorNodeInterface>& condition,
     std::list<std::unique_ptr<FlowInterface>>&& sentences_to_get_condition) {
   if (DefaultConditionCheck(*condition)) [[likely]] {
@@ -146,7 +145,7 @@ inline bool ConditionBlockInterface::SetCondition(
   }
 }
 
-inline bool ConditionBlockInterface::AddSentence(
+bool ConditionBlockInterface::AddSentence(
     std::unique_ptr<FlowInterface>&& sentence) {
   if (DefaultMainBlockSentenceCheck(*sentence)) {
     main_block_.emplace_back(std::move(sentence));
@@ -202,7 +201,8 @@ inline bool ConditionBlockInterface::DefaultMainBlockSentenceCheck(
       break;
   }
 }
-bool CheckSwitchCaseAbleToAdd(
+
+bool SwitchSentence::CheckSwitchCaseAbleToAdd(
     const SwitchSentence& switch_node,
     const BasicTypeInitializeOperatorNode& case_value) {
   if (case_value.GetInitializeType() != InitializeType::kBasic) [[unlikely]] {
@@ -216,7 +216,7 @@ bool CheckSwitchCaseAbleToAdd(
 
 // 添加普通的case，返回是否添加成功，如果添加失败则不修改参数
 
-inline bool SwitchSentence::AddSimpleCase(
+bool SwitchSentence::AddSimpleCase(
     const std::shared_ptr<const BasicTypeInitializeOperatorNode>& case_value) {
   if (CheckSwitchCaseAbleToAdd(*this, *case_value)) [[likely]] {
     // 可以添加
@@ -234,7 +234,7 @@ inline bool SwitchSentence::AddSimpleCase(
     return false;
   }
 }
-inline bool SwitchSentence::AddDefaultCase() {
+bool SwitchSentence::AddDefaultCase() {
   if (default_case_ != nullptr) [[unlikely]] {
     // 已经设置了默认标签
     return false;
@@ -325,7 +325,7 @@ bool Return::SetReturnTarget(
 namespace c_parser_frontend::type_system {
 FunctionType::~FunctionType() {}
 
-inline bool FunctionType::CheckSentenceInFunctionValid(
+bool FunctionType::CheckSentenceInFunctionValid(
     const FlowInterface& flow_interface) {
   switch (flow_interface.GetFlowType()) {
     case FlowType::kFunctionDefine:
@@ -338,12 +338,12 @@ inline bool FunctionType::CheckSentenceInFunctionValid(
   }
 }
 
-inline const std::list<std::unique_ptr<FlowInterface>>&
-FunctionType::GetSentences() const {
+const std::list<std::unique_ptr<FlowInterface>>& FunctionType::GetSentences()
+    const {
   return *sentences_in_function_;
 }
 
-inline bool FunctionType::AddSentence(
+bool FunctionType::AddSentence(
     std::unique_ptr<FlowInterface>&& sentence_to_add) {
   if (CheckSentenceInFunctionValid(*sentence_to_add)) [[likely]] {
     sentences_in_function_->emplace_back(std::move(sentence_to_add));
@@ -354,7 +354,7 @@ inline bool FunctionType::AddSentence(
   }
 }
 
-inline bool FunctionType::AddSentences(
+bool FunctionType::AddSentences(
     std::list<std::unique_ptr<FlowInterface>>&& sentence_container) {
   // 检查是否容器内所有节点都可以添加
   for (const auto& sentence : sentence_container) {
@@ -376,19 +376,19 @@ FunctionCallOperatorNode::FunctionCallArgumentsContainer::
 FunctionCallOperatorNode::FunctionCallArgumentsContainer::
     ~FunctionCallArgumentsContainer() {}
 
-inline const std::list<
+const std::list<
     std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>>&
 TemaryOperatorNode::GetFlowControlNodeToGetConditionReference() const {
   return *condition_flow_control_node_container_;
 }
 
-inline const std::list<
+const std::list<
     std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>>&
 TemaryOperatorNode::GetFlowControlNodeToGetTrueBranchReference() const {
   return *true_branch_flow_control_node_container_;
 }
 
-inline const std::list<
+const std::list<
     std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>>&
 TemaryOperatorNode::GetFlowControlNodeToGetFalseBranchReference() const {
   return *false_branch_flow_control_node_container_;

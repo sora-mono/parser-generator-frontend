@@ -7,8 +7,7 @@ namespace c_parser_frontend::action_scope_system {
 // 建议先创建空节点后调用该函数，可以提升性能
 // 返回值含义见该类型定义处
 
-inline DefineVarietyResult
-ActionScopeSystem::VarietyData::AddVarietyData(
+inline DefineVarietyResult ActionScopeSystem::VarietyData::AddVarietyData(
     const std::shared_ptr<const VarietyOperatorNode>& operator_node,
     ActionScopeLevelType action_scope_level_) {
   auto& variety_data = GetVarietyData();
@@ -87,8 +86,7 @@ ActionScopeSystem::VarietyData::GetTopData() {
   }
 }
 
-std::pair<std::shared_ptr<const ActionScopeSystem::VarietyOperatorNode>,
-          bool>
+std::pair<std::shared_ptr<const ActionScopeSystem::VarietyOperatorNode>, bool>
 ActionScopeSystem::GetVariety(const std::string& variety_name) {
   auto iter = GetVarietyNameToOperatorNodePointer().find(variety_name);
   if (iter != GetVarietyNameToOperatorNodePointer().end()) [[likely]] {
@@ -149,7 +147,7 @@ void ActionScopeSystem::SetFunctionToConstruct(
 
 // 将构建中的流程控制节点压栈，自动增加一级作用域等级
 
-inline bool ActionScopeSystem::PushFlowControlSentence(
+bool ActionScopeSystem::PushFlowControlSentence(
     std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
         flow_control_sentence) {
   if (flow_control_stack_.empty()) {
@@ -159,6 +157,7 @@ inline bool ActionScopeSystem::PushFlowControlSentence(
   AddActionScopeLevel();
   flow_control_stack_.emplace(
       std::make_pair(std::move(flow_control_sentence), GetActionScopeLevel()));
+  return true;
 }
 
 bool ActionScopeSystem::RemoveEmptyNode(
@@ -179,18 +178,10 @@ bool ActionScopeSystem::RemoveEmptyNode(
 // 将if流程控制语句转化为if-else语句
 // 如果顶层控制语句不为if则返回false
 
-inline bool ActionScopeSystem::ConvertIfSentenceToIfElseSentence() {
-  assert(flow_control_stack_.top().first->GetFlowType() ==
-         c_parser_frontend::flow_control::FlowType::kIfSentence);
-  static_cast<c_parser_frontend::flow_control::IfSentence&>(
-      *flow_control_stack_.top().first)
-      .ConvertToIfElse();
-}
-
 // 向switch语句中添加普通case
 // 如果当前顶层控制语句不为switch则返回false
 
-inline bool ActionScopeSystem::AddSwitchSimpleCase(
+bool ActionScopeSystem::AddSwitchSimpleCase(
     const std::shared_ptr<
         c_parser_frontend::flow_control::BasicTypeInitializeOperatorNode>&
         case_value) {
@@ -203,7 +194,7 @@ inline bool ActionScopeSystem::AddSwitchSimpleCase(
       .AddSimpleCase(case_value);
 }
 
-inline bool ActionScopeSystem::AddSwitchDefaultCase() {
+bool ActionScopeSystem::AddSwitchDefaultCase() {
   if (GetTopFlowControlSentence().GetFlowType() !=
       c_parser_frontend::flow_control::FlowType::kSwitchSentence) [[unlikely]] {
     return false;
@@ -220,20 +211,11 @@ inline bool ActionScopeSystem::AddSwitchDefaultCase() {
 // 返回是否添加成功，添加失败则不修改参数
 // 如果当前无流程控制语句则返回false
 
-inline bool ActionScopeSystem::AddSentence(
-    std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
-        sentence) {
-  if (flow_control_stack_.empty()) [[unlikely]] {
-    return false;
-  }
-  return flow_control_stack_.top().first->AddMainSentence(std::move(sentence));
-}
-
 // 添加待执行语句的集合
 // 返回是否添加成功，添加失败则不修改参数
 // 如果当前无流程控制语句则返回false
 
-inline bool ActionScopeSystem::AddSentences(
+bool ActionScopeSystem::AddSentences(
     std::list<std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>>&&
         sentence_container) {
   if (flow_control_stack_.empty()) [[unlikely]] {

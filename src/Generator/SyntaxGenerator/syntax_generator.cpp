@@ -793,8 +793,6 @@ void SyntaxGenerator::ParsingTableConstruct() {
   SpreadLookForwardSymbolAndConstructParsingTableEntry(root_core_id);
   // 合并相同项，压缩语法分析表
   ParsingTableMergeOptimize();
-  // 保存配置
-  SaveConfig();
 }
 
 void SyntaxGenerator::SyntaxGeneratorInit() {

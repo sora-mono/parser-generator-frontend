@@ -136,7 +136,13 @@ class ActionScopeSystem {
   // 如果顶层控制语句不为if则返回false
   // 将if流程控制语句转化为if-else语句
   // 如果顶层控制语句不为if则返回false
-  bool ConvertIfSentenceToIfElseSentence();
+  void ConvertIfSentenceToIfElseSentence() {
+    assert(flow_control_stack_.top().first->GetFlowType() ==
+           c_parser_frontend::flow_control::FlowType::kIfSentence);
+    static_cast<c_parser_frontend::flow_control::IfSentence&>(
+        *flow_control_stack_.top().first)
+        .ConvertToIfElse();
+  }
   // 向switch语句中添加普通case
   // 返回是否添加成功
   // 如果当前顶层控制语句不为switch则返回false
@@ -153,7 +159,13 @@ class ActionScopeSystem {
   // 如果当前无流程控制语句则返回false
   bool AddSentence(
       std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
-          sentence);
+          sentence) {
+    if (flow_control_stack_.empty()) [[unlikely]] {
+      return false;
+    }
+    return flow_control_stack_.top().first->AddMainSentence(
+        std::move(sentence));
+  }
   // 添加待执行语句的集合
   // 返回是否添加成功，添加失败则不修改参数
   // 如果当前无流程控制语句则返回false

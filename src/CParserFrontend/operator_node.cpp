@@ -118,7 +118,7 @@ inline bool InitializeOperatorNodeInterface::CheckInitValueTypeValid(
 
 // 返回值是否为有效的初始化列表可用类型，如果类型无效则不执行插入操作
 
-inline bool ListInitializeOperatorNode::AddListValue(
+bool ListInitializeOperatorNode::AddListValue(
     const std::shared_ptr<const InitializeOperatorNodeInterface>& list_value) {
   if (CheckInitListValueTypeValid(*list_value->GetResultTypePointer()))
       [[likely]] {
@@ -129,7 +129,7 @@ inline bool ListInitializeOperatorNode::AddListValue(
   }
 }
 
-inline bool ListInitializeOperatorNode::SetInitListType(
+bool ListInitializeOperatorNode::SetInitListType(
     const std::shared_ptr<const TypeInterface>& list_type) {
   if (CheckInitListTypeValid(*list_type)) [[likely]] {
     return SetInitValueType(list_type);
@@ -138,7 +138,7 @@ inline bool ListInitializeOperatorNode::SetInitListType(
   }
 }
 
-inline bool MathematicalOperatorNode::SetLeftOperatorNode(
+bool MathematicalOperatorNode::SetLeftOperatorNode(
     const std::shared_ptr<const OperatorNodeInterface>& left_operator_node) {
   switch (GetMathematicalOperation()) {
     case MathematicalOperation::kNot:
@@ -288,7 +288,7 @@ AssignableCheckResult FunctionCallOperatorNode::AddFunctionCallArgument(
   return check_result;
 }
 
-inline bool AllocateOperatorNode::SetTargetVariety(
+bool AllocateOperatorNode::SetTargetVariety(
     const std::shared_ptr<const OperatorNodeInterface>& target_variety) {
   if (CheckAllocatable(*target_variety)) [[likely]] {
     target_variety_ = target_variety;
@@ -298,7 +298,7 @@ inline bool AllocateOperatorNode::SetTargetVariety(
   }
 }
 
-inline bool MemberAccessOperatorNode::CheckNodeToAccessValid(
+bool MemberAccessOperatorNode::CheckNodeToAccessValid(
     const OperatorNodeInterface& node_to_access) {
   // 只能对结构类型变量访问成员
   switch (node_to_access.GetResultTypePointer()->GetType()) {
@@ -1033,7 +1033,7 @@ bool TemaryOperatorNode::ConstructResultNode() {
   return true;
 }
 
-inline MathematicalOperation
+MathematicalOperation
 MathematicalAndAssignOperationToMathematicalOperation(
     MathematicalAndAssignOperation mathematical_and_assign_operation) {
   switch (mathematical_and_assign_operation) {
@@ -1079,7 +1079,7 @@ MathematicalAndAssignOperationToMathematicalOperation(
 
 // 使用前向声明后定义移到这里以使用智能指针
 namespace c_parser_frontend::type_system {
-inline bool FunctionType::ArgumentInfo::operator==(
+bool FunctionType::ArgumentInfo::operator==(
     const ArgumentInfo& argument_info) const {
   // 函数参数名不影响是否为同一参数，仅比较类型和是否为const
   return variety_operator_node->GetConstTag() ==
@@ -1087,7 +1087,7 @@ inline bool FunctionType::ArgumentInfo::operator==(
          variety_operator_node->GetVarietyTypeReference() ==
              argument_info.variety_operator_node->GetVarietyTypeReference();
 }
-inline void FunctionType::AddFunctionCallArgument(
+void FunctionType::AddFunctionCallArgument(
     const std::shared_ptr<
         const c_parser_frontend::operator_node::VarietyOperatorNode>&
         argument) {

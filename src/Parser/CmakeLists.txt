@@ -10,4 +10,4 @@ add_executable(Parser ${PARSER_SRCS})
 
 link_directories(${CMAKE_SOURCE_DIR}/src/Common)
 
-target_link_libraries(Parser CONAN_PKG::boost)
+target_link_libraries(Parser syntax_machine)

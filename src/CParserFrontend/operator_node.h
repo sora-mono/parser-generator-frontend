@@ -116,7 +116,7 @@ class OperatorNodeInterface {
   // 复制构造函数不复制节点编号而是生成新的编号
   OperatorNodeInterface(const OperatorNodeInterface& operator_node)
       : general_operator_type_(operator_node.general_operator_type_) {}
-  virtual ~OperatorNodeInterface();
+  virtual ~OperatorNodeInterface() {}
 
   OperatorNodeInterface& operator=(const OperatorNodeInterface& old_interface) {
     general_operator_type_ = old_interface.general_operator_type_;

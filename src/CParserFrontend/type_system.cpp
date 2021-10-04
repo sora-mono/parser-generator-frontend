@@ -150,7 +150,7 @@ inline bool BasicType::IsSameObject(const TypeInterface& type_interface) const {
              GetSignTag() == basic_type.GetSignTag();
 }
 
-inline AssignableCheckResult FunctionType::CanBeAssignedBy(
+AssignableCheckResult FunctionType::CanBeAssignedBy(
     const TypeInterface& type_interface) const {
   // 在赋值给函数指针的过程中调用
   // 函数类型只能使用函数赋值
@@ -168,19 +168,9 @@ inline AssignableCheckResult FunctionType::CanBeAssignedBy(
 
 // 返回是否为函数声明（函数声明中不存在任何流程控制语句）
 
-inline bool FunctionType::IsFunctionAnnounce() const {
-  return GetSentences().empty();
-}
-
-inline bool FunctionType::IsSameObject(
-    const TypeInterface& type_interface) const {
-  // 函数类型唯一，只有指向同一个FunctionType对象才是同一个函数
-  return this == &type_interface;
-}
-
 // 检查给定语句是否可以作为函数内出现的语句
 
-inline AssignableCheckResult PointerType::CanBeAssignedBy(
+AssignableCheckResult PointerType::CanBeAssignedBy(
     const TypeInterface& type_interface) const {
   // 初步检查用来赋值的类型
   switch (type_interface.GetType()) {
@@ -257,7 +247,7 @@ inline AssignableCheckResult PointerType::CanBeAssignedBy(
   return assignable_check_result;
 }
 
-inline size_t PointerType::TypeSizeOf() const {
+size_t PointerType::TypeSizeOf() const {
   size_t array_size = GetArraySize();
   assert(array_size != -1);
   if (array_size == 0) {
@@ -269,7 +259,7 @@ inline size_t PointerType::TypeSizeOf() const {
   }
 }
 
-inline AssignableCheckResult StructType::CanBeAssignedBy(
+AssignableCheckResult StructType::CanBeAssignedBy(
     const TypeInterface& type_interface) const {
   if (type_interface.GetType() == StructOrBasicType::kInitializeList)
       [[likely]] {
@@ -281,7 +271,7 @@ inline AssignableCheckResult StructType::CanBeAssignedBy(
   }
 }
 
-inline size_t StructType::GetTypeStoreSize() const {
+size_t StructType::GetTypeStoreSize() const {
   // 扫描结构体以获取最大的成员
   const auto& struct_members = GetStructureMembers();
   // C语言空结构体大小为0
@@ -313,7 +303,7 @@ inline size_t StructType::GetTypeStoreSize() const {
   return struct_size;
 }
 
-inline AssignableCheckResult UnionType::CanBeAssignedBy(
+AssignableCheckResult UnionType::CanBeAssignedBy(
     const TypeInterface& type_interface) const {
   if (type_interface.GetType() == StructOrBasicType::kInitializeList)
       [[unlikely]] {
@@ -324,7 +314,7 @@ inline AssignableCheckResult UnionType::CanBeAssignedBy(
   }
 }
 
-inline size_t UnionType::GetTypeStoreSize() const {
+size_t UnionType::GetTypeStoreSize() const {
   // 扫描共用体以获取最大的成员
   const auto& union_members = GetStructureMembers();
   // C语言空共用体大小为0
@@ -346,7 +336,7 @@ inline size_t UnionType::GetTypeStoreSize() const {
   }
 }
 
-inline AssignableCheckResult EnumType::CanBeAssignedBy(
+AssignableCheckResult EnumType::CanBeAssignedBy(
     const TypeInterface& type_interface) const {
   if (type_interface.GetType() == StructOrBasicType::kInitializeList)
       [[unlikely]] {
@@ -394,7 +384,7 @@ bool InitializeListType::IsSameObject(
                      .GetListTypes();
 }
 
-inline bool PointerType::IsSameObject(
+bool PointerType::IsSameObject(
     const TypeInterface& type_interface) const {
   // this == &basic_type是优化手段，类型系统设计思路是尽可能多的共享一条类型链
   // 所以容易出现指向同一个节点的情况
@@ -641,7 +631,7 @@ TypeSystem::TypeData::GetType(StructOrBasicType type_prefer) const {
 // StructOrBasicType::kBasic和StructOrBasicType::kPointer属于同一大类
 // 除此以外类型单独成一大类
 
-inline bool TypeSystem::TypeData::IsSameKind(StructOrBasicType type1,
+bool TypeSystem::TypeData::IsSameKind(StructOrBasicType type1,
                                              StructOrBasicType type2) {
   unsigned long long type1_ = static_cast<unsigned long long>(type1);
   unsigned long long type2_ = static_cast<unsigned long long>(type2);
@@ -657,7 +647,7 @@ inline bool TypeSystem::TypeData::IsSameKind(StructOrBasicType type1,
 
 // 返回MemberIndex::InvalidId()代表不存在该成员
 
-inline StructureTypeInterface::StructureMemberContainer::MemberIndex
+StructureTypeInterface::StructureMemberContainer::MemberIndex
 StructureTypeInterface::StructureMemberContainer::GetMemberIndex(
     const std::string& member_name) const {
   auto iter = member_name_to_index_.find(member_name);
@@ -668,7 +658,7 @@ StructureTypeInterface::StructureMemberContainer::GetMemberIndex(
   }
 }
 
-inline bool StructureTypeInterface::IsSameObject(
+bool StructureTypeInterface::IsSameObject(
     const TypeInterface& type_interface) const {
   // this == &type_interface是优化手段
   // 类型系统设计思路是尽可能多的共享一条类型链
