@@ -42,16 +42,15 @@ bool DfaGenerator::AddRegexpression(const std::string& regex_str,
 }
 
 bool DfaGenerator::DfaConstruct() {
+  nfa_generator_.MergeOptimization();
   NfaNodeId nfa_head_handler = nfa_generator_.GetHeadNfaNodeId();
-  SetType set_now;
-  TailNodeData tail_data;
-  std::pair(set_now, tail_data) = nfa_generator_.Closure(nfa_head_handler);
+  auto [set_now, tail_data] = nfa_generator_.Closure(nfa_head_handler);
   assert(tail_data == NfaGenerator::NotTailNodeTag);
   IntermediateNodeId intermediate_node_handler_now,
       intermediate_node_handler_temp;
-  bool result;
-  std::pair(intermediate_node_handler_now, result) = InOrInsert(set_now);
-  assert(result == false);
+  bool inserted;
+  std::tie(intermediate_node_handler_now, inserted) = InOrInsert(set_now);
+  assert(inserted);
   std::queue<IntermediateNodeId> q;
   q.push(intermediate_node_handler_now);
   head_node_intermediate_ = intermediate_node_handler_now;
@@ -60,16 +59,16 @@ bool DfaGenerator::DfaConstruct() {
     q.pop();
     SetId set_handler_now =
         GetIntermediateNode(intermediate_node_handler_now).set_handler;
-    for (size_t i = 0; i < kCharNum; i++) {
-      std::pair(intermediate_node_handler_temp, result) =
-          SetGoto(set_handler_now, static_cast<char>(i + CHAR_MIN));
+    for (int i = CHAR_MIN; i <= CHAR_MAX; i++) {
+      std::tie(intermediate_node_handler_temp, inserted) =
+          SetGoto(set_handler_now, static_cast<char>(i));
       if (!intermediate_node_handler_temp.IsValid()) {
         // 该字符下不可转移
         continue;
       }
       GetIntermediateNode(intermediate_node_handler_now)
           .forward_nodes[static_cast<char>(i)] = intermediate_node_handler_temp;
-      if (result == false) {
+      if (inserted) {
         // 新集合对应的中间节点以前不存在，插入队列等待处理
         q.push(intermediate_node_handler_temp);
       }
@@ -95,20 +94,19 @@ bool DfaGenerator::DfaMinimize() {
   }
   std::vector<bool> logged_index(config_node_num, false);
   for (auto& p : intermediate_node_to_final_node_) {
-    size_t index = p.second;
+    TransformArrayId index = p.second;
     IntermediateDfaNode& intermediate_node = GetIntermediateNode(p.first);
     if (logged_index[index] == false) {
-      // 该节点未配置
-      for (size_t i = 0; i < kCharNum; i++) {
+      // 该状态转移表条目未配置
+      for (int i = CHAR_MIN; i <= CHAR_MAX; i++) {
         // 寻找有效节点并设置语法分析表中对应项
         // 从最小的char开始
         IntermediateNodeId next_node_id =
-            intermediate_node.forward_nodes[static_cast<char>(i + CHAR_MIN)];
+            intermediate_node.forward_nodes[static_cast<char>(i)];
         if (next_node_id.IsValid()) {
           auto iter = intermediate_node_to_final_node_.find(next_node_id);
           assert(iter != intermediate_node_to_final_node_.end());
-          dfa_config_[index].first[static_cast<char>(i + CHAR_MIN)] =
-              iter->second;
+          dfa_config_[index].first[static_cast<char>(i)] = iter->second;
           dfa_config_[index].second = intermediate_node.tail_node_data.first;
         }
       }
@@ -143,7 +141,7 @@ std::pair<DfaGenerator::IntermediateNodeId, bool> DfaGenerator::SetGoto(
     }
   }
   if (set.size() == 0) {
-    return std::pair(IntermediateNodeId::InvalidId(), false);
+    return std::make_pair(IntermediateNodeId::InvalidId(), false);
   }
   return InOrInsert(set, tail_data);
 }
@@ -163,19 +161,19 @@ inline bool DfaGenerator::SetIntermediateNodeTransform(
 
 std::pair<DfaGenerator::IntermediateNodeId, bool> DfaGenerator::InOrInsert(
     const SetType& uset, TailNodeData tail_node_data) {
-  auto [setid, set_already_exist] = node_manager_set_.AddObject(uset);
+  auto [setid, inserted] = node_manager_set_.AddObject(uset);
   IntermediateNodeId intermediate_node_id = IntermediateNodeId::InvalidId();
-  if (set_already_exist) {
-    auto iter = setid_to_intermediate_nodeid_.find(setid);
-    assert(iter != setid_to_intermediate_nodeid_.end());
-    intermediate_node_id = iter->second;
-  } else {
+  if (inserted) {
     intermediate_node_id =
         node_manager_intermediate_node_.EmplaceObject(setid, tail_node_data);
     setid_to_intermediate_nodeid_.insert(
         std::make_pair(setid, intermediate_node_id));
+  } else {
+    auto iter = setid_to_intermediate_nodeid_.find(setid);
+    assert(iter != setid_to_intermediate_nodeid_.end());
+    intermediate_node_id = iter->second;
   }
-  return std::make_pair(intermediate_node_id, set_already_exist);
+  return std::make_pair(intermediate_node_id, inserted);
 }
 
 bool DfaGenerator::DfaMinimize(const std::vector<IntermediateNodeId>& handlers,

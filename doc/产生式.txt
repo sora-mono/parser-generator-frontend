@@ -5,7 +5,7 @@ Str -> ".*"
 Character -> '..?'
 
 非终结产生式
-SingleConstexprValue -> Char
+SingleConstexprValue -> Character
 SingleConstexprValue -> Str "[" Num "]"
 SingleConstexprValue -> Num
 SingleConstexprValue -> Str
@@ -59,7 +59,7 @@ NotEmptyFunctionPointerArguments -> SingleAnnounceNoAssign
 NotEmptyFunctionPointerArguments -> NotEmptyFunctionPointerArguments "," SingleAnnounceNoAssign
 FunctionRelaventArguments -> NotEmptyFunctionPointerArguments
 FunctionDefineHead -> FunctionRelavent "{"
-FunctionDefine -> FunctionDefineHead Sentences "}"
+FunctionDefine -> FunctionDefineHead Statements "}"
 SingleStructureBody -> SingleAnnounceNoAssign
 SingleStructureBody -> SingleStructureBody "," Id
 NotEmptyStructureBody -> SingleStructureBody
@@ -166,14 +166,18 @@ WhileInitHead -> "while" "(" Assignable ")"
 While -> WhileInitHead ProcessControlSentenceBody
 DoWhileInitHead -> "do"
 DoWhile -> DoWhileInitHead ProcessControlSentenceBody while "(" Assignable ")" ";"
-SwitchCaseSimple -> "case" SingleConstexprValue ":"
-SwitchCaseSimple -> "default" ":"
+SwitchCase -> "case" SingleConstexprValue ":"
+SwitchCase -> "default" ":"
 SingleSwitchStatement -> SwitchCase
 SingleSwitchStatement -> Statements
 SwitchStatements -> SwitchStatements SingleSwitchStatement
 SwitchCondition -> "switch" "(" Assignable ")"
 Switch -> SwitchCondition "{" SwitchStatements "}"
 Statements -> Statements SingleStatement
+StatementsLeftBrace -> Statements "{"
+Statements -> StatementsLeftBrace Statements "}"
+ProcessControlSentenceBody -> SingleStatement
+ProcessControlSentenceBody -> "{" Statements "}"
 
 根产生式
 Root -> Root FunctionDefine

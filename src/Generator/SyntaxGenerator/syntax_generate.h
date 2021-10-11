@@ -71,7 +71,8 @@
     unary_operator_associatity, unary_operator_priority)
 
 // 定义终结节点，production_body为正则表达式
-// 例：GENERATOR_DEFINE_TERMINAL_PRODUCTION(example_symbol,
+// 加双引号为避免添加()时宏无法正常展开
+// 例：GENERATOR_DEFINE_TERMINAL_PRODUCTION("example_symbol",
 //                                          "[a-zA-Z_][a-zA-Z_0-9]*")
 #ifdef GENERATOR_DEFINE_TERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_TERMINAL_PRODUCTION
@@ -115,11 +116,11 @@
 #endif  // GENERATOR_DEFINE_BINARY_OPERATOR
 #define GENERATOR_DEFINE_ROOT_PRODUCTION(production_symbol)
 
-// 这部分对三种需要产生式信息的文件特化
+// 这部分对两种需要产生式信息的文件特化
 #ifdef GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_
 
 // 防止重复包含
-#ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER_END
+#ifndef GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_END
 // 定义该宏以屏蔽用来允许使用IntelliSense而包含的头文件
 // 在函数定义内包含头文件会导致大量奇怪错误
 #define SHIELD_HEADERS_FOR_INTELLISENSE
@@ -162,7 +163,7 @@
 #endif  // GENERATOR_DEFINE_TERMINAL_PRODUCTION
 #define GENERATOR_DEFINE_TERMINAL_PRODUCTION(production_symbol, \
                                              production_body)   \
-  AddTerminalNode(#production_symbol, production_body);
+  AddTerminalNode(production_symbol, production_body);
 
 #ifdef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION

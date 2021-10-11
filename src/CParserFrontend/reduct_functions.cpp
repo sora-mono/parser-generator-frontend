@@ -229,6 +229,15 @@ SingleConstexprValueIndexedString(std::vector<WordDataToUser>&& word_data) {
   size_t converted_num;
   std::string& index_str = word_data[2].GetTerminalWordData().word;
   std::string& string_str = word_data[0].GetTerminalWordData().word;
+  for (auto iter = string_str.begin(); iter < string_str.end(); iter++) {
+    // 删除转义字符
+    if (*iter == '\\') [[unlikely]] {
+      iter = string_str.erase(iter);
+      if (*iter == '\\') [[unlikely]] {
+        ++iter;
+      }
+    }
+  }
   size_t index = std::stoull(index_str, &converted_num);
   // 检查使用的下标是否全部转换
   if (converted_num != index_str.size()) [[unlikely]] {
@@ -247,7 +256,8 @@ SingleConstexprValueIndexedString(std::vector<WordDataToUser>&& word_data) {
   } else if (index == string_str.size()) [[unlikely]] {
     result = '\0';
   } else {
-    result = string_str[index];
+    // +1以跳过开头的"
+    result = string_str[index + 1];
   }
   auto initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
       InitializeType::kBasic, std::to_string(result));
@@ -274,6 +284,15 @@ std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueString(
   // 字符串使用""作为分隔标记
   assert(str.front() == '"');
   assert(str.back() == '"');
+  // 删除转义字符
+  for (auto iter = str.begin(); iter < str.end(); iter++) {
+    if (*iter == '\\') [[unlikely]] {
+      iter = str.erase(iter);
+      if (*iter == '\\') [[unlikely]] {
+        ++iter;
+      }
+    }
+  }
   // 删除尾部的"
   str.pop_back();
   // 删除头部的"
@@ -877,7 +896,6 @@ std::any FunctionRelaventBasePartFunctionInitExtend(
   return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
 }
 
-
 // FunctionRelaventBasePart -> FunctionRelaventBasePartFunctionInit
 //  FunctionRelaventArguments ")"
 // 返回值类型：std::shared_ptr<ObjectConstructData>
@@ -1192,7 +1210,6 @@ std::any NotEmptyStructureBodyExtend(std::vector<WordDataToUser>&& word_data) {
   return std::any();
 }
 
-
 // StructureBody -> NotEmptyStructureBody
 // 不返回任何数据
 std::any StructureBody(std::vector<WordDataToUser>&& word_data) {
@@ -1257,7 +1274,6 @@ std::any InitializeListArgumentsExtend(
   list_pointer->emplace_back(std::move(init_data_pointer));
   return std::move(word_data[2].GetNonTerminalWordData().user_returned_data);
 }
-
 
 // AnnounceAssignable -> Assignable
 // 返回值类型：std::pair<std::shared_ptr<const OperatorNodeInterface>,
@@ -1476,7 +1492,6 @@ std::any SingleAnnounceAndAssignWithAssignExtend(
       std::move(*sub_flow_control_node_container));
   return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
 }
-
 
 // Type -> BasicType
 // 返回类型和变量的ConstTag
@@ -1811,7 +1826,6 @@ std::any AssignableTemaryOperator(std::vector<WordDataToUser>&& word_data) {
       word_data.front().GetNonTerminalWordData().user_returned_data);
 }
 
-
 // Assignable -> "(" Assignable ")"
 // 返回这一步得到的最终可运算节点和获取过程的操作
 // 返回值类型：std::pair<std::shared_ptr<const OperatorNodeInterface>,
@@ -1861,7 +1875,6 @@ AssignableTypeConvert(std::vector<WordDataToUser>&& word_data) {
   return std::make_pair(std::move(converted_operator_node),
                         std::move(flow_control_node_container));
 }
-
 
 // Assignable -> FunctionCall
 // 返回值类型：std::pair<std::shared_ptr<const OperatorNodeInterface>,
@@ -3029,7 +3042,6 @@ std::any ForHead(std::vector<WordDataToUser>&& word_data) {
   return std::any();
 }
 
-
 // For -> ForHead ProcessControlSentenceBody
 // 弹出作用域
 // 不返回任何值
@@ -3179,8 +3191,40 @@ std::any Switch(std::vector<WordDataToUser>&& word_data) {
 
 // Statements -> Statements SingleStatement
 // 不做任何操作
-std::any Statements(std::vector<WordDataToUser>&& word_data) {
+std::any StatementsSingleStatement(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
+  return std::any();
+}
+
+std::any StatementsLeftBrace(std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 2);
+  parser_frontend.AddActionScopeLevel();
+  return std::any();
+}
+
+std::any StatementsBrace(std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 3);
+  parser_frontend.PopActionScope();
+  return std::any();
+}
+
+// ProcessControlSentenceBody -> SingleStatement
+// 不做任何操作
+std::any ProcessControlSentenceBodySingleStatement(
+    std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 1);
+  return std::any();
+}
+
+std::any ProcessControlSentenceBodyLeftBrace(
+    std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 1);
+  return std::any();
+}
+
+std::any ProcessControlSentenceBodyStatements(
+    std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 3);
   return std::any();
 }
 

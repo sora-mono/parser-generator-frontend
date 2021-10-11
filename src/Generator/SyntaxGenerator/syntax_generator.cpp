@@ -26,8 +26,6 @@ SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddTerminalNode(
         word_attached_data;
     word_attached_data.production_node_id = production_node_id;
     word_attached_data.node_type = ProductionNodeType::kTerminalNode;
-    word_attached_data.process_function_class_id_ =
-        ProcessFunctionClassId::InvalidId();
     // 向DFA生成器注册关键词
     dfa_generator_.AddRegexpression(body_symbol, std::move(word_attached_data),
                                     node_priority);
@@ -197,7 +195,7 @@ SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
   ProductionNodeId production_node_id =
       GetProductionNodeIdFromNodeSymbol(node_symbol);
   if (!production_node_id.IsValid()) {
-    // 该终结节点名未注册
+    // 该非终结节点名未注册
     SymbolId symbol_id = AddNodeSymbol(node_symbol).first;
     assert(symbol_id.IsValid());
     production_node_id = SubAddNonTerminalNode(symbol_id);
@@ -209,31 +207,21 @@ SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
           GetProductionNode(production_node_id));
   for (auto& subnode_symbol : subnode_symbols) {
     // 将产生式体的所有产生式名转换为节点ID
-    ProductionNodeId subproduction_node_id;
-    if (subnode_symbol == "@") {
-      // 此处不应出现空节点标记
-      fprintf(stderr, "syntax_generator error: 产生式： %s 产生式体：",
-              node_symbol.c_str());
-      for (auto& symbol : subnode_symbols) {
-        fprintf(stderr, "%s ", symbol.c_str());
-      }
-      fprintf(stderr, "语法错误，不应在产生式体中出现@\n");
-      return ProductionNodeId::InvalidId();
-    } else {
-      subproduction_node_id = GetProductionNodeIdFromNodeSymbol(subnode_symbol);
-    }
+    ProductionNodeId subproduction_node_id =
+        GetProductionNodeIdFromNodeSymbol(subnode_symbol);
     // 产生式名
     if (!subproduction_node_id.IsValid()) {
       // 产生式节点未定义
       // 添加待处理记录
       AddUnableContinueNonTerminalNode(subnode_symbol, std::move(node_symbol),
                                        std::move(subnode_symbols), class_id);
+      return ProductionNodeId::InvalidId();
     }
+    assert(subproduction_node_id.IsValid());
     node_ids.push_back(subproduction_node_id);
   }
-
-  ProductionBodyId body_id = production_node.AddBody(std::move(node_ids));
-  production_node.SetBodyProcessFunctionClassId(body_id, class_id);
+  ProductionBodyId body_id =
+      production_node.AddBody(std::move(node_ids), class_id);
   return production_node_id;
 }
 
@@ -245,7 +233,7 @@ void SyntaxGenerator::SetNonTerminalNodeCouldEmptyReduct(
   NonTerminalProductionNode& nonterminal_production_node =
       static_cast<NonTerminalProductionNode&>(
           GetProductionNode(nonterminal_node_id));
-  nonterminal_production_node.SetProductionCouldBeEmpty();
+  nonterminal_production_node.SetProductionCouldBeEmptyRedut();
 }
 
 inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::SubAddNonTerminalNode(
@@ -275,6 +263,8 @@ std::unordered_set<SyntaxGenerator::ProductionNodeId>
 SyntaxGenerator::GetNonTerminalNodeFirstNodes(
     ProductionNodeId production_node_id,
     std::unordered_set<ProductionNodeId>&& processed_nodes) {
+  bool result = processed_nodes.insert(production_node_id).second;
+  assert(result);
   if (!production_node_id.IsValid()) {
     return std::unordered_set<ProductionNodeId>();
   }
@@ -285,16 +275,21 @@ SyntaxGenerator::GetNonTerminalNodeFirstNodes(
   std::unordered_set<ProductionNodeId> return_set;
   for (auto& body : production_node.GetAllBody()) {
     // 正在处理的产生式节点的ID
-    ProductionNodeId node_id = body.front();
+    ProductionNodeId node_id = body.production_body.front();
+    assert(node_id.IsValid());
     BaseProductionNode& node = GetProductionNode(node_id);
     if (node.Type() == ProductionNodeType::kNonTerminalNode) {
-      return_set.merge(
-          GetNonTerminalNodeFirstNodes(node_id, std::move(processed_nodes)));
+      // 检查该节点是否已经处理过
+      if (processed_nodes.find(node_id) == processed_nodes.end()) {
+        // 如果该节点未处理则获取该节点的first节点ID并添加到主first节点ID集合中
+        return_set.merge(
+            GetNonTerminalNodeFirstNodes(node_id, std::move(processed_nodes)));
+      }
     } else {
       return_set.insert(node_id);
     }
   }
-  processed_nodes.insert(production_node_id);
+
   return return_set;
 }
 
@@ -318,7 +313,7 @@ std::unordered_set<SyntaxGenerator::ProductionNodeId> SyntaxGenerator::First(
         return_set.merge(GetNonTerminalNodeFirstNodes(node_id));
         if (static_cast<NonTerminalProductionNode&>(
                 GetProductionNode(production_node_id))
-                .CouldBeEmpty()) {
+                .CouldBeEmptyReduct()) {
           // 该非终结节点可以空规约
           return_set.merge(First(production_node_id, production_body_id,
                                  ++point_index, next_node_ids));
@@ -360,16 +355,14 @@ void SyntaxGenerator::CoreClosure(CoreId core_id) {
       ParsingTableEntry& parsing_table_entry =
           GetParsingTableEntry(core.GetParsingTableEntryId());
       // 组装规约使用的数据
-      ParsingTableEntry::ReductAttachedData reduct_attached_data;
-      reduct_attached_data.process_function_class_id_ =
-          GetProcessFunctionClass(production_node_id, production_body_id);
-      reduct_attached_data.production_body_ =
-          GetProductionBody(production_node_id, production_body_id);
-      reduct_attached_data.reducted_nonterminal_node_id_ = production_node_id;
+      ParsingTableEntry::ReductAttachedData reduct_attached_data(
+          production_node_id,
+          GetProcessFunctionClass(production_node_id, production_body_id),
+          GetProductionBody(production_node_id, production_body_id));
       for (auto node_id : item_now->second) {
         // 对每个向前看符号设置规约操作
         parsing_table_entry.SetTerminalNodeActionAndAttachedData(
-            node_id, ActionType::kReduct, reduct_attached_data);
+            node_id, reduct_attached_data);
       }
       continue;
     }
@@ -398,7 +391,7 @@ void SyntaxGenerator::CoreClosure(CoreId core_id) {
         items_waiting_process.push(&*iter);
       }
     }
-    if (production_node.CouldBeEmpty()) {
+    if (production_node.CouldBeEmptyReduct()) {
       // 该非终结节点可以空规约
       // 向项集中添加空规约后的项，向前看符号复制原来的项的向前看符号集
       auto [iter, inserted] = AddItemAndForwardNodeIdsToCore(
@@ -431,26 +424,29 @@ void SyntaxGenerator::SpreadLookForwardSymbolAndConstructParsingTableEntry(
       // 没有下一个节点
       continue;
     }
-    ParsingTableEntry& parsing_table_entry =
-        GetParsingTableEntry(GetCore(core_id).GetParsingTableEntryId());
+    ParsingTableEntryId parsing_table_entry_id =
+        GetCore(core_id).GetParsingTableEntryId();
     BaseProductionNode& next_production_node =
         GetProductionNode(next_production_node_id);
     switch (next_production_node.Type()) {
       case ProductionNodeType::kTerminalNode:
       case ProductionNodeType::kOperatorNode: {
-        const ParsingTableEntry::ActionAndAttachedData* action_and_target =
-            parsing_table_entry.AtTerminalNode(next_production_node_id);
+        const ParsingTableEntry::ActionAndAttachedDataInterface*
+            action_and_target = GetParsingTableEntry(parsing_table_entry_id)
+                                    .AtTerminalNode(next_production_node_id);
         // 移入节点后到达的核心ID
         CoreId next_core_id;
         if (action_and_target == nullptr) {
           // 不存在该转移条件下到达的分析表条目，需要新建core
+          // 新建core同时会新建语法分析表条目，原有对语法分析表的引用可能失效
           next_core_id = EmplaceCore();
           // 记录新添加的核心ID
           new_core_ids.push_back(next_core_id);
         } else {
           // 通过转移到的语法分析表条目ID反查对应的核心ID
           next_core_id = GetCoreIdFromParsingTableEntryId(
-              action_and_target->GetShiftAttachedData().next_entry_id_);
+              action_and_target->GetShiftAttachedData()
+                  .GetNextParsingTableEntryId());
         }
         Core& new_core = GetCore(next_core_id);
         // 将移入节点后的项添加到核心中
@@ -460,14 +456,16 @@ void SyntaxGenerator::SpreadLookForwardSymbolAndConstructParsingTableEntry(
                      PointIndex(point_index + 1)),
             GetForwardNodeIds(core_id, item.first));
         // 设置语法分析表在该终结节点下的转移条件
-        parsing_table_entry.SetTerminalNodeActionAndAttachedData(
-            next_production_node_id, ActionType::kShift,
-            ParsingTableEntry::ShiftAttachedData(
-                new_core.GetParsingTableEntryId()));
+        GetParsingTableEntry(parsing_table_entry_id)
+            .SetTerminalNodeActionAndAttachedData(
+                next_production_node_id,
+                ParsingTableEntry::ShiftAttachedData(
+                    new_core.GetParsingTableEntryId()));
       } break;
       case ProductionNodeType::kNonTerminalNode: {
         ParsingTableEntryId next_parsing_table_entry_id =
-            parsing_table_entry.AtNonTerminalNode(next_production_node_id);
+            GetParsingTableEntry(parsing_table_entry_id)
+                .AtNonTerminalNode(next_production_node_id);
         CoreId next_core_id;
         if (!next_parsing_table_entry_id.IsValid()) {
           // 不存在该转移条件下到达的语法分析表条目，需要新建core
@@ -484,8 +482,9 @@ void SyntaxGenerator::SpreadLookForwardSymbolAndConstructParsingTableEntry(
                      PointIndex(point_index + 1)),
             GetForwardNodeIds(core_id, item.first));
         // 更新语法分析表在该非终结节点下的转移条件
-        parsing_table_entry.SetNonTerminalNodeTransformId(
-            next_production_node_id, new_core.GetParsingTableEntryId());
+        GetParsingTableEntry(parsing_table_entry_id)
+            .SetNonTerminalNodeTransformId(next_production_node_id,
+                                           new_core.GetParsingTableEntryId());
       } break;
       default:
         break;
@@ -710,7 +709,6 @@ void SyntaxGenerator::AnalysisTerminalProduction(
                                  binary_operator_priority);
 }
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
 void SyntaxGenerator::AnalysisOperatorProduction(const std::string& str) {
   std::smatch match_result;
   std::regex_match(str, match_result, operator_node_regex_);
@@ -747,7 +745,6 @@ void SyntaxGenerator::AnalysisOperatorProduction(const std::string& str) {
 #endif  // USE_USER_DEFINED_FILE
   PrintOperatorNodeConstructData(std::move(operator_data));
 }
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
 void syntaxgenerator::SyntaxGenerator::AnalysisNonTerminalProduction(
     const std::string& str) {
@@ -791,7 +788,7 @@ void SyntaxGenerator::ParsingTableConstruct() {
   SetRootParsingTableEntryId(root_core.GetParsingTableEntryId());
   // 传播向前看符号同时构造语法分析表
   SpreadLookForwardSymbolAndConstructParsingTableEntry(root_core_id);
-  // 合并相同项，压缩语法分析表
+  // 合并等效项，压缩语法分析表
   ParsingTableMergeOptimize();
 }
 
@@ -944,26 +941,20 @@ void SyntaxGenerator::AddUnableContinueNonTerminalNode(
 }
 
 void SyntaxGenerator::CheckNonTerminalNodeCanContinue(
-    const std::string& node_symbol) {
-  if (!undefined_productions_.empty()) {
-    auto [iter_begin, iter_end] =
-        undefined_productions_.equal_range(node_symbol);
-    if (iter_begin != undefined_productions_.end()) {
-      while (iter_begin != iter_end) {
-        auto& [node_symbol, node_body_ptr, process_function_class_id_] =
-            iter_begin->second;
-        ProductionNodeId node_id =
-            AddNonTerminalNode(std::move(node_symbol), std::move(node_body_ptr),
-                               process_function_class_id_);
-        if (node_id.IsValid()) {
-          // 成功添加非终结节点，删除该条记录
-          auto temp_iter = iter_begin;
-          ++iter_begin;
-          undefined_productions_.erase(temp_iter);
-        } else {
-          ++iter_begin;
-        }
-      }
+    const std::string& added_node_symbol) {
+  auto [iter_begin, iter_end] =
+      undefined_productions_.equal_range(added_node_symbol);
+  while (iter_begin != iter_end) {
+    auto& [node_could_continue_to_add_symbol, node_body_ptr,
+           process_function_class_id_] = iter_begin->second;
+    ProductionNodeId node_id = AddNonTerminalNode(
+        std::move(node_could_continue_to_add_symbol), std::move(node_body_ptr),
+        process_function_class_id_);
+    if (node_id.IsValid()) {
+      // 成功添加非终结节点，删除该条记录
+      iter_begin = undefined_productions_.erase(iter_begin);
+    } else {
+      ++iter_begin;
     }
   }
 }
@@ -980,11 +971,12 @@ void SyntaxGenerator::CheckUndefinedProductionRemained() {
 
       fprintf(stderr, "中\n产生式：%s 未定义\n", item.first.c_str());
     }
+    exit(-1);
   }
 }
 
-inline void SyntaxGenerator::AddKeyWord(const std::string& key_word) {
-  // 关键字优先级默认为1
+void SyntaxGenerator::AddKeyWord(const std::string& key_word) {
+  // 关键字优先级默认为2
   // 自动生成同名终结节点
   AddTerminalNode(
       key_word, key_word,
@@ -1010,7 +1002,6 @@ void SyntaxGenerator::PrintTerminalNodeConstructData(
           std::to_string(binary_operator_priority).c_str());
 }
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
 void SyntaxGenerator::PrintOperatorNodeConstructData(OperatorData&& data) {
   // 分配一个编号
   int operator_num = GetNodeNum();
@@ -1058,8 +1049,6 @@ void SyntaxGenerator::PrintOperatorNodeConstructData(OperatorData&& data) {
           "\"frontend::generator::syntaxgenerator::%s\")",
           class_name.c_str(), class_name.c_str());
 }
-
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
 void SyntaxGenerator::PrintNonTerminalNodeConstructData(
     NonTerminalNodeData&& data) {
@@ -1170,18 +1159,6 @@ SyntaxGenerator::TerminalProductionNode::GetProductionNodeInBody(
   }
 }
 
-inline void SyntaxGenerator::NonTerminalProductionNode::ResizeProductionBodyNum(
-    size_t new_size) {
-  nonterminal_bodys_.resize(new_size);
-  process_function_class_ids_.resize(new_size);
-}
-
-void SyntaxGenerator::NonTerminalProductionNode::ResizeProductionBodyNodeNum(
-    ProductionBodyId production_body_id, size_t new_size) {
-  assert(production_body_id < nonterminal_bodys_.size());
-  nonterminal_bodys_[production_body_id].resize(new_size);
-}
-
 std::vector<SyntaxGenerator::ProductionBodyId>
 SyntaxGenerator::NonTerminalProductionNode::GetAllBodyIds() const {
   std::vector<ProductionBodyId> production_body_ids;
@@ -1195,8 +1172,9 @@ inline SyntaxGenerator::ProductionNodeId
 SyntaxGenerator::NonTerminalProductionNode::GetProductionNodeInBody(
     ProductionBodyId production_body_id, PointIndex point_index) {
   assert(production_body_id < nonterminal_bodys_.size());
-  if (point_index < nonterminal_bodys_[production_body_id].size()) {
-    return nonterminal_bodys_[production_body_id][point_index];
+  if (point_index <
+      nonterminal_bodys_[production_body_id].production_body.size()) {
+    return nonterminal_bodys_[production_body_id].production_body[point_index];
   } else {
     return ProductionNodeId::InvalidId();
   }
@@ -1218,10 +1196,13 @@ void SyntaxGenerator::ParsingTableEntry::ResetEntryId(
   //处理终结节点的动作
   for (auto& action_and_attached_data : GetAllActionAndAttachedData()) {
     // 获取原条目ID的引用
-    ParsingTableEntryId& old_entry_id =
-        action_and_attached_data.second.GetShiftAttachedData().next_entry_id_;
+    ShiftAttachedData& shift_attached_data =
+        action_and_attached_data.second->GetShiftAttachedData();
     // 更新为新的条目ID
-    old_entry_id = old_entry_id_to_new_entry_id.find(old_entry_id)->second;
+    shift_attached_data.SetNextParsingTableEntryId(
+        old_entry_id_to_new_entry_id
+            .find(shift_attached_data.GetNextParsingTableEntryId())
+            ->second);
   }
   //处理非终结节点的转移
   for (auto& target : GetAllNonTerminalNodeTransformTarget()) {
@@ -1241,7 +1222,6 @@ SyntaxGenerator::BaseProductionNode::operator=(
   return *this;
 }
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
 SyntaxGenerator::OperatorProductionNode&
 SyntaxGenerator::OperatorProductionNode::operator=(
     OperatorProductionNode&& operator_production_node) {
@@ -1252,7 +1232,6 @@ SyntaxGenerator::OperatorProductionNode::operator=(
       std::move(operator_production_node.operator_priority_level_);
   return *this;
 }
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
 SyntaxGenerator::Core& SyntaxGenerator::Core::operator=(Core&& core) {
   core_closure_available_ = std::move(core.core_closure_available_);
@@ -1277,5 +1256,81 @@ const std::regex SyntaxGenerator::function_regex_(
     R"(((?:[a-zA-Z_][a-zA-Z0-9_]*)|@))");
 const std::regex SyntaxGenerator::file_regex_(
     R"(((?:[a-zA-Z_][a-zA-Z0-9_.\- ]*)|@))");
+
+bool SyntaxGenerator::ParsingTableEntry::ShiftAttachedData::operator==(
+    const ActionAndAttachedDataInterface& shift_attached_data) const {
+  return ActionAndAttachedDataInterface::operator==(shift_attached_data) &&
+         next_entry_id_ ==
+             static_cast<const ShiftAttachedData&>(shift_attached_data)
+                 .next_entry_id_;
+}
+
+bool SyntaxGenerator::ParsingTableEntry::ReductAttachedData::operator==(
+    const ActionAndAttachedDataInterface& reduct_attached_data) const {
+  if (ActionAndAttachedDataInterface::operator==(reduct_attached_data))
+      [[likely]] {
+    const ReductAttachedData& real_type_reduct_attached_data =
+        static_cast<const ReductAttachedData&>(reduct_attached_data);
+    return reducted_nonterminal_node_id_ ==
+               real_type_reduct_attached_data.reducted_nonterminal_node_id_ &&
+           process_function_class_id_ ==
+               real_type_reduct_attached_data.process_function_class_id_ &&
+           production_body_ == real_type_reduct_attached_data.production_body_;
+  } else {
+    return false;
+  }
+}
+
+bool SyntaxGenerator::ParsingTableEntry::ShiftReductAttachedData::operator==(
+    const ActionAndAttachedDataInterface& shift_reduct_attached_data) const {
+  return ActionAndAttachedDataInterface::operator==(
+             shift_reduct_attached_data) &&
+         shift_attached_data_ == static_cast<const ShiftReductAttachedData&>(
+                                     shift_reduct_attached_data)
+                                     .shift_attached_data_ &&
+         reduct_attached_data_ == static_cast<const ShiftReductAttachedData&>(
+                                      shift_reduct_attached_data)
+                                      .reduct_attached_data_;
+}
+
+inline const SyntaxGenerator::ParsingTableEntry::ShiftAttachedData&
+SyntaxGenerator::ParsingTableEntry::ActionAndAttachedDataInterface::
+    GetShiftAttachedData() const {
+  assert(false);
+  // 防止警告
+  return reinterpret_cast<const ShiftAttachedData&>(*this);
+}
+
+inline const SyntaxGenerator::ParsingTableEntry::ReductAttachedData&
+SyntaxGenerator::ParsingTableEntry::ActionAndAttachedDataInterface::
+    GetReductAttachedData() const {
+  assert(false);
+  // 防止警告
+  return reinterpret_cast<const ReductAttachedData&>(*this);
+}
+
+inline const SyntaxGenerator::ParsingTableEntry::ShiftReductAttachedData&
+SyntaxGenerator::ParsingTableEntry::ActionAndAttachedDataInterface::
+    GetShiftReductAttachedData() const {
+  assert(false);
+  // 防止警告
+  return reinterpret_cast<const ShiftReductAttachedData&>(*this);
+}
+
+inline bool SyntaxGenerator::ActionAndAttachedDataPointerEqualTo::operator()(
+    const ParsingTableEntry::ActionAndAttachedDataInterface* const& lhs,
+    const ParsingTableEntry::ActionAndAttachedDataInterface* const& rhs) const {
+  if (lhs == nullptr) {
+    if (rhs == nullptr) {
+      return true;
+    } else {
+      return false;
+    }
+  } else if (rhs == nullptr) {
+    return false;
+  } else {
+    return lhs->operator==(*rhs);
+  }
+}
 
 }  // namespace frontend::generator::syntaxgenerator

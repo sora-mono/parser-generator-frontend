@@ -8,3 +8,4 @@ aux_source_directory(. DFA_GENERATOR_SRC)
 
 add_library(dfa_generator ${DFA_GENERATOR_SRC})
 target_link_libraries(dfa_generator nfa_generator CONAN_PKG::boost)
+install(TARGETS dfa_generator RUNTIME)

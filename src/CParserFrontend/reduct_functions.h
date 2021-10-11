@@ -453,7 +453,7 @@ std::any FunctionRelaventArguments(std::vector<WordDataToUser>&& word_data);
 // 对函数自身和每个参数执行Define并注册函数类型和函数对应的变量（利于查找）
 std::shared_ptr<c_parser_frontend::flow_control::FunctionDefine>
 FunctionDefineHead(std::vector<WordDataToUser>&& word_data);
-// FunctionDefine -> FunctionDefineHead Sentences "}"
+// FunctionDefine -> FunctionDefineHead Statements "}"
 // 返回值类型：std::shared_ptr<FunctionDefine>
 // 弹出最后一层作用域，重置当前活跃函数
 // 不返回任何数据
@@ -887,10 +887,10 @@ std::any DoWhileInitHead(std::vector<WordDataToUser>&& word_data);
 // while "(" Assignable ")" ";"
 // 不返回任何数据
 std::any DoWhile(std::vector<WordDataToUser>&& word_data);
-// SwitchCaseSimple -> "case" SingleConstexprValue ":"
+// SwitchCase -> "case" SingleConstexprValue ":"
 // 不返回任何数据
 std::any SwitchCaseSimple(std::vector<WordDataToUser>&& word_data);
-// SwitchCaseSimple -> "default" ":"
+// SwitchCase -> "default" ":"
 // 不返回任何数据
 std::any SwitchCaseDefault(std::vector<WordDataToUser>&& word_data);
 // SingleSwitchStatement -> SwitchCase
@@ -911,7 +911,25 @@ std::any SwitchCondition(std::vector<WordDataToUser>&& word_data);
 std::any Switch(std::vector<WordDataToUser>&& word_data);
 // Statements -> Statements SingleStatement
 // 不做任何操作
-std::any Statements(std::vector<WordDataToUser>&& word_data);
+std::any StatementsSingleStatement(std::vector<WordDataToUser>&& word_data);
+// StatementsLeftBrace -> Statements "{"
+// 提升作用域等级
+// 不返回任何值
+std::any StatementsLeftBrace(std::vector<WordDataToUser>&& word_data);
+// Statements -> StatementsLeftBrace Statements "}"
+// 弹出作用域
+// 不返回任何值
+std::any StatementsBrace(std::vector<WordDataToUser>&& word_data);
+// ProcessControlSentenceBody -> SingleStatement
+// 不弹出作用域
+// 不做任何操作
+std::any ProcessControlSentenceBodySingleStatement(
+    std::vector<WordDataToUser>&& word_data);
+// ProcessControlSentenceBody -> "{" Statements "}"
+// 不弹出作用域
+// 不做任何操作
+std::any ProcessControlSentenceBodyStatements(
+    std::vector<WordDataToUser>&& word_data);
 // 根产生式
 // Root -> Root FunctionDefine
 // 不作任何操作

@@ -89,15 +89,18 @@ class ObjectManager {
                                const std::function<bool(T&, T&, Manager&)>&
                                    merge_function = DefaultMergeFunction3);
   // 查询ID对应的节点是否可合并
-  bool CanMerge(ObjectId id) {
-    assert(id < nodes_can_merge_.size());
-    return nodes_can_merge_[id];
+  bool CanBeSourceInMerge(ObjectId id) {
+    assert(id < nodes_can_be_source_in_merge.size());
+    return nodes_can_be_source_in_merge[id];
   }
-
-  bool SetObjectMergeAllowed(ObjectId id);
-  bool SetObjectMergeRefused(ObjectId id);
-  void SetAllObjectsMergeAllowed();
-  void SetAllObjectsMergeRefused();
+  // 设置给定对象在合并时可以作为源对象（合并成功则源对象被释放）
+  bool SetObjectCanBeSourceInMerge(ObjectId id);
+  // 设置给定对象在合并时不能作为源对象（合并成功则源对象被释放）
+  bool SetObjectCanNotBeSourceInMerge(ObjectId id);
+  // 设置所有对象在合并时均可以作为源对象（合并成功则源对象被释放）
+  void SetAllObjectsCanBeSourceInMerge();
+  // 设置所有对象在合并时均不可以作为源对象（合并成功则源对象被释放）
+  void SetAllObjectsCanNotBeSourceInMerge();
 
   // 判断两个ID是否相等
   bool IsSame(ObjectId id1, ObjectId id2) { return id1 == id2; }
@@ -129,7 +132,7 @@ class ObjectManager {
   void serialize(Archive& ar, const unsigned int version) {
     ar& nodes_;
     ar& removed_ids_;
-    ar& nodes_can_merge_;
+    ar& nodes_can_be_source_in_merge;
   }
 
   // 在指定位置放置节点
@@ -147,7 +150,7 @@ class ObjectManager {
   // 优化用数组，存放被删除节点对应的ID
   std::vector<ObjectId> removed_ids_;
   // 存储信息表示是否允许合并节点
-  std::vector<bool> nodes_can_merge_;
+  std::vector<bool> nodes_can_be_source_in_merge;
 };
 
 template <class T>
@@ -177,10 +180,10 @@ inline T* ObjectManager<T>::RemoveObjectNoDelete(ObjectId id) {
   nodes_[id] = nullptr;
   assert(temp_pointer != nullptr);
   AddRemovedIndex(id);
-  nodes_can_merge_[id] = false;
+  nodes_can_be_source_in_merge[id] = false;
   while (nodes_.size() > 0 && nodes_.back() == nullptr) {
     nodes_.pop_back();  // 清理末尾无效ID
-    nodes_can_merge_.pop_back();
+    nodes_can_be_source_in_merge.pop_back();
   }
   return temp_pointer;
 }
@@ -212,7 +215,7 @@ inline ObjectManager<T>::ObjectId ObjectManager<T>::EmplacePointerIndex(
   size_t size_old = nodes_.size();
   if (id >= size_old) {
     nodes_.resize(id + 1, nullptr);
-    nodes_can_merge_.resize(id + 1, false);
+    nodes_can_be_source_in_merge.resize(id + 1, false);
     for (size_t i = size_old; i < id; i++) {
       removed_ids_.push_back(ObjectId(i));
     }
@@ -227,36 +230,36 @@ template <class T>
 inline void ObjectManager<T>::Swap(ObjectManager& manager_other) {
   nodes_.swap(manager_other.nodes_);
   removed_ids_.swap(manager_other.removed_ids_);
-  nodes_can_merge_.swap(manager_other.nodes_can_merge_);
+  nodes_can_be_source_in_merge.swap(manager_other.nodes_can_be_source_in_merge);
 }
 
 template <class T>
-inline bool ObjectManager<T>::SetObjectMergeAllowed(ObjectId id) {
+inline bool ObjectManager<T>::SetObjectCanBeSourceInMerge(ObjectId id) {
   assert(id < nodes_.size() && nodes_[id] != nullptr);
-  nodes_can_merge_[id] = true;
+  nodes_can_be_source_in_merge[id] = true;
   return true;
 }
 
 template <class T>
-inline bool ObjectManager<T>::SetObjectMergeRefused(ObjectId id) {
+inline bool ObjectManager<T>::SetObjectCanNotBeSourceInMerge(ObjectId id) {
   assert(id < nodes_.size() && nodes_[id] != nullptr);
-  nodes_can_merge_[id] = false;
+  nodes_can_be_source_in_merge[id] = false;
   return true;
 }
 
 template <class T>
-inline void ObjectManager<T>::SetAllObjectsMergeAllowed() {
+inline void ObjectManager<T>::SetAllObjectsCanBeSourceInMerge() {
   for (size_t id = 0; id < nodes_.size(); id++) {
     if (nodes_[id] != nullptr) {
-      nodes_can_merge_[id] = true;
+      nodes_can_be_source_in_merge[id] = true;
     }
   }
 }
 
 template <class T>
-inline void ObjectManager<T>::SetAllObjectsMergeRefused() {
-  std::vector<bool> vec_temp(nodes_can_merge_.size(), false);
-  nodes_can_merge_.Swap(vec_temp);
+inline void ObjectManager<T>::SetAllObjectsCanNotBeSourceInMerge() {
+  std::vector<bool> vec_temp(nodes_can_be_source_in_merge.size(), false);
+  nodes_can_be_source_in_merge.Swap(vec_temp);
 }
 
 template <class T>
@@ -265,8 +268,8 @@ inline bool ObjectManager<T>::MergeObjects(
     const std::function<bool(T&, T&)>& merge_function) {
   T& object_dst = GetObject(id_dst);
   T& object_src = GetObject(id_src);
-  if (!CanMerge(id_dst) || !CanMerge(id_src)) {
-    // 两个节点至少有一个不可合并
+  if (!CanBeSourceInMerge(id_src)) {
+    // 给定源节点不允许作为合并时的源节点
     return false;
   }
   if (!merge_function(object_dst, object_src)) {
@@ -285,8 +288,8 @@ bool ObjectManager<T>::MergeObjectsWithManager(
     const std::function<bool(T&, T&, Manager&)>& merge_function) {
   T& object_dst = GetObject(id_dst);
   T& object_src = GetObject(id_src);
-  if (!CanMerge(id_dst) || !CanMerge(id_src)) {
-    // 两个节点至少有一个不可合并
+  if (!CanBeSourceInMerge(id_src)) {
+    // 给定源节点不允许作为合并时的源节点
     return false;
   }
   if (!merge_function(object_dst, object_src, manager)) {
@@ -316,7 +319,7 @@ template <class T>
 inline void ObjectManager<T>::ShrinkToFit() {
   while (nodes_.size() > 0 && nodes_.back() == nullptr) {
     nodes_.pop_back();
-    nodes_can_merge_.pop_back();
+    nodes_can_be_source_in_merge.pop_back();
   }
   nodes_.shrink_to_fit();
   removed_ids_.shrink_to_fit();
@@ -375,50 +378,56 @@ inline ObjectManager<T>::Iterator ObjectManager<T>::Begin() {
 
 template <class T>
 inline ObjectManager<T>::Iterator& ObjectManager<T>::Iterator::operator++() {
-  ObjectId id_temp = id_;
+  assert(*this != manager_pointer_->End());
   auto& nodes = manager_pointer_->nodes_;
   do {
-    ++id_temp;
-  } while (id_temp < nodes.size() && nodes[id_temp] == nullptr);
-  assert(id_temp < nodes.size());
-  id_ = id_temp;
+    ++id_;
+  } while (id_ < nodes.size() && nodes[id_] == nullptr);
+  if (id_ >= nodes.size()) [[likely]] {
+    *this = manager_pointer_->End();
+  }
   return *this;
 }
 
 template <class T>
 inline ObjectManager<T>::Iterator ObjectManager<T>::Iterator::operator++(int) {
+  assert(*this != manager_pointer_->End());
   ObjectId id_temp = id_;
   auto& nodes = manager_pointer_->nodes_;
   do {
     ++id_temp;
   } while (id_temp < nodes.size() && nodes[id_temp] == nullptr);
-  assert(id_temp < nodes.size());
-  std::swap(id_temp, id_);
-  return Iterator(manager_pointer_, id_temp);
+  if (id_temp < nodes.size()) [[likely]] {
+    std::swap(id_temp, id_);
+    return Iterator(manager_pointer_, id_temp);
+  } else {
+    *this = manager_pointer_->End();
+    return manager_pointer_->End();
+  }
 }
 
 template <class T>
 inline ObjectManager<T>::Iterator& ObjectManager<T>::Iterator::operator--() {
-  ObjectId id_temp = id_;
+  assert(id_.IsValid() && *this != manager_pointer_->End());
   auto& nodes = manager_pointer_->nodes_;
   do {
-    --id_temp;
-  } while (id_temp.IsValid() && nodes[id_temp] == nullptr);
-  assert(id_temp.IsValid());
-  id_ = id_temp;
+    --id_;
+    assert(id_ != -1);
+  } while (nodes[id_] == nullptr);
   return *this;
 }
 
 template <class T>
 inline ObjectManager<T>::Iterator ObjectManager<T>::Iterator::operator--(int) {
-  size_t id_temp = id_;
+  assert(id_.IsValid() && *this != manager_pointer_->End());
+  size_t temp_id = id_;
   auto& nodes = manager_pointer_->nodes_;
   do {
-    --id_temp;
-  } while (id_temp.IsValid() && nodes[id_temp] == nullptr);
-  assert(id_temp.IsValid());
-  std::swap(id_temp, id_);
-  return Iterator(manager_pointer_, id_temp);
+    --temp_id;
+    assert(temp_id != -1);
+  } while (nodes[temp_id] == nullptr);
+  std::swap(temp_id, id_);
+  return Iterator(manager_pointer_, temp_id);
 }
 
 template <class T>

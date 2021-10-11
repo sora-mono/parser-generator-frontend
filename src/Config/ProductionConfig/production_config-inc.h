@@ -10,10 +10,16 @@
 // 该文件不可以添加用户定义头文件
 
 // 终结产生式
-GENERATOR_DEFINE_TERMINAL_PRODUCTION(Id, R"([a-zA-Z_][a-zA-Z0-9_]*)")
-GENERATOR_DEFINE_TERMINAL_PRODUCTION(Num, R"([0-9]*(\.[0-9]*)?)")
-GENERATOR_DEFINE_TERMINAL_PRODUCTION(Str, R"(".*")")
-GENERATOR_DEFINE_TERMINAL_PRODUCTION(Character, R"('..?')")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("Id", R"([a-zA-Z_][a-zA-Z0-9_]*)")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("Num", R"([0-9]*(\.[0-9]*)?)")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("Str", R"(".*")")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("Character", R"('..?')")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("]", R"(\])")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION(")", R"(\))")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("{", R"({)")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("}", R"(})")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION(";", R"(;)")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION(":", R"(:)")
 
 // 关键字
 GENERATOR_DEFINE_KEY_WORD("char")
@@ -44,6 +50,7 @@ GENERATOR_DEFINE_KEY_WORD("default")
 
 // 运算符
 GENERATOR_DEFINE_BINARY_OPERATOR(",", OperatorAssociatityType::kLeftToRight, 1)
+GENERATOR_DEFINE_BINARY_OPERATOR("=", OperatorAssociatityType::kRightToLeft, 2)
 GENERATOR_DEFINE_BINARY_OPERATOR("+=", OperatorAssociatityType::kRightToLeft, 2)
 GENERATOR_DEFINE_BINARY_OPERATOR("-=", OperatorAssociatityType::kRightToLeft, 2)
 GENERATOR_DEFINE_BINARY_OPERATOR("*=", OperatorAssociatityType::kRightToLeft, 2)
@@ -113,7 +120,8 @@ GENERATOR_DEFINE_BINARY_OPERATOR("(", OperatorAssociatityType::kRightToLeft, 15)
 // 非终结产生式
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleConstexprValue,
-    c_parser_frontend::parse_functions::SingleConstexprValueChar, 0, {"Char"})
+    c_parser_frontend::parse_functions::SingleConstexprValueChar, 0,
+    {"Character"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleconstexprValue,
     c_parser_frontend::parse_functions::SingleConstexprValueIndexedString, 1,
@@ -273,7 +281,7 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleAnnounceNoAssign,
     c_parser_frontend::parse_functions::SingleAnnounceNoAssignVariety, 0,
-    {"BasicType IdOrEquivence"})
+    {"BasicType", "IdOrEquivence"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleAnnounceNoAssign,
     c_parser_frontend::parse_functions::SingleAnnounceNoAssignFunctionRelavent,
@@ -298,11 +306,11 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     0, {"FunctionRelavent", "{"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     FunctionDefine, c_parser_frontend::parse_functions::FunctionDefine, 0,
-    {"FunctionDefineHead", "Sentences", "}"})
+    {"FunctionDefineHead", "Statements", "}"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleStructureBody,
     c_parser_frontend::parse_functions::SingleStructureBodyBase, 0,
-    {"SingleAnnouncceNoAssign"})
+    {"SingleAnnounceNoAssign"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleStructureBody,
     c_parser_frontend::parse_functions::SingleStructureBodyExtend, 1,
@@ -320,7 +328,7 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     {"NotEmptyStructureBody"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     InitializeList, c_parser_frontend::parse_functions::InitializeList, 0,
-    {"{", "InitializeLlistArguments", "}"})
+    {"{", "InitializeListArguments", "}"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleInitializeListArgument,
     c_parser_frontend::parse_functions::
@@ -660,10 +668,10 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     {"DoWhileInitHead", "ProcessControlSentenceBody", "while", "(",
      "Assignable", ")", ";"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    SwitchCaseSimple, c_parser_frontend::parse_functions::SwitchCaseSimple, 0,
+    SwitchCase, c_parser_frontend::parse_functions::SwitchCaseSimple, 0,
     {"case", "SingleConstexprValue", ":"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    SwitchCaseSimple, c_parser_frontend::parse_functions::SwitchCaseDefault, 1,
+    SwitchCase, c_parser_frontend::parse_functions::SwitchCaseDefault, 1,
     {"default", ":"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleSwitchStatement,
@@ -683,8 +691,23 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Switch, c_parser_frontend::parse_functions::Switch, 0,
     {"SwitchCondition", "{", "SwitchStatements", "}"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Statements, c_parser_frontend::parse_functions::Statements, 0,
-    {"Statements", "SingleStatement"})
+    Statements, c_parser_frontend::parse_functions::StatementsSingleStatement,
+    0, {"Statements", "SingleStatement"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    StatementsLeftBrace,
+    c_parser_frontend::parse_functions::StatementsLeftBrace, 0, {"{"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    Statements, c_parser_frontend::parse_functions::StatementsBrace, 1,
+    {"StatementsLeftBrace", "Statements", "}"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    ProcessControlSentenceBody,
+    c_parser_frontend::parse_functions::
+        ProcessControlSentenceBodySingleStatement,
+    0, {"SingleStatement"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    ProcessControlSentenceBody,
+    c_parser_frontend::parse_functions::ProcessControlSentenceBodyStatements, 1,
+    {"{", "Statements", "}"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Root, c_parser_frontend::parse_functions::RootFunctionDefine, 0,
     {"Root", "FunctionDefine"})

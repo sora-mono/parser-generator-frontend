@@ -4,3 +4,4 @@ aux_source_directory(. SYNTAX_GENERATOR_SRCS)
 
 add_library(syntax_generator ${SYNTAX_GENERATOR_SRCS})
 target_link_libraries(syntax_generator dfa_generator CONAN_PKG::boost c_parser_frontend)
+install(TARGETS syntax_generator RUNTIME)

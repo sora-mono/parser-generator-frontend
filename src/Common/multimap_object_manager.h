@@ -59,19 +59,19 @@ class MultimapObjectManager {
   // 交换两个类的内容
   void Swap(MultimapObjectManager& manager_other);
   // 设置对象允许合并标志
-  bool SetObjectMergeAllowed(ObjectId production_node_id);
+  bool SetObjectCanBeSourceInMerge(ObjectId production_node_id);
   // 设置对象禁止合并标志
-  bool SetObjectMergeRefused(ObjectId production_node_id);
+  bool SetObjectCanNotBeSourceInMerge(ObjectId production_node_id);
   // 设置所有对象允许合并，不会对未分配对象设置允许标记
-  void SetAllObjectsMergeAllowed() {
-    node_manager_.SetAllObjectsMergeAllowed();
+  void SetAllObjectsCanBeSourceInMerge() {
+    node_manager_.SetAllObjectsCanBeSourceInMerge();
   }
   // 设置所有对象禁止合并
-  void SetAllObjectsMergeRefused() {
-    node_manager_.SetAllObjectsMergeRefused();
+  void SetAllObjectsCanNotBeSourceInMerge() {
+    node_manager_.SetAllObjectsCanNotBeSourceInMerge();
   }
   // 返回id对应对象可合并状态
-  bool CanMerge(ObjectId production_node_id);
+  bool CanBeSourceInMerge(ObjectId production_node_id);
 
   // 暂时不写，优化释放后的空间太少
   // void remap_optimization();	// 重映射所有的对象，消除node_manager空余空间
@@ -161,23 +161,23 @@ MultimapObjectManager<T>::EmplaceObject(Args&&... args) {
 }
 
 template <class T>
-inline bool MultimapObjectManager<T>::SetObjectMergeAllowed(
+inline bool MultimapObjectManager<T>::SetObjectCanBeSourceInMerge(
     ObjectId production_node_id) {
   InsideId inside_id = GetInsideId(production_node_id);
-  return node_manager_.SetObjectMergeAllowed(inside_id);
+  return node_manager_.SetObjectCanBeSourceInMerge(inside_id);
 }
 
 template <class T>
-inline bool MultimapObjectManager<T>::SetObjectMergeRefused(
+inline bool MultimapObjectManager<T>::SetObjectCanNotBeSourceInMerge(
     ObjectId production_node_id) {
   InsideId inside_id = GetInsideId(production_node_id);
-  return node_manager_.SetObjectMergeRefused(inside_id);
+  return node_manager_.SetObjectCanNotBeSourceInMerge(inside_id);
 }
 
 template <class T>
-inline bool MultimapObjectManager<T>::CanMerge(ObjectId production_node_id) {
+inline bool MultimapObjectManager<T>::CanBeSourceInMerge(ObjectId production_node_id) {
   InsideId index = GetInsideId(production_node_id);
-  return node_manager_.CanMerge(index);
+  return node_manager_.CanBeSourceInMerge(index);
 }
 
 template <class T>

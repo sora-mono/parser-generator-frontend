@@ -1,7 +1,5 @@
 Project(Generator)
 
-add_compile_options("/std:c++latest")
-
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
 add_subdirectory(DfaGenerator)
@@ -11,3 +9,4 @@ aux_source_directory(. GENERATOR_SRCS)
 add_executable(Generator ${GENERATOR_SRCS})
 
 target_link_libraries(Generator syntax_generator)
+install(TARGETS Generator RUNTIME)

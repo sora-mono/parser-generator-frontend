@@ -10,6 +10,7 @@
 #include <boost/serialization/set.hpp>
 #include <boost/serialization/split_member.hpp>
 #include <boost/serialization/string.hpp>
+#include <boost/serialization/unique_ptr.hpp>
 #include <boost/serialization/variant.hpp>
 #include <boost/serialization/vector.hpp>
 #include <cassert>
@@ -56,14 +57,12 @@ class SyntaxGenerator {
       frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
                                           WrapperLabel::kParsingTableEntryId>;
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
   // 运算符优先级，数字越大优先级越高，仅对运算符节点有效
   // 与TailNodePriority意义不同，该优先级影响语法分析过程
   // 当遇到连续的运算符时决定移入还是归并
   using OperatorPriority =
       frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
                                           WrapperLabel::kPriorityLevel>;
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
   // 词法分析中词的优先级
   using WordPriority =
@@ -80,10 +79,6 @@ class SyntaxGenerator {
                                           WrapperLabel::kProductionBodyId>;
   // 产生式节点ID
   using ProductionNodeId = ObjectManager<BaseProductionNode>::ObjectId;
-  // 单个产生式体
-  using ProductionBodyType = std::vector<ProductionNodeId>;
-  // 产生式容器
-  using BodyContainerType = std::vector<ProductionBodyType>;
   // 符号ID
   using SymbolId =
       UnorderedStructManager<std::string, std::hash<std::string>>::ObjectId;
@@ -109,7 +104,6 @@ class SyntaxGenerator {
   // 分析动作类型：规约，移入，移入和规约，报错，接受
   enum class ActionType { kReduct, kShift, kShiftReduct, kError, kAccept };
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
   // 运算符数据
   struct OperatorData {
     std::string operator_symbol;
@@ -120,7 +114,6 @@ class SyntaxGenerator {
     std::vector<std::string> include_files;
 #endif  // USE_USER_DEFINED_FILE
   };
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
   struct NonTerminalNodeData {
     std::string node_symbol;
@@ -142,6 +135,8 @@ class SyntaxGenerator {
   SyntaxGenerator() {
     SyntaxGeneratorInit();
     ConfigConstruct();
+    CheckUndefinedProductionRemained();
+    dfa_generator_.DfaReconstrcut();
     ParsingTableConstruct();
     // 保存配置
     SaveConfig();
@@ -206,11 +201,9 @@ class SyntaxGenerator {
   // data中函数名为空则返回false
   template <class T>
   bool PrintProcessFunction(FILE* function_file, const T& data);
-#ifdef USE_AMBIGUOUS_GRAMMAR
   // 向配置文件中写入生成运算符的操作
   // data中的优先级必须为单个字符L或R
   void PrintOperatorNodeConstructData(OperatorData&& data);
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
   // 向配置文件中写入生成非终结节点的操作
   void PrintNonTerminalNodeConstructData(NonTerminalNodeData&& data);
@@ -259,11 +252,15 @@ class SyntaxGenerator {
     production_body_symbol_id_to_node_id_[body_symbol_id] = node_id;
   }
   // 将产生式名ID转换为产生式节点ID
+  // 如果不存在该产生式节点则返回ProductionNodeId::InvalidId()
   ProductionNodeId GetProductionNodeIdFromNodeSymbolId(
       SymbolId node_symbol_id) {
     auto iter = node_symbol_id_to_node_id_.find(node_symbol_id);
-    assert(iter != node_symbol_id_to_node_id_.end());
-    return iter->second;
+    if (iter == node_symbol_id_to_node_id_.end()) {
+      return ProductionNodeId::InvalidId();
+    } else {
+      return iter->second;
+    }
   }
   // 将产生式体符号ID转换为产生式节点ID
   // 不存在时则返回ProductionNodeId::InvalidId()
@@ -339,7 +336,6 @@ class SyntaxGenerator {
   ProductionNodeId SubAddTerminalNode(SymbolId node_symbol_id,
                                       SymbolId body_symbol_id);
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
   // 新建双目运算符节点，返回节点ID
   // 节点已存在则返回ProductionNodeId::InvalidId()
   // 默认添加的运算符词法分析优先级高于普通终结产生式低于关键字
@@ -373,7 +369,6 @@ class SyntaxGenerator {
   ProductionNodeId SubAddOperatorNode(SymbolId node_symbol_id,
                                       OperatorAssociatityType associatity_type,
                                       OperatorPriority priority_level);
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
   // 新建非终结节点，返回节点ID，节点已存在则不会创建新的节点
   // node_symbol为产生式名，subnode_symbols是产生式体
@@ -387,14 +382,14 @@ class SyntaxGenerator {
   ProductionNodeId AddNonTerminalNode(
       std::string&& node_symbol, std::vector<std::string>&& subnode_symbols,
       ProcessFunctionClassId class_id);
-  // 设置非终结节点可以空规约
-  // 必须保证给定名称节点存在且为非终结产生式名
-  void SetNonTerminalNodeCouldEmptyReduct(
-      const std::string& nonterminal_node_symbol);
   // 子过程，仅用于创建节点
   // 自动更新节点名ID到节点ID的映射表
   // 自动为节点类设置节点ID
   ProductionNodeId SubAddNonTerminalNode(SymbolId symbol_id);
+  // 设置非终结节点可以空规约
+  // 必须保证给定名称节点存在且为非终结产生式名
+  void SetNonTerminalNodeCouldEmptyReduct(
+      const std::string& nonterminal_node_symbol);
   // 新建文件尾节点，返回节点ID
   ProductionNodeId AddEndNode();
   // 设置产生式根节点
@@ -425,13 +420,13 @@ class SyntaxGenerator {
             GetProductionNode(production_node_id));
     // 只有非终结节点才有多个产生式体，对其它节点调用该函数无意义
     assert(nonterminal_node.Type() == ProductionNodeType::kNonTerminalNode);
-    return nonterminal_node.GetBody(production_body_id);
+    return nonterminal_node.GetBody(production_body_id).production_body;
   }
   // 给非终结节点添加产生式体
   template <class IdType>
   void AddNonTerminalNodeBody(ProductionNodeId node_id, IdType&& body) {
-    static_cast<NonTerminalProductionNode&>(GetProductionNode(node_id))
-        .AddBody(std::forward<IdType>(body));
+    static_cast<NonTerminalProductionNode&>(GetProductionNode(node_id)).AddBody,
+        (std::forward<IdType>(body));
   }
   // 添加一条语法分析表条目
   ParsingTableEntryId AddParsingTableEntry() {
@@ -491,7 +486,7 @@ class SyntaxGenerator {
       std::unordered_set<ProductionNodeId>&& processed_nodes =
           std::unordered_set<ProductionNodeId>());
   // 闭包操作中的first操作，前三个参数标志β的位置
-  // 采用三个参数因为终结节点节点可能归并为空节点，需要向下查找终结节点
+  // 采用三个参数因为非终结节点可能规约为空节点，需要向下查找终结节点
   // 向前看节点可以规约为空节点则添加相应向前看符号
   // 然后继续向前查找直到结尾或不可空规约非终结节点或终结节点
   std::unordered_set<ProductionNodeId> First(
@@ -731,7 +726,6 @@ class SyntaxGenerator {
     SymbolId body_symbol_id_;
   };
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
   class OperatorProductionNode : public BaseProductionNode {
    public:
     OperatorProductionNode(SymbolId node_symbol_id,
@@ -779,10 +773,16 @@ class SyntaxGenerator {
     // 运算符优先级
     OperatorPriority operator_priority_level_;
   };
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
   class NonTerminalProductionNode : public BaseProductionNode {
    public:
+    struct ProductionBodyType {
+      // 产生式体
+      std::vector<ProductionNodeId> production_body;
+      // 规约产生式使用的类的ID
+      ProcessFunctionClassId class_for_reduct_id;
+    };
+
     NonTerminalProductionNode(SymbolId symbol_id)
         : BaseProductionNode(ProductionNodeType::kNonTerminalNode, symbol_id) {}
     template <class IdType>
@@ -795,68 +795,58 @@ class SyntaxGenerator {
     NonTerminalProductionNode(NonTerminalProductionNode&& node)
         : BaseProductionNode(std::move(node)),
           nonterminal_bodys_(std::move(node.nonterminal_bodys_)),
-          process_function_class_ids_(
-              std::move(node.process_function_class_ids_)),
-          empty_body_(std::move(node.empty_body_)) {}
+          could_empty_reduct_(std::move(node.could_empty_reduct_)) {}
     NonTerminalProductionNode& operator=(NonTerminalProductionNode&& node) {
       BaseProductionNode::operator=(std::move(node));
       nonterminal_bodys_ = std::move(node.nonterminal_bodys_);
-      process_function_class_ids_ = std::move(node.process_function_class_ids_);
-      empty_body_ = std::move(node.empty_body_);
+      could_empty_reduct_ = std::move(node.could_empty_reduct_);
       return *this;
     }
 
-    // 重新设置产生式体数目，会同时设置相关数据
-    // 输入新的所有产生式体的数目，不要+1
-    void ResizeProductionBodyNum(size_t new_size);
-    // 重新设置产生式体里节点数目，会同时设置相关数据
-    // 输入新的产生式体内所有节点的数目，不要+1
-    void ResizeProductionBodyNodeNum(ProductionBodyId production_body_id,
-                                     size_t new_size);
     // 添加一个产生式体，要求IdType为一个vector，按序存储产生式节点ID
     template <class IdType>
-    ProductionBodyId AddBody(IdType&& body);
+    ProductionBodyId AddBody(IdType&& body,
+                             ProcessFunctionClassId class_for_reduct_id_);
     // 获取产生式的一个体
-    const std::vector<ProductionNodeId>& GetProductionBody(
+    const ProductionBodyType& GetProductionBody(
         ProductionBodyId production_body_id) {
       assert(production_body_id < nonterminal_bodys_.size());
       return nonterminal_bodys_[production_body_id];
     }
     // 设置给定产生式体ID对应的ProcessFunctionClass的ID
-    void SetBodyProcessFunctionClassId(ProductionBodyId body_id,
-                                       ProcessFunctionClassId class_id) {
-      assert(body_id < process_function_class_ids_.size());
-      process_function_class_ids_[body_id] = class_id;
+    void SetBodyProcessFunctionClassId(
+        ProductionBodyId body_id, ProcessFunctionClassId class_for_reduct_id) {
+      assert(body_id < nonterminal_bodys_.size());
+      nonterminal_bodys_[body_id].class_for_reduct_id = class_for_reduct_id;
     }
     const ProductionBodyType& GetBody(ProductionBodyId body_id) const {
       return nonterminal_bodys_[body_id];
     }
-    const BodyContainerType& GetAllBody() const { return nonterminal_bodys_; }
+    const std::vector<ProductionBodyType>& GetAllBody() const {
+      return nonterminal_bodys_;
+    }
     // 获取全部产生式体ID
     std::vector<ProductionBodyId> GetAllBodyIds() const;
     // 设置该产生式不可以空规约
-    void SetProductionShouldNotEmpty() { empty_body_ = false; }
-    void SetProductionCouldBeEmpty() { empty_body_ = true; }
-    // 查询该产生式是否可以为空
-    bool CouldBeEmpty() { return empty_body_; }
+    void SetProductionShouldNotEmptyReduct() { could_empty_reduct_ = false; }
+    void SetProductionCouldBeEmptyRedut() { could_empty_reduct_ = true; }
+    // 查询该产生式是否可以空规约
+    bool CouldBeEmptyReduct() { return could_empty_reduct_; }
 
     virtual ProductionNodeId GetProductionNodeInBody(
         ProductionBodyId production_body_id, PointIndex point_index) override;
     // 返回给定产生式体ID对应的ProcessFunctionClass的ID
     ProcessFunctionClassId GetBodyProcessFunctionClassId(
         ProductionBodyId body_id) {
-      assert(body_id < process_function_class_ids_.size());
-      return process_function_class_ids_[body_id];
+      assert(body_id < nonterminal_bodys_.size());
+      return nonterminal_bodys_[body_id].class_for_reduct_id;
     }
 
    private:
-    // 外层vector存该非终结符号下各个产生式的体
-    // 内层vector存该产生式的体里含有的各个符号对应的节点ID
-    BodyContainerType nonterminal_bodys_;
-    // 存储每个产生式体对应的包装用户自定义函数和数据的类的已分配对象ID
-    std::vector<ProcessFunctionClassId> process_function_class_ids_;
+    // 存储产生式体
+    std::vector<ProductionBodyType> nonterminal_bodys_;
     // 标志该产生式是否可能为空
-    bool empty_body_ = false;
+    bool could_empty_reduct_ = false;
   };
 
   // 文件尾节点
@@ -980,27 +970,157 @@ class SyntaxGenerator {
   // 语法分析表条目
   class ParsingTableEntry {
    public:
-    // 执行移入动作时的附属数据
-    struct ShiftAttachedData {
-      friend class boost::serialization::access;
+    // 前向声明三种派生类，为了虚函数可以返回相应的类型
+    class ShiftAttachedData;
+    class ReductAttachedData;
+    class ShiftReductAttachedData;
+
+    class ActionAndAttachedDataInterface {
+     public:
+      ActionAndAttachedDataInterface(ActionType action_type)
+          : action_type_(action_type) {}
+      virtual ~ActionAndAttachedDataInterface() {}
+
+      virtual bool operator==(const ActionAndAttachedDataInterface&
+                                  attached_data_interface) const = 0 {
+        return action_type_ == attached_data_interface.action_type_;
+      }
+
+      virtual const ShiftAttachedData& GetShiftAttachedData() const;
+      virtual const ReductAttachedData& GetReductAttachedData() const;
+      virtual const ShiftReductAttachedData& GetShiftReductAttachedData() const;
+
+      ActionType GetActionType() const { return action_type_; }
+      void SetActionType(ActionType action_type) { action_type_ = action_type; }
 
       template <class Archive>
       void serialize(Archive& ar, const unsigned int version) {
+        ar& action_type_;
+      }
+
+     private:
+      // 允许序列化用的类访问
+      friend class boost::serialization::access;
+      // 允许语法分析表条目调用内部接口
+      friend class ParsingTableEntry;
+
+      virtual ShiftAttachedData& GetShiftAttachedData() {
+        return const_cast<ShiftAttachedData&>(
+            static_cast<const ActionAndAttachedDataInterface&>(*this)
+                .GetShiftAttachedData());
+      }
+      virtual ReductAttachedData& GetReductAttachedData() {
+        return const_cast<ReductAttachedData&>(
+            static_cast<const ActionAndAttachedDataInterface&>(*this)
+                .GetReductAttachedData());
+      }
+      virtual ShiftReductAttachedData& GetShiftReductAttachedData() {
+        return const_cast<ShiftReductAttachedData&>(
+            static_cast<const ActionAndAttachedDataInterface&>(*this)
+                .GetShiftReductAttachedData());
+      }
+
+      ActionType action_type_;
+    };
+    // 执行移入动作时的附属数据
+    class ShiftAttachedData : public ActionAndAttachedDataInterface {
+     public:
+      ShiftAttachedData(ParsingTableEntryId next_entry_id)
+          : ActionAndAttachedDataInterface(ActionType::kShift),
+            next_entry_id_(next_entry_id) {}
+
+      virtual bool operator==(const ActionAndAttachedDataInterface&
+                                  shift_attached_data) const override;
+
+      virtual const ShiftAttachedData& GetShiftAttachedData() const override {
+        return *this;
+      }
+
+      ParsingTableEntryId GetNextParsingTableEntryId() const {
+        return next_entry_id_;
+      }
+      void SetNextParsingTableEntryId(ParsingTableEntryId next_entry_id) {
+        next_entry_id_ = next_entry_id;
+      }
+
+     private:
+      // 允许序列化类访问
+      friend class boost::serialization::access;
+      // 允许语法分析表条目访问内部接口
+      friend class ParsingTableEntry;
+
+      template <class Archive>
+      void serialize(Archive& ar, const unsigned int version) {
+        ActionAndAttachedDataInterface::serialize(ar, version);
         ar& next_entry_id_;
+      }
+      virtual ShiftAttachedData& GetShiftAttachedData() override {
+        return const_cast<ShiftAttachedData&>(
+            static_cast<const ShiftAttachedData&>(*this)
+                .GetShiftAttachedData());
       }
 
       // 移入该单词后转移到的语法分析表条目ID
       ParsingTableEntryId next_entry_id_;
     };
     // 执行规约动作时的附属数据
-    struct ReductAttachedData {
+    class ReductAttachedData : public ActionAndAttachedDataInterface {
+     public:
+      template <class ProductionBody>
+      ReductAttachedData(ProductionNodeId reducted_nonterminal_node_id,
+                         ProcessFunctionClassId process_function_class_id,
+                         ProductionBody&& production_body)
+          : ActionAndAttachedDataInterface(ActionType::kReduct),
+            reducted_nonterminal_node_id_(reducted_nonterminal_node_id),
+            process_function_class_id_(process_function_class_id),
+            production_body_(std::forward<ProductionBody>(production_body)) {}
+
+      virtual bool operator==(const ActionAndAttachedDataInterface&
+                                  reduct_attached_data) const override;
+
+      virtual const ReductAttachedData& GetReductAttachedData() const override {
+        return *this;
+      }
+
+      ProductionNodeId GetReductedNonTerminalNodeId() const {
+        return reducted_nonterminal_node_id_;
+      }
+      void SetReductedNonTerminalNodeId(
+          ProductionNodeId reducted_nonterminal_node_id) {
+        reducted_nonterminal_node_id_ = reducted_nonterminal_node_id;
+      }
+      ProcessFunctionClassId GetProcessFunctionClassId() const {
+        return process_function_class_id_;
+      }
+      void SetProcessFunctionClassId(
+          ProcessFunctionClassId process_function_class_id) {
+        process_function_class_id_ = process_function_class_id;
+      }
+      const std::vector<ProductionNodeId>& GetProductionBody() const {
+        return production_body_;
+      }
+      void SetProductionBody(std::vector<ProductionNodeId>&& production_body) {
+        production_body_ = std::move(production_body);
+      }
+
+     private:
+      // 允许序列化类访问
       friend class boost::serialization::access;
+      // 允许语法分析表条目访问内部接口
+      friend class ParsingTableEntry;
 
       template <class Archive>
       void serialize(Archive& ar, const unsigned int version) {
+        ActionAndAttachedDataInterface::serialize(ar, version);
         ar& reducted_nonterminal_node_id_;
         ar& process_function_class_id_;
         ar& production_body_;
+      }
+
+      virtual ReductAttachedData& GetReductAttachedData() override {
+        return const_cast<ReductAttachedData&>(
+            static_cast<const ReductAttachedData>(*this)
+                .GetReductAttachedData());
       }
 
       // 规约后得到的非终结节点的ID
@@ -1012,101 +1132,76 @@ class SyntaxGenerator {
       std::vector<ProductionNodeId> production_body_;
     };
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
     // 使用二义性文法时对一个单词既可以移入也可以规约
-    struct ShiftReductAttachedData {
+    class ShiftReductAttachedData : public ActionAndAttachedDataInterface {
+     public:
+      template <class ShiftData, class ReductData>
+      ShiftReductAttachedData(ShiftData&& shift_attached_data,
+                              ReductData&& reduct_attached_data)
+          : ActionAndAttachedDataInterface(ActionType::kShiftReduct),
+            shift_attached_data_(std::forward<ShiftData>(shift_attached_data)),
+            reduct_attached_data_(
+                std::forward<ReductData>(reduct_attached_data)) {}
+
+      virtual bool operator==(const ActionAndAttachedDataInterface&
+                                  shift_reduct_attached_data) const override;
+
+      virtual const ShiftAttachedData& GetShiftAttachedData() const override {
+        return shift_attached_data_;
+      }
+      virtual const ReductAttachedData& GetReductAttachedData() const override {
+        return reduct_attached_data_;
+      }
+      virtual const ShiftReductAttachedData& GetShiftReductAttachedData()
+          const override {
+        return *this;
+      }
+
+      void SetShiftAttachedData(ShiftAttachedData&& shift_attached_data) {
+        shift_attached_data_ = std::move(shift_attached_data);
+      }
+      void SetReductAttachedData(ReductAttachedData&& reduct_attached_data) {
+        reduct_attached_data_ = std::move(reduct_attached_data);
+      }
+
+     private:
+      // 允许序列化类访问
       friend class boost::serialization::access;
+      // 允许语法分析表条目访问内部接口
+      friend class ParsingTableEntry;
 
       template <class Archive>
       void serialize(Archive& ar, const unsigned int version) {
+        ActionAndAttachedDataInterface::serialize(ar, version);
         ar& shift_attached_data_;
         ar& reduct_attached_data_;
+      }
+      virtual ShiftAttachedData& GetShiftAttachedData() override {
+        return const_cast<ShiftAttachedData&>(
+            static_cast<const ShiftReductAttachedData&>(*this)
+                .GetShiftAttachedData());
+      }
+      virtual ReductAttachedData& GetReductAttachedData() override {
+        return const_cast<ReductAttachedData&>(
+            static_cast<const ShiftReductAttachedData&>(*this)
+                .GetReductAttachedData());
+      }
+      virtual ShiftReductAttachedData& GetShiftReductAttachedData() override {
+        return const_cast<ShiftReductAttachedData&>(
+            static_cast<const ShiftReductAttachedData&>(*this)
+                .GetShiftReductAttachedData());
       }
 
       ShiftAttachedData shift_attached_data_;
       ReductAttachedData reduct_attached_data_;
     };
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
-    // 待移入一个单词时的动作和该动作附属的数据
-    struct ActionAndAttachedData {
-      // 获取移入操作的附属数据
-      // 可以获取已经转成kShiftReduct类型的移入操作附属数据
-      const ShiftAttachedData& GetShiftAttachedData() const;
-      // 获取规约操作的附属数据
-      // 可以获取已经转成kShiftReduct类型的规约操作附属数据
-      const ReductAttachedData& GetReductAttachedData() const;
-
-#ifdef USE_AMBIGUOUS_GRAMMAR
-      const ShiftReductAttachedData& GetShiftReductAttachedData() const {
-        return boost::get<ShiftReductAttachedData>(attached_data_);
-      }
-      // 已有的ReductAttachedData补上ShiftAttachedData
-      // 转换成ShiftReductAttachedData
-      void ConvertToShiftReductAttachedData(
-          const ShiftAttachedData& shift_attached_data) {
-        assert(action_type_ == ActionType::kReduct);
-        action_type_ = ActionType::kShiftReduct;
-        SetAttachedData(ShiftReductAttachedData(
-            shift_attached_data, std::move(GetReductAttachedData())));
-      }
-      // 将已有的ShiftAttachedData补上ReductAttachedData
-      // 转换成ShiftReductAttachedData
-      void ConvertToShiftReductAttachedData(
-          const ReductAttachedData& reduct_attached_data) {
-        assert(action_type_ == ActionType::kShift);
-        action_type_ = ActionType::kShiftReduct;
-        SetAttachedData(ShiftReductAttachedData(
-            std::move(GetShiftAttachedData()), reduct_attached_data));
-      }
-#endif  // USE_AMBIGUOUS_GRAMMAR
-
-      template <class BasicObjectType>
-      void SetAttachedData(BasicObjectType&& attached_data) {
-        attached_data_ = std::forward<BasicObjectType>(attached_data);
-      }
-      // 用来支持将ActionAndAttachedData作为map键值的操作
-      bool operator<(const ActionAndAttachedData& right) const {
-        return memcmp(this, &right, sizeof(ActionAndAttachedData));
-      }
-
-      ActionType action_type_;
-      boost::variant<ShiftReductAttachedData, ShiftAttachedData,
-                     ReductAttachedData>
-          attached_data_;
-
-     private:
-      // 只有ParsingTableEntry可以调用非const函数
-      friend class ParsingTableEntry;
-      friend class boost::serialization::access;
-
-      template <class Archive>
-      void serialize(Archive& ar, const unsigned int version) {
-        ar& action_type_;
-        ar& attached_data_;
-      }
-
-      ShiftAttachedData& GetShiftAttachedData() {
-        return const_cast<ShiftAttachedData&>(
-            static_cast<const ActionAndAttachedData&>(*this)
-                .GetShiftAttachedData());
-      }
-      ReductAttachedData& GetReductAttachedData() {
-        return const_cast<ReductAttachedData&>(
-            static_cast<const ActionAndAttachedData&>(*this)
-                .GetReductAttachedData());
-      }
-      ShiftReductAttachedData& GetShiftReductAttachedData() {
-        return const_cast<ShiftReductAttachedData&>(
-            static_cast<const ActionAndAttachedData&>(*this)
-                .GetShiftReductAttachedData());
-      }
-    };
     // 动作为规约时存储包装调用函数的类的对象的ID和规约后得到的非终结产生式ID
     // 产生式ID用于确定如何在规约后产生的非终结产生式条件下转移
     // 动作为移入时存储移入后转移到的条目ID
     using ActionAndTargetContainer =
-        std::unordered_map<ProductionNodeId, ActionAndAttachedData>;
+        std::unordered_map<ProductionNodeId,
+                           std::unique_ptr<ActionAndAttachedDataInterface>>;
 
     ParsingTableEntry() {}
     ParsingTableEntry(const ParsingTableEntry&) = delete;
@@ -1120,8 +1215,16 @@ class SyntaxGenerator {
 
     // 设置该产生式在转移条件下的动作和目标节点
     template <class AttachedData>
+    requires std::is_same_v<
+        std::decay_t<AttachedData>,
+        SyntaxGenerator::ParsingTableEntry::ShiftAttachedData> ||
+        std::is_same_v<
+            std::decay_t<AttachedData>,
+            SyntaxGenerator::ParsingTableEntry::ReductAttachedData> ||
+        std::is_same_v<
+            std::decay_t<AttachedData>,
+            SyntaxGenerator::ParsingTableEntry::ShiftReductAttachedData>
     void SetTerminalNodeActionAndAttachedData(ProductionNodeId node_id,
-                                              ActionType action_type_,
                                               AttachedData&& attached_data);
     // 设置该条目移入非终结节点后转移到的节点
     void SetNonTerminalNodeTransformId(ProductionNodeId node_id,
@@ -1135,10 +1238,11 @@ class SyntaxGenerator {
             old_entry_id_to_new_entry_id);
     // 访问该条目下给定ID终结节点的行为与目标ID
     // 如果不存在该转移条件则返回空指针
-    const ActionAndAttachedData* AtTerminalNode(
+    const ActionAndAttachedDataInterface* AtTerminalNode(
         ProductionNodeId node_id) const {
       auto iter = action_and_attached_data_.find(node_id);
-      return iter == action_and_attached_data_.end() ? nullptr : &iter->second;
+      return iter == action_and_attached_data_.end() ? nullptr
+                                                     : iter->second.get();
     }
     // 访问该条目下给定ID非终结节点移入时转移到的条目ID
     // 不存在该转移条件则返回ParsingTableEntryId::InvalidId()
@@ -1190,17 +1294,23 @@ class SyntaxGenerator {
     std::unordered_map<ProductionNodeId, ParsingTableEntryId>
         nonterminal_node_transform_table_;
   };
+  // 用于ParsingTableTerminalNodeClassify中判断两个转移结果是否相同
+  struct ActionAndAttachedDataPointerEqualTo {
+    bool operator()(
+        const ParsingTableEntry::ActionAndAttachedDataInterface* const& lhs,
+        const ParsingTableEntry::ActionAndAttachedDataInterface* const& rhs)
+        const;
+  };
 };
 template <class IdType>
 inline SyntaxGenerator::ProductionBodyId
-SyntaxGenerator::NonTerminalProductionNode::AddBody(IdType&& body) {
+SyntaxGenerator::NonTerminalProductionNode::AddBody(
+    IdType&& body, ProcessFunctionClassId class_for_reduct_id_) {
   ProductionBodyId body_id(nonterminal_bodys_.size());
   // 将输入插入到产生式体向量中，无删除相同产生式功能
-  nonterminal_bodys_.emplace_back(std::forward<IdType>(body));
-  // 为产生式体的所有不同位置的点对应的向前看符号留出空间
-  ResizeProductionBodyNum(nonterminal_bodys_.size());
-  // 为不同点的位置留出空间
-  ResizeProductionBodyNodeNum(body_id, body.size());
+  nonterminal_bodys_.emplace_back(
+      ProductionBodyType{.production_body = std::forward<IdType>(body),
+                         .class_for_reduct_id = class_for_reduct_id_});
   return body_id;
 }
 
@@ -1246,7 +1356,7 @@ SyntaxGenerator::AddItemAndForwardNodeIdsToCore(
 }
 
 template <class ParsingTableEntryIdContainer>
-inline void SyntaxGenerator::ParsingTableTerminalNodeClassify(
+void SyntaxGenerator::ParsingTableTerminalNodeClassify(
     const std::vector<ProductionNodeId>& terminal_node_ids, size_t index,
     ParsingTableEntryIdContainer&& entry_ids,
     std::vector<std::vector<ParsingTableEntryId>>* equivalent_ids) {
@@ -1261,14 +1371,18 @@ inline void SyntaxGenerator::ParsingTableTerminalNodeClassify(
            GetProductionNode(terminal_node_ids[index]).Type() ==
                ProductionNodeType::kOperatorNode);
     // 分类表，根据转移条件下的转移结果分类
-    std::map<ParsingTableEntry::ActionAndAttachedData,
-             std::vector<ParsingTableEntryId>>
+    // 使用ActionAndAttachedDataPointerEqualTo来判断两个转移结果是否相同
+    std::unordered_map<
+        const ParsingTableEntry::ActionAndAttachedDataInterface*,
+        std::vector<ParsingTableEntryId>,
+        std::hash<const ParsingTableEntry::ActionAndAttachedDataInterface*>,
+        ActionAndAttachedDataPointerEqualTo>
         classify_table;
     ProductionNodeId transform_id = terminal_node_ids[index];
     for (auto production_node_id : entry_ids) {
-      // 利用map进行分类
-      classify_table[*GetParsingTableEntry(production_node_id)
-                          .AtTerminalNode(transform_id)]
+      // 利用unordered_map进行分类
+      classify_table[GetParsingTableEntry(production_node_id)
+                         .AtTerminalNode(transform_id)]
           .push_back(production_node_id);
     }
     size_t next_index = index + 1;
@@ -1325,34 +1439,57 @@ inline void SyntaxGenerator::save(Archive& ar,
 }
 
 template <class AttachedData>
+requires std::is_same_v<
+    std::decay_t<AttachedData>,
+    SyntaxGenerator::ParsingTableEntry::ShiftAttachedData> ||
+    std::is_same_v<std::decay_t<AttachedData>,
+                   SyntaxGenerator::ParsingTableEntry::ReductAttachedData> ||
+    std::is_same_v<std::decay_t<AttachedData>,
+                   SyntaxGenerator::ParsingTableEntry::ShiftReductAttachedData>
 void SyntaxGenerator::ParsingTableEntry::SetTerminalNodeActionAndAttachedData(
-    ProductionNodeId node_id, ActionType action_type,
-    AttachedData&& attached_data) {
-#ifdef USE_AMBIGUOUS_GRAMMAR
+    ProductionNodeId node_id, AttachedData&& attached_data) {
   // 使用二义性文法，语法分析表某些情况下需要对同一个节点支持移入和规约操作并存
   auto iter = action_and_attached_data_.find(node_id);
   if (iter == action_and_attached_data_.end()) {
     // 新插入转移节点
     action_and_attached_data_.emplace(
-        node_id, ActionAndAttachedData(
-                     action_type, std::forward<AttachedData>(attached_data)));
-    return;
+        node_id, std::make_unique<std::decay_t<AttachedData>>(
+                     std::forward<AttachedData>(attached_data)));
+  } else {
+    // 待插入的转移条件已存在
+    // 获取已经存储的数据
+    ActionAndAttachedDataInterface& data_already_in = *iter->second;
+    // 语法分析表创建过程中不应重写已存在的转移条件
+    // 要么插入新转移条件，要么补全移入/规约的另一部分（规约/移入）
+    if (attached_data.GetActionType() != data_already_in.GetActionType()) {
+      assert(data_already_in.GetActionType() != ActionType::kShiftReduct);
+      if (attached_data.GetActionType() == ActionType::kShift) {
+        // 提供的数据为移入部分数据
+        if constexpr (std::is_same_v<std::decay_t<AttachedData>,
+                                     ShiftAttachedData>) {
+          iter->second = std::make_unique<ShiftReductAttachedData>(
+              std::forward<AttachedData>(attached_data),
+              std::move(iter->second->GetReductAttachedData()));
+        } else {
+          assert(false);
+        }
+      } else {
+        // 提供的数据为规约部分数据
+        assert(attached_data.GetActionType() == ActionType::kReduct);
+        if constexpr (std::is_same_v<std::decay_t<AttachedData>,
+                                     ReductAttachedData>) {
+          iter->second = std::make_unique<ShiftReductAttachedData>(
+              std::move(iter->second->GetShiftAttachedData()),
+              std::forward<AttachedData>(attached_data));
+        } else {
+          assert(false);
+        }
+      }
+    } else {
+      assert(static_cast<const AttachedData&>(data_already_in) ==
+             attached_data);
+    }
   }
-  // 待插入的转移条件已存在
-  ActionAndAttachedData& data = iter->second;
-  // 语法分析表创建过程中不应重写已存在的转移条件
-  // 要么插入新转移条件，要么补全移入/规约的另一部分（规约/移入）
-  assert(action_type == ActionType::kShift &&
-             data.action_type_ == ActionType::kReduct ||
-         action_type == ActionType::kReduct &&
-             data.action_type_ == ActionType::kShift);
-  data.ConvertToShiftReductAttachedData(
-      std::forward<AttachedData>(attached_data));
-#else
-  ActionAndAttachedData& data = action_and_attached_data_[node_id];
-  data.action_type_ = action_type;
-  data.SetAttachedData(std::forward<AttachedData>(attached_data));
-#endif  // USE_AMBIGUOUS_GRAMMAR
 }
 
 template <class ForwardNodeIdContainer>
@@ -1375,57 +1512,5 @@ SyntaxGenerator::Core::AddItemAndForwardNodeIds(
   }
 }
 
-inline const SyntaxGenerator::ParsingTableEntry::ShiftAttachedData&
-SyntaxGenerator::ParsingTableEntry::ActionAndAttachedData::
-    GetShiftAttachedData() const {
-  switch (action_type_) {
-    break;
-    case ActionType::kShift:
-      return boost::get<ShiftAttachedData>(attached_data_);
-      break;
-
-#ifdef USE_AMBIGUOUS_GRAMMAR
-    case ActionType::kShiftReduct:
-      return boost::get<ShiftReductAttachedData>(attached_data_)
-          .shift_attached_data_;
-      break;
-#endif  // USE_AMBIGUOUS_GRAMMAR
-
-    case ActionType::kError:
-    case ActionType::kAccept:
-    case ActionType::kReduct:
-    default:
-      assert(false);
-      // 防止警告：不是所有的控件路径都返回值
-      return boost::get<ShiftAttachedData>(attached_data_);
-      break;
-  }
-}
-
-inline const SyntaxGenerator::ParsingTableEntry::ReductAttachedData&
-SyntaxGenerator::ParsingTableEntry::ActionAndAttachedData::
-    GetReductAttachedData() const {
-  switch (action_type_) {
-    case ActionType::kReduct:
-      return boost::get<ReductAttachedData>(attached_data_);
-      break;
-
-#ifdef USE_AMBIGUOUS_GRAMMAR
-    case ActionType::kShiftReduct:
-      return boost::get<ShiftReductAttachedData>(attached_data_)
-          .reduct_attached_data_;
-      break;
-#endif  // USE_AMBIGUOUS_GRAMMAR
-
-    case ActionType::kShift:
-    case ActionType::kError:
-    case ActionType::kAccept:
-    default:
-      assert(false);
-      // 防止警告：不是所有的控件路径都返回值
-      return boost::get<ReductAttachedData>(attached_data_);
-      break;
-  }
-}
 }  // namespace frontend::generator::syntaxgenerator
 #endif  // !GENERATOR_SYNTAXGENERATOR_SYNTAXGENERATOR_H_

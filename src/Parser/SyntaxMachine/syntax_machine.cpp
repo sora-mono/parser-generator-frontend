@@ -17,11 +17,7 @@ bool SyntaxMachine::Parse(const std::string& filename) {
   GetNextWord();
   // 初始化当前解析数据
   GetParsingDataNow().parsing_table_entry_id = GetRootParsingEntryId();
-
-#ifdef USE_AMBIGUOUS_GRAMMAR
   GetOperatorPriorityNow() = OperatorPriority(0);
-#endif  // USE_AMBIGUOUS_GRAMMAR
-
   while (!GetParsingStack().empty()) {
     const WordInfo& dfa_return_data = GetWaitingProcessWordInfo();
     switch (dfa_return_data.word_attached_data_.node_type) {
@@ -44,9 +40,10 @@ bool SyntaxMachine::Parse(const std::string& filename) {
 void SyntaxMachine::TerminalWordWaitingProcess() {
   ProductionNodeId production_node_to_shift_id(
       GetWaitingProcessWordInfo().word_attached_data_.production_node_id);
-  const ActionAndAttachedData& action_and_attached_data = *GetActionAndTarget(
-      GetParsingDataNow().parsing_table_entry_id, production_node_to_shift_id);
-  switch (action_and_attached_data.action_type_) {
+  const ActionAndAttachedDataInterface& action_and_attached_data =
+      *GetActionAndTarget(GetParsingDataNow().parsing_table_entry_id,
+                          production_node_to_shift_id);
+  switch (action_and_attached_data.GetActionType()) {
     // TODO 添加接受时的后续处理
     [[unlikely]] case ActionType::kAccept : exit(0);
     break;
@@ -113,7 +110,7 @@ void SyntaxMachine::TerminalWordWaitingProcess() {
 }
 
 inline void SyntaxMachine::ShiftTerminalWord(
-    const ActionAndAttachedData& action_and_target) {
+    const ActionAndAttachedDataInterface& action_and_target) {
   ParsingData& parsing_data_now = GetParsingDataNow();
   const WordInfo& word_info = GetWaitingProcessWordInfo();
   // 构建当前单词的数据
@@ -131,7 +128,7 @@ inline void SyntaxMachine::ShiftTerminalWord(
   GetParsingStack().emplace(std::move(parsing_data_now));
   // 更新状态为移入该节点后到达的条目
   parsing_data_now.parsing_table_entry_id =
-      action_and_target.GetShiftAttachedData().next_entry_id_;
+      action_and_target.GetShiftAttachedData().GetNextParsingTableEntryId();
 
   // 如果移入了运算符则更新优先级为新的优先级
   if (word_info.word_attached_data_.node_type ==
@@ -151,12 +148,13 @@ inline void SyntaxMachine::ShiftTerminalWord(
   SetLastOperateIsNotReduct();
 }
 
-void SyntaxMachine::Reduct(const ActionAndAttachedData& action_and_target) {
+void SyntaxMachine::Reduct(
+    const ActionAndAttachedDataInterface& action_and_target) {
   const ReductAttachedData& reduct_attached_data =
       action_and_target.GetReductAttachedData();
   ProcessFunctionInterface& process_function_object =
-      GetProcessFunctionClass(reduct_attached_data.process_function_class_id_);
-  const auto& production_body = reduct_attached_data.production_body_;
+      GetProcessFunctionClass(reduct_attached_data.GetProcessFunctionClassId());
+  const auto& production_body = reduct_attached_data.GetProductionBody();
   // 传递给用户定义函数的数据
   std::vector<WordDataToUser> word_data_to_user;
   // 预分配空间，防止多次扩容
@@ -184,7 +182,7 @@ void SyntaxMachine::Reduct(const ActionAndAttachedData& action_and_target) {
   GetParsingStack().pop();
   ShiftNonTerminalWord(
       process_function_object.Reduct(std::move(word_data_to_user)),
-      action_and_target.GetReductAttachedData().reducted_nonterminal_node_id_);
+      action_and_target.GetReductAttachedData().GetReductedNonTerminalNodeId());
   // 执行了一次完整的规约操作，需要设置上一步执行了规约操作的标记
   SetLastOperateIsReduct();
 }

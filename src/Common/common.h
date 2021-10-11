@@ -32,7 +32,6 @@ enum class ProductionNodeType {
 #ifdef _DEBUG
 
 #define USE_USER_DEFINED_FILE
-#define USE_AMBIGUOUS_GRAMMAR
 
 #endif  // _DEBUG
 

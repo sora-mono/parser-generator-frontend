@@ -23,10 +23,8 @@ class SyntaxMachine {
   // 节点类型
   using ProductionNodeType = SyntaxGenerator::ProductionNodeType;
 
-#ifdef USE_AMBIGUOUS_GRAMMAR
   // 运算符结合性
   using OperatorAssociatityType = SyntaxGenerator::OperatorAssociatityType;
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
   // 用户定义的分析用函数、数据对象的管理器
   using ProcessFunctionClassManagerType =
@@ -39,8 +37,8 @@ class SyntaxMachine {
   // 语法分析表条目
   using ParsingTableEntry = SyntaxGenerator::ParsingTableEntry;
   // 动作和目标
-  using ActionAndAttachedData =
-      SyntaxGenerator::ParsingTableEntry::ActionAndAttachedData;
+  using ActionAndAttachedDataInterface =
+      SyntaxGenerator::ParsingTableEntry::ActionAndAttachedDataInterface;
   // 具体动作
   using ActionType = SyntaxGenerator::ActionType;
   // 移入时使用的数据
@@ -55,10 +53,8 @@ class SyntaxMachine {
   using TerminalWordData = ProcessFunctionInterface::TerminalWordData;
   // 非终结节点数据
   using NonTerminalWordData = ProcessFunctionInterface::NonTerminalWordData;
-#ifdef USE_AMBIGUOUS_GRAMMAR
   // 运算符优先级，根据当前最高优先级运算符确定，0保留为非运算符优先级
   using OperatorPriority = SyntaxGenerator::OperatorPriority;
-#endif  // USE_AMBIGUOUS_GRAMMAR
 
   // 存储解析过程使用的数据
   struct ParsingData {
@@ -102,7 +98,7 @@ class SyntaxMachine {
   }
   // 获取在该终结节点条件下的动作（移入/规约）和附属数据
   // 不存在该转移条件则返回空指针
-  const ActionAndAttachedData* GetActionAndTarget(
+  const ActionAndAttachedDataInterface* GetActionAndTarget(
       ParsingTableEntryId src_entry_id, ProductionNodeId node_id) const {
     assert(src_entry_id.IsValid());
     return syntax_parsing_table_[src_entry_id].AtTerminalNode(node_id);
@@ -143,10 +139,11 @@ class SyntaxMachine {
   // 自动处理移入和归并，归并后执行一次移入非终结节点后执行GetNextWord()
   void TerminalWordWaitingProcess();
   // TerminalWordWaitingShift子过程，处理移入的情况，处理后自动GetNextWord()
-  void ShiftTerminalWord(const ActionAndAttachedData& action_and_target);
+  void ShiftTerminalWord(
+      const ActionAndAttachedDataInterface& action_and_target);
   // TerminalWordWaitingShifg子过程，处理规约的情况
   // 处理后自动执行一次移入非终结节点的操作并GetNextWord()
-  void Reduct(const ActionAndAttachedData& action_and_target);
+  void Reduct(const ActionAndAttachedDataInterface& action_and_target);
   // 移入非终结节点
   // non_terminal_word_data是规约后用户返回的数据
   // reducted_nonterminal_node_id是规约后得到的非终结产生式ID

@@ -21,8 +21,9 @@ namespace common = frontend::common;
 class DfaGenerator {
   struct IntermediateDfaNode;
   // 管理转移表用，仅用于DfaGenerator，为了避免使用char作下标时使用负下标
-  template <class BasicObjectType, size_t size>
-  requires(size <= frontend::common::kCharNum) class TransformArrayManager {
+  // 可以直接使用CHAR_MIN~CHAR_MAX任意值访问
+  template <class BasicObjectType>
+  class TransformArrayManager {
    public:
     TransformArrayManager() {}
 
@@ -42,7 +43,7 @@ class DfaGenerator {
       ar& transform_array_;
     }
 
-    std::array<BasicObjectType, size> transform_array_;
+    std::array<BasicObjectType, frontend::common::kCharNum> transform_array_;
   };
 
  public:
@@ -71,8 +72,7 @@ class DfaGenerator {
       frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
                                           WrapperLabel::kTransformArrayId>;
   // 状态转移表
-  using TransformArray =
-      TransformArrayManager<TransformArrayId, frontend::common::kCharNum>;
+  using TransformArray = TransformArrayManager<TransformArrayId>;
   // DFA配置类型
   using DfaConfigType =
       std::vector<std::pair<TransformArray, WordAttachedData>>;
@@ -135,9 +135,11 @@ class DfaGenerator {
     void SetTailNodeData(TailNodeData data) { tail_node_data = data; }
 
     // 该节点的转移条件，存储IntermediateDfaNode节点句柄
-    TransformArrayManager<IntermediateNodeId, common::kCharNum> forward_nodes;
+    // 可以直接使用CHAR_MIN~CHAR_MAX任意值访问
+    TransformArrayManager<IntermediateNodeId> forward_nodes;
     TailNodeData tail_node_data;
-    SetId set_handler;  // 该节点对应的子集闭包
+    // 该节点对应的子集闭包
+    SetId set_handler;
   };
 
   IntermediateDfaNode& GetIntermediateNode(IntermediateNodeId handler) {
@@ -147,7 +149,8 @@ class DfaGenerator {
     return node_manager_set_.GetObject(production_node_id);
   }
   // 集合转移函数（子集构造法用），
-  // 返回值前半部分表示新集合是否已存在，后半部分为对应中间节点句柄
+  // 返回值前半部分为对应中间节点句柄，后半部分表示是否新创建了集合
+  // 如果无法转移则返回std::make_pair(IntermediateNodeId::InvalidId(),false)
   std::pair<IntermediateNodeId, bool> SetGoto(SetId set_src, char c_transform);
   // DFA转移函数（最小化DFA用）
   IntermediateNodeId IntermediateGoto(IntermediateNodeId dfa_src,
@@ -157,8 +160,8 @@ class DfaGenerator {
                                     char c_transform,
                                     IntermediateNodeId node_intermediate_dst);
   // 如果集合已存在则返回true，如果不存在则插入并返回false
-  // 返回的第一个参数为集合是否已存在
-  // 返回的第二个参数为对应中间节点句柄
+  // 返回的第一个参数为对应中间节点句柄
+  // 返回的第二个参数为集合是否已存在
   std::pair<IntermediateNodeId, bool> InOrInsert(
       const SetType& uset,
       TailNodeData tail_node_data = NfaGenerator::NotTailNodeTag);
