@@ -2,8 +2,6 @@
 
 #include <queue>
 
-#include "syntax_generator.h"
-
 namespace frontend::generator::syntax_generator {
 SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddTerminalNode(
     const std::string& node_symbol, const std::string& body_symbol,
@@ -330,6 +328,35 @@ SyntaxGenerator::GetProductionNode(ProductionNodeId production_node_id) const {
   return manager_nodes_[production_node_id];
 }
 
+inline SyntaxGenerator::BaseProductionNode&
+SyntaxGenerator::GetProductionNodeFromNodeSymbolId(SymbolId symbol_id) {
+  ProductionNodeId production_node_id =
+      GetProductionNodeIdFromNodeSymbolId(symbol_id);
+  assert(symbol_id.IsValid());
+  return GetProductionNode(production_node_id);
+}
+
+inline SyntaxGenerator::BaseProductionNode&
+SyntaxGenerator::GetProductionNodeBodyFromSymbolId(SymbolId symbol_id) {
+  ProductionNodeId production_node_id =
+      GetProductionNodeIdFromBodySymbolId(symbol_id);
+  assert(symbol_id.IsValid());
+  return GetProductionNode(production_node_id);
+}
+
+// 获取非终结节点中的一个产生式体
+
+inline const std::vector<SyntaxGenerator::ProductionNodeId>&
+SyntaxGenerator::GetProductionBody(ProductionNodeId production_node_id,
+                                   ProductionBodyId production_body_id) {
+  NonTerminalProductionNode& nonterminal_node =
+      static_cast<NonTerminalProductionNode&>(
+          GetProductionNode(production_node_id));
+  // 只有非终结节点才有多个产生式体，对其它节点调用该函数无意义
+  assert(nonterminal_node.Type() == ProductionNodeType::kNonTerminalNode);
+  return nonterminal_node.GetBody(production_body_id).production_body;
+}
+
 // 记录核心项所属的核心ID
 
 inline void SyntaxGenerator::AddCoreItemBelongToCoreId(
@@ -399,8 +426,7 @@ void SyntaxGenerator::GetNonTerminalNodeFirstNodeIds(
 
 std::unordered_set<SyntaxGenerator::ProductionNodeId> SyntaxGenerator::First(
     ProductionNodeId production_node_id, ProductionBodyId production_body_id,
-    PointIndex point_index,
-    const InsideForwardNodesContainerType& next_node_ids) {
+    PointIndex point_index, const ForwardNodesContainerType& next_node_ids) {
   ProductionNodeId node_id = GetProductionNodeIdInBody(
       production_node_id, production_body_id, point_index);
   if (node_id.IsValid()) {
@@ -442,8 +468,7 @@ bool SyntaxGenerator::CoreClosure(CoreId core_id) {
       GetParsingTableEntry(core.GetParsingTableEntryId());
   // 存储当前待展开的项
   // 存储指向待展开项的迭代器
-  std::queue<
-      std::map<CoreItem, InsideForwardNodesContainerType>::const_iterator>
+  std::queue<std::map<CoreItem, ForwardNodesContainerType>::const_iterator>
       items_waiting_process;
   const auto& core_items_and_forward_nodes =
       GetCoreItemsAndForwardNodes(core_id);
@@ -489,7 +514,7 @@ bool SyntaxGenerator::CoreClosure(CoreId core_id) {
       continue;
     }
     // 展开非终结节点，并为其创建向前看符号集
-    InsideForwardNodesContainerType forward_node_ids =
+    ForwardNodesContainerType forward_node_ids =
         First(production_node_id, production_body_id,
               PointIndex(point_index + 1), item_now->second);
     for (auto body_id : next_production_node.GetAllBodyIds()) {
@@ -903,159 +928,14 @@ std::string SyntaxGenerator::FormatCoreItems(CoreId core_id) const {
   return format_result;
 }
 
-void SyntaxGenerator::AnalysisKeyWord(const std::string& str) {
-  std::sregex_iterator iter(str.cbegin(), str.cend(), keyword_regex_);
-  std::sregex_iterator iter_end;
-  FILE* config_file = GetConfigConstructFilePointer();
-  for (; iter != iter_end; ++iter) {
-    std::string keyword = iter->str(1);
-    fprintf(config_file, "// 关键字：%s\n", keyword.c_str());
-    fprintf(config_file, "PrintKeyWordConstructData(\"%s\");\n",
-            keyword.c_str());
-  }
-}
-
-void SyntaxGenerator::AnalysisProductionConfig(const std::string& file_name) {
-  // 不支持换行功能
-  std::ifstream file(file_name);
-  if (!file.is_open()) {
-    fprintf(stderr, "打开产生式配置文件：%s 失败\n", file_name.c_str());
-    return;
-  }
-  std::string temp;
-  // 当前功能区编号
-  size_t part_num = 0;
-  while (part_num < frontend::common::kFunctionPartSize) {
-    std::getline(file, temp);
-    if (!file) {
-      break;
-    }
-    if (temp.empty()) {
-      continue;
-    }
-    if (temp[0] == '@') [[unlikely]] {
-      // 特殊标记，1个@代表注释，2个@代表功能区域分隔
-      if (temp.size() >= 2 && temp[1] == '@') {
-        // 该功能区（基础终结节点）结束
-        ++part_num;
-        break;
-      } else {
-        continue;
-      }
-    }
-    switch (part_num) {
-      case 0:
-        // 关键字定义区
-        AnalysisKeyWord(std::move(temp));
-        break;
-      case 1:
-        // 根产生式定义区
-        AnalysisNonTerminalProduction(std::move(temp));
-        ++part_num;
-        break;
-      case 2:
-        // 运算符定义区
-        AnalysisOperatorProduction(std::move(temp));
-        break;
-      case 3:
-        // 基础终结节点定义区
-        AnalysisTerminalProduction(std::move(temp));
-        break;
-      case 4:
-        // 普通产生式定义区
-        AnalysisNonTerminalProduction(std::move(temp));
-        break;
-      default:
-        assert(false);
-        break;
-    }
-  }
-}
-
-void SyntaxGenerator::AnalysisTerminalProduction(
-    const std::string& str, size_t binary_operator_priority) {
-  std::smatch match_result;
-  std::regex_match(str, match_result, terminal_node_regex_);
-  if (match_result.size() < 3) [[unlikely]] {
-    fprintf(stderr, "终结产生式：%s 不符合语法规范\n", str.c_str());
-    return;
-  }
-  // 产生式名
-  std::string node_symbol = match_result[1].str();
-  // 产生式体
-  std::string body_symbol = match_result[2].str();
-  if (node_symbol.empty()) [[unlikely]] {
-    fprintf(stderr, "终结产生式：%s 缺少产生式名\n", str.c_str());
-    return;
-  }
-  if (body_symbol.empty()) [[unlikely]] {
-    fprintf(stderr, "终结产生式：%s 缺少产生式体\n", str.c_str());
-    return;
-  }
-  PrintTerminalNodeConstructData(std::move(node_symbol), std::move(body_symbol),
-                                 binary_operator_priority);
-}
-
-void SyntaxGenerator::AnalysisOperatorProduction(const std::string& str) {
-  std::smatch match_result;
-  std::regex_match(str, match_result, operator_node_regex_);
-  if (match_result.size() == 0) {
-    fprintf(stderr, "运算符声明不符合规范：%s\n", str.c_str());
-    return;
-  }
-  OperatorData operator_data;
-  // 运算符名
-  operator_data.operator_symbol = match_result[1].str();
-  if (operator_data.operator_symbol.empty()) {
-    fprintf(stderr, "运算符名缺失\n");
-    return;
-  }
-  // 运算符优先级
-  operator_data.binary_operator_priority = match_result[2].str();
-  if (operator_data.binary_operator_priority.empty()) {
-    fprintf(stderr, "运算符：%s 优先级缺失\n",
-            operator_data.binary_operator_priority.c_str());
-    return;
-  }
-  // 运算符结合性
-  operator_data.binary_operator_associatity_type = match_result[3].str();
-  if (operator_data.binary_operator_associatity_type.empty()) {
-    fprintf(stderr, "运算符：%s 运算符结合性缺失\n",
-            operator_data.operator_symbol.c_str());
-    return;
-  }
-
-  operator_data.reduct_function = match_result[4].str();
-
-#ifdef USE_USER_DEFINED_FILE
-  operator_data.include_files = GetFilesName(match_result[5].str());
-#endif  // USE_USER_DEFINED_FILE
-  PrintOperatorNodeConstructData(std::move(operator_data));
-}
-
-void syntax_generator::SyntaxGenerator::AnalysisNonTerminalProduction(
-    const std::string& str) {
-  std::smatch match_result;
-  std::regex_match(str, match_result, nonterminal_node_regex_);
-  if (match_result.size() == 0) {
-    // 未捕获
-    fprintf(stderr, "非终结节点：%s 声明不规范\n", str.c_str());
-    return;
-  }
-  NonTerminalNodeData node_data;
-  node_data.node_symbol = match_result[1].str();
-  std::string body_symbol_str = match_result[2].str();
-  node_data.body_symbols = GetBodySymbol(body_symbol_str);
-  if (body_symbol_str.find('|') != std::string::npos) {
-    node_data.use_same_process_function_class = true;
-  } else {
-    node_data.use_same_process_function_class = false;
-  }
-  node_data.reduct_function = match_result[3].str();
-#ifdef USE_USER_DEFINED_FILE
-  node_data.include_files = GetFilesName(match_result[4].str());
-#endif  // USE_USER_DEFINED_FILE
-  PrintNonTerminalNodeConstructData(std::move(node_data));
+SyntaxGenerator::SyntaxGenerator() {
+  SyntaxGeneratorInit();
+  ConfigConstruct();
+  CheckUndefinedProductionRemained();
+  dfa_generator_.DfaReconstrcut();
+  ParsingTableConstruct();
+  // 保存配置
+  SaveConfig();
 }
 
 void SyntaxGenerator::ParsingTableConstruct() {
@@ -1082,7 +962,6 @@ void SyntaxGenerator::ParsingTableConstruct() {
 }
 
 void SyntaxGenerator::SyntaxGeneratorInit() {
-  CloseConfigFile();
   NodeNumInit();
   undefined_productions_.clear();
   manager_nodes_.ObjectManagerInit();
@@ -1097,126 +976,6 @@ void SyntaxGenerator::SyntaxGeneratorInit() {
   dfa_generator_.DfaInit();
   syntax_parsing_table_.clear();
   manager_process_function_class_.ObjectManagerInit();
-  OpenConfigFile();
-}
-
-void SyntaxGenerator::OpenConfigFile() {
-  if (GetProcessFunctionClassFilePointer() == nullptr) [[likely]] {
-    errno_t result = fopen_s(&GetProcessFunctionClassFilePointer(),
-                             "process_functions_classes.h", "w+");
-    if (result != 0) [[unlikely]] {
-      fprintf(stderr, "打开SyntaxConfig/process_functions.h失败，错误码：%d\n",
-              result);
-      return;
-    }
-    fprintf(
-        GetProcessFunctionClassFilePointer(),
-        "#ifndef GENERATOR_SYNTAXGENERATOR_SYNTAXCONFIG_PROCESSFUNCTIONS_H_\n"
-        "#define "
-        "GENERATOR_SYNTAXGENERATOR_SYNTAXCONFIG_PROCESSFUNCTIONS_H_\n");
-  }
-  if (GetUserDefinedFunctionAndDataRegisterFilePointer() == nullptr)
-      [[likely]] {
-    errno_t result =
-        fopen_s(&GetUserDefinedFunctionAndDataRegisterFilePointer(),
-                "user_defined_function_and_data_register.h", "w+");
-    if (result != 0) [[unlikely]] {
-      fprintf(stderr, "打开SyntaxConfig/process_functions.h失败，错误码：%d\n",
-              result);
-      return;
-    }
-    fprintf(GetUserDefinedFunctionAndDataRegisterFilePointer(),
-            "#ifndef "
-            "GENERATOR_SYNTAXGENERATOR_USER_DEFINED_FUNCTION_AND_DATA_"
-            "REGISTER_H_\n"
-            "#define "
-            "GENERATOR_SYNTAXGENERATOR_USER_DEFINED_FUNCTION_AND_DATA_"
-            "REGISTER_H_\n"
-            "#include \"process_functions_classes.h\"");
-  }
-  if (GetConfigConstructFilePointer() == nullptr) [[likely]] {
-    errno_t result =
-        fopen_s(&GetConfigConstructFilePointer(), "config_construct.cpp", "w+");
-    if (result != 0) [[unlikely]] {
-      fprintf(stderr, "打开SyntaxConfig/config_construct.cpp失败，错误码：%d\n",
-              result);
-      return;
-    }
-    fprintf(GetConfigConstructFilePointer(),
-            "#include \"syntax_generator.h\"\n"
-            "namespace frontend::generator::syntax_generator {\n"
-            "void SyntaxGenerator::ConfigConstruct() { \n");
-  }
-}
-
-void SyntaxGenerator::CloseConfigFile() {
-  FILE* function_class_file_ptr = GetProcessFunctionClassFilePointer();
-  if (function_class_file_ptr != nullptr) [[likely]] {
-    fprintf(function_class_file_ptr,
-            "#endif  // "
-            "!GENERATOR_SYNTAXGENERATOR_SYNTAXCONFIG_PROCESSFUNCTIONS_H_\n");
-    fclose(function_class_file_ptr);
-  }
-  if (GetUserDefinedFunctionAndDataRegisterFilePointer() != nullptr)
-      [[likely]] {
-    fclose(GetUserDefinedFunctionAndDataRegisterFilePointer());
-    fprintf(GetUserDefinedFunctionAndDataRegisterFilePointer(),
-            "#endif  // "
-            "!GENERATOR_SYNTAXGENERATOR_USER_DEFINED_FUNCTION_AND_DATA_"
-            "REGISTER_H_\n");
-  }
-  FILE* config_file_ptr = GetConfigConstructFilePointer();
-  if (config_file_ptr != nullptr) [[likely]] {
-    // 检查是否有未定义产生式
-    fprintf(config_file_ptr, "CheckUndefinedProductionRemained();\n");
-    fprintf(config_file_ptr,
-            "}\n"
-            "}  // namespace frontend::generator::syntax_generator\n");
-    fclose(config_file_ptr);
-  }
-}
-
-std::vector<std::pair<std::string, bool>> SyntaxGenerator::GetBodySymbol(
-    const std::string& str) {
-  std::sregex_iterator regex_iter(str.cbegin(), str.cend(), body_symbol_regex_);
-  std::vector<std::pair<std::string, bool>> bodys;
-  std::sregex_iterator regex_iter_end;
-  for (; regex_iter != regex_iter_end; ++regex_iter) {
-    bool is_terminal_symbol = *regex_iter->str(1).cbegin() == '"';
-    bodys.emplace_back(std::make_pair(regex_iter->str(2), is_terminal_symbol));
-  }
-  return bodys;
-}
-
-std::vector<std::string> SyntaxGenerator::GetFunctionsName(
-    const std::string& str) {
-  std::sregex_iterator regex_iter(str.cbegin(), str.cend(), function_regex_);
-  std::vector<std::string> functions;
-  std::sregex_iterator regex_iter_end;
-  for (; regex_iter != regex_iter_end; ++regex_iter) {
-    std::string function_name = regex_iter->str(1);
-    if (function_name == "@") {
-      // 使用占位符表示空函数
-      function_name.clear();
-    }
-    functions.emplace_back(std::move(function_name));
-  }
-  return functions;
-}
-
-std::vector<std::string> SyntaxGenerator::GetFilesName(const std::string& str) {
-  std::sregex_iterator regex_iter(str.cbegin(), str.cend(), file_regex_);
-  std::vector<std::string> include_files;
-  std::sregex_iterator regex_iter_end;
-  for (; regex_iter != regex_iter_end; ++regex_iter) {
-    std::string include_file_name = regex_iter->str(1);
-    if (include_file_name == "@") {
-      // 使用占位符代表没有包含文件
-      break;
-    }
-    include_files.emplace_back(std::move(include_file_name));
-  }
-  return include_files;
 }
 
 void SyntaxGenerator::AddUnableContinueNonTerminalNode(
@@ -1285,139 +1044,6 @@ void SyntaxGenerator::AddKeyWord(const std::string& key_word) {
   AddTerminalNode(
       key_word, key_word,
       frontend::generator::dfa_generator::DfaGenerator::WordPriority(2));
-}
-
-void SyntaxGenerator::PrintKeyWordConstructData(const std::string& keyword) {
-  fprintf(GetConfigConstructFilePointer(), "// 关键字：%s\n", keyword.c_str());
-  fprintf(GetConfigConstructFilePointer(), "AddKeyWord(%s);\n",
-          keyword.c_str());
-}
-
-void SyntaxGenerator::PrintTerminalNodeConstructData(
-    std::string&& node_symbol, std::string&& body_symbol,
-    size_t binary_operator_priority) {
-  fprintf(GetConfigConstructFilePointer(),
-          "// 终结节点名：%s\n// 终结节点体：%s\n // 优先级：%llu",
-          node_symbol.c_str(), body_symbol.c_str(),
-          static_cast<unsigned long long>(binary_operator_priority));
-  fprintf(GetConfigConstructFilePointer(),
-          "AddTerminalNode(\"%s\", \"%s\", PriorityLevel(%s));\n",
-          node_symbol.c_str(), body_symbol.c_str(),
-          std::to_string(binary_operator_priority).c_str());
-}
-
-void SyntaxGenerator::PrintOperatorNodeConstructData(OperatorData&& data) {
-  // 分配一个编号
-  int operator_num = GetNodeNum();
-  std::string class_name = class_name + std::to_string(operator_num) +
-                           data.binary_operator_associatity_type +
-                           data.binary_operator_priority;
-  // 重新编码输出的结合性字符串
-  if (data.binary_operator_associatity_type == "L") {
-    data.binary_operator_associatity_type =
-        "OperatorAssociatityType::kLeftAssociate";
-  } else {
-    assert(data.binary_operator_associatity_type == "R");
-    data.binary_operator_associatity_type =
-        "OperatorAssociatityType::kRightAssociate";
-  }
-  fprintf(GetConfigConstructFilePointer(),
-          "// 运算符： %s\n// 结合性：%s\n// 优先级：%s\n",
-          data.operator_symbol.c_str(),
-          data.binary_operator_associatity_type.c_str(),
-          data.binary_operator_priority.c_str());
-  fprintf(GetConfigConstructFilePointer(),
-          "AddBinaryOperatorNode<%s>(\"%s\",OperatorAssociatityType(%s),"
-          "PriorityLevel(%s));\n",
-          class_name.c_str(), data.operator_symbol.c_str(),
-          data.binary_operator_associatity_type.c_str(),
-          data.binary_operator_priority.c_str());
-  FILE* function_file = GetProcessFunctionClassFilePointer();
-  // TODO 去掉运算符的处理函数
-  fprintf(function_file,
-          "class %s : public ProcessFunctionInterface {\n public:\n",
-          class_name.c_str());
-  fprintf(function_file, "// 运算符： %s\n// 结合性：%s\n// 优先级：%s\n",
-          data.operator_symbol.c_str(),
-          data.binary_operator_associatity_type.c_str(),
-          data.binary_operator_priority.c_str());
-#ifdef USE_USER_DEFINED_FILE
-  for (size_t i = 0; i < data.include_files.size(); i++) {
-    fprintf(function_file, "  #include\"%s\"\n", data.include_files[i].c_str());
-  }
-#endif  // USE_USER_DEFINED_FILE
-  PrintProcessFunction(function_file, data);
-  fprintf(function_file, "}\n");
-  fprintf(GetUserDefinedFunctionAndDataRegisterFilePointer(),
-          "BOOST_CLASS_EXPORT_GUID(frontend::generator::syntax_generator::%s,"
-          "\"frontend::generator::syntax_generator::%s\")",
-          class_name.c_str(), class_name.c_str());
-}
-
-void SyntaxGenerator::PrintNonTerminalNodeConstructData(
-    NonTerminalNodeData&& data) {
-  int node_num = GetNodeNum();
-  std::string class_name = data.node_symbol + '_' + std::to_string(node_num);
-  // 为了序列化注册新生成的类
-  fprintf(GetUserDefinedFunctionAndDataRegisterFilePointer(),
-          "BOOST_CLASS_EXPORT_GUID(frontend::generator::syntax_generator::%s,"
-          "\"frontend::generator::syntax_generator::%s\")",
-          class_name.c_str(), class_name.c_str());
-  FILE* function_file = GetProcessFunctionClassFilePointer();
-  fprintf(function_file, "class %s :public ProcessFunctionInterface {\n",
-          class_name.c_str());
-  fprintf(function_file, "// 非终结节点名：%s\n", data.node_symbol.c_str());
-  PrintProcessFunction(function_file, data);
-  fprintf(function_file, " private:\n");
-#ifdef USE_USER_DEFINED_FILE
-  for (size_t i = 0; i < data.include_files.size(); i++) {
-    fprintf(function_file, "  #include\"%s\"\n", data.include_files[i].c_str());
-  }
-#endif  // USE_USER_DEFINED_FILE
-  fprintf(function_file, "}\n");
-
-  FILE* config_file = GetConfigConstructFilePointer();
-  if (data.use_same_process_function_class) {
-    // 该非终结节点存储多个终结节点且共用处理函数
-    // 创建一个独一无二的变量名
-    std::string variety_name =
-        class_name + std::to_string('_') + std::to_string(node_num);
-    fprintf(config_file,
-            "ProcessFunctionClassId %s = "
-            "CreateProcessFunctionClassObject<frontend::generator::"
-            "syntax_generator::%s>();\n",
-            variety_name.c_str(), class_name.c_str());
-    for (size_t i = 0; i < data.body_symbols.size(); i++) {
-      if (!data.body_symbols[i].second) {
-        fprintf(stderr,
-                "非终结节点：%s 中，第%llu个产生式体不是终结节点产生式\n",
-                data.node_symbol.c_str(), static_cast<unsigned long long>(i));
-      }
-      fprintf(config_file, "AddNonTerminalNode(\"%s\",{{\"%s\",true}},%s);\n",
-              data.node_symbol.c_str(), data.body_symbols[i].first.c_str(),
-              variety_name.c_str());
-    }
-  } else {
-    // 正常处理非终结节点的一个产生式体
-    if (data.body_symbols.empty()) [[unlikely]] {
-      fprintf(stderr, "非终结节点：%s 没有产生式体\n",
-              data.node_symbol.c_str());
-      return;
-    }
-    // 输出使用初始化列表表示的每个产生式体
-    std::string is_terminal_body =
-        data.body_symbols.front().second ? "true" : "false";
-    fprintf(config_file, "AddNonTerminalNode<%s>(\"%s\",{{\"%s\",%s}",
-            class_name.c_str(), data.node_symbol.c_str(),
-            data.body_symbols.front().first.c_str(), is_terminal_body.c_str());
-    for (size_t i = 1; i < data.body_symbols.size(); i++) {
-      std::string is_terminal_body =
-          data.body_symbols[i].second ? "true" : "false";
-      fprintf(config_file, ",{\"%s\",%s}", data.body_symbols[i].first.c_str(),
-              is_terminal_body.c_str());
-    }
-    fprintf(config_file, "};\n");
-  }
 }
 
 SyntaxGenerator::ProductionNodeId
@@ -1576,22 +1202,6 @@ inline void SyntaxGenerator::Core::SetMainItem(
   main_items_.emplace_back(item_iter);
   SetClosureNotAvailable();
 }
-
-const std::regex SyntaxGenerator::terminal_node_regex_(
-    R"!(^\s*([a-zA-Z][a-zA-Z0-9_]*)\s*->\s*(\S+)\s*$)!");
-const std::regex SyntaxGenerator::operator_node_regex_(
-    R"(^\s*(\S+)\s*@\s*([1-9][0-9]*)\s*@\s*([LR])\s*\{\s*([a-zA-Z_])"
-    R"([a-zA-Z0-9_]*)\s*\}\s*(?:\{\s*([^\}]+)\s*\})?\s*$)");
-const std::regex SyntaxGenerator::nonterminal_node_regex_(
-    R"(^\s*([a-zA-Z_][a-zA-Z0-9_]*)\s*->\s*([^=]+)\s*(?:=>\s*\{\s*)"
-    R"(([a-zA-Z_][a-zA-Z0-9_]*)\s*\})\s*(?:\{\s*([^\}]+)\s*\})?\s*$)");
-const std::regex SyntaxGenerator::keyword_regex_(R"!("(\S*)")!");
-const std::regex SyntaxGenerator::body_symbol_regex_(
-    R"((")?([a-zA-Z_][a-zA-Z0-9_]*)(\1))");
-const std::regex SyntaxGenerator::function_regex_(
-    R"(((?:[a-zA-Z_][a-zA-Z0-9_]*)|@))");
-const std::regex SyntaxGenerator::file_regex_(
-    R"(((?:[a-zA-Z_][a-zA-Z0-9_.\- ]*)|@))");
 
 bool SyntaxGenerator::ParsingTableEntry::ShiftAttachedData::operator==(
     const ActionAndAttachedDataInterface& shift_attached_data) const {

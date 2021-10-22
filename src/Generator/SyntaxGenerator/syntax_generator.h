@@ -64,7 +64,6 @@ class SyntaxGenerator {
   using OperatorPriority =
       frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
                                           WrapperLabel::kPriorityLevel>;
-
   // 词法分析中词的优先级
   using WordPriority =
       frontend::generator::dfa_generator::DfaGenerator::WordPriority;
@@ -83,14 +82,8 @@ class SyntaxGenerator {
   // 符号ID
   using SymbolId =
       UnorderedStructManager<std::string, std::hash<std::string>>::ObjectId;
-  // 向前看符号容器（最内层容器，由ProductionBodyId和PointIndex共同决定）
-  using InsideForwardNodesContainerType = std::unordered_set<ProductionNodeId>;
-  // 向前看符号容器（中间层容器，由ProductionBodyId决定）
-  using MiddleForwardNodesContainerType =
-      std::vector<InsideForwardNodesContainerType>;
-  // 向前看符号容器（最外层容器，与产生式一一对应）
-  using OutSideForwardNodesContainerType =
-      std::vector<MiddleForwardNodesContainerType>;
+  // 向前看符号容器
+  using ForwardNodesContainerType = std::unordered_set<ProductionNodeId>;
   // 内核内单个项集，参数从左到右依次为
   // 产生式节点ID，产生式体ID，产生式体中点的位置
   using CoreItem = std::tuple<ProductionNodeId, ProductionBodyId, PointIndex>;
@@ -106,109 +99,24 @@ class SyntaxGenerator {
   // 分析动作类型：规约，移入，移入和规约，报错，接受
   enum class ActionType { kReduct, kShift, kShiftReduct, kError, kAccept };
 
-  // 运算符数据
-  struct OperatorData {
-    std::string operator_symbol;
-    std::string binary_operator_priority;
-    std::string binary_operator_associatity_type;
-    std::string reduct_function;
-#ifdef USE_USER_DEFINED_FILE
-    std::vector<std::string> include_files;
-#endif  // USE_USER_DEFINED_FILE
-  };
-
-  struct NonTerminalNodeData {
-    std::string node_symbol;
-    // 保存的string两侧没有双引号
-    // bool表示是否为终结节点体
-    std::vector<std::pair<std::string, bool>> body_symbols;
-    std::string reduct_function;
-#ifdef USE_USER_DEFINED_FILE
-    std::vector<std::string> include_files;
-#endif  // USE_USER_DEFINED_FILE
-
-    // 该产生式节点是否只代表多个不同的终结产生式
-    // 例：Example -> "int"|"char"|"double"
-    // 这些终结产生式将共用处理函数
-    bool use_same_process_function_class = false;
-  };
-
  public:
-  SyntaxGenerator() {
-    SyntaxGeneratorInit();
-    ConfigConstruct();
-    CheckUndefinedProductionRemained();
-    dfa_generator_.DfaReconstrcut();
-    ParsingTableConstruct();
-    // 保存配置
-    SaveConfig();
-  }
+  SyntaxGenerator();
   SyntaxGenerator(const SyntaxGenerator&) = delete;
-  ~SyntaxGenerator() { CloseConfigFile(); }
 
   SyntaxGenerator& operator=(const SyntaxGenerator&) = delete;
 
-  // 解析关键字
-  void AnalysisKeyWord(const std::string& str);
-  // 解析终结节点产生式文件
-  void AnalysisProductionConfig(const std::string& file_name);
-  // 解析终结节点产生式，仅需且必须输入一个完整的产生式
-  // 普通终结节点默认优先级为0（最低）
-  void AnalysisTerminalProduction(const std::string& str,
-                                  size_t binary_operator_priority = 0);
-  // 解析运算符产生式，仅需且必须输入一个完整的产生式
-  void AnalysisOperatorProduction(const std::string& str);
-  // 解析非终结节点产生式，仅需且必须输入一个完整的产生式
-  void AnalysisNonTerminalProduction(const std::string& str);
-  // 构建LALR所需的各种外围信息
+ private:
+   // 初始化
+  void SyntaxGeneratorInit();
+  // 构建LALR（1））所需的各种外围信息
   void ConfigConstruct();
   // 构建LALR(1)配置
   void ParsingTableConstruct();
-  // 初始化
-  void SyntaxGeneratorInit();
 
- private:
-  FILE*& GetConfigConstructFilePointer() { return config_construct_code_file_; }
-  FILE*& GetProcessFunctionClassFilePointer() {
-    return process_function_class_file_;
-  }
-  FILE*& GetUserDefinedFunctionAndDataRegisterFilePointer() {
-    return user_defined_function_and_data_register_file_;
-  }
-  // 打开配置文件
-  void OpenConfigFile();
-  // 关闭配置文件
-  void CloseConfigFile();
   // 获取一个节点编号
   int GetNodeNum() { return node_num_++; }
   // 复位节点编号
   void NodeNumInit() { node_num_ = 0; }
-  // 将字符串视作包含多个终结符号体，并按顺序提取出来
-  // 每组中的bool代表是否为终结节点体，根据两侧是否有"来判断
-  // 返回的string中没有双引号
-  std::vector<std::pair<std::string, bool>> GetBodySymbol(
-      const std::string& str);
-  // 将字符串视作包含多个函数名，并按顺序提取出来
-  std::vector<std::string> GetFunctionsName(const std::string& str);
-  // 将字符串视作包含多个文件名，并按顺序提取出来
-  // 遇到@时中止提取
-  std::vector<std::string> GetFilesName(const std::string& str);
-  // 向配置文件中写入生成关键字的操作
-  void PrintKeyWordConstructData(const std::string& keyword);
-  // 向配置文件中写入生成终结节点的操作
-  void PrintTerminalNodeConstructData(std::string&& node_symbol,
-                                      std::string&& body_symbol,
-                                      size_t binary_operator_priority);
-  // 子过程，向配置文件写入Reduct函数
-  // data中函数名为空则返回false
-  template <class T>
-  bool PrintProcessFunction(FILE* function_file, const T& data);
-  // 向配置文件中写入生成运算符的操作
-  // data中的优先级必须为单个字符L或R
-  void PrintOperatorNodeConstructData(OperatorData&& data);
-
-  // 向配置文件中写入生成非终结节点的操作
-  void PrintNonTerminalNodeConstructData(NonTerminalNodeData&& data);
   // 添加产生式名，返回符号的ID和是否执行了插入操作
   // 执行了插入操作则返回true
   std::pair<SymbolId, bool> AddNodeSymbol(const std::string& node_symbol) {
@@ -310,7 +218,6 @@ class SyntaxGenerator {
   // 函数会复制一份副本，无需保持原来的参数的生命周期
   void AddUnableContinueNonTerminalNode(
       const std::string& undefined_symbol, std::string&& node_symbol,
-
       std::vector<std::string>&& subnode_symbols,
       ProcessFunctionClassId class_id);
   // 检查给定的节点生成后是否可以重启因为部分产生式体未定义而搁置的
@@ -318,7 +225,7 @@ class SyntaxGenerator {
   void CheckNonTerminalNodeCanContinue(const std::string& node_symbol);
   // 检查是否还有未定义的产生式体
   // 用于完成所有产生式添加后检查
-  // 在stderr输出错误信息（如果有）
+  // 如果有则输出错误信息并结束程序
   void CheckUndefinedProductionRemained();
   // 添加关键字，自动创建同名终结节点
   void AddKeyWord(const std::string& key_word);
@@ -337,7 +244,6 @@ class SyntaxGenerator {
   // 自动为节点类设置节点ID
   ProductionNodeId SubAddTerminalNode(SymbolId node_symbol_id,
                                       SymbolId body_symbol_id);
-
   // 新建双目运算符节点，返回节点ID
   // 节点已存在则返回ProductionNodeId::InvalidId()
   // 默认添加的运算符词法分析优先级高于普通终结产生式低于关键字
@@ -371,7 +277,6 @@ class SyntaxGenerator {
   ProductionNodeId SubAddOperatorNode(SymbolId node_symbol_id,
                                       OperatorAssociatityType associatity_type,
                                       OperatorPriority priority_level);
-
   // 新建非终结节点，返回节点ID，节点已存在则不会创建新的节点
   // node_symbol为产生式名，subnode_symbols是产生式体
   // could_empty_reduct代表是否可以空规约
@@ -401,29 +306,11 @@ class SyntaxGenerator {
   BaseProductionNode& GetProductionNode(ProductionNodeId production_node_id);
   const BaseProductionNode& GetProductionNode(
       ProductionNodeId production_node_id) const;
-  BaseProductionNode& GetProductionNodeFromNodeSymbolId(SymbolId symbol_id) {
-    ProductionNodeId production_node_id =
-        GetProductionNodeIdFromNodeSymbolId(symbol_id);
-    assert(symbol_id.IsValid());
-    return GetProductionNode(production_node_id);
-  }
-  BaseProductionNode& GetProductionNodeBodyFromSymbolId(SymbolId symbol_id) {
-    ProductionNodeId production_node_id =
-        GetProductionNodeIdFromBodySymbolId(symbol_id);
-    assert(symbol_id.IsValid());
-    return GetProductionNode(production_node_id);
-  }
+  BaseProductionNode& GetProductionNodeFromNodeSymbolId(SymbolId symbol_id);
+  BaseProductionNode& GetProductionNodeBodyFromSymbolId(SymbolId symbol_id);
   // 获取非终结节点中的一个产生式体
   const std::vector<ProductionNodeId>& GetProductionBody(
-      ProductionNodeId production_node_id,
-      ProductionBodyId production_body_id) {
-    NonTerminalProductionNode& nonterminal_node =
-        static_cast<NonTerminalProductionNode&>(
-            GetProductionNode(production_node_id));
-    // 只有非终结节点才有多个产生式体，对其它节点调用该函数无意义
-    assert(nonterminal_node.Type() == ProductionNodeType::kNonTerminalNode);
-    return nonterminal_node.GetBody(production_body_id).production_body;
-  }
+      ProductionNodeId production_node_id, ProductionBodyId production_body_id);
   // 给非终结节点添加产生式体
   template <class IdType>
   void AddNonTerminalNodeBody(ProductionNodeId node_id, IdType&& body) {
@@ -525,8 +412,7 @@ class SyntaxGenerator {
   // 然后继续向前查找直到结尾或不可空规约非终结节点或终结节点
   std::unordered_set<ProductionNodeId> First(
       ProductionNodeId production_node_id, ProductionBodyId production_body_id,
-      PointIndex point_index,
-      const InsideForwardNodesContainerType& next_node_ids);
+      PointIndex point_index, const ForwardNodesContainerType& next_node_ids);
   // 获取核心的全部项
   const std::map<CoreItem, std::unordered_set<ProductionNodeId>>&
   GetCoreItemsAndForwardNodes(CoreId core_id) {
@@ -652,28 +538,6 @@ class SyntaxGenerator {
   // 允许序列化类访问
   friend class boost::serialization::access;
 
-  // 终结节点产生式定义
-  static const std::regex terminal_node_regex_;
-  // 运算符定义
-  static const std::regex operator_node_regex_;
-  // 非终结节点产生式定义
-  static const std::regex nonterminal_node_regex_;
-  // 单个关键字定义
-  static const std::regex keyword_regex_;
-  // 单个终结符号定义
-  static const std::regex body_symbol_regex_;
-  // 单个函数名定义
-  static const std::regex function_regex_;
-  // 包含的单个用户文件定义
-  static const std::regex file_regex_;
-
-  // Generator生成的包装用户定义函数数据的类的源码文件
-  FILE* process_function_class_file_ = nullptr;
-  // boost序列化派生类时需要注册派生类具体类型
-  // 该文件里储存用户定义的函数数据对象类型的声明
-  FILE* user_defined_function_and_data_register_file_ = nullptr;
-  // Generator生成的外围数据加载代码文件(ConfigConstruct函数的具体实现)
-  FILE* config_construct_code_file_ = nullptr;
   // 对节点编号，便于区分不同节点对应的类
   // 该值仅用于生成配置代码中生成包装用户定义函数数据的类
   int node_num_;
@@ -701,7 +565,7 @@ class SyntaxGenerator {
   // 终结产生式体符号ID到对应节点ID的映射
   std::unordered_map<SymbolId, ProductionNodeId>
       production_body_symbol_id_to_node_id_;
-  // 内核+非内核项集
+  // 存储项集
   ObjectManager<Core> cores_;
   // 语法分析表ID到核心ID的映射
   std::unordered_map<ParsingTableEntryId, CoreId>
@@ -1077,8 +941,7 @@ class SyntaxGenerator {
     void SetClosureNotAvailable() { core_closure_available_ = false; }
 
     // 存储指向核心项的迭代器
-    std::list<
-        std::map<CoreItem, InsideForwardNodesContainerType>::const_iterator>
+    std::list<std::map<CoreItem, ForwardNodesContainerType>::const_iterator>
         main_items_;
     // 该项集求的闭包是否有效（求过闭包则为true）
     bool core_closure_available_ = false;
@@ -1088,8 +951,7 @@ class SyntaxGenerator {
     ParsingTableEntryId parsing_table_entry_id_ =
         ParsingTableEntryId::InvalidId();
     // 项和对应的向前看符号
-    std::map<CoreItem, InsideForwardNodesContainerType>
-        item_and_forward_node_ids_;
+    std::map<CoreItem, ForwardNodesContainerType> item_and_forward_node_ids_;
   };
 
   // 语法分析表条目
@@ -1441,22 +1303,6 @@ SyntaxGenerator::NonTerminalProductionNode::AddBody(
   nonterminal_bodys_.emplace_back(std::forward<IdType>(body),
                                   class_for_reduct_id_);
   return body_id;
-}
-
-template <class T>
-inline bool SyntaxGenerator::PrintProcessFunction(FILE* function_file,
-                                                  const T& data) {
-  assert(function_file != nullptr);
-  if (data.reduct_function.empty()) {
-    fprintf(stderr, "Warning: 产生式未提供规约函数\n");
-    return false;
-  }
-  fprintf(function_file,
-          " virtual ProcessFunctionInterface::UserData "
-          "Reduct(std::vector<WordDataToUser>&& user_returned_data) { return "
-          "%s(user_returned_data); }\n",
-          data.reduct_function.c_str());
-  return true;
 }
 
 template <class ProcessFunctionClass>
