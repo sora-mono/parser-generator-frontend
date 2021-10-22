@@ -5,7 +5,7 @@
 #include "Config/ProductionConfig/user_defined_functions.h"
 #include "process_function_interface.h"
 
-namespace frontend::generator::syntaxgenerator {
+namespace frontend::generator::syntax_generator {
 // 下面的宏将包含的文件中用户定义的产生式转化为定义规约函数的类
 // 类名修饰方法见syntax_generate.h
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_
@@ -13,7 +13,7 @@ namespace frontend::generator::syntaxgenerator {
 #undef GENERATOR_LEXICALGENERATOR_PROCESS_FUNCTIONS_CLASSES_
 // 定义结束标志
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_END
-}  // namespace frontend::generator::syntaxgenerator
+}  // namespace frontend::generator::syntax_generator
 
 // 在boost::serialization中注册包装用户定义函数的类以序列化派生类
 #include <boost/serialization/export.hpp>

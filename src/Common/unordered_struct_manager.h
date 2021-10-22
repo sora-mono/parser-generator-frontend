@@ -36,12 +36,17 @@ class UnorderedStructManager {
 
   // 返回指向管理的对象的引用
   StructType& GetObject(ObjectId production_node_id) {
+    return const_cast<StructType&>(
+        static_cast<const UnorderedStructManager&>(*this).GetObject(
+            production_node_id));
+  }
+  const StructType& GetObject(ObjectId production_node_id) const {
     return node_manager_.GetObject(production_node_id);
   }
   // 返回值前半部分为对象ID，后半部分为是否执行了插入操作
   template <class T>
   std::pair<ObjectId, bool> AddObject(T&& object);
-  ObjectId GetObjectId(const StructType& object);
+  ObjectId GetObjectId(const StructType& object) const;
   bool RemoveObject(const StructType& object);
   // 初始化，如果容器中存在对象则全部释放
   void StructManagerInit() {
@@ -54,7 +59,7 @@ class UnorderedStructManager {
   }
 
  private:
-  ObjectHashType DoHash(const StructType& object) {
+  ObjectHashType DoHash(const StructType& object) const {
     Hasher hasher;
     return ObjectHashType(hasher(object));
   }
@@ -82,7 +87,7 @@ UnorderedStructManager<StructType, Hasher>::AddObject(T&& object) {
 template <class StructType, class Hasher>
 UnorderedStructManager<StructType, Hasher>::ObjectId
 UnorderedStructManager<StructType, Hasher>::GetObjectId(
-    const StructType& object) {
+    const StructType& object) const {
   ObjectHashType hashed_string(DoHash(object));
   auto [iter_begin, iter_end] = hash_to_id_.equal_range(hashed_string);
   ObjectId return_id = ObjectId::InvalidId();

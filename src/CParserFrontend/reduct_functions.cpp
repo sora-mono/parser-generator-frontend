@@ -25,28 +25,20 @@ void VarietyOrFunctionConstructError(
   switch (check_result) {
     [[likely]] case ObjectConstructData::CheckResult::kSuccess : break;
     case ObjectConstructData::CheckResult::kAttachToTerminalType:
-      std::cerr
-          << std::format(
-                 "行数{:} 待构建对象{:}已存在终结类型，不可声明更多类型结构",
-                 GetLine(), object_name)
-          << std::endl;
+      OutputError(std::format(
+          "待构建对象{:}已存在终结类型，不可声明更多类型结构", object_name));
       exit(-1);
       break;
     case ObjectConstructData::CheckResult::kReturnFunction:
-      std::cerr << std::format("行数{:} 函数{:}返回值不能为函数", GetLine(),
-                               object_name);
+      OutputError(std::format("函数{:}返回值不能为函数", object_name));
       exit(-1);
       break;
     case ObjectConstructData::CheckResult::kPointerEnd:
-      std::cerr << std::format("行数{:} 待构建对象{:}缺少具体类型", GetLine(),
-                               object_name)
-                << std::endl;
+      OutputError(std::format("待构建对象{:}缺少具体类型", object_name));
       exit(-1);
       break;
     case ObjectConstructData::CheckResult::kEmptyChain:
-      std::cerr << std::format("行数{:} 没有为待构建对象{:}提供任何类型",
-                               GetLine(), object_name)
-                << std::endl;
+      OutputError(std::format("没有为待构建对象{:}提供任何类型", object_name));
       exit(-1);
       break;
     default:
@@ -89,39 +81,31 @@ void CheckAssignableCheckResult(AssignableCheckResult assignable_check_result) {
       break;
     case AssignableCheckResult::kUnsignedToSigned:
       // 使用警告
-      std::cerr << std::format("行数{:} 警告：将无符号类型赋值给有符号类型",
-                               GetLine())
-                << std::endl;
+      OutputWarning(std::format("将无符号类型赋值给有符号类型"));
       break;
     case AssignableCheckResult::kSignedToUnsigned:
       // 使用警告
-      std::cerr << std::format("行数{:} 警告：将有符号类型赋值给无符号类型",
-                               GetLine())
-                << std::endl;
+      OutputWarning(std::format("将有符号类型赋值给无符号类型"));
       break;
     case AssignableCheckResult::kLowerConvert:
-      std::cerr << std::format("行数{:} 在赋值时发生缩窄转换", GetLine())
-                << std::endl;
+      OutputError(std::format("在赋值时发生缩窄转换"));
       exit(-1);
       break;
     case AssignableCheckResult::kCanNotConvert:
-      std::cerr << std::format("行数{:} 无法转换类型", GetLine()) << std::endl;
+      OutputError(std::format("无法转换类型"));
       exit(-1);
       break;
     case AssignableCheckResult::kAssignedNodeIsConst:
-      std::cerr << std::format("行数{:} 非声明时无法给const对象赋值", GetLine())
-                << std::endl;
+      OutputError(std::format("非声明时无法给const对象赋值"));
       exit(-1);
       break;
     case AssignableCheckResult::kAssignToRightValue:
-      std::cerr << std::format("行数{:} 无法给右值对象赋值", GetLine())
-                << std::endl;
+      OutputError(std::format("无法给右值对象赋值"));
       exit(-1);
       break;
     case AssignableCheckResult::kArgumentsFull:
       // TODO 支持可变参数函数后修改该报错进行更具体的判断
-      std::cerr << std::format("行数{:} 实参数量超出形参数量", GetLine())
-                << std::endl;
+      OutputError(std::format("实参数量超出形参数量"));
       exit(-1);
       break;
     case AssignableCheckResult::kMayBeZeroToPointer:
@@ -144,31 +128,23 @@ void CheckMathematicalComputeTypeResult(
       // 可以运算
       break;
     case DeclineMathematicalComputeTypeResult::kLeftNotComputableType:
-      std::cerr << std::format("行数{:} 左运算数不是可运算类型", GetLine())
-                << std::endl;
+      OutputError(std::format("左运算数不是可运算类型"));
       exit(-1);
       break;
     case DeclineMathematicalComputeTypeResult::kLeftNotIntger:
-      std::cerr << std::format("行数{:} 左运算数作为指针偏移量时不是整型",
-                               GetLine())
-                << std::endl;
+      OutputError(std::format("左运算数作为指针偏移量时不是整型"));
       exit(-1);
       break;
     case DeclineMathematicalComputeTypeResult::kLeftRightBothPointer:
-      std::cerr << std::format("行数{:} 两个指针类型无法进行数学运算",
-                               GetLine())
-                << std::endl;
+      OutputError(std::format("两个指针类型无法进行数学运算"));
       exit(-1);
       break;
     case DeclineMathematicalComputeTypeResult::kRightNotComputableType:
-      std::cerr << std::format("行数{:} 右运算数不是可运算类型", GetLine())
-                << std::endl;
+      OutputError(std::format("右运算数不是可运算类型"));
       exit(-1);
       break;
     case DeclineMathematicalComputeTypeResult::kRightNotIntger:
-      std::cerr << std::format("行数{:} 右运算数作为指针偏移量时不是整型",
-                               GetLine())
-                << std::endl;
+      OutputError(std::format("右运算数作为指针偏移量时不是整型"));
       exit(-1);
       break;
     default:
@@ -187,26 +163,38 @@ void CheckAddTypeResult(AddTypeResult add_type_result) {
       break;
     case c_parser_frontend::type_system::AddTypeResult::
         kAnnounceOrDefineBeforeFunctionAnnounce:
-      std::cerr << std::format("行数{:} 列数{:} Warning: 重复声明函数",
-                               GetLine(), GetColumn())
-                << std::endl;
+      OutputWarning(std::format("重复声明函数"));
       break;
     case c_parser_frontend::type_system::AddTypeResult::kTypeAlreadyIn:
-      std::cerr << std::format("行数{:} 列数{:} 已存在同名类型", GetLine(),
-                               GetColumn())
-                << std::endl;
+      OutputError(std::format("已存在同名类型"));
       exit(-1);
       break;
     case c_parser_frontend::type_system::AddTypeResult::kRedefineFunction:
-      std::cerr << std::format("行数{:} 列数{:} 重定义函数", GetLine(),
-                               GetColumn())
-                << std::endl;
+      OutputError(std::format("重定义函数"));
       exit(-1);
       break;
     default:
       assert(false);
       break;
   }
+}
+
+void OutputError(const std::string& error) {
+  std::cerr << std::format("Compline Error: 行数:{:} 列数:{:} ", GetLine(),
+                           GetColumn())
+            << error << std::endl;
+}
+
+void OutputWarning(const std::string& warning) {
+  std::cerr << std::format("Compline Warning: 行数:{:} 列数:{:} ", GetLine(),
+                           GetColumn())
+            << warning << std::endl;
+}
+
+void OutputInfo(const std::string& info) {
+  std::cout << std::format("Compline Info: 行数:{:} 列数:{:} ", GetLine(),
+                           GetColumn())
+            << info << std::endl;
 }
 
 std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueChar(
@@ -241,17 +229,13 @@ SingleConstexprValueIndexedString(std::vector<WordDataToUser>&& word_data) {
   size_t index = std::stoull(index_str, &converted_num);
   // 检查使用的下标是否全部转换
   if (converted_num != index_str.size()) [[unlikely]] {
-    std::cerr << std::format(
-                     "行数{:} 无法转换下标，可能为浮点数或超出可用下标范围",
-                     GetLine())
-              << std::endl;
+    OutputError(std::format("无法转换下标，可能为浮点数或超出可用下标范围"));
     exit(-1);
   }
   // 检查下标是否越界
   char result;
   if (index > string_str.size()) [[unlikely]] {
-    std::cerr << std::format("行数{:} 使用的下标大于字符串大小", GetLine())
-              << std::endl;
+    OutputError(std::format("使用的下标大于字符串大小"));
     exit(-1);
   } else if (index == string_str.size()) [[unlikely]] {
     result = '\0';
@@ -412,12 +396,9 @@ std::any IdOrEquivenceNumAddressing(std::vector<WordDataToUser>&& word_data) {
   if (chars_converted_to_longlong != array_size_or_index_string.size())
       [[unlikely]] {
     // 不是所有的数字都参与了转换，说明使用了浮点数
-    std::cerr
-        << std::format(
-               "行数：{:} "
-               "{:}无法作为数组大小或偏移量，原因可能为浮点数、数值过大、负数",
-               GetLine(), array_size_or_index_string)
-        << std::endl;
+    OutputError(std::format(
+        "{:}无法作为数组大小或偏移量，原因可能为浮点数、数值过大、负数",
+        array_size_or_index_string));
     exit(-1);
   }
   // 添加一层指针和指针指向的数组大小
@@ -492,10 +473,7 @@ EnumReturnData NotEmptyEnumArgumentsIdAssignNumBase(
   long long enum_member_value = std::stoll(num, &chars_converted_to_longlong);
   if (chars_converted_to_longlong != num.size()) [[unlikely]] {
     // 存在浮点数，不是所有的值都可以作为枚举项的值
-    std::cerr << std::format(
-                     "行数：{:} {:}不能作为枚举项的值，原因可能为浮点数",
-                     GetLine(), num)
-              << std::endl;
+    OutputError(std::format("{:}不能作为枚举项的值，原因可能为浮点数", num));
     exit(-1);
   }
   // 添加给定值的枚举值
@@ -503,9 +481,7 @@ EnumReturnData NotEmptyEnumArgumentsIdAssignNumBase(
       std::move(enum_member_name), enum_member_value);
   if (!inserted) [[unlikely]] {
     // 插入失败，存在同名成员
-    std::cerr << std::format("行数：{:} 枚举项：{:}已定义", GetLine(),
-                             enum_member_name)
-              << std::endl;
+    OutputError(std::format("枚举项：{:}已定义", enum_member_name));
     exit(-1);
   }
   return enum_return_data;
@@ -522,9 +498,7 @@ std::any NotEmptyEnumArgumentsIdExtend(
       data_before.AddMember(std::move(enum_member_name), enum_member_value);
   if (!inserted) [[unlikely]] {
     // 待添加的项的ID已经存在
-    std::cerr << std::format("行数：{:} 枚举项：{:}已定义", GetLine(),
-                             enum_member_name)
-              << std::endl;
+    OutputError(std::format("枚举项：{:}已定义", enum_member_name));
     exit(-1);
   }
   return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
@@ -541,21 +515,18 @@ std::any NotEmptyEnumArgumentsIdAssignNumExtend(
   long long enum_member_value = std::stoll(num, &chars_converted_to_longlong);
   if (chars_converted_to_longlong != num.size()) [[unlikely]] {
     // 给定项的值不能完全转化为long long
-    std::cerr << std::format(
-                     "行数：{0:} 枚举项{1:} = {2:}中 "
-                     "{2:}不能作为枚举项的值，可能原因为浮点数",
-                     GetLine(), enum_member_name, num)
-              << std::endl;
+    OutputError(
+        std::format("枚举项{0:} = {1:}中 "
+                    "{1:}不能作为枚举项的值，可能原因为浮点数",
+                    enum_member_name, num));
     exit(-1);
   }
   auto [iter, inserted] =
       data_before.AddMember(std::move(enum_member_name), enum_member_value);
   if (!inserted) [[unlikely]] {
     // 待添加的项的ID已经存在
-    std::cerr << std::format(
-                     "行数：{0:} 枚举项{1:} = {2:}中 枚举项：{1:}已定义",
-                     GetLine(), enum_member_name, num)
-              << std::endl;
+    OutputError(std::format("枚举项{0:} = {1:}中 枚举项：{0:}已定义",
+                            enum_member_name, num));
     exit(-1);
   }
   return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
@@ -731,9 +702,8 @@ std::shared_ptr<const StructureTypeInterface> StructTypeStructAnnounce(
       // 找不到给定名称的类型
       const char* type_name =
           struct_type == StructOrBasicType::kStruct ? "结构体" : "共用体";
-      std::cerr << std::format("行数{:} {:}{:}未定义", GetLine(), type_name,
-                               struct_name)
-                << std::endl;
+      OutputError(std::format("{:}{:}未定义", type_name, struct_name));
+      exit(-1);
     } break;
     case GetTypeResult::kSeveralSameLevelMatches:
       // 该情况仅在无类型选择偏好时有效
@@ -799,13 +769,11 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeId(
       // 成功获取变量类型
       break;
     case GetTypeResult::kSeveralSameLevelMatches:
-      std::cerr << std::format("行数{:} 类型名{:}对应多个同级类型", GetLine(),
-                               type_name);
+      OutputError(std::format("类型名{:}对应多个同级类型", type_name));
       exit(-1);
       break;
     case GetTypeResult::kTypeNameNotFound:
-      std::cerr << std::format("行数{:} 类型{:}不存在", GetLine(), type_name)
-                << std::endl;
+      OutputError(std::format("类型{:}不存在", type_name));
       exit(-1);
       break;
     case GetTypeResult::kNoMatchTypePrefer:
@@ -831,13 +799,11 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeEnumAnnounce(
       // 成功获取变量类型
       break;
     case GetTypeResult::kSeveralSameLevelMatches:
-      std::cerr << std::format("行数{:} 类型名{:}对应多个同级类型", GetLine(),
-                               enum_name);
+      OutputError(std::format("类型名{:}对应多个同级类型", enum_name));
       exit(-1);
       break;
     case GetTypeResult::kTypeNameNotFound:
-      std::cerr << std::format("行数{:} 类型{:}不存在", GetLine(), enum_name)
-                << std::endl;
+      OutputError(std::format("类型{:}不存在", enum_name));
       exit(-1);
       break;
     case GetTypeResult::kNoMatchTypePrefer:
@@ -855,8 +821,7 @@ std::any FunctionRelaventBasePartFunctionInitBase(
   // 可能声明匿名函数指针作为函数形参
   if (!word_data[0].GetNonTerminalWordData().user_returned_data.has_value())
       [[unlikely]] {
-    std::cerr << std::format("行数{:} 无法声明匿名函数", GetLine())
-              << std::endl;
+    OutputError(std::format("无法声明匿名函数"));
     exit(-1);
   } else {
     // IdOrEquivence产生式规约得到的数据
@@ -953,24 +918,23 @@ std::shared_ptr<FlowInterface> FunctionRelavent(
 std::shared_ptr<FlowInterface> SingleAnnounceNoAssignVariety(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
-  if (!word_data[1].GetNonTerminalWordData().user_returned_data.has_value())
-      [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 语法错误", GetLine(), GetColumn())
-              << std::endl;
-    exit(-1);
-  }
-  std::shared_ptr<ObjectConstructData>& construct_data =
-      std::any_cast<std::shared_ptr<ObjectConstructData>&>(
-          word_data[1].GetNonTerminalWordData().user_returned_data);
-  if (construct_data->GetObjectName().empty()) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 声明的变量必须有名", GetLine(),
-                             GetColumn())
-              << std::endl;
-    exit(-1);
-  }
   auto [final_type, const_tag_before_final_type] =
       std::any_cast<std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&>(
           word_data[0].GetNonTerminalWordData().user_returned_data);
+  std::shared_ptr<ObjectConstructData> construct_data;
+  if (!word_data[1].GetNonTerminalWordData().user_returned_data.has_value()) {
+    // 函数声明中省略参数名
+    construct_data = std::make_shared<ObjectConstructData>("");
+    construct_data->ConstructBasicObjectPart<VarietyOperatorNode>(
+        nullptr, const_tag_before_final_type, LeftRightValueTag::kLeftValue);
+  } else {
+    construct_data = std::any_cast<std::shared_ptr<ObjectConstructData>&>(
+        word_data[1].GetNonTerminalWordData().user_returned_data);
+    if (construct_data->GetObjectName().empty()) [[unlikely]] {
+      OutputError(std::format("声明的变量必须有名"));
+      exit(-1);
+    }
+  }
   auto [flow_control_node, construct_result] = construct_data->ConstructObject(
       const_tag_before_final_type, std::move(final_type));
   // 检查是否构建成功
@@ -997,8 +961,7 @@ std::any TypeDef(std::vector<WordDataToUser>&& word_data) {
       break;
     case FlowType::kFunctionDefine:
       // 不能给函数起别名
-      std::cerr << std::format("行数{:} 无法给函数起别名", GetLine())
-                << std::endl;
+      OutputError(std::format("无法给函数起别名"));
       exit(-1);
       break;
     default:
@@ -1014,11 +977,8 @@ std::any TypeDef(std::vector<WordDataToUser>&& word_data) {
   auto [ignore_iter, result] =
       parser_frontend.DefineType(*type_name, type_pointer);
   if (result == AddTypeResult::kTypeAlreadyIn) [[unlikely]] {
-    std::cerr << std::format(
-                     "行数{:} 列数{:} "
-                     "使用typedef定义别名时使用的名字{:}已存在相同类型的定义",
-                     GetLine(), GetColumn(), *type_name)
-              << std::endl;
+    OutputError(std::format(
+        "使用typedef定义别名时使用的名字{:}已存在相同类型的定义", *type_name));
     exit(-1);
   }
   // 尝试清除空的类型节点
@@ -1038,16 +998,13 @@ std::any NotEmptyFunctionPointerArgumentsBase(
       break;
     case FlowType::kFunctionDefine:
       // 函数不能作为函数声明时的参数
-      std::cerr
-          << std::format(
-                 "行数{:} 函数不能作为声明时函数参数,"
-                 "请使用函数指针\n此诊断出现在函数{:}处",
-                 GetLine(),
-                 static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
-                     *flow_control_node)
-                     .GetFunctionTypeReference()
-                     .GetFunctionName())
-          << std::endl;
+      OutputError(std::format("函数不能作为声明时函数参数,请使用函数指针"));
+      OutputError(std::format(
+          "此诊断出现在函数{:}处",
+          static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
+              *flow_control_node)
+              .GetFunctionTypeReference()
+              .GetFunctionName()));
       exit(-1);
       break;
     default:
@@ -1073,16 +1030,13 @@ std::any NotEmptyFunctionPointerArgumentsExtend(
       break;
     case FlowType::kFunctionDefine:
       // 函数不能作为函数的参数
-      std::cerr
-          << std::format(
-                 "行数{:} 函数不能作为声明时函数参数,"
-                 "请使用函数指针\n此诊断出现在函数{:}处",
-                 GetLine(),
-                 static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
-                     *flow_control_node)
-                     .GetFunctionTypeReference()
-                     .GetFunctionName())
-          << std::endl;
+      OutputError(std::format("函数不能作为声明时函数参数,请使用函数指针"));
+      OutputError(std::format(
+          "此诊断出现在函数{:}处",
+          static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
+              *flow_control_node)
+              .GetFunctionTypeReference()
+              .GetFunctionName()));
       exit(-1);
       break;
     default:
@@ -1113,8 +1067,7 @@ FunctionDefineHead(std::vector<WordDataToUser>&& word_data) {
     case FlowType::kFunctionDefine:
       break;
     case FlowType::kSimpleSentence:
-      std::cerr << std::format("行数{:} 函数声明语法错误", GetLine())
-                << std::endl;
+      OutputError(std::format("函数声明语法错误"));
       exit(-1);
       break;
     default:
@@ -1150,9 +1103,7 @@ SingleStructureBodyBase(std::vector<WordDataToUser>&& word_data) {
     case FlowType::kSimpleSentence:
       break;
     case FlowType::kFunctionDefine:
-      std::cerr << std::format("行数{:} 函数声明不能作为结构数据成员",
-                               GetLine())
-                << std::endl;
+      OutputError(std::format("函数声明不能作为结构数据成员"));
       exit(-1);
       break;
     default:
@@ -1188,9 +1139,7 @@ std::any SingleStructureBodyExtend(std::vector<WordDataToUser>&& word_data) {
           std::move(new_member_name), extend_type, extend_const_tag);
   // 检查待添加成员名是否重复
   if (!structure_member_index.IsValid()) {
-    std::cerr << std::format("行数{:} 重定义成员{:}", GetLine(),
-                             new_member_name)
-              << std::endl;
+    OutputError(std::format("重定义成员{:}", new_member_name));
     exit(-1);
   }
   return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
@@ -1399,9 +1348,7 @@ SingleAnnounceAndAssignNoAssignBase(std::vector<WordDataToUser>&& word_data) {
     case FlowType::kSimpleSentence:
       break;
     case FlowType::kFunctionDefine:
-      std::cerr << std::format("行数{:} 不支持的扩展：函数内声明函数",
-                               GetLine())
-                << std::endl;
+      OutputError(std::format("不支持的扩展：函数内声明函数"));
       exit(-1);
       break;
     default:
@@ -1424,9 +1371,7 @@ SingleAnnounceAndAssignWithAssignBase(std::vector<WordDataToUser>&& word_data) {
     case FlowType::kSimpleSentence:
       break;
     case FlowType::kFunctionDefine:
-      std::cerr << std::format("行数{:} 不支持的扩展：函数内声明函数",
-                               GetLine())
-                << std::endl;
+      OutputError(std::format("不支持的扩展：函数内声明函数"));
       exit(-1);
       break;
     default:
@@ -1511,8 +1456,7 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> TypeFunctionRelavent(
   if (flow_control_node->GetFlowType() == FlowType::kFunctionDefine)
       [[unlikely]] {
     // 函数不能作为类型使用
-    std::cerr << std::format("行数{:} 函数不能作为类型", GetLine())
-              << std::endl;
+    OutputError(std::format("函数不能作为类型"));
     exit(-1);
   }
   auto operator_node = std::static_pointer_cast<VarietyOperatorNode>(
@@ -1520,8 +1464,7 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> TypeFunctionRelavent(
           .GetSentenceOperateNodePointer());
   // 检查是否为匿名指针声明
   if (operator_node->GetVarietyNamePointer() != nullptr) [[unlikely]] {
-    std::cerr << std::format("行数{:} 此处不能使用变量声明", GetLine())
-              << std::endl;
+    OutputError(std::format("此处不能使用变量声明"));
     exit(-1);
   }
   return std::make_pair(operator_node->GetVarietyTypePointer(),
@@ -1807,8 +1750,7 @@ AssignableId(std::vector<WordDataToUser>&& word_data) {
       parser_frontend.GetVariety(variety_name);
   if (!found) [[unlikely]] {
     // 未找到给定名称的变量
-    std::cerr << std::format("行数{:} 找不到对象{:}", GetLine(), variety_name)
-              << std::endl;
+    OutputError(std::format("找不到对象{:}", variety_name));
     exit(-1);
   }
   return std::make_pair(
@@ -1861,8 +1803,7 @@ AssignableTypeConvert(std::vector<WordDataToUser>&& word_data) {
         ->SetConstTag(new_const_tag);
   } else if (new_const_tag != ConstTag::kConst) [[unlikely]] {
     // 变量以外的都是右值，不能修改const属性为可变
-    std::cerr << std::format("行数{:} 无法转换为非const", GetLine())
-              << std::endl;
+    OutputError(std::format("无法转换为非const"));
     exit(-1);
   }
   // 添加转换流程控制节点
@@ -1947,19 +1888,14 @@ AssignableMemberAccess(std::vector<WordDataToUser>&& word_data) {
   auto member_access_node = std::make_shared<MemberAccessOperatorNode>();
   bool result = member_access_node->SetNodeToAccess(assignable);
   if (!result) [[unlikely]] {
-    std::cout << std::format(
-                     "行数{:} 列数{:} 无法对非结构数据或枚举类型访问成员",
-                     GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("无法对非结构数据或枚举类型访问成员"));
     exit(-1);
   }
   result = member_access_node->SetMemberName(
       std::move(word_data[2].GetTerminalWordData().word));
   if (!result) [[unlikely]] {
-    std::cout << std::format("行数{:} 列数{:} 给定结构体不存在成员{:}",
-                             GetLine(), GetColumn(),
-                             word_data[2].GetTerminalWordData().word)
-              << std::endl;
+    OutputError(std::format("给定结构体不存在成员{:}",
+                            word_data[2].GetTerminalWordData().word));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
@@ -1982,28 +1918,21 @@ AssignablePointerMemberAccess(std::vector<WordDataToUser>&& word_data) {
   auto dereference_node = std::make_shared<DereferenceOperatorNode>();
   bool result = dereference_node->SetNodeToDereference(assignable);
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 不能对非指针对象使用\"->\"运算符",
-                             GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("不能对非指针对象使用\"->\"运算符"));
     exit(-1);
   }
   auto dereferenced_node = dereference_node->GetDereferencedNodePointer();
   auto member_access_node = std::make_shared<MemberAccessOperatorNode>();
   result = member_access_node->SetNodeToAccess(dereferenced_node);
   if (!result) [[unlikely]] {
-    std::cout << std::format(
-                     "行数{:} 列数{:} 无法对非结构数据或枚举类型访问成员",
-                     GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("无法对非结构数据或枚举类型访问成员"));
     exit(-1);
   }
   result = member_access_node->SetMemberName(
       std::move(word_data[2].GetTerminalWordData().word));
   if (!result) [[unlikely]] {
-    std::cout << std::format("行数{:} 列数{:} 给定结构数据不存在成员{:}",
-                             GetLine(), GetColumn(),
-                             word_data[2].GetTerminalWordData().word)
-              << std::endl;
+    OutputError(std::format("给定结构数据不存在成员{:}",
+                            word_data[2].GetTerminalWordData().word));
     exit(-1);
   }
   // 添加解引用节点和成员访问节点
@@ -2039,9 +1968,7 @@ AssignableMathematicalOperate(std::vector<WordDataToUser>&& word_data) {
   bool left_operator_node_check_result =
       mathematical_operator_node->SetLeftOperatorNode(left_operator_node);
   if (!left_operator_node_check_result) [[unlikely]] {
-    std::cerr << std::format("行数{:}，列数{:} 左运算数无法参与运算", GetLine(),
-                             GetColumn())
-              << std::endl;
+    OutputError(std::format("左运算数无法参与运算"));
     exit(-1);
   }
   DeclineMathematicalComputeTypeResult right_operator_node_check_result =
@@ -2090,9 +2017,7 @@ AssignableMathematicalAndAssignOperate(
   bool left_operator_node_check_result =
       mathematical_operator_node->SetLeftOperatorNode(left_operator_node);
   if (!left_operator_node_check_result) [[unlikely]] {
-    std::cerr << std::format("行数{:}，列数{:} 左运算数无法参与运算", GetLine(),
-                             GetColumn())
-              << std::endl;
+    OutputError(std::format("左运算数无法参与运算"));
     exit(-1);
   }
   DeclineMathematicalComputeTypeResult right_operator_node_check_result =
@@ -2146,17 +2071,13 @@ AssignableLogicalOperate(std::vector<WordDataToUser>&& word_data) {
   bool check_result =
       logical_operator_node->SetLeftOperatorNode(left_operator_node);
   if (!check_result) [[unlikely]] {
-    std::cerr << std::format("行数{:}，列数{:} 左操作数无法作为逻辑运算节点",
-                             GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("左操作数无法作为逻辑运算节点"));
     exit(-1);
   }
   check_result =
       logical_operator_node->SetRightOperatorNode(right_operator_node);
   if (!check_result) [[unlikely]] {
-    std::cerr << std::format("行数{:}，列数{:} 右操作数无法作为逻辑运算节点",
-                             GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("右操作数无法作为逻辑运算节点"));
     exit(-1);
   }
   // 将生成右运算节点的操作合并到左容器中
@@ -2186,9 +2107,7 @@ AssignableNot(std::vector<WordDataToUser>&& word_data) {
   bool check_result =
       not_operator_node->SetLeftOperatorNode(sub_assignable_node);
   if (!check_result) [[unlikely]] {
-    std::cerr << std::format("行数{:}，列数{:} 无法进行逻辑非运算", GetLine(),
-                             GetColumn())
-              << std::endl;
+    OutputError(std::format("无法进行逻辑非运算"));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
@@ -2213,9 +2132,7 @@ AssignableLogicalNegative(std::vector<WordDataToUser>&& word_data) {
   bool check_result =
       not_operator_node->SetLeftOperatorNode(sub_assignable_node);
   if (!check_result) [[unlikely]] {
-    std::cerr << std::format("行数{:}，列数{:} 无法进行按位取反运算", GetLine(),
-                             GetColumn())
-              << std::endl;
+    OutputError(std::format("无法进行按位取反运算"));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
@@ -2240,9 +2157,7 @@ AssignableMathematicalNegative(std::vector<WordDataToUser>&& word_data) {
   bool check_result =
       not_operator_node->SetLeftOperatorNode(sub_assignable_node);
   if (!check_result) [[unlikely]] {
-    std::cerr << std::format("行数{:}，列数{:} 无法进行取负运算", GetLine(),
-                             GetColumn())
-              << std::endl;
+    OutputError(std::format("无法进行取负运算"));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
@@ -2267,25 +2182,19 @@ AssignableObtainAddress(std::vector<WordDataToUser>&& word_data) {
   // 检查被取地址的节点
   if (node_to_obtain_address->GetGeneralOperatorType() !=
       GeneralOperationType::kVariety) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 无法对非变量类型取地址",
-                             GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("无法对非变量类型取地址"));
     exit(-1);
   } else if (node_to_obtain_address->GetLeftRightValueTag() !=
              LeftRightValueTag::kLeftValue) [[unlikely]] {
     // 被取地址的节点是右值
-    std::cerr << std::format("行数{:} 列数{:} 无法对右值取地址", GetLine(),
-                             GetColumn())
-              << std::endl;
+    OutputError(std::format("无法对右值取地址"));
     exit(-1);
   }
   auto obtain_address_node = std::make_shared<ObtainAddressOperatorNode>();
   bool result =
       obtain_address_node->SetNodeToObtainAddress(node_to_obtain_address);
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 无法取地址", GetLine(),
-                             GetColumn())
-              << std::endl;
+    OutputError(std::format("无法取地址"));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
@@ -2308,9 +2217,7 @@ AssignableDereference(std::vector<WordDataToUser>&& word_data) {
   auto dereference_node = std::make_shared<DereferenceOperatorNode>();
   bool result = dereference_node->SetNodeToDereference(sub_assignable_node);
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 无法解引用", GetLine(),
-                             GetColumn())
-              << std::endl;
+    OutputError(std::format("无法解引用"));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
@@ -2340,9 +2247,7 @@ AssignableArrayAccess(std::vector<WordDataToUser>&& word_data) {
   bool left_node_check_result =
       plus_operator_node->SetLeftOperatorNode(node_to_dereference);
   if (!left_node_check_result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 无法间接寻址", GetLine(),
-                             GetColumn())
-              << std::endl;
+    OutputError(std::format("无法间接寻址"));
     exit(-1);
   }
   auto right_node_check_result =
@@ -2353,10 +2258,7 @@ AssignableArrayAccess(std::vector<WordDataToUser>&& word_data) {
   bool dereference_result = dereference_operator_node->SetNodeToDereference(
       plus_operator_node->GetResultOperatorNode());
   if (!dereference_result) [[unlikely]] {
-    std::cerr << std::format(
-                     "行数{:} 列数{:} 无法访问数组，可能使用了浮点数下标",
-                     GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("无法访问数组，可能使用了浮点数下标"));
     exit(-1);
   }
   // 合并获取index的操作到主容器中
@@ -2399,9 +2301,7 @@ std::shared_ptr<const OperatorNodeInterface> PrefixPlusOrMinus(
   bool left_operator_node_check_result =
       mathematical_operator_node->SetLeftOperatorNode(node_to_operate);
   if (!left_operator_node_check_result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 无法对该类型使用++运算符",
-                             GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("无法对该类型使用++运算符"));
     exit(-1);
   }
   auto right_operator_node_check_result =
@@ -2527,19 +2427,15 @@ std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithValue(
   auto return_flow_control_node = std::make_unique<Return>();
   auto active_function = parser_frontend.GetActiveFunctionPointer();
   if (active_function == nullptr) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 当前不处于函数内，无法返回",
-                             GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("当前不处于函数内，无法返回"));
     exit(-1);
   }
   bool result =
       return_flow_control_node->SetReturnTarget(active_function, return_target);
   if (!result) [[unlikely]] {
-    std::cerr << std::format(
-                     "行数{:} 列数{:} "
-                     "无法返回该类型的值，给定类型无法转换为函数{:}返回的类型",
-                     GetLine(), GetColumn(), active_function->GetFunctionName())
-              << std::endl;
+    OutputError(
+        std::format("无法返回该类型的值，给定类型无法转换为函数{:}返回的类型",
+                    active_function->GetFunctionName()));
     exit(-1);
   }
   sentences_to_get_assignable->emplace_back(
@@ -2554,17 +2450,14 @@ std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithoutValue(
   auto return_flow_control_node = std::make_unique<Return>();
   auto active_function = parser_frontend.GetActiveFunctionPointer();
   if (active_function == nullptr) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 当前不处于函数内，无法返回",
-                             GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("当前不处于函数内，无法返回"));
     exit(-1);
   }
   bool result =
       return_flow_control_node->SetReturnTarget(active_function, nullptr);
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 函数{:}无法返回空值", GetLine(),
-                             GetColumn(), active_function->GetFunctionName())
-              << std::endl;
+    OutputError(
+        std::format("函数{:}无法返回空值", active_function->GetFunctionName()));
     exit(-1);
   }
   sentences_to_get_assignable->emplace_back(
@@ -2596,27 +2489,19 @@ TemaryOperator(std::vector<WordDataToUser>&& word_data) {
   bool condition_check_result = temary_operator_node->SetBranchCondition(
       temary_condition, condition_flow_control_node_container);
   if (!condition_check_result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 无法将给定对象作为三目运算符条件",
-                             GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("无法将给定对象作为三目运算符条件"));
     exit(-1);
   }
   bool true_branch_check_result = temary_operator_node->SetTrueBranch(
       temary_true_branch, true_branch_flow_control_node_container);
   if (!true_branch_check_result) [[unlikely]] {
-    std::cerr << std::format(
-                     "行数{:} 列数{:} 无法将给定对象作为三目运算符真分支结果",
-                     GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("无法将给定对象作为三目运算符真分支结果"));
     exit(-1);
   }
   bool false_branch_check_result = temary_operator_node->SetFalseBranch(
       temary_false_branch, false_branch_flow_control_node_container);
   if (!false_branch_check_result) [[unlikely]] {
-    std::cerr << std::format(
-                     "行数{:} 列数{:} 无法将给定对象作为三目运算符假分支结果",
-                     GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("无法将给定对象作为三目运算符假分支结果"));
     exit(-1);
   }
   // 添加三目运算符流程控制节点
@@ -2691,11 +2576,8 @@ FunctionCallInit(std::vector<WordDataToUser>&& word_data) {
     if (!result ||
         dereference_operator_node->GetResultTypePointer()->GetType() !=
             StructOrBasicType::kFunction) [[unlikely]] {
-      std::cerr << std::format(
-                       "行数{:} 列数{:} "
-                       "用来调用函数的对象既不是函数名也不是一重函数指针",
-                       GetLine(), GetColumn())
-                << std::endl;
+      OutputError(
+          std::format("用来调用函数的对象既不是函数名也不是一重函数指针"));
       exit(-1);
     }
     // 包装解引用节点
@@ -2780,11 +2662,7 @@ std::shared_ptr<std::unique_ptr<Jmp>> Break(
           top_flow_control_sentence.GetSentenceEndLabel()));
       break;
     default:
-      std::cerr
-          << std::format(
-                 "行数{:} 列数{:} 无法跳出非for/while/do-while/switch语句",
-                 GetLine(), GetColumn())
-          << std::endl;
+      OutputError(std::format("无法跳出非for/while/do-while/switch语句"));
       exit(-1);
       // 防止警告
       return std::shared_ptr<std::unique_ptr<Jmp>>();
@@ -2804,11 +2682,7 @@ std::shared_ptr<std::unique_ptr<Jmp>> Continue(
           top_flow_control_sentence.GetLoopMainBlockEndLabel()));
       break;
     default:
-      std::cerr
-          << std::format(
-                 "行数{:} 列数{:} 无法在非for/while/do-while语句中使用continue",
-                 GetLine(), GetColumn())
-          << std::endl;
+      OutputError(std::format("无法在非for/while/do-while语句中使用continue"));
       exit(-1);
       // 防止警告
       return std::shared_ptr<std::unique_ptr<Jmp>>();
@@ -2860,9 +2734,7 @@ std::any SingleStatementAssignable(std::vector<WordDataToUser>&& word_data) {
   bool result =
       parser_frontend.AddSentences(std::move(*flow_control_node_container));
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 此语句不应出现在该范围内",
-                             GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("此语句不应出现在该范围内"));
     exit(-1);
   }
   return std::any();
@@ -2878,9 +2750,7 @@ std::any SingleStatementAnnounce(std::vector<WordDataToUser>&& word_data) {
   bool result =
       parser_frontend.AddSentences(std::move(*flow_control_node_container));
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 此语句不应出现在该范围内",
-                             GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("此语句不应出现在该范围内"));
     exit(-1);
   }
   return std::any();
@@ -2929,9 +2799,7 @@ std::any IfCondition(std::vector<WordDataToUser>&& word_data) {
   bool result = if_flow_control_node->SetCondition(
       if_condition, std::move(*sentences_to_get_if_condition));
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 该条件无法作为if语句条件",
-                             GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("该条件无法作为if语句条件"));
     exit(-1);
   }
   parser_frontend.PushFlowControlSentence(std::move(if_flow_control_node));
@@ -3019,24 +2887,18 @@ std::any ForHead(std::vector<WordDataToUser>&& word_data) {
   bool result =
       for_sentence.AddForInitSentences(std::move(*for_init_sentences));
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 给定语句无法作为for语句初始化条件",
-                             GetLine())
-              << std::endl;
+    OutputError(std::format("给定语句无法作为for语句初始化条件"));
     exit(-1);
   }
   result = for_sentence.SetCondition(
       for_condition, std::move(*sentences_to_get_for_condition));
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 给定语句无法作为for语句循环条件",
-                             GetLine())
-              << std::endl;
+    OutputError(std::format("给定语句无法作为for语句循环条件"));
     exit(-1);
   }
   result = for_sentence.AddForRenewSentences(std::move(*for_renew_sentences));
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 给定语句无法用在for语句中更新循环条件",
-                             GetLine())
-              << std::endl;
+    OutputError(std::format("给定语句无法用在for语句中更新循环条件"));
     exit(-1);
   }
   return std::any();
@@ -3065,9 +2927,7 @@ std::any WhileInitHead(std::vector<WordDataToUser>&& word_data) {
   bool result = while_sentence->SetCondition(
       while_condition, std::move(*sentences_to_get_condition));
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 给定条件无法作为while循环语句条件",
-                             GetLine())
-              << std::endl;
+    OutputError(std::format("给定条件无法作为while循环语句条件"));
     exit(-1);
   }
   parser_frontend.PushFlowControlSentence(std::move(while_sentence));
@@ -3115,12 +2975,8 @@ std::any SwitchCaseSimple(std::vector<WordDataToUser>&& word_data) {
           word_data[1].GetNonTerminalWordData().user_returned_data);
   bool result = parser_frontend.AddSwitchSimpleCase(case_data);
   if (!result) [[unlikely]] {
-    std::cerr << std::format(
-                     "行数{:} 列数{:} "
-                     "无法添加给定的case选项，可能是不位于switch语句内或case条"
-                     "件已存在",
-                     GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format(
+        "无法添加给定的case选项，可能是不位于switch语句内或case条件已存在"));
     exit(-1);
   }
   return std::any();
@@ -3130,12 +2986,8 @@ std::any SwitchCaseDefault(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
   bool result = parser_frontend.AddSwitchDefaultCase();
   if (!result) [[unlikely]] {
-    std::cerr
-        << std::format(
-               "行数{:} 列数{:} "
-               "无法添加default标签，可能不位于switch语句内或已存在default标签",
-               GetLine(), GetColumn())
-        << std::endl;
+    OutputError(std::format(
+        "无法添加default标签，可能不位于switch语句内或已存在default标签"));
     exit(-1);
   }
   return std::any();
@@ -3173,9 +3025,7 @@ std::any SwitchCondition(std::vector<WordDataToUser>&& word_data) {
   bool result = switch_sentence->SetCondition(
       assignable, std::move(*sentences_to_get_assignable));
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 给定条件无法作为switch分支条件",
-                             GetLine(), GetColumn())
-              << std::endl;
+    OutputError(std::format("给定条件无法作为switch分支条件"));
     exit(-1);
   }
   parser_frontend.PushFlowControlSentence(std::move(switch_sentence));
@@ -3294,8 +3144,7 @@ ObjectConstructData::AttachSingleNodeToTailNodePointer(
       if (std::static_pointer_cast<PointerType>(type_chain_tail_)
               ->GetArraySize() != 0) [[unlikely]] {
         // 非0代表声明数组
-        std::cerr << std::format("行数{:} 不支持声明指针数组", GetLine())
-                  << std::endl;
+        OutputError(std::format("不支持声明指针数组"));
         exit(-1);
       }
       [[fallthrough]];
@@ -3336,22 +3185,30 @@ ObjectConstructData::ConstructObject(
       break;
     case StructOrBasicType::kEnd:
       // 之前未创建任何类型节点
+      assert(static_cast<SimpleSentence&>(*object_)
+                 .GetSentenceOperateNodeReference()
+                 .GetGeneralOperatorType() == GeneralOperationType::kVariety);
       switch (final_node_to_attach->GetType()) {
         case StructOrBasicType::kBasic:
           // 声明POD变量
           // 不能声明void类型的变量
           if (static_cast<const BasicType&>(*final_node_to_attach)
                   .GetBuiltInType() == BuiltInType::kVoid) [[unlikely]] {
-            std::cerr << std::format("行数{:} 变量{:}不能声明为\"void\"",
-                                     GetLine(), GetObjectName())
-                      << std::endl;
+            OutputError(
+                std::format("变量{:}不能声明为\"void\"", GetObjectName()));
             exit(-1);
+          }
+          // 检查声明的变量的ConstTag与最终构建时的ConstTag是否相同
+          if (static_cast<const VarietyOperatorNode&>(
+                  static_cast<SimpleSentence&>(*object_)
+                      .GetSentenceOperateNodeReference())
+                  .GetConstTag() != const_tag_before_final_type) [[unlikely]] {
+            return std::make_pair(std::unique_ptr<FlowInterface>(),
+                                  CheckResult::kConstTagNotSame);
           }
           break;
         case StructOrBasicType::kFunction:
-          std::cerr << std::format("行数{:} 函数{:}未声明返回值", GetLine(),
-                                   GetObjectName())
-                    << std::endl;
+          OutputError(std::format("函数{:}未声明返回值", GetObjectName()));
           exit(-1);
           break;
         case StructOrBasicType::kStruct:

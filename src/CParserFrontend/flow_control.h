@@ -218,12 +218,12 @@ class ConditionBlockInterface : public FlowInterface {
   // 获取块起始处标签
   std::unique_ptr<Label> GetSentenceStartLabel() const {
     return std::make_unique<Label>(std::format("condition_block_{:}_start",
-                                               GetFlowId().GetThisNodeValue()));
+                                               GetFlowId().GetRawValue()));
   }
   // 获取块结束处标签
   std::unique_ptr<Label> GetSentenceEndLabel() const {
     return std::make_unique<Label>(
-        std::format("condition_block_{:}_end", GetFlowId().GetThisNodeValue()));
+        std::format("condition_block_{:}_end", GetFlowId().GetRawValue()));
   }
 
   // 默认对循环条件节点进行类型检查的函数
@@ -385,12 +385,12 @@ class LoopSentenceInterface : public ConditionBlockInterface {
   // 获取循环块主块开始处标签
   std::unique_ptr<Label> GetLoopMainBlockStartLabel() const {
     return std::make_unique<Label>(std::format("loop_main_block_{:}_start",
-                                               GetFlowId().GetThisNodeValue()));
+                                               GetFlowId().GetRawValue()));
   }
   // 获取循环主块结尾处标签
   std::unique_ptr<Label> GetLoopMainBlockEndLabel() const {
     return std::make_unique<Label>(
-        std::format("loop_main_block_{:}_end", GetFlowId().GetThisNodeValue()));
+        std::format("loop_main_block_{:}_end", GetFlowId().GetRawValue()));
   }
 };
 

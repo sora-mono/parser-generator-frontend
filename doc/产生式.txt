@@ -23,7 +23,7 @@ IdOrEquivence -> ConstTag Id
 IdOrEquivence -> ConstTag
 IdOrEquivence -> IdOrEquivence "[" Num "]"
 IdOrEquivence -> IdOrEquivence "[" "]"
-IdOrEquivence -> Consttag "*" IdOrEquivence
+IdOrEquivence -> ConstTag "*" IdOrEquivence
 IdOrEquivence -> "(" IdOrEquivence ")"
 NotEmptyEnumArguments -> Id
 NotEmptyEnumArguments -> Id "=" Num

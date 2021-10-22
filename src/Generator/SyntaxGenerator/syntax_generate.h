@@ -143,7 +143,7 @@
 #endif  // GENERATOR_DEFINE_UNARY_OPERATOR
 #define GENERATOR_DEFINE_UNARY_OPERATOR(                                  \
     operator_symbol, unary_operator_associatity, unary_operator_priority) \
-  AddUnaryOperatorNode(operator_symbol,                                   \
+  AddLeftUnaryOperatorNode(operator_symbol,                                   \
                        frontend::common::unary_operator_associatity,      \
                        OperatorPriority(unary_operator_priority));
 #ifdef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
@@ -201,7 +201,7 @@
     production_symbol, reduct_function, production_body_seq, ...)          \
   class NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,            \
                                              production_body_seq)          \
-      : public frontend::generator::syntaxgenerator::                      \
+      : public frontend::generator::syntax_generator::                      \
             ProcessFunctionInterface {                                     \
    public:                                                                 \
     virtual ProcessFunctionInterface::UserData Reduct(                     \
@@ -228,11 +228,11 @@
 #define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                     \
     production_symbol, reduct_function, production_body_seq, ...)    \
   BOOST_CLASS_EXPORT_GUID(                                           \
-      frontend::generator::syntaxgenerator::                         \
+      frontend::generator::syntax_generator::                         \
           NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,    \
                                                production_body_seq), \
       "frontend::generator::"                                        \
-      "syntaxgenerator::" NONTERMINAL_PRODUCTION_SYMBOL_MODIFY_STR(  \
+      "syntax_generator::" NONTERMINAL_PRODUCTION_SYMBOL_MODIFY_STR(  \
           production_symbol, production_body_seq))
 #endif
 #endif

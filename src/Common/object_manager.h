@@ -66,7 +66,9 @@ class ObjectManager {
     return manager.MergeNodes(node_dst, node_src);
   }
   // 获取节点引用
+  const T& GetObject(ObjectId id) const;
   T& GetObject(ObjectId id);
+  const T& operator[](ObjectId id) const;
   T& operator[](ObjectId id);
 
   // 系统自行选择最佳位置放置对象
@@ -109,7 +111,7 @@ class ObjectManager {
   void Swap(ObjectManager& manager_other);
 
   // 容器大小，包含未分配节点的指针
-  size_t Size() { return nodes_.size(); }
+  size_t Size()const { return nodes_.size(); }
   // 容器实际持有的对象数量
   size_t ItemSize();
 
@@ -161,9 +163,14 @@ ObjectManager<T>::~ObjectManager() {
 }
 
 template <class T>
-inline T& ObjectManager<T>::GetObject(ObjectId id) {
+inline const T& ObjectManager<T>::GetObject(ObjectId id) const {
   assert(id < nodes_.size() && nodes_[id] != nullptr);
   return *nodes_[id];
+}
+template <class T>
+inline T& frontend::common::ObjectManager<T>::GetObject(ObjectId id) {
+  return const_cast<T&>(
+      static_cast<const ObjectManager<T>&>(*this).GetObject(id));
 }
 
 template <class T>
@@ -356,9 +363,14 @@ inline ObjectManager<T>::ObjectId ObjectManager<T>::GetBestEmptyIndex() {
 }
 
 template <class T>
-inline T& ObjectManager<T>::operator[](ObjectId id) {
+inline const T& ObjectManager<T>::operator[](ObjectId id) const {
   assert(id < nodes_.size());
   return *nodes_[id];
+}
+template <class T>
+inline T& ObjectManager<T>::operator[](ObjectId id) {
+  return const_cast<T&>(
+      static_cast<const ObjectManager<T>&>(*this).operator[](id));
 }
 
 template <class T>

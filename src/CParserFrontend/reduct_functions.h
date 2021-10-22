@@ -15,7 +15,7 @@ extern thread_local CParserFrontend parser_frontend;
 }  // namespace c_parser_frontend
 
 namespace c_parser_frontend::parse_functions {
-using WordDataToUser = frontend::generator::syntaxgenerator::
+using WordDataToUser = frontend::generator::syntax_generator::
     ProcessFunctionInterface::WordDataToUser;
 using c_parser_frontend::parser_frontend;
 using c_parser_frontend::flow_control::AllocateOperatorNode;
@@ -97,7 +97,8 @@ class ObjectConstructData {
                             // 不能连接下一个节点
     kPointerEnd,      // 类型链尾部为指针而不是终结类型
     kReturnFunction,  // 函数试图返回函数而非函数指针
-    kEmptyChain       // 类型链无任何数据
+    kEmptyChain,      // 类型链无任何数据
+    kConstTagNotSame  // 声明POD变量时类型左侧与类型右侧的ConstTag类型不同
   };
 
   // 禁止使用EndType::GetEndType()，防止修改全局共享的节点
@@ -213,6 +214,12 @@ void CheckMathematicalComputeTypeResult(
         decline_mathematical_compute_type_result);
 // 检查声明/定义类型时的结果，输出相应错误信息，如果是error则不返回
 void CheckAddTypeResult(AddTypeResult add_type_result);
+// 输出错误信息
+void OutputError(const std::string& error);
+// 输出警告信息
+void OutputWarning(const std::string& warning);
+// 输出info信息
+void OutputInfo(const std::string& info);
 
 // 处理函数内执行流程中声明变量不赋初始值的变量注册和获取扩展声明用类型的步骤
 // 返回扩展声明时变量的类型（如果最初为有指针类型则去掉一重指针，否则不变）
@@ -308,7 +315,7 @@ std::any IdOrEquivenceNumAddressing(std::vector<WordDataToUser>&& word_data);
 // 设置新添加的指针所对应数组大小为-1来标记此处数组大小需要根据赋值结果推断
 std::any IdOrEquivenceAnonymousAddressing(
     std::vector<WordDataToUser>&& word_data);
-// IdOrEquivence -> Consttag "*" IdOrEquivence
+// IdOrEquivence -> ConstTag "*" IdOrEquivence
 // 返回值类型：std::shared_ptr<ObjectConstructData>
 // 返回std::any防止移动构造VarietyConstructData
 std::any IdOrEquivencePointerAnnounce(std::vector<WordDataToUser>&& word_data);

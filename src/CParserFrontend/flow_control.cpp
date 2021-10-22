@@ -252,7 +252,7 @@ SwitchSentence::ConvertCaseValueToLabel(
   auto switch_node_id = switch_sentence.GetFlowId();
   // 生成标签名
   std::string label_name =
-      std::format("switch_{:}_{:}", switch_node_id.GetThisNodeValue(),
+      std::format("switch_{:}_{:}", switch_node_id.GetRawValue(),
                   case_value.GetValue());
   // switch跳转语句中使用的标签
   auto label_for_jmp = std::make_unique<Label>(label_name);
@@ -266,7 +266,7 @@ SwitchSentence::GetDefaultLabel(const SwitchSentence& switch_sentence) {
   auto switch_node_id = switch_sentence.GetFlowId();
   // 生成标签名
   std::string label_name =
-      std::format("switch_{:}_default", switch_node_id.GetThisNodeValue());
+      std::format("switch_{:}_default", switch_node_id.GetRawValue());
   // switch跳转语句中使用的标签
   auto label_for_jmp = std::make_unique<Label>(label_name);
   // switch主体内使用的标签

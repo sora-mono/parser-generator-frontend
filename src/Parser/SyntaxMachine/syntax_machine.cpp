@@ -70,8 +70,6 @@ void SyntaxMachine::TerminalWordWaitingProcess() {
         case ProductionNodeType::kOperatorNode: {
           // 运算符优先级必须不为0
           OperatorPriority priority_now = GetOperatorPriorityNow();
-          assert(terminal_node_info.node_type ==
-                 ProductionNodeType::kOperatorNode);
           auto [operator_associate_type, operator_priority] =
               terminal_node_info.GetAssociatityTypeAndPriority(
                   LastOperateIsReduct());
@@ -101,8 +99,7 @@ void SyntaxMachine::TerminalWordWaitingProcess() {
           assert(false);
           break;
       }
-    }
-
+    } break;
     default:
       assert(false);
       break;

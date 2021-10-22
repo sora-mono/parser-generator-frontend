@@ -8,9 +8,11 @@ namespace c_parser_frontend {
 thread_local CParserFrontend parser_frontend;
 
 // 获取当前行数
-size_t GetLine() { return frontend::parser::line_; }
+size_t GetLine() { return frontend::parser::dfamachine::DfaMachine::GetLine(); }
 // 获取当前列数
-size_t GetColumn() { return frontend::parser::column_; }
+size_t GetColumn() {
+  return frontend::parser::dfamachine::DfaMachine::GetColumn();
+}
 
 void CParserFrontend::PushFlowControlSentence(
     std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
@@ -62,6 +64,6 @@ void ActionScopeSystem::PopVarietyOverLevel(ActionScopeLevelType level) {
       // 通知控制器完成函数构建
       c_parser_frontend::parser_frontend.FinishFunctionConstruct(function_type);
     }
-  } 
+  }
 }
 }  // namespace c_parser_frontend::action_scope_system

@@ -10,7 +10,7 @@
 namespace frontend::parser::syntaxmachine {
 
 class SyntaxMachine {
-  using SyntaxGenerator = frontend::generator::syntaxgenerator::SyntaxGenerator;
+  using SyntaxGenerator = frontend::generator::syntax_generator::SyntaxGenerator;
   using DfaMachine = frontend::parser::dfamachine::DfaMachine;
 
  public:
@@ -33,7 +33,7 @@ class SyntaxMachine {
   using ProcessFunctionClassId = SyntaxGenerator::ProcessFunctionClassId;
   // 管理器中的对象的基类
   using ProcessFunctionInterface =
-      frontend::generator::syntaxgenerator::ProcessFunctionInterface;
+      frontend::generator::syntax_generator::ProcessFunctionInterface;
   // 语法分析表条目
   using ParsingTableEntry = SyntaxGenerator::ParsingTableEntry;
   // 动作和目标

@@ -5,7 +5,7 @@
 #include <boost/serialization/variant.hpp>
 
 #include "Common/common.h"
-namespace frontend::generator::syntaxgenerator {
+namespace frontend::generator::syntax_generator {
 // 接口类，所有用户定义函数均从该类派生
 class ProcessFunctionInterface {
  public:
@@ -59,5 +59,12 @@ class ProcessFunctionInterface {
   // 空规约节点的node_type是ProductionNodeType::kEndNode
   virtual UserData Reduct(std::vector<WordDataToUser>&& word_data) = 0;
 };
-}  // namespace frontend::generator::syntaxgenerator
+
+// 内部实现用根节点的规约函数
+class RootReductClass : public ProcessFunctionInterface {
+  virtual UserData Reduct(std::vector<WordDataToUser>&& word_data) override {
+    return UserData();
+  }
+};
+}  // namespace frontend::generator::syntax_generator
 #endif  // !GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_H_
