@@ -163,9 +163,9 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     IdOrEquivence, c_parser_frontend::parse_functions::IdOrEquivenceConstTagId,
     0, {"ConstTag", "Id"})
-GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    IdOrEquivence, c_parser_frontend::parse_functions::IdOrEquivenceConstTag, 1,
-    {"ConstTag"})
+// GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+//    IdOrEquivence, c_parser_frontend::parse_functions::IdOrEquivenceConst, 1,
+//    {"const"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     IdOrEquivence,
     c_parser_frontend::parse_functions::IdOrEquivenceNumAddressing, 2,
@@ -247,9 +247,9 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     BasicType, c_parser_frontend::parse_functions::BasicTypeStructType, 1,
     {"ConstTag", "StructType"})
-GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    BasicType, c_parser_frontend::parse_functions::BasicTypeId, 2,
-    {"ConstTag", "Id"})
+//GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+//    BasicType, c_parser_frontend::parse_functions::BasicTypeId, 2,
+//    {"ConstTag", "Id"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     BasicType, c_parser_frontend::parse_functions::BasicTypeEnumAnnounce, 3,
     {"ConstTag", "EnumAnnounce"})
@@ -284,8 +284,12 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     {"BasicType", "IdOrEquivence"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleAnnounceNoAssign,
+    c_parser_frontend::parse_functions::SingleAnnounceNoAssignNotPodVariety, 1,
+    {"ConstTag", "Id", "IdOrEquivence"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    SingleAnnounceNoAssign,
     c_parser_frontend::parse_functions::SingleAnnounceNoAssignFunctionRelavent,
-    1, {"FunctionRelavent"})
+    2, {"FunctionRelavent"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     TypeDef, c_parser_frontend::parse_functions::TypeDef, 0,
     {"typedef", "SingleAnnounceNoAssign"})
@@ -716,12 +720,11 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     {"Root", "SingleAnnounceNoAssign", ";"})
 
 // 设置可以空规约的非终结节点
-GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(IdOrEquivence)
+// GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(IdOrEquivence)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(EnumArguments)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(SignTag)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(ConstTag)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(EnumArguments)
-GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(IdOrEquivence)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(
     FunctionRelaventArguments)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(StructureBody)

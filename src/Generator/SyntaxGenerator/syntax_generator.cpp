@@ -2,6 +2,8 @@
 
 #include <queue>
 
+#include "syntax_generator.h"
+
 namespace frontend::generator::syntax_generator {
 SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddTerminalNode(
     const std::string& node_symbol, const std::string& body_symbol,
@@ -383,7 +385,7 @@ SyntaxGenerator::GetCoreIdFromCoreItem(ProductionNodeId production_node_id,
 
 void SyntaxGenerator::GetNonTerminalNodeFirstNodeIds(
     ProductionNodeId production_node_id,
-    std::unordered_set<ProductionNodeId>* result,
+    SyntaxGenerator::ForwardNodesContainerType* result,
     std::unordered_set<ProductionNodeId>&& processed_nodes) {
   bool inserted = processed_nodes.insert(production_node_id).second;
   assert(inserted);
@@ -395,7 +397,7 @@ void SyntaxGenerator::GetNonTerminalNodeFirstNodeIds(
           GetProductionNode(production_node_id));
   assert(production_node.Type() == ProductionNodeType::kNonTerminalNode);
   for (auto& body : production_node.GetAllBody()) {
-    ProductionBodyId node_id_index(0);
+    PointIndex node_id_index(0);
     // 正在处理的产生式节点的ID
     ProductionNodeId node_id;
     while (node_id_index < body.production_body.size()) {
@@ -424,33 +426,34 @@ void SyntaxGenerator::GetNonTerminalNodeFirstNodeIds(
   }
 }
 
-std::unordered_set<SyntaxGenerator::ProductionNodeId> SyntaxGenerator::First(
+SyntaxGenerator::ForwardNodesContainerType SyntaxGenerator::First(
     ProductionNodeId production_node_id, ProductionBodyId production_body_id,
     PointIndex point_index, const ForwardNodesContainerType& next_node_ids) {
   ProductionNodeId node_id = GetProductionNodeIdInBody(
       production_node_id, production_body_id, point_index);
   if (node_id.IsValid()) {
-    std::unordered_set<ProductionNodeId> return_set;
+    ForwardNodesContainerType forward_nodes;
     switch (GetProductionNode(node_id).Type()) {
       case ProductionNodeType::kTerminalNode:
       case ProductionNodeType::kOperatorNode:
-        return_set.insert(node_id);
+        forward_nodes.insert(node_id);
         break;
       case ProductionNodeType::kNonTerminalNode:
         // 合并当前·右侧非终结节点可能的所有单词ID
-        GetNonTerminalNodeFirstNodeIds(node_id, &return_set);
+        GetNonTerminalNodeFirstNodeIds(node_id, &forward_nodes);
         if (static_cast<NonTerminalProductionNode&>(GetProductionNode(node_id))
                 .CouldBeEmptyReduct()) {
           // 当前·右侧的非终结节点可以空规约，需要考虑它下一个节点的情况
-          return_set.merge(First(production_node_id, production_body_id,
-                                 PointIndex(point_index + 1), next_node_ids));
+          forward_nodes.merge(First(production_node_id, production_body_id,
+                                    PointIndex(point_index + 1),
+                                    next_node_ids));
         }
         break;
       default:
         assert(false);
         break;
     }
-    return return_set;
+    return forward_nodes;
   } else {
     return next_node_ids;
   }
@@ -458,7 +461,9 @@ std::unordered_set<SyntaxGenerator::ProductionNodeId> SyntaxGenerator::First(
 
 bool SyntaxGenerator::CoreClosure(CoreId core_id) {
   OutPutInfo(
-      std::format("对核心（ID = {:}）执行闭包操作", core_id.GetRawValue()));
+      std::format("对Core ID = {:}的核心执行闭包操作", core_id.GetRawValue()));
+  OutPutInfo(std::format("该核心具有的项和向前看符号如下：\n") +
+             FormatCoreItems(core_id));
   Core& core = GetCore(core_id);
   if (core.IsClosureAvailable()) {
     // 闭包有效，无需重求
@@ -468,7 +473,7 @@ bool SyntaxGenerator::CoreClosure(CoreId core_id) {
       GetParsingTableEntry(core.GetParsingTableEntryId());
   // 存储当前待展开的项
   // 存储指向待展开项的迭代器
-  std::queue<std::map<CoreItem, ForwardNodesContainerType>::const_iterator>
+  std::queue<CoreItemAndForwardNodesContainer::const_iterator>
       items_waiting_process;
   const auto& core_items_and_forward_nodes =
       GetCoreItemsAndForwardNodes(core_id);
@@ -495,7 +500,7 @@ bool SyntaxGenerator::CoreClosure(CoreId core_id) {
           production_node_id,
           GetProcessFunctionClass(production_node_id, production_body_id),
           GetProductionBody(production_node_id, production_body_id));
-      OutPutInfo(std::format("项：") + FormatItem(item_now->first));
+      OutPutInfo(std::format("项：") + FormatCoreItem(item_now->first));
       OutPutInfo(std::format("在向前看符号：") +
                  FormatLookForwardSymbols(item_now->second) + " 下执行规约");
       const auto& production_body =
@@ -511,12 +516,21 @@ bool SyntaxGenerator::CoreClosure(CoreId core_id) {
         static_cast<NonTerminalProductionNode&>(
             GetProductionNode(next_production_node_id));
     if (next_production_node.Type() != ProductionNodeType::kNonTerminalNode) {
+      OutPutInfo(std::format("项：") + FormatCoreItem(item_now->first) +
+                 std::format(" 由于下一个移入的符号为终结节点而终止展开"));
       continue;
     }
     // 展开非终结节点，并为其创建向前看符号集
     ForwardNodesContainerType forward_node_ids =
         First(production_node_id, production_body_id,
               PointIndex(point_index + 1), item_now->second);
+    OutPutInfo(
+        std::format("项：") + FormatCoreItem(item_now->first) +
+        std::format(" 正在展开非终结节点 {:}",
+                    GetNextNodeToShiftSymbolString(
+                        production_node_id, production_body_id, point_index)));
+    OutPutInfo(std::format("该非终结节点具有的全部向前看符号：") +
+               FormatLookForwardSymbols(forward_node_ids));
     for (auto body_id : next_production_node.GetAllBodyIds()) {
       // 将该非终结节点中的每个产生式体加入到core中，点在最左侧
       auto [iter, inserted] = AddItemAndForwardNodeIdsToCore(
@@ -525,6 +539,9 @@ bool SyntaxGenerator::CoreClosure(CoreId core_id) {
       if (inserted) {
         // 如果插入新的项则添加到队列中等待处理，并记录该项属于的新核心ID
         items_waiting_process.push(iter);
+        OutPutInfo(std::format("向项集中插入新项：") +
+                   FormatCoreItem(iter->first) + std::format(" 向前看符号：") +
+                   FormatLookForwardSymbols(forward_node_ids));
       }
     }
     if (next_production_node.CouldBeEmptyReduct()) {
@@ -538,27 +555,40 @@ bool SyntaxGenerator::CoreClosure(CoreId core_id) {
       if (inserted) {
         // 如果插入新的项则添加到队列中等待处理
         items_waiting_process.push(iter);
+        OutPutInfo(
+            std::format(
+                "由于非终结产生式 {:} 可以空规约，向项集中插入新项：",
+                GetNextNodeToShiftSymbolString(
+                    production_node_id, production_body_id, point_index)) +
+            FormatCoreItemAndLookForwardSymbols(iter->first, item_now->second));
       }
     }
-    OutPutInfo(std::format("项：") + FormatItem(item_now->first));
-    const auto& production_node_waiting_spread_body =
-        production_node_now.GetBody(production_body_id).production_body;
-    OutPutInfo(std::format(" 已展开"));
-    OutPutInfo(std::format("该节点当前拥有的向前看符号： ") +
-               FormatLookForwardSymbols(item_now->second));
+    OutPutInfo(
+        std::format("项：") +
+        FormatCoreItemAndLookForwardSymbols(item_now->first, item_now->second) +
+        std::format(" 已展开"));
   }
   SetCoreClosureAvailable(core_id);
+  OutPutInfo(
+      std::format("完成对CoreID = {:}的核心的闭包操作", core_id.GetRawValue()));
+  OutPutInfo(std::format("该核心具有的项和向前看符号如下：\n") +
+             FormatCoreItems(core_id));
   return true;
 }
 
 SyntaxGenerator::CoreId SyntaxGenerator::GetCoreIdFromCoreItems(
-    const std::list<SyntaxGenerator::CoreItem>& items) {
+    const std::list<
+        SyntaxGenerator::CoreItemAndForwardNodesContainer::const_iterator>&
+        items) {
 #ifdef _DEBUG
   // 检查参数中不存在重复项
+  // 所有的参数都是移入相同的节点前的项，移入相同节点后的项相同的充分必要条件为
+  // 移入相同节点前的项相同
+  // 所以只需检查移入相同节点前的项是否相同
   for (auto iter = items.cbegin(); iter != items.cend(); ++iter) {
     auto compare_iter = iter;
     while (++compare_iter != items.cend()) {
-      assert(*iter != *compare_iter);
+      assert((*iter)->first != (*compare_iter)->first);
     }
   }
 #endif  // _DEBUG
@@ -567,9 +597,17 @@ SyntaxGenerator::CoreId SyntaxGenerator::GetCoreIdFromCoreItems(
   std::unordered_map<CoreId, size_t> core_includes_item_size;
   // 统计核心包含给定项的个数
   for (const auto& item : items) {
-    auto [production_node_id, production_body_id, point_index] = item;
-    for (auto core_id : GetCoreIdFromCoreItem(
-             production_node_id, production_body_id, point_index)) {
+    // 拆分移入节点前的项数据
+    auto [production_node_id, production_body_id, point_index] = item->first;
+    // 获取移入节点后的项数据
+    ++point_index;
+    const auto& core_ids_item_belong_to = GetCoreIdFromCoreItem(
+        production_node_id, production_body_id, point_index);
+    // 优化手段，任意给定项不属于任何核心则不存在包含所有给定项的核心
+    if (core_ids_item_belong_to.empty()) [[likely]] {
+      return CoreId::InvalidId();
+    }
+    for (auto core_id : core_ids_item_belong_to) {
       auto [iter, inserted] = core_includes_item_size.emplace(core_id, 1);
       if (!inserted) {
         // 该核心ID已经记录，增加该核心ID出现的次数
@@ -579,13 +617,15 @@ SyntaxGenerator::CoreId SyntaxGenerator::GetCoreIdFromCoreItems(
   }
   // 检查所有出现过的核心ID，找出包含所有给定项的核心ID
   auto iter = core_includes_item_size.begin();
-  while (iter != core_includes_item_size.end()) {
+  for (; iter != core_includes_item_size.end(); ++iter) {
     if (iter->second != items.size()) [[likely]] {
       // 该核心没包含所有项
       continue;
     }
     // 检查该核心核心项数目是否等于给定项数目
-    // 因为二者都不包含重复项，所以只要数目相等二者就包含相同项
+    // 二者都不包含重复项，并且给定项移入相同节点后得到的项均是该项集的核心项
+    // PointIndex不在最左侧的项一定是核心项
+    // 所以只要数目相等二者就包含相同项
     if (GetCoreMainItems(iter->first).size() == items.size()) {
       return iter->first;
     }
@@ -607,13 +647,16 @@ bool SyntaxGenerator::SpreadLookForwardSymbolAndConstructParsingTableEntry(
   ParsingTableEntryId parsing_table_entry_id =
       GetCore(core_id).GetParsingTableEntryId();
   // 根据转移条件分类项，以便之后寻找goto后的项所属项集
-  // 键是转移条件，值是移入键值后得到的项
-  std::unordered_map<ProductionNodeId, std::list<CoreItem>> goto_table;
+  // 键是转移条件，值是移入键值前的项
+  std::unordered_map<
+      ProductionNodeId,
+      std::list<CoreItemAndForwardNodesContainer::const_iterator>>
+      goto_table;
   // 收集所有转移条件
-  for (const auto& item_and_forward_nodes :
-       GetCoreItemsAndForwardNodes(core_id)) {
-    auto [production_node_id, production_body_id, point_index] =
-        item_and_forward_nodes.first;
+  const auto& items_and_forward_nodes = GetCoreItemsAndForwardNodes(core_id);
+  for (auto iter = items_and_forward_nodes.cbegin();
+       iter != items_and_forward_nodes.cend(); iter++) {
+    auto [production_node_id, production_body_id, point_index] = iter->first;
     NonTerminalProductionNode& production_node_now =
         static_cast<NonTerminalProductionNode&>(
             GetProductionNode(production_node_id));
@@ -622,16 +665,15 @@ bool SyntaxGenerator::SpreadLookForwardSymbolAndConstructParsingTableEntry(
                                                     point_index);
     if (next_production_node_id.IsValid()) [[unlikely]] {
       // 该项可以继续移入符号
-      goto_table[next_production_node_id].emplace_back(
-          production_node_id, production_body_id, PointIndex(point_index + 1));
+      goto_table[next_production_node_id].emplace_back(iter);
     }
   }
-  // 找到每个转移条件下的所有项是否存在共同所属项集，如果存在则转移到该项集
-  // 否则建立新项集
-  for (const auto& transform_condition_and_transformed_items : goto_table) {
+  // 找到每个转移条件下的所有项是否存在共同所属项集
+  // 如果存在则设置转移到该项集并传播向前看符号，否则建立新项集并添加所有项
+  for (const auto& transform_condition_and_transformed_data : goto_table) {
     // 获取转移后项集属于的核心的ID
-    CoreId core_after_transform_id = GetCoreIdFromCoreItems(
-        transform_condition_and_transformed_items.second);
+    CoreId core_after_transform_id =
+        GetCoreIdFromCoreItems(transform_condition_and_transformed_data.second);
     if (core_after_transform_id.IsValid()) [[unlikely]] {
       // 转移到的项集已存在
       // 转移后到达的语法分析表条目
@@ -640,18 +682,18 @@ bool SyntaxGenerator::SpreadLookForwardSymbolAndConstructParsingTableEntry(
       ParsingTableEntry& parsing_table_entry =
           GetParsingTableEntry(parsing_table_entry_id);
       // 设置转移条件下转移到已有的项集
-      switch (GetProductionNode(transform_condition_and_transformed_items.first)
+      switch (GetProductionNode(transform_condition_and_transformed_data.first)
                   .Type()) {
         case ProductionNodeType::kTerminalNode:
         case ProductionNodeType::kOperatorNode:
           parsing_table_entry.SetTerminalNodeActionAndAttachedData(
-              transform_condition_and_transformed_items.first,
+              transform_condition_and_transformed_data.first,
               ParsingTableEntry::ShiftAttachedData(
                   parsing_table_entry_id_after_transform));
           break;
         case ProductionNodeType::kNonTerminalNode:
           parsing_table_entry.SetNonTerminalNodeTransformId(
-              transform_condition_and_transformed_items.first,
+              transform_condition_and_transformed_data.first,
               parsing_table_entry_id_after_transform);
           break;
         default:
@@ -660,16 +702,23 @@ bool SyntaxGenerator::SpreadLookForwardSymbolAndConstructParsingTableEntry(
       }
       bool new_forward_node_inserted = false;
       // 添加转移条件下转移到的这些项的向前看符号
-      for (auto& item : transform_condition_and_transformed_items.second) {
-        new_forward_node_inserted |= AddForwardNodes(
-            core_after_transform_id, item, GetForwardNodeIds(core_id, item));
+      for (auto& item_and_forward_nodes_iter :
+           transform_condition_and_transformed_data.second) {
+        // 构建移入符号后的项
+        CoreItem shifted_item = item_and_forward_nodes_iter->first;
+        // 获取移入符号后的项数据
+        ++std::get<PointIndex>(shifted_item);
+        new_forward_node_inserted |=
+            AddForwardNodes(core_after_transform_id, shifted_item,
+                            item_and_forward_nodes_iter->second);
       }
-      // 如果向已有项集的项中添加了新的向前看节点则重新传播该项
+      // 如果向已有项集的项中添加了新的向前看符号则重新传播该项
       if (new_forward_node_inserted) {
         core_waiting_spread_ids.push_back(core_after_transform_id);
         OutPutInfo(std::format(
             "Core ID:{:} "
-            "的项集由于添加了新项/新向前看符号，重新传播该项集的向前看符号"));
+            "的项集由于添加了新项/新向前看符号，重新传播该项集的向前看符号",
+            core_after_transform_id.GetRawValue()));
       }
     } else {
       // 不存在这些项构成的核心，需要新建
@@ -679,18 +728,18 @@ bool SyntaxGenerator::SpreadLookForwardSymbolAndConstructParsingTableEntry(
       ParsingTableEntry& parsing_table_entry =
           GetParsingTableEntry(parsing_table_entry_id);
       // 设置转移条件下转移到已有的项集
-      switch (GetProductionNode(transform_condition_and_transformed_items.first)
+      switch (GetProductionNode(transform_condition_and_transformed_data.first)
                   .Type()) {
         case ProductionNodeType::kTerminalNode:
         case ProductionNodeType::kOperatorNode:
           parsing_table_entry.SetTerminalNodeActionAndAttachedData(
-              transform_condition_and_transformed_items.first,
+              transform_condition_and_transformed_data.first,
               ParsingTableEntry::ShiftAttachedData(
                   parsing_table_entry_id_after_transform));
           break;
         case ProductionNodeType::kNonTerminalNode:
           parsing_table_entry.SetNonTerminalNodeTransformId(
-              transform_condition_and_transformed_items.first,
+              transform_condition_and_transformed_data.first,
               parsing_table_entry_id_after_transform);
           break;
         default:
@@ -698,9 +747,14 @@ bool SyntaxGenerator::SpreadLookForwardSymbolAndConstructParsingTableEntry(
           break;
       }
       // 填入所有核心项
-      for (auto& item : transform_condition_and_transformed_items.second) {
+      for (auto& item_and_forward_nodes_iter :
+           transform_condition_and_transformed_data.second) {
+        // 构建移入符号后的项
+        CoreItem shifted_item = item_and_forward_nodes_iter->first;
+        // 获取移入符号后的项数据
+        ++std::get<PointIndex>(shifted_item);
         auto result = AddMainItemAndForwardNodeIdsToCore(
-            new_core_id, item, GetForwardNodeIds(core_id, item));
+            new_core_id, shifted_item, item_and_forward_nodes_iter->second);
         assert(result.second);
       }
       core_waiting_spread_ids.push_back(new_core_id);
@@ -716,35 +770,194 @@ bool SyntaxGenerator::SpreadLookForwardSymbolAndConstructParsingTableEntry(
 
 std::array<std::vector<SyntaxGenerator::ProductionNodeId>,
            sizeof(SyntaxGenerator::ProductionNodeType)>
-SyntaxGenerator::ClassifyProductionNodes() {
+SyntaxGenerator::ClassifyProductionNodes() const {
   std::array<std::vector<ProductionNodeId>, sizeof(ProductionNodeType)>
       production_nodes;
-  ObjectManager<BaseProductionNode>::Iterator iter = manager_nodes_.Begin();
-  while (iter != manager_nodes_.End()) {
+  ObjectManager<BaseProductionNode>::ConstIterator iter =
+      manager_nodes_.ConstBegin();
+  while (iter != manager_nodes_.ConstEnd()) {
     production_nodes[static_cast<size_t>(iter->Type())].push_back(iter->Id());
     ++iter;
   }
   return production_nodes;
 }
 
-std::vector<std::vector<SyntaxGenerator::ParsingTableEntryId>>
+// ParsingTableMergeOptimize的子过程，分类具有相同终结节点项的语法分析表条目
+// 向equivalent_ids写入相同终结节点转移表的节点ID的组，不会执行实际合并操作
+// 不会写入只有一个项的组
+
+void SyntaxGenerator::ParsingTableTerminalNodeClassify(
+    const std::vector<ProductionNodeId>& terminal_node_ids, size_t index,
+    std::list<ParsingTableEntryId>&& parsing_table_entry_ids,
+    std::vector<std::list<ParsingTableEntryId>>* equivalent_ids) {
+  if (index >= terminal_node_ids.size()) {
+    // 分类完成，执行合并操作
+    assert(parsing_table_entry_ids.size() > 1);
+    equivalent_ids->emplace_back(std::move(parsing_table_entry_ids));
+    return;
+  }
+  assert(GetProductionNode(terminal_node_ids[index]).Type() ==
+             ProductionNodeType::kTerminalNode ||
+         GetProductionNode(terminal_node_ids[index]).Type() ==
+             ProductionNodeType::kOperatorNode);
+  // 以下三个分类表，根据转移条件下的转移结果分类
+  // 使用ActionAndAttachedDataPointerEqualTo来判断两个转移结果是否相同
+  // 键值为ShiftAttachedData移入符号后转移到的语法分析表条目ID
+  std::unordered_map<ParsingTableEntryId, std::list<ParsingTableEntryId>>
+      shift_classify_table;
+  // 键值为ReductAttachedData规约时使用的包装Reduct函数的类的对象的ID
+  // 这个ID属于唯一的规约数据，所以可以用来标识规约数据
+  std::unordered_map<ProcessFunctionClassId, std::list<ParsingTableEntryId>>
+      reduct_classify_table;
+  // 键值前半部分为ShiftReductAttachedData移入符号后转移到的语法分析表条目ID
+  // 键值后半部分为ReductAttachedData规约时使用的包装Reduct函数的类的对象ID
+  std::unordered_map<std::pair<ParsingTableEntryId, ProcessFunctionClassId>,
+                     std::list<ParsingTableEntryId>,
+                     PairOfParsingTableEntryIdAndProcessFunctionClassIdHasher>
+      shift_reduct_classify_table;
+  // 在该条件下不能规约也不能移入的语法分析表条目ID
+  std::list<ParsingTableEntryId> nothing_to_do_entry_ids;
+  ProductionNodeId transform_id = terminal_node_ids[index];
+  for (auto parsing_table_entry_id : parsing_table_entry_ids) {
+    // 利用unordered_map进行分类
+    auto action_and_attahced_data = GetParsingTableEntry(parsing_table_entry_id)
+                                        .AtTerminalNode(transform_id);
+    if (action_and_attahced_data) [[unlikely]] {
+      // 在该向前看节点处存在
+      switch (action_and_attahced_data->GetActionType()) {
+        case ActionType::kShift:
+          shift_classify_table[action_and_attahced_data->GetShiftAttachedData()
+                                   .GetNextParsingTableEntryId()]
+              .push_back(parsing_table_entry_id);
+          break;
+        case ActionType::kReduct:
+          reduct_classify_table[action_and_attahced_data
+                                    ->GetReductAttachedData()
+                                    .GetProcessFunctionClassId()]
+              .push_back(parsing_table_entry_id);
+          break;
+        case ActionType::kShiftReduct:
+          shift_reduct_classify_table
+              [std::make_pair(action_and_attahced_data->GetShiftAttachedData()
+                                  .GetNextParsingTableEntryId(),
+                              action_and_attahced_data->GetReductAttachedData()
+                                  .GetProcessFunctionClassId())]
+                  .push_back(parsing_table_entry_id);
+          break;
+        default:
+          assert(false);
+          break;
+      }
+    } else {
+      nothing_to_do_entry_ids.push_back(parsing_table_entry_id);
+    }
+  }
+
+  size_t next_index = index + 1;
+  // 处理在当前条件下移入的节点
+  for (auto& parsing_table_entry_ids : shift_classify_table) {
+    if (parsing_table_entry_ids.second.size() > 1) {
+      // 含有多个条目且有剩余未比较的转移条件，需要继续分类
+      ParsingTableTerminalNodeClassify(
+          terminal_node_ids, next_index,
+          std::move(parsing_table_entry_ids.second), equivalent_ids);
+    }
+  }
+  // 处理在当前条件下规约的节点
+  for (auto& parsing_table_entry_ids : reduct_classify_table) {
+    if (parsing_table_entry_ids.second.size() > 1) {
+      // 含有多个条目且有剩余未比较的转移条件，需要继续分类
+      ParsingTableTerminalNodeClassify(
+          terminal_node_ids, next_index,
+          std::move(parsing_table_entry_ids.second), equivalent_ids);
+    }
+  }
+  // 处理在当前条件下既可以移入也可以规约的节点
+  for (auto& parsing_table_entry_ids : shift_reduct_classify_table) {
+    if (parsing_table_entry_ids.second.size() > 1) {
+      // 含有多个条目且有剩余未比较的转移条件，需要继续分类
+      ParsingTableTerminalNodeClassify(
+          terminal_node_ids, next_index,
+          std::move(parsing_table_entry_ids.second), equivalent_ids);
+    }
+  }
+  // 处理在当前条件下既可以移入也可以规约的节点
+  if (nothing_to_do_entry_ids.size() > 1) [[likely]] {
+    // 含有多个条目且有剩余未比较的转移条件，需要继续分类
+    ParsingTableTerminalNodeClassify(terminal_node_ids, next_index,
+                                     std::move(nothing_to_do_entry_ids),
+                                     equivalent_ids);
+  }
+}
+
+void SyntaxGenerator::ParsingTableNonTerminalNodeClassify(
+    const std::vector<ProductionNodeId>& nonterminal_node_ids, size_t index,
+    std::list<ParsingTableEntryId>&& entry_ids,
+    std::vector<std::list<ParsingTableEntryId>>* equivalent_ids) {
+  if (index >= nonterminal_node_ids.size()) {
+    // 分类完成，执行合并操作
+    assert(entry_ids.size() > 1);
+    equivalent_ids->emplace_back(std::move(entry_ids));
+  } else {
+    assert(GetProductionNode(nonterminal_node_ids[index]).Type() ==
+           ProductionNodeType::kNonTerminalNode);
+    // 分类表，根据转移条件下的转移结果分类
+    std::unordered_map<ParsingTableEntryId, std::list<ParsingTableEntryId>>
+        classify_table;
+    ProductionNodeId transform_id = nonterminal_node_ids[index];
+    for (auto production_node_id : entry_ids) {
+      // 利用unordered_map进行分类
+      classify_table[GetParsingTableEntry(production_node_id)
+                         .AtNonTerminalNode(transform_id)]
+          .push_back(production_node_id);
+    }
+    size_t next_index = index + 1;
+    for (auto parsing_table_entry_ids : classify_table) {
+      if (parsing_table_entry_ids.second.size() > 1) {
+        // 该类含有多个条目且有剩余未比较的转移条件，需要继续分类
+        ParsingTableNonTerminalNodeClassify(
+            nonterminal_node_ids, next_index,
+            std::move(parsing_table_entry_ids.second), equivalent_ids);
+      }
+    }
+  }
+}
+
+// ParsingTableMergeOptimize的子过程，分类具有相同非终结节点项的语法分析表条目
+// 向equivalent_ids写入相同非终结节点转移表的节点ID的组，不会执行实际合并操作
+// 不会写入只有一个项的组
+
+std::vector<std::list<SyntaxGenerator::ParsingTableEntryId>>
 SyntaxGenerator::ParsingTableEntryClassify(
-    const std::vector<ProductionNodeId>& terminal_node_ids,
-    const std::vector<ProductionNodeId>& nonterminal_node_ids) {
+    std::vector<ProductionNodeId>&& operator_node_ids,
+    std::vector<ProductionNodeId>&& terminal_node_ids,
+    std::vector<ProductionNodeId>&& nonterminal_node_ids) {
   // 存储相同终结节点转移表的条目
-  std::vector<std::vector<ParsingTableEntryId>> terminal_classify_result,
-      final_classify_result;
-  std::vector<ParsingTableEntryId> entry_ids;
-  entry_ids.reserve(syntax_parsing_table_.size());
+  std::vector<std::list<ParsingTableEntryId>> operator_classify_result,
+      terminal_classify_result, final_classify_result;
+  std::list<ParsingTableEntryId> entry_ids;
   for (size_t i = 0; i < syntax_parsing_table_.size(); i++) {
     // 添加所有待分类的语法分析表条目ID
     entry_ids.push_back(ParsingTableEntryId(i));
   }
-  ParsingTableTerminalNodeClassify(terminal_node_ids, 0, entry_ids,
-                                   &terminal_classify_result);
-  for (auto vec_entry_ids : terminal_classify_result) {
-    ParsingTableNonTerminalNodeClassify(nonterminal_node_ids, 0, vec_entry_ids,
-                                        &final_classify_result);
+  assert(operator_classify_result.empty());
+  ParsingTableTerminalNodeClassify(operator_node_ids, 0, std::move(entry_ids),
+                                   &operator_classify_result);
+  assert(terminal_classify_result.empty());
+  for (auto& parsing_table_entry_ids : operator_classify_result) {
+    if (parsing_table_entry_ids.size() > 1) {
+      ParsingTableTerminalNodeClassify(terminal_node_ids, 0,
+                                       std::move(parsing_table_entry_ids),
+                                       &terminal_classify_result);
+    }
+  }
+  assert(final_classify_result.empty());
+  for (auto& parsing_table_entry_ids : terminal_classify_result) {
+    if (parsing_table_entry_ids.size() > 1) {
+      ParsingTableNonTerminalNodeClassify(nonterminal_node_ids, 0,
+                                          std::move(parsing_table_entry_ids),
+                                          &final_classify_result);
+    }
   }
   return final_classify_result;
 }
@@ -759,34 +972,32 @@ inline void SyntaxGenerator::RemapParsingTableEntryId(
 
 void SyntaxGenerator::ParsingTableMergeOptimize() {
   std::array<std::vector<ProductionNodeId>, sizeof(ProductionNodeType)>
-      classified_production_node_ids;
-  size_t terminal_index =
+      classified_production_node_ids = ClassifyProductionNodes();
+  constexpr size_t terminal_index =
       static_cast<size_t>(ProductionNodeType::kTerminalNode);
-  size_t operator_index =
+  constexpr size_t operator_index =
       static_cast<size_t>(ProductionNodeType::kOperatorNode);
-  size_t nonterminal_index =
+  constexpr size_t nonterminal_index =
       static_cast<size_t>(ProductionNodeType::kNonTerminalNode);
-  for (auto production_node_id :
-       classified_production_node_ids[operator_index]) {
-    // 将所有运算符类节点添加到终结节点表里，构成完整的终结节点表
-    classified_production_node_ids[terminal_index].push_back(
-        production_node_id);
-  }
-  std::vector<std::vector<ParsingTableEntryId>> classified_ids =
+  std::vector<std::list<ParsingTableEntryId>> classified_ids =
       ParsingTableEntryClassify(
-          classified_production_node_ids[terminal_index],
-          classified_production_node_ids[nonterminal_index]);
+          std::move(classified_production_node_ids[operator_index]),
+          std::move(classified_production_node_ids[terminal_index]),
+          std::move(classified_production_node_ids[nonterminal_index]));
   // 存储所有旧条目到新条目的映射
   std::unordered_map<ParsingTableEntryId, ParsingTableEntryId>
       old_entry_id_to_new_entry_id;
   for (auto& entry_ids : classified_ids) {
     // 添加被合并的旧条目到相同条目的映射
     // 重复的条目只保留返回数组中的第一条，其余的全部映射到该条
-    ParsingTableEntryId new_id = entry_ids.front();
-    for (auto old_id : entry_ids) {
-      assert(old_entry_id_to_new_entry_id.find(old_id) ==
+    auto iter = entry_ids.begin();
+    ParsingTableEntryId new_id = *iter;
+    ++iter;
+    while (iter != entry_ids.end()) {
+      assert(old_entry_id_to_new_entry_id.find(*iter) ==
              old_entry_id_to_new_entry_id.end());
-      old_entry_id_to_new_entry_id[old_id] = new_id;
+      old_entry_id_to_new_entry_id[*iter] = new_id;
+      ++iter;
     }
   }
   // 存储移动后的条目的新条目ID
@@ -794,21 +1005,32 @@ void SyntaxGenerator::ParsingTableMergeOptimize() {
       moved_entry_to_new_entry_id;
   // 开始合并
   assert(syntax_parsing_table_.size() > 0);
-  // 下一个要处理的条目
-  ParsingTableEntryId next_process_entry_index(0);
-  // 下一个插入位置
-  ParsingTableEntryId next_insert_position_index(0);
   // 类似快排分类的算法
   // 寻找没有被合并的条目并紧凑排列在vector低下标一侧
+
+  // 下一个要处理的条目
+  ParsingTableEntryId next_process_entry_index(0);
+  // 跳过前面维持原位的语法分析表条目
+  while (next_process_entry_index < syntax_parsing_table_.size() &&
+         old_entry_id_to_new_entry_id.find(next_process_entry_index) ==
+             old_entry_id_to_new_entry_id.end())
+    [[likely]] {
+      // 保留的条目仍处于原位
+      moved_entry_to_new_entry_id[next_process_entry_index] =
+          next_process_entry_index;
+      ++next_process_entry_index;
+    }
+  // 下一个插入位置
+  ParsingTableEntryId next_insert_position_index(next_process_entry_index);
+  ++next_process_entry_index;
   while (next_process_entry_index < syntax_parsing_table_.size()) {
     if (old_entry_id_to_new_entry_id.find(next_process_entry_index) ==
         old_entry_id_to_new_entry_id.end()) {
       // 该条目保留
-      if (next_insert_position_index != next_process_entry_index) {
-        // 需要移动到新位置保持vector紧凑
-        syntax_parsing_table_[next_insert_position_index] =
-            std::move(syntax_parsing_table_[next_process_entry_index]);
-      }
+      assert(next_insert_position_index != next_process_entry_index);
+      // 需要移动到新位置保持vector紧凑
+      syntax_parsing_table_[next_insert_position_index] =
+          std::move(syntax_parsing_table_[next_process_entry_index]);
       // 重映射保留条目的新位置
       moved_entry_to_new_entry_id[next_process_entry_index] =
           next_insert_position_index;
@@ -828,7 +1050,6 @@ void SyntaxGenerator::ParsingTableMergeOptimize() {
   }
   // 至此每一个条目都有了新条目的映射
   // 释放多余空间
-  old_entry_id_to_new_entry_id.clear();
   syntax_parsing_table_.resize(next_insert_position_index);
   // 将所有旧ID更新为新ID
   RemapParsingTableEntryId(moved_entry_to_new_entry_id);
@@ -847,9 +1068,8 @@ std::string SyntaxGenerator::FormatSingleProductionBody(
       GetNodeSymbolStringFromId(production_node_now.GetNodeSymbolId()));
   for (auto id :
        production_node_now.GetBody(production_body_id).production_body) {
-    std::cout << std::format(
-        " {:}",
-        GetNodeSymbolStringFromId(GetProductionNode(id).GetNodeSymbolId()));
+    format_result +=
+        std::format(" {:}", GetNodeSymbolStringFromProductionNodeId(id));
   }
   return format_result;
 }
@@ -868,7 +1088,7 @@ std::string SyntaxGenerator::FormatProductionBodys(
   return format_result;
 }
 
-std::string SyntaxGenerator::FormatItem(const CoreItem& core_item) const {
+std::string SyntaxGenerator::FormatCoreItem(const CoreItem& core_item) const {
   std::string format_result;
   auto& [production_node_id, production_body_id, point_index] = core_item;
   const NonTerminalProductionNode& production_node_now =
@@ -880,31 +1100,35 @@ std::string SyntaxGenerator::FormatItem(const CoreItem& core_item) const {
   const auto& production_node_waiting_spread_body =
       production_node_now.GetBody(production_body_id).production_body;
   for (size_t i = 0; i < point_index; ++i) {
-    format_result += std::format(
-        " {:}", GetNodeSymbolStringFromId(
-                    GetProductionNode(production_node_waiting_spread_body[i])
-                        .GetNodeSymbolId()));
+    format_result +=
+        std::format(" {:}", GetNodeSymbolStringFromProductionNodeId(
+                                production_node_waiting_spread_body[i]));
   }
   format_result += std::format(" ·");
   for (size_t i = point_index; i < production_node_waiting_spread_body.size();
        i++) {
-    format_result += std::format(
-        " {:}", GetNodeSymbolStringFromId(
-                    GetProductionNode(production_node_waiting_spread_body[i])
-                        .GetNodeSymbolId()));
+    format_result +=
+        std::format(" {:}", GetNodeSymbolStringFromProductionNodeId(
+                                production_node_waiting_spread_body[i]));
   }
   return format_result;
 }
 
+std::string SyntaxGenerator::FormatCoreItemAndLookForwardSymbols(
+    const CoreItem& core_item,
+    const ForwardNodesContainerType& look_forward_node_ids) const {
+  return FormatCoreItem(core_item) + std::format(" 向前看符号：") +
+         FormatLookForwardSymbols(look_forward_node_ids);
+}
+
 std::string SyntaxGenerator::FormatLookForwardSymbols(
-    const std::unordered_set<ProductionNodeId>& look_forward_node_ids) const {
+    const ForwardNodesContainerType& look_forward_node_ids) const {
   if (look_forward_node_ids.empty()) [[unlikely]] {
     return std::string();
   }
   std::string format_result;
   for (const auto& node_id : look_forward_node_ids) {
-    format_result +=
-        GetNodeSymbolStringFromId(GetProductionNode(node_id).GetNodeSymbolId());
+    format_result += GetNodeSymbolStringFromProductionNodeId(node_id);
     format_result += ' ';
   }
   // 弹出尾部空格
@@ -916,7 +1140,7 @@ std::string SyntaxGenerator::FormatCoreItems(CoreId core_id) const {
   std::string format_result;
   const Core& core = GetCore(core_id);
   for (const auto& item_and_forward_nodes : core.GetItemsAndForwardNodeIds()) {
-    format_result += FormatItem(item_and_forward_nodes.first);
+    format_result += FormatCoreItem(item_and_forward_nodes.first);
     format_result += std::format(" 向前看符号：");
     format_result += FormatLookForwardSymbols(item_and_forward_nodes.second);
     format_result += '\n';
@@ -1141,21 +1365,34 @@ void SyntaxGenerator::ParsingTableEntry::ResetEntryId(
         old_entry_id_to_new_entry_id) {
   //处理终结节点的动作
   for (auto& action_and_attached_data : GetAllActionAndAttachedData()) {
-    // 获取原条目ID的引用
-    ShiftAttachedData& shift_attached_data =
-        action_and_attached_data.second->GetShiftAttachedData();
-    // 更新为新的条目ID
-    shift_attached_data.SetNextParsingTableEntryId(
-        old_entry_id_to_new_entry_id
-            .find(shift_attached_data.GetNextParsingTableEntryId())
-            ->second);
+    switch (action_and_attached_data.second->GetActionType()) {
+      case ActionType::kShift:
+      case ActionType::kShiftReduct: {
+        // 获取原条目ID的引用
+        ShiftAttachedData& shift_attached_data =
+            action_and_attached_data.second->GetShiftAttachedData();
+        // 更新为新的条目ID
+        shift_attached_data.SetNextParsingTableEntryId(
+            old_entry_id_to_new_entry_id
+                .find(shift_attached_data.GetNextParsingTableEntryId())
+                ->second);
+      } break;
+      case ActionType::kReduct:
+        // 无需做任何更改
+        break;
+      default:
+        assert(false);
+        break;
+    }
   }
   //处理非终结节点的转移
   for (auto& target : GetAllNonTerminalNodeTransformTarget()) {
     ParsingTableEntryId old_entry_id = target.second;
     ParsingTableEntryId new_entry_id =
         old_entry_id_to_new_entry_id.find(old_entry_id)->second;
-    SetNonTerminalNodeTransformId(target.first, new_entry_id);
+    if (old_entry_id != new_entry_id) {
+      SetNonTerminalNodeTransformId(target.first, new_entry_id);
+    }
   }
 }
 
@@ -1191,8 +1428,7 @@ SyntaxGenerator::Core& SyntaxGenerator::Core::operator=(Core&& core) {
 // 要求该核心项未添加过
 
 inline void SyntaxGenerator::Core::SetMainItem(
-    std::map<CoreItem, std::unordered_set<ProductionNodeId>>::const_iterator&
-        item_iter) {
+    CoreItemAndForwardNodesContainer::const_iterator& item_iter) {
 #ifdef _DEBUG
   // 不允许重复设置已有的核心项为核心项
   for (const auto& main_item_already_in : GetMainItems()) {
@@ -1228,15 +1464,31 @@ bool SyntaxGenerator::ParsingTableEntry::ReductAttachedData::operator==(
 }
 
 bool SyntaxGenerator::ParsingTableEntry::ShiftReductAttachedData::operator==(
-    const ActionAndAttachedDataInterface& shift_reduct_attached_data) const {
-  return ActionAndAttachedDataInterface::operator==(
-             shift_reduct_attached_data) &&
-         shift_attached_data_ == static_cast<const ShiftReductAttachedData&>(
-                                     shift_reduct_attached_data)
-                                     .shift_attached_data_ &&
-         reduct_attached_data_ == static_cast<const ShiftReductAttachedData&>(
-                                      shift_reduct_attached_data)
-                                      .reduct_attached_data_;
+    const ActionAndAttachedDataInterface& attached_data) const {
+  switch (attached_data.GetActionType()) {
+    case ActionType::kShift:
+      return shift_attached_data_ ==
+             static_cast<const ShiftAttachedData&>(attached_data);
+      break;
+    case ActionType::kReduct:
+      return reduct_attached_data_ ==
+             static_cast<const ReductAttachedData&>(attached_data);
+      break;
+    case ActionType::kShiftReduct:
+      return ActionAndAttachedDataInterface::operator==(attached_data) &&
+             shift_attached_data_ ==
+                 static_cast<const ShiftReductAttachedData&>(attached_data)
+                     .shift_attached_data_ &&
+             reduct_attached_data_ ==
+                 static_cast<const ShiftReductAttachedData&>(attached_data)
+                     .reduct_attached_data_;
+      break;
+    default:
+      assert(false);
+      // 防止警告
+      return false;
+      break;
+  }
 }
 
 inline const SyntaxGenerator::ParsingTableEntry::ShiftAttachedData&
@@ -1261,22 +1513,6 @@ SyntaxGenerator::ParsingTableEntry::ActionAndAttachedDataInterface::
   assert(false);
   // 防止警告
   return reinterpret_cast<const ShiftReductAttachedData&>(*this);
-}
-
-inline bool SyntaxGenerator::ActionAndAttachedDataPointerEqualTo::operator()(
-    const ParsingTableEntry::ActionAndAttachedDataInterface* const& lhs,
-    const ParsingTableEntry::ActionAndAttachedDataInterface* const& rhs) const {
-  if (lhs == nullptr) {
-    if (rhs == nullptr) {
-      return true;
-    } else {
-      return false;
-    }
-  } else if (rhs == nullptr) {
-    return false;
-  } else {
-    return lhs->operator==(*rhs);
-  }
 }
 
 }  // namespace frontend::generator::syntax_generator

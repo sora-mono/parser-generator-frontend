@@ -5,7 +5,6 @@
 
 #include "SyntaxGenerator/syntax_generator.h"
 
-
 int main() {
   frontend::generator::syntax_generator::SyntaxGenerator syntax_generator;
 }

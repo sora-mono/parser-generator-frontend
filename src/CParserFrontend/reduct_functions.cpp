@@ -370,16 +370,19 @@ std::shared_ptr<ObjectConstructData> IdOrEquivenceConstTagId(
       nullptr, const_tag, LeftRightValueTag::kLeftValue);
   return construct_data;
 }
-std::shared_ptr<ObjectConstructData> IdOrEquivenceConstTag(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  ConstTag const_tag = GetConstTag(word_data.front());
-  std::shared_ptr<ObjectConstructData> construct_data =
-      std::make_shared<ObjectConstructData>(std::string());
-  construct_data->ConstructBasicObjectPart<VarietyOperatorNode>(
-      nullptr, const_tag, LeftRightValueTag::kLeftValue);
-  return construct_data;
-}
+
+//// IdOrEquivence -> "const"
+//// 分配在堆上，避免any容器中复制对象
+//// 使用std::shared_ptr代替std::shared_ptr，std::any不能存储不支持复制的类型
+//std::shared_ptr<ObjectConstructData> IdOrEquivenceConst(
+//    std::vector<WordDataToUser>&& word_data) {
+//  assert(word_data.size() == 1);
+//  std::shared_ptr<ObjectConstructData> construct_data =
+//      std::make_shared<ObjectConstructData>(std::string());
+//  construct_data->ConstructBasicObjectPart<VarietyOperatorNode>(
+//      nullptr, ConstTag::kConst, LeftRightValueTag::kLeftValue);
+//  return construct_data;
+//}
 std::any IdOrEquivenceNumAddressing(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 4);
   // 获取之前解析到的信息
@@ -451,6 +454,15 @@ std::any IdOrEquivenceInBrackets(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
   return std::move(word_data[1].GetNonTerminalWordData().user_returned_data);
 }
+
+
+//// EmptyReductableIdOrEquivence -> IdOrEquivence
+//// 返回值类型：std::shared_ptr<ObjectConstructData>
+//std::any EmptyReductableIdOrEquivence(std::vector<WordDataToUser>&& word_data) {
+//  assert(word_data.size() == 1);
+//  return std::move(word_data.front());
+//}
+
 EnumReturnData NotEmptyEnumArgumentsIdBase(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
@@ -753,37 +765,37 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeStructType(
       const_tag);
 }
 
-// BasicType->ConstTag Id
-// 返回获取到的类型与ConstTag
-std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeId(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  ConstTag const_tag = GetConstTag(word_data[0]);
-  std::string& type_name = word_data[1].GetTerminalWordData().word;
-  assert(!type_name.empty());
-  // 获取ID对应的类型
-  auto [type_pointer, result] =
-      parser_frontend.GetType(type_name, StructOrBasicType::kNotSpecified);
-  switch (result) {
-    case GetTypeResult::kSuccess:
-      // 成功获取变量类型
-      break;
-    case GetTypeResult::kSeveralSameLevelMatches:
-      OutputError(std::format("类型名{:}对应多个同级类型", type_name));
-      exit(-1);
-      break;
-    case GetTypeResult::kTypeNameNotFound:
-      OutputError(std::format("类型{:}不存在", type_name));
-      exit(-1);
-      break;
-    case GetTypeResult::kNoMatchTypePrefer:
-      // 无类型选择倾向时不能返回该结果
-    default:
-      assert(false);
-      break;
-  }
-  return std::make_pair(std::move(type_pointer), const_tag);
-}
+//// BasicType->ConstTag Id
+//// 返回获取到的类型与ConstTag
+//std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeId(
+//    std::vector<WordDataToUser>&& word_data) {
+//  assert(word_data.size() == 2);
+//  ConstTag const_tag = GetConstTag(word_data[0]);
+//  std::string& type_name = word_data[1].GetTerminalWordData().word;
+//  assert(!type_name.empty());
+//  // 获取ID对应的类型
+//  auto [type_pointer, result] =
+//      parser_frontend.GetType(type_name, StructOrBasicType::kNotSpecified);
+//  switch (result) {
+//    case GetTypeResult::kSuccess:
+//      // 成功获取变量类型
+//      break;
+//    case GetTypeResult::kSeveralSameLevelMatches:
+//      OutputError(std::format("类型名{:}对应多个同级类型", type_name));
+//      exit(-1);
+//      break;
+//    case GetTypeResult::kTypeNameNotFound:
+//      OutputError(std::format("类型{:}不存在", type_name));
+//      exit(-1);
+//      break;
+//    case GetTypeResult::kNoMatchTypePrefer:
+//      // 无类型选择倾向时不能返回该结果
+//    default:
+//      assert(false);
+//      break;
+//  }
+//  return std::make_pair(std::move(type_pointer), const_tag);
+//}
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeEnumAnnounce(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
@@ -818,19 +830,12 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeEnumAnnounce(
 std::any FunctionRelaventBasePartFunctionInitBase(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
-  // 可能声明匿名函数指针作为函数形参
-  if (!word_data[0].GetNonTerminalWordData().user_returned_data.has_value())
-      [[unlikely]] {
-    OutputError(std::format("无法声明匿名函数"));
-    exit(-1);
-  } else {
-    // IdOrEquivence产生式规约得到的数据
-    std::shared_ptr<ObjectConstructData>& construct_data =
-        std::any_cast<std::shared_ptr<ObjectConstructData>&>(
-            word_data[0].GetNonTerminalWordData().user_returned_data);
-    // 设置构建数据，在构建函数参数时使用
-    function_type_construct_data = construct_data;
-  }
+  // IdOrEquivence产生式规约得到的数据
+  std::shared_ptr<ObjectConstructData>& construct_data =
+      std::any_cast<std::shared_ptr<ObjectConstructData>&>(
+          word_data[0].GetNonTerminalWordData().user_returned_data);
+  // 设置构建数据，在构建函数参数时使用
+  function_type_construct_data = construct_data;
   // 创建匿名函数类型并设置函数参数
   auto result = function_type_construct_data
                     ->AttachSingleNodeToTailNodeEmplace<FunctionType>(nullptr);
@@ -938,7 +943,44 @@ std::shared_ptr<FlowInterface> SingleAnnounceNoAssignVariety(
   auto [flow_control_node, construct_result] = construct_data->ConstructObject(
       const_tag_before_final_type, std::move(final_type));
   // 检查是否构建成功
-  if (construct_result != ObjectConstructData::CheckResult::kSuccess) {
+  if (construct_result != ObjectConstructData::CheckResult::kSuccess)
+      [[unlikely]] {
+    VarietyOrFunctionConstructError(construct_result,
+                                    construct_data->GetObjectName());
+  }
+  return std::move(flow_control_node);
+}
+
+std::shared_ptr<FlowInterface> SingleAnnounceNoAssignNotPodVariety(
+    std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 3);
+  ConstTag const_tag_before_final_type = GetConstTag(word_data[0]);
+  std::string& type_name = word_data[1].GetTerminalWordData().word;
+  auto& construct_data = std::any_cast<std::shared_ptr<ObjectConstructData>&>(
+      word_data[2].GetNonTerminalWordData().user_returned_data);
+  auto [final_type, result] =
+      parser_frontend.GetType(type_name, StructOrBasicType::kNotSpecified);
+  switch (result) {
+    case GetTypeResult::kSeveralSameLevelMatches:
+      OutputError(std::format("类型名 {:} 对应多种类型，无法确定要使用的类型",
+                              type_name));
+      exit(-1);
+      break;
+    case GetTypeResult::kTypeNameNotFound:
+      OutputError(std::format("不存在类型 {:}", type_name));
+      exit(-1);
+      break;
+    case GetTypeResult::kSuccess:
+      break;
+    case GetTypeResult::kNoMatchTypePrefer:
+    default:
+      assert(false);
+      break;
+  }
+  auto [flow_control_node, construct_result] = construct_data->ConstructObject(
+      const_tag_before_final_type, std::move(final_type));
+  if (construct_result != ObjectConstructData::CheckResult::kSuccess)
+      [[unlikely]] {
     VarietyOrFunctionConstructError(construct_result,
                                     construct_data->GetObjectName());
   }

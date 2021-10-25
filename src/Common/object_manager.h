@@ -35,8 +35,8 @@ class ObjectManager {
     Iterator(const Iterator& iter)
         : manager_pointer_(iter.manager_pointer_), id_(iter.id_) {}
 
-    ObjectId GetId() { return id_; }
-    void SetManagerPointer(const ObjectManager<T>* manager_pointer) {
+    ObjectId GetId() const { return id_; }
+    void SetManagerPointer(ObjectManager<T>* manager_pointer) {
       manager_pointer_ = manager_pointer;
     }
     void SetId(ObjectId id);
@@ -45,15 +45,54 @@ class ObjectManager {
     Iterator operator++(int);
     Iterator& operator--();
     Iterator operator--(int);
-    T& operator*();
-    T* operator->();
-    bool operator==(const Iterator& iter) {
+    T& operator*() const;
+    T* operator->() const;
+    bool operator==(const Iterator& iter) const {
       return manager_pointer_ == iter.manager_pointer_ && id_ == iter.id_;
     }
-    bool operator!=(const Iterator& iter) { return !this->operator==(iter); }
+    bool operator!=(const Iterator& iter) const {
+      return !this->operator==(iter);
+    }
 
    private:
     ObjectManager<T>* manager_pointer_;
+    ObjectId id_;
+  };
+  class ConstIterator {
+   public:
+    ConstIterator() : manager_pointer_(nullptr), id_(ObjectId::InvalidId()) {}
+    ConstIterator(const ObjectManager<T>* manager_pointer, ObjectId id)
+        : manager_pointer_(manager_pointer), id_(id) {}
+    ConstIterator(const Iterator& iterator)
+        : manager_pointer_(iterator.manager_pointer), id_(iterator.id_) {}
+    ConstIterator(const ConstIterator& iter)
+        : manager_pointer_(iter.manager_pointer_), id_(iter.id_) {}
+
+    ObjectId GetId() const { return id_; }
+    void SetManagerPointer(const ObjectManager<T>* manager_pointer) {
+      manager_pointer_ = manager_pointer;
+    }
+    void SetId(ObjectId id) {
+      assert(manager_pointer_ != nullptr &&
+             id < manager_pointer_->nodes_.size());
+      id_ = id;
+    }
+
+    ConstIterator& operator++();
+    ConstIterator operator++(int);
+    ConstIterator& operator--();
+    ConstIterator operator--(int);
+    const T& operator*() const { return manager_pointer_->GetObject(id_); }
+    const T* operator->() const { return &manager_pointer_->GetObject(id_); }
+    bool operator==(const ConstIterator& iter) const {
+      return manager_pointer_ == iter.manager_pointer_ && id_ == iter.id_;
+    }
+    bool operator!=(const ConstIterator& iter) const {
+      return !this->operator==(iter);
+    }
+
+   private:
+    const ObjectManager<T>* manager_pointer_;
     ObjectId id_;
   };
 
@@ -105,13 +144,13 @@ class ObjectManager {
   void SetAllObjectsCanNotBeSourceInMerge();
 
   // 判断两个ID是否相等
-  bool IsSame(ObjectId id1, ObjectId id2) { return id1 == id2; }
+  bool IsSame(ObjectId id1, ObjectId id2) const { return id1 == id2; }
 
   // 交换两个容器
   void Swap(ObjectManager& manager_other);
 
   // 容器大小，包含未分配节点的指针
-  size_t Size()const { return nodes_.size(); }
+  size_t Size() const { return nodes_.size(); }
   // 容器实际持有的对象数量
   size_t ItemSize();
 
@@ -124,6 +163,10 @@ class ObjectManager {
 
   Iterator End() { return Iterator(this, ObjectId(nodes_.size())); }
   Iterator Begin();
+  ConstIterator ConstEnd() const {
+    return ConstIterator(this, ObjectId(nodes_.size()));
+  }
+  ConstIterator ConstBegin() const;
 
  private:
   friend class Iterator;
@@ -389,6 +432,15 @@ inline ObjectManager<T>::Iterator ObjectManager<T>::Begin() {
 }
 
 template <class T>
+inline ObjectManager<T>::ConstIterator ObjectManager<T>::ConstBegin() const {
+  ObjectId id(0);
+  while (id <= nodes_.size() && nodes_[id] == nullptr) {
+    ++id;
+  }
+  return ConstIterator(this, id);
+}
+
+template <class T>
 inline ObjectManager<T>::Iterator& ObjectManager<T>::Iterator::operator++() {
   assert(*this != manager_pointer_->End());
   auto& nodes = manager_pointer_->nodes_;
@@ -443,14 +495,71 @@ inline ObjectManager<T>::Iterator ObjectManager<T>::Iterator::operator--(int) {
 }
 
 template <class T>
-inline T& ObjectManager<T>::Iterator::operator*() {
+inline T& ObjectManager<T>::Iterator::operator*() const {
   return manager_pointer_->GetObject(id_);
 }
 
 template <class T>
-inline T* ObjectManager<T>::Iterator::operator->() {
+inline T* ObjectManager<T>::Iterator::operator->() const {
   return &manager_pointer_->GetObject(id_);
 }
 
+template <class T>
+inline ObjectManager<T>::ConstIterator&
+ObjectManager<T>::ConstIterator::operator++() {
+  assert(*this != manager_pointer_->ConstEnd());
+  auto& nodes = manager_pointer_->nodes_;
+  do {
+    ++id_;
+  } while (id_ < nodes.size() && nodes[id_] == nullptr);
+  if (id_ >= nodes.size()) [[likely]] {
+    *this = manager_pointer_->ConstEnd();
+  }
+  return *this;
+}
+
+template <class T>
+inline ObjectManager<T>::ConstIterator
+ObjectManager<T>::ConstIterator::operator++(int) {
+  assert(*this != manager_pointer_->ConstEnd());
+  ObjectId id_temp = id_;
+  auto& nodes = manager_pointer_->nodes_;
+  do {
+    ++id_temp;
+  } while (id_temp < nodes.size() && nodes[id_temp] == nullptr);
+  if (id_temp < nodes.size()) [[likely]] {
+    std::swap(id_temp, id_);
+    return ConstIterator(manager_pointer_, id_temp);
+  } else {
+    *this = manager_pointer_->ConstEnd();
+    return manager_pointer_->ConstEnd();
+  }
+}
+
+template <class T>
+inline ObjectManager<T>::ConstIterator&
+ObjectManager<T>::ConstIterator::operator--() {
+  assert(id_.IsValid() && *this != manager_pointer_->End());
+  auto& nodes = manager_pointer_->nodes_;
+  do {
+    --id_;
+    assert(id_ != -1);
+  } while (nodes[id_] == nullptr);
+  return *this;
+}
+
+template <class T>
+inline ObjectManager<T>::ConstIterator
+ObjectManager<T>::ConstIterator::operator--(int) {
+  assert(id_.IsValid() && *this != manager_pointer_->End());
+  size_t temp_id = id_;
+  auto& nodes = manager_pointer_->nodes_;
+  do {
+    --temp_id;
+    assert(temp_id != -1);
+  } while (nodes[temp_id] == nullptr);
+  std::swap(temp_id, id_);
+  return ConstIterator(manager_pointer_, temp_id);
+}
 }  // namespace frontend::common
 #endif  // !COMMON_COMMON_NODE_MANAGER

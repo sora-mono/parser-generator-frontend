@@ -300,11 +300,11 @@ ConstTag ConstTagConst(std::vector<WordDataToUser>&& word_data);
 // 使用std::shared_ptr代替std::shared_ptr，std::any不能存储不支持复制的类型
 std::shared_ptr<ObjectConstructData> IdOrEquivenceConstTagId(
     std::vector<WordDataToUser>&& word_data);
-// IdOrEquivence -> ConstTag
-// 分配在堆上，避免any容器中复制对象
-// 使用std::shared_ptr代替std::shared_ptr，std::any不能存储不支持复制的类型
-std::shared_ptr<ObjectConstructData> IdOrEquivenceConstTag(
-    std::vector<WordDataToUser>&& word_data);
+//// IdOrEquivence -> "const"
+//// 分配在堆上，避免any容器中复制对象
+//// 使用std::shared_ptr代替std::shared_ptr，std::any不能存储不支持复制的类型
+//std::shared_ptr<ObjectConstructData> IdOrEquivenceConst(
+//    std::vector<WordDataToUser>&& word_data);
 // IdOrEquivence -> IdOrEquivence "[" Num "]"
 // 返回值类型：std::shared_ptr<ObjectConstructData>
 // 返回std::any防止移动构造VarietyConstructData
@@ -323,6 +323,9 @@ std::any IdOrEquivencePointerAnnounce(std::vector<WordDataToUser>&& word_data);
 // 返回值类型：std::shared_ptr<ObjectConstructData>
 // 返回std::any防止移动构造VarietyConstructData
 std::any IdOrEquivenceInBrackets(std::vector<WordDataToUser>&& word_data);
+//// EmptyReductableIdOrEquivence -> IdOrEquivence
+//// 返回值类型：std::shared_ptr<ObjectConstructData>
+//std::any EmptyReductableIdOrEquivence(std::vector<WordDataToUser>&& word_data);
 // NotEmptyEnumArguments -> Id
 EnumReturnData NotEmptyEnumArgumentsIdBase(
     std::vector<WordDataToUser>&& word_data);
@@ -393,10 +396,10 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeFundamental(
 // 返回获取到的类型与ConstTag
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeStructType(
     std::vector<WordDataToUser>&& word_data);
-// BasicType -> ConstTag Id
-// 返回获取到的类型与ConstTag
-std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeId(
-    std::vector<WordDataToUser>&& word_data);
+//// BasicType -> ConstTag Id
+//// 返回获取到的类型与ConstTag
+//std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeId(
+//    std::vector<WordDataToUser>&& word_data);
 // BasicType -> ConstTag EnumAnnounce
 // 返回获取到的类型与ConstTag
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeEnumAnnounce(
@@ -435,6 +438,10 @@ std::shared_ptr<FlowInterface> FunctionRelavent(
 // 或std::shared_ptr<VarietyOperatorNode>（变量声明）
 // 不执行DefineVariety/DefineType也不添加空间分配节点
 std::shared_ptr<FlowInterface> SingleAnnounceNoAssignVariety(
+    std::vector<WordDataToUser>&& word_data);
+// SingleAnnounceNoAssign -> ConstTag Id IdOrEquivence
+// 不执行DefineVariety/DefineType也不添加空间分配节点
+std::shared_ptr<FlowInterface> SingleAnnounceNoAssignNotPodVariety(
     std::vector<WordDataToUser>&& word_data);
 // SingleAnnounceNoAssign -> FunctionRelavent
 // 返回值类型：std::shared_ptr<FlowInterface>

@@ -1,6 +1,7 @@
 #ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_H_
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_H_
 #include <any>
+#include <boost/serialization/export.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/variant.hpp>
 
@@ -67,4 +68,11 @@ class RootReductClass : public ProcessFunctionInterface {
   }
 };
 }  // namespace frontend::generator::syntax_generator
+// 注册基类以允许序列化
+BOOST_CLASS_EXPORT_GUID(
+    frontend::generator::syntax_generator::ProcessFunctionInterface,
+    "frontend::generator::syntax_generator::ProcessFunctionInterface")
+BOOST_CLASS_EXPORT_GUID(
+    frontend::generator::syntax_generator::RootReductClass,
+    "frontend::generator::syntax_generator::RootReductClass")
 #endif  // !GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_H_

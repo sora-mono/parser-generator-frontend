@@ -3,7 +3,6 @@
 
 #include <any>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/serialization/array.hpp>
 #include <boost/serialization/export.hpp>
 #include <boost/serialization/map.hpp>
 #include <boost/serialization/serialization.hpp>
@@ -37,6 +36,7 @@ using frontend::common::ObjectManager;
 using frontend::common::UnorderedStructManager;
 
 class SyntaxGenerator {
+ private:
   class BaseProductionNode;
   class ParsingTableEntry;
   class Core;
@@ -84,9 +84,6 @@ class SyntaxGenerator {
       UnorderedStructManager<std::string, std::hash<std::string>>::ObjectId;
   // 向前看符号容器
   using ForwardNodesContainerType = std::unordered_set<ProductionNodeId>;
-  // 内核内单个项集，参数从左到右依次为
-  // 产生式节点ID，产生式体ID，产生式体中点的位置
-  using CoreItem = std::tuple<ProductionNodeId, ProductionBodyId, PointIndex>;
   // 包装用户自定义函数和数据的类的已分配对象ID
   using ProcessFunctionClassId =
       frontend::common::ObjectManager<frontend::generator::syntax_generator::
@@ -98,6 +95,21 @@ class SyntaxGenerator {
   using OperatorAssociatityType = frontend::common::OperatorAssociatityType;
   // 分析动作类型：规约，移入，移入和规约，报错，接受
   enum class ActionType { kReduct, kShift, kShiftReduct, kError, kAccept };
+  // 内核内单个项集，参数从左到右依次为
+  // 产生式节点ID，产生式体ID，产生式体中点的位置
+  using CoreItem = std::tuple<ProductionNodeId, ProductionBodyId, PointIndex>;
+  // 用来哈希CoreItem的类
+  // 在SyntaxGenerator声明结束后用该类特化std::hash<CoreItem>
+  // 以允许CoreItem可以作为std::unordered_map键值
+  struct CoreItemHasher {
+    size_t operator()(const CoreItem& core_item) const {
+      auto& [production_node_id, production_body_id, point_index] = core_item;
+      return production_node_id * production_body_id * point_index;
+    }
+  };
+  // 存储项和向前看节点的容器
+  using CoreItemAndForwardNodesContainer =
+      std::unordered_map<CoreItem, ForwardNodesContainerType, CoreItemHasher>;
 
  public:
   SyntaxGenerator();
@@ -106,7 +118,7 @@ class SyntaxGenerator {
   SyntaxGenerator& operator=(const SyntaxGenerator&) = delete;
 
  private:
-   // 初始化
+  // 初始化
   void SyntaxGeneratorInit();
   // 构建LALR（1））所需的各种外围信息
   void ConfigConstruct();
@@ -139,15 +151,35 @@ class SyntaxGenerator {
     assert(body_symbol.size() != 0);
     return manager_terminal_body_symbol_.GetObjectId(body_symbol);
   }
-  // 通过产生式名ID查询对应字符串
+  // 通过产生式名ID查询对应产生式名
   const std::string& GetNodeSymbolStringFromId(SymbolId node_symbol_id) const {
     assert(node_symbol_id.IsValid());
     return manager_node_symbol_.GetObject(node_symbol_id);
   }
-  // 通过产生式体符号ID查询对应的字符串
+  // 通过产生式体符号ID查询产生式体原始数据
   const std::string& GetBodySymbolStringFromId(SymbolId body_symbol_id) const {
     assert(body_symbol_id.IsValid());
     return manager_terminal_body_symbol_.GetObject(body_symbol_id);
+  }
+  // 通过产生式ID查询对应产生式名
+  const std::string& GetNodeSymbolStringFromProductionNodeId(
+      ProductionNodeId production_node_id) const {
+    return GetNodeSymbolStringFromId(
+        GetProductionNode(production_node_id).GetNodeSymbolId());
+  }
+  // 通过项查询下一个移入的节点名
+  const std::string& GetNextNodeToShiftSymbolString(
+      ProductionNodeId production_node_id, ProductionBodyId production_body_id,
+      PointIndex point_index) const {
+    return GetNodeSymbolStringFromProductionNodeId(GetProductionNodeIdInBody(
+        production_node_id, production_body_id, point_index));
+  }
+  // 通过项查询下一个移入的节点名
+  const std::string& GetNextNodeToShiftSymbolString(
+      const CoreItem& core_item) const {
+    auto& [production_node_id, production_body_id, point_index] = core_item;
+    return GetNextNodeToShiftSymbolString(production_node_id,
+                                          production_body_id, point_index);
   }
   // 设置产生式名ID到节点ID的映射
   void SetNodeSymbolIdToProductionNodeIdMapping(SymbolId node_symbol_id,
@@ -184,7 +216,7 @@ class SyntaxGenerator {
   // 获取产生式体的产生式节点ID，越界时返回ProductionNodeId::InvalidId()
   ProductionNodeId GetProductionNodeIdInBody(
       ProductionNodeId production_node_id, ProductionBodyId production_body_id,
-      PointIndex point_index) {
+      PointIndex point_index) const {
     return GetProductionNode(production_node_id)
         .GetProductionNodeInBody(production_body_id, point_index);
   }
@@ -359,14 +391,12 @@ class SyntaxGenerator {
   // 如果该项已存在则仅添加向前看符号
   // 如果向项集中新添加了项则自动添加该项所添加到的新核心ID的记录
   template <class ForwardNodeIdContainer>
-  std::pair<std::map<CoreItem, std::unordered_set<ProductionNodeId>>::iterator,
-            bool>
+  std::pair<CoreItemAndForwardNodesContainer::iterator, bool>
   AddItemAndForwardNodeIdsToCore(CoreId core_id, const CoreItem& core_item,
                                  ForwardNodeIdContainer&& forward_node_ids);
   // 在AddItemAndForwardNodeIdsToCore基础上设置添加的项为核心项
   template <class ForwardNodeIdContainer>
-  std::pair<std::map<CoreItem, std::unordered_set<ProductionNodeId>>::iterator,
-            bool>
+  std::pair<CoreItemAndForwardNodesContainer::iterator, bool>
   AddMainItemAndForwardNodeIdsToCore(CoreId core_id, const CoreItem& core_item,
                                      ForwardNodeIdContainer&& forward_node_ids);
   // 向给定项中添加向前看符号，同时支持输入单个符号和符号容器
@@ -382,8 +412,7 @@ class SyntaxGenerator {
   // 记录核心项所属的核心ID
   void AddCoreItemBelongToCoreId(const CoreItem& core_item, CoreId core_id);
   // 获取项集的全部核心项
-  const std::list<
-      std::map<CoreItem, std::unordered_set<ProductionNodeId>>::const_iterator>
+  const std::list<CoreItemAndForwardNodesContainer::const_iterator>
   GetCoreMainItems(CoreId core_id) const {
     return GetCore(core_id).GetMainItems();
   }
@@ -392,7 +421,7 @@ class SyntaxGenerator {
       ProductionNodeId production_node_id, ProductionBodyId body_id,
       PointIndex point_index);
   // 获取向前看符号集
-  const std::unordered_set<ProductionNodeId>& GetForwardNodeIds(
+  const ForwardNodesContainerType& GetForwardNodeIds(
       CoreId core_id, const CoreItem& core_item) const {
     return GetCore(core_id).GetItemsAndForwardNodeIds().at(core_item);
   }
@@ -402,20 +431,19 @@ class SyntaxGenerator {
   // 第三个参数用来存储已经处理过的节点，防止无限递归，初次调用应传入空集合
   // 如果输入ProductionNodeId::InvalidId()则返回空集合
   void GetNonTerminalNodeFirstNodeIds(
-      ProductionNodeId production_node_id,
-      std::unordered_set<ProductionNodeId>* result,
+      ProductionNodeId production_node_id, ForwardNodesContainerType* result,
       std::unordered_set<ProductionNodeId>&& processed_nodes =
           std::unordered_set<ProductionNodeId>());
   // 闭包操作中的first操作，前三个参数标志β的位置
   // 采用三个参数因为非终结节点可能规约为空节点，需要向下查找终结节点
   // 向前看节点可以规约为空节点则添加相应向前看符号
   // 然后继续向前查找直到结尾或不可空规约非终结节点或终结节点
-  std::unordered_set<ProductionNodeId> First(
+  ForwardNodesContainerType First(
       ProductionNodeId production_node_id, ProductionBodyId production_body_id,
       PointIndex point_index, const ForwardNodesContainerType& next_node_ids);
   // 获取核心的全部项
-  const std::map<CoreItem, std::unordered_set<ProductionNodeId>>&
-  GetCoreItemsAndForwardNodes(CoreId core_id) {
+  const CoreItemAndForwardNodesContainer& GetCoreItemsAndForwardNodes(
+      CoreId core_id) {
     return GetCore(core_id).GetItemsAndForwardNodeIds();
   }
   // 获取语法分析表条目
@@ -443,8 +471,11 @@ class SyntaxGenerator {
   // 重求闭包则清空语法分析表条目
   bool CoreClosure(CoreId core_id);
   // 获取给定的项构成的项集，如果不存在则返回CoreId::InvalidId()
-  // 要求给定项必须不重复
-  CoreId GetCoreIdFromCoreItems(const std::list<CoreItem>& items);
+  // 输入指向转移前项的迭代器
+  CoreId GetCoreIdFromCoreItems(
+      const std::list<std::unordered_map<
+          SyntaxGenerator::CoreItem, std::unordered_set<ProductionNodeId>,
+          CoreItemHasher>::const_iterator>& items);
   // 传播向前看符号，同时在传播过程中构建语法分析表
   // 返回是否执行了传播过程
   // 如果未重求闭包则不会执行传播的步骤直接返回
@@ -452,32 +483,29 @@ class SyntaxGenerator {
   // 对所有产生式节点按照ProductionNodeType分类
   // 返回array内的vector内类型对应的下标为ProductionNodeType内类型的值
   std::array<std::vector<ProductionNodeId>, sizeof(ProductionNodeType)>
-  ClassifyProductionNodes();
+  ClassifyProductionNodes() const;
   // ParsingTableMergeOptimize的子过程，分类具有相同终结节点项的语法分析表条目
   // 向equivalent_ids写入相同终结节点转移表的节点ID的组，不会执行实际合并操作
   // 不会写入只有一个项的组
-  // entry_ids类型应为std::vector<ParsingTableEntryId>
-  template <class ParsingTableEntryIdContainer>
   void ParsingTableTerminalNodeClassify(
       const std::vector<ProductionNodeId>& terminal_node_ids, size_t index,
-      ParsingTableEntryIdContainer&& entry_ids,
-      std::vector<std::vector<ParsingTableEntryId>>* equivalent_ids);
+      std::list<ParsingTableEntryId>&& parsing_table_entry_ids,
+      std::vector<std::list<ParsingTableEntryId>>* equivalent_ids);
   // ParsingTableMergeOptimize的子过程，分类具有相同非终结节点项的语法分析表条目
   // 向equivalent_ids写入相同非终结节点转移表的节点ID的组，不会执行实际合并操作
   // 不会写入只有一个项的组
-  // entry_ids类型应为std::vector<ParsingTableEntryId>
-  template <class ParsingTableEntryIdContainer>
   void ParsingTableNonTerminalNodeClassify(
       const std::vector<ProductionNodeId>& nonterminal_node_ids, size_t index,
-      ParsingTableEntryIdContainer&& entry_ids,
-      std::vector<std::vector<ParsingTableEntryId>>* equivalent_ids);
+      std::list<ParsingTableEntryId>&& entry_ids,
+      std::vector<std::list<ParsingTableEntryId>>* equivalent_ids);
   // ParsingTableMergeOptimize的子过程，分类具有相同项的语法分析表条目
   // 第一个参数为语法分析表内所有终结节点ID
   // 第二个参数为语法分析表内所有非终结节点ID
   // 返回可以合并的语法分析表条目组，所有组均有至少两个条目
-  std::vector<std::vector<ParsingTableEntryId>> ParsingTableEntryClassify(
-      const std::vector<ProductionNodeId>& terminal_node_ids,
-      const std::vector<ProductionNodeId>& nonterminal_node_ids);
+  std::vector<std::list<ParsingTableEntryId>> ParsingTableEntryClassify(
+      std::vector<ProductionNodeId>&& operator_node_ids,
+      std::vector<ProductionNodeId>&& terminal_node_ids,
+      std::vector<ProductionNodeId>&& nonterminal_node_ids);
   // 根据给定的表项重映射语法分析表内ID
   void RemapParsingTableEntryId(
       const std::unordered_map<ParsingTableEntryId, ParsingTableEntryId>&
@@ -493,7 +521,8 @@ class SyntaxGenerator {
 
   // 将语法分析表配置写入文件
   void SaveConfig() const {
-    std::ofstream config_file(frontend::common::kSyntaxConfigFileName);
+    std::ofstream config_file(frontend::common::kSyntaxConfigFileName,
+                              std::ios_base::binary);
     boost::archive::binary_oarchive oarchive(config_file);
     dfa_generator_.SaveConfig();
     oarchive << *this;
@@ -509,11 +538,17 @@ class SyntaxGenerator {
   std::string FormatProductionBodys(ProductionNodeId nonterminal_node_id);
   // 将给定项格式化
   // 返回值例：IdOrEquivence -> IdOrEquivence · [ Num ]
-  std::string FormatItem(const CoreItem& core_item) const;
+  std::string FormatCoreItem(const CoreItem& core_item) const;
   // 将给定的向前看符号格式化
   // 向前看符号间通过空格分隔，符号两边不加双引号
   std::string FormatLookForwardSymbols(
-      const std::unordered_set<ProductionNodeId>& look_forward_node_ids) const;
+      const ForwardNodesContainerType& look_forward_node_ids) const;
+  // 同时格式化给定项和向前看符号
+  // 格式化给定项后接" 向前看符号："后接全部向前看符号
+  // 给定项格式同FormatCoreItem，向前看符号格式同FormatLookForwardSymbols
+  std::string FormatCoreItemAndLookForwardSymbols(
+      const CoreItem& core_item,
+      const ForwardNodesContainerType& look_forward_node_ids) const;
   // 将给定核心内全部项格式化
   // 产生式格式同FormatItem，产生式后跟" 向前看符号："后跟所有向前看符号
   // 向前看符号格式同FormatLookForwardSymbols
@@ -535,6 +570,8 @@ class SyntaxGenerator {
 
   // 声明语法分析机为友类，便于其使用各种定义
   friend class frontend::parser::syntaxmachine::SyntaxMachine;
+  // 暴露部分内部类型，从而在boost_serialization中注册
+  friend struct ExportSyntaxGeneratorInsideTypeForSerialization;
   // 允许序列化类访问
   friend class boost::serialization::access;
 
@@ -579,8 +616,18 @@ class SyntaxGenerator {
   // 语法分析表，配置写入文件
   ParsingTableType syntax_parsing_table_;
   // 用户自定义函数和数据的类的对象，配置写入文件
+  // 每个规约数据都必须关联唯一的包装Reduct函数的类的对象，不允许重用对象
   ProcessFunctionClassManagerType manager_process_function_class_;
 
+  // 哈希两个ProductionNodeId用的类
+  // 用于ParsingTableTerminalNodeClassify中分类同时支持规约与移入的数据
+  struct PairOfParsingTableEntryIdAndProcessFunctionClassIdHasher {
+    size_t operator()(
+        const std::pair<ParsingTableEntryId, ProcessFunctionClassId>&
+            data_to_hash) const {
+      return data_to_hash.first * data_to_hash.second;
+    }
+  };
   //所有产生式节点类都应继承自该类
   class BaseProductionNode {
    public:
@@ -865,16 +912,12 @@ class SyntaxGenerator {
     // 可以使用单个未包装ID
     // 如果添加了新项或向前看符号则设置闭包无效
     template <class ForwardNodeIdContainer>
-    std::pair<
-        std::map<CoreItem, std::unordered_set<ProductionNodeId>>::iterator,
-        bool>
+    std::pair<CoreItemAndForwardNodesContainer::iterator, bool>
     AddItemAndForwardNodeIds(const CoreItem& item,
                              ForwardNodeIdContainer&& forward_node_ids);
     // 在AddItemAndForwardNodeIds基础上设置添加的项为核心项
     template <class ForwardNodeIdContainer>
-    std::pair<
-        std::map<CoreItem, std::unordered_set<ProductionNodeId>>::iterator,
-        bool>
+    std::pair<CoreItemAndForwardNodesContainer::iterator, bool>
     AddMainItemAndForwardNodeIds(const CoreItem& item,
                                  ForwardNodeIdContainer&& forward_node_ids) {
       auto result = AddItemAndForwardNodeIds(
@@ -898,19 +941,17 @@ class SyntaxGenerator {
     // 设置该项集求的闭包有效，仅应由闭包函数调用
     void SetClosureAvailable() { core_closure_available_ = true; }
     // 获取全部核心项
-    const std::list<std::map<
-        CoreItem, std::unordered_set<ProductionNodeId>>::const_iterator>&
+    const std::list<CoreItemAndForwardNodesContainer::const_iterator>&
     GetMainItems() const {
       return main_items_;
     }
     // 设置一项为核心项
     // 要求该核心项未添加过
     // 设置闭包无效
-    void SetMainItem(std::map<CoreItem, std::unordered_set<ProductionNodeId>>::
-                         const_iterator& item_iter);
+    void SetMainItem(
+        CoreItemAndForwardNodesContainer ::const_iterator& item_iter);
     // 获取全部项和对应的向前看节点
-    const std::map<CoreItem, std::unordered_set<ProductionNodeId>>&
-    GetItemsAndForwardNodeIds() const {
+    const CoreItemAndForwardNodesContainer& GetItemsAndForwardNodeIds() const {
       return item_and_forward_node_ids_;
     }
     // 获取项对应的语法分析表条目ID
@@ -933,16 +974,15 @@ class SyntaxGenerator {
     // 如果添加了新的向前看符号则设置闭包无效
     template <class ForwardNodeIdContainer>
     bool AddForwardNodes(
-        const std::map<CoreItem,
-                       std::unordered_set<ProductionNodeId>>::iterator& iter,
+        const std::unordered_map<
+            CoreItem, std::unordered_set<ProductionNodeId>>::iterator& iter,
         ForwardNodeIdContainer&& forward_node_id_container);
     // 设置闭包无效
     // 应由每个修改了项/项的向前看符号的函数调用
     void SetClosureNotAvailable() { core_closure_available_ = false; }
 
     // 存储指向核心项的迭代器
-    std::list<std::map<CoreItem, ForwardNodesContainerType>::const_iterator>
-        main_items_;
+    std::list<CoreItemAndForwardNodesContainer::const_iterator> main_items_;
     // 该项集求的闭包是否有效（求过闭包则为true）
     bool core_closure_available_ = false;
     // 项集ID
@@ -951,7 +991,7 @@ class SyntaxGenerator {
     ParsingTableEntryId parsing_table_entry_id_ =
         ParsingTableEntryId::InvalidId();
     // 项和对应的向前看符号
-    std::map<CoreItem, ForwardNodesContainerType> item_and_forward_node_ids_;
+    CoreItemAndForwardNodesContainer item_and_forward_node_ids_;
   };
 
   // 语法分析表条目
@@ -966,7 +1006,12 @@ class SyntaxGenerator {
      public:
       ActionAndAttachedDataInterface(ActionType action_type)
           : action_type_(action_type) {}
+      ActionAndAttachedDataInterface(const ActionAndAttachedDataInterface&) =
+          default;
       virtual ~ActionAndAttachedDataInterface() {}
+
+      ActionAndAttachedDataInterface& operator=(
+          const ActionAndAttachedDataInterface&) = default;
 
       virtual bool operator==(const ActionAndAttachedDataInterface&
                                   attached_data_interface) const = 0 {
@@ -1015,7 +1060,9 @@ class SyntaxGenerator {
       ShiftAttachedData(ParsingTableEntryId next_entry_id)
           : ActionAndAttachedDataInterface(ActionType::kShift),
             next_entry_id_(next_entry_id) {}
+      ShiftAttachedData(const ShiftAttachedData&) = default;
 
+      ShiftAttachedData& operator=(const ShiftAttachedData&) = default;
       virtual bool operator==(const ActionAndAttachedDataInterface&
                                   shift_attached_data) const override;
 
@@ -1061,7 +1108,11 @@ class SyntaxGenerator {
             reducted_nonterminal_node_id_(reducted_nonterminal_node_id),
             process_function_class_id_(process_function_class_id),
             production_body_(std::forward<ProductionBody>(production_body)) {}
+      ReductAttachedData(const ReductAttachedData&) = default;
+      ReductAttachedData(ReductAttachedData&&) = default;
 
+      ReductAttachedData& operator=(const ReductAttachedData&) = default;
+      ReductAttachedData& operator=(ReductAttachedData&&) = default;
       virtual bool operator==(const ActionAndAttachedDataInterface&
                                   reduct_attached_data) const override;
 
@@ -1106,7 +1157,7 @@ class SyntaxGenerator {
 
       virtual ReductAttachedData& GetReductAttachedData() override {
         return const_cast<ReductAttachedData&>(
-            static_cast<const ReductAttachedData>(*this)
+            static_cast<const ReductAttachedData&>(*this)
                 .GetReductAttachedData());
       }
 
@@ -1129,9 +1180,11 @@ class SyntaxGenerator {
             shift_attached_data_(std::forward<ShiftData>(shift_attached_data)),
             reduct_attached_data_(
                 std::forward<ReductData>(reduct_attached_data)) {}
+      ShiftReductAttachedData(const ShiftReductAttachedData&) = delete;
 
-      virtual bool operator==(const ActionAndAttachedDataInterface&
-                                  shift_reduct_attached_data) const override;
+      // 在与ShiftAttachedData和ReductAttachedData比较时仅比较相应部分
+      virtual bool operator==(
+          const ActionAndAttachedDataInterface& attached_data) const override;
 
       virtual const ShiftAttachedData& GetShiftAttachedData() const override {
         return shift_attached_data_;
@@ -1183,9 +1236,7 @@ class SyntaxGenerator {
       ReductAttachedData reduct_attached_data_;
     };
 
-    // 动作为规约时存储包装调用函数的类的对象的ID和规约后得到的非终结产生式ID
-    // 产生式ID用于确定如何在规约后产生的非终结产生式条件下转移
-    // 动作为移入时存储移入后转移到的条目ID
+    // 键值为待移入节点ID，值为指向相应数据的指针
     using ActionAndTargetContainer =
         std::unordered_map<ProductionNodeId,
                            std::unique_ptr<ActionAndAttachedDataInterface>>;
@@ -1201,16 +1252,18 @@ class SyntaxGenerator {
     ParsingTableEntry& operator=(ParsingTableEntry&& parsing_table_entry);
 
     // 设置该产生式在转移条件下的动作和目标节点
+    // 由于空规约机制，末尾部分节点空规约时在相同的向前看符号下有不同产生式规约
+    // 例如产生式：Example1 -> Example2 · Example3 和 Example3 -> Example4 ·
+    // 均在相同向前看符号下可规约（Example3可以空规约）
+    // 但是规约后得到的产生式不同，所以需要获取语法分析表条目对应的核心
+    // 如果一个产生式可以规约后移入另一个产生式，则设置给定条件下规约前者
+    // 否则报错，所以需要提供SyntaxGenerator
     template <class AttachedData>
     requires std::is_same_v<
         std::decay_t<AttachedData>,
         SyntaxGenerator::ParsingTableEntry::ShiftAttachedData> ||
-        std::is_same_v<
-            std::decay_t<AttachedData>,
-            SyntaxGenerator::ParsingTableEntry::ReductAttachedData> ||
-        std::is_same_v<
-            std::decay_t<AttachedData>,
-            SyntaxGenerator::ParsingTableEntry::ShiftReductAttachedData>
+        std::is_same_v<std::decay_t<AttachedData>,
+                       SyntaxGenerator::ParsingTableEntry::ReductAttachedData>
     void SetTerminalNodeActionAndAttachedData(ProductionNodeId node_id,
                                               AttachedData&& attached_data);
     // 设置该条目移入非终结节点后转移到的节点
@@ -1277,21 +1330,12 @@ class SyntaxGenerator {
           static_cast<const ParsingTableEntry&>(*this)
               .GetAllNonTerminalNodeTransformTarget());
     }
+
     // 向前看符号ID下的操作和目标节点
-    // 操作为移入时variant存移入后转移到的ID（ProductionBodyId）
-    // 操作为规约时variant存使用的产生式ID和产生式体ID（ProductionNodeId）
-    // 操作为接受和报错时variant未定义
     ActionAndTargetContainer action_and_attached_data_;
     // 移入非终结节点后转移到的产生式体序号
     std::unordered_map<ProductionNodeId, ParsingTableEntryId>
         nonterminal_node_transform_table_;
-  };
-  // 用于ParsingTableTerminalNodeClassify中判断两个转移结果是否相同
-  struct ActionAndAttachedDataPointerEqualTo {
-    bool operator()(
-        const ParsingTableEntry::ActionAndAttachedDataInterface* const& lhs,
-        const ParsingTableEntry::ActionAndAttachedDataInterface* const& rhs)
-        const;
   };
 };
 template <class IdType>
@@ -1316,8 +1360,9 @@ inline SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
 
 template <class ForwardNodeIdContainer>
 inline std::pair<
-    std::map<SyntaxGenerator::CoreItem,
-             std::unordered_set<SyntaxGenerator::ProductionNodeId>>::iterator,
+    typename std::unordered_map<SyntaxGenerator::CoreItem,
+                                SyntaxGenerator::ForwardNodesContainerType,
+                                SyntaxGenerator::CoreItemHasher>::iterator,
     bool>
 SyntaxGenerator::AddItemAndForwardNodeIdsToCore(
     CoreId core_id, const CoreItem& core_item,
@@ -1336,8 +1381,9 @@ SyntaxGenerator::AddItemAndForwardNodeIdsToCore(
 
 template <class ForwardNodeIdContainer>
 inline std::pair<
-    std::map<SyntaxGenerator::CoreItem,
-             std::unordered_set<SyntaxGenerator::ProductionNodeId>>::iterator,
+    typename std::unordered_map<SyntaxGenerator::CoreItem,
+                                SyntaxGenerator::ForwardNodesContainerType,
+                                SyntaxGenerator::CoreItemHasher>::iterator,
     bool>
 SyntaxGenerator::AddMainItemAndForwardNodeIdsToCore(
     CoreId core_id, const CoreItem& core_item,
@@ -1349,81 +1395,6 @@ SyntaxGenerator::AddMainItemAndForwardNodeIdsToCore(
     AddCoreItemBelongToCoreId(core_item, core_id);
   }
   return result;
-}
-
-template <class ParsingTableEntryIdContainer>
-void SyntaxGenerator::ParsingTableTerminalNodeClassify(
-    const std::vector<ProductionNodeId>& terminal_node_ids, size_t index,
-    ParsingTableEntryIdContainer&& entry_ids,
-    std::vector<std::vector<ParsingTableEntryId>>* equivalent_ids) {
-  if (index >= terminal_node_ids.size()) {
-    // 分类完成，执行合并操作
-    assert(entry_ids.size() > 1);
-    equivalent_ids->emplace_back(
-        std::forward<ParsingTableEntryIdContainer>(entry_ids));
-  } else {
-    assert(GetProductionNode(terminal_node_ids[index]).Type() ==
-               ProductionNodeType::kTerminalNode ||
-           GetProductionNode(terminal_node_ids[index]).Type() ==
-               ProductionNodeType::kOperatorNode);
-    // 分类表，根据转移条件下的转移结果分类
-    // 使用ActionAndAttachedDataPointerEqualTo来判断两个转移结果是否相同
-    std::unordered_map<
-        const ParsingTableEntry::ActionAndAttachedDataInterface*,
-        std::vector<ParsingTableEntryId>,
-        std::hash<const ParsingTableEntry::ActionAndAttachedDataInterface*>,
-        ActionAndAttachedDataPointerEqualTo>
-        classify_table;
-    ProductionNodeId transform_id = terminal_node_ids[index];
-    for (auto production_node_id : entry_ids) {
-      // 利用unordered_map进行分类
-      classify_table[GetParsingTableEntry(production_node_id)
-                         .AtTerminalNode(transform_id)]
-          .push_back(production_node_id);
-    }
-    size_t next_index = index + 1;
-    for (auto& vec : classify_table) {
-      if (vec.second.size() > 1) {
-        // 该类含有多个条目且有剩余未比较的转移条件，需要继续分类
-        ParsingTableTerminalNodeClassify(terminal_node_ids, next_index,
-                                         std::move(vec.second), equivalent_ids);
-      }
-    }
-  }
-}
-
-template <class ParsingTableEntryIdContainer>
-inline void SyntaxGenerator::ParsingTableNonTerminalNodeClassify(
-    const std::vector<ProductionNodeId>& nonterminal_node_ids, size_t index,
-    ParsingTableEntryIdContainer&& entry_ids,
-    std::vector<std::vector<ParsingTableEntryId>>* equivalent_ids) {
-  if (index >= nonterminal_node_ids.size()) {
-    // 分类完成，执行合并操作
-    assert(entry_ids.size() > 1);
-    equivalent_ids->emplace_back(
-        std::forward<ParsingTableEntryIdContainer>(entry_ids));
-  } else {
-    assert(GetProductionNode(nonterminal_node_ids[index]).Type() ==
-           ProductionNodeType::kNonTerminalNode);
-    // 分类表，根据转移条件下的转移结果分类
-    std::map<ParsingTableEntryId, std::vector<ParsingTableEntryId>>
-        classify_table;
-    ProductionNodeId transform_id = nonterminal_node_ids[index];
-    for (auto production_node_id : entry_ids) {
-      // 利用map进行分类
-      classify_table[GetParsingTableEntry(production_node_id)
-                         .AtNonTerminalNode(transform_id)]
-          .push_back(production_node_id);
-    }
-    size_t next_index = index + 1;
-    for (auto vec : classify_table) {
-      if (vec.second.size() > 1) {
-        // 该类含有多个条目且有剩余未比较的转移条件，需要继续分类
-        ParsingTableTerminalNodeClassify(nonterminal_node_ids, next_index,
-                                         std::move(vec.second), equivalent_ids);
-      }
-    }
-  }
 }
 
 template <class Archive>
@@ -1439,11 +1410,13 @@ requires std::is_same_v<
     std::decay_t<AttachedData>,
     SyntaxGenerator::ParsingTableEntry::ShiftAttachedData> ||
     std::is_same_v<std::decay_t<AttachedData>,
-                   SyntaxGenerator::ParsingTableEntry::ReductAttachedData> ||
-    std::is_same_v<std::decay_t<AttachedData>,
-                   SyntaxGenerator::ParsingTableEntry::ShiftReductAttachedData>
+                   SyntaxGenerator::ParsingTableEntry::ReductAttachedData>
 void SyntaxGenerator::ParsingTableEntry::SetTerminalNodeActionAndAttachedData(
     ProductionNodeId node_id, AttachedData&& attached_data) {
+  static_assert(
+      !std::is_same_v<std::decay_t<AttachedData>, ShiftReductAttachedData>,
+      "该类型仅允许通过在已有一种动作的基础上补全缺少的另一半后转换得到，不允许"
+      "直接传入");
   // 使用二义性文法，语法分析表某些情况下需要对同一个节点支持移入和规约操作并存
   auto iter = action_and_attached_data_.find(node_id);
   if (iter == action_and_attached_data_.end()) {
@@ -1455,44 +1428,82 @@ void SyntaxGenerator::ParsingTableEntry::SetTerminalNodeActionAndAttachedData(
     // 待插入的转移条件已存在
     // 获取已经存储的数据
     ActionAndAttachedDataInterface& data_already_in = *iter->second;
-    // 语法分析表创建过程中不应重写已存在的转移条件
-    // 要么插入新转移条件，要么补全移入/规约的另一部分（规约/移入）
-    if (attached_data.GetActionType() != data_already_in.GetActionType()) {
-      assert(data_already_in.GetActionType() != ActionType::kShiftReduct);
-      if (attached_data.GetActionType() == ActionType::kShift) {
-        // 提供的数据为移入部分数据
-        if constexpr (std::is_same_v<std::decay_t<AttachedData>,
-                                     ShiftAttachedData>) {
-          iter->second = std::make_unique<ShiftReductAttachedData>(
-              std::forward<AttachedData>(attached_data),
-              std::move(iter->second->GetReductAttachedData()));
-        } else {
-          assert(false);
-        }
-      } else {
-        // 提供的数据为规约部分数据
-        assert(attached_data.GetActionType() == ActionType::kReduct);
+    // 要么修改已有的规约后得到的节点，要么补全移入/规约的另一部分（规约/移入）
+    // 不应修改已有的移入后转移到的语法分析表条目
+    switch (data_already_in.GetActionType()) {
+      case ActionType::kShift:
         if constexpr (std::is_same_v<std::decay_t<AttachedData>,
                                      ReductAttachedData>) {
+          // 提供的数据是规约数据，转换为ShiftReductAttachedData
           iter->second = std::make_unique<ShiftReductAttachedData>(
               std::move(iter->second->GetShiftAttachedData()),
               std::forward<AttachedData>(attached_data));
         } else {
-          assert(false);
+          // 提供的是移入数据，要求必须与已有的数据相同
+          static_assert(
+              std::is_same_v<std::decay_t<AttachedData>, ShiftAttachedData>);
+          // 检查提供的移入数据是否与已有的移入数据相同
+          // 不能写反，否则当data_already_in为ShiftReductAttachedData时
+          // 无法获得与其它附属数据比较的正确语义
+          // 可能是MSVC的BUG
+          // 使用隐式调用会导致调用attached_data的operator==，所以显式调用
+          if (!data_already_in.operator==(attached_data)) [[unlikely]] {
+            // 设置相同条件不同产生式下规约
+            OutPutError(
+                std::format("一个项集在相同条件下只能规约一种产生式，请参考该项"
+                            "集求闭包时的输出信息检查产生式"));
+            exit(-1);
+          }
         }
+        break;
+      case ActionType::kReduct:
+        if constexpr (std::is_same_v<std::decay_t<AttachedData>,
+                                     ShiftAttachedData>) {
+          // 提供的数据为移入部分数据，转换为ShiftReductAttachedData
+          iter->second = std::make_unique<ShiftReductAttachedData>(
+              std::forward<AttachedData>(attached_data),
+              std::move(iter->second->GetReductAttachedData()));
+        } else {
+          // 提供的是移入数据，需要检查是否与已有的数据相同
+          static_assert(
+              std::is_same_v<std::decay_t<AttachedData>, ReductAttachedData>);
+          // 不能写反，否则当data_already_in为ShiftReductAttachedData时
+          // 无法获得与其它附属数据比较的正确语义
+          // 可能是MSVC的BUG
+          // 使用隐式调用会导致调用attached_data的operator==，所以显式调用
+          if (!data_already_in.operator==(attached_data)) {
+            // 设置相同条件不同产生式下规约
+            OutPutError(
+                std::format("一个项集在相同条件下只能规约一种产生式，请参考该项"
+                            "集求闭包时的输出信息检查产生式"));
+            exit(-1);
+          }
+        }
+        break;
+      case ActionType::kShiftReduct: {
+        // 可能是MSVC的BUG
+        // 使用隐式调用会导致调用attached_data的operator==，所以显式调用
+        if (!data_already_in.operator==(attached_data)) {
+          // 设置相同条件不同产生式下规约
+          OutPutError(
+              std::format("一个项集在相同条件下只能规约一种产生式，请参考该项"
+                          "集求闭包时的输出信息检查产生式"));
+          exit(-1);
+        }
+        break;
       }
-    } else {
-      assert(static_cast<const AttachedData&>(data_already_in) ==
-             attached_data);
+      default:
+        assert(false);
+        break;
     }
   }
 }
 
 template <class ForwardNodeIdContainer>
-inline std::pair<
-    std::map<SyntaxGenerator::CoreItem,
-             std::unordered_set<SyntaxGenerator::ProductionNodeId>>::iterator,
-    bool>
+inline std::pair<std::unordered_map<SyntaxGenerator::CoreItem,
+                                    SyntaxGenerator::ForwardNodesContainerType,
+                                    SyntaxGenerator::CoreItemHasher>::iterator,
+                 bool>
 SyntaxGenerator::Core::AddItemAndForwardNodeIds(
     const CoreItem& item, ForwardNodeIdContainer&& forward_node_ids) {
   // 已经求过闭包的核心不能添加新项
@@ -1527,8 +1538,9 @@ inline bool SyntaxGenerator::Core::AddForwardNodes(
 
 template <class ForwardNodeIdContainer>
 inline bool SyntaxGenerator::Core::AddForwardNodes(
-    const std::map<CoreItem, std::unordered_set<ProductionNodeId>>::iterator&
-        iter,
+    const std::unordered_map<
+        CoreItem, std::unordered_set<ProductionNodeId>>::iterator& iter,
+
     ForwardNodeIdContainer&& forward_node_id_container) {
   assert(iter != item_and_forward_node_ids_.end());
   bool result;
@@ -1553,5 +1565,17 @@ inline bool SyntaxGenerator::Core::AddForwardNodes(
   return result;
 }
 
+// 暴露部分内部类供boost序列化注册类型(BOOST_CLASS_EXPORT_GUID)用
+struct ExportSyntaxGeneratorInsideTypeForSerialization {
+  using ParsingTableEntry = SyntaxGenerator::ParsingTableEntry;
+  using ParsingTableEntryId = SyntaxGenerator::ParsingTableEntryId;
+};
 }  // namespace frontend::generator::syntax_generator
+
+// 注册序列化需要使用的类
+BOOST_CLASS_EXPORT_GUID(
+    frontend::generator::syntax_generator::
+        ExportSyntaxGeneratorInsideTypeForSerialization::ParsingTableEntry,
+    "frontend::generator::syntax_generator::SyntaxGenerator::ParsingTableEntry")
+
 #endif  // !GENERATOR_SYNTAXGENERATOR_SYNTAXGENERATOR_H_
