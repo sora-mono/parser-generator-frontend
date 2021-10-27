@@ -1,6 +1,7 @@
 #include "nfa_generator.h"
 
 #include <algorithm>
+#include <format>
 #include <queue>
 #include <sstream>
 
@@ -46,46 +47,55 @@ inline void NfaGenerator::NfaNode::RemoveConditionlessTransfer(
 std::pair<std::unordered_set<typename NfaGenerator::NfaNodeId>,
           typename NfaGenerator::TailNodeData>
 NfaGenerator::Closure(NfaNodeId production_node_id) {
-  std::unordered_set<NfaNodeId> uset_temp =
-      node_manager_.GetIdsReferringSameObject(production_node_id);
-  TailNodeData tail_node_data(NotTailNodeTag);
+  std::unordered_set<NfaNodeId> result_set;
+  TailNodeData word_attached_data(NotTailNodeTag);
   std::queue<NfaNodeId> q;
-  for (auto x : uset_temp) {
+  for (auto x : node_manager_.GetIdsReferringSameObject(production_node_id)) {
     q.push(x);
   }
+  // 清空等效节点集合，否则队列中所有节点都在集合内，导致
+  result_set.clear();
   while (!q.empty()) {
     NfaNodeId id_now = q.front();
     q.pop();
-    if (uset_temp.find(id_now) != uset_temp.end()) {
+    if (result_set.find(id_now) != result_set.end()) {
       continue;
     }
-    auto iter = tail_nodes_.find(&GetNfaNode(id_now));
+    auto [result_iter, inserted] = result_set.insert(id_now);
+    assert(inserted);
+    const auto& nfa_node = GetNfaNode(id_now);
+    auto iter = tail_nodes_.find(&nfa_node);
     // 判断是否为尾节点
     if (iter != tail_nodes_.end()) {
       TailNodeData& tail_node_data_new = iter->second;
-      WordPriority priority_old = tail_node_data.second;
+      WordPriority priority_old = word_attached_data.second;
       WordPriority priority_new = tail_node_data_new.second;
-
-      if (tail_node_data == NotTailNodeTag) {
+      if (word_attached_data == NotTailNodeTag) {
         // 以前无尾节点记录
-        tail_node_data = tail_node_data_new;
+        word_attached_data = tail_node_data_new;
       } else if (priority_new > priority_old) {
         // 当前记录优先级大于以前的优先级
-        tail_node_data = tail_node_data_new;
+        word_attached_data = tail_node_data_new;
       } else if (priority_new == priority_old &&
-                 tail_node_data_new.first != tail_node_data.first) {
-        // TODO 去除异常
+                 tail_node_data_new.first != word_attached_data.first) {
         // 两个尾节点标记优先级相同，对应尾节点不同
-        throw std::runtime_error("两个尾节点具有相同优先级且不对应同一个节点");
+        // 输出错误信息
+        std::cerr
+            << std::format(
+                   "NfaGenerator "
+                   "Error:"
+                   "存在两个正则表达式在相同的输入下均可获取单词，且单词优先级"
+                   "相同，产生歧义，请检查终结节点定义/运算符定义部分")
+            << std::endl;
+        assert(false);
+        exit(-1);
       }
     }
-    const std::unordered_set<NfaNodeId>& uset_nodes =
-        node_manager_.GetIdsReferringSameObject(id_now);
-    for (auto x : uset_nodes) {
+    for (auto x : nfa_node.GetUnconditionTransferNodesIds()) {
       q.push(x);
     }
   }
-  return std::make_pair(std::move(uset_temp), std::move(tail_node_data));
+  return std::make_pair(std::move(result_set), std::move(word_attached_data));
 }
 
 std::pair<std::unordered_set<typename NfaGenerator::NfaNodeId>,
@@ -284,7 +294,7 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
 
 std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>
 NfaGenerator::WordConstruct(const std::string& str,
-                            TailNodeData&& tail_node_data) {
+                            TailNodeData&& word_attached_data) {
   assert(str.size() != 0);
   NfaNodeId head_id = node_manager_.EmplaceObject();
   NfaNodeId tail_id = head_id;
@@ -294,7 +304,7 @@ NfaGenerator::WordConstruct(const std::string& str,
     tail_id = temp_id;
   }
   GetNfaNode(head_node_id_).AddNoconditionTransfer(head_id);
-  AddTailNode(tail_id, std::move(tail_node_data));
+  AddTailNode(tail_id, std::move(word_attached_data));
   return std::make_pair(head_id, tail_id);
 }
 
@@ -485,7 +495,7 @@ const NfaGenerator::TailNodeData NfaGenerator::NotTailNodeTag =
 // 根据上一个操作是否为规约判断使用左侧单目运算符优先级还是双目运算符优先级
 // 返回获取到的结合类型和优先级
 
-inline std::pair<frontend::common::OperatorAssociatityType, size_t>
+std::pair<frontend::common::OperatorAssociatityType, size_t>
 NfaGenerator::WordAttachedData::GetAssociatityTypeAndPriority(
     bool is_last_operate_reduct) const {
   assert(node_type == frontend::common::ProductionNodeType::kOperatorNode);

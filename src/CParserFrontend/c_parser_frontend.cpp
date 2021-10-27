@@ -5,28 +5,16 @@
 // 如果不存在给定名称的函数则返回空指针
 namespace c_parser_frontend {
 
-thread_local CParserFrontend parser_frontend;
+thread_local CParserFrontend c_parser_frontend;
 
-// 获取当前行数
-size_t GetLine() { return frontend::parser::dfamachine::DfaMachine::GetLine(); }
-// 获取当前列数
-size_t GetColumn() {
-  return frontend::parser::dfamachine::DfaMachine::GetColumn();
-}
-
-void CParserFrontend::PushFlowControlSentence(
+bool CParserFrontend::PushFlowControlSentence(
     std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
         flow_control_sentence) {
   bool result = action_scope_system_.PushFlowControlSentence(
       std::move(flow_control_sentence));
-  if (!result) [[unlikely]] {
-    std::cerr << std::format(
-                     "行数{:} 列数{:} 流程控制语句必须在函数定义内部使用",
-                     GetLine(), GetColumn())
-              << std::endl;
-    exit(-1);
-  }
+  return result;
 }
+
 }  // namespace c_parser_frontend
 
 namespace c_parser_frontend::action_scope_system {
@@ -62,7 +50,8 @@ void ActionScopeSystem::PopVarietyOverLevel(ActionScopeLevelType level) {
       bool result = CreateFunctionTypeVarietyAndPush(function_type);
       assert(result);
       // 通知控制器完成函数构建
-      c_parser_frontend::parser_frontend.FinishFunctionConstruct(function_type);
+      c_parser_frontend::c_parser_frontend.FinishFunctionConstruct(
+          function_type);
     }
   }
 }

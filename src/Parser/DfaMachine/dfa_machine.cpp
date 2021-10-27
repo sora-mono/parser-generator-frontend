@@ -1,10 +1,6 @@
 #include "Parser/DfaMachine/dfa_machine.h"
 
 #include <format>
-namespace frontend::parser {
-thread_local size_t line_ = 0;
-thread_local size_t column_ = 0;
-}  // namespace frontend::parser
 
 namespace frontend::parser::dfamachine {
 bool DfaMachine::SetInputFile(const std::string filename) {
@@ -28,7 +24,7 @@ DfaMachine::WordInfo DfaMachine::GetNextWord() {
   std::string symbol;
   WordInfo return_data;
   // 当前状态转移表ID
-  TransformArrayId transform_array_id = root_index_;
+  TransformArrayId transform_array_id = root_transform_array_id_;
   while (true) {
     char c = fgetc(file_);
     if (ferror(file_)) {

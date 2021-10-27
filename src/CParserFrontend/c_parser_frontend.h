@@ -1,26 +1,21 @@
 #ifndef CPARSERFRONTEND_C_PARSER_FRONTEND_H_
 #define CPARSERFRONTEND_C_PARSER_FRONTEND_H_
 
+#include <iostream>
 #include <unordered_map>
 
 #include "Generator/SyntaxGenerator/process_function_interface.h"
-#include "Parser/DfaMachine/dfa_machine.h"
+#include "Parser/line_and_column.h"
 #include "action_scope_system.h"
 #include "flow_control.h"
 #include "operator_node.h"
 #include "type_system.h"
 
-// 引用解析到的行数和列数
-namespace frontend::parser {
-extern thread_local size_t line_;
-extern thread_local size_t column_;
-}  // namespace frontend::parser
-
 namespace c_parser_frontend {
 // 获取当前行数
-size_t GetLine();
+inline size_t GetLine() { return frontend::parser::GetLine(); }
 // 获取当前列数
-size_t GetColumn();
+inline size_t GetColumn() { return frontend::parser::GetColumn(); }
 
 class CParserFrontend {
   // 引用一些类型的定义
@@ -124,15 +119,21 @@ class CParserFrontend {
   }
   // 设置当前待构建函数
   // 在作用域内声明函数的全部参数和函数类型的对象且自动提升作用域等级
-  void SetFunctionToConstruct(
+  // 返回是否设置成功
+  bool SetFunctionToConstruct(
       const std::shared_ptr<FunctionType>& function_to_construct) {
-    flow_control_system_.SetFunctionToConstruct(function_to_construct);
-    action_scope_system_.SetFunctionToConstruct(function_to_construct);
+    if (action_scope_system_.SetFunctionToConstruct(function_to_construct))
+        [[likely]] {
+      flow_control_system_.SetFunctionToConstruct(function_to_construct);
+      return true;
+    } else {
+      return false;
+    }
   }
   // 将流程控制语句压入栈
   // 返回是否添加成功
   // 如果无法添加语句则输出错误信息
-  void PushFlowControlSentence(
+  bool PushFlowControlSentence(
       std::unique_ptr<FlowInterface>&& flow_control_sentence);
   // 获取最顶层的控制语句
   // 用于完善do-while语句尾部和for语句头部
@@ -198,7 +199,7 @@ class CParserFrontend {
   FlowControlSystem flow_control_system_;
 };
 
-extern thread_local CParserFrontend parser_frontend;
+extern thread_local CParserFrontend c_parser_frontend;
 
 }  // namespace c_parser_frontend
 

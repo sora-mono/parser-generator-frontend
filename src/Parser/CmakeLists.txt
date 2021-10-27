@@ -5,9 +5,8 @@ add_compile_options("/std:c++latest")
 add_subdirectory(DfaMachine)
 add_subdirectory(SyntaxMachine)
 
-aux_source_directory(. PARSER_SRCS)
-add_executable(Parser ${PARSER_SRCS})
+add_library(line_and_column "line_and_column.cpp")
 
-link_directories(${CMAKE_SOURCE_DIR}/src/Common)
+add_executable(Parser "Parser.cpp")
 
-target_link_libraries(Parser syntax_machine)
+target_link_libraries(Parser syntax_machine dfa_machine line_and_column)

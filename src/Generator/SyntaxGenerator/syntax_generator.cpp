@@ -2,8 +2,6 @@
 
 #include <queue>
 
-#include "syntax_generator.h"
-
 namespace frontend::generator::syntax_generator {
 SyntaxGenerator::ProductionNodeId SyntaxGenerator::AddTerminalNode(
     const std::string& node_symbol, const std::string& body_symbol,
@@ -1152,16 +1150,6 @@ std::string SyntaxGenerator::FormatCoreItems(CoreId core_id) const {
   return format_result;
 }
 
-SyntaxGenerator::SyntaxGenerator() {
-  SyntaxGeneratorInit();
-  ConfigConstruct();
-  CheckUndefinedProductionRemained();
-  dfa_generator_.DfaReconstrcut();
-  ParsingTableConstruct();
-  // 保存配置
-  SaveConfig();
-}
-
 void SyntaxGenerator::ParsingTableConstruct() {
   // 创建输入到文件尾时返回的节点
   ProductionNodeId end_production_node_id = AddEndNode();
@@ -1183,6 +1171,16 @@ void SyntaxGenerator::ParsingTableConstruct() {
   SpreadLookForwardSymbolAndConstructParsingTableEntry(root_core_id);
   // 合并等效项，压缩语法分析表
   ParsingTableMergeOptimize();
+}
+
+void SyntaxGenerator::ConstructSyntaxConfig() {
+  SyntaxGeneratorInit();
+  ConfigConstruct();
+  CheckUndefinedProductionRemained();
+  dfa_generator_.DfaReconstrcut();
+  ParsingTableConstruct();
+  // 保存配置
+  SaveConfig();
 }
 
 void SyntaxGenerator::SyntaxGeneratorInit() {

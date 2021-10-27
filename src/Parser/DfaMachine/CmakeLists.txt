@@ -1,4 +1,4 @@
 aux_source_directory(. DFA_MACHINE_SRCS)
 
 add_library(dfa_machine ${DFA_MACHINE_SRCS})
-target_link_libraries(dfa_machine CONAN_PKG::boost dfa_generator)
+target_link_libraries(dfa_machine CONAN_PKG::boost dfa_generator line_and_column)

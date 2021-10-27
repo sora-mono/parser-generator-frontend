@@ -2,7 +2,6 @@
 // process_functions_classes.h
 // process_functions_classes_register.h
 // config_construct.cpp所包含
-
 #include "Generator/SyntaxGenerator/syntax_generate.h"
 
 // 用户可修改部分
@@ -11,7 +10,7 @@
 
 // 终结产生式
 GENERATOR_DEFINE_TERMINAL_PRODUCTION("Id", R"([a-zA-Z_][a-zA-Z0-9_]*)")
-GENERATOR_DEFINE_TERMINAL_PRODUCTION("Num", R"([0-9]*(\.[0-9]*)?)")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("Num", R"([0-9]+(\.[0-9]*)?)")
 GENERATOR_DEFINE_TERMINAL_PRODUCTION("Str", R"(".*")")
 GENERATOR_DEFINE_TERMINAL_PRODUCTION("Character", R"('..?')")
 GENERATOR_DEFINE_TERMINAL_PRODUCTION("]", R"(\])")

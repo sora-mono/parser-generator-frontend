@@ -1,9 +1,9 @@
 // 该文件的目的是为了去除执行generator生成编译所需代码这一步
 // 通过宏在定义产生式时生成代码，定义产生式后就可以编译运行generator生成配置
-// 该文件需要被两个文件包含，并在两个文件中相同的宏生成不同代码
+// 该文件需要被三个文件包含，并在三个文件中生成不同代码
 
 // 下面的宏保证该宏定义最终仅被process_functions_classes.h
-// user_defined_function_and_data_register.h和config_construct.cpp包含
+// process_functions_classes_register.h和config_construct.cpp包含
 // 且相同名字的宏在三种文件中定义不同内容
 // 该文件不应使用标准头文件保护，应该使用下面的宏保护
 // 这么写为了使用户在编辑器里可以看到宏声明
@@ -143,9 +143,9 @@
 #endif  // GENERATOR_DEFINE_UNARY_OPERATOR
 #define GENERATOR_DEFINE_UNARY_OPERATOR(                                  \
     operator_symbol, unary_operator_associatity, unary_operator_priority) \
-  AddLeftUnaryOperatorNode(operator_symbol,                                   \
-                       frontend::common::unary_operator_associatity,      \
-                       OperatorPriority(unary_operator_priority));
+  AddLeftUnaryOperatorNode(operator_symbol,                               \
+                           frontend::common::unary_operator_associatity,  \
+                           OperatorPriority(unary_operator_priority));
 #ifdef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
 #undef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
 #endif  // !GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
@@ -187,9 +187,12 @@
 #define GENERATOR_DEFINE_ROOT_PRODUCTION(production_symbol) \
   SetRootProduction(#production_symbol);
 
+#else
+#error 请勿在config_construct.cpp以外包含production_config-inc.h或重复包含
+#endif
 #endif
 
-#elif defined GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_
+#ifdef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_
 // 防止被重复包含
 #ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_END
 
@@ -197,30 +200,33 @@
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #endif  // GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 
-#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                           \
-    production_symbol, reduct_function, production_body_seq, ...)          \
-  class NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,            \
-                                             production_body_seq)          \
-      : public frontend::generator::syntax_generator::                      \
-            ProcessFunctionInterface {                                     \
-   public:                                                                 \
-    virtual ProcessFunctionInterface::UserData Reduct(                     \
-        std::vector<ProcessFunctionInterface::WordDataToUser>&& word_data) \
-        override {                                                         \
-      return reduct_function(std::move(word_data));                        \
-    }                                                                      \
-                                                                           \
-   private:                                                                \
-    friend class boost::serialization::access;                             \
-    template <class Archive>                                               \
-    void serialize(Archive& ar, const unsigned int version) {}             \
+#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                              \
+    production_symbol, reduct_function, production_body_seq, ...)             \
+  class NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,               \
+                                             production_body_seq)             \
+      : public frontend::generator::syntax_generator::                        \
+            ProcessFunctionInterface {                                        \
+   public:                                                                    \
+    virtual ProcessFunctionInterface::UserData Reduct(                        \
+        std::vector<ProcessFunctionInterface::WordDataToUser>&& word_data)    \
+        const override {                                                      \
+      return reduct_function(std::move(word_data));                           \
+    }                                                                         \
+                                                                              \
+   private:                                                                   \
+    friend class boost::serialization::access;                                \
+    template <class Archive>                                                  \
+    void serialize(Archive& ar, const unsigned int version) {                 \
+      ar& boost::serialization::base_object<ProcessFunctionInterface>(*this); \
+    }                                                                         \
   };
+#endif
 #endif
 
 #ifdef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER
 // 防止重复包含
 #ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER_END
-
+#define SHIELD_HEADERS_FOR_INTELLISENSE
 #ifdef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #endif  // GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
@@ -228,22 +234,25 @@
 #define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                     \
     production_symbol, reduct_function, production_body_seq, ...)    \
   BOOST_CLASS_EXPORT_GUID(                                           \
-      frontend::generator::syntax_generator::                         \
+      frontend::generator::syntax_generator::                        \
           NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,    \
                                                production_body_seq), \
       "frontend::generator::"                                        \
-      "syntax_generator::" NONTERMINAL_PRODUCTION_SYMBOL_MODIFY_STR(  \
+      "syntax_generator::" NONTERMINAL_PRODUCTION_SYMBOL_MODIFY_STR( \
           production_symbol, production_body_seq))
-#endif
-#endif
-
 #else
-
-#error 该文件仅且必须最终被Generator/SyntaxGenerator下的\
-process_functions_classes.h \
-config_construct.cpp所包含
-
+#errror 请勿在process_functions_classes_register.h文件以外包含 \
+    "production_config-inc.h"或重复包含
 #endif
+#endif
+
+//#else
+//
+//    #error 该文件仅且必须最终被Generator/SyntaxGenerator下的\
+//process_functions_classes.h \
+//config_construct.cpp process_functions_classes_register.h所包含
+//
+//#endif
 
 // 为了使用Intellisense在这个宏里包含需要的头文件
 // 此处的头文件在代码生成过程中会被忽略

@@ -5,16 +5,8 @@
 
 #include "Common/common.h"
 #include "Generator/DfaGenerator/dfa_generator.h"
+#include "Parser/line_and_column.h"
 #include "boost/archive/binary_iarchive.hpp"
-
-namespace frontend::parser {
-// 线程全局变量，存储当前解析到的行数
-// 从0开始计数
-extern thread_local size_t line_;
-// 线程全局变量，存储当前解析到的列数
-// 从0开始计数
-extern thread_local size_t column_;
-}  // namespace frontend::parser
 
 namespace frontend::parser::dfamachine {
 
@@ -53,18 +45,19 @@ class DfaMachine {
   // 如果遇到了文件结尾则返回tail_node_id = WordAttachedData::InvalidId()
   WordInfo GetNextWord();
   // 获取当前行数
-  static size_t GetLine() { return line_; }
+  static size_t GetLine() { return frontend::parser::GetLine(); }
   // 设置当前行数
-  static void SetLine(size_t line) { line_ = line; }
+  static void SetLine(size_t line) { frontend::parser::SetLine(line); }
   // 获取当前列数
-  static size_t GetColumn() { return column_; }
+  static size_t GetColumn() { return frontend::parser::GetColumn(); }
   // 设置当前列数
-  static void SetColumn(size_t column) { column_ = column; }
+  static void SetColumn(size_t column) { frontend::parser::SetColumn(column); }
 
   // 重置状态
   void Reset() {
     file_ = nullptr;
-    line_ = 0;
+    SetLine(0);
+    SetColumn(0);
   }
   void SetEndOfFileSavedData(const WordAttachedData& word_attached_data_) {
     file_end_saved_data_ = word_attached_data_;
@@ -78,7 +71,8 @@ class DfaMachine {
   }
   // 加载配置
   void LoadConfig() {
-    std::ifstream config_file(frontend::common::kDfaConfigFileName);
+    std::ifstream config_file(frontend::common::kDfaConfigFileName,
+                              std::ios_base::binary);
     boost::archive::binary_iarchive iarchive(config_file);
     iarchive >> *this;
   }
@@ -90,13 +84,13 @@ class DfaMachine {
   template <class Archive>
   void load(Archive& ar, const unsigned int version) {
     ar >> dfa_config_;
-    ar >> root_index_;
+    ar >> root_transform_array_id_;
     ar >> file_end_saved_data_;
   }
   BOOST_SERIALIZATION_SPLIT_MEMBER()
 
   // 起始DFA分析表ID
-  TransformArrayId root_index_;
+  TransformArrayId root_transform_array_id_;
   // DFA配置
   DfaConfigType dfa_config_;
   // 遇到文件尾时返回的数据

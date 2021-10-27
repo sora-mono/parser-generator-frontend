@@ -15,13 +15,4 @@ namespace frontend::generator::syntax_generator {
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_END
 }  // namespace frontend::generator::syntax_generator
 
-// 在boost::serialization中注册包装用户定义函数的类以序列化派生类
-#include <boost/serialization/export.hpp>
-#define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER
-#include "Config/ProductionConfig/production_config-inc.h"
-#undef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER
-
-// 定义结束标志
-#define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER_END
-
 #endif  // !GENERATOR_SYNTAXGENERATOR_SYNTAXCONFIG_PROCESSFUNCTIONS_H_

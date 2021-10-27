@@ -26,7 +26,7 @@
 #include "Generator/DfaGenerator/dfa_generator.h"
 #include "process_function_interface.h"
 
-namespace frontend::parser::syntaxmachine {
+namespace frontend::parser::syntax_machine {
 class SyntaxMachine;
 }
 
@@ -112,10 +112,13 @@ class SyntaxGenerator {
       std::unordered_map<CoreItem, ForwardNodesContainerType, CoreItemHasher>;
 
  public:
-  SyntaxGenerator();
+  SyntaxGenerator() = default;
   SyntaxGenerator(const SyntaxGenerator&) = delete;
 
   SyntaxGenerator& operator=(const SyntaxGenerator&) = delete;
+
+  // 构建并保存编译器前端配置
+  void ConstructSyntaxConfig();
 
  private:
   // 初始化
@@ -521,11 +524,14 @@ class SyntaxGenerator {
 
   // 将语法分析表配置写入文件
   void SaveConfig() const {
-    std::ofstream config_file(frontend::common::kSyntaxConfigFileName,
-                              std::ios_base::binary);
-    boost::archive::binary_oarchive oarchive(config_file);
     dfa_generator_.SaveConfig();
-    oarchive << *this;
+    std::ofstream config_file(frontend::common::kSyntaxConfigFileName,
+                              std::ios_base::binary | std::ios_base::out);
+    // oarchive要在config_file析构前析构，否则文件不完整在反序列化时会抛异常
+    {
+      boost::archive::binary_oarchive oarchive(config_file);
+      oarchive << *this;
+    }
   }
 
   // 将给定产生式转化为字符串
@@ -569,7 +575,7 @@ class SyntaxGenerator {
   }
 
   // 声明语法分析机为友类，便于其使用各种定义
-  friend class frontend::parser::syntaxmachine::SyntaxMachine;
+  friend class frontend::parser::syntax_machine::SyntaxMachine;
   // 暴露部分内部类型，从而在boost_serialization中注册
   friend struct ExportSyntaxGeneratorInsideTypeForSerialization;
   // 允许序列化类访问
@@ -1031,10 +1037,15 @@ class SyntaxGenerator {
       }
 
      private:
+      // 提供默认构造函数供序列化时构建对象
+      ActionAndAttachedDataInterface() = default;
+
       // 允许序列化用的类访问
       friend class boost::serialization::access;
       // 允许语法分析表条目调用内部接口
       friend class ParsingTableEntry;
+      // 暴露部分内部类型，从而在boost_serialization中注册
+      friend struct ExportSyntaxGeneratorInsideTypeForSerialization;
 
       virtual ShiftAttachedData& GetShiftAttachedData() {
         return const_cast<ShiftAttachedData&>(
@@ -1078,6 +1089,9 @@ class SyntaxGenerator {
       }
 
      private:
+      // 提供默认构造函数供序列化时构建对象
+      ShiftAttachedData() = default;
+
       // 允许序列化类访问
       friend class boost::serialization::access;
       // 允许语法分析表条目访问内部接口
@@ -1085,7 +1099,8 @@ class SyntaxGenerator {
 
       template <class Archive>
       void serialize(Archive& ar, const unsigned int version) {
-        ActionAndAttachedDataInterface::serialize(ar, version);
+        ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
+            *this);
         ar& next_entry_id_;
       }
       virtual ShiftAttachedData& GetShiftAttachedData() override {
@@ -1142,6 +1157,9 @@ class SyntaxGenerator {
       }
 
      private:
+      // 提供默认构造函数供序列化时构建对象
+      ReductAttachedData() = default;
+
       // 允许序列化类访问
       friend class boost::serialization::access;
       // 允许语法分析表条目访问内部接口
@@ -1149,7 +1167,8 @@ class SyntaxGenerator {
 
       template <class Archive>
       void serialize(Archive& ar, const unsigned int version) {
-        ActionAndAttachedDataInterface::serialize(ar, version);
+        ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
+            *this);
         ar& reducted_nonterminal_node_id_;
         ar& process_function_class_id_;
         ar& production_body_;
@@ -1205,6 +1224,9 @@ class SyntaxGenerator {
       }
 
      private:
+      // 提供默认构造函数供序列化时构建对象
+      ShiftReductAttachedData() = default;
+
       // 允许序列化类访问
       friend class boost::serialization::access;
       // 允许语法分析表条目访问内部接口
@@ -1212,7 +1234,8 @@ class SyntaxGenerator {
 
       template <class Archive>
       void serialize(Archive& ar, const unsigned int version) {
-        ActionAndAttachedDataInterface::serialize(ar, version);
+        ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
+            *this);
         ar& shift_attached_data_;
         ar& reduct_attached_data_;
       }
@@ -1567,15 +1590,22 @@ inline bool SyntaxGenerator::Core::AddForwardNodes(
 
 // 暴露部分内部类供boost序列化注册类型(BOOST_CLASS_EXPORT_GUID)用
 struct ExportSyntaxGeneratorInsideTypeForSerialization {
+  using ProductionNodeId = SyntaxGenerator::ProductionNodeId;
+  using ProcessFunctionClassId = SyntaxGenerator::ProcessFunctionClassId;
+  using ProcessFunctionClassManagerType =
+      SyntaxGenerator::ProcessFunctionClassManagerType;
+  using ParsingTableType = SyntaxGenerator::ParsingTableType;
   using ParsingTableEntry = SyntaxGenerator::ParsingTableEntry;
   using ParsingTableEntryId = SyntaxGenerator::ParsingTableEntryId;
+  using ParsingTableEntryActionAndReductDataInterface =
+      SyntaxGenerator::ParsingTableEntry::ActionAndAttachedDataInterface;
+  using ParsingTableEntryShiftAttachedData =
+      SyntaxGenerator::ParsingTableEntry::ShiftAttachedData;
+  using ParsingTableEntryReductAttachedData =
+      SyntaxGenerator::ParsingTableEntry::ReductAttachedData;
+  using ParsingTableEntryShiftReductAttachedData =
+      SyntaxGenerator::ParsingTableEntry::ShiftReductAttachedData;
 };
 }  // namespace frontend::generator::syntax_generator
-
-// 注册序列化需要使用的类
-BOOST_CLASS_EXPORT_GUID(
-    frontend::generator::syntax_generator::
-        ExportSyntaxGeneratorInsideTypeForSerialization::ParsingTableEntry,
-    "frontend::generator::syntax_generator::SyntaxGenerator::ParsingTableEntry")
 
 #endif  // !GENERATOR_SYNTAXGENERATOR_SYNTAXGENERATOR_H_

@@ -112,18 +112,28 @@ class DfaGenerator {
   friend class DfaMachine;
   friend class boost::serialization::access;
 
+  // 用来哈希中间节点ID和单词数据的结合体的结构，用于SubDataMinimize
+  struct PairOfIntermediateNodeIdAndWordAttachedDataHasher {
+    size_t operator()(const std::pair<IntermediateNodeId, WordAttachedData>&
+                          data_to_hash) const {
+      return data_to_hash.first * data_to_hash.second.production_node_id;
+    }
+  };
+
   template <class Archive>
   void save(Archive& ar, const unsigned int version) const {
     ar << dfa_config_;
-    ar << root_index_;
+    ar << root_transform_array_id_;
     ar << file_end_saved_data_;
   }
   BOOST_SERIALIZATION_SPLIT_MEMBER()
 
   struct IntermediateDfaNode {
+    template <class AttachedData>
     IntermediateDfaNode(SetId handler = SetId::InvalidId(),
-                        TailNodeData data = NfaGenerator::NotTailNodeTag)
-        : tail_node_data(data), set_handler(handler) {
+                        AttachedData&& word_attached_data_ = WordAttachedData())
+        : word_attached_data(std::forward<AttachedData>(word_attached_data_)),
+          set_handler(handler) {
       SetAllUntransable();
     }
 
@@ -132,12 +142,14 @@ class DfaGenerator {
       forward_nodes.fill(IntermediateNodeId::InvalidId());
     }
     SetId GetSetHandler() { return set_handler; }
-    void SetTailNodeData(TailNodeData data) { tail_node_data = data; }
+    void SetWordAttachedData(const WordAttachedData& data) {
+      word_attached_data = data;
+    }
 
     // 该节点的转移条件，存储IntermediateDfaNode节点句柄
     // 可以直接使用CHAR_MIN~CHAR_MAX任意值访问
     TransformArrayManager<IntermediateNodeId> forward_nodes;
-    TailNodeData tail_node_data;
+    WordAttachedData word_attached_data;
     // 该节点对应的子集闭包
     SetId set_handler;
   };
@@ -162,27 +174,20 @@ class DfaGenerator {
   // 如果集合已存在则返回true，如果不存在则插入并返回false
   // 返回的第一个参数为对应中间节点句柄
   // 返回的第二个参数为集合是否已存在
+  template <class IntermediateNodeSet>
   std::pair<IntermediateNodeId, bool> InOrInsert(
-      const SetType& uset,
-      TailNodeData tail_node_data = NfaGenerator::NotTailNodeTag);
+      IntermediateNodeSet&& uset,
+      WordAttachedData&& word_attached_data = WordAttachedData());
 
-  // 对handlers数组中的句柄作最小化处理，从c_transform转移条件开始
-  bool DfaMinimize(const std::vector<IntermediateNodeId>& handlers,
-                   char c_transform);
-  // DfaMinimize的子过程，处理它生成的分类表
-  // 并对每一个需要继续分类的组调用DfaMinimize()
-  // 分类完成的节点会添加旧节点ID到新节点ID的映射
-  // 会添加保留的节点到新节点的映射
-  // 并删除多余的等效节点，仅保留一个
-  template <class IdType>
-  bool DfaMinimizeGroupsRecursion(
-      const std::map<IdType, std::vector<IntermediateNodeId>>& groups,
-      char c_transform);
+  // 对handlers数组中的句柄作最小化处理，从CHAR_MIN转移条件开始递增直到CHAR_MAX
+  // 第二个参数表示起始条件
+  void SubDfaMinimize(std::list<IntermediateNodeId>&& handlers,
+                      char c_transform = CHAR_MIN);
 
   // DFA配置，写入文件
   DfaConfigType dfa_config_;
   // 头结点序号，写入文件
-  TransformArrayId root_index_;
+  TransformArrayId root_transform_array_id_;
   // 遇到文件尾时返回的数据，写入文件
   WordAttachedData file_end_saved_data_;
 
@@ -190,7 +195,7 @@ class DfaGenerator {
   // 中间节点头结点句柄
   IntermediateNodeId head_node_intermediate_;
   // 最终有效节点数
-  size_t config_node_num = 0;
+  size_t transform_array_size = 0;
 
   // 存储DFA中间节点到最终标号的映射
   std::unordered_map<IntermediateNodeId, TransformArrayId>
@@ -203,32 +208,28 @@ class DfaGenerator {
   std::unordered_map<SetId, IntermediateNodeId> setid_to_intermediate_nodeid_;
 };
 
-template <class IdType>
-inline bool DfaGenerator::DfaMinimizeGroupsRecursion(
-    const std::map<IdType, std::vector<IntermediateNodeId>>& groups,
-    char c_transform) {
-  for (auto& p : groups) {
-    const std::vector<IntermediateNodeId>& vec = p.second;
-    if (vec.size() == 1) {
-      intermediate_node_to_final_node_.insert(
-          std::make_pair(vec.front(), config_node_num));
-      ++config_node_num;
-      continue;
-    }
-    if (c_transform != CHAR_MAX) {
-      DfaMinimize(vec, c_transform + 1);
-    } else {
-      intermediate_node_to_final_node_.insert(
-          std::make_pair(vec[0], config_node_num));
-      for (size_t i = 1; i < vec.size(); i++) {
-        intermediate_node_to_final_node_.insert(
-            std::make_pair(vec[i], config_node_num));
-        node_manager_intermediate_node_.RemoveObject(vec[i]);
-      }
-      ++config_node_num;
-    }
+// 如果集合已存在则返回true，如果不存在则插入并返回false
+// 返回的第一个参数为对应中间节点句柄
+// 返回的第二个参数为集合是否已存在
+
+template <class IntermediateNodeSet>
+inline std::pair<DfaGenerator::IntermediateNodeId, bool>
+DfaGenerator::InOrInsert(IntermediateNodeSet&& uset,
+                         WordAttachedData&& word_attached_data) {
+  auto [setid, inserted] =
+      node_manager_set_.AddObject(std::forward<IntermediateNodeSet>(uset));
+  IntermediateNodeId intermediate_node_id = IntermediateNodeId::InvalidId();
+  if (inserted) {
+    intermediate_node_id = node_manager_intermediate_node_.EmplaceObject(
+        setid, std::move(word_attached_data));
+    setid_to_intermediate_nodeid_.insert(
+        std::make_pair(setid, intermediate_node_id));
+  } else {
+    auto iter = setid_to_intermediate_nodeid_.find(setid);
+    assert(iter != setid_to_intermediate_nodeid_.end());
+    intermediate_node_id = iter->second;
   }
-  return true;
+  return std::make_pair(intermediate_node_id, inserted);
 }
 
 }  // namespace frontend::generator::dfa_generator

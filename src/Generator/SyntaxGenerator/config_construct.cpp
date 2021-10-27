@@ -1,6 +1,3 @@
-#ifndef GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT
-#define GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT
-
 #include "process_functions_classes.h"
 #include "syntax_generator.h"
 
@@ -15,5 +12,3 @@ void SyntaxGenerator::ConfigConstruct() {
 #define GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_END
 }
 }  // namespace frontend::generator::syntax_generator
-
-#endif  // !GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT

@@ -116,16 +116,13 @@ bool ActionScopeSystem::CreateFunctionTypeVarietyAndPush(
   return define_variety_result != DefineVarietyResult::kReDefine;
 }
 
-void ActionScopeSystem::SetFunctionToConstruct(
+bool ActionScopeSystem::SetFunctionToConstruct(
     const std::shared_ptr<c_parser_frontend::type_system::FunctionType>&
         function_type) {
   // 添加全局的函数类型变量，用于函数指针赋值
   bool result = CreateFunctionTypeVarietyAndPush(function_type);
   if (!result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 函数内部不能声明函数",
-                             frontend::parser::line_, frontend::parser::column_)
-              << std::endl;
-    exit(-1);
+    return false;
   }
   AddActionScopeLevel();
   // 添加函数定义流程控制语句
@@ -143,6 +140,7 @@ void ActionScopeSystem::SetFunctionToConstruct(
                                         argument_node.variety_operator_node));
     }
   }
+  return true;
 }
 
 // 将构建中的流程控制节点压栈，自动增加一级作用域等级

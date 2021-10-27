@@ -4,20 +4,19 @@
 #include <iostream>
 #include <limits>
 
-#include "Generator/SyntaxGenerator/process_function_interface.h"
 #include "c_parser_frontend.h"
 #include "flow_control.h"
 #include "operator_node.h"
 #include "type_system.h"
 namespace c_parser_frontend {
 // 声明线程全局变量：C语言编译器前端的类对象
-extern thread_local CParserFrontend parser_frontend;
+extern thread_local CParserFrontend c_parser_frontend;
 }  // namespace c_parser_frontend
 
 namespace c_parser_frontend::parse_functions {
 using WordDataToUser = frontend::generator::syntax_generator::
     ProcessFunctionInterface::WordDataToUser;
-using c_parser_frontend::parser_frontend;
+using c_parser_frontend::c_parser_frontend;
 using c_parser_frontend::flow_control::AllocateOperatorNode;
 using c_parser_frontend::flow_control::ConditionBlockInterface;
 using c_parser_frontend::flow_control::DoWhileSentence;

@@ -1,7 +1,6 @@
 #ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_H_
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_H_
 #include <any>
-#include <boost/serialization/export.hpp>
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/variant.hpp>
 
@@ -58,21 +57,32 @@ class ProcessFunctionInterface {
   // 参数标号越低入栈时间越晚
   // 返回的值作为移入该产生式规约得到的非终结符号下一次参与规约传递的参数
   // 空规约节点的node_type是ProductionNodeType::kEndNode
-  virtual UserData Reduct(std::vector<WordDataToUser>&& word_data) = 0;
+  virtual UserData Reduct(std::vector<WordDataToUser>&& word_data) const = 0;
+
+ private:
+  // 允许序列化类访问
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive&& ar, const unsigned int version) {}
 };
 
 // 内部实现用根节点的规约函数
 class RootReductClass : public ProcessFunctionInterface {
-  virtual UserData Reduct(std::vector<WordDataToUser>&& word_data) override {
+  virtual UserData Reduct(
+      std::vector<WordDataToUser>&& word_data) const override {
     return UserData();
+  }
+
+ private:
+  // 允许序列化类访问
+  friend class boost::serialization::access;
+
+  template <class Archive>
+  void serialize(Archive&& ar, const unsigned int version) {
+    ar& boost::serialization::base_object<ProcessFunctionInterface>(*this);
   }
 };
 }  // namespace frontend::generator::syntax_generator
-// 注册基类以允许序列化
-BOOST_CLASS_EXPORT_GUID(
-    frontend::generator::syntax_generator::ProcessFunctionInterface,
-    "frontend::generator::syntax_generator::ProcessFunctionInterface")
-BOOST_CLASS_EXPORT_GUID(
-    frontend::generator::syntax_generator::RootReductClass,
-    "frontend::generator::syntax_generator::RootReductClass")
+
 #endif  // !GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_H_

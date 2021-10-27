@@ -7,7 +7,7 @@
 #ifndef PARSER_SYNTAXMACHINE_SYNTAXMACHINE_H_
 #define PARSER_SYNTAXMACHINE_SYNTAXMACHINE_H_
 
-namespace frontend::parser::syntaxmachine {
+namespace frontend::parser::syntax_machine {
 
 class SyntaxMachine {
   using SyntaxGenerator = frontend::generator::syntax_generator::SyntaxGenerator;
@@ -173,5 +173,5 @@ class SyntaxMachine {
   bool last_operate_is_reduct_ = true;
 };
 
-}  // namespace frontend::parser::syntaxmachine
+}  // namespace frontend::parser::syntax_machine
 #endif  // !PARSER_SYNTAXMACHINE_SYNTAXMACHINE_H_

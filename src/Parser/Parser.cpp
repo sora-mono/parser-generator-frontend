@@ -9,7 +9,11 @@
 
 #include <iostream>
 
-int main() { std::cout << "Hello World!\n"; }
+#include "Generator/SyntaxGenerator/process_functions_classes_register.h"
+#include "Generator/SyntaxGenerator/syntax_generator_classes_register.h"
+#include "SyntaxMachine/syntax_machine.h"
+
+int main() { frontend::parser::syntax_machine::SyntaxMachine syntax_machine; }
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单

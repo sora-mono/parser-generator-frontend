@@ -374,7 +374,7 @@ std::shared_ptr<ObjectConstructData> IdOrEquivenceConstTagId(
 //// IdOrEquivence -> "const"
 //// 分配在堆上，避免any容器中复制对象
 //// 使用std::shared_ptr代替std::shared_ptr，std::any不能存储不支持复制的类型
-//std::shared_ptr<ObjectConstructData> IdOrEquivenceConst(
+// std::shared_ptr<ObjectConstructData> IdOrEquivenceConst(
 //    std::vector<WordDataToUser>&& word_data) {
 //  assert(word_data.size() == 1);
 //  std::shared_ptr<ObjectConstructData> construct_data =
@@ -455,10 +455,10 @@ std::any IdOrEquivenceInBrackets(std::vector<WordDataToUser>&& word_data) {
   return std::move(word_data[1].GetNonTerminalWordData().user_returned_data);
 }
 
-
 //// EmptyReductableIdOrEquivence -> IdOrEquivence
 //// 返回值类型：std::shared_ptr<ObjectConstructData>
-//std::any EmptyReductableIdOrEquivence(std::vector<WordDataToUser>&& word_data) {
+// std::any EmptyReductableIdOrEquivence(std::vector<WordDataToUser>&&
+// word_data) {
 //  assert(word_data.size() == 1);
 //  return std::move(word_data.front());
 //}
@@ -558,7 +558,7 @@ std::shared_ptr<EnumType> EnumDefine(std::vector<WordDataToUser>&& word_data) {
       word_data[3].GetNonTerminalWordData().user_returned_data;
   std::string& enum_name = word_data[1].GetTerminalWordData().word;
   // 声明该枚举以获取指向名字的指针
-  auto iter = parser_frontend.AnnounceTypeName(std::move(enum_name));
+  auto iter = c_parser_frontend.AnnounceTypeName(std::move(enum_name));
   std::shared_ptr<EnumType> enum_type;
   if (enum_return_data.has_value()) {
     // 该枚举有成员
@@ -572,7 +572,7 @@ std::shared_ptr<EnumType> EnumDefine(std::vector<WordDataToUser>&& word_data) {
   }
   // 添加该枚举的定义
   auto [insert_iter, result] =
-      parser_frontend.DefineType(std::move(enum_name), enum_type);
+      c_parser_frontend.DefineType(std::move(enum_name), enum_type);
   CheckAddTypeResult(result);
   return enum_type;
 }
@@ -659,7 +659,7 @@ std::shared_ptr<StructureTypeInterface> StructureDefineInitHead(
   const std::string* structure_name_pointer = nullptr;
   if (!struct_name.empty()) {
     // 如果声明的结构具名则声明该类型名
-    auto iter = parser_frontend.AnnounceTypeName(std::move(struct_name));
+    auto iter = c_parser_frontend.AnnounceTypeName(std::move(struct_name));
     structure_name_pointer = &iter->first;
   }
   switch (struct_type) {
@@ -678,7 +678,7 @@ std::shared_ptr<StructureTypeInterface> StructureDefineInitHead(
   // 如果是非匿名结构则注册结构体/共用体类型
   // 不使用struct_name因为已经被移动构造
   if (structure_name_pointer != nullptr) [[likely]] {
-    auto [iter, result] = parser_frontend.DefineType(
+    auto [iter, result] = c_parser_frontend.DefineType(
         *structure_name_pointer, structure_type_constructuring);
     CheckAddTypeResult(result);
   }
@@ -704,7 +704,7 @@ std::shared_ptr<const StructureTypeInterface> StructTypeStructAnnounce(
   std::string& struct_name = struct_data.first;
   StructOrBasicType struct_type = struct_data.second;
   auto [type_pointer, get_type_result] =
-      parser_frontend.GetType(struct_name, struct_type);
+      c_parser_frontend.GetType(struct_name, struct_type);
   switch (get_type_result) {
     case GetTypeResult::kSuccess:
       // 成功获取
@@ -767,7 +767,7 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeStructType(
 
 //// BasicType->ConstTag Id
 //// 返回获取到的类型与ConstTag
-//std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeId(
+// std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeId(
 //    std::vector<WordDataToUser>&& word_data) {
 //  assert(word_data.size() == 2);
 //  ConstTag const_tag = GetConstTag(word_data[0]);
@@ -775,7 +775,7 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeStructType(
 //  assert(!type_name.empty());
 //  // 获取ID对应的类型
 //  auto [type_pointer, result] =
-//      parser_frontend.GetType(type_name, StructOrBasicType::kNotSpecified);
+//      c_parser_frontend.GetType(type_name, StructOrBasicType::kNotSpecified);
 //  switch (result) {
 //    case GetTypeResult::kSuccess:
 //      // 成功获取变量类型
@@ -805,7 +805,7 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeEnumAnnounce(
           word_data[1].GetNonTerminalWordData().user_returned_data)
           .first;
   auto [type_pointer, result] =
-      parser_frontend.GetType(enum_name, StructOrBasicType::kNotSpecified);
+      c_parser_frontend.GetType(enum_name, StructOrBasicType::kNotSpecified);
   switch (result) {
     case GetTypeResult::kSuccess:
       // 成功获取变量类型
@@ -959,7 +959,7 @@ std::shared_ptr<FlowInterface> SingleAnnounceNoAssignNotPodVariety(
   auto& construct_data = std::any_cast<std::shared_ptr<ObjectConstructData>&>(
       word_data[2].GetNonTerminalWordData().user_returned_data);
   auto [final_type, result] =
-      parser_frontend.GetType(type_name, StructOrBasicType::kNotSpecified);
+      c_parser_frontend.GetType(type_name, StructOrBasicType::kNotSpecified);
   switch (result) {
     case GetTypeResult::kSeveralSameLevelMatches:
       OutputError(std::format("类型名 {:} 对应多种类型，无法确定要使用的类型",
@@ -1015,16 +1015,16 @@ std::any TypeDef(std::vector<WordDataToUser>&& word_data) {
   auto type_pointer = variety_pointer->GetVarietyTypePointer();
   const std::string* type_name = variety_pointer->GetVarietyNamePointer();
   // 注册类型名
-  auto iter = parser_frontend.AnnounceTypeName(*type_name);
+  auto iter = c_parser_frontend.AnnounceTypeName(*type_name);
   auto [ignore_iter, result] =
-      parser_frontend.DefineType(*type_name, type_pointer);
+      c_parser_frontend.DefineType(*type_name, type_pointer);
   if (result == AddTypeResult::kTypeAlreadyIn) [[unlikely]] {
     OutputError(std::format(
         "使用typedef定义别名时使用的名字{:}已存在相同类型的定义", *type_name));
     exit(-1);
   }
   // 尝试清除空的类型节点
-  parser_frontend.RemoveVarietySystemEmptyNode(*type_name);
+  c_parser_frontend.RemoveVarietySystemEmptyNode(*type_name);
   return std::any();
 }
 
@@ -1121,8 +1121,14 @@ FunctionDefineHead(std::vector<WordDataToUser>&& word_data) {
           *function_head)
           .GetFunctionTypePointer();
   // 设置当前待构建函数
-  parser_frontend.SetFunctionToConstruct(
+  bool set_result = c_parser_frontend.SetFunctionToConstruct(
       std::shared_ptr<FunctionType>(function_type));
+  if (!set_result) [[unlikely]] {
+    std::cerr << std::format("行数{:} 列数{:} 函数内部不能声明函数", GetLine(),
+                             GetColumn())
+              << std::endl;
+    exit(-1);
+  }
   return std::static_pointer_cast<
       c_parser_frontend::flow_control::FunctionDefine>(function_head);
 }
@@ -1131,7 +1137,7 @@ std::any FunctionDefine(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
   // 添加函数内语句已经在Sentences构建过程中完成
   // 只需清理作用域
-  parser_frontend.PopActionScope();
+  c_parser_frontend.PopActionScope();
   return std::any();
 }
 
@@ -1308,8 +1314,8 @@ VarietyAnnounceNoAssign(std::shared_ptr<VarietyOperatorNode>&& variety_node) {
   flow_control_node_container->emplace_back(
       std::move(allocate_flow_control_node));
   // 定义变量
-  parser_frontend.DefineVariety(*variety_node->GetVarietyNamePointer(),
-                                std::move(variety_node));
+  c_parser_frontend.DefineVariety(*variety_node->GetVarietyNamePointer(),
+                                  std::move(variety_node));
   // 获取扩展声明时的类型
   if (raw_variety_type->GetType() == StructOrBasicType::kPointer) {
     // 如果是指针类型则在原始声明类型基础上去除一重指针
@@ -1365,8 +1371,8 @@ VarieytAnnounceWithAssign(
   flow_control_node_container->emplace_back(
       std::move(assign_flow_control_node));
   // 定义变量
-  parser_frontend.DefineVariety(*variety_node->GetVarietyNamePointer(),
-                                std::move(variety_node));
+  c_parser_frontend.DefineVariety(*variety_node->GetVarietyNamePointer(),
+                                  std::move(variety_node));
   // 获取扩展声明时的类型
   if (raw_variety_type->GetType() == StructOrBasicType::kPointer) {
     // 如果是指针类型则在原始声明类型基础上去除一重指针
@@ -1439,7 +1445,7 @@ std::any SingleAnnounceAndAssignNoAssignExtend(
   std::string& variety_name = word_data[2].GetTerminalWordData().word;
   // 构建变量节点
   // 声明变量名
-  auto iter = parser_frontend.AnnounceVarietyName(variety_name);
+  auto iter = c_parser_frontend.AnnounceVarietyName(variety_name);
   auto variety_node = std::make_shared<VarietyOperatorNode>(
       &iter->first, extend_const_tag, LeftRightValueTag::kLeftValue);
   variety_node->SetVarietyType(
@@ -1466,7 +1472,7 @@ std::any SingleAnnounceAndAssignWithAssignExtend(
   std::string& variety_name = word_data[2].GetTerminalWordData().word;
   // 构建变量节点
   // 声明变量名
-  auto iter = parser_frontend.AnnounceVarietyName(variety_name);
+  auto iter = c_parser_frontend.AnnounceVarietyName(variety_name);
   auto variety_node = std::make_shared<VarietyOperatorNode>(
       &iter->first, extend_const_tag, LeftRightValueTag::kLeftValue);
   variety_node->SetVarietyType(
@@ -1789,7 +1795,7 @@ AssignableId(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
   std::string& variety_name = word_data.front().GetTerminalWordData().word;
   auto [variety_operator_node, found] =
-      parser_frontend.GetVariety(variety_name);
+      c_parser_frontend.GetVariety(variety_name);
   if (!found) [[unlikely]] {
     // 未找到给定名称的变量
     OutputError(std::format("找不到对象{:}", variety_name));
@@ -2467,7 +2473,7 @@ std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithValue(
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
       word_data[1].GetNonTerminalWordData().user_returned_data);
   auto return_flow_control_node = std::make_unique<Return>();
-  auto active_function = parser_frontend.GetActiveFunctionPointer();
+  auto active_function = c_parser_frontend.GetActiveFunctionPointer();
   if (active_function == nullptr) [[unlikely]] {
     OutputError(std::format("当前不处于函数内，无法返回"));
     exit(-1);
@@ -2490,7 +2496,7 @@ std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithoutValue(
   auto sentences_to_get_assignable =
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>();
   auto return_flow_control_node = std::make_unique<Return>();
-  auto active_function = parser_frontend.GetActiveFunctionPointer();
+  auto active_function = c_parser_frontend.GetActiveFunctionPointer();
   if (active_function == nullptr) [[unlikely]] {
     OutputError(std::format("当前不处于函数内，无法返回"));
     exit(-1);
@@ -2694,7 +2700,7 @@ std::any AssignablesExtend(std::vector<WordDataToUser>&& word_data) {
 std::shared_ptr<std::unique_ptr<Jmp>> Break(
     std::vector<WordDataToUser>&& word_data) {
   auto& top_flow_control_sentence = static_cast<ConditionBlockInterface&>(
-      parser_frontend.GetTopFlowControlSentence());
+      c_parser_frontend.GetTopFlowControlSentence());
   switch (top_flow_control_sentence.GetFlowType()) {
     case FlowType::kDoWhileSentence:
     case FlowType::kWhileSentence:
@@ -2715,7 +2721,7 @@ std::shared_ptr<std::unique_ptr<Jmp>> Break(
 std::shared_ptr<std::unique_ptr<Jmp>> Continue(
     std::vector<WordDataToUser>&& word_data) {
   auto& top_flow_control_sentence = static_cast<LoopSentenceInterface&>(
-      parser_frontend.GetTopFlowControlSentence());
+      c_parser_frontend.GetTopFlowControlSentence());
   switch (top_flow_control_sentence.GetFlowType()) {
     case FlowType::kDoWhileSentence:
     case FlowType::kWhileSentence:
@@ -2774,7 +2780,7 @@ std::any SingleStatementAssignable(std::vector<WordDataToUser>&& word_data) {
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
       word_data[0].GetNonTerminalWordData().user_returned_data);
   bool result =
-      parser_frontend.AddSentences(std::move(*flow_control_node_container));
+      c_parser_frontend.AddSentences(std::move(*flow_control_node_container));
   if (!result) [[unlikely]] {
     OutputError(std::format("此语句不应出现在该范围内"));
     exit(-1);
@@ -2790,7 +2796,7 @@ std::any SingleStatementAnnounce(std::vector<WordDataToUser>&& word_data) {
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
           word_data[0].GetNonTerminalWordData().user_returned_data);
   bool result =
-      parser_frontend.AddSentences(std::move(*flow_control_node_container));
+      c_parser_frontend.AddSentences(std::move(*flow_control_node_container));
   if (!result) [[unlikely]] {
     OutputError(std::format("此语句不应出现在该范围内"));
     exit(-1);
@@ -2804,7 +2810,7 @@ std::any SingleStatementReturn(std::vector<WordDataToUser>&& word_data) {
       std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&>(
       word_data.front().GetNonTerminalWordData().user_returned_data);
   bool result =
-      parser_frontend.AddSentences(std::move(sentences_to_get_return_node));
+      c_parser_frontend.AddSentences(std::move(sentences_to_get_return_node));
   // 所有报错应在这步规约前进行
   assert(result);
   return std::any();
@@ -2814,7 +2820,7 @@ std::any SingleStatementBreak(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
   auto& jmp_sentence = *std::any_cast<std::shared_ptr<std::unique_ptr<Jmp>>&>(
       word_data.front().GetNonTerminalWordData().user_returned_data);
-  bool result = parser_frontend.AddSentence(std::move(jmp_sentence));
+  bool result = c_parser_frontend.AddSentence(std::move(jmp_sentence));
   // 所有报错应在这步规约前进行
   assert(result);
   return std::any();
@@ -2824,7 +2830,7 @@ std::any SingleStatementContinue(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
   auto& jmp_sentence = *std::any_cast<std::shared_ptr<std::unique_ptr<Jmp>>&>(
       word_data.front().GetNonTerminalWordData().user_returned_data);
-  bool result = parser_frontend.AddSentence(std::move(jmp_sentence));
+  bool result = c_parser_frontend.AddSentence(std::move(jmp_sentence));
   // 所有报错应在这步规约前进行
   assert(result);
   return std::any();
@@ -2844,21 +2850,29 @@ std::any IfCondition(std::vector<WordDataToUser>&& word_data) {
     OutputError(std::format("该条件无法作为if语句条件"));
     exit(-1);
   }
-  parser_frontend.PushFlowControlSentence(std::move(if_flow_control_node));
+  bool push_result = c_parser_frontend.PushFlowControlSentence(
+      std::move(if_flow_control_node));
+  if (!push_result) [[unlikely]] {
+    std::cerr << std::format(
+                     "行数{:} 列数{:} 流程控制语句必须在函数定义内部使用",
+                     GetLine(), GetColumn())
+              << std::endl;
+    exit(-1);
+  }
   return std::any();
 }
 
 std::any IfWithElse(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
   // 转换为if-else语句
-  parser_frontend.ConvertIfSentenceToIfElseSentence();
+  c_parser_frontend.ConvertIfSentenceToIfElseSentence();
   return std::any();
 }
 
 // If->IfWithElse ProcessControlSentenceBody
 // 不返回任何值
 std::any IfElseSence(std::vector<WordDataToUser>&& word_data) {
-  parser_frontend.PopActionScope();
+  c_parser_frontend.PopActionScope();
   return std::any();
 }
 
@@ -2866,7 +2880,7 @@ std::any IfElseSence(std::vector<WordDataToUser>&& word_data) {
 // 不返回任何值
 std::any IfIfSentence(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
-  parser_frontend.PopActionScope();
+  c_parser_frontend.PopActionScope();
   return std::any();
 }
 
@@ -2907,14 +2921,22 @@ ForInitSentenceAnnounce(std::vector<WordDataToUser>&& word_data) {
 // 不返回任何值
 std::any ForInitHead(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
-  parser_frontend.PushFlowControlSentence(std::make_unique<ForSentence>());
+  bool push_result = c_parser_frontend.PushFlowControlSentence(
+      std::make_unique<ForSentence>());
+  if (!push_result) [[unlikely]] {
+    std::cerr << std::format(
+                     "行数{:} 列数{:} 流程控制语句必须在函数定义内部使用",
+                     GetLine(), GetColumn())
+              << std::endl;
+    exit(-1);
+  }
   return std::any();
 }
 
 std::any ForHead(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 6);
   auto& for_sentence =
-      static_cast<ForSentence&>(parser_frontend.GetTopFlowControlSentence());
+      static_cast<ForSentence&>(c_parser_frontend.GetTopFlowControlSentence());
   assert(for_sentence.GetFlowType() == FlowType::kForSentence);
   auto& for_init_sentences = std::any_cast<
       std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&>(
@@ -2951,7 +2973,7 @@ std::any ForHead(std::vector<WordDataToUser>&& word_data) {
 // 不返回任何值
 std::any For(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
-  parser_frontend.PopActionScope();
+  c_parser_frontend.PopActionScope();
   return std::any();
 }
 
@@ -2965,14 +2987,22 @@ std::any WhileInitHead(std::vector<WordDataToUser>&& word_data) {
       std::make_shared<std::unique_ptr<WhileSentence>>(
           std::make_unique<WhileSentence>());
   auto& while_sentence = *pointer_to_while_sentence;
-  parser_frontend.AddActionScopeLevel();
+  c_parser_frontend.AddActionScopeLevel();
   bool result = while_sentence->SetCondition(
       while_condition, std::move(*sentences_to_get_condition));
   if (!result) [[unlikely]] {
     OutputError(std::format("给定条件无法作为while循环语句条件"));
     exit(-1);
   }
-  parser_frontend.PushFlowControlSentence(std::move(while_sentence));
+  bool push_result =
+      c_parser_frontend.PushFlowControlSentence(std::move(while_sentence));
+  if (!push_result) [[unlikely]] {
+    std::cerr << std::format(
+                     "行数{:} 列数{:} 流程控制语句必须在函数定义内部使用",
+                     GetLine(), GetColumn())
+              << std::endl;
+    exit(-1);
+  }
   return std::any();
 }
 
@@ -2981,7 +3011,7 @@ std::any WhileInitHead(std::vector<WordDataToUser>&& word_data) {
 // 不返回任何值
 std::any While(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
-  parser_frontend.PopActionScope();
+  c_parser_frontend.PopActionScope();
   return std::any();
 }
 
@@ -2990,7 +3020,15 @@ std::any While(std::vector<WordDataToUser>&& word_data) {
 // 不返回任何数据
 std::any DoWhileInitHead(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
-  parser_frontend.PushFlowControlSentence(std::make_unique<DoWhileSentence>());
+  bool push_result = c_parser_frontend.PushFlowControlSentence(
+      std::make_unique<DoWhileSentence>());
+  if (!push_result) [[unlikely]] {
+    std::cerr << std::format(
+                     "行数{:} 列数{:} 流程控制语句必须在函数定义内部使用",
+                     GetLine(), GetColumn())
+              << std::endl;
+    exit(-1);
+  }
   return std::any();
 }
 
@@ -3001,12 +3039,12 @@ std::any DoWhile(std::vector<WordDataToUser>&& word_data) {
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
       word_data[4].GetNonTerminalWordData().user_returned_data);
   DoWhileSentence& do_while_sentence = static_cast<DoWhileSentence&>(
-      parser_frontend.GetTopFlowControlSentence());
+      c_parser_frontend.GetTopFlowControlSentence());
   assert(do_while_sentence.GetFlowType() == FlowType::kDoWhileSentence);
   // 设置do-while语句条件
   do_while_sentence.SetCondition(assignable,
                                  std::move(*sentences_to_get_assignable));
-  parser_frontend.PopActionScope();
+  c_parser_frontend.PopActionScope();
   return std::any();
 }
 
@@ -3015,7 +3053,7 @@ std::any SwitchCaseSimple(std::vector<WordDataToUser>&& word_data) {
   auto& case_data =
       std::any_cast<std::shared_ptr<BasicTypeInitializeOperatorNode>&>(
           word_data[1].GetNonTerminalWordData().user_returned_data);
-  bool result = parser_frontend.AddSwitchSimpleCase(case_data);
+  bool result = c_parser_frontend.AddSwitchSimpleCase(case_data);
   if (!result) [[unlikely]] {
     OutputError(std::format(
         "无法添加给定的case选项，可能是不位于switch语句内或case条件已存在"));
@@ -3026,7 +3064,7 @@ std::any SwitchCaseSimple(std::vector<WordDataToUser>&& word_data) {
 
 std::any SwitchCaseDefault(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
-  bool result = parser_frontend.AddSwitchDefaultCase();
+  bool result = c_parser_frontend.AddSwitchDefaultCase();
   if (!result) [[unlikely]] {
     OutputError(std::format(
         "无法添加default标签，可能不位于switch语句内或已存在default标签"));
@@ -3070,7 +3108,15 @@ std::any SwitchCondition(std::vector<WordDataToUser>&& word_data) {
     OutputError(std::format("给定条件无法作为switch分支条件"));
     exit(-1);
   }
-  parser_frontend.PushFlowControlSentence(std::move(switch_sentence));
+  bool push_result =
+      c_parser_frontend.PushFlowControlSentence(std::move(switch_sentence));
+  if (!push_result) [[unlikely]] {
+    std::cerr << std::format(
+                     "行数{:} 列数{:} 流程控制语句必须在函数定义内部使用",
+                     GetLine(), GetColumn())
+              << std::endl;
+    exit(-1);
+  }
   return std::any();
 }
 
@@ -3090,13 +3136,13 @@ std::any StatementsSingleStatement(std::vector<WordDataToUser>&& word_data) {
 
 std::any StatementsLeftBrace(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
-  parser_frontend.AddActionScopeLevel();
+  c_parser_frontend.AddActionScopeLevel();
   return std::any();
 }
 
 std::any StatementsBrace(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
-  parser_frontend.PopActionScope();
+  c_parser_frontend.PopActionScope();
   return std::any();
 }
 
@@ -3140,14 +3186,14 @@ std::any RootAnnounce(std::vector<WordDataToUser>&& word_data) {
               static_cast<SimpleSentence&>(*flow_control_node)
                   .GetSentenceOperateNodePointer());
       // 添加变量定义
-      parser_frontend.DefineVariety(
+      c_parser_frontend.DefineVariety(
           *variety_operator_node->GetVarietyNamePointer(),
           variety_operator_node);
     } break;
     case FlowType::kFunctionDefine: {
       // 函数声明
       auto [ignore_iter, announce_result] =
-          parser_frontend.AnnounceFunctionType(
+          c_parser_frontend.AnnounceFunctionType(
               static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
                   *flow_control_node)
                   .GetFunctionTypePointer());
@@ -3292,7 +3338,7 @@ ObjectConstructData::ConstructObject(
     // 转换为流程类型——函数定义
 
     // 声明待添加的函数
-    auto iter = parser_frontend.AnnounceTypeName(GetObjectName());
+    auto iter = c_parser_frontend.AnnounceTypeName(GetObjectName());
     // 获取最终类型链
     // 为了构建类型链违反const原则
     auto function_type_chain = std::const_pointer_cast<FunctionType>(
@@ -3305,7 +3351,7 @@ ObjectConstructData::ConstructObject(
   } else {
     // 要构建的类型为变量，无需额外转换
     // 声明待添加变量
-    auto iter = parser_frontend.AnnounceVarietyName(GetObjectName());
+    auto iter = c_parser_frontend.AnnounceVarietyName(GetObjectName());
     auto& variety_node = static_cast<VarietyOperatorNode&>(
         static_cast<SimpleSentence&>(*object_)
             .GetSentenceOperateNodeReference());

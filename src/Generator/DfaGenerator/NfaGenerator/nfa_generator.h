@@ -53,7 +53,7 @@ class NfaGenerator {
 
     // 产生式节点ID，前向声明无法引用嵌套类，所以无法引用源类型
     // 应保证ID是唯一的，且一个ID对应的其余项唯一
-    size_t production_node_id;
+    size_t production_node_id = -1;
     // 节点类型
     frontend::common::ProductionNodeType node_type;
     // 以下三项仅对运算符有效，非运算符请使用默认值以保持==和!=语义
@@ -141,13 +141,14 @@ class NfaGenerator {
       const bool add_to_NFA_head = true,
       const bool return_when_right_bracket = false);
   // 添加一个由字符串构成的NFA，自动处理结尾的范围限制符号
-  std::pair<NfaNodeId, NfaNodeId> WordConstruct(const std::string& str,
-                                                TailNodeData&& tail_node_data);
+  std::pair<NfaNodeId, NfaNodeId> WordConstruct(
+      const std::string& str, TailNodeData&& word_attached_data);
   // 合并优化，降低节点数和分支路径以降低子集构造法集合大小
   // 直接使用NFA也可以降低成本
   void MergeOptimization();
 
   // 获取给定NFA节点的所有等效节点ID（包含自身）
+  // 返回所有等效节点的集合和这些等效节点代表的单词附属数据（可能无效）
   std::pair<std::unordered_set<NfaNodeId>, TailNodeData> Closure(
       NfaNodeId production_node_id);
   // 返回goto后的节点的闭包
@@ -179,7 +180,7 @@ class NfaGenerator {
   // 所有NFA的头结点
   NfaNodeId head_node_id_;
   // 该set用来存储所有尾节点和对应单词的信息
-  std::unordered_map<NfaNode*, TailNodeData> tail_nodes_;
+  std::unordered_map<const NfaNode*, TailNodeData> tail_nodes_;
   frontend::common::MultimapObjectManager<NfaNode> node_manager_;
 };
 

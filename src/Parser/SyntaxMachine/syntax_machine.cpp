@@ -1,9 +1,10 @@
 #include "syntax_machine.h"
 
 #include <format>
-namespace frontend::parser::syntaxmachine {
+namespace frontend::parser::syntax_machine {
 void SyntaxMachine::LoadConfig() {
-  std::ifstream config_file(frontend::common::kSyntaxConfigFileName);
+  std::ifstream config_file(frontend::common::kSyntaxConfigFileName,
+                            std::ios_base::binary);
   boost::archive::binary_iarchive iarchive(config_file);
   dfa_machine_.LoadConfig();
   iarchive >> *this;
@@ -202,4 +203,4 @@ void SyntaxMachine::ShiftNonTerminalWord(
       GetParsingStack().top().operator_priority;
 }
 
-}  // namespace frontend::parser::syntaxmachine
+}  // namespace frontend::parser::syntax_machine

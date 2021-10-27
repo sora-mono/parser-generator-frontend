@@ -105,7 +105,8 @@ class ActionScopeSystem {
       const std::string& variety_name);
   // 设置当前待构建函数
   // 自动提升作用域，创建函数类型变量等
-  void SetFunctionToConstruct(
+  // 返回是否添加成功
+  bool SetFunctionToConstruct(
       const std::shared_ptr<c_parser_frontend::type_system::FunctionType>&
           function_type);
   ActionScopeLevelType GetActionScopeLevel() const {
@@ -203,9 +204,8 @@ class ActionScopeSystem {
       flow_control_stack_;
 };
 template <class VarietyName>
-inline std::pair<
-    ActionScopeSystem::ActionScopeContainerType::const_iterator,
-    DefineVarietyResult>
+inline std::pair<ActionScopeSystem::ActionScopeContainerType::const_iterator,
+                 DefineVarietyResult>
 ActionScopeSystem::DefineVariety(
     VarietyName&& variety_name,
     const std::shared_ptr<const VarietyOperatorNode>& operator_node_pointer) {
