@@ -34,9 +34,8 @@ bool DfaGenerator::AddWord(const std::string& word,
 bool DfaGenerator::AddRegexpression(const std::string& regex_str,
                                     WordAttachedData&& regex_attached_data,
                                     WordPriority regex_priority) {
-  std::stringstream sstream(regex_str);
   auto [head_node_id, tail_node_id] = nfa_generator_.RegexConstruct(
-      sstream, TailNodeData(std::move(regex_attached_data), regex_priority));
+      TailNodeData(std::move(regex_attached_data), regex_priority), regex_str);
   assert(head_node_id.IsValid() && tail_node_id.IsValid());
   return true;
 }

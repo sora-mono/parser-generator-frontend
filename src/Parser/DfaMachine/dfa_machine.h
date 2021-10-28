@@ -2,19 +2,19 @@
 #define PARSER_DFAMACHINE_DFAMACHINE_H_
 
 #include <fstream>
+#include <iostream>
 
 #include "Common/common.h"
-#include "Generator/DfaGenerator/dfa_generator.h"
+#include "Generator/export_types.h"
 #include "Parser/line_and_column.h"
 #include "boost/archive/binary_iarchive.hpp"
 
 namespace frontend::parser::dfamachine {
 
 class DfaMachine {
-  using DfaGenerator = frontend::generator::dfa_generator::DfaGenerator;
-  using DfaConfigType = DfaGenerator ::DfaConfigType;
-  using WordAttachedData = DfaGenerator::WordAttachedData;
-  using TransformArrayId = DfaGenerator::TransformArrayId;
+  using DfaConfigType = frontend::generator::dfa_generator::DfaConfigType;
+  using WordAttachedData = frontend::generator::dfa_generator::WordAttachedData;
+  using TransformArrayId = frontend::generator::dfa_generator::TransformArrayId;
 
  public:
   DfaMachine() {}

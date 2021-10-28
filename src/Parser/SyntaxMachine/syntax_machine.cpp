@@ -17,7 +17,7 @@ bool SyntaxMachine::Parse(const std::string& filename) {
   }
   GetNextWord();
   // 初始化当前解析数据
-  GetParsingDataNow().parsing_table_entry_id = GetRootParsingEntryId();
+  GetParsingDataNow().syntax_analysis_table_entry_id = GetRootParsingEntryId();
   GetOperatorPriorityNow() = OperatorPriority(0);
   while (!GetParsingStack().empty()) {
     const WordInfo& dfa_return_data = GetWaitingProcessWordInfo();
@@ -39,10 +39,10 @@ bool SyntaxMachine::Parse(const std::string& filename) {
 }
 
 void SyntaxMachine::TerminalWordWaitingProcess() {
-  ProductionNodeId production_node_to_shift_id(
-      GetWaitingProcessWordInfo().word_attached_data_.production_node_id);
+  ProductionNodeId production_node_to_shift_id =
+      GetWaitingProcessWordInfo().word_attached_data_.production_node_id;
   const ActionAndAttachedDataInterface& action_and_attached_data =
-      *GetActionAndTarget(GetParsingDataNow().parsing_table_entry_id,
+      *GetActionAndTarget(GetParsingDataNow().syntax_analysis_table_entry_id,
                           production_node_to_shift_id);
   switch (action_and_attached_data.GetActionType()) {
     // TODO 添加接受时的后续处理
@@ -114,7 +114,7 @@ inline void SyntaxMachine::ShiftTerminalWord(
   // 构建当前单词的数据
   // 待移入节点的ID
   parsing_data_now.shift_node_id =
-      ProductionNodeId(word_info.word_attached_data_.production_node_id);
+      word_info.word_attached_data_.production_node_id;
   // 待移入节点的数据
   TerminalWordData terminal_word_data;
   // 设置待移入节点的字符串和所在行数
@@ -125,9 +125,9 @@ inline void SyntaxMachine::ShiftTerminalWord(
   // 将当前的状态压入栈
   GetParsingStack().emplace(std::move(parsing_data_now));
   // 更新状态为移入该节点后到达的条目
-  parsing_data_now.parsing_table_entry_id =
-      action_and_target.GetShiftAttachedData().GetNextParsingTableEntryId();
-
+  parsing_data_now.syntax_analysis_table_entry_id =
+      action_and_target.GetShiftAttachedData()
+          .GetNextSyntaxAnalysisTableEntryId();
   // 如果移入了运算符则更新优先级为新的优先级
   if (word_info.word_attached_data_.node_type ==
       ProductionNodeType::kOperatorNode) {
@@ -190,13 +190,14 @@ void SyntaxMachine::ShiftNonTerminalWord(
     ProductionNodeId reducted_nonterminal_node_id) {
   ParsingData& parsing_data_now = GetParsingDataNow();
   // 获取移入非终结节点后转移到的语法分析表条目
-  ParsingTableEntryId next_entry_id = GetNextEntryId(
-      parsing_data_now.parsing_table_entry_id, reducted_nonterminal_node_id);
+  SyntaxAnalysisTableEntryId next_entry_id =
+      GetNextEntryId(parsing_data_now.syntax_analysis_table_entry_id,
+                     reducted_nonterminal_node_id);
   parsing_data_now.shift_node_id = reducted_nonterminal_node_id;
   parsing_data_now.word_data_to_user.SetWordDataToUser(
       std::move(non_terminal_word_data));
   GetParsingStack().emplace(std::move(parsing_data_now));
-  parsing_data_now.parsing_table_entry_id = next_entry_id;
+  parsing_data_now.syntax_analysis_table_entry_id = next_entry_id;
 
   // 重设当前优先级为移入该节点时的优先级
   parsing_data_now.operator_priority =

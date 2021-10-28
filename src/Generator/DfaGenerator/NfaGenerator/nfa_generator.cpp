@@ -1,12 +1,7 @@
 #include "nfa_generator.h"
 
-#include <algorithm>
 #include <format>
 #include <queue>
-#include <sstream>
-
-#include "Generator/DfaGenerator/NfaGenerator/nfa_generator.h"
-#include "nfa_generator.h"
 
 namespace frontend::generator::dfa_generator::nfa_generator {
 
@@ -152,49 +147,59 @@ inline const NfaGenerator::TailNodeData NfaGenerator::GetTailNodeData(
     NfaNodeId production_node_id) {
   return GetTailNodeData(&GetNfaNode(production_node_id));
 }
-// TODO 将流改成printf等函数
 std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>
-NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
-                             const bool add_to_NFA_head,
+NfaGenerator::RegexConstruct(const TailNodeData& tail_node_data,
+                             const std::string& raw_regex_string,
+                             size_t&& index, const bool add_to_nfa_head,
                              const bool return_when_right_bracket) {
   NfaNodeId head_id = node_manager_.EmplaceObject();
   NfaNodeId tail_id = head_id;
   NfaNodeId pre_tail_id = head_id;
+  if (index >= raw_regex_string.size()) [[unlikely]] {
+    return std::make_pair(head_id, tail_id);
+  }
   char c_now;
-  in >> c_now;
-  while (c_now != '\0' && in) {
+  while (index < raw_regex_string.size()) {
+    c_now = raw_regex_string[index];
+    ++index;
     NfaNodeId temp_head_id = NfaNodeId::InvalidId(),
               temp_tail_id = NfaNodeId::InvalidId();
     switch (c_now) {
       case '[': {
-        std::tie(temp_head_id, temp_tail_id) = CreateSwitchTree(in);
+        std::tie(temp_head_id, temp_tail_id) =
+            CreateSwitchTree(raw_regex_string, &index);
         if (!(temp_head_id.IsValid() && temp_tail_id.IsValid())) {
-          throw std::invalid_argument("非法正则");
+          std::cerr << std::format("非法正则 {:}\n{: >{:}}", raw_regex_string,
+                                   '^', index + 10)
+                    << std::endl;
+          exit(-1);
         }
         GetNfaNode(tail_id).AddNoconditionTransfer(temp_head_id);
         pre_tail_id = tail_id;
         tail_id = temp_tail_id;
       } break;
       case ']':
-        throw std::runtime_error(
-            "regex_construct函数不应该处理]字符，应交给create_switch_tree处理");
+        // regex_construct函数不应该处理]字符，应交给create_switch_tree处理
+        assert(false);
         break;
       case '(': {
-        std::tie(temp_head_id, temp_tail_id) =
-            RegexConstruct(in, NotTailNodeTag, false, true);
+        std::tie(temp_head_id, temp_tail_id) = RegexConstruct(
+            NotTailNodeTag, raw_regex_string, std::move(index), false, true);
         if (!(temp_head_id.IsValid() && temp_tail_id.IsValid())) {
-          throw std::invalid_argument("非法正则");
+          std::cerr << std::format("非法正则 {:}\n{: >{:}}", raw_regex_string,
+                                   '^', index + 10)
+                    << std::endl;
+          exit(-1);
         }
         GetNfaNode(tail_id).AddNoconditionTransfer(temp_head_id);
         pre_tail_id = tail_id;
         tail_id = temp_tail_id;
       } break;
       case ')':
-        in >> c_now;
-        if (!in) {
-          c_now = '\0';
+        if (index >= raw_regex_string.size()) [[unlikely]] {
           break;
         }
+        c_now = raw_regex_string[index];
         switch (c_now) {
           case '*':
             temp_tail_id = node_manager_.EmplaceObject();
@@ -219,7 +224,8 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
             tail_id = temp_tail_id;
             break;
           default:
-            in.putback(c_now);
+            assert(index > 0);
+            --index;
             break;
         }
         if (return_when_right_bracket) {
@@ -249,10 +255,14 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
         tail_id = pre_tail_id;
         break;
       case '\\':  // 仅对单个字符生效
-        in >> c_now;
-        if (!in || c_now == '\0') {
-          throw std::invalid_argument("非法正则");
+        if (index >= raw_regex_string.size()) [[unlikely]] {
+          std::cerr << std::format("非法正则 {:}\n{: >{:}}", raw_regex_string,
+                                   '^', index + 10)
+                    << std::endl;
+          exit(-1);
         }
+        c_now = raw_regex_string[index];
+        ++index;
         temp_tail_id = node_manager_.EmplaceObject();
         GetNfaNode(tail_id).SetConditionTransfer(c_now, temp_tail_id);
         pre_tail_id = tail_id;
@@ -276,14 +286,11 @@ NfaGenerator::RegexConstruct(std::istream& in, const TailNodeData& tag,
         tail_id = temp_tail_id;
         break;
     }
-    if (c_now != '\0') {
-      in >> c_now;
-    }
   }
   if (head_id != tail_id) {
-    if (add_to_NFA_head) {
+    if (add_to_nfa_head) {
       GetNfaNode(head_node_id_).AddNoconditionTransfer(head_id);
-      AddTailNode(tail_id, tag);
+      AddTailNode(tail_id, tail_node_data);
     }
   } else {
     node_manager_.RemoveObject(head_id);
@@ -402,18 +409,35 @@ bool NfaGenerator::AddTailNode(NfaNode* pointer, const TailNodeData& tag) {
 }
 
 std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>
-NfaGenerator::CreateSwitchTree(std::istream& in) {
+NfaGenerator::CreateSwitchTree(const std::string& raw_regex_string,
+                               size_t* index) {
   NfaNodeId head_id = node_manager_.EmplaceObject();
   NfaNodeId tail_id = node_manager_.EmplaceObject();
-  char character_now, character_pre;
-  in >> character_now;
-  character_pre = character_now;
   NfaNode& head_node = GetNfaNode(head_id);
-  while (in && character_now != ']') {
+  // 初始化成不是']'的值就可以，从而可以进入循环
+  char character_pre;
+  char character_now = '\0';
+  while (character_now != ']') {
+    if (*index >= raw_regex_string.size()) [[unlikely]] {
+      std::cerr << std::format("非法正则 {:}\n{: >{:}}", raw_regex_string, '^',
+                               *index + 10)
+                << std::endl;
+      exit(-1);
+    }
+    character_pre = character_now;
+    character_now = raw_regex_string[*index];
+    ++*index;
     switch (character_now) {
       case '-':
         // 读入另一端的字符
-        in >> character_now;
+        if (*index >= raw_regex_string.size()) [[unlikely]] {
+          std::cerr << std::format("非法正则 {:}\n{: >{:}}", raw_regex_string,
+                                   '^', *index + 10)
+                    << std::endl;
+          exit(-1);
+        }
+        character_now = raw_regex_string[*index];
+        ++*index;
         for (char bigger_character = std::max(character_now, character_pre),
                   smaller_character = std::min(character_pre, character_now);
              smaller_character != character_now; smaller_character++) {
@@ -422,31 +446,33 @@ NfaGenerator::CreateSwitchTree(std::istream& in) {
         head_node.SetConditionTransfer(character_now, tail_id);
         break;
       case '\\':
-        in >> character_now;
-        if (!in || character_now == '\0') {
-          throw std::invalid_argument("非法正则");
+        if (*index >= raw_regex_string.size()) [[unlikely]] {
+          std::cerr << std::format("非法正则 {:}\n{: >{:}}", raw_regex_string,
+                                   '^', *index + 10)
+                    << std::endl;
+          exit(-1);
         }
+        character_now = raw_regex_string[*index];
+        ++*index;
         head_node.SetConditionTransfer(character_now, tail_id);
         break;
       default:
         head_node.SetConditionTransfer(character_now, tail_id);
         break;
     }
-    character_pre = character_now;
-    in >> character_now;
-  }
-  if (character_now != ']' || !in) {
-    throw std::invalid_argument("非法正则");
   }
   if (head_node.GetConditionalTransfers().empty()) {
     node_manager_.RemoveObject(head_id);
-    throw std::invalid_argument("[]中为空");
+    std::cerr << std::format("非法正则 {:}\n{: >{:}}\n[]中为空",
+                             raw_regex_string, '^', *index + 10)
+              << std::endl;
+    exit(-1);
   }
-
-  in >> character_now;
-  if (!in) {
+  if (*index >= raw_regex_string.size()) {
     return std::make_pair(head_id, tail_id);
   }
+  character_now = raw_regex_string[*index];
+  ++*index;
   switch (character_now) {
     case '*':
       GetNfaNode(head_id).AddNoconditionTransfer(tail_id);
@@ -459,7 +485,7 @@ NfaGenerator::CreateSwitchTree(std::istream& in) {
       GetNfaNode(head_id).AddNoconditionTransfer(tail_id);
       break;
     default:
-      in.putback(character_now);
+      --*index;
       break;
   }
   return std::make_pair(head_id, tail_id);
@@ -491,36 +517,5 @@ bool NfaGenerator::MergeNfaNodes(NfaGenerator::NfaNode& node_dst,
 
 const NfaGenerator::TailNodeData NfaGenerator::NotTailNodeTag =
     NfaGenerator::TailNodeData(WordAttachedData(), WordPriority::InvalidId());
-
-// 根据上一个操作是否为规约判断使用左侧单目运算符优先级还是双目运算符优先级
-// 返回获取到的结合类型和优先级
-
-std::pair<frontend::common::OperatorAssociatityType, size_t>
-NfaGenerator::WordAttachedData::GetAssociatityTypeAndPriority(
-    bool is_last_operate_reduct) const {
-  assert(node_type == frontend::common::ProductionNodeType::kOperatorNode);
-  if (binary_operator_priority != -1) {
-    if (unary_operator_priority != -1) {
-      // 两种语义均存在
-      if (is_last_operate_reduct) {
-        // 上次操作为规约，应使用左侧单目运算符语义
-        return std::make_pair(unary_operator_associate_type,
-                              unary_operator_priority);
-      } else {
-        // 上次操作为移入，应使用双目运算符语义
-        return std::make_pair(binary_operator_associate_type,
-                              binary_operator_priority);
-      }
-    } else {
-      // 仅存在双目运算符语义，直接返回
-      return std::make_pair(binary_operator_associate_type,
-                            binary_operator_priority);
-    }
-  } else {
-    // 仅存在单目运算符语义，直接返回
-    return std::make_pair(unary_operator_associate_type,
-                          unary_operator_priority);
-  }
-}
 
 }  // namespace frontend::generator::dfa_generator::nfa_generator

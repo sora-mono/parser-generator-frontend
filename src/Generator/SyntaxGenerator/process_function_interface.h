@@ -4,7 +4,6 @@
 #include <boost/serialization/string.hpp>
 #include <boost/serialization/variant.hpp>
 
-#include "Common/common.h"
 namespace frontend::generator::syntax_generator {
 // 接口类，所有用户定义函数均从该类派生
 class ProcessFunctionInterface {

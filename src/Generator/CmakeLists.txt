@@ -5,8 +5,9 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 add_subdirectory(DfaGenerator)
 add_subdirectory(SyntaxGenerator)
 
-aux_source_directory(. GENERATOR_SRCS)
-add_executable(Generator ${GENERATOR_SRCS})
+add_library(export_types "export_types.cpp")
+target_link_libraries(export_types CONAN_PKG::boost)
 
+add_executable(Generator "Generator.cpp")
 target_link_libraries(Generator syntax_generator)
 install(TARGETS Generator RUNTIME)

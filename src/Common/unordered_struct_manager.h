@@ -2,7 +2,6 @@
 #define COMMON_UNORDERED_STRUCT_MANAGER_H_
 
 #include <boost/serialization/unordered_map.hpp>
-#include <functional>
 
 #include "Common/id_wrapper.h"
 #include "Common/object_manager.h"

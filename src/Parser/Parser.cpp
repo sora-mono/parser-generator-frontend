@@ -1,14 +1,5 @@
 ﻿// Parser.cpp : 此文件包含 "main" 函数。程序执行将在此处开始并结束。
 //
-#ifdef _DEBUG
-#define USE_PRODUCTION_NODE_SHIFT_FUNCTION
-#define USE_PRODUCTION_NODE_INIT_FUNCTION
-#define USE_PRODUCTION_NODE_REDUCTION_FUNCTION
-
-#endif  // _DEBUG
-
-#include <iostream>
-
 #include "Generator/SyntaxGenerator/process_functions_classes_register.h"
 #include "Generator/SyntaxGenerator/syntax_generator_classes_register.h"
 #include "SyntaxMachine/syntax_machine.h"

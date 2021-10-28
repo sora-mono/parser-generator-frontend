@@ -4,6 +4,7 @@
 #include <iostream>
 #include <limits>
 
+#include "Generator/SyntaxGenerator/process_function_interface.h"
 #include "c_parser_frontend.h"
 #include "flow_control.h"
 #include "operator_node.h"
@@ -302,7 +303,7 @@ std::shared_ptr<ObjectConstructData> IdOrEquivenceConstTagId(
 //// IdOrEquivence -> "const"
 //// 分配在堆上，避免any容器中复制对象
 //// 使用std::shared_ptr代替std::shared_ptr，std::any不能存储不支持复制的类型
-//std::shared_ptr<ObjectConstructData> IdOrEquivenceConst(
+// std::shared_ptr<ObjectConstructData> IdOrEquivenceConst(
 //    std::vector<WordDataToUser>&& word_data);
 // IdOrEquivence -> IdOrEquivence "[" Num "]"
 // 返回值类型：std::shared_ptr<ObjectConstructData>
@@ -324,7 +325,8 @@ std::any IdOrEquivencePointerAnnounce(std::vector<WordDataToUser>&& word_data);
 std::any IdOrEquivenceInBrackets(std::vector<WordDataToUser>&& word_data);
 //// EmptyReductableIdOrEquivence -> IdOrEquivence
 //// 返回值类型：std::shared_ptr<ObjectConstructData>
-//std::any EmptyReductableIdOrEquivence(std::vector<WordDataToUser>&& word_data);
+// std::any EmptyReductableIdOrEquivence(std::vector<WordDataToUser>&&
+// word_data);
 // NotEmptyEnumArguments -> Id
 EnumReturnData NotEmptyEnumArgumentsIdBase(
     std::vector<WordDataToUser>&& word_data);
@@ -397,7 +399,7 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeStructType(
     std::vector<WordDataToUser>&& word_data);
 //// BasicType -> ConstTag Id
 //// 返回获取到的类型与ConstTag
-//std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeId(
+// std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeId(
 //    std::vector<WordDataToUser>&& word_data);
 // BasicType -> ConstTag EnumAnnounce
 // 返回获取到的类型与ConstTag

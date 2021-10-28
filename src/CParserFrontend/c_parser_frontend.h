@@ -4,7 +4,6 @@
 #include <iostream>
 #include <unordered_map>
 
-#include "Generator/SyntaxGenerator/process_function_interface.h"
 #include "Parser/line_and_column.h"
 #include "action_scope_system.h"
 #include "flow_control.h"

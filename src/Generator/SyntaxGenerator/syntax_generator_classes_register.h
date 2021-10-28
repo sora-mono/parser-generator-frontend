@@ -3,57 +3,40 @@
 #ifndef GENERATOR_SYNTAXGENERATOR_SYNTAX_GENERATOR_CLASSES_REGISTER_H_
 #define GENERATOR_SYNTAXGENERATOR_SYNTAX_GENERATOR_CLASSES_REGISTER_H_
 
-#include "syntax_generator.h"
+#include <boost/serialization/export.hpp>
+
+#include "Generator/export_types.h"
+#include "syntax_analysis_table.h"
 
 // 注册序列化需要使用的类
 BOOST_CLASS_EXPORT_GUID(
-    frontend::generator::syntax_generator::
-        ExportSyntaxGeneratorInsideTypeForSerialization::ProductionNodeId,
-    "frontend::generator::syntax_generator::SyntaxGenerator::ProductionNodeId")
+    frontend::generator::syntax_generator::ProductionNodeId,
+    "frontend::generator::syntax_generator::ProductionNodeId")
 BOOST_CLASS_EXPORT_GUID(
-    frontend::generator::syntax_generator::
-        ExportSyntaxGeneratorInsideTypeForSerialization::ProcessFunctionClassId,
-    "frontend::generator::syntax_generator::SyntaxGenerator::"
-    "ProcessFunctionClassId")
+    frontend::generator::syntax_generator::ProcessFunctionClassId,
+    "frontend::generator::syntax_generator::ProcessFunctionClassId")
+BOOST_CLASS_EXPORT_GUID(
+    frontend::generator::syntax_generator::ProcessFunctionClassManagerType,
+    "frontend::generator::syntax_generator::ProcessFunctionClassManagerType")
+BOOST_CLASS_EXPORT_GUID(
+    frontend::generator::syntax_generator::SyntaxAnalysisTableEntryId,
+    "frontend::generator::syntax_generator::SyntaxAnalysisTableEntryId")
+BOOST_CLASS_EXPORT_GUID(
+    frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::
+        ActionAndAttachedDataInterface,
+    "frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::"
+    "ActionAndAttachedDataInterface")
 BOOST_CLASS_EXPORT_GUID(frontend::generator::syntax_generator::
-                            ExportSyntaxGeneratorInsideTypeForSerialization::
-                                ProcessFunctionClassManagerType,
+                            SyntaxAnalysisTableEntry::ShiftAttachedData,
                         "frontend::generator::syntax_generator::"
-                        "SyntaxGenerator::ProcessFunctionClassManagerType")
-BOOST_CLASS_EXPORT_GUID(
-    frontend::generator::syntax_generator::
-        ExportSyntaxGeneratorInsideTypeForSerialization::ParsingTableType,
-    "frontend::generator::syntax_generator::SyntaxGenerator::ParsingTableType")
-BOOST_CLASS_EXPORT_GUID(
-    frontend::generator::syntax_generator::
-        ExportSyntaxGeneratorInsideTypeForSerialization::ParsingTableEntry,
-    "frontend::generator::syntax_generator::SyntaxGenerator::ParsingTableEntry")
-BOOST_CLASS_EXPORT_GUID(
-    frontend::generator::syntax_generator::
-        ExportSyntaxGeneratorInsideTypeForSerialization::ParsingTableEntryId,
-    "frontend::generator::syntax_generator::SyntaxGenerator::"
-    "ParsingTableEntryId")
-BOOST_CLASS_EXPORT_GUID(
-    frontend::generator::syntax_generator::
-        ExportSyntaxGeneratorInsideTypeForSerialization::
-            ParsingTableEntryActionAndReductDataInterface,
-    "frontend::generator::syntax_generator::SyntaxGenerator::"
-    "ParsingTableEntryActionAndReductDataInterface")
+                        "SyntaxAnalysisTableEntry::ShiftAttachedData")
 BOOST_CLASS_EXPORT_GUID(frontend::generator::syntax_generator::
-                            ExportSyntaxGeneratorInsideTypeForSerialization::
-                                ParsingTableEntryShiftAttachedData,
+                            SyntaxAnalysisTableEntry::ReductAttachedData,
                         "frontend::generator::syntax_generator::"
-                        "SyntaxGenerator::ParsingTableEntryShiftAttachedData")
+                        "SyntaxAnalysisTableEntry::ReductAttachedData")
 BOOST_CLASS_EXPORT_GUID(frontend::generator::syntax_generator::
-                            ExportSyntaxGeneratorInsideTypeForSerialization::
-                                ParsingTableEntryReductAttachedData,
+                            SyntaxAnalysisTableEntry::ShiftReductAttachedData,
                         "frontend::generator::syntax_generator::"
-                        "SyntaxGenerator::ParsingTableEntryReductAttachedData")
-BOOST_CLASS_EXPORT_GUID(
-    frontend::generator::syntax_generator::
-        ExportSyntaxGeneratorInsideTypeForSerialization::
-            ParsingTableEntryShiftReductAttachedData,
-    "frontend::generator::syntax_generator::SyntaxGenerator::"
-    "ParsingTableEntryShiftReductAttachedData")
+                        "SyntaxAnalysisTableEntry::ShiftReductAttachedData")
 
 #endif  // !GENERATOR_SYNTAXGENERATOR_SYNTAX_GENERATOR_CLASSES_REGISTER_H_

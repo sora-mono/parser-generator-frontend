@@ -1,9 +1,9 @@
 #ifndef COMMON_ID_WRAPPER_H_
 #define COMMON_ID_WRAPPER_H_
 
-#include <boost/archive/text_oarchive.hpp>
+#include <boost/archive/binary_iarchive.hpp>
+#include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/access.hpp>
-#include <boost/serialization/export.hpp>
 
 namespace frontend::common {
 // 该头文件包含两个生成不同的ID包装类的模板类

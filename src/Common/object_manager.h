@@ -7,8 +7,6 @@
 #include <boost/serialization/serialization.hpp>
 #include <boost/serialization/split_member.hpp>
 #include <boost/serialization/vector.hpp>
-#include <functional>
-#include <stdexcept>
 
 #include "Common/id_wrapper.h"
 

@@ -2,6 +2,15 @@ Project(SyntaxGenerator)
 
 aux_source_directory(. SYNTAX_GENERATOR_SRCS)
 
-add_library(syntax_generator ${SYNTAX_GENERATOR_SRCS})
-target_link_libraries(syntax_generator dfa_generator CONAN_PKG::boost c_parser_frontend)
+add_library(syntax_analysis_table "syntax_analysis_table.cpp")
+target_link_libraries(syntax_analysis_table CONAN_PKG::boost export_types)
+
+add_library(production_item_set "production_item_set.cpp")
+target_link_libraries(production_item_set export_types)
+
+add_library(production_node "production_node.cpp")
+target_link_libraries(production_node export_types)
+
+add_library(syntax_generator "syntax_generator.cpp" "config_construct.cpp")
+target_link_libraries(syntax_generator syntax_analysis_table production_item_set production_node dfa_generator CONAN_PKG::boost c_parser_frontend)
 install(TARGETS syntax_generator RUNTIME)

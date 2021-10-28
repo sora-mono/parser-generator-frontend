@@ -1,6 +1,8 @@
 #ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_REGISTER_H_
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_REGISTER_H_
 
+#include <boost/serialization/export.hpp>
+
 #include "process_function_interface.h"
 
 // 注册基类以允许序列化

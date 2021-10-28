@@ -6,76 +6,37 @@
 
 #include "Common/common.h"
 #include "Common/id_wrapper.h"
+#include "Common/object_manager.h"
 #include "Common/unordered_struct_manager.h"
+#include "Generator/export_types.h"
 #include "NfaGenerator/nfa_generator.h"
-
-namespace frontend::parser::dfamachine {
-class DfaMachine;
-}
 
 namespace frontend::generator::dfa_generator {
 using frontend::common::ObjectManager;
 using frontend::generator::dfa_generator::nfa_generator::NfaGenerator;
-namespace common = frontend::common;
 
 class DfaGenerator {
   struct IntermediateDfaNode;
-  // 管理转移表用，仅用于DfaGenerator，为了避免使用char作下标时使用负下标
-  // 可以直接使用CHAR_MIN~CHAR_MAX任意值访问
-  template <class BasicObjectType>
-  class TransformArrayManager {
-   public:
-    TransformArrayManager() {}
-
-    BasicObjectType& operator[](char c) {
-      return transform_array_[(c + frontend::common::kCharNum) %
-                              frontend::common::kCharNum];
-    }
-    void fill(const BasicObjectType& fill_object) {
-      transform_array_.fill(fill_object);
-    }
-
-   private:
-    friend class boost::serialization::access;
-
-    template <class Archive>
-    void serialize(Archive& ar, const unsigned int version) {
-      ar& transform_array_;
-    }
-
-    std::array<BasicObjectType, frontend::common::kCharNum> transform_array_;
-  };
 
  public:
   // 尾节点数据
   using TailNodeData = NfaGenerator::TailNodeData;
   // 解析出单词后随单词返回的附属数据
-  using WordAttachedData = TailNodeData::first_type;
+  using WordAttachedData = nfa_generator::WordAttachedData;
   // 尾节点优先级，数字越大优先级越高，所有表达式体都有该参数
   // 与运算符节点的优先级意义不同
   // 该优先级决定在多个正则同时匹配成功时选择哪个正则得出词和附属数据
-  using WordPriority = TailNodeData::second_type;
+  using WordPriority = nfa_generator::WordPriority;
   // Nfa节点ID
   using NfaNodeId = NfaGenerator::NfaNodeId;
   // 子集构造法使用的集合的类型
   using SetType = std::unordered_set<NfaNodeId>;
-  // 中间节点ID
-  using IntermediateNodeId = ObjectManager<IntermediateDfaNode>::ObjectId;
-
-  using SetManagerType = common::UnorderedStructManager<SetType>;
+  // 管理集合的结构
+  using SetManagerType = frontend::common::UnorderedStructManager<SetType>;
   // 子集构造法得到的子集的ID
   using SetId = SetManagerType::ObjectId;
-  // 分发标签
-  enum class WrapperLabel { kTransformArrayId };
-  // 状态转移表ID
-  using TransformArrayId =
-      frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
-                                          WrapperLabel::kTransformArrayId>;
-  // 状态转移表
-  using TransformArray = TransformArrayManager<TransformArrayId>;
-  // DFA配置类型
-  using DfaConfigType =
-      std::vector<std::pair<TransformArray, WordAttachedData>>;
+  // 中间节点ID
+  using IntermediateNodeId = ObjectManager<IntermediateDfaNode>::ObjectId;
 
   DfaGenerator() = default;
   DfaGenerator(const DfaGenerator&) = delete;
@@ -109,7 +70,6 @@ class DfaGenerator {
   void SaveConfig() const;
 
  private:
-  friend class DfaMachine;
   friend class boost::serialization::access;
 
   // 用来哈希中间节点ID和单词数据的结合体的结构，用于SubDataMinimize

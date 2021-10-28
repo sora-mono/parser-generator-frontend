@@ -135,16 +135,14 @@
 #endif  // GENERATOR_DEFINE_BINARY_OPERATOR
 #define GENERATOR_DEFINE_BINARY_OPERATOR(                                   \
     operator_symbol, binary_operator_associatity, binary_operator_priority) \
-  AddBinaryOperatorNode(operator_symbol,                                    \
-                        frontend::common::binary_operator_associatity,      \
+  AddBinaryOperatorNode(operator_symbol, binary_operator_associatity,       \
                         OperatorPriority(binary_operator_priority));
 #ifdef GENERATOR_DEFINE_UNARY_OPERATOR
 #undef GENERATOR_DEFINE_UNARY_OPERATOR
 #endif  // GENERATOR_DEFINE_UNARY_OPERATOR
 #define GENERATOR_DEFINE_UNARY_OPERATOR(                                  \
     operator_symbol, unary_operator_associatity, unary_operator_priority) \
-  AddLeftUnaryOperatorNode(operator_symbol,                               \
-                           frontend::common::unary_operator_associatity,  \
+  AddLeftUnaryOperatorNode(operator_symbol, unary_operator_associatity,   \
                            OperatorPriority(unary_operator_priority));
 #ifdef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
 #undef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
@@ -152,10 +150,9 @@
 #define GENERATOR_DEFINE_BINARY_UNARY_OPERATOR(                             \
     operator_symbol, binary_operator_associatity, binary_operator_priority, \
     unary_operator_associatity, unary_operator_priority)                    \
-  AddBinaryUnaryOperatorNode(operator_symbol,                               \
-                             frontend::common::binary_operator_associatity, \
+  AddBinaryUnaryOperatorNode(operator_symbol, binary_operator_associatity,  \
                              OperatorPriority(binary_operator_priority),    \
-                             frontend::common::unary_operator_associatity,  \
+                             unary_operator_associatity,                    \
                              OperatorPriority(unary_operator_priority));
 
 #ifdef GENERATOR_DEFINE_TERMINAL_PRODUCTION
@@ -200,12 +197,15 @@
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #endif  // GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 
+// 定义该宏以屏蔽用来允许使用IntelliSense而包含的头文件
+// 在命名空间内包含这些头文件会导致各种奇怪的错误
+#define SHIELD_HEADERS_FOR_INTELLISENSE
+
 #define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                              \
     production_symbol, reduct_function, production_body_seq, ...)             \
   class NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,               \
                                              production_body_seq)             \
-      : public frontend::generator::syntax_generator::                        \
-            ProcessFunctionInterface {                                        \
+      : public ProcessFunctionInterface {                                     \
    public:                                                                    \
     virtual ProcessFunctionInterface::UserData Reduct(                        \
         std::vector<ProcessFunctionInterface::WordDataToUser>&& word_data)    \
@@ -226,7 +226,10 @@
 #ifdef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER
 // 防止重复包含
 #ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER_END
+
+// 定义该宏以屏蔽用来允许使用IntelliSense而包含的头文件
 #define SHIELD_HEADERS_FOR_INTELLISENSE
+
 #ifdef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #endif  // GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
@@ -246,17 +249,10 @@
 #endif
 #endif
 
-//#else
-//
-//    #error 该文件仅且必须最终被Generator/SyntaxGenerator下的\
-//process_functions_classes.h \
-//config_construct.cpp process_functions_classes_register.h所包含
-//
-//#endif
-
 // 为了使用Intellisense在这个宏里包含需要的头文件
 // 此处的头文件在代码生成过程中会被忽略
 // 用户请在user_defined_functions.h内添加自己定义的头文件
+// 在每个包含该文件的文件中都要定义下面的宏以屏蔽这些文件，否则会出现各种奇怪报错
 #ifndef SHIELD_HEADERS_FOR_INTELLISENSE
 #include "Common/common.h"
 #include "Config/ProductionConfig/user_defined_functions.h"
