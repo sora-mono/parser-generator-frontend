@@ -120,17 +120,15 @@ class SyntaxMachine {
     assert(src_entry_id.IsValid());
     return syntax_analysis_table_[src_entry_id].AtNonTerminalNode(node_id);
   }
-  std::stack<ParsingData>& GetParsingStack() { return parsing_stack_; }
-  ParsingData& GetParsingDataNow() { return parsing_data_now_; }
-  OperatorPriority& GetOperatorPriorityNow() {
-    return parsing_data_now_.operator_priority;
+  // 获取当前活跃的解析数据（解析数据栈顶对象）
+  ParsingData& GetParsingDataNow() { return parsing_stack_.top(); }
+  template <class ParsingDataType>
+  void PushParsingData(ParsingDataType&& parsing_data) {
+    parsing_stack_.push(std::forward<ParsingDataType>(parsing_data));
   }
-
-  // 放回当前待处理单词
-  void PutbackWordNow() {
-    dfa_machine_.PutbackWord(std::move(GetWaitingProcessWordInfo()));
-  }
-
+  // 弹出解析数据栈顶部数据
+  void PopTopParsingData() { parsing_stack_.pop(); }
+  bool IsParsingStackEmpty() const { return parsing_stack_.empty(); }
   // 分析代码文件
   bool Parse(const std::string& filename);
 
@@ -176,10 +174,8 @@ class SyntaxMachine {
 
   // DFA返回的数据
   WordInfo dfa_return_data_;
-  // 解析用数据栈
+  // 解析用数据栈，栈顶为当前解析数据
   std::stack<ParsingData> parsing_stack_;
-  // 当前解析用数据
-  ParsingData parsing_data_now_;
   // 标记上次操作是否为规约操作
   // 用来支持运算符优先级时同一个运算符可以细分为左侧单目运算符和双目运算符功能
   bool last_operate_is_reduct_ = true;

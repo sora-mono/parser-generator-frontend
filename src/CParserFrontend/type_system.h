@@ -17,13 +17,6 @@ class ListInitializeOperatorNode;
 class VarietyOperatorNode;
 }  // namespace c_parser_frontend::operator_node
 
-namespace c_parser_frontend::flow_control {
-// 前向声明FlowInterface，用于定义函数内执行的语句
-// 前向声明FlowType，用于实现添加函数内执行的语句的相关功能
-class FlowInterface;
-enum class FlowType;
-}  // namespace c_parser_frontend::flow_control
-
 // 类型系统
 namespace c_parser_frontend::type_system {
 // const标记，必须保证当前声明顺序
@@ -105,7 +98,8 @@ enum class AddTypeResult {
   kAnnounceOrDefineBeforeFunctionAnnounce,  // 函数声明前已有声明/定义
   // 添加失败的情况
   kTypeAlreadyIn,  // 待添加的类型所属大类已经有一种同名类型
-  kRedefineFunction,  // 重定义函数
+  kDoubleAnnounceFunction,  // 声明已经定义/声明的函数
+  kOverrideFunction         // 试图重载函数
 };
 enum class GetTypeResult {
   // 成功匹配的情况
@@ -128,9 +122,6 @@ BuiltInType CalculateBuiltInType(const std::string& value);
 
 // 前向声明指针变量类，用于TypeInterface::ObtainAddress生成指针类型
 class PointerType;
-
-using c_parser_frontend::flow_control::FlowInterface;
-using c_parser_frontend::flow_control::FlowType;
 
 // 变量类型基类
 class TypeInterface {
@@ -376,7 +367,6 @@ class FunctionType : public TypeInterface {
         return_type_const_tag_(return_type_const_tag),
         return_type_(return_type),
         argument_infos_(std::forward<ArgumentContainter>(argument_infos)) {}
-  ~FunctionType();
 
   virtual bool operator==(const TypeInterface& type_interface) const override {
     if (IsSameObject(type_interface)) [[likely]] {
@@ -398,8 +388,6 @@ class FunctionType : public TypeInterface {
     return size_t();
   }
 
-  // 返回是否为函数声明（函数声明中不存在任何流程控制语句）
-  bool IsFunctionAnnounce() const { return GetSentences().empty(); }
   // 只检查函数签名是否相同，不检查函数名和函数内执行的语句
   bool IsSameSignature(const FunctionType& function_type) const {
     return GetFunctionName() == function_type.GetFunctionName() &&
@@ -434,17 +422,6 @@ class FunctionType : public TypeInterface {
     function_name_ = function_name;
   }
   const std::string& GetFunctionName() const { return *function_name_; }
-  const std::list<std::unique_ptr<FlowInterface>>& GetSentences() const;
-  // 添加一条函数内执行的语句（按出现顺序添加）
-  // 成功添加返回true，不返还控制权
-  // 如果不能添加则返回false，不修改入参
-  bool AddSentence(std::unique_ptr<FlowInterface>&& sentence_to_add);
-  // 添加一个容器内的全部语句（按照给定迭代器begin->end顺序添加）
-  // 成功添加后作为参数的容器空
-  // 如果有返回false的CheckSentenceInFunctionValid结果则返回false且不修改参数
-  // 成功添加则返回true
-  bool AddSentences(
-      std::list<std::unique_ptr<FlowInterface>>&& sentence_container);
   // 获取函数的一级函数指针形式
   // 返回shared_ptr指向一个指针节点，这个指针节点指向该函数
   static std::shared_ptr<const PointerType> ConvertToFunctionPointer(
@@ -455,8 +432,6 @@ class FunctionType : public TypeInterface {
         ConstTag::kConst, 0,
         std::const_pointer_cast<TypeInterface>(function_type));
   }
-  // 检查给定语句是否可以作为函数内出现的语句
-  static bool CheckSentenceInFunctionValid(const FlowInterface& flow_interface);
 
  private:
   // 函数名
@@ -468,9 +443,6 @@ class FunctionType : public TypeInterface {
   std::shared_ptr<const TypeInterface> return_type_;
   // 参数类型和参数名
   ArgumentInfoContainer argument_infos_;
-  // 函数内执行的语句
-  std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>
-      sentences_in_function_;
 };
 
 // 结构化数据的基类
@@ -829,10 +801,8 @@ class TypeSystem {
     // 添加一个类型，自动处理存储结构的转换
     // 多次添加无待执行语句的函数类型为合法操作
     // 模板参数在函数声明/定义时需要设定
-    template <bool is_function_announce, bool is_function_define>
-    requires(is_function_announce == false ||
-             is_function_define == false) AddTypeResult
-        AddType(const std::shared_ptr<const TypeInterface>& type_to_add);
+    AddTypeResult AddType(
+        const std::shared_ptr<const TypeInterface>& type_to_add);
     // 根据类型偏好获取类型
     std::pair<std::shared_ptr<const TypeInterface>, GetTypeResult> GetType(
         StructOrBasicType type_prefer) const;
@@ -847,11 +817,15 @@ class TypeSystem {
     static bool IsSameKind(StructOrBasicType type1, StructOrBasicType type2);
     // 检查已存在同名函数声明条件下是否可以添加函数声明/定义的具体情况
     // 此情况下一定不可以添加函数声明
-    template <bool is_function_announce, bool is_function_define>
-    requires(is_function_announce == false ||
-             is_function_define == false) static AddTypeResult
-        CheckFunctionDefineAddResult(const FunctionType& function_type_exist,
-                                     const FunctionType& function_type_to_add);
+    static AddTypeResult CheckFunctionDefineAddResult(
+        const FunctionType& function_type_exist,
+        const FunctionType& function_type_to_add) {
+      if (function_type_exist.IsSameSignature(function_type_to_add)) {
+        return AddTypeResult::kTypeAlreadyIn;
+      } else {
+        return AddTypeResult::kOverrideFunction;
+      }
+    }
 
    private:
     // 初始构建时为空，添加类型指针后根据添加的数量使用直接存储或vector存储
@@ -872,26 +846,16 @@ class TypeSystem {
   // 返回指向插入位置的迭代器和插入结果
   // 如果给定类型名下待添加的类型链所属的大类已存在则添加失败，返回false
   // 大类见StructOrBasicType，不含kEnd和kNotSpecified
-  template <bool is_function_announce = false, bool is_function_define = false,
-            class TypeName>
-  requires(is_function_announce == false || is_function_define == false) std::
-      pair<TypeNodeContainerType::const_iterator, AddTypeResult> DefineType(
-          TypeName&& type_name,
-          const std::shared_ptr<const TypeInterface>& type_pointer);
+  template <class TypeName>
+  std::pair<TypeNodeContainerType::const_iterator, AddTypeResult> DefineType(
+      TypeName&& type_name,
+      const std::shared_ptr<const TypeInterface>& type_pointer);
   // 声明函数类型使用该接口
   std::pair<TypeNodeContainerType::const_iterator, AddTypeResult>
   AnnounceFunctionType(
       const std::shared_ptr<const FunctionType>& function_type) {
-    return DefineType<true, false>(function_type->GetFunctionName(),
-                                   function_type);
+    return DefineType(function_type->GetFunctionName(), function_type);
   }
-  // 定义函数类型使用该接口
-  std::pair<TypeNodeContainerType::const_iterator, AddTypeResult>
-  DefineFunctionType(const std::shared_ptr<const FunctionType>& function_type) {
-    return DefineType<false, true>(function_type->GetFunctionName(),
-                                   function_type);
-  }
-
   // 声明类型，返回指向该名字对应类型集合的迭代器
   // 保证迭代器有效且类型集合被创建
   template <class TypeName>
@@ -918,20 +882,17 @@ class TypeSystem {
   TypeNodeContainerType type_name_to_node_;
 };
 
-template <bool is_function_announce, bool is_function_define, class TypeName>
-requires(is_function_announce == false ||
-         is_function_define == false) inline std::
-    pair<TypeSystem::TypeNodeContainerType::const_iterator,
-         AddTypeResult> TypeSystem::
-        DefineType(TypeName&& type_name,
-                   const std::shared_ptr<const TypeInterface>& type_pointer) {
+template <class TypeName>
+inline std::pair<TypeSystem::TypeNodeContainerType::const_iterator,
+                 AddTypeResult>
+TypeSystem::DefineType(
+    TypeName&& type_name,
+    const std::shared_ptr<const TypeInterface>& type_pointer) {
   assert(type_pointer->GetType() != StructOrBasicType::kEnd);
   assert(type_pointer->GetType() != StructOrBasicType::kNotSpecified);
   auto [iter, inserted] = GetTypeNameToNode().emplace(
       std::forward<TypeName>(type_name), TypeData());
-  return std::make_pair(
-      iter, iter->second.AddType<is_function_announce, is_function_define>(
-                type_pointer));
+  return std::make_pair(iter, iter->second.AddType(type_pointer));
 }
 
 template <class TypeName>
@@ -957,137 +918,9 @@ StructureTypeInterface::StructureMemberContainer::AddMember(
     return iter->second;
   }
 }
-template <bool is_function_announce, bool is_function_define>
-requires(is_function_announce == false || is_function_define == false)
-    AddTypeResult TypeSystem::TypeData::AddType(
-        const std::shared_ptr<const TypeInterface>& type_to_add) {
-  std::monostate* empty_status_pointer =
-      std::get_if<std::monostate>(&type_data_);
-  if (empty_status_pointer != nullptr) [[likely]] {
-    // 该节点未保存任何指针
-    // 存入第一个指针
-    type_data_ = type_to_add;
-    return AddTypeResult::kNew;
-  } else {
-    std::shared_ptr<const TypeInterface>* shared_pointer =
-        std::get_if<std::shared_ptr<const TypeInterface>>(&type_data_);
-    if (shared_pointer != nullptr) [[likely]] {
-      // 该节点保存了一个指针，新增一个后转为vector存储
-      // 检查要添加的类型是否与已有类型重复或者重复添加kPointer/kBasic一类
-      if (IsSameKind((*shared_pointer)->GetType(), type_to_add->GetType()))
-          [[unlikely]] {
-        // 检查是否在添加函数类型
-        if (type_to_add->GetType() == StructOrBasicType::kFunction)
-            [[unlikely]] {
-          AddTypeResult function_define_add_result =
-              CheckFunctionDefineAddResult<is_function_announce,
-                                           is_function_define>(
-                  static_cast<const FunctionType&>(**shared_pointer),
-                  static_cast<const FunctionType&>(*type_to_add));
-          if (function_define_add_result == AddTypeResult::kAbleToAdd)
-              [[likely]] {
-            // 使用新的指针替换原有指针，从而更新函数参数名和函数内存储的语句
-            *shared_pointer = type_to_add;
-            function_define_add_result = AddTypeResult::kFunctionDefine;
-          }
-          return function_define_add_result;
-        } else {
-          // 待添加的类型与已有类型相同，产生冲突
-          return AddTypeResult::kTypeAlreadyIn;
-        }
-      }
-      auto vector_pointer =
-          std::make_unique<std::vector<std::shared_ptr<const TypeInterface>>>();
-      // 将StructOrBasicType::kBasic或StructOrBasicType::kPointer类型放在最前面
-      // 从而优化查找类型的速度
-      if (IsSameKind(type_to_add->GetType(), StructOrBasicType::kBasic)) {
-        vector_pointer->emplace_back(type_to_add);
-        vector_pointer->emplace_back(std::move(*shared_pointer));
-      } else {
-        // 原来的类型不一定属于该大类，但新添加的类型一定不属于该大类
-        vector_pointer->emplace_back(std::move(*shared_pointer));
-        vector_pointer->emplace_back(type_to_add);
-      }
-      type_data_ = std::move(vector_pointer);
-      return AddTypeResult::kShiftToVector;
-    } else {
-      // 该节点已经使用vector存储
-      std::unique_ptr<std::vector<std::shared_ptr<const TypeInterface>>>&
-          vector_pointer = *std::get_if<std::unique_ptr<
-              std::vector<std::shared_ptr<const TypeInterface>>>>(&type_data_);
-      assert(vector_pointer != nullptr);
-      // 检查待添加的类型与已存在的类型是否属于同一大类
-      for (auto& stored_pointer : *vector_pointer) {
-        if (IsSameKind(stored_pointer->GetType(), type_to_add->GetType()))
-            [[unlikely]] {
-          // 检查是否在添加函数类型
-          if (type_to_add->GetType() == StructOrBasicType::kFunction)
-              [[unlikely]] {
-            AddTypeResult function_define_add_result =
-                CheckFunctionDefineAddResult<is_function_announce,
-                                             is_function_define>(
-                    static_cast<const FunctionType&>(*stored_pointer),
-                    static_cast<const FunctionType&>(*type_to_add));
-            if (function_define_add_result == AddTypeResult::kAbleToAdd)
-                [[likely]] {
-              // 这种情况为在函数定义前已添加函数声明
-              // 使用新的指针替换原有指针
-              stored_pointer = type_to_add;
-              return AddTypeResult::kFunctionDefine;
-            }
-            return function_define_add_result;
-          }
-          // 待添加的类型与已有类型相同，产生冲突
-          return AddTypeResult::kTypeAlreadyIn;
-        }
-      }
-      vector_pointer->emplace_back(type_to_add);
-      if (IsSameKind(type_to_add->GetType(), StructOrBasicType::kBasic)) {
-        // 新插入的类型为StructOrBasicType::kBasic/kPointer
-        // 将该类型放到第一个位置以便优化无类型倾向性时的查找逻辑
-        std::swap(vector_pointer->front(), vector_pointer->back());
-      }
-      return AddTypeResult::kAddToVector;
-    }
-  }
-}
 
 // 检查已存在同名函数声明条件下是否可以添加函数声明/定义的具体情况
 // 此情况下一定不可以添加函数声明
-
-template <bool is_function_announce, bool is_function_define>
-requires(is_function_announce == false || is_function_define == false)
-    AddTypeResult TypeSystem::TypeData::CheckFunctionDefineAddResult(
-        const FunctionType& function_type_exist,
-        const FunctionType& function_type_to_add) {
-  if constexpr (is_function_announce) {
-    // 已经存在同名函数定义/声明
-    assert(function_type_to_add.IsFunctionAnnounce());
-    if (function_type_exist.IsSameSignature(function_type_to_add)) {
-      return AddTypeResult::kAnnounceOrDefineBeforeFunctionAnnounce;
-    } else {
-      return AddTypeResult::kTypeAlreadyIn;
-    }
-  } else if constexpr (is_function_define) {
-    assert(!function_type_to_add.IsFunctionAnnounce());
-    // 检查待添加函数与已存在的函数声明是否为相同签名
-    if (function_type_exist.IsSameSignature(function_type_to_add)) [[likely]] {
-      // 如果之前存在的类型为函数声明则可以覆盖函数声明
-      if (function_type_exist.IsFunctionAnnounce()) [[likely]] {
-        return AddTypeResult::kAbleToAdd;
-      } else {
-        // 之前已存在函数定义，返回重定义错误
-        return AddTypeResult::kRedefineFunction;
-      }
-    } else {
-      // 之前存在签名不同的函数声明
-      return AddTypeResult::kTypeAlreadyIn;
-    }
-  }
-  assert(false);
-  // 防止警告
-  return AddTypeResult();
-}
 
 }  // namespace c_parser_frontend::type_system
 #endif  // !CPARSERFRONTEND_PARSE_CLASSES_H_

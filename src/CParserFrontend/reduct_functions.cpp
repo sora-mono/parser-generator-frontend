@@ -169,7 +169,7 @@ void CheckAddTypeResult(AddTypeResult add_type_result) {
       OutputError(std::format("已存在同名类型"));
       exit(-1);
       break;
-    case c_parser_frontend::type_system::AddTypeResult::kRedefineFunction:
+    case c_parser_frontend::type_system::AddTypeResult::kDoubleAnnounceFunction:
       OutputError(std::format("重定义函数"));
       exit(-1);
       break;
@@ -734,7 +734,7 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeFundamental(
   auto& sign_tag_data =
       word_data[1].GetNonTerminalWordData().user_returned_data;
   SignTag sign_tag = SignTag::kSigned;
-  if (!sign_tag_data.has_value()) {
+  if (sign_tag_data.has_value()) [[unlikely]] {
     sign_tag = std::any_cast<SignTag&>(sign_tag_data);
   }
   BuiltInType builtin_type = std::any_cast<BuiltInType&>(
@@ -1116,13 +1116,13 @@ FunctionDefineHead(std::vector<WordDataToUser>&& word_data) {
       assert(false);
       break;
   }
-  std::shared_ptr<FunctionType> function_type =
+  std::shared_ptr<const FunctionType> function_type =
       static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
           *function_head)
           .GetFunctionTypePointer();
   // 设置当前待构建函数
   bool set_result = c_parser_frontend.SetFunctionToConstruct(
-      std::shared_ptr<FunctionType>(function_type));
+      std::shared_ptr<const FunctionType>(function_type));
   if (!set_result) [[unlikely]] {
     std::cerr << std::format("行数{:} 列数{:} 函数内部不能声明函数", GetLine(),
                              GetColumn())
@@ -1315,7 +1315,7 @@ VarietyAnnounceNoAssign(std::shared_ptr<VarietyOperatorNode>&& variety_node) {
       std::move(allocate_flow_control_node));
   // 定义变量
   c_parser_frontend.DefineVariety(*variety_node->GetVarietyNamePointer(),
-                                  std::move(variety_node));
+                                  variety_node);
   // 获取扩展声明时的类型
   if (raw_variety_type->GetType() == StructOrBasicType::kPointer) {
     // 如果是指针类型则在原始声明类型基础上去除一重指针
@@ -2481,9 +2481,9 @@ std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithValue(
   bool result =
       return_flow_control_node->SetReturnTarget(active_function, return_target);
   if (!result) [[unlikely]] {
-    OutputError(
-        std::format("无法返回该类型的值，给定类型无法转换为函数{:}返回的类型",
-                    active_function->GetFunctionName()));
+    OutputError(std::format(
+        "无法返回该类型的值，给定类型无法转换为函数{:}返回的类型",
+        active_function->GetFunctionTypeReference().GetFunctionName()));
     exit(-1);
   }
   sentences_to_get_assignable->emplace_back(
@@ -2504,8 +2504,9 @@ std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithoutValue(
   bool result =
       return_flow_control_node->SetReturnTarget(active_function, nullptr);
   if (!result) [[unlikely]] {
-    OutputError(
-        std::format("函数{:}无法返回空值", active_function->GetFunctionName()));
+    OutputError(std::format(
+        "函数{:}无法返回空值",
+        active_function->GetFunctionTypeReference().GetFunctionName()));
     exit(-1);
   }
   sentences_to_get_assignable->emplace_back(
@@ -3192,11 +3193,10 @@ std::any RootAnnounce(std::vector<WordDataToUser>&& word_data) {
     } break;
     case FlowType::kFunctionDefine: {
       // 函数声明
-      auto [ignore_iter, announce_result] =
-          c_parser_frontend.AnnounceFunctionType(
-              static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
-                  *flow_control_node)
-                  .GetFunctionTypePointer());
+      auto [ignore_iter, announce_result] = c_parser_frontend.AnnounceFunction(
+          static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
+              *flow_control_node)
+              .GetFunctionTypePointer());
       CheckAddTypeResult(announce_result);
     } break;
     default:

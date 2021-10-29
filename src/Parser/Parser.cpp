@@ -4,7 +4,10 @@
 #include "Generator/SyntaxGenerator/syntax_generator_classes_register.h"
 #include "SyntaxMachine/syntax_machine.h"
 
-int main() { frontend::parser::syntax_machine::SyntaxMachine syntax_machine; }
+int main() {
+  frontend::parser::syntax_machine::SyntaxMachine syntax_machine;
+  syntax_machine.Parse("test.cpp");
+}
 
 // 运行程序: Ctrl + F5 或调试 >“开始执行(不调试)”菜单
 // 调试程序: F5 或调试 >“开始调试”菜单

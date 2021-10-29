@@ -5,8 +5,8 @@ namespace frontend::generator::dfa_generator::nfa_generator {
 // 根据上一个操作是否为规约判断使用左侧单目运算符优先级还是双目运算符优先级
 // 返回获取到的结合类型和优先级
 
-std::pair<frontend::generator::syntax_generator::OperatorAssociatityType,
-          size_t>
+std::pair<WordAttachedData::OperatorAssociatityType,
+          WordAttachedData::OperatorPriority>
 WordAttachedData::GetAssociatityTypeAndPriority(
     bool is_last_operate_reduct) const {
   assert(

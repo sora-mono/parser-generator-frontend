@@ -28,6 +28,7 @@ inline bool SimpleSentence::CheckOperatorNodeValid(
     case GeneralOperationType::kMathematicalOperation:
     case GeneralOperationType::kMemberAccess:
     case GeneralOperationType::kObtainAddress:
+    case GeneralOperationType::kVariety:
       // 以上为可以成为基础语句的节点
       return true;
       break;
@@ -251,9 +252,8 @@ SwitchSentence::ConvertCaseValueToLabel(
   // switch语句ID，用来生成独一无二的标签
   auto switch_node_id = switch_sentence.GetFlowId();
   // 生成标签名
-  std::string label_name =
-      std::format("switch_{:}_{:}", switch_node_id.GetRawValue(),
-                  case_value.GetValue());
+  std::string label_name = std::format(
+      "switch_{:}_{:}", switch_node_id.GetRawValue(), case_value.GetValue());
   // switch跳转语句中使用的标签
   auto label_for_jmp = std::make_unique<Label>(label_name);
   // switch主体内使用的标签
@@ -274,13 +274,13 @@ SwitchSentence::GetDefaultLabel(const SwitchSentence& switch_sentence) {
   return std::make_pair(std::move(label_for_jmp), std::move(label_in_body));
 }
 bool Return::SetReturnTarget(
-    const std::shared_ptr<const c_parser_frontend::type_system::FunctionType>
-        function_to_return_from,
+    const FunctionDefine* function_to_return_from,
     const std::shared_ptr<const OperatorNodeInterface>& return_target) {
   assert(function_to_return_from != nullptr);
   if (return_target == nullptr) {
     auto& function_return_type =
-        function_to_return_from->GetReturnTypeReference();
+        function_to_return_from->GetFunctionTypeReference()
+            .GetReturnTypeReference();
     if (function_return_type.GetType() == StructOrBasicType::kBasic &&
         static_cast<const c_parser_frontend::type_system::BasicType&>(
             function_return_type)
@@ -300,7 +300,8 @@ bool Return::SetReturnTarget(
           nullptr, ConstTag::kNonConst,
           c_parser_frontend::operator_node::LeftRightValueTag::kLeftValue);
   bool result = temp_node_to_be_assigned.SetVarietyType(
-      function_to_return_from->GetReturnTypePointer());
+      function_to_return_from->GetFunctionTypeReference()
+          .GetReturnTypePointer());
   assert(result);
   switch (c_parser_frontend::operator_node::AssignOperatorNode::CheckAssignable(
       temp_node_to_be_assigned, *return_target, true)) {
@@ -319,13 +320,41 @@ bool Return::SetReturnTarget(
       break;
   }
 }
-}  // namespace c_parser_frontend::flow_control
 
-// 使用前向声明后定义移到这里以使用智能指针
-namespace c_parser_frontend::type_system {
-FunctionType::~FunctionType() {}
+// 添加一条函数内执行的语句（按出现顺序添加）
+// 成功添加返回true，不返还控制权
+// 如果不能添加则返回false，不修改入参
 
-bool FunctionType::CheckSentenceInFunctionValid(
+inline bool FunctionDefine::AddSentence(
+    std::unique_ptr<FlowInterface>&& sentence_to_add) {
+  if (CheckSentenceInFunctionValid(*sentence_to_add)) [[likely]] {
+    sentences_in_function_.emplace_back(std::move(sentence_to_add));
+    return true;
+  } else {
+    // 不能添加，返回控制权
+    return false;
+  }
+}
+
+// 添加一个容器内的全部语句（按照给定迭代器begin->end顺序添加）
+// 成功添加后作为参数的容器空
+// 如果有返回false的CheckSentenceInFunctionValid结果则返回false且不修改参数
+// 成功添加则返回true
+
+inline bool FunctionDefine::AddSentences(
+    std::list<std::unique_ptr<FlowInterface>>&& sentence_container) {
+  // 检查是否容器内所有节点都可以添加
+  for (const auto& sentence : sentence_container) {
+    if (!CheckSentenceInFunctionValid(*sentence)) [[unlikely]] {
+      return false;
+    }
+  }
+  // 通过检查，将容器内所有语句全部合并到主容器中
+  sentences_in_function_.merge(std::move(sentence_container));
+  return true;
+}
+
+inline bool FunctionDefine::CheckSentenceInFunctionValid(
     const FlowInterface& flow_interface) {
   switch (flow_interface.GetFlowType()) {
     case FlowType::kFunctionDefine:
@@ -337,36 +366,46 @@ bool FunctionType::CheckSentenceInFunctionValid(
       break;
   }
 }
-
-const std::list<std::unique_ptr<FlowInterface>>& FunctionType::GetSentences()
-    const {
-  return *sentences_in_function_;
-}
-
-bool FunctionType::AddSentence(
-    std::unique_ptr<FlowInterface>&& sentence_to_add) {
-  if (CheckSentenceInFunctionValid(*sentence_to_add)) [[likely]] {
-    sentences_in_function_->emplace_back(std::move(sentence_to_add));
-    return true;
-  } else {
-    // 不能添加，返回控制权
-    return false;
-  }
-}
-
-bool FunctionType::AddSentences(
-    std::list<std::unique_ptr<FlowInterface>>&& sentence_container) {
-  // 检查是否容器内所有节点都可以添加
-  for (const auto& sentence : sentence_container) {
-    if (CheckSentenceInFunctionValid(*sentence)) [[unlikely]] {
-      return false;
+FlowControlSystem::FunctionCheckResult
+FlowControlSystem::SetFunctionToConstruct(
+    const std::shared_ptr<const FunctionType>& active_function) {
+  const auto& function_name = active_function->GetFunctionName();
+  auto [iter, inserted] = functions_.emplace(function_name, active_function);
+  if (!inserted) [[likely]] {
+    // 已存在声明/定义的函数
+    // 判断已存在的函数是否是仅声明
+    if (!iter->second.IsFunctionAnnounce()) [[unlikely]] {
+      // 已存在的函数已经定义过
+      return FunctionCheckResult::kFunctionConstructed;
+    } else if (!iter->second.GetFunctionTypeReference().IsSameSignature(
+                   *active_function)) [[unlikely]] {
+      // 已存在的函数函数签名与待添加函数函数签名不同
+      return FunctionCheckResult::kOverrideFunction;
     }
   }
-  // 通过检查，将容器内所有语句全部合并到主容器中
-  sentences_in_function_->merge(std::move(sentence_container));
-  return true;
+  active_function_ = iter;
+  return FunctionCheckResult::kSuccess;
 }
-}  // namespace c_parser_frontend::type_system
+FlowControlSystem::FunctionCheckResult FlowControlSystem::AnnounceFunction(
+    const std::shared_ptr<const FunctionType>& function_type) {
+  auto iter = functions_.find(function_type->GetFunctionName());
+  if (iter == functions_.end()) [[likely]] {
+    // 不存在要声明的函数
+    functions_.emplace(function_type->GetFunctionName(),
+                       FunctionDefine(function_type));
+    return FunctionCheckResult::kSuccess;
+  } else {
+    if (iter->second.GetFunctionTypeReference().IsSameSignature(
+            *function_type)) {
+      // 试图重新声明已声明/定义的函数
+      return FunctionCheckResult::kDoubleAnnounce;
+    } else {
+      // 试图重载函数
+      return FunctionCheckResult::kOverrideFunction;
+    }
+  }
+}
+}  // namespace c_parser_frontend::flow_control
 
 // 使用前向声明后定义移到这里以使用智能指针
 namespace c_parser_frontend::operator_node {

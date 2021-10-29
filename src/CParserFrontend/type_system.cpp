@@ -165,7 +165,6 @@ AssignableCheckResult FunctionType::CanBeAssignedBy(
   return AssignableCheckResult::kCanNotConvert;
 }
 
-
 // 返回是否为函数声明（函数声明中不存在任何流程控制语句）
 
 // 检查给定语句是否可以作为函数内出现的语句
@@ -384,8 +383,7 @@ bool InitializeListType::IsSameObject(
                      .GetListTypes();
 }
 
-bool PointerType::IsSameObject(
-    const TypeInterface& type_interface) const {
+bool PointerType::IsSameObject(const TypeInterface& type_interface) const {
   // this == &basic_type是优化手段，类型系统设计思路是尽可能多的共享一条类型链
   // 所以容易出现指向同一个节点的情况
   return this == &type_interface ||
@@ -578,6 +576,102 @@ TypeInterface::DeclineMathematicalComputeResult(
   }
 }
 
+// 添加一个类型，自动处理存储结构的转换
+// 多次添加无待执行语句的函数类型为合法操作
+// 模板参数在函数声明/定义时需要设定
+
+AddTypeResult TypeSystem::TypeData::AddType(
+    const std::shared_ptr<const TypeInterface>& type_to_add) {
+  std::monostate* empty_status_pointer =
+      std::get_if<std::monostate>(&type_data_);
+  if (empty_status_pointer != nullptr) [[likely]] {
+    // 该节点未保存任何指针
+    // 存入第一个指针
+    type_data_ = type_to_add;
+    return AddTypeResult::kNew;
+  } else {
+    std::shared_ptr<const TypeInterface>* shared_pointer =
+        std::get_if<std::shared_ptr<const TypeInterface>>(&type_data_);
+    if (shared_pointer != nullptr) [[likely]] {
+      // 该节点保存了一个指针，新增一个后转为vector存储
+      // 检查要添加的类型是否与已有类型重复或者重复添加kPointer/kBasic一类
+      if (IsSameKind((*shared_pointer)->GetType(), type_to_add->GetType()))
+          [[unlikely]] {
+        // 检查是否在添加函数类型
+        if (type_to_add->GetType() == StructOrBasicType::kFunction)
+            [[unlikely]] {
+          AddTypeResult function_define_add_result =
+              CheckFunctionDefineAddResult(
+                  static_cast<const FunctionType&>(**shared_pointer),
+                  static_cast<const FunctionType&>(*type_to_add));
+          if (function_define_add_result == AddTypeResult::kTypeAlreadyIn)
+              [[likely]] {
+            // 如果函数签名不同应返回AddTypeResult::kOverrideFunction
+            // 使用新的指针替换原有指针，从而更新函数参数名
+            *shared_pointer = type_to_add;
+            function_define_add_result = AddTypeResult::kFunctionDefine;
+          }
+          return function_define_add_result;
+        } else {
+          // 待添加的类型与已有类型相同，产生冲突
+          return AddTypeResult::kTypeAlreadyIn;
+        }
+      }
+      auto vector_pointer =
+          std::make_unique<std::vector<std::shared_ptr<const TypeInterface>>>();
+      // 将StructOrBasicType::kBasic或StructOrBasicType::kPointer类型放在最前面
+      // 从而优化查找类型的速度
+      if (IsSameKind(type_to_add->GetType(), StructOrBasicType::kBasic)) {
+        vector_pointer->emplace_back(type_to_add);
+        vector_pointer->emplace_back(std::move(*shared_pointer));
+      } else {
+        // 原来的类型不一定属于该大类，但新添加的类型一定不属于该大类
+        vector_pointer->emplace_back(std::move(*shared_pointer));
+        vector_pointer->emplace_back(type_to_add);
+      }
+      type_data_ = std::move(vector_pointer);
+      return AddTypeResult::kShiftToVector;
+    } else {
+      // 该节点已经使用vector存储
+      std::unique_ptr<std::vector<std::shared_ptr<const TypeInterface>>>&
+          vector_pointer = *std::get_if<std::unique_ptr<
+              std::vector<std::shared_ptr<const TypeInterface>>>>(&type_data_);
+      assert(vector_pointer != nullptr);
+      // 检查待添加的类型与已存在的类型是否属于同一大类
+      for (auto& stored_pointer : *vector_pointer) {
+        if (IsSameKind(stored_pointer->GetType(), type_to_add->GetType()))
+            [[unlikely]] {
+          // 检查是否在添加函数类型
+          if (type_to_add->GetType() == StructOrBasicType::kFunction)
+              [[unlikely]] {
+            AddTypeResult function_define_add_result =
+                CheckFunctionDefineAddResult(
+                    static_cast<const FunctionType&>(*stored_pointer),
+                    static_cast<const FunctionType&>(*type_to_add));
+            if (function_define_add_result == AddTypeResult::kAbleToAdd)
+                [[likely]] {
+              // 这种情况为在函数定义前已添加函数声明
+              // 使用新的指针替换原有指针
+              stored_pointer = type_to_add;
+              return AddTypeResult::kFunctionDefine;
+            }
+            return function_define_add_result;
+          }
+          // 待添加的类型与已有类型相同，产生冲突
+          return AddTypeResult::kTypeAlreadyIn;
+        }
+      }
+      vector_pointer->emplace_back(type_to_add);
+      if (IsSameKind(type_to_add->GetType(), StructOrBasicType::kBasic)) {
+        // 新插入的类型为StructOrBasicType::kBasic/kPointer
+        // 将该类型放到第一个位置以便优化无类型倾向性时的查找逻辑
+        std::swap(vector_pointer->front(), vector_pointer->back());
+      }
+      return AddTypeResult::kAddToVector;
+    }
+  }
+}
+
 std::pair<std::shared_ptr<const TypeInterface>, GetTypeResult>
 TypeSystem::TypeData::GetType(StructOrBasicType type_prefer) const {
   if (std::get_if<std::monostate>(&type_data_) != nullptr) [[unlikely]] {
@@ -632,7 +726,7 @@ TypeSystem::TypeData::GetType(StructOrBasicType type_prefer) const {
 // 除此以外类型单独成一大类
 
 bool TypeSystem::TypeData::IsSameKind(StructOrBasicType type1,
-                                             StructOrBasicType type2) {
+                                      StructOrBasicType type2) {
   unsigned long long type1_ = static_cast<unsigned long long>(type1);
   unsigned long long type2_ = static_cast<unsigned long long>(type2);
   constexpr unsigned long long kBasicType =

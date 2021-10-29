@@ -11,10 +11,10 @@ extern thread_local size_t line_;
 // 从0开始计数
 extern thread_local size_t column_;
 
-size_t GetLine();
-size_t GetColumn();
-void SetLine(size_t line);
-void SetColumn(size_t column);
+extern inline size_t GetLine();
+extern inline size_t GetColumn();
+extern inline void SetLine(size_t line);
+extern inline void SetColumn(size_t column);
 
 }  // namespace frontend::parser
 

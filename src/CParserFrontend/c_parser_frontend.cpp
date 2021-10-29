@@ -7,6 +7,52 @@ namespace c_parser_frontend {
 
 thread_local CParserFrontend c_parser_frontend;
 
+// 声明函数使用该接口
+
+std::pair<CParserFrontend::TypeSystem::TypeNodeContainerIter,
+          CParserFrontend::AddTypeResult>
+CParserFrontend::AnnounceFunction(
+    const std::shared_ptr<const FunctionType>& function_type) {
+  FlowControlSystem::FunctionCheckResult check_result =
+      flow_control_system_.AnnounceFunction(function_type);
+  switch (check_result) {
+    case FlowControlSystem::FunctionCheckResult::kSuccess:
+      break;
+    case FlowControlSystem::FunctionCheckResult::kOverrideFunction:
+      return std::make_pair(TypeSystem::TypeNodeContainerIter(),
+                            AddTypeResult::kOverrideFunction);
+      break;
+    case FlowControlSystem::FunctionCheckResult::kDoubleAnnounce:
+      return std::make_pair(TypeSystem::TypeNodeContainerIter(),
+                            AddTypeResult::kDoubleAnnounceFunction);
+      break;
+    case FlowControlSystem::FunctionCheckResult::kFunctionConstructed:
+      return std::make_pair(TypeSystem::TypeNodeContainerIter(),
+                            AddTypeResult::kTypeAlreadyIn);
+      break;
+    default:
+      assert(false);
+      break;
+  }
+  return type_system_.AnnounceFunctionType(function_type);
+}
+
+// 设置当前待构建函数
+// 在作用域内声明函数的全部参数和函数类型的对象且自动提升作用域等级
+// 返回是否设置成功
+
+bool CParserFrontend::SetFunctionToConstruct(
+    const std::shared_ptr<const FunctionType>& function_to_construct) {
+  auto result =
+      flow_control_system_.SetFunctionToConstruct(function_to_construct);
+  if (result == FlowControlSystem::FunctionCheckResult::kSuccess) [[likely]] {
+    return action_scope_system_.SetFunctionToConstruct(
+        flow_control_system_.GetActiveFunctionPointer());
+  } else {
+    return false;
+  }
+}
+
 bool CParserFrontend::PushFlowControlSentence(
     std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
         flow_control_sentence) {
@@ -43,15 +89,11 @@ void ActionScopeSystem::PopVarietyOverLevel(ActionScopeLevelType level) {
       // 函数构建完成，创建构建完成的函数类型对象并添加到全局成员的作用域
       assert(flow_control_sentence->GetFlowType() ==
              c_parser_frontend::flow_control::FlowType::kFunctionDefine);
-      auto function_type =
-          static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
-              *flow_control_sentence)
-              .GetFunctionTypePointer();
-      bool result = CreateFunctionTypeVarietyAndPush(function_type);
-      assert(result);
+      // 释放指向函数数据的指针，防止该指针在flow_control_sentence析构时被释放
+      // 该指针管辖权在FlowControlSystem
+      flow_control_sentence.release();
       // 通知控制器完成函数构建
-      c_parser_frontend::c_parser_frontend.FinishFunctionConstruct(
-          function_type);
+      c_parser_frontend::c_parser_frontend.FinishFunctionConstruct();
     }
   }
 }

@@ -10,33 +10,34 @@ bool DfaMachine::SetInputFile(const std::string filename) {
     return false;
   } else {
     file_ = file;
+    SetCharacterNow(fgetc(file_));
     return true;
   }
 }
 
 DfaMachine::WordInfo DfaMachine::GetNextWord() {
-  // 判断是否有放回的单词
-  if (!putback_words_.empty()) {
-    WordInfo return_word = std::move(putback_words_.back());
-    putback_words_.pop_back();
-    return return_word;
-  }
   std::string symbol;
   WordInfo return_data;
   // 当前状态转移表ID
   TransformArrayId transform_array_id = root_transform_array_id_;
-  while (true) {
-    char c = fgetc(file_);
-    if (ferror(file_)) {
-      std::cerr << std::format("读取输入文件出错，请检查文件\n") << std::endl;
-      abort();
+  // 跳过空白字符
+  while (std::isspace(GetCharacterNow())) {
+    if (GetCharacterNow() == '\n') [[unlikely]] {
+      // 行数+1
+      SetLine(GetLine() + 1);
+      // 重置列数为0
+      SetColumn(0);
     }
+    SetCharacterNow(fgetc(file_));
+    SetColumn(GetColumn() + 1);
+  }
+  while (true) {
     // 判断特殊情况
-    switch (c) {
+    switch (GetCharacterNow()) {
       case EOF:
         if (feof(file_)) {
           // 文件结尾，输出结果
-          goto Return;
+          return WordInfo(GetEndOfFileSavedData(), std::move(symbol));
         }
         break;
       case '\n':
@@ -48,22 +49,20 @@ DfaMachine::WordInfo DfaMachine::GetNextWord() {
       default:
         break;
     }
-    symbol += c;
-    SetColumn(GetColumn() + 1);
-    TransformArrayId next_array_id = dfa_config_[transform_array_id].first[c];
+    TransformArrayId next_array_id =
+        dfa_config_[transform_array_id].first[GetCharacterNow()];
     if (!next_array_id.IsValid()) {
+      // 无法移入当前字符
       break;
     } else {
+      // 可以移入
+      symbol += GetCharacterNow();
       transform_array_id = next_array_id;
+      SetCharacterNow(fgetc(file_));
+      SetColumn(GetColumn() + 1);
     }
   }
-Return:
-  if (feof(file_)) {
-    // 到达文件结尾
-    return WordInfo(GetEndOfFileSavedData(), std::move(symbol));
-  } else {
-    return WordInfo(dfa_config_[transform_array_id].second, std::move(symbol));
-  }
+  return WordInfo(dfa_config_[transform_array_id].second, std::move(symbol));
 }
 
 }  // namespace frontend::parser::dfamachine

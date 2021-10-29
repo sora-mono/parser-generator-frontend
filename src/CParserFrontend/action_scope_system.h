@@ -76,6 +76,7 @@ class ActionScopeSystem {
 
   // 初始化
   void VarietyScopeSystemInit() {
+    action_scope_level_ = ActionScopeLevelType(0);
     variety_name_to_operator_node_pointer_.clear();
     while (!variety_stack_.empty()) {
       variety_stack_.pop();
@@ -107,8 +108,7 @@ class ActionScopeSystem {
   // 自动提升作用域，创建函数类型变量等
   // 返回是否添加成功
   bool SetFunctionToConstruct(
-      const std::shared_ptr<c_parser_frontend::type_system::FunctionType>&
-          function_type);
+      c_parser_frontend::flow_control::FunctionDefine* function_data);
   ActionScopeLevelType GetActionScopeLevel() const {
     return action_scope_level_;
   }
@@ -182,11 +182,11 @@ class ActionScopeSystem {
     return variety_name_to_operator_node_pointer_;
   }
   auto& GetVarietyStack() { return variety_stack_; }
-  // 创建函数类型变量并添加到作用域中，返回是否添加成功
-  // 函数类型变量用于函数指针赋值
-  bool CreateFunctionTypeVarietyAndPush(
-      const std::shared_ptr<c_parser_frontend::type_system::FunctionType>&
-          function_type);
+  // 创建函数定义控制块并压入作用域栈中，返回是否添加成功
+  // 并创建函数类型的const右值变量添加到全局变量中，便于赋值使用
+  // 提升定义域等级
+  bool PushFunctionFlowControlNode(
+      c_parser_frontend::flow_control::FunctionDefine* function_data);
 
   // 存储变量名和对应同名不同作用域变量
   // 键值为变量名
@@ -222,7 +222,7 @@ ActionScopeSystem::DefineVariety(
         // 添加该节点的信息，以便作用域失效时精确弹出
         // 可以避免用户提供需要弹出的序列，简化操作
         // 同时避免遍历整个变量名到节点映射表，也无需每个指针都存储对应的level
-        GetVarietyStack().emplace(std::move(iter));
+        GetVarietyStack().emplace(iter);
       }
       break;
     case DefineVarietyResult::kReDefine:

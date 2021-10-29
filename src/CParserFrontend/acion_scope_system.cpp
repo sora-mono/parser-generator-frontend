@@ -97,41 +97,41 @@ ActionScopeSystem::GetVariety(const std::string& variety_name) {
   }
 }
 
-bool ActionScopeSystem::CreateFunctionTypeVarietyAndPush(
-    const std::shared_ptr<c_parser_frontend::type_system::FunctionType>&
-        function_type) {
+bool ActionScopeSystem::PushFunctionFlowControlNode(
+    c_parser_frontend::flow_control::FunctionDefine* function_data) {
   if (GetActionScopeLevel() != 0) [[unlikely]] {
     // 函数只能定义在0级（全局）作用域
     return false;
   }
-  auto iter = AnnounceVarietyName(function_type->GetFunctionName());
-  auto function_type_variety = std::make_shared<VarietyOperatorNode>(
-      &iter->first, c_parser_frontend::operator_node::ConstTag::kConst,
-      c_parser_frontend::operator_node::LeftRightValueTag::kLeftValue);
-  bool result =
-      function_type_variety->SetVarietyTypeNoCheckFunctionType(function_type);
-  assert(result);
-  auto [ignore_iter, define_variety_result] =
-      DefineVariety(function_type->GetFunctionName(), function_type_variety);
-  return define_variety_result != DefineVarietyResult::kReDefine;
+  auto iter = AnnounceVarietyName(
+      function_data->GetFunctionTypeReference().GetFunctionName());
+  // 定义全局函数变量供赋值使用，该变量为const右值，防止被赋值/修改
+  auto [ignore_iter, result] = DefineVariety(
+      iter->first, std::make_shared<operator_node::VarietyOperatorNode>(
+                       &iter->first, type_system::ConstTag::kConst,
+                       operator_node::LeftRightValueTag::kRightValue));
+  // 在此之前应该已经判断过是否存在重定义/重载问题（在添加到FlowControlSystem时）
+  assert(result != DefineVarietyResult::kReDefine);
+  // 将函数数据指针压入栈，该指针管辖权不在ActionScopeSystem
+  // 而在FlowControlSystem，所以弹出时要调用release防止数据被unique_ptr释放
+  PushFlowControlSentence(
+      std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>(
+          function_data));
+  return true;
 }
 
 bool ActionScopeSystem::SetFunctionToConstruct(
-    const std::shared_ptr<c_parser_frontend::type_system::FunctionType>&
-        function_type) {
+    c_parser_frontend::flow_control::FunctionDefine* function_data) {
+  assert(function_data != nullptr);
   // 添加全局的函数类型变量，用于函数指针赋值
-  bool result = CreateFunctionTypeVarietyAndPush(function_type);
+  // 并将函数的flow_control节点压入作用域栈底
+  bool result = PushFunctionFlowControlNode(function_data);
   if (!result) [[unlikely]] {
     return false;
   }
-  AddActionScopeLevel();
-  // 添加函数定义流程控制语句
-  flow_control_stack_.emplace(std::make_pair(
-      std::make_unique<c_parser_frontend::flow_control::FunctionDefine>(
-          function_type),
-      GetActionScopeLevel()));
   // 将函数参数添加到作用域中
-  for (auto& argument_node : function_type->GetArguments()) {
+  for (auto& argument_node :
+       function_data->GetFunctionTypeReference().GetArguments()) {
     const std::string* argument_name =
         argument_node.variety_operator_node->GetVarietyNamePointer();
     // 如果参数有名则添加到作用域中

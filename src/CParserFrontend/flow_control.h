@@ -144,6 +144,58 @@ class Jmp : public FlowInterface {
   std::unique_ptr<Label> target_label_;
 };
 
+class FunctionDefine : public FlowInterface {
+ public:
+  FunctionDefine(const std::shared_ptr<const FunctionType>& function_type)
+      : FlowInterface(FlowType::kFunctionDefine),
+        function_type_(function_type) {}
+
+  virtual bool AddMainSentences(
+      std::list<std::unique_ptr<FlowInterface>>&& sentences) override {
+    return AddSentences(std::move(sentences));
+  }
+  virtual bool AddMainSentence(
+      std::unique_ptr<FlowInterface>&& sentence) override {
+    return AddSentence(std::move(sentence));
+  }
+
+  // 添加一条函数内执行的语句（按出现顺序添加）
+  // 成功添加返回true，不返还控制权
+  // 如果不能添加则返回false，不修改入参
+  bool AddSentence(std::unique_ptr<FlowInterface>&& sentence_to_add);
+  // 添加一个容器内的全部语句（按照给定迭代器begin->end顺序添加）
+  // 成功添加后作为参数的容器空
+  // 如果有返回false的CheckSentenceInFunctionValid结果则返回false且不修改参数
+  // 成功添加则返回true
+  bool AddSentences(
+      std::list<std::unique_ptr<FlowInterface>>&& sentence_container);
+  // 获取函数内执行的语句
+  const std::list<std::unique_ptr<FlowInterface>>& GetSentences() const {
+    return sentences_in_function_;
+  }
+  // 返回是否为函数声明（函数声明中不存在任何流程控制语句）
+  bool IsFunctionAnnounce() const { return GetSentences().empty(); }
+  void SetFunctionObjectToCall(
+      const std::shared_ptr<const FunctionType>& function_type) {
+    function_type_ = function_type;
+  }
+  std::shared_ptr<const FunctionType> GetFunctionTypePointer() const {
+    return function_type_;
+  }
+  const FunctionType& GetFunctionTypeReference() const {
+    return *function_type_;
+  }
+
+  // 检查给定语句是否可以作为函数内出现的语句
+  static bool CheckSentenceInFunctionValid(const FlowInterface& flow_interface);
+
+ private:
+  // 函数的类型
+  std::shared_ptr<const FunctionType> function_type_;
+  // 函数内执行的语句
+  std::list<std::unique_ptr<FlowInterface>> sentences_in_function_;
+};
+
 //从函数中返回
 class Return : public FlowInterface {
  public:
@@ -163,21 +215,17 @@ class Return : public FlowInterface {
   }
 
   // 设置从中返回的函数和返回的值，如果不存在返回值则提供nullptr作为参数
-  bool SetReturnTarget(
-      const std::shared_ptr<const c_parser_frontend::type_system::FunctionType>
-          function_to_return_from,
-      const std::shared_ptr<const OperatorNodeInterface>& return_target =
-          nullptr);
+  bool SetReturnTarget(const FunctionDefine* function_to_return_from,
+                       const std::shared_ptr<const OperatorNodeInterface>&
+                           return_target = nullptr);
 
   std::shared_ptr<const OperatorNodeInterface> GetReturnValuePointer() const {
     return return_target_;
   }
-  std::shared_ptr<const c_parser_frontend::type_system::FunctionType>
-  GetFunctionToReturnFromPointer() const {
+  const FunctionDefine* GetFunctionToReturnFromPointer() const {
     return function_to_return_from_;
   }
-  const c_parser_frontend::type_system::FunctionType&
-  GetFunctionToReturnFromReference() const {
+  const FunctionDefine& GetFunctionToReturnFromReference() const {
     return *function_to_return_from_;
   }
 
@@ -185,8 +233,7 @@ class Return : public FlowInterface {
   // 要返回的值，nullptr代表无返回值
   std::shared_ptr<const OperatorNodeInterface> return_target_ = nullptr;
   // 从该函数返回
-  std::shared_ptr<const c_parser_frontend::type_system::FunctionType>
-      function_to_return_from_;
+  const FunctionDefine* function_to_return_from_;
 };
 
 // 条件控制块基类（if,for,while等）
@@ -217,8 +264,8 @@ class ConditionBlockInterface : public FlowInterface {
   const auto& GetSentences() const { return main_block_; }
   // 获取块起始处标签
   std::unique_ptr<Label> GetSentenceStartLabel() const {
-    return std::make_unique<Label>(std::format("condition_block_{:}_start",
-                                               GetFlowId().GetRawValue()));
+    return std::make_unique<Label>(
+        std::format("condition_block_{:}_start", GetFlowId().GetRawValue()));
   }
   // 获取块结束处标签
   std::unique_ptr<Label> GetSentenceEndLabel() const {
@@ -242,35 +289,6 @@ class ConditionBlockInterface : public FlowInterface {
   std::list<std::unique_ptr<FlowInterface>> sentence_to_get_condition_;
   // 控制块主块的内容
   std::list<std::unique_ptr<FlowInterface>> main_block_;
-};
-
-class FunctionDefine : public FlowInterface {
- public:
-  FunctionDefine(const std::shared_ptr<FunctionType>& function_type)
-      : FlowInterface(FlowType::kFunctionDefine),
-        function_type_(function_type) {}
-
-  virtual bool AddMainSentences(
-      std::list<std::unique_ptr<FlowInterface>>&& sentences) override {
-    return GetFunctionTypeReference().AddSentences(std::move(sentences));
-  }
-  virtual bool AddMainSentence(
-      std::unique_ptr<FlowInterface>&& sentence) override {
-    return GetFunctionTypeReference().AddSentence(std::move(sentence));
-  }
-
-  void SetFunctionObjectToCall(
-      const std::shared_ptr<FunctionType>& function_type) {
-    function_type_ = function_type;
-  }
-  std::shared_ptr<FunctionType> GetFunctionTypePointer() const {
-    return function_type_;
-  }
-  FunctionType& GetFunctionTypeReference() const { return *function_type_; }
-
- private:
-  // 函数的类型
-  std::shared_ptr<FunctionType> function_type_;
 };
 
 class SimpleSentence : public FlowInterface {
@@ -384,8 +402,8 @@ class LoopSentenceInterface : public ConditionBlockInterface {
 
   // 获取循环块主块开始处标签
   std::unique_ptr<Label> GetLoopMainBlockStartLabel() const {
-    return std::make_unique<Label>(std::format("loop_main_block_{:}_start",
-                                               GetFlowId().GetRawValue()));
+    return std::make_unique<Label>(
+        std::format("loop_main_block_{:}_start", GetFlowId().GetRawValue()));
   }
   // 获取循环主块结尾处标签
   std::unique_ptr<Label> GetLoopMainBlockEndLabel() const {
@@ -558,27 +576,45 @@ class SwitchSentence : public ConditionBlockInterface {
 
 class FlowControlSystem {
  public:
-  void SetFunctionToConstruct(
-      const std::shared_ptr<FunctionType>& active_function) {
-    active_function_ = active_function;
+  // 声明/设置活跃函数时返回的结果
+  enum class FunctionCheckResult {
+    kSuccess,  // 成功声明/设置当前活跃函数
+    // 失败的情况
+    kOverrideFunction,  // 试图重载函数
+    kDoubleAnnounce,    // 声明已经声明/定义的函数
+    kFunctionConstructed  // 试图设置已经构建完成的函数为待构建函数
+  };
+  FunctionCheckResult SetFunctionToConstruct(
+      const std::shared_ptr<const FunctionType>& active_function);
+  // 当前无活跃函数时返回nullptr
+  // 提供的指针不允许delete
+  FunctionDefine* GetActiveFunctionPointer() const {
+    return active_function_ == functions_.end() ? nullptr
+                                                : &active_function_->second;
   }
-  std::shared_ptr<const FunctionType> GetActiveFunctionPointer() const {
-    return active_function_;
-  }
-  const FunctionType& GetActiveFunctionReference() const {
-    return *active_function_;
+  FunctionDefine& GetActiveFunctionReference() const {
+    return active_function_->second;
   }
   // 完成函数构建后调用
-  void FinishFunctionConstruct() {
-    functions_.emplace_back(std::move(active_function_));
-    active_function_ = nullptr;
+  void FinishFunctionConstruct() { active_function_ = functions_.end(); }
+  // 通过函数名查询函数数据，如果不存在则返回空指针
+  const FunctionDefine* GetFunction(const std::string& function_name) {
+    auto iter = functions_.find(function_name);
+    if (iter == functions_.end()) [[unlikely]] {
+      return nullptr;
+    } else {
+      return &iter->second;
+    }
   }
+  FunctionCheckResult AnnounceFunction(
+      const std::shared_ptr<const FunctionType>& function_type);
 
  private:
+  // 所有构建完成的函数，键为函数名，值为指向函数对象的指针
+  std::unordered_map<std::string, FunctionDefine> functions_;
   // 当前活动的函数（正在被构建的函数）
-  std::shared_ptr<FunctionType> active_function_ = nullptr;
-  // 所有构建完成的函数
-  std::list<std::shared_ptr<FunctionType>> functions_;
+  std::unordered_map<std::string, FunctionDefine>::iterator active_function_ =
+      functions_.end();
 };
 }  // namespace c_parser_frontend::flow_control
 

@@ -98,6 +98,7 @@ bool DfaGenerator::DfaMinimize() {
     IntermediateDfaNode& intermediate_node = GetIntermediateNode(p.first);
     if (logged_index[index] == false) {
       // 该状态转移表条目未配置
+      dfa_config_[index].second = intermediate_node.word_attached_data;
       for (int i = CHAR_MIN; i <= CHAR_MAX; i++) {
         // 寻找有效节点并设置语法分析表中对应项
         // 从最小的char开始
@@ -108,7 +109,6 @@ bool DfaGenerator::DfaMinimize() {
           auto iter = intermediate_node_to_final_node_.find(next_node_id);
           assert(iter != intermediate_node_to_final_node_.end());
           dfa_config_[index].first[static_cast<char>(i)] = iter->second;
-          dfa_config_[index].second = intermediate_node.word_attached_data;
         }
       }
       logged_index[index] = true;

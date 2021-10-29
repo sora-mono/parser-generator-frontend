@@ -3,6 +3,12 @@
 #include "Common/id_wrapper.h"
 #include "type_system.h"
 
+namespace c_parser_frontend::flow_control {
+// 前向声明FlowInterface供三目运算符节点（TemaryOperatorNode）
+// 中SetBranchCondition使用
+class FlowInterface;
+}  // namespace c_parser_frontend::flow_control
+
 // 操作节点
 namespace c_parser_frontend::operator_node {
 // 运算节点大类

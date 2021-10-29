@@ -3,6 +3,7 @@
 
 #include <fstream>
 #include <iostream>
+#include <list>
 
 #include "Common/common.h"
 #include "Generator/export_types.h"
@@ -39,19 +40,12 @@ class DfaMachine {
     // 获取到的单词
     std::string symbol_;
   };
-  // 设置输入文件
+
+  // 设置输入文件，自动读取输入文件的第一个字符到character_now
   bool SetInputFile(const std::string filename);
   // 获取下一个词
   // 如果遇到了文件结尾则返回tail_node_id = WordAttachedData::InvalidId()
   WordInfo GetNextWord();
-  // 获取当前行数
-  static size_t GetLine() { return frontend::parser::GetLine(); }
-  // 设置当前行数
-  static void SetLine(size_t line) { frontend::parser::SetLine(line); }
-  // 获取当前列数
-  static size_t GetColumn() { return frontend::parser::GetColumn(); }
-  // 设置当前列数
-  static void SetColumn(size_t column) { frontend::parser::SetColumn(column); }
 
   // 重置状态
   void Reset() {
@@ -65,10 +59,6 @@ class DfaMachine {
   const WordAttachedData& GetEndOfFileSavedData() {
     return file_end_saved_data_;
   }
-  // 放回一个单词
-  void PutbackWord(WordInfo&& word_info) {
-    putback_words_.emplace_back(std::move(word_info));
-  }
   // 加载配置
   void LoadConfig() {
     std::ifstream config_file(frontend::common::kDfaConfigFileName,
@@ -76,6 +66,8 @@ class DfaMachine {
     boost::archive::binary_iarchive iarchive(config_file);
     iarchive >> *this;
   }
+  void SetCharacterNow(char character_now) { character_now_ = character_now; }
+  char GetCharacterNow() const { return character_now_; }
 
  private:
   // 允许序列化类访问成员
@@ -97,8 +89,8 @@ class DfaMachine {
   WordAttachedData file_end_saved_data_;
   // 当前输入文件
   FILE* file_;
-  // 保存放回单词的数组
-  std::vector<WordInfo> putback_words_;
+  // 当前读取到的字符
+  char character_now_;
 };
 
 }  // namespace frontend::parser::dfamachine

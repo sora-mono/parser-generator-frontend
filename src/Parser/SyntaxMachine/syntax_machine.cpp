@@ -16,10 +16,11 @@ bool SyntaxMachine::Parse(const std::string& filename) {
     return false;
   }
   GetNextWord();
-  // 初始化当前解析数据
-  GetParsingDataNow().syntax_analysis_table_entry_id = GetRootParsingEntryId();
-  GetOperatorPriorityNow() = OperatorPriority(0);
-  while (!GetParsingStack().empty()) {
+  // 初始化解析数据栈，压入当前解析数据
+  PushParsingData(
+      ParsingData{.syntax_analysis_table_entry_id = GetRootParsingEntryId(),
+                  .operator_priority = OperatorPriority(0)});
+  while (!IsParsingStackEmpty()) {
     const WordInfo& dfa_return_data = GetWaitingProcessWordInfo();
     switch (dfa_return_data.word_attached_data_.node_type) {
       case ProductionNodeType::kTerminalNode:
@@ -70,7 +71,7 @@ void SyntaxMachine::TerminalWordWaitingProcess() {
           break;
         case ProductionNodeType::kOperatorNode: {
           // 运算符优先级必须不为0
-          OperatorPriority priority_now = GetOperatorPriorityNow();
+          OperatorPriority priority_now = GetParsingDataNow().operator_priority;
           auto [operator_associate_type, operator_priority] =
               terminal_node_info.GetAssociatityTypeAndPriority(
                   LastOperateIsReduct());
@@ -110,36 +111,31 @@ void SyntaxMachine::TerminalWordWaitingProcess() {
 inline void SyntaxMachine::ShiftTerminalWord(
     const ActionAndAttachedDataInterface& action_and_target) {
   ParsingData& parsing_data_now = GetParsingDataNow();
-  const WordInfo& word_info = GetWaitingProcessWordInfo();
+  WordInfo& word_info = GetWaitingProcessWordInfo();
   // 构建当前单词的数据
   // 待移入节点的ID
   parsing_data_now.shift_node_id =
       word_info.word_attached_data_.production_node_id;
-  // 待移入节点的数据
-  TerminalWordData terminal_word_data;
-  // 设置待移入节点的字符串和所在行数
-  terminal_word_data.word = word_info.symbol_;
   // 添加待移入节点信息到当前解析用信息
   parsing_data_now.word_data_to_user.SetWordDataToUser(
-      std::move(terminal_word_data));
-  // 将当前的状态压入栈
-  GetParsingStack().emplace(std::move(parsing_data_now));
-  // 更新状态为移入该节点后到达的条目
-  parsing_data_now.syntax_analysis_table_entry_id =
-      action_and_target.GetShiftAttachedData()
-          .GetNextSyntaxAnalysisTableEntryId();
+      TerminalWordData{.word = std::move(word_info.symbol_)});
   // 如果移入了运算符则更新优先级为新的优先级
+  OperatorPriority new_parsing_data_priority;
   if (word_info.word_attached_data_.node_type ==
       ProductionNodeType::kOperatorNode) {
-    parsing_data_now.operator_priority = OperatorPriority(
+    new_parsing_data_priority =
         word_info.word_attached_data_
             .GetAssociatityTypeAndPriority(LastOperateIsReduct())
-            .second);
+            .second;
   } else {
     // 否则使用原来的优先级
-    parsing_data_now.operator_priority =
-        GetParsingStack().top().operator_priority;
+    new_parsing_data_priority = parsing_data_now.operator_priority;
   }
+  // 压入移入该单词后得到的解析数据
+  PushParsingData(ParsingData{.syntax_analysis_table_entry_id =
+                                  action_and_target.GetShiftAttachedData()
+                                      .GetNextSyntaxAnalysisTableEntryId(),
+                              .operator_priority = new_parsing_data_priority});
   // 获取下一个单词
   GetNextWord();
   // 执行了移入操作，需要设置上一步为非规约操作
@@ -157,27 +153,42 @@ void SyntaxMachine::Reduct(
   std::vector<WordDataToUser> word_data_to_user;
   // 预分配空间，防止多次扩容
   word_data_to_user.resize(production_body.size());
-  auto& parsing_stack = GetParsingStack();
+
   // 生成规约数据，数组内数据顺序为产生式书写顺序
   // 从后向前添加数据
+  // 存储上一个弹出的数据
+  ParsingData last_pop_data = std::move(GetParsingDataNow());
+  PopTopParsingData();
   auto production_node_id_iter = production_body.rbegin();
   for (auto user_data_iter = word_data_to_user.rbegin();
-       user_data_iter != word_data_to_user.rend();
-       ++user_data_iter, ++production_node_id_iter) {
-    if (parsing_stack.top().shift_node_id == *production_node_id_iter) {
-      // 该节点正常参与规约
-      *user_data_iter = std::move(GetParsingStack().top().word_data_to_user);
-      GetParsingStack().pop();
+       user_data_iter != word_data_to_user.rend(); ++production_node_id_iter) {
+    if (GetParsingDataNow().shift_node_id == *production_node_id_iter)
+        [[likely]] {
+      // 当前产生式正常参与规约，获取之前保存下来提供给用户规约使用的数据
+      *user_data_iter = std::move(GetParsingDataNow().word_data_to_user);
+      ++user_data_iter;
+      // 弹出解析数据栈顶部无附属数据的部分，露出之前存入的解析数据
+      last_pop_data = std::move(GetParsingDataNow());
+      PopTopParsingData();
+      // 栈空时可能发生空规约数据未完全填写，填充所有未填写的空规约标记
+      if (IsParsingStackEmpty()) [[unlikely]] {
+        while (user_data_iter != word_data_to_user.rend()) {
+          user_data_iter->SetWordDataToUser(NonTerminalWordData());
+          ++user_data_iter;
+        }
+        break;
+      }
     } else {
       // 该节点空规约，设置空规约节点标记
       // 空规约节点存储NonTerminalWordData
       // 其中NonTerminalWordData::user_data_为空
       user_data_iter->SetWordDataToUser(NonTerminalWordData());
+      ++user_data_iter;
     }
   }
-  // 恢复解析用数据到该非终结产生式移入前
-  GetParsingDataNow() = std::move(GetParsingStack().top());
-  GetParsingStack().pop();
+  // 将最后弹出的数据压回栈
+  // 该数据仍储存有效信息（当前语法分析表条目和运算符优先级）
+  PushParsingData(std::move(last_pop_data));
   ShiftNonTerminalWord(
       process_function_object.Reduct(std::move(word_data_to_user)),
       action_and_target.GetReductAttachedData().GetReductedNonTerminalNodeId());
@@ -193,15 +204,14 @@ void SyntaxMachine::ShiftNonTerminalWord(
   SyntaxAnalysisTableEntryId next_entry_id =
       GetNextEntryId(parsing_data_now.syntax_analysis_table_entry_id,
                      reducted_nonterminal_node_id);
+  // 更新移入节点的ID和附属数据
   parsing_data_now.shift_node_id = reducted_nonterminal_node_id;
   parsing_data_now.word_data_to_user.SetWordDataToUser(
       std::move(non_terminal_word_data));
-  GetParsingStack().emplace(std::move(parsing_data_now));
-  parsing_data_now.syntax_analysis_table_entry_id = next_entry_id;
-
-  // 重设当前优先级为移入该节点时的优先级
-  parsing_data_now.operator_priority =
-      GetParsingStack().top().operator_priority;
+  // 移入非终结节点不改变运算符优先级
+  PushParsingData(
+      ParsingData{.syntax_analysis_table_entry_id = next_entry_id,
+                  .operator_priority = parsing_data_now.operator_priority});
 }
 
 }  // namespace frontend::parser::syntax_machine

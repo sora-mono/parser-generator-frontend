@@ -63,17 +63,9 @@ class CParserFrontend {
       const std::string& type_name, StructOrBasicType type_prefer) {
     return type_system_.GetType(type_name, type_prefer);
   }
-  // 声明函数类型使用该接口
-  std::pair<TypeSystem::TypeNodeContainerIter, AddTypeResult>
-  AnnounceFunctionType(
-      const std::shared_ptr<const FunctionType>& function_type) {
-    return type_system_.AnnounceFunctionType(function_type);
-  }
-  // 定义函数类型使用该接口
-  std::pair<TypeSystem::TypeNodeContainerIter, AddTypeResult>
-  DefineFunctionType(const std::shared_ptr<const FunctionType>& function_type) {
-    return type_system_.DefineFunctionType(function_type);
-  }
+  // 声明函数使用该接口
+  std::pair<TypeSystem::TypeNodeContainerIter, AddTypeResult> AnnounceFunction(
+      const std::shared_ptr<const FunctionType>& function_type);
   // 添加变量
   // 返回指向插入位置的迭代器与添加结果，添加结果意义见定义
   template <class VarietyName>
@@ -120,15 +112,7 @@ class CParserFrontend {
   // 在作用域内声明函数的全部参数和函数类型的对象且自动提升作用域等级
   // 返回是否设置成功
   bool SetFunctionToConstruct(
-      const std::shared_ptr<FunctionType>& function_to_construct) {
-    if (action_scope_system_.SetFunctionToConstruct(function_to_construct))
-        [[likely]] {
-      flow_control_system_.SetFunctionToConstruct(function_to_construct);
-      return true;
-    } else {
-      return false;
-    }
-  }
+      const std::shared_ptr<const FunctionType>& function_to_construct);
   // 将流程控制语句压入栈
   // 返回是否添加成功
   // 如果无法添加语句则输出错误信息
@@ -140,10 +124,10 @@ class CParserFrontend {
     return action_scope_system_.GetTopFlowControlSentence();
   }
   // 获取当前活跃函数
-  std::shared_ptr<const FunctionType> GetActiveFunctionPointer() const {
+  const FunctionDefine* GetActiveFunctionPointer() const {
     return flow_control_system_.GetActiveFunctionPointer();
   }
-  const FunctionType& GetActiveFunctionReference() const {
+  const FunctionDefine& GetActiveFunctionReference() const {
     return flow_control_system_.GetActiveFunctionReference();
   }
   // 向当前活跃的函数内执行的语句尾部附加语句
@@ -183,12 +167,12 @@ class CParserFrontend {
   friend ActionScopeSystem;
 
   // 做一些完成函数构建后的清理操作
-  void FinishFunctionConstruct(
-      const std::shared_ptr<c_parser_frontend::type_system::FunctionType>&
-          function_type) {
+  void FinishFunctionConstruct() {
+    // 无论是否声明过函数，调用该函数后都会保证该函数类型存在
+    type_system_.AnnounceFunctionType(
+        flow_control_system_.GetActiveFunctionReference()
+            .GetFunctionTypePointer());
     flow_control_system_.FinishFunctionConstruct();
-    // 向类型系统中插入函数类型
-    DefineFunctionType(function_type);
   }
   // 类型系统
   TypeSystem type_system_;
