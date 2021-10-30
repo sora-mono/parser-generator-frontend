@@ -53,7 +53,7 @@ class ProcessFunctionInterface {
 
   virtual ~ProcessFunctionInterface() {}
 
-  // 参数标号越低入栈时间越晚
+  // 参数为产生式定义顺序
   // 返回的值作为移入该产生式规约得到的非终结符号下一次参与规约传递的参数
   // 空规约节点的node_type是ProductionNodeType::kEndNode
   virtual UserData Reduct(std::vector<WordDataToUser>&& word_data) const = 0;

@@ -86,6 +86,18 @@ ActionScopeSystem::VarietyData::GetTopData() {
   }
 }
 
+ActionScopeSystem::~ActionScopeSystem() {
+  if (!flow_control_stack_.empty()) {
+    // 需要正确弹出栈中的函数对象指针，防止释放无管辖权的指针
+    while (flow_control_stack_.size() > 1) {
+      flow_control_stack_.pop();
+    }
+    // 当前流程控制语句栈仅剩正在构建的函数对象指针
+    // release该指针以防止被释放
+    flow_control_stack_.top().first.release();
+  }
+}
+
 std::pair<std::shared_ptr<const ActionScopeSystem::VarietyOperatorNode>, bool>
 ActionScopeSystem::GetVariety(const std::string& variety_name) {
   auto iter = GetVarietyNameToOperatorNodePointer().find(variety_name);
@@ -99,6 +111,7 @@ ActionScopeSystem::GetVariety(const std::string& variety_name) {
 
 bool ActionScopeSystem::PushFunctionFlowControlNode(
     c_parser_frontend::flow_control::FunctionDefine* function_data) {
+  assert(function_data);
   if (GetActionScopeLevel() != 0) [[unlikely]] {
     // 函数只能定义在0级（全局）作用域
     return false;
@@ -106,17 +119,19 @@ bool ActionScopeSystem::PushFunctionFlowControlNode(
   auto iter = AnnounceVarietyName(
       function_data->GetFunctionTypeReference().GetFunctionName());
   // 定义全局函数变量供赋值使用，该变量为const右值，防止被赋值/修改
-  auto [ignore_iter, result] = DefineVariety(
+  auto [ignore_iter, define_variety_result] = DefineVariety(
       iter->first, std::make_shared<operator_node::VarietyOperatorNode>(
                        &iter->first, type_system::ConstTag::kConst,
                        operator_node::LeftRightValueTag::kRightValue));
   // 在此之前应该已经判断过是否存在重定义/重载问题（在添加到FlowControlSystem时）
-  assert(result != DefineVarietyResult::kReDefine);
+  assert(define_variety_result != DefineVarietyResult::kReDefine);
   // 将函数数据指针压入栈，该指针管辖权不在ActionScopeSystem
   // 而在FlowControlSystem，所以弹出时要调用release防止数据被unique_ptr释放
-  PushFlowControlSentence(
+  bool push_result = PushFlowControlSentence(
       std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>(
           function_data));
+  // 如果压入不成功会导致unique_ptr在函数结束析构时抛异常
+  assert(push_result);
   return true;
 }
 
@@ -148,7 +163,12 @@ bool ActionScopeSystem::SetFunctionToConstruct(
 bool ActionScopeSystem::PushFlowControlSentence(
     std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
         flow_control_sentence) {
-  if (flow_control_stack_.empty()) {
+  if (flow_control_sentence->GetFlowType() !=
+      flow_control::FlowType::kFunctionDefine) [[likely]] {
+    if (flow_control_stack_.empty()) {
+      return false;
+    }
+  } else if (!flow_control_stack_.empty()) [[unlikely]] {
     return false;
   }
   // 先提升作用域等级，后设置流程控制语句的作用域等级

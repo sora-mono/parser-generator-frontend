@@ -28,11 +28,11 @@ class NfaGenerator {
    public:
     NfaNode() {}
     NfaNode(const NfaNode& node)
-        : nodes_forward(node.nodes_forward),
+        : nodes_forward_(node.nodes_forward_),
           conditionless_transfer_nodes_id(
               node.conditionless_transfer_nodes_id) {}
     NfaNode(NfaNode&& node)
-        : nodes_forward(std::move(node.nodes_forward)),
+        : nodes_forward_(std::move(node.nodes_forward_)),
           conditionless_transfer_nodes_id(
               std::move(node.conditionless_transfer_nodes_id)) {}
 
@@ -44,7 +44,7 @@ class NfaGenerator {
       return conditionless_transfer_nodes_id;
     }
     const std::unordered_map<char, NfaNodeId>& GetConditionalTransfers() const {
-      return nodes_forward;
+      return nodes_forward_;
     }
     // 设置条件转移节点
     void SetConditionTransfer(char c_transfer, NfaNodeId node_id);
@@ -67,10 +67,10 @@ class NfaGenerator {
       return conditionless_transfer_nodes_id;
     }
     std::unordered_map<char, NfaNodeId>& GetConditionalTransfers() {
-      return nodes_forward;
+      return nodes_forward_;
     }
     // 记录转移条件与转移到的节点，一个条件仅允许对应一个节点
-    std::unordered_map<char, NfaNodeId> nodes_forward;
+    std::unordered_map<char, NfaNodeId> nodes_forward_;
     // 存储无条件转移节点
     std::unordered_set<NfaNodeId> conditionless_transfer_nodes_id;
   };
@@ -88,15 +88,15 @@ class NfaGenerator {
   }
   // 解析正则并添加到已有NFA中，返回生成的自动机的头结点和尾节点
   // 作为外部接口使用时只需填写前两个参数，其余参数使用默认值
-  // regex为正则表达式字符串，inedx为当前解析到的位置
+  // regex为正则表达式字符串，next_character_index为下一个读取的字符的位置
   // add_to_nfa_head代表构建字符串后是否添加到NFA头结点中
-  // return_when_right_bracket代表在遇到第一个)时返回
-  // 自动处理结尾的范围限制符号
+  // 读取到与调用时给定的next_character_index左侧'('匹配的')'时返回
+  // （如果有，否则在next_character_index到达字符串尾部时返回）
+  // 返回时不自动处理结尾的范围限制符号（?、+、*等）
   // 如果输入空串则仅返回一个节点（头结点和尾节点相同）
   std::pair<NfaNodeId, NfaNodeId> RegexConstruct(
       const TailNodeData& tail_node_data, const std::string& raw_regex_string,
-      size_t&& index = 0, const bool add_to_nfa_head = true,
-      const bool return_when_right_bracket = false);
+      size_t&& next_character_index = 0, const bool add_to_nfa_head = true);
   // 添加一个由字符串构成的NFA，自动处理结尾的范围限制符号
   std::pair<NfaNodeId, NfaNodeId> WordConstruct(
       const std::string& str, TailNodeData&& word_attached_data);
@@ -123,12 +123,12 @@ class NfaGenerator {
   bool AddTailNode(NfaNodeId production_node_id, const TailNodeData& tag) {
     return AddTailNode(&GetNfaNode(production_node_id), tag);
   }
-  // 根据输入生成可选字符序列，会读取]后的*,+,?等限定符
-  // 输入的字符流第一个字符应为'['右侧字符
-  // 例：a-zA-Z_]
+  // 根据输入生成可选字符序列，不会读取]后的*,+,?等限定符
+  // next_character_index应指向'['右侧第一个字符
+  // 例：raw_regex_string == "[a-zA-Z_]" next_character_index == 1
   // 返回的第一个参数为头结点ID，第二个参数为尾节点ID
   std::pair<NfaNodeId, NfaNodeId> CreateSwitchTree(
-      const std::string& raw_regex_string, size_t* index);
+      const std::string& raw_regex_string, size_t* next_character_index);
   // 将node_src合并到node_dst中
   // 返回是否合并成功
   static bool MergeNfaNodes(NfaGenerator::NfaNode& node_dst,

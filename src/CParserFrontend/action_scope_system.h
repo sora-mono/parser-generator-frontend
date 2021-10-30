@@ -73,6 +73,7 @@ class ActionScopeSystem {
   using ActionScopeContainerType = std::unordered_map<std::string, VarietyData>;
 
   ActionScopeSystem() { VarietyScopeSystemInit(); }
+  ~ActionScopeSystem();
 
   // 初始化
   void VarietyScopeSystemInit() {
@@ -113,7 +114,7 @@ class ActionScopeSystem {
     return action_scope_level_;
   }
   // 将构建中的流程控制节点压栈，自动增加一级作用域等级
-  // 如果流程控制语句栈为空（当前无活跃函数）则返回false
+  // 如果当前无活跃流程控制语句且压入的不是FunctionDefine则返回false
   bool PushFlowControlSentence(
       std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
           flow_control_sentence);
