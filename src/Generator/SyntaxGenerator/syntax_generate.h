@@ -30,6 +30,7 @@
 #production_symbol## #production_body_seq##"_"
 
 // 定义关键字
+// 使用时请输入单词，不支持正则表达式
 // 例：GENERATOR_DEFINE_KEY_WORD("example_key_word")
 #ifdef GENERATOR_DEFINE_KEY_WORD
 #undef GENERATOR_DEFINE_KEY_WORD
@@ -256,6 +257,8 @@
 #ifndef SHIELD_HEADERS_FOR_INTELLISENSE
 #include "Common/common.h"
 #include "Config/ProductionConfig/user_defined_functions.h"
+#include "Generator/export_types.h"
 // 提供运算符结合性的枚举
-using OperatorAssociatityType = frontend::common::OperatorAssociatityType;
+using OperatorAssociatityType =
+    frontend::generator::syntax_generator::OperatorAssociatityType;
 #endif  // !SHIELD_HEADERS_FOR_INTELLIGENCE

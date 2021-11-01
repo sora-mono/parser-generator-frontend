@@ -38,5 +38,9 @@ BOOST_CLASS_EXPORT_GUID(frontend::generator::syntax_generator::
                             SyntaxAnalysisTableEntry::ShiftReductAttachedData,
                         "frontend::generator::syntax_generator::"
                         "SyntaxAnalysisTableEntry::ShiftReductAttachedData")
+BOOST_CLASS_EXPORT_GUID(frontend::generator::syntax_generator::
+                            SyntaxAnalysisTableEntry::AcceptAttachedData,
+                        "frontend::generator::syntax_generator::"
+                        "SyntaxAnalysisTableEntry::AcceptAttachedData")
 
 #endif  // !GENERATOR_SYNTAXGENERATOR_SYNTAX_GENERATOR_CLASSES_REGISTER_H_

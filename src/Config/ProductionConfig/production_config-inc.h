@@ -21,6 +21,7 @@ GENERATOR_DEFINE_TERMINAL_PRODUCTION(";", R"(;)")
 GENERATOR_DEFINE_TERMINAL_PRODUCTION(":", R"(:)")
 
 // 关键字
+// 定义时请当做单词定义，不允许使用正则
 GENERATOR_DEFINE_KEY_WORD("char")
 GENERATOR_DEFINE_KEY_WORD("short")
 GENERATOR_DEFINE_KEY_WORD("int")
@@ -122,14 +123,14 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     c_parser_frontend::parse_functions::SingleConstexprValueChar, 0,
     {"Character"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    SingleconstexprValue,
+    SingleConstexprValue,
     c_parser_frontend::parse_functions::SingleConstexprValueIndexedString, 1,
     {"Str", "[", "Num", "]"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    SingleconstexprValue,
+    SingleConstexprValue,
     c_parser_frontend::parse_functions::SingleConstexprValueNum, 2, {"Num"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    SingleconstexprValue,
+    SingleConstexprValue,
     c_parser_frontend::parse_functions::SingleConstexprValueString, 3, {"Str"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     FundamentalType, c_parser_frontend::parse_functions::FundamentalTypeChar, 0,
@@ -246,7 +247,7 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     BasicType, c_parser_frontend::parse_functions::BasicTypeStructType, 1,
     {"ConstTag", "StructType"})
-//GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+// GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
 //    BasicType, c_parser_frontend::parse_functions::BasicTypeId, 2,
 //    {"ConstTag", "Id"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(

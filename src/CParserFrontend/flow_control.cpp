@@ -350,7 +350,8 @@ inline bool FunctionDefine::AddSentences(
     }
   }
   // 通过检查，将容器内所有语句全部合并到主容器中
-  sentences_in_function_.merge(std::move(sentence_container));
+  sentences_in_function_.splice(sentences_in_function_.end(),
+                                std::move(sentence_container));
   return true;
 }
 

@@ -64,8 +64,6 @@ class DfaGenerator {
   bool DfaConstruct();
   // 构建最小化DFA
   bool DfaMinimize();
-  // 重新进行完整构建过程
-  bool DfaReconstrcut() { return DfaConstruct() && DfaMinimize(); }
   // 保存配置
   void SaveConfig() const;
 

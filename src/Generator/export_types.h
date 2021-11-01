@@ -134,7 +134,7 @@ struct WordAttachedData {
 };
 }  // namespace nfa_generator
 
-// 管理转移表用，仅用于DfaGenerator，为了避免使用char作下标时使用负下标
+// 管理转移表用，仅用于DfaGenerator，为了避免使用char作下标时使用负下标数组越界
 // 可以直接使用CHAR_MIN~CHAR_MAX任意值访问
 template <class BasicObjectType>
 class TransformArrayManager {

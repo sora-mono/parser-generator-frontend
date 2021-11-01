@@ -72,9 +72,7 @@ bool DfaGenerator::DfaConstruct() {
       }
     }
   }
-  node_manager_set_.StructManagerInit();
-  node_manager_set_.ShrinkToFit();
-  setid_to_intermediate_nodeid_.clear();
+  DfaMinimize();
   return true;
 }
 

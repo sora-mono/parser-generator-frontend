@@ -3,9 +3,10 @@
 #include <queue>
 
 namespace frontend::generator::syntax_generator {
-ProductionNodeId SyntaxGenerator::AddTerminalNode(
-    const std::string& node_symbol, const std::string& body_symbol,
-    WordPriority node_priority) {
+ProductionNodeId SyntaxGenerator::AddTerminalNode(std::string&& node_symbol,
+                                                  std::string&& body_symbol,
+                                                  WordPriority node_priority,
+                                                  bool is_key_word) {
   auto [node_symbol_id, node_symbol_inserted] = AddNodeSymbol(node_symbol);
   auto [body_symbol_id, body_symbol_inserted] = AddBodySymbol(body_symbol);
   ProductionNodeId production_node_id;
@@ -24,8 +25,16 @@ ProductionNodeId SyntaxGenerator::AddTerminalNode(
     word_attached_data.production_node_id = production_node_id;
     word_attached_data.node_type = ProductionNodeType::kTerminalNode;
     // 向DFA生成器注册关键词
-    bool result = dfa_generator_.AddRegexpression(
-        body_symbol, std::move(word_attached_data), node_priority);
+    bool result;
+    if (!is_key_word) [[likely]] {
+      assert(node_priority == 0 || node_priority == 1);
+      result = dfa_generator_.AddRegexpression(
+          body_symbol, std::move(word_attached_data), node_priority);
+    } else {
+      assert(node_priority == 2);
+      result = dfa_generator_.AddWord(
+          body_symbol, std::move(word_attached_data), node_priority);
+    }
     if (!result) [[unlikely]] {
       OutPutError(
           std::format("内部错误：无法添加终结节点正则表达式 {:}", body_symbol));
@@ -60,7 +69,7 @@ inline ProductionNodeId SyntaxGenerator::SubAddTerminalNode(
 }
 
 ProductionNodeId SyntaxGenerator::AddBinaryOperatorNode(
-    const std::string& operator_symbol,
+    std::string&& operator_symbol,
     OperatorAssociatityType binary_operator_associatity_type,
     OperatorPriority binary_operator_priority_level) {
   // 运算符产生式名与运算符相同
@@ -109,7 +118,8 @@ ProductionNodeId SyntaxGenerator::AddBinaryOperatorNode(
 }
 
 ProductionNodeId SyntaxGenerator::AddLeftUnaryOperatorNode(
-    const std::string& operator_symbol,
+    std::string&& operator_symbol,
+
     OperatorAssociatityType unary_operator_associatity_type,
     OperatorPriority unary_operator_priority_level) {
   // 运算符产生式名与运算符相同
@@ -158,9 +168,12 @@ ProductionNodeId SyntaxGenerator::AddLeftUnaryOperatorNode(
 }
 
 ProductionNodeId SyntaxGenerator::AddBinaryUnaryOperatorNode(
-    const std::string& operator_symbol,
+    std::string&& operator_symbol,
+
     OperatorAssociatityType binary_operator_associatity_type,
+
     OperatorPriority binary_operator_priority_level,
+
     OperatorAssociatityType unary_operator_associatity_type,
     OperatorPriority unary_operator_priority_level) {
   // 运算符产生式名与运算符相同
@@ -293,25 +306,24 @@ inline ProductionNodeId SyntaxGenerator::SubAddNonTerminalNode(
 
 inline ProductionNodeId SyntaxGenerator::AddEndNode() {
   ProductionNodeId node_id = manager_nodes_.EmplaceObject<EndNode>();
-  manager_nodes_.GetObject(node_id).SetThisNodeId(node_id);
+  GetProductionNode(node_id).SetSymbolId(AddNodeSymbol("$").first);
+  GetProductionNode(node_id).SetThisNodeId(node_id);
   return node_id;
 }
 
 void SyntaxGenerator::SetRootProduction(
     const std::string& production_node_symbol) {
-  ProductionNodeId production_node_id =
-      GetProductionNodeIdFromNodeSymbol(production_node_symbol);
   if (GetRootProductionNodeId().IsValid()) [[unlikely]] {
     OutPutError(std::format("仅且必须声明一个根产生式"));
     exit(-1);
   }
-  assert(production_node_id.IsValid());
-  // 生成根产生式
-  // 根产生式名使用了无法通过宏定义的字符@以防止与用户定义的节点名冲突
-  ProductionNodeId root_production_node_id =
-      AddNonTerminalNode<RootReductClass>("@RootNode",
-                                          {production_node_symbol});
-  SetRootProductionNodeId(root_production_node_id);
+  ProductionNodeId production_node_id =
+      GetProductionNodeIdFromNodeSymbol(production_node_symbol);
+  if (!production_node_id.IsValid()) [[unlikely]] {
+    OutPutError(std::format("不存在非终结产生式 {:}", production_node_symbol));
+    exit(-1);
+  }
+  SetRootProductionNodeId(production_node_id);
 }
 
 // 获取节点
@@ -460,8 +472,9 @@ SyntaxGenerator::ForwardNodesContainer SyntaxGenerator::First(
   }
 }
 
-bool SyntaxGenerator::CoreClosure(ProductionItemSetId production_item_set_id) {
-  OutPutInfo(std::format("对Core ID = {:}的项集执行闭包操作",
+bool SyntaxGenerator::ProductionItemSetClosure(
+    ProductionItemSetId production_item_set_id) {
+  OutPutInfo(std::format("对ID = {:}的项集执行闭包操作",
                          production_item_set_id.GetRawValue()));
   OutPutInfo(std::format("该项集具有的项和向前看符号如下：\n") +
              FormatProductionItems(production_item_set_id));
@@ -480,7 +493,7 @@ bool SyntaxGenerator::CoreClosure(ProductionItemSetId production_item_set_id) {
       items_waiting_process;
   const auto& production_items_and_forward_nodes =
       GetProductionItemsAndForwardNodes(production_item_set_id);
-  for (auto& iter : GetCoreMainItems(production_item_set_id)) {
+  for (auto& iter : GetProductionItemSetMainItems(production_item_set_id)) {
     // 将项集中所有核心项压入待处理队列
     items_waiting_process.push(iter);
   }
@@ -636,7 +649,7 @@ ProductionItemSetId SyntaxGenerator::GetProductionItemSetIdFromProductionItems(
     // 二者都不包含重复项，并且给定项移入相同节点后得到的项均是该项集的核心项
     // PointIndex不在最左侧的项一定是核心项
     // 所以只要数目相等二者就包含相同项
-    if (GetCoreMainItems(iter->first).size() == items.size()) {
+    if (GetProductionItemSetMainItems(iter->first).size() == items.size()) {
       return iter->first;
     }
   }
@@ -647,9 +660,14 @@ bool SyntaxGenerator::
     SpreadLookForwardSymbolAndConstructSyntaxAnalysisTableEntry(
         ProductionItemSetId production_item_set_id) {
   // 如果未执行闭包操作则无需执行传播步骤
-  if (!CoreClosure(production_item_set_id)) [[unlikely]] {
+  if (!ProductionItemSetClosure(production_item_set_id)) [[unlikely]] {
+    OutPutInfo(std::format(
+        "ID = {:}的项集在求闭包后没有任何更改，无需重新传播向前看符号",
+        production_item_set_id.GetRawValue()));
     return false;
   }
+  OutPutInfo(std::format("对ID = {:}的项集传播向前看符号",
+                         production_item_set_id.GetRawValue()));
   // 执行闭包操作后可以空规约达到的每一项都在production_item_set内
   // 所以处理时无需考虑某项空规约可能达到的项，因为这些项都存在于production_item_set内
 
@@ -689,34 +707,13 @@ bool SyntaxGenerator::
     ProductionItemSetId production_item_set_after_transform_id =
         GetProductionItemSetIdFromProductionItems(
             transform_condition_and_transformed_data.second);
+    SyntaxAnalysisTableEntryId syntax_analysis_table_entry_id_after_transform;
     if (production_item_set_after_transform_id.IsValid()) [[unlikely]] {
       // 转移到的项集已存在
       // 转移后到达的语法分析表条目
-      SyntaxAnalysisTableEntryId
-          syntax_analysis_table_entry_id_after_transform =
-              GetProductionItemSet(production_item_set_after_transform_id)
-                  .GetSyntaxAnalysisTableEntryId();
-      SyntaxAnalysisTableEntry& syntax_analysis_table_entry =
-          GetSyntaxAnalysisTableEntry(syntax_analysis_table_entry_id);
-      // 设置转移条件下转移到已有的项集
-      switch (GetProductionNode(transform_condition_and_transformed_data.first)
-                  .Type()) {
-        case ProductionNodeType::kTerminalNode:
-        case ProductionNodeType::kOperatorNode:
-          syntax_analysis_table_entry.SetTerminalNodeActionAndAttachedData(
-              transform_condition_and_transformed_data.first,
-              SyntaxAnalysisTableEntry::ShiftAttachedData(
-                  syntax_analysis_table_entry_id_after_transform));
-          break;
-        case ProductionNodeType::kNonTerminalNode:
-          syntax_analysis_table_entry.SetNonTerminalNodeTransformId(
-              transform_condition_and_transformed_data.first,
-              syntax_analysis_table_entry_id_after_transform);
-          break;
-        default:
-          assert(false);
-          break;
-      }
+      syntax_analysis_table_entry_id_after_transform =
+          GetProductionItemSet(production_item_set_after_transform_id)
+              .GetSyntaxAnalysisTableEntryId();
       bool new_forward_node_inserted = false;
       // 添加转移条件下转移到的这些项的向前看符号
       for (auto& item_and_forward_nodes_iter :
@@ -728,6 +725,11 @@ bool SyntaxGenerator::
         new_forward_node_inserted |=
             AddForwardNodes(production_item_set_after_transform_id,
                             shifted_item, item_and_forward_nodes_iter->second);
+        OutPutInfo(std::format(
+            "设置项：{:} 在向前看符号 {:} 下执行移入操作",
+            FormatProductionItem(item_and_forward_nodes_iter->first),
+            GetNodeSymbolStringFromProductionNodeId(
+                transform_condition_and_transformed_data.first)));
       }
       // 如果向已有项集的项中添加了新的向前看符号则重新传播该项
       if (new_forward_node_inserted) {
@@ -740,33 +742,10 @@ bool SyntaxGenerator::
       }
     } else {
       // 不存在这些项构成的项集，需要新建
-      ProductionItemSetId new_production_item_set_id =
-          EmplaceProductionItemSet();
-      SyntaxAnalysisTableEntryId
-          syntax_analysis_table_entry_id_after_transform =
-              GetProductionItemSet(new_production_item_set_id)
-                  .GetSyntaxAnalysisTableEntryId();
-      SyntaxAnalysisTableEntry& syntax_analysis_table_entry =
-          GetSyntaxAnalysisTableEntry(syntax_analysis_table_entry_id);
-      // 设置转移条件下转移到已有的项集
-      switch (GetProductionNode(transform_condition_and_transformed_data.first)
-                  .Type()) {
-        case ProductionNodeType::kTerminalNode:
-        case ProductionNodeType::kOperatorNode:
-          syntax_analysis_table_entry.SetTerminalNodeActionAndAttachedData(
-              transform_condition_and_transformed_data.first,
-              SyntaxAnalysisTableEntry::ShiftAttachedData(
-                  syntax_analysis_table_entry_id_after_transform));
-          break;
-        case ProductionNodeType::kNonTerminalNode:
-          syntax_analysis_table_entry.SetNonTerminalNodeTransformId(
-              transform_condition_and_transformed_data.first,
-              syntax_analysis_table_entry_id_after_transform);
-          break;
-        default:
-          assert(false);
-          break;
-      }
+      production_item_set_after_transform_id = EmplaceProductionItemSet();
+      syntax_analysis_table_entry_id_after_transform =
+          GetProductionItemSet(production_item_set_after_transform_id)
+              .GetSyntaxAnalysisTableEntryId();
       // 填入所有核心项
       for (auto& item_and_forward_nodes_iter :
            transform_condition_and_transformed_data.second) {
@@ -775,14 +754,49 @@ bool SyntaxGenerator::
         // 获取移入符号后的项数据
         ++std::get<NextWordToShiftIndex>(shifted_item);
         auto result = AddMainItemAndForwardNodeIdsToCore(
-            new_production_item_set_id, shifted_item,
+            production_item_set_after_transform_id, shifted_item,
             item_and_forward_nodes_iter->second);
         assert(result.second);
       }
       production_item_set_waiting_spread_ids.push_back(
-          new_production_item_set_id);
+          production_item_set_after_transform_id);
+    }
+    SyntaxAnalysisTableEntry& syntax_analysis_table_entry =
+        GetSyntaxAnalysisTableEntry(syntax_analysis_table_entry_id);
+    // 设置转移条件下转移到已有的项集
+    switch (GetProductionNode(transform_condition_and_transformed_data.first)
+                .Type()) {
+      case ProductionNodeType::kTerminalNode:
+      case ProductionNodeType::kOperatorNode:
+        syntax_analysis_table_entry.SetTerminalNodeActionAndAttachedData(
+            transform_condition_and_transformed_data.first,
+            SyntaxAnalysisTableEntry::ShiftAttachedData(
+                syntax_analysis_table_entry_id_after_transform));
+        OutPutInfo(std::format(
+            "ID = {:}的项集在移入终结符号 {:} 后转移到ID = {:}的项集",
+            production_item_set_id.GetRawValue(),
+            GetNodeSymbolStringFromProductionNodeId(
+                transform_condition_and_transformed_data.first),
+            production_item_set_after_transform_id.GetRawValue()));
+        break;
+      case ProductionNodeType::kNonTerminalNode:
+        syntax_analysis_table_entry.SetNonTerminalNodeTransformId(
+            transform_condition_and_transformed_data.first,
+            syntax_analysis_table_entry_id_after_transform);
+        OutPutInfo(std::format(
+            "ID = {:}的项集在移入非终结符号 {:} 后转移到ID = {:}的项集",
+            production_item_set_id.GetRawValue(),
+            GetNodeSymbolStringFromProductionNodeId(
+                transform_condition_and_transformed_data.first),
+            production_item_set_after_transform_id.GetRawValue()));
+        break;
+      default:
+        assert(false);
+        break;
     }
   }
+  OutPutInfo(std::format("ID = {:}的项集传播向前看符号操作已完成",
+                         production_item_set_id.GetRawValue()));
   for (auto production_item_set_waiting_spread_id :
        production_item_set_waiting_spread_ids) {
     // 对新生成的每个项集都传播向前看符号
@@ -813,7 +827,7 @@ void SyntaxGenerator::SyntaxAnalysisTableTerminalNodeClassify(
     std::list<SyntaxAnalysisTableEntryId>&& syntax_analysis_table_entry_ids,
     std::vector<std::list<SyntaxAnalysisTableEntryId>>* equivalent_ids) {
   if (index >= terminal_node_ids.size()) {
-    // 分类完成，执行合并操作
+    // 分类完成，将可以合并的组添加到结果
     assert(syntax_analysis_table_entry_ids.size() > 1);
     equivalent_ids->emplace_back(std::move(syntax_analysis_table_entry_ids));
     return;
@@ -921,7 +935,7 @@ void SyntaxGenerator::SyntaxAnalysisTableNonTerminalNodeClassify(
     std::list<SyntaxAnalysisTableEntryId>&& entry_ids,
     std::vector<std::list<SyntaxAnalysisTableEntryId>>* equivalent_ids) {
   if (index >= nonterminal_node_ids.size()) {
-    // 分类完成，执行合并操作
+    // 分类完成，将可以合并的条目添加到结果
     assert(entry_ids.size() > 1);
     equivalent_ids->emplace_back(std::move(entry_ids));
   } else {
@@ -950,16 +964,12 @@ void SyntaxGenerator::SyntaxAnalysisTableNonTerminalNodeClassify(
   }
 }
 
-// SyntaxAnalysisTableMergeOptimize的子过程，分类具有相同非终结节点项的语法分析表条目
-// 向equivalent_ids写入相同非终结节点转移表的节点ID的组，不会执行实际合并操作
-// 不会写入只有一个项的组
-
 std::vector<std::list<SyntaxAnalysisTableEntryId>>
 SyntaxGenerator::SyntaxAnalysisTableEntryClassify(
     std::vector<ProductionNodeId>&& operator_node_ids,
     std::vector<ProductionNodeId>&& terminal_node_ids,
     std::vector<ProductionNodeId>&& nonterminal_node_ids) {
-  // 存储相同终结节点转移表的条目
+  // 存储相同转移条件的转移表条目ID
   std::vector<std::list<SyntaxAnalysisTableEntryId>> operator_classify_result,
       terminal_classify_result, final_classify_result;
   std::list<SyntaxAnalysisTableEntryId> entry_ids;
@@ -967,10 +977,8 @@ SyntaxGenerator::SyntaxAnalysisTableEntryClassify(
     // 添加所有待分类的语法分析表条目ID
     entry_ids.push_back(SyntaxAnalysisTableEntryId(i));
   }
-  assert(operator_classify_result.empty());
   SyntaxAnalysisTableTerminalNodeClassify(
       operator_node_ids, 0, std::move(entry_ids), &operator_classify_result);
-  assert(terminal_classify_result.empty());
   for (auto& syntax_analysis_table_entry_ids : operator_classify_result) {
     if (syntax_analysis_table_entry_ids.size() > 1) {
       SyntaxAnalysisTableTerminalNodeClassify(
@@ -978,7 +986,6 @@ SyntaxGenerator::SyntaxAnalysisTableEntryClassify(
           &terminal_classify_result);
     }
   }
-  assert(final_classify_result.empty());
   for (auto& syntax_analysis_table_entry_ids : terminal_classify_result) {
     if (syntax_analysis_table_entry_ids.size() > 1) {
       SyntaxAnalysisTableNonTerminalNodeClassify(
@@ -999,8 +1006,8 @@ inline void SyntaxGenerator::RemapSyntaxAnalysisTableEntryId(
 }
 
 void SyntaxGenerator::SyntaxAnalysisTableMergeOptimize() {
-  std::array<std::vector<ProductionNodeId>, 4>
-      classified_production_node_ids = ClassifyProductionNodes();
+  std::array<std::vector<ProductionNodeId>, 4> classified_production_node_ids =
+      ClassifyProductionNodes();
   constexpr size_t terminal_index =
       static_cast<size_t>(ProductionNodeType::kTerminalNode);
   constexpr size_t operator_index =
@@ -1012,9 +1019,9 @@ void SyntaxGenerator::SyntaxAnalysisTableMergeOptimize() {
           std::move(classified_production_node_ids[operator_index]),
           std::move(classified_production_node_ids[terminal_index]),
           std::move(classified_production_node_ids[nonterminal_index]));
-  // 存储所有旧条目到新条目的映射
+  // 存储需要重映射的条目ID和新条目ID
   std::unordered_map<SyntaxAnalysisTableEntryId, SyntaxAnalysisTableEntryId>
-      old_entry_id_to_new_entry_id;
+      remapped_entry_id_to_new_entry_id;
   for (auto& entry_ids : classified_ids) {
     // 添加被合并的旧条目到相同条目的映射
     // 重复的条目只保留返回数组中的第一条，其余的全部映射到该条
@@ -1022,9 +1029,9 @@ void SyntaxGenerator::SyntaxAnalysisTableMergeOptimize() {
     SyntaxAnalysisTableEntryId new_id = *iter;
     ++iter;
     while (iter != entry_ids.end()) {
-      assert(old_entry_id_to_new_entry_id.find(*iter) ==
-             old_entry_id_to_new_entry_id.end());
-      old_entry_id_to_new_entry_id[*iter] = new_id;
+      assert(remapped_entry_id_to_new_entry_id.find(*iter) ==
+             remapped_entry_id_to_new_entry_id.end());
+      remapped_entry_id_to_new_entry_id[*iter] = new_id;
       ++iter;
     }
   }
@@ -1040,8 +1047,8 @@ void SyntaxGenerator::SyntaxAnalysisTableMergeOptimize() {
   SyntaxAnalysisTableEntryId next_process_entry_index(0);
   // 跳过前面维持原位的语法分析表条目
   while (next_process_entry_index < syntax_analysis_table_.size() &&
-         old_entry_id_to_new_entry_id.find(next_process_entry_index) ==
-             old_entry_id_to_new_entry_id.end())
+         remapped_entry_id_to_new_entry_id.find(next_process_entry_index) ==
+             remapped_entry_id_to_new_entry_id.end())
     [[likely]] {
       // 保留的条目仍处于原位
       moved_entry_to_new_entry_id[next_process_entry_index] =
@@ -1053,8 +1060,8 @@ void SyntaxGenerator::SyntaxAnalysisTableMergeOptimize() {
       next_process_entry_index);
   ++next_process_entry_index;
   while (next_process_entry_index < syntax_analysis_table_.size()) {
-    if (old_entry_id_to_new_entry_id.find(next_process_entry_index) ==
-        old_entry_id_to_new_entry_id.end()) {
+    if (remapped_entry_id_to_new_entry_id.find(next_process_entry_index) ==
+        remapped_entry_id_to_new_entry_id.end()) {
       // 该条目保留
       assert(next_insert_position_index != next_process_entry_index);
       // 需要移动到新位置保持vector紧凑
@@ -1066,16 +1073,6 @@ void SyntaxGenerator::SyntaxAnalysisTableMergeOptimize() {
       ++next_insert_position_index;
     }
     ++next_process_entry_index;
-  }
-  for (auto& item : old_entry_id_to_new_entry_id) {
-    // 重映射已被合并条目到保留的唯一条目
-    // 与重映射保留条目的新位置的操作一起构成完整的条目重映射表
-    // 所有旧条目都拥有自己对应的新条目，被合并的条目映射到
-    assert(moved_entry_to_new_entry_id.find(item.second) !=
-           moved_entry_to_new_entry_id.end());
-    // item_and_forward_node_ids.first是旧entry的ID，item.second是保留下来的entry的ID
-    moved_entry_to_new_entry_id[item.first] =
-        moved_entry_to_new_entry_id[item.second];
   }
   // 至此每一个条目都有了新条目的映射
   // 释放多余空间
@@ -1193,15 +1190,20 @@ void SyntaxGenerator::SyntaxAnalysisTableConstruct() {
   frontend::generator::dfa_generator::DfaGenerator::WordAttachedData
       end_of_file_saved_data;
   end_of_file_saved_data.production_node_id = end_production_node_id;
-  GetProductionNode(end_production_node_id)
-      .SetSymbolId(AddNodeSymbol("$").first);
+  end_of_file_saved_data.node_type = ProductionNodeType::kEndNode;
   dfa_generator_.SetEndOfFileSavedData(std::move(end_of_file_saved_data));
   // 生成初始的项集，并将根产生式填入
   ProductionItemSetId root_production_item_set_id = EmplaceProductionItemSet();
   ProductionItemSet& root_production_item_set =
       GetProductionItemSet(root_production_item_set_id);
+  // 生成内部根产生式，防止用户定义的根产生式具有多个产生式体导致一系列问题
+  // 根产生式名使用了无法通过宏定义的字符@以防止与用户定义的节点名冲突
+  ProductionNodeId inside_root_production_node_id =
+      AddNonTerminalNode<RootReductClass>(
+          "@RootNode",
+          {GetNodeSymbolStringFromProductionNodeId(GetRootProductionNodeId())});
   root_production_item_set.AddMainItemAndForwardNodeIds(
-      ProductionItem(GetRootProductionNodeId(), ProductionBodyId(0),
+      ProductionItem(inside_root_production_node_id, ProductionBodyId(0),
                      NextWordToShiftIndex(0)),
       std::initializer_list<ProductionNodeId>{end_production_node_id});
   SetRootSyntaxAnalysisTableEntryId(
@@ -1209,6 +1211,13 @@ void SyntaxGenerator::SyntaxAnalysisTableConstruct() {
   // 传播向前看符号同时构造语法分析表
   SpreadLookForwardSymbolAndConstructSyntaxAnalysisTableEntry(
       root_production_item_set_id);
+  // 设置移入用户设置的root节点后在遇到文件尾返回的节点时使用Accept动作
+  SyntaxAnalysisTableEntryId entry_after_shift_user_defined_root =
+      GetSyntaxAnalysisTableEntry(
+          root_production_item_set.GetSyntaxAnalysisTableEntryId())
+          .AtNonTerminalNode(GetRootProductionNodeId());
+  GetSyntaxAnalysisTableEntry(entry_after_shift_user_defined_root)
+      .SetAcceptInEofForwardNode(end_production_node_id);
   // 合并等效项，压缩语法分析表
   SyntaxAnalysisTableMergeOptimize();
 }
@@ -1217,7 +1226,7 @@ void SyntaxGenerator::ConstructSyntaxConfig() {
   SyntaxGeneratorInit();
   ConfigConstruct();
   CheckUndefinedProductionRemained();
-  dfa_generator_.DfaReconstrcut();
+  dfa_generator_.DfaConstruct();
   SyntaxAnalysisTableConstruct();
   // 保存配置
   SaveConfig();
@@ -1245,6 +1254,8 @@ void SyntaxGenerator::AddUnableContinueNonTerminalNode(
     const std::string& undefined_symbol, std::string&& node_symbol,
     std::vector<std::string>&& subnode_symbols,
     ProcessFunctionClassId class_id) {
+  assert(!undefined_symbol.empty() && !node_symbol.empty() &&
+         !subnode_symbols.empty() && class_id.IsValid());
   std::string temp_output(std::format("非终结产生式 {:} ->", node_symbol));
   for (const auto& subnode_symbol : subnode_symbols) {
     temp_output += std::format(" {:}", subnode_symbol);
@@ -1271,15 +1282,10 @@ void SyntaxGenerator::CheckNonTerminalNodeCanContinue(
     }
     temp_output += std::format("恢复添加");
     OutPutInfo(temp_output);
-    ProductionNodeId node_id =
-        AddNonTerminalNode(std::move(node_could_continue_to_add_symbol),
-                           std::move(node_body), process_function_class_id_);
-    if (node_id.IsValid()) {
-      // 成功添加非终结节点，删除该条记录
-      iter_begin = undefined_productions_.erase(iter_begin);
-    } else {
-      ++iter_begin;
-    }
+    // 如果无法继续添加则会再次调用AddUnableContinueNonTerminalNode函数添加
+    AddNonTerminalNode(std::move(node_could_continue_to_add_symbol),
+                       std::move(node_body), process_function_class_id_);
+    undefined_productions_.erase(iter_begin++);
   }
 }
 
@@ -1301,12 +1307,13 @@ void SyntaxGenerator::CheckUndefinedProductionRemained() {
   }
 }
 
-void SyntaxGenerator::AddKeyWord(const std::string& key_word) {
+void SyntaxGenerator::AddKeyWord(std::string&& key_word) {
   // 关键字优先级默认为2
   // 自动生成同名终结节点
+  // 关键字定义时将key_word视作单词而不是正则表达式
   AddTerminalNode(
-      key_word, key_word,
-      frontend::generator::dfa_generator::DfaGenerator::WordPriority(2));
+      std::string(key_word), std::string(key_word),
+      frontend::generator::dfa_generator::DfaGenerator::WordPriority(2), true);
 }
 
 ProductionNodeId SyntaxGenerator::GetProductionNodeIdFromBodySymbolId(

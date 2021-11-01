@@ -234,9 +234,9 @@ VarietyAnnounceNoAssign(std::shared_ptr<VarietyOperatorNode>&& variety_node);
 // 如果是合法的声明则添加变量定义并创建空间分配节点和赋值节点
 std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
            std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-VarieytAnnounceWithAssign(
+VarietyAnnounceWithAssign(
     std::shared_ptr<VarietyOperatorNode>&& variety_node,
-    std::shared_ptr<OperatorNodeInterface>&& node_for_assign);
+    const std::shared_ptr<const OperatorNodeInterface>& node_for_assign);
 // 处理前缀++/--的情况
 // 输入使用的运算符（仅限++/--）、待运算的节点和存储获取结果的操作的容器
 // 向给定容器中添加操作节点
@@ -413,12 +413,12 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeEnumAnnounce(
 std::any&& FunctionRelaventBasePartFunctionInitBase(
     std::vector<WordDataToUser>&& word_data);
 // FunctionRelaventBasePartFunctionInit -> FunctionRelaventBasePart "("
-// 做一些声明函数指针时的初始化工作
+// 做一些声明函数/函数指针时的初始化工作
 // 返回值类型：std::shared_ptr<ObjectConstructData>
 std::any&& FunctionRelaventBasePartFunctionInitExtend(
     std::vector<WordDataToUser>&& word_data);
 // FunctionRelaventBasePart -> FunctionRelaventBasePartFunctionInit
-//  FunctionRelaventArguments ")"
+// FunctionRelaventArguments ")"
 // 返回值类型：std::shared_ptr<ObjectConstructData>
 std::any&& FunctionRelaventBasePartFunction(
     std::vector<WordDataToUser>&& word_data);

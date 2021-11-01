@@ -36,8 +36,14 @@ DfaMachine::WordInfo DfaMachine::GetNextWord() {
     switch (GetCharacterNow()) {
       case EOF:
         if (feof(file_)) {
-          // 文件结尾，输出结果
-          return WordInfo(GetEndOfFileSavedData(), std::move(symbol));
+          if (!symbol.empty()) {
+            // 如果已经获取到了单词则返回单词携带的数据而不是直接返回文件尾数据
+            return WordInfo(dfa_config_[transform_array_id].second,
+                            std::move(symbol));
+          } else {
+            // 没有获取到单词，直接返回文件尾数据
+            return WordInfo(GetEndOfFileSavedData(), std::move(symbol));
+          }
         }
         break;
       case '\n':

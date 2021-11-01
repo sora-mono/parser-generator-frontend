@@ -36,6 +36,9 @@ class SyntaxAnalysisTableEntry {
     virtual const ShiftAttachedData& GetShiftAttachedData() const;
     virtual const ReductAttachedData& GetReductAttachedData() const;
     virtual const ShiftReductAttachedData& GetShiftReductAttachedData() const;
+    // 与operator==在ShiftReductAttachedData语义上不同
+    // 入参如果是ShiftAttachedData或ReductAttachedData则只比较对应部分
+    virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&) const = 0;
 
     ActionType GetActionType() const { return action_type_; }
     void SetActionType(ActionType action_type) { action_type_ = action_type; }
@@ -89,6 +92,10 @@ class SyntaxAnalysisTableEntry {
     virtual const ShiftAttachedData& GetShiftAttachedData() const override {
       return *this;
     }
+    virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
+                                  shift_attached_data) const override {
+      return operator==(shift_attached_data);
+    }
 
     SyntaxAnalysisTableEntryId GetNextSyntaxAnalysisTableEntryId() const {
       return next_entry_id_;
@@ -113,10 +120,7 @@ class SyntaxAnalysisTableEntry {
           *this);
       ar& next_entry_id_;
     }
-    virtual ShiftAttachedData& GetShiftAttachedData() override {
-      return const_cast<ShiftAttachedData&>(
-          static_cast<const ShiftAttachedData&>(*this).GetShiftAttachedData());
-    }
+    virtual ShiftAttachedData& GetShiftAttachedData() override { return *this; }
 
     // 移入该单词后转移到的语法分析表条目ID
     SyntaxAnalysisTableEntryId next_entry_id_;
@@ -142,6 +146,10 @@ class SyntaxAnalysisTableEntry {
 
     virtual const ReductAttachedData& GetReductAttachedData() const override {
       return *this;
+    }
+    virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
+                                  reduct_attached_data) const override {
+      return operator==(reduct_attached_data);
     }
 
     ProductionNodeId GetReductedNonTerminalNodeId() const {
@@ -184,9 +192,7 @@ class SyntaxAnalysisTableEntry {
     }
 
     virtual ReductAttachedData& GetReductAttachedData() override {
-      return const_cast<ReductAttachedData&>(
-          static_cast<const ReductAttachedData&>(*this)
-              .GetReductAttachedData());
+      return *this;
     }
 
     // 规约后得到的非终结节点的ID
@@ -224,6 +230,8 @@ class SyntaxAnalysisTableEntry {
         const override {
       return *this;
     }
+    virtual bool IsSameOrPart(
+        const ActionAndAttachedDataInterface& attached_data) const override;
 
     void SetShiftAttachedData(ShiftAttachedData&& shift_attached_data) {
       shift_attached_data_ = std::move(shift_attached_data);
@@ -249,23 +257,50 @@ class SyntaxAnalysisTableEntry {
       ar& reduct_attached_data_;
     }
     virtual ShiftAttachedData& GetShiftAttachedData() override {
-      return const_cast<ShiftAttachedData&>(
-          static_cast<const ShiftReductAttachedData&>(*this)
-              .GetShiftAttachedData());
+      return shift_attached_data_;
     }
     virtual ReductAttachedData& GetReductAttachedData() override {
-      return const_cast<ReductAttachedData&>(
-          static_cast<const ShiftReductAttachedData&>(*this)
-              .GetReductAttachedData());
+      return reduct_attached_data_;
     }
     virtual ShiftReductAttachedData& GetShiftReductAttachedData() override {
-      return const_cast<ShiftReductAttachedData&>(
-          static_cast<const ShiftReductAttachedData&>(*this)
-              .GetShiftReductAttachedData());
+      return *this;
     }
 
     ShiftAttachedData shift_attached_data_;
     ReductAttachedData reduct_attached_data_;
+  };
+  // 表示Accept动作的节点
+  class AcceptAttachedData : public ActionAndAttachedDataInterface {
+   public:
+    AcceptAttachedData()
+        : ActionAndAttachedDataInterface(ActionType::kAccept) {}
+    AcceptAttachedData(const AcceptAttachedData&) = delete;
+    AcceptAttachedData(AcceptAttachedData&&) = default;
+
+    AcceptAttachedData& operator=(const AcceptAttachedData&) = delete;
+    AcceptAttachedData& operator=(AcceptAttachedData&&) = delete;
+
+    virtual bool operator==(
+        const ActionAndAttachedDataInterface&) const override {
+      assert(false);
+      // 防止警告
+      return false;
+    }
+    virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
+                                  accept_attached_data) const override {
+      assert(false);
+      // 防止警告
+      return false;
+    }
+
+   private:
+    friend class boost::serialization::access;
+
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version) {
+      ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
+          *this);
+    }
   };
 
   // 键值为待移入节点ID，值为指向相应数据的指针
@@ -290,7 +325,9 @@ class SyntaxAnalysisTableEntry {
   requires std::is_same_v<std::decay_t<AttachedData>,
                           SyntaxAnalysisTableEntry::ShiftAttachedData> ||
       std::is_same_v<std::decay_t<AttachedData>,
-                     SyntaxAnalysisTableEntry::ReductAttachedData>
+                     SyntaxAnalysisTableEntry::ReductAttachedData> ||
+      std::is_same_v<std::decay_t<AttachedData>,
+                     SyntaxAnalysisTableEntry::AcceptAttachedData>
   void SetTerminalNodeActionAndAttachedData(ProductionNodeId node_id,
                                             AttachedData&& attached_data);
   // 设置该条目移入非终结节点后转移到的节点
@@ -298,8 +335,7 @@ class SyntaxAnalysisTableEntry {
       ProductionNodeId node_id, SyntaxAnalysisTableEntryId production_node_id) {
     nonterminal_node_transform_table_[node_id] = production_node_id;
   }
-  // 修改该条目中所有条目ID为新ID
-  // 当前设计下仅修改移入时转移到的下一个条目ID（移入终结节点/非终结节点）
+  // 修改参数中给定的ID为新ID
   void ResetEntryId(const std::unordered_map<SyntaxAnalysisTableEntryId,
                                              SyntaxAnalysisTableEntryId>&
                         old_entry_id_to_new_entry_id);
@@ -327,6 +363,11 @@ class SyntaxAnalysisTableEntry {
   const std::unordered_map<ProductionNodeId, SyntaxAnalysisTableEntryId>&
   GetAllNonTerminalNodeTransformTarget() const {
     return nonterminal_node_transform_table_;
+  }
+  // 设置内置根条目在文件尾向前看节点下执行Accept动作
+  // 仅允许对内置根条目执行该操作
+  void SetAcceptInEofForwardNode(ProductionNodeId eof_node_id) {
+    SetTerminalNodeActionAndAttachedData(eof_node_id, AcceptAttachedData());
   }
   // 清除该条目中所有数据
   void Clear() {
@@ -369,91 +410,95 @@ template <class AttachedData>
 requires std::is_same_v<std::decay_t<AttachedData>,
                         SyntaxAnalysisTableEntry::ShiftAttachedData> ||
     std::is_same_v<std::decay_t<AttachedData>,
-                   SyntaxAnalysisTableEntry::ReductAttachedData>
+                   SyntaxAnalysisTableEntry::ReductAttachedData> ||
+    std::is_same_v<std::decay_t<AttachedData>,
+                   SyntaxAnalysisTableEntry::AcceptAttachedData>
 void SyntaxAnalysisTableEntry::SetTerminalNodeActionAndAttachedData(
     ProductionNodeId node_id, AttachedData&& attached_data) {
-  static_assert(
-      !std::is_same_v<std::decay_t<AttachedData>, ShiftReductAttachedData>,
-      "该类型仅允许通过在已有一种动作的基础上补全缺少的另一半后转换得到，不允许"
-      "直接传入");
-  // 使用二义性文法，语法分析表某些情况下需要对同一个节点支持移入和规约操作并存
-  auto iter = action_and_attached_data_.find(node_id);
-  if (iter == action_and_attached_data_.end()) {
-    // 新插入转移节点
-    action_and_attached_data_.emplace(
-        node_id, std::make_unique<std::decay_t<AttachedData>>(
-                     std::forward<AttachedData>(attached_data)));
+  if constexpr (std::is_same_v<std::decay_t<AttachedData>,
+                               SyntaxAnalysisTableEntry::AcceptAttachedData>) {
+    action_and_attached_data_[node_id] = std::make_unique<AcceptAttachedData>(
+        std::forward<AttachedData>(attached_data));
+    return;
   } else {
-    // 待插入的转移条件已存在
-    // 获取已经存储的数据
-    ActionAndAttachedDataInterface& data_already_in = *iter->second;
-    // 要么修改已有的规约后得到的节点，要么补全移入/规约的另一部分（规约/移入）
-    // 不应修改已有的移入后转移到的语法分析表条目
-    switch (data_already_in.GetActionType()) {
-      case ActionType::kShift:
-        if constexpr (std::is_same_v<std::decay_t<AttachedData>,
-                                     ReductAttachedData>) {
-          // 提供的数据是规约数据，转换为ShiftReductAttachedData
-          iter->second = std::make_unique<ShiftReductAttachedData>(
-              std::move(iter->second->GetShiftAttachedData()),
-              std::forward<AttachedData>(attached_data));
-        } else {
-          // 提供的是移入数据，要求必须与已有的数据相同
-          static_assert(
-              std::is_same_v<std::decay_t<AttachedData>, ShiftAttachedData>);
-          // 检查提供的移入数据是否与已有的移入数据相同
-          // 不能写反，否则当data_already_in为ShiftReductAttachedData时
-          // 无法获得与其它附属数据比较的正确语义
-          // 可能是MSVC的BUG
-          // 使用隐式调用会导致调用attached_data的operator==，所以显式调用
-          if (!data_already_in.operator==(attached_data)) [[unlikely]] {
+    static_assert(
+        !std::is_same_v<std::decay_t<AttachedData>, ShiftReductAttachedData>,
+        "该类型仅允许通过在已有一种动作的基础上补全缺少的另一半后转换得到，不允"
+        "许"
+        "直接传入");
+    // 使用二义性文法，语法分析表某些情况下需要对同一个节点支持移入和规约操作并存
+    auto iter = action_and_attached_data_.find(node_id);
+    if (iter == action_and_attached_data_.end()) {
+      // 新插入转移节点
+      action_and_attached_data_.emplace(
+          node_id, std::make_unique<std::decay_t<AttachedData>>(
+                       std::forward<AttachedData>(attached_data)));
+    } else {
+      // 待插入的转移条件已存在
+      // 获取已经存储的数据
+      ActionAndAttachedDataInterface& data_already_in = *iter->second;
+      // 要么修改已有的规约后得到的节点，要么补全移入/规约的另一部分（规约/移入）
+      // 不应修改已有的移入后转移到的语法分析表条目
+      switch (data_already_in.GetActionType()) {
+        case ActionType::kShift:
+          if constexpr (std::is_same_v<std::decay_t<AttachedData>,
+                                       ReductAttachedData>) {
+            // 提供的数据是规约数据，转换为ShiftReductAttachedData
+            iter->second = std::make_unique<ShiftReductAttachedData>(
+                std::move(iter->second->GetShiftAttachedData()),
+                std::forward<AttachedData>(attached_data));
+          } else {
+            // 提供的是移入数据，要求必须与已有的数据相同
+            static_assert(
+                std::is_same_v<std::decay_t<AttachedData>, ShiftAttachedData>);
+            // 检查提供的移入数据是否与已有的移入数据相同
+            // 不能写反，否则当data_already_in为ShiftReductAttachedData时
+            // 无法获得与其它附属数据比较的正确语义
+            if (!data_already_in.IsSameOrPart(attached_data)) [[unlikely]] {
+              // 设置相同条件不同产生式下规约
+              std::cerr << std::format(
+                  "一个项集在相同条件下只能规约一种产生式，请参考该项"
+                  "集求闭包时的输出信息检查产生式");
+              exit(-1);
+            }
+          }
+          break;
+        case ActionType::kReduct:
+          if constexpr (std::is_same_v<std::decay_t<AttachedData>,
+                                       ShiftAttachedData>) {
+            // 提供的数据为移入部分数据，转换为ShiftReductAttachedData
+            iter->second = std::make_unique<ShiftReductAttachedData>(
+                std::forward<AttachedData>(attached_data),
+                std::move(iter->second->GetReductAttachedData()));
+          } else {
+            // 提供的是移入数据，需要检查是否与已有的数据相同
+            static_assert(
+                std::is_same_v<std::decay_t<AttachedData>, ReductAttachedData>);
+            // 不能写反，否则当data_already_in为ShiftReductAttachedData时
+            // 无法获得与其它附属数据比较的正确语义
+            if (!data_already_in.IsSameOrPart(attached_data)) [[unlikely]] {
+              // 设置相同条件不同产生式下规约
+              std::cerr << std::format(
+                  "一个项集在相同条件下只能规约一种产生式，请参考该项"
+                  "集求闭包时的输出信息检查产生式");
+              exit(-1);
+            }
+          }
+          break;
+        case ActionType::kShiftReduct: {
+          if (!data_already_in.IsSameOrPart(attached_data)) [[unlikely]] {
             // 设置相同条件不同产生式下规约
             std::cerr << std::format(
                 "一个项集在相同条件下只能规约一种产生式，请参考该项"
                 "集求闭包时的输出信息检查产生式");
             exit(-1);
           }
+          break;
         }
-        break;
-      case ActionType::kReduct:
-        if constexpr (std::is_same_v<std::decay_t<AttachedData>,
-                                     ShiftAttachedData>) {
-          // 提供的数据为移入部分数据，转换为ShiftReductAttachedData
-          iter->second = std::make_unique<ShiftReductAttachedData>(
-              std::forward<AttachedData>(attached_data),
-              std::move(iter->second->GetReductAttachedData()));
-        } else {
-          // 提供的是移入数据，需要检查是否与已有的数据相同
-          static_assert(
-              std::is_same_v<std::decay_t<AttachedData>, ReductAttachedData>);
-          // 不能写反，否则当data_already_in为ShiftReductAttachedData时
-          // 无法获得与其它附属数据比较的正确语义
-          // 可能是MSVC的BUG
-          // 使用隐式调用会导致调用attached_data的operator==，所以显式调用
-          if (!data_already_in.operator==(attached_data)) {
-            // 设置相同条件不同产生式下规约
-            std::cerr << std::format(
-                "一个项集在相同条件下只能规约一种产生式，请参考该项"
-                "集求闭包时的输出信息检查产生式");
-            exit(-1);
-          }
-        }
-        break;
-      case ActionType::kShiftReduct: {
-        // 可能是MSVC的BUG
-        // 使用隐式调用会导致调用attached_data的operator==，所以显式调用
-        if (!data_already_in.operator==(attached_data)) {
-          // 设置相同条件不同产生式下规约
-          std::cerr << std::format(
-              "一个项集在相同条件下只能规约一种产生式，请参考该项"
-              "集求闭包时的输出信息检查产生式");
-          exit(-1);
-        }
-        break;
+        default:
+          assert(false);
+          break;
       }
-      default:
-        assert(false);
-        break;
     }
   }
 }

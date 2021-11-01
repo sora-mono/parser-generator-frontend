@@ -23,13 +23,15 @@ void SyntaxAnalysisTableEntry::ResetEntryId(
         // 获取原条目ID的引用
         ShiftAttachedData& shift_attached_data =
             action_and_attached_data.second->GetShiftAttachedData();
-        // 更新为新的条目ID
-        shift_attached_data.SetNextSyntaxAnalysisTableEntryId(
-            old_entry_id_to_new_entry_id
-                .find(shift_attached_data.GetNextSyntaxAnalysisTableEntryId())
-                ->second);
+        auto iter = old_entry_id_to_new_entry_id.find(
+            shift_attached_data.GetNextSyntaxAnalysisTableEntryId());
+        if (iter != old_entry_id_to_new_entry_id.end()) [[unlikely]] {
+          // 更新为新的条目ID
+          shift_attached_data.SetNextSyntaxAnalysisTableEntryId(iter->second);
+        }
       } break;
       case ActionType::kReduct:
+      case ActionType::kAccept:
         // 无需做任何更改
         break;
       default:
@@ -74,29 +76,16 @@ bool SyntaxAnalysisTableEntry::ReductAttachedData::operator==(
 
 bool SyntaxAnalysisTableEntry::ShiftReductAttachedData::operator==(
     const ActionAndAttachedDataInterface& attached_data) const {
-  switch (attached_data.GetActionType()) {
-    case ActionType::kShift:
-      return shift_attached_data_ ==
-             static_cast<const ShiftAttachedData&>(attached_data);
-      break;
-    case ActionType::kReduct:
-      return reduct_attached_data_ ==
-             static_cast<const ReductAttachedData&>(attached_data);
-      break;
-    case ActionType::kShiftReduct:
-      return ActionAndAttachedDataInterface::operator==(attached_data) &&
-             shift_attached_data_ ==
-                 static_cast<const ShiftReductAttachedData&>(attached_data)
-                     .shift_attached_data_ &&
-             reduct_attached_data_ ==
-                 static_cast<const ShiftReductAttachedData&>(attached_data)
-                     .reduct_attached_data_;
-      break;
-    default:
-      assert(false);
-      // 防止警告
-      return false;
-      break;
+  if (ActionAndAttachedDataInterface::operator==(attached_data)) [[likely]] {
+    return ActionAndAttachedDataInterface::operator==(attached_data) &&
+           shift_attached_data_ ==
+               static_cast<const ShiftReductAttachedData&>(attached_data)
+                   .shift_attached_data_ &&
+           reduct_attached_data_ ==
+               static_cast<const ShiftReductAttachedData&>(attached_data)
+                   .reduct_attached_data_;
+  } else {
+    return false;
   }
 }
 
@@ -108,9 +97,8 @@ SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface::GetShiftAttachedData()
   return reinterpret_cast<const ShiftAttachedData&>(*this);
 }
 
-const SyntaxAnalysisTableEntry::ReductAttachedData&
-SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface::
-    GetReductAttachedData() const {
+const SyntaxAnalysisTableEntry::ReductAttachedData& SyntaxAnalysisTableEntry::
+    ActionAndAttachedDataInterface::GetReductAttachedData() const {
   assert(false);
   // 防止警告
   return reinterpret_cast<const ReductAttachedData&>(*this);
@@ -122,5 +110,26 @@ SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface::
   assert(false);
   // 防止警告
   return reinterpret_cast<const ShiftReductAttachedData&>(*this);
+}
+bool SyntaxAnalysisTableEntry::ShiftReductAttachedData::IsSameOrPart(
+    const ActionAndAttachedDataInterface& attached_data) const {
+  switch (attached_data.GetActionType()) {
+    case ActionType::kShift:
+      return shift_attached_data_ ==
+             static_cast<const ShiftAttachedData&>(attached_data);
+      break;
+    case ActionType::kReduct:
+      return reduct_attached_data_ ==
+             static_cast<const ReductAttachedData&>(attached_data);
+      break;
+    case ActionType::kShiftReduct:
+      return operator==(attached_data);
+      break;
+    default:
+      assert(false);
+      // 防止警告
+      return false;
+      break;
+  }
 }
 }  // namespace frontend::generator::syntax_generator

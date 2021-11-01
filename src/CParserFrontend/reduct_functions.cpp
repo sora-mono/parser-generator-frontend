@@ -457,7 +457,8 @@ std::any&& IdOrEquivenceInBrackets(std::vector<WordDataToUser>&& word_data) {
 // std::any&& EmptyReductableIdOrEquivence(std::vector<WordDataToUser>&&
 // word_data) {
 //  assert(word_data.size() == 1);
-//  return std::move(word_data.front());
+//  return
+//  std::move(word_data.front().GetNonTerminalWordData().user_returned_data);
 //}
 
 EnumReturnData NotEmptyEnumArgumentsIdBase(
@@ -864,7 +865,7 @@ std::any&& FunctionRelaventBasePartFunctionInitExtend(
 }
 
 // FunctionRelaventBasePart -> FunctionRelaventBasePartFunctionInit
-//  FunctionRelaventArguments ")"
+// FunctionRelaventArguments ")"
 // 返回值类型：std::shared_ptr<ObjectConstructData>
 std::any&& FunctionRelaventBasePartFunction(
     std::vector<WordDataToUser>&& word_data) {
@@ -1241,7 +1242,8 @@ std::any&& SingleInitializeListArgumentConstexprValue(
 std::any&& SingleInitializeListArgumentList(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
-  return std::move(word_data.front());
+  return std::move(
+      word_data.front().GetNonTerminalWordData().user_returned_data);
 }
 
 std::shared_ptr<std::list<std::shared_ptr<InitializeOperatorNodeInterface>>>
@@ -1329,9 +1331,9 @@ VarietyAnnounceNoAssign(std::shared_ptr<VarietyOperatorNode>&& variety_node) {
 
 std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
            std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-VarieytAnnounceWithAssign(
+VarietyAnnounceWithAssign(
     std::shared_ptr<VarietyOperatorNode>&& variety_node,
-    std::shared_ptr<OperatorNodeInterface>&& node_for_assign) {
+    const std::shared_ptr<const OperatorNodeInterface>& node_for_assign) {
   // 获取原始声明使用的类型
   auto raw_variety_type = variety_node->GetVarietyTypePointer();
   // 获取原始声明的ConstTag
@@ -1354,7 +1356,7 @@ VarieytAnnounceWithAssign(
   // 创建并添加赋值节点
   auto assign_node = std::make_shared<AssignOperatorNode>();
   // 设置被赋值的节点
-  assign_node->SetNodeToBeAssigned(std::move(variety_node));
+  assign_node->SetNodeToBeAssigned(variety_node);
   // 设置用来赋值的节点
   // 当前处于声明状态
   auto assignable_check_result =
@@ -1370,7 +1372,7 @@ VarieytAnnounceWithAssign(
       std::move(assign_flow_control_node));
   // 定义变量
   c_parser_frontend.DefineVariety(*variety_node->GetVarietyNamePointer(),
-                                  std::move(variety_node));
+                                  variety_node);
   // 获取扩展声明时的类型
   if (raw_variety_type->GetType() == StructOrBasicType::kPointer) {
     // 如果是指针类型则在原始声明类型基础上去除一重指针
@@ -1424,12 +1426,16 @@ SingleAnnounceAndAssignWithAssignBase(std::vector<WordDataToUser>&& word_data) {
       assert(false);
       break;
   }
-  return VarieytAnnounceWithAssign(
+  auto& [node_for_assign, statements_to_get_node_for_assign] = std::any_cast<
+      std::pair<std::shared_ptr<const OperatorNodeInterface>,
+                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
+      word_data[2].GetNonTerminalWordData().user_returned_data);
+  c_parser_frontend.AddSentences(std::move(*statements_to_get_node_for_assign));
+  return VarietyAnnounceWithAssign(
       std::static_pointer_cast<VarietyOperatorNode>(
           static_cast<SimpleSentence&>(*flow_control_node)
               .GetSentenceOperateNodePointer()),
-      std::any_cast<std::shared_ptr<OperatorNodeInterface>>(
-          word_data[2].GetNonTerminalWordData().user_returned_data));
+      node_for_assign);
 }
 
 std::any&& SingleAnnounceAndAssignNoAssignExtend(
@@ -1476,7 +1482,8 @@ std::any&& SingleAnnounceAndAssignWithAssignExtend(
   variety_node->SetVarietyType(
       std::shared_ptr<const TypeInterface>(extend_announce_type));
   auto [ignore_type, ignore_const_tag, sub_flow_control_node_container] =
-      VarieytAnnounceWithAssign(std::move(variety_node),
+      VarietyAnnounceWithAssign(std::move(variety_node),
+
                                 std::move(node_for_assign));
   // 将获取变量的操作合并到主容器中
   flow_control_node_container->merge(
@@ -1782,7 +1789,7 @@ AssignableConstexprValue(std::vector<WordDataToUser>&& word_data) {
   // 构建存储获取常量/变量的操作的容器
   return std::make_pair(
       std::move(
-          std::any_cast<std::shared_ptr<InitializeOperatorNodeInterface>&>(
+          std::any_cast<std::shared_ptr<BasicTypeInitializeOperatorNode>&>(
               word_data.front().GetNonTerminalWordData().user_returned_data)),
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>());
 }

@@ -159,11 +159,11 @@ class SyntaxGenerator {
     return GetProductionNode(production_node_id)
         .GetProductionNodeInBody(production_body_id, next_word_to_shift_index);
   }
-  // 设置根产生式ID
+  // 设置用户定义的根产生式ID
   void SetRootProductionNodeId(ProductionNodeId root_production_node_id) {
     root_production_node_id_ = root_production_node_id;
   }
-  // 获取根产生式ID
+  // 获取用户定义的根产生式ID
   ProductionNodeId GetRootProductionNodeId() {
     return root_production_node_id_;
   }
@@ -199,16 +199,17 @@ class SyntaxGenerator {
   // 如果有则输出错误信息并结束程序
   void CheckUndefinedProductionRemained();
   // 添加关键字，自动创建同名终结节点
-  void AddKeyWord(const std::string& key_word);
+  void AddKeyWord(std::string&& key_word);
   // 新建终结节点，返回节点ID
   // 该函数用于声明终结产生式的正则定义
   // 节点已存在且给定symbol_id不同于已有ID则返回ProductionNodeId::InvalidId()
   // 第三个参数是词优先级，0保留为普通词的优先级，1保留为运算符优先级
   // 2保留为关键字优先级，其余的优先级尚未指定
   // ！！！词优先级与运算符优先级不同，请注意区分！！！
-  ProductionNodeId AddTerminalNode(
-      const std::string& node_symbol, const std::string& body_symbol,
-      WordPriority node_priority = WordPriority(0));
+  ProductionNodeId AddTerminalNode(std::string&& node_symbol,
+                                   std::string&& body_symbol,
+                                   WordPriority node_priority = WordPriority(0),
+                                   bool is_key_word = false);
   // 子过程，仅用于创建节点
   // 自动更新节点名ID到节点ID的映射
   // 自动更新节点体ID到节点ID的映射
@@ -219,7 +220,7 @@ class SyntaxGenerator {
   // 节点已存在则返回ProductionNodeId::InvalidId()
   // 默认添加的运算符词法分析优先级高于普通终结产生式低于关键字
   ProductionNodeId AddBinaryOperatorNode(
-      const std::string& operator_symbol,
+      std::string&& operator_symbol,
       OperatorAssociatityType binary_operator_associatity_type,
       OperatorPriority binary_operator_priority_level);
   // 新建左侧单目运算符节点，返回节点ID
@@ -227,7 +228,7 @@ class SyntaxGenerator {
   // 默认添加的运算符词法分析优先级高于普通终结产生式低于关键字
   // 提供左侧单目运算符版本
   ProductionNodeId AddLeftUnaryOperatorNode(
-      const std::string& operator_symbol,
+      std::string&& operator_symbol,
       OperatorAssociatityType unary_operator_associatity_type,
       OperatorPriority unary_operator_priority_level);
   // 新建复用的左侧单目和双目运算符节点，返回节点ID
@@ -235,7 +236,7 @@ class SyntaxGenerator {
   // 默认添加的运算符词法分析优先级高于普通终结产生式低于关键字
   // 提供左侧单目运算符版本
   ProductionNodeId AddBinaryUnaryOperatorNode(
-      const std::string& operator_symbol,
+      std::string&& operator_symbol,
       OperatorAssociatityType binary_operator_associatity_type,
       OperatorPriority binary_operator_priority_level,
       OperatorAssociatityType unary_operator_associatity_type,
@@ -271,6 +272,7 @@ class SyntaxGenerator {
   // 新建文件尾节点，返回节点ID
   ProductionNodeId AddEndNode();
   // 设置产生式根节点
+  // 输入产生式名
   void SetRootProduction(const std::string& production_node_name);
 
   // 获取节点
@@ -370,7 +372,8 @@ class SyntaxGenerator {
       ProductionItemSetId production_item_set_id);
   // 获取项集的全部核心项
   const std::list<ProductionItemAndForwardNodesContainer::const_iterator>
-  GetCoreMainItems(ProductionItemSetId production_item_set_id) const {
+  GetProductionItemSetMainItems(
+      ProductionItemSetId production_item_set_id) const {
     return GetProductionItemSet(production_item_set_id).GetMainItems();
   }
   // 获取单个核心项所属的全部项集
@@ -433,7 +436,7 @@ class SyntaxGenerator {
   // 自动添加所有当前位置可以空规约的项的后续项
   // 返回是否重求闭包
   // 重求闭包则清空语法分析表条目
-  bool CoreClosure(ProductionItemSetId production_item_set_id);
+  bool ProductionItemSetClosure(ProductionItemSetId production_item_set_id);
   // 获取给定的项构成的项集，如果不存在则返回ProductionItemSetId::InvalidId()
   // 输入指向转移前项的迭代器
   ProductionItemSetId GetProductionItemSetIdFromProductionItems(
@@ -447,8 +450,7 @@ class SyntaxGenerator {
       ProductionItemSetId production_item_set_id);
   // 对所有产生式节点按照ProductionNodeType分类
   // 返回array内的vector内类型对应的下标为ProductionNodeType内类型的值
-  std::array<std::vector<ProductionNodeId>, 4>
-  ClassifyProductionNodes() const;
+  std::array<std::vector<ProductionNodeId>, 4> ClassifyProductionNodes() const;
   // SyntaxAnalysisTableMergeOptimize的子过程，分类具有相同终结节点项的语法分析表条目
   // 向equivalent_ids写入相同终结节点转移表的节点ID的组，不会执行实际合并操作
   // 不会写入只有一个项的组
@@ -464,8 +466,9 @@ class SyntaxGenerator {
       std::list<SyntaxAnalysisTableEntryId>&& entry_ids,
       std::vector<std::list<SyntaxAnalysisTableEntryId>>* equivalent_ids);
   // SyntaxAnalysisTableMergeOptimize的子过程，分类具有相同项的语法分析表条目
-  // 第一个参数为语法分析表内所有终结节点ID
-  // 第二个参数为语法分析表内所有非终结节点ID
+  // 第一个参数为语法分析表内所有运算符节点ID
+  // 第二个参数为语法分析表内所有终结节点ID
+  // 第三个参数为语法分析表内所有非终结节点ID
   // 返回可以合并的语法分析表条目组，所有组均有至少两个条目
   std::vector<std::list<SyntaxAnalysisTableEntryId>>
   SyntaxAnalysisTableEntryClassify(
@@ -527,7 +530,7 @@ class SyntaxGenerator {
       ProductionItemSetId production_item_set_id) const;
   // 输出Info级诊断信息
   static void OutPutInfo(const std::string& info) {
-    std::cout << std::format("SyntaxGenerator Info: ") << info << std::endl;
+    //std::cout << std::format("SyntaxGenerator Info: ") << info << std::endl;
   }
   // 输出Warning级诊断信息
   static void OutPutWarning(const std::string& warning) {
@@ -574,7 +577,7 @@ class SyntaxGenerator {
   // 语法分析表ID到项集ID的映射
   std::unordered_map<SyntaxAnalysisTableEntryId, ProductionItemSetId>
       syntax_analysis_table_entry_id_to_production_item_set_id_;
-  // 根产生式条目ID
+  // 用户定义的根非终结产生式节点ID
   ProductionNodeId root_production_node_id_ = ProductionNodeId::InvalidId();
   // 初始语法分析表条目ID，配置写入文件
   SyntaxAnalysisTableEntryId root_syntax_analysis_table_entry_id_;

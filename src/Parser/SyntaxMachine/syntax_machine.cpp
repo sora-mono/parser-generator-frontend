@@ -21,25 +21,19 @@ bool SyntaxMachine::Parse(const std::string& filename) {
       ParsingData{.syntax_analysis_table_entry_id = GetRootParsingEntryId(),
                   .operator_priority = OperatorPriority(0)});
   while (!IsParsingStackEmpty()) {
-    const WordInfo& dfa_return_data = GetWaitingProcessWordInfo();
-    switch (dfa_return_data.word_attached_data_.node_type) {
-      case ProductionNodeType::kTerminalNode:
-      case ProductionNodeType::kOperatorNode:
-      case ProductionNodeType::kEndNode:
-        TerminalWordWaitingProcess();
-        // TODO 添加用户调用清空数据栈的功能
-        break;
-      // 非终结节点在Reduct函数的处理流程中最后移入，不会在这里出现
-      case ProductionNodeType::kNonTerminalNode:
-      default:
-        assert(false);
-        break;
-    }
+    // TODO 添加用户调用清空数据栈的功能
+    TerminalWordWaitingProcess();
   }
   return true;
 }
 
 void SyntaxMachine::TerminalWordWaitingProcess() {
+  assert(GetWaitingProcessWordInfo().word_attached_data_.node_type ==
+             ProductionNodeType::kTerminalNode ||
+         GetWaitingProcessWordInfo().word_attached_data_.node_type ==
+             ProductionNodeType::kOperatorNode ||
+         GetWaitingProcessWordInfo().word_attached_data_.node_type ==
+             ProductionNodeType::kEndNode);
   ProductionNodeId production_node_to_shift_id =
       GetWaitingProcessWordInfo().word_attached_data_.production_node_id;
   const ActionAndAttachedDataInterface& action_and_attached_data =
