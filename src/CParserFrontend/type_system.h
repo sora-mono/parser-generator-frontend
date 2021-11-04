@@ -726,14 +726,15 @@ class InitializeListType : public TypeInterface {
  public:
   // 储存初始化信息用的列表类型
   using InitializeListContainerType =
-      std::vector<std::shared_ptr<const TypeInterface>>;
+      std::list<std::shared_ptr<const TypeInterface>>;
 
   InitializeListType()
       : TypeInterface(StructOrBasicType::kInitializeList,
                       EndType::GetEndType()) {}
   template <class MemberType>
   InitializeListType(MemberType&& list_types)
-      : list_types_(std::forward<MemberType>(list_types)) {}
+      : TypeInterface(StructOrBasicType::kInitializeList),
+        list_types_(std::forward<MemberType>(list_types)) {}
 
   virtual bool operator==(const TypeInterface& type_interface) {
     if (IsSameObject(type_interface)) [[likely]] {

@@ -79,6 +79,7 @@ enum class ProcessType {
 enum class InitializeType {
   kBasic,          // 基础类型，具体类型取决于值的范围
   kString,         // 字符串，固定为const char*类型
+  kFunction,       // 用于给函数指针赋值的全局初始化常量类型
   kInitializeList  // 初始化列表
 };
 // 左右值类型
@@ -139,6 +140,7 @@ class OperatorNodeInterface {
       const = 0;
   // 拷贝自身生成shared_ptr并设置拷贝得到的对象类型为new_type
   // 如果不能拷贝则返回nullptr
+  // 用于类型转换
   virtual std::shared_ptr<OperatorNodeInterface> SelfCopy(
       const std::shared_ptr<const TypeInterface>& new_type) const = 0;
 
@@ -225,7 +227,8 @@ class TypeConvert : public OperatorNodeInterface {
   TypeConvert(const std::shared_ptr<const OperatorNodeInterface>& source_node,
               const std::shared_ptr<const TypeInterface>& new_type)
       : OperatorNodeInterface(GeneralOperationType::kTypeConvert),
-        source_node_(source_node) {}
+        source_node_(source_node),
+        destination_node_(source_node->SelfCopy(new_type)) {}
   TypeConvert(const TypeConvert&) = delete;
 
   virtual ConstTag GetResultConstTag() const override {
@@ -357,15 +360,15 @@ class InitializeOperatorNodeInterface : public OperatorNodeInterface {
   InitializeOperatorNodeInterface& operator=(
       const InitializeOperatorNodeInterface& initialize_node) = default;
 
-  virtual ConstTag GetResultConstTag() const override {
+  virtual ConstTag GetResultConstTag() const override final {
     return ConstTag::kConst;
   }
   virtual std::shared_ptr<const TypeInterface> GetResultTypePointer()
-      const override {
+      const override final {
     return initialize_value_type_;
   }
   virtual std::shared_ptr<const OperatorNodeInterface> GetResultOperatorNode()
-      const override {
+      const override final {
     return nullptr;
   }
 
@@ -377,7 +380,9 @@ class InitializeOperatorNodeInterface : public OperatorNodeInterface {
   // 返回是否为有效的初始化数据类型，如果无效则不添加
   bool SetInitValueType(
       const std::shared_ptr<const TypeInterface>& init_value_type);
-
+  const std::shared_ptr<const TypeInterface>& GetInitValueType() const {
+    return initialize_value_type_;
+  }
   // 返回是否为有效的初始化数据类型
   static bool CheckInitValueTypeValid(const TypeInterface& init_value_type);
 
@@ -389,29 +394,25 @@ class InitializeOperatorNodeInterface : public OperatorNodeInterface {
 };
 
 // 基础初始化类型（数值/字符串/函数）
+// 保存函数时value留空
 class BasicTypeInitializeOperatorNode : public InitializeOperatorNodeInterface {
  public:
   template <class Value>
   BasicTypeInitializeOperatorNode(InitializeType initialize_type, Value&& value)
       : InitializeOperatorNodeInterface(initialize_type),
         value_(std::forward<Value>(value)) {}
+  BasicTypeInitializeOperatorNode(
+      const std::shared_ptr<const type_system::FunctionType>& function_type)
+      : InitializeOperatorNodeInterface(InitializeType::kFunction) {
+    bool result = SetInitDataType(function_type);
+    assert(result);
+  }
   BasicTypeInitializeOperatorNode(const BasicTypeInitializeOperatorNode&) =
       default;
 
   BasicTypeInitializeOperatorNode& operator=(
       const BasicTypeInitializeOperatorNode&) = default;
 
-  virtual ConstTag GetResultConstTag() const override {
-    return InitializeOperatorNodeInterface::GetResultConstTag();
-  }
-  virtual std::shared_ptr<const TypeInterface> GetResultTypePointer()
-      const override {
-    return InitializeOperatorNodeInterface::GetResultTypePointer();
-  }
-  virtual std::shared_ptr<const OperatorNodeInterface> GetResultOperatorNode()
-      const override {
-    return nullptr;
-  }
   virtual std::shared_ptr<OperatorNodeInterface> SelfCopy(
       const std::shared_ptr<const TypeInterface>& new_type) const override {
     auto new_node = std::make_shared<BasicTypeInitializeOperatorNode>(*this);
@@ -424,7 +425,7 @@ class BasicTypeInitializeOperatorNode : public InitializeOperatorNodeInterface {
     value_ = std::forward<Value>(value);
   }
   const std::string& GetValue() const { return value_; }
-  // 设置初始化用数据类型（基础类型/const char*）
+  // 设置初始化用数据类型（基础类型/const char*/函数类型）
   bool SetInitDataType(const std::shared_ptr<const TypeInterface>& data_type);
   // 该对象是否可以使用给定的类型
   // 有效类型返回true，无效类型返回false
@@ -452,32 +453,23 @@ class ListInitializeOperatorNode : public InitializeOperatorNodeInterface {
   ListInitializeOperatorNode& operator=(const ListInitializeOperatorNode&) =
       default;
 
-  virtual ConstTag GetResultConstTag() const override {
-    return InitializeOperatorNodeInterface::GetResultConstTag();
-  }
-  virtual std::shared_ptr<const TypeInterface> GetResultTypePointer()
-      const override {
-    return InitializeOperatorNodeInterface::GetResultTypePointer();
-  }
-  virtual std::shared_ptr<const OperatorNodeInterface> GetResultOperatorNode()
-      const override {
-    return nullptr;
-  }
   virtual std::shared_ptr<OperatorNodeInterface> SelfCopy(
       const std::shared_ptr<const TypeInterface>& new_type) const override {
-    return nullptr;
+    assert(false);
+    // 防止警告
+    return std::shared_ptr<OperatorNodeInterface>();
   }
 
   // 向初始化列表中添加初始化值
   // 返回值是否为有效的初始化列表可用类型，如果类型无效则不执行插入操作
-  // 值从左到右顺序添加
-  bool AddListValue(
-      const std::shared_ptr<const InitializeOperatorNodeInterface>& list_value);
+  // 初始化值的顺序为书写顺序
+  bool SetListValues(
+      std::list<std::shared_ptr<InitializeOperatorNodeInterface>>&&
+          list_values);
   const std::list<std::shared_ptr<const InitializeOperatorNodeInterface>>&
   GetListValues() const {
     return list_values_;
   }
-  bool SetInitListType(const std::shared_ptr<const TypeInterface>& list_type);
   // 检查给定的初始化列表类型是否合法
   static bool CheckInitListTypeValid(const TypeInterface& list_type) {
     return list_type.GetType() == StructOrBasicType::kInitializeList;
@@ -675,7 +667,8 @@ class AssignOperatorNode : public OperatorNodeInterface {
   }
   // 如果不是可以赋值的情况则不会设置
   // 输入指向要设置的用来赋值的节点的指针和是否为声明时赋值
-  // 声明时赋值会忽略被赋值的节点自身的const属性并且允许使用初始化列表
+  // 声明时赋值会忽略被赋值的节点自身的const属性和LeftRightValue属性
+  // 并且允许使用初始化列表
   // 需要先设置被赋值的节点（SetNodeToBeAssigned）
   // 如果被赋值的节点与用来赋值的节点类型完全相同（operator==()）则
   // 设置被赋值的节点的类型链指针指向用来赋值的类型链以节省内存
@@ -693,7 +686,7 @@ class AssignOperatorNode : public OperatorNodeInterface {
   // 函数的模板参数表示是否为声明时赋值
   // 自动检查AssignableCheckResut::kMayBeZeroToPointer的具体情况并改变返回结果
   // 当is_announce == true时
-  // 忽略node_to_be_assigned的const标记且允许使用初始化列表
+  // 忽略const标记和LeftRightValue标记的检查且允许使用初始化列表
   // 如果使用自动数组大小推断则更新数组大小（违反const原则）
   // 如果被赋值的节点与用来赋值的节点类型完全相同（operator==()）且为变量类型
   // 则设置被赋值的节点的类型链指针指向用来赋值的类型链以节省内存(违反const原则)
@@ -874,6 +867,7 @@ class LogicalOperationOperatorNode : public OperatorNodeInterface {
     compute_result_node->SetVarietyType(
         CommonlyUsedTypeGenerator::GetBasicType<BuiltInType::kInt1,
                                                 SignTag::kUnsigned>());
+    compute_result_node_ = compute_result_node;
   }
 
   // 逻辑运算类型
@@ -942,14 +936,14 @@ class DereferenceOperatorNode : public OperatorNodeInterface {
 
  private:
   void SetDereferencedNode(
-      const std::shared_ptr<const VarietyOperatorNode>& dereferenced_node) {
+      const std::shared_ptr<VarietyOperatorNode>& dereferenced_node) {
     dereferenced_node_ = dereferenced_node;
   }
 
   // 将要被解引用的节点
   std::shared_ptr<const OperatorNodeInterface> node_to_dereference_;
   // 解引用后得到的对象的节点
-  std::shared_ptr<const VarietyOperatorNode> dereferenced_node_;
+  std::shared_ptr<VarietyOperatorNode> dereferenced_node_;
 };
 
 class ObtainAddressOperatorNode : public OperatorNodeInterface {

@@ -180,20 +180,20 @@ void CheckAddTypeResult(AddTypeResult add_type_result) {
 }
 
 void OutputError(const std::string& error) {
-  std::cerr << std::format("Compline Error: 行数:{:} 列数:{:} ", GetLine(),
-                           GetColumn())
+  std::cerr << std::format("Compline Error: 行数:{:} 列数:{:} ", GetLine() + 1,
+                           GetColumn() + 1)
             << error << std::endl;
 }
 
 void OutputWarning(const std::string& warning) {
-  std::cerr << std::format("Compline Warning: 行数:{:} 列数:{:} ", GetLine(),
-                           GetColumn())
+  std::cerr << std::format("Compline Warning: 行数:{:} 列数:{:} ",
+                           GetLine() + 1, GetColumn() + 1)
             << warning << std::endl;
 }
 
 void OutputInfo(const std::string& info) {
-  std::cout << std::format("Compline Info: 行数:{:} 列数:{:} ", GetLine(),
-                           GetColumn())
+  std::cout << std::format("Compline Info: 行数:{:} 列数:{:} ", GetLine() + 1,
+                           GetColumn() + 1)
             << info << std::endl;
 }
 
@@ -201,11 +201,19 @@ std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueChar(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
   std::string& word = word_data.front().GetTerminalWordData().word;
-  // ''中夹一个字符
-  assert(word.size() == 3);
+  // ''中夹一个字符或夹一个带转义字符的字符
+  assert(word.size() == 3 || word.size() == 4);
   // 提取单个字符作为值
-  auto initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
-      InitializeType::kBasic, std::to_string(word[1]));
+  std::shared_ptr<BasicTypeInitializeOperatorNode> initialize_node;
+  if (word.size() == 3) [[likely]] {
+    // 不带转义字符
+    initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
+        InitializeType::kBasic, std::to_string(word[1]));
+  } else {
+    // 带转义字符
+    initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
+        InitializeType::kBasic, std::to_string(word[2]));
+  }
   initialize_node->SetInitDataType(
       CommonlyUsedTypeGenerator::GetBasicType<BuiltInType::kInt8,
                                               SignTag::kSigned>());
@@ -257,8 +265,9 @@ std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueNum(
   auto initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
       InitializeType::kBasic, std::move(word));
   initialize_node->SetInitDataType(
-      CommonlyUsedTypeGenerator::GetBasicType<BuiltInType::kInt8,
-                                              SignTag::kSigned>());
+      type_system::CommonlyUsedTypeGenerator::GetBasicTypeNotTemplate(
+          type_system::CalculateBuiltInType(initialize_node->GetValue()),
+          SignTag::kSigned));
   return initialize_node;
 }
 std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueString(
@@ -386,9 +395,8 @@ std::shared_ptr<ObjectConstructData> IdOrEquivenceConstTagId(
 std::any&& IdOrEquivenceNumAddressing(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 4);
   // 获取之前解析到的信息
-  auto data_before =
-      std::move(std::any_cast<std::shared_ptr<ObjectConstructData>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data));
+  auto& data_before = std::any_cast<std::shared_ptr<ObjectConstructData>&>(
+      word_data[0].GetNonTerminalWordData().user_returned_data);
   // 转换为long long的字符数
   size_t chars_converted_to_longlong;
   std::string& array_size_or_index_string =
@@ -1220,22 +1228,19 @@ std::shared_ptr<ListInitializeOperatorNode> InitializeList(
   auto& list_argument_pointer = std::any_cast<std::shared_ptr<
       std::list<std::shared_ptr<InitializeOperatorNodeInterface>>>&>(
       word_data[1].GetNonTerminalWordData().user_returned_data);
-  // 将每一个参数添加到容器中
-  for (auto& single_argument_pointer : *list_argument_pointer) {
-    // 检查是否为有效的初始化类型
-    bool result =
-        initialize_list->AddListValue(std::move(single_argument_pointer));
-    assert(result);
-  }
+  // 将初始化列表的所有参数添加到容器中
+  bool result =
+      initialize_list->SetListValues(std::move(*list_argument_pointer));
   return std::move(initialize_list);
 }
 
 // SingleInitializeListArgument -> SingleConstexprValue
 // 返回值类型：std::shared_ptr<InitializeOperatorNodeInterface>
-std::any&& SingleInitializeListArgumentConstexprValue(
+std::shared_ptr<InitializeOperatorNodeInterface>
+SingleInitializeListArgumentConstexprValue(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
-  return std::move(
+  return std::any_cast<std::shared_ptr<BasicTypeInitializeOperatorNode>&>(
       word_data.front().GetNonTerminalWordData().user_returned_data);
 }
 
@@ -1268,7 +1273,7 @@ std::any&& InitializeListArgumentsExtend(
       std::any_cast<std::shared_ptr<InitializeOperatorNodeInterface>&>(
           word_data[2].GetNonTerminalWordData().user_returned_data);
   list_pointer->emplace_back(std::move(init_data_pointer));
-  return std::move(word_data[2].GetNonTerminalWordData().user_returned_data);
+  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
 }
 
 // AnnounceAssignable -> Assignable
@@ -1286,9 +1291,8 @@ std::pair<std::shared_ptr<const OperatorNodeInterface>,
 AnnounceAssignableInitializeList(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
   return std::make_pair(
-      std::move(
-          std::any_cast<std::shared_ptr<InitializeOperatorNodeInterface>&>(
-              word_data.front().GetNonTerminalWordData().user_returned_data)),
+      std::move(std::any_cast<std::shared_ptr<ListInitializeOperatorNode>&>(
+          word_data.front().GetNonTerminalWordData().user_returned_data)),
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>());
 }
 
@@ -1457,7 +1461,8 @@ std::any&& SingleAnnounceAndAssignNoAssignExtend(
   auto [ignore_type, ignore_const_tag, sub_flow_control_node_container] =
       VarietyAnnounceNoAssign(std::move(variety_node));
   // 将获取变量的操作合并到主容器中
-  flow_control_node_container->merge(
+  flow_control_node_container->splice(
+      flow_control_node_container->end(),
       std::move(*sub_flow_control_node_container));
   return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
 }
@@ -1486,7 +1491,8 @@ std::any&& SingleAnnounceAndAssignWithAssignExtend(
 
                                 std::move(node_for_assign));
   // 将获取变量的操作合并到主容器中
-  flow_control_node_container->merge(
+  flow_control_node_container->splice(
+      flow_control_node_container->end(),
       std::move(*sub_flow_control_node_container));
   return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
 }
@@ -1800,7 +1806,7 @@ AssignableId(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
   std::string& variety_name = word_data.front().GetTerminalWordData().word;
   auto [variety_operator_node, found] =
-      c_parser_frontend.GetVariety(variety_name);
+      c_parser_frontend.GetVarietyOrFunction(variety_name);
   if (!found) [[unlikely]] {
     // 未找到给定名称的变量
     OutputError(std::format("找不到对象{:}", variety_name));
@@ -1849,15 +1855,19 @@ AssignableTypeConvert(std::vector<WordDataToUser>&& word_data) {
   auto converted_operator_node =
       convert_operator_node->GetDestinationNodePointer();
   // 设置新的const属性
-  if (converted_operator_node->GetGeneralOperatorType() ==
-      GeneralOperationType::kVariety) [[likely]] {
-    // 变量可以为const也可以为非const
-    std::static_pointer_cast<VarietyOperatorNode>(converted_operator_node)
-        ->SetConstTag(new_const_tag);
-  } else if (new_const_tag != ConstTag::kConst) [[unlikely]] {
-    // 变量以外的都是右值，不能修改const属性为可变
-    OutputError(std::format("无法转换为非const"));
-    exit(-1);
+  switch (converted_operator_node->GetGeneralOperatorType()) {
+    case GeneralOperationType::kVariety:
+      // 变量可以为const也可以为非const
+      std::static_pointer_cast<VarietyOperatorNode>(converted_operator_node)
+          ->SetConstTag(new_const_tag);
+      break;
+    case GeneralOperationType::kInitValue:
+      // 忽视修改为非const的语句但无需报错
+      break;
+    default:
+      OutputError(std::format("无法转换为非const"));
+      exit(-1);
+      break;
   }
   // 添加转换流程控制节点
   auto flow_control_node = std::make_unique<SimpleSentence>();
@@ -1868,6 +1878,58 @@ AssignableTypeConvert(std::vector<WordDataToUser>&& word_data) {
   // 返回经过转换的节点而不是转换节点
   return std::make_pair(std::move(converted_operator_node),
                         std::move(flow_control_node_container));
+}
+
+std::pair<std::shared_ptr<const OperatorNodeInterface>,
+          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
+AssignableAssign(std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 3);
+  auto& [node_to_be_assigned, statements_to_get_node_to_be_assigned] =
+      std::any_cast<std::pair<
+          std::shared_ptr<const OperatorNodeInterface>,
+          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
+          word_data[0].GetNonTerminalWordData().user_returned_data);
+  auto& [node_for_assign, statements_to_get_node_for_assign] = std::any_cast<
+      std::pair<std::shared_ptr<const OperatorNodeInterface>,
+                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
+      word_data[2].GetNonTerminalWordData().user_returned_data);
+  // 获取真正的待赋值对象
+  auto real_node_to_be_assigned = node_to_be_assigned->GetResultOperatorNode();
+  if (real_node_to_be_assigned == nullptr) {
+    real_node_to_be_assigned = node_to_be_assigned;
+  }
+  // 获取真正的待赋值对象
+  auto real_node_for_assign = node_for_assign->GetResultOperatorNode();
+  if (real_node_for_assign == nullptr) {
+    real_node_for_assign = node_for_assign;
+  }
+  if (real_node_to_be_assigned->GetGeneralOperatorType() !=
+      GeneralOperationType::kVariety) [[unlikely]] {
+    OutputError(std::format("无法对非变量赋值"));
+    exit(-1);
+  } else if (static_cast<const VarietyOperatorNode&>(*real_node_to_be_assigned)
+                 .GetLeftRightValueTag() != LeftRightValueTag::kLeftValue)
+      [[unlikely]] {
+    OutputError(std::format("无法对右值赋值"));
+    exit(-1);
+  }
+  auto assign_node = std::make_shared<AssignOperatorNode>();
+  assign_node->SetNodeToBeAssigned(real_node_to_be_assigned);
+  auto assignable_check_result =
+      assign_node->SetNodeForAssign(real_node_for_assign, false);
+  CheckAssignableCheckResult(assignable_check_result);
+  // 合并获取赋值用节点和被赋值的节点过程中产生的语句
+  statements_to_get_node_to_be_assigned->splice(
+      statements_to_get_node_to_be_assigned->end(),
+      std::move(*statements_to_get_node_for_assign));
+  auto flow_control_sentence = std::make_unique<SimpleSentence>();
+  bool result = flow_control_sentence->SetSentenceOperateNode(assign_node);
+  assert(result);
+  statements_to_get_node_to_be_assigned->emplace_back(
+      std::move(flow_control_sentence));
+  assert(statements_to_get_node_for_assign->empty());
+  return std::make_pair(std::move(assign_node),
+                        std::move(statements_to_get_node_to_be_assigned));
 }
 
 // Assignable -> FunctionCall
@@ -2013,7 +2075,7 @@ AssignableMathematicalOperate(std::vector<WordDataToUser>&& word_data) {
       word_data[1].GetNonTerminalWordData().user_returned_data);
   auto& [right_operator_node, right_flow_control_node_container] =
       std::any_cast<std::pair<
-          std::shared_ptr<OperatorNodeInterface>,
+          std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
           word_data[2].GetNonTerminalWordData().user_returned_data);
   auto mathematical_operator_node =
@@ -2033,7 +2095,8 @@ AssignableMathematicalOperate(std::vector<WordDataToUser>&& word_data) {
       flow_control_node->SetSentenceOperateNode(mathematical_operator_node);
   assert(result);
   // 将生成右运算节点的操作合并到左容器中
-  left_flow_control_node_container->merge(
+  left_flow_control_node_container->splice(
+      left_flow_control_node_container->end(),
       std::move(*right_flow_control_node_container));
   // 添加数学运算节点
   left_flow_control_node_container->emplace_back(std::move(flow_control_node));
@@ -2083,7 +2146,8 @@ AssignableMathematicalAndAssignOperate(
       assign_operator_node->SetNodeForAssign(right_operator_node, false);
   CheckAssignableCheckResult(assignable_check_result);
   // 将生成右运算节点的操作合并到左容器中
-  left_flow_control_node_container->merge(
+  left_flow_control_node_container->splice(
+      left_flow_control_node_container->end(),
       std::move(*right_flow_control_node_container));
   // 添加运算流程控制节点和赋值流程控制节点
   auto flow_control_node_mathematical = std::make_unique<SimpleSentence>();
@@ -2134,7 +2198,8 @@ AssignableLogicalOperate(std::vector<WordDataToUser>&& word_data) {
     exit(-1);
   }
   // 将生成右运算节点的操作合并到左容器中
-  left_flow_control_node_container->merge(
+  left_flow_control_node_container->splice(
+      left_flow_control_node_container->end(),
       std::move(*right_flow_control_node_container));
   // 添加运算流程节点
   auto flow_control_node = std::make_unique<SimpleSentence>();
@@ -2293,7 +2358,7 @@ AssignableArrayAccess(std::vector<WordDataToUser>&& word_data) {
   auto& [index_node, sub_flow_control_node_container] = std::any_cast<
       std::pair<std::shared_ptr<const OperatorNodeInterface>,
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+      word_data[2].GetNonTerminalWordData().user_returned_data);
   // 创建将指针地址与偏移量相加的节点
   auto plus_operator_node =
       std::make_shared<MathematicalOperatorNode>(MathematicalOperation::kPlus);
@@ -2315,7 +2380,8 @@ AssignableArrayAccess(std::vector<WordDataToUser>&& word_data) {
     exit(-1);
   }
   // 合并获取index的操作到主容器中
-  main_flow_control_node_container->merge(
+  main_flow_control_node_container->splice(
+      main_flow_control_node_container->end(),
       std::move(*sub_flow_control_node_container));
   // 创建流程节点
   auto plus_flow_control_node = std::make_unique<SimpleSentence>();
@@ -2400,7 +2466,7 @@ std::shared_ptr<const OperatorNodeInterface> SuffixPlusOrMinus(
   auto copy_assign_operator_node = std::make_shared<AssignOperatorNode>();
   copy_assign_operator_node->SetNodeToBeAssigned(temp_variety_node);
   auto copy_assign_node_check_result =
-      copy_assign_operator_node->SetNodeForAssign(node_to_operate, false);
+      copy_assign_operator_node->SetNodeForAssign(node_to_operate, true);
   CheckAssignableCheckResult(copy_assign_node_check_result);
   auto copy_flow_control_node = std::make_unique<SimpleSentence>();
   bool result =
@@ -2421,7 +2487,7 @@ AssignablePrefixPlus(std::vector<WordDataToUser>&& word_data) {
   auto& [node_to_plus, flow_control_node_container] = std::any_cast<
       std::pair<std::shared_ptr<const OperatorNodeInterface>,
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+      word_data[1].GetNonTerminalWordData().user_returned_data);
   return std::make_pair(
       PrefixPlusOrMinus(MathematicalOperation::kPlus, node_to_plus,
                         flow_control_node_container.get()),
@@ -2435,7 +2501,7 @@ AssignablePrefixMinus(std::vector<WordDataToUser>&& word_data) {
   auto& [node_to_minus, flow_control_node_container] = std::any_cast<
       std::pair<std::shared_ptr<const OperatorNodeInterface>,
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+      word_data[1].GetNonTerminalWordData().user_returned_data);
   return std::make_pair(
       PrefixPlusOrMinus(MathematicalOperation::kMinus, node_to_minus,
                         flow_control_node_container.get()),
@@ -2472,7 +2538,7 @@ AssignableSuffixMinus(std::vector<WordDataToUser>&& word_data) {
 
 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithValue(
     std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
+  assert(word_data.size() == 3);
   auto& [return_target, sentences_to_get_assignable] = std::any_cast<
       std::pair<std::shared_ptr<const OperatorNodeInterface>,
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
@@ -2498,6 +2564,7 @@ std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithValue(
 
 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithoutValue(
     std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 2);
   auto sentences_to_get_assignable =
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>();
   auto return_flow_control_node = std::make_unique<Return>();
@@ -2662,7 +2729,7 @@ std::pair<std::shared_ptr<const OperatorNodeInterface>,
 FunctionCall(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
   auto& [node_to_call, sentences_to_get_node_to_call] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
+      std::pair<std::shared_ptr<FunctionCallOperatorNode>,
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
       word_data[0].GetNonTerminalWordData().user_returned_data);
   // 创建流程控制节点并添加
@@ -2699,7 +2766,8 @@ std::any&& AssignablesExtend(std::vector<WordDataToUser>&& word_data) {
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
       word_data[2].GetNonTerminalWordData().user_returned_data);
   // 合并到主容器中
-  main_control_node_container->merge(std::move(*now_control_node_container));
+  main_control_node_container->splice(main_control_node_container->end(),
+                                      std::move(*now_control_node_container));
   return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
 }
 
@@ -2894,7 +2962,7 @@ std::any IfIfSentence(std::vector<WordDataToUser>&& word_data) {
 // 返回值类型：std::pair<std::shared_ptr<const OperatorNodeInterface>,
 //                   std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 std::any&& ForRenewSentences(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
+  assert(word_data.size() == 1);
   return std::move(
       word_data.front().GetNonTerminalWordData().user_returned_data);
 }
@@ -2940,7 +3008,7 @@ std::any ForInitHead(std::vector<WordDataToUser>&& word_data) {
 }
 
 std::any ForHead(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 6);
+  assert(word_data.size() == 7);
   auto& for_sentence =
       static_cast<ForSentence&>(c_parser_frontend.GetTopFlowControlSentence());
   assert(for_sentence.GetFlowType() == FlowType::kForSentence);
@@ -2953,7 +3021,7 @@ std::any ForHead(std::vector<WordDataToUser>&& word_data) {
       word_data[3].GetNonTerminalWordData().user_returned_data);
   auto& for_renew_sentences = std::any_cast<
       std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&>(
-      word_data[4].GetNonTerminalWordData().user_returned_data);
+      word_data[5].GetNonTerminalWordData().user_returned_data);
   bool result =
       for_sentence.AddForInitSentences(std::move(*for_init_sentences));
   if (!result) [[unlikely]] {
@@ -2993,7 +3061,6 @@ std::any WhileInitHead(std::vector<WordDataToUser>&& word_data) {
       std::make_shared<std::unique_ptr<WhileSentence>>(
           std::make_unique<WhileSentence>());
   auto& while_sentence = *pointer_to_while_sentence;
-  c_parser_frontend.AddActionScopeLevel();
   bool result = while_sentence->SetCondition(
       while_condition, std::move(*sentences_to_get_condition));
   if (!result) [[unlikely]] {
@@ -3235,9 +3302,10 @@ ObjectConstructData::AttachSingleNodeToTailNodePointer(
     case StructOrBasicType::kPointer:
       // 需要额外检查是否在声明函数数组
       if (std::static_pointer_cast<PointerType>(type_chain_tail_)
-              ->GetArraySize() != 0) [[unlikely]] {
+                  ->GetArraySize() != 0 &&
+          next_node->GetType() == StructOrBasicType::kFunction) [[unlikely]] {
         // 非0代表声明数组
-        OutputError(std::format("不支持声明指针数组"));
+        OutputError(std::format("不支持声明函数数组"));
         exit(-1);
       }
       [[fallthrough]];

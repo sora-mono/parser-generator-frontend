@@ -278,7 +278,7 @@ ProductionNodeId SyntaxGenerator::AddNonTerminalNode(
       production_node.AddBody(std::move(node_ids), class_id);
   OutPutInfo(std::format("成功添加非终结节点 ") +
              FormatSingleProductionBody(production_node_id, body_id));
-  OutPutInfo(std::format("非终结节点ID:：{:} 当前产生式体ID：{:}",
+  OutPutInfo(std::format("非终结节点ID：{:} 当前产生式体ID：{:}",
                          production_node_id.GetRawValue(),
                          body_id.GetRawValue()));
   return production_node_id;

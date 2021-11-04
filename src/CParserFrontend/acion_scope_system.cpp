@@ -7,9 +7,14 @@ namespace c_parser_frontend::action_scope_system {
 // 建议先创建空节点后调用该函数，可以提升性能
 // 返回值含义见该类型定义处
 
-inline DefineVarietyResult ActionScopeSystem::VarietyData::AddVarietyData(
-    const std::shared_ptr<const VarietyOperatorNode>& operator_node,
+inline DefineVarietyResult
+ActionScopeSystem::VarietyData::AddVarietyOrFunctionData(
+    const std::shared_ptr<const OperatorNodeInterface>& operator_node,
     ActionScopeLevelType action_scope_level_) {
+  assert(operator_node->GetGeneralOperatorType() ==
+             operator_node::GeneralOperationType::kVariety ||
+         operator_node->GetGeneralOperatorType() ==
+             operator_node::GeneralOperationType::kInitValue);
   auto& variety_data = GetVarietyData();
   std::monostate* empty_status_pointer =
       std::get_if<std::monostate>(&variety_data);
@@ -98,10 +103,11 @@ ActionScopeSystem::~ActionScopeSystem() {
   }
 }
 
-std::pair<std::shared_ptr<const ActionScopeSystem::VarietyOperatorNode>, bool>
-ActionScopeSystem::GetVariety(const std::string& variety_name) {
-  auto iter = GetVarietyNameToOperatorNodePointer().find(variety_name);
-  if (iter != GetVarietyNameToOperatorNodePointer().end()) [[likely]] {
+std::pair<std::shared_ptr<const operator_node::OperatorNodeInterface>, bool>
+ActionScopeSystem::GetVarietyOrFunction(const std::string& target_name) {
+  auto iter = GetVarietyOrFunctionNameToOperatorNodePointer().find(target_name);
+  if (iter != GetVarietyOrFunctionNameToOperatorNodePointer().end())
+      [[likely]] {
     auto [pointer_data, has_pointer] = iter->second.GetTopData();
     return std::make_pair(pointer_data.first, has_pointer);
   } else {
@@ -116,13 +122,11 @@ bool ActionScopeSystem::PushFunctionFlowControlNode(
     // 函数只能定义在0级（全局）作用域
     return false;
   }
-  auto iter = AnnounceVarietyName(
-      function_data->GetFunctionTypeReference().GetFunctionName());
-  // 定义全局函数变量供赋值使用，该变量为const右值，防止被赋值/修改
-  auto [ignore_iter, define_variety_result] = DefineVariety(
-      iter->first, std::make_shared<operator_node::VarietyOperatorNode>(
-                       &iter->first, type_system::ConstTag::kConst,
-                       operator_node::LeftRightValueTag::kRightValue));
+  // 定义全局初始化常量，在给函数指针赋值时使用
+  auto [ignore_iter, define_variety_result] = DefineVarietyOrFunction(
+      function_data->GetFunctionTypeReference().GetFunctionName(),
+      std::make_shared<operator_node::BasicTypeInitializeOperatorNode>(
+          function_data->GetFunctionTypePointer()));
   // 在此之前应该已经判断过是否存在重定义/重载问题（在添加到FlowControlSystem时）
   assert(define_variety_result != DefineVarietyResult::kReDefine);
   // 将函数数据指针压入栈，该指针管辖权不在ActionScopeSystem
@@ -151,14 +155,12 @@ bool ActionScopeSystem::SetFunctionToConstruct(
         argument_node.variety_operator_node->GetVarietyNamePointer();
     // 如果参数有名则添加到作用域中
     if (argument_name != nullptr) [[likely]] {
-      DefineVariety(*argument_name, std::shared_ptr<const VarietyOperatorNode>(
+      DefineVarietyOrFunction(*argument_name, std::shared_ptr<const VarietyOperatorNode>(
                                         argument_node.variety_operator_node));
     }
   }
   return true;
 }
-
-// 将构建中的流程控制节点压栈，自动增加一级作用域等级
 
 bool ActionScopeSystem::PushFlowControlSentence(
     std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
@@ -180,24 +182,16 @@ bool ActionScopeSystem::PushFlowControlSentence(
 
 bool ActionScopeSystem::RemoveEmptyNode(
     const std::string& empty_node_to_remove_name) {
-  auto iter =
-      variety_name_to_operator_node_pointer_.find(empty_node_to_remove_name);
+  auto iter = variety_or_function_name_to_operator_node_pointer_.find(
+      empty_node_to_remove_name);
   // 目标节点空，删除节点
-  if (iter != variety_name_to_operator_node_pointer_.end() &&
+  if (iter != variety_or_function_name_to_operator_node_pointer_.end() &&
       iter->second.Empty()) [[likely]] {
-    variety_name_to_operator_node_pointer_.erase(iter);
+    variety_or_function_name_to_operator_node_pointer_.erase(iter);
     return true;
   }
   return false;
 }
-
-// 将if流程控制语句转化为if-else语句
-// 如果顶层控制语句不为if则返回false
-// 将if流程控制语句转化为if-else语句
-// 如果顶层控制语句不为if则返回false
-
-// 向switch语句中添加普通case
-// 如果当前顶层控制语句不为switch则返回false
 
 bool ActionScopeSystem::AddSwitchSimpleCase(
     const std::shared_ptr<
@@ -221,18 +215,6 @@ bool ActionScopeSystem::AddSwitchDefaultCase() {
              GetTopFlowControlSentence())
       .AddDefaultCase();
 }
-
-// 向switch语句中添加普通case
-// 如果当前顶层控制语句不为switch则返回false
-
-// 向当前活跃的函数内执行的语句尾部附加语句
-// 返回是否添加成功，添加失败则不修改参数
-// 如果当前无流程控制语句则返回false
-
-// 添加待执行语句的集合
-// 返回是否添加成功，添加失败则不修改参数
-// 如果当前无流程控制语句则返回false
-
 bool ActionScopeSystem::AddSentences(
     std::list<std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>>&&
         sentence_container) {

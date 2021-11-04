@@ -119,6 +119,7 @@ Assignable -> Assignable "." Id
 Assignable -> Assignable "->" Id
 Assignable -> "(" Assignable ")"
 Assignable -> "(" Type ")" Assignable
+Assignable -> Assignable "=" Assignable
 Assignable -> Assignable MathematicalOperator Assignable
 Assignable -> Assignable MathematicalAndAssignOperator Assignable
 Assignable -> Assignable LogicalOperator Assignable
@@ -132,8 +133,8 @@ Assignable -> "++" Assignable
 Assignable -> "--" Assignable
 Assignable -> Assignable "++"
 Assignable -> Assignable "--"
-Return -> "return" Assignable
-Return -> "return"
+Return -> "return" Assignable ";"
+Return -> "return" ";"
 TemaryOperator -> Assignable "?" Assignable ":" Assignable
 NotEmptyFunctionCallArguments -> Assignable
 NotEmptyFunctionCallArguments -> NotEmptyFunctionCallArguments "," Assignable
@@ -158,11 +159,11 @@ IfCondition -> "if" "(" Assignable ")"
 IfWithElse -> IfCondition ProcessControlSentenceBody "else"
 If->IfWithElse ProcessControlSentenceBody
 If -> IfCondition ProcessControlSentenceBody
-ForRenewSentences -> Assignables ";"
+ForRenewSentences -> Assignables
 ForInitSentence -> Assignables ";"
 ForInitSentence -> SingleAnnounceAndAssign ";"
 ForInitHead -> "for"
-ForHead -> ForInitHead "(" ForInitSentence Assignable ForRenewSentences ")"
+ForHead -> ForInitHead "(" ForInitSentence Assignable ";" ForRenewSentences ")"
 For -> ForHead ProcessControlSentenceBody
 WhileInitHead -> "while" "(" Assignable ")"
 While -> WhileInitHead ProcessControlSentenceBody

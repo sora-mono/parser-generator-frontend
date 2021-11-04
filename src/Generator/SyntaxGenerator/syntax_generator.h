@@ -530,7 +530,7 @@ class SyntaxGenerator {
       ProductionItemSetId production_item_set_id) const;
   // 输出Info级诊断信息
   static void OutPutInfo(const std::string& info) {
-    //std::cout << std::format("SyntaxGenerator Info: ") << info << std::endl;
+    std::cout << std::format("SyntaxGenerator Info: ") << info << std::endl;
   }
   // 输出Warning级诊断信息
   static void OutPutWarning(const std::string& warning) {

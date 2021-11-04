@@ -51,6 +51,8 @@ DfaMachine::WordInfo DfaMachine::GetNextWord() {
         SetLine(GetLine() + 1);
         // 重置列数为0
         SetColumn(0);
+        SetCharacterNow(fgetc(file_));
+        continue;
         break;
       default:
         break;
@@ -68,6 +70,7 @@ DfaMachine::WordInfo DfaMachine::GetNextWord() {
       SetColumn(GetColumn() + 1);
     }
   }
+  std::cout << symbol << std::endl;
   return WordInfo(dfa_config_[transform_array_id].second, std::move(symbol));
 }
 

@@ -10,7 +10,7 @@
 
 // 终结产生式
 GENERATOR_DEFINE_TERMINAL_PRODUCTION("Id", R"([a-zA-Z_][a-zA-Z0-9_]*)")
-GENERATOR_DEFINE_TERMINAL_PRODUCTION("Num", R"([0-9]+(\.[0-9]*)?)")
+GENERATOR_DEFINE_TERMINAL_PRODUCTION("Num", R"([+-]?[0-9]+(\.[0-9]*)?)")
 GENERATOR_DEFINE_TERMINAL_PRODUCTION("Str", R"(".*")")
 GENERATOR_DEFINE_TERMINAL_PRODUCTION("Character", R"('..?')")
 GENERATOR_DEFINE_TERMINAL_PRODUCTION("]", R"(\])")
@@ -514,53 +514,56 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Assignable, c_parser_frontend::parse_functions::AssignableTypeConvert, 9,
     {"(", "Type", ")", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    Assignable, c_parser_frontend::parse_functions::AssignableAssign, 10,
+    {"Assignable", "=", "Assignable"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Assignable,
-    c_parser_frontend::parse_functions::AssignableMathematicalOperate, 10,
+    c_parser_frontend::parse_functions::AssignableMathematicalOperate, 11,
     {"Assignable", "MathematicalOperator", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Assignable,
     c_parser_frontend::parse_functions::AssignableMathematicalAndAssignOperate,
-    11, {"Assignable", "MathematicalAndAssignOperator", "Assignable"})
+    12, {"Assignable", "MathematicalAndAssignOperator", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Assignable, c_parser_frontend::parse_functions::AssignableLogicalOperate,
-    12, {"Assignable", "LogicalOperator", "Assignable"})
+    13, {"Assignable", "LogicalOperator", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignableNot, 13,
+    Assignable, c_parser_frontend::parse_functions::AssignableNot, 14,
     {"!", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Assignable, c_parser_frontend::parse_functions::AssignableLogicalNegative,
-    14, {"~", "Assignable"})
+    15, {"~", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Assignable,
-    c_parser_frontend::parse_functions::AssignableMathematicalNegative, 15,
+    c_parser_frontend::parse_functions::AssignableMathematicalNegative, 16,
     {"-", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignableObtainAddress, 16,
+    Assignable, c_parser_frontend::parse_functions::AssignableObtainAddress, 17,
     {"&", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignableDereference, 17,
+    Assignable, c_parser_frontend::parse_functions::AssignableDereference, 18,
     {"*", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignableArrayAccess, 18,
+    Assignable, c_parser_frontend::parse_functions::AssignableArrayAccess, 19,
     {"Assignable", "[", "Assignable", "]"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignablePrefixPlus, 19,
+    Assignable, c_parser_frontend::parse_functions::AssignablePrefixPlus, 20,
     {"++", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignablePrefixMinus, 20,
+    Assignable, c_parser_frontend::parse_functions::AssignablePrefixMinus, 21,
     {"--", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignableSuffixPlus, 21,
+    Assignable, c_parser_frontend::parse_functions::AssignableSuffixPlus, 22,
     {"Assignable", "++"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Assignable, c_parser_frontend::parse_functions::AssignableSuffixMinus, 22,
+    Assignable, c_parser_frontend::parse_functions::AssignableSuffixMinus, 23,
     {"Assignable", "--"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Return, c_parser_frontend::parse_functions::ReturnWithValue, 0,
-    {"return", "Assignable"})
+    {"return", "Assignable", ";"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Return, c_parser_frontend::parse_functions::ReturnWithoutValue, 1,
-    {"return"})
+    {"return", ";"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     TemaryOperator, c_parser_frontend::parse_functions::TemaryOperator, 0,
     {"Assignable", "?", "Assignable", ":", "Assignable"})
@@ -587,7 +590,7 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     {"Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Assignables, c_parser_frontend::parse_functions::AssignablesExtend, 1,
-    {"Assignables", "Assignable"})
+    {"Assignables", ",", "Assignable"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Break, c_parser_frontend::parse_functions::Break, 0, {"break", ";"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
@@ -640,11 +643,11 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     {"IfCondition", "ProcessControlSentenceBody"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     ForRenewSentences, c_parser_frontend::parse_functions::ForRenewSentences, 0,
-    {"Assignables", ";"})
+    {"Assignables"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     ForInitSentence,
     c_parser_frontend::parse_functions::ForInitSentenceAssignables, 0,
-    {"Assignables", ","})
+    {"Assignables", ";"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     ForInitSentence,
     c_parser_frontend::parse_functions::ForInitSentenceAnnounce, 1,
@@ -653,8 +656,8 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     ForInitHead, c_parser_frontend::parse_functions::ForInitHead, 0, {"for"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     ForHead, c_parser_frontend::parse_functions::ForHead, 0,
-    {"ForInitHead", "(", "ForInitSentence", "Assignable", "ForRenewSentences",
-     ")"})
+    {"ForInitHead", "(", "ForInitSentence", "Assignable", ";",
+     "ForRenewSentences", ")"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     For, c_parser_frontend::parse_functions::For, 0,
     {"ForHead", "ProcessControlSentenceBody"})

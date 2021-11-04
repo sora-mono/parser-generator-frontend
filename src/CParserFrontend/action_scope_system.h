@@ -33,7 +33,7 @@ class ActionScopeSystem {
    public:
     // 存储单个指针的类型
     using SinglePointerType =
-        std::pair<std::shared_ptr<const VarietyOperatorNode>,
+        std::pair<std::shared_ptr<const OperatorNodeInterface>,
                   ActionScopeLevelType>;
     // 存储多个指针的类型
     using PointerStackType = std::stack<SinglePointerType>;
@@ -42,11 +42,12 @@ class ActionScopeSystem {
     template <class Data>
     VarietyData(Data&& data) : variety_data_(std::forward<Data>(data)) {}
 
-    // 添加一条数据，如需转换成栈则自动执行
+    // 添加一条变量数据或函数数据，如需转换成栈则自动执行
     // 建议先创建空节点后调用该函数，可以提升性能
     // 返回值含义见该类型定义处
-    DefineVarietyResult AddVarietyData(
-        const std::shared_ptr<const VarietyOperatorNode>& operator_node,
+    DefineVarietyResult AddVarietyOrFunctionData(
+        const std::shared_ptr<const OperatorNodeInterface>& operator_node,
+
         ActionScopeLevelType action_scope_level_);
     // 弹出最顶层数据，自动处理转换
     // 如果弹出了最后一个数据则返回true，应移除该节点
@@ -78,33 +79,34 @@ class ActionScopeSystem {
   // 初始化
   void VarietyScopeSystemInit() {
     action_scope_level_ = ActionScopeLevelType(0);
-    variety_name_to_operator_node_pointer_.clear();
+    variety_or_function_name_to_operator_node_pointer_.clear();
     while (!variety_stack_.empty()) {
       variety_stack_.pop();
     }
     // 压入哨兵，弹出所有高于给定层数花括号的变量时无需判断栈是否为空
-    auto [iter, inserted] = variety_name_to_operator_node_pointer_.emplace(
-        std::string(),
-        VarietyData::SinglePointerType(nullptr, ActionScopeLevelType(0)));
+    auto [iter, inserted] =
+        variety_or_function_name_to_operator_node_pointer_.emplace(
+            std::string(),
+            VarietyData::SinglePointerType(nullptr, ActionScopeLevelType(0)));
     assert(inserted == true);
     variety_stack_.emplace(std::move(iter));
   }
   // 定义一个变量，level代表该变量外花括号的层数，0代表全局变量
   // 返回指向插入位置的迭代器与插入的结果，结果含义见定义
-  template <class VarietyName>
+  template <class Name>
   std::pair<ActionScopeContainerType::const_iterator, DefineVarietyResult>
-  DefineVariety(
-      VarietyName&& variety_name,
-      const std::shared_ptr<const VarietyOperatorNode>& operator_node_pointer);
+  DefineVarietyOrFunction(Name&& name,
+                          const std::shared_ptr<const OperatorNodeInterface>&
+                              operator_node_pointer);
   // 声明一个变量，保证返回的迭代器有效且管理节点存在，但不会添加变量指针
   // 添加变量指针请使用DefineVariety()
   // 返回指向插入位置的迭代器
-  template <class VarietyName>
+  template <class Name>
   ActionScopeContainerType::const_iterator AnnounceVarietyName(
-      VarietyName&& variety_name);
+      Name&& variety_name);
   // 返回指向变量节点的智能指针和变量是否存在
-  std::pair<std::shared_ptr<const VarietyOperatorNode>, bool> GetVariety(
-      const std::string& variety_name);
+  std::pair<std::shared_ptr<const OperatorNodeInterface>, bool>
+  GetVarietyOrFunction(const std::string& variety_name);
   // 设置当前待构建函数
   // 自动提升作用域，创建函数类型变量等
   // 返回是否添加成功
@@ -114,6 +116,8 @@ class ActionScopeSystem {
     return action_scope_level_;
   }
   // 将构建中的流程控制节点压栈，自动增加一级作用域等级
+  // 先增加一级作用域等级后压入流程控制节点
+  // 这样在弹出该级作用域时就可以自动添加
   // 如果当前无活跃流程控制语句且压入的不是FunctionDefine则返回false
   bool PushFlowControlSentence(
       std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
@@ -124,7 +128,7 @@ class ActionScopeSystem {
   void PopActionScope() {
     assert(action_scope_level_ != 0);
     --action_scope_level_;
-    PopVarietyOverLevel(GetActionScopeLevel());
+    PopOverLevel(GetActionScopeLevel());
   }
   // 移除空节点，如果节点不空则不移除
   // 返回是否移除了节点
@@ -156,7 +160,7 @@ class ActionScopeSystem {
   // 返回是否添加成功
   // 如果当前顶层控制语句不为switch则返回false
   bool AddSwitchDefaultCase();
-  // 向当前活跃的函数内执行的语句尾部附加语句
+  // 向当前活跃的流程控制语句内执行的语句列表末端添加语句
   // 返回是否添加成功，添加失败则不修改参数
   // 如果当前无流程控制语句则返回false
   bool AddSentence(
@@ -177,14 +181,14 @@ class ActionScopeSystem {
           sentence_container);
 
  private:
-  // 弹出所有高于给定作用域等级的变量
-  void PopVarietyOverLevel(ActionScopeLevelType level);
-  ActionScopeContainerType& GetVarietyNameToOperatorNodePointer() {
-    return variety_name_to_operator_node_pointer_;
+  // 弹出所有高于给定作用域等级的变量和流程控制语句
+  void PopOverLevel(ActionScopeLevelType level);
+  ActionScopeContainerType& GetVarietyOrFunctionNameToOperatorNodePointer() {
+    return variety_or_function_name_to_operator_node_pointer_;
   }
   auto& GetVarietyStack() { return variety_stack_; }
   // 创建函数定义控制块并压入作用域栈中，返回是否添加成功
-  // 并创建函数类型的const右值变量添加到全局变量中，便于赋值使用
+  // 并创建函数类型的BasicInitializeType变量添加到全局变量中，便于赋值使用
   // 提升定义域等级
   bool PushFunctionFlowControlNode(
       c_parser_frontend::flow_control::FunctionDefine* function_data);
@@ -192,7 +196,7 @@ class ActionScopeSystem {
   // 存储变量名和对应同名不同作用域变量
   // 键值为变量名
   // 在发生覆盖时创建变量栈转换结构可以降低内存占用和stack的性能消耗
-  ActionScopeContainerType variety_name_to_operator_node_pointer_;
+  ActionScopeContainerType variety_or_function_name_to_operator_node_pointer_;
   // 按顺序存储添加的变量，用来支持作用域结束后清除该作用域内全部变量功能
   // iterator指向变量和对应数据
   std::stack<ActionScopeContainerType::iterator> variety_stack_;
@@ -204,16 +208,18 @@ class ActionScopeSystem {
                 ActionScopeLevelType>>
       flow_control_stack_;
 };
-template <class VarietyName>
+template <class Name>
 inline std::pair<ActionScopeSystem::ActionScopeContainerType::const_iterator,
                  DefineVarietyResult>
-ActionScopeSystem::DefineVariety(
-    VarietyName&& variety_name,
-    const std::shared_ptr<const VarietyOperatorNode>& operator_node_pointer) {
-  auto [iter, inserted] = GetVarietyNameToOperatorNodePointer().emplace(
-      std::forward<VarietyName>(variety_name), VarietyData());
+ActionScopeSystem::DefineVarietyOrFunction(
+    Name&& name,
+    const std::shared_ptr<const OperatorNodeInterface>& operator_node_pointer) {
+  auto [iter, inserted] =
+      GetVarietyOrFunctionNameToOperatorNodePointer().emplace(
+          std::forward<Name>(name), VarietyData());
   DefineVarietyResult add_variety_result =
-      iter->second.AddVarietyData(operator_node_pointer, GetActionScopeLevel());
+      iter->second.AddVarietyOrFunctionData(operator_node_pointer,
+                                            GetActionScopeLevel());
   switch (add_variety_result) {
     case DefineVarietyResult::kNew:
     case DefineVarietyResult::kAddToStack:
@@ -234,11 +240,11 @@ ActionScopeSystem::DefineVariety(
   }
   return std::make_pair(std::move(iter), add_variety_result);
 }
-template <class VarietyName>
+template <class Name>
 inline ActionScopeSystem::ActionScopeContainerType::const_iterator
-ActionScopeSystem::AnnounceVarietyName(VarietyName&& variety_name) {
-  return GetVarietyNameToOperatorNodePointer()
-      .emplace(std::forward<VarietyName>(variety_name), VarietyData())
+ActionScopeSystem::AnnounceVarietyName(Name&& variety_name) {
+  return GetVarietyOrFunctionNameToOperatorNodePointer()
+      .emplace(std::forward<Name>(variety_name), VarietyData())
       .first;
 }
 }  // namespace c_parser_frontend::action_scope_system

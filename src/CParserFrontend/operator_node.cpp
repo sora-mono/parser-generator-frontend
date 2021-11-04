@@ -64,6 +64,7 @@ inline bool BasicTypeInitializeOperatorNode::CheckBasicTypeInitializeValid(
              *CommonlyUsedTypeGenerator::GetConstExprStringType();
       break;
     case StructOrBasicType::kBasic:
+    case StructOrBasicType::kFunction:
       return true;
       break;
     default:
@@ -90,6 +91,8 @@ inline bool InitializeOperatorNodeInterface::CheckInitValueTypeValid(
       // 数字
     case StructOrBasicType::kInitializeList:
       // 初始化列表
+    case StructOrBasicType::kFunction:
+      // 用来给函数指针赋值的初始化值
       return true;
       break;
     case StructOrBasicType::kPointer:
@@ -105,7 +108,6 @@ inline bool InitializeOperatorNodeInterface::CheckInitValueTypeValid(
     case StructOrBasicType::kEnum:
     case StructOrBasicType::kStruct:
     case StructOrBasicType::kUnion:
-    case StructOrBasicType::kFunction:
       // c语言中这几种类型不能声明为初始化用变量
       return false;
     default:
@@ -118,24 +120,23 @@ inline bool InitializeOperatorNodeInterface::CheckInitValueTypeValid(
 
 // 返回值是否为有效的初始化列表可用类型，如果类型无效则不执行插入操作
 
-bool ListInitializeOperatorNode::AddListValue(
-    const std::shared_ptr<const InitializeOperatorNodeInterface>& list_value) {
-  if (CheckInitListValueTypeValid(*list_value->GetResultTypePointer()))
-      [[likely]] {
-    list_values_.emplace_back(list_value);
-    return true;
-  } else {
-    return false;
+bool ListInitializeOperatorNode::SetListValues(
+    std::list<std::shared_ptr<InitializeOperatorNodeInterface>>&& list_values) {
+  // 待添加的所有数据的类型
+  type_system::InitializeListType::InitializeListContainerType value_types;
+  // 检查是否所有的值都可以作为初始化列表的值
+  for (auto& list_value : list_values) {
+    auto result_type_pointer = list_value->GetResultTypePointer();
+    if (!CheckInitListValueTypeValid(*result_type_pointer)) [[unlikely]] {
+      return false;
+    } else {
+      value_types.emplace_back(std::move(result_type_pointer));
+      list_values_.emplace_back(std::move(list_value));
+    }
   }
-}
-
-bool ListInitializeOperatorNode::SetInitListType(
-    const std::shared_ptr<const TypeInterface>& list_type) {
-  if (CheckInitListTypeValid(*list_type)) [[likely]] {
-    return SetInitValueType(list_type);
-  } else {
-    return false;
-  }
+  // 创建初始化列表类型并设置
+  return SetInitValueType(std::make_shared<type_system::InitializeListType>(
+      std::move(value_types)));
 }
 
 bool MathematicalOperatorNode::SetLeftOperatorNode(
@@ -195,7 +196,7 @@ MathematicalOperatorNode::DeclineComputeResult(
   std::shared_ptr<const TypeInterface> left_operator_node_type =
       left_operator_node->GetResultTypePointer();
   std::shared_ptr<const TypeInterface> right_operator_node_type =
-      left_operator_node->GetResultTypePointer();
+      right_operator_node->GetResultTypePointer();
   auto [compute_result_type, compute_result] =
       TypeInterface::DeclineMathematicalComputeResult(left_operator_node_type,
                                                       right_operator_node_type);
@@ -386,10 +387,6 @@ bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
   }
 }
 
-// 如果不是可以赋值的情况则不会设置
-// 输入指向要设置的用来赋值的节点的指针和是否为声明时赋值
-// 声明时赋值会忽略被赋值的节点自身的const属性并且允许使用初始化列表
-// 需要先设置被赋值的节点（SetNodeToBeAssigned）
 AssignableCheckResult AssignOperatorNode::SetNodeForAssign(
     const std::shared_ptr<const OperatorNodeInterface>& node_for_assign,
     bool is_announce) {
@@ -411,10 +408,6 @@ AssignableCheckResult AssignOperatorNode::SetNodeForAssign(
   return assignable_check_result;
 }
 
-// 检查给定节点的类型是否可以赋值
-// 函数的模板参数表示是否为声明时赋值
-// 当is_announce == true时
-// 忽略node_to_be_assigned的const标记且允许使用初始化列表
 AssignableCheckResult AssignOperatorNode::CheckAssignable(
     const OperatorNodeInterface& node_to_be_assigned,
     const OperatorNodeInterface& node_for_assign, bool is_announce) {
@@ -440,12 +433,14 @@ AssignableCheckResult AssignOperatorNode::CheckAssignable(
     case GeneralOperationType::kVariety: {
       auto variety_node =
           static_cast<const VarietyOperatorNode&>(node_to_be_assigned);
-      // 变量可能是左值也可能是右值的中间变量，需要检验
-      if (variety_node.GetLeftRightValueTag() == LeftRightValueTag::kRightValue)
-          [[unlikely]] {
-        // 右值不能被赋值
-        check_result = AssignableCheckResult::kAssignToRightValue;
-        break;
+      // 在构建变量时忽略左右值
+      if (!is_announce) [[likely]] {
+        // 赋值时变量可能是左值也可能是右值，需要检验
+        if (variety_node.GetLeftRightValueTag() ==
+            LeftRightValueTag::kRightValue) [[unlikely]] {
+          check_result = AssignableCheckResult::kAssignToRightValue;
+          break;
+        }
       }
     }
       [[fallthrough]];
@@ -751,7 +746,7 @@ bool DereferenceOperatorNode::SetNodeToDereference(
     auto [dereferenced_node_type, dereferenced_node_const_tag] =
         node_to_dereference_type->DeReference();
     auto dereferenced_node = std::make_shared<VarietyOperatorNode>(
-        nullptr, dereferenced_node_const_tag, LeftRightValueTag::kRightValue);
+        nullptr, dereferenced_node_const_tag, LeftRightValueTag::kLeftValue);
     bool result = dereferenced_node->SetVarietyTypeNoCheckFunctionType(
         std::move(dereferenced_node_type));
     assert(result == true);
@@ -1033,8 +1028,7 @@ bool TemaryOperatorNode::ConstructResultNode() {
   return true;
 }
 
-MathematicalOperation
-MathematicalAndAssignOperationToMathematicalOperation(
+MathematicalOperation MathematicalAndAssignOperationToMathematicalOperation(
     MathematicalAndAssignOperation mathematical_and_assign_operation) {
   switch (mathematical_and_assign_operation) {
     case MathematicalAndAssignOperation::kOrAssign:

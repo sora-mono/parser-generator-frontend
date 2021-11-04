@@ -29,6 +29,7 @@ inline bool SimpleSentence::CheckOperatorNodeValid(
     case GeneralOperationType::kMemberAccess:
     case GeneralOperationType::kObtainAddress:
     case GeneralOperationType::kVariety:
+    case GeneralOperationType::kTypeConvert:
       // 以上为可以成为基础语句的节点
       return true;
       break;
@@ -85,7 +86,7 @@ bool IfSentence::AddFalseBranchSentences(
       return false;
     }
   }
-  else_body_->merge(std::move(else_body_sentences));
+  else_body_->splice(else_body_->end(), std::move(else_body_sentences));
   return true;
 }
 
@@ -105,7 +106,7 @@ bool ForSentence::AddForInitSentences(
       return false;
     }
   }
-  init_block_.merge(std::move(init_body_sentences));
+  init_block_.splice(init_block_.end(), std::move(init_body_sentences));
   return true;
 }
 inline bool ForSentence::AddForRenewSentence(
@@ -125,7 +126,8 @@ bool ForSentence::AddForRenewSentences(
       return false;
     }
   }
-  after_body_sentences_.merge(std::move(after_body_sentences));
+  after_body_sentences_.splice(after_body_sentences_.end(),
+                               std::move(after_body_sentences));
   return true;
 }
 
@@ -163,7 +165,7 @@ bool ConditionBlockInterface::AddSentences(
       return false;
     }
   }
-  main_block_.merge(std::move(sentences));
+  main_block_.splice(main_block_.end(), std::move(sentences));
   return true;
 }
 

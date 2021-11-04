@@ -267,8 +267,6 @@ std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueChar(
 std::shared_ptr<BasicTypeInitializeOperatorNode>
 SingleConstexprValueIndexedString(std::vector<WordDataToUser>&& word_data);
 // SingleConstexprValue -> Num
-// 属性：InitializeType::kBasic，BuiltInType::kChar，SignTag::kSigned
-// TODO 精确获取给定数值对应的类型
 std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueNum(
     std::vector<WordDataToUser>&& word_data);
 // SingleConstexprValue -> Str
@@ -497,7 +495,8 @@ std::shared_ptr<ListInitializeOperatorNode> InitializeList(
     std::vector<WordDataToUser>&& word_data);
 // SingleInitializeListArgument -> SingleConstexprValue
 // 返回值类型：std::shared_ptr<InitializeOperatorNodeInterface>
-std::any&& SingleInitializeListArgumentConstexprValue(
+std::shared_ptr<InitializeOperatorNodeInterface>
+SingleInitializeListArgumentConstexprValue(
     std::vector<WordDataToUser>&& word_data);
 // SingleInitializeListArgument -> InitializeList
 // 返回值类型：std::shared_ptr<InitializeOperatorNodeInterface>
@@ -718,6 +717,10 @@ std::any&& AssignableBracket(std::vector<WordDataToUser>&& word_data);
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 AssignableTypeConvert(std::vector<WordDataToUser>&& word_data);
+// Assignable -> Assignable "=" Assignable
+std::pair<std::shared_ptr<const OperatorNodeInterface>,
+          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
+AssignableAssign(std::vector<WordDataToUser>&& word_data);
 // Assignable -> Assignable MathematicalOperator Assignable
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
@@ -770,11 +773,11 @@ AssignableSuffixPlus(std::vector<WordDataToUser>&& word_data);
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 AssignableSuffixMinus(std::vector<WordDataToUser>&& word_data);
-// Return -> "return" Assignable
+// Return -> "return" Assignable ";"
 // 返回获取返回值的操作（里面添加了返回流程控制节点）
 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithValue(
     std::vector<WordDataToUser>&& word_data);
-// Return -> "return"
+// Return -> "return" ";"
 // 返回存储操作的容器（里面添加了返回流程控制节点）
 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithoutValue(
     std::vector<WordDataToUser>&& word_data);
@@ -869,7 +872,7 @@ std::any IfElseSence(std::vector<WordDataToUser>&& word_data);
 // If -> IfCondition ProcessControlSentenceBody
 // 不返回任何值
 std::any IfIfSentence(std::vector<WordDataToUser>&& word_data);
-// ForRenewSentences -> Assignables ";"
+// ForRenewSentences -> Assignables
 // 返回值类型：std::pair<std::shared_ptr<const OperatorNodeInterface>,
 //                   std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 std::any&& ForRenewSentences(std::vector<WordDataToUser>&& word_data);
@@ -883,7 +886,8 @@ ForInitSentenceAnnounce(std::vector<WordDataToUser>&& word_data);
 // 做一些准备工作
 // 不返回任何值
 std::any ForInitHead(std::vector<WordDataToUser>&& word_data);
-// ForHead -> ForInitHead "(" ForInitSentence Assignable ForRenewSentences ")"
+// ForHead -> ForInitHead "(" ForInitSentence 
+//            Assignable ";" ForRenewSentences ")"
 // 规约for语句的三要素
 // 不返回任何值
 std::any ForHead(std::vector<WordDataToUser>&& word_data);

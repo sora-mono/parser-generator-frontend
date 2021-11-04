@@ -389,6 +389,10 @@ NfaGenerator::CreateSwitchTree(const std::string& raw_regex_string,
         }
         character_now = raw_regex_string[*next_character_index];
         ++*next_character_index;
+        if (character_now == ']') [[unlikely]] {
+          // [+-]这种正则表达式
+          break;
+        }
         char bigger_character = std::max(character_now, character_pre);
         for (char smaller_character = std::min(character_pre, character_now);
              smaller_character < bigger_character; smaller_character++) {

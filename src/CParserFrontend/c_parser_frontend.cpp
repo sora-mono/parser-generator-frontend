@@ -64,7 +64,7 @@ bool CParserFrontend::PushFlowControlSentence(
 }  // namespace c_parser_frontend
 
 namespace c_parser_frontend::action_scope_system {
-void ActionScopeSystem::PopVarietyOverLevel(ActionScopeLevelType level) {
+void ActionScopeSystem::PopOverLevel(ActionScopeLevelType level) {
   auto& variety_stack = GetVarietyStack();
   // 因为存在哨兵，所以无需判断栈是否为空
   // 弹出变量
@@ -73,12 +73,13 @@ void ActionScopeSystem::PopVarietyOverLevel(ActionScopeLevelType level) {
     if (should_erase_this_node) [[likely]] {
       // 该变量名并不与任何节点绑定
       // 删除该数据节点
-      GetVarietyNameToOperatorNodePointer().erase(variety_stack.top());
+      GetVarietyOrFunctionNameToOperatorNodePointer().erase(variety_stack.top());
     }
     variety_stack.pop();
   }
-  // 弹出流程控制语句
-  if (flow_control_stack_.top().second > level) {
+  while (!flow_control_stack_.empty() &&
+         flow_control_stack_.top().second > level) {
+    // 弹出流程控制语句
     auto flow_control_sentence = std::move(flow_control_stack_.top().first);
     flow_control_stack_.pop();
     if (!flow_control_stack_.empty()) [[likely]] {

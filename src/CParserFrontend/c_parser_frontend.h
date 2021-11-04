@@ -68,26 +68,26 @@ class CParserFrontend {
       const std::shared_ptr<const FunctionType>& function_type);
   // 添加变量
   // 返回指向插入位置的迭代器与添加结果，添加结果意义见定义
-  template <class VarietyName>
+  template <class Name>
   std::pair<ActionScopeSystem::ActionScopeContainerType::const_iterator,
             DefineVarietyResult>
   DefineVariety(
-      VarietyName&& variety_name,
+      Name&& variety_name,
       const std::shared_ptr<const VarietyOperatorNode>& operator_node) {
-    return action_scope_system_.DefineVariety(
-        std::forward<VarietyName>(variety_name), operator_node);
+    return action_scope_system_.DefineVarietyOrFunction(
+        std::forward<Name>(variety_name), operator_node);
   }
   // 声明变量，返回指向插入位置的迭代器
   // 保证插入节点有效且管理节点存在
-  template <class VarietyName>
+  template <class Name>
   ActionScopeSystem::ActionScopeContainerType::const_iterator
-  AnnounceVarietyName(VarietyName&& variety_name) {
+  AnnounceVarietyName(Name&& variety_name) {
     return action_scope_system_.AnnounceVarietyName(
-        std::forward<VarietyName>(variety_name));
+        std::forward<Name>(variety_name));
   }
-  std::pair<std::shared_ptr<const VarietyOperatorNode>, bool> GetVariety(
-      const std::string& variety_name) {
-    return action_scope_system_.GetVariety(variety_name);
+  std::pair<std::shared_ptr<const operator_node::OperatorNodeInterface>, bool>
+  GetVarietyOrFunction(const std::string& variety_name) {
+    return action_scope_system_.GetVarietyOrFunction(variety_name);
   }
   // 增加一级作用域等级
   void AddActionScopeLevel() { action_scope_system_.AddActionScopeLevel(); }
@@ -174,6 +174,7 @@ class CParserFrontend {
             .GetFunctionTypePointer());
     flow_control_system_.FinishFunctionConstruct();
   }
+
   // 类型系统
   TypeSystem type_system_;
   // 作用域系统
