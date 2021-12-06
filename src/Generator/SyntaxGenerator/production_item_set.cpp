@@ -15,14 +15,28 @@ ProductionItemSet& ProductionItemSet::operator=(
   return *this;
 }
 
-// 添加核心项
-// 要求该核心项未添加过
+void ProductionItemSet::ClearNotMainItem() {
+  ProductionItemAndForwardNodesContainer new_container;
+  for (auto& main_item_iter : GetMainItemIters()) {
+    main_item_iter = new_container.insert(*main_item_iter).first;
+  }
+  item_and_forward_node_ids_.swap(new_container);
+}
+
+bool ProductionItemSet::IsMainItem(const ProductionItem& item) {
+  for (const auto& main_item_iter : GetMainItemIters()) {
+    if (item == main_item_iter->first) [[unlikely]] {
+      return true;
+    }
+  }
+  return false;
+}
 
 void ProductionItemSet::SetMainItem(
     ProductionItemAndForwardNodesContainer::const_iterator& item_iter) {
 #ifdef _DEBUG
   // 不允许重复设置已有的核心项为核心项
-  for (const auto& main_item_already_in : GetMainItems()) {
+  for (const auto& main_item_already_in : GetMainItemIters()) {
     assert(item_iter->first != main_item_already_in->first);
   }
 #endif  // _DEBUG

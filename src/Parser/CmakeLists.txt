@@ -2,8 +2,8 @@ project(Parser)
 
 add_compile_options("/std:c++latest")
 
-add_subdirectory(DfaMachine)
-add_subdirectory(SyntaxMachine)
+add_subdirectory(DfaParser)
+add_subdirectory(SyntaxParser)
 
 add_library(line_and_column "line_and_column.cpp")
 

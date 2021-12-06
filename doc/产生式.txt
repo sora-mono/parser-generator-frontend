@@ -1,8 +1,88 @@
 终结产生式
 Id -> [a-zA-Z_][a-zA-Z0-9_]*
-Num -> [0-9]*(\.[0-9]*)?
+Num -> [+-]?[0-9]*(\.[0-9]*)?
 Str -> ".*"
 Character -> '..?'
+] -> \]
+) -> \)
+{ -> {
+} -> }
+; -> ;
+: -> :
+
+关键字
+char
+short
+int
+long
+float
+double
+void
+signed
+unsigned
+const
+enum
+struct
+union
+typedef
+return
+break
+continue
+if
+else
+for
+do
+while
+switch
+case
+default
+
+运算符	运算符优先级	运算符结合性	运算符类型
+,		1				自左到右		双目
+=		2				自右到左		双目
++=		2				自右到左		双目
+-=		2				自右到左		双目
+*=		2				自右到左		双目
+/=		2				自右到左		双目
+%=		2				自右到左		双目
+<<=		2				自右到左		双目
+>>=		2				自右到左		双目
+&=		2				自右到左		双目
+|=		2				自右到左		双目
+^=		2				自右到左		双目
+?		3				自右到左		双目
+||		4				自左到右		双目
+&&		5				自左到右		双目
+|		6				自左到右		双目
+^		7				自左到右		双目
+&		8				自左到右		双目
+!=		9				自左到右		双目
+==		9				自左到右		双目
+>		10				自左到右		双目
+>=		10				自左到右		双目
+<		10				自左到右		双目
+<=		10				自左到右		双目
+<<		11				自左到右		双目
+>>		11				自左到右		双目
++		12				自左到右		双目
+-		12				自左到右		双目
+*		13				自左到右		双目
+/		13				自左到右		双目
+%		13				自左到右		双目
+&		14				自右到左		左侧单目
+-		14				自右到左		左侧单目
+*		14				自右到左		左侧单目
+++		14				自右到左		双目
+++		14				自右到左		左侧单目
+--		14				自右到左		双目
+--		14				自右到左		左侧单目
+!		14				自右到左		左侧单目
+~		14				自右到左		左侧单目
+sizeof	14				自右到左		左侧单目
+.		14				自右到左		双目
+->		14				自右到左		双目
+[		15				自右到左		双目
+(		15				自右到左		双目
 
 非终结产生式
 SingleConstexprValue -> Character
@@ -20,12 +100,15 @@ SignTag  -> "signed"
 SignTag -> "unsigned"
 ConstTag -> "const"
 IdOrEquivence -> ConstTag Id
-// IdOrEquivence -> "const"
 IdOrEquivence -> IdOrEquivence "[" Num "]"
 IdOrEquivence -> IdOrEquivence "[" "]"
 IdOrEquivence -> ConstTag "*" IdOrEquivence
 IdOrEquivence -> "(" IdOrEquivence ")"
-// EmptyReductableIdOrEquivence -> IdOrEquivence
+AnonymousIdOrEquivence -> "const"
+AnonymousIdOrEquivence -> AnonymousIdOrEquivence "[" Num "]"
+AnonymousIdOrEquivence -> AnonymousIdOrEquivence "[" "]"
+AnonymousIdOrEquivence -> ConstTag "*" AnonymousIdOrEquivence
+AnonymousIdOrEquivence -> "(" AnonymousIdOrEquivence ")"
 NotEmptyEnumArguments -> Id
 NotEmptyEnumArguments -> Id "=" Num
 NotEmptyEnumArguments -> NotEmptyEnumArguments "," Id
@@ -42,10 +125,9 @@ StructureDefineHead -> StructureAnnounce
 StructureDefineInitHead -> StructureDefineHead "{"
 StructureDefine -> StructureDefineInitHead StructureBody "}"
 StructType -> StructureDefine
-StructType -> StructAnnounce
+StructType -> StructureAnnounce
 BasicType -> ConstTag SignTag FundamentalType
 BasicType -> ConstTag StructType
-// BasicType -> ConstTag Id
 BasicType -> ConstTag EnumAnnounce
 FunctionRelaventBasePartFunctionInit -> IdOrEquivence "("
 FunctionRelaventBasePartFunctionInit -> FunctionRelaventBasePart "("
@@ -56,9 +138,12 @@ FunctionRelavent -> BasicType FunctionRelaventBasePart
 SingleAnnounceNoAssign -> BasicType IdOrEquivence
 SingleAnnounceNoAssign -> ConstTag Id IdOrEquivence
 SingleAnnounceNoAssign -> FunctionRelavent
+AnonymousSingleAnnounceNoAssign -> BasicType AnonymousIdOrEquivence
 TypeDef -> "typedef" SingleAnnounceNoAssign
 NotEmptyFunctionPointerArguments -> SingleAnnounceNoAssign
+NotEmptyFunctionPointerArguments -> AnonymousSingleAnnounceNoAssign
 NotEmptyFunctionPointerArguments -> NotEmptyFunctionPointerArguments "," SingleAnnounceNoAssign
+NotEmptyFunctionPointerArguments -> NotEmptyFunctionPointerArguments "," AnonymousSingleAnnounceNoAssign
 FunctionRelaventArguments -> NotEmptyFunctionPointerArguments
 FunctionDefineHead -> FunctionRelavent "{"
 FunctionDefine -> FunctionDefineHead Statements "}"
@@ -113,14 +198,12 @@ Assignable -> SingleConstexprValue
 Assignable -> Id
 Assignable -> TemaryOperator
 Assignable -> FunctionCall
-Assignable -> "sizeof" "(" Type ")"
 Assignable -> "sizeof" "(" Assignable ")"
-Assignable -> Assignable "." Id
+Assignable -> Assignable "," Id
 Assignable -> Assignable "->" Id
 Assignable -> "(" Assignable ")"
 Assignable -> "(" Type ")" Assignable
 Assignable -> Assignable "=" Assignable
-Assignable -> Assignable MathematicalOperator Assignable
 Assignable -> Assignable MathematicalAndAssignOperator Assignable
 Assignable -> Assignable LogicalOperator Assignable
 Assignable -> "!" Assignable
@@ -155,33 +238,49 @@ SingleStatement -> SingleAnnounceAndAssign ";"
 SingleStatement -> Return
 SingleStatement -> Break
 SingleStatement -> Continue
-IfCondition -> "if" "(" Assignable ")"
+SingleStatement -> ";"
+IfCondition -> "if" "(" ProcessControlSentenceBody "else"
 IfWithElse -> IfCondition ProcessControlSentenceBody "else"
-If->IfWithElse ProcessControlSentenceBody
+If -> IfWithElse ProcessControlSentenceBody
 If -> IfCondition ProcessControlSentenceBody
-ForRenewSentences -> Assignables
-ForInitSentence -> Assignables ";"
-ForInitSentence -> SingleAnnounceAndAssign ";"
+ForRenewSentence -> Assignables
+ForInitSentence -> Assignables
+ForInitSentence -> SingleAnnounceAndAssign
 ForInitHead -> "for"
-ForHead -> ForInitHead "(" ForInitSentence Assignable ";" ForRenewSentences ")"
+ForHead -> ForInitHead "(" ForInitSentence ";" Assignable ";" ForRenewSentence ")"
 For -> ForHead ProcessControlSentenceBody
 WhileInitHead -> "while" "(" Assignable ")"
 While -> WhileInitHead ProcessControlSentenceBody
 DoWhileInitHead -> "do"
-DoWhile -> DoWhileInitHead ProcessControlSentenceBody while "(" Assignable ")" ";"
-SwitchCase -> "case" SingleConstexprValue ":"
-SwitchCase -> "default" ":"
+DoWhile -> DoWhileInitHead ProcessControlSentenceBody "while" "(" Assignable ")" ";"
+SwitchCase -> "case" SingleConstexprValue ";"
+SwitchCase -> "default" ";"
 SingleSwitchStatement -> SwitchCase
 SingleSwitchStatement -> Statements
 SwitchStatements -> SwitchStatements SingleSwitchStatement
 SwitchCondition -> "switch" "(" Assignable ")"
 Switch -> SwitchCondition "{" SwitchStatements "}"
+StatementsLeftBrace -> "{"
 Statements -> Statements SingleStatement
-StatementsLeftBrace -> Statements "{"
 Statements -> StatementsLeftBrace Statements "}"
 ProcessControlSentenceBody -> SingleStatement
 ProcessControlSentenceBody -> "{" Statements "}"
 
 根产生式
-Root -> Root FunctionDefine
-Root -> Root SingleAnnounceNoAssign ";"
+Root -> FunctionDefine
+Root -> SingleAnnounceNoAssign ";"
+
+允许空规约的非终结产生式
+EnumArguments
+SignTag
+ConstTag
+EnumArguments
+AnonymousIdOrEquivence
+FunctionRelaventArguments
+StructureBody
+FunctionCallArguments
+ForRenewSentences
+ForInitSentence
+SwitchStatements
+Statements
+Root

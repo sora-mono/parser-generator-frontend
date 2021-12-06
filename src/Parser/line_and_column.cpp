@@ -8,4 +8,4 @@ size_t GetLine() { return line_; }
 size_t GetColumn() { return column_; }
 void SetLine(size_t line) { line_ = line; }
 void SetColumn(size_t column) { column_ = column; }
-}  // namespace frontend::parser
+}  /// namespace frontend::parser

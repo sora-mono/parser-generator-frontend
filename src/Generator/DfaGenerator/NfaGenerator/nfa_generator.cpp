@@ -5,7 +5,7 @@
 
 namespace frontend::generator::dfa_generator::nfa_generator {
 
-NfaGenerator::NfaNodeId NfaGenerator::NfaNode::GetForwardNodesId(
+NfaGenerator::NfaNodeId NfaGenerator::NfaNode::GetForwardNodeId(
     char c_transfer) {
   auto iter = nodes_forward_.find(c_transfer);
   if (iter == nodes_forward_.end()) {
@@ -26,32 +26,25 @@ inline void NfaGenerator::NfaNode::AddNoconditionTransfer(NfaNodeId node_id) {
   assert(inserted);
 }
 
-inline void NfaGenerator::NfaNode::RemoveConditionalTransfer(char c_treasfer) {
-  auto iter = nodes_forward_.find(c_treasfer);
-  if (iter != nodes_forward_.end()) {
-    nodes_forward_.erase(iter);
-  }
+inline size_t NfaGenerator::NfaNode::RemoveConditionalTransfer(
+    char c_transfer) {
+  return nodes_forward_.erase(c_transfer);
 }
 
-inline void NfaGenerator::NfaNode::RemoveConditionlessTransfer(
+inline size_t NfaGenerator::NfaNode::RemoveConditionlessTransfer(
     NfaNodeId node_id) {
-  auto iter = conditionless_transfer_nodes_id.find(node_id);
-  if (iter != conditionless_transfer_nodes_id.end()) {
-    conditionless_transfer_nodes_id.erase(iter);
-  }
+  return conditionless_transfer_nodes_id.erase(node_id);
 }
 
 std::pair<std::unordered_set<typename NfaGenerator::NfaNodeId>,
           typename NfaGenerator::TailNodeData>
-NfaGenerator::Closure(NfaNodeId production_node_id) {
+NfaGenerator::Closure(NfaNodeId node_id) {
   std::unordered_set<NfaNodeId> result_set;
-  TailNodeData word_attached_data(NotTailNodeTag);
+  TailNodeData word_attached_data(kNotTailNodeTag);
   std::queue<NfaNodeId> q;
-  for (auto x : node_manager_.GetIdsReferringSameObject(production_node_id)) {
+  for (auto x : node_manager_.GetIdsReferringSameObject(node_id)) {
     q.push(x);
   }
-  // 清空等效节点集合，否则队列中所有节点都在集合内，导致
-  result_set.clear();
   while (!q.empty()) {
     NfaNodeId id_now = q.front();
     q.pop();
@@ -60,14 +53,13 @@ NfaGenerator::Closure(NfaNodeId production_node_id) {
     }
     auto [result_iter, inserted] = result_set.insert(id_now);
     assert(inserted);
-    const auto& nfa_node = GetNfaNode(id_now);
-    auto iter = tail_nodes_.find(&nfa_node);
+    auto iter = tail_nodes_.find(id_now);
     // 判断是否为尾节点
     if (iter != tail_nodes_.end()) {
       TailNodeData& tail_node_data_new = iter->second;
       WordPriority priority_old = word_attached_data.second;
       WordPriority priority_new = tail_node_data_new.second;
-      if (word_attached_data == NotTailNodeTag) {
+      if (word_attached_data == kNotTailNodeTag) {
         // 以前无尾节点记录
         word_attached_data = tail_node_data_new;
       } else if (priority_new > priority_old) {
@@ -88,7 +80,7 @@ NfaGenerator::Closure(NfaNodeId production_node_id) {
         exit(-1);
       }
     }
-    for (auto x : nfa_node.GetUnconditionTransferNodesIds()) {
+    for (auto x : GetNfaNode(id_now).GetUnconditionTransferNodesIds()) {
       q.push(x);
     }
   }
@@ -99,58 +91,53 @@ std::pair<std::unordered_set<typename NfaGenerator::NfaNodeId>,
           typename NfaGenerator::TailNodeData>
 NfaGenerator::Goto(NfaNodeId id_src, char c_transform) {
   NfaNode& pointer_node = GetNfaNode(id_src);
-  NfaNodeId production_node_id = pointer_node.GetForwardNodesId(c_transform);
-  if (!production_node_id.IsValid()) {
-    return std::make_pair(std::unordered_set<NfaNodeId>(), NotTailNodeTag);
+  NfaNodeId node_id = pointer_node.GetForwardNodeId(c_transform);
+  if (!node_id.IsValid()) {
+    return std::make_pair(std::unordered_set<NfaNodeId>(), kNotTailNodeTag);
   }
-  return Closure(production_node_id);
+  return Closure(node_id);
 }
 
 void NfaGenerator::NfaInit() {
-  head_node_id_ = NfaNodeId::InvalidId();
   tail_nodes_.clear();
   node_manager_.MultimapObjectManagerInit();
   head_node_id_ = node_manager_.EmplaceObject();  // 添加头结点
 }
 
-bool NfaGenerator::NfaNode::MergeNodesWithManager(NfaNode& node_src) {
-  if (&node_src == this) {  // 相同节点合并则直接返回true
-    return true;
+bool NfaGenerator::NfaNode::MergeNodes(NfaNode* node_src) {
+  if (node_src == this) {
+    // 相同节点合并则直接返回false
+    return false;
   }
-  if (nodes_forward_.size() != 0 && node_src.nodes_forward_.size() != 0) {
-    bool CanBeSourceInMerge = true;
-    for (auto& p : node_src.nodes_forward_) {
-      auto iter = nodes_forward_.find(p.first);
-      if (iter != nodes_forward_.end() && iter->second != p.second) {
-        CanBeSourceInMerge = false;
-        break;
+  // 检查是否可以合并
+  // node_src所有条件转移条目必须在this中不存在
+  // 或与this中相同条件的转移条目转移到的节点ID相同
+  if (GetConditionalTransfers().size() != 0 &&
+      node_src->GetConditionalTransfers().size() != 0) {
+    for (const auto& transform : node_src->GetConditionalTransfers()) {
+      NfaNodeId next_node_id = GetForwardNodeId(transform.first);
+      if (!next_node_id.IsValid() && next_node_id != transform.second) {
+        return false;
       }
     }
-    if (!CanBeSourceInMerge) {
-      return false;
-    }
   }
-  nodes_forward_.merge(node_src.nodes_forward_);
+  nodes_forward_.merge(node_src->nodes_forward_);
   conditionless_transfer_nodes_id.merge(
-      node_src.conditionless_transfer_nodes_id);
+      node_src->conditionless_transfer_nodes_id);
   return true;
 }
 
-inline const NfaGenerator::TailNodeData NfaGenerator::GetTailNodeData(
-    NfaNode* pointer) {
-  auto iter = tail_nodes_.find(pointer);
-  if (iter == tail_nodes_.end()) {
-    return NotTailNodeTag;
+inline const NfaGenerator::TailNodeData& NfaGenerator::GetTailNodeData(
+    NfaNodeId node_id) {
+  auto iter = tail_nodes_.find(node_id);
+  if (iter != tail_nodes_.end()) [[likely]] {
+    return iter->second;
+  } else {
+    return kNotTailNodeTag;
   }
-  return iter->second;
-}
-
-inline const NfaGenerator::TailNodeData NfaGenerator::GetTailNodeData(
-    NfaNodeId production_node_id) {
-  return GetTailNodeData(&GetNfaNode(production_node_id));
 }
 std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>
-NfaGenerator::RegexConstruct(const TailNodeData& tail_node_data,
+NfaGenerator::RegexConstruct(TailNodeData&& tail_node_data,
                              const std::string& raw_regex_string,
                              size_t&& next_character_index,
                              const bool add_to_nfa_head) {
@@ -184,7 +171,7 @@ NfaGenerator::RegexConstruct(const TailNodeData& tail_node_data,
         break;
       case '(': {
         auto [temp_head_id, temp_tail_id] =
-            RegexConstruct(NotTailNodeTag, raw_regex_string,
+            RegexConstruct(std::move(tail_node_data), raw_regex_string,
                            std::move(next_character_index), false);
         if (!(temp_head_id.IsValid() && temp_tail_id.IsValid())) [[unlikely]] {
           std::cerr << std::format("非法正则 {:}\n{: >{}}", raw_regex_string,
@@ -241,7 +228,7 @@ NfaGenerator::RegexConstruct(const TailNodeData& tail_node_data,
   if (head_id != tail_id) [[likely]] {
     if (add_to_nfa_head) {
       GetNfaNode(head_node_id_).AddNoconditionTransfer(head_id);
-      AddTailNode(tail_id, tail_node_data);
+      SetTailNode(tail_id, std::move(tail_node_data));
     }
   } else {
     node_manager_.RemoveObject(head_id);
@@ -262,7 +249,7 @@ NfaGenerator::WordConstruct(const std::string& str,
     tail_id = temp_id;
   }
   GetNfaNode(head_node_id_).AddNoconditionTransfer(head_id);
-  AddTailNode(tail_id, std::move(word_attached_data));
+  SetTailNode(tail_id, std::move(word_attached_data));
   return std::make_pair(head_id, tail_id);
 }
 
@@ -289,8 +276,8 @@ void NfaGenerator::MergeOptimization() {
       // 处理无条件转移表
       const auto& equal_node_unconditional_transfer_node_ids =
           equal_node.GetUnconditionTransferNodesIds();
-      for (auto iter = node_now.GetUnconditionTransferNodesIds().begin();
-           iter != node_now.GetUnconditionTransferNodesIds().end();) {
+      for (auto iter = node_now.GetUnconditionTransferNodesIds().cbegin();
+           iter != node_now.GetUnconditionTransferNodesIds().cend();) {
         if (equal_node_unconditional_transfer_node_ids.find(*iter) !=
             equal_node_unconditional_transfer_node_ids.end()) {
           // 当前节点转移表中的项在等价节点中存在
@@ -298,7 +285,8 @@ void NfaGenerator::MergeOptimization() {
           if (*iter != equal_node_id) [[likely]] {
             // 如果存在等价节点的无条件自环节点则不能移除
             // 否则会失去指向等价节点的记录，导致正则不完整、内存泄漏等
-            iter = node_now.GetUnconditionTransferNodesIds().erase(iter);
+            ++iter;
+            node_now.RemoveConditionlessTransfer(*iter);
             // continue防止额外前移iter
             continue;
           }
@@ -308,15 +296,16 @@ void NfaGenerator::MergeOptimization() {
       // 处理条件转移表
       const auto& equal_node_conditional_transfers =
           equal_node.GetConditionalTransfers();
-      for (auto iter = node_now.GetConditionalTransfers().begin();
-           iter != node_now.GetConditionalTransfers().end();) {
+      for (auto iter = node_now.GetConditionalTransfers().cbegin();
+           iter != node_now.GetConditionalTransfers().cend();) {
         auto equal_node_iter =
             equal_node_conditional_transfers.find(iter->first);
-        if (equal_node_iter != equal_node_conditional_transfers.end() &&
+        if (equal_node_iter != equal_node_conditional_transfers.cend() &&
             iter->second == equal_node_iter->second) {
           // 当前节点转移表中的项在等价节点中存在
           // 移除该项
-          iter = node_now.GetConditionalTransfers().erase(iter);
+          ++iter;
+          node_now.RemoveConditionalTransfer(iter->first);
           // continue防止额外前移iter
           continue;
         }
@@ -330,13 +319,33 @@ void NfaGenerator::MergeOptimization() {
         q.push(conditional_transfer.second);
       }
     }
+    // 检查是否可以将node_now与node_now唯一可无条件转移到的节点合并
     if (node_now.GetConditionalTransfers().empty() &&
         node_now.GetUnconditionTransferNodesIds().size() == 1) [[unlikely]] {
       // 只剩一条无条件转移路径，该节点可以与无条件转移到的节点合并
-      bool result = node_manager_.MergeObjectsWithManager<NfaGenerator>(
-          *node_now.GetUnconditionTransferNodesIds().begin(), id_now, *this,
-          MergeNfaNodes);
-      assert(result);
+      NfaNodeId dst_node_id =
+          *node_now.GetUnconditionTransferNodesIds().cbegin();
+      const NfaGenerator::TailNodeData& dst_tag = GetTailNodeData(dst_node_id);
+      const NfaGenerator::TailNodeData& src_tag = GetTailNodeData(id_now);
+      if (dst_tag != NfaGenerator::kNotTailNodeTag &&
+          src_tag != NfaGenerator::kNotTailNodeTag &&
+          dst_tag.second == src_tag.second && dst_tag.first != src_tag.first) {
+        std::cerr << std::format("两个尾节点具有相同优先级且不对应同一个节点")
+                  << std::endl;
+        exit(-1);
+      }
+      bool result = GetNfaNode(dst_node_id).MergeNodes(&GetNfaNode(id_now));
+      if (result) {
+        if (src_tag != NfaGenerator::kNotTailNodeTag) {
+          SetTailNode(dst_node_id, src_tag);
+          RemoveTailNode(id_now);
+        }
+        bool result = node_manager_.MergeObjects(
+            dst_node_id, id_now,
+            [](NfaNode&, NfaNode&) -> bool { return true; });
+        assert(result);
+      }
+
     } else {
       // 没有执行任何操作，不存在从该节点开始的合并操作
       // 设置该节点在合并时不能作为源节点
@@ -345,28 +354,16 @@ void NfaGenerator::MergeOptimization() {
   }
 }
 
-inline bool NfaGenerator::RemoveTailNode(NfaNode* pointer) {
-  if (pointer == nullptr) {
-    return false;
-  }
-  tail_nodes_.erase(pointer);
-  return true;
-}
-
-bool NfaGenerator::AddTailNode(NfaNode* pointer, const TailNodeData& tag) {
-  assert(pointer != nullptr);
-  tail_nodes_.insert(std::make_pair(pointer, tag));
-  return false;
-}
+// @brief 添加尾节点信息
 
 std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>
 NfaGenerator::CreateSwitchTree(const std::string& raw_regex_string,
-                               size_t* next_character_index) {
+                               size_t* const next_character_index) {
   NfaNodeId head_id = node_manager_.EmplaceObject();
   NfaNodeId tail_id = node_manager_.EmplaceObject();
   NfaNode& head_node = GetNfaNode(head_id);
-  // 初始化成不是']'的值就可以，从而可以进入循环
   char character_pre;
+  // 初始化成不是']'的值从而可以进入循环
   char character_now = '[';
   while (character_now != ']') {
     if (*next_character_index >= raw_regex_string.size()) [[unlikely]] {
@@ -429,31 +426,7 @@ NfaGenerator::CreateSwitchTree(const std::string& raw_regex_string,
   return std::make_pair(head_id, tail_id);
 }
 
-bool NfaGenerator::MergeNfaNodes(NfaGenerator::NfaNode& node_dst,
-                                 NfaGenerator::NfaNode& node_src,
-                                 NfaGenerator& nfa_generator) {
-  const NfaGenerator::TailNodeData dst_tag =
-      nfa_generator.GetTailNodeData(&node_dst);
-  const NfaGenerator::TailNodeData src_tag =
-      nfa_generator.GetTailNodeData(&node_src);
-  if (dst_tag != NfaGenerator::NotTailNodeTag &&
-      src_tag != NfaGenerator::NotTailNodeTag &&
-      dst_tag.second == src_tag.second && dst_tag.first != src_tag.first) {
-    throw std::runtime_error("两个尾节点具有相同优先级且不对应同一个节点");
-  }
-  bool result = node_dst.MergeNodesWithManager(node_src);
-  if (result) {
-    if (src_tag != NfaGenerator::NotTailNodeTag) {
-      nfa_generator.RemoveTailNode(&node_src);
-      nfa_generator.AddTailNode(&node_dst, src_tag);
-    }
-    return true;
-  } else {
-    return false;
-  }
-}
-
-const NfaGenerator::TailNodeData NfaGenerator::NotTailNodeTag =
+const NfaGenerator::TailNodeData NfaGenerator::kNotTailNodeTag =
     NfaGenerator::TailNodeData(WordAttachedData(), WordPriority::InvalidId());
 
 }  // namespace frontend::generator::dfa_generator::nfa_generator

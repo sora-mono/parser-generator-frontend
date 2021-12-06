@@ -1,0 +1,34 @@
+Generator生成编译器前端配置，主要分为三个部分：
+NfaGenerator：NFA配置生成器
+DfaGenerator：DFA配置生成器
+SyntaxGenerator：语法分析机配置生成器
+1.实现时SyntaxGenerator包含DfaGenerator，DfaGenerator包含NfaGenerator
+2.NfaGenerator根据所有可以获取到的单词生成NFA配置，通过数据结构表示正则
+（NFA节点的不同连接方式表示*、+、?等），设置单词时每个单词都具有自己的优先级，
+在输入的字符可以构成多个单词时选择优先级最高的单词
+3.DfaGenerator通过子集构造法根据NFA配置构造出DFA中间节点，然后根据中间节点
+执行合并优化，合并优化后构造转移表
+3.SyntaxGenerator独立于DfaGenerator和NfaGenerator，它仅用于生成语法分析配置。
+	1)通过宏定义产生式，宏用于在多个文件中生成代码，这些宏定义于
+	syntax_generate.h中，根据产生式生成代码的设计思路请参考该文件
+	2)最终通过ConfigConstruct在运行时向Generator中添加产生式信息
+	3)每个产生式都会创建对应类型的产生式节点(production_node.h)，特别于非终结
+	产生式，除了保存产生式自身的信息以外，还保存了该产生式可以产生的所有项作为
+	核心项所属的项集ID，该数据用于查找N个项所构成的项集
+	4)项集通过ProductionItemSet类来表示（production_item_set.h），每个项集都存储
+	该项集所包含的项及其向前看符号，还记录项集中的核心项
+	5)在传播向前看符号前会构建一个内部根节点，该根节点是非终结产生式，仅包含用户
+	定义的根节点，该节点用来避免用户定义的根节点可以空规约/拥有多个产生式体等
+	一系列可能引发解析问题的特性，该节点在遇到文件尾节点时只有接受操作
+	6)ProductionItemSetClosure对项集求闭包
+	7)SpreadLookForwardSymbolAndConstructSyntaxAnalysisTableEntry用于传播向前看
+	符号并构造语法分析表和新项集
+	8)传播向前看符号前需要先对项集求闭包，如果闭包有效说明不存在新的向前看符号
+	需要传播；转移时优先转移到已有项集（这里使用3)中所保存的项作为核心项所属的
+	项集ID），这很重要，如果优先创建项集则在展开递归的产生式时会导致无限循环；
+	只有转移后的所有项均属于一个项集，且该项集有且仅有这些项作为核心项才可以转移
+	到该项集，否则需要创建新项集
+	转移到已有的项集时会向该项集中的核心项添加新的向前看符号，如果添加了新的
+	向前看符号则需要重新传播该项集的向前看符号
+	9)传播向前看符号的过程结束后调用SyntaxAnalysisTableMergeOptimize合并等效
+	语法分析表条目并紧凑排列语法分析表条目

@@ -14,8 +14,8 @@ void DfaGenerator::DfaInit() {
   root_transform_array_id_ = TransformArrayId::InvalidId();
   file_end_saved_data_ = WordAttachedData();
   nfa_generator_.NfaInit();
-  head_node_intermediate_ = IntermediateNodeId::InvalidId();
-  transform_array_size = 0;
+  root_intermediate_node_id_ = IntermediateNodeId::InvalidId();
+  transform_array_size_ = 0;
   intermediate_node_to_final_node_.clear();
   node_manager_intermediate_node_.ObjectManagerInit();
   node_manager_set_.StructManagerInit();
@@ -44,12 +44,12 @@ bool DfaGenerator::DfaConstruct() {
   nfa_generator_.MergeOptimization();
   NfaNodeId nfa_head_handler = nfa_generator_.GetHeadNfaNodeId();
   auto&& [set_now, tail_data] = nfa_generator_.Closure(nfa_head_handler);
-  assert(tail_data == NfaGenerator::NotTailNodeTag);
+  assert(tail_data == NfaGenerator::kNotTailNodeTag);
   auto [root_itermediate_node_id, inserted] = InOrInsert(std::move(set_now));
   assert(inserted);
   std::queue<IntermediateNodeId> q;
   q.push(root_itermediate_node_id);
-  head_node_intermediate_ = root_itermediate_node_id;
+  root_intermediate_node_id_ = root_itermediate_node_id;
   while (!q.empty()) {
     IntermediateNodeId intermediate_node_handler_now = q.front();
     q.pop();
@@ -77,20 +77,20 @@ bool DfaGenerator::DfaConstruct() {
 }
 
 bool DfaGenerator::DfaMinimize() {
-  transform_array_size = 0;  // 清零最终有效节点数
+  transform_array_size_ = 0;  // 清零最终有效节点数
   std::list<IntermediateNodeId> nodes;
   for (auto iter = node_manager_intermediate_node_.Begin();
        iter != node_manager_intermediate_node_.End(); ++iter) {
     nodes.push_back(iter.GetId());
   }
-  SubDfaMinimize(std::move(nodes));
-  dfa_config_.resize(transform_array_size);
+  IntermediateNodeClassify(std::move(nodes));
+  dfa_config_.resize(transform_array_size_);
   for (auto& p : dfa_config_) {
     // 填充整个转移表为无法转移状态
     p.first.fill(TransformArrayId::InvalidId());
   }
   // 标记转移表条目是否完成构建
-  std::vector<bool> logged_index(transform_array_size, false);
+  std::vector<bool> logged_index(transform_array_size_, false);
   for (auto& p : intermediate_node_to_final_node_) {
     TransformArrayId index = p.second;
     IntermediateDfaNode& intermediate_node = GetIntermediateNode(p.first);
@@ -119,9 +119,9 @@ bool DfaGenerator::DfaMinimize() {
   }
 #endif  // _DEBUG
   root_transform_array_id_ =
-      intermediate_node_to_final_node_.find(head_node_intermediate_)->second;
+      intermediate_node_to_final_node_.find(root_intermediate_node_id_)->second;
   assert(root_transform_array_id_.IsValid());
-  head_node_intermediate_ = IntermediateNodeId::InvalidId();
+  root_intermediate_node_id_ = IntermediateNodeId::InvalidId();
   node_manager_intermediate_node_.ObjectManagerInit();
   node_manager_intermediate_node_.ShrinkToFit();
   intermediate_node_to_final_node_.clear();
@@ -131,7 +131,7 @@ bool DfaGenerator::DfaMinimize() {
 std::pair<DfaGenerator::IntermediateNodeId, bool> DfaGenerator::SetGoto(
     SetId set_src, char c_transform) {
   SetType set;
-  TailNodeData tail_data(NfaGenerator::NotTailNodeTag);
+  TailNodeData tail_data(NfaGenerator::kNotTailNodeTag);
   for (auto x : GetSetObject(set_src)) {
     auto [set_temp, tail_data_temp] = nfa_generator_.Goto(x, c_transform);
     if (set_temp.empty()) [[likely]] {
@@ -139,8 +139,8 @@ std::pair<DfaGenerator::IntermediateNodeId, bool> DfaGenerator::SetGoto(
     }
     set.merge(std::move(set_temp));
     // 不存在尾节点标记或新的标记优先级大于原来的标记则修改
-    if (tail_data_temp != NfaGenerator::NotTailNodeTag) [[unlikely]] {
-      if (tail_data == NfaGenerator::NotTailNodeTag ||
+    if (tail_data_temp != NfaGenerator::kNotTailNodeTag) [[unlikely]] {
+      if (tail_data == NfaGenerator::kNotTailNodeTag ||
           tail_data_temp.second > tail_data.second) {
         tail_data = tail_data_temp;
       }
@@ -154,7 +154,7 @@ std::pair<DfaGenerator::IntermediateNodeId, bool> DfaGenerator::SetGoto(
 }
 
 inline DfaGenerator::IntermediateNodeId DfaGenerator::IntermediateGoto(
-    IntermediateNodeId handler_src, char c_transform) {
+    IntermediateNodeId handler_src, char c_transform) const {
   return GetIntermediateNode(handler_src).forward_nodes[c_transform];
 }
 
@@ -166,15 +166,15 @@ inline bool DfaGenerator::SetIntermediateNodeTransform(
   return true;
 }
 
-void DfaGenerator::SubDfaMinimize(std::list<IntermediateNodeId>&& handlers,
-                                  char c_transform) {
+void DfaGenerator::IntermediateNodeClassify(
+    std::list<IntermediateNodeId>&& node_ids, char c_transform) {
   // 存储不同分组，键值为当前转移条件下转移到的节点句柄
   // 无法转移的节点键值前半部分使用IntermediateNodeId::InvalidId()
   std::unordered_map<std::pair<IntermediateNodeId, WordAttachedData>,
                      std::list<IntermediateNodeId>,
                      PairOfIntermediateNodeIdAndWordAttachedDataHasher>
       transform_node_ids;
-  for (auto handler : handlers) {
+  for (auto handler : node_ids) {
     IntermediateNodeId next_node_id = IntermediateGoto(handler, c_transform);
     IntermediateDfaNode& node = GetIntermediateNode(handler);
     transform_node_ids[std::make_pair(next_node_id, node.word_attached_data)]
@@ -186,9 +186,9 @@ void DfaGenerator::SubDfaMinimize(std::list<IntermediateNodeId>&& handlers,
       for (auto& intermediate_node_id : group.second) {
         // 当前具有的转移表条目数为新建条目的下标
         intermediate_node_to_final_node_.emplace(intermediate_node_id,
-                                                 transform_array_size);
+                                                 transform_array_size_);
       }
-      ++transform_array_size;
+      ++transform_array_size_;
     }
   } else {
     // 未达到最后条件（CHAR_MAX），应继续对数目大于1的组分类
@@ -197,12 +197,12 @@ void DfaGenerator::SubDfaMinimize(std::list<IntermediateNodeId>&& handlers,
     for (auto& group : transform_node_ids) {
       if (group.second.size() > 1) {
         // 组内成员大于1个，需要继续分类
-        SubDfaMinimize(std::move(group.second), c_transform);
+        IntermediateNodeClassify(std::move(group.second), c_transform);
       } else {
         // 组内只有一个成员，直接填写中间节点到转移表条目的映射表
         intermediate_node_to_final_node_.emplace(group.second.front(),
-                                                 transform_array_size);
-        ++transform_array_size;
+                                                 transform_array_size_);
+        ++transform_array_size_;
       }
     }
   }

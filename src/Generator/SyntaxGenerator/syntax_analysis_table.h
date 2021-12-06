@@ -1,7 +1,12 @@
+/// @file syntax_analysis_table.h
+/// @brief 语法分析表
+/// @details
+/// 语法分析表序列化到文件中，使用时只需反序列化
 #ifndef GENERATOR_SYNTAXGENERATOR_SYNTAX_ANALYSIS_TABLE_H_
 #define GENERATOR_SYNTAXGENERATOR_SYNTAX_ANALYSIS_TABLE_H_
 
 #include <boost/serialization/unique_ptr.hpp>
+#include <boost/serialization/unordered_map.hpp>
 #include <format>
 #include <iostream>
 
@@ -9,7 +14,8 @@
 
 namespace frontend::generator::syntax_generator {
 
-// 语法分析表条目
+/// @class SynatxAnalysisTableEntry syntax_analysis_table.h
+/// @brief 语法分析表单个条目
 class SyntaxAnalysisTableEntry {
  public:
   // 前向声明三种派生类，为了虚函数可以返回相应的类型
@@ -17,6 +23,14 @@ class SyntaxAnalysisTableEntry {
   class ReductAttachedData;
   class ShiftReductAttachedData;
 
+  /// @class SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface
+  /// syntax_analysis_table.h
+  /// @brief 动作和附属数据基类
+  /// @details
+  /// 动作是根据向前看符号决定移入/规约/接受/报错等
+  /// 附属数据是完成动作后维持状态机基础性质所需要的数据，例如移入单词后转移到的
+  /// 下一个条目，规约后得到的非终结产生式ID等
+  /// @attention 所有的动作和附属数据均应从该类派生
   class ActionAndAttachedDataInterface {
    public:
     ActionAndAttachedDataInterface(ActionType action_type)
@@ -33,51 +47,90 @@ class SyntaxAnalysisTableEntry {
       return action_type_ == attached_data_interface.action_type_;
     }
 
+    /// @brief 获取移入操作的附属数据
+    /// @return 返回移入操作的附属数据的const引用
+    /// @attention 必须存在移入附属数据才可以调用该函数
     virtual const ShiftAttachedData& GetShiftAttachedData() const;
+    /// @brief 获取规约操作的附属数据
+    /// @return 返回规约操作的附属数据的const引用
+    /// @attention 必须存在规约附属数据才可以调用该函数
     virtual const ReductAttachedData& GetReductAttachedData() const;
+    /// @brief 获取移入和规约操作的附属数据
+    /// @return 返回移入和规约操作的附属数据的const引用
+    /// @note 由于二义性文法，有时在一个状态下既可以移入也可以规约
+    /// @attention 必须存在移入和规约附属数据才可以调用该函数
     virtual const ShiftReductAttachedData& GetShiftReductAttachedData() const;
-    // 与operator==在ShiftReductAttachedData语义上不同
-    // 入参如果是ShiftAttachedData或ReductAttachedData则只比较对应部分
-    virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&) const = 0;
+    /// @brief 判断两个对象是否相应部分相同
+    /// @param[in] action_and_attached_data ：用来比较的另一部分数据
+    /// @attention
+    /// 与operator==()在ShiftReductAttachedData语义上不同
+    /// operator==()比较两个对象是否完全相同，IsSameOrPart入参如果是
+    /// ShiftAttachedData或ReductAttachedData则只比较相应部分
+    virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
+                                  action_and_attached_data) const = 0;
 
+    /// @brief 获取动作类型
+    /// @return 返回动作类型
+    /// @retval ActionType::kShift ：移入
+    /// @retval ActionType::kReduct ：规约
+    /// @retval ActionType::kShiftReduct ：移入和规约
+    /// @retval ActionType::kError ：报错
+    /// @retval ActionType::kAccept ：接受
     ActionType GetActionType() const { return action_type_; }
+    /// @brief 设置动作类型
+    /// @param[in] action_type ：待设置的动作类型
     void SetActionType(ActionType action_type) { action_type_ = action_type; }
 
+    /// @brief 序列化该类的函数
+    /// @param[in,out] ar ：序列化使用的档案
+    /// @param[in] version ：序列化文件版本
+    /// @attention 该函数应由boost库调用而非手动调用
     template <class Archive>
     void serialize(Archive& ar, const unsigned int version) {
       ar& action_type_;
     }
 
    private:
-    // 提供默认构造函数供序列化时构建对象
+    /// @brief 提供默认构造函数供序列化时构建对象
     ActionAndAttachedDataInterface() = default;
 
-    // 允许序列化用的类访问
+    /// @brief 允许序列化用的类访问
     friend class boost::serialization::access;
-    // 允许语法分析表条目调用内部接口
+    /// @brief 允许语法分析表条目调用内部接口
     friend class SyntaxAnalysisTableEntry;
-    // 暴露部分内部类型，从而在boost_serialization中注册
-    friend struct ExportSyntaxGeneratorInsideTypeForSerialization;
 
+    /// @brief 获取移入操作的附属数据
+    /// @return 返回移入操作的附属数据的引用
+    /// @attention 必须存在移入附属数据才可以调用该函数
     virtual ShiftAttachedData& GetShiftAttachedData() {
       return const_cast<ShiftAttachedData&>(
           static_cast<const ActionAndAttachedDataInterface&>(*this)
               .GetShiftAttachedData());
     }
+    /// @brief 获取规约操作的附属数据
+    /// @return 返回规约操作的附属数据的引用
+    /// @attention 必须存在规约附属数据才可以调用该函数
     virtual ReductAttachedData& GetReductAttachedData() {
       return const_cast<ReductAttachedData&>(
           static_cast<const ActionAndAttachedDataInterface&>(*this)
               .GetReductAttachedData());
     }
+    /// @brief 获取移入和规约操作的附属数据
+    /// @return 返回移入和规约操作的附属数据的引用
+    /// @note 由于二义性文法，有时在一个状态下既可以移入也可以规约
+    /// @attention 必须存在移入和规约附属数据才可以调用该函数
     virtual ShiftReductAttachedData& GetShiftReductAttachedData() {
       return const_cast<ShiftReductAttachedData&>(
           static_cast<const ActionAndAttachedDataInterface&>(*this)
               .GetShiftReductAttachedData());
     }
 
+    /// @brief 动作类型
     ActionType action_type_;
   };
-  // 执行移入动作时的附属数据
+
+  /// @class SyntaxAnalysisTableEntry::ShiftAttachedData syntax_analysis_table.h
+  /// @brief 执行移入动作时的附属数据
   class ShiftAttachedData : public ActionAndAttachedDataInterface {
    public:
     ShiftAttachedData(SyntaxAnalysisTableEntryId next_entry_id)
@@ -89,43 +142,67 @@ class SyntaxAnalysisTableEntry {
     virtual bool operator==(const ActionAndAttachedDataInterface&
                                 shift_attached_data) const override;
 
+    /// @brief 获取移入操作的附属数据
+    /// @return 返回移入操作的附属数据的const引用
+    /// @attention 必须存在移入附属数据才可以调用该函数
     virtual const ShiftAttachedData& GetShiftAttachedData() const override {
       return *this;
     }
+    /// @brief 判断两个对象是否相应部分相同
+    /// @param[in] shift_attached_data ：用来比较的另一部分数据
+    /// @attention
+    /// 与operator==()在this为ShiftReductAttachedData类型时语义上不同
+    /// operator==()比较两个对象是否完全相同，IsSameOrPart入参如果是
+    /// ShiftAttachedData或ReductAttachedData则只比较相应部分
     virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
                                   shift_attached_data) const override {
       return operator==(shift_attached_data);
     }
 
+    /// @brief 获取移入单词后转移到的语法分析表条目ID
+    /// @return 返回移入单词后转移到的语法分析表条目ID
     SyntaxAnalysisTableEntryId GetNextSyntaxAnalysisTableEntryId() const {
       return next_entry_id_;
     }
+    /// @brief 设置移入单词后转移到的语法分析表条目ID
+    /// @param[in] next_entry_id ：移入单词后转移到的语法分析表条目ID
     void SetNextSyntaxAnalysisTableEntryId(
         SyntaxAnalysisTableEntryId next_entry_id) {
       next_entry_id_ = next_entry_id;
     }
 
    private:
-    // 提供默认构造函数供序列化时构建对象
+    /// @brief 提供默认构造函数供序列化时构建对象
     ShiftAttachedData() = default;
 
-    // 允许序列化类访问
+    /// @brief 允许序列化类访问
     friend class boost::serialization::access;
-    // 允许语法分析表条目访问内部接口
+    /// @brief 允许语法分析表条目访问内部接口
     friend class SyntaxAnalysisTableEntry;
 
+    /// @brief 序列化该类的函数
+    /// @param[in,out] ar ：序列化使用的档案
+    /// @param[in] version ：序列化文件版本
+    /// @attention 该函数应由boost库调用而非手动调用
     template <class Archive>
     void serialize(Archive& ar, const unsigned int version) {
       ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
           *this);
       ar& next_entry_id_;
     }
+
+    /// @brief 获取移入操作的附属数据
+    /// @return 返回移入操作的附属数据的引用
+    /// @attention 必须存在移入附属数据才可以调用该函数
     virtual ShiftAttachedData& GetShiftAttachedData() override { return *this; }
 
-    // 移入该单词后转移到的语法分析表条目ID
+    /// @brief 移入该单词后转移到的语法分析表条目ID
     SyntaxAnalysisTableEntryId next_entry_id_;
   };
-  // 执行规约动作时的附属数据
+
+  /// @class SyntaxAnalysisTableEntry::ReductAttachedData
+  /// syntax_analysis_table.h
+  /// @brief 执行规约动作时的附属数据
   class ReductAttachedData : public ActionAndAttachedDataInterface {
    public:
     template <class ProductionBody>
@@ -144,44 +221,72 @@ class SyntaxAnalysisTableEntry {
     virtual bool operator==(const ActionAndAttachedDataInterface&
                                 reduct_attached_data) const override;
 
+    /// @brief 获取规约操作的附属数据
+    /// @return 返回规约操作的附属数据的const引用
+    /// @attention 必须存在规约附属数据才可以调用该函数
     virtual const ReductAttachedData& GetReductAttachedData() const override {
       return *this;
     }
+    /// @brief 判断两个对象是否相应部分相同
+    /// @param[in] reduct_attached_data ：用来比较的另一部分数据
+    /// @attention
+    /// 与operator==()在this为ShiftReductAttachedData类型时语义上不同
+    /// operator==()比较两个对象是否完全相同，IsSameOrPart入参如果是
+    /// ShiftAttachedData或ReductAttachedData则只比较相应部分
     virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
                                   reduct_attached_data) const override {
       return operator==(reduct_attached_data);
     }
 
+    /// @brief 获取规约得到的非终结产生式ID
+    /// @return 返回规约后得到的非终结产生式ID
     ProductionNodeId GetReductedNonTerminalNodeId() const {
       return reducted_nonterminal_node_id_;
     }
+    /// @brief 设置规约后得到的非终结产生式ID
+    /// @param[in] reducted_nonterminal_node_id
+    /// ：待设置的规约后得到的非终结产生式ID
     void SetReductedNonTerminalNodeId(
         ProductionNodeId reducted_nonterminal_node_id) {
       reducted_nonterminal_node_id_ = reducted_nonterminal_node_id;
     }
+    /// @brief 获取包装规约函数的类的实例化对象ID
+    /// @return 返回包装规约函数的类的实例化对象
     ProcessFunctionClassId GetProcessFunctionClassId() const {
       return process_function_class_id_;
     }
+    /// @brief 设置包装规约函数的类的实例化对象ID
+    /// @param[in] process_function_class_id
+    /// ：待设置的包装规约函数的类的实例化对象ID
     void SetProcessFunctionClassId(
         ProcessFunctionClassId process_function_class_id) {
       process_function_class_id_ = process_function_class_id;
     }
+    /// @brief 获取产生式体
+    /// @return 返回产生式体的const引用
+    /// @note 产生式体用于核对获取到了哪些单词，从而判断哪些产生式空规约
     const std::vector<ProductionNodeId>& GetProductionBody() const {
       return production_body_;
     }
+    /// @brief 设置产生式体
+    /// @param[in] production_body ：待设置的产生式体
     void SetProductionBody(std::vector<ProductionNodeId>&& production_body) {
       production_body_ = std::move(production_body);
     }
 
    private:
-    // 提供默认构造函数供序列化时构建对象
+    /// @brief 提供默认构造函数供序列化时构建对象
     ReductAttachedData() = default;
 
-    // 允许序列化类访问
+    /// @brief 允许序列化类访问
     friend class boost::serialization::access;
-    // 允许语法分析表条目访问内部接口
+    /// @brief 允许语法分析表条目访问内部接口
     friend class SyntaxAnalysisTableEntry;
 
+    /// @brief 序列化该类的函数
+    /// @param[in,out] ar ：序列化使用的档案
+    /// @param[in] version ：序列化文件版本
+    /// @attention 该函数应由boost库调用而非手动调用
     template <class Archive>
     void serialize(Archive& ar, const unsigned int version) {
       ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
@@ -191,20 +296,25 @@ class SyntaxAnalysisTableEntry {
       ar& production_body_;
     }
 
+    /// @brief 获取规约操作的附属数据
+    /// @return 返回规约操作的附属数据的引用
+    /// @attention 必须存在规约附属数据才可以调用该函数
     virtual ReductAttachedData& GetReductAttachedData() override {
       return *this;
     }
 
-    // 规约后得到的非终结节点的ID
+    /// @brief 规约后得到的非终结节点的ID
     ProductionNodeId reducted_nonterminal_node_id_;
-    // 执行规约操作时使用的对象的ID
+    /// @brief 执行规约操作时使用的对象的ID
     ProcessFunctionClassId process_function_class_id_;
-    // 规约所用产生式，用于核对该产生式包含哪些节点
-    // 不使用空规约功能则可改为产生式节点数目
+    /// @brief 规约所用产生式，用于核对该产生式包含哪些节点
+    /// @note 不使用空规约功能则可改为产生式节点数目
     std::vector<ProductionNodeId> production_body_;
   };
 
-  // 使用二义性文法时对一个单词既可以移入也可以规约
+  /// @class SyntaxAnalysisTableEntry::ShiftReductAttachedData
+  /// @brief 移入与规约动作的附属数据
+  /// @note 使用二义性文法时某些状态下既可以移入也可以规约
   class ShiftReductAttachedData : public ActionAndAttachedDataInterface {
    public:
     template <class ShiftData, class ReductData>
@@ -216,39 +326,62 @@ class SyntaxAnalysisTableEntry {
               std::forward<ReductData>(reduct_attached_data)) {}
     ShiftReductAttachedData(const ShiftReductAttachedData&) = delete;
 
-    // 在与ShiftAttachedData和ReductAttachedData比较时仅比较相应部分
     virtual bool operator==(
         const ActionAndAttachedDataInterface& attached_data) const override;
 
+    /// @brief 获取移入操作的附属数据
+    /// @return 返回移入操作的附属数据的const引用
+    /// @attention 必须存在移入附属数据才可以调用该函数
     virtual const ShiftAttachedData& GetShiftAttachedData() const override {
       return shift_attached_data_;
     }
+    /// @brief 获取规约操作的附属数据
+    /// @return 返回规约操作的附属数据的const引用
+    /// @attention 必须存在规约附属数据才可以调用该函数
     virtual const ReductAttachedData& GetReductAttachedData() const override {
       return reduct_attached_data_;
     }
+    /// @brief 获取移入和规约操作的附属数据
+    /// @return 返回移入和规约操作的附属数据的const引用
+    /// @note 由于二义性文法，有时在一个状态下既可以移入也可以规约
+    /// @attention 必须存在移入和规约附属数据才可以调用该函数
     virtual const ShiftReductAttachedData& GetShiftReductAttachedData()
         const override {
       return *this;
     }
+    /// @brief 判断两个对象是否相应部分相同
+    /// @param[in] attached_data ：用来比较的另一部分数据
+    /// @attention
+    /// 与operator==()在this为ShiftReductAttachedData类型时语义上不同
+    /// operator==()比较两个对象是否完全相同，IsSameOrPart入参如果是
+    /// ShiftAttachedData或ReductAttachedData则只比较相应部分
     virtual bool IsSameOrPart(
         const ActionAndAttachedDataInterface& attached_data) const override;
 
+    /// @brief 设置移入附属数据
+    /// @param[in] shift_attached_data ：待设置的移入数据
     void SetShiftAttachedData(ShiftAttachedData&& shift_attached_data) {
       shift_attached_data_ = std::move(shift_attached_data);
     }
+    /// @brief 设置规约附属数据
+    /// @param[in] reduct_attached_data ：待设置的规约数据
     void SetReductAttachedData(ReductAttachedData&& reduct_attached_data) {
       reduct_attached_data_ = std::move(reduct_attached_data);
     }
 
    private:
-    // 提供默认构造函数供序列化时构建对象
+    /// @brief 提供默认构造函数供序列化时构建对象
     ShiftReductAttachedData() = default;
 
-    // 允许序列化类访问
+    /// @brief 允许序列化类访问
     friend class boost::serialization::access;
-    // 允许语法分析表条目访问内部接口
+    /// @brief 允许语法分析表条目访问内部接口
     friend class SyntaxAnalysisTableEntry;
 
+    /// @brief 序列化该类的函数
+    /// @param[in,out] ar ：序列化使用的档案
+    /// @param[in] version ：序列化文件版本
+    /// @attention 该函数应由boost库调用而非手动调用
     template <class Archive>
     void serialize(Archive& ar, const unsigned int version) {
       ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
@@ -256,20 +389,36 @@ class SyntaxAnalysisTableEntry {
       ar& shift_attached_data_;
       ar& reduct_attached_data_;
     }
+    /// @brief 获取移入操作的附属数据
+    /// @return 返回移入操作的附属数据的引用
+    /// @attention 必须存在移入附属数据才可以调用该函数
     virtual ShiftAttachedData& GetShiftAttachedData() override {
       return shift_attached_data_;
     }
+    /// @brief 获取规约操作的附属数据
+    /// @return 返回规约操作的附属数据的引用
+    /// @attention 必须存在规约附属数据才可以调用该函数
     virtual ReductAttachedData& GetReductAttachedData() override {
       return reduct_attached_data_;
     }
+
+    /// @brief 获取移入和规约操作的附属数据
+    /// @return 返回移入和规约操作的附属数据的引用
+    /// @note 由于二义性文法，有时在一个状态下既可以移入也可以规约
+    /// @attention 必须存在移入和规约附属数据才可以调用该函数
     virtual ShiftReductAttachedData& GetShiftReductAttachedData() override {
       return *this;
     }
 
+    /// @brief 移入附属数据
     ShiftAttachedData shift_attached_data_;
+    /// @brief 规约附属数据
     ReductAttachedData reduct_attached_data_;
   };
-  // 表示Accept动作的节点
+
+  /// @class SyntaxAnalysisTableEntry::AcceptAttachedData
+  /// syntax_analysis_table.h
+  /// @brief 表示Accept动作的节点
   class AcceptAttachedData : public ActionAndAttachedDataInterface {
    public:
     AcceptAttachedData()
@@ -280,22 +429,29 @@ class SyntaxAnalysisTableEntry {
     AcceptAttachedData& operator=(const AcceptAttachedData&) = delete;
     AcceptAttachedData& operator=(AcceptAttachedData&&) = delete;
 
+    /// @attention Accept语义下不支持该操作
     virtual bool operator==(
         const ActionAndAttachedDataInterface&) const override {
       assert(false);
-      // 防止警告
+      /// 防止警告
       return false;
     }
+    /// @attention Accept语义下不支持该操作
     virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
                                   accept_attached_data) const override {
       assert(false);
-      // 防止警告
+      /// 防止警告
       return false;
     }
 
    private:
+    /// @brief 允许序列化类访问
     friend class boost::serialization::access;
 
+    /// @brief 序列化该类的函数
+    /// @param[in,out] ar ：序列化使用的档案
+    /// @param[in] version ：序列化文件版本
+    /// @attention 该函数应由boost库调用而非手动调用
     template <class Archive>
     void serialize(Archive& ar, const unsigned int version) {
       ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
@@ -303,7 +459,8 @@ class SyntaxAnalysisTableEntry {
     }
   };
 
-  // 键值为待移入节点ID，值为指向相应数据的指针
+  /// @brief 语法分析表条目中存储向前看符号对应的动作和附属数据的容器
+  /// @note 键值为待移入节点ID，值为指向动作和附属数据的指针
   using ActionAndTargetContainer =
       std::unordered_map<ProductionNodeId,
                          std::unique_ptr<ActionAndAttachedDataInterface>>;
@@ -320,7 +477,14 @@ class SyntaxAnalysisTableEntry {
   SyntaxAnalysisTableEntry& operator=(
       SyntaxAnalysisTableEntry&& syntax_analysis_table_entry);
 
-  // 设置该产生式在转移条件下的动作和目标节点
+  /// @brief 设置该条目在给定终结节点下的动作和目标节点
+  /// @param[in] node_id ：待处理的终结节点ID
+  /// @param[in] attached_data ：终结节点的附属数据
+  /// @details
+  /// 该函数设置在面对node_id代表的终结节点时需要做的操作和操作的附属数据
+  /// 第二个参数仅支持ShiftAttachedData、ReductAttachedData和AcceptAttachedData
+  /// @note 待添加的操作类型必须与node_id已有的动作类型不同，或动作类型和
+  /// 附属数据完全相同
   template <class AttachedData>
   requires std::is_same_v<std::decay_t<AttachedData>,
                           SyntaxAnalysisTableEntry::ShiftAttachedData> ||
@@ -330,67 +494,90 @@ class SyntaxAnalysisTableEntry {
                      SyntaxAnalysisTableEntry::AcceptAttachedData>
   void SetTerminalNodeActionAndAttachedData(ProductionNodeId node_id,
                                             AttachedData&& attached_data);
-  // 设置该条目移入非终结节点后转移到的节点
+  /// @brief 设置该条目移入非终结节点后转移到的语法分析表条目ID
+  /// @param[in] node_id ：待处理的非终结节点ID
+  /// @param[in] next_analysis_table_entry_id
+  /// ：移入该非终结节点后转移到的语法分析表条目ID
   void SetNonTerminalNodeTransformId(
-      ProductionNodeId node_id, SyntaxAnalysisTableEntryId production_node_id) {
-    nonterminal_node_transform_table_[node_id] = production_node_id;
+      ProductionNodeId node_id,
+      SyntaxAnalysisTableEntryId next_analysis_table_entry_id) {
+    nonterminal_node_transform_table_[node_id] = next_analysis_table_entry_id;
   }
-  // 修改参数中给定的ID为新ID
-  void ResetEntryId(const std::unordered_map<SyntaxAnalysisTableEntryId,
-                                             SyntaxAnalysisTableEntryId>&
-                        old_entry_id_to_new_entry_id);
-  // 访问该条目下给定ID终结节点的行为与目标ID
-  // 如果不存在该转移条件则返回空指针
+  /// @brief 修改语法分析表中所有指定的语法分析表ID为新ID
+  /// @param[in] old_id_to_new_id ：存储待修改的ID到新ID的映射
+  /// @note old_id_to_new_id仅需存储需要更改的ID，不改变的ID无需存储
+  void ResetEntryId(
+      const std::unordered_map<SyntaxAnalysisTableEntryId,
+                               SyntaxAnalysisTableEntryId>& old_id_to_new_id);
+  /// @brief 获取在给定待处理终结节点ID下的动作与附属数据
+  /// @param[in] node_id ：待处理的终结节点ID
+  /// @return 返回指向动作与附属数据的const指针
+  /// @retval nullptr ：该终结节点下不存在可以执行的动作（语法错误）
   const ActionAndAttachedDataInterface* AtTerminalNode(
       ProductionNodeId node_id) const {
     auto iter = action_and_attached_data_.find(node_id);
     return iter == action_and_attached_data_.end() ? nullptr
                                                    : iter->second.get();
   }
-  // 访问该条目下给定ID非终结节点移入时转移到的条目ID
-  // 不存在该转移条件则返回SyntaxAnalysisTableEntryId::InvalidId()
+  /// @brief 获取移入给定非终结节点后转移到的语法分析表条目ID
+  /// @param[in] node_id ：待移入的非终结节点ID
+  /// @return 返回移入后转移到的语法分析表条目ID
+  /// @retval SyntaxAnalysisTableEntryId::InvalidId()
+  /// ：该非终结节点无法移入（语法错误）
   SyntaxAnalysisTableEntryId AtNonTerminalNode(ProductionNodeId node_id) const {
     auto iter = nonterminal_node_transform_table_.find(node_id);
     return iter == nonterminal_node_transform_table_.end()
                ? SyntaxAnalysisTableEntryId::InvalidId()
                : iter->second;
   }
-  // 获取全部终结节点的操作
+  /// @brief 获取全部终结节点的动作和附属数据
+  /// @return 返回存储全部终结节点的动作和附属数据的容器的const引用
   const ActionAndTargetContainer& GetAllActionAndAttachedData() const {
     return action_and_attached_data_;
   }
-  // 获取全部非终结节点转移到的表项
+  /// @brief 获取全部非终结节点转移到的语法分析表条目ID
+  /// @return
+  /// 返回存储全部非终结节点移入后转移到的语法分析表条目ID的容器的const引用
   const std::unordered_map<ProductionNodeId, SyntaxAnalysisTableEntryId>&
   GetAllNonTerminalNodeTransformTarget() const {
     return nonterminal_node_transform_table_;
   }
-  // 设置内置根条目在文件尾向前看节点下执行Accept动作
-  // 仅允许对内置根条目执行该操作
+  /// @brief 设置在文件尾向前看节点下执行Accept动作
+  /// @param[in] eof_node_id ：文件尾向前看节点
+  /// @note 文件尾节点永远不会被移入
+  /// @attention 仅允许对内置根条目执行该操作
   void SetAcceptInEofForwardNode(ProductionNodeId eof_node_id) {
     SetTerminalNodeActionAndAttachedData(eof_node_id, AcceptAttachedData());
   }
-  // 清除该条目中所有数据
+  /// @brief 清除该条目中所有数据
   void Clear() {
     action_and_attached_data_.clear();
     nonterminal_node_transform_table_.clear();
   }
 
  private:
+  /// @brief 允许序列化类访问
   friend class boost::serialization::access;
 
+  /// @brief 序列化该类的函数
+  /// @param[in,out] ar ：序列化使用的档案
+  /// @param[in] version ：序列化文件版本
+  /// @attention 该函数应由boost库调用而非手动调用
   template <class Archive>
   void serialize(Archive& ar, const unsigned int version) {
     ar& action_and_attached_data_;
     ar& nonterminal_node_transform_table_;
   }
 
-  // 只有自身可以修改原始数据结构，外来请求要走接口
+  /// @brief 获取全部终结节点的动作和附属数据
+  /// @return 返回存储全部终结节点的动作和附属数据的容器的引用
   ActionAndTargetContainer& GetAllActionAndAttachedData() {
     return const_cast<ActionAndTargetContainer&>(
         static_cast<const SyntaxAnalysisTableEntry&>(*this)
             .GetAllActionAndAttachedData());
   }
-  // 获取全部非终结节点转移到的表项
+  /// @brief 获取全部非终结节点转移到的语法分析表条目ID
+  /// @return 返回存储全部非终结节点移入后转移到的语法分析表条目ID的容器的引用
   std::unordered_map<ProductionNodeId, SyntaxAnalysisTableEntryId>&
   GetAllNonTerminalNodeTransformTarget() {
     return const_cast<
@@ -399,9 +586,9 @@ class SyntaxAnalysisTableEntry {
             .GetAllNonTerminalNodeTransformTarget());
   }
 
-  // 向前看符号ID下的操作和目标节点
+  /// @brief 向前看符号ID下的操作和目标节点
   ActionAndTargetContainer action_and_attached_data_;
-  // 移入非终结节点后转移到的产生式体序号
+  /// @brief 移入非终结节点后转移到的产生式体序号
   std::unordered_map<ProductionNodeId, SyntaxAnalysisTableEntryId>
       nonterminal_node_transform_table_;
 };
@@ -417,6 +604,10 @@ void SyntaxAnalysisTableEntry::SetTerminalNodeActionAndAttachedData(
     ProductionNodeId node_id, AttachedData&& attached_data) {
   if constexpr (std::is_same_v<std::decay_t<AttachedData>,
                                SyntaxAnalysisTableEntry::AcceptAttachedData>) {
+    // 传播向前看符号后，根语法分析表条目移入内置根节点后到达的条目在向前看符号
+    // 是文件尾节点时执行规约操作，需要设置为接受操作
+    assert(action_and_attached_data_.find(node_id)->second->GetActionType() ==
+           ActionType::kReduct);
     action_and_attached_data_[node_id] = std::make_unique<AcceptAttachedData>(
         std::forward<AttachedData>(attached_data));
     return;
@@ -424,8 +615,7 @@ void SyntaxAnalysisTableEntry::SetTerminalNodeActionAndAttachedData(
     static_assert(
         !std::is_same_v<std::decay_t<AttachedData>, ShiftReductAttachedData>,
         "该类型仅允许通过在已有一种动作的基础上补全缺少的另一半后转换得到，不允"
-        "许"
-        "直接传入");
+        "许直接传入");
     // 使用二义性文法，语法分析表某些情况下需要对同一个节点支持移入和规约操作并存
     auto iter = action_and_attached_data_.find(node_id);
     if (iter == action_and_attached_data_.end()) {

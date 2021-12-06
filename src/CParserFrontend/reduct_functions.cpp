@@ -50,13 +50,20 @@ void VarietyOrFunctionConstructError(
 // 从ConstTag的规约信息中获取ConstTag类型
 // 需要保证输入为非终结产生式ConstTag规约得到的数据（无论是否为空规约）
 ConstTag GetConstTag(const WordDataToUser& raw_const_tag_data) {
-  auto& const_tag_data =
-      raw_const_tag_data.GetNonTerminalWordData().user_returned_data;
-  ConstTag const_tag = ConstTag::kNonConst;
-  if (const_tag_data.has_value()) [[unlikely]] {
-    const_tag = ConstTag::kConst;
+  if (raw_const_tag_data.Empty()) [[likely]] {
+    return ConstTag::kNonConst;
+  } else {
+    return ConstTag::kConst;
   }
-  return const_tag;
+}
+
+SignTag GetSignTag(const WordDataToUser& raw_sign_tag_data) {
+  if (raw_sign_tag_data.Empty()) [[likely]] {
+    return SignTag::kSigned;
+  } else {
+    return std::any_cast<SignTag>(
+        raw_sign_tag_data.GetNonTerminalWordData().user_returned_data);
+  }
 }
 
 // 根据声明时的初始类型获取一次声明中非第一个变量的类型
@@ -380,18 +387,6 @@ std::shared_ptr<ObjectConstructData> IdOrEquivenceConstTagId(
   return construct_data;
 }
 
-//// IdOrEquivence -> "const"
-//// 分配在堆上，避免any容器中复制对象
-//// 使用std::shared_ptr代替std::shared_ptr，std::any不能存储不支持复制的类型
-// std::shared_ptr<ObjectConstructData> IdOrEquivenceConst(
-//    std::vector<WordDataToUser>&& word_data) {
-//  assert(word_data.size() == 1);
-//  std::shared_ptr<ObjectConstructData> construct_data =
-//      std::make_shared<ObjectConstructData>(std::string());
-//  construct_data->ConstructBasicObjectPart<VarietyOperatorNode>(
-//      nullptr, ConstTag::kConst, LeftRightValueTag::kLeftValue);
-//  return construct_data;
-//}
 std::any&& IdOrEquivenceNumAddressing(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 4);
   // 获取之前解析到的信息
@@ -460,14 +455,39 @@ std::any&& IdOrEquivenceInBrackets(std::vector<WordDataToUser>&& word_data) {
   return std::move(word_data[1].GetNonTerminalWordData().user_returned_data);
 }
 
-//// EmptyReductableIdOrEquivence -> IdOrEquivence
-//// 返回值类型：std::shared_ptr<ObjectConstructData>
-// std::any&& EmptyReductableIdOrEquivence(std::vector<WordDataToUser>&&
-// word_data) {
-//  assert(word_data.size() == 1);
-//  return
-//  std::move(word_data.front().GetNonTerminalWordData().user_returned_data);
-//}
+std::shared_ptr<ObjectConstructData> AnonymousIdOrEquivenceConst(
+    std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 1);
+  std::shared_ptr<ObjectConstructData> construct_data =
+      std::make_shared<ObjectConstructData>(std::string());
+  construct_data->ConstructBasicObjectPart<VarietyOperatorNode>(
+      nullptr, ConstTag::kConst, LeftRightValueTag::kLeftValue);
+  return construct_data;
+}
+
+// AnonymousIdOrEquivence -> AnonymousIdOrEquivence "[" Num "]"
+inline std::any&& AnonymousIdOrEquivenceNumAddressing(
+    std::vector<WordDataToUser>&& word_data) {
+  return IdOrEquivenceNumAddressing(std::move(word_data));
+}
+
+// AnonymousIdOrEquivence -> AnonymousIdOrEquivence "[" "]"
+inline std::any&& AnonymousIdOrEquivenceAnonymousAddressing(
+    std::vector<WordDataToUser>&& word_data) {
+  return IdOrEquivenceAnonymousAddressing(std::move(word_data));
+}
+
+// AnonymousIdOrEquivence -> ConstTag "*" AnonymousIdOrEquivence
+inline std::any&& AnonymousIdOrEquivencePointerAnnounce(
+    std::vector<WordDataToUser>&& word_data) {
+  return IdOrEquivencePointerAnnounce(std::move(word_data));
+}
+
+// AnonymousIdOrEquivence -> "(" AnonymousIdOrEquivence ")"
+inline std::any&& AnonymousIdOrEquivenceInBrackets(
+    std::vector<WordDataToUser>&& word_data) {
+  return IdOrEquivenceInBrackets(std::move(word_data));
+}
 
 EnumReturnData NotEmptyEnumArgumentsIdBase(
     std::vector<WordDataToUser>&& word_data) {
@@ -560,18 +580,18 @@ std::any&& EnumArgumentsNotEmptyEnumArguments(
 }
 std::shared_ptr<EnumType> EnumDefine(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 5);
-  std::any& enum_return_data =
-      word_data[3].GetNonTerminalWordData().user_returned_data;
+
   std::string& enum_name = word_data[1].GetTerminalWordData().word;
   // 声明该枚举以获取指向名字的指针
   auto iter = c_parser_frontend.AnnounceTypeName(std::move(enum_name));
   std::shared_ptr<EnumType> enum_type;
-  if (enum_return_data.has_value()) {
+  if (!word_data[3].Empty()) [[likely]] {
     // 该枚举有成员
     enum_type = std::make_shared<EnumType>(
         &iter->first,
-        std::move(
-            std::any_cast<EnumReturnData&>(enum_return_data).GetContainer()));
+        std::move(std::any_cast<EnumReturnData&>(
+                      word_data[3].GetNonTerminalWordData().user_returned_data)
+                      .GetContainer()));
   } else {
     // 该枚举没有成员
     enum_type = std::make_shared<EnumType>(&iter->first);
@@ -585,15 +605,14 @@ std::shared_ptr<EnumType> EnumDefine(std::vector<WordDataToUser>&& word_data) {
 std::shared_ptr<EnumType> EnumAnonymousDefine(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 4);
-  std::any& enum_return_data =
-      word_data[3].GetNonTerminalWordData().user_returned_data;
   std::shared_ptr<EnumType> enum_type;
-  if (enum_return_data.has_value()) {
+  if (!word_data[3].Empty()) [[likely]] {
     // 该枚举有成员
     enum_type = std::make_shared<EnumType>(
         nullptr,
-        std::move(
-            std::any_cast<EnumReturnData&>(enum_return_data).GetContainer()));
+        std::move(std::any_cast<EnumReturnData&>(
+                      word_data[3].GetNonTerminalWordData().user_returned_data)
+                      .GetContainer()));
   } else {
     // 该枚举没有成员
     enum_type = std::make_shared<EnumType>(nullptr);
@@ -734,22 +753,15 @@ std::shared_ptr<const StructureTypeInterface> StructTypeStructAnnounce(
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeFundamental(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
-  // 获取ConstTag
   ConstTag const_tag = GetConstTag(word_data[0]);
-  // 获取SignTag
-  auto& sign_tag_data =
-      word_data[1].GetNonTerminalWordData().user_returned_data;
-  SignTag sign_tag = SignTag::kSigned;
-  if (sign_tag_data.has_value()) [[unlikely]] {
-    sign_tag = std::any_cast<SignTag&>(sign_tag_data);
-  }
+  SignTag sign_tag = GetSignTag(word_data[1]);
   BuiltInType builtin_type = std::any_cast<BuiltInType&>(
       word_data[2].GetNonTerminalWordData().user_returned_data);
   switch (builtin_type) {
-    case c_parser_frontend::type_system::BuiltInType::kInt1:
-    case c_parser_frontend::type_system::BuiltInType::kVoid:
       // 这两种类型只能使用无符号
-      sign_tag = SignTag::kUnsigned;
+    case c_parser_frontend::type_system::BuiltInType::kVoid:
+    case c_parser_frontend::type_system::BuiltInType::kInt1:
+      assert(sign_tag == SignTag::kSigned);
       break;
     default:
       break;
@@ -926,37 +938,6 @@ std::shared_ptr<FlowInterface> FunctionRelavent(
   return std::move(flow_control_node);
 }
 
-std::shared_ptr<FlowInterface> SingleAnnounceNoAssignVariety(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto [final_type, const_tag_before_final_type] =
-      std::any_cast<std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data);
-  std::shared_ptr<ObjectConstructData> construct_data;
-  if (!word_data[1].GetNonTerminalWordData().user_returned_data.has_value()) {
-    // 函数声明中省略参数名
-    construct_data = std::make_shared<ObjectConstructData>("");
-    construct_data->ConstructBasicObjectPart<VarietyOperatorNode>(
-        nullptr, const_tag_before_final_type, LeftRightValueTag::kLeftValue);
-  } else {
-    construct_data = std::any_cast<std::shared_ptr<ObjectConstructData>&>(
-        word_data[1].GetNonTerminalWordData().user_returned_data);
-    if (construct_data->GetObjectName().empty()) [[unlikely]] {
-      OutputError(std::format("声明的变量必须有名"));
-      exit(-1);
-    }
-  }
-  auto [flow_control_node, construct_result] = construct_data->ConstructObject(
-      const_tag_before_final_type, std::move(final_type));
-  // 检查是否构建成功
-  if (construct_result != ObjectConstructData::CheckResult::kSuccess)
-      [[unlikely]] {
-    VarietyOrFunctionConstructError(construct_result,
-                                    construct_data->GetObjectName());
-  }
-  return std::move(flow_control_node);
-}
-
 std::shared_ptr<FlowInterface> SingleAnnounceNoAssignNotPodVariety(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
@@ -964,6 +945,10 @@ std::shared_ptr<FlowInterface> SingleAnnounceNoAssignNotPodVariety(
   std::string& type_name = word_data[1].GetTerminalWordData().word;
   auto& construct_data = std::any_cast<std::shared_ptr<ObjectConstructData>&>(
       word_data[2].GetNonTerminalWordData().user_returned_data);
+  if (construct_data->GetObjectName().empty()) [[unlikely]] {
+    OutputError(std::format("声明的变量必须有名"));
+    exit(-1);
+  }
   auto [final_type, result] =
       c_parser_frontend.GetType(type_name, StructOrBasicType::kNotSpecified);
   switch (result) {
@@ -991,13 +976,6 @@ std::shared_ptr<FlowInterface> SingleAnnounceNoAssignNotPodVariety(
                                     construct_data->GetObjectName());
   }
   return std::move(flow_control_node);
-}
-
-std::any&& SingleAnnounceNoAssignFunctionRelavent(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
 }
 
 std::any TypeDef(std::vector<WordDataToUser>&& word_data) {
@@ -1034,7 +1012,7 @@ std::any TypeDef(std::vector<WordDataToUser>&& word_data) {
   return std::any();
 }
 
-std::any NotEmptyFunctionPointerArgumentsBase(
+std::any NotEmptyFunctionRelaventArgumentsBase(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
   std::shared_ptr<FlowInterface>& flow_control_node =
@@ -1067,7 +1045,14 @@ std::any NotEmptyFunctionPointerArgumentsBase(
   return std::any();
 }
 
-std::any NotEmptyFunctionPointerArgumentsExtend(
+// NotEmptyFunctionRelaventArguments -> AnonymousSingleAnnounceNoAssign
+// 不返回数据
+inline std::any NotEmptyFunctionRelaventArgumentsAnonymousBase(
+    std::vector<WordDataToUser>&& word_data) {
+  return NotEmptyFunctionRelaventArgumentsBase(std::move(word_data));
+}
+
+std::any NotEmptyFunctionRelaventArgumentsExtend(
     std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
   auto& flow_control_node = std::any_cast<std::shared_ptr<FlowInterface>&>(
@@ -1097,6 +1082,14 @@ std::any NotEmptyFunctionPointerArgumentsExtend(
   // 添加函数参数
   function_type_construct_data->AddFunctionTypeArgument(variety_pointer);
   return std::any();
+}
+
+// NotEmptyFunctionRelaventArguments -> NotEmptyFunctionRelaventArguments ","
+// AnonymousSingleAnnounceNoAssign
+// 返回值类型：std::shared_ptr<FunctionType::ArgumentInfoContainer>
+inline std::any NotEmptyFunctionRelaventArgumentsAnonymousExtend(
+    std::vector<WordDataToUser>&& word_data) {
+  return NotEmptyFunctionRelaventArgumentsExtend(std::move(word_data));
 }
 
 std::any&& FunctionRelaventArguments(std::vector<WordDataToUser>&& word_data) {
@@ -1130,8 +1123,11 @@ FunctionDefineHead(std::vector<WordDataToUser>&& word_data) {
   bool set_result = c_parser_frontend.SetFunctionToConstruct(
       std::shared_ptr<const FunctionType>(function_type));
   if (!set_result) [[unlikely]] {
-    std::cerr << std::format("行数{:} 列数{:} 函数内部不能声明函数", GetLine(),
-                             GetColumn())
+    std::cerr << std::format(
+                     "行数{:} 列数{:} "
+                     "无法声明/定义函数，可能原因为：函数内部声明/"
+                     "定义函数、定义与已声明的同名函数签名不同的函数",
+                     GetLine(), GetColumn())
               << std::endl;
     exit(-1);
   }
@@ -1322,10 +1318,18 @@ VarietyAnnounceNoAssign(std::shared_ptr<VarietyOperatorNode>&& variety_node) {
                                   variety_node);
   // 获取扩展声明时的类型
   if (raw_variety_type->GetType() == StructOrBasicType::kPointer) {
+    // 剥离数组维数层指针
+    while (raw_variety_type->GetType() == StructOrBasicType::kPointer &&
+           std::static_pointer_cast<const PointerType>(raw_variety_type)
+                   ->GetArraySize() != 0) {
+      raw_variety_type = raw_variety_type->GetNextNodePointer();
+    }
     // 如果是指针类型则在原始声明类型基础上去除一重指针
-    return std::make_tuple(raw_variety_type->GetNextNodePointer(),
-                           extend_const_tag,
-                           std::move(flow_control_node_container));
+    return std::make_tuple(
+        raw_variety_type->GetType() == StructOrBasicType::kPointer
+            ? raw_variety_type->GetNextNodePointer()
+            : raw_variety_type,
+        extend_const_tag, std::move(flow_control_node_container));
   } else {
     // 不是指针类型，直接返回
     return std::make_tuple(raw_variety_type, extend_const_tag,
@@ -1379,6 +1383,12 @@ VarietyAnnounceWithAssign(
                                   variety_node);
   // 获取扩展声明时的类型
   if (raw_variety_type->GetType() == StructOrBasicType::kPointer) {
+    // 剥离数组维数层指针
+    while (raw_variety_type->GetType() == StructOrBasicType::kPointer &&
+           std::static_pointer_cast<const PointerType>(raw_variety_type)
+                   ->GetArraySize() != 0) {
+      raw_variety_type = raw_variety_type->GetNextNodePointer();
+    }
     // 如果是指针类型则在原始声明类型基础上去除一重指针
     return std::make_tuple(raw_variety_type->GetNextNodePointer(),
                            extend_const_tag,
@@ -1475,9 +1485,15 @@ std::any&& SingleAnnounceAndAssignWithAssignExtend(
           std::shared_ptr<const TypeInterface>, ConstTag,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
           word_data[0].GetNonTerminalWordData().user_returned_data);
-  auto& node_for_assign =
-      std::any_cast<std::shared_ptr<OperatorNodeInterface>&>(
+  auto& [node_for_assign, flow_control_nodes_to_get_node_for_assign] =
+      std::any_cast<std::pair<
+          std::shared_ptr<const OperatorNodeInterface>,
+          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
           word_data[4].GetNonTerminalWordData().user_returned_data);
+  // 将获取待赋值变量的操作合并到主容器中
+  flow_control_node_container->splice(
+      flow_control_node_container->end(),
+      std::move(*flow_control_nodes_to_get_node_for_assign));
   std::string& variety_name = word_data[2].GetTerminalWordData().word;
   // 构建变量节点
   // 声明变量名
@@ -1488,16 +1504,15 @@ std::any&& SingleAnnounceAndAssignWithAssignExtend(
       std::shared_ptr<const TypeInterface>(extend_announce_type));
   auto [ignore_type, ignore_const_tag, sub_flow_control_node_container] =
       VarietyAnnounceWithAssign(std::move(variety_node),
-
                                 std::move(node_for_assign));
-  // 将获取变量的操作合并到主容器中
+  // 将初始化变量的操作合并到主容器中
   flow_control_node_container->splice(
       flow_control_node_container->end(),
       std::move(*sub_flow_control_node_container));
   return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
 }
 
-// Type -> BasicType
+// GetType -> BasicType
 // 返回类型和变量的ConstTag
 // 返回值类型：std::pair<std::shared_ptr<const TypeInterface>, ConstTag>
 std::any&& TypeBasicType(std::vector<WordDataToUser>&& word_data) {
@@ -2910,6 +2925,12 @@ std::any SingleStatementContinue(std::vector<WordDataToUser>&& word_data) {
   return std::any();
 }
 
+std::any SingleStatementEmptyStatement(
+    std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 1);
+  return std::any();
+}
+
 std::any IfCondition(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 4);
   // if条件和获取条件的操作
@@ -2958,29 +2979,25 @@ std::any IfIfSentence(std::vector<WordDataToUser>&& word_data) {
   return std::any();
 }
 
-// ForRenewSentences -> Assignables ";"
+// ForRenewSentence -> Assignables
 // 返回值类型：std::pair<std::shared_ptr<const OperatorNodeInterface>,
 //                   std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-std::any&& ForRenewSentences(std::vector<WordDataToUser>&& word_data) {
+std::any&& ForRenewSentence(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
   return std::move(
       word_data.front().GetNonTerminalWordData().user_returned_data);
 }
 
-// ForInitSentence -> Assignables ";"
-std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>
-ForInitSentenceAssignables(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& [ignore_assignable, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
-  return flow_control_node_container;
+// ForInitSentence -> Assignables
+std::any&& ForInitSentenceAssignables(std::vector<WordDataToUser>&& word_data) {
+  assert(word_data.size() == 1);
+  return std::move(
+      word_data.front().GetNonTerminalWordData().user_returned_data);
 }
 
 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>
 ForInitSentenceAnnounce(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
+  assert(word_data.size() == 1);
   auto& [ignore_extend_type, ignore_extend_const_tag,
          flow_control_node_container] =
       std::any_cast<std::tuple<
@@ -3008,7 +3025,7 @@ std::any ForInitHead(std::vector<WordDataToUser>&& word_data) {
 }
 
 std::any ForHead(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 7);
+  assert(word_data.size() == 8);
   auto& for_sentence =
       static_cast<ForSentence&>(c_parser_frontend.GetTopFlowControlSentence());
   assert(for_sentence.GetFlowType() == FlowType::kForSentence);
@@ -3018,10 +3035,10 @@ std::any ForHead(std::vector<WordDataToUser>&& word_data) {
   auto& [for_condition, sentences_to_get_for_condition] = std::any_cast<
       std::pair<std::shared_ptr<const OperatorNodeInterface>,
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[3].GetNonTerminalWordData().user_returned_data);
+      word_data[4].GetNonTerminalWordData().user_returned_data);
   auto& for_renew_sentences = std::any_cast<
       std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&>(
-      word_data[5].GetNonTerminalWordData().user_returned_data);
+      word_data[6].GetNonTerminalWordData().user_returned_data);
   bool result =
       for_sentence.AddForInitSentences(std::move(*for_init_sentences));
   if (!result) [[unlikely]] {
@@ -3415,21 +3432,24 @@ ObjectConstructData::ConstructObject(
     // 要构建的类型为函数，将object_从流程类型——基础非流程
     // 转换为流程类型——函数定义
 
-    // 声明待添加的函数
-    auto iter = c_parser_frontend.AnnounceTypeName(GetObjectName());
     // 获取最终类型链
     // 为了构建类型链违反const原则
     auto function_type_chain = std::const_pointer_cast<FunctionType>(
         std::static_pointer_cast<const FunctionType>(final_type_chain));
     // 获取变量名指针后设置函数名
-    function_type_chain->SetFunctionName(&iter->first);
+    if (GetObjectName().empty()) {
+      function_type_chain->SetFunctionName(nullptr);
+    } else {
+      // 声明待添加的函数
+      auto iter = c_parser_frontend.AnnounceTypeName(GetObjectName());
+      function_type_chain->SetFunctionName(&iter->first);
+    }
     // 构建函数定义（FunctionDefine流程）
     ConstructBasicObjectPart<c_parser_frontend::flow_control::FunctionDefine>(
         std::move(function_type_chain));
   } else {
     // 要构建的类型为变量，无需额外转换
-    // 声明待添加变量
-    auto iter = c_parser_frontend.AnnounceVarietyName(GetObjectName());
+
     auto& variety_node = static_cast<VarietyOperatorNode&>(
         static_cast<SimpleSentence&>(*object_)
             .GetSentenceOperateNodeReference());
@@ -3437,7 +3457,13 @@ ObjectConstructData::ConstructObject(
     variety_node.SetVarietyType(
         std::move(type_chain_head_->GetNextNodePointer()));
     // 设置变量名
-    variety_node.SetVarietyName(&iter->first);
+    if (GetObjectName().empty()) {
+      variety_node.SetVarietyName(nullptr);
+    } else {
+      // 声明待添加变量
+      auto iter = c_parser_frontend.AnnounceVarietyName(GetObjectName());
+      variety_node.SetVarietyName(&iter->first);
+    }
   }
   return std::make_pair(std::move(object_), CheckResult::kSuccess);
 }

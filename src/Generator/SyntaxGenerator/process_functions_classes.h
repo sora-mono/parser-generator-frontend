@@ -1,4 +1,11 @@
-// 该文件将用户定义的产生式转化为包装规约函数的类
+/// @file process_functions_classes.h
+/// @brief 根据用户定义的非终结产生式定义包装规约函数的类
+/// @details
+/// 为了避免写链接脚本，通过虚函数机制来调用用户定义的规约函数，以达到根据
+/// 不同产生式调用不同规约函数的目的
+/// 每个非终结产生式体都会定义对应的唯一包装规约函数的类，Generator在构建配置时
+/// 每个类都实例化唯一的对象，这些对象在保存/加载配置时一并序列化
+/// 规约时先获取对应产生式的对象，然后调用Reduct虚函数规约
 #ifndef GENERATOR_SYNTAXGENERATOR_SYNTAXCONFIG_PROCESS_FUNCTIONS_CLASSES_H_
 #define GENERATOR_SYNTAXGENERATOR_SYNTAXCONFIG_PROCESS_FUNCTIONS_CLASSES_H_
 
@@ -6,12 +13,9 @@
 #include "process_function_interface.h"
 
 namespace frontend::generator::syntax_generator {
-// 下面的宏将包含的文件中用户定义的产生式转化为定义规约函数的类
-// 类名修饰方法见syntax_generate.h
-
-// 定义该宏以屏蔽用来允许使用IntelliSense而包含的头文件
-// 在命名空间内包含这些头文件会导致各种奇怪的错误
-#define SHIELD_HEADERS_FOR_INTELLISENSE
+// 下面的宏将包含的文件中用户定义的非终结产生式转化为包装规约函数的类
+// 类名修饰方法见syntax_generate.h中NONTERMINAL_PRODUCTION_SYMBOL_MODIFY和
+// NONTERMINAL_PRODUCTION_SYMBOL_MODIFY_STR
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_
 #include "Config/ProductionConfig/production_config-inc.h"
 #undef GENERATOR_LEXICALGENERATOR_PROCESS_FUNCTIONS_CLASSES_
@@ -19,4 +23,4 @@ namespace frontend::generator::syntax_generator {
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_END
 }  // namespace frontend::generator::syntax_generator
 
-#endif  // !GENERATOR_SYNTAXGENERATOR_SYNTAXCONFIG_PROCESSFUNCTIONS_H_
+#endif  /// !GENERATOR_SYNTAXGENERATOR_SYNTAXCONFIG_PROCESSFUNCTIONS_H_

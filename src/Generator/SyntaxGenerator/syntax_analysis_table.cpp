@@ -13,9 +13,8 @@ SyntaxAnalysisTableEntry& SyntaxAnalysisTableEntry::operator=(
 
 void SyntaxAnalysisTableEntry::ResetEntryId(
     const std::unordered_map<SyntaxAnalysisTableEntryId,
-                             SyntaxAnalysisTableEntryId>&
-        old_entry_id_to_new_entry_id) {
-  //处理终结节点的动作
+                             SyntaxAnalysisTableEntryId>& old_id_to_new_id) {
+  // 处理终结节点的动作
   for (auto& action_and_attached_data : GetAllActionAndAttachedData()) {
     switch (action_and_attached_data.second->GetActionType()) {
       case ActionType::kShift:
@@ -23,9 +22,9 @@ void SyntaxAnalysisTableEntry::ResetEntryId(
         // 获取原条目ID的引用
         ShiftAttachedData& shift_attached_data =
             action_and_attached_data.second->GetShiftAttachedData();
-        auto iter = old_entry_id_to_new_entry_id.find(
+        auto iter = old_id_to_new_id.find(
             shift_attached_data.GetNextSyntaxAnalysisTableEntryId());
-        if (iter != old_entry_id_to_new_entry_id.end()) [[unlikely]] {
+        if (iter != old_id_to_new_id.end()) [[unlikely]] {
           // 更新为新的条目ID
           shift_attached_data.SetNextSyntaxAnalysisTableEntryId(iter->second);
         }
@@ -39,13 +38,14 @@ void SyntaxAnalysisTableEntry::ResetEntryId(
         break;
     }
   }
-  //处理非终结节点的转移
+  // 处理非终结节点的转移
   for (auto& target : GetAllNonTerminalNodeTransformTarget()) {
     SyntaxAnalysisTableEntryId old_entry_id = target.second;
-    SyntaxAnalysisTableEntryId new_entry_id =
-        old_entry_id_to_new_entry_id.find(old_entry_id)->second;
-    if (old_entry_id != new_entry_id) {
-      SetNonTerminalNodeTransformId(target.first, new_entry_id);
+    auto iter = old_id_to_new_id.find(old_entry_id);
+    if (iter != old_id_to_new_id.end()) {
+      if (old_entry_id != iter->second) {
+        SetNonTerminalNodeTransformId(target.first, iter->second);
+      }
     }
   }
 }

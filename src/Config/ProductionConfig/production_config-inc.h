@@ -1,14 +1,14 @@
-// 该文件仅且必须最终被Generator/SyntaxGenerator下的
-// process_functions_classes.h
-// process_functions_classes_register.h
-// config_construct.cpp所包含
+/// 该文件仅且必须最终被Generator/SyntaxGenerator下的
+/// process_functions_classes.h
+/// process_functions_classes_register.h
+/// config_construct.cpp所包含
 #include "Generator/SyntaxGenerator/syntax_generate.h"
 
-// 用户可修改部分
-// 用户定义头文件请在user_defined_functions.h中添加
-// 该文件不可以添加用户定义头文件
+/// 用户可修改部分
+/// 用户定义头文件请在user_defined_functions.h中添加
+/// 该文件不可以添加用户定义头文件
 
-// 终结产生式
+/// 终结产生式
 GENERATOR_DEFINE_TERMINAL_PRODUCTION("Id", R"([a-zA-Z_][a-zA-Z0-9_]*)")
 GENERATOR_DEFINE_TERMINAL_PRODUCTION("Num", R"([+-]?[0-9]+(\.[0-9]*)?)")
 GENERATOR_DEFINE_TERMINAL_PRODUCTION("Str", R"(".*")")
@@ -20,8 +20,8 @@ GENERATOR_DEFINE_TERMINAL_PRODUCTION("}", R"(})")
 GENERATOR_DEFINE_TERMINAL_PRODUCTION(";", R"(;)")
 GENERATOR_DEFINE_TERMINAL_PRODUCTION(":", R"(:)")
 
-// 关键字
-// 定义时请当做单词定义，不允许使用正则
+/// 关键字
+/// 定义时请当做单词定义，不允许使用正则
 GENERATOR_DEFINE_KEY_WORD("char")
 GENERATOR_DEFINE_KEY_WORD("short")
 GENERATOR_DEFINE_KEY_WORD("int")
@@ -48,7 +48,7 @@ GENERATOR_DEFINE_KEY_WORD("switch")
 GENERATOR_DEFINE_KEY_WORD("case")
 GENERATOR_DEFINE_KEY_WORD("default")
 
-// 运算符
+/// 运算符
 GENERATOR_DEFINE_BINARY_OPERATOR(",", OperatorAssociatityType::kLeftToRight, 1)
 GENERATOR_DEFINE_BINARY_OPERATOR("=", OperatorAssociatityType::kRightToLeft, 2)
 GENERATOR_DEFINE_BINARY_OPERATOR("+=", OperatorAssociatityType::kRightToLeft, 2)
@@ -117,7 +117,7 @@ GENERATOR_DEFINE_BINARY_OPERATOR("->", OperatorAssociatityType::kRightToLeft,
 GENERATOR_DEFINE_BINARY_OPERATOR("[", OperatorAssociatityType::kRightToLeft, 15)
 GENERATOR_DEFINE_BINARY_OPERATOR("(", OperatorAssociatityType::kRightToLeft, 15)
 
-// 非终结产生式
+/// 非终结产生式
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleConstexprValue,
     c_parser_frontend::parse_functions::SingleConstexprValueChar, 0,
@@ -163,9 +163,6 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     IdOrEquivence, c_parser_frontend::parse_functions::IdOrEquivenceConstTagId,
     0, {"ConstTag", "Id"})
-// GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-//    IdOrEquivence, c_parser_frontend::parse_functions::IdOrEquivenceConst, 1,
-//    {"const"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     IdOrEquivence,
     c_parser_frontend::parse_functions::IdOrEquivenceNumAddressing, 2,
@@ -181,6 +178,27 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     IdOrEquivence, c_parser_frontend::parse_functions::IdOrEquivenceInBrackets,
     5, {"(", "IdOrEquivence", ")"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    AnonymousIdOrEquivence,
+    c_parser_frontend::parse_functions::AnonymousIdOrEquivenceConst, 0,
+    {"const"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    AnonymousIdOrEquivence,
+    c_parser_frontend::parse_functions::AnonymousIdOrEquivenceNumAddressing, 1,
+    {"AnonymousIdOrEquivence", "[", "Num", "]"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    AnonymousIdOrEquivence,
+    c_parser_frontend::parse_functions::
+        AnonymousIdOrEquivenceAnonymousAddressing,
+    2, {"AnonymousIdOrEquivence", "[", "]"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    AnonymousIdOrEquivence,
+    c_parser_frontend::parse_functions::AnonymousIdOrEquivencePointerAnnounce,
+    3, {"ConstTag", "*", "AnonymousIdOrEquivence"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    AnonymousIdOrEquivence,
+    c_parser_frontend::parse_functions::AnonymousIdOrEquivenceInBrackets, 4,
+    {"(", "AnonymousIdOrEquivence", ")"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     NotEmptyEnumArguments,
     c_parser_frontend::parse_functions::NotEmptyEnumArgumentsIdBase, 0, {"Id"})
@@ -247,9 +265,6 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     BasicType, c_parser_frontend::parse_functions::BasicTypeStructType, 1,
     {"ConstTag", "StructType"})
-// GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-//    BasicType, c_parser_frontend::parse_functions::BasicTypeId, 2,
-//    {"ConstTag", "Id"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     BasicType, c_parser_frontend::parse_functions::BasicTypeEnumAnnounce, 3,
     {"ConstTag", "EnumAnnounce"})
@@ -280,7 +295,7 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     {"BasicType", "FunctionRelaventBasePart"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleAnnounceNoAssign,
-    c_parser_frontend::parse_functions::SingleAnnounceNoAssignVariety, 0,
+    c_parser_frontend::parse_functions::SingleAnnounceNoAssignVariety<false>, 0,
     {"BasicType", "IdOrEquivence"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleAnnounceNoAssign,
@@ -288,19 +303,36 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     {"ConstTag", "Id", "IdOrEquivence"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     SingleAnnounceNoAssign,
-    c_parser_frontend::parse_functions::SingleAnnounceNoAssignFunctionRelavent,
+    c_parser_frontend::parse_functions::SingleAnnounceNoAssignFunctionRelavent<
+        false>,
     2, {"FunctionRelavent"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    AnonymousSingleAnnounceNoAssign,
+    c_parser_frontend::parse_functions::SingleAnnounceNoAssignVariety<true>, 0,
+    {"BasicType", "AnonymousIdOrEquivence"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     TypeDef, c_parser_frontend::parse_functions::TypeDef, 0,
     {"typedef", "SingleAnnounceNoAssign"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     NotEmptyFunctionPointerArguments,
-    c_parser_frontend::parse_functions::NotEmptyFunctionPointerArgumentsBase, 0,
-    {"SingleAnnounceNoAssign"})
+    c_parser_frontend::parse_functions::NotEmptyFunctionRelaventArgumentsBase,
+    0, {"SingleAnnounceNoAssign"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     NotEmptyFunctionPointerArguments,
-    c_parser_frontend::parse_functions::NotEmptyFunctionPointerArgumentsExtend,
-    1, {"NotEmptyFunctionPointerArguments", ",", "SingleAnnounceNoAssign"})
+    c_parser_frontend::parse_functions::
+        NotEmptyFunctionRelaventArgumentsAnonymousBase,
+    1, {"AnonymousSingleAnnounceNoAssign"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    NotEmptyFunctionPointerArguments,
+    c_parser_frontend::parse_functions::NotEmptyFunctionRelaventArgumentsExtend,
+    2, {"NotEmptyFunctionPointerArguments", ",", "SingleAnnounceNoAssign"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    NotEmptyFunctionPointerArguments,
+    c_parser_frontend::parse_functions::
+        NotEmptyFunctionRelaventArgumentsAnonymousExtend,
+    3,
+    {"NotEmptyFunctionPointerArguments", ",",
+     "AnonymousSingleAnnounceNoAssign"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     FunctionRelaventArguments,
     c_parser_frontend::parse_functions::FunctionRelaventArguments, 0,
@@ -630,6 +662,10 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     c_parser_frontend::parse_functions::SingleStatementContinue, 9,
     {"Continue"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    SingleStatement,
+    c_parser_frontend::parse_functions::SingleStatementEmptyStatement, 10,
+    {";"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     IfCondition, c_parser_frontend::parse_functions::IfCondition, 0,
     {"if", "(", "Assignable", ")"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
@@ -642,22 +678,22 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     If, c_parser_frontend::parse_functions::IfIfSentence, 1,
     {"IfCondition", "ProcessControlSentenceBody"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    ForRenewSentences, c_parser_frontend::parse_functions::ForRenewSentences, 0,
+    ForRenewSentence, c_parser_frontend::parse_functions::ForRenewSentence, 0,
     {"Assignables"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     ForInitSentence,
     c_parser_frontend::parse_functions::ForInitSentenceAssignables, 0,
-    {"Assignables", ";"})
+    {"Assignables"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     ForInitSentence,
     c_parser_frontend::parse_functions::ForInitSentenceAnnounce, 1,
-    {"SingleAnnounceAndAssign", ";"})
+    {"SingleAnnounceAndAssign"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     ForInitHead, c_parser_frontend::parse_functions::ForInitHead, 0, {"for"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     ForHead, c_parser_frontend::parse_functions::ForHead, 0,
-    {"ForInitHead", "(", "ForInitSentence", "Assignable", ";",
-     "ForRenewSentences", ")"})
+    {"ForInitHead", "(", "ForInitSentence", ";", "Assignable", ";",
+     "ForRenewSentence", ")"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     For, c_parser_frontend::parse_functions::For, 0,
     {"ForHead", "ProcessControlSentenceBody"})
@@ -698,11 +734,11 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Switch, c_parser_frontend::parse_functions::Switch, 0,
     {"SwitchCondition", "{", "SwitchStatements", "}"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    Statements, c_parser_frontend::parse_functions::StatementsSingleStatement,
-    0, {"Statements", "SingleStatement"})
-GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     StatementsLeftBrace,
     c_parser_frontend::parse_functions::StatementsLeftBrace, 0, {"{"})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    Statements, c_parser_frontend::parse_functions::StatementsSingleStatement,
+    0, {"Statements", "SingleStatement"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Statements, c_parser_frontend::parse_functions::StatementsBrace, 1,
     {"StatementsLeftBrace", "Statements", "}"})
@@ -722,12 +758,12 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Root, c_parser_frontend::parse_functions::RootAnnounce, 1,
     {"Root", "SingleAnnounceNoAssign", ";"})
 
-// 设置可以空规约的非终结节点
-// GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(IdOrEquivence)
+/// 设置可以空规约的非终结节点
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(EnumArguments)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(SignTag)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(ConstTag)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(EnumArguments)
+GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(AnonymousIdOrEquivence)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(
     FunctionRelaventArguments)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(StructureBody)
@@ -738,6 +774,6 @@ GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(SwitchStatements)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(Statements)
 GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(Root)
 
-// 设置产生式根节点
-// 仅允许设置一个
+/// 设置产生式根节点
+/// 仅允许设置一个
 GENERATOR_DEFINE_ROOT_PRODUCTION(Root)
