@@ -23,8 +23,7 @@ class SyntaxAnalysisTableEntry {
   class ReductAttachedData;
   class ShiftReductAttachedData;
 
-  /// @class SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface
-  /// syntax_analysis_table.h
+  /// @class ActionAndAttachedDataInterface syntax_analysis_table.h
   /// @brief 动作和附属数据基类
   /// @details
   /// 动作是根据向前看符号决定移入/规约/接受/报错等
@@ -129,7 +128,7 @@ class SyntaxAnalysisTableEntry {
     ActionType action_type_;
   };
 
-  /// @class SyntaxAnalysisTableEntry::ShiftAttachedData syntax_analysis_table.h
+  /// @class ShiftAttachedData syntax_analysis_table.h
   /// @brief 执行移入动作时的附属数据
   class ShiftAttachedData : public ActionAndAttachedDataInterface {
    public:
@@ -200,8 +199,7 @@ class SyntaxAnalysisTableEntry {
     SyntaxAnalysisTableEntryId next_entry_id_;
   };
 
-  /// @class SyntaxAnalysisTableEntry::ReductAttachedData
-  /// syntax_analysis_table.h
+  /// @class ReductAttachedData syntax_analysis_table.h
   /// @brief 执行规约动作时的附属数据
   class ReductAttachedData : public ActionAndAttachedDataInterface {
    public:
@@ -312,7 +310,7 @@ class SyntaxAnalysisTableEntry {
     std::vector<ProductionNodeId> production_body_;
   };
 
-  /// @class SyntaxAnalysisTableEntry::ShiftReductAttachedData
+  /// @class ShiftReductAttachedData syntax_analysis_table.h
   /// @brief 移入与规约动作的附属数据
   /// @note 使用二义性文法时某些状态下既可以移入也可以规约
   class ShiftReductAttachedData : public ActionAndAttachedDataInterface {
@@ -416,8 +414,7 @@ class SyntaxAnalysisTableEntry {
     ReductAttachedData reduct_attached_data_;
   };
 
-  /// @class SyntaxAnalysisTableEntry::AcceptAttachedData
-  /// syntax_analysis_table.h
+  /// @class AcceptAttachedData syntax_analysis_table.h
   /// @brief 表示Accept动作的节点
   class AcceptAttachedData : public ActionAndAttachedDataInterface {
    public:

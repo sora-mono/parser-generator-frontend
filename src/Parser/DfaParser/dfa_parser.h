@@ -31,7 +31,7 @@ class DfaParser {
   }
   DfaParser& operator=(const DfaParser&) = delete;
 
-  /// @class DfaParser::WordInfo dfa_parser.h
+  /// @class WordInfo dfa_parser.h
   /// @brief µ¥´ÊÊý¾Ý
   struct WordInfo {
     WordInfo() = default;

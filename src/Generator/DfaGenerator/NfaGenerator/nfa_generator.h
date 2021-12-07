@@ -2,7 +2,8 @@
 /// @brief NFA配置生成器
 /// @details
 /// NFA Generator将输入的正则表达式转化为正则数据结构
-/// 支持基础的正则格式有：单字符，[]，()，*，+，?
+/// 支持使用char的全部字符
+/// 支持基础的正则格式有：单字符，[]，[]内使用-，()，*，+，?
 
 #ifndef GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
 #define GENERATOR_DFAGENERATOR_NFAGENERATOR_NFAGENERATOR_H_
@@ -37,7 +38,8 @@ class NfaGenerator {
   using TailNodeData = std::pair<WordAttachedData, WordPriority>;
 
  private:
-  /// @class NfaGenerator::NfaNode nfa_generator.h
+  /// @class NfaNode nfa_generator.h
+  /// @brief 表示正则的Nfa节点
   /// @details
   /// 1.NFA以链表的形式存储在内存中，每个节点具有两个成员，分别存储从该节点可以无条件
   /// 转移到的节点和移入某个字符后转移到的节点。

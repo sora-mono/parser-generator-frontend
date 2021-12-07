@@ -32,7 +32,7 @@ class DfaGenerator {
   using NfaNodeId = NfaGenerator::NfaNodeId;
   /// @brief 子集构造法使用的集合的类型
   using SetType = std::unordered_set<NfaNodeId>;
-  /// @class DfaGenerator::UnorderedSetHasher dfa_generator.h
+  /// @class UnorderedSetHasher dfa_generator.h
   /// @brief 哈希SetType集合的类，用于实例化UnorderedStructManager
   struct UnorderedSetHasher {
     size_t operator()(const SetType& set) const {
@@ -114,9 +114,8 @@ class DfaGenerator {
   /// @brief 声明友元，允许序列化类访问成员
   friend class boost::serialization::access;
 
-  /// @class DfaGenerator::PairOfIntermediateNodeIdAndWordAttachedDataHasher
-  /// dfa_generator.h
-  /// @brief 用来哈希中间节点ID和单词数据的结合体的结构，用于SubDataMinimize
+  /// @class PairOfIntermediateNodeIdAndWordAttachedDataHasher dfa_generator.h
+  /// @brief 哈希中间节点ID和单词数据的结合体的结构，用于SubDataMinimize
   struct PairOfIntermediateNodeIdAndWordAttachedDataHasher {
     size_t operator()(const std::pair<IntermediateNodeId, WordAttachedData>&
                           data_to_hash) const {
@@ -137,7 +136,7 @@ class DfaGenerator {
   /// 分割save和load操作，DFA配置生成器只能执行save操作，不能执行load操作
   BOOST_SERIALIZATION_SPLIT_MEMBER()
 
-  /// @class DfaGenerator::IntermediateDfaNode dfa_generator.h
+  /// @class IntermediateDfaNode dfa_generator.h
   /// @brief DFA配置生成器的中间节点
   /// @details
   /// 中间节点与子集构造法的集合一一对应，每个节点存储一个条件转移表

@@ -375,7 +375,7 @@ class BinaryUnaryOperatorNode : public OperatorNodeInterface {
 /// @brief 表示非终结产生式
 class NonTerminalProductionNode : public BaseProductionNode {
  public:
-  /// @class NonTerminalProductionNode::ProductionBodyType production_node.h
+  /// @class ProductionBodyType production_node.h
   /// @brief 表示单个非终结产生式体
   struct ProductionBodyType {
     template <class BodyContainer>

@@ -1,0 +1,43 @@
+本项目为编译器前端生成器（Generator + Parser），附带使用样例:C语言编译器前端实现
+
+使用说明：
+1.基础概念介绍
+  1) 产生式分类：产生式分为终结产生式和非终结产生式，终结产生式分为普通终结
+     产生式、运算符、关键字；非终结产生式分为普通非终结产生式、根非终结产生式
+  2) 本生成器使用lALR(1)语法，支持特性如下所示：
+     非终结产生式空规约
+     二义性文法（仅支持左侧单目和双目运算符，右侧单目运算符使用双目运算符语义）
+     产生式循环引用
+  3) 正则支持特性如下所示：
+     可使用char的全部字符
+     *、+、?三种限制符
+     []可选字符序列，支持X-Y表示X到Y的全部字符
+     ()分组
+  4) 向前看符号不是运算符时使用移入优先策略
+2.产生式定义方法：
+  1) 产生式定义于src/Config/ProductionConfig/production_config-inc.h中
+  2) 规约用函数的头文件在src/Config/ProductionConfig/user_defined_functions.h中
+     添加，禁止在定义产生式的文件中添加任何额外的头文件
+  3) 产生式通过宏定义，定义产生式的宏如下所示：
+     GENERATOR_DEFINE_KEY_WORD(key_word)
+     GENERATOR_DEFINE_BINARY_OPERATOR( \
+       operator_symbol, binary_operator_associatity, binary_operator_priority)
+     GENERATOR_DEFINE_UNARY_OPERATOR( \
+       operator_symbol, unary_operator_associatity, unary_operator_priority)
+     GENERATOR_DEFINE_BINARY_UNARY_OPERATOR(                             \
+       operator_symbol, binary_operator_associatity, binary_operator_priority, \
+       unary_operator_associatity, unary_operator_priority)
+     GENERATOR_DEFINE_TERMINAL_PRODUCTION(production_symbol, production_body)
+     GENERATOR_DEFINE_NONTERMINAL_PRODUCTION( \
+       production_symbol, reduct_function_name, production_body_seq, ...)
+     GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT( \
+       production_symbol)
+     GENERATOR_DEFINE_ROOT_PRODUCTION(production_symbol)
+  4) 宏的使用方法见src/Generator/SyntaxGenerator/syntax_generate.h
+  5) 3)中所提供的宏仅允许在1)所述文件中使用
+3.库链接方法：
+  1) 用户自定义库需要链接到SyntaxGenerator和SyntaxParser
+  2) 修改对应文件夹中的CMakeLists.txt，在target_link_libraries中添加规约产生式的
+     函数所在库，SynatxGenerator链接到syntax_generator，SyntaxParser链接到
+     syntax_machine
+  3) c_parser_frontend是样例的规约函数所在的库，使用时应删除

@@ -866,13 +866,11 @@ class SyntaxGenerator {
   /// 将序列化分为保存与加载，Generator仅保存配置，不加载
   BOOST_SERIALIZATION_SPLIT_MEMBER()
 
-  /*! @class \
-  * SyntaxGenerator::SyntaxAnalysisTableEntryIdAndProcessFunctionClassIdHasher
-  * syntax_generator.h
-  * @brief 哈希语法分析表条目ID与规约函数ID的类
-  * @note
-  * 用于SyntaxAnalysisTableTerminalNodeClassify中分类同时支持规约与移入的数据
-  */
+  /// @class SyntaxAnalysisTableEntryIdAndProcessFunctionClassIdHasher
+  /// syntax_generator.h
+  /// @brief 哈希语法分析表条目ID与规约函数ID的类
+  /// @note
+  /// 用于SyntaxAnalysisTableTerminalNodeClassify中分类同时支持规约与移入的数据
   struct SyntaxAnalysisTableEntryIdAndProcessFunctionClassIdHasher {
     size_t operator()(
         const std::pair<SyntaxAnalysisTableEntryId, ProcessFunctionClassId>&
@@ -928,7 +926,7 @@ template <class IdType>
 inline ProductionBodyId NonTerminalProductionNode::AddBody(
     IdType&& body, ProcessFunctionClassId class_for_reduct_id) {
   ProductionBodyId body_id(nonterminal_bodys_.size());
-  /// 将输入插入到产生式体向量中，无删除相同产生式功能
+  // 将输入插入到产生式体向量中，无删除相同产生式功能
   nonterminal_bodys_.emplace_back(std::forward<IdType>(body),
                                   class_for_reduct_id);
   return body_id;
@@ -958,8 +956,6 @@ SyntaxGenerator::AddItemAndForwardNodeIdsToProductionItem(
   return result;
 }
 
-/// 在AddItemAndForwardNodeIdsToCore基础上设置添加的项为核心项
-
 template <class ForwardNodeIdContainer>
 inline std::pair<
     SyntaxGenerator::ProductionItemAndForwardNodesContainer::iterator, bool>
@@ -972,7 +968,7 @@ SyntaxGenerator::AddMainItemAndForwardNodeIdsToProductionItem(
                         production_item,
                         std::forward<ForwardNodeIdContainer>(forward_node_ids));
   if (result.second) {
-    /// 向项集中插入了新的项则更新该项属于的项集
+    // 向项集中插入了新的项则更新该项属于的项集
     AddProductionItemBelongToProductionItemSetId(production_item,
                                                  production_item_set_id);
   }

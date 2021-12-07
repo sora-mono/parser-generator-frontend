@@ -1,4 +1,5 @@
-/// 存储向外暴露的一些数据类型
+/// @file export_types.h
+/// @brief 存储向外暴露的一些数据类型
 #ifndef COMMON_ENUM_AND_TYPES_H_
 #define COMMON_ENUM_AND_TYPES_H_
 

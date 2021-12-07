@@ -353,8 +353,6 @@ void SyntaxGenerator::SetRootProduction(
   SetRootProductionNodeId(production_node_id);
 }
 
-// 获取节点
-
 inline BaseProductionNode& SyntaxGenerator::GetProductionNode(
     ProductionNodeId production_node_id) {
   return const_cast<BaseProductionNode&>(
@@ -382,8 +380,6 @@ inline BaseProductionNode& SyntaxGenerator::GetProductionNodeFromBodySymbolId(
   assert(symbol_id.IsValid());
   return GetProductionNode(production_node_id);
 }
-
-// 获取非终结节点中的一个产生式体
 
 inline const std::vector<ProductionNodeId>& SyntaxGenerator::GetProductionBody(
     ProductionNodeId production_node_id, ProductionBodyId production_body_id) {
@@ -1134,10 +1130,6 @@ void SyntaxGenerator::SyntaxAnalysisTableMergeOptimize() {
   // 将所有旧ID更新为新ID
   RemapSyntaxAnalysisTableEntryId(moved_entry_to_new_entry_id);
 }
-
-
-/// @brief 将语法分析表配置写入文件
-/// 文件名为frontend::common::kSyntaxConfigFileName
 
 inline void SyntaxGenerator::SaveConfig() const {
   dfa_generator_.SaveConfig();

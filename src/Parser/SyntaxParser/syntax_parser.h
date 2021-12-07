@@ -67,7 +67,7 @@ class SyntaxParser {
   using OperatorPriority =
       frontend::generator::syntax_generator::OperatorPriority;
 
-  /// @class SyntaxParser::ParsingData syntax_parser.h
+  /// @class ParsingData syntax_parser.h
   /// @brief 解析时使用的数据
   struct ParsingData {
     /// @brief 当前语法分析表条目ID
