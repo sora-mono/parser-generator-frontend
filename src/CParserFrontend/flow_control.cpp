@@ -2,11 +2,11 @@
 
 #include "action_scope_system.h"
 namespace c_parser_frontend::flow_control {
-/// 添加一条函数内执行的语句（按出现顺序添加）
-/// 成功添加返回true，不返还控制权
-/// 如果不能添加则返回false与控制权
+// 添加一条函数内执行的语句（按出现顺序添加）
+// 成功添加返回true，不返还控制权
+// 如果不能添加则返回false与控制权
 
-/// 检查给定语句是否可以作为函数内出现的语句
+// 检查给定语句是否可以作为函数内出现的语句
 
 bool SimpleSentence::SetSentenceOperateNode(
     const std::shared_ptr<OperatorNodeInterface>& sentence_operate_node) {
@@ -30,7 +30,7 @@ inline bool SimpleSentence::CheckOperatorNodeValid(
     case GeneralOperationType::kObtainAddress:
     case GeneralOperationType::kVariety:
     case GeneralOperationType::kTypeConvert:
-      /// 以上为可以成为基础语句的节点
+      // 以上为可以成为基础语句的节点
       return true;
       break;
     default:
@@ -39,9 +39,9 @@ inline bool SimpleSentence::CheckOperatorNodeValid(
   }
 }
 
-/// 根据if语句类型判断应该添加到哪个部分
-/// 如果是FlowType::kIfSentence则添加到true_branch
-/// 如果是FlowType::kIfElseSentence则添加到false_branch
+// 根据if语句类型判断应该添加到哪个部分
+// 如果是FlowType::kIfSentence则添加到true_branch
+// 如果是FlowType::kIfElseSentence则添加到false_branch
 
 bool IfSentence::AddMainSentence(std::unique_ptr<FlowInterface>&& sentence) {
   if (GetFlowType() == FlowType::kIfSentence) [[likely]] {
@@ -64,14 +64,15 @@ bool IfSentence::AddMainSentences(
 
 void IfSentence::ConvertToIfElse() {
   assert(GetFlowType() == FlowType::kIfSentence);
-  /// 修改语句类型
+  // 修改语句类型
   SetFlowType(FlowType::kIfElseSentence);
-  /// 创建else节点容器
-  else_body_ = std::make_shared<std::list<std::unique_ptr<FlowInterface>>>();
+  // 创建else节点容器
+  else_body_ = std::make_unique<std::list<std::unique_ptr<FlowInterface>>>();
 }
 
 inline bool IfSentence::AddFalseBranchSentence(
     std::unique_ptr<FlowInterface>&& else_body_sentence) {
+  assert(else_body_ != nullptr);
   if (CheckElseBodySentenceValid(*else_body_sentence)) [[likely]] {
     else_body_->emplace_back(std::move(else_body_sentence));
     return true;
@@ -81,6 +82,7 @@ inline bool IfSentence::AddFalseBranchSentence(
 }
 bool IfSentence::AddFalseBranchSentences(
     std::list<std::unique_ptr<FlowInterface>>&& else_body_sentences) {
+  assert(else_body_ != nullptr);
   for (const auto& sentence : else_body_sentences) {
     if (!CheckElseBodySentenceValid(*sentence)) [[unlikely]] {
       return false;
@@ -112,7 +114,7 @@ bool ForSentence::AddForInitSentences(
 inline bool ForSentence::AddForRenewSentence(
     std::unique_ptr<FlowInterface>&& after_body_sentence) {
   if (CheckForBodySentenceValid(*after_body_sentence)) [[likely]] {
-    AddSentence(std::move(after_body_sentence));
+    renew_sentences_.emplace_back(std::move(after_body_sentence));
     return true;
   } else {
     return false;
@@ -126,15 +128,10 @@ bool ForSentence::AddForRenewSentences(
       return false;
     }
   }
-  after_body_sentences_.splice(after_body_sentences_.end(),
-                               std::move(after_body_sentences));
+  renew_sentences_.splice(renew_sentences_.end(),
+                          std::move(after_body_sentences));
   return true;
 }
-
-/// 默认对循环条件节点进行类型检查的函数
-/// 返回给定节点是否可以作为条件分支类语句的条件
-
-/// 向主块内添加语句，做参数检查，如果参数检查不通过则不添加
 
 bool ConditionBlockInterface::SetCondition(
     const std::shared_ptr<const OperatorNodeInterface>& condition,
@@ -181,8 +178,8 @@ inline bool ConditionBlockInterface::DefaultConditionCheck(
   }
 }
 
-/// 默认检查主体内语句的函数
-/// 返回给定流程控制节点是否可以作为条件分支语句主体的内容
+// 默认检查主体内语句的函数
+// 返回给定流程控制节点是否可以作为条件分支语句主体的内容
 
 inline bool ConditionBlockInterface::DefaultMainBlockSentenceCheck(
     const FlowInterface& flow_interface) {
@@ -199,7 +196,7 @@ inline bool ConditionBlockInterface::DefaultMainBlockSentenceCheck(
       return true;
       break;
     default:
-      /// 只有函数定义不允许在if语句中出现
+      // 只有函数定义不允许在if语句中出现
       return false;
       break;
   }
@@ -209,27 +206,27 @@ bool SwitchSentence::CheckSwitchCaseAbleToAdd(
     const SwitchSentence& switch_node,
     const BasicTypeInitializeOperatorNode& case_value) {
   if (case_value.GetInitializeType() != InitializeType::kBasic) [[unlikely]] {
-    /// case的条件必须为立即数
+    // case的条件必须为立即数
     return false;
   }
-  /// 判断给定case条件是否已经存在
+  // 判断给定case条件是否已经存在
   auto iter = switch_node.GetSimpleCases().find(case_value.GetValue());
   return iter == switch_node.GetSimpleCases().end();
 }
 
-/// 添加普通的case，返回是否添加成功，如果添加失败则不修改参数
+// 添加普通的case，返回是否添加成功，如果添加失败则不修改参数
 
 bool SwitchSentence::AddSimpleCase(
     const std::shared_ptr<const BasicTypeInitializeOperatorNode>& case_value) {
   if (CheckSwitchCaseAbleToAdd(*this, *case_value)) [[likely]] {
-    /// 可以添加
-    auto [label_for_jmp, label_in_body] =
-        ConvertCaseValueToLabel(*this, *case_value);
+    // 可以添加
+    auto&& [label_for_jmp, label_in_body] =
+        ConvertCaseValueToLabel(*case_value);
     auto [iter, inserted] = simple_cases_.emplace(
         case_value->GetValue(),
         std::make_pair(case_value, std::move(label_for_jmp)));
     if (inserted) [[likely]] {
-      /// 标签未重名，复制一份标签添加到switch主体
+      // 标签未重名，复制一份标签添加到switch主体
       AddSentence(std::move(label_in_body));
     }
     return inserted;
@@ -239,93 +236,41 @@ bool SwitchSentence::AddSimpleCase(
 }
 bool SwitchSentence::AddDefaultCase() {
   if (default_case_ != nullptr) [[unlikely]] {
-    /// 已经设置了默认标签
+    // 已经设置了默认标签
     return false;
   }
-  auto [label_for_jmp, label_in_body] = GetDefaultLabel(*this);
+  auto&& [label_for_jmp, label_in_body] = CreateDefaultLabel();
   AddSentence(std::move(label_in_body));
   default_case_ = std::move(label_for_jmp);
   return true;
 }
 std::pair<std::unique_ptr<Label>, std::unique_ptr<Label>>
 SwitchSentence::ConvertCaseValueToLabel(
-    const SwitchSentence& switch_sentence,
-    const BasicTypeInitializeOperatorNode& case_value) {
-  /// switch语句ID，用来生成独一无二的标签
-  auto switch_node_id = switch_sentence.GetFlowId();
-  /// 生成标签名
+    const BasicTypeInitializeOperatorNode& case_value) const {
+  // switch语句ID，用来生成独一无二的标签
+  auto switch_node_id = GetFlowId();
+  // 生成标签名
   std::string label_name = std::format(
       "switch_{:}_{:}", switch_node_id.GetRawValue(), case_value.GetValue());
-  /// switch跳转语句中使用的标签
+  // switch跳转语句中使用的标签
   auto label_for_jmp = std::make_unique<Label>(label_name);
-  /// switch主体内使用的标签
+  // switch主体内使用的标签
   auto label_in_body = std::make_unique<Label>(std::move(label_name));
   return std::make_pair(std::move(label_for_jmp), std::move(label_in_body));
 }
 std::pair<std::unique_ptr<Label>, std::unique_ptr<Label>>
-SwitchSentence::GetDefaultLabel(const SwitchSentence& switch_sentence) {
-  /// switch语句ID，用来生成独一无二的标签
-  auto switch_node_id = switch_sentence.GetFlowId();
-  /// 生成标签名
+SwitchSentence::CreateDefaultLabel() const {
+  // switch语句ID，用来生成独一无二的标签
+  auto switch_node_id = GetFlowId();
+  // 生成标签名
   std::string label_name =
       std::format("switch_{:}_default", switch_node_id.GetRawValue());
-  /// switch跳转语句中使用的标签
+  // switch跳转语句中使用的标签
   auto label_for_jmp = std::make_unique<Label>(label_name);
-  /// switch主体内使用的标签
+  // switch主体内使用的标签
   auto label_in_body = std::make_unique<Label>(std::move(label_name));
   return std::make_pair(std::move(label_for_jmp), std::move(label_in_body));
 }
-bool Return::SetReturnTarget(
-    const FunctionDefine* function_to_return_from,
-    const std::shared_ptr<const OperatorNodeInterface>& return_target) {
-  assert(function_to_return_from != nullptr);
-  if (return_target == nullptr) {
-    auto& function_return_type =
-        function_to_return_from->GetFunctionTypeReference()
-            .GetReturnTypeReference();
-    if (function_return_type.GetType() == StructOrBasicType::kBasic &&
-        static_cast<const c_parser_frontend::type_system::BasicType&>(
-            function_return_type)
-                .GetBuiltInType() ==
-            c_parser_frontend::type_system::BuiltInType::kVoid) [[likely]] {
-      /// 函数无返回值
-      return_target_ = return_target;
-      function_to_return_from_ = function_to_return_from;
-      return true;
-    } else {
-      return false;
-    }
-  }
-  /// 构建临时变量用于调用CheckAssignable函数
-  c_parser_frontend::operator_node::VarietyOperatorNode
-      temp_node_to_be_assigned(
-          nullptr, ConstTag::kNonConst,
-          c_parser_frontend::operator_node::LeftRightValueTag::kLeftValue);
-  bool result = temp_node_to_be_assigned.SetVarietyType(
-      function_to_return_from->GetFunctionTypeReference()
-          .GetReturnTypePointer());
-  assert(result);
-  switch (c_parser_frontend::operator_node::AssignOperatorNode::CheckAssignable(
-      temp_node_to_be_assigned, *return_target, true)) {
-    case AssignableCheckResult::kZeroConvertToPointer:
-    case AssignableCheckResult::kUpperConvert:
-    case AssignableCheckResult::kConvertToVoidPointer:
-    case AssignableCheckResult::kNonConvert:
-    case AssignableCheckResult::kSignedToUnsigned:
-    case AssignableCheckResult::kUnsignedToSigned:
-      return_target_ = return_target;
-      function_to_return_from_ = function_to_return_from;
-      return true;
-      break;
-    default:
-      return false;
-      break;
-  }
-}
-
-/// 添加一条函数内执行的语句（按出现顺序添加）
-/// 成功添加返回true，不返还控制权
-/// 如果不能添加则返回false，不修改入参
 
 inline bool FunctionDefine::AddSentence(
     std::unique_ptr<FlowInterface>&& sentence_to_add) {
@@ -333,37 +278,86 @@ inline bool FunctionDefine::AddSentence(
     sentences_in_function_.emplace_back(std::move(sentence_to_add));
     return true;
   } else {
-    /// 不能添加，返回控制权
+    // 不能添加，返回控制权
     return false;
   }
 }
-
-/// 添加一个容器内的全部语句（按照给定迭代器begin->end顺序添加）
-/// 成功添加后作为参数的容器空
-/// 如果有返回false的CheckSentenceInFunctionValid结果则返回false且不修改参数
-/// 成功添加则返回true
-
 inline bool FunctionDefine::AddSentences(
     std::list<std::unique_ptr<FlowInterface>>&& sentence_container) {
-  /// 检查是否容器内所有节点都可以添加
+  // 检查是否容器内所有节点都可以添加
   for (const auto& sentence : sentence_container) {
     if (!CheckSentenceInFunctionValid(*sentence)) [[unlikely]] {
       return false;
     }
   }
-  /// 通过检查，将容器内所有语句全部合并到主容器中
+  // 通过检查，将容器内所有语句全部合并到主容器中
   sentences_in_function_.splice(sentences_in_function_.end(),
                                 std::move(sentence_container));
   return true;
 }
 
 inline bool FunctionDefine::CheckSentenceInFunctionValid(
-    const FlowInterface& flow_interface) {
+    const FlowInterface& flow_interface) const {
   switch (flow_interface.GetFlowType()) {
     case FlowType::kFunctionDefine:
-      /// C语言不允许嵌套定义函数
+      // C语言不允许嵌套定义函数
       return false;
       break;
+    case FlowType::kReturn: {
+      // 需要检查返回值与函数返回值是否匹配
+      // 构建标准的函数返回节点
+      auto function_return_type =
+          GetFunctionTypeReference().GetReturnTypePointer();
+      const Return& return_sentence =
+          static_cast<const Return&>(flow_interface);
+      // 检查是否为void返回值
+      if (function_return_type ==
+          c_parser_frontend::type_system::CommonlyUsedTypeGenerator::
+              GetBasicType<
+                  c_parser_frontend::type_system::BuiltInType::kVoid,
+                  c_parser_frontend::type_system::SignTag::kUnsigned>()) {
+        // void返回语句应不返回任何值
+        return return_sentence.GetReturnValuePointer() == nullptr;
+      }
+      auto standard_return_node = std::make_unique<
+          c_parser_frontend::operator_node::VarietyOperatorNode>(
+          "", ConstTag::kConst,
+          c_parser_frontend::operator_node::LeftRightValueTag::kRightValue);
+      bool set_type_result =
+          standard_return_node->SetVarietyType(function_return_type);
+      assert(set_type_result);
+      // 检查是否可以用返回的值构建标准返回值
+      auto assign_check_result =
+          c_parser_frontend::operator_node::AssignOperatorNode::CheckAssignable(
+              *standard_return_node, *return_sentence.GetReturnValuePointer(),
+              true);
+      switch (assign_check_result) {
+        case AssignableCheckResult::kNonConvert:
+        case AssignableCheckResult::kUpperConvert:
+        case AssignableCheckResult::kConvertToVoidPointer:
+        case AssignableCheckResult::kZeroConvertToPointer:
+        case AssignableCheckResult::kUnsignedToSigned:
+        case AssignableCheckResult::kSignedToUnsigned:
+          return true;
+          break;
+        case AssignableCheckResult::kLowerConvert:
+        case AssignableCheckResult::kCanNotConvert:
+        case AssignableCheckResult::kAssignedNodeIsConst:
+        case AssignableCheckResult::kInitializeListTooLarge:
+          return false;
+          break;
+        case AssignableCheckResult::kArgumentsFull:
+        case AssignableCheckResult::kAssignToRightValue:
+        case AssignableCheckResult::kInitializeList:
+        case AssignableCheckResult::kMayBeZeroToPointer:
+        default:
+          assert(false);
+          // 防止警告
+          return false;
+          break;
+      }
+
+    } break;
     default:
       return true;
       break;
@@ -375,16 +369,17 @@ FlowControlSystem::SetFunctionToConstruct(
   const auto& function_name = active_function->GetFunctionName();
   auto [iter, inserted] = functions_.emplace(function_name, active_function);
   if (!inserted) [[likely]] {
-    /// 已存在声明/定义的函数
-    /// 判断已存在的函数是否是仅声明
+    // 已存在声明/定义的函数
+    // 判断已存在的函数是否是仅声明
     if (!iter->second.IsFunctionAnnounce()) [[unlikely]] {
-      /// 已存在的函数已经定义过
+      // 已存在的函数已经定义过
       return FunctionCheckResult::kFunctionConstructed;
     } else if (!iter->second.GetFunctionTypeReference().IsSameSignature(
                    *active_function)) [[unlikely]] {
-      /// 已存在的函数函数签名与待添加函数函数签名不同
+      // 已存在的函数函数签名与待添加函数函数签名不同
       return FunctionCheckResult::kOverrideFunction;
     }
+    // 已存在的函数只是声明且函数签名相同
   }
   active_function_ = iter;
   return FunctionCheckResult::kSuccess;
@@ -393,24 +388,23 @@ FlowControlSystem::FunctionCheckResult FlowControlSystem::AnnounceFunction(
     const std::shared_ptr<const FunctionType>& function_type) {
   auto iter = functions_.find(function_type->GetFunctionName());
   if (iter == functions_.end()) [[likely]] {
-    /// 不存在要声明的函数
-    functions_.emplace(function_type->GetFunctionName(),
-                       FunctionDefine(function_type));
+    // 不存在要声明的函数
+    functions_.emplace(function_type->GetFunctionName(), function_type);
     return FunctionCheckResult::kSuccess;
   } else {
     if (iter->second.GetFunctionTypeReference().IsSameSignature(
             *function_type)) {
-      /// 试图重新声明已声明/定义的函数
+      // 试图重新声明已声明/定义的函数
       return FunctionCheckResult::kDoubleAnnounce;
     } else {
-      /// 试图重载函数
+      // 试图重载函数
       return FunctionCheckResult::kOverrideFunction;
     }
   }
 }
-}  /// namespace c_parser_frontend::flow_control
+}  // namespace c_parser_frontend::flow_control
 
-/// 使用前向声明后定义移到这里以使用智能指针
+// 使用前向声明后定义移到这里以使用智能指针
 namespace c_parser_frontend::operator_node {
 FunctionCallOperatorNode::FunctionCallArgumentsContainer::
     FunctionCallArgumentsContainer() {}
@@ -426,12 +420,6 @@ TemaryOperatorNode::GetFlowControlNodeToGetConditionReference() const {
 
 const std::list<
     std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>>&
-TemaryOperatorNode::GetFlowControlNodeToGetTrueBranchReference() const {
-  return *true_branch_flow_control_node_container_;
-}
-
-const std::list<
-    std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>>&
 TemaryOperatorNode::GetFlowControlNodeToGetFalseBranchReference() const {
   return *false_branch_flow_control_node_container_;
 }
@@ -440,14 +428,14 @@ bool FunctionCallOperatorNode::SetArguments(
     FunctionCallArgumentsContainer&& container) {
   FunctionCallArgumentsContainer::ContainerType& raw_container =
       container.GetFunctionCallArguments();
-  /// 标准的函数调用参数，待设置容器中所有参数必须可以转换到位置相同的参数
+  // 标准的函数调用参数，待设置容器中所有参数必须可以转换到位置相同的参数
   const auto& function_argument_standard =
       GetFunctionTypePointer()->GetArguments();
   if (raw_container.size() != function_argument_standard.size()) [[unlikely]] {
-    /// 调用给定的参数数目与函数参数数目不相等
+    // 调用给定的参数数目与函数参数数目不相等
     return false;
   }
-  /// 检查是否每个参数都可以转化为最终调用使用的参数类型
+  // 检查是否每个参数都可以转化为最终调用使用的参数类型
   auto iter_standard = function_argument_standard.begin();
   auto iter_container_to_set = raw_container.begin();
   for (size_t i = 0; i < raw_container.size(); i++) {
@@ -461,17 +449,17 @@ bool FunctionCallOperatorNode::SetArguments(
       case AssignableCheckResult::kZeroConvertToPointer:
       case AssignableCheckResult::kUnsignedToSigned:
       case AssignableCheckResult::kSignedToUnsigned:
-        /// 可以添加
+        // 可以添加
         break;
       default:
-        /// 不可以添加
+        // 不可以添加
         return false;
         break;
     }
   }
-  /// 所有参数通过检查
+  // 所有参数通过检查
   function_arguments_offerred_ = std::move(container);
   return true;
 }
 
-}  /// namespace c_parser_frontend::operator_node
+}  // namespace c_parser_frontend::operator_node

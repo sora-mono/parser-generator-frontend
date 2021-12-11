@@ -28,18 +28,18 @@ using OperatorAssociatityType = frontend::common::OperatorAssociatityType;
 /// 为了支持ClassfiyProductionNodes，允许自定义项的值
 /// 如果自定义项的值则所有项的值都必须小于sizeof(ProductionNodeType)
 enum class ProductionNodeType {
-  kTerminalNode,     // 终结产生式节点
-  kOperatorNode,     // 运算符节点
-  kNonTerminalNode,  // 非终结产生式节点
-  kEndNode           // 文件尾节点
+  kTerminalNode,     ///< 终结产生式节点
+  kOperatorNode,     ///< 运算符节点
+  kNonTerminalNode,  ///< 非终结产生式节点
+  kEndNode           ///< 文件尾节点
 };
 /// @brief 语法分析动作类型
 enum class ActionType {
-  kShift,        // 移入
-  kReduct,       // 规约
-  kShiftReduct,  // 移入或规约
-  kError,        // 报错
-  kAccept        // 接受
+  kShift,        ///< 移入
+  kReduct,       ///< 规约
+  kShiftReduct,  ///< 移入或规约
+  kError,        ///< 报错
+  kAccept        ///< 接受
 };
 
 // 前向声明类，用来获取管理该类的结构给出的标识ID

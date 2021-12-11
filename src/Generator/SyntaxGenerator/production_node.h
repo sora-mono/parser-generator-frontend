@@ -155,9 +155,9 @@ class TerminalProductionNode : public BaseProductionNode {
 class OperatorNodeInterface : public BaseProductionNode {
  public:
   enum class OperatorType {
-    kBinary,     // 双目运算符
-    kLeftUnary,  // 左侧单目运算符
-    kBinaryLeftUnary  // 同时具有双目运算符语义和左侧单目运算符语义的运算符
+    kBinary,     ///< 双目运算符
+    kLeftUnary,  ///< 左侧单目运算符
+    kBinaryLeftUnary  ///< 同时具有双目运算符语义和左侧单目运算符语义的运算符
   };
   /// @brief 获取产生式体内的产生式
   /// @param[in] production_body_id ：待获取的产生式体ID

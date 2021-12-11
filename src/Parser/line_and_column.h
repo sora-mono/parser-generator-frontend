@@ -19,7 +19,7 @@ extern inline size_t GetColumn();
 /// @note 从0开始计算
 extern inline void SetLine(size_t line);
 /// @brief 设置当前列数
-/// @param[in] line ：待设置的列数
+/// @param[in] column ：待设置的列数
 /// @note 从0开始计算
 extern inline void SetColumn(size_t column);
 

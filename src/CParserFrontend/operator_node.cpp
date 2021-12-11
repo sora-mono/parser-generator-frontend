@@ -3,10 +3,18 @@
 #include <format>
 #include <iostream>
 namespace c_parser_frontend::operator_node {
+inline std::shared_ptr<OperatorNodeInterface> VarietyOperatorNode::SelfCopy(
+    const std::shared_ptr<const TypeInterface>& new_type,
+    ConstTag new_const_tag) const {
+  auto new_node = std::make_shared<VarietyOperatorNode>(*this);
+  new_node->SetVarietyType(new_type);
+  new_node->SetConstTag(new_const_tag);
+  return new_node;
+}
 inline bool VarietyOperatorNode::SetVarietyType(
     const std::shared_ptr<const TypeInterface>& variety_type) {
   if (CheckVarietyTypeValid(*variety_type)) [[likely]] {
-    /// 仅当符合变量的类型的标准时才可以设置
+    // 仅当符合变量的类型的标准时才可以设置
     variety_type_ = variety_type;
     return true;
   } else {
@@ -29,21 +37,35 @@ inline bool VarietyOperatorNode::CheckVarietyTypeValid(
     const TypeInterface& variety_type) {
   switch (variety_type.GetType()) {
     case StructOrBasicType::kEnd:
-      /// 该类型代表最终哨兵节点
+      // 该类型代表最终哨兵节点
     case StructOrBasicType::kNotSpecified:
-      /// 该选项仅应出现在根据类型名查询类型用函数中
+      // 该选项仅应出现在根据类型名查询类型用函数中
       assert(false);
-      [[fallthrough]];
+      return false;
+      break;
     case StructOrBasicType::kFunction:
-    /// 函数不能声明为变量
+    // 函数不能声明为变量
     case StructOrBasicType::kInitializeList:
-      /// 初始化列表不能声明为变量
+      // 初始化列表不能声明为变量
       return false;
       break;
     default:
       return true;
       break;
   }
+}
+
+inline std::shared_ptr<OperatorNodeInterface>
+BasicTypeInitializeOperatorNode::SelfCopy(
+    const std::shared_ptr<const TypeInterface>& new_type,
+    ConstTag new_const_tag) const {
+  if (new_const_tag == ConstTag::kNonConst) [[unlikely]] {
+    // 不允许设置初始化数据为const
+    return nullptr;
+  }
+  auto new_node = std::make_shared<BasicTypeInitializeOperatorNode>(*this);
+  new_node->SetInitDataType(new_type);
+  return new_node;
 }
 
 inline bool BasicTypeInitializeOperatorNode::SetInitDataType(
@@ -59,7 +81,7 @@ inline bool BasicTypeInitializeOperatorNode::CheckBasicTypeInitializeValid(
     const TypeInterface& variety_type) {
   switch (variety_type.GetType()) {
     case StructOrBasicType::kPointer:
-      /// const char*
+      // const char*
       return variety_type ==
              *CommonlyUsedTypeGenerator::GetConstExprStringType();
       break;
@@ -73,7 +95,7 @@ inline bool BasicTypeInitializeOperatorNode::CheckBasicTypeInitializeValid(
   }
 }
 
-/// 返回是否为有效的初始化数据类型，如果无效则不添加
+// 返回是否为有效的初始化数据类型，如果无效则不添加
 inline bool InitializeOperatorNodeInterface::SetInitValueType(
     const std::shared_ptr<const TypeInterface>& init_value_type) {
   if (CheckInitValueTypeValid(*init_value_type)) [[likely]] {
@@ -88,53 +110,50 @@ inline bool InitializeOperatorNodeInterface::CheckInitValueTypeValid(
     const TypeInterface& init_value_type) {
   switch (init_value_type.GetType()) {
     case StructOrBasicType::kBasic:
-      /// 数字
+      // 数字
     case StructOrBasicType::kInitializeList:
-      /// 初始化列表
+      // 初始化列表
     case StructOrBasicType::kFunction:
-      /// 用来给函数指针赋值的初始化值
+      // 用来给函数指针赋值的初始化值
       return true;
       break;
     case StructOrBasicType::kPointer:
-      /// 检查是否为字符串类型const char*
+      // 检查是否为字符串类型const char*
       return init_value_type ==
              *CommonlyUsedTypeGenerator::GetConstExprStringType();
       break;
     case StructOrBasicType::kEnd:
     case StructOrBasicType::kNotSpecified:
-      /// 以上两种类型不应在这里出现
+      // 以上两种类型不应在这里出现
       assert(false);
       [[fallthrough]];
     case StructOrBasicType::kEnum:
     case StructOrBasicType::kStruct:
     case StructOrBasicType::kUnion:
-      /// c语言中这几种类型不能声明为初始化用变量
+      // c语言中这几种类型不能声明为初始化用变量
       return false;
     default:
       assert(false);
-      /// 防止警告
+      // 防止警告
       return false;
       break;
   }
 }
 
-/// 返回值是否为有效的初始化列表可用类型，如果类型无效则不执行插入操作
+// 返回值是否为有效的初始化列表可用类型，如果类型无效则不执行插入操作
 
 bool ListInitializeOperatorNode::SetListValues(
-    std::list<std::shared_ptr<InitializeOperatorNodeInterface>>&& list_values) {
-  /// 待添加的所有数据的类型
+    std::list<std::shared_ptr<const InitializeOperatorNodeInterface>>&&
+        list_values) {
+  // 待添加的所有数据的类型
   type_system::InitializeListType::InitializeListContainerType value_types;
-  /// 检查是否所有的值都可以作为初始化列表的值
+  // 检查是否所有的值都可以作为初始化列表的值
   for (auto& list_value : list_values) {
     auto result_type_pointer = list_value->GetResultTypePointer();
-    if (!CheckInitListValueTypeValid(*result_type_pointer)) [[unlikely]] {
-      return false;
-    } else {
-      value_types.emplace_back(std::move(result_type_pointer));
-      list_values_.emplace_back(std::move(list_value));
-    }
+    value_types.emplace_back(std::move(result_type_pointer));
+    list_values_.emplace_back(std::move(list_value));
   }
-  /// 创建初始化列表类型并设置
+  // 设置初始化列表类型
   return SetInitValueType(std::make_shared<type_system::InitializeListType>(
       std::move(value_types)));
 }
@@ -144,13 +163,13 @@ bool MathematicalOperatorNode::SetLeftOperatorNode(
   switch (GetMathematicalOperation()) {
     case MathematicalOperation::kNot:
     case MathematicalOperation::kLogicalNegative: {
-      /// 按位取反和逻辑非为一元运算符，结果类型与运算数类型相同
+      // 按位取反和逻辑非为一元运算符，结果类型与运算数类型相同
       auto compute_result_node = std::make_shared<VarietyOperatorNode>(
           nullptr, ConstTag::kNonConst, LeftRightValueTag::kRightValue);
       bool result = compute_result_node->SetVarietyType(
           left_operator_node->GetResultTypePointer());
       if (result) [[likely]] {
-        /// left_operator_node是合法的参与运算的节点则可以设置
+        // left_operator_node是合法的参与运算的节点则可以设置
         SetComputeResultNode(std::move(compute_result_node));
       } else {
         break;
@@ -170,7 +189,7 @@ MathematicalOperatorNode::SetRightOperatorNode(
   switch (GetMathematicalOperation()) {
     case MathematicalOperation::kNot:
     case MathematicalOperation::kLogicalNegative:
-      /// 一元运算符不应调用此函数
+      // 一元运算符不应调用此函数
       assert(false);
       break;
     default:
@@ -180,14 +199,14 @@ MathematicalOperatorNode::SetRightOperatorNode(
       DeclineComputeResult(GetMathematicalOperation(),
                            GetLeftOperatorNodePointer(), right_operator_node);
   if (compute_result_node != nullptr) [[likely]] {
-    /// 可以运算，设置运算右节点和运算结果节点
+    // 可以运算，设置运算右节点和运算结果节点
     right_operator_node_ = right_operator_node;
     compute_result_node_ = std::move(compute_result_node);
   }
   return decline_result;
 }
 
-std::pair<std::shared_ptr<const VarietyOperatorNode>,
+std::pair<std::shared_ptr<VarietyOperatorNode>,
           MathematicalOperatorNode::DeclineMathematicalComputeTypeResult>
 MathematicalOperatorNode::DeclineComputeResult(
     MathematicalOperation mathematical_operation,
@@ -206,11 +225,11 @@ MathematicalOperatorNode::DeclineComputeResult(
     case DeclineMathematicalComputeTypeResult::kLeftOffsetRightPointer:
     case DeclineMathematicalComputeTypeResult::kConvertToLeft:
     case DeclineMathematicalComputeTypeResult::kConvertToRight:
-      /// 可以运算的几种情况
+      // 可以运算的几种情况
       {
-        /// 创建运算结果节点
+        // 创建运算结果节点
         auto compute_result_node = std::make_shared<VarietyOperatorNode>(
-            nullptr, ConstTag::kNonConst, LeftRightValueTag::kRightValue);
+            std::string(), ConstTag::kNonConst, LeftRightValueTag::kRightValue);
         compute_result_node->SetVarietyType(std::move(compute_result_type));
         return std::make_pair(std::move(compute_result_node), compute_result);
       }
@@ -221,24 +240,24 @@ MathematicalOperatorNode::DeclineComputeResult(
   }
 }
 
-bool FunctionCallOperatorNode::SetFunctionObjectToCall(
+bool FunctionCallOperatorNode::SetFunctionType(
     const std::shared_ptr<const OperatorNodeInterface>&
         function_object_to_call) {
-  /// 判断类型是否合法
+  // 判断类型是否合法
   auto function_type = function_object_to_call->GetResultTypePointer();
   if (CheckFunctionTypeValid(*function_type)) [[likely]] {
-    /// 获取最精确的类型
+    // 获取最精确的类型
     auto exact_function_type = std::static_pointer_cast<
         const c_parser_frontend::type_system::FunctionType>(function_type);
-    /// 成功设置函数调用后返回的类型
-    /// 清除原来生成的函数参数对象指针
+    // 成功设置函数调用后返回的类型
+    // 清除原来生成的函数参数对象指针
     function_arguments_offerred_.GetFunctionCallArguments().clear();
-    /// 设置函数类型
+    // 设置函数类型
     function_type_ = exact_function_type;
-    /// 根据函数类型创建返回类型对象
-    /// 返回类型匿名
+    // 根据函数类型创建返回类型对象
+    // 返回类型匿名
     auto return_object = std::make_shared<VarietyOperatorNode>(
-        nullptr, exact_function_type->GetReturnTypeConstTag(),
+        std::string(), exact_function_type->GetReturnTypeConstTag(),
         LeftRightValueTag::kRightValue);
     return_object->SetVarietyType(exact_function_type->GetReturnTypePointer());
     return_object_ = return_object;
@@ -248,24 +267,24 @@ bool FunctionCallOperatorNode::SetFunctionObjectToCall(
   }
 }
 
-/// 添加一个参数，参数添加顺序从左到右
-/// 返回待添加的参数是否通过检验，未通过检验则不会添加
+// 添加一个参数，参数添加顺序从左到右
+// 返回待添加的参数是否通过检验，未通过检验则不会添加
 
 AssignableCheckResult FunctionCallOperatorNode::AddFunctionCallArgument(
     const std::shared_ptr<const OperatorNodeInterface>& argument_node,
     const std::shared_ptr<std::list<
         std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>>>&
         sentences_to_get_argument) {
-  /// 将要放置节点的index
+  // 将要放置节点的index
   size_t new_argument_index =
       function_arguments_offerred_.GetFunctionCallArguments().size();
   if (new_argument_index >= GetFunctionTypePointer()->GetArguments().size())
       [[unlikely]] {
-    /// 函数参数已满，不能添加更多参数
-    /// 暂不支持可变参数
+    // 函数参数已满，不能添加更多参数
+    // 暂不支持可变参数
     return AssignableCheckResult::kArgumentsFull;
   }
-  /// 函数参数创建过程等同于声明并赋值
+  // 函数参数创建过程等同于声明并赋值
   AssignableCheckResult check_result = AssignOperatorNode::CheckAssignable(
       *GetFunctionTypePointer()
            ->GetArguments()[new_argument_index]
@@ -278,12 +297,12 @@ AssignableCheckResult FunctionCallOperatorNode::AddFunctionCallArgument(
     case AssignableCheckResult::kZeroConvertToPointer:
     case AssignableCheckResult::kUnsignedToSigned:
     case AssignableCheckResult::kSignedToUnsigned:
-      /// 可以添加
+      // 可以添加
       function_arguments_offerred_.AddFunctionCallArgument(
           argument_node, sentences_to_get_argument);
       break;
     default:
-      /// 不可以添加
+      // 不可以添加
       break;
   }
   return check_result;
@@ -301,7 +320,7 @@ bool AllocateOperatorNode::SetTargetVariety(
 
 bool MemberAccessOperatorNode::CheckNodeToAccessValid(
     const OperatorNodeInterface& node_to_access) {
-  /// 只能对结构类型变量访问成员
+  // 只能对结构类型变量访问成员
   switch (node_to_access.GetResultTypePointer()->GetType()) {
     case StructOrBasicType::kEnum:
     case StructOrBasicType::kStruct:
@@ -316,7 +335,7 @@ bool MemberAccessOperatorNode::CheckNodeToAccessValid(
 
 bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
     std::string&& member_name_to_set) {
-  /// 要被访问成员的节点的类型
+  // 要被访问成员的节点的类型
   auto accessed_node_type = GetNodeToAccessReference().GetResultTypePointer();
   switch (accessed_node_type->GetType()) {
     case StructOrBasicType::kStruct: {
@@ -326,12 +345,12 @@ bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
       MemberIndex struct_member_index =
           struct_type.GetStructMemberIndex(member_name_to_set);
       if (!struct_member_index.IsValid()) [[unlikely]] {
-        /// 不存在给定的成员名
+        // 不存在给定的成员名
         return false;
       }
       const auto& struct_member_info =
           struct_type.GetStructMemberInfo(struct_member_index);
-      /// 生成访问成员后得到的节点
+      // 生成访问成员后得到的节点
       auto struct_node = std::make_shared<VarietyOperatorNode>(
           nullptr, struct_member_info.second, LeftRightValueTag::kLeftValue);
       bool result = struct_node->SetVarietyType(struct_member_info.first);
@@ -347,12 +366,12 @@ bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
       MemberIndex union_member_index =
           union_type.GetUnionMemberIndex(member_name_to_set);
       if (!union_member_index.IsValid()) [[unlikely]] {
-        /// 不存在给定的成员名
+        // 不存在给定的成员名
         return false;
       }
       auto& union_member_info =
           union_type.GetUnionMemberInfo(union_member_index);
-      /// 生成访问成员后得到的节点
+      // 生成访问成员后得到的节点
       auto union_node = std::make_shared<VarietyOperatorNode>(
           nullptr, union_member_info.second, LeftRightValueTag::kLeftValue);
       bool result = union_node->SetVarietyType(union_member_info.first);
@@ -368,10 +387,10 @@ bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
       auto [enum_member_info_iter, enum_member_exist] =
           enum_type.GetEnumMemberInfo(member_name_to_set);
       if (!enum_member_exist) [[unlikely]] {
-        /// 不存在给定的成员名
+        // 不存在给定的成员名
         return false;
       }
-      /// 生成访问成员后得到的节点
+      // 生成访问成员后得到的节点
       auto enum_node = std::make_shared<BasicTypeInitializeOperatorNode>(
           InitializeType::kBasic,
           std::to_string(enum_member_info_iter->second));
@@ -381,7 +400,7 @@ bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
     } break;
     default:
       assert(false);
-      /// 防止警告
+      // 防止警告
       return false;
       break;
   }
@@ -402,7 +421,7 @@ AssignableCheckResult AssignOperatorNode::SetNodeForAssign(
       node_for_assign_ = node_for_assign;
       break;
     default:
-      /// 不可以赋值的情况，直接返回
+      // 不可以赋值的情况，直接返回
       break;
   }
   return assignable_check_result;
@@ -412,10 +431,10 @@ AssignableCheckResult AssignOperatorNode::CheckAssignable(
     const OperatorNodeInterface& node_to_be_assigned,
     const OperatorNodeInterface& node_for_assign, bool is_announce) {
   if (!is_announce) [[unlikely]] {
-    /// 不是声明时赋值则要检查被赋值的节点是否为const
+    // 不是声明时赋值则要检查被赋值的节点是否为const
     if (node_to_be_assigned.GetResultConstTag() == ConstTag::kConst)
         [[unlikely]] {
-      /// 被赋值的节点是const且不是声明语句中
+      // 被赋值的节点是const且不是声明语句中
       return AssignableCheckResult::kAssignedNodeIsConst;
     }
   }
@@ -423,19 +442,19 @@ AssignableCheckResult AssignOperatorNode::CheckAssignable(
   switch (node_to_be_assigned.GetGeneralOperatorType()) {
     case GeneralOperationType::kLogicalOperation:
     case GeneralOperationType::kMathematicalOperation:
-      /// 数值运算与逻辑运算结果均为右值，不能被赋值
+      // 数值运算与逻辑运算结果均为右值，不能被赋值
     case GeneralOperationType::kInitValue:
-      /// 初始化值为右值，不能被赋值
+      // 初始化值为右值，不能被赋值
     case GeneralOperationType::kFunctionCall:
-      /// C语言中函数返回值为右值，不能被赋值
+      // C语言中函数返回值为右值，不能被赋值
       check_result = AssignableCheckResult::kAssignToRightValue;
       break;
     case GeneralOperationType::kVariety: {
       auto variety_node =
           static_cast<const VarietyOperatorNode&>(node_to_be_assigned);
-      /// 在构建变量时忽略左右值
+      // 在构建变量时忽略左右值
       if (!is_announce) [[likely]] {
-        /// 赋值时变量可能是左值也可能是右值，需要检验
+        // 赋值时变量可能是左值也可能是右值，需要检验
         if (variety_node.GetLeftRightValueTag() ==
             LeftRightValueTag::kRightValue) [[unlikely]] {
           check_result = AssignableCheckResult::kAssignToRightValue;
@@ -452,9 +471,9 @@ AssignableCheckResult AssignOperatorNode::CheckAssignable(
               *node_for_assign.GetResultTypePointer());
       switch (check_result) {
         case AssignableCheckResult::kNonConvert: {
-          /// 如果被赋值的节点与用来赋值的节点类型完全相同（operator==()）
-          /// 且为变量类型则设置被赋值的节点的类型链指针指向用来赋值的类型链
-          /// 以节省内存（违反const原则）
+          // 如果被赋值的节点与用来赋值的节点类型完全相同（operator==()）
+          // 且为变量类型则设置被赋值的节点的类型链指针指向用来赋值的类型链
+          // 以节省内存（违反const原则）
           auto node_to_be_assigned_type_pointer =
               node_to_be_assigned.GetResultTypePointer();
           auto node_for_assign_type_pointer =
@@ -476,28 +495,28 @@ AssignableCheckResult AssignOperatorNode::CheckAssignable(
         case AssignableCheckResult::kSignedToUnsigned:
           break;
         case AssignableCheckResult::kMayBeZeroToPointer:
-          /// 如果可能是将0赋值给指针则需要额外检查
-          /// 检查用来赋值的是否为编译期常量
+          // 如果可能是将0赋值给指针则需要额外检查
+          // 检查用来赋值的是否为编译期常量
           if (node_for_assign.GetGeneralOperatorType() ==
               GeneralOperationType::kInitValue) [[likely]] {
             const BasicTypeInitializeOperatorNode& initialize_node =
                 static_cast<const BasicTypeInitializeOperatorNode&>(
                     node_for_assign);
-            /// 确认初始化值是否为0
+            // 确认初始化值是否为0
             if (initialize_node.GetInitializeType() == InitializeType::kBasic &&
                 initialize_node.GetValue() == "0") [[likely]] {
               check_result = AssignableCheckResult::kZeroConvertToPointer;
             } else {
-              /// 不能将除了0以外的值赋值给指针
+              // 不能将除了0以外的值赋值给指针
               check_result = AssignableCheckResult::kCanNotConvert;
             }
           } else {
-            /// 无法直接赋值，需要强制类型转换
+            // 无法直接赋值，需要强制类型转换
             check_result = AssignableCheckResult::kCanNotConvert;
           }
           break;
         case AssignableCheckResult::kInitializeList:
-          /// 用来赋值的是初始化列表，调用相应的函数处理
+          // 用来赋值的是初始化列表，调用相应的函数处理
           return VarietyAssignableByInitializeList(
               static_cast<const VarietyOperatorNode&>(node_to_be_assigned),
               static_cast<const ListInitializeOperatorNode&>(node_for_assign));
@@ -526,19 +545,19 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
   switch (variety_node.GetVarietyTypeReference().GetType()) {
     case StructOrBasicType::kBasic:
     case StructOrBasicType::kEnum: {
-      /// 对基础变量使用初始化列表时初始化列表中只能存在一个值
-      /// 且只使用一层初始化列表
+      // 对基础变量使用初始化列表时初始化列表中只能存在一个值
+      // 且只使用一层初始化列表
       auto initialize_members = list_initialize_operator_node.GetListValues();
-      /// 检查初始化列表中是否只存在一个值
+      // 检查初始化列表中是否只存在一个值
       if (initialize_members.size() == 1) [[likely]] {
         auto& initialize_value = initialize_members.front();
-        /// 检查是否只使用一层初始化列表
+        // 检查是否只使用一层初始化列表
         if (initialize_value->GetInitializeType() !=
             InitializeType::kInitializeList) [[unlikely]] {
           return CheckAssignable(variety_node, *initialize_value, true);
         }
       }
-      /// 不符合上述条件，无法赋值
+      // 不符合上述条件，无法赋值
       return AssignableCheckResult::kCanNotConvert;
     } break;
     case StructOrBasicType::kPointer: {
@@ -548,10 +567,10 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
       const auto& list_values = list_initialize_operator_node.GetListValues();
       size_t list_size = list_values.size();
       size_t pointer_array_size = pointer_type.GetArraySize();
-      /// 检查是否为纯指针使用初始化列表初始化
+      // 检查是否为纯指针使用初始化列表初始化
       if (pointer_array_size == 0) {
-        /// 纯指针，使用变量对变量赋值语义
-        /// 检查用来赋值的初始化列表是否只有一个值且这个值不是初始化列表
+        // 纯指针，使用变量对变量赋值语义
+        // 检查用来赋值的初始化列表是否只有一个值且这个值不是初始化列表
         auto& value_for_assign =
             static_cast<const BasicTypeInitializeOperatorNode&>(
                 *list_values.front());
@@ -563,7 +582,7 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
           return AssignableCheckResult::kCanNotConvert;
         }
       }
-      /// 构建参与下一轮比较的临时节点
+      // 构建参与下一轮比较的临时节点
       auto [dereferenced_type, const_tag] = pointer_type.DeReference();
       auto sub_variety_node = std::make_unique<VarietyOperatorNode>(
           nullptr, const_tag, LeftRightValueTag::kLeftValue);
@@ -572,7 +591,7 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
               dereferenced_type);
       AssignableCheckResult check_result =
           AssignableCheckResult::kCanNotConvert;
-      /// 检查是否初始化列表中每一个值都可以赋值
+      // 检查是否初始化列表中每一个值都可以赋值
       for (const auto& value : list_values) {
         check_result = CheckAssignable(*sub_variety_node, *value, true);
         switch (check_result) {
@@ -587,12 +606,12 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
           case AssignableCheckResult::kCanNotConvert:
           case AssignableCheckResult::kAssignedNodeIsConst:
           case AssignableCheckResult::kInitializeListTooLarge:
-            /// 无法赋值的情况
-            /// 直接返回，不检测剩余部分
+            // 无法赋值的情况
+            // 直接返回，不检测剩余部分
             return check_result;
             break;
           case AssignableCheckResult::kInitializeList:
-            /// 在调用该函数前已经被CheckAssignable拦截掉
+            // 在调用该函数前已经被CheckAssignable拦截掉
           case AssignableCheckResult::kAssignToRightValue:
           case AssignableCheckResult::kArgumentsFull:
           default:
@@ -600,13 +619,13 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
             break;
         }
       }
-      /// 所有节点均通过测试，检查指针指向的数组大小
+      // 所有节点均通过测试，检查指针指向的数组大小
       if (pointer_array_size == -1) {
-        /// 需要自动计算数组大小
+        // 需要自动计算数组大小
         const_cast<c_parser_frontend::type_system::PointerType&>(pointer_type)
             .SetArraySize(list_size);
       } else if (list_size > pointer_array_size) [[unlikely]] {
-        /// 初始化列表给出的数据数目大于指针声明时的数组大小
+        // 初始化列表给出的数据数目大于指针声明时的数组大小
         check_result = AssignableCheckResult::kInitializeListTooLarge;
       }
       return check_result;
@@ -618,11 +637,11 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
               const c_parser_frontend::type_system::StructureTypeInterface&>(
               variety_node.GetVarietyTypeReference())
               .TypeSizeOf();
-      /// 检查初始化列表中是否只存储了一个成员且该成员不是初始化列表
+      // 检查初始化列表中是否只存储了一个成员且该成员不是初始化列表
       if (list_values.size() == 1 && list_values.front()->GetInitializeType() !=
                                          InitializeType::kInitializeList)
           [[likely]] {
-        /// 检查用来赋值的对象是否小于等于共用体内最大的对象
+        // 检查用来赋值的对象是否小于等于共用体内最大的对象
         if (union_size >=
             list_values.front()->GetResultTypePointer()->TypeSizeOf()) {
           return AssignableCheckResult::kNonConvert;
@@ -637,21 +656,21 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
               const c_parser_frontend::type_system::StructureTypeInterface&>(
               variety_node.GetVarietyTypeReference())
               .GetStructureMembers();
-      /// 构建比较用临时节点
+      // 构建比较用临时节点
       auto sub_variety_node = std::make_unique<VarietyOperatorNode>(
           nullptr, ConstTag::kNonConst, LeftRightValueTag::kLeftValue);
       if (list_values.size() > structure_members.size()) [[unlikely]] {
-        /// 给定的初始化成员列表大小大于结构体内成员数目
+        // 给定的初始化成员列表大小大于结构体内成员数目
         return AssignableCheckResult::kInitializeListTooLarge;
       }
-      /// 检验初始化列表中的值是否可以给结构体成员按顺序赋值
+      // 检验初始化列表中的值是否可以给结构体成员按顺序赋值
       AssignableCheckResult check_result =
           AssignableCheckResult::kCanNotConvert;
       auto structure_member_iter = structure_members.begin();
       auto list_iter = list_values.begin();
       for (; list_iter != list_values.end();
            ++list_iter, ++structure_member_iter) {
-        /// 设置结构体成员属性
+        // 设置结构体成员属性
         sub_variety_node->SetVarietyType(structure_member_iter->first);
         sub_variety_node->SetConstTag(structure_member_iter->second);
         check_result = CheckAssignable(*sub_variety_node, **list_iter, true);
@@ -667,7 +686,7 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
           case AssignableCheckResult::kCanNotConvert:
           case AssignableCheckResult::kAssignedNodeIsConst:
           case AssignableCheckResult::kInitializeListTooLarge:
-            /// 无法赋值，无需判断剩余对象直接返回
+            // 无法赋值，无需判断剩余对象直接返回
             return check_result;
             break;
           case AssignableCheckResult::kInitializeList:
@@ -679,51 +698,51 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
             break;
         }
       }
-      /// 初始化列表中所有的值都可以给结构体成员赋值
+      // 初始化列表中所有的值都可以给结构体成员赋值
       return check_result;
     } break;
     case StructOrBasicType::kInitializeList:
     case StructOrBasicType::kFunction:
     default:
       assert(false);
-      /// 防止警告
+      // 防止警告
       return AssignableCheckResult();
       break;
   }
 }
 
-/// 返回是否可以设置，如果不可设置则不会设置
+// 返回是否可以设置，如果不可设置则不会设置
 
 bool ObtainAddressOperatorNode::SetNodeToObtainAddress(
     const std::shared_ptr<const VarietyOperatorNode>& node_to_obtain_address) {
   bool check_result = CheckNodeToObtainAddress(*node_to_obtain_address);
   if (check_result) [[likely]] {
-    /// 可以取地址
-    /// 设置将要被取地址的指针
+    // 可以取地址
+    // 设置将要被取地址的指针
     node_to_obtain_address_ = node_to_obtain_address;
-    /// 生成取地址后得到的变量的类型
+    // 生成取地址后得到的变量的类型
     auto obtained_type = TypeInterface::ObtainAddressOperatorNode(
-        node_to_obtain_address->GetResultTypePointer());
-    /// 创建取地址后得到的节点（生成匿名右值中间变量）
+        node_to_obtain_address->GetResultTypePointer(),
+        node_to_obtain_address->GetConstTag());
+    // 创建取地址后得到的节点（生成匿名右值中间变量）
     auto node_obtained_address = std::make_shared<VarietyOperatorNode>(
         nullptr, ConstTag::kNonConst, LeftRightValueTag::kRightValue);
-    /// 设置取地址后的变量节点类型
+    // 设置取地址后的变量节点类型
     bool result =
         node_obtained_address->SetVarietyType(std::move(obtained_type));
     assert(result == true);
-    /// 设置取地址后得到的节点
+    // 设置取地址后得到的节点
     SetNodeObtainedAddress(std::move(node_obtained_address));
   }
   return check_result;
 }
 
-inline bool ObtainAddressOperatorNode::CheckNodeToObtainAddress(
+inline bool ObtainAddressOperatorNode ::CheckNodeToObtainAddress(
     const OperatorNodeInterface& node_interface) {
   switch (node_interface.GetGeneralOperatorType()) {
     case GeneralOperationType::kDeReference:
     case GeneralOperationType::kMemberAccess:
     case GeneralOperationType::kAssign:
-    case GeneralOperationType::kObtainAddress:
     case GeneralOperationType::kVariety:
       return true;
       break;
@@ -736,17 +755,18 @@ inline bool ObtainAddressOperatorNode::CheckNodeToObtainAddress(
 bool DereferenceOperatorNode::SetNodeToDereference(
     const std::shared_ptr<const OperatorNodeInterface>& node_to_dereference) {
   if (CheckNodeDereferenceAble(*node_to_dereference)) [[likely]] {
-    /// 设置待解引用的节点
+    // 设置待解引用的节点
     node_to_dereference_ = node_to_dereference;
-    /// 创建解引用后得到的节点
+    // 创建解引用后得到的节点
     auto node_to_dereference_type = std::static_pointer_cast<
         const c_parser_frontend::type_system::PointerType>(
         node_to_dereference->GetResultTypePointer());
-    /// 获取解引用后的类型和解引用的结果
+    // 获取解引用后的类型和解引用的结果
     auto [dereferenced_node_type, dereferenced_node_const_tag] =
         node_to_dereference_type->DeReference();
     auto dereferenced_node = std::make_shared<VarietyOperatorNode>(
-        nullptr, dereferenced_node_const_tag, LeftRightValueTag::kLeftValue);
+        std::string(), dereferenced_node_const_tag,
+        LeftRightValueTag::kLeftValue);
     bool result = dereferenced_node->SetVarietyTypeNoCheckFunctionType(
         std::move(dereferenced_node_type));
     assert(result == true);
@@ -759,11 +779,11 @@ bool DereferenceOperatorNode::SetNodeToDereference(
 
 inline bool DereferenceOperatorNode::CheckNodeDereferenceAble(
     const OperatorNodeInterface& node_to_dereference) {
-  /// 当且仅当为指针时可以解引用
-  /// 且要求解引用得到的不是void类型
+  // 当且仅当为指针时可以解引用
+  // 且要求解引用得到的不是void类型
   auto result_type = node_to_dereference.GetResultTypePointer();
   bool result = result_type->GetType() == StructOrBasicType::kPointer;
-  /// 获取指针节点的下一个节点，判断是否为void类型
+  // 获取指针节点的下一个节点，判断是否为void类型
   auto& next_type_node = result_type->GetNextNodeReference();
   result &= !(next_type_node.GetType() == StructOrBasicType::kBasic &&
               static_cast<const c_parser_frontend::type_system::BasicType&>(
@@ -797,7 +817,7 @@ bool LogicalOperationOperatorNode::SetRightOperatorNode(
   }
 }
 
-/// 检查是否可以参与逻辑运算
+// 检查是否可以参与逻辑运算
 
 inline bool LogicalOperationOperatorNode::CheckLogicalTypeValid(
     const TypeInterface& type_interface) {
@@ -815,15 +835,15 @@ inline bool LogicalOperationOperatorNode::CheckLogicalTypeValid(
 bool TypeConvert::GenerateDestinationNode(
     const std::shared_ptr<const TypeInterface>& new_type,
     ConstTag new_const_tag) {
-  /// 获取最终结果节点作为用来转换的节点
+  // 获取最终结果节点作为用来转换的节点
   auto node_for_convert = GetSourceNodeReference().GetResultOperatorNode();
-  /// 如果返回nullptr则代表自身就是结果节点，如VarietyOperatorNode
+  // 如果返回nullptr则代表自身就是结果节点，如VarietyOperatorNode
   if (node_for_convert == nullptr) [[likely]] {
     node_for_convert = GetSourceNodePointer();
   }
-  /// 复制一份对象作为转换后得到的对象并修改类型为转换到的类型
-  auto node_converted = node_for_convert->SelfCopy(new_type);
-  /// 判断是否不可复制
+  // 复制一份对象作为转换后得到的对象并修改类型为转换到的类型
+  auto node_converted = node_for_convert->SelfCopy(new_type, new_const_tag);
+  // 判断是否不可复制
   if (node_converted == nullptr) [[unlikely]] {
     return false;
   }
@@ -853,7 +873,7 @@ bool TemaryOperatorNode::SetTrueBranch(
   assert(GetBranchConditionPointer() != nullptr);
   if (GetBranchConditionReference().GetGeneralOperatorType() !=
       GeneralOperationType::kInitValue) [[likely]] {
-    /// 分支条件不为编译期常量
+    // 分支条件不为编译期常量
     if (CheckBranchValid(*true_branch)) [[likely]] {
       true_branch_ = true_branch;
       true_branch_flow_control_node_container_ = flow_control_node_container;
@@ -862,7 +882,7 @@ bool TemaryOperatorNode::SetTrueBranch(
       return false;
     }
   } else {
-    /// 分支条件为编译期常量
+    // 分支条件为编译期常量
     const auto& branch_condition =
         static_cast<const BasicTypeInitializeOperatorNode&>(
             GetBranchConditionReference());
@@ -871,18 +891,18 @@ bool TemaryOperatorNode::SetTrueBranch(
     const std::string& branch_value = branch_condition.GetValue();
     assert(branch_value == "0" || branch_value == "1");
     if (branch_value == "1") {
-      /// 选择真分支，需要检查
+      // 选择真分支，需要检查
       if (CheckBranchValid(*true_branch)) [[likely]] {
         true_branch_ = true_branch;
         true_branch_flow_control_node_container_ = flow_control_node_container;
-        /// 同时设置结果分支节点
+        // 同时设置结果分支节点
         result_ = true_branch;
         return true;
       } else {
         return false;
       }
     } else {
-      /// 选择假分支，真分支随意设置
+      // 选择假分支，真分支随意设置
       true_branch_ = true_branch;
       true_branch_flow_control_node_container_ = flow_control_node_container;
       return true;
@@ -899,7 +919,7 @@ bool TemaryOperatorNode::SetFalseBranch(
   assert(GetBranchConditionPointer() != nullptr);
   if (GetBranchConditionReference().GetGeneralOperatorType() !=
       GeneralOperationType::kInitValue) [[likely]] {
-    /// 分支条件不为编译期常量
+    // 分支条件不为编译期常量
     if (CheckBranchValid(*false_branch)) [[likely]] {
       false_branch_ = false_branch;
       false_branch_flow_control_node_container_ = flow_control_node_container;
@@ -908,7 +928,7 @@ bool TemaryOperatorNode::SetFalseBranch(
       return false;
     }
   } else {
-    /// 分支条件为编译期常量
+    // 分支条件为编译期常量
     const auto& branch_condition =
         static_cast<const BasicTypeInitializeOperatorNode&>(
             GetBranchConditionReference());
@@ -917,18 +937,18 @@ bool TemaryOperatorNode::SetFalseBranch(
     const std::string& branch_value = branch_condition.GetValue();
     assert(branch_value == "0" || branch_value == "1");
     if (branch_value == "0") {
-      /// 选择假分支，需要检查
+      // 选择假分支，需要检查
       if (CheckBranchValid(*false_branch)) [[likely]] {
         false_branch_ = false_branch;
         false_branch_flow_control_node_container_ = flow_control_node_container;
-        /// 同时设置结果分支节点
+        // 同时设置结果分支节点
         result_ = false_branch;
         return true;
       } else {
         return false;
       }
     } else {
-      /// 选择真分支，假分支随意设置
+      // 选择真分支，假分支随意设置
       false_branch_ = false_branch;
       false_branch_flow_control_node_container_ = flow_control_node_container;
       return true;
@@ -942,7 +962,7 @@ bool TemaryOperatorNode::CheckBranchConditionValid(
   auto result_type = branch_condition.GetResultTypePointer();
   switch (result_type->GetType()) {
     case StructOrBasicType::kBasic:
-      /// 进一步判断是否为void
+      // 进一步判断是否为void
       return static_cast<const c_parser_frontend::type_system::BasicType&>(
                  *result_type)
                  .GetBuiltInType() != BuiltInType::kVoid;
@@ -956,20 +976,16 @@ bool TemaryOperatorNode::CheckBranchConditionValid(
   }
 }
 
-bool TemaryOperatorNode::CheckBranchValid(const OperatorNodeInterface& branch) {
-  return CheckBranchConditionValid(branch);
-}
-
 bool TemaryOperatorNode::ConstructResultNode() {
-  /// 检查分支条件是否为编译期常量
-  /// 如果为常量则结果节点已设置
-  /// 检查是否已设置两分支
+  // 检查分支条件是否为编译期常量
+  // 如果为常量则结果节点已设置
+  // 检查是否已设置两分支
   if (GetBranchConditionReference().GetGeneralOperatorType() !=
           GeneralOperationType::kInitValue &&
       GetTrueBranchPointer() != nullptr && GetFalseBranchPointer() != nullptr)
       [[likely]] {
-    /// 结果分支未创建
-    /// 获取两个分支都可以转换到的类型
+    // 结果分支未创建
+    // 获取两个分支都可以转换到的类型
     std::shared_ptr<const TypeInterface> common_type;
     auto assignable_check_result = AssignOperatorNode::CheckAssignable(
         GetTrueBranchReference(), GetFalseBranchReference(), false);
@@ -983,17 +999,17 @@ bool TemaryOperatorNode::ConstructResultNode() {
         common_type = GetTrueBranchReference().GetResultTypePointer();
         break;
       case AssignableCheckResult::kLowerConvert:
-        /// 可以反向转换
+        // 可以反向转换
         common_type = GetFalseBranchReference().GetResultTypePointer();
         break;
       case AssignableCheckResult::kInitializeList:
-        /// 不支持在非编译期常量条件下使用初始化列表
+        // 不支持在非编译期常量条件下使用初始化列表
         return false;
         break;
       case AssignableCheckResult::kCanNotConvert:
       case AssignableCheckResult::kAssignedNodeIsConst:
       case AssignableCheckResult::kAssignToRightValue:
-        /// 无法从true分支转换到false分支，尝试反向转换
+        // 无法从true分支转换到false分支，尝试反向转换
         assignable_check_result = AssignOperatorNode::CheckAssignable(
             GetFalseBranchReference(), GetTrueBranchReference(), false);
         switch (assignable_check_result) {
@@ -1006,7 +1022,7 @@ bool TemaryOperatorNode::ConstructResultNode() {
           case AssignableCheckResult::kConvertToVoidPointer:
             common_type = GetFalseBranchReference().GetResultTypePointer();
             break;
-            /// 其余情况在外层已处理完毕或不应出现
+            // 其余情况在外层已处理完毕或不应出现
           default:
             assert(false);
             break;
@@ -1063,19 +1079,19 @@ MathematicalOperation MathematicalAndAssignOperationToMathematicalOperation(
       break;
     default:
       assert(false);
-      /// 防止警告
+      // 防止警告
       return MathematicalOperation();
       break;
   }
 }
 
-}  /// namespace c_parser_frontend::operator_node
+}  // namespace c_parser_frontend::operator_node
 
-/// 使用前向声明后定义移到这里以使用智能指针
+// 使用前向声明后定义移到这里以使用智能指针
 namespace c_parser_frontend::type_system {
 bool FunctionType::ArgumentInfo::operator==(
     const ArgumentInfo& argument_info) const {
-  /// 函数参数名不影响是否为同一参数，仅比较类型和是否为const
+  // 函数参数名不影响是否为同一参数，仅比较类型和是否为const
   return variety_operator_node->GetConstTag() ==
              argument_info.variety_operator_node->GetConstTag() &&
          variety_operator_node->GetVarietyTypeReference() ==
@@ -1087,4 +1103,4 @@ void FunctionType::AddFunctionCallArgument(
         argument) {
   argument_infos_.emplace_back(ArgumentInfo(argument));
 }
-}  /// namespace c_parser_frontend::type_system
+}  // namespace c_parser_frontend::type_system

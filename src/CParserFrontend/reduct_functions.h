@@ -500,6 +500,7 @@ std::shared_ptr<c_parser_frontend::flow_control::FunctionDefine>
 FunctionDefineHead(std::vector<WordDataToUser>&& word_data);
 /// FunctionDefine -> FunctionDefineHead Statements "}"
 /// 返回值类型：std::shared_ptr<FunctionDefine>
+/// 检查添加的函数体是否为空，如果为空则添加无返回值语句或Error
 /// 弹出最后一层作用域，重置当前活跃函数
 /// 不返回任何数据
 std::any FunctionDefine(std::vector<WordDataToUser>&& word_data);
@@ -581,11 +582,11 @@ std::any&& SingleAnnounceAndAssignNoAssignExtend(
 ///                   std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 std::any&& SingleAnnounceAndAssignWithAssignExtend(
     std::vector<WordDataToUser>&& word_data);
-/// GetType -> BasicType
+/// Type -> BasicType
 /// 返回类型和变量的ConstTag
 /// 返回值类型：std::pair<std::shared_ptr<const TypeInterface>, ConstTag>
 std::any&& TypeBasicType(std::vector<WordDataToUser>&& word_data);
-/// GetType -> FunctionRelavent
+/// Type -> FunctionRelavent
 /// 返回类型和变量的ConstTag
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> TypeFunctionRelavent(
     std::vector<WordDataToUser>&& word_data);
@@ -805,13 +806,11 @@ std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 AssignableSuffixMinus(std::vector<WordDataToUser>&& word_data);
 /// Return -> "return" Assignable ";"
-/// 返回获取返回值的操作（里面添加了返回流程控制节点）
-std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithValue(
-    std::vector<WordDataToUser>&& word_data);
+/// 不返回任何值
+std::any ReturnWithValue(std::vector<WordDataToUser>&& word_data);
 /// Return -> "return" ";"
-/// 返回存储操作的容器（里面添加了返回流程控制节点）
-std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithoutValue(
-    std::vector<WordDataToUser>&& word_data);
+/// 不返回任何值
+std::any ReturnWithoutValue(std::vector<WordDataToUser>&& word_data);
 /// TemaryOperator -> Assignable "?" Assignable ":" Assignable
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
@@ -880,7 +879,7 @@ std::any SingleStatementAssignable(std::vector<WordDataToUser>&& word_data);
 /// 不返回任何值
 std::any SingleStatementAnnounce(std::vector<WordDataToUser>&& word_data);
 /// SingleStatement -> Return
-/// 不返回任何值
+/// 不做任何操作
 std::any SingleStatementReturn(std::vector<WordDataToUser>&& word_data);
 /// SingleStatement -> Break
 /// 不返回任何值
@@ -989,7 +988,7 @@ std::any ProcessControlSentenceBodyStatements(
     std::vector<WordDataToUser>&& word_data);
 /// 根产生式
 /// Root -> Root FunctionDefine
-/// 不作任何操作
+/// 不做任何操作
 std::any RootFunctionDefine(std::vector<WordDataToUser>&& word_data);
 /// 根产生式
 /// Root -> Root SingleAnnounceNoAssign ";"
@@ -1070,15 +1069,15 @@ std::any&& SingleAnnounceNoAssignFunctionRelavent(
     auto& variety_node = static_cast<const VarietyOperatorNode&>(
         static_cast<SimpleSentence&>(*flow_control_node)
             .GetSentenceOperateNodeReference());
-    assert(variety_node.GetVarietyNamePointer() == nullptr);
+    assert(variety_node.GetVarietyName().empty());
   } else {
     const std::string* variety_name;
     switch (flow_control_node->GetFlowType()) {
       case FlowType::kSimpleSentence:
-        variety_name = static_cast<const VarietyOperatorNode&>(
-                           static_cast<SimpleSentence&>(*flow_control_node)
-                               .GetSentenceOperateNodeReference())
-                           .GetVarietyNamePointer();
+        variety_name = &static_cast<const VarietyOperatorNode&>(
+                            static_cast<SimpleSentence&>(*flow_control_node)
+                                .GetSentenceOperateNodeReference())
+                            .GetVarietyName();
         break;
       case FlowType::kFunctionDefine:
         variety_name = &static_cast<const flow_control::FunctionDefine&>(
@@ -1090,7 +1089,7 @@ std::any&& SingleAnnounceNoAssignFunctionRelavent(
         assert(false);
         break;
     }
-    if (variety_name == nullptr) [[unlikely]] {
+    if (variety_name->empty()) [[unlikely]] {
       OutputError(std::format("声明的变量必须有名"));
       exit(-1);
     }

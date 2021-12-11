@@ -381,9 +381,8 @@ std::shared_ptr<ObjectConstructData> IdOrEquivenceConstTagId(
   std::string& name = word_data[1].GetTerminalWordData().word;
   std::shared_ptr<ObjectConstructData> construct_data =
       std::make_shared<ObjectConstructData>(std::move(name));
-  // 先不设置名字指针，因为无法确定最终获得函数头还是变量
   construct_data->ConstructBasicObjectPart<VarietyOperatorNode>(
-      nullptr, const_tag, LeftRightValueTag::kLeftValue);
+      std::string(), const_tag, LeftRightValueTag::kLeftValue);
   return construct_data;
 }
 
@@ -461,7 +460,7 @@ std::shared_ptr<ObjectConstructData> AnonymousIdOrEquivenceConst(
   std::shared_ptr<ObjectConstructData> construct_data =
       std::make_shared<ObjectConstructData>(std::string());
   construct_data->ConstructBasicObjectPart<VarietyOperatorNode>(
-      nullptr, ConstTag::kConst, LeftRightValueTag::kLeftValue);
+      std::string(), ConstTag::kConst, LeftRightValueTag::kLeftValue);
   return construct_data;
 }
 
@@ -582,19 +581,17 @@ std::shared_ptr<EnumType> EnumDefine(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 5);
 
   std::string& enum_name = word_data[1].GetTerminalWordData().word;
-  // 声明该枚举以获取指向名字的指针
-  auto iter = c_parser_frontend.AnnounceTypeName(std::move(enum_name));
   std::shared_ptr<EnumType> enum_type;
   if (!word_data[3].Empty()) [[likely]] {
     // 该枚举有成员
     enum_type = std::make_shared<EnumType>(
-        &iter->first,
+        enum_name,
         std::move(std::any_cast<EnumReturnData&>(
                       word_data[3].GetNonTerminalWordData().user_returned_data)
                       .GetContainer()));
   } else {
     // 该枚举没有成员
-    enum_type = std::make_shared<EnumType>(&iter->first);
+    enum_type = std::make_shared<EnumType>(enum_name);
   }
   // 添加该枚举的定义
   auto [insert_iter, result] =
@@ -609,13 +606,13 @@ std::shared_ptr<EnumType> EnumAnonymousDefine(
   if (!word_data[3].Empty()) [[likely]] {
     // 该枚举有成员
     enum_type = std::make_shared<EnumType>(
-        nullptr,
+        std::string(),
         std::move(std::any_cast<EnumReturnData&>(
                       word_data[3].GetNonTerminalWordData().user_returned_data)
                       .GetContainer()));
   } else {
     // 该枚举没有成员
-    enum_type = std::make_shared<EnumType>(nullptr);
+    enum_type = std::make_shared<EnumType>(std::string());
   }
   // 匿名枚举无需定义
   return enum_type;
@@ -680,21 +677,12 @@ std::shared_ptr<StructureTypeInterface> StructureDefineInitHead(
   auto& [struct_name, struct_type] =
       std::any_cast<std::pair<std::string, StructOrBasicType>&>(
           word_data[0].GetNonTerminalWordData().user_returned_data);
-  // 获取指向结构名的指针
-  const std::string* structure_name_pointer = nullptr;
-  if (!struct_name.empty()) {
-    // 如果声明的结构具名则声明该类型名
-    auto iter = c_parser_frontend.AnnounceTypeName(std::move(struct_name));
-    structure_name_pointer = &iter->first;
-  }
   switch (struct_type) {
     case StructOrBasicType::kStruct:
-      structure_type_constructuring =
-          std::make_shared<StructType>(structure_name_pointer);
+      structure_type_constructuring = std::make_shared<StructType>(struct_name);
       break;
     case StructOrBasicType::kUnion:
-      structure_type_constructuring =
-          std::make_shared<UnionType>(structure_name_pointer);
+      structure_type_constructuring = std::make_shared<UnionType>(struct_name);
       break;
     default:
       assert(false);
@@ -702,9 +690,9 @@ std::shared_ptr<StructureTypeInterface> StructureDefineInitHead(
   }
   // 如果是非匿名结构则注册结构体/共用体类型
   // 不使用struct_name因为已经被移动构造
-  if (structure_name_pointer != nullptr) [[likely]] {
+  if (!struct_name.empty()) [[likely]] {
     auto [iter, result] = c_parser_frontend.DefineType(
-        *structure_name_pointer, structure_type_constructuring);
+        std::move(struct_name), structure_type_constructuring);
     CheckAddTypeResult(result);
   }
   return structure_type_constructuring;
@@ -855,8 +843,9 @@ std::any&& FunctionRelaventBasePartFunctionInitBase(
   // 设置构建数据，在构建函数参数时使用
   function_type_construct_data = construct_data;
   // 创建匿名函数类型并设置函数参数
-  auto result = function_type_construct_data
-                    ->AttachSingleNodeToTailNodeEmplace<FunctionType>(nullptr);
+  auto result =
+      function_type_construct_data
+          ->AttachSingleNodeToTailNodeEmplace<FunctionType>(std::string());
   // 检查添加结果
   if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
     VarietyOrFunctionConstructError(
@@ -874,8 +863,9 @@ std::any&& FunctionRelaventBasePartFunctionInitExtend(
   // 设置构建数据，在构建函数参数时使用
   function_type_construct_data = construct_data;
   // 创建匿名函数类型并设置函数参数
-  auto result = function_type_construct_data
-                    ->AttachSingleNodeToTailNodeEmplace<FunctionType>(nullptr);
+  auto result =
+      function_type_construct_data
+          ->AttachSingleNodeToTailNodeEmplace<FunctionType>(std::string());
   // 检查添加结果
   if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
     VarietyOrFunctionConstructError(
@@ -997,18 +987,14 @@ std::any TypeDef(std::vector<WordDataToUser>&& word_data) {
       static_cast<SimpleSentence&>(*announced_object)
           .GetSentenceOperateNodePointer());
   auto type_pointer = variety_pointer->GetVarietyTypePointer();
-  const std::string* type_name = variety_pointer->GetVarietyNamePointer();
-  // 注册类型名
-  auto iter = c_parser_frontend.AnnounceTypeName(*type_name);
+  const std::string& type_name = variety_pointer->GetVarietyName();
   auto [ignore_iter, result] =
-      c_parser_frontend.DefineType(*type_name, type_pointer);
+      c_parser_frontend.DefineType(type_name, type_pointer);
   if (result == AddTypeResult::kTypeAlreadyIn) [[unlikely]] {
     OutputError(std::format(
-        "使用typedef定义别名时使用的名字{:}已存在相同类型的定义", *type_name));
+        "使用typedef定义别名时使用的名字{:}已存在相同类型的定义", type_name));
     exit(-1);
   }
-  // 尝试清除空的类型节点
-  c_parser_frontend.RemoveVarietySystemEmptyNode(*type_name);
   return std::any();
 }
 
@@ -1137,6 +1123,24 @@ FunctionDefineHead(std::vector<WordDataToUser>&& word_data) {
 
 std::any FunctionDefine(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
+  // 检查函数体是否为空，如果为空则添加无返回值返回语句或报错
+  auto& active_function = c_parser_frontend.GetActiveFunctionReference();
+  if (active_function.GetSentences().empty()) [[unlikely]] {
+    auto& function_return_type =
+        active_function.GetFunctionTypeReference().GetReturnTypeReference();
+    if (function_return_type ==
+        *c_parser_frontend::type_system::CommonlyUsedTypeGenerator::
+            GetBasicType<c_parser_frontend::type_system::BuiltInType::kVoid,
+                         c_parser_frontend::type_system::SignTag::kUnsigned>())
+        [[likely]] {
+      // 函数无返回值
+      bool result = c_parser_frontend.AddSentence(std::make_unique<Return>());
+      assert(result);
+    } else {
+      OutputError(std::format("函数必须返回一个值"));
+      exit(-1);
+    }
+  }
   // 添加函数内语句已经在Sentences构建过程中完成
   // 只需清理作用域
   c_parser_frontend.PopActionScope();
@@ -1171,7 +1175,7 @@ SingleStructureBodyBase(std::vector<WordDataToUser>&& word_data) {
   // 向结构数据节点中添加成员
   auto structure_member_index =
       structure_type_constructuring->AddStructureMember(
-          *variety_pointer->GetVarietyNamePointer(),
+          variety_pointer->GetVarietyName(),
           variety_pointer->GetVarietyTypePointer(),
           variety_pointer->GetConstTag());
   assert(structure_member_index.IsValid());
@@ -1224,9 +1228,14 @@ std::shared_ptr<ListInitializeOperatorNode> InitializeList(
   auto& list_argument_pointer = std::any_cast<std::shared_ptr<
       std::list<std::shared_ptr<InitializeOperatorNodeInterface>>>&>(
       word_data[1].GetNonTerminalWordData().user_returned_data);
+  std::list<std::shared_ptr<const InitializeOperatorNodeInterface>>
+      argument_pointers_to_add;
+  for (const auto& pointer : *list_argument_pointer) {
+    argument_pointers_to_add.emplace_back(pointer);
+  }
   // 将初始化列表的所有参数添加到容器中
   bool result =
-      initialize_list->SetListValues(std::move(*list_argument_pointer));
+      initialize_list->SetListValues(std::move(argument_pointers_to_add));
   return std::move(initialize_list);
 }
 
@@ -1314,8 +1323,7 @@ VarietyAnnounceNoAssign(std::shared_ptr<VarietyOperatorNode>&& variety_node) {
   flow_control_node_container->emplace_back(
       std::move(allocate_flow_control_node));
   // 定义变量
-  c_parser_frontend.DefineVariety(*variety_node->GetVarietyNamePointer(),
-                                  variety_node);
+  c_parser_frontend.DefineVariety(variety_node);
   // 获取扩展声明时的类型
   if (raw_variety_type->GetType() == StructOrBasicType::kPointer) {
     // 剥离数组维数层指针
@@ -1379,8 +1387,7 @@ VarietyAnnounceWithAssign(
   flow_control_node_container->emplace_back(
       std::move(assign_flow_control_node));
   // 定义变量
-  c_parser_frontend.DefineVariety(*variety_node->GetVarietyNamePointer(),
-                                  variety_node);
+  c_parser_frontend.DefineVariety(variety_node);
   // 获取扩展声明时的类型
   if (raw_variety_type->GetType() == StructOrBasicType::kPointer) {
     // 剥离数组维数层指针
@@ -1462,10 +1469,8 @@ std::any&& SingleAnnounceAndAssignNoAssignExtend(
           word_data[0].GetNonTerminalWordData().user_returned_data);
   std::string& variety_name = word_data[2].GetTerminalWordData().word;
   // 构建变量节点
-  // 声明变量名
-  auto iter = c_parser_frontend.AnnounceVarietyName(variety_name);
   auto variety_node = std::make_shared<VarietyOperatorNode>(
-      &iter->first, extend_const_tag, LeftRightValueTag::kLeftValue);
+      std::move(variety_name), extend_const_tag, LeftRightValueTag::kLeftValue);
   variety_node->SetVarietyType(
       std::shared_ptr<const TypeInterface>(extend_announce_type));
   auto [ignore_type, ignore_const_tag, sub_flow_control_node_container] =
@@ -1496,10 +1501,8 @@ std::any&& SingleAnnounceAndAssignWithAssignExtend(
       std::move(*flow_control_nodes_to_get_node_for_assign));
   std::string& variety_name = word_data[2].GetTerminalWordData().word;
   // 构建变量节点
-  // 声明变量名
-  auto iter = c_parser_frontend.AnnounceVarietyName(variety_name);
   auto variety_node = std::make_shared<VarietyOperatorNode>(
-      &iter->first, extend_const_tag, LeftRightValueTag::kLeftValue);
+      std::move(variety_name), extend_const_tag, LeftRightValueTag::kLeftValue);
   variety_node->SetVarietyType(
       std::shared_ptr<const TypeInterface>(extend_announce_type));
   auto [ignore_type, ignore_const_tag, sub_flow_control_node_container] =
@@ -1530,15 +1533,15 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> TypeFunctionRelavent(
   if (flow_control_node->GetFlowType() == FlowType::kFunctionDefine)
       [[unlikely]] {
     // 函数不能作为类型使用
-    OutputError(std::format("函数不能作为类型"));
+    OutputError(std::format("函数声明/定义不能作为类型"));
     exit(-1);
   }
   auto operator_node = std::static_pointer_cast<VarietyOperatorNode>(
       static_cast<SimpleSentence&>(*flow_control_node)
           .GetSentenceOperateNodePointer());
   // 检查是否为匿名指针声明
-  if (operator_node->GetVarietyNamePointer() != nullptr) [[unlikely]] {
-    OutputError(std::format("此处不能使用变量声明"));
+  if (!operator_node->GetVarietyName().empty()) [[unlikely]] {
+    OutputError(std::format("变量声明不是类型"));
     exit(-1);
   }
   return std::make_pair(operator_node->GetVarietyTypePointer(),
@@ -1863,27 +1866,18 @@ AssignableTypeConvert(std::vector<WordDataToUser>&& word_data) {
       std::pair<std::shared_ptr<const OperatorNodeInterface>,
                 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
       word_data[3].GetNonTerminalWordData().user_returned_data);
+  if (old_operator_node->GetGeneralOperatorType() ==
+          GeneralOperationType::kInitValue &&
+      new_const_tag == ConstTag::kNonConst) [[unlikely]] {
+    OutputError("初始化数据不能转化为非const类型");
+    exit(-1);
+  }
   // 转换节点
   auto convert_operator_node =
-      std::make_shared<TypeConvert>(old_operator_node, new_type);
+      std::make_shared<TypeConvert>(old_operator_node, new_type, new_const_tag);
   // 经过类型转换得到的节点
   auto converted_operator_node =
       convert_operator_node->GetDestinationNodePointer();
-  // 设置新的const属性
-  switch (converted_operator_node->GetGeneralOperatorType()) {
-    case GeneralOperationType::kVariety:
-      // 变量可以为const也可以为非const
-      std::static_pointer_cast<VarietyOperatorNode>(converted_operator_node)
-          ->SetConstTag(new_const_tag);
-      break;
-    case GeneralOperationType::kInitValue:
-      // 忽视修改为非const的语句但无需报错
-      break;
-    default:
-      OutputError(std::format("无法转换为非const"));
-      exit(-1);
-      break;
-  }
   // 添加转换流程控制节点
   auto flow_control_node = std::make_unique<SimpleSentence>();
   bool result =
@@ -2473,7 +2467,7 @@ std::shared_ptr<const OperatorNodeInterface> SuffixPlusOrMinus(
   // 构建中间变量节点和赋值节点
   // 复制一份变量后将原变量+1/-1（等价于执行前缀++/--）
   auto temp_variety_node = std::make_shared<VarietyOperatorNode>(
-      nullptr, ConstTag::kNonConst, LeftRightValueTag::kRightValue);
+      std::string(), ConstTag::kNonConst, LeftRightValueTag::kRightValue);
   bool set_temp_variety_type_result = temp_variety_node->SetVarietyType(
       node_to_operate->GetResultTypePointer());
   assert(set_temp_variety_type_result);
@@ -2551,8 +2545,7 @@ AssignableSuffixMinus(std::vector<WordDataToUser>&& word_data) {
       std::move(flow_control_node_container));
 }
 
-std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithValue(
-    std::vector<WordDataToUser>&& word_data) {
+std::any ReturnWithValue(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 3);
   auto& [return_target, sentences_to_get_assignable] = std::any_cast<
       std::pair<std::shared_ptr<const OperatorNodeInterface>,
@@ -2564,21 +2557,24 @@ std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithValue(
     OutputError(std::format("当前不处于函数内，无法返回"));
     exit(-1);
   }
+  return_flow_control_node->SetReturnValue(return_target);
   bool result =
-      return_flow_control_node->SetReturnTarget(active_function, return_target);
+      c_parser_frontend.AddSentences(std::move(*sentences_to_get_assignable));
+  if (!result) [[unlikely]] {
+    OutputError(std::format("生成返回值过程中存在非法操作"));
+    exit(-1);
+  }
+  result = c_parser_frontend.AddSentence(std::move(return_flow_control_node));
   if (!result) [[unlikely]] {
     OutputError(std::format(
-        "无法返回该类型的值，给定类型无法转换为函数{:}返回的类型",
+        "函数{:}必须有返回值",
         active_function->GetFunctionTypeReference().GetFunctionName()));
     exit(-1);
   }
-  sentences_to_get_assignable->emplace_back(
-      std::move(return_flow_control_node));
-  return std::move(sentences_to_get_assignable);
+  return std::any();
 }
 
-std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithoutValue(
-    std::vector<WordDataToUser>&& word_data) {
+std::any ReturnWithoutValue(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
   auto sentences_to_get_assignable =
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>();
@@ -2588,17 +2584,21 @@ std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> ReturnWithoutValue(
     OutputError(std::format("当前不处于函数内，无法返回"));
     exit(-1);
   }
+  return_flow_control_node->SetReturnValue(nullptr);
   bool result =
-      return_flow_control_node->SetReturnTarget(active_function, nullptr);
+      c_parser_frontend.AddSentences(std::move(*sentences_to_get_assignable));
+  if (!result) [[unlikely]] {
+    OutputError(std::format("生成返回值过程中存在非法操作"));
+    exit(-1);
+  }
+  result = c_parser_frontend.AddSentence(std::move(return_flow_control_node));
   if (!result) [[unlikely]] {
     OutputError(std::format(
-        "函数{:}无法返回空值",
+        "函数{:}必须有返回值",
         active_function->GetFunctionTypeReference().GetFunctionName()));
     exit(-1);
   }
-  sentences_to_get_assignable->emplace_back(
-      std::move(return_flow_control_node));
-  return std::move(sentences_to_get_assignable);
+  return std::any();
 }
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
@@ -2725,13 +2725,12 @@ FunctionCallInit(std::vector<WordDataToUser>&& word_data) {
     sentences_to_get_node_to_call->emplace_back(
         std::move(dereference_flow_control_node));
     // 设置调用的节点为解引用后得到的节点
-    result = function_call_operator_node->SetFunctionObjectToCall(
+    result = function_call_operator_node->SetFunctionType(
         dereference_operator_node->GetResultOperatorNode());
     assert(result);
   } else {
     // 给定节点可以直接调用
-    bool result =
-        function_call_operator_node->SetFunctionObjectToCall(node_to_call);
+    bool result = function_call_operator_node->SetFunctionType(node_to_call);
     assert(result);
   }
 
@@ -2895,13 +2894,6 @@ std::any SingleStatementAnnounce(std::vector<WordDataToUser>&& word_data) {
 
 std::any SingleStatementReturn(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 1);
-  auto& sentences_to_get_return_node = *std::any_cast<
-      std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&>(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
-  bool result =
-      c_parser_frontend.AddSentences(std::move(sentences_to_get_return_node));
-  // 所有报错应在这步规约前进行
-  assert(result);
   return std::any();
 }
 
@@ -3256,9 +3248,6 @@ std::any ProcessControlSentenceBodyStatements(
   return std::any();
 }
 
-// 根产生式
-// Root -> Root FunctionDefine
-// 不作任何操作
 std::any RootFunctionDefine(std::vector<WordDataToUser>&& word_data) {
   assert(word_data.size() == 2);
   return std::any();
@@ -3276,9 +3265,7 @@ std::any RootAnnounce(std::vector<WordDataToUser>&& word_data) {
               static_cast<SimpleSentence&>(*flow_control_node)
                   .GetSentenceOperateNodePointer());
       // 添加变量定义
-      c_parser_frontend.DefineVariety(
-          *variety_operator_node->GetVarietyNamePointer(),
-          variety_operator_node);
+      c_parser_frontend.DefineVariety(variety_operator_node);
     } break;
     case FlowType::kFunctionDefine: {
       // 函数声明
@@ -3294,11 +3281,6 @@ std::any RootAnnounce(std::vector<WordDataToUser>&& word_data) {
   }
   return std::any();
 }
-
-// 完成构建过程，返回流程对象
-// 输入最终的函数名指针/变量名指针
-
-// 语义同AttachSingleNodeToTailNodeEmplace，参数使用已经构建好的节点
 
 ObjectConstructData::CheckResult
 ObjectConstructData::AttachSingleNodeToTailNodePointer(
@@ -3361,7 +3343,8 @@ ObjectConstructData::ConstructObject(
       pointer_type.SetConstTag(const_tag_before_final_type);
     } break;
     case StructOrBasicType::kFunction:
-      // 类型链末端为函数，设置函数返回值的const_tag
+      // 这种情况下函数返回值类型只有一个有效类型节点（final_node_to_attach）
+      // 合法的语义下这个节点应该是基础类型
       static_cast<FunctionType&>(*type_chain_tail_)
           .SetReturnTypeConstTag(const_tag_before_final_type);
       break;
@@ -3437,19 +3420,12 @@ ObjectConstructData::ConstructObject(
     auto function_type_chain = std::const_pointer_cast<FunctionType>(
         std::static_pointer_cast<const FunctionType>(final_type_chain));
     // 获取变量名指针后设置函数名
-    if (GetObjectName().empty()) {
-      function_type_chain->SetFunctionName(nullptr);
-    } else {
-      // 声明待添加的函数
-      auto iter = c_parser_frontend.AnnounceTypeName(GetObjectName());
-      function_type_chain->SetFunctionName(&iter->first);
-    }
+    function_type_chain->SetFunctionName(std::move(GetObjectName()));
     // 构建函数定义（FunctionDefine流程）
     ConstructBasicObjectPart<c_parser_frontend::flow_control::FunctionDefine>(
         std::move(function_type_chain));
   } else {
     // 要构建的类型为变量，无需额外转换
-
     auto& variety_node = static_cast<VarietyOperatorNode&>(
         static_cast<SimpleSentence&>(*object_)
             .GetSentenceOperateNodeReference());
@@ -3457,13 +3433,7 @@ ObjectConstructData::ConstructObject(
     variety_node.SetVarietyType(
         std::move(type_chain_head_->GetNextNodePointer()));
     // 设置变量名
-    if (GetObjectName().empty()) {
-      variety_node.SetVarietyName(nullptr);
-    } else {
-      // 声明待添加变量
-      auto iter = c_parser_frontend.AnnounceVarietyName(GetObjectName());
-      variety_node.SetVarietyName(&iter->first);
-    }
+    variety_node.SetVarietyName(std::move(GetObjectName()));
   }
   return std::make_pair(std::move(object_), CheckResult::kSuccess);
 }
