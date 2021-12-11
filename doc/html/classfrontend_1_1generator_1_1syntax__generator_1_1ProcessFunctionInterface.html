@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: frontend::generator::syntax_generator::ProcessFunctionInterface类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#pub-types">Public 类型</a> &#124;
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pri-methods">Private 成员函数</a> &#124;
+<a href="#friends">友元</a> &#124;
+<a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">frontend::generator::syntax_generator::ProcessFunctionInterface类 参考<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>所有包装用户定义函数的类均从该类派生  
+ <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="process__function__interface_8h_source.html">process_function_interface.h</a>&gt;</code></p>
+<div class="dynheader">
+类 frontend::generator::syntax_generator::ProcessFunctionInterface 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface__inherit__graph.png" border="0" usemap="#frontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_inherit__map" alt="Inheritance graph"/></div>
+<map name="frontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_inherit__map" id="frontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_inherit__map">
+<area shape="rect" title="所有包装用户定义函数的类均从该类派生" alt="" coords="5,5,191,61"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html" title="内部实现用根节点的规约函数" alt="" coords="22,109,174,165"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html">NonTerminalWordData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">非终结产生式的数据  <a href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html">TerminalWordData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">终结产生式单词的数据  <a href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html">WordDataToUser</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a9c2956cc0bd63108ef1dd1d2ce75dac5"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">UserData</a> = std::any</td></tr>
+<tr class="memdesc:a9c2956cc0bd63108ef1dd1d2ce75dac5"><td class="mdescLeft">&#160;</td><td class="mdescRight">定义用户返回的数据类型  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">更多...</a><br /></td></tr>
+<tr class="separator:a9c2956cc0bd63108ef1dd1d2ce75dac5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a9b7a00b54b47da366a9641e368da0bbb"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9b7a00b54b47da366a9641e368da0bbb">~ProcessFunctionInterface</a> ()</td></tr>
+<tr class="separator:a9b7a00b54b47da366a9641e368da0bbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a16cbfd0a0ee1d62abe35741177e9e458"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">UserData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a16cbfd0a0ee1d62abe35741177e9e458">Reduct</a> (std::vector&lt; <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html">WordDataToUser</a> &gt; &amp;&amp;word_data) const =0</td></tr>
+<tr class="memdesc:a16cbfd0a0ee1d62abe35741177e9e458"><td class="mdescLeft">&#160;</td><td class="mdescRight">调用用户定义的规约函数  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a16cbfd0a0ee1d62abe35741177e9e458">更多...</a><br /></td></tr>
+<tr class="separator:a16cbfd0a0ee1d62abe35741177e9e458"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private 成员函数</h2></td></tr>
+<tr class="memitem:a3066b1f7d9c07a55b8dda0778ea9bd1d"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:a3066b1f7d9c07a55b8dda0778ea9bd1d"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a3066b1f7d9c07a55b8dda0778ea9bd1d">serialize</a> (Archive &amp;&amp;ar, const unsigned int version)</td></tr>
+<tr class="memdesc:a3066b1f7d9c07a55b8dda0778ea9bd1d"><td class="mdescLeft">&#160;</td><td class="mdescRight">序列化该类的函数  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a3066b1f7d9c07a55b8dda0778ea9bd1d">更多...</a><br /></td></tr>
+<tr class="separator:a3066b1f7d9c07a55b8dda0778ea9bd1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+友元</h2></td></tr>
+<tr class="memitem:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">boost::serialization::access</a></td></tr>
+<tr class="memdesc:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">允许序列化类访问  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">更多...</a><br /></td></tr>
+<tr class="separator:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>所有包装用户定义函数的类均从该类派生 </p>
+<p>所有派生类必须且仅允许重载Reduct函数，该函数返回规约后用户返回的数据 该数据在下一次规约时使用 </p>
+
+<p class="definition">在文件 <a class="el" href="process__function__interface_8h_source.html">process_function_interface.h</a> 第 <a class="el" href="process__function__interface_8h_source.html#l00016">16</a> 行定义.</p>
+</div><h2 class="groupheader">成员类型定义说明</h2>
+<a id="a9c2956cc0bd63108ef1dd1d2ce75dac5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c2956cc0bd63108ef1dd1d2ce75dac5">&#9670;&nbsp;</a></span>UserData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">frontend::generator::syntax_generator::ProcessFunctionInterface::UserData</a> =  std::any</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>定义用户返回的数据类型 </p>
+
+<p class="definition">在文件 <a class="el" href="process__function__interface_8h_source.html">process_function_interface.h</a> 第 <a class="el" href="process__function__interface_8h_source.html#l00019">19</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">构造及析构函数说明</h2>
+<a id="a9b7a00b54b47da366a9641e368da0bbb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b7a00b54b47da366a9641e368da0bbb">&#9670;&nbsp;</a></span>~ProcessFunctionInterface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual frontend::generator::syntax_generator::ProcessFunctionInterface::~ProcessFunctionInterface </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="process__function__interface_8h_source.html">process_function_interface.h</a> 第 <a class="el" href="process__function__interface_8h_source.html#l00089">89</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="a16cbfd0a0ee1d62abe35741177e9e458"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a16cbfd0a0ee1d62abe35741177e9e458">&#9670;&nbsp;</a></span>Reduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">UserData</a> frontend::generator::syntax_generator::ProcessFunctionInterface::Reduct </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html">WordDataToUser</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>word_data</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>调用用户定义的规约函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">word_data</td><td>：规约的产生式体中每个产生式的数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回用户规约后返回的数据</dd></dl>
+<p>word_data中数据顺序为产生式定义顺序 </p><dl class="section note"><dt>注解</dt><dd>空规约节点存储std::monostate </dd></dl>
+
+<p>在 <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html#ad98a27e64bab64271b38e08a06dfd4f5">frontend::generator::syntax_generator::RootReductClass</a> 内被实现.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00145">frontend::parser::syntax_parser::SyntaxParser::Reduct()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_a16cbfd0a0ee1d62abe35741177e9e458_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_a16cbfd0a0ee1d62abe35741177e9e458_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_a16cbfd0a0ee1d62abe35741177e9e458_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_a16cbfd0a0ee1d62abe35741177e9e458_icgraph">
+<area shape="rect" title="调用用户定义的规约函数" alt="" coords="885,5,1071,76"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b" title="处理产生式待规约的情况" alt="" coords="621,20,837,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,13,573,69"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,20,315,61"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3066b1f7d9c07a55b8dda0778ea9bd1d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3066b1f7d9c07a55b8dda0778ea9bd1d">&#9670;&nbsp;</a></span>serialize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Archive &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::syntax_generator::ProcessFunctionInterface::serialize </td>
+          <td>(</td>
+          <td class="paramtype">Archive &amp;&amp;&#160;</td>
+          <td class="paramname"><em>ar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>version</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>序列化该类的函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">ar</td><td>：序列化使用的档案 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">version</td><td>：序列化文件版本 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section attention"><dt>注意</dt><dd>该函数应由boost库调用而非手动调用 所有派生类均需重写该函数 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="process__function__interface_8h_source.html">process_function_interface.h</a> 第 <a class="el" href="process__function__interface_8h_source.html#l00109">109</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">友元及相关函数文档</h2>
+<a id="ac98d07dd8f7b70e16ccb9a01abf56b9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac98d07dd8f7b70e16ccb9a01abf56b9c">&#9670;&nbsp;</a></span>boost::serialization::access</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class boost::serialization::access</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>允许序列化类访问 </p>
+
+<p class="definition">在文件 <a class="el" href="process__function__interface_8h_source.html">process_function_interface.h</a> 第 <a class="el" href="process__function__interface_8h_source.html#l00101">101</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/Generator/SyntaxGenerator/<a class="el" href="process__function__interface_8h_source.html">process_function_interface.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacefrontend.html">frontend</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1generator.html">generator</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html">syntax_generator</a></li><li class="navelem"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html">ProcessFunctionInterface</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

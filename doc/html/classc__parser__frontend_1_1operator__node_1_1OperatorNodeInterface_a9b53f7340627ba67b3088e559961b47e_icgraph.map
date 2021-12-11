@@ -1,0 +1,33 @@
+<map id="c_parser_frontend::operator_node::OperatorNodeInterface::GetResultTypePointer" name="c_parser_frontend::operator_node::OperatorNodeInterface::GetResultTypePointer">
+<area shape="rect" id="node1" title="获取最终结果的类型" alt="" coords="1228,845,1456,901"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#ae04475df3488b171fc37c245af4fa441" title="检查两个节点是否可以赋值" alt="" coords="916,405,1140,461"/>
+<area shape="rect" id="node9" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#ae59e55b700c8709ffc835891f6cd84f7" title="创建返回结果的节点" alt="" coords="568,165,797,221"/>
+<area shape="rect" id="node15" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a8bbcf79237101cc951de40d07f3a5085" title="检查分支条件是否有效" alt="" coords="907,85,1149,141"/>
+<area shape="rect" id="node18" href="$classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#afecbf5df68d69241c8f666f7e4452e67" title="检查节点是否可以解引用" alt="" coords="876,645,1180,701"/>
+<area shape="rect" id="node20" href="$classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#a548bfce6c0ae11b7a9570b82938eb490" title="检查给定节点是否可以作为被访问成员的节点" alt="" coords="885,725,1171,781"/>
+<area shape="rect" id="node22" href="$classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a0f872e3820348d686f46708f07d91d29" title="默认对循环条件节点进行类型检查的函数" alt="" coords="909,805,1147,861"/>
+<area shape="rect" id="node25" href="$classc__parser__frontend_1_1operator__node_1_1TypeConvert.html#a9d577bd625e3c6134e8d25536207af6d" title="获取最终结果的类型" alt="" coords="925,885,1131,941"/>
+<area shape="rect" id="node26" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#af0e8dcc1136bce4c2497ca0ef6921ec3" title="获取最终结果的类型" alt="" coords="913,965,1143,1021"/>
+<area shape="rect" id="node27" href="$classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca8bf9ef313ae917878d6e7b3f8d59f0" title="获取最终结果的类型" alt="" coords="916,1045,1140,1101"/>
+<area shape="rect" id="node28" href="$classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#a7a68435eb982c0200338f6be3ecac531" title="获取最终结果的类型" alt="" coords="897,1125,1159,1181"/>
+<area shape="rect" id="node29" href="$classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#a7c309aa4aa6cbc43dc1aa5ce6c00d790" title="获取最终结果的类型" alt="" coords="897,1205,1159,1261"/>
+<area shape="rect" id="node30" href="$classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#aefd53de131f70e5127cd9b30d098d30a" title="设置访问的成员名" alt="" coords="897,1286,1159,1357"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#a42baddd3c0fb6f454c50d06472993ae2" title="添加调用参数" alt="" coords="537,325,828,381"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#aaf0729f7e7c809dad9814ec9fecf5fe5" title="检查给定语句是否可以作为函数内执行的语句" alt="" coords="568,245,797,301"/>
+<area shape="rect" id="node12" href="$classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#ad2a310de687335d6658b0daead191637" title="按容器设置调用参数" alt="" coords="576,485,789,541"/>
+<area shape="rect" id="node13" href="$classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca9910541d690b4040e6ba1ce4323a72" title="设置用来赋值的节点" alt="" coords="571,565,795,621"/>
+<area shape="rect" id="node14" href="$classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a723c6c6897c0618d9577cece835a85c8" title="检查使用初始化列表初始化变量的情况" alt="" coords="544,405,821,461"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a80ece7836e0b60e9abace2aef88b7f6e" title="添加一条函数内执行的语句" alt="" coords="271,245,478,301"/>
+<area shape="rect" id="node7" href="$classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a1197ee4a48e2d37c82b402f6bd01246a" title="添加一个容器内的全部语句" alt="" coords="271,325,478,381"/>
+<area shape="rect" id="node6" href="$classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a73416179a5655fc54cd037f7d9a43f43" title="向流程语句主体中中添加单条语句" alt="" coords="5,245,212,301"/>
+<area shape="rect" id="node8" href="$classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a4e41329fb34ed861cb4ffa6e1677271d" title="向流程语句主体中中添加多条语句" alt="" coords="5,325,212,381"/>
+<area shape="rect" id="node10" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#aed46590b486ee7477bb17dce3677c3fb" title="设置条件为假时的分支" alt="" coords="260,145,489,201"/>
+<area shape="rect" id="node11" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a3bf8f22583fef107e37a3b9a51d1f7de" title="设置条件为真时的分支" alt="" coords="260,25,489,81"/>
+<area shape="rect" id="node16" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#aa2d2461fd18663c1ed73484328b81fc3" title="检查条件分支结果是否有效" alt="" coords="568,5,797,61"/>
+<area shape="rect" id="node17" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a440baeb7f54df4d2ac6429273c26c1e6" title="设置分支条件" alt="" coords="568,85,797,141"/>
+<area shape="rect" id="node19" href="$classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#a082cac4f28ce1ff5d278a3a0c7cc6bea" title="设定被解引用的节点" alt="" coords="547,645,818,701"/>
+<area shape="rect" id="node21" href="$classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#ac22f0f73cebcb75eac556e5a5a15f43e" title="设置要访问的结构化数据节点" alt="" coords="565,725,800,781"/>
+<area shape="rect" id="node23" href="$classc__parser__frontend_1_1flow__control_1_1ForSentence.html#ab841ab4beb1e56f11a1f68e961e33199" title="检查给定节点是否可以作为for条件" alt="" coords="588,805,777,861"/>
+<area shape="rect" id="node24" href="$classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a1556d7a7178522a674e67e52046728bf" title="设定条件控制语句的条件与获取条件的操作" alt="" coords="579,885,786,941"/>
+<area shape="rect" id="node31" href="$classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#ae95a9a06b45870ad8675b330273cecde" title="设置访问的成员名" alt="" coords="565,1293,800,1349"/>
+</map>

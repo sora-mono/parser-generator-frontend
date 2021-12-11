@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::operator_node::ListInitializeOperatorNode" name="c_parser_frontend::operator_node::ListInitializeOperatorNode">
+<area shape="rect" id="node1" title="初始化列表" alt="" coords="23,213,225,269"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html" title="所有初始化数据（编译期常量）的基类" alt="" coords="5,109,243,165"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html" title="操作节点基类" alt="" coords="17,5,231,61"/>
+</map>

@@ -1,0 +1,19 @@
+<map id="frontend::generator::syntax_generator::ProductionItemSet::GetMainItemIters" name="frontend::generator::syntax_generator::ProductionItemSet::GetMainItemIters">
+<area shape="rect" id="node1" title="获取全部指向核心项的迭代器" alt="" coords="2212,188,2447,259"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#aa4c65d18edde8ef3e0a24e7e762fb944" title="向给定项中添加向前看符号" alt="" coords="1934,188,2161,259"/>
+<area shape="rect" id="node13" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a2f5b6a16b4faae23094dd37bbe24724b" title="清空所有非核心项" alt="" coords="1379,5,1586,76"/>
+<area shape="rect" id="node14" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a77eab058e01b34db9ad35789e671dfba" title="获取项集的全部核心项" alt="" coords="1651,79,1883,149"/>
+<area shape="rect" id="node15" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a63bdfe8072065bdd3aa74418f020eb04" title="判断给定项是否为该项集的核心项" alt="" coords="1936,374,2159,430"/>
+<area shape="rect" id="node17" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a662065072b4b9a5a9c8b810161f75bcd" title="设置一项为核心项" alt="" coords="1931,287,2164,343"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae342de44b6d6aedcec6a98586d3f133a" title="向给定核心项中添加向前看符号" alt="" coords="1073,173,1291,244"/>
+<area shape="rect" id="node8" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a19bc83f8d64e0d4975f66c694026aaf6" title="向项集中插入项和对应的向前看符号" alt="" coords="1651,173,1882,244"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,254,1001,339"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,301,643,372"/>
+<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,301,355,372"/>
+<area shape="rect" id="node7" href="$Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,323,60,350"/>
+<area shape="rect" id="node9" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5129208be8ce5779d5b75d3169a23592" title="向项集中添加项和项的向前看符号" alt="" coords="1363,161,1603,232"/>
+<area shape="rect" id="node11" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9b99c668d7a0c10456fdab8ebc351178" title="向项集中插入核心项和对应的向前看符号" alt="" coords="1364,319,1601,389"/>
+<area shape="rect" id="node10" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1077,79,1287,149"/>
+<area shape="rect" id="node12" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#af9e3df47546b3fe233595849cfd1c5c9" title="向项集中添加核心项和核心项的向前看符号" alt="" coords="1049,268,1315,339"/>
+<area shape="rect" id="node16" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a13e771dd708af5749a2119d63fe66165" title="获取给定项移入相同产生式后构成的项集" alt="" coords="1651,387,1883,457"/>
+</map>

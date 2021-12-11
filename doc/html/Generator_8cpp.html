@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: src/Generator/Generator.cpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('Generator_8cpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle">
+<div class="title">Generator.cpp 文件参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="process__functions__classes__register_8h_source.html">SyntaxGenerator/process_functions_classes_register.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="syntax__generator_8h_source.html">SyntaxGenerator/syntax_generator.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="syntax__generator__classes__register_8h_source.html">SyntaxGenerator/syntax_generator_classes_register.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Generator.cpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="Generator_8cpp__incl.png" border="0" usemap="#src_2Generator_2Generator_8cpp" alt=""/></div>
+<map name="src_2Generator_2Generator_8cpp" id="src_2Generator_2Generator_8cpp">
+<area shape="rect" title=" " alt="" coords="1511,5,1717,32"/>
+<area shape="rect" href="process__functions__classes__register_8h.html" title="向boost&#45;serialization注册process_functions_classes.h中定义的派生类" alt="" coords="1089,80,1301,121"/>
+<area shape="rect" href="syntax__generator_8h.html" title="语法分析机配置生成器" alt="" coords="2009,601,2189,643"/>
+<area shape="rect" href="syntax__generator__classes__register_8h.html" title=" " alt="" coords="1507,691,1721,732"/>
+<area shape="rect" title=" " alt="" coords="1136,1048,1279,1089"/>
+<area shape="rect" href="process__function__interface__register_8h.html" title="注册process_function_interface.h中派生类的宏" alt="" coords="926,601,1123,643"/>
+<area shape="rect" href="process__functions__classes_8h.html" title="根据用户定义的非终结产生式定义包装规约函数的类" alt="" coords="1092,169,1299,196"/>
+<area shape="rect" href="production__config-inc_8h.html" title=" " alt="" coords="1248,244,1425,285"/>
+<area shape="rect" href="process__function__interface_8h.html" title="该文件定义包装用户定义规约函数的类的基类" alt="" coords="979,698,1188,725"/>
+<area shape="rect" title=" " alt="" coords="1301,787,1348,814"/>
+<area shape="rect" title=" " alt="" coords="916,780,1059,821"/>
+<area shape="rect" title=" " alt="" coords="1083,780,1225,821"/>
+<area shape="rect" title=" " alt="" coords="35,1055,103,1082"/>
+<area shape="rect" href="user__defined__functions_8h.html" title=" " alt="" coords="977,423,1165,464"/>
+<area shape="rect" href="reduct__functions_8h.html" title=" " alt="" coords="650,512,823,553"/>
+<area shape="rect" title=" " alt="" coords="989,877,1055,903"/>
+<area shape="rect" title=" " alt="" coords="1134,877,1214,903"/>
+<area shape="rect" title=" " alt="" coords="641,609,699,635"/>
+<area shape="rect" href="c__parser__frontend_8h.html" title="C语言编译器前端控制器" alt="" coords="365,609,516,635"/>
+<area shape="rect" href="flow__control_8h.html" title="流程控制" alt="" coords="248,787,361,814"/>
+<area shape="rect" href="operator__node_8h.html" title="操作节点" alt="" coords="510,877,638,903"/>
+<area shape="rect" href="type__system_8h.html" title="类型系统" alt="" coords="515,966,633,993"/>
+<area shape="rect" title=" " alt="" coords="377,1055,501,1082"/>
+<area shape="rect" href="line__and__column_8h.html" title="存储当前解析到的源文件行数和列数" alt="" coords="297,698,485,725"/>
+<area shape="rect" href="action__scope__system_8h.html" title="作用域系统" alt="" coords="47,698,221,725"/>
+<area shape="rect" title=" " alt="" coords="127,1055,205,1082"/>
+<area shape="rect" href="id__wrapper_8h.html" title="ID包装器，包装ID以避免ID混用导致运行时错误" alt="" coords="2437,1055,2605,1082"/>
+<area shape="rect" title=" " alt="" coords="2357,1137,2511,1179"/>
+<area shape="rect" title=" " alt="" coords="2536,1137,2679,1179"/>
+<area shape="rect" title=" " alt="" coords="342,877,385,903"/>
+<area shape="rect" title=" " alt="" coords="847,1055,917,1082"/>
+<area shape="rect" title=" " alt="" coords="1015,1055,1074,1082"/>
+<area shape="rect" title=" " alt="" coords="2304,1055,2367,1082"/>
+<area shape="rect" href="syntax__generate_8h.html" title="定义表示产生式的宏以简化配置生成过程" alt="" coords="1241,333,1443,375"/>
+<area shape="rect" href="common_8h.html" title="存储公开的定义和类型" alt="" coords="1879,966,2034,993"/>
+<area shape="rect" href="export__types_8h.html" title="存储向外暴露的一些数据类型" alt="" coords="2220,877,2408,903"/>
+<area shape="rect" title=" " alt="" coords="1923,1055,1990,1082"/>
+<area shape="rect" title=" " alt="" coords="2379,959,2521,1000"/>
+<area shape="rect" title=" " alt="" coords="2109,959,2252,1000"/>
+<area shape="rect" href="object__manager_8h.html" title="管理对象，通过给定ID标识对象，ID与对象是一一映射的关系" alt="" coords="3179,966,3380,993"/>
+<area shape="rect" href="unordered__struct__manager_8h.html" title="将多元素结构哈希存储的类" alt="" coords="2647,959,2842,1000"/>
+<area shape="rect" title=" " alt="" coords="2862,1055,2937,1082"/>
+<area shape="rect" title=" " alt="" coords="3295,1048,3437,1089"/>
+<area shape="rect" title=" " alt="" coords="2961,1048,3104,1089"/>
+<area shape="rect" title=" " alt="" coords="3128,1048,3271,1089"/>
+<area shape="rect" title=" " alt="" coords="3462,1055,3577,1082"/>
+<area shape="rect" title=" " alt="" coords="2427,691,2582,732"/>
+<area shape="rect" title=" " alt="" coords="2607,698,2680,725"/>
+<area shape="rect" title=" " alt="" coords="2705,698,2763,725"/>
+<area shape="rect" title=" " alt="" coords="2788,698,2843,725"/>
+<area shape="rect" href="dfa__generator_8h.html" title="DFA配置生成器" alt="" coords="2225,691,2403,732"/>
+<area shape="rect" href="production__item__set_8h.html" title="存储项集与向前看符号的类" alt="" coords="2965,787,3132,814"/>
+<area shape="rect" href="production__node_8h.html" title="描述产生式的类" alt="" coords="2083,787,2225,814"/>
+<area shape="rect" href="syntax__analysis__table_8h.html" title="语法分析表" alt="" coords="1525,787,1703,814"/>
+<area shape="rect" title=" " alt="" coords="2352,780,2495,821"/>
+<area shape="rect" href="nfa__generator_8h.html" title="NFA配置生成器" alt="" coords="2570,787,2786,814"/>
+<area shape="rect" href="multimap__object__manager_8h.html" title="管理对象，支持对象的合并，允许多个ID对应一个对象" alt="" coords="2946,869,3141,911"/>
+<area shape="rect" title=" " alt="" coords="3018,966,3103,993"/>
+<area shape="rect" title=" " alt="" coords="1380,869,1523,911"/>
+<area shape="rect" title=" " alt="" coords="1547,869,1703,911"/>
+</map>
+</div>
+</div>
+<p><a href="Generator_8cpp_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="Generator_8cpp.html">Generator.cpp</a> : 此文件包含 "main" 函数。程序执行将在此处开始并结束。  <a href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">更多...</a><br /></td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">函数说明</h2>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p><a class="el" href="Generator_8cpp.html">Generator.cpp</a> : 此文件包含 "main" 函数。程序执行将在此处开始并结束。 </p>
+
+<p class="definition">在文件 <a class="el" href="Generator_8cpp_source.html">Generator.cpp</a> 第 <a class="el" href="Generator_8cpp_source.html#l00007">7</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__generator_8cpp_source.html#l01286">frontend::generator::syntax_generator::SyntaxGenerator::ConstructSyntaxConfig()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="Generator_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph.png" border="0" usemap="#Generator_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph" alt=""/></div>
+<map name="Generator_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph" id="Generator_8cpp_ae66f6b31b5ad750f1fe042a706a4e3d4_cgraph">
+<area shape="rect" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,1469,60,1495"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,1447,355,1517"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a7bde56fe0c0a6e3ed33c232004ddf956" title="检查是否存在未定义的产生式体" alt="" coords="415,860,661,931"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ac36af38a759bad82c7cf7646ac6a8bf7" title="添加构建配置所需的各种外围信息" alt="" coords="417,1290,659,1346"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="429,1370,647,1426"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a82180d7b3fd461e84c0570173d521ca0" title="将语法分析表配置写入文件 文件名为frontend::common::kSyntaxConfigFileName" alt="" coords="431,1606,645,1662"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="418,2223,658,2293"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a7d2bf2a9d13bca48536846a1650141f8" title="初始化" alt="" coords="403,2893,673,2949"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a736c60d18820ddf9b08bb7e4cdc8e6ec" title="输出Error级诊断信息" alt="" coords="769,487,984,543"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a36fe0f238a5663a90c8b1100d723eb33" title="获取给定NFA节点的所有等效节点ID（包含自身）" alt="" coords="1449,1144,1637,1215"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a21776396cecfb452b42e56dca43b5724" title="构建最小化DFA" alt="" coords="768,1602,985,1658"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a067fa9c2c4907f35de5bd576f000f317" title="获取中间节点引用" alt="" coords="1434,1471,1651,1527"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa6064ffbfc016cd8c14626928b894616" title="获取NFA节点头结点ID" alt="" coords="1131,5,1319,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a1d1bc4c8b084e3ca3e28011d63ededc4" title="获取集合对应的中间节点ID，如果不存在则创建新的中间节点" alt="" coords="1116,1537,1333,1593"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a9c66fbc2e3302533f3ef3d3b693b3691" title="合并优化，降低节点数和转移路径以降低子集构造法集合大小" alt="" coords="783,619,971,689"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="768,1305,985,1361"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a533e7b18b83514f9782c24c1781646b2" title="通过一个id查询引用相同底层对象的所有id" alt="" coords="1716,1101,1947,1157"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed" title="根据NFA节点ID获取NFA节点" alt="" coords="1737,1181,1925,1252"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a4347527ee933efa32065a14e90be53dc" title="获取指向第一个有效节点的迭代器" alt="" coords="1129,1829,1321,1871"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a99d1a3c63580f5a44f26e2c1351398f7" title="获取指向超尾的迭代器" alt="" coords="1129,1617,1321,1659"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa38cc668b660a10ec56f354b6051dbad" title="对中间节点进行分类" alt="" coords="1116,1683,1333,1739"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf" title="获取存储无效值的容器" alt="" coords="1103,2405,1347,2476"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html#aa088b185f8650169d2e53c4372db529b" title="判断当前存储的值是否有效" alt="" coords="1445,1291,1640,1332"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#af218c097d7fa411572f79043be378ee7" title="初始化，如果容器中存在节点则全部释放" alt="" coords="1121,2868,1328,2909"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#ace94586d70da1f07e0af846ad52d42be" title="调用成员变量的shrink_to_fit来节省空间" alt="" coords="1129,1764,1321,1805"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a204350a871426aaf21ddc9cd535925b6" title="获取对象的const引用" alt="" coords="1735,1479,1927,1520"/>
+<area shape="rect" href="classfrontend_1_1common_1_1UnorderedStructManager.html#acbd7bff0314ac667bce8e2bc92ccaeaa" title="插入一个待管理的对象" alt="" coords="1431,1727,1654,1768"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#adbb63b10c08fd65047c2b6ee5cae362d" title="系统自行选择最佳位置放置对象" alt="" coords="1447,1968,1639,2009"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#afcb26d4dca905b39d4f83e72187dc283" title="返回入参对应对象是否可合并" alt="" coords="1091,809,1359,851"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#ab65f8095016ee5dbf4a5d50383129a6e" title="获取该节点全部转移条件和在转移条件下可以转移到的节点ID" alt="" coords="1417,805,1668,876"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a7809a54c44c233d956e1a0d3b10f2b82" title="根据NFA节点ID获取尾节点数据" alt="" coords="1131,969,1319,1040"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#aed4bf2120860b512aa58944ef74db9de" title="获取所有可以无条件转移到的节点ID" alt="" coords="1101,1065,1349,1150"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a4826ed2c4c0620c974bdc20a57b7bb69" title="合并两个节点" alt="" coords="1131,875,1319,945"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a16f9f323dfb681713c30de2662e4a207" title="将id_src对应的节点合并到id_dst对应的节点" alt="" coords="1115,152,1334,193"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a6123301c8e968a642436e9b57068e0df" title="移除一条转移条目" alt="" coords="1087,217,1362,288"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#af82e02943c97174e032f27988c4844bb" title="移除一个无条件转移节点" alt="" coords="1080,312,1369,383"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aaf1122d36ed3eced824030181ea7ff3f" title="移除尾节点信息" alt="" coords="1131,407,1319,477"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#afa5329d293067a1afb82750be49c98f4" title="设置所有对象允许合并" alt="" coords="1104,502,1345,558"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a2a3fe55defeb8a18be2c166063be5c34" title="设置对象禁止合并标志" alt="" coords="1105,582,1345,638"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aabdd9849ae9d8831534733ce6e6eb688" title="设置尾节点信息" alt="" coords="1131,663,1319,733"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a504c3213c736bdf80fdbf90cf17865eb" title="获取子集构造法的集合的引用" alt="" coords="1116,1305,1333,1361"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a52c8b5c40bdc50f5048f61a267f7dfc0" title="获取给定NFA节点在转移条件下可以到达的等效节点" alt="" coords="1111,1225,1338,1281"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa3e202423198da5fa4b91d0e24228a30" title="保存DFA配置" alt="" coords="768,1682,985,1738"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae42f4e8c267e3c13e1bc7931dec5736f" title="新建文件尾节点" alt="" coords="765,1858,988,1914"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9b99c668d7a0c10456fdab8ebc351178" title="向项集中插入核心项和对应的向前看符号" alt="" coords="758,2765,995,2836"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry.html#a3dc8f7d8bab3a273b1cf8014c8a4ee3f" title="获取移入给定非终结节点后转移到的语法分析表条目ID" alt="" coords="781,1763,972,1833"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a22553aaed4afe307361af5f07da29fe9" title="添加新的项集" alt="" coords="1092,2500,1357,2571"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a6e838cc21976d781be783fbe0da27cc3" title="通过产生式节点ID获取产生式名" alt="" coords="1101,2027,1348,2097"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0c9987d677e8acbbb2b19a82a2b37815" title="根据项集ID获取项集" alt="" coords="1109,2121,1341,2192"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a29be86f204dd6a6cc2887846795791f8" title="获取用户定义的根产生式ID" alt="" coords="745,2040,1008,2111"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#af882ff147dad50a6e8636278872e9410" title="获取语法分析表条目" alt="" coords="1093,2216,1356,2287"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a0a4a8966b76688ea2a0c385801e21416" title="获取该项集对应的语法分析表条目ID" alt="" coords="1115,2311,1334,2381"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry.html#a455d119ea52ce531782db7bd982b6032" title="设置在文件尾向前看节点下执行Accept动作" alt="" coords="769,2296,984,2367"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a2e2c3d8bfb4049c5798afa334d8889bd" title="设置到达文件尾时返回的数据" alt="" coords="768,2391,985,2447"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a9ad3271e2711364df2675c93ca87c90a" title="设置根语法分析表条目ID" alt="" coords="759,2472,995,2543"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="721,2135,1032,2221"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ad8c84b2ded36df7c756b650b66fa685a" title="合并语法分析表内等价条目以缩减语法分析表大小" alt="" coords="757,2619,997,2689"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae0b4802e9c60b7e57990233f17095dd2" title="添加产生式名" alt="" coords="1101,1895,1349,1951"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a765989368257c66b0b23d2b2ab43d711" title="初始化" alt="" coords="768,2861,985,2917"/>
+<area shape="rect" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a5912fd9f67bdee5098556fd6c5a32224" title="初始化容器" alt="" coords="1104,2959,1345,3000"/>
+</map>
+</div>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f466c1e82a0f34288cd0acce601c95c4.html">Generator</a></li><li class="navelem"><a class="el" href="Generator_8cpp.html">Generator.cpp</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

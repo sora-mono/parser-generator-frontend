@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::operator_node::BasicTypeInitializeOperatorNode::CheckBasicTypeInitializeValid" name="c_parser_frontend::operator_node::BasicTypeInitializeOperatorNode::CheckBasicTypeInitializeValid">
+<area shape="rect" id="node1" title="检查给定类型是否可以作为基础初始化数据的类型" alt="" coords="5,45,320,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator.html#a1a42e808be44d5f7c6f3bc673ad78e43" title="获取初始化用字符串类型（const char*）" alt="" coords="368,5,620,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="393,85,595,141"/>
+</map>

@@ -1,0 +1,550 @@
+\hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::Function\+Define类 参考}
+\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine}\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+
+
+函数定义  
+
+
+
+
+{\ttfamily \#include $<$flow\+\_\+control.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::Function\+Define 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::Function\+Define 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_afa4f61ed91cfa5f549153d16614469ce}{Function\+Define}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}} $>$ \&function\+\_\+type)
+\item 
+virtual bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a4e41329fb34ed861cb4ffa6e1677271d}{Add\+Main\+Sentences}} (std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&sentences) override
+\begin{DoxyCompactList}\small\item\em 向流程语句主体中中添加多条语句 \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a73416179a5655fc54cd037f7d9a43f43}{Add\+Main\+Sentence}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&sentence) override
+\begin{DoxyCompactList}\small\item\em 向流程语句主体中中添加单条语句 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a80ece7836e0b60e9abace2aef88b7f6e}{Add\+Sentence}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&sentence\+\_\+to\+\_\+add)
+\begin{DoxyCompactList}\small\item\em 添加一条函数内执行的语句 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a1197ee4a48e2d37c82b402f6bd01246a}{Add\+Sentences}} (std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&sentence\+\_\+container)
+\begin{DoxyCompactList}\small\item\em 添加一个容器内的全部语句 \end{DoxyCompactList}\item 
+const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ $>$ \& \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a4f208e571db13e0159b9c667b047dea6}{Get\+Sentences}} () const
+\begin{DoxyCompactList}\small\item\em 获取函数体执行的语句 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a28405428bd5e8de048354c9c522ae4a1}{Is\+Function\+Announce}} () const
+\begin{DoxyCompactList}\small\item\em 检查是否为函数声明 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a790c21833070bf654389ca3d8ed9121c}{Set\+Function\+Type}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}} $>$ \&function\+\_\+type)
+\begin{DoxyCompactList}\small\item\em 设置函数类型 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_abe3ac31570d557129b8f9e22c8468956}{Get\+Function\+Type\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取函数类型 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}} \& \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a7ca98b20b063affa295150ad106e6e1b}{Get\+Function\+Type\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取函数类型 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_aaf0729f7e7c809dad9814ec9fecf5fe5}{Check\+Sentence\+In\+Function\+Valid}} (const \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} \&flow\+\_\+interface) const
+\begin{DoxyCompactList}\small\item\em 检查给定语句是否可以作为函数内执行的语句 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_ab0e8fcd5c518d4208fcf0c45e66c5095}{function\+\_\+type\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 函数的类型 \end{DoxyCompactList}\item 
+std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a19d6a5ad872eee5661c43635debd4088}{sentences\+\_\+in\+\_\+function\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 函数体中执行的语句 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+函数定义 
+
+\begin{DoxyAttention}{注意}
+函数体不含执行语句时应插入一条return语句占位，否则视为函数声明 
+\end{DoxyAttention}
+
+
+在文件 flow\+\_\+control.\+h 第 205 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_afa4f61ed91cfa5f549153d16614469ce}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_afa4f61ed91cfa5f549153d16614469ce}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!FunctionDefine@{FunctionDefine}}
+\index{FunctionDefine@{FunctionDefine}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{FunctionDefine()}{FunctionDefine()}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Function\+Define (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}} $>$ \&}]{function\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 flow\+\_\+control.\+h 第 207 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Function\+Define.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a73416179a5655fc54cd037f7d9a43f43}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a73416179a5655fc54cd037f7d9a43f43}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!AddMainSentence@{AddMainSentence}}
+\index{AddMainSentence@{AddMainSentence}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{AddMainSentence()}{AddMainSentence()}}
+{\footnotesize\ttfamily virtual bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Add\+Main\+Sentence (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&}]{sentence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+向流程语句主体中中添加单条语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentence} & ：待添加的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回添加是否成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：sentence不能添加到流程控制语句中\\
+\hline
+\end{DoxyRetVals}
+1.对do-\/while/while/for调用该函数时添加到循环体中 2.对if语句调用时添加到if成立时执行的语句内 3.对if-\/else语句调用时添加到else成立时执行的语句内 4.对switch语句调用时添加到switch主体内 \begin{DoxyNote}{注解}
+添加语句时添加到已有的语句后 
+\end{DoxyNote}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface_a8de24ac57738cf0fdd5bb48b8b05df4b}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}.
+
+
+
+在文件 flow\+\_\+control.\+h 第 215 行定义.
+
+
+
+引用了 Add\+Sentence().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a73416179a5655fc54cd037f7d9a43f43_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a4e41329fb34ed861cb4ffa6e1677271d}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a4e41329fb34ed861cb4ffa6e1677271d}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!AddMainSentences@{AddMainSentences}}
+\index{AddMainSentences@{AddMainSentences}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{AddMainSentences()}{AddMainSentences()}}
+{\footnotesize\ttfamily virtual bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Add\+Main\+Sentences (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&}]{sentences }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+向流程语句主体中中添加多条语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentences} & ：待添加的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回添加是否成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：sentences中含有不能添加到流程控制语句的语句\\
+\hline
+\end{DoxyRetVals}
+1.对do-\/while/while/for调用该函数时添加到循环体中 2.对if语句调用时添加到if成立时执行的语句内 3.对if-\/else语句调用时添加到else成立时执行的语句内 4.对switch语句调用时添加到switch主体内 \begin{DoxyNote}{注解}
+添加语句时添加到已有的语句后 
+\end{DoxyNote}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface_a3a89f0b4c77f952a520a58a7107e6787}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}.
+
+
+
+在文件 flow\+\_\+control.\+h 第 211 行定义.
+
+
+
+引用了 Add\+Sentences().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a4e41329fb34ed861cb4ffa6e1677271d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a80ece7836e0b60e9abace2aef88b7f6e}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a80ece7836e0b60e9abace2aef88b7f6e}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!AddSentence@{AddSentence}}
+\index{AddSentence@{AddSentence}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{AddSentence()}{AddSentence()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Add\+Sentence (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&}]{sentence\+\_\+to\+\_\+add }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+添加一条函数内执行的语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentence\+\_\+to\+\_\+add} & ：待添加的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回添加是否成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & 添加成功，夺取sentences\+\_\+to\+\_\+add控制权 \\
+\hline
+{\em false} & 不能添加，不修改入参\\
+\hline
+\end{DoxyRetVals}
+1.对语句的要求参考\+Check\+Sentence\+In\+Function\+Valid 2.添加到已添加的语句尾部 
+
+在文件 flow\+\_\+control.\+cpp 第 275 行定义.
+
+
+
+引用了 Check\+Sentence\+In\+Function\+Valid() , 以及 sentences\+\_\+in\+\_\+function\+\_\+.
+
+
+
+被这些函数引用 Add\+Main\+Sentence().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a80ece7836e0b60e9abace2aef88b7f6e_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a80ece7836e0b60e9abace2aef88b7f6e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a1197ee4a48e2d37c82b402f6bd01246a}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a1197ee4a48e2d37c82b402f6bd01246a}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!AddSentences@{AddSentences}}
+\index{AddSentences@{AddSentences}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{AddSentences()}{AddSentences()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Add\+Sentences (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&}]{sentence\+\_\+container }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+添加一个容器内的全部语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentence\+\_\+container} & ：存储待添加语句的容器 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回添加是否成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & 成功添加，移动sentence\+\_\+container中所有节点到函数执行语句容器 \\
+\hline
+{\em false} & 容器中存在非法语句，不能添加，不修改sentence\+\_\+container\\
+\hline
+\end{DoxyRetVals}
+1.按照给定迭代器begin-\/$>$end顺序添加 2.对语句的要求参考\+Check\+Sentence\+In\+Function\+Valid 
+
+在文件 flow\+\_\+control.\+cpp 第 285 行定义.
+
+
+
+引用了 Check\+Sentence\+In\+Function\+Valid() , 以及 sentences\+\_\+in\+\_\+function\+\_\+.
+
+
+
+被这些函数引用 Add\+Main\+Sentences().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a1197ee4a48e2d37c82b402f6bd01246a_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a1197ee4a48e2d37c82b402f6bd01246a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_aaf0729f7e7c809dad9814ec9fecf5fe5}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_aaf0729f7e7c809dad9814ec9fecf5fe5}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!CheckSentenceInFunctionValid@{CheckSentenceInFunctionValid}}
+\index{CheckSentenceInFunctionValid@{CheckSentenceInFunctionValid}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{CheckSentenceInFunctionValid()}{CheckSentenceInFunctionValid()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Check\+Sentence\+In\+Function\+Valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} \&}]{flow\+\_\+interface }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+检查给定语句是否可以作为函数内执行的语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em flow\+\_\+interface} & ：待检查的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回给定语句是否可以作为函数内执行的语句 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & 允许在函数内执行 \\
+\hline
+{\em false} & 不允许在函数内执行\\
+\hline
+\end{DoxyRetVals}
+检查返回语句的返回值是否与函数定义的返回值匹配 不允许嵌套声明函数 
+
+在文件 flow\+\_\+control.\+cpp 第 299 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Check\+Assignable(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface\+::\+Get\+Flow\+Type(), Get\+Function\+Type\+Reference(), c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Function\+Type\+::\+Get\+Return\+Type\+Pointer(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Return\+::\+Get\+Return\+Value\+Pointer(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Function\+Define, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Return, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Right\+Value, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Unsigned, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Void , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Set\+Variety\+Type().
+
+
+
+被这些函数引用 Add\+Sentence() , 以及 Add\+Sentences().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_aaf0729f7e7c809dad9814ec9fecf5fe5_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_aaf0729f7e7c809dad9814ec9fecf5fe5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_abe3ac31570d557129b8f9e22c8468956}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_abe3ac31570d557129b8f9e22c8468956}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!GetFunctionTypePointer@{GetFunctionTypePointer}}
+\index{GetFunctionTypePointer@{GetFunctionTypePointer}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{GetFunctionTypePointer()}{GetFunctionTypePointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Get\+Function\+Type\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取函数类型 
+
+\begin{DoxyReturn}{返回}
+返回指向函数类型的const指针 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 258 行定义.
+
+
+
+引用了 function\+\_\+type\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Finish\+Function\+Construct() , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Push\+Function\+Flow\+Control\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_abe3ac31570d557129b8f9e22c8468956_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a7ca98b20b063affa295150ad106e6e1b}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a7ca98b20b063affa295150ad106e6e1b}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!GetFunctionTypeReference@{GetFunctionTypeReference}}
+\index{GetFunctionTypeReference@{GetFunctionTypeReference}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{GetFunctionTypeReference()}{GetFunctionTypeReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}}\& c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Get\+Function\+Type\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取函数类型 
+
+\begin{DoxyReturn}{返回}
+返回函数类型的const引用 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 263 行定义.
+
+
+
+引用了 function\+\_\+type\+\_\+.
+
+
+
+被这些函数引用 Check\+Sentence\+In\+Function\+Valid(), c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Push\+Function\+Flow\+Control\+Node() , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Set\+Function\+To\+Construct().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a7ca98b20b063affa295150ad106e6e1b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a4f208e571db13e0159b9c667b047dea6}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a4f208e571db13e0159b9c667b047dea6}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!GetSentences@{GetSentences}}
+\index{GetSentences@{GetSentences}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{GetSentences()}{GetSentences()}}
+{\footnotesize\ttfamily const std\+::list$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}}$>$ $>$\& c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Get\+Sentences (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取函数体执行的语句 
+
+\begin{DoxyReturn}{返回}
+返回存储语句的容器的const引用 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 241 行定义.
+
+
+
+引用了 sentences\+\_\+in\+\_\+function\+\_\+.
+
+
+
+被这些函数引用 Is\+Function\+Announce().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a4f208e571db13e0159b9c667b047dea6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a28405428bd5e8de048354c9c522ae4a1}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a28405428bd5e8de048354c9c522ae4a1}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!IsFunctionAnnounce@{IsFunctionAnnounce}}
+\index{IsFunctionAnnounce@{IsFunctionAnnounce}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{IsFunctionAnnounce()}{IsFunctionAnnounce()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Is\+Function\+Announce (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+检查是否为函数声明 
+
+\begin{DoxyReturn}{返回}
+返回是否为函数声明
+\end{DoxyReturn}
+函数声明中不存在任何流程控制语句 \begin{DoxyAttention}{注意}
+空函数体内应包含一条return语句 
+\end{DoxyAttention}
+
+
+在文件 flow\+\_\+control.\+h 第 249 行定义.
+
+
+
+引用了 Get\+Sentences().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a28405428bd5e8de048354c9c522ae4a1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a790c21833070bf654389ca3d8ed9121c}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a790c21833070bf654389ca3d8ed9121c}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!SetFunctionType@{SetFunctionType}}
+\index{SetFunctionType@{SetFunctionType}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{SetFunctionType()}{SetFunctionType()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Set\+Function\+Type (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}} $>$ \&}]{function\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置函数类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em function\+\_\+type} & ：函数类型 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 flow\+\_\+control.\+h 第 252 行定义.
+
+
+
+引用了 function\+\_\+type\+\_\+.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_ab0e8fcd5c518d4208fcf0c45e66c5095}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_ab0e8fcd5c518d4208fcf0c45e66c5095}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!function\_type\_@{function\_type\_}}
+\index{function\_type\_@{function\_type\_}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{function\_type\_}{function\_type\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::function\+\_\+type\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+函数的类型 
+
+
+
+在文件 flow\+\_\+control.\+h 第 279 行定义.
+
+
+
+被这些函数引用 Get\+Function\+Type\+Pointer(), Get\+Function\+Type\+Reference() , 以及 Set\+Function\+Type().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a19d6a5ad872eee5661c43635debd4088}\label{classc__parser__frontend_1_1flow__control_1_1FunctionDefine_a19d6a5ad872eee5661c43635debd4088}} 
+\index{c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}!sentences\_in\_function\_@{sentences\_in\_function\_}}
+\index{sentences\_in\_function\_@{sentences\_in\_function\_}!c\_parser\_frontend::flow\_control::FunctionDefine@{c\_parser\_frontend::flow\_control::FunctionDefine}}
+\doxysubsubsection{\texorpdfstring{sentences\_in\_function\_}{sentences\_in\_function\_}}
+{\footnotesize\ttfamily std\+::list$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}}$>$ $>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::sentences\+\_\+in\+\_\+function\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+函数体中执行的语句 
+
+
+
+在文件 flow\+\_\+control.\+h 第 281 行定义.
+
+
+
+被这些函数引用 Add\+Sentence(), Add\+Sentences() , 以及 Get\+Sentences().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{flow__control_8h}{flow\+\_\+control.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{flow__control_8cpp}{flow\+\_\+control.\+cpp}}\end{DoxyCompactItemize}

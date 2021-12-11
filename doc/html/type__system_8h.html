@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: src/CParserFrontend/type_system.h 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('type__system_8h.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#namespaces">命名空间</a> &#124;
+<a href="#enum-members">枚举</a> &#124;
+<a href="#func-members">函数</a> &#124;
+<a href="#var-members">变量</a>  </div>
+  <div class="headertitle">
+<div class="title">type_system.h 文件参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>类型系统  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &lt;cassert&gt;</code><br />
+<code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
+<code>#include &lt;unordered_map&gt;</code><br />
+<code>#include &lt;variant&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;<a class="el" href="id__wrapper_8h_source.html">Common/id_wrapper.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+type_system.h 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="type__system_8h__incl.png" border="0" usemap="#src_2CParserFrontend_2type__system_8h" alt=""/></div>
+<map name="src_2CParserFrontend_2type__system_8h" id="src_2CParserFrontend_2type__system_8h">
+<area shape="rect" title="类型系统" alt="" coords="270,5,421,47"/>
+<area shape="rect" title=" " alt="" coords="5,95,75,121"/>
+<area shape="rect" title=" " alt="" coords="99,95,176,121"/>
+<area shape="rect" title=" " alt="" coords="200,95,259,121"/>
+<area shape="rect" title=" " alt="" coords="283,95,407,121"/>
+<area shape="rect" title=" " alt="" coords="431,95,499,121"/>
+<area shape="rect" title=" " alt="" coords="523,95,586,121"/>
+<area shape="rect" href="id__wrapper_8h.html" title="ID包装器，包装ID以避免ID混用导致运行时错误" alt="" coords="611,95,779,121"/>
+<area shape="rect" title=" " alt="" coords="531,169,685,211"/>
+<area shape="rect" title=" " alt="" coords="710,169,853,211"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+此图展示该文件直接或间接的被哪些文件引用了:</div>
+<div class="dyncontent">
+<div class="center"><img src="type__system_8h__dep__incl.png" border="0" usemap="#src_2CParserFrontend_2type__system_8hdep" alt=""/></div>
+<map name="src_2CParserFrontend_2type__system_8hdep" id="src_2CParserFrontend_2type__system_8hdep">
+<area shape="rect" title="类型系统" alt="" coords="583,5,734,47"/>
+<area shape="rect" href="operator__node_8h.html" title="操作节点" alt="" coords="583,95,734,136"/>
+<area shape="rect" href="flow__control_8h.html" title="流程控制" alt="" coords="409,184,559,225"/>
+<area shape="rect" href="c__parser__frontend_8h.html" title="C语言编译器前端控制器" alt="" coords="796,363,951,404"/>
+<area shape="rect" href="reduct__functions_8h.html" title=" " alt="" coords="270,452,421,493"/>
+<area shape="rect" href="type__system_8cpp.html" title=" " alt="" coords="911,95,1062,136"/>
+<area shape="rect" href="action__scope__system_8h.html" title="作用域系统" alt="" coords="556,273,735,315"/>
+<area shape="rect" href="operator__node_8cpp.html" title=" " alt="" coords="583,184,734,225"/>
+<area shape="rect" href="flow__control_8cpp.html" title=" " alt="" coords="409,363,559,404"/>
+<area shape="rect" href="acion__scope__system_8cpp.html" title=" " alt="" coords="583,363,771,404"/>
+<area shape="rect" href="c__parser__frontend_8cpp.html" title=" " alt="" coords="788,452,959,493"/>
+<area shape="rect" href="user__defined__functions_8h.html" title=" " alt="" coords="144,541,344,583"/>
+<area shape="rect" href="reduct__functions_8cpp.html" title=" " alt="" coords="367,541,529,583"/>
+<area shape="rect" href="process__functions__classes_8h.html" title="根据用户定义的非终结产生式定义包装规约函数的类" alt="" coords="129,809,353,851"/>
+<area shape="rect" href="syntax__generate_8h.html" title="定义表示产生式的宏以简化配置生成过程" alt="" coords="207,631,431,672"/>
+<area shape="rect" href="process__functions__classes__register_8h.html" title="向boost&#45;serialization注册process_functions_classes.h中定义的派生类" alt="" coords="265,899,489,955"/>
+<area shape="rect" href="config__construct_8cpp.html" title="定义添加构建配置所需外围信息的函数ConfigConstruct" alt="" coords="5,906,229,947"/>
+<area shape="rect" href="Generator_8cpp.html" title=" " alt="" coords="172,1003,377,1029"/>
+<area shape="rect" href="Parser_8cpp.html" title=" " alt="" coords="401,1003,556,1029"/>
+<area shape="rect" href="production__config-inc_8h.html" title=" " alt="" coords="212,720,412,761"/>
+</map>
+</div>
+</div>
+<p><a href="type__system_8h_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">c_parser_frontend::type_system::TypeInterface</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">类型基类  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1EndType.html">c_parser_frontend::type_system::EndType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">类型链尾部哨兵节点  <a href="classc__parser__frontend_1_1type__system_1_1EndType.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1BasicType.html">c_parser_frontend::type_system::BasicType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">预定义的基础类型  <a href="classc__parser__frontend_1_1type__system_1_1BasicType.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1PointerType.html">c_parser_frontend::type_system::PointerType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型，一个*对应一个节点  <a href="classc__parser__frontend_1_1type__system_1_1PointerType.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1FunctionType.html">c_parser_frontend::type_system::FunctionType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">函数类型  <a href="classc__parser__frontend_1_1type__system_1_1FunctionType.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structc__parser__frontend_1_1type__system_1_1FunctionType_1_1ArgumentInfo.html">c_parser_frontend::type_system::FunctionType::ArgumentInfo</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储函数参数信息  <a href="structc__parser__frontend_1_1type__system_1_1FunctionType_1_1ArgumentInfo.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html">c_parser_frontend::type_system::StructureTypeInterface</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">结构化类型（结构体/共用体）的基类  <a href="classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1StructureTypeInterface_1_1StructureMemberContainer.html">c_parser_frontend::type_system::StructureTypeInterface::StructureMemberContainer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储结构化类型成员  <a href="classc__parser__frontend_1_1type__system_1_1StructureTypeInterface_1_1StructureMemberContainer.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1StructType.html">c_parser_frontend::type_system::StructType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">结构体类型  <a href="classc__parser__frontend_1_1type__system_1_1StructType.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1UnionType.html">c_parser_frontend::type_system::UnionType</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1EnumType.html">c_parser_frontend::type_system::EnumType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">枚举类型  <a href="classc__parser__frontend_1_1type__system_1_1EnumType.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1InitializeListType.html">c_parser_frontend::type_system::InitializeListType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化列表类型  <a href="classc__parser__frontend_1_1type__system_1_1InitializeListType.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator.html">c_parser_frontend::type_system::CommonlyUsedTypeGenerator</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">常用类型节点的生成器  <a href="classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeSystem.html">c_parser_frontend::type_system::TypeSystem</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">类型系统  <a href="classc__parser__frontend_1_1type__system_1_1TypeSystem.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData.html">c_parser_frontend::type_system::TypeSystem::TypeData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储某个类型名下的不同类型链信息  <a href="classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+命名空间</h2></td></tr>
+<tr class="memitem:namespacec__parser__frontend"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend.html">c_parser_frontend</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacec__parser__frontend_1_1operator__node"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1operator__node.html">c_parser_frontend::operator_node</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacec__parser__frontend_1_1type__system"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html">c_parser_frontend::type_system</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+枚举</h2></td></tr>
+<tr class="memitem:a19d20e5542c29e0fbf656fc55ad88893"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a19d20e5542c29e0fbf656fc55ad88893">c_parser_frontend::type_system::ConstTag</a> { <a class="el" href="namespacec__parser__frontend_1_1type__system.html#a19d20e5542c29e0fbf656fc55ad88893a1b83312fb2f7cd1fc1e1054e0fdaf15d">c_parser_frontend::type_system::ConstTag::kNonConst</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a19d20e5542c29e0fbf656fc55ad88893ad1efdc0f2aa096a47586b448aa73f414">c_parser_frontend::type_system::ConstTag::kConst</a>
+ }</td></tr>
+<tr class="memdesc:a19d20e5542c29e0fbf656fc55ad88893"><td class="mdescLeft">&#160;</td><td class="mdescRight">const标记  <a href="namespacec__parser__frontend_1_1type__system.html#a19d20e5542c29e0fbf656fc55ad88893">更多...</a><br /></td></tr>
+<tr class="separator:a19d20e5542c29e0fbf656fc55ad88893"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab49a05ac9449cbab0efc2c3380d1172c"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#ab49a05ac9449cbab0efc2c3380d1172c">c_parser_frontend::type_system::SignTag</a> { <a class="el" href="namespacec__parser__frontend_1_1type__system.html#ab49a05ac9449cbab0efc2c3380d1172ca52c0e4f472cd0c011e4f63c6fa9b55c3">c_parser_frontend::type_system::SignTag::kSigned</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#ab49a05ac9449cbab0efc2c3380d1172ca0b04c4794c6c58dae84b686c82b03959">c_parser_frontend::type_system::SignTag::kUnsigned</a>
+ }</td></tr>
+<tr class="memdesc:ab49a05ac9449cbab0efc2c3380d1172c"><td class="mdescLeft">&#160;</td><td class="mdescRight">符号标记  <a href="namespacec__parser__frontend_1_1type__system.html#ab49a05ac9449cbab0efc2c3380d1172c">更多...</a><br /></td></tr>
+<tr class="separator:ab49a05ac9449cbab0efc2c3380d1172c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ada2ff0eba2205e6a1c0c5afa2d5bd7"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7">c_parser_frontend::type_system::StructOrBasicType</a> { <br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7a27296922b87cce1a26d3d54419a74599">c_parser_frontend::type_system::StructOrBasicType::kBasic</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7afa1773a7a00e4d1723a5b0fbf0c435be">c_parser_frontend::type_system::StructOrBasicType::kPointer</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7ad77fcb77da3dc9a391cbdfd264f8d7d9">c_parser_frontend::type_system::StructOrBasicType::kFunction</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7a37d24e1221658f0e0333a512fdbcd2f0">c_parser_frontend::type_system::StructOrBasicType::kStruct</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7a519268cd3a9af56838648120b3e53b36">c_parser_frontend::type_system::StructOrBasicType::kUnion</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7a57aeb634ac17cdd0c8f3e6c82b16cf99">c_parser_frontend::type_system::StructOrBasicType::kEnum</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7a11fbe471298d80d0a97ca6227e23074a">c_parser_frontend::type_system::StructOrBasicType::kInitializeList</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7a374bf9ba57a441a600d65b212cf9d13c">c_parser_frontend::type_system::StructOrBasicType::kEnd</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7a87635f074ae2d912681888c7113144e4">c_parser_frontend::type_system::StructOrBasicType::kNotSpecified</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a7ada2ff0eba2205e6a1c0c5afa2d5bd7"><td class="mdescLeft">&#160;</td><td class="mdescRight">宽泛的变量类型  <a href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7">更多...</a><br /></td></tr>
+<tr class="separator:a7ada2ff0eba2205e6a1c0c5afa2d5bd7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec297cf4e12aa9aa66034a08667ada28"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#aec297cf4e12aa9aa66034a08667ada28">c_parser_frontend::type_system::BuiltInType</a> { <br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#aec297cf4e12aa9aa66034a08667ada28a8cff88241f63a107add3454a4c1198df">c_parser_frontend::type_system::BuiltInType::kInt1</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#aec297cf4e12aa9aa66034a08667ada28af112965031ccac10c07073b4e7430107">c_parser_frontend::type_system::BuiltInType::kInt8</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#aec297cf4e12aa9aa66034a08667ada28a6698ae5a05a12d36333200ae5e8f4f95">c_parser_frontend::type_system::BuiltInType::kInt16</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#aec297cf4e12aa9aa66034a08667ada28a10c09f8bff3c372f21cd8a13e01ae941">c_parser_frontend::type_system::BuiltInType::kInt32</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#aec297cf4e12aa9aa66034a08667ada28a9a78d6a569d086b524c3caf8c2522f96">c_parser_frontend::type_system::BuiltInType::kFloat32</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#aec297cf4e12aa9aa66034a08667ada28a78f9bf284cc7269efe0093b7c505feaa">c_parser_frontend::type_system::BuiltInType::kFloat64</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#aec297cf4e12aa9aa66034a08667ada28abd383557eb16fc23863cf3fc70b77ab3">c_parser_frontend::type_system::BuiltInType::kVoid</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:aec297cf4e12aa9aa66034a08667ada28"><td class="mdescLeft">&#160;</td><td class="mdescRight">内置变量类型  <a href="namespacec__parser__frontend_1_1type__system.html#aec297cf4e12aa9aa66034a08667ada28">更多...</a><br /></td></tr>
+<tr class="separator:aec297cf4e12aa9aa66034a08667ada28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abdba49f59bc164b6932d698ad6af20fe"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fe">c_parser_frontend::type_system::AssignableCheckResult</a> { <br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fea45fe6ae08611c6edceca614084703ff6">c_parser_frontend::type_system::AssignableCheckResult::kNonConvert</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fea7b3ab1df8a730783333ae754b5140762">c_parser_frontend::type_system::AssignableCheckResult::kUpperConvert</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20feaaf740548d4258ecc1feb41cf9ebc128a">c_parser_frontend::type_system::AssignableCheckResult::kConvertToVoidPointer</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20feaa3039d30c575b90d496bc33146f8f886">c_parser_frontend::type_system::AssignableCheckResult::kZeroConvertToPointer</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fea37c2ec9da628cccde5989a0a1f6b7e41">c_parser_frontend::type_system::AssignableCheckResult::kUnsignedToSigned</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20feac3111fe5784eae119de42f6448be23e2">c_parser_frontend::type_system::AssignableCheckResult::kSignedToUnsigned</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fea7d5930a84508f44770bbb88809004ca7">c_parser_frontend::type_system::AssignableCheckResult::kMayBeZeroToPointer</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fea11fbe471298d80d0a97ca6227e23074a">c_parser_frontend::type_system::AssignableCheckResult::kInitializeList</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fea9289b82769e97450212e48677739ce72">c_parser_frontend::type_system::AssignableCheckResult::kLowerConvert</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fea2862445348e9bafbfb3cd27e60cfc839">c_parser_frontend::type_system::AssignableCheckResult::kCanNotConvert</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fea7ad6e5c77bec91aba65bb63987581552">c_parser_frontend::type_system::AssignableCheckResult::kAssignedNodeIsConst</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fea21523a6148a1423f810500b6b02593d9">c_parser_frontend::type_system::AssignableCheckResult::kAssignToRightValue</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fea26be2346278c65e7eab000a2affbfa53">c_parser_frontend::type_system::AssignableCheckResult::kArgumentsFull</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fea8d4eedcfdc7c28d62305c8f532e193f0">c_parser_frontend::type_system::AssignableCheckResult::kInitializeListTooLarge</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:abdba49f59bc164b6932d698ad6af20fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查是否可以赋值的结果  <a href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fe">更多...</a><br /></td></tr>
+<tr class="separator:abdba49f59bc164b6932d698ad6af20fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abda2c7df23bef8ddeaa9244a62fd8d2b"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2b">c_parser_frontend::type_system::DeclineMathematicalComputeTypeResult</a> { <br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba62d91e717c38f2eabdbbda4a5bbcb435">c_parser_frontend::type_system::DeclineMathematicalComputeTypeResult::kComputable</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba48258c9022e55bbc417d2eb1ec83ec76">c_parser_frontend::type_system::DeclineMathematicalComputeTypeResult::kLeftPointerRightOffset</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba052ccdb30ea590ee39b37b99f6f56115">c_parser_frontend::type_system::DeclineMathematicalComputeTypeResult::kLeftOffsetRightPointer</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba85d2b3072333fccfbbcc96be951e37d3">c_parser_frontend::type_system::DeclineMathematicalComputeTypeResult::kConvertToLeft</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba3aacaeb4659426801cfe7fc7bd65f204">c_parser_frontend::type_system::DeclineMathematicalComputeTypeResult::kConvertToRight</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba1432a29dbee20f7f25402288a89b89d7">c_parser_frontend::type_system::DeclineMathematicalComputeTypeResult::kLeftNotComputableType</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba403b5e07ec03e4d6f6645ba562c8e662">c_parser_frontend::type_system::DeclineMathematicalComputeTypeResult::kRightNotComputableType</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2bac9cf64e875d9f10c38fbecaaa2ee86b9">c_parser_frontend::type_system::DeclineMathematicalComputeTypeResult::kLeftRightBothPointer</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba33490b04e79dc1d9b7eb9a98b46d2c75">c_parser_frontend::type_system::DeclineMathematicalComputeTypeResult::kLeftNotIntger</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba2c6ef4e6846a36fc373171c17249890b">c_parser_frontend::type_system::DeclineMathematicalComputeTypeResult::kRightNotIntger</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:abda2c7df23bef8ddeaa9244a62fd8d2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">推断数学运算类型的结果  <a href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2b">更多...</a><br /></td></tr>
+<tr class="separator:abda2c7df23bef8ddeaa9244a62fd8d2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a53035d13ed98c1c9c754e011d3c3320d"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320d">c_parser_frontend::type_system::AddTypeResult</a> { <br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320da18fe7c93505b9fca8e271c6735a4a81e">c_parser_frontend::type_system::AddTypeResult::kAbleToAdd</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320daaf1adf7ec3673b4f5765cfbc5d43b7dc">c_parser_frontend::type_system::AddTypeResult::kNew</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320da8ca744848dcd84c3547df6ef437bbef5">c_parser_frontend::type_system::AddTypeResult::kFunctionDefine</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320da0113bf3f5019557b9bc7defe988f6b7c">c_parser_frontend::type_system::AddTypeResult::kShiftToVector</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320da61d438ed1bc8102e0eedbf069300c52b">c_parser_frontend::type_system::AddTypeResult::kAddToVector</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320da723cf734423612c9f1dc6de4e5397825">c_parser_frontend::type_system::AddTypeResult::kAnnounceOrDefineBeforeFunctionAnnounce</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320dafa8b9c0a25d3665edcca92567975f749">c_parser_frontend::type_system::AddTypeResult::kTypeAlreadyIn</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320da9ecd555a0d34f50fe033507ccb188204">c_parser_frontend::type_system::AddTypeResult::kDoubleAnnounceFunction</a>, 
+<br />
+&#160;&#160;<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320da2720a88b1ed0140ebb9224313cf50033">c_parser_frontend::type_system::AddTypeResult::kOverrideFunction</a>
+<br />
+ }</td></tr>
+<tr class="memdesc:a53035d13ed98c1c9c754e011d3c3320d"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加类型的结果  <a href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320d">更多...</a><br /></td></tr>
+<tr class="separator:a53035d13ed98c1c9c754e011d3c3320d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8beb6f70423e49b45609ea37c23839d9"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a8beb6f70423e49b45609ea37c23839d9">c_parser_frontend::type_system::GetTypeResult</a> { <a class="el" href="namespacec__parser__frontend_1_1type__system.html#a8beb6f70423e49b45609ea37c23839d9a8c632159fa131f09d04f94e3cbcd8782">c_parser_frontend::type_system::GetTypeResult::kSuccess</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a8beb6f70423e49b45609ea37c23839d9a8259ac3a08b13e5bc705ce231690f438">c_parser_frontend::type_system::GetTypeResult::kTypeNameNotFound</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a8beb6f70423e49b45609ea37c23839d9a59f798c739da0689aae08c603f68e826">c_parser_frontend::type_system::GetTypeResult::kNoMatchTypePrefer</a>, 
+<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a8beb6f70423e49b45609ea37c23839d9a19e8786f486af27826888a7f57e871fc">c_parser_frontend::type_system::GetTypeResult::kSeveralSameLevelMatches</a>
+ }</td></tr>
+<tr class="memdesc:a8beb6f70423e49b45609ea37c23839d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据名称获取类型的结果  <a href="namespacec__parser__frontend_1_1type__system.html#a8beb6f70423e49b45609ea37c23839d9">更多...</a><br /></td></tr>
+<tr class="separator:a8beb6f70423e49b45609ea37c23839d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:aa707ca7f6ac783c7a99b24e92f764595"><td class="memItemLeft" align="right" valign="top">BuiltInType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#aa707ca7f6ac783c7a99b24e92f764595">c_parser_frontend::type_system::CalculateBuiltInType</a> (const std::string &amp;value)</td></tr>
+<tr class="memdesc:aa707ca7f6ac783c7a99b24e92f764595"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算存储给定值所需的最小类型  <a href="namespacec__parser__frontend_1_1type__system.html#aa707ca7f6ac783c7a99b24e92f764595">更多...</a><br /></td></tr>
+<tr class="separator:aa707ca7f6ac783c7a99b24e92f764595"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0915baa55b6cdf79c3c28cb8b6249f18"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a0915baa55b6cdf79c3c28cb8b6249f18">c_parser_frontend::type_system::operator==</a> (const std::shared_ptr&lt; TypeInterface &gt; &amp;type_interface1, const std::shared_ptr&lt; TypeInterface &gt; &amp;type_interface2)</td></tr>
+<tr class="memdesc:a0915baa55b6cdf79c3c28cb8b6249f18"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较节点指针指向的节点是否相同  <a href="namespacec__parser__frontend_1_1type__system.html#a0915baa55b6cdf79c3c28cb8b6249f18">更多...</a><br /></td></tr>
+<tr class="separator:a0915baa55b6cdf79c3c28cb8b6249f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+变量</h2></td></tr>
+<tr class="memitem:a7d9311a277c10a9a10fbdf577de47034"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7d9311a277c10a9a10fbdf577de47034">c_parser_frontend::type_system::kPointerSize</a> = 4</td></tr>
+<tr class="memdesc:a7d9311a277c10a9a10fbdf577de47034"><td class="mdescLeft">&#160;</td><td class="mdescRight">指针类型大小  <a href="namespacec__parser__frontend_1_1type__system.html#a7d9311a277c10a9a10fbdf577de47034">更多...</a><br /></td></tr>
+<tr class="separator:a7d9311a277c10a9a10fbdf577de47034"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afb366deb840a7257cddd75f4831c28b0"><td class="memItemLeft" align="right" valign="top">constexpr size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#afb366deb840a7257cddd75f4831c28b0">c_parser_frontend::type_system::kBuiltInTypeSize</a> [7] = {1, 1, 2, 4, 4, 8, 4}</td></tr>
+<tr class="memdesc:afb366deb840a7257cddd75f4831c28b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">内置类型大小（单位：字节）  <a href="namespacec__parser__frontend_1_1type__system.html#afb366deb840a7257cddd75f4831c28b0">更多...</a><br /></td></tr>
+<tr class="separator:afb366deb840a7257cddd75f4831c28b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>类型系统 </p>
+<p>1.类型系统通过“类型链”表示一个对象的类型 2.表示类型的最小单位为节点，一个节点可以是一重指针(数组)、函数头、 基础类型（内置类型/自定义结构）等，节点通过单向链表串成一串得到类型链 3.类型链构造顺序同变量定义时规约的顺序，头结点是最靠近变量名的部分 4.所有类型链尾部都共用一个哨兵 5.类型链例： const double* (*func(unsigned int x, const short y))(float z); 注：argument_infos_存在简化，仅体现类型部分</p>
+<p>******************************** [0].variety_type_</p><ul>
+<li>type_ = <em>argument_infos_*****************************</em></li>
+<li><em>StructOrBasicType::kFunction *==============&gt;</em> type_ = *</li>
+<li>next_type_node_ = * * StructOrBasicType::kBasic *</li>
+<li>EndType::GetEndType() * * next_type_node_ = *</li>
+<li>function_name_ = "func" * * EndType::GetEndType() *</li>
+<li>return_type_const_tag_ = * * built_in_type_ = *</li>
+<li>ConstTag::kNonConst * * BuiltInType::kInt32 * ******************************** * sign_tag_ = * │ * SignTag::kUnSigned * │return_type_ ***************************** ↓ [1].variety_type_</li>
+</ul>
+<hr  />
+<ul>
+<li>type_ = * * type_ = *</li>
+<li>StructOrBasicType::kPointer * * StructOrBasicType::kBasic *</li>
+<li>array_size_ = 0 * * next_type_node_ = *</li>
+<li>variety_const_tag_ = * * EndType::GetEndType() *</li>
+<li>ConstTag::kNonConst * * built_in_type_ = * ******************************** * BuiltInType::kInt16 * │ * sign_tag_ = * │next_type_node_ * SignTag::kSigned * ↓ *****************************</li>
+</ul>
+<hr  />
+<ul>
+<li>type_ = * [0].variety_type_</li>
+<li>StructOrBasicType::kFunction*argument_infos_*****************************</li>
+<li>next_type_node = *==============&gt;* type_ = *</li>
+<li>EndType::GetEndType() * * StructOrBasicType::kBasic *</li>
+<li>function_name_ = "" * * next_type_node_ = *</li>
+<li>return_type_const_tag_ = * * EndType::GetEndType() *</li>
+<li>ConstTag::kConst * * built_in_type_ = * ******************************** * BuiltInType::kFloat32 * │ * sign_tag_ = * │return_type_ * SignTag::kSigned * ↓ *****************************</li>
+</ul>
+<hr  />
+<ul>
+<li>type_ = *</li>
+<li>StructOrBasicType::kPointer *</li>
+<li>array_size_ = 0 *</li>
+<li>variety_const_tag_ = *</li>
+<li>ConstTag::kNonConst *</li>
+</ul>
+<hr  />
+<p> │ │next_type_node_ ↓</p>
+<hr  />
+<ul>
+<li>type_ = *</li>
+<li>StructOrBasicType::kBasic *</li>
+<li>next_type_node_ = *</li>
+<li>EndType::GetEndType() *</li>
+<li>built_in_type_ = *</li>
+<li>BuiltInType::kFloat64 *</li>
+<li>sign_tag_ = SignTag::kSigned *</li>
+</ul>
+<hr  />
+ 
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 中定义.</p>
+</div></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9d6b2bf2bb0a0ac49f2e2316cb4c6dde.html">CParserFrontend</a></li><li class="navelem"><a class="el" href="type__system_8h.html">type_system.h</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

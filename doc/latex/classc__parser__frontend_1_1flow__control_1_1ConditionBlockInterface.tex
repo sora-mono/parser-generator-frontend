@@ -1,0 +1,583 @@
+\hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::Condition\+Block\+Interface类 参考}
+\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface}\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+
+
+条件控制块基类（if、for、while、switch等）  
+
+
+
+
+{\ttfamily \#include $<$flow\+\_\+control.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::Condition\+Block\+Interface 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::Condition\+Block\+Interface 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_adcd3a7e995944aa86601008c3401d061}{Condition\+Block\+Interface}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1flow__control_ad0c5d7192b629f67cd18bb2ba05cbceb}{Flow\+Type}} flow\+\_\+type)
+\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a1556d7a7178522a674e67e52046728bf}{Set\+Condition}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&condition, std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&sentences\+\_\+to\+\_\+get\+\_\+condition)
+\begin{DoxyCompactList}\small\item\em 设定条件控制语句的条件与获取条件的操作 \end{DoxyCompactList}\item 
+const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ $>$ \& \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a7d179af22d9e216e28669fa7209b0c4f}{Get\+Sentence\+To\+Get\+Condition}} () const
+\begin{DoxyCompactList}\small\item\em 获取得到条件节点的操作 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a9d71dc8fe05daefecc8c37194aca073e}{Get\+Condition\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取条件节点 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a144533dc1cb4e466e7198348ccd63bc3}{Get\+Condition\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取条件节点 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a92c88836ad47c341cd6ff10f5713d983}{Add\+Sentence}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&sentence)
+\begin{DoxyCompactList}\small\item\em 向主体内添加一条语句 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a2c0bc6ba39e025c43b8b66a9a11f9b3d}{Add\+Sentences}} (std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&sentences)
+\begin{DoxyCompactList}\small\item\em 向主体内添加多条语句 \end{DoxyCompactList}\item 
+const auto \& \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a0b470bb6d1f6d180504d13028efaddd1}{Get\+Sentences}} () const
+\begin{DoxyCompactList}\small\item\em 获取所有已添加的语句 \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a32b50be3e4eec7dd0d293569a7b016dc}{Get\+Sentence\+Start\+Label}} () const
+\begin{DoxyCompactList}\small\item\em 获取块起始处标签 \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a722e793ee81fc3e2c4f35e42da955d80}{Get\+Sentence\+End\+Label}} () const
+\begin{DoxyCompactList}\small\item\em 获取块结束处标签 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a0f872e3820348d686f46708f07d91d29}{Default\+Condition\+Check}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&condition\+\_\+node)
+\begin{DoxyCompactList}\small\item\em 默认对循环条件节点进行类型检查的函数 \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a2afaacb18c830c6f59e4114511b88ea3}{Default\+Main\+Block\+Sentence\+Check}} (const \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} \&flow\+\_\+interface)
+\begin{DoxyCompactList}\small\item\em 默认检查主体内语句的函数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_ad9e29ce717c70409d17965266ed09d57}{condition\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 控制块的条件 \end{DoxyCompactList}\item 
+std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a4a1a8e00dcf9b9b11ee865be12e9d24e}{sentence\+\_\+to\+\_\+get\+\_\+condition\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 获取控制块条件的语句 \end{DoxyCompactList}\item 
+std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a68a9a3a80ffffae05becad6367afe58c}{main\+\_\+block\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 控制块主体的内容 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+条件控制块基类（if、for、while、switch等） 
+
+1.控制块主体例： if(condition) \{ // 主体 \} else \{ // 主体 \} for(int i = 0;i $<$ x;i++)\{ // 主体 \} 2.控制块条件指判断控制块是否执行/跳转方向的语句，如1中if语句的condition， for中的i $<$ x; \begin{DoxyAttention}{注意}
+派生类不应修改接口语义且不可以任何方式重写或绕过接口 
+\end{DoxyAttention}
+
+
+在文件 flow\+\_\+control.\+h 第 337 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_adcd3a7e995944aa86601008c3401d061}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_adcd3a7e995944aa86601008c3401d061}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!ConditionBlockInterface@{ConditionBlockInterface}}
+\index{ConditionBlockInterface@{ConditionBlockInterface}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{ConditionBlockInterface()}{ConditionBlockInterface()}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Condition\+Block\+Interface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1flow__control_ad0c5d7192b629f67cd18bb2ba05cbceb}{Flow\+Type}}}]{flow\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 flow\+\_\+control.\+h 第 339 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a92c88836ad47c341cd6ff10f5713d983}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a92c88836ad47c341cd6ff10f5713d983}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!AddSentence@{AddSentence}}
+\index{AddSentence@{AddSentence}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{AddSentence()}{AddSentence()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Add\+Sentence (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&}]{sentence }\end{DoxyParamCaption})}
+
+
+
+向主体内添加一条语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentence} & ：待添加的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否添加成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：该语句不能添加到条件控制语句主体中\\
+\hline
+\end{DoxyRetVals}
+1.无法添加则不修改sentence 2.成功添加则夺取sentence控制权 3.所有语句添加到已有的语句后 4.对语句的要求参考\+Default\+Main\+Block\+Sentence\+Check 
+
+在文件 flow\+\_\+control.\+cpp 第 148 行定义.
+
+
+
+引用了 Default\+Main\+Block\+Sentence\+Check() , 以及 main\+\_\+block\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Switch\+Sentence\+::\+Add\+Default\+Case(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Add\+For\+Init\+Sentence(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+While\+Sentence\+::\+Add\+Main\+Sentence(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Do\+While\+Sentence\+::\+Add\+Main\+Sentence(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Add\+Main\+Sentence(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Switch\+Sentence\+::\+Add\+Main\+Sentence(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Switch\+Sentence\+::\+Add\+Simple\+Case() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+If\+Sentence\+::\+Add\+True\+Branch\+Sentence().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a92c88836ad47c341cd6ff10f5713d983_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a92c88836ad47c341cd6ff10f5713d983_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a2c0bc6ba39e025c43b8b66a9a11f9b3d}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a2c0bc6ba39e025c43b8b66a9a11f9b3d}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!AddSentences@{AddSentences}}
+\index{AddSentences@{AddSentences}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{AddSentences()}{AddSentences()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Add\+Sentences (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&}]{sentences }\end{DoxyParamCaption})}
+
+
+
+向主体内添加多条语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentences} & ：存储待添加的语句的容器 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否添加成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：该语句不能添加到条件控制语句主体中\\
+\hline
+\end{DoxyRetVals}
+1.无法添加则不修改sentence 2.成功添加则夺取sentence控制权 3.所有语句添加到已有的语句后 4.按begin-\/$>$end的顺序添加容器内的语句 5.对语句的要求参考\+Default\+Main\+Block\+Sentence\+Check 
+
+在文件 flow\+\_\+control.\+cpp 第 158 行定义.
+
+
+
+引用了 Default\+Main\+Block\+Sentence\+Check() , 以及 main\+\_\+block\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+While\+Sentence\+::\+Add\+Main\+Sentences(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Do\+While\+Sentence\+::\+Add\+Main\+Sentences(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Add\+Main\+Sentences(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Switch\+Sentence\+::\+Add\+Main\+Sentences() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+If\+Sentence\+::\+Add\+True\+Branch\+Sentences().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a2c0bc6ba39e025c43b8b66a9a11f9b3d_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a2c0bc6ba39e025c43b8b66a9a11f9b3d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a0f872e3820348d686f46708f07d91d29}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a0f872e3820348d686f46708f07d91d29}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!DefaultConditionCheck@{DefaultConditionCheck}}
+\index{DefaultConditionCheck@{DefaultConditionCheck}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{DefaultConditionCheck()}{DefaultConditionCheck()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Default\+Condition\+Check (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&}]{condition\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+默认对循环条件节点进行类型检查的函数 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em condition\+\_\+node} & ：待检查的条件节点 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回给定节点是否可以作为条件控制语句的条件 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & 给定节点允许作为条件控制语句的条件 \\
+\hline
+{\em false} & 给定节点不能作为条件控制语句的条件 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 flow\+\_\+control.\+cpp 第 169 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Type\+Pointer().
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Check\+For\+Condition\+Valid() , 以及 Set\+Condition().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a0f872e3820348d686f46708f07d91d29_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a0f872e3820348d686f46708f07d91d29_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a2afaacb18c830c6f59e4114511b88ea3}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a2afaacb18c830c6f59e4114511b88ea3}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!DefaultMainBlockSentenceCheck@{DefaultMainBlockSentenceCheck}}
+\index{DefaultMainBlockSentenceCheck@{DefaultMainBlockSentenceCheck}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{DefaultMainBlockSentenceCheck()}{DefaultMainBlockSentenceCheck()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Default\+Main\+Block\+Sentence\+Check (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} \&}]{flow\+\_\+interface }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+默认检查主体内语句的函数 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em flow\+\_\+interface} & ：待检查的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回给定流程控制节点是否可以作为条件控制语句主体的内容 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & 给定节点允许作为条件控制语句主体的内容 \\
+\hline
+{\em false} & 给定节点不能作为条件控制语句主体的内容 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 flow\+\_\+control.\+cpp 第 184 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface\+::\+Get\+Flow\+Type(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Do\+While\+Sentence, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+For\+Sentence, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+If\+Sentence, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Jmp, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Label, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Return, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Simple\+Sentence, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Switch\+Sentence , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+While\+Sentence.
+
+
+
+被这些函数引用 Add\+Sentence(), Add\+Sentences(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+If\+Sentence\+::\+Check\+Else\+Body\+Sentence\+Valid(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Check\+For\+Body\+Sentence\+Valid() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Switch\+Sentence\+::\+Check\+Switch\+Body\+Sentence\+Valid().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a2afaacb18c830c6f59e4114511b88ea3_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a2afaacb18c830c6f59e4114511b88ea3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a9d71dc8fe05daefecc8c37194aca073e}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a9d71dc8fe05daefecc8c37194aca073e}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!GetConditionPointer@{GetConditionPointer}}
+\index{GetConditionPointer@{GetConditionPointer}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{GetConditionPointer()}{GetConditionPointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Get\+Condition\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取条件节点 
+
+\begin{DoxyReturn}{返回}
+返回指向条件节点的const指针 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 363 行定义.
+
+
+
+引用了 condition\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a144533dc1cb4e466e7198348ccd63bc3}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a144533dc1cb4e466e7198348ccd63bc3}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!GetConditionReference@{GetConditionReference}}
+\index{GetConditionReference@{GetConditionReference}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{GetConditionReference()}{GetConditionReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Get\+Condition\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取条件节点 
+
+\begin{DoxyReturn}{返回}
+返回条件节点的const引用 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 368 行定义.
+
+
+
+引用了 condition\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a722e793ee81fc3e2c4f35e42da955d80}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a722e793ee81fc3e2c4f35e42da955d80}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!GetSentenceEndLabel@{GetSentenceEndLabel}}
+\index{GetSentenceEndLabel@{GetSentenceEndLabel}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{GetSentenceEndLabel()}{GetSentenceEndLabel()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Get\+Sentence\+End\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取块结束处标签 
+
+\begin{DoxyReturn}{返回}
+返回块结束处标签 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 405 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface\+::\+Get\+Flow\+Id().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a722e793ee81fc3e2c4f35e42da955d80_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a0b470bb6d1f6d180504d13028efaddd1}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a0b470bb6d1f6d180504d13028efaddd1}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!GetSentences@{GetSentences}}
+\index{GetSentences@{GetSentences}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{GetSentences()}{GetSentences()}}
+{\footnotesize\ttfamily const auto\& c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Get\+Sentences (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取所有已添加的语句 
+
+\begin{DoxyReturn}{返回}
+返回存储语句的容器的const引用 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 396 行定义.
+
+
+
+引用了 main\+\_\+block\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Get\+For\+Body() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+If\+Sentence\+::\+Get\+True\+Branch\+Sentences().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a0b470bb6d1f6d180504d13028efaddd1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a32b50be3e4eec7dd0d293569a7b016dc}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a32b50be3e4eec7dd0d293569a7b016dc}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!GetSentenceStartLabel@{GetSentenceStartLabel}}
+\index{GetSentenceStartLabel@{GetSentenceStartLabel}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{GetSentenceStartLabel()}{GetSentenceStartLabel()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Get\+Sentence\+Start\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取块起始处标签 
+
+\begin{DoxyReturn}{返回}
+返回块起始处标签 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 399 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface\+::\+Get\+Flow\+Id().
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+While\+Sentence\+::\+Get\+Loop\+Condition\+Start\+Label() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Get\+Loop\+Condition\+Start\+Label().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a32b50be3e4eec7dd0d293569a7b016dc_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a32b50be3e4eec7dd0d293569a7b016dc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a7d179af22d9e216e28669fa7209b0c4f}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a7d179af22d9e216e28669fa7209b0c4f}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!GetSentenceToGetCondition@{GetSentenceToGetCondition}}
+\index{GetSentenceToGetCondition@{GetSentenceToGetCondition}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{GetSentenceToGetCondition()}{GetSentenceToGetCondition()}}
+{\footnotesize\ttfamily const std\+::list$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}}$>$ $>$\& c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Get\+Sentence\+To\+Get\+Condition (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取得到条件节点的操作 
+
+\begin{DoxyReturn}{返回}
+返回存储操作的容器的const引用 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 357 行定义.
+
+
+
+引用了 sentence\+\_\+to\+\_\+get\+\_\+condition\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a1556d7a7178522a674e67e52046728bf}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a1556d7a7178522a674e67e52046728bf}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!SetCondition@{SetCondition}}
+\index{SetCondition@{SetCondition}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{SetCondition()}{SetCondition()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Set\+Condition (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&}]{condition,  }\item[{std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&}]{sentences\+\_\+to\+\_\+get\+\_\+condition }\end{DoxyParamCaption})}
+
+
+
+设定条件控制语句的条件与获取条件的操作 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em condition} & ：条件节点 \\
+\hline
+\mbox{\texttt{ in}}  & {\em sentences\+\_\+to\+\_\+get\+\_\+condition} & ：获取条件的操作 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否设置成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：设置成功 \\
+\hline
+{\em false} & ：condition不能作为条件控制语句的条件\\
+\hline
+\end{DoxyRetVals}
+1.无法设置则不会设置 2.成功设置后夺取condition的控制权 3.不能设置则不修改condition 4.对条件节点的要求参考\+Default\+Condition\+Check 
+
+在文件 flow\+\_\+control.\+cpp 第 136 行定义.
+
+
+
+引用了 condition\+\_\+, Default\+Condition\+Check() , 以及 sentence\+\_\+to\+\_\+get\+\_\+condition\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a1556d7a7178522a674e67e52046728bf_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_ad9e29ce717c70409d17965266ed09d57}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_ad9e29ce717c70409d17965266ed09d57}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!condition\_@{condition\_}}
+\index{condition\_@{condition\_}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{condition\_}{condition\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::condition\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+控制块的条件 
+
+
+
+在文件 flow\+\_\+control.\+h 第 427 行定义.
+
+
+
+被这些函数引用 Get\+Condition\+Pointer(), Get\+Condition\+Reference() , 以及 Set\+Condition().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a68a9a3a80ffffae05becad6367afe58c}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a68a9a3a80ffffae05becad6367afe58c}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!main\_block\_@{main\_block\_}}
+\index{main\_block\_@{main\_block\_}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{main\_block\_}{main\_block\_}}
+{\footnotesize\ttfamily std\+::list$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}}$>$ $>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::main\+\_\+block\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+控制块主体的内容 
+
+
+
+在文件 flow\+\_\+control.\+h 第 431 行定义.
+
+
+
+被这些函数引用 Add\+Sentence(), Add\+Sentences() , 以及 Get\+Sentences().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a4a1a8e00dcf9b9b11ee865be12e9d24e}\label{classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface_a4a1a8e00dcf9b9b11ee865be12e9d24e}} 
+\index{c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}!sentence\_to\_get\_condition\_@{sentence\_to\_get\_condition\_}}
+\index{sentence\_to\_get\_condition\_@{sentence\_to\_get\_condition\_}!c\_parser\_frontend::flow\_control::ConditionBlockInterface@{c\_parser\_frontend::flow\_control::ConditionBlockInterface}}
+\doxysubsubsection{\texorpdfstring{sentence\_to\_get\_condition\_}{sentence\_to\_get\_condition\_}}
+{\footnotesize\ttfamily std\+::list$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}}$>$ $>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::sentence\+\_\+to\+\_\+get\+\_\+condition\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+获取控制块条件的语句 
+
+
+
+在文件 flow\+\_\+control.\+h 第 429 行定义.
+
+
+
+被这些函数引用 Get\+Sentence\+To\+Get\+Condition() , 以及 Set\+Condition().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{flow__control_8h}{flow\+\_\+control.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{flow__control_8cpp}{flow\+\_\+control.\+cpp}}\end{DoxyCompactItemize}

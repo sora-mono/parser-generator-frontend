@@ -1,0 +1,4 @@
+<map id="c_parser_frontend::type_system::StructType::GetTypeStoreSize" name="c_parser_frontend::type_system::StructType::GetTypeStoreSize">
+<area shape="rect" id="node1" title="获取存储该类型变量所需空间的大小" alt="" coords="236,5,419,61"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1StructType.html#adeefcb116c5db8a88c0de3a1789b8acb" title="获取sizeof语义下类型的大小" alt="" coords="5,5,188,61"/>
+</map>

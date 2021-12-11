@@ -1,0 +1,7 @@
+<map id="frontend::generator::syntax_generator::BaseProductionNode::operator=" name="frontend::generator::syntax_generator::BaseProductionNode::operator=">
+<area shape="rect" id="node1" title=" " alt="" coords="260,155,491,211"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1TerminalProductionNode.html#a752dbbc667e43b73ff775f53ed46280d" title=" " alt="" coords="18,5,199,76"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface.html#ad29acd45afbc6d77108f994aaee7f922" title=" " alt="" coords="23,100,194,171"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#adad0c7645865e904f017fa0eb8a3c3f6" title=" " alt="" coords="5,195,212,265"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1EndNode.html#a6bdaeb9b2821545a444a1ffa5180a0a5" title=" " alt="" coords="31,290,186,346"/>
+</map>

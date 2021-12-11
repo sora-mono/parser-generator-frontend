@@ -1,0 +1,451 @@
+\hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::Basic\+Type类 参考}
+\label{classc__parser__frontend_1_1type__system_1_1BasicType}\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+
+
+预定义的基础类型  
+
+
+
+
+{\ttfamily \#include $<$type\+\_\+system.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::Basic\+Type 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classc__parser__frontend_1_1type__system_1_1BasicType__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::Basic\+Type 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classc__parser__frontend_1_1type__system_1_1BasicType__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType_aa0d7764a88f4371da986a509f6ef3f99}{Basic\+Type}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_aec297cf4e12aa9aa66034a08667ada28}{Built\+In\+Type}} built\+\_\+in\+\_\+type, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_ab49a05ac9449cbab0efc2c3380d1172c}{Sign\+Tag}} sign\+\_\+tag)
+\item 
+virtual bool \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType_a23b0071b2c288812c3955482d4186a51}{operator==}} (const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&type\+\_\+interface) const override
+\begin{DoxyCompactList}\small\item\em 比较两个类型是否完全相同 \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_abdba49f59bc164b6932d698ad6af20fe}{Assignable\+Check\+Result}} \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType_a03a2d0a5c1388f66c3d3fff1d0c4330a}{Can\+Be\+Assigned\+By}} (const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&type\+\_\+interface) const override
+\begin{DoxyCompactList}\small\item\em 判断给定类型是否可以给该对象赋值 \end{DoxyCompactList}\item 
+virtual size\+\_\+t \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType_a9aacb43f70f8f31bb21e9ebc2e7dacf9}{Get\+Type\+Store\+Size}} () const override
+\begin{DoxyCompactList}\small\item\em 获取存储该类型变量所需空间的大小 \end{DoxyCompactList}\item 
+virtual size\+\_\+t \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType_a302bae5c8446b77bbc79159f4eb24a88}{Type\+Size\+Of}} () const override
+\begin{DoxyCompactList}\small\item\em 获取sizeof语义下类型的大小 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType_a537951dca906314695cbc194a3f34409}{Set\+Built\+In\+Type}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_aec297cf4e12aa9aa66034a08667ada28}{Built\+In\+Type}} built\+\_\+in\+\_\+type)
+\begin{DoxyCompactList}\small\item\em 设置内置类型 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_aec297cf4e12aa9aa66034a08667ada28}{Built\+In\+Type}} \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType_a06a15a1c51d15f2a9358b470263caf7d}{Get\+Built\+In\+Type}} () const
+\begin{DoxyCompactList}\small\item\em 获取内置类型 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType_a661d46271b6abe416646b468165b96a9}{Set\+Sign\+Tag}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_ab49a05ac9449cbab0efc2c3380d1172c}{Sign\+Tag}} sign\+\_\+tag)
+\begin{DoxyCompactList}\small\item\em 设置内置类型的符号属性（有符号/无符号） \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_ab49a05ac9449cbab0efc2c3380d1172c}{Sign\+Tag}} \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType_ad716d6cf27f71599ef52d22c4c824ee0}{Get\+Sign\+Tag}} () const
+\begin{DoxyCompactList}\small\item\em 获取内置类型的符号标记 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType_ac78c52556f6bfec3ce16afb568253aa8}{Is\+Same\+Object}} (const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&type\+\_\+interface) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_aec297cf4e12aa9aa66034a08667ada28}{Built\+In\+Type}} \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType_aef35fa8c6661506a49430ee2e94ff40f}{built\+\_\+in\+\_\+type\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 内置类型 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_ab49a05ac9449cbab0efc2c3380d1172c}{Sign\+Tag}} \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType_ae5759c42d23fcec1769ce3be0edc4c22}{sign\+\_\+tag\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 符号标记 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+预定义的基础类型 
+
+该节点后连接的是\+End\+Type节点 
+
+在文件 type\+\_\+system.\+h 第 356 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType_aa0d7764a88f4371da986a509f6ef3f99}\label{classc__parser__frontend_1_1type__system_1_1BasicType_aa0d7764a88f4371da986a509f6ef3f99}} 
+\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}!BasicType@{BasicType}}
+\index{BasicType@{BasicType}!c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+\doxysubsubsection{\texorpdfstring{BasicType()}{BasicType()}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Basic\+Type\+::\+Basic\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_aec297cf4e12aa9aa66034a08667ada28}{Built\+In\+Type}}}]{built\+\_\+in\+\_\+type,  }\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_ab49a05ac9449cbab0efc2c3380d1172c}{Sign\+Tag}}}]{sign\+\_\+tag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 type\+\_\+system.\+h 第 358 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType_a03a2d0a5c1388f66c3d3fff1d0c4330a}\label{classc__parser__frontend_1_1type__system_1_1BasicType_a03a2d0a5c1388f66c3d3fff1d0c4330a}} 
+\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}!CanBeAssignedBy@{CanBeAssignedBy}}
+\index{CanBeAssignedBy@{CanBeAssignedBy}!c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+\doxysubsubsection{\texorpdfstring{CanBeAssignedBy()}{CanBeAssignedBy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_abdba49f59bc164b6932d698ad6af20fe}{Assignable\+Check\+Result}} c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Basic\+Type\+::\+Can\+Be\+Assigned\+By (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&}]{type\+\_\+interface }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+判断给定类型是否可以给该对象赋值 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em type\+\_\+interface} & ：待判断的类型 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回检查结果 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+返回值的意义见其定义 
+\end{DoxyNote}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface_a669b266fbf7be6477db5464916d7ddc6}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface}}.
+
+
+
+在文件 type\+\_\+system.\+cpp 第 75 行定义.
+
+
+
+引用了 Get\+Built\+In\+Type(), Get\+Sign\+Tag(), c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface\+::\+Get\+Type(), c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Basic, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Can\+Not\+Convert, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Initialize\+List, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Lower\+Convert, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Non\+Convert, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Not\+Specified, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Signed, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Signed\+To\+Unsigned, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Unsigned\+To\+Signed , 以及 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Upper\+Convert.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1BasicType_a03a2d0a5c1388f66c3d3fff1d0c4330a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType_a06a15a1c51d15f2a9358b470263caf7d}\label{classc__parser__frontend_1_1type__system_1_1BasicType_a06a15a1c51d15f2a9358b470263caf7d}} 
+\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}!GetBuiltInType@{GetBuiltInType}}
+\index{GetBuiltInType@{GetBuiltInType}!c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+\doxysubsubsection{\texorpdfstring{GetBuiltInType()}{GetBuiltInType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_aec297cf4e12aa9aa66034a08667ada28}{Built\+In\+Type}} c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Basic\+Type\+::\+Get\+Built\+In\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取内置类型 
+
+\begin{DoxyReturn}{返回}
+返回内置类型 
+\end{DoxyReturn}
+
+
+在文件 type\+\_\+system.\+h 第 378 行定义.
+
+
+
+引用了 built\+\_\+in\+\_\+type\+\_\+.
+
+
+
+被这些函数引用 Can\+Be\+Assigned\+By(), Get\+Type\+Store\+Size() , 以及 Is\+Same\+Object().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1BasicType_a06a15a1c51d15f2a9358b470263caf7d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType_ad716d6cf27f71599ef52d22c4c824ee0}\label{classc__parser__frontend_1_1type__system_1_1BasicType_ad716d6cf27f71599ef52d22c4c824ee0}} 
+\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}!GetSignTag@{GetSignTag}}
+\index{GetSignTag@{GetSignTag}!c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+\doxysubsubsection{\texorpdfstring{GetSignTag()}{GetSignTag()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_ab49a05ac9449cbab0efc2c3380d1172c}{Sign\+Tag}} c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Basic\+Type\+::\+Get\+Sign\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取内置类型的符号标记 
+
+\begin{DoxyReturn}{返回}
+返回符号标记 
+\end{DoxyReturn}
+
+
+在文件 type\+\_\+system.\+h 第 384 行定义.
+
+
+
+引用了 sign\+\_\+tag\+\_\+.
+
+
+
+被这些函数引用 Can\+Be\+Assigned\+By() , 以及 Is\+Same\+Object().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1BasicType_ad716d6cf27f71599ef52d22c4c824ee0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType_a9aacb43f70f8f31bb21e9ebc2e7dacf9}\label{classc__parser__frontend_1_1type__system_1_1BasicType_a9aacb43f70f8f31bb21e9ebc2e7dacf9}} 
+\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}!GetTypeStoreSize@{GetTypeStoreSize}}
+\index{GetTypeStoreSize@{GetTypeStoreSize}!c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+\doxysubsubsection{\texorpdfstring{GetTypeStoreSize()}{GetTypeStoreSize()}}
+{\footnotesize\ttfamily size\+\_\+t c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Basic\+Type\+::\+Get\+Type\+Store\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取存储该类型变量所需空间的大小 
+
+\begin{DoxyReturn}{返回}
+返回存储该类型变量所需空间大小 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+指针均为k\+Pointer\+Size字节 
+\end{DoxyNote}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface_af141ec273bfe24c2b4e662680d3bad9c}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface}}.
+
+
+
+在文件 type\+\_\+system.\+cpp 第 119 行定义.
+
+
+
+引用了 Get\+Built\+In\+Type(), c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Float32, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Float64, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Int1, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Int16, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Int32, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Int8 , 以及 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Void.
+
+
+
+被这些函数引用 Type\+Size\+Of().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1BasicType_a9aacb43f70f8f31bb21e9ebc2e7dacf9_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1BasicType_a9aacb43f70f8f31bb21e9ebc2e7dacf9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType_ac78c52556f6bfec3ce16afb568253aa8}\label{classc__parser__frontend_1_1type__system_1_1BasicType_ac78c52556f6bfec3ce16afb568253aa8}} 
+\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}!IsSameObject@{IsSameObject}}
+\index{IsSameObject@{IsSameObject}!c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+\doxysubsubsection{\texorpdfstring{IsSameObject()}{IsSameObject()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Basic\+Type\+::\+Is\+Same\+Object (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&}]{type\+\_\+interface }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 type\+\_\+system.\+cpp 第 152 行定义.
+
+
+
+引用了 Get\+Built\+In\+Type(), Get\+Sign\+Tag() , 以及 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface\+::\+Is\+Same\+Object().
+
+
+
+被这些函数引用 operator==().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1BasicType_ac78c52556f6bfec3ce16afb568253aa8_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1BasicType_ac78c52556f6bfec3ce16afb568253aa8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType_a23b0071b2c288812c3955482d4186a51}\label{classc__parser__frontend_1_1type__system_1_1BasicType_a23b0071b2c288812c3955482d4186a51}} 
+\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}!operator==@{operator==}}
+\index{operator==@{operator==}!c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Basic\+Type\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&}]{type\+\_\+interface }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+比较两个类型是否完全相同 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em type\+\_\+interface} & ：待比较的两个类型 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回两个类型是否完全相同 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：两个类型完全相同 \\
+\hline
+{\em false} & ：两个类型不完全相同 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+自动调用下一级比较函数 
+\end{DoxyNote}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface_a5aa9c19280d18ecedfc56f910f6d95bc}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface}}.
+
+
+
+在文件 type\+\_\+system.\+cpp 第 67 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface\+::\+Get\+Next\+Node\+Reference() , 以及 Is\+Same\+Object().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1BasicType_a23b0071b2c288812c3955482d4186a51_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType_a537951dca906314695cbc194a3f34409}\label{classc__parser__frontend_1_1type__system_1_1BasicType_a537951dca906314695cbc194a3f34409}} 
+\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}!SetBuiltInType@{SetBuiltInType}}
+\index{SetBuiltInType@{SetBuiltInType}!c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+\doxysubsubsection{\texorpdfstring{SetBuiltInType()}{SetBuiltInType()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Basic\+Type\+::\+Set\+Built\+In\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_aec297cf4e12aa9aa66034a08667ada28}{Built\+In\+Type}}}]{built\+\_\+in\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置内置类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em built\+\_\+in\+\_\+type} & ：待设置的内置类型 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 type\+\_\+system.\+h 第 373 行定义.
+
+
+
+引用了 built\+\_\+in\+\_\+type\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType_a661d46271b6abe416646b468165b96a9}\label{classc__parser__frontend_1_1type__system_1_1BasicType_a661d46271b6abe416646b468165b96a9}} 
+\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}!SetSignTag@{SetSignTag}}
+\index{SetSignTag@{SetSignTag}!c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+\doxysubsubsection{\texorpdfstring{SetSignTag()}{SetSignTag()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Basic\+Type\+::\+Set\+Sign\+Tag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_ab49a05ac9449cbab0efc2c3380d1172c}{Sign\+Tag}}}]{sign\+\_\+tag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置内置类型的符号属性（有符号/无符号） 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sign\+\_\+tag} & ：符号标记 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 type\+\_\+system.\+h 第 381 行定义.
+
+
+
+引用了 sign\+\_\+tag\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType_a302bae5c8446b77bbc79159f4eb24a88}\label{classc__parser__frontend_1_1type__system_1_1BasicType_a302bae5c8446b77bbc79159f4eb24a88}} 
+\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}!TypeSizeOf@{TypeSizeOf}}
+\index{TypeSizeOf@{TypeSizeOf}!c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+\doxysubsubsection{\texorpdfstring{TypeSizeOf()}{TypeSizeOf()}}
+{\footnotesize\ttfamily virtual size\+\_\+t c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Basic\+Type\+::\+Type\+Size\+Of (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取sizeof语义下类型的大小 
+
+\begin{DoxyReturn}{返回}
+返回sizeof语义下类型的大小 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+指向数组的指针结果为类型大小乘以各维度大小 
+\end{DoxyNote}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface_ac226ef7e7ae3877dcbbe6bc23433884e}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface}}.
+
+
+
+在文件 type\+\_\+system.\+h 第 367 行定义.
+
+
+
+引用了 Get\+Type\+Store\+Size().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1BasicType_a302bae5c8446b77bbc79159f4eb24a88_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType_aef35fa8c6661506a49430ee2e94ff40f}\label{classc__parser__frontend_1_1type__system_1_1BasicType_aef35fa8c6661506a49430ee2e94ff40f}} 
+\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}!built\_in\_type\_@{built\_in\_type\_}}
+\index{built\_in\_type\_@{built\_in\_type\_}!c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+\doxysubsubsection{\texorpdfstring{built\_in\_type\_}{built\_in\_type\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_aec297cf4e12aa9aa66034a08667ada28}{Built\+In\+Type}} c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Basic\+Type\+::built\+\_\+in\+\_\+type\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+内置类型 
+
+
+
+在文件 type\+\_\+system.\+h 第 390 行定义.
+
+
+
+被这些函数引用 Get\+Built\+In\+Type() , 以及 Set\+Built\+In\+Type().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1BasicType_ae5759c42d23fcec1769ce3be0edc4c22}\label{classc__parser__frontend_1_1type__system_1_1BasicType_ae5759c42d23fcec1769ce3be0edc4c22}} 
+\index{c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}!sign\_tag\_@{sign\_tag\_}}
+\index{sign\_tag\_@{sign\_tag\_}!c\_parser\_frontend::type\_system::BasicType@{c\_parser\_frontend::type\_system::BasicType}}
+\doxysubsubsection{\texorpdfstring{sign\_tag\_}{sign\_tag\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_ab49a05ac9449cbab0efc2c3380d1172c}{Sign\+Tag}} c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Basic\+Type\+::sign\+\_\+tag\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+符号标记 
+
+
+
+在文件 type\+\_\+system.\+h 第 392 行定义.
+
+
+
+被这些函数引用 Get\+Sign\+Tag() , 以及 Set\+Sign\+Tag().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{type__system_8h}{type\+\_\+system.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{type__system_8cpp}{type\+\_\+system.\+cpp}}\end{DoxyCompactItemize}

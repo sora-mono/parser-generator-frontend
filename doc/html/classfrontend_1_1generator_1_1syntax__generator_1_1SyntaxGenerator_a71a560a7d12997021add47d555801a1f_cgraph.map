@@ -1,0 +1,6 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::IsClosureAvailable" name="frontend::generator::syntax_generator::SyntaxGenerator::IsClosureAvailable">
+<area shape="rect" id="node1" title="查询一个项集是否闭包有效" alt="" coords="5,61,265,117"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0c9987d677e8acbbb2b19a82a2b37815" title="根据项集ID获取项集" alt="" coords="313,5,545,76"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a3ff0fee566735401041a4e71cd8f48ce" title="获取该项集求的闭包是否有效" alt="" coords="324,100,535,171"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1ObjectManager.html#a1c27178f6f5cf8e5ce2ddec1863f9533" title="获取容器实际存储的有效对象数量" alt="" coords="593,20,785,61"/>
+</map>

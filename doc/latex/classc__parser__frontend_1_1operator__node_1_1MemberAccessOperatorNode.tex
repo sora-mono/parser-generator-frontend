@@ -1,0 +1,729 @@
+\hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Member\+Access\+Operator\+Node类 参考}
+\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode}\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+
+
+成员访问节点  
+
+
+
+
+{\ttfamily \#include $<$operator\+\_\+node.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Member\+Access\+Operator\+Node 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=247pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Member\+Access\+Operator\+Node 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a712f5aa9058f128e7de19fcff105820a}{Member\+Index}} = \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1StructureTypeInterface_ac7c25b40ad63d12bf91d56b668ab6d61}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Structure\+Type\+Interface\+::\+Member\+Index}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ada9d2ef906a40f09793e70a2622f3187}{Member\+Access\+Operator\+Node}} ()
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a639c6c9067c15667fa945e0cae8f1d37}{Member\+Access\+Operator\+Node}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode}{Member\+Access\+Operator\+Node}} \&)=delete
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode}{Member\+Access\+Operator\+Node}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_aa1fd998c57fb47acfdd42aaa3aef9704}{operator=}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode}{Member\+Access\+Operator\+Node}} \&)=delete
+\item 
+virtual Const\+Tag \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a9218122090e0051b3b97bfb7a31b6d0e}{Get\+Result\+Const\+Tag}} () const override
+\begin{DoxyCompactList}\small\item\em 获取该节点操作结果的const标记 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a7c309aa4aa6cbc43dc1aa5ce6c00d790}{Get\+Result\+Type\+Pointer}} () const override
+\begin{DoxyCompactList}\small\item\em 获取最终结果的类型 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a7b3872da36eda2707b680ab154d4fb65}{Get\+Result\+Operator\+Node}} () const override
+\begin{DoxyCompactList}\small\item\em 获取最终结果的节点 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a80f1eed9bf1a5fceb092e9270d860f86}{Self\+Copy}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&new\+\_\+type, Const\+Tag new\+\_\+const\+\_\+tag) const override
+\begin{DoxyCompactList}\small\item\em 拷贝自身并设置拷贝得到的对象类型为new\+\_\+type \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ac22f0f73cebcb75eac556e5a5a15f43e}{Set\+Node\+To\+Access}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&node\+\_\+to\+\_\+access)
+\begin{DoxyCompactList}\small\item\em 设置要访问的结构化数据节点 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a954a87731146f2e2432e871ea9956767}{Get\+Node\+To\+Access\+Pointer}} ()
+\begin{DoxyCompactList}\small\item\em 获取被访问成员的节点 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a215de55ef7eab0be34a6bf41ddfcca55}{Get\+Node\+To\+Access\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取被访问成员的节点 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Member\+Name $>$ }\\bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ae95a9a06b45870ad8675b330273cecde}{Set\+Member\+Name}} (Member\+Name \&\&member\+\_\+name)
+\begin{DoxyCompactList}\small\item\em 设置访问的成员名 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a712f5aa9058f128e7de19fcff105820a}{Member\+Index}} \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a3404f55779fea7d9b8e76f0fc543cd8b}{Get\+Member\+Index}} () const
+\begin{DoxyCompactList}\small\item\em 获取访问的成员在结构中的下标 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ab762aa1f8d97d94658403d7631297570}{Get\+Accessed\+Node\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取访问的成员的节点 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a2c6f7d5f36148be8aab4a7124175ba64}{Get\+Accessed\+Node\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取访问的成员的节点 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a548bfce6c0ae11b7a9570b82938eb490}{Check\+Node\+To\+Access\+Valid}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&node\+\_\+to\+\_\+access)
+\begin{DoxyCompactList}\small\item\em 检查给定节点是否可以作为被访问成员的节点 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_aefd53de131f70e5127cd9b30d098d30a}{Set\+Accessed\+Node\+And\+Member\+Name}} (std\+::string \&\&member\+\_\+name\+\_\+to\+\_\+set)
+\begin{DoxyCompactList}\small\item\em 设置访问的成员名 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a0be47645db2897b12b868411db73f5b0}{Set\+Accessed\+Node}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&node\+\_\+accessed)
+\begin{DoxyCompactList}\small\item\em 设置访问后得到的节点 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_aab76eebde14d9a1ccbf1b152e90de37c}{node\+\_\+to\+\_\+access\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 要访问的节点 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a712f5aa9058f128e7de19fcff105820a}{Member\+Index}} \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_adf2d04bda145347cd20ed357e80aad3a}{member\+\_\+index\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 访问的节点成员的index \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a27f30c892f10ef31bed7db8ab2de92e4}{node\+\_\+accessed\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 访问后得到的节点 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+成员访问节点 
+
+在文件 operator\+\_\+node.\+h 第 1347 行定义.
+
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a712f5aa9058f128e7de19fcff105820a}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a712f5aa9058f128e7de19fcff105820a}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!MemberIndex@{MemberIndex}}
+\index{MemberIndex@{MemberIndex}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{MemberIndex}{MemberIndex}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a712f5aa9058f128e7de19fcff105820a}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Member\+Index}} =  \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1StructureTypeInterface_ac7c25b40ad63d12bf91d56b668ab6d61}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Structure\+Type\+Interface\+::\+Member\+Index}}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 1350 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ada9d2ef906a40f09793e70a2622f3187}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ada9d2ef906a40f09793e70a2622f3187}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!MemberAccessOperatorNode@{MemberAccessOperatorNode}}
+\index{MemberAccessOperatorNode@{MemberAccessOperatorNode}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{MemberAccessOperatorNode()}{MemberAccessOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Member\+Access\+Operator\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 1351 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Member\+Access.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a639c6c9067c15667fa945e0cae8f1d37}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a639c6c9067c15667fa945e0cae8f1d37}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!MemberAccessOperatorNode@{MemberAccessOperatorNode}}
+\index{MemberAccessOperatorNode@{MemberAccessOperatorNode}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{MemberAccessOperatorNode()}{MemberAccessOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Member\+Access\+Operator\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode}{Member\+Access\+Operator\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a548bfce6c0ae11b7a9570b82938eb490}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a548bfce6c0ae11b7a9570b82938eb490}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!CheckNodeToAccessValid@{CheckNodeToAccessValid}}
+\index{CheckNodeToAccessValid@{CheckNodeToAccessValid}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{CheckNodeToAccessValid()}{CheckNodeToAccessValid()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Check\+Node\+To\+Access\+Valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&}]{node\+\_\+to\+\_\+access }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+检查给定节点是否可以作为被访问成员的节点 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em node\+\_\+to\+\_\+access} & ：待检查的节点 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回给定节点是否可以作为被访问成员的节点 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：给定成员可以被访问成员（是结构化数据类型） \\
+\hline
+{\em false} & ：给定成员不能被访问成员（不是结构化数据类型） \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 operator\+\_\+node.\+cpp 第 321 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Type\+Pointer().
+
+
+
+被这些函数引用 Set\+Node\+To\+Access().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a548bfce6c0ae11b7a9570b82938eb490_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a548bfce6c0ae11b7a9570b82938eb490_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ab762aa1f8d97d94658403d7631297570}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ab762aa1f8d97d94658403d7631297570}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!GetAccessedNodePointer@{GetAccessedNodePointer}}
+\index{GetAccessedNodePointer@{GetAccessedNodePointer}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetAccessedNodePointer()}{GetAccessedNodePointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Get\+Accessed\+Node\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取访问的成员的节点 
+
+\begin{DoxyReturn}{返回}
+返回访问的成员节点的const指针 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+必须成功设置要访问的节点和成员名 
+\end{DoxyAttention}
+
+
+在文件 operator\+\_\+node.\+h 第 1419 行定义.
+
+
+
+引用了 node\+\_\+accessed\+\_\+.
+
+
+
+被这些函数引用 Get\+Result\+Operator\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ab762aa1f8d97d94658403d7631297570_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a2c6f7d5f36148be8aab4a7124175ba64}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a2c6f7d5f36148be8aab4a7124175ba64}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!GetAccessedNodeReference@{GetAccessedNodeReference}}
+\index{GetAccessedNodeReference@{GetAccessedNodeReference}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetAccessedNodeReference()}{GetAccessedNodeReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Get\+Accessed\+Node\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取访问的成员的节点 
+
+\begin{DoxyReturn}{返回}
+返回访问的成员节点的const指针 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+必须成功设置要访问的节点和成员名 
+\end{DoxyAttention}
+
+
+在文件 operator\+\_\+node.\+h 第 1425 行定义.
+
+
+
+引用了 node\+\_\+accessed\+\_\+.
+
+
+
+被这些函数引用 Get\+Result\+Const\+Tag() , 以及 Get\+Result\+Type\+Pointer().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a2c6f7d5f36148be8aab4a7124175ba64_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a3404f55779fea7d9b8e76f0fc543cd8b}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a3404f55779fea7d9b8e76f0fc543cd8b}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!GetMemberIndex@{GetMemberIndex}}
+\index{GetMemberIndex@{GetMemberIndex}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetMemberIndex()}{GetMemberIndex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a712f5aa9058f128e7de19fcff105820a}{Member\+Index}} c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Get\+Member\+Index (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取访问的成员在结构中的下标 
+
+\begin{DoxyReturn}{返回}
+返回成员在结构中的下标 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 1415 行定义.
+
+
+
+引用了 member\+\_\+index\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a954a87731146f2e2432e871ea9956767}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a954a87731146f2e2432e871ea9956767}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!GetNodeToAccessPointer@{GetNodeToAccessPointer}}
+\index{GetNodeToAccessPointer@{GetNodeToAccessPointer}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetNodeToAccessPointer()}{GetNodeToAccessPointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Get\+Node\+To\+Access\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取被访问成员的节点 
+
+\begin{DoxyReturn}{返回}
+返回指向被访问成员的节点的const指针 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 1393 行定义.
+
+
+
+引用了 node\+\_\+to\+\_\+access\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a215de55ef7eab0be34a6bf41ddfcca55}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a215de55ef7eab0be34a6bf41ddfcca55}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!GetNodeToAccessReference@{GetNodeToAccessReference}}
+\index{GetNodeToAccessReference@{GetNodeToAccessReference}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetNodeToAccessReference()}{GetNodeToAccessReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Get\+Node\+To\+Access\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取被访问成员的节点 
+
+\begin{DoxyReturn}{返回}
+返回被访问成员的节点的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 1398 行定义.
+
+
+
+引用了 node\+\_\+to\+\_\+access\+\_\+.
+
+
+
+被这些函数引用 Set\+Accessed\+Node\+And\+Member\+Name().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a215de55ef7eab0be34a6bf41ddfcca55_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a9218122090e0051b3b97bfb7a31b6d0e}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a9218122090e0051b3b97bfb7a31b6d0e}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!GetResultConstTag@{GetResultConstTag}}
+\index{GetResultConstTag@{GetResultConstTag}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultConstTag()}{GetResultConstTag()}}
+{\footnotesize\ttfamily virtual Const\+Tag c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Get\+Result\+Const\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取该节点操作结果的const标记 
+
+\begin{DoxyReturn}{返回}
+返回操作结果的const标记
+\end{DoxyReturn}
+1.成员访问、解引用等操作的后续操作不是对原结构体/原指针操作，而是对得到的 新对象进行操作，不同操作类型操作的对象不同 2.通过这个函数抽象获取最终结果的过程以忽略操作的不同 3.以成员访问为例，该函数获取指定的成员在结构体中的const标记，以数学运算 为例，该函数获取运算结果的const标记（\+Const\+Tag\+::k\+Non\+Const），以变量声明 为例，该函数返回声明的变量的const标记（对象不变） 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 1357 行定义.
+
+
+
+引用了 Get\+Accessed\+Node\+Reference() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Const\+Tag().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a9218122090e0051b3b97bfb7a31b6d0e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a7b3872da36eda2707b680ab154d4fb65}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a7b3872da36eda2707b680ab154d4fb65}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!GetResultOperatorNode@{GetResultOperatorNode}}
+\index{GetResultOperatorNode@{GetResultOperatorNode}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultOperatorNode()}{GetResultOperatorNode()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Get\+Result\+Operator\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取最终结果的节点 
+
+\begin{DoxyReturn}{返回}
+返回指向最终结果的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：自身是最终节点\\
+\hline
+\end{DoxyRetVals}
+1.该函数用于抽象获取操作最终结果的过程 2.基础变量和初始化变量最终操作节点就是本身，所以返回nullptr 3.赋值运算返回被赋值的对象，解引用返回解引用后得到的对象，以此为例 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 1364 行定义.
+
+
+
+引用了 Get\+Accessed\+Node\+Pointer().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a7b3872da36eda2707b680ab154d4fb65_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a7c309aa4aa6cbc43dc1aa5ce6c00d790}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a7c309aa4aa6cbc43dc1aa5ce6c00d790}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!GetResultTypePointer@{GetResultTypePointer}}
+\index{GetResultTypePointer@{GetResultTypePointer}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultTypePointer()}{GetResultTypePointer()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取最终结果的类型 
+
+\begin{DoxyReturn}{返回}
+返回类型链头结点的const指针
+\end{DoxyReturn}
+设计思路同\+Get\+Result\+Const\+Tag 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 1360 行定义.
+
+
+
+引用了 Get\+Accessed\+Node\+Reference() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Type\+Pointer().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a7c309aa4aa6cbc43dc1aa5ce6c00d790_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_aa1fd998c57fb47acfdd42aaa3aef9704}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_aa1fd998c57fb47acfdd42aaa3aef9704}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!operator=@{operator=}}
+\index{operator=@{operator=}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode}{Member\+Access\+Operator\+Node}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode}{Member\+Access\+Operator\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a80f1eed9bf1a5fceb092e9270d860f86}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a80f1eed9bf1a5fceb092e9270d860f86}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!SelfCopy@{SelfCopy}}
+\index{SelfCopy@{SelfCopy}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SelfCopy()}{SelfCopy()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Self\+Copy (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{new\+\_\+type,  }\item[{Const\+Tag}]{new\+\_\+const\+\_\+tag }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+拷贝自身并设置拷贝得到的对象类型为new\+\_\+type 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em new\+\_\+type} & ：拷贝后得到的对象的类型 \\
+\hline
+\mbox{\texttt{ in}}  & {\em new\+\_\+const\+\_\+tag} & ：拷贝后得到的对象的新const标记 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回指向拷贝后的对象的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：设置初始化数据为非const\\
+\hline
+\end{DoxyRetVals}
+该函数用于类型转换 \begin{DoxyAttention}{注意}
+仅允许对变量、初始化值和类型转换节点调用该函数 
+\end{DoxyAttention}
+防止警告
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_afaf8c7f881d6b57c275611312b5e0f78}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 1368 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a0be47645db2897b12b868411db73f5b0}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a0be47645db2897b12b868411db73f5b0}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!SetAccessedNode@{SetAccessedNode}}
+\index{SetAccessedNode@{SetAccessedNode}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetAccessedNode()}{SetAccessedNode()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Set\+Accessed\+Node (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&}]{node\+\_\+accessed }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+设置访问后得到的节点 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em node\+\_\+accessed} & ：访问后得到的节点 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 operator\+\_\+node.\+h 第 1449 行定义.
+
+
+
+引用了 node\+\_\+accessed\+\_\+.
+
+
+
+被这些函数引用 Set\+Accessed\+Node\+And\+Member\+Name().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a0be47645db2897b12b868411db73f5b0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_aefd53de131f70e5127cd9b30d098d30a}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_aefd53de131f70e5127cd9b30d098d30a}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!SetAccessedNodeAndMemberName@{SetAccessedNodeAndMemberName}}
+\index{SetAccessedNodeAndMemberName@{SetAccessedNodeAndMemberName}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetAccessedNodeAndMemberName()}{SetAccessedNodeAndMemberName()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Set\+Accessed\+Node\+And\+Member\+Name (\begin{DoxyParamCaption}\item[{std\+::string \&\&}]{member\+\_\+name\+\_\+to\+\_\+set }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+设置访问的成员名 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em member\+\_\+name\+\_\+to\+\_\+set} & ：访问的成员名 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否设置成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：成功设置 \\
+\hline
+{\em false} & ：不存在给定的成员\\
+\hline
+\end{DoxyRetVals}
+根据待访问的节点和节点成员名设置成员的下标，创建并设置访问的成员的下标 \begin{DoxyNote}{注解}
+如果不存在给定的成员则不设置 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+cpp 第 336 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Enum\+Type\+::\+Get\+Enum\+Member\+Info(), Get\+Node\+To\+Access\+Reference(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Type\+Pointer(), frontend\+::common\+::\+Base\+Id\+Wrapper$<$ Id\+Type\+\_\+, Label\+Enum\+\_\+, label\+\_\+, invalid\+\_\+value\+\_\+ $>$\+::\+Is\+Valid(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Basic, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Left\+Value, member\+\_\+index\+\_\+ , 以及 Set\+Accessed\+Node().
+
+
+
+被这些函数引用 Set\+Member\+Name().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_aefd53de131f70e5127cd9b30d098d30a_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_aefd53de131f70e5127cd9b30d098d30a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ae95a9a06b45870ad8675b330273cecde}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ae95a9a06b45870ad8675b330273cecde}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!SetMemberName@{SetMemberName}}
+\index{SetMemberName@{SetMemberName}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetMemberName()}{SetMemberName()}}
+{\footnotesize\ttfamily template$<$class Member\+Name $>$ \\
+bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Set\+Member\+Name (\begin{DoxyParamCaption}\item[{Member\+Name \&\&}]{member\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置访问的成员名 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em member\+\_\+name} & 访问的成员名 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回给定节点是否是成员名 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：成功设置 \\
+\hline
+{\em false} & ：成员名不存在 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+如果给定成员名不存在则不会设置 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+必须先设置节点，后设置要访问的成员名 
+\end{DoxyAttention}
+
+
+在文件 operator\+\_\+node.\+h 第 1409 行定义.
+
+
+
+引用了 Set\+Accessed\+Node\+And\+Member\+Name().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ae95a9a06b45870ad8675b330273cecde_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ac22f0f73cebcb75eac556e5a5a15f43e}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ac22f0f73cebcb75eac556e5a5a15f43e}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!SetNodeToAccess@{SetNodeToAccess}}
+\index{SetNodeToAccess@{SetNodeToAccess}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetNodeToAccess()}{SetNodeToAccess()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Set\+Node\+To\+Access (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&}]{node\+\_\+to\+\_\+access }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置要访问的结构化数据节点 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em node\+\_\+to\+\_\+access} & ：待访问的结构化数据节点 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回给定节点是否可以作为被访问成员的节点 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：成功设置 \\
+\hline
+{\em false} & ：该节点不是结构化数据节点 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+如果不可以则不会设置 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+h 第 1382 行定义.
+
+
+
+引用了 Check\+Node\+To\+Access\+Valid() , 以及 node\+\_\+to\+\_\+access\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_ac22f0f73cebcb75eac556e5a5a15f43e_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_adf2d04bda145347cd20ed357e80aad3a}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_adf2d04bda145347cd20ed357e80aad3a}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!member\_index\_@{member\_index\_}}
+\index{member\_index\_@{member\_index\_}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{member\_index\_}{member\_index\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a712f5aa9058f128e7de19fcff105820a}{Member\+Index}} c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::member\+\_\+index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+访问的节点成员的index 
+
+\begin{DoxyNote}{注解}
+枚举类型不设置该项 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+h 第 1458 行定义.
+
+
+
+被这些函数引用 Get\+Member\+Index() , 以及 Set\+Accessed\+Node\+And\+Member\+Name().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a27f30c892f10ef31bed7db8ab2de92e4}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a27f30c892f10ef31bed7db8ab2de92e4}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!node\_accessed\_@{node\_accessed\_}}
+\index{node\_accessed\_@{node\_accessed\_}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{node\_accessed\_}{node\_accessed\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::node\+\_\+accessed\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+访问后得到的节点 
+
+
+
+在文件 operator\+\_\+node.\+h 第 1460 行定义.
+
+
+
+被这些函数引用 Get\+Accessed\+Node\+Pointer(), Get\+Accessed\+Node\+Reference() , 以及 Set\+Accessed\+Node().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_aab76eebde14d9a1ccbf1b152e90de37c}\label{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_aab76eebde14d9a1ccbf1b152e90de37c}} 
+\index{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}!node\_to\_access\_@{node\_to\_access\_}}
+\index{node\_to\_access\_@{node\_to\_access\_}!c\_parser\_frontend::operator\_node::MemberAccessOperatorNode@{c\_parser\_frontend::operator\_node::MemberAccessOperatorNode}}
+\doxysubsubsection{\texorpdfstring{node\_to\_access\_}{node\_to\_access\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::node\+\_\+to\+\_\+access\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+要访问的节点 
+
+
+
+在文件 operator\+\_\+node.\+h 第 1455 行定义.
+
+
+
+被这些函数引用 Get\+Node\+To\+Access\+Pointer(), Get\+Node\+To\+Access\+Reference() , 以及 Set\+Node\+To\+Access().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8h}{operator\+\_\+node.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8cpp}{operator\+\_\+node.\+cpp}}\end{DoxyCompactItemize}

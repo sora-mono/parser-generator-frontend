@@ -1,0 +1,53 @@
+\hypertarget{c__parser__frontend_8h}{}\doxysection{src/\+C\+Parser\+Frontend/c\+\_\+parser\+\_\+frontend.h 文件参考}
+\label{c__parser__frontend_8h}\index{src/CParserFrontend/c\_parser\_frontend.h@{src/CParserFrontend/c\_parser\_frontend.h}}
+
+
+C语言编译器前端控制器  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include \char`\"{}Parser/line\+\_\+and\+\_\+column.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}action\+\_\+scope\+\_\+system.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}flow\+\_\+control.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}operator\+\_\+node.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}type\+\_\+system.\+h\char`\"{}}\newline
+c\+\_\+parser\+\_\+frontend.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{c__parser__frontend_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{c__parser__frontend_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend}}
+\end{DoxyCompactItemize}
+\doxysubsection*{命名空间}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacec__parser__frontend}{c\+\_\+parser\+\_\+frontend}}
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{namespacec__parser__frontend_aeb2197ec97ed9ffc51a5a9217ebf0458}{c\+\_\+parser\+\_\+frontend\+::\+Get\+Line}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前行数 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{namespacec__parser__frontend_ade457c7a24ac32bc77b2267b6705ead7}{c\+\_\+parser\+\_\+frontend\+::\+Get\+Column}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前列数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+C语言编译器前端控制器 
+
+C\+Parser\+Frontend管理所有供规约函数调用的接口，整合\+Type\+System、 Action\+Scope\+System和\+Flow\+Control\+System功能，提供上层接口 

@@ -1,0 +1,196 @@
+\hypertarget{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::Loop\+Sentence\+Interface类 参考}
+\label{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface}\index{c\_parser\_frontend::flow\_control::LoopSentenceInterface@{c\_parser\_frontend::flow\_control::LoopSentenceInterface}}
+
+
+循环语句基类  
+
+
+
+
+{\ttfamily \#include $<$flow\+\_\+control.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::Loop\+Sentence\+Interface 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::Loop\+Sentence\+Interface 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a5111343f1df4f345141ec0695d0717c1}{Get\+Loop\+Condition\+Start\+Label}} () const =0
+\begin{DoxyCompactList}\small\item\em 获取循环块循环条件判断开始处标签（即将开始判断循环条件） \end{DoxyCompactList}\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a8a128d977a1efa3eb7173ff7fe26ab7f}{Get\+Loop\+Condition\+End\+Label}} () const =0
+\begin{DoxyCompactList}\small\item\em 获取循环块循环条件判断结束处标签（刚刚完成循环条件判断） \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a1dd032cbaef26ff07dd447d379ce6566}{Get\+Loop\+Main\+Block\+Start\+Label}} () const
+\begin{DoxyCompactList}\small\item\em 获取循环块主块开始处标签（即将开始执行主体内容） \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a566b49677148c8ee5ab3c8f83ed5b16e}{Get\+Loop\+Main\+Block\+End\+Label}} () const
+\begin{DoxyCompactList}\small\item\em 获取循环主块结尾处标签（刚刚结束主体执行） \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a0b6a010e167a3a9fd0b7e7d2b161261c}{Loop\+Sentence\+Interface}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1flow__control_ad0c5d7192b629f67cd18bb2ba05cbceb}{Flow\+Type}} flow\+\_\+type)
+\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+循环语句基类 
+
+在文件 flow\+\_\+control.\+h 第 580 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a0b6a010e167a3a9fd0b7e7d2b161261c}\label{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a0b6a010e167a3a9fd0b7e7d2b161261c}} 
+\index{c\_parser\_frontend::flow\_control::LoopSentenceInterface@{c\_parser\_frontend::flow\_control::LoopSentenceInterface}!LoopSentenceInterface@{LoopSentenceInterface}}
+\index{LoopSentenceInterface@{LoopSentenceInterface}!c\_parser\_frontend::flow\_control::LoopSentenceInterface@{c\_parser\_frontend::flow\_control::LoopSentenceInterface}}
+\doxysubsubsection{\texorpdfstring{LoopSentenceInterface()}{LoopSentenceInterface()}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Loop\+Sentence\+Interface\+::\+Loop\+Sentence\+Interface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1flow__control_ad0c5d7192b629f67cd18bb2ba05cbceb}{Flow\+Type}}}]{flow\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+在文件 flow\+\_\+control.\+h 第 582 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Do\+While\+Sentence, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+For\+Sentence , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+While\+Sentence.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a8a128d977a1efa3eb7173ff7fe26ab7f}\label{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a8a128d977a1efa3eb7173ff7fe26ab7f}} 
+\index{c\_parser\_frontend::flow\_control::LoopSentenceInterface@{c\_parser\_frontend::flow\_control::LoopSentenceInterface}!GetLoopConditionEndLabel@{GetLoopConditionEndLabel}}
+\index{GetLoopConditionEndLabel@{GetLoopConditionEndLabel}!c\_parser\_frontend::flow\_control::LoopSentenceInterface@{c\_parser\_frontend::flow\_control::LoopSentenceInterface}}
+\doxysubsubsection{\texorpdfstring{GetLoopConditionEndLabel()}{GetLoopConditionEndLabel()}}
+{\footnotesize\ttfamily virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Loop\+Sentence\+Interface\+::\+Get\+Loop\+Condition\+End\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+获取循环块循环条件判断结束处标签（刚刚完成循环条件判断） 
+
+\begin{DoxyReturn}{返回}
+返回循环块循环条件判断结束处标签 
+\end{DoxyReturn}
+
+
+在 \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a822d559708b631c9ddd00a7a8fc966ff}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence}}, \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1DoWhileSentence_a16f36e1058b2212a31db643452c44501}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Do\+While\+Sentence}} , 以及 \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1WhileSentence_a6f199443b03f7d96f550e635c33064aa}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+While\+Sentence}} 内被实现.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a5111343f1df4f345141ec0695d0717c1}\label{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a5111343f1df4f345141ec0695d0717c1}} 
+\index{c\_parser\_frontend::flow\_control::LoopSentenceInterface@{c\_parser\_frontend::flow\_control::LoopSentenceInterface}!GetLoopConditionStartLabel@{GetLoopConditionStartLabel}}
+\index{GetLoopConditionStartLabel@{GetLoopConditionStartLabel}!c\_parser\_frontend::flow\_control::LoopSentenceInterface@{c\_parser\_frontend::flow\_control::LoopSentenceInterface}}
+\doxysubsubsection{\texorpdfstring{GetLoopConditionStartLabel()}{GetLoopConditionStartLabel()}}
+{\footnotesize\ttfamily virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Loop\+Sentence\+Interface\+::\+Get\+Loop\+Condition\+Start\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+获取循环块循环条件判断开始处标签（即将开始判断循环条件） 
+
+\begin{DoxyReturn}{返回}
+返回循环块循环条件判断开始处标签 
+\end{DoxyReturn}
+
+
+在 \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a476967568ac50dbc04bf3b2cc4be743f}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence}}, \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1DoWhileSentence_a84a5ddc743171587a5407e842d7843a8}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Do\+While\+Sentence}} , 以及 \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1WhileSentence_ac976d748ead3f05849286120941d059f}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+While\+Sentence}} 内被实现.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a566b49677148c8ee5ab3c8f83ed5b16e}\label{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a566b49677148c8ee5ab3c8f83ed5b16e}} 
+\index{c\_parser\_frontend::flow\_control::LoopSentenceInterface@{c\_parser\_frontend::flow\_control::LoopSentenceInterface}!GetLoopMainBlockEndLabel@{GetLoopMainBlockEndLabel}}
+\index{GetLoopMainBlockEndLabel@{GetLoopMainBlockEndLabel}!c\_parser\_frontend::flow\_control::LoopSentenceInterface@{c\_parser\_frontend::flow\_control::LoopSentenceInterface}}
+\doxysubsubsection{\texorpdfstring{GetLoopMainBlockEndLabel()}{GetLoopMainBlockEndLabel()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Loop\+Sentence\+Interface\+::\+Get\+Loop\+Main\+Block\+End\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取循环主块结尾处标签（刚刚结束主体执行） 
+
+\begin{DoxyReturn}{返回}
+返回循环主块结尾处标签 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 605 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface\+::\+Get\+Flow\+Id().
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Do\+While\+Sentence\+::\+Get\+Loop\+Condition\+End\+Label() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Do\+While\+Sentence\+::\+Get\+Loop\+Condition\+Start\+Label().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a566b49677148c8ee5ab3c8f83ed5b16e_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a566b49677148c8ee5ab3c8f83ed5b16e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a1dd032cbaef26ff07dd447d379ce6566}\label{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a1dd032cbaef26ff07dd447d379ce6566}} 
+\index{c\_parser\_frontend::flow\_control::LoopSentenceInterface@{c\_parser\_frontend::flow\_control::LoopSentenceInterface}!GetLoopMainBlockStartLabel@{GetLoopMainBlockStartLabel}}
+\index{GetLoopMainBlockStartLabel@{GetLoopMainBlockStartLabel}!c\_parser\_frontend::flow\_control::LoopSentenceInterface@{c\_parser\_frontend::flow\_control::LoopSentenceInterface}}
+\doxysubsubsection{\texorpdfstring{GetLoopMainBlockStartLabel()}{GetLoopMainBlockStartLabel()}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Loop\+Sentence\+Interface\+::\+Get\+Loop\+Main\+Block\+Start\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取循环块主块开始处标签（即将开始执行主体内容） 
+
+\begin{DoxyReturn}{返回}
+返回循环块主块开始处标签 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 599 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface\+::\+Get\+Flow\+Id().
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+While\+Sentence\+::\+Get\+Loop\+Condition\+End\+Label() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Get\+Loop\+Condition\+End\+Label().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a1dd032cbaef26ff07dd447d379ce6566_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a1dd032cbaef26ff07dd447d379ce6566_icgraph}
+\end{center}
+\end{figure}
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{flow__control_8h}{flow\+\_\+control.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,15 @@
+<map id="c_parser_frontend::action_scope_system::ActionScopeSystem::PopActionScope" name="c_parser_frontend::action_scope_system::ActionScopeSystem::PopActionScope">
+<area shape="rect" id="node1" title="弹出一级作用域" alt="" coords="5,119,172,190"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a7ac1dd24d92bf630f4969bd35bec6860" title="获取当前作用域等级" alt="" coords="220,71,387,142"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a1d17eb37f21f42079ed3c066802389a4" title="弹出所有高于给定作用域等级的变量和流程控制语句" alt="" coords="220,166,387,237"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a352a7a0c33d507358a5a37f1a0e95677" title="向当前活跃的流程控制语句内添加一条语句" alt="" coords="487,30,653,101"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1CParserFrontend.html#a6c14bf77496f247c9347800d6b83df04" title="做一些完成函数构建后的清理操作" alt="" coords="455,125,685,181"/>
+<area shape="rect" id="node12" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a4fff2178d35bc39a63f972e82b66d6a5" title="获取存储变量/函数名到节点指针的映射的容器" alt="" coords="435,205,705,291"/>
+<area shape="rect" id="node13" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a01d1f19c1a4d3a5b26427cb46b63b6e4" title="获取变量栈" alt="" coords="487,315,653,386"/>
+<area shape="rect" id="node6" href="$classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a55119a508fa7ca1257475ec7795315c8" title="声明函数类型" alt="" coords="775,5,968,61"/>
+<area shape="rect" id="node9" href="$classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#afbf89fec3ad8edebac79c34a16813afb" title="完成函数构建" alt="" coords="753,85,989,141"/>
+<area shape="rect" id="node10" href="$classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a6d5728e43702302c2289df69c7b02069" title="获取当前活跃函数节点的引用" alt="" coords="753,165,989,221"/>
+<area shape="rect" id="node11" href="$classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#abe3ac31570d557129b8f9e22c8468956" title="获取函数类型" alt="" coords="768,245,975,301"/>
+<area shape="rect" id="node7" href="$classc__parser__frontend_1_1type__system_1_1TypeSystem.html#af8ea1dc56730fbe42ad70ff578ae532b" title="向类型系统中添加类型" alt="" coords="1037,5,1231,61"/>
+<area shape="rect" id="node8" href="$classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a758de256c4f407f85ef4a1113075b2a1" title="获取全部类型名到类型链的映射" alt="" coords="1279,5,1472,61"/>
+</map>

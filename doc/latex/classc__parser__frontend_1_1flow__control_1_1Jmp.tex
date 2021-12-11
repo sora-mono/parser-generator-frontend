@@ -1,0 +1,196 @@
+\hypertarget{classc__parser__frontend_1_1flow__control_1_1Jmp}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::Jmp类 参考}
+\label{classc__parser__frontend_1_1flow__control_1_1Jmp}\index{c\_parser\_frontend::flow\_control::Jmp@{c\_parser\_frontend::flow\_control::Jmp}}
+
+
+跳转  
+
+
+
+
+{\ttfamily \#include $<$flow\+\_\+control.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::Jmp 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=229pt]{classc__parser__frontend_1_1flow__control_1_1Jmp__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::Jmp 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1Jmp__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Jmp_a43f1f61a4de061369dc27ea5201fc685}{Jmp}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}} $>$ \&\&target\+\_\+label)
+\item 
+virtual bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Jmp_ae1fb86f822ff59ab866e6eb6b57e22ab}{Add\+Main\+Sentence}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&sentence) override
+\begin{DoxyCompactList}\small\item\em 向流程语句主体中中添加单条语句 \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Jmp_a866c4920ebd8150665c6af3f721c781d}{Add\+Main\+Sentences}} (std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&sentences) override
+\begin{DoxyCompactList}\small\item\em 向流程语句主体中中添加多条语句 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}} \& \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Jmp_a640b0efd0cac415074bf9daed2deed8b}{Get\+Target\+Label}} () const
+\begin{DoxyCompactList}\small\item\em 获取跳转语句绑定的标签 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Jmp_ac69f3c23f5b961c2115f5bceae0fdded}{target\+\_\+label\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 跳转指令要跳到的标签 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+跳转 
+
+每个跳转语句都绑定跳转到的标签 
+
+在文件 flow\+\_\+control.\+h 第 175 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1Jmp_a43f1f61a4de061369dc27ea5201fc685}\label{classc__parser__frontend_1_1flow__control_1_1Jmp_a43f1f61a4de061369dc27ea5201fc685}} 
+\index{c\_parser\_frontend::flow\_control::Jmp@{c\_parser\_frontend::flow\_control::Jmp}!Jmp@{Jmp}}
+\index{Jmp@{Jmp}!c\_parser\_frontend::flow\_control::Jmp@{c\_parser\_frontend::flow\_control::Jmp}}
+\doxysubsubsection{\texorpdfstring{Jmp()}{Jmp()}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Jmp\+::\+Jmp (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}} $>$ \&\&}]{target\+\_\+label }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 flow\+\_\+control.\+h 第 177 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Jmp.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1Jmp_ae1fb86f822ff59ab866e6eb6b57e22ab}\label{classc__parser__frontend_1_1flow__control_1_1Jmp_ae1fb86f822ff59ab866e6eb6b57e22ab}} 
+\index{c\_parser\_frontend::flow\_control::Jmp@{c\_parser\_frontend::flow\_control::Jmp}!AddMainSentence@{AddMainSentence}}
+\index{AddMainSentence@{AddMainSentence}!c\_parser\_frontend::flow\_control::Jmp@{c\_parser\_frontend::flow\_control::Jmp}}
+\doxysubsubsection{\texorpdfstring{AddMainSentence()}{AddMainSentence()}}
+{\footnotesize\ttfamily virtual bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Jmp\+::\+Add\+Main\+Sentence (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&}]{sentence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+向流程语句主体中中添加单条语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentence} & ：待添加的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回添加是否成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：sentence不能添加到流程控制语句中\\
+\hline
+\end{DoxyRetVals}
+1.对do-\/while/while/for调用该函数时添加到循环体中 2.对if语句调用时添加到if成立时执行的语句内 3.对if-\/else语句调用时添加到else成立时执行的语句内 4.对switch语句调用时添加到switch主体内 \begin{DoxyNote}{注解}
+添加语句时添加到已有的语句后 
+\end{DoxyNote}
+防止警告
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface_a8de24ac57738cf0fdd5bb48b8b05df4b}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}.
+
+
+
+在文件 flow\+\_\+control.\+h 第 180 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1Jmp_a866c4920ebd8150665c6af3f721c781d}\label{classc__parser__frontend_1_1flow__control_1_1Jmp_a866c4920ebd8150665c6af3f721c781d}} 
+\index{c\_parser\_frontend::flow\_control::Jmp@{c\_parser\_frontend::flow\_control::Jmp}!AddMainSentences@{AddMainSentences}}
+\index{AddMainSentences@{AddMainSentences}!c\_parser\_frontend::flow\_control::Jmp@{c\_parser\_frontend::flow\_control::Jmp}}
+\doxysubsubsection{\texorpdfstring{AddMainSentences()}{AddMainSentences()}}
+{\footnotesize\ttfamily virtual bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Jmp\+::\+Add\+Main\+Sentences (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&}]{sentences }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+向流程语句主体中中添加多条语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentences} & ：待添加的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回添加是否成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：sentences中含有不能添加到流程控制语句的语句\\
+\hline
+\end{DoxyRetVals}
+1.对do-\/while/while/for调用该函数时添加到循环体中 2.对if语句调用时添加到if成立时执行的语句内 3.对if-\/else语句调用时添加到else成立时执行的语句内 4.对switch语句调用时添加到switch主体内 \begin{DoxyNote}{注解}
+添加语句时添加到已有的语句后 
+\end{DoxyNote}
+防止警告
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface_a3a89f0b4c77f952a520a58a7107e6787}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}.
+
+
+
+在文件 flow\+\_\+control.\+h 第 186 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1Jmp_a640b0efd0cac415074bf9daed2deed8b}\label{classc__parser__frontend_1_1flow__control_1_1Jmp_a640b0efd0cac415074bf9daed2deed8b}} 
+\index{c\_parser\_frontend::flow\_control::Jmp@{c\_parser\_frontend::flow\_control::Jmp}!GetTargetLabel@{GetTargetLabel}}
+\index{GetTargetLabel@{GetTargetLabel}!c\_parser\_frontend::flow\_control::Jmp@{c\_parser\_frontend::flow\_control::Jmp}}
+\doxysubsubsection{\texorpdfstring{GetTargetLabel()}{GetTargetLabel()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}}\& c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Jmp\+::\+Get\+Target\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取跳转语句绑定的标签 
+
+\begin{DoxyReturn}{返回}
+返回跳转语句绑定的标签的const引用 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 195 行定义.
+
+
+
+引用了 target\+\_\+label\+\_\+.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1Jmp_ac69f3c23f5b961c2115f5bceae0fdded}\label{classc__parser__frontend_1_1flow__control_1_1Jmp_ac69f3c23f5b961c2115f5bceae0fdded}} 
+\index{c\_parser\_frontend::flow\_control::Jmp@{c\_parser\_frontend::flow\_control::Jmp}!target\_label\_@{target\_label\_}}
+\index{target\_label\_@{target\_label\_}!c\_parser\_frontend::flow\_control::Jmp@{c\_parser\_frontend::flow\_control::Jmp}}
+\doxysubsubsection{\texorpdfstring{target\_label\_}{target\_label\_}}
+{\footnotesize\ttfamily std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Jmp\+::target\+\_\+label\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+跳转指令要跳到的标签 
+
+
+
+在文件 flow\+\_\+control.\+h 第 199 行定义.
+
+
+
+被这些函数引用 Get\+Target\+Label().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{flow__control_8h}{flow\+\_\+control.\+h}}\end{DoxyCompactItemize}

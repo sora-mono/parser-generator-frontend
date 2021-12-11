@@ -1,0 +1,12 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::GetSyntaxAnalysisTableEntry" name="frontend::generator::syntax_generator::SyntaxGenerator::GetSyntaxAnalysisTableEntry">
+<area shape="rect" id="node1" title="获取语法分析表条目" alt="" coords="1625,129,1888,200"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1353,5,1562,76"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="979,42,1289,127"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,129,643,200"/>
+<area shape="rect" id="node7" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a8740440629885e53b9b9c81194c91fd6" title="分类非终结产生式作为向前看符号时下动作相同的语法分析表条目" alt="" coords="1337,203,1577,273"/>
+<area shape="rect" id="node10" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aed97b43f50879b73c7b484e06a900e9a" title="分类在终结产生式作为向前看符号时下动作相同的语法分析表条目" alt="" coords="1337,297,1577,368"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,129,355,200"/>
+<area shape="rect" id="node6" href="$Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,151,60,178"/>
+<area shape="rect" id="node8" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a86d61d1c07c59a09eee26e95899b4d30" title="分类等价的语法分析表条目" alt="" coords="1014,203,1254,273"/>
+<area shape="rect" id="node9" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ad8c84b2ded36df7c756b650b66fa685a" title="合并语法分析表内等价条目以缩减语法分析表大小" alt="" coords="691,203,931,273"/>
+</map>

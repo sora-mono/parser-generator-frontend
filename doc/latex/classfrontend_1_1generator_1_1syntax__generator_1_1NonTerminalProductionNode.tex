@@ -1,0 +1,676 @@
+\hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{}\doxysection{frontend\+::generator\+::syntax\+\_\+generator\+::Non\+Terminal\+Production\+Node类 参考}
+\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+
+
+表示非终结产生式  
+
+
+
+
+{\ttfamily \#include $<$production\+\_\+node.\+h$>$}
+
+
+
+类 frontend\+::generator\+::syntax\+\_\+generator\+::Non\+Terminal\+Production\+Node 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode__inherit__graph}
+\end{center}
+\end{figure}
+
+
+frontend\+::generator\+::syntax\+\_\+generator\+::Non\+Terminal\+Production\+Node 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType}{Production\+Body\+Type}}
+\begin{DoxyCompactList}\small\item\em 表示单个非终结产生式体 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_acd446a00fefd88a64936df99d07ad857}{Non\+Terminal\+Production\+Node}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}} symbol\+\_\+id)
+\item 
+{\footnotesize template$<$class Id\+Type $>$ }\\\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a5e61eb0b1178a4424dd965c9bcede6eb}{Non\+Terminal\+Production\+Node}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}} symbol\+\_\+id, Id\+Type \&\&body)
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a277e90f185a29f4b944479269f242cbf}{Non\+Terminal\+Production\+Node}} (const \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{Non\+Terminal\+Production\+Node}} \&)=delete
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{Non\+Terminal\+Production\+Node}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a85ae88d55a2c72a087529c9bedae7a88}{operator=}} (const \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{Non\+Terminal\+Production\+Node}} \&)=delete
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_ada03380d41061066554e1cba94d30555}{Non\+Terminal\+Production\+Node}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{Non\+Terminal\+Production\+Node}} \&\&node)
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{Non\+Terminal\+Production\+Node}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_adad0c7645865e904f017fa0eb8a3c3f6}{operator=}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{Non\+Terminal\+Production\+Node}} \&\&node)
+\item 
+virtual \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{Production\+Node\+Id}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a665b8d003098bd29e75de8bc30bb1f84}{Get\+Production\+Node\+In\+Body}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} production\+\_\+body\+\_\+id, \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a947b9e3a6819c29acb6bfca1cfbdf281}{Next\+Word\+To\+Shift\+Index}} next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index) const override
+\begin{DoxyCompactList}\small\item\em 获取产生式体内的产生式 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Id\+Type $>$ }\\\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a26022130e2f6beaa669440bd117eaeea}{Add\+Body}} (Id\+Type \&\&body, \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_af8388c16e5ec8eb818f984e81d014de7}{Process\+Function\+Class\+Id}} class\+\_\+for\+\_\+reduct\+\_\+id)
+\begin{DoxyCompactList}\small\item\em 添加一个产生式体 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType}{Production\+Body\+Type}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a44bb376a95fb05539fede36f8ffd94d4}{Get\+Production\+Body}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} production\+\_\+body\+\_\+id) const
+\begin{DoxyCompactList}\small\item\em 获取产生式的一个体 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_ab3559269ceefd775239f5861344830ef}{Set\+Body\+Process\+Function\+Class\+Id}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} body\+\_\+id, \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_af8388c16e5ec8eb818f984e81d014de7}{Process\+Function\+Class\+Id}} class\+\_\+for\+\_\+reduct\+\_\+id)
+\begin{DoxyCompactList}\small\item\em 设置给定产生式体\+I\+D规约使用的对象的\+ID \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType}{Production\+Body\+Type}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4142e3ce887dd6fe46021459c4e35e27}{Get\+Body}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} body\+\_\+id) const
+\begin{DoxyCompactList}\small\item\em 获取产生式体 \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType}{Production\+Body\+Type}} $>$ \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a72c90ff7ee70f81e41c8103afdbceb12}{Get\+All\+Body}} () const
+\begin{DoxyCompactList}\small\item\em 获取全部产生式体 \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} $>$ \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a32981dd5c4ce5f2278b72131ec9ee39d}{Get\+All\+Body\+Ids}} () const
+\begin{DoxyCompactList}\small\item\em 获取全部有效的产生式体\+ID \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a8cda189c533c6969ca0bb3ff973691a2}{Set\+Production\+Should\+Not\+Empty\+Reduct}} ()
+\begin{DoxyCompactList}\small\item\em 设置该产生式不可以空规约 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a6c237f58931d763a4e48f5f4bea0ac26}{Set\+Production\+Could\+Be\+Empty\+Redut}} ()
+\begin{DoxyCompactList}\small\item\em 设置该产生式可以空规约 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4feb296992b7b970488887a2c6904de4}{Could\+Be\+Empty\+Reduct}} () const
+\begin{DoxyCompactList}\small\item\em 查询该产生式是否可以空规约 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a8c1d7d05497a2f15efb1379cd03be36d}{Add\+Production\+Item\+Belong\+To\+Production\+Item\+Set\+Id}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} body\+\_\+id, \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a947b9e3a6819c29acb6bfca1cfbdf281}{Next\+Word\+To\+Shift\+Index}} next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index, \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_ad1086df60fade324297d10771daa1066}{Production\+Item\+Set\+Id}} production\+\_\+item\+\_\+set\+\_\+id)
+\begin{DoxyCompactList}\small\item\em 添加产生式中某项所属的项集\+ID \end{DoxyCompactList}\item 
+const std\+::list$<$ \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_ad1086df60fade324297d10771daa1066}{Production\+Item\+Set\+Id}} $>$ \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2f7af2f31b9cf5b1327a8514faa6f730}{Get\+Production\+Item\+Set\+Id\+From\+Production\+Item}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} body\+\_\+id, \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a947b9e3a6819c29acb6bfca1cfbdf281}{Next\+Word\+To\+Shift\+Index}} next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index)
+\begin{DoxyCompactList}\small\item\em 获取指定项所属的全部项集的\+ID \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_af8388c16e5ec8eb818f984e81d014de7}{Process\+Function\+Class\+Id}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2da2c02fb9e05291c9dcc1401d865586}{Get\+Body\+Process\+Function\+Class\+Id}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} body\+\_\+id) const
+\begin{DoxyCompactList}\small\item\em 获取指定产生式体包装规约用函数的类的实例化对象\+ID \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType}{Production\+Body\+Type}} $>$ \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_ab7240559621dcc56196f745a05939f91}{nonterminal\+\_\+bodys\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 存储产生式体 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_ac326ecaba24b6b02be0a4080523ba185}{could\+\_\+empty\+\_\+reduct\+\_\+}} = false
+\begin{DoxyCompactList}\small\item\em 标志该产生式是否可能为空 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+表示非终结产生式 
+
+在文件 production\+\_\+node.\+h 第 376 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_acd446a00fefd88a64936df99d07ad857}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_acd446a00fefd88a64936df99d07ad857}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!NonTerminalProductionNode@{NonTerminalProductionNode}}
+\index{NonTerminalProductionNode@{NonTerminalProductionNode}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{NonTerminalProductionNode()}{NonTerminalProductionNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Non\+Terminal\+Production\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}}}]{symbol\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 production\+\_\+node.\+h 第 406 行定义.
+
+
+
+引用了 frontend\+::generator\+::syntax\+\_\+generator\+::k\+Non\+Terminal\+Node.
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a5e61eb0b1178a4424dd965c9bcede6eb}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a5e61eb0b1178a4424dd965c9bcede6eb}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!NonTerminalProductionNode@{NonTerminalProductionNode}}
+\index{NonTerminalProductionNode@{NonTerminalProductionNode}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{NonTerminalProductionNode()}{NonTerminalProductionNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class Id\+Type $>$ \\
+frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Non\+Terminal\+Production\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}}}]{symbol\+\_\+id,  }\item[{Id\+Type \&\&}]{body }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 production\+\_\+node.\+h 第 409 行定义.
+
+
+
+引用了 frontend\+::generator\+::syntax\+\_\+generator\+::k\+Non\+Terminal\+Node.
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a277e90f185a29f4b944479269f242cbf}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a277e90f185a29f4b944479269f242cbf}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!NonTerminalProductionNode@{NonTerminalProductionNode}}
+\index{NonTerminalProductionNode@{NonTerminalProductionNode}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{NonTerminalProductionNode()}{NonTerminalProductionNode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Non\+Terminal\+Production\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{Non\+Terminal\+Production\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_ada03380d41061066554e1cba94d30555}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_ada03380d41061066554e1cba94d30555}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!NonTerminalProductionNode@{NonTerminalProductionNode}}
+\index{NonTerminalProductionNode@{NonTerminalProductionNode}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{NonTerminalProductionNode()}{NonTerminalProductionNode()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Non\+Terminal\+Production\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{Non\+Terminal\+Production\+Node}} \&\&}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 production\+\_\+node.\+h 第 415 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a26022130e2f6beaa669440bd117eaeea}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a26022130e2f6beaa669440bd117eaeea}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!AddBody@{AddBody}}
+\index{AddBody@{AddBody}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{AddBody()}{AddBody()}}
+{\footnotesize\ttfamily template$<$class Id\+Type $>$ \\
+\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Add\+Body (\begin{DoxyParamCaption}\item[{Id\+Type \&\&}]{body,  }\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_af8388c16e5ec8eb818f984e81d014de7}{Process\+Function\+Class\+Id}}}]{class\+\_\+for\+\_\+reduct\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+添加一个产生式体 
+
+
+\begin{DoxyTemplParams}{模板参数}
+{\em Id\+Type} & 存储产生式体中各产生式\+I\+D的容器，仅支持vector \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em body} & ：待添加的产生式体 \\
+\hline
+\mbox{\texttt{ in}}  & {\em class\+\_\+for\+\_\+reduct\+\_\+id} & ：包装规约该产生式体的函数的类的实例化对象\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回该产生式体在非终结节点内的\+ID 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+body内的各产生式\+I\+D按书写顺序排列 该函数无检测重复功能 
+\end{DoxyNote}
+
+
+在文件 syntax\+\_\+generator.\+h 第 926 行定义.
+
+
+
+引用了 nonterminal\+\_\+bodys\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Non\+Terminal\+Production().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a26022130e2f6beaa669440bd117eaeea_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a8c1d7d05497a2f15efb1379cd03be36d}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a8c1d7d05497a2f15efb1379cd03be36d}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!AddProductionItemBelongToProductionItemSetId@{AddProductionItemBelongToProductionItemSetId}}
+\index{AddProductionItemBelongToProductionItemSetId@{AddProductionItemBelongToProductionItemSetId}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{AddProductionItemBelongToProductionItemSetId()}{AddProductionItemBelongToProductionItemSetId()}}
+{\footnotesize\ttfamily void frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Add\+Production\+Item\+Belong\+To\+Production\+Item\+Set\+Id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}}}]{body\+\_\+id,  }\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a947b9e3a6819c29acb6bfca1cfbdf281}{Next\+Word\+To\+Shift\+Index}}}]{next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index,  }\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_ad1086df60fade324297d10771daa1066}{Production\+Item\+Set\+Id}}}]{production\+\_\+item\+\_\+set\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+添加产生式中某项所属的项集\+ID 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em body\+\_\+id} & ：待添加项所属的产生式体\+ID \\
+\hline
+\mbox{\texttt{ in}}  & {\em next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index} & ：指向该项下一个移入的单词的位置 \\
+\hline
+\mbox{\texttt{ in}}  & {\em production\+\_\+item\+\_\+set\+\_\+id} & ：该项所属的项集\+ID\\
+\hline
+\end{DoxyParams}
+body\+\_\+id与next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index共同指定要添加所属项集\+I\+D的项 \begin{DoxyNote}{注解}
+无去重功能，要求不与已添加过的的项集\+I\+D重复 
+\end{DoxyNote}
+
+
+在文件 production\+\_\+node.\+cpp 第 48 行定义.
+
+
+
+引用了 nonterminal\+\_\+bodys\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Production\+Item\+Belong\+To\+Production\+Item\+Set\+Id().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a8c1d7d05497a2f15efb1379cd03be36d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4feb296992b7b970488887a2c6904de4}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4feb296992b7b970488887a2c6904de4}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!CouldBeEmptyReduct@{CouldBeEmptyReduct}}
+\index{CouldBeEmptyReduct@{CouldBeEmptyReduct}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{CouldBeEmptyReduct()}{CouldBeEmptyReduct()}}
+{\footnotesize\ttfamily bool frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Could\+Be\+Empty\+Reduct (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+查询该产生式是否可以空规约 
+
+\begin{DoxyReturn}{返回}
+返回该产生式是否可以空规约 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：该产生式可以空规约 \\
+\hline
+{\em false} & ：该产生式不可以空规约 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 production\+\_\+node.\+h 第 486 行定义.
+
+
+
+引用了 could\+\_\+empty\+\_\+reduct\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Production\+Item\+Set\+Closure().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4feb296992b7b970488887a2c6904de4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a72c90ff7ee70f81e41c8103afdbceb12}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a72c90ff7ee70f81e41c8103afdbceb12}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!GetAllBody@{GetAllBody}}
+\index{GetAllBody@{GetAllBody}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{GetAllBody()}{GetAllBody()}}
+{\footnotesize\ttfamily const std\+::vector$<$\mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType}{Production\+Body\+Type}}$>$\& frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Get\+All\+Body (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取全部产生式体 
+
+\begin{DoxyReturn}{返回}
+返回存储产生式体的容器const引用 
+\end{DoxyReturn}
+
+
+在文件 production\+\_\+node.\+h 第 472 行定义.
+
+
+
+引用了 nonterminal\+\_\+bodys\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Non\+Terminal\+Node\+First\+Node\+Ids().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a72c90ff7ee70f81e41c8103afdbceb12_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a32981dd5c4ce5f2278b72131ec9ee39d}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a32981dd5c4ce5f2278b72131ec9ee39d}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!GetAllBodyIds@{GetAllBodyIds}}
+\index{GetAllBodyIds@{GetAllBodyIds}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{GetAllBodyIds()}{GetAllBodyIds()}}
+{\footnotesize\ttfamily std\+::vector$<$ \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} $>$ frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Get\+All\+Body\+Ids (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取全部有效的产生式体\+ID 
+
+\begin{DoxyReturn}{返回}
+返回存储全部有效的产生式体\+I\+D的vector容器 
+\end{DoxyReturn}
+
+
+在文件 production\+\_\+node.\+cpp 第 40 行定义.
+
+
+
+引用了 nonterminal\+\_\+bodys\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Format\+Production\+Bodys() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Production\+Item\+Set\+Closure().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a32981dd5c4ce5f2278b72131ec9ee39d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4142e3ce887dd6fe46021459c4e35e27}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4142e3ce887dd6fe46021459c4e35e27}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!GetBody@{GetBody}}
+\index{GetBody@{GetBody}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{GetBody()}{GetBody()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType}{Production\+Body\+Type}}\& frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Get\+Body (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}}}]{body\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取产生式体 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em body\+\_\+id} & ：待获取的产生式体\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回获取到的产生式体数据结构const引用 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+body\+\_\+id必须对应有效的产生式体 
+\end{DoxyNote}
+
+
+在文件 production\+\_\+node.\+h 第 467 行定义.
+
+
+
+引用了 nonterminal\+\_\+bodys\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Format\+Production\+Item(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Format\+Single\+Production\+Body(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Production\+Body() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Production\+Item\+Set\+Closure().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4142e3ce887dd6fe46021459c4e35e27_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2da2c02fb9e05291c9dcc1401d865586}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2da2c02fb9e05291c9dcc1401d865586}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!GetBodyProcessFunctionClassId@{GetBodyProcessFunctionClassId}}
+\index{GetBodyProcessFunctionClassId@{GetBodyProcessFunctionClassId}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{GetBodyProcessFunctionClassId()}{GetBodyProcessFunctionClassId()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_af8388c16e5ec8eb818f984e81d014de7}{Process\+Function\+Class\+Id}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Get\+Body\+Process\+Function\+Class\+Id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}}}]{body\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取指定产生式体包装规约用函数的类的实例化对象\+ID 
+
+\begin{DoxyReturn}{返回}
+返回包装规约用函数的类的实例化对象\+ID 
+\end{DoxyReturn}
+
+
+在文件 production\+\_\+node.\+h 第 509 行定义.
+
+
+
+引用了 nonterminal\+\_\+bodys\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Process\+Function\+Class().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2da2c02fb9e05291c9dcc1401d865586_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a44bb376a95fb05539fede36f8ffd94d4}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a44bb376a95fb05539fede36f8ffd94d4}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!GetProductionBody@{GetProductionBody}}
+\index{GetProductionBody@{GetProductionBody}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{GetProductionBody()}{GetProductionBody()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType}{Production\+Body\+Type}}\& frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Get\+Production\+Body (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}}}]{production\+\_\+body\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取产生式的一个体 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em production\+\_\+body\+\_\+id} & ：要获取的产生式体\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回产生式体的const引用 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+production\+\_\+body\+\_\+id必须对应存在的产生式体 
+\end{DoxyNote}
+
+
+在文件 production\+\_\+node.\+h 第 450 行定义.
+
+
+
+引用了 nonterminal\+\_\+bodys\+\_\+.
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2f7af2f31b9cf5b1327a8514faa6f730}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2f7af2f31b9cf5b1327a8514faa6f730}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!GetProductionItemSetIdFromProductionItem@{GetProductionItemSetIdFromProductionItem}}
+\index{GetProductionItemSetIdFromProductionItem@{GetProductionItemSetIdFromProductionItem}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{GetProductionItemSetIdFromProductionItem()}{GetProductionItemSetIdFromProductionItem()}}
+{\footnotesize\ttfamily const std\+::list$<$\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_ad1086df60fade324297d10771daa1066}{Production\+Item\+Set\+Id}}$>$\& frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Get\+Production\+Item\+Set\+Id\+From\+Production\+Item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}}}]{body\+\_\+id,  }\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a947b9e3a6819c29acb6bfca1cfbdf281}{Next\+Word\+To\+Shift\+Index}}}]{next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取指定项所属的全部项集的\+ID 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em body\+\_\+id} & ：指定项所属的产生式体\+ID \\
+\hline
+\mbox{\texttt{ in}}  & {\em next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index} & ：指向该项下一个移入单词的位置 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回存储该项所属的全部项集\+I\+D的容器 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+body\+\_\+id与next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index共同指定一个项 
+\end{DoxyNote}
+
+
+在文件 production\+\_\+node.\+h 第 502 行定义.
+
+
+
+引用了 nonterminal\+\_\+bodys\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Production\+Item\+Set\+Id\+From\+Production\+Item().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2f7af2f31b9cf5b1327a8514faa6f730_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a665b8d003098bd29e75de8bc30bb1f84}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a665b8d003098bd29e75de8bc30bb1f84}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!GetProductionNodeInBody@{GetProductionNodeInBody}}
+\index{GetProductionNodeInBody@{GetProductionNodeInBody}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{GetProductionNodeInBody()}{GetProductionNodeInBody()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{Production\+Node\+Id}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Get\+Production\+Node\+In\+Body (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}}}]{production\+\_\+body\+\_\+id,  }\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a947b9e3a6819c29acb6bfca1cfbdf281}{Next\+Word\+To\+Shift\+Index}}}]{next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取产生式体内的产生式 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em production\+\_\+body\+\_\+id} & ：待获取的产生式体\+ID \\
+\hline
+\mbox{\texttt{ in}}  & {\em next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index} & ：待获取的子产生式位置 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{注意}
+终结节点调用该函数时production\+\_\+body\+\_\+id必须为0 next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index不是0时则返回\+Next\+Word\+To\+Shift\+Index\+::\+Invalid\+Id() 
+\end{DoxyAttention}
+
+
+实现了 \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a59f98cd7ca7b0906985c8bc053e92e65}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node}}.
+
+
+
+在文件 production\+\_\+node.\+cpp 第 63 行定义.
+
+
+
+引用了 nonterminal\+\_\+bodys\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Spread\+Look\+Forward\+Symbol\+And\+Construct\+Syntax\+Analysis\+Table\+Entry().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a665b8d003098bd29e75de8bc30bb1f84_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a85ae88d55a2c72a087529c9bedae7a88}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a85ae88d55a2c72a087529c9bedae7a88}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!operator=@{operator=}}
+\index{operator=@{operator=}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{Non\+Terminal\+Production\+Node}}\& frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{Non\+Terminal\+Production\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_adad0c7645865e904f017fa0eb8a3c3f6}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_adad0c7645865e904f017fa0eb8a3c3f6}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!operator=@{operator=}}
+\index{operator=@{operator=}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{Non\+Terminal\+Production\+Node}}\& frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{Non\+Terminal\+Production\+Node}} \&\&}]{node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 production\+\_\+node.\+h 第 419 行定义.
+
+
+
+引用了 could\+\_\+empty\+\_\+reduct\+\_\+, nonterminal\+\_\+bodys\+\_\+ , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::operator=().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_adad0c7645865e904f017fa0eb8a3c3f6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_ab3559269ceefd775239f5861344830ef}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_ab3559269ceefd775239f5861344830ef}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!SetBodyProcessFunctionClassId@{SetBodyProcessFunctionClassId}}
+\index{SetBodyProcessFunctionClassId@{SetBodyProcessFunctionClassId}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{SetBodyProcessFunctionClassId()}{SetBodyProcessFunctionClassId()}}
+{\footnotesize\ttfamily void frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Set\+Body\+Process\+Function\+Class\+Id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}}}]{body\+\_\+id,  }\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_af8388c16e5ec8eb818f984e81d014de7}{Process\+Function\+Class\+Id}}}]{class\+\_\+for\+\_\+reduct\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置给定产生式体\+I\+D规约使用的对象的\+ID 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em body\+\_\+id} & ：待设置规约用对象\+I\+D的产生式体\+ID \\
+\hline
+\mbox{\texttt{ in}}  & {\em class\+\_\+for\+\_\+reduct\+\_\+id} & ：待设置的规约用对象\+ID \\
+\hline
+\end{DoxyParams}
+
+
+在文件 production\+\_\+node.\+h 第 458 行定义.
+
+
+
+引用了 nonterminal\+\_\+bodys\+\_\+.
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a6c237f58931d763a4e48f5f4bea0ac26}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a6c237f58931d763a4e48f5f4bea0ac26}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!SetProductionCouldBeEmptyRedut@{SetProductionCouldBeEmptyRedut}}
+\index{SetProductionCouldBeEmptyRedut@{SetProductionCouldBeEmptyRedut}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{SetProductionCouldBeEmptyRedut()}{SetProductionCouldBeEmptyRedut()}}
+{\footnotesize\ttfamily void frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Set\+Production\+Could\+Be\+Empty\+Redut (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置该产生式可以空规约 
+
+
+
+在文件 production\+\_\+node.\+h 第 481 行定义.
+
+
+
+引用了 could\+\_\+empty\+\_\+reduct\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Set\+Non\+Terminal\+Node\+Could\+Empty\+Reduct().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a6c237f58931d763a4e48f5f4bea0ac26_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a8cda189c533c6969ca0bb3ff973691a2}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a8cda189c533c6969ca0bb3ff973691a2}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!SetProductionShouldNotEmptyReduct@{SetProductionShouldNotEmptyReduct}}
+\index{SetProductionShouldNotEmptyReduct@{SetProductionShouldNotEmptyReduct}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{SetProductionShouldNotEmptyReduct()}{SetProductionShouldNotEmptyReduct()}}
+{\footnotesize\ttfamily void frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Set\+Production\+Should\+Not\+Empty\+Reduct (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置该产生式不可以空规约 
+
+
+
+在文件 production\+\_\+node.\+h 第 479 行定义.
+
+
+
+引用了 could\+\_\+empty\+\_\+reduct\+\_\+.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_ac326ecaba24b6b02be0a4080523ba185}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_ac326ecaba24b6b02be0a4080523ba185}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!could\_empty\_reduct\_@{could\_empty\_reduct\_}}
+\index{could\_empty\_reduct\_@{could\_empty\_reduct\_}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{could\_empty\_reduct\_}{could\_empty\_reduct\_}}
+{\footnotesize\ttfamily bool frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::could\+\_\+empty\+\_\+reduct\+\_\+ = false\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+标志该产生式是否可能为空 
+
+
+
+在文件 production\+\_\+node.\+h 第 519 行定义.
+
+
+
+被这些函数引用 Could\+Be\+Empty\+Reduct(), operator=(), Set\+Production\+Could\+Be\+Empty\+Redut() , 以及 Set\+Production\+Should\+Not\+Empty\+Reduct().
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_ab7240559621dcc56196f745a05939f91}\label{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_ab7240559621dcc56196f745a05939f91}} 
+\index{frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}!nonterminal\_bodys\_@{nonterminal\_bodys\_}}
+\index{nonterminal\_bodys\_@{nonterminal\_bodys\_}!frontend::generator::syntax\_generator::NonTerminalProductionNode@{frontend::generator::syntax\_generator::NonTerminalProductionNode}}
+\doxysubsubsection{\texorpdfstring{nonterminal\_bodys\_}{nonterminal\_bodys\_}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType}{Production\+Body\+Type}}$>$ frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::nonterminal\+\_\+bodys\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存储产生式体 
+
+
+
+在文件 production\+\_\+node.\+h 第 517 行定义.
+
+
+
+被这些函数引用 Add\+Body(), Add\+Production\+Item\+Belong\+To\+Production\+Item\+Set\+Id(), Get\+All\+Body(), Get\+All\+Body\+Ids(), Get\+Body(), Get\+Body\+Process\+Function\+Class\+Id(), Get\+Production\+Body(), Get\+Production\+Item\+Set\+Id\+From\+Production\+Item(), Get\+Production\+Node\+In\+Body(), operator=() , 以及 Set\+Body\+Process\+Function\+Class\+Id().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Generator/\+Syntax\+Generator/\mbox{\hyperlink{production__node_8h}{production\+\_\+node.\+h}}\item 
+src/\+Generator/\+Syntax\+Generator/\mbox{\hyperlink{production__node_8cpp}{production\+\_\+node.\+cpp}}\item 
+src/\+Generator/\+Syntax\+Generator/\mbox{\hyperlink{syntax__generator_8h}{syntax\+\_\+generator.\+h}}\end{DoxyCompactItemize}

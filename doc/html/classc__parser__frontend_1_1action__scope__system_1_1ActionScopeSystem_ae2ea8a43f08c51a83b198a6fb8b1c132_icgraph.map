@@ -1,0 +1,6 @@
+<map id="c_parser_frontend::action_scope_system::ActionScopeSystem::DefineVariety" name="c_parser_frontend::action_scope_system::ActionScopeSystem::DefineVariety">
+<area shape="rect" id="node1" title="定义变量" alt="" coords="537,31,704,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1CParserFrontend.html#a2831b7890e9106f1529849d9514f748c" title="定义变量" alt="" coords="265,5,489,47"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#ac44ad28c95778bb6ca7fc51eee472f80" title="设置当前待构建函数" alt="" coords="290,71,465,141"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1CParserFrontend.html#aa27c730d6112f2cf35380d8c98520349" title="设置当前待构建函数" alt="" coords="5,78,217,134"/>
+</map>

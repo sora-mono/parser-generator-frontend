@@ -1,0 +1,121 @@
+\hypertarget{namespacefrontend_1_1common}{}\doxysection{frontend\+::common 命名空间参考}
+\label{namespacefrontend_1_1common}\index{frontend::common@{frontend::common}}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1BaseIdWrapper}{Base\+Id\+Wrapper}}
+\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper}{Explicit\+Id\+Wrapper}}
+\begin{DoxyCompactList}\small\item\em 强制显式调用构造函数且使用默认无效值版\+Wrapper \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapperCustomizeInvalidValue}{Explicit\+Id\+Wrapper\+Customize\+Invalid\+Value}}
+\begin{DoxyCompactList}\small\item\em 强制显示调用构造函数不使用默认无效值版 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1MultimapObjectManager}{Multimap\+Object\+Manager}}
+\begin{DoxyCompactList}\small\item\em 管理对象，允许多个\+I\+D对应一个对象 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1NonExplicitIdWrapper}{Non\+Explicit\+Id\+Wrapper}}
+\begin{DoxyCompactList}\small\item\em 不强制显示调用构造函数使用默认无效值版 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1NonExplicitIdWrapperCustomizeInvalidValue}{Non\+Explicit\+Id\+Wrapper\+Customize\+Invalid\+Value}}
+\begin{DoxyCompactList}\small\item\em 不强制显示调用构造函数不使用默认无效值版 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}
+\begin{DoxyCompactList}\small\item\em 管理对象，对象与\+I\+D一一对应 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{Unordered\+Struct\+Manager}}
+\begin{DoxyCompactList}\small\item\em 建立stl未提供hash方法的结构的哈希存储,通过\+I\+D一一标识对象 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{枚举}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{Operator\+Associatity\+Type}} \{ \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73ab20d13decb9e3090c3d9048b836c268c}{Operator\+Associatity\+Type\+::k\+Left\+To\+Right}}, 
+\mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73a1cf7b134fc011bb46fb7426e12f14ae5}{Operator\+Associatity\+Type\+::k\+Right\+To\+Left}}
+ \}
+\begin{DoxyCompactList}\small\item\em 运算符结合类型：左结合，右结合 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+constexpr const char $\ast$ \mbox{\hyperlink{namespacefrontend_1_1common_a54e591f46dcd845c569b8041180873e8}{k\+Syntax\+Config\+File\+Name}} = \char`\"{}syntax\+\_\+config.\+conf\char`\"{}
+\begin{DoxyCompactList}\small\item\em 语法分析机配置文件名 \end{DoxyCompactList}\item 
+constexpr const char $\ast$ \mbox{\hyperlink{namespacefrontend_1_1common_a641ec5f9e683e77530e166d8beca9dd6}{k\+Dfa\+Config\+File\+Name}} = \char`\"{}dfa\+\_\+config.\+conf\char`\"{}
+\begin{DoxyCompactList}\small\item\em 词法分析机配置文件名 \end{DoxyCompactList}\item 
+constexpr size\+\_\+t \mbox{\hyperlink{namespacefrontend_1_1common_a0d24b3a81315fdd89e6968ac380afdfb}{k\+Char\+Num}} = C\+H\+A\+R\+\_\+\+M\+AX -\/ C\+H\+A\+R\+\_\+\+M\+IN + 1
+\begin{DoxyCompactList}\small\item\em char可能取值的数目 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{枚举类型说明}
+\mbox{\Hypertarget{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}\label{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}} 
+\index{frontend::common@{frontend::common}!OperatorAssociatityType@{OperatorAssociatityType}}
+\index{OperatorAssociatityType@{OperatorAssociatityType}!frontend::common@{frontend::common}}
+\doxysubsubsection{\texorpdfstring{OperatorAssociatityType}{OperatorAssociatityType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{frontend\+::common\+::\+Operator\+Associatity\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+运算符结合类型：左结合，右结合 
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLeftToRight@{kLeftToRight}!frontend::common@{frontend::common}}\index{frontend::common@{frontend::common}!kLeftToRight@{kLeftToRight}}}\mbox{\Hypertarget{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73ab20d13decb9e3090c3d9048b836c268c}\label{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73ab20d13decb9e3090c3d9048b836c268c}} 
+k\+Left\+To\+Right&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kRightToLeft@{kRightToLeft}!frontend::common@{frontend::common}}\index{frontend::common@{frontend::common}!kRightToLeft@{kRightToLeft}}}\mbox{\Hypertarget{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73a1cf7b134fc011bb46fb7426e12f14ae5}\label{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73a1cf7b134fc011bb46fb7426e12f14ae5}} 
+k\+Right\+To\+Left&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+在文件 common.\+h 第 18 行定义.
+
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{namespacefrontend_1_1common_a0d24b3a81315fdd89e6968ac380afdfb}\label{namespacefrontend_1_1common_a0d24b3a81315fdd89e6968ac380afdfb}} 
+\index{frontend::common@{frontend::common}!kCharNum@{kCharNum}}
+\index{kCharNum@{kCharNum}!frontend::common@{frontend::common}}
+\doxysubsubsection{\texorpdfstring{kCharNum}{kCharNum}}
+{\footnotesize\ttfamily constexpr size\+\_\+t frontend\+::common\+::k\+Char\+Num = C\+H\+A\+R\+\_\+\+M\+AX -\/ C\+H\+A\+R\+\_\+\+M\+IN + 1\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+char可能取值的数目 
+
+
+
+在文件 common.\+h 第 15 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Transform\+Array\+Manager$<$ frontend\+::common\+::\+Explicit\+Id\+Wrapper $>$\+::operator\mbox{[}$\,$\mbox{]}().
+
+\mbox{\Hypertarget{namespacefrontend_1_1common_a641ec5f9e683e77530e166d8beca9dd6}\label{namespacefrontend_1_1common_a641ec5f9e683e77530e166d8beca9dd6}} 
+\index{frontend::common@{frontend::common}!kDfaConfigFileName@{kDfaConfigFileName}}
+\index{kDfaConfigFileName@{kDfaConfigFileName}!frontend::common@{frontend::common}}
+\doxysubsubsection{\texorpdfstring{kDfaConfigFileName}{kDfaConfigFileName}}
+{\footnotesize\ttfamily constexpr const char$\ast$ frontend\+::common\+::k\+Dfa\+Config\+File\+Name = \char`\"{}dfa\+\_\+config.\+conf\char`\"{}\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+词法分析机配置文件名 
+
+
+
+在文件 common.\+h 第 13 行定义.
+
+
+
+被这些函数引用 frontend\+::parser\+::dfa\+\_\+parser\+::\+Dfa\+Parser\+::\+Load\+Config() , 以及 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Save\+Config().
+
+\mbox{\Hypertarget{namespacefrontend_1_1common_a54e591f46dcd845c569b8041180873e8}\label{namespacefrontend_1_1common_a54e591f46dcd845c569b8041180873e8}} 
+\index{frontend::common@{frontend::common}!kSyntaxConfigFileName@{kSyntaxConfigFileName}}
+\index{kSyntaxConfigFileName@{kSyntaxConfigFileName}!frontend::common@{frontend::common}}
+\doxysubsubsection{\texorpdfstring{kSyntaxConfigFileName}{kSyntaxConfigFileName}}
+{\footnotesize\ttfamily constexpr const char$\ast$ frontend\+::common\+::k\+Syntax\+Config\+File\+Name = \char`\"{}syntax\+\_\+config.\+conf\char`\"{}\hspace{0.3cm}{\ttfamily [constexpr]}}
+
+
+
+语法分析机配置文件名 
+
+
+
+在文件 common.\+h 第 11 行定义.
+
+
+
+被这些函数引用 frontend\+::parser\+::syntax\+\_\+parser\+::\+Syntax\+Parser\+::\+Load\+Config() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Save\+Config().
+

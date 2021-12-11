@@ -1,0 +1,6 @@
+<map id="c_parser_frontend::type_system::BasicType::GetSignTag" name="c_parser_frontend::type_system::BasicType::GetSignTag">
+<area shape="rect" id="node1" title="获取内置类型的符号标记" alt="" coords="459,45,637,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#a03a2d0a5c1388f66c3d3fff1d0c4330a" title="判断给定类型是否可以给该对象赋值" alt="" coords="232,5,411,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#ac78c52556f6bfec3ce16afb568253aa8" title=" " alt="" coords="232,85,411,141"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#a23b0071b2c288812c3955482d4186a51" title="比较两个类型是否完全相同" alt="" coords="5,85,184,141"/>
+</map>

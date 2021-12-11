@@ -1,0 +1,1177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: frontend::generator::syntax_generator::NonTerminalProductionNode类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">frontend::generator::syntax_generator::NonTerminalProductionNode类 参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>表示非终结产生式  
+ <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="production__node_8h_source.html">production_node.h</a>&gt;</code></p>
+<div class="dynheader">
+类 frontend::generator::syntax_generator::NonTerminalProductionNode 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode__inherit__graph.png" border="0" usemap="#frontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_inherit__map" alt="Inheritance graph"/></div>
+<map name="frontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_inherit__map" id="frontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_inherit__map">
+<area shape="rect" title="表示非终结产生式" alt="" coords="5,109,212,165"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html" title="该类是所有表示具体产生式类别的派生类的基类" alt="" coords="30,5,187,61"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<div class="dynheader">
+frontend::generator::syntax_generator::NonTerminalProductionNode 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode__coll__graph.png" border="0" usemap="#frontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_coll__map" alt="Collaboration graph"/></div>
+<map name="frontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_coll__map" id="frontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_coll__map">
+<area shape="rect" title="表示非终结产生式" alt="" coords="621,43,828,99"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html" title="该类是所有表示具体产生式类别的派生类的基类" alt="" coords="415,43,572,99"/>
+<area shape="rect" href="classfrontend_1_1common_1_1UnorderedStructManager.html" title=" " alt="" coords="18,5,237,61"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html" title=" " alt="" coords="5,86,249,127"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType.html">ProductionBodyType</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">表示单个非终结产生式体  <a href="structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:acd446a00fefd88a64936df99d07ad857"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#acd446a00fefd88a64936df99d07ad857">NonTerminalProductionNode</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa5441d8d67eb2b259fb6924ed9b91200">SymbolId</a> symbol_id)</td></tr>
+<tr class="separator:acd446a00fefd88a64936df99d07ad857"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e61eb0b1178a4424dd965c9bcede6eb"><td class="memTemplParams" colspan="2">template&lt;class IdType &gt; </td></tr>
+<tr class="memitem:a5e61eb0b1178a4424dd965c9bcede6eb"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a5e61eb0b1178a4424dd965c9bcede6eb">NonTerminalProductionNode</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa5441d8d67eb2b259fb6924ed9b91200">SymbolId</a> symbol_id, IdType &amp;&amp;body)</td></tr>
+<tr class="separator:a5e61eb0b1178a4424dd965c9bcede6eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a277e90f185a29f4b944479269f242cbf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a277e90f185a29f4b944479269f242cbf">NonTerminalProductionNode</a> (const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a> &amp;)=delete</td></tr>
+<tr class="separator:a277e90f185a29f4b944479269f242cbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a85ae88d55a2c72a087529c9bedae7a88"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a85ae88d55a2c72a087529c9bedae7a88">operator=</a> (const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a> &amp;)=delete</td></tr>
+<tr class="separator:a85ae88d55a2c72a087529c9bedae7a88"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada03380d41061066554e1cba94d30555"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#ada03380d41061066554e1cba94d30555">NonTerminalProductionNode</a> (<a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a> &amp;&amp;node)</td></tr>
+<tr class="separator:ada03380d41061066554e1cba94d30555"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adad0c7645865e904f017fa0eb8a3c3f6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#adad0c7645865e904f017fa0eb8a3c3f6">operator=</a> (<a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a> &amp;&amp;node)</td></tr>
+<tr class="separator:adad0c7645865e904f017fa0eb8a3c3f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a665b8d003098bd29e75de8bc30bb1f84"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a8d03686ef93995074fb23ce1faf35b77">ProductionNodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a665b8d003098bd29e75de8bc30bb1f84">GetProductionNodeInBody</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a> production_body_id, <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a947b9e3a6819c29acb6bfca1cfbdf281">NextWordToShiftIndex</a> next_word_to_shift_index) const override</td></tr>
+<tr class="memdesc:a665b8d003098bd29e75de8bc30bb1f84"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取产生式体内的产生式  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a665b8d003098bd29e75de8bc30bb1f84">更多...</a><br /></td></tr>
+<tr class="separator:a665b8d003098bd29e75de8bc30bb1f84"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26022130e2f6beaa669440bd117eaeea"><td class="memTemplParams" colspan="2">template&lt;class IdType &gt; </td></tr>
+<tr class="memitem:a26022130e2f6beaa669440bd117eaeea"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a26022130e2f6beaa669440bd117eaeea">AddBody</a> (IdType &amp;&amp;body, <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#af8388c16e5ec8eb818f984e81d014de7">ProcessFunctionClassId</a> class_for_reduct_id)</td></tr>
+<tr class="memdesc:a26022130e2f6beaa669440bd117eaeea"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加一个产生式体  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a26022130e2f6beaa669440bd117eaeea">更多...</a><br /></td></tr>
+<tr class="separator:a26022130e2f6beaa669440bd117eaeea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a44bb376a95fb05539fede36f8ffd94d4"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType.html">ProductionBodyType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a44bb376a95fb05539fede36f8ffd94d4">GetProductionBody</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a> production_body_id) const</td></tr>
+<tr class="memdesc:a44bb376a95fb05539fede36f8ffd94d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取产生式的一个体  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a44bb376a95fb05539fede36f8ffd94d4">更多...</a><br /></td></tr>
+<tr class="separator:a44bb376a95fb05539fede36f8ffd94d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3559269ceefd775239f5861344830ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#ab3559269ceefd775239f5861344830ef">SetBodyProcessFunctionClassId</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a> body_id, <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#af8388c16e5ec8eb818f984e81d014de7">ProcessFunctionClassId</a> class_for_reduct_id)</td></tr>
+<tr class="memdesc:ab3559269ceefd775239f5861344830ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置给定产生式体ID规约使用的对象的ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#ab3559269ceefd775239f5861344830ef">更多...</a><br /></td></tr>
+<tr class="separator:ab3559269ceefd775239f5861344830ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4142e3ce887dd6fe46021459c4e35e27"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType.html">ProductionBodyType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a4142e3ce887dd6fe46021459c4e35e27">GetBody</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a> body_id) const</td></tr>
+<tr class="memdesc:a4142e3ce887dd6fe46021459c4e35e27"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取产生式体  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a4142e3ce887dd6fe46021459c4e35e27">更多...</a><br /></td></tr>
+<tr class="separator:a4142e3ce887dd6fe46021459c4e35e27"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72c90ff7ee70f81e41c8103afdbceb12"><td class="memItemLeft" align="right" valign="top">const std::vector&lt; <a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType.html">ProductionBodyType</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a72c90ff7ee70f81e41c8103afdbceb12">GetAllBody</a> () const</td></tr>
+<tr class="memdesc:a72c90ff7ee70f81e41c8103afdbceb12"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取全部产生式体  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a72c90ff7ee70f81e41c8103afdbceb12">更多...</a><br /></td></tr>
+<tr class="separator:a72c90ff7ee70f81e41c8103afdbceb12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32981dd5c4ce5f2278b72131ec9ee39d"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a32981dd5c4ce5f2278b72131ec9ee39d">GetAllBodyIds</a> () const</td></tr>
+<tr class="memdesc:a32981dd5c4ce5f2278b72131ec9ee39d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取全部有效的产生式体ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a32981dd5c4ce5f2278b72131ec9ee39d">更多...</a><br /></td></tr>
+<tr class="separator:a32981dd5c4ce5f2278b72131ec9ee39d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cda189c533c6969ca0bb3ff973691a2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a8cda189c533c6969ca0bb3ff973691a2">SetProductionShouldNotEmptyReduct</a> ()</td></tr>
+<tr class="memdesc:a8cda189c533c6969ca0bb3ff973691a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置该产生式不可以空规约  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a8cda189c533c6969ca0bb3ff973691a2">更多...</a><br /></td></tr>
+<tr class="separator:a8cda189c533c6969ca0bb3ff973691a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6c237f58931d763a4e48f5f4bea0ac26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a6c237f58931d763a4e48f5f4bea0ac26">SetProductionCouldBeEmptyRedut</a> ()</td></tr>
+<tr class="memdesc:a6c237f58931d763a4e48f5f4bea0ac26"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置该产生式可以空规约  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a6c237f58931d763a4e48f5f4bea0ac26">更多...</a><br /></td></tr>
+<tr class="separator:a6c237f58931d763a4e48f5f4bea0ac26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4feb296992b7b970488887a2c6904de4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a4feb296992b7b970488887a2c6904de4">CouldBeEmptyReduct</a> () const</td></tr>
+<tr class="memdesc:a4feb296992b7b970488887a2c6904de4"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询该产生式是否可以空规约  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a4feb296992b7b970488887a2c6904de4">更多...</a><br /></td></tr>
+<tr class="separator:a4feb296992b7b970488887a2c6904de4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c1d7d05497a2f15efb1379cd03be36d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a8c1d7d05497a2f15efb1379cd03be36d">AddProductionItemBelongToProductionItemSetId</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a> body_id, <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a947b9e3a6819c29acb6bfca1cfbdf281">NextWordToShiftIndex</a> next_word_to_shift_index, <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#ad1086df60fade324297d10771daa1066">ProductionItemSetId</a> production_item_set_id)</td></tr>
+<tr class="memdesc:a8c1d7d05497a2f15efb1379cd03be36d"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加产生式中某项所属的项集ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a8c1d7d05497a2f15efb1379cd03be36d">更多...</a><br /></td></tr>
+<tr class="separator:a8c1d7d05497a2f15efb1379cd03be36d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f7af2f31b9cf5b1327a8514faa6f730"><td class="memItemLeft" align="right" valign="top">const std::list&lt; <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#ad1086df60fade324297d10771daa1066">ProductionItemSetId</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a2f7af2f31b9cf5b1327a8514faa6f730">GetProductionItemSetIdFromProductionItem</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a> body_id, <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a947b9e3a6819c29acb6bfca1cfbdf281">NextWordToShiftIndex</a> next_word_to_shift_index)</td></tr>
+<tr class="memdesc:a2f7af2f31b9cf5b1327a8514faa6f730"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指定项所属的全部项集的ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a2f7af2f31b9cf5b1327a8514faa6f730">更多...</a><br /></td></tr>
+<tr class="separator:a2f7af2f31b9cf5b1327a8514faa6f730"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2da2c02fb9e05291c9dcc1401d865586"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#af8388c16e5ec8eb818f984e81d014de7">ProcessFunctionClassId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a2da2c02fb9e05291c9dcc1401d865586">GetBodyProcessFunctionClassId</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a> body_id) const</td></tr>
+<tr class="memdesc:a2da2c02fb9e05291c9dcc1401d865586"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取指定产生式体包装规约用函数的类的实例化对象ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a2da2c02fb9e05291c9dcc1401d865586">更多...</a><br /></td></tr>
+<tr class="separator:a2da2c02fb9e05291c9dcc1401d865586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode')"><img src="closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html">frontend::generator::syntax_generator::BaseProductionNode</a></td></tr>
+<tr class="memitem:a330f363b48b0ad0e56997c3a2bc9b98b inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a330f363b48b0ad0e56997c3a2bc9b98b">BaseProductionNode</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa3b76f72027c071e3140ceb5fa56d0b8">ProductionNodeType</a> type, <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa5441d8d67eb2b259fb6924ed9b91200">SymbolId</a> symbol_id)</td></tr>
+<tr class="separator:a330f363b48b0ad0e56997c3a2bc9b98b inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1221f412fcd14e41285ecbf4cbdb9280 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a1221f412fcd14e41285ecbf4cbdb9280">BaseProductionNode</a> (const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html">BaseProductionNode</a> &amp;)=delete</td></tr>
+<tr class="separator:a1221f412fcd14e41285ecbf4cbdb9280 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7dd2b9f25b6936a97a6df95fb0cde367 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html">BaseProductionNode</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a7dd2b9f25b6936a97a6df95fb0cde367">operator=</a> (const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html">BaseProductionNode</a> &amp;)=delete</td></tr>
+<tr class="separator:a7dd2b9f25b6936a97a6df95fb0cde367 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0af3298d0c47c779f9c5c30867d6ecc5 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a0af3298d0c47c779f9c5c30867d6ecc5">BaseProductionNode</a> (<a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html">BaseProductionNode</a> &amp;&amp;base_production_node)</td></tr>
+<tr class="separator:a0af3298d0c47c779f9c5c30867d6ecc5 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5d787731137b40b0a18e17e2e65d2ed inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html">BaseProductionNode</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#af5d787731137b40b0a18e17e2e65d2ed">operator=</a> (<a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html">BaseProductionNode</a> &amp;&amp;base_production_node)</td></tr>
+<tr class="separator:af5d787731137b40b0a18e17e2e65d2ed inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf7f0903039567513c830e77c39a64d0 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#abf7f0903039567513c830e77c39a64d0">~BaseProductionNode</a> ()</td></tr>
+<tr class="separator:abf7f0903039567513c830e77c39a64d0 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a049e3d1e5df5370aa487431b3c0c7415 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a049e3d1e5df5370aa487431b3c0c7415">SetType</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa3b76f72027c071e3140ceb5fa56d0b8">ProductionNodeType</a> type)</td></tr>
+<tr class="memdesc:a049e3d1e5df5370aa487431b3c0c7415 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置产生式类型  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a049e3d1e5df5370aa487431b3c0c7415">更多...</a><br /></td></tr>
+<tr class="separator:a049e3d1e5df5370aa487431b3c0c7415 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1aa8dcd59b8c2220d5af4db2c656d23b inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa3b76f72027c071e3140ceb5fa56d0b8">ProductionNodeType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a1aa8dcd59b8c2220d5af4db2c656d23b">GetType</a> () const</td></tr>
+<tr class="memdesc:a1aa8dcd59b8c2220d5af4db2c656d23b inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取产生式类型  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a1aa8dcd59b8c2220d5af4db2c656d23b">更多...</a><br /></td></tr>
+<tr class="separator:a1aa8dcd59b8c2220d5af4db2c656d23b inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21cb460db9c35e2953b20d40ee9bf5b2 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a21cb460db9c35e2953b20d40ee9bf5b2">SetNodeId</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a8d03686ef93995074fb23ce1faf35b77">ProductionNodeId</a> production_node_id)</td></tr>
+<tr class="memdesc:a21cb460db9c35e2953b20d40ee9bf5b2 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置该节点ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a21cb460db9c35e2953b20d40ee9bf5b2">更多...</a><br /></td></tr>
+<tr class="separator:a21cb460db9c35e2953b20d40ee9bf5b2 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aec1c422ccfb4d44e34443ecf30754bc3 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a8d03686ef93995074fb23ce1faf35b77">ProductionNodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#aec1c422ccfb4d44e34443ecf30754bc3">GetNodeId</a> () const</td></tr>
+<tr class="memdesc:aec1c422ccfb4d44e34443ecf30754bc3 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取该节点ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#aec1c422ccfb4d44e34443ecf30754bc3">更多...</a><br /></td></tr>
+<tr class="separator:aec1c422ccfb4d44e34443ecf30754bc3 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aca6099a8cc54e3ffa0f63f0c5f6cb4 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a5aca6099a8cc54e3ffa0f63f0c5f6cb4">SetSymbolId</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa5441d8d67eb2b259fb6924ed9b91200">SymbolId</a> production_node_id)</td></tr>
+<tr class="memdesc:a5aca6099a8cc54e3ffa0f63f0c5f6cb4 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置该节点表示的产生式名ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a5aca6099a8cc54e3ffa0f63f0c5f6cb4">更多...</a><br /></td></tr>
+<tr class="separator:a5aca6099a8cc54e3ffa0f63f0c5f6cb4 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada56e50b8f4c0b75de3ae7553376f1b1 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa5441d8d67eb2b259fb6924ed9b91200">SymbolId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#ada56e50b8f4c0b75de3ae7553376f1b1">GetNodeSymbolId</a> () const</td></tr>
+<tr class="memdesc:ada56e50b8f4c0b75de3ae7553376f1b1 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取该节点表示的产生式名ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#ada56e50b8f4c0b75de3ae7553376f1b1">更多...</a><br /></td></tr>
+<tr class="separator:ada56e50b8f4c0b75de3ae7553376f1b1 inherit pub_methods_classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:ab7240559621dcc56196f745a05939f91"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType.html">ProductionBodyType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#ab7240559621dcc56196f745a05939f91">nonterminal_bodys_</a></td></tr>
+<tr class="memdesc:ab7240559621dcc56196f745a05939f91"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储产生式体  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#ab7240559621dcc56196f745a05939f91">更多...</a><br /></td></tr>
+<tr class="separator:ab7240559621dcc56196f745a05939f91"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac326ecaba24b6b02be0a4080523ba185"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#ac326ecaba24b6b02be0a4080523ba185">could_empty_reduct_</a> = false</td></tr>
+<tr class="memdesc:ac326ecaba24b6b02be0a4080523ba185"><td class="mdescLeft">&#160;</td><td class="mdescRight">标志该产生式是否可能为空  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#ac326ecaba24b6b02be0a4080523ba185">更多...</a><br /></td></tr>
+<tr class="separator:ac326ecaba24b6b02be0a4080523ba185"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>表示非终结产生式 </p>
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00376">376</a> 行定义.</p>
+</div><h2 class="groupheader">构造及析构函数说明</h2>
+<a id="acd446a00fefd88a64936df99d07ad857"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd446a00fefd88a64936df99d07ad857">&#9670;&nbsp;</a></span>NonTerminalProductionNode() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::syntax_generator::NonTerminalProductionNode::NonTerminalProductionNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa5441d8d67eb2b259fb6924ed9b91200">SymbolId</a>&#160;</td>
+          <td class="paramname"><em>symbol_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00406">406</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa3b76f72027c071e3140ceb5fa56d0b8a7d17d0e0d320c0f622b630ce1415cdc3">frontend::generator::syntax_generator::kNonTerminalNode</a>.</p>
+
+</div>
+</div>
+<a id="a5e61eb0b1178a4424dd965c9bcede6eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e61eb0b1178a4424dd965c9bcede6eb">&#9670;&nbsp;</a></span>NonTerminalProductionNode() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class IdType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::syntax_generator::NonTerminalProductionNode::NonTerminalProductionNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa5441d8d67eb2b259fb6924ed9b91200">SymbolId</a>&#160;</td>
+          <td class="paramname"><em>symbol_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">IdType &amp;&amp;&#160;</td>
+          <td class="paramname"><em>body</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00409">409</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa3b76f72027c071e3140ceb5fa56d0b8a7d17d0e0d320c0f622b630ce1415cdc3">frontend::generator::syntax_generator::kNonTerminalNode</a>.</p>
+
+</div>
+</div>
+<a id="a277e90f185a29f4b944479269f242cbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a277e90f185a29f4b944479269f242cbf">&#9670;&nbsp;</a></span>NonTerminalProductionNode() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::syntax_generator::NonTerminalProductionNode::NonTerminalProductionNode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ada03380d41061066554e1cba94d30555"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada03380d41061066554e1cba94d30555">&#9670;&nbsp;</a></span>NonTerminalProductionNode() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::syntax_generator::NonTerminalProductionNode::NonTerminalProductionNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00415">415</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="a26022130e2f6beaa669440bd117eaeea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26022130e2f6beaa669440bd117eaeea">&#9670;&nbsp;</a></span>AddBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class IdType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a> frontend::generator::syntax_generator::NonTerminalProductionNode::AddBody </td>
+          <td>(</td>
+          <td class="paramtype">IdType &amp;&amp;&#160;</td>
+          <td class="paramname"><em>body</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#af8388c16e5ec8eb818f984e81d014de7">ProcessFunctionClassId</a>&#160;</td>
+          <td class="paramname"><em>class_for_reduct_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>添加一个产生式体 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">IdType</td><td>存储产生式体中各产生式ID的容器，仅支持vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">body</td><td>：待添加的产生式体 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">class_for_reduct_id</td><td>：包装规约该产生式体的函数的类的实例化对象ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回该产生式体在非终结节点内的ID </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>body内的各产生式ID按书写顺序排列 该函数无检测重复功能 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__generator_8h_source.html">syntax_generator.h</a> 第 <a class="el" href="syntax__generator_8h_source.html#l00926">926</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00517">nonterminal_bodys_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l00263">frontend::generator::syntax_generator::SyntaxGenerator::AddNonTerminalProduction()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a26022130e2f6beaa669440bd117eaeea_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a26022130e2f6beaa669440bd117eaeea_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a26022130e2f6beaa669440bd117eaeea_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a26022130e2f6beaa669440bd117eaeea_icgraph">
+<area shape="rect" title="添加一个产生式体" alt="" coords="300,5,507,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#adc8a8b9ef6516d04b2ad19bb8d8bbfea" title="添加非终结产生式" alt="" coords="5,5,252,76"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8c1d7d05497a2f15efb1379cd03be36d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c1d7d05497a2f15efb1379cd03be36d">&#9670;&nbsp;</a></span>AddProductionItemBelongToProductionItemSetId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::syntax_generator::NonTerminalProductionNode::AddProductionItemBelongToProductionItemSetId </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a>&#160;</td>
+          <td class="paramname"><em>body_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a947b9e3a6819c29acb6bfca1cfbdf281">NextWordToShiftIndex</a>&#160;</td>
+          <td class="paramname"><em>next_word_to_shift_index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#ad1086df60fade324297d10771daa1066">ProductionItemSetId</a>&#160;</td>
+          <td class="paramname"><em>production_item_set_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加产生式中某项所属的项集ID </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">body_id</td><td>：待添加项所属的产生式体ID </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">next_word_to_shift_index</td><td>：指向该项下一个移入的单词的位置 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">production_item_set_id</td><td>：该项所属的项集ID</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>body_id与next_word_to_shift_index共同指定要添加所属项集ID的项 </p><dl class="section note"><dt>注解</dt><dd>无去重功能，要求不与已添加过的的项集ID重复 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__node_8cpp_source.html">production_node.cpp</a> 第 <a class="el" href="production__node_8cpp_source.html#l00048">48</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00517">nonterminal_bodys_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l00416">frontend::generator::syntax_generator::SyntaxGenerator::AddProductionItemBelongToProductionItemSetId()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a8c1d7d05497a2f15efb1379cd03be36d_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a8c1d7d05497a2f15efb1379cd03be36d_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a8c1d7d05497a2f15efb1379cd03be36d_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a8c1d7d05497a2f15efb1379cd03be36d_icgraph">
+<area shape="rect" title="添加产生式中某项所属的项集ID" alt="" coords="1653,5,1936,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a035000f5a575b281e9a856ff71c0f4cb" title="添加核心项所属的项集ID" alt="" coords="1363,13,1605,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#af9e3df47546b3fe233595849cfd1c5c9" title="向项集中添加核心项和核心项的向前看符号" alt="" coords="1049,13,1315,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,5,1001,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,13,643,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,13,355,83"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,35,60,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4feb296992b7b970488887a2c6904de4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4feb296992b7b970488887a2c6904de4">&#9670;&nbsp;</a></span>CouldBeEmptyReduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::syntax_generator::NonTerminalProductionNode::CouldBeEmptyReduct </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查询该产生式是否可以空规约 </p>
+<dl class="section return"><dt>返回</dt><dd>返回该产生式是否可以空规约 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：该产生式可以空规约 </td></tr>
+    <tr><td class="paramname">false</td><td>：该产生式不可以空规约 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00486">486</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00519">could_empty_reduct_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l00517">frontend::generator::syntax_generator::SyntaxGenerator::ProductionItemSetClosure()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4feb296992b7b970488887a2c6904de4_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4feb296992b7b970488887a2c6904de4_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4feb296992b7b970488887a2c6904de4_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4feb296992b7b970488887a2c6904de4_icgraph">
+<area shape="rect" title="查询该产生式是否可以空规约" alt="" coords="1307,13,1513,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1049,13,1259,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,5,1001,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,13,643,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,13,355,83"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,35,60,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a72c90ff7ee70f81e41c8103afdbceb12"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72c90ff7ee70f81e41c8103afdbceb12">&#9670;&nbsp;</a></span>GetAllBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::vector&lt;<a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType.html">ProductionBodyType</a>&gt;&amp; frontend::generator::syntax_generator::NonTerminalProductionNode::GetAllBody </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取全部产生式体 </p>
+<dl class="section return"><dt>返回</dt><dd>返回存储产生式体的容器const引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00472">472</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00517">nonterminal_bodys_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l00441">frontend::generator::syntax_generator::SyntaxGenerator::GetNonTerminalNodeFirstNodeIds()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a72c90ff7ee70f81e41c8103afdbceb12_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a72c90ff7ee70f81e41c8103afdbceb12_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a72c90ff7ee70f81e41c8103afdbceb12_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a72c90ff7ee70f81e41c8103afdbceb12_icgraph">
+<area shape="rect" title="获取全部产生式体" alt="" coords="1816,13,2023,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a23442cd8c8b98b58a2d9b9f6bff2e060" title="First的子过程，提取一个非终结节点全部第一个可移入的产生式节点ID" alt="" coords="1523,13,1768,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ad855b93680cdd0454aca0fbdad6dae48" title="闭包操作中的first操作，用来提取非终结产生式的向前看节点" alt="" coords="1307,20,1475,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1049,13,1259,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,5,1001,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,13,643,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,13,355,83"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,35,60,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a32981dd5c4ce5f2278b72131ec9ee39d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32981dd5c4ce5f2278b72131ec9ee39d">&#9670;&nbsp;</a></span>GetAllBodyIds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a> &gt; frontend::generator::syntax_generator::NonTerminalProductionNode::GetAllBodyIds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取全部有效的产生式体ID </p>
+<dl class="section return"><dt>返回</dt><dd>返回存储全部有效的产生式体ID的vector容器 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__node_8cpp_source.html">production_node.cpp</a> 第 <a class="el" href="production__node_8cpp_source.html#l00040">40</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00517">nonterminal_bodys_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l01164">frontend::generator::syntax_generator::SyntaxGenerator::FormatProductionBodys()</a> , 以及 <a class="el" href="syntax__generator_8cpp_source.html#l00517">frontend::generator::syntax_generator::SyntaxGenerator::ProductionItemSetClosure()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a32981dd5c4ce5f2278b72131ec9ee39d_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a32981dd5c4ce5f2278b72131ec9ee39d_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a32981dd5c4ce5f2278b72131ec9ee39d_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a32981dd5c4ce5f2278b72131ec9ee39d_icgraph">
+<area shape="rect" title="获取全部有效的产生式体ID" alt="" coords="1352,53,1559,124"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a70a4d44740b413762658641c9a48f7a6" title="格式化非终结节点全部产生式" alt="" coords="1049,5,1304,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1072,100,1281,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,93,1001,178"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,100,643,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,100,355,171"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,122,60,149"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4142e3ce887dd6fe46021459c4e35e27"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4142e3ce887dd6fe46021459c4e35e27">&#9670;&nbsp;</a></span>GetBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType.html">ProductionBodyType</a>&amp; frontend::generator::syntax_generator::NonTerminalProductionNode::GetBody </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a>&#160;</td>
+          <td class="paramname"><em>body_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取产生式体 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">body_id</td><td>：待获取的产生式体ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回获取到的产生式体数据结构const引用 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>body_id必须对应有效的产生式体 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00467">467</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00517">nonterminal_bodys_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l01178">frontend::generator::syntax_generator::SyntaxGenerator::FormatProductionItem()</a>, <a class="el" href="syntax__generator_8cpp_source.html#l01145">frontend::generator::syntax_generator::SyntaxGenerator::FormatSingleProductionBody()</a>, <a class="el" href="syntax__generator_8cpp_source.html#l00384">frontend::generator::syntax_generator::SyntaxGenerator::GetProductionBody()</a> , 以及 <a class="el" href="syntax__generator_8cpp_source.html#l00517">frontend::generator::syntax_generator::SyntaxGenerator::ProductionItemSetClosure()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4142e3ce887dd6fe46021459c4e35e27_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4142e3ce887dd6fe46021459c4e35e27_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4142e3ce887dd6fe46021459c4e35e27_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a4142e3ce887dd6fe46021459c4e35e27_icgraph">
+<area shape="rect" title="获取产生式体" alt="" coords="1943,119,2149,189"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aa0fd2aa1188025239754e6a491f77542" title="格式化项" alt="" coords="1609,202,1895,258"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1049,148,1259,219"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0356a8c7b3b39a6beb6a46750e36fcc2" title="格式化产生式" alt="" coords="1639,392,1865,463"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65f7eb8a4fe83539f5c54498f2689fd6" title="获取非终结节点中的一个产生式体" alt="" coords="1619,85,1885,141"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1a5e6621aed32555b8418ba69663d861" title="格式化项和项的向前看符号" alt="" coords="1307,195,1561,265"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,250,1001,335"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4b4afd286d8c501a7f1aa80041e9920d" title="格式化项集中全部项及项对应的向前看符号" alt="" coords="1307,100,1561,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,257,643,328"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,257,355,328"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,279,60,306"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#adc8a8b9ef6516d04b2ad19bb8d8bbfea" title="添加非终结产生式" alt="" coords="1311,392,1557,463"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a70a4d44740b413762658641c9a48f7a6" title="格式化非终结节点全部产生式" alt="" coords="1307,487,1561,557"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2da2c02fb9e05291c9dcc1401d865586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2da2c02fb9e05291c9dcc1401d865586">&#9670;&nbsp;</a></span>GetBodyProcessFunctionClassId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#af8388c16e5ec8eb818f984e81d014de7">ProcessFunctionClassId</a> frontend::generator::syntax_generator::NonTerminalProductionNode::GetBodyProcessFunctionClassId </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a>&#160;</td>
+          <td class="paramname"><em>body_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取指定产生式体包装规约用函数的类的实例化对象ID </p>
+<dl class="section return"><dt>返回</dt><dd>返回包装规约用函数的类的实例化对象ID </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00509">509</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00517">nonterminal_bodys_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8h_source.html#l00239">frontend::generator::syntax_generator::SyntaxGenerator::GetProcessFunctionClass()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2da2c02fb9e05291c9dcc1401d865586_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2da2c02fb9e05291c9dcc1401d865586_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2da2c02fb9e05291c9dcc1401d865586_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2da2c02fb9e05291c9dcc1401d865586_icgraph">
+<area shape="rect" title="获取指定产生式体包装规约用函数的类的实例化对象ID" alt="" coords="1568,13,1807,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a20522ce2a00da8692841434e044de4ea" title="获取规约某个产生式使用的包装处理函数的类的实例化对象ID" alt="" coords="1307,13,1520,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1049,13,1259,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,5,1001,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,13,643,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,13,355,83"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,35,60,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a44bb376a95fb05539fede36f8ffd94d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a44bb376a95fb05539fede36f8ffd94d4">&#9670;&nbsp;</a></span>GetProductionBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType.html">ProductionBodyType</a>&amp; frontend::generator::syntax_generator::NonTerminalProductionNode::GetProductionBody </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a>&#160;</td>
+          <td class="paramname"><em>production_body_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取产生式的一个体 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">production_body_id</td><td>：要获取的产生式体ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回产生式体的const引用 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>production_body_id必须对应存在的产生式体 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00450">450</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00517">nonterminal_bodys_</a>.</p>
+
+</div>
+</div>
+<a id="a2f7af2f31b9cf5b1327a8514faa6f730"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f7af2f31b9cf5b1327a8514faa6f730">&#9670;&nbsp;</a></span>GetProductionItemSetIdFromProductionItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::list&lt;<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#ad1086df60fade324297d10771daa1066">ProductionItemSetId</a>&gt;&amp; frontend::generator::syntax_generator::NonTerminalProductionNode::GetProductionItemSetIdFromProductionItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a>&#160;</td>
+          <td class="paramname"><em>body_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a947b9e3a6819c29acb6bfca1cfbdf281">NextWordToShiftIndex</a>&#160;</td>
+          <td class="paramname"><em>next_word_to_shift_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取指定项所属的全部项集的ID </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">body_id</td><td>：指定项所属的产生式体ID </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">next_word_to_shift_index</td><td>：指向该项下一个移入单词的位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回存储该项所属的全部项集ID的容器 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>body_id与next_word_to_shift_index共同指定一个项 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00502">502</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00517">nonterminal_bodys_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l00430">frontend::generator::syntax_generator::SyntaxGenerator::GetProductionItemSetIdFromProductionItem()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2f7af2f31b9cf5b1327a8514faa6f730_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2f7af2f31b9cf5b1327a8514faa6f730_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2f7af2f31b9cf5b1327a8514faa6f730_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a2f7af2f31b9cf5b1327a8514faa6f730_icgraph">
+<area shape="rect" title="获取指定项所属的全部项集的ID" alt="" coords="1609,13,1927,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a34f14ed77b5011654a4400a4c7ec542d" title="获取单个核心项所属的全部项集" alt="" coords="1329,13,1561,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a13e771dd708af5749a2119d63fe66165" title="获取给定项移入相同产生式后构成的项集" alt="" coords="1049,13,1281,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,5,1001,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,13,643,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,13,355,83"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,35,60,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a665b8d003098bd29e75de8bc30bb1f84"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a665b8d003098bd29e75de8bc30bb1f84">&#9670;&nbsp;</a></span>GetProductionNodeInBody()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a8d03686ef93995074fb23ce1faf35b77">ProductionNodeId</a> frontend::generator::syntax_generator::NonTerminalProductionNode::GetProductionNodeInBody </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a>&#160;</td>
+          <td class="paramname"><em>production_body_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a947b9e3a6819c29acb6bfca1cfbdf281">NextWordToShiftIndex</a>&#160;</td>
+          <td class="paramname"><em>next_word_to_shift_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取产生式体内的产生式 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">production_body_id</td><td>：待获取的产生式体ID </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">next_word_to_shift_index</td><td>：待获取的子产生式位置 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section attention"><dt>注意</dt><dd>终结节点调用该函数时production_body_id必须为0 next_word_to_shift_index不是0时则返回NextWordToShiftIndex::InvalidId() </dd></dl>
+
+<p>实现了 <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a59f98cd7ca7b0906985c8bc053e92e65">frontend::generator::syntax_generator::BaseProductionNode</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="production__node_8cpp_source.html">production_node.cpp</a> 第 <a class="el" href="production__node_8cpp_source.html#l00063">63</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00517">nonterminal_bodys_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l00717">frontend::generator::syntax_generator::SyntaxGenerator::SpreadLookForwardSymbolAndConstructSyntaxAnalysisTableEntry()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a665b8d003098bd29e75de8bc30bb1f84_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a665b8d003098bd29e75de8bc30bb1f84_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a665b8d003098bd29e75de8bc30bb1f84_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a665b8d003098bd29e75de8bc30bb1f84_icgraph">
+<area shape="rect" title="获取产生式体内的产生式" alt="" coords="1049,13,1256,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,5,1001,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,13,643,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,13,355,83"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,35,60,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a85ae88d55a2c72a087529c9bedae7a88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a85ae88d55a2c72a087529c9bedae7a88">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a>&amp; frontend::generator::syntax_generator::NonTerminalProductionNode::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adad0c7645865e904f017fa0eb8a3c3f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adad0c7645865e904f017fa0eb8a3c3f6">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a>&amp; frontend::generator::syntax_generator::NonTerminalProductionNode::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00419">419</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00519">could_empty_reduct_</a>, <a class="el" href="production__node_8h_source.html#l00517">nonterminal_bodys_</a> , 以及 <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a7dd2b9f25b6936a97a6df95fb0cde367">frontend::generator::syntax_generator::BaseProductionNode::operator=()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_adad0c7645865e904f017fa0eb8a3c3f6_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_adad0c7645865e904f017fa0eb8a3c3f6_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_adad0c7645865e904f017fa0eb8a3c3f6_cgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_adad0c7645865e904f017fa0eb8a3c3f6_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,212,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a7dd2b9f25b6936a97a6df95fb0cde367" title=" " alt="" coords="260,13,491,69"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab3559269ceefd775239f5861344830ef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3559269ceefd775239f5861344830ef">&#9670;&nbsp;</a></span>SetBodyProcessFunctionClassId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::syntax_generator::NonTerminalProductionNode::SetBodyProcessFunctionClassId </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a>&#160;</td>
+          <td class="paramname"><em>body_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#af8388c16e5ec8eb818f984e81d014de7">ProcessFunctionClassId</a>&#160;</td>
+          <td class="paramname"><em>class_for_reduct_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置给定产生式体ID规约使用的对象的ID </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">body_id</td><td>：待设置规约用对象ID的产生式体ID </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">class_for_reduct_id</td><td>：待设置的规约用对象ID </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00458">458</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00517">nonterminal_bodys_</a>.</p>
+
+</div>
+</div>
+<a id="a6c237f58931d763a4e48f5f4bea0ac26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6c237f58931d763a4e48f5f4bea0ac26">&#9670;&nbsp;</a></span>SetProductionCouldBeEmptyRedut()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::syntax_generator::NonTerminalProductionNode::SetProductionCouldBeEmptyRedut </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置该产生式可以空规约 </p>
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00481">481</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00519">could_empty_reduct_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l00308">frontend::generator::syntax_generator::SyntaxGenerator::SetNonTerminalNodeCouldEmptyReduct()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a6c237f58931d763a4e48f5f4bea0ac26_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a6c237f58931d763a4e48f5f4bea0ac26_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a6c237f58931d763a4e48f5f4bea0ac26_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a6c237f58931d763a4e48f5f4bea0ac26_icgraph">
+<area shape="rect" title="设置该产生式可以空规约" alt="" coords="296,5,551,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5100679b94d5727f0c7de415f9639c39" title="设置非终结产生式可以空规约" alt="" coords="5,5,248,76"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8cda189c533c6969ca0bb3ff973691a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cda189c533c6969ca0bb3ff973691a2">&#9670;&nbsp;</a></span>SetProductionShouldNotEmptyReduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::syntax_generator::NonTerminalProductionNode::SetProductionShouldNotEmptyReduct </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置该产生式不可以空规约 </p>
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00479">479</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__node_8h_source.html#l00519">could_empty_reduct_</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="ac326ecaba24b6b02be0a4080523ba185"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac326ecaba24b6b02be0a4080523ba185">&#9670;&nbsp;</a></span>could_empty_reduct_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::syntax_generator::NonTerminalProductionNode::could_empty_reduct_ = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>标志该产生式是否可能为空 </p>
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00519">519</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="production__node_8h_source.html#l00486">CouldBeEmptyReduct()</a>, <a class="el" href="production__node_8h_source.html#l00419">operator=()</a>, <a class="el" href="production__node_8h_source.html#l00481">SetProductionCouldBeEmptyRedut()</a> , 以及 <a class="el" href="production__node_8h_source.html#l00479">SetProductionShouldNotEmptyReduct()</a>.</p>
+
+</div>
+</div>
+<a id="ab7240559621dcc56196f745a05939f91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7240559621dcc56196f745a05939f91">&#9670;&nbsp;</a></span>nonterminal_bodys_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;<a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType.html">ProductionBodyType</a>&gt; frontend::generator::syntax_generator::NonTerminalProductionNode::nonterminal_bodys_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>存储产生式体 </p>
+
+<p class="definition">在文件 <a class="el" href="production__node_8h_source.html">production_node.h</a> 第 <a class="el" href="production__node_8h_source.html#l00517">517</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8h_source.html#l00926">AddBody()</a>, <a class="el" href="production__node_8cpp_source.html#l00048">AddProductionItemBelongToProductionItemSetId()</a>, <a class="el" href="production__node_8h_source.html#l00472">GetAllBody()</a>, <a class="el" href="production__node_8cpp_source.html#l00040">GetAllBodyIds()</a>, <a class="el" href="production__node_8h_source.html#l00467">GetBody()</a>, <a class="el" href="production__node_8h_source.html#l00509">GetBodyProcessFunctionClassId()</a>, <a class="el" href="production__node_8h_source.html#l00450">GetProductionBody()</a>, <a class="el" href="production__node_8h_source.html#l00502">GetProductionItemSetIdFromProductionItem()</a>, <a class="el" href="production__node_8cpp_source.html#l00063">GetProductionNodeInBody()</a>, <a class="el" href="production__node_8h_source.html#l00419">operator=()</a> , 以及 <a class="el" href="production__node_8h_source.html#l00458">SetBodyProcessFunctionClassId()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/Generator/SyntaxGenerator/<a class="el" href="production__node_8h_source.html">production_node.h</a></li>
+<li>src/Generator/SyntaxGenerator/<a class="el" href="production__node_8cpp_source.html">production_node.cpp</a></li>
+<li>src/Generator/SyntaxGenerator/<a class="el" href="syntax__generator_8h_source.html">syntax_generator.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacefrontend.html">frontend</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1generator.html">generator</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html">syntax_generator</a></li><li class="navelem"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html">NonTerminalProductionNode</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

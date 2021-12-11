@@ -1,0 +1,7 @@
+<map id="c_parser_frontend::operator_node::InitializeOperatorNodeInterface::SetInitValueType" name="c_parser_frontend::operator_node::InitializeOperatorNodeInterface::SetInitValueType">
+<area shape="rect" id="node1" title="设置初始化数据的具体类型" alt="" coords="973,45,1211,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a54b4e242ed930666c66aeb028a8836de" title=" " alt="" coords="680,5,925,61"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1operator__node_1_1ListInitializeOperatorNode.html#a825f53ecf407d8c5f0f1431f0a4b7e65" title="设置初始化列表中含有的全部初始化值" alt="" coords="699,85,907,141"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#aa8eec206ebcf1953933a92fd50678a3b" title="设置初始化用数据的类型" alt="" coords="387,5,632,61"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a4348f1c094015c0feb6bb76e5ace630b" title=" " alt="" coords="5,5,339,61"/>
+</map>

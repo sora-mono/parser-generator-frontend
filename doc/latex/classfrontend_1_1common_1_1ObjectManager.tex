@@ -1,0 +1,1209 @@
+\hypertarget{classfrontend_1_1common_1_1ObjectManager}{}\doxysection{frontend\+::common\+::Object\+Manager$<$ T $>$ 模板类 参考}
+\label{classfrontend_1_1common_1_1ObjectManager}\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+
+
+管理对象，对象与\+I\+D一一对应  
+
+
+
+
+{\ttfamily \#include $<$object\+\_\+manager.\+h$>$}
+
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}}
+\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1Iterator}{Iterator}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a6ebff4ccdbf18cb040afad1d5d8b7756}{Wrapper\+Label}} \{ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a6ebff4ccdbf18cb040afad1d5d8b7756a40cb64c0aaed2080445730e9d33e4f1b}{Wrapper\+Label\+::k\+Object\+Id}}
+ \}
+\begin{DoxyCompactList}\small\item\em 用来定义\+Object\+Id类型的分发标签 \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} = \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper}{Explicit\+Id\+Wrapper}}$<$ size\+\_\+t, \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a6ebff4ccdbf18cb040afad1d5d8b7756}{Wrapper\+Label}}, \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a6ebff4ccdbf18cb040afad1d5d8b7756a40cb64c0aaed2080445730e9d33e4f1b}{Wrapper\+Label\+::k\+Object\+Id}} $>$
+\begin{DoxyCompactList}\small\item\em 标识对象的\+I\+D，与对象一一对应 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a94b199886adfc6950a4a5b85fea860df}{Object\+Manager}} ()
+\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a90f4438a6ee16f9f2c67731f329e6372}{Object\+Manager}} (const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}} \&)=delete
+\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a803fe499d821dbad1d916045a476ddbe}{Object\+Manager}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}} \&\&)=delete
+\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_af6715d28e16f2d3635605aaf0a24f779}{$\sim$\+Object\+Manager}} ()
+\item 
+const T \& \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a204350a871426aaf21ddc9cd535925b6}{Get\+Object}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id) const
+\begin{DoxyCompactList}\small\item\em 获取对象的const引用 \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7da20be38a510f6972ba56ba99d0fe6c}{Get\+Object}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id)
+\begin{DoxyCompactList}\small\item\em 获取对象的引用 \end{DoxyCompactList}\item 
+const T \& \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_ab4083adad38bb9862267f2b69bab1e7f}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id) const
+\begin{DoxyCompactList}\small\item\em 获取对象的const引用 \end{DoxyCompactList}\item 
+T \& \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_afc8bd11762174e42dcb8785a07c691d6}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id)
+\begin{DoxyCompactList}\small\item\em 获取对象的引用 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Object\+Type  = T, class... Args$>$ }\\\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_adbb63b10c08fd65047c2b6ee5cae362d}{Emplace\+Object}} (Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em 系统自行选择最佳位置放置对象 \end{DoxyCompactList}\item 
+T $\ast$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_affc6ed45a06c406ad6c920cd6d3acbf0}{Remove\+Object\+No\+Delete}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id)
+\begin{DoxyCompactList}\small\item\em 仅删除节点记录但不释放节点内存 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a80621136eb2b70cec29e8230cc227a03}{Remove\+Object}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id)
+\begin{DoxyCompactList}\small\item\em 删除节点并释放节点内存（默认删除语义） \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a539cafb236a4acf67fa2d04ef7c8dc3c}{Merge\+Objects}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id\+\_\+dst, \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id\+\_\+src, const std\+::function$<$ bool(T \&, T \&)$>$ \&merge\+\_\+function=\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7a8ac0056a1fab66cf88142fab62887f}{Default\+Merge\+Function2}})
+\begin{DoxyCompactList}\small\item\em 合并两个对象，合并成功会删除id\+\_\+src对象 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Manager $>$ }\\bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a5e8bb025b99c58c0820a6c129221e03c}{Merge\+Objects\+With\+Manager}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id\+\_\+dst, \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id\+\_\+src, Manager \&manager, const std\+::function$<$ bool(T \&, T \&, Manager \&)$>$ \&merge\+\_\+function=\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a8fc0513ed1a46628e8b4f7b89897615b}{Default\+Merge\+Function3}})
+\begin{DoxyCompactList}\small\item\em 合并两个对象，合并成功会删除id\+\_\+src节点 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_aa143a18667598b024ce4d90037208e67}{Can\+Be\+Source\+In\+Merge}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id) const
+\begin{DoxyCompactList}\small\item\em 查询\+I\+D对应的节点是否可合并 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a1b6d1535e60720b771ffc34b514dd63b}{Set\+Object\+Can\+Be\+Source\+In\+Merge}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id)
+\begin{DoxyCompactList}\small\item\em 设置给定对象在合并时可以作为源对象（合并成功则源对象被释放） \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a41640aa1828fa9c9eddf738300e44a17}{Set\+Object\+Can\+Not\+Be\+Source\+In\+Merge}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id)
+\item 
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a0ddfa7bd0bad5d62e693694fae4b74cd}{Set\+All\+Objects\+Can\+Be\+Source\+In\+Merge}} ()
+\begin{DoxyCompactList}\small\item\em 设置所有对象在合并时均可以作为源对象（合并成功则源对象被释放） \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_ac691fffa08ec1a9a89d2a38017ed3393}{Set\+All\+Objects\+Can\+Not\+Be\+Source\+In\+Merge}} ()
+\begin{DoxyCompactList}\small\item\em 设置所有对象在合并时均不可以作为源对象（合并成功则源对象被释放） \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a0812ece46329204c2248bba60293ebca}{Is\+Same}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id1, \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id2) const
+\begin{DoxyCompactList}\small\item\em 判断两个\+I\+D是否指向同一对象 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a4eacfacee3316a29b9f385c30c175c5a}{Swap}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}} $\ast$manager\+\_\+other)
+\begin{DoxyCompactList}\small\item\em 交换两个容器的内容 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_afd7723556903f5e6cc85822872e96d59}{Capacity}} () const
+\begin{DoxyCompactList}\small\item\em 获取容器能存储的对象个数 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a1c27178f6f5cf8e5ce2ddec1863f9533}{Size}} () const
+\begin{DoxyCompactList}\small\item\em 获取容器实际存储的有效对象数量 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_af218c097d7fa411572f79043be378ee7}{Object\+Manager\+Init}} ()
+\begin{DoxyCompactList}\small\item\em 初始化，如果容器中存在节点则全部释放 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a24d5af5cda609f0eaee8c58cda3df6bf}{Clear\+No\+Release}} ()
+\begin{DoxyCompactList}\small\item\em 清除所有节点记录但不释放 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_ace94586d70da1f07e0af846ad52d42be}{Shrink\+To\+Fit}} ()
+\begin{DoxyCompactList}\small\item\em 调用成员变量的shrink\+\_\+to\+\_\+fit来节省空间 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1Iterator}{Iterator}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a99d1a3c63580f5a44f26e2c1351398f7}{End}} ()
+\begin{DoxyCompactList}\small\item\em 获取指向超尾的迭代器 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1Iterator}{Iterator}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a4347527ee933efa32065a14e90be53dc}{Begin}} ()
+\begin{DoxyCompactList}\small\item\em 获取指向第一个有效节点的迭代器 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a30ef49b57319e930b6011ed03eb7004d}{Const\+End}} () const
+\begin{DoxyCompactList}\small\item\em 获取指向超尾的const迭代器 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a673d5b73eae6ed03f541147975bfebb5}{Const\+Begin}} () const
+\begin{DoxyCompactList}\small\item\em 获取指向第一个有效节点的const迭代器 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Manager $>$ }\\bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a9b171a12633d32ae123806810ad4f3e4}{Merge\+Objects\+With\+Manager}} (typename \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id\+\_\+dst, typename \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id\+\_\+src, Manager \&manager, const std\+::function$<$ bool(T \&, T \&, Manager \&)$>$ \&merge\+\_\+function)
+\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7a8ac0056a1fab66cf88142fab62887f}{Default\+Merge\+Function2}} (T \&node\+\_\+dst, T \&node\+\_\+src)
+\begin{DoxyCompactList}\small\item\em 默认用来合并两个对象的函数 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Manager $>$ }\\static bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a8fc0513ed1a46628e8b4f7b89897615b}{Default\+Merge\+Function3}} (T \&node\+\_\+dst, T \&node\+\_\+src, Manager \&manager)
+\begin{DoxyCompactList}\small\item\em 默认用来在管理器参与下合并两个对象的函数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Archive $>$ }\\void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_ad1e26c9bf05a2f557b0e840b4fc8e95a}{serialize}} (Archive \&ar, const unsigned int version)
+\begin{DoxyCompactList}\small\item\em 序列化容器 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Object\+Type  = T, class... Args$>$ }\\\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a19c9433885906dddf365a8c05dbb5f52}{Emplace\+Object\+Index}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em 在指定位置放置对象 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_aa70778e00decfb966ffdbcee62b92bd3}{Emplace\+Pointer\+Index}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id, T $\ast$pointer)
+\begin{DoxyCompactList}\small\item\em 在指定位置放置指针 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a58bda366de57299c3f17e1abacb691c4}{Get\+Best\+Empty\+Index}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前最佳可用\+ID \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a67368a9f56af76e970dd199499806e76}{Add\+Removed\+Index}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id)
+\begin{DoxyCompactList}\small\item\em 添加已移除的\+ID \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ T $\ast$ $>$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_ae88ac60df51afa0799810e2c3563ea2d}{nodes\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 存放指向节点的指针，节点不存在则置为nullptr \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} $>$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_aa8367e243ee3330aa3d1db7383b1b6ab}{removed\+\_\+ids\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 存放所有被删除节点对应的\+I\+D（可能大于nodes\+\_\+.\+size()） \end{DoxyCompactList}\item 
+std\+::vector$<$ bool $>$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_aada5766f9ac5e45f817caec3e52647de}{nodes\+\_\+can\+\_\+be\+\_\+source\+\_\+in\+\_\+merge}}
+\begin{DoxyCompactList}\small\item\em 存储节点在合并时是否允许作为源节点 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{友元}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_ac98d07dd8f7b70e16ccb9a01abf56b9c}{boost\+::serialization\+::access}}
+\begin{DoxyCompactList}\small\item\em 声明友元以允许boost-\/serialization库访问内部成员 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+\subsubsection*{template$<$class T$>$\newline
+class frontend\+::common\+::\+Object\+Manager$<$ T $>$}
+
+管理对象，对象与\+I\+D一一对应 
+
+在文件 object\+\_\+manager.\+h 第 24 行定义.
+
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}\label{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!ObjectId@{ObjectId}}
+\index{ObjectId@{ObjectId}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ObjectId}{ObjectId}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+using \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} =  \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper}{Explicit\+Id\+Wrapper}}$<$size\+\_\+t, \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a6ebff4ccdbf18cb040afad1d5d8b7756}{Wrapper\+Label}}, \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a6ebff4ccdbf18cb040afad1d5d8b7756a40cb64c0aaed2080445730e9d33e4f1b}{Wrapper\+Label\+::k\+Object\+Id}}$>$}
+
+
+
+标识对象的\+I\+D，与对象一一对应 
+
+
+
+在文件 object\+\_\+manager.\+h 第 30 行定义.
+
+
+
+\doxysubsection{成员枚举类型说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a6ebff4ccdbf18cb040afad1d5d8b7756}\label{classfrontend_1_1common_1_1ObjectManager_a6ebff4ccdbf18cb040afad1d5d8b7756}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!WrapperLabel@{WrapperLabel}}
+\index{WrapperLabel@{WrapperLabel}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{WrapperLabel}{WrapperLabel}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+enum \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a6ebff4ccdbf18cb040afad1d5d8b7756}{frontend\+::common\+::\+Object\+Manager\+::\+Wrapper\+Label}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+用来定义\+Object\+Id类型的分发标签 
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kObjectId@{kObjectId}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!kObjectId@{kObjectId}}}\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a6ebff4ccdbf18cb040afad1d5d8b7756a40cb64c0aaed2080445730e9d33e4f1b}\label{classfrontend_1_1common_1_1ObjectManager_a6ebff4ccdbf18cb040afad1d5d8b7756a40cb64c0aaed2080445730e9d33e4f1b}} 
+k\+Object\+Id&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+在文件 object\+\_\+manager.\+h 第 27 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a94b199886adfc6950a4a5b85fea860df}\label{classfrontend_1_1common_1_1ObjectManager_a94b199886adfc6950a4a5b85fea860df}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!ObjectManager@{ObjectManager}}
+\index{ObjectManager@{ObjectManager}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ObjectManager()}{ObjectManager()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 object\+\_\+manager.\+h 第 32 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a90f4438a6ee16f9f2c67731f329e6372}\label{classfrontend_1_1common_1_1ObjectManager_a90f4438a6ee16f9f2c67731f329e6372}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!ObjectManager@{ObjectManager}}
+\index{ObjectManager@{ObjectManager}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ObjectManager()}{ObjectManager()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$ \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a803fe499d821dbad1d916045a476ddbe}\label{classfrontend_1_1common_1_1ObjectManager_a803fe499d821dbad1d916045a476ddbe}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!ObjectManager@{ObjectManager}}
+\index{ObjectManager@{ObjectManager}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ObjectManager()}{ObjectManager()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$ \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_af6715d28e16f2d3635605aaf0a24f779}\label{classfrontend_1_1common_1_1ObjectManager_af6715d28e16f2d3635605aaf0a24f779}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!````~ObjectManager@{$\sim$ObjectManager}}
+\index{````~ObjectManager@{$\sim$ObjectManager}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$ObjectManager()}{~ObjectManager()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::$\sim$\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}}
+
+
+
+在文件 object\+\_\+manager.\+h 第 411 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a67368a9f56af76e970dd199499806e76}\label{classfrontend_1_1common_1_1ObjectManager_a67368a9f56af76e970dd199499806e76}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!AddRemovedIndex@{AddRemovedIndex}}
+\index{AddRemovedIndex@{AddRemovedIndex}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{AddRemovedIndex()}{AddRemovedIndex()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Add\+Removed\+Index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+添加已移除的\+ID 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：已移除的对象对应的\+ID \\
+\hline
+\end{DoxyParams}
+
+
+在文件 object\+\_\+manager.\+h 第 400 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a4347527ee933efa32065a14e90be53dc}\label{classfrontend_1_1common_1_1ObjectManager_a4347527ee933efa32065a14e90be53dc}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!Begin@{Begin}}
+\index{Begin@{Begin}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Begin()}{Begin()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1Iterator}{Iterator}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Begin\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取指向第一个有效节点的迭代器 
+
+\begin{DoxyReturn}{返回}
+返回指向第一个有效节点的迭代器 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+如果不存在有效节点则返回\+End() 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 641 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Dfa\+Minimize().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1ObjectManager_a4347527ee933efa32065a14e90be53dc_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_aa143a18667598b024ce4d90037208e67}\label{classfrontend_1_1common_1_1ObjectManager_aa143a18667598b024ce4d90037208e67}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!CanBeSourceInMerge@{CanBeSourceInMerge}}
+\index{CanBeSourceInMerge@{CanBeSourceInMerge}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{CanBeSourceInMerge()}{CanBeSourceInMerge()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Can\+Be\+Source\+In\+Merge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+查询\+I\+D对应的节点是否可合并 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：待查询的节点\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+给定节点是否可合并 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：可以合并 \\
+\hline
+{\em false} & ：不可以合并 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyAttention}{注意}
+传入的参数必须指向已存在的对象 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 299 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_afd7723556903f5e6cc85822872e96d59}\label{classfrontend_1_1common_1_1ObjectManager_afd7723556903f5e6cc85822872e96d59}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!Capacity@{Capacity}}
+\index{Capacity@{Capacity}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Capacity()}{Capacity()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Capacity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取容器能存储的对象个数 
+
+\begin{DoxyReturn}{返回}
+返回容器能存储的对象个数 
+\end{DoxyReturn}
+
+
+在文件 object\+\_\+manager.\+h 第 335 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a24d5af5cda609f0eaee8c58cda3df6bf}\label{classfrontend_1_1common_1_1ObjectManager_a24d5af5cda609f0eaee8c58cda3df6bf}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!ClearNoRelease@{ClearNoRelease}}
+\index{ClearNoRelease@{ClearNoRelease}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ClearNoRelease()}{ClearNoRelease()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Clear\+No\+Release\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+清除所有节点记录但不释放 
+
+
+
+在文件 object\+\_\+manager.\+h 第 578 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a673d5b73eae6ed03f541147975bfebb5}\label{classfrontend_1_1common_1_1ObjectManager_a673d5b73eae6ed03f541147975bfebb5}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!ConstBegin@{ConstBegin}}
+\index{ConstBegin@{ConstBegin}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ConstBegin()}{ConstBegin()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Begin\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取指向第一个有效节点的const迭代器 
+
+\begin{DoxyReturn}{返回}
+返回指向第一个有效节点的const迭代器 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+如果不存在有效节点则返回\+Const\+End() 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 650 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Classify\+Production\+Nodes().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1ObjectManager_a673d5b73eae6ed03f541147975bfebb5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a30ef49b57319e930b6011ed03eb7004d}\label{classfrontend_1_1common_1_1ObjectManager_a30ef49b57319e930b6011ed03eb7004d}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!ConstEnd@{ConstEnd}}
+\index{ConstEnd@{ConstEnd}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ConstEnd()}{ConstEnd()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取指向超尾的const迭代器 
+
+\begin{DoxyReturn}{返回}
+返回指向超尾的const迭代器 
+\end{DoxyReturn}
+
+
+在文件 object\+\_\+manager.\+h 第 356 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Classify\+Production\+Nodes().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1ObjectManager_a30ef49b57319e930b6011ed03eb7004d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a7a8ac0056a1fab66cf88142fab62887f}\label{classfrontend_1_1common_1_1ObjectManager_a7a8ac0056a1fab66cf88142fab62887f}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!DefaultMergeFunction2@{DefaultMergeFunction2}}
+\index{DefaultMergeFunction2@{DefaultMergeFunction2}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{DefaultMergeFunction2()}{DefaultMergeFunction2()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+static bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Default\+Merge\+Function2 (\begin{DoxyParamCaption}\item[{T \&}]{node\+\_\+dst,  }\item[{T \&}]{node\+\_\+src }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+默认用来合并两个对象的函数 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em node\+\_\+dst} & ：合并到的对象，该对象在成功合并后会被保留 \\
+\hline
+\mbox{\texttt{ in}}  & {\em node\+\_\+src} & ：被合并的对象，该对象在成功合并后会被删除 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回合并是否成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：合并成功 \\
+\hline
+{\em false} & ：合并失败 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 object\+\_\+manager.\+h 第 207 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a8fc0513ed1a46628e8b4f7b89897615b}\label{classfrontend_1_1common_1_1ObjectManager_a8fc0513ed1a46628e8b4f7b89897615b}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!DefaultMergeFunction3@{DefaultMergeFunction3}}
+\index{DefaultMergeFunction3@{DefaultMergeFunction3}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{DefaultMergeFunction3()}{DefaultMergeFunction3()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+template$<$class Manager $>$ \\
+static bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Default\+Merge\+Function3 (\begin{DoxyParamCaption}\item[{T \&}]{node\+\_\+dst,  }\item[{T \&}]{node\+\_\+src,  }\item[{Manager \&}]{manager }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+默认用来在管理器参与下合并两个对象的函数 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em node\+\_\+dst} & ：合并到的对象，该对象在成功合并后会被保留 \\
+\hline
+\mbox{\texttt{ in}}  & {\em node\+\_\+src} & ：被合并的对象，该对象在成功合并后会被删除 \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em manager} & ：上层管理器，控制合并过程 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回合并是否成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：合并成功 \\
+\hline
+{\em false} & ：合并失败 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 object\+\_\+manager.\+h 第 218 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_adbb63b10c08fd65047c2b6ee5cae362d}\label{classfrontend_1_1common_1_1ObjectManager_adbb63b10c08fd65047c2b6ee5cae362d}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!EmplaceObject@{EmplaceObject}}
+\index{EmplaceObject@{EmplaceObject}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{EmplaceObject()}{EmplaceObject()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+template$<$class Object\+Type , class... Args$>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Emplace\+Object (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+系统自行选择最佳位置放置对象 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in,out}}  & {\em args} & ：对象构造函数使用的参数 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回唯一对应于对象的\+ID 
+\end{DoxyReturn}
+
+
+在文件 object\+\_\+manager.\+h 第 452 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+End\+Node(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Create\+Process\+Function\+Class\+Object(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Emplace\+Production\+Item\+Set(), frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+In\+Or\+Insert(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Sub\+Add\+Binary\+Operator\+Node(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Sub\+Add\+Binary\+Unary\+Operator\+Node(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Sub\+Add\+Non\+Terminal\+Node(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Sub\+Add\+Terminal\+Node() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Sub\+Add\+Unary\+Operator\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1ObjectManager_adbb63b10c08fd65047c2b6ee5cae362d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a19c9433885906dddf365a8c05dbb5f52}\label{classfrontend_1_1common_1_1ObjectManager_a19c9433885906dddf365a8c05dbb5f52}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!EmplaceObjectIndex@{EmplaceObjectIndex}}
+\index{EmplaceObjectIndex@{EmplaceObjectIndex}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{EmplaceObjectIndex()}{EmplaceObjectIndex()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+template$<$class Object\+Type , class... Args$>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Emplace\+Object\+Index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id,  }\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+在指定位置放置对象 
+
+
+\begin{DoxyTemplParams}{模板参数}
+{\em Object\+Type} & ：放置的对象类型，默认使用容器声明时指定的对象类型 允许使用该类型的派生类类型 \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：要放置对象的位置，可以为大于等于nodes\+\_\+.\+size()的值 \\
+\hline
+\mbox{\texttt{ in}}  & {\em args} & ：对象的构造函数参数 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回id 
+\end{DoxyReturn}
+
+
+在文件 object\+\_\+manager.\+h 第 463 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_aa70778e00decfb966ffdbcee62b92bd3}\label{classfrontend_1_1common_1_1ObjectManager_aa70778e00decfb966ffdbcee62b92bd3}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!EmplacePointerIndex@{EmplacePointerIndex}}
+\index{EmplacePointerIndex@{EmplacePointerIndex}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{EmplacePointerIndex()}{EmplacePointerIndex()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Emplace\+Pointer\+Index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id,  }\item[{T $\ast$}]{pointer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+在指定位置放置指针 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：放置对象的位置 \\
+\hline
+\mbox{\texttt{ in}}  & {\em pointer} & ：对象的指针 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回id 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+不允许传入空指针 
+\end{DoxyAttention}
+不可以覆盖已有非空且不同的指针
+
+在文件 object\+\_\+manager.\+h 第 472 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a99d1a3c63580f5a44f26e2c1351398f7}\label{classfrontend_1_1common_1_1ObjectManager_a99d1a3c63580f5a44f26e2c1351398f7}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!End@{End}}
+\index{End@{End}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{End()}{End()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1Iterator}{Iterator}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::End (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取指向超尾的迭代器 
+
+\begin{DoxyReturn}{返回}
+返回指向超尾的迭代器 
+\end{DoxyReturn}
+
+
+在文件 object\+\_\+manager.\+h 第 349 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Dfa\+Minimize().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1ObjectManager_a99d1a3c63580f5a44f26e2c1351398f7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a58bda366de57299c3f17e1abacb691c4}\label{classfrontend_1_1common_1_1ObjectManager_a58bda366de57299c3f17e1abacb691c4}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!GetBestEmptyIndex@{GetBestEmptyIndex}}
+\index{GetBestEmptyIndex@{GetBestEmptyIndex}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{GetBestEmptyIndex()}{GetBestEmptyIndex()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Get\+Best\+Empty\+Index\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+获取当前最佳可用\+ID 
+
+\begin{DoxyReturn}{返回}
+返回当前最佳可用\+ID 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+优先选择removed\+\_\+ids\+\_\+中的\+I\+D，如果不存在则返回nodes\+\_\+.\+size() 
+\end{DoxyNote}
+查找有效\+ID
+
+无有效已删除\+ID
+
+在文件 object\+\_\+manager.\+h 第 605 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a7da20be38a510f6972ba56ba99d0fe6c}\label{classfrontend_1_1common_1_1ObjectManager_a7da20be38a510f6972ba56ba99d0fe6c}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!GetObject@{GetObject}}
+\index{GetObject@{GetObject}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{GetObject()}{GetObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T \& \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Get\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取对象的引用 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：要获取引用的对象的\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回获取到的对象的引用 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+id必须指向有效的的对象 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 423 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a204350a871426aaf21ddc9cd535925b6}\label{classfrontend_1_1common_1_1ObjectManager_a204350a871426aaf21ddc9cd535925b6}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!GetObject@{GetObject}}
+\index{GetObject@{GetObject}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{GetObject()}{GetObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const T \& \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Get\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取对象的const引用 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：要获取const引用的对象的\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回获取到的对象的const引用 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+id必须指向有效的的对象 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 418 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Get\+Intermediate\+Node(), frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::\+Get\+Object(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Sub\+Add\+Binary\+Operator\+Node(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Sub\+Add\+Binary\+Unary\+Operator\+Node(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Sub\+Add\+Non\+Terminal\+Node(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Sub\+Add\+Terminal\+Node() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Sub\+Add\+Unary\+Operator\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1ObjectManager_a204350a871426aaf21ddc9cd535925b6_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a0812ece46329204c2248bba60293ebca}\label{classfrontend_1_1common_1_1ObjectManager_a0812ece46329204c2248bba60293ebca}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!IsSame@{IsSame}}
+\index{IsSame@{IsSame}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{IsSame()}{IsSame()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Is\+Same (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id1,  }\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id2 }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+判断两个\+I\+D是否指向同一对象 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id1} & ：要判断的一个\+ID \\
+\hline
+\mbox{\texttt{ in}}  & {\em id2} & ：要判断的另一个\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回两个\+I\+D是否指向相同对象 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：两个\+I\+D指向相同对象 \\
+\hline
+{\em false} & ：两个\+I\+D指向不同对象 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+允许输入相同\+ID 
+\end{DoxyNote}
+
+
+在文件 object\+\_\+manager.\+h 第 325 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a539cafb236a4acf67fa2d04ef7c8dc3c}\label{classfrontend_1_1common_1_1ObjectManager_a539cafb236a4acf67fa2d04ef7c8dc3c}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!MergeObjects@{MergeObjects}}
+\index{MergeObjects@{MergeObjects}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{MergeObjects()}{MergeObjects()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Merge\+Objects (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id\+\_\+dst,  }\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id\+\_\+src,  }\item[{const std\+::function$<$ bool(T \&, T \&)$>$ \&}]{merge\+\_\+function = {\ttfamily \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7a8ac0056a1fab66cf88142fab62887f}{Default\+Merge\+Function2}}} }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+合并两个对象，合并成功会删除id\+\_\+src对象 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id\+\_\+dst} & ：要合并到的对象（合并后保留） \\
+\hline
+\mbox{\texttt{ in}}  & {\em id\+\_\+src} & ：用来合并的对象（成功合并后删除） \\
+\hline
+\mbox{\texttt{ in}}  & {\em merge\+\_\+function} & ：控制合并过程的函数，第一个参数为id\+\_\+dst对应的对象 第二个参数为id\+\_\+src对应的对象 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否合并成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em false} & ：合并同一个对象或id\+\_\+src对应的节点不允许合并或merge\+\_\+function返回false \\
+\hline
+{\em true} & ：合并成功 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyAttention}{注意}
+合并失败则不会删除源对象，id\+\_\+dst和id\+\_\+src必须指向已存在的对象 
+\end{DoxyAttention}
+给定源节点不允许作为合并时的源节点
+
+合并失败
+
+在文件 object\+\_\+manager.\+h 第 527 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a5e8bb025b99c58c0820a6c129221e03c}\label{classfrontend_1_1common_1_1ObjectManager_a5e8bb025b99c58c0820a6c129221e03c}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!MergeObjectsWithManager@{MergeObjectsWithManager}}
+\index{MergeObjectsWithManager@{MergeObjectsWithManager}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{MergeObjectsWithManager()}{MergeObjectsWithManager()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+template$<$class Manager $>$ \\
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Merge\+Objects\+With\+Manager (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id\+\_\+dst,  }\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id\+\_\+src,  }\item[{Manager \&}]{manager,  }\item[{const std\+::function$<$ bool(T \&, T \&, Manager \&)$>$ \&}]{merge\+\_\+function = {\ttfamily \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a8fc0513ed1a46628e8b4f7b89897615b}{Default\+Merge\+Function3}}} }\end{DoxyParamCaption})}
+
+
+
+合并两个对象，合并成功会删除id\+\_\+src节点 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id\+\_\+dst} & ：要合并到的对象（合并后保留） \\
+\hline
+\mbox{\texttt{ in}}  & {\em id\+\_\+src} & ：用来合并的对象（成功合并后删除） \\
+\hline
+\mbox{\texttt{ in}}  & {\em manager} & ：合并管理器，在调用merge\+\_\+function时使用 \\
+\hline
+\mbox{\texttt{ in}}  & {\em merge\+\_\+function} & ：控制合并过程的函数，第一个参数为id\+\_\+dst对应的对象 第二个参数为id\+\_\+src对应的对象，第三个参数为传入的manager \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否合并成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em false} & ：合并同一个对象或id\+\_\+src对应的节点不允许合并或merge\+\_\+function返回false \\
+\hline
+{\em true} & ：合并成功 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyAttention}{注意}
+合并失败则不会删除源对象，id\+\_\+dst和id\+\_\+src必须指向已存在的对象 
+\end{DoxyAttention}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a9b171a12633d32ae123806810ad4f3e4}\label{classfrontend_1_1common_1_1ObjectManager_a9b171a12633d32ae123806810ad4f3e4}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!MergeObjectsWithManager@{MergeObjectsWithManager}}
+\index{MergeObjectsWithManager@{MergeObjectsWithManager}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{MergeObjectsWithManager()}{MergeObjectsWithManager()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+template$<$class Manager $>$ \\
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Merge\+Objects\+With\+Manager (\begin{DoxyParamCaption}\item[{typename \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id\+\_\+dst,  }\item[{typename \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id\+\_\+src,  }\item[{Manager \&}]{manager,  }\item[{const std\+::function$<$ bool(T \&, T \&, Manager \&)$>$ \&}]{merge\+\_\+function }\end{DoxyParamCaption})}
+
+给定源节点不允许作为合并时的源节点
+
+合并失败
+
+在文件 object\+\_\+manager.\+h 第 550 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_af218c097d7fa411572f79043be378ee7}\label{classfrontend_1_1common_1_1ObjectManager_af218c097d7fa411572f79043be378ee7}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!ObjectManagerInit@{ObjectManagerInit}}
+\index{ObjectManagerInit@{ObjectManagerInit}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ObjectManagerInit()}{ObjectManagerInit()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Object\+Manager\+Init\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+初始化，如果容器中存在节点则全部释放 
+
+
+
+在文件 object\+\_\+manager.\+h 第 569 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Dfa\+Init(), frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Dfa\+Minimize() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Syntax\+Generator\+Init().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1ObjectManager_af218c097d7fa411572f79043be378ee7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_afc8bd11762174e42dcb8785a07c691d6}\label{classfrontend_1_1common_1_1ObjectManager_afc8bd11762174e42dcb8785a07c691d6}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T \& \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取对象的引用 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：要获取引用的对象的\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回获取到的对象的引用 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+与\+Get\+Object等效 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+id必须指向有效的的对象 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 629 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_ab4083adad38bb9862267f2b69bab1e7f}\label{classfrontend_1_1common_1_1ObjectManager_ab4083adad38bb9862267f2b69bab1e7f}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const T \& \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取对象的const引用 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：要获取const引用的对象的\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回获取到的对象的const引用 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+与\+Get\+Object等效 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+id必须指向有效的的对象 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 624 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a80621136eb2b70cec29e8230cc227a03}\label{classfrontend_1_1common_1_1ObjectManager_a80621136eb2b70cec29e8230cc227a03}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!RemoveObject@{RemoveObject}}
+\index{RemoveObject@{RemoveObject}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RemoveObject()}{RemoveObject()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Remove\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+删除节点并释放节点内存（默认删除语义） 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：要删除的对象的\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+一定返回true 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+入参必须指向有效的对象 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 429 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_affc6ed45a06c406ad6c920cd6d3acbf0}\label{classfrontend_1_1common_1_1ObjectManager_affc6ed45a06c406ad6c920cd6d3acbf0}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!RemoveObjectNoDelete@{RemoveObjectNoDelete}}
+\index{RemoveObjectNoDelete@{RemoveObjectNoDelete}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RemoveObjectNoDelete()}{RemoveObjectNoDelete()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+T $\ast$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Remove\+Object\+No\+Delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+仅删除节点记录但不释放节点内存 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：要删除的对象的\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回指向对象的指针 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+入参必须指向有效的对象 
+\end{DoxyAttention}
+清理末尾无效\+ID
+
+在文件 object\+\_\+manager.\+h 第 436 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_ad1e26c9bf05a2f557b0e840b4fc8e95a}\label{classfrontend_1_1common_1_1ObjectManager_ad1e26c9bf05a2f557b0e840b4fc8e95a}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!serialize@{serialize}}
+\index{serialize@{serialize}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{serialize()}{serialize()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+template$<$class Archive $>$ \\
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::serialize (\begin{DoxyParamCaption}\item[{Archive \&}]{ar,  }\item[{const unsigned int}]{version }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+序列化容器 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in,out}}  & {\em ar} & ：序列化使用的档案 \\
+\hline
+\mbox{\texttt{ in}}  & {\em version} & ：序列化文件版本 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{注意}
+该函数应由boost库调用而非手动调用 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 373 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a0ddfa7bd0bad5d62e693694fae4b74cd}\label{classfrontend_1_1common_1_1ObjectManager_a0ddfa7bd0bad5d62e693694fae4b74cd}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!SetAllObjectsCanBeSourceInMerge@{SetAllObjectsCanBeSourceInMerge}}
+\index{SetAllObjectsCanBeSourceInMerge@{SetAllObjectsCanBeSourceInMerge}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{SetAllObjectsCanBeSourceInMerge()}{SetAllObjectsCanBeSourceInMerge()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Set\+All\+Objects\+Can\+Be\+Source\+In\+Merge\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置所有对象在合并时均可以作为源对象（合并成功则源对象被释放） 
+
+
+
+在文件 object\+\_\+manager.\+h 第 512 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_ac691fffa08ec1a9a89d2a38017ed3393}\label{classfrontend_1_1common_1_1ObjectManager_ac691fffa08ec1a9a89d2a38017ed3393}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!SetAllObjectsCanNotBeSourceInMerge@{SetAllObjectsCanNotBeSourceInMerge}}
+\index{SetAllObjectsCanNotBeSourceInMerge@{SetAllObjectsCanNotBeSourceInMerge}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{SetAllObjectsCanNotBeSourceInMerge()}{SetAllObjectsCanNotBeSourceInMerge()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Set\+All\+Objects\+Can\+Not\+Be\+Source\+In\+Merge\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置所有对象在合并时均不可以作为源对象（合并成功则源对象被释放） 
+
+
+
+在文件 object\+\_\+manager.\+h 第 521 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a1b6d1535e60720b771ffc34b514dd63b}\label{classfrontend_1_1common_1_1ObjectManager_a1b6d1535e60720b771ffc34b514dd63b}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!SetObjectCanBeSourceInMerge@{SetObjectCanBeSourceInMerge}}
+\index{SetObjectCanBeSourceInMerge@{SetObjectCanBeSourceInMerge}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{SetObjectCanBeSourceInMerge()}{SetObjectCanBeSourceInMerge()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Set\+Object\+Can\+Be\+Source\+In\+Merge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置给定对象在合并时可以作为源对象（合并成功则源对象被释放） 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：待设置的对象\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+一定返回true 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+传入的参数必须指向已存在的对象 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 498 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a41640aa1828fa9c9eddf738300e44a17}\label{classfrontend_1_1common_1_1ObjectManager_a41640aa1828fa9c9eddf738300e44a17}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!SetObjectCanNotBeSourceInMerge@{SetObjectCanNotBeSourceInMerge}}
+\index{SetObjectCanNotBeSourceInMerge@{SetObjectCanNotBeSourceInMerge}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{SetObjectCanNotBeSourceInMerge()}{SetObjectCanNotBeSourceInMerge()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Set\+Object\+Can\+Not\+Be\+Source\+In\+Merge (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+设置给定对象在合并时不能作为源对象（合并成功则源对象被释放） 
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：待设置的对象\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+一定返回true 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+传入的参数必须指向已存在的对象 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 505 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_ace94586d70da1f07e0af846ad52d42be}\label{classfrontend_1_1common_1_1ObjectManager_ace94586d70da1f07e0af846ad52d42be}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!ShrinkToFit@{ShrinkToFit}}
+\index{ShrinkToFit@{ShrinkToFit}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{ShrinkToFit()}{ShrinkToFit()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Shrink\+To\+Fit\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+调用成员变量的shrink\+\_\+to\+\_\+fit来节省空间 
+
+
+
+在文件 object\+\_\+manager.\+h 第 584 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Dfa\+Minimize().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1ObjectManager_ace94586d70da1f07e0af846ad52d42be_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a1c27178f6f5cf8e5ce2ddec1863f9533}\label{classfrontend_1_1common_1_1ObjectManager_a1c27178f6f5cf8e5ce2ddec1863f9533}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!Size@{Size}}
+\index{Size@{Size}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+size\+\_\+t \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Size\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取容器实际存储的有效对象数量 
+
+\begin{DoxyReturn}{返回}
+返回容器中实际存储的有效对象个数 
+\end{DoxyReturn}
+
+
+在文件 object\+\_\+manager.\+h 第 594 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Production\+Item\+Set().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1ObjectManager_a1c27178f6f5cf8e5ce2ddec1863f9533_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_a4eacfacee3316a29b9f385c30c175c5a}\label{classfrontend_1_1common_1_1ObjectManager_a4eacfacee3316a29b9f385c30c175c5a}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!Swap@{Swap}}
+\index{Swap@{Swap}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Swap()}{Swap()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Swap (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$ $\ast$}]{manager\+\_\+other }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+交换两个容器的内容 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in,out}}  & {\em manager\+\_\+other} & ：要交换的另一个容器 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+允许传入this，但会执行完整的交换流程 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+不允许传入空指针 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 490 行定义.
+
+
+
+\doxysubsection{友元及相关函数文档}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_ac98d07dd8f7b70e16ccb9a01abf56b9c}\label{classfrontend_1_1common_1_1ObjectManager_ac98d07dd8f7b70e16ccb9a01abf56b9c}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!boost::serialization::access@{boost::serialization::access}}
+\index{boost::serialization::access@{boost::serialization::access}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{boost::serialization::access}{boost::serialization::access}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+friend class boost\+::serialization\+::access\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+声明友元以允许boost-\/serialization库访问内部成员 
+
+
+
+在文件 object\+\_\+manager.\+h 第 366 行定义.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_ae88ac60df51afa0799810e2c3563ea2d}\label{classfrontend_1_1common_1_1ObjectManager_ae88ac60df51afa0799810e2c3563ea2d}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!nodes\_@{nodes\_}}
+\index{nodes\_@{nodes\_}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nodes\_}{nodes\_}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::vector$<$T$\ast$$>$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::nodes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存放指向节点的指针，节点不存在则置为nullptr 
+
+
+
+在文件 object\+\_\+manager.\+h 第 403 行定义.
+
+
+
+被这些函数引用 frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::\+Begin(), frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::\+Can\+Be\+Source\+In\+Merge(), frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::\+Capacity(), frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::\+Const\+Begin(), frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::\+Const\+End(), frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::\+End(), frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::serialize(), frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Iterator\+::\+Set\+Id(), frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::\+Set\+Id() , 以及 frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::\+Swap().
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_aada5766f9ac5e45f817caec3e52647de}\label{classfrontend_1_1common_1_1ObjectManager_aada5766f9ac5e45f817caec3e52647de}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!nodes\_can\_be\_source\_in\_merge@{nodes\_can\_be\_source\_in\_merge}}
+\index{nodes\_can\_be\_source\_in\_merge@{nodes\_can\_be\_source\_in\_merge}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{nodes\_can\_be\_source\_in\_merge}{nodes\_can\_be\_source\_in\_merge}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::vector$<$bool$>$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::nodes\+\_\+can\+\_\+be\+\_\+source\+\_\+in\+\_\+merge\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存储节点在合并时是否允许作为源节点 
+
+
+
+在文件 object\+\_\+manager.\+h 第 407 行定义.
+
+
+
+被这些函数引用 frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::\+Can\+Be\+Source\+In\+Merge(), frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::serialize() , 以及 frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::\+Swap().
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_aa8367e243ee3330aa3d1db7383b1b6ab}\label{classfrontend_1_1common_1_1ObjectManager_aa8367e243ee3330aa3d1db7383b1b6ab}} 
+\index{frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}!removed\_ids\_@{removed\_ids\_}}
+\index{removed\_ids\_@{removed\_ids\_}!frontend::common::ObjectManager$<$ T $>$@{frontend::common::ObjectManager$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{removed\_ids\_}{removed\_ids\_}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+std\+::vector$<$\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}$>$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::removed\+\_\+ids\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存放所有被删除节点对应的\+I\+D（可能大于nodes\+\_\+.\+size()） 
+
+
+
+在文件 object\+\_\+manager.\+h 第 405 行定义.
+
+
+
+被这些函数引用 frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::\+Add\+Removed\+Index(), frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::serialize() , 以及 frontend\+::common\+::\+Object\+Manager$<$ Production\+Item\+Set $>$\+::\+Swap().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Common/\mbox{\hyperlink{object__manager_8h}{object\+\_\+manager.\+h}}\end{DoxyCompactItemize}

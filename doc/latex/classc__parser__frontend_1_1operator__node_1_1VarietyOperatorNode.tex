@@ -1,0 +1,711 @@
+\hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Variety\+Operator\+Node类 参考}
+\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+
+
+表示变量  
+
+
+
+
+{\ttfamily \#include $<$operator\+\_\+node.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Variety\+Operator\+Node 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=276pt]{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Variety\+Operator\+Node 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_aa753d8ca65afe9f0dad10c7b11425e36}{Variety\+Operator\+Node}} (const std\+::string \&variety\+\_\+name, Const\+Tag const\+\_\+tag, \mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a37f6ee0d8ea3f194ac7943f4d32a4a0a}{Left\+Right\+Value\+Tag}} left\+\_\+right\+\_\+value\+\_\+tag)
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a75c7819310aa92bf1b6632b9cbc5dee7}{Variety\+Operator\+Node}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}} \&variety\+\_\+node)=default
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a43591219d3cc44700300ab39d7f29557}{operator=}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}} \&variety\+\_\+node)=default
+\item 
+virtual Const\+Tag \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ad4d6a4c142e34ff22142eca6d4701ac6}{Get\+Result\+Const\+Tag}} () const override
+\begin{DoxyCompactList}\small\item\em 获取该节点操作结果的const标记 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ac39bc02e1f25358d37ba2688300a8cae}{Get\+Result\+Type\+Pointer}} () const override
+\begin{DoxyCompactList}\small\item\em 获取最终结果的类型 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_afd01150de53e83866ba3eb2fac9ec047}{Get\+Result\+Operator\+Node}} () const override
+\begin{DoxyCompactList}\small\item\em 获取最终结果的节点 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a908868d3daf19c0dac817eeecd0bdf86}{Self\+Copy}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&new\+\_\+type, Const\+Tag new\+\_\+const\+\_\+tag) const override
+\begin{DoxyCompactList}\small\item\em 拷贝自身并设置拷贝得到的对象类型为new\+\_\+type \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ae009fdefed7d0fe4ddcc9a3dd302995a}{Set\+Variety\+Name}} (const std\+::string \&variety\+\_\+name)
+\begin{DoxyCompactList}\small\item\em 设置变量名 \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_acafd6685785e1759e4e9bf0fe16c42e9}{Get\+Variety\+Name}} () const
+\begin{DoxyCompactList}\small\item\em 获取变量名 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_afd88e4fda2e912b6686345f644720c2d}{Set\+Const\+Tag}} (Const\+Tag const\+\_\+tag)
+\begin{DoxyCompactList}\small\item\em 设置变量的const标记 \end{DoxyCompactList}\item 
+Const\+Tag \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a4b3e53fe55d1873cff0394cd55ddf9d1}{Get\+Const\+Tag}} () const
+\begin{DoxyCompactList}\small\item\em 获取变量的const标记 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_aab8fe19e01a367a1299f682d0ef59f02}{Set\+Left\+Right\+Value\+Tag}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a37f6ee0d8ea3f194ac7943f4d32a4a0a}{Left\+Right\+Value\+Tag}} left\+\_\+right\+\_\+value\+\_\+tag)
+\begin{DoxyCompactList}\small\item\em 设置变量左右值标记 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a37f6ee0d8ea3f194ac7943f4d32a4a0a}{Left\+Right\+Value\+Tag}} \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a94a8ea3dcdff58835bdeb64549e15b32}{Get\+Left\+Right\+Value\+Tag}} () const
+\begin{DoxyCompactList}\small\item\em 获取变量的左右值标记 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a212a08cb0c6f8c89f43eb35dbd26897e}{Set\+Variety\+Type}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&variety\+\_\+type)
+\begin{DoxyCompactList}\small\item\em 设置变量的类型 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a91c6a50a9b916ea2db13739a8c5ed4bc}{Set\+Variety\+Type\+No\+Check\+Function\+Type}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&variety\+\_\+type)
+\begin{DoxyCompactList}\small\item\em 设置变量的类型，允许使用函数类型 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a6ecc5dcf6ff5daa986ca47e1552c162f}{Get\+Variety\+Type\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取变量类型链 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a1c5421e70225e5de9db2c7f26e650de9}{Get\+Variety\+Type\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取变量类型链 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a6672689ac26f0762b7fc0108659fdb32}{Check\+Variety\+Type\+Valid}} (const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&variety\+\_\+type)
+\begin{DoxyCompactList}\small\item\em 检查给定类型是否可以作为普通变量的类型 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a65d45cd6e353cd86d1bc8e1cc622b4f2}{variety\+\_\+name\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 变量名 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a9b59b88eb7f554ea7649747ca6523d99}{variety\+\_\+type\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 变量类型 \end{DoxyCompactList}\item 
+Const\+Tag \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a2b3936badb9e1e1bd5196c361a46f0d3}{variety\+\_\+const\+\_\+tag\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 变量本身的const标记 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a37f6ee0d8ea3f194ac7943f4d32a4a0a}{Left\+Right\+Value\+Tag}} \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a77772a325a1c239b05858cb8be9431ba}{variety\+\_\+left\+\_\+right\+\_\+value\+\_\+tag\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 变量的左右值标记 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+表示变量 
+
+在文件 operator\+\_\+node.\+h 第 354 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_aa753d8ca65afe9f0dad10c7b11425e36}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_aa753d8ca65afe9f0dad10c7b11425e36}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!VarietyOperatorNode@{VarietyOperatorNode}}
+\index{VarietyOperatorNode@{VarietyOperatorNode}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{VarietyOperatorNode()}{VarietyOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Variety\+Operator\+Node (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{variety\+\_\+name,  }\item[{Const\+Tag}]{const\+\_\+tag,  }\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a37f6ee0d8ea3f194ac7943f4d32a4a0a}{Left\+Right\+Value\+Tag}}}]{left\+\_\+right\+\_\+value\+\_\+tag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 356 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Variety.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a75c7819310aa92bf1b6632b9cbc5dee7}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a75c7819310aa92bf1b6632b9cbc5dee7}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!VarietyOperatorNode@{VarietyOperatorNode}}
+\index{VarietyOperatorNode@{VarietyOperatorNode}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{VarietyOperatorNode()}{VarietyOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Variety\+Operator\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}} \&}]{variety\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a6672689ac26f0762b7fc0108659fdb32}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a6672689ac26f0762b7fc0108659fdb32}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!CheckVarietyTypeValid@{CheckVarietyTypeValid}}
+\index{CheckVarietyTypeValid@{CheckVarietyTypeValid}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{CheckVarietyTypeValid()}{CheckVarietyTypeValid()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Check\+Variety\+Type\+Valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&}]{variety\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+检查给定类型是否可以作为普通变量的类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em variety\+\_\+type} & ：待检查的类型 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回给定类型是否可以作为普通变量类型 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：给定类型可以作为普通变量类型 \\
+\hline
+{\em false} & ：给定类型是\+Struct\+Or\+Basic\+Type\+::k\+Function或 Struct\+Or\+Basic\+Type\+::k\+Initialize\+List\\
+\hline
+\end{DoxyRetVals}
+变量仅允许使用 Struct\+Or\+Basic\+Type\+::k\+Basic Struct\+Or\+Basic\+Type\+::k\+Pointer Struct\+Or\+Basic\+Type\+::k\+Struct Struct\+Or\+Basic\+Type\+::k\+Union Struct\+Or\+Basic\+Type\+::k\+Enum 
+
+在文件 operator\+\_\+node.\+cpp 第 36 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface\+::\+Get\+Type().
+
+
+
+被这些函数引用 Set\+Variety\+Type() , 以及 Set\+Variety\+Type\+No\+Check\+Function\+Type().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a6672689ac26f0762b7fc0108659fdb32_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a6672689ac26f0762b7fc0108659fdb32_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a4b3e53fe55d1873cff0394cd55ddf9d1}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a4b3e53fe55d1873cff0394cd55ddf9d1}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!GetConstTag@{GetConstTag}}
+\index{GetConstTag@{GetConstTag}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetConstTag()}{GetConstTag()}}
+{\footnotesize\ttfamily Const\+Tag c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Get\+Const\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取变量的const标记 
+
+\begin{DoxyReturn}{返回}
+返回变量的const标记 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em Const\+Tag\+::k\+Const} & ：变量不允许修改 \\
+\hline
+{\em Const\+Tag\+::k\+Non\+Const} & ：变量允许修改 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 operator\+\_\+node.\+h 第 395 行定义.
+
+
+
+引用了 variety\+\_\+const\+\_\+tag\+\_\+.
+
+
+
+被这些函数引用 Get\+Result\+Const\+Tag() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Dereference\+Operator\+Node\+::\+Get\+Result\+Const\+Tag().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a4b3e53fe55d1873cff0394cd55ddf9d1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a94a8ea3dcdff58835bdeb64549e15b32}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a94a8ea3dcdff58835bdeb64549e15b32}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!GetLeftRightValueTag@{GetLeftRightValueTag}}
+\index{GetLeftRightValueTag@{GetLeftRightValueTag}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetLeftRightValueTag()}{GetLeftRightValueTag()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a37f6ee0d8ea3f194ac7943f4d32a4a0a}{Left\+Right\+Value\+Tag}} c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Get\+Left\+Right\+Value\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取变量的左右值标记 
+
+\begin{DoxyReturn}{返回}
+返回左右值标记 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em \mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a37f6ee0d8ea3f194ac7943f4d32a4a0aaa2baf12c40baf489cffcefcb9b81b926}{Left\+Right\+Value\+Tag\+::k\+Left\+Value}}} & ：左值 \\
+\hline
+{\em \mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a37f6ee0d8ea3f194ac7943f4d32a4a0aab09bfa0519fcbc6ee7b5fde9ec872cf2}{Left\+Right\+Value\+Tag\+::k\+Right\+Value}}} & ：右值 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 operator\+\_\+node.\+h 第 405 行定义.
+
+
+
+引用了 variety\+\_\+left\+\_\+right\+\_\+value\+\_\+tag\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ad4d6a4c142e34ff22142eca6d4701ac6}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ad4d6a4c142e34ff22142eca6d4701ac6}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!GetResultConstTag@{GetResultConstTag}}
+\index{GetResultConstTag@{GetResultConstTag}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultConstTag()}{GetResultConstTag()}}
+{\footnotesize\ttfamily virtual Const\+Tag c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Get\+Result\+Const\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取该节点操作结果的const标记 
+
+\begin{DoxyReturn}{返回}
+返回操作结果的const标记
+\end{DoxyReturn}
+1.成员访问、解引用等操作的后续操作不是对原结构体/原指针操作，而是对得到的 新对象进行操作，不同操作类型操作的对象不同 2.通过这个函数抽象获取最终结果的过程以忽略操作的不同 3.以成员访问为例，该函数获取指定的成员在结构体中的const标记，以数学运算 为例，该函数获取运算结果的const标记（\+Const\+Tag\+::k\+Non\+Const），以变量声明 为例，该函数返回声明的变量的const标记（对象不变） 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 367 行定义.
+
+
+
+引用了 Get\+Const\+Tag().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ad4d6a4c142e34ff22142eca6d4701ac6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_afd01150de53e83866ba3eb2fac9ec047}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_afd01150de53e83866ba3eb2fac9ec047}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!GetResultOperatorNode@{GetResultOperatorNode}}
+\index{GetResultOperatorNode@{GetResultOperatorNode}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultOperatorNode()}{GetResultOperatorNode()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Get\+Result\+Operator\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取最终结果的节点 
+
+\begin{DoxyReturn}{返回}
+返回指向最终结果的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：自身是最终节点\\
+\hline
+\end{DoxyRetVals}
+1.该函数用于抽象获取操作最终结果的过程 2.基础变量和初始化变量最终操作节点就是本身，所以返回nullptr 3.赋值运算返回被赋值的对象，解引用返回解引用后得到的对象，以此为例 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 372 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ac39bc02e1f25358d37ba2688300a8cae}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ac39bc02e1f25358d37ba2688300a8cae}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!GetResultTypePointer@{GetResultTypePointer}}
+\index{GetResultTypePointer@{GetResultTypePointer}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultTypePointer()}{GetResultTypePointer()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取最终结果的类型 
+
+\begin{DoxyReturn}{返回}
+返回类型链头结点的const指针
+\end{DoxyReturn}
+设计思路同\+Get\+Result\+Const\+Tag 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 368 行定义.
+
+
+
+引用了 variety\+\_\+type\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Mathematical\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Dereference\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ac39bc02e1f25358d37ba2688300a8cae_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_acafd6685785e1759e4e9bf0fe16c42e9}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_acafd6685785e1759e4e9bf0fe16c42e9}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!GetVarietyName@{GetVarietyName}}
+\index{GetVarietyName@{GetVarietyName}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetVarietyName()}{GetVarietyName()}}
+{\footnotesize\ttfamily const std\+::string\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Get\+Variety\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取变量名 
+
+\begin{DoxyReturn}{返回}
+返回变量名的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 387 行定义.
+
+
+
+引用了 variety\+\_\+name\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Define\+Variety\+Or\+Init\+Value().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_acafd6685785e1759e4e9bf0fe16c42e9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a6ecc5dcf6ff5daa986ca47e1552c162f}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a6ecc5dcf6ff5daa986ca47e1552c162f}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!GetVarietyTypePointer@{GetVarietyTypePointer}}
+\index{GetVarietyTypePointer@{GetVarietyTypePointer}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetVarietyTypePointer()}{GetVarietyTypePointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Get\+Variety\+Type\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取变量类型链 
+
+\begin{DoxyReturn}{返回}
+返回指向变量类型链头结点的const指针 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 428 行定义.
+
+
+
+引用了 variety\+\_\+type\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a1c5421e70225e5de9db2c7f26e650de9}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a1c5421e70225e5de9db2c7f26e650de9}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!GetVarietyTypeReference@{GetVarietyTypeReference}}
+\index{GetVarietyTypeReference@{GetVarietyTypeReference}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetVarietyTypeReference()}{GetVarietyTypeReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Get\+Variety\+Type\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取变量类型链 
+
+\begin{DoxyReturn}{返回}
+返回变量类型链头结点的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 433 行定义.
+
+
+
+引用了 variety\+\_\+type\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Variety\+Assignable\+By\+Initialize\+List().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a1c5421e70225e5de9db2c7f26e650de9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a43591219d3cc44700300ab39d7f29557}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a43591219d3cc44700300ab39d7f29557}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!operator=@{operator=}}
+\index{operator=@{operator=}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}} \&}]{variety\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a908868d3daf19c0dac817eeecd0bdf86}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a908868d3daf19c0dac817eeecd0bdf86}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!SelfCopy@{SelfCopy}}
+\index{SelfCopy@{SelfCopy}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SelfCopy()}{SelfCopy()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Self\+Copy (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{new\+\_\+type,  }\item[{Const\+Tag}]{new\+\_\+const\+\_\+tag }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+拷贝自身并设置拷贝得到的对象类型为new\+\_\+type 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em new\+\_\+type} & ：拷贝后得到的对象的类型 \\
+\hline
+\mbox{\texttt{ in}}  & {\em new\+\_\+const\+\_\+tag} & ：拷贝后得到的对象的新const标记 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回指向拷贝后的对象的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：设置初始化数据为非const\\
+\hline
+\end{DoxyRetVals}
+该函数用于类型转换 \begin{DoxyAttention}{注意}
+仅允许对变量、初始化值和类型转换节点调用该函数 
+\end{DoxyAttention}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_afaf8c7f881d6b57c275611312b5e0f78}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+cpp 第 6 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_afd88e4fda2e912b6686345f644720c2d}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_afd88e4fda2e912b6686345f644720c2d}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!SetConstTag@{SetConstTag}}
+\index{SetConstTag@{SetConstTag}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetConstTag()}{SetConstTag()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Set\+Const\+Tag (\begin{DoxyParamCaption}\item[{Const\+Tag}]{const\+\_\+tag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置变量的const标记 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em const\+\_\+tag} & ：const标记 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 operator\+\_\+node.\+h 第 390 行定义.
+
+
+
+引用了 variety\+\_\+const\+\_\+tag\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_aab8fe19e01a367a1299f682d0ef59f02}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_aab8fe19e01a367a1299f682d0ef59f02}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!SetLeftRightValueTag@{SetLeftRightValueTag}}
+\index{SetLeftRightValueTag@{SetLeftRightValueTag}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetLeftRightValueTag()}{SetLeftRightValueTag()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Set\+Left\+Right\+Value\+Tag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a37f6ee0d8ea3f194ac7943f4d32a4a0a}{Left\+Right\+Value\+Tag}}}]{left\+\_\+right\+\_\+value\+\_\+tag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置变量左右值标记 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em left\+\_\+right\+\_\+value\+\_\+tag} & ：左右值标记 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 operator\+\_\+node.\+h 第 398 行定义.
+
+
+
+引用了 variety\+\_\+left\+\_\+right\+\_\+value\+\_\+tag\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ae009fdefed7d0fe4ddcc9a3dd302995a}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ae009fdefed7d0fe4ddcc9a3dd302995a}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!SetVarietyName@{SetVarietyName}}
+\index{SetVarietyName@{SetVarietyName}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetVarietyName()}{SetVarietyName()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Set\+Variety\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{variety\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置变量名 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em variety\+\_\+name} & ：变量名 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 operator\+\_\+node.\+h 第 382 行定义.
+
+
+
+引用了 variety\+\_\+name\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a212a08cb0c6f8c89f43eb35dbd26897e}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a212a08cb0c6f8c89f43eb35dbd26897e}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!SetVarietyType@{SetVarietyType}}
+\index{SetVarietyType@{SetVarietyType}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetVarietyType()}{SetVarietyType()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Set\+Variety\+Type (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{variety\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置变量的类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em variety\+\_\+type} & ：类型链头结点const指针 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否可以设置给定类型 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：可以设置给定类型 \\
+\hline
+{\em false} & ：不可以设置给定类型 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+变量允许使用的类型参考\+Check\+Variety\+Type\+Valid 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+cpp 第 14 行定义.
+
+
+
+引用了 Check\+Variety\+Type\+Valid() , 以及 variety\+\_\+type\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Check\+Assignable(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Check\+Sentence\+In\+Function\+Valid() , 以及 c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Object\+Construct\+Data\+::\+Construct\+Object().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a212a08cb0c6f8c89f43eb35dbd26897e_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a212a08cb0c6f8c89f43eb35dbd26897e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a91c6a50a9b916ea2db13739a8c5ed4bc}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a91c6a50a9b916ea2db13739a8c5ed4bc}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!SetVarietyTypeNoCheckFunctionType@{SetVarietyTypeNoCheckFunctionType}}
+\index{SetVarietyTypeNoCheckFunctionType@{SetVarietyTypeNoCheckFunctionType}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetVarietyTypeNoCheckFunctionType()}{SetVarietyTypeNoCheckFunctionType()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Set\+Variety\+Type\+No\+Check\+Function\+Type (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{variety\+\_\+type }\end{DoxyParamCaption})}
+
+
+
+设置变量的类型，允许使用函数类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em variety\+\_\+type} & ：类型链头结点const指针 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否可以设置给定类型 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：可以设置给定类型 \\
+\hline
+{\em false} & ：不可以设置给定类型\\
+\hline
+\end{DoxyRetVals}
+1.如果不可以设置则不会设置 2.相比于\+Set\+Variety\+Type，允许使用\+Function\+Type作为变量类型 3.该函数仅用于初始化列表赋值时构建参与检查的\+Variety\+Type和解引用 
+
+在文件 operator\+\_\+node.\+cpp 第 25 行定义.
+
+
+
+引用了 Check\+Variety\+Type\+Valid() , 以及 variety\+\_\+type\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a91c6a50a9b916ea2db13739a8c5ed4bc_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a2b3936badb9e1e1bd5196c361a46f0d3}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a2b3936badb9e1e1bd5196c361a46f0d3}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!variety\_const\_tag\_@{variety\_const\_tag\_}}
+\index{variety\_const\_tag\_@{variety\_const\_tag\_}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{variety\_const\_tag\_}{variety\_const\_tag\_}}
+{\footnotesize\ttfamily Const\+Tag c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::variety\+\_\+const\+\_\+tag\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+变量本身的const标记 
+
+
+
+在文件 operator\+\_\+node.\+h 第 458 行定义.
+
+
+
+被这些函数引用 Get\+Const\+Tag() , 以及 Set\+Const\+Tag().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a77772a325a1c239b05858cb8be9431ba}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a77772a325a1c239b05858cb8be9431ba}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!variety\_left\_right\_value\_tag\_@{variety\_left\_right\_value\_tag\_}}
+\index{variety\_left\_right\_value\_tag\_@{variety\_left\_right\_value\_tag\_}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{variety\_left\_right\_value\_tag\_}{variety\_left\_right\_value\_tag\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a37f6ee0d8ea3f194ac7943f4d32a4a0a}{Left\+Right\+Value\+Tag}} c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::variety\+\_\+left\+\_\+right\+\_\+value\+\_\+tag\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+变量的左右值标记 
+
+
+
+在文件 operator\+\_\+node.\+h 第 460 行定义.
+
+
+
+被这些函数引用 Get\+Left\+Right\+Value\+Tag() , 以及 Set\+Left\+Right\+Value\+Tag().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a65d45cd6e353cd86d1bc8e1cc622b4f2}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a65d45cd6e353cd86d1bc8e1cc622b4f2}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!variety\_name\_@{variety\_name\_}}
+\index{variety\_name\_@{variety\_name\_}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{variety\_name\_}{variety\_name\_}}
+{\footnotesize\ttfamily std\+::string c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::variety\+\_\+name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+变量名 
+
+
+
+在文件 operator\+\_\+node.\+h 第 454 行定义.
+
+
+
+被这些函数引用 Get\+Variety\+Name() , 以及 Set\+Variety\+Name().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a9b59b88eb7f554ea7649747ca6523d99}\label{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a9b59b88eb7f554ea7649747ca6523d99}} 
+\index{c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}!variety\_type\_@{variety\_type\_}}
+\index{variety\_type\_@{variety\_type\_}!c\_parser\_frontend::operator\_node::VarietyOperatorNode@{c\_parser\_frontend::operator\_node::VarietyOperatorNode}}
+\doxysubsubsection{\texorpdfstring{variety\_type\_}{variety\_type\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::variety\+\_\+type\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+变量类型 
+
+
+
+在文件 operator\+\_\+node.\+h 第 456 行定义.
+
+
+
+被这些函数引用 Get\+Result\+Type\+Pointer(), Get\+Variety\+Type\+Pointer(), Get\+Variety\+Type\+Reference(), Set\+Variety\+Type() , 以及 Set\+Variety\+Type\+No\+Check\+Function\+Type().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8h}{operator\+\_\+node.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8cpp}{operator\+\_\+node.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,6 @@
+<map id="frontend::generator::dfa_generator::nfa_generator::NfaGenerator::Closure" name="frontend::generator::dfa_generator::nfa_generator::NfaGenerator::Closure">
+<area shape="rect" id="node1" title="获取给定NFA节点的所有等效节点ID（包含自身）" alt="" coords="5,42,193,113"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1common_1_1MultimapObjectManager.html#a533e7b18b83514f9782c24c1781646b2" title="通过一个id查询引用相同底层对象的所有id" alt="" coords="241,5,472,61"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed" title="根据NFA节点ID获取NFA节点" alt="" coords="263,86,451,157"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1common_1_1MultimapObjectManager.html#a271ef9fe0032f1eeb8585fb329f53cbb" title="获取指向有效对象的引用" alt="" coords="520,101,732,142"/>
+</map>

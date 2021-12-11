@@ -1,0 +1,4 @@
+<map id="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ShiftAttachedData::SetNextSyntaxAnalysisTableEntryId" name="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ShiftAttachedData::SetNextSyntaxAnalysisTableEntryId">
+<area shape="rect" id="node1" title="设置移入单词后转移到的语法分析表条目ID" alt="" coords="244,5,497,91"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry.html#a97734fabdf3a78ce6dec3aa7abf9db69" title="修改语法分析表中所有指定的语法分析表ID为新ID" alt="" coords="5,13,196,83"/>
+</map>

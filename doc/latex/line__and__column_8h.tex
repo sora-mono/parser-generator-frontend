@@ -1,0 +1,41 @@
+\hypertarget{line__and__column_8h}{}\doxysection{src/\+Parser/line\+\_\+and\+\_\+column.h 文件参考}
+\label{line__and__column_8h}\index{src/Parser/line\_and\_column.h@{src/Parser/line\_and\_column.h}}
+
+
+存储当前解析到的源文件行数和列数  
+
+
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{line__and__column_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{命名空间}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefrontend}{frontend}}
+\item 
+ \mbox{\hyperlink{namespacefrontend_1_1parser}{frontend\+::parser}}
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{namespacefrontend_1_1parser_a79d5fb6dfa446e6c683e6257d27a6944}{frontend\+::parser\+::\+Get\+Line}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前行数 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{namespacefrontend_1_1parser_aff0816dfe7d9e7d2a7f1349e4194d7b1}{frontend\+::parser\+::\+Get\+Column}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前列数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacefrontend_1_1parser_a59928cc6510133886f5b191062f76846}{frontend\+::parser\+::\+Set\+Line}} (size\+\_\+t line)
+\begin{DoxyCompactList}\small\item\em 设置当前行数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacefrontend_1_1parser_a633860090eb822d1fb009c8bef7ff745}{frontend\+::parser\+::\+Set\+Column}} (size\+\_\+t column)
+\begin{DoxyCompactList}\small\item\em 设置当前列数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+存储当前解析到的源文件行数和列数 
+
+\begin{DoxyNote}{注解}
+表示行数与列数的变量都是thread\+\_\+loacl修饰的全局变量 
+\end{DoxyNote}

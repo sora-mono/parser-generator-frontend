@@ -1,0 +1,46 @@
+\hypertarget{unordered__struct__manager_8h}{}\doxysection{src/\+Common/unordered\+\_\+struct\+\_\+manager.h 文件参考}
+\label{unordered__struct__manager_8h}\index{src/Common/unordered\_struct\_manager.h@{src/Common/unordered\_struct\_manager.h}}
+
+
+将多元素结构哈希存储的类  
+
+
+{\ttfamily \#include $<$unordered\+\_\+set$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include \char`\"{}Common/id\+\_\+wrapper.\+h\char`\"{}}\newline
+unordered\+\_\+struct\+\_\+manager.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unordered__struct__manager_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{unordered__struct__manager_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager$<$ Struct\+Type, Hasher $>$}}
+\begin{DoxyCompactList}\small\item\em 建立stl未提供hash方法的结构的哈希存储,通过\+I\+D一一标识对象 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{命名空间}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefrontend}{frontend}}
+\item 
+ \mbox{\hyperlink{namespacefrontend_1_1common}{frontend\+::common}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+将多元素结构哈希存储的类 
+
+\begin{DoxyNote}{注解}
+该类仅支持插入对象和全部清空，不支持删除单个对象 
+\end{DoxyNote}

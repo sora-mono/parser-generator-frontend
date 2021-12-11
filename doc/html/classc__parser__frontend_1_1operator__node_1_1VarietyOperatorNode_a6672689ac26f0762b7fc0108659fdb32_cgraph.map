@@ -1,0 +1,4 @@
+<map id="c_parser_frontend::operator_node::VarietyOperatorNode::CheckVarietyTypeValid" name="c_parser_frontend::operator_node::VarietyOperatorNode::CheckVarietyTypeValid">
+<area shape="rect" id="node1" title="检查给定类型是否可以作为普通变量的类型" alt="" coords="5,5,232,61"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="280,5,483,61"/>
+</map>

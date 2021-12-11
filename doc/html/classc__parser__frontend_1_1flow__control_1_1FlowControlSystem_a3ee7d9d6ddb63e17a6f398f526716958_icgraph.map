@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::flow_control::FlowControlSystem::GetActiveFunctionPointer" name="c_parser_frontend::flow_control::FlowControlSystem::GetActiveFunctionPointer">
+<area shape="rect" id="node1" title="获取指向当前活跃函数节点的指针" alt="" coords="265,45,501,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1CParserFrontend.html#a63fe4e1fa22a016d22537da4314a0803" title="获取当前活跃函数（正在构建的函数）" alt="" coords="11,5,211,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1CParserFrontend.html#aa27c730d6112f2cf35380d8c98520349" title="设置当前待构建函数" alt="" coords="5,85,217,141"/>
+</map>

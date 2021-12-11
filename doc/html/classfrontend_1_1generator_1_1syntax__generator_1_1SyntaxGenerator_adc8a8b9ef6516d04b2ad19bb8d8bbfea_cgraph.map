@@ -1,0 +1,28 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::AddNonTerminalProduction" name="frontend::generator::syntax_generator::SyntaxGenerator::AddNonTerminalProduction">
+<area shape="rect" id="node1" title="添加非终结产生式" alt="" coords="5,379,252,449"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a26022130e2f6beaa669440bd117eaeea" title="添加一个产生式体" alt="" coords="349,5,556,76"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae0b4802e9c60b7e57990233f17095dd2" title="添加产生式名" alt="" coords="329,101,577,157"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a27e6f4cf5b7f1f2b149ed7d2657a95c0" title="添加因为产生式体中某个产生式未定义而导致不能继续添加的记录" alt="" coords="318,232,587,303"/>
+<area shape="rect" id="node6" href="$classfrontend_1_1common_1_1BaseIdWrapper.html#aa088b185f8650169d2e53c4372db529b" title="判断当前存储的值是否有效" alt="" coords="679,203,874,244"/>
+<area shape="rect" id="node7" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae027e09a0314ec44e349980d391b3578" title="输出Info级诊断信息" alt="" coords="672,298,881,354"/>
+<area shape="rect" id="node8" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a7524b8df41982fde038c48c9545d615c" title="检查已添加给定的产生式节点后是否可以重启因为该产生式体未定义而搁置的 非终结产生式添加过程，如果可以则重启全部添加过程" alt="" coords="321,379,584,449"/>
+<area shape="rect" id="node10" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0356a8c7b3b39a6beb6a46750e36fcc2" title="格式化产生式" alt="" coords="339,672,566,743"/>
+<area shape="rect" id="node18" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="948,606,1215,662"/>
+<area shape="rect" id="node20" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0c623efe1db965b3ae044243b21cb226" title="根据产生式名获取产生式节点ID" alt="" coords="337,869,569,940"/>
+<area shape="rect" id="node22" href="$classfrontend_1_1common_1_1BaseIdWrapper.html#a6bb7da55224b284292fba00f1f3a3e9a" title="获取未包装的原始值" alt="" coords="355,964,550,1005"/>
+<area shape="rect" id="node23" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ac60bcdad42b7dcd025e599ce0cc77175" title="AddNonTerminalProduction的子过程，仅用于创建节点" alt="" coords="300,1174,605,1230"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#acbd7bff0314ac667bce8e2bc92ccaeaa" title="插入一个待管理的对象" alt="" coords="665,108,888,149"/>
+<area shape="rect" id="node9" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a68c9e77972169809f5e17535da62e964" title="添加非终结产生式" alt="" coords="653,379,900,449"/>
+<area shape="rect" id="node11" href="$classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a4142e3ce887dd6fe46021459c4e35e27" title="获取产生式体" alt="" coords="673,525,880,596"/>
+<area shape="rect" id="node12" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#ada56e50b8f4c0b75de3ae7553376f1b1" title="获取该节点表示的产生式名ID" alt="" coords="665,672,888,743"/>
+<area shape="rect" id="node13" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5e851a1d4c3dd84f61105ea2b3a9f027" title="根据产生式名ID获取对应产生式名" alt="" coords="958,783,1205,853"/>
+<area shape="rect" id="node15" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a6e838cc21976d781be783fbe0da27cc3" title="通过产生式节点ID获取产生式名" alt="" coords="653,819,900,889"/>
+<area shape="rect" id="node19" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a1aa8dcd59b8c2220d5af4db2c656d23b" title="获取产生式类型" alt="" coords="667,914,886,970"/>
+<area shape="rect" id="node14" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#a1959da3a072226c4cab199b6e1acf273" title="返回指向管理的对象的引用" alt="" coords="1292,797,1511,839"/>
+<area shape="rect" id="node16" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#afa97ab3763b61a50e57a7f06eb87f85b" title="根据产生式名获取对应ID" alt="" coords="952,958,1211,1014"/>
+<area shape="rect" id="node17" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#a8843e773f9b1f958e9beb2373084704d" title="根据对象获取其ID" alt="" coords="1263,965,1540,1007"/>
+<area shape="rect" id="node21" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae482dcdd29e61fc9ca3dab48827f83fa" title="根据产生式名ID获取对应产生式节点ID" alt="" coords="661,995,893,1065"/>
+<area shape="rect" id="node24" href="$classfrontend_1_1common_1_1ObjectManager.html#adbb63b10c08fd65047c2b6ee5cae362d" title="系统自行选择最佳位置放置对象" alt="" coords="681,1301,873,1343"/>
+<area shape="rect" id="node25" href="$classfrontend_1_1common_1_1ObjectManager.html#a204350a871426aaf21ddc9cd535925b6" title="获取对象的const引用" alt="" coords="681,1141,873,1183"/>
+<area shape="rect" id="node26" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aacf80506134caabbc3833538bec6ea66" title="设置产生式名ID到产生式节点ID的映射" alt="" coords="655,1207,899,1277"/>
+</map>

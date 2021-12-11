@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: src/Generator/SyntaxGenerator/process_function_interface.h 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('process__function__interface_8h_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">process_function_interface.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="process__function__interface_8h.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_H_</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_H_</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;any&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;boost/serialization/string.hpp&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;boost/serialization/variant.hpp&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;variant&gt;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacefrontend_1_1generator_1_1syntax__generator.html">frontend::generator::syntax_generator</a> {</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html">ProcessFunctionInterface</a> {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">   19</a></span>&#160;  <span class="keyword">using</span> <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">UserData</a> = std::any;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html">   21</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html">TerminalWordData</a> {</div>
+<div class="line"><a name="l00023"></a><span class="lineno"><a class="line" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html#a5676839f4dabe423cd6ef86d48b889ff">   23</a></span>&#160;    std::string <a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html#a5676839f4dabe423cd6ef86d48b889ff">word</a>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;  };</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html">   26</a></span>&#160;  <span class="keyword">struct </span><a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html">NonTerminalWordData</a> {</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html#ae3823d10b652f50e16ebb63d1e5239ce">NonTerminalWordData</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html#a9fc95c9e8569c01fbef966a92cf88c08">   28</a></span>&#160;    <a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html#a9fc95c9e8569c01fbef966a92cf88c08">NonTerminalWordData</a>(<a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">UserData</a>&amp;&amp; user_data)</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;        : <a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html#a09577724d069aa4b447dedefd5958c39">user_returned_data</a>(<a class="code" href="namespacestd.html">std</a>::move(user_data)) {}</div>
+<div class="line"><a name="l00030"></a><span class="lineno"><a class="line" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html#a09577724d069aa4b447dedefd5958c39">   30</a></span>&#160;    <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">UserData</a> <a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html#a09577724d069aa4b447dedefd5958c39">user_returned_data</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;  };</div>
+<div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html">   37</a></span>&#160;  <span class="keyword">class </span><a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html">WordDataToUser</a> {</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;   <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00042"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa5afb8805890febb8a7ed31b3cdd67d4">   42</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html">TerminalWordData</a>&amp; <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa5afb8805890febb8a7ed31b3cdd67d4">GetTerminalWordData</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      <span class="keywordflow">return</span> std::get&lt;TerminalWordData&gt;(<a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa48e56700f191d30007fea8b50686149">word_data_to_user_</a>);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a2bd02ac5b621ac4cb2e266e3ad413458">   48</a></span>&#160;    <a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html">TerminalWordData</a>&amp; <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a2bd02ac5b621ac4cb2e266e3ad413458">GetTerminalWordData</a>() {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">const_cast&lt;</span><a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html">TerminalWordData</a>&amp;<span class="keyword">&gt;</span>(</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;          <span class="keyword">const_cast&lt;</span><span class="keyword">const </span><a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html">WordDataToUser</a>&amp;<span class="keyword">&gt;</span>(*this).<a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa5afb8805890febb8a7ed31b3cdd67d4">GetTerminalWordData</a>());</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
+<div class="line"><a name="l00055"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a62a2c5cb95555b4799957ced1c807e33">   55</a></span>&#160;    <span class="keyword">const</span> <a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html">NonTerminalWordData</a>&amp; <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a62a2c5cb95555b4799957ced1c807e33">GetNonTerminalWordData</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;      <span class="keywordflow">return</span> std::get&lt;NonTerminalWordData&gt;(<a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa48e56700f191d30007fea8b50686149">word_data_to_user_</a>);</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    }</div>
+<div class="line"><a name="l00061"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa77ad3a89af9c9557df78cf5c063b8f7">   61</a></span>&#160;    <a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html">NonTerminalWordData</a>&amp; <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa77ad3a89af9c9557df78cf5c063b8f7">GetNonTerminalWordData</a>() {</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;      <span class="keywordflow">return</span> <span class="keyword">const_cast&lt;</span><a class="code" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html">NonTerminalWordData</a>&amp;<span class="keyword">&gt;</span>(</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;          <span class="keyword">const_cast&lt;</span><span class="keyword">const </span><a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html">WordDataToUser</a>&amp;<span class="keyword">&gt;</span>(*this).<a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a62a2c5cb95555b4799957ced1c807e33">GetNonTerminalWordData</a>());</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    }</div>
+<div class="line"><a name="l00069"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a20be5f05aa692eddd03f76d8a87572da">   69</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a20be5f05aa692eddd03f76d8a87572da">Empty</a>()<span class="keyword"> const </span>{</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="keywordflow">return</span> std::get_if&lt;std::monostate&gt;(&amp;<a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa48e56700f191d30007fea8b50686149">word_data_to_user_</a>) != <span class="keyword">nullptr</span>;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    }</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    <span class="keyword">template</span> &lt;<span class="keyword">class</span> BasicObjectType&gt;</div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a9e0b9c345a98949418730a086168b953">   78</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a9e0b9c345a98949418730a086168b953">SetWordDataToUser</a>(BasicObjectType&amp;&amp; word_data) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa48e56700f191d30007fea8b50686149">word_data_to_user_</a> = std::forward&lt;BasicObjectType&gt;(word_data);</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    }</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;   <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    std::variant&lt;std::monostate, TerminalWordData, NonTerminalWordData&gt;</div>
+<div class="line"><a name="l00086"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa48e56700f191d30007fea8b50686149">   86</a></span>&#160;        <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa48e56700f191d30007fea8b50686149">word_data_to_user_</a>;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;  };</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9b7a00b54b47da366a9641e368da0bbb">   89</a></span>&#160;  <span class="keyword">virtual</span> <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9b7a00b54b47da366a9641e368da0bbb">~ProcessFunctionInterface</a>() {}</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;  <span class="keyword">virtual</span> <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">UserData</a> <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a16cbfd0a0ee1d62abe35741177e9e458">Reduct</a>(std::vector&lt;WordDataToUser&gt;&amp;&amp; word_data) <span class="keyword">const</span> = 0;</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">  101</a></span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">boost::serialization::access</a>;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> Archive&gt;</div>
+<div class="line"><a name="l00109"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a3066b1f7d9c07a55b8dda0778ea9bd1d">  109</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a3066b1f7d9c07a55b8dda0778ea9bd1d">serialize</a>(Archive&amp;&amp; ar, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> version) {}</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;};</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160; </div>
+<div class="line"><a name="l00119"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html">  119</a></span>&#160;<span class="keyword">class </span><a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html">RootReductClass</a> : <span class="keyword">public</span> <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html">ProcessFunctionInterface</a> {</div>
+<div class="line"><a name="l00128"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html#ad98a27e64bab64271b38e08a06dfd4f5">  128</a></span>&#160;  <span class="keyword">virtual</span> <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">UserData</a> <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html#ad98a27e64bab64271b38e08a06dfd4f5">Reduct</a>(</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;      std::vector&lt;WordDataToUser&gt;&amp;&amp; word_data)<span class="keyword"> const override </span>{</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;    assert(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;    <span class="comment">// 防止警告</span></div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">UserData</a>();</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;  }</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160; </div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160; <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00137"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">  137</a></span>&#160;  <span class="keyword">friend</span> <span class="keyword">class </span><a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">boost::serialization::access</a>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160; </div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;  <span class="keyword">template</span> &lt;<span class="keyword">class</span> Archive&gt;</div>
+<div class="line"><a name="l00145"></a><span class="lineno"><a class="line" href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html#ae1bafd74ab2992637cfce4bfc5ac2576">  145</a></span>&#160;  <span class="keywordtype">void</span> <a class="code" href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html#ae1bafd74ab2992637cfce4bfc5ac2576">serialize</a>(Archive&amp;&amp; ar, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">int</span> version) {</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;    ar&amp; boost::serialization::base_object&lt;ProcessFunctionInterface&gt;(*<span class="keyword">this</span>);</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;  }</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;};</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;}  <span class="comment">// namespace frontend::generator::syntax_generator</span></div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160; </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="preprocessor">#endif  </span></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_html_a16cbfd0a0ee1d62abe35741177e9e458"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a16cbfd0a0ee1d62abe35741177e9e458">frontend::generator::syntax_generator::ProcessFunctionInterface::Reduct</a></div><div class="ttdeci">virtual UserData Reduct(std::vector&lt; WordDataToUser &gt; &amp;&amp;word_data) const =0</div><div class="ttdoc">调用用户定义的规约函数</div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass_html"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html">frontend::generator::syntax_generator::RootReductClass</a></div><div class="ttdoc">内部实现用根节点的规约函数</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00119">process_function_interface.h:119</a></div></div>
+<div class="ttc" id="astructfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData_html"><div class="ttname"><a href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html">frontend::generator::syntax_generator::ProcessFunctionInterface::NonTerminalWordData</a></div><div class="ttdoc">非终结产生式的数据</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00026">process_function_interface.h:26</a></div></div>
+<div class="ttc" id="astructfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData_html_a9fc95c9e8569c01fbef966a92cf88c08"><div class="ttname"><a href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html#a9fc95c9e8569c01fbef966a92cf88c08">frontend::generator::syntax_generator::ProcessFunctionInterface::NonTerminalWordData::NonTerminalWordData</a></div><div class="ttdeci">NonTerminalWordData(UserData &amp;&amp;user_data)</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00028">process_function_interface.h:28</a></div></div>
+<div class="ttc" id="astructfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData_html_a09577724d069aa4b447dedefd5958c39"><div class="ttname"><a href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html#a09577724d069aa4b447dedefd5958c39">frontend::generator::syntax_generator::ProcessFunctionInterface::NonTerminalWordData::user_returned_data</a></div><div class="ttdeci">UserData user_returned_data</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00030">process_function_interface.h:30</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_html_a9b7a00b54b47da366a9641e368da0bbb"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9b7a00b54b47da366a9641e368da0bbb">frontend::generator::syntax_generator::ProcessFunctionInterface::~ProcessFunctionInterface</a></div><div class="ttdeci">virtual ~ProcessFunctionInterface()</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00089">process_function_interface.h:89</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_html_a62a2c5cb95555b4799957ced1c807e33"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a62a2c5cb95555b4799957ced1c807e33">frontend::generator::syntax_generator::ProcessFunctionInterface::WordDataToUser::GetNonTerminalWordData</a></div><div class="ttdeci">const NonTerminalWordData &amp; GetNonTerminalWordData() const</div><div class="ttdoc">获取非终结产生式数据const引用</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00055">process_function_interface.h:55</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass_html_ac98d07dd8f7b70e16ccb9a01abf56b9c"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">frontend::generator::syntax_generator::RootReductClass::access</a></div><div class="ttdeci">friend class boost::serialization::access</div><div class="ttdoc">允许序列化类访问</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00137">process_function_interface.h:137</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_html_aa77ad3a89af9c9557df78cf5c063b8f7"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa77ad3a89af9c9557df78cf5c063b8f7">frontend::generator::syntax_generator::ProcessFunctionInterface::WordDataToUser::GetNonTerminalWordData</a></div><div class="ttdeci">NonTerminalWordData &amp; GetNonTerminalWordData()</div><div class="ttdoc">获取非终结产生式数据引用</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00061">process_function_interface.h:61</a></div></div>
+<div class="ttc" id="astructfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData_html_a5676839f4dabe423cd6ef86d48b889ff"><div class="ttname"><a href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html#a5676839f4dabe423cd6ef86d48b889ff">frontend::generator::syntax_generator::ProcessFunctionInterface::TerminalWordData::word</a></div><div class="ttdeci">std::string word</div><div class="ttdoc">单词</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00023">process_function_interface.h:23</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_html"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html">frontend::generator::syntax_generator::ProcessFunctionInterface</a></div><div class="ttdoc">所有包装用户定义函数的类均从该类派生</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00016">process_function_interface.h:16</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass_html_ae1bafd74ab2992637cfce4bfc5ac2576"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html#ae1bafd74ab2992637cfce4bfc5ac2576">frontend::generator::syntax_generator::RootReductClass::serialize</a></div><div class="ttdeci">void serialize(Archive &amp;&amp;ar, const unsigned int version)</div><div class="ttdoc">序列化该类的函数</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00145">process_function_interface.h:145</a></div></div>
+<div class="ttc" id="anamespacefrontend_1_1generator_1_1syntax__generator_html"><div class="ttname"><a href="namespacefrontend_1_1generator_1_1syntax__generator.html">frontend::generator::syntax_generator</a></div><div class="ttdoc">TODO 添加删除未使用产生式的功能</div><div class="ttdef"><b>Definition:</b> <a href="export__types_8h_source.html#l00016">export_types.h:16</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_html_ac98d07dd8f7b70e16ccb9a01abf56b9c"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">frontend::generator::syntax_generator::ProcessFunctionInterface::access</a></div><div class="ttdeci">friend class boost::serialization::access</div><div class="ttdoc">允许序列化类访问</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00101">process_function_interface.h:101</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_html_a20be5f05aa692eddd03f76d8a87572da"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a20be5f05aa692eddd03f76d8a87572da">frontend::generator::syntax_generator::ProcessFunctionInterface::WordDataToUser::Empty</a></div><div class="ttdeci">bool Empty() const</div><div class="ttdoc">获取是否有产生式数据</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00069">process_function_interface.h:69</a></div></div>
+<div class="ttc" id="astructfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData_html"><div class="ttname"><a href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html">frontend::generator::syntax_generator::ProcessFunctionInterface::TerminalWordData</a></div><div class="ttdoc">终结产生式单词的数据</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00021">process_function_interface.h:21</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_html_a3066b1f7d9c07a55b8dda0778ea9bd1d"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a3066b1f7d9c07a55b8dda0778ea9bd1d">frontend::generator::syntax_generator::ProcessFunctionInterface::serialize</a></div><div class="ttdeci">void serialize(Archive &amp;&amp;ar, const unsigned int version)</div><div class="ttdoc">序列化该类的函数</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00109">process_function_interface.h:109</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_html_a9c2956cc0bd63108ef1dd1d2ce75dac5"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a9c2956cc0bd63108ef1dd1d2ce75dac5">frontend::generator::syntax_generator::ProcessFunctionInterface::UserData</a></div><div class="ttdeci">std::any UserData</div><div class="ttdoc">定义用户返回的数据类型</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00019">process_function_interface.h:19</a></div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definition:</b> <a href="id__wrapper_8h_source.html#l00397">id_wrapper.h:397</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_html_aa5afb8805890febb8a7ed31b3cdd67d4"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa5afb8805890febb8a7ed31b3cdd67d4">frontend::generator::syntax_generator::ProcessFunctionInterface::WordDataToUser::GetTerminalWordData</a></div><div class="ttdeci">const TerminalWordData &amp; GetTerminalWordData() const</div><div class="ttdoc">获取终结产生式数据const引用</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00042">process_function_interface.h:42</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_html_a9e0b9c345a98949418730a086168b953"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a9e0b9c345a98949418730a086168b953">frontend::generator::syntax_generator::ProcessFunctionInterface::WordDataToUser::SetWordDataToUser</a></div><div class="ttdeci">void SetWordDataToUser(BasicObjectType &amp;&amp;word_data)</div><div class="ttdoc">设置存储的数据</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00078">process_function_interface.h:78</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_html"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html">frontend::generator::syntax_generator::ProcessFunctionInterface::WordDataToUser</a></div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00037">process_function_interface.h:37</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_html_aa48e56700f191d30007fea8b50686149"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa48e56700f191d30007fea8b50686149">frontend::generator::syntax_generator::ProcessFunctionInterface::WordDataToUser::word_data_to_user_</a></div><div class="ttdeci">std::variant&lt; std::monostate, TerminalWordData, NonTerminalWordData &gt; word_data_to_user_</div><div class="ttdoc">该单词的数据</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00086">process_function_interface.h:86</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass_html_ad98a27e64bab64271b38e08a06dfd4f5"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html#ad98a27e64bab64271b38e08a06dfd4f5">frontend::generator::syntax_generator::RootReductClass::Reduct</a></div><div class="ttdeci">virtual UserData Reduct(std::vector&lt; WordDataToUser &gt; &amp;&amp;word_data) const override</div><div class="ttdoc">调用内部根节点的规约函数</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00128">process_function_interface.h:128</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_html_a2bd02ac5b621ac4cb2e266e3ad413458"><div class="ttname"><a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a2bd02ac5b621ac4cb2e266e3ad413458">frontend::generator::syntax_generator::ProcessFunctionInterface::WordDataToUser::GetTerminalWordData</a></div><div class="ttdeci">TerminalWordData &amp; GetTerminalWordData()</div><div class="ttdoc">获取终结产生式数据引用</div><div class="ttdef"><b>Definition:</b> <a href="process__function__interface_8h_source.html#l00048">process_function_interface.h:48</a></div></div>
+<div class="ttc" id="astructfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData_html_ae3823d10b652f50e16ebb63d1e5239ce"><div class="ttname"><a href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html#ae3823d10b652f50e16ebb63d1e5239ce">frontend::generator::syntax_generator::ProcessFunctionInterface::NonTerminalWordData::NonTerminalWordData</a></div><div class="ttdeci">NonTerminalWordData()=default</div></div>
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f466c1e82a0f34288cd0acce601c95c4.html">Generator</a></li><li class="navelem"><a class="el" href="dir_40510978350a03cd6117cc2d0bb02e32.html">SyntaxGenerator</a></li><li class="navelem"><a class="el" href="process__function__interface_8h.html">process_function_interface.h</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,1142 @@
+\hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::Action\+Scope\+System类 参考}
+\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem}\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+
+
+作用域系统  
+
+
+
+
+{\ttfamily \#include $<$action\+\_\+scope\+\_\+system.\+h$>$}
+
+
+
+c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::Action\+Scope\+System 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData}{Variety\+Data}}
+\begin{DoxyCompactList}\small\item\em 管理变量信息的存储 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a830b2f53529ca9559000596289fce284}{Action\+Scope\+Container\+Type}} = std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData}{Variety\+Data}} $>$
+\begin{DoxyCompactList}\small\item\em 存储不同作用域变量的结构 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a09c5219a059727395b5118c8eee4b76d}{Action\+Scope\+System}} ()
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a14a29ef4f33745ed4dcb9d83287b8f58}{$\sim$\+Action\+Scope\+System}} ()
+\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_abc50b4d894f8a231da525959003948dc}{Variety\+Scope\+System\+Init}} ()
+\begin{DoxyCompactList}\small\item\em 初始化变量系统 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a7094c400291ef7c10d01727a2b8bf3d2}{Add\+Action\+Scope\+Level}} ()
+\begin{DoxyCompactList}\small\item\em 增加一级作用域等级 \end{DoxyCompactList}\item 
+std\+::pair$<$ Action\+Scope\+Container\+Type\+::const\+\_\+iterator, \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{Define\+Variety\+Result}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ae2ea8a43f08c51a83b198a6fb8b1c132}{Define\+Variety}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_aacf6d7a3837afca75964fcbb41ff1fc9}{Variety\+Operator\+Node}} $>$ \&variety\+\_\+node\+\_\+pointer)
+\begin{DoxyCompactList}\small\item\em 定义变量 \end{DoxyCompactList}\item 
+std\+::pair$<$ Action\+Scope\+Container\+Type\+::const\+\_\+iterator, \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{Define\+Variety\+Result}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a2c8bdb9a8a217b69bccc63d08ac48fc3}{Define\+Variety\+Or\+Init\+Value}} (const std\+::string \&name, const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a0f3f1f71fdcc6eaf478bf5087da35c9b}{Operator\+Node\+Interface}} $>$ \&operator\+\_\+node\+\_\+pointer)
+\begin{DoxyCompactList}\small\item\em 定义变量或初始化常量 \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a0f3f1f71fdcc6eaf478bf5087da35c9b}{Operator\+Node\+Interface}} $>$, bool $>$ \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a5831df991c23f266e44d23e5f72e1f90}{Get\+Variety\+Or\+Function}} (const std\+::string \&variety\+\_\+name) const
+\begin{DoxyCompactList}\small\item\em 根据名字获取变量或函数名 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ac44ad28c95778bb6ca7fc51eee472f80}{Set\+Function\+To\+Construct}} (\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define}} $\ast$function\+\_\+data)
+\begin{DoxyCompactList}\small\item\em 设置当前待构建函数 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}} \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a7ac1dd24d92bf630f4969bd35bec6860}{Get\+Action\+Scope\+Level}} () const
+\begin{DoxyCompactList}\small\item\em 获取当前作用域等级 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_aa1729e785acbaa7379f65a06cf9e17f5}{Push\+Flow\+Control\+Sentence}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ \&\&flow\+\_\+control\+\_\+sentence)
+\begin{DoxyCompactList}\small\item\em 压入流程控制节点 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a27ee94c6536eb57c0b2401774d2a6ce7}{Pop\+Action\+Scope}} ()
+\begin{DoxyCompactList}\small\item\em 弹出一级作用域 \end{DoxyCompactList}\item 
+auto \& \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a121f8773a5ec18de2fd09e2873bdf5bf}{Get\+Top\+Flow\+Control\+Sentence}} () const
+\begin{DoxyCompactList}\small\item\em 获取最顶层流程控制语句 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a22685d0a7f4d826cdc20d5c6004fe1e5}{Convert\+If\+Sentence\+To\+If\+Else\+Sentence}} ()
+\begin{DoxyCompactList}\small\item\em 将流程控制语句栈顶的if流程控制语句转化为if-\/else语句 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a39a4c96164e6ab725102c5bc8cd4b0b9}{Add\+Switch\+Simple\+Case}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Basic\+Type\+Initialize\+Operator\+Node}} $>$ \&case\+\_\+value)
+\begin{DoxyCompactList}\small\item\em 向switch语句中添加普通case \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a1fee8d1a66636749a8afb374a586fec0}{Add\+Switch\+Default\+Case}} ()
+\begin{DoxyCompactList}\small\item\em 向switch语句中添加default标签 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a352a7a0c33d507358a5a37f1a0e95677}{Add\+Sentence}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ \&\&sentence)
+\begin{DoxyCompactList}\small\item\em 向当前活跃的流程控制语句内添加一条语句 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a8916da5257a5b4be44c7e30203628fef}{Add\+Sentences}} (std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$$>$ \&\&sentence\+\_\+container)
+\begin{DoxyCompactList}\small\item\em 向当前活跃的流程控制语句内添加多条语句 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 类型}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a6a5eb566386f6df718e1fb56299a4a96}{Id\+Wrapper\+Label}} \{ \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a6a5eb566386f6df718e1fb56299a4a96aa1083da2dbd81c274975bd87ef5895bb}{k\+Action\+Scope\+Level\+Type}}
+ \}
+\begin{DoxyCompactList}\small\item\em 作用域等级的分发标签 \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a0f3f1f71fdcc6eaf478bf5087da35c9b}{Operator\+Node\+Interface}} = \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_aacf6d7a3837afca75964fcbb41ff1fc9}{Variety\+Operator\+Node}} = \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}} = \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper}{frontend\+::common\+::\+Explicit\+Id\+Wrapper}}$<$ size\+\_\+t, \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a6a5eb566386f6df718e1fb56299a4a96}{Id\+Wrapper\+Label}}, Id\+Wrapper\+Label\+::k\+Action\+Scope\+Level\+Type $>$
+\begin{DoxyCompactList}\small\item\em 存储当前作用域等级的类型 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a1d17eb37f21f42079ed3c066802389a4}{Pop\+Over\+Level}} (\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}} level)
+\begin{DoxyCompactList}\small\item\em 弹出所有高于给定作用域等级的变量和流程控制语句 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a830b2f53529ca9559000596289fce284}{Action\+Scope\+Container\+Type}} \& \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a4fff2178d35bc39a63f972e82b66d6a5}{Get\+Variety\+Or\+Function\+Name\+To\+Operator\+Node\+Pointer}} ()
+\begin{DoxyCompactList}\small\item\em 获取存储变量/函数名到节点指针的映射的容器 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a830b2f53529ca9559000596289fce284}{Action\+Scope\+Container\+Type}} \& \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_adc9d355f66c213e56db60ed2833045fd}{Get\+Variety\+Or\+Function\+Name\+To\+Operator\+Node\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取存储变量/函数名到节点指针的映射的容器 \end{DoxyCompactList}\item 
+auto \& \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a01d1f19c1a4d3a5b26427cb46b63b6e4}{Get\+Variety\+Stack}} ()
+\begin{DoxyCompactList}\small\item\em 获取变量栈 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ac01d17fed7775b3fa28fc332b0ec1de9}{Push\+Function\+Flow\+Control\+Node}} (\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define}} $\ast$function\+\_\+data)
+\begin{DoxyCompactList}\small\item\em 创建函数定义控制块并压入流程控制节点栈中 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a830b2f53529ca9559000596289fce284}{Action\+Scope\+Container\+Type}} \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a16bf6dfe64267fd01379bc18b75c1271}{variety\+\_\+or\+\_\+function\+\_\+name\+\_\+to\+\_\+operator\+\_\+node\+\_\+pointer\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 存储变量/函数名和到节点指针的映射 \end{DoxyCompactList}\item 
+std\+::stack$<$ Action\+Scope\+Container\+Type\+::iterator $>$ \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_af5567a0934d92a7604cdc105a39fdced}{variety\+\_\+stack\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 按顺序存储添加的变量 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}} \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ae9e3fc47d45a6bccc5ad03847e71746b}{action\+\_\+scope\+\_\+level\+\_\+}} = \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}}(0)
+\begin{DoxyCompactList}\small\item\em 当前作用域等级 \end{DoxyCompactList}\item 
+std\+::stack$<$ std\+::pair$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$, \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}} $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a543ae6bc8aed1b39e690cef86b10ffdd}{flow\+\_\+control\+\_\+stack\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 存储当前所有正在构建的流程语句和流程语句的作用域等级 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+作用域系统 
+
+1.作用域系统管理变量的作用域/可见域和流程控制语句的构建 2.根据作用域的变化自动弹出作用域超出范围的变量和构建完成的流程控制语句 3.每个变量/流程控制语句都有自己的作用域等级，作用域等级等于声明处外面的流程 控制语句（花括号）层数，全局变量为0级，正在构建的函数为1级 \begin{DoxyAttention}{注意}
+作用域系统在构建函数时从\+Flow\+Control\+System提取指向当前活跃函数节点的指针并用 unique\+\_\+ptr存储该指针，将它压入流程控制栈中，当前函数构建完毕后弹出该指针不 释放内存，这样可以避免每次添加语句时都需要判断流程控制栈是否为空，函数节点 的控制权一直属于\+Flow\+Control\+System，作用域系统只拥有访问权 
+\end{DoxyAttention}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 36 行定义.
+
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a830b2f53529ca9559000596289fce284}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a830b2f53529ca9559000596289fce284}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!ActionScopeContainerType@{ActionScopeContainerType}}
+\index{ActionScopeContainerType@{ActionScopeContainerType}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{ActionScopeContainerType}{ActionScopeContainerType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a830b2f53529ca9559000596289fce284}{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Action\+Scope\+Container\+Type}} =  std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData}{Variety\+Data}}$>$}
+
+
+
+存储不同作用域变量的结构 
+
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 108 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!ActionScopeLevel@{ActionScopeLevel}}
+\index{ActionScopeLevel@{ActionScopeLevel}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{ActionScopeLevel}{ActionScopeLevel}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Action\+Scope\+Level}} =  \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper}{frontend\+::common\+::\+Explicit\+Id\+Wrapper}}$<$ size\+\_\+t, \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a6a5eb566386f6df718e1fb56299a4a96}{Id\+Wrapper\+Label}}, Id\+Wrapper\+Label\+::k\+Action\+Scope\+Level\+Type$>$\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存储当前作用域等级的类型 
+
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 45 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a0f3f1f71fdcc6eaf478bf5087da35c9b}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a0f3f1f71fdcc6eaf478bf5087da35c9b}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!OperatorNodeInterface@{OperatorNodeInterface}}
+\index{OperatorNodeInterface@{OperatorNodeInterface}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{OperatorNodeInterface}{OperatorNodeInterface}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a0f3f1f71fdcc6eaf478bf5087da35c9b}{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Operator\+Node\+Interface}} =  \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 38 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_aacf6d7a3837afca75964fcbb41ff1fc9}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_aacf6d7a3837afca75964fcbb41ff1fc9}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!VarietyOperatorNode@{VarietyOperatorNode}}
+\index{VarietyOperatorNode@{VarietyOperatorNode}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{VarietyOperatorNode}{VarietyOperatorNode}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_aacf6d7a3837afca75964fcbb41ff1fc9}{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Operator\+Node}} =  \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 40 行定义.
+
+
+
+\doxysubsection{成员枚举类型说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a6a5eb566386f6df718e1fb56299a4a96}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a6a5eb566386f6df718e1fb56299a4a96}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!IdWrapperLabel@{IdWrapperLabel}}
+\index{IdWrapperLabel@{IdWrapperLabel}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{IdWrapperLabel}{IdWrapperLabel}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a6a5eb566386f6df718e1fb56299a4a96}{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Id\+Wrapper\+Label}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+作用域等级的分发标签 
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kActionScopeLevelType@{kActionScopeLevelType}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!kActionScopeLevelType@{kActionScopeLevelType}}}\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a6a5eb566386f6df718e1fb56299a4a96aa1083da2dbd81c274975bd87ef5895bb}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a6a5eb566386f6df718e1fb56299a4a96aa1083da2dbd81c274975bd87ef5895bb}} 
+k\+Action\+Scope\+Level\+Type&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 42 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a09c5219a059727395b5118c8eee4b76d}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a09c5219a059727395b5118c8eee4b76d}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!ActionScopeSystem@{ActionScopeSystem}}
+\index{ActionScopeSystem@{ActionScopeSystem}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{ActionScopeSystem()}{ActionScopeSystem()}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Action\+Scope\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 110 行定义.
+
+
+
+引用了 Variety\+Scope\+System\+Init().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a09c5219a059727395b5118c8eee4b76d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a14a29ef4f33745ed4dcb9d83287b8f58}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a14a29ef4f33745ed4dcb9d83287b8f58}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!````~ActionScopeSystem@{$\sim$ActionScopeSystem}}
+\index{````~ActionScopeSystem@{$\sim$ActionScopeSystem}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{$\sim$ActionScopeSystem()}{~ActionScopeSystem()}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::$\sim$\+Action\+Scope\+System (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 88 行定义.
+
+
+
+引用了 flow\+\_\+control\+\_\+stack\+\_\+.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a7094c400291ef7c10d01727a2b8bf3d2}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a7094c400291ef7c10d01727a2b8bf3d2}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!AddActionScopeLevel@{AddActionScopeLevel}}
+\index{AddActionScopeLevel@{AddActionScopeLevel}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{AddActionScopeLevel()}{AddActionScopeLevel()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Add\+Action\+Scope\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+增加一级作用域等级 
+
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 131 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+level\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Add\+Action\+Scope\+Level() , 以及 Push\+Flow\+Control\+Sentence().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a7094c400291ef7c10d01727a2b8bf3d2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a352a7a0c33d507358a5a37f1a0e95677}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a352a7a0c33d507358a5a37f1a0e95677}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!AddSentence@{AddSentence}}
+\index{AddSentence@{AddSentence}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{AddSentence()}{AddSentence()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Add\+Sentence (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ \&\&}]{sentence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+向当前活跃的流程控制语句内添加一条语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentence} & ：待添加的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否添加成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功，夺取sentence控制权 \\
+\hline
+{\em false} & ：无活跃的流程控制语句或给定语句无法添加到当前的流程控制节点中，不修改参数 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+添加到已有的流程语句后 
+\end{DoxyNote}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 230 行定义.
+
+
+
+引用了 flow\+\_\+control\+\_\+stack\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Add\+Sentence() , 以及 Pop\+Over\+Level().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a352a7a0c33d507358a5a37f1a0e95677_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a8916da5257a5b4be44c7e30203628fef}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a8916da5257a5b4be44c7e30203628fef}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!AddSentences@{AddSentences}}
+\index{AddSentences@{AddSentences}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{AddSentences()}{AddSentences()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Add\+Sentences (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$$>$ \&\&}]{sentence\+\_\+container }\end{DoxyParamCaption})}
+
+
+
+向当前活跃的流程控制语句内添加多条语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentence\+\_\+container} & ：存储待添加的语句的容器 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否添加成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功，将sentence\+\_\+container中所有语句移动到活跃流程控制语句的主容器中 \\
+\hline
+{\em false} & ：给定语句无法添加到当前的流程控制节点中，不修改参数 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+按begin-\/$>$end的顺序添加，添加到已有的流程语句后 
+\end{DoxyNote}
+
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 248 行定义.
+
+
+
+引用了 flow\+\_\+control\+\_\+stack\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Add\+Sentences().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a8916da5257a5b4be44c7e30203628fef_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a1fee8d1a66636749a8afb374a586fec0}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a1fee8d1a66636749a8afb374a586fec0}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!AddSwitchDefaultCase@{AddSwitchDefaultCase}}
+\index{AddSwitchDefaultCase@{AddSwitchDefaultCase}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{AddSwitchDefaultCase()}{AddSwitchDefaultCase()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Add\+Switch\+Default\+Case (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+向switch语句中添加default标签 
+
+\begin{DoxyReturn}{返回}
+返回是否添加成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：已添加过default标签或当前顶层控制语句不为switch \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 239 行定义.
+
+
+
+引用了 Get\+Top\+Flow\+Control\+Sentence() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Switch\+Sentence.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Add\+Switch\+Default\+Case().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a1fee8d1a66636749a8afb374a586fec0_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a1fee8d1a66636749a8afb374a586fec0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a39a4c96164e6ab725102c5bc8cd4b0b9}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a39a4c96164e6ab725102c5bc8cd4b0b9}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!AddSwitchSimpleCase@{AddSwitchSimpleCase}}
+\index{AddSwitchSimpleCase@{AddSwitchSimpleCase}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{AddSwitchSimpleCase()}{AddSwitchSimpleCase()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Add\+Switch\+Simple\+Case (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Basic\+Type\+Initialize\+Operator\+Node}} $>$ \&}]{case\+\_\+value }\end{DoxyParamCaption})}
+
+
+
+向switch语句中添加普通case 
+
+\begin{DoxyReturn}{返回}
+返回是否添加成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & 当前顶层控制语句不为switch或与已有的值重复 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 226 行定义.
+
+
+
+引用了 Get\+Top\+Flow\+Control\+Sentence() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Switch\+Sentence.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Add\+Switch\+Simple\+Case().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a39a4c96164e6ab725102c5bc8cd4b0b9_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a39a4c96164e6ab725102c5bc8cd4b0b9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a22685d0a7f4d826cdc20d5c6004fe1e5}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a22685d0a7f4d826cdc20d5c6004fe1e5}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!ConvertIfSentenceToIfElseSentence@{ConvertIfSentenceToIfElseSentence}}
+\index{ConvertIfSentenceToIfElseSentence@{ConvertIfSentenceToIfElseSentence}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{ConvertIfSentenceToIfElseSentence()}{ConvertIfSentenceToIfElseSentence()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Convert\+If\+Sentence\+To\+If\+Else\+Sentence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+将流程控制语句栈顶的if流程控制语句转化为if-\/else语句 
+
+\begin{DoxyNote}{注解}
+顶部的流程控制语句必须是if流程控制语句 
+\end{DoxyNote}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 203 行定义.
+
+
+
+引用了 flow\+\_\+control\+\_\+stack\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+If\+Sentence.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Convert\+If\+Sentence\+To\+If\+Else\+Sentence().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a22685d0a7f4d826cdc20d5c6004fe1e5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ae2ea8a43f08c51a83b198a6fb8b1c132}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ae2ea8a43f08c51a83b198a6fb8b1c132}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!DefineVariety@{DefineVariety}}
+\index{DefineVariety@{DefineVariety}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{DefineVariety()}{DefineVariety()}}
+{\footnotesize\ttfamily std\+::pair$<$ Action\+Scope\+System\+::\+Action\+Scope\+Container\+Type\+::const\+\_\+iterator, \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{Define\+Variety\+Result}} $>$ c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Define\+Variety (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_aacf6d7a3837afca75964fcbb41ff1fc9}{Variety\+Operator\+Node}} $>$ \&}]{variety\+\_\+node\+\_\+pointer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+定义变量 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em variety\+\_\+node\+\_\+pointer} & ：指向变量节点的指针 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为插入位置的迭代器，后半部分为检查结果 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+变量必须已经设置变量名 与\+Define\+Variety\+Or\+Init\+Value在定义变量时等价 
+\end{DoxyNote}
+
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 102 行定义.
+
+
+
+引用了 Define\+Variety\+Or\+Init\+Value().
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Define\+Variety() , 以及 Set\+Function\+To\+Construct().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ae2ea8a43f08c51a83b198a6fb8b1c132_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ae2ea8a43f08c51a83b198a6fb8b1c132_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a2c8bdb9a8a217b69bccc63d08ac48fc3}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a2c8bdb9a8a217b69bccc63d08ac48fc3}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!DefineVarietyOrInitValue@{DefineVarietyOrInitValue}}
+\index{DefineVarietyOrInitValue@{DefineVarietyOrInitValue}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{DefineVarietyOrInitValue()}{DefineVarietyOrInitValue()}}
+{\footnotesize\ttfamily std\+::pair$<$ Action\+Scope\+System\+::\+Action\+Scope\+Container\+Type\+::const\+\_\+iterator, \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{Define\+Variety\+Result}} $>$ c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Define\+Variety\+Or\+Init\+Value (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name,  }\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a0f3f1f71fdcc6eaf478bf5087da35c9b}{Operator\+Node\+Interface}} $>$ \&}]{operator\+\_\+node\+\_\+pointer }\end{DoxyParamCaption})}
+
+
+
+定义变量或初始化常量 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em name} & ：变量名/初始化常量 \\
+\hline
+\mbox{\texttt{ in}}  & {\em operator\+\_\+node\+\_\+pointer} & ：指向变量节点的指针 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为插入位置的迭代器，后半部分为检查结果 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+变量必须已经设置变量名 Define\+Variety无法定义初始化值，因为初始化值不附带名字，需要从外传入 定义变量时提供的名字必须与变量节点中储存的名字相同 
+\end{DoxyNote}
+
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 110 行定义.
+
+
+
+引用了 Get\+Action\+Scope\+Level(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Get\+Variety\+Name(), Get\+Variety\+Or\+Function\+Name\+To\+Operator\+Node\+Pointer(), Get\+Variety\+Stack(), c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::k\+Add\+To\+Stack, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Init\+Value, c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::k\+New, c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::k\+Re\+Define , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::k\+Shift\+To\+Stack.
+
+
+
+被这些函数引用 Define\+Variety() , 以及 Push\+Function\+Flow\+Control\+Node().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a2c8bdb9a8a217b69bccc63d08ac48fc3_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a2c8bdb9a8a217b69bccc63d08ac48fc3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a7ac1dd24d92bf630f4969bd35bec6860}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a7ac1dd24d92bf630f4969bd35bec6860}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!GetActionScopeLevel@{GetActionScopeLevel}}
+\index{GetActionScopeLevel@{GetActionScopeLevel}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{GetActionScopeLevel()}{GetActionScopeLevel()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}} c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Get\+Action\+Scope\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取当前作用域等级 
+
+\begin{DoxyReturn}{返回}
+返回当前作用域等级 
+\end{DoxyReturn}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 171 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+level\+\_\+.
+
+
+
+被这些函数引用 Define\+Variety\+Or\+Init\+Value(), c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Get\+Action\+Scope\+Level(), Pop\+Action\+Scope(), Push\+Flow\+Control\+Sentence() , 以及 Push\+Function\+Flow\+Control\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a7ac1dd24d92bf630f4969bd35bec6860_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a121f8773a5ec18de2fd09e2873bdf5bf}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a121f8773a5ec18de2fd09e2873bdf5bf}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!GetTopFlowControlSentence@{GetTopFlowControlSentence}}
+\index{GetTopFlowControlSentence@{GetTopFlowControlSentence}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{GetTopFlowControlSentence()}{GetTopFlowControlSentence()}}
+{\footnotesize\ttfamily auto\& c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Get\+Top\+Flow\+Control\+Sentence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取最顶层流程控制语句 
+
+\begin{DoxyReturn}{返回}
+返回最顶层流程控制语句的引用 
+\end{DoxyReturn}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 197 行定义.
+
+
+
+引用了 flow\+\_\+control\+\_\+stack\+\_\+.
+
+
+
+被这些函数引用 Add\+Switch\+Default\+Case(), Add\+Switch\+Simple\+Case() , 以及 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Get\+Top\+Flow\+Control\+Sentence().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a121f8773a5ec18de2fd09e2873bdf5bf_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a5831df991c23f266e44d23e5f72e1f90}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a5831df991c23f266e44d23e5f72e1f90}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!GetVarietyOrFunction@{GetVarietyOrFunction}}
+\index{GetVarietyOrFunction@{GetVarietyOrFunction}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{GetVarietyOrFunction()}{GetVarietyOrFunction()}}
+{\footnotesize\ttfamily std\+::pair$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{operator\+\_\+node\+::\+Operator\+Node\+Interface}} $>$, bool $>$ c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Get\+Variety\+Or\+Function (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{variety\+\_\+name }\end{DoxyParamCaption}) const}
+
+
+
+根据名字获取变量或函数名 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em variety\+\_\+name} & ：查询的名字 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为指向变量或函数节点的指针，后半部分为节点是否存在 
+\end{DoxyReturn}
+
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 149 行定义.
+
+
+
+引用了 Get\+Variety\+Or\+Function\+Name\+To\+Operator\+Node\+Pointer().
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Get\+Variety\+Or\+Function().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a5831df991c23f266e44d23e5f72e1f90_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a5831df991c23f266e44d23e5f72e1f90_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a4fff2178d35bc39a63f972e82b66d6a5}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a4fff2178d35bc39a63f972e82b66d6a5}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!GetVarietyOrFunctionNameToOperatorNodePointer@{GetVarietyOrFunctionNameToOperatorNodePointer}}
+\index{GetVarietyOrFunctionNameToOperatorNodePointer@{GetVarietyOrFunctionNameToOperatorNodePointer}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{GetVarietyOrFunctionNameToOperatorNodePointer()}{GetVarietyOrFunctionNameToOperatorNodePointer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a830b2f53529ca9559000596289fce284}{Action\+Scope\+Container\+Type}}\& c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Get\+Variety\+Or\+Function\+Name\+To\+Operator\+Node\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+获取存储变量/函数名到节点指针的映射的容器 
+
+\begin{DoxyReturn}{返回}
+返回容器的引用 
+\end{DoxyReturn}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 257 行定义.
+
+
+
+引用了 variety\+\_\+or\+\_\+function\+\_\+name\+\_\+to\+\_\+operator\+\_\+node\+\_\+pointer\+\_\+.
+
+
+
+被这些函数引用 Define\+Variety\+Or\+Init\+Value(), Get\+Variety\+Or\+Function() , 以及 Pop\+Over\+Level().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a4fff2178d35bc39a63f972e82b66d6a5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_adc9d355f66c213e56db60ed2833045fd}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_adc9d355f66c213e56db60ed2833045fd}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!GetVarietyOrFunctionNameToOperatorNodePointer@{GetVarietyOrFunctionNameToOperatorNodePointer}}
+\index{GetVarietyOrFunctionNameToOperatorNodePointer@{GetVarietyOrFunctionNameToOperatorNodePointer}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{GetVarietyOrFunctionNameToOperatorNodePointer()}{GetVarietyOrFunctionNameToOperatorNodePointer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a830b2f53529ca9559000596289fce284}{Action\+Scope\+Container\+Type}}\& c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Get\+Variety\+Or\+Function\+Name\+To\+Operator\+Node\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+获取存储变量/函数名到节点指针的映射的容器 
+
+\begin{DoxyReturn}{返回}
+返回容器的const引用 
+\end{DoxyReturn}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 263 行定义.
+
+
+
+引用了 variety\+\_\+or\+\_\+function\+\_\+name\+\_\+to\+\_\+operator\+\_\+node\+\_\+pointer\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a01d1f19c1a4d3a5b26427cb46b63b6e4}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a01d1f19c1a4d3a5b26427cb46b63b6e4}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!GetVarietyStack@{GetVarietyStack}}
+\index{GetVarietyStack@{GetVarietyStack}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{GetVarietyStack()}{GetVarietyStack()}}
+{\footnotesize\ttfamily auto\& c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Get\+Variety\+Stack (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+获取变量栈 
+
+\begin{DoxyReturn}{返回}
+返回变量栈的引用 
+\end{DoxyReturn}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 268 行定义.
+
+
+
+引用了 variety\+\_\+stack\+\_\+.
+
+
+
+被这些函数引用 Define\+Variety\+Or\+Init\+Value() , 以及 Pop\+Over\+Level().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a01d1f19c1a4d3a5b26427cb46b63b6e4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a27ee94c6536eb57c0b2401774d2a6ce7}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a27ee94c6536eb57c0b2401774d2a6ce7}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!PopActionScope@{PopActionScope}}
+\index{PopActionScope@{PopActionScope}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{PopActionScope()}{PopActionScope()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Pop\+Action\+Scope (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+弹出一级作用域 
+
+1.弹出该作用域内所有的变量和流程控制语句，自动添加弹出的流程控制语句 2.调用后作用域等级减1 
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 190 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+level\+\_\+, Get\+Action\+Scope\+Level() , 以及 Pop\+Over\+Level().
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Pop\+Action\+Scope().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a27ee94c6536eb57c0b2401774d2a6ce7_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a27ee94c6536eb57c0b2401774d2a6ce7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a1d17eb37f21f42079ed3c066802389a4}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a1d17eb37f21f42079ed3c066802389a4}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!PopOverLevel@{PopOverLevel}}
+\index{PopOverLevel@{PopOverLevel}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{PopOverLevel()}{PopOverLevel()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Pop\+Over\+Level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}}}]{level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+弹出所有高于给定作用域等级的变量和流程控制语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em level} & ：弹出所有高于该等级的变量和流程控制语句 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+cpp 第 68 行定义.
+
+
+
+引用了 Add\+Sentence(), c\+\_\+parser\+\_\+frontend\+::c\+\_\+parser\+\_\+frontend, c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Finish\+Function\+Construct(), flow\+\_\+control\+\_\+stack\+\_\+, Get\+Variety\+Or\+Function\+Name\+To\+Operator\+Node\+Pointer(), Get\+Variety\+Stack() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Function\+Define.
+
+
+
+被这些函数引用 Pop\+Action\+Scope().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a1d17eb37f21f42079ed3c066802389a4_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a1d17eb37f21f42079ed3c066802389a4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_aa1729e785acbaa7379f65a06cf9e17f5}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_aa1729e785acbaa7379f65a06cf9e17f5}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!PushFlowControlSentence@{PushFlowControlSentence}}
+\index{PushFlowControlSentence@{PushFlowControlSentence}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{PushFlowControlSentence()}{PushFlowControlSentence()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Push\+Flow\+Control\+Sentence (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ \&\&}]{flow\+\_\+control\+\_\+sentence }\end{DoxyParamCaption})}
+
+
+
+压入流程控制节点 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em flow\+\_\+control\+\_\+sentence} & ：待压入的流程控制节点 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否压入成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：压入成功 \\
+\hline
+{\em false} & ：未压入函数节点作为流程控制栈底部就压入其它流程控制节点或 栈不空时压入函数节点（嵌套定义函数）\\
+\hline
+\end{DoxyRetVals}
+1.自动增加一级作用域等级 2.先增加一级作用域等级后压入流程控制节点，这样在弹出该级作用域时就能够一并 弹出构建完成的流程控制节点 \begin{DoxyAttention}{注意}
+必须压入可以存储流程控制节点的流程控制语句 
+\end{DoxyAttention}
+
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 206 行定义.
+
+
+
+引用了 Add\+Action\+Scope\+Level(), flow\+\_\+control\+\_\+stack\+\_\+, Get\+Action\+Scope\+Level() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+Function\+Define.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Push\+Flow\+Control\+Sentence() , 以及 Push\+Function\+Flow\+Control\+Node().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_aa1729e785acbaa7379f65a06cf9e17f5_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_aa1729e785acbaa7379f65a06cf9e17f5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ac01d17fed7775b3fa28fc332b0ec1de9}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ac01d17fed7775b3fa28fc332b0ec1de9}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!PushFunctionFlowControlNode@{PushFunctionFlowControlNode}}
+\index{PushFunctionFlowControlNode@{PushFunctionFlowControlNode}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{PushFunctionFlowControlNode()}{PushFunctionFlowControlNode()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Push\+Function\+Flow\+Control\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define}} $\ast$}]{function\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+创建函数定义控制块并压入流程控制节点栈中 
+
+\begin{DoxyReturn}{返回}
+返回是否添加成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：当前作用域等级不是0级，不允许嵌套定义函数\\
+\hline
+\end{DoxyRetVals}
+1.该函数还创建函数类型的初始化值并添加为全局变量，供赋值使用 2.从作用域等级0提升到1 
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 160 行定义.
+
+
+
+引用了 Define\+Variety\+Or\+Init\+Value(), Get\+Action\+Scope\+Level(), c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Function\+Type\+::\+Get\+Function\+Name(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Get\+Function\+Type\+Pointer(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Get\+Function\+Type\+Reference(), c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::k\+Re\+Define , 以及 Push\+Flow\+Control\+Sentence().
+
+
+
+被这些函数引用 Set\+Function\+To\+Construct().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ac01d17fed7775b3fa28fc332b0ec1de9_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ac01d17fed7775b3fa28fc332b0ec1de9_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ac44ad28c95778bb6ca7fc51eee472f80}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ac44ad28c95778bb6ca7fc51eee472f80}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!SetFunctionToConstruct@{SetFunctionToConstruct}}
+\index{SetFunctionToConstruct@{SetFunctionToConstruct}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{SetFunctionToConstruct()}{SetFunctionToConstruct()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Set\+Function\+To\+Construct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define}} $\ast$}]{function\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+设置当前待构建函数 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em function\+\_\+data} & ：指向待构建的函数节点的指针 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否设置成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：设置成功 \\
+\hline
+{\em false} & ：当前定义域等级不是0级，不允许嵌套定义函数\\
+\hline
+\end{DoxyRetVals}
+1.\+function\+\_\+data的控制权归属于\+Flow\+Control\+System，\+Action\+Scope\+System 仅有function\+\_\+data的访问权，没有控制权，禁止delete该指针 2.为了能将该指针放入流程控制节点栈中，使用std\+::unique\+\_\+ptr$<$\+Flow\+Interface$>$ 包装后压入栈，在弹出时release指针防止被释放 3.设置后自动增加一级作用域等级 
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 184 行定义.
+
+
+
+引用了 Define\+Variety(), c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Function\+Type\+::\+Get\+Arguments(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Get\+Function\+Type\+Reference() , 以及 Push\+Function\+Flow\+Control\+Node().
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Set\+Function\+To\+Construct().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ac44ad28c95778bb6ca7fc51eee472f80_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ac44ad28c95778bb6ca7fc51eee472f80_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_abc50b4d894f8a231da525959003948dc}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_abc50b4d894f8a231da525959003948dc}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!VarietyScopeSystemInit@{VarietyScopeSystemInit}}
+\index{VarietyScopeSystemInit@{VarietyScopeSystemInit}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{VarietyScopeSystemInit()}{VarietyScopeSystemInit()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Scope\+System\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+初始化变量系统 
+
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 114 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+level\+\_\+, variety\+\_\+or\+\_\+function\+\_\+name\+\_\+to\+\_\+operator\+\_\+node\+\_\+pointer\+\_\+ , 以及 variety\+\_\+stack\+\_\+.
+
+
+
+被这些函数引用 Action\+Scope\+System().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_abc50b4d894f8a231da525959003948dc_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ae9e3fc47d45a6bccc5ad03847e71746b}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_ae9e3fc47d45a6bccc5ad03847e71746b}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!action\_scope\_level\_@{action\_scope\_level\_}}
+\index{action\_scope\_level\_@{action\_scope\_level\_}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{action\_scope\_level\_}{action\_scope\_level\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}} c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::action\+\_\+scope\+\_\+level\+\_\+ = \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}}(0)\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+当前作用域等级 
+
+\begin{DoxyNote}{注解}
+全局变量为0级，每个\{或流程控制语句增加1级 
+\end{DoxyNote}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 291 行定义.
+
+
+
+被这些函数引用 Add\+Action\+Scope\+Level(), Get\+Action\+Scope\+Level(), Pop\+Action\+Scope() , 以及 Variety\+Scope\+System\+Init().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a543ae6bc8aed1b39e690cef86b10ffdd}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a543ae6bc8aed1b39e690cef86b10ffdd}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!flow\_control\_stack\_@{flow\_control\_stack\_}}
+\index{flow\_control\_stack\_@{flow\_control\_stack\_}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{flow\_control\_stack\_}{flow\_control\_stack\_}}
+{\footnotesize\ttfamily std\+::stack$<$ std\+::pair$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}$>$, \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}}$>$ $>$ c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::flow\+\_\+control\+\_\+stack\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存储当前所有正在构建的流程语句和流程语句的作用域等级 
+
+\begin{DoxyNote}{注解}
+最底层为当前所在函数，作用域等级为1 
+\end{DoxyNote}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 297 行定义.
+
+
+
+被这些函数引用 Add\+Sentence(), Add\+Sentences(), Convert\+If\+Sentence\+To\+If\+Else\+Sentence(), Get\+Top\+Flow\+Control\+Sentence(), Pop\+Over\+Level(), Push\+Flow\+Control\+Sentence() , 以及 $\sim$\+Action\+Scope\+System().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a16bf6dfe64267fd01379bc18b75c1271}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a16bf6dfe64267fd01379bc18b75c1271}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!variety\_or\_function\_name\_to\_operator\_node\_pointer\_@{variety\_or\_function\_name\_to\_operator\_node\_pointer\_}}
+\index{variety\_or\_function\_name\_to\_operator\_node\_pointer\_@{variety\_or\_function\_name\_to\_operator\_node\_pointer\_}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{variety\_or\_function\_name\_to\_operator\_node\_pointer\_}{variety\_or\_function\_name\_to\_operator\_node\_pointer\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a830b2f53529ca9559000596289fce284}{Action\+Scope\+Container\+Type}} c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::variety\+\_\+or\+\_\+function\+\_\+name\+\_\+to\+\_\+operator\+\_\+node\+\_\+pointer\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存储变量/函数名和到节点指针的映射 
+
+键值为变量名 在发生覆盖时创建变量栈转换结构可以降低内存占用和stack的性能消耗 
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 283 行定义.
+
+
+
+被这些函数引用 Get\+Variety\+Or\+Function\+Name\+To\+Operator\+Node\+Pointer() , 以及 Variety\+Scope\+System\+Init().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_af5567a0934d92a7604cdc105a39fdced}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_af5567a0934d92a7604cdc105a39fdced}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}!variety\_stack\_@{variety\_stack\_}}
+\index{variety\_stack\_@{variety\_stack\_}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem}}
+\doxysubsubsection{\texorpdfstring{variety\_stack\_}{variety\_stack\_}}
+{\footnotesize\ttfamily std\+::stack$<$Action\+Scope\+Container\+Type\+::iterator$>$ c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::variety\+\_\+stack\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+按顺序存储添加的变量 
+
+用来支持作用域终结后清除该作用域内全部变量 iterator指向变量和对应数据 
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 288 行定义.
+
+
+
+被这些函数引用 Get\+Variety\+Stack() , 以及 Variety\+Scope\+System\+Init().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{action__scope__system_8h}{action\+\_\+scope\+\_\+system.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{acion__scope__system_8cpp}{acion\+\_\+scope\+\_\+system.\+cpp}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{c__parser__frontend_8cpp}{c\+\_\+parser\+\_\+frontend.\+cpp}}\end{DoxyCompactItemize}

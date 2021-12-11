@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::operator_node::ObtainAddressOperatorNode::GetResultTypePointer" name="c_parser_frontend::operator_node::ObtainAddressOperatorNode::GetResultTypePointer">
+<area shape="rect" id="node1" title="获取最终结果的类型" alt="" coords="5,57,267,113"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#afecdc58a43ff6bdca93cf7cfa510a3d0" title="获取取地址后得到的节点" alt="" coords="315,5,569,76"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e" title="获取最终结果的类型" alt="" coords="328,101,556,157"/>
+</map>

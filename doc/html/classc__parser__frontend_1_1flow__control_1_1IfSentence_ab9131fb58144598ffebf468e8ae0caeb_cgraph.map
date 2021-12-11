@@ -1,0 +1,9 @@
+<map id="c_parser_frontend::flow_control::IfSentence::AddMainSentences" name="c_parser_frontend::flow_control::IfSentence::AddMainSentences">
+<area shape="rect" id="node1" title=" " alt="" coords="5,85,184,141"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1IfSentence.html#ae5d7c213b8ec902dfead5015f1f48938" title="添加假分支内执行的多条语句" alt="" coords="232,85,432,141"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#afca8c0d1489d1512d061573abd61a818" title="获取流程控制类型" alt="" coords="1103,119,1301,175"/>
+<area shape="rect" id="node6" href="$classc__parser__frontend_1_1flow__control_1_1IfSentence.html#abf596da6c74a7c8e8523451f03e686c2" title="添加真分支内执行的多条语句" alt="" coords="235,5,429,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1flow__control_1_1IfSentence.html#ac9088f74888525fb23af2ea7790abaee" title="检查给定语句是否可以添加到假分支内" alt="" coords="480,85,703,141"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2afaacb18c830c6f59e4114511b88ea3" title="默认检查主体内语句的函数" alt="" coords="751,85,1055,141"/>
+<area shape="rect" id="node7" href="$classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2c0bc6ba39e025c43b8b66a9a11f9b3d" title="向主体内添加多条语句" alt="" coords="488,5,695,61"/>
+</map>

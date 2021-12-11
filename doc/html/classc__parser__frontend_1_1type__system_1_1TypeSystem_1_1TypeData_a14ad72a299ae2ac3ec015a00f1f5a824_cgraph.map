@@ -1,0 +1,7 @@
+<map id="c_parser_frontend::type_system::TypeSystem::TypeData::CheckFunctionDefineAddResult" name="c_parser_frontend::type_system::TypeSystem::TypeData::CheckFunctionDefineAddResult">
+<area shape="rect" id="node1" title="检查已存在函数声明/定义条件下添加同名函数声明/定义的错误情况" alt="" coords="5,78,241,149"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1FunctionType.html#a415931fb8ef9d81ad8c6f09a1c4dbb92" title="比较两个函数签名是否相同" alt="" coords="289,85,488,141"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1FunctionType.html#a4e8f18f88e3d4aff6762bf06f741acb5" title="获取存储参数节点的容器" alt="" coords="536,5,735,61"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1FunctionType.html#ac6c2b063f5141ca6352f4bc872c96a8d" title="获取函数名" alt="" coords="536,85,735,141"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1FunctionType.html#a66a21bb0b5e78bd4a74f9f4e8fdff3a5" title="获取函数的返回类型链头结点引用" alt="" coords="536,165,735,221"/>
+</map>

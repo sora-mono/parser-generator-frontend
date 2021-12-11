@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: src/Generator/SyntaxGenerator/config_construct.cpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('config__construct_8cpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">命名空间</a> &#124;
+<a href="#define-members">宏定义</a>  </div>
+  <div class="headertitle">
+<div class="title">config_construct.cpp 文件参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>定义添加构建配置所需外围信息的函数ConfigConstruct  
+<a href="#details">更多...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="process__functions__classes_8h_source.html">process_functions_classes.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="syntax__generator_8h_source.html">syntax_generator.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="production__config-inc_8h_source.html">Config/ProductionConfig/production_config-inc.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+config_construct.cpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="config__construct_8cpp__incl.png" border="0" usemap="#src_2Generator_2SyntaxGenerator_2config__construct_8cpp" alt=""/></div>
+<map name="src_2Generator_2SyntaxGenerator_2config__construct_8cpp" id="src_2Generator_2SyntaxGenerator_2config__construct_8cpp">
+<area shape="rect" title="定义添加构建配置所需外围信息的函数ConfigConstruct" alt="" coords="1285,5,1509,47"/>
+<area shape="rect" href="process__functions__classes_8h.html" title="根据用户定义的非终结产生式定义包装规约函数的类" alt="" coords="1152,95,1359,121"/>
+<area shape="rect" href="production__config-inc_8h.html" title=" " alt="" coords="1307,169,1484,211"/>
+<area shape="rect" href="syntax__generator_8h.html" title="语法分析机配置生成器" alt="" coords="1892,527,2038,553"/>
+<area shape="rect" href="user__defined__functions_8h.html" title=" " alt="" coords="1030,348,1218,389"/>
+<area shape="rect" href="process__function__interface_8h.html" title="该文件定义包装用户定义规约函数的类的基类" alt="" coords="993,601,1206,643"/>
+<area shape="rect" href="reduct__functions_8h.html" title=" " alt="" coords="650,437,824,479"/>
+<area shape="rect" title=" " alt="" coords="898,787,965,814"/>
+<area shape="rect" title=" " alt="" coords="1184,787,1264,814"/>
+<area shape="rect" title=" " alt="" coords="825,527,884,553"/>
+<area shape="rect" href="c__parser__frontend_8h.html" title="C语言编译器前端控制器" alt="" coords="346,527,496,553"/>
+<area shape="rect" href="flow__control_8h.html" title="流程控制" alt="" coords="48,698,162,725"/>
+<area shape="rect" href="operator__node_8h.html" title="操作节点" alt="" coords="470,787,598,814"/>
+<area shape="rect" href="type__system_8h.html" title="类型系统" alt="" coords="370,877,488,903"/>
+<area shape="rect" title=" " alt="" coords="1210,698,1256,725"/>
+<area shape="rect" title=" " alt="" coords="876,691,1019,732"/>
+<area shape="rect" title=" " alt="" coords="1043,691,1186,732"/>
+<area shape="rect" title=" " alt="" coords="395,966,463,993"/>
+<area shape="rect" title=" " alt="" coords="232,966,356,993"/>
+<area shape="rect" href="line__and__column_8h.html" title="存储当前解析到的源文件行数和列数" alt="" coords="59,609,247,635"/>
+<area shape="rect" href="action__scope__system_8h.html" title="作用域系统" alt="" coords="271,609,446,635"/>
+<area shape="rect" title=" " alt="" coords="24,966,101,993"/>
+<area shape="rect" title=" " alt="" coords="186,698,243,725"/>
+<area shape="rect" href="id__wrapper_8h.html" title="ID包装器，包装ID以避免ID混用导致运行时错误" alt="" coords="2006,966,2174,993"/>
+<area shape="rect" title=" " alt="" coords="1926,1048,2081,1089"/>
+<area shape="rect" title=" " alt="" coords="2106,1048,2248,1089"/>
+<area shape="rect" title=" " alt="" coords="100,787,142,814"/>
+<area shape="rect" title=" " alt="" coords="653,966,722,993"/>
+<area shape="rect" title=" " alt="" coords="913,966,972,993"/>
+<area shape="rect" title=" " alt="" coords="1707,966,1770,993"/>
+<area shape="rect" href="syntax__generate_8h.html" title="定义表示产生式的宏以简化配置生成过程" alt="" coords="1295,259,1496,300"/>
+<area shape="rect" href="common_8h.html" title="存储公开的定义和类型" alt="" coords="1284,877,1438,903"/>
+<area shape="rect" href="export__types_8h.html" title="存储向外暴露的一些数据类型" alt="" coords="1788,787,1976,814"/>
+<area shape="rect" title=" " alt="" coords="1328,966,1394,993"/>
+<area shape="rect" title=" " alt="" coords="1834,869,1976,911"/>
+<area shape="rect" title=" " alt="" coords="1564,869,1707,911"/>
+<area shape="rect" href="object__manager_8h.html" title="管理对象，通过给定ID标识对象，ID与对象是一一映射的关系" alt="" coords="2850,877,3051,903"/>
+<area shape="rect" href="unordered__struct__manager_8h.html" title="将多元素结构哈希存储的类" alt="" coords="2465,869,2660,911"/>
+<area shape="rect" title=" " alt="" coords="2628,966,2702,993"/>
+<area shape="rect" title=" " alt="" coords="3060,959,3203,1000"/>
+<area shape="rect" title=" " alt="" coords="3227,959,3370,1000"/>
+<area shape="rect" title=" " alt="" coords="2727,959,2870,1000"/>
+<area shape="rect" title=" " alt="" coords="2894,959,3036,1000"/>
+<area shape="rect" title=" " alt="" coords="2489,966,2604,993"/>
+<area shape="rect" title=" " alt="" coords="2260,601,2414,643"/>
+<area shape="rect" title=" " alt="" coords="2439,609,2512,635"/>
+<area shape="rect" title=" " alt="" coords="2537,609,2596,635"/>
+<area shape="rect" title=" " alt="" coords="2620,609,2675,635"/>
+<area shape="rect" href="dfa__generator_8h.html" title="DFA配置生成器" alt="" coords="2057,601,2236,643"/>
+<area shape="rect" href="production__item__set_8h.html" title="存储项集与向前看符号的类" alt="" coords="2751,698,2918,725"/>
+<area shape="rect" href="production__node_8h.html" title="描述产生式的类" alt="" coords="1839,609,1982,635"/>
+<area shape="rect" href="syntax__analysis__table_8h.html" title="语法分析表" alt="" coords="1433,698,1612,725"/>
+<area shape="rect" title=" " alt="" coords="2532,691,2675,732"/>
+<area shape="rect" href="nfa__generator_8h.html" title="NFA配置生成器" alt="" coords="2052,698,2268,725"/>
+<area shape="rect" href="multimap__object__manager_8h.html" title="管理对象，支持对象的合并，允许多个ID对应一个对象" alt="" coords="2254,780,2449,821"/>
+<area shape="rect" title=" " alt="" coords="2356,877,2441,903"/>
+<area shape="rect" title=" " alt="" coords="1288,780,1431,821"/>
+<area shape="rect" title=" " alt="" coords="1455,780,1611,821"/>
+</map>
+</div>
+</div>
+<p><a href="config__construct_8cpp_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+命名空间</h2></td></tr>
+<tr class="memitem:namespacefrontend"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrontend.html">frontend</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacefrontend_1_1generator"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrontend_1_1generator.html">frontend::generator</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacefrontend_1_1generator_1_1syntax__generator"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html">frontend::generator::syntax_generator</a></td></tr>
+<tr class="memdesc:namespacefrontend_1_1generator_1_1syntax__generator"><td class="mdescLeft">&#160;</td><td class="mdescRight">TODO 添加删除未使用产生式的功能 <br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+宏定义</h2></td></tr>
+<tr class="memitem:a526b42abc76e989753d65c5ce2a18817"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__construct_8cpp.html#a526b42abc76e989753d65c5ce2a18817">GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_</a></td></tr>
+<tr class="separator:a526b42abc76e989753d65c5ce2a18817"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f89fdaf6a78e0b22fedf86de624c9ed"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="config__construct_8cpp.html#a9f89fdaf6a78e0b22fedf86de624c9ed">GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_END</a></td></tr>
+<tr class="separator:a9f89fdaf6a78e0b22fedf86de624c9ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>定义添加构建配置所需外围信息的函数ConfigConstruct </p>
+<p>该文件将用户通过宏定义的产生式转化为C++代码来控制构建语法分析机配置的过程 包含的文件process_functions_classes.h中定义包装用户定义的规约函数的类 这些类用于AddNonTerminalNode </p>
+
+<p class="definition">在文件 <a class="el" href="config__construct_8cpp_source.html">config_construct.cpp</a> 中定义.</p>
+</div><h2 class="groupheader">宏定义说明</h2>
+<a id="a526b42abc76e989753d65c5ce2a18817"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a526b42abc76e989753d65c5ce2a18817">&#9670;&nbsp;</a></span>GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f89fdaf6a78e0b22fedf86de624c9ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f89fdaf6a78e0b22fedf86de624c9ed">&#9670;&nbsp;</a></span>GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_END</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_END</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_f466c1e82a0f34288cd0acce601c95c4.html">Generator</a></li><li class="navelem"><a class="el" href="dir_40510978350a03cd6117cc2d0bb02e32.html">SyntaxGenerator</a></li><li class="navelem"><a class="el" href="config__construct_8cpp.html">config_construct.cpp</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

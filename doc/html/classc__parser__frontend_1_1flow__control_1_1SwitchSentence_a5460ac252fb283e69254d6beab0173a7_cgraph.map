@@ -1,0 +1,6 @@
+<map id="c_parser_frontend::flow_control::SwitchSentence::CheckSwitchCaseAbleToAdd" name="c_parser_frontend::flow_control::SwitchSentence::CheckSwitchCaseAbleToAdd">
+<area shape="rect" id="node1" title="检查给定case是否可以作为switch内的标签" alt="" coords="5,85,219,141"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html#a8759d34682bb031948e9ec241e95b0ff" title="获取初始化数据所属分类" alt="" coords="271,5,508,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a04ee3a54a9ea899528559ac5b8cb3676" title="获取全部普通case标签" alt="" coords="283,85,495,141"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a3eaeaca261e5860d4ca73accce3cf460" title="获取初始化数据的值" alt="" coords="267,165,512,221"/>
+</map>

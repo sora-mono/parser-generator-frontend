@@ -1,0 +1,4 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::SubAddBinaryOperatorNode" name="frontend::generator::syntax_generator::SyntaxGenerator::SubAddBinaryOperatorNode">
+<area shape="rect" id="node1" title="AddBinaryOperatorNode的子过程" alt="" coords="317,5,548,76"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aec2d0760baf4095f4f2183c8e84e37ea" title="添加双目运算符" alt="" coords="5,13,269,69"/>
+</map>

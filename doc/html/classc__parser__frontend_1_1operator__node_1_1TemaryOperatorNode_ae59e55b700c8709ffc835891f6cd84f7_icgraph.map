@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::operator_node::TemaryOperatorNode::ConstructResultNode" name="c_parser_frontend::operator_node::TemaryOperatorNode::ConstructResultNode">
+<area shape="rect" id="node1" title="创建返回结果的节点" alt="" coords="283,45,512,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#aed46590b486ee7477bb17dce3677c3fb" title="设置条件为假时的分支" alt="" coords="5,5,235,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a3bf8f22583fef107e37a3b9a51d1f7de" title="设置条件为真时的分支" alt="" coords="5,85,235,141"/>
+</map>

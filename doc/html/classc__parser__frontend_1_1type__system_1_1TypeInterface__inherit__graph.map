@@ -1,0 +1,12 @@
+<map id="c_parser_frontend::type_system::TypeInterface" name="c_parser_frontend::type_system::TypeInterface">
+<area shape="rect" id="node1" title="类型基类" alt="" coords="5,201,208,243"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html" title="预定义的基础类型" alt="" coords="278,5,457,47"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1EndType.html" title="类型链尾部哨兵节点" alt="" coords="283,71,451,112"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1EnumType.html" title="枚举类型" alt="" coords="277,136,458,177"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1FunctionType.html" title="函数类型" alt="" coords="268,201,467,243"/>
+<area shape="rect" id="node6" href="$classc__parser__frontend_1_1type__system_1_1InitializeListType.html" title="初始化列表类型" alt="" coords="256,267,479,308"/>
+<area shape="rect" id="node7" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html" title="指针类型，一个*对应一个节点" alt="" coords="272,332,463,373"/>
+<area shape="rect" id="node8" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html" title="结构化类型（结构体/共用体）的基类" alt="" coords="266,398,469,454"/>
+<area shape="rect" id="node9" href="$classc__parser__frontend_1_1type__system_1_1StructType.html" title="结构体类型" alt="" coords="527,372,709,413"/>
+<area shape="rect" id="node10" href="$classc__parser__frontend_1_1type__system_1_1UnionType.html" title=" " alt="" coords="527,437,709,479"/>
+</map>

@@ -1,0 +1,787 @@
+\hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator}{}\doxysection{frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::Nfa\+Generator类 参考}
+\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator}\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+
+
+{\ttfamily \#include $<$nfa\+\_\+generator.\+h$>$}
+
+
+
+frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::Nfa\+Generator 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode}{Nfa\+Node}}
+\begin{DoxyCompactList}\small\item\em 表示正则的\+Nfa节点 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} = \mbox{\hyperlink{classfrontend_1_1common_1_1MultimapObjectManager}{frontend\+::common\+::\+Multimap\+Object\+Manager}}$<$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode}{Nfa\+Node}} $>$\+::Object\+Id
+\begin{DoxyCompactList}\small\item\em Nfa\+Node在管理类中的\+ID \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Tail\+Node\+Data}} = std\+::pair$<$ \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData}{Word\+Attached\+Data}}, \mbox{\hyperlink{namespacefrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_a9f86071c52342524eef847930c54db95}{Word\+Priority}} $>$
+\begin{DoxyCompactList}\small\item\em 尾节点数据，内容为该单词所附带的属性 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a87346bdc0f454735c958b64934b0177d}{Nfa\+Generator}} ()
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa9dc3c9da3425f331cb952876b9f7b2c}{Nfa\+Generator}} (const \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator}{Nfa\+Generator}} \&)=delete
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a7cbdfdd5e3eb8af36b14306ac21d429e}{Nfa\+Generator}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator}{Nfa\+Generator}} \&\&)=delete
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa6064ffbfc016cd8c14626928b894616}{Get\+Head\+Nfa\+Node\+Id}} () const
+\begin{DoxyCompactList}\small\item\em 获取\+N\+F\+A节点头结点\+ID \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Tail\+Node\+Data}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a7809a54c44c233d956e1a0d3b10f2b82}{Get\+Tail\+Node\+Data}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} node\+\_\+id)
+\begin{DoxyCompactList}\small\item\em 根据\+N\+F\+A节点\+I\+D获取尾节点数据 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode}{Nfa\+Node}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed}{Get\+Nfa\+Node}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} node\+\_\+id)
+\begin{DoxyCompactList}\small\item\em 根据\+N\+F\+A节点\+I\+D获取\+N\+F\+A节点 \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}}, \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} $>$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0}{Regex\+Construct}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Tail\+Node\+Data}} \&\&tail\+\_\+node\+\_\+data, const std\+::string \&raw\+\_\+regex\+\_\+string, size\+\_\+t \&\&next\+\_\+character\+\_\+index=0, const bool add\+\_\+to\+\_\+nfa\+\_\+head=true)
+\begin{DoxyCompactList}\small\item\em 解析正则 \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}}, \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} $>$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320}{Word\+Construct}} (const std\+::string \&str, \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Tail\+Node\+Data}} \&\&word\+\_\+attached\+\_\+data)
+\begin{DoxyCompactList}\small\item\em 添加一个纯单词 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691}{Merge\+Optimization}} ()
+\begin{DoxyCompactList}\small\item\em 合并优化，降低节点数和转移路径以降低子集构造法集合大小 \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} $>$, \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Tail\+Node\+Data}} $>$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33}{Closure}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} node\+\_\+id)
+\begin{DoxyCompactList}\small\item\em 获取给定\+N\+F\+A节点的所有等效节点\+I\+D（包含自身） \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} $>$, \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Tail\+Node\+Data}} $>$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0}{Goto}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} id\+\_\+src, char c\+\_\+transform)
+\begin{DoxyCompactList}\small\item\em 获取给定\+N\+F\+A节点在转移条件下可以到达的等效节点 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068}{Nfa\+Init}} ()
+\begin{DoxyCompactList}\small\item\em N\+F\+A初始化 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+static const \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Tail\+Node\+Data}} \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afa18192c64defc0544485a4fa7c9a410}{k\+Not\+Tail\+Node\+Tag}}
+\begin{DoxyCompactList}\small\item\em 非尾节点标记 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aaf1122d36ed3eced824030181ea7ff3f}{Remove\+Tail\+Node}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} tail\+\_\+node\+\_\+id)
+\begin{DoxyCompactList}\small\item\em 移除尾节点信息 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Tail\+Node\+Data\+Type $>$ }\\bool \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aabdd9849ae9d8831534733ce6e6eb688}{Set\+Tail\+Node}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} node\+\_\+id, Tail\+Node\+Data\+Type \&\&tail\+\_\+node\+\_\+data)
+\begin{DoxyCompactList}\small\item\em 设置尾节点信息 \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}}, \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} $>$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59}{Create\+Switch\+Tree}} (const std\+::string \&raw\+\_\+regex\+\_\+string, size\+\_\+t $\ast$const next\+\_\+character\+\_\+index)
+\begin{DoxyCompactList}\small\item\em 根据输入生成可选字符结构 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a02e466281eb3f8f9c62ccd3bd4b52be4}{head\+\_\+node\+\_\+id\+\_\+}}
+\begin{DoxyCompactList}\small\item\em N\+F\+A头结点\+ID \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}}, \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Tail\+Node\+Data}} $>$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a2325bf96b0a3597eaaaf9cc4dc425592}{tail\+\_\+nodes\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 储存尾节点\+I\+D到尾节点数据的映射 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1MultimapObjectManager}{frontend\+::common\+::\+Multimap\+Object\+Manager}}$<$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode}{Nfa\+Node}} $>$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a5e68c1ef2912bd9b41037d7a6f0ad5c5}{node\+\_\+manager\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 储存\+N\+F\+A节点 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+该\+N\+F\+A配置生成器支持char的所有值作为\+N\+F\+A的转移字符，支持$\ast$，+，?限定重复次数 该生成器设计初衷为了作为\+D\+F\+A\+Generator的组件使用，所以未添加将配置写入文件功能 
+
+在文件 nfa\+\_\+generator.\+h 第 27 行定义.
+
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!NfaNodeId@{NfaNodeId}}
+\index{NfaNodeId@{NfaNodeId}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{NfaNodeId}{NfaNodeId}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+Id}} =  \mbox{\hyperlink{classfrontend_1_1common_1_1MultimapObjectManager}{frontend\+::common\+::\+Multimap\+Object\+Manager}}$<$\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode}{Nfa\+Node}}$>$\+::Object\+Id}
+
+
+
+Nfa\+Node在管理类中的\+ID 
+
+
+
+在文件 nfa\+\_\+generator.\+h 第 34 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!TailNodeData@{TailNodeData}}
+\index{TailNodeData@{TailNodeData}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{TailNodeData}{TailNodeData}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Tail\+Node\+Data}} =  std\+::pair$<$\mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData}{Word\+Attached\+Data}}, \mbox{\hyperlink{namespacefrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_a9f86071c52342524eef847930c54db95}{Word\+Priority}}$>$}
+
+
+
+尾节点数据，内容为该单词所附带的属性 
+
+前半部分为用户定义数据，后半部分为单词优先级，数字越大优先级越高 
+
+在文件 nfa\+\_\+generator.\+h 第 38 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a87346bdc0f454735c958b64934b0177d}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a87346bdc0f454735c958b64934b0177d}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!NfaGenerator@{NfaGenerator}}
+\index{NfaGenerator@{NfaGenerator}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{NfaGenerator()}{NfaGenerator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Generator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 nfa\+\_\+generator.\+h 第 135 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa9dc3c9da3425f331cb952876b9f7b2c}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa9dc3c9da3425f331cb952876b9f7b2c}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!NfaGenerator@{NfaGenerator}}
+\index{NfaGenerator@{NfaGenerator}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{NfaGenerator()}{NfaGenerator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Generator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator}{Nfa\+Generator}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a7cbdfdd5e3eb8af36b14306ac21d429e}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a7cbdfdd5e3eb8af36b14306ac21d429e}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!NfaGenerator@{NfaGenerator}}
+\index{NfaGenerator@{NfaGenerator}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{NfaGenerator()}{NfaGenerator()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Generator (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator}{Nfa\+Generator}} \&\&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!Closure@{Closure}}
+\index{Closure@{Closure}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{Closure()}{Closure()}}
+{\footnotesize\ttfamily std\+::pair$<$ std\+::unordered\+\_\+set$<$ typename \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Generator\+::\+Nfa\+Node\+Id}} $>$, typename \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Nfa\+Generator\+::\+Tail\+Node\+Data}} $>$ frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Closure (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}}}]{node\+\_\+id }\end{DoxyParamCaption})}
+
+
+
+获取给定\+N\+F\+A节点的所有等效节点\+I\+D（包含自身） 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em node\+\_\+id} & ：要获取所有等效节点的\+N\+F\+A节点\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为所有等效节点的集合，后半部分为这些等效节点代表的单词的 附属数据 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+返回值后半部分为所有可能代表的单词中最高优先级的单词的数据 如果所有等效节点都无法代表任何单词，那么后半部分返回k\+Not\+Tail\+Node\+Tag 
+\end{DoxyNote}
+
+
+在文件 nfa\+\_\+generator.\+cpp 第 41 行定义.
+
+
+
+引用了 frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Get\+Ids\+Referring\+Same\+Object(), Get\+Nfa\+Node(), k\+Not\+Tail\+Node\+Tag, node\+\_\+manager\+\_\+ , 以及 tail\+\_\+nodes\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Dfa\+Construct() , 以及 Goto().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!CreateSwitchTree@{CreateSwitchTree}}
+\index{CreateSwitchTree@{CreateSwitchTree}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{CreateSwitchTree()}{CreateSwitchTree()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Generator\+::\+Nfa\+Node\+Id}}, \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Generator\+::\+Nfa\+Node\+Id}} $>$ frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Create\+Switch\+Tree (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{raw\+\_\+regex\+\_\+string,  }\item[{size\+\_\+t $\ast$const}]{next\+\_\+character\+\_\+index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+根据输入生成可选字符结构 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em raw\+\_\+regex\+\_\+string} & ：表示单词的正则表达式字符串 \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em next\+\_\+character\+\_\+index} & ：指向下一个读取的字符位置的下标的指针 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回生成的\+N\+F\+A数据结构的头结点\+I\+D和尾节点\+ID
+\end{DoxyReturn}
+1.\+raw\+\_\+regex\+\_\+string内对应\mbox{[}\mbox{]}部分必须为有效正则 否则在std\+::cerr输出错误信息后退出 2.\+next\+\_\+character\+\_\+index调用时解引用的值应为\textquotesingle{}\mbox{[}\textquotesingle{}右侧第一个字符的下标 成功调用后解引用的值为\textquotesingle{}\mbox{]}\textquotesingle{}右侧第一个字符的下标 3.不会读取\mbox{]}后的$\ast$,+,?等限定符 4.例：raw\+\_\+regex\+\_\+string == \char`\"{}\mbox{[}a-\/z\+A-\/\+Z\+\_\+\mbox{]}\char`\"{} next\+\_\+character\+\_\+index == 1 
+
+在文件 nfa\+\_\+generator.\+cpp 第 360 行定义.
+
+
+
+引用了 frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Emplace\+Object(), frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+::\+Get\+Conditional\+Transfers(), Get\+Nfa\+Node(), node\+\_\+manager\+\_\+, frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Remove\+Object() , 以及 frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+::\+Set\+Condition\+Transfer().
+
+
+
+被这些函数引用 Regex\+Construct().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa6064ffbfc016cd8c14626928b894616}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa6064ffbfc016cd8c14626928b894616}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!GetHeadNfaNodeId@{GetHeadNfaNodeId}}
+\index{GetHeadNfaNodeId@{GetHeadNfaNodeId}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{GetHeadNfaNodeId()}{GetHeadNfaNodeId()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Get\+Head\+Nfa\+Node\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取\+N\+F\+A节点头结点\+ID 
+
+\begin{DoxyReturn}{返回}
+返回\+N\+F\+A节点头结点\+ID 
+\end{DoxyReturn}
+
+
+在文件 nfa\+\_\+generator.\+h 第 141 行定义.
+
+
+
+引用了 head\+\_\+node\+\_\+id\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Dfa\+Construct() , 以及 Merge\+Optimization().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa6064ffbfc016cd8c14626928b894616_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!GetNfaNode@{GetNfaNode}}
+\index{GetNfaNode@{GetNfaNode}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{GetNfaNode()}{GetNfaNode()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode}{Nfa\+Node}}\& frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Get\+Nfa\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}}}]{node\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+根据\+N\+F\+A节点\+I\+D获取\+N\+F\+A节点 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em node\+\_\+id} & ：\+N\+F\+A节点\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回获取到的\+N\+F\+A节点 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+node\+\_\+id必须对应已存在的\+N\+F\+A节点 
+\end{DoxyAttention}
+
+
+在文件 nfa\+\_\+generator.\+h 第 151 行定义.
+
+
+
+引用了 frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Get\+Object() , 以及 node\+\_\+manager\+\_\+.
+
+
+
+被这些函数引用 Closure(), Create\+Switch\+Tree(), Goto(), Merge\+Optimization(), Regex\+Construct() , 以及 Word\+Construct().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a7809a54c44c233d956e1a0d3b10f2b82}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a7809a54c44c233d956e1a0d3b10f2b82}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!GetTailNodeData@{GetTailNodeData}}
+\index{GetTailNodeData@{GetTailNodeData}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{GetTailNodeData()}{GetTailNodeData()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Nfa\+Generator\+::\+Tail\+Node\+Data}} \& frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Get\+Tail\+Node\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}}}]{node\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+根据\+N\+F\+A节点\+I\+D获取尾节点数据 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em node\+\_\+id} & ：要获取尾节点数据的\+N\+F\+A节点\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回获取到的尾节点数据 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em ：k\+Not\+Tail\+Node\+Tag} & node\+\_\+id不是尾节点时返回该内容 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 nfa\+\_\+generator.\+cpp 第 130 行定义.
+
+
+
+引用了 k\+Not\+Tail\+Node\+Tag , 以及 tail\+\_\+nodes\+\_\+.
+
+
+
+被这些函数引用 Merge\+Optimization().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a7809a54c44c233d956e1a0d3b10f2b82_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!Goto@{Goto}}
+\index{Goto@{Goto}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{Goto()}{Goto()}}
+{\footnotesize\ttfamily std\+::pair$<$ std\+::unordered\+\_\+set$<$ typename \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Generator\+::\+Nfa\+Node\+Id}} $>$, typename \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Nfa\+Generator\+::\+Tail\+Node\+Data}} $>$ frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Goto (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}}}]{id\+\_\+src,  }\item[{char}]{c\+\_\+transform }\end{DoxyParamCaption})}
+
+
+
+获取给定\+N\+F\+A节点在转移条件下可以到达的等效节点 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id\+\_\+src} & ：源节点 \\
+\hline
+\mbox{\texttt{ in}}  & {\em c\+\_\+transform} & ：转移条件 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为所有等效节点的集合，后半部分为这些等效节点代表的单词的 附属数据
+\end{DoxyReturn}
+该函数获取转移后达到的\+Nfa\+Node\+Id，然后返回该\+I\+D的\+Closure结果 
+
+在文件 nfa\+\_\+generator.\+cpp 第 92 行定义.
+
+
+
+引用了 Closure(), frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+::\+Get\+Forward\+Node\+Id(), Get\+Nfa\+Node(), frontend\+::common\+::\+Base\+Id\+Wrapper$<$ Id\+Type\+\_\+, Label\+Enum\+\_\+, label\+\_\+, invalid\+\_\+value\+\_\+ $>$\+::\+Is\+Valid() , 以及 k\+Not\+Tail\+Node\+Tag.
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Set\+Goto().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!MergeOptimization@{MergeOptimization}}
+\index{MergeOptimization@{MergeOptimization}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{MergeOptimization()}{MergeOptimization()}}
+{\footnotesize\ttfamily void frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Merge\+Optimization (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+合并优化，降低节点数和转移路径以降低子集构造法集合大小 
+
+合并优化由两部分组成，一部分为删除当前处理节点与等效节点重复的转移项 另一部分为当前处理节点仅存在无条件转移到等效节点的转移条目时合并两个节点 直接使用\+N\+F\+A也可以降低成本 
+
+在文件 nfa\+\_\+generator.\+cpp 第 256 行定义.
+
+
+
+引用了 frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Can\+Be\+Source\+In\+Merge(), frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+::\+Get\+Conditional\+Transfers(), Get\+Head\+Nfa\+Node\+Id(), Get\+Nfa\+Node(), Get\+Tail\+Node\+Data(), frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+::\+Get\+Uncondition\+Transfer\+Nodes\+Ids(), k\+Not\+Tail\+Node\+Tag, frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+::\+Merge\+Nodes(), frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Merge\+Objects(), node\+\_\+manager\+\_\+, frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+::\+Remove\+Conditional\+Transfer(), frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+::\+Remove\+Conditionless\+Transfer(), Remove\+Tail\+Node(), frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Set\+All\+Objects\+Can\+Be\+Source\+In\+Merge(), frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Set\+Object\+Can\+Not\+Be\+Source\+In\+Merge() , 以及 Set\+Tail\+Node().
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Dfa\+Construct().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!NfaInit@{NfaInit}}
+\index{NfaInit@{NfaInit}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{NfaInit()}{NfaInit()}}
+{\footnotesize\ttfamily void frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+N\+F\+A初始化 
+
+\begin{DoxyNote}{注解}
+可以通过调用该函数清空已有的\+N\+F\+A配置 
+\end{DoxyNote}
+
+
+在文件 nfa\+\_\+generator.\+cpp 第 101 行定义.
+
+
+
+引用了 frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Emplace\+Object(), head\+\_\+node\+\_\+id\+\_\+, frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Multimap\+Object\+Manager\+Init(), node\+\_\+manager\+\_\+ , 以及 tail\+\_\+nodes\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Dfa\+Init().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!RegexConstruct@{RegexConstruct}}
+\index{RegexConstruct@{RegexConstruct}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{RegexConstruct()}{RegexConstruct()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Generator\+::\+Nfa\+Node\+Id}}, \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Generator\+::\+Nfa\+Node\+Id}} $>$ frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Regex\+Construct (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Tail\+Node\+Data}} \&\&}]{tail\+\_\+node\+\_\+data,  }\item[{const std\+::string \&}]{raw\+\_\+regex\+\_\+string,  }\item[{size\+\_\+t \&\&}]{next\+\_\+character\+\_\+index = {\ttfamily 0},  }\item[{const bool}]{add\+\_\+to\+\_\+nfa\+\_\+head = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+解析正则 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em tail\+\_\+node\+\_\+data} & ：获取到该单词时返回的数据 \\
+\hline
+\mbox{\texttt{ in}}  & {\em raw\+\_\+regex\+\_\+string} & ：表示单词的正则表达式 \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em next\+\_\+character\+\_\+index} & ：下一个读取的raw\+\_\+regex\+\_\+string中的单词的位置 \\
+\hline
+\mbox{\texttt{ in}}  & {\em add\+\_\+to\+\_\+nfa\+\_\+head} & ：构建完成后是否设置\+N\+F\+A头结点到生成的结构链头结点的无条件转移路径 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回生成的\+N\+F\+A结构链的头结点\+I\+D和尾节点\+ID
+\end{DoxyReturn}
+next\+\_\+character\+\_\+index决定调用该函数时从哪里开始读取raw\+\_\+regex\+\_\+string中的字符 add\+\_\+to\+\_\+nfa\+\_\+head用于内部遇到\textquotesingle{}(\textquotesingle{}时递归调用该函数时防止将子正则作为有效单词 添加到配置中，第一次调用应使用true（默认值），递归调用时应使用false 如果next\+\_\+character\+\_\+index指向的字符左侧为\textquotesingle{}(\textquotesingle{}，则读取到与之匹配的\textquotesingle{})\textquotesingle{}时返回 （读取到第一个\textquotesingle{})\textquotesingle{}时返回，因为递归调用时会自动处理对应的\textquotesingle{})\textquotesingle{}），否则读取到 raw\+\_\+regex\+\_\+string末尾时返回 如果遇到\textquotesingle{})\textquotesingle{}，返回时不自动处理\textquotesingle{})\textquotesingle{}后的范围限制符号（?、+、$\ast$等） \begin{DoxyNote}{注解}
+返回时next\+\_\+character\+\_\+index指向下一个要读取的字符 add\+\_\+to\+\_\+nfa\+\_\+head == false时tail\+\_\+node\+\_\+data可以提供任意参数 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+如果next\+\_\+character\+\_\+index $>$= raw\+\_\+regex\+\_\+string.\+size() 则返回值两部分都为\+Nfa\+Node\+Id\+::\+Invalid\+Id() 
+\end{DoxyAttention}
+
+
+在文件 nfa\+\_\+generator.\+cpp 第 140 行定义.
+
+
+
+引用了 frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+::\+Add\+Nocondition\+Transfer(), Create\+Switch\+Tree(), frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Emplace\+Object(), Get\+Nfa\+Node(), head\+\_\+node\+\_\+id\+\_\+, frontend\+::common\+::\+Explicit\+Id\+Wrapper$<$ size\+\_\+t, Wrapper\+Label, Wrapper\+Label\+::k\+Object\+Id $>$\+::\+Invalid\+Id(), node\+\_\+manager\+\_\+, Regex\+Construct(), frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Remove\+Object(), frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+::\+Set\+Condition\+Transfer() , 以及 Set\+Tail\+Node().
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Add\+Regexpression() , 以及 Regex\+Construct().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aaf1122d36ed3eced824030181ea7ff3f}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aaf1122d36ed3eced824030181ea7ff3f}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!RemoveTailNode@{RemoveTailNode}}
+\index{RemoveTailNode@{RemoveTailNode}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{RemoveTailNode()}{RemoveTailNode()}}
+{\footnotesize\ttfamily size\+\_\+t frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Remove\+Tail\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}}}]{tail\+\_\+node\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+移除尾节点信息 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em tail\+\_\+node\+\_\+id} & ：要移除尾节点信息的节点\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回删除的条目个数 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em 0} & ：未删除任何条目（node\+\_\+id指定的节点不存在或不为尾节点） \\
+\hline
+{\em 1} & ：删除了已有的一个条目 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 nfa\+\_\+generator.\+h 第 223 行定义.
+
+
+
+引用了 tail\+\_\+nodes\+\_\+.
+
+
+
+被这些函数引用 Merge\+Optimization().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aaf1122d36ed3eced824030181ea7ff3f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aabdd9849ae9d8831534733ce6e6eb688}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aabdd9849ae9d8831534733ce6e6eb688}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!SetTailNode@{SetTailNode}}
+\index{SetTailNode@{SetTailNode}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{SetTailNode()}{SetTailNode()}}
+{\footnotesize\ttfamily template$<$class Tail\+Node\+Data\+Type $>$ \\
+bool frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Set\+Tail\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}}}]{node\+\_\+id,  }\item[{Tail\+Node\+Data\+Type \&\&}]{tail\+\_\+node\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+设置尾节点信息 
+
+
+\begin{DoxyTemplParams}{模板参数}
+{\em Tail\+Node\+Data\+Type} & ：尾节点数据类型，仅支持const Tail\+Node\+Data\&和\+Tail\+Node\+Data\&\& \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em node\+\_\+id} & ：待设置为尾节点的节点\+ID \\
+\hline
+\mbox{\texttt{ in}}  & {\em tail\+\_\+node\+\_\+data} & ：尾节点数据 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+是否设置成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：设置成功 \\
+\hline
+{\em false} & ：设置失败 已存在node\+\_\+id的尾节点记录，需要先调用\+Remove\+Tail\+Node然后再调用该函数 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 nfa\+\_\+generator.\+h 第 236 行定义.
+
+
+
+引用了 tail\+\_\+nodes\+\_\+.
+
+
+
+被这些函数引用 Merge\+Optimization(), Regex\+Construct() , 以及 Word\+Construct().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aabdd9849ae9d8831534733ce6e6eb688_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!WordConstruct@{WordConstruct}}
+\index{WordConstruct@{WordConstruct}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{WordConstruct()}{WordConstruct()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Generator\+::\+Nfa\+Node\+Id}}, \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Generator\+::\+Nfa\+Node\+Id}} $>$ frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Word\+Construct (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str,  }\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Tail\+Node\+Data}} \&\&}]{word\+\_\+attached\+\_\+data }\end{DoxyParamCaption})}
+
+
+
+添加一个纯单词 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em str} & ：单词的字符串 \\
+\hline
+\mbox{\texttt{ in}}  & {\em word\+\_\+attached\+\_\+data} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回生成的\+N\+F\+A结构链的头结点\+I\+D和尾节点\+ID
+\end{DoxyReturn}
+该函数与\+Regex\+Construct区别在于它将str视为纯单词而非正则表达式来添加 \begin{DoxyReturn}{返回}
+返回生成的\+N\+F\+A结构链的头结点和尾节点 
+\end{DoxyReturn}
+
+
+在文件 nfa\+\_\+generator.\+cpp 第 241 行定义.
+
+
+
+引用了 frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+::\+Add\+Nocondition\+Transfer(), frontend\+::common\+::\+Multimap\+Object\+Manager$<$ T $>$\+::\+Emplace\+Object(), Get\+Nfa\+Node(), head\+\_\+node\+\_\+id\+\_\+, node\+\_\+manager\+\_\+, frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::\+Nfa\+Node\+::\+Set\+Condition\+Transfer() , 以及 Set\+Tail\+Node().
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Add\+Word().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a02e466281eb3f8f9c62ccd3bd4b52be4}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a02e466281eb3f8f9c62ccd3bd4b52be4}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!head\_node\_id\_@{head\_node\_id\_}}
+\index{head\_node\_id\_@{head\_node\_id\_}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{head\_node\_id\_}{head\_node\_id\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}} frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::head\+\_\+node\+\_\+id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+N\+F\+A头结点\+ID 
+
+
+
+在文件 nfa\+\_\+generator.\+h 第 256 行定义.
+
+
+
+被这些函数引用 Get\+Head\+Nfa\+Node\+Id(), Nfa\+Init(), Regex\+Construct() , 以及 Word\+Construct().
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afa18192c64defc0544485a4fa7c9a410}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afa18192c64defc0544485a4fa7c9a410}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!kNotTailNodeTag@{kNotTailNodeTag}}
+\index{kNotTailNodeTag@{kNotTailNodeTag}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{kNotTailNodeTag}{kNotTailNodeTag}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Nfa\+Generator\+::\+Tail\+Node\+Data}} frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::k\+Not\+Tail\+Node\+Tag\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries 初始值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{    \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{NfaGenerator::TailNodeData}}(\mbox{\hyperlink{namespacefrontend_1_1generator_1_1dfa__generator_ace8ccb7b6f5392490ab9907d95e26cf9}{WordAttachedData}}(), \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper_a5286ddd962d1091679c76ba11beeacaf}{WordPriority::InvalidId}}())}
+
+\end{DoxyCode}
+
+
+非尾节点标记 
+
+
+
+在文件 nfa\+\_\+generator.\+h 第 215 行定义.
+
+
+
+被这些函数引用 Closure(), frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Dfa\+Construct(), Get\+Tail\+Node\+Data(), Goto(), Merge\+Optimization() , 以及 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Set\+Goto().
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a5e68c1ef2912bd9b41037d7a6f0ad5c5}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a5e68c1ef2912bd9b41037d7a6f0ad5c5}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!node\_manager\_@{node\_manager\_}}
+\index{node\_manager\_@{node\_manager\_}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{node\_manager\_}{node\_manager\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrontend_1_1common_1_1MultimapObjectManager}{frontend\+::common\+::\+Multimap\+Object\+Manager}}$<$\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode}{Nfa\+Node}}$>$ frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::node\+\_\+manager\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+储存\+N\+F\+A节点 
+
+
+
+在文件 nfa\+\_\+generator.\+h 第 260 行定义.
+
+
+
+被这些函数引用 Closure(), Create\+Switch\+Tree(), Get\+Nfa\+Node(), Merge\+Optimization(), Nfa\+Init(), Regex\+Construct() , 以及 Word\+Construct().
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a2325bf96b0a3597eaaaf9cc4dc425592}\label{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a2325bf96b0a3597eaaaf9cc4dc425592}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}!tail\_nodes\_@{tail\_nodes\_}}
+\index{tail\_nodes\_@{tail\_nodes\_}!frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator@{frontend::generator::dfa\_generator::nfa\_generator::NfaGenerator}}
+\doxysubsubsection{\texorpdfstring{tail\_nodes\_}{tail\_nodes\_}}
+{\footnotesize\ttfamily std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ad07eafdc898343115c3415bd6514e71b}{Nfa\+Node\+Id}}, \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac4e941bb614deadf6f71db643d52c80c}{Tail\+Node\+Data}}$>$ frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Nfa\+Generator\+::tail\+\_\+nodes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+储存尾节点\+I\+D到尾节点数据的映射 
+
+
+
+在文件 nfa\+\_\+generator.\+h 第 258 行定义.
+
+
+
+被这些函数引用 Closure(), Get\+Tail\+Node\+Data(), Nfa\+Init(), Remove\+Tail\+Node() , 以及 Set\+Tail\+Node().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Generator/\+Dfa\+Generator/\+Nfa\+Generator/\mbox{\hyperlink{nfa__generator_8h}{nfa\+\_\+generator.\+h}}\item 
+src/\+Generator/\+Dfa\+Generator/\+Nfa\+Generator/\mbox{\hyperlink{nfa__generator_8cpp}{nfa\+\_\+generator.\+cpp}}\end{DoxyCompactItemize}

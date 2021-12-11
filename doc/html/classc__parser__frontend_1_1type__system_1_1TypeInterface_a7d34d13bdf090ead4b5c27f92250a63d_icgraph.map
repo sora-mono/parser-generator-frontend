@@ -1,0 +1,14 @@
+<map id="c_parser_frontend::type_system::TypeInterface::GetNextNodeReference" name="c_parser_frontend::type_system::TypeInterface::GetNextNodeReference">
+<area shape="rect" id="node1" title="获取下一个节点的引用" alt="" coords="487,325,689,381"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#a2e635862cc6ed9674889aedd73706042" title="判断给定类型是否可以给该对象赋值" alt="" coords="242,5,433,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a5aa9c19280d18ecedfc56f910f6d95bc" title="比较两个类型是否完全相同" alt="" coords="236,85,439,141"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#a23b0071b2c288812c3955482d4186a51" title="比较两个类型是否完全相同" alt="" coords="248,165,427,221"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#aa64ede3652f3e1ff0a96e7a76c82a4fb" title="比较两个类型是否完全相同" alt="" coords="242,245,433,301"/>
+<area shape="rect" id="node6" href="$classc__parser__frontend_1_1type__system_1_1FunctionType.html#ac1fdbac52baf81b5ffae14d60daa6ad1" title="比较两个类型是否完全相同" alt="" coords="238,325,437,381"/>
+<area shape="rect" id="node7" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a83d928e714bfb4a8aa758b2462db06a8" title="比较两个类型是否完全相同" alt="" coords="236,405,439,461"/>
+<area shape="rect" id="node10" href="$classc__parser__frontend_1_1type__system_1_1EnumType.html#a2eead0fe62ca004bde766b819213c826" title="比较两个类型是否完全相同" alt="" coords="247,485,428,541"/>
+<area shape="rect" id="node11" href="$classc__parser__frontend_1_1type__system_1_1InitializeListType.html#afb573a97b14debe0ed84badfac6e0091" title="比较两个类型是否完全相同" alt="" coords="241,565,434,621"/>
+<area shape="rect" id="node12" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#adf934102c4e9c172ea7fdb80527a9b25" title="获取sizeof语义下类型的大小" alt="" coords="242,645,433,701"/>
+<area shape="rect" id="node8" href="$classc__parser__frontend_1_1type__system_1_1StructType.html#ad57e4456caf14fca05a2752ff98f67e0" title="比较两个类型是否完全相同" alt="" coords="5,365,188,421"/>
+<area shape="rect" id="node9" href="$classc__parser__frontend_1_1type__system_1_1UnionType.html#a9e5eb68061afd992a8455dc20e92330f" title="比较两个类型是否完全相同" alt="" coords="5,445,188,501"/>
+</map>

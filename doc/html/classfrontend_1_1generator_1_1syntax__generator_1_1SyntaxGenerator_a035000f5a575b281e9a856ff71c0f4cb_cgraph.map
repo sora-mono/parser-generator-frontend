@@ -1,0 +1,6 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::AddProductionItemBelongToProductionItemSetId" name="frontend::generator::syntax_generator::SyntaxGenerator::AddProductionItemBelongToProductionItemSetId">
+<area shape="rect" id="node1" title="添加核心项所属的项集ID" alt="" coords="5,131,248,202"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a8c1d7d05497a2f15efb1379cd03be36d" title="添加产生式中某项所属的项集ID" alt="" coords="296,5,579,91"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="304,139,571,195"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a1aa8dcd59b8c2220d5af4db2c656d23b" title="获取产生式类型" alt="" coords="328,219,547,275"/>
+</map>

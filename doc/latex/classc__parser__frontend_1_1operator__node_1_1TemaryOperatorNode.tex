@@ -1,0 +1,1069 @@
+\hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Temary\+Operator\+Node类 参考}
+\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode}\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+
+
+三目运算符  
+
+
+
+
+{\ttfamily \#include $<$operator\+\_\+node.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Temary\+Operator\+Node 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=277pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Temary\+Operator\+Node 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a4b44867928af37dee048157868ee479d}{Temary\+Operator\+Node}} ()
+\item 
+virtual Const\+Tag \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a72f3d2497e1aaca3a5bb71ea926c570a}{Get\+Result\+Const\+Tag}} () const override
+\begin{DoxyCompactList}\small\item\em 获取该节点操作结果的const标记 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_af0e8dcc1136bce4c2497ca0ef6921ec3}{Get\+Result\+Type\+Pointer}} () const override
+\begin{DoxyCompactList}\small\item\em 获取最终结果的类型 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_af65bb4438ce3a492cf03919e6aef4631}{Get\+Result\+Operator\+Node}} () const override
+\begin{DoxyCompactList}\small\item\em 获取最终结果的节点 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a0eaae8f08e933b4d6defbe82e0e4e03f}{Self\+Copy}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&new\+\_\+type, Const\+Tag new\+\_\+const\+\_\+tag) const override
+\begin{DoxyCompactList}\small\item\em 拷贝自身并设置拷贝得到的对象类型为new\+\_\+type \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a440baeb7f54df4d2ac6429273c26c1e6}{Set\+Branch\+Condition}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&branch\+\_\+condition, const std\+::shared\+\_\+ptr$<$ const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$$>$$>$ \&flow\+\_\+control\+\_\+node\+\_\+container)
+\begin{DoxyCompactList}\small\item\em 设置分支条件 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a22b9c2dc2a996537411b0683ce873195}{Get\+Branch\+Condition\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取分支条件 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aed120ea8ded163e2579c02181f3d01d8}{Get\+Branch\+Condition\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取分支条件 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ab617a155bead5c32428009e25f16e1c3}{Get\+Flow\+Control\+Node\+To\+Get\+Condition\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取得到分支条件的全部操作 \end{DoxyCompactList}\item 
+const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ $>$ \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a8506ecac948d7da6508965205b8e4eca}{Get\+Flow\+Control\+Node\+To\+Get\+Condition\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取得到分支条件的全部操作 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a3bf8f22583fef107e37a3b9a51d1f7de}{Set\+True\+Branch}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&true\+\_\+branch, const std\+::shared\+\_\+ptr$<$ const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$$>$$>$ \&flow\+\_\+control\+\_\+node\+\_\+container)
+\begin{DoxyCompactList}\small\item\em 设置条件为真时的分支 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aed03c446991c9597c6499a3b7d6e33c8}{Get\+True\+Branch\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取真分支结果 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a0349ffd14404d64aca8a71748f0740fb}{Get\+True\+Branch\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取真分支结果 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae8622001f5d885326d893ae7e9dcb1a2}{Get\+Flow\+Control\+Node\+To\+Get\+True\+Branch\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取得到真分支结果的操作 \end{DoxyCompactList}\item 
+const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ $>$ \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae3c0c386350d531c0acf8cc55e0fb7df}{Get\+Flow\+Control\+Node\+To\+Get\+True\+Branch\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取得到真分支结果的操作 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aed46590b486ee7477bb17dce3677c3fb}{Set\+False\+Branch}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&false\+\_\+branch, const std\+::shared\+\_\+ptr$<$ const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$$>$$>$ \&flow\+\_\+control\+\_\+node\+\_\+container)
+\begin{DoxyCompactList}\small\item\em 设置条件为假时的分支 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_acd01ef4be4086baffb3f12fd78b238d5}{Get\+False\+Branch\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取假分支结果 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a705bb8d534472d8326dd50493dba83ea}{Get\+False\+Branch\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取假分支结果 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a2e61627839b6b97ec9e233b183e6ea55}{Get\+Flow\+Control\+Node\+To\+Get\+False\+Branch\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取得到假分支结果的操作 \end{DoxyCompactList}\item 
+const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ $>$ \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a3e7a34905b3a3f5777ee59bff1c14f55}{Get\+Flow\+Control\+Node\+To\+Get\+False\+Branch\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取得到假分支结果的操作 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a128bc08bae8a5b39c5bcd33a3608f2b3}{Get\+Result\+Pointer}} () const
+\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ade075f315049b64b637b64abcc9dc728}{Get\+Result\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取结果 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a8bbcf79237101cc951de40d07f3a5085}{Check\+Branch\+Condition\+Valid}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&branch\+\_\+condition)
+\begin{DoxyCompactList}\small\item\em 检查分支条件是否有效 \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aa2d2461fd18663c1ed73484328b81fc3}{Check\+Branch\+Valid}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&branch)
+\begin{DoxyCompactList}\small\item\em 检查条件分支结果是否有效 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae59e55b700c8709ffc835891f6cd84f7}{Construct\+Result\+Node}} ()
+\begin{DoxyCompactList}\small\item\em 创建返回结果的节点 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a6b664c503794202345d5b94885c35ac0}{branch\+\_\+condition\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 分支条件 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a933b96efcd1bbaa501a32cb99d871f10}{condition\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 获取分支条件的操作 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a0a7db1283226caa922a0d997659a6d74}{true\+\_\+branch\+\_\+}} = nullptr
+\begin{DoxyCompactList}\small\item\em 条件为真时表达式的结果 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aff56208529d044620ada2f7c9bbb2d77}{true\+\_\+branch\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 获取真分支结果的操作 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_adb24a57225ff3b03d496f0f08dd8275a}{false\+\_\+branch\+\_\+}} = nullptr
+\begin{DoxyCompactList}\small\item\em 条件为假时表达式的结果 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a7416a13f3f4b3cfa597f7cd55c95b0df}{false\+\_\+branch\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 获取假分支结果的操作 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae7e4cc66985febf62f689432f676f11f}{result\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 存储返回结果的节点 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+三目运算符 
+
+支持constexpr三目运算符语义 
+
+在文件 operator\+\_\+node.\+h 第 635 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a4b44867928af37dee048157868ee479d}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a4b44867928af37dee048157868ee479d}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!TemaryOperatorNode@{TemaryOperatorNode}}
+\index{TemaryOperatorNode@{TemaryOperatorNode}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{TemaryOperatorNode()}{TemaryOperatorNode()}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Temary\+Operator\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 637 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Temary\+Operator.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a8bbcf79237101cc951de40d07f3a5085}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a8bbcf79237101cc951de40d07f3a5085}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!CheckBranchConditionValid@{CheckBranchConditionValid}}
+\index{CheckBranchConditionValid@{CheckBranchConditionValid}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{CheckBranchConditionValid()}{CheckBranchConditionValid()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Check\+Branch\+Condition\+Valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&}]{branch\+\_\+condition }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+检查分支条件是否有效 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em branch\+\_\+condition} & ：分支条件 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回分支条件是否有效 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：分支条件有效 \\
+\hline
+{\em false} & ：分支条件无效 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+只有\+Struct\+Or\+Basic\+Type\+::k\+Basic和\+Struct\+Or\+Basic\+Type\+::k\+Pointer可以作为 分支条件 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+cpp 第 960 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Type\+Pointer().
+
+
+
+被这些函数引用 Check\+Branch\+Valid() , 以及 Set\+Branch\+Condition().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a8bbcf79237101cc951de40d07f3a5085_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a8bbcf79237101cc951de40d07f3a5085_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aa2d2461fd18663c1ed73484328b81fc3}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aa2d2461fd18663c1ed73484328b81fc3}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!CheckBranchValid@{CheckBranchValid}}
+\index{CheckBranchValid@{CheckBranchValid}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{CheckBranchValid()}{CheckBranchValid()}}
+{\footnotesize\ttfamily static bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Check\+Branch\+Valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&}]{branch }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+检查条件分支结果是否有效 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em branch} & ：条件分支结果 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回条件分支结果是否有效 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：分支条件结果有效 \\
+\hline
+{\em false} & ：分支条件结果无效 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+只有\+Struct\+Or\+Basic\+Type\+::k\+Basic和\+Struct\+Or\+Basic\+Type\+::k\+Pointer可以作为 分支条件 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+h 第 799 行定义.
+
+
+
+引用了 Check\+Branch\+Condition\+Valid().
+
+
+
+被这些函数引用 Set\+False\+Branch() , 以及 Set\+True\+Branch().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aa2d2461fd18663c1ed73484328b81fc3_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aa2d2461fd18663c1ed73484328b81fc3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae59e55b700c8709ffc835891f6cd84f7}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae59e55b700c8709ffc835891f6cd84f7}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!ConstructResultNode@{ConstructResultNode}}
+\index{ConstructResultNode@{ConstructResultNode}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{ConstructResultNode()}{ConstructResultNode()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Construct\+Result\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+创建返回结果的节点 
+
+\begin{DoxyReturn}{返回}
+返回创建结果是否成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：创建成功\\
+\hline
+\end{DoxyRetVals}
+1.设置分支条件和两个分支后调用 2.如果两个分支不能互相转化则返回false 3.如果分支条件为编译期常量则不做任何操作返回true 4.不支持非编译期常量条件下使用初始化列表 
+
+在文件 operator\+\_\+node.\+cpp 第 979 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Check\+Assignable(), Get\+Branch\+Condition\+Reference(), Get\+False\+Branch\+Pointer(), Get\+False\+Branch\+Reference(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+General\+Operator\+Type(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Type\+Pointer(), Get\+True\+Branch\+Pointer(), Get\+True\+Branch\+Reference(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Init\+Value, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Right\+Value , 以及 result\+\_\+.
+
+
+
+被这些函数引用 Set\+False\+Branch() , 以及 Set\+True\+Branch().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae59e55b700c8709ffc835891f6cd84f7_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae59e55b700c8709ffc835891f6cd84f7_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a22b9c2dc2a996537411b0683ce873195}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a22b9c2dc2a996537411b0683ce873195}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetBranchConditionPointer@{GetBranchConditionPointer}}
+\index{GetBranchConditionPointer@{GetBranchConditionPointer}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetBranchConditionPointer()}{GetBranchConditionPointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Branch\+Condition\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取分支条件 
+
+\begin{DoxyReturn}{返回}
+返回指向分支条件节点的const指针 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 679 行定义.
+
+
+
+引用了 branch\+\_\+condition\+\_\+.
+
+
+
+被这些函数引用 Set\+False\+Branch() , 以及 Set\+True\+Branch().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a22b9c2dc2a996537411b0683ce873195_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aed120ea8ded163e2579c02181f3d01d8}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aed120ea8ded163e2579c02181f3d01d8}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetBranchConditionReference@{GetBranchConditionReference}}
+\index{GetBranchConditionReference@{GetBranchConditionReference}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetBranchConditionReference()}{GetBranchConditionReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Branch\+Condition\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取分支条件 
+
+\begin{DoxyReturn}{返回}
+返回分支条件节点的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 685 行定义.
+
+
+
+引用了 branch\+\_\+condition\+\_\+.
+
+
+
+被这些函数引用 Construct\+Result\+Node(), Set\+False\+Branch() , 以及 Set\+True\+Branch().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aed120ea8ded163e2579c02181f3d01d8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_acd01ef4be4086baffb3f12fd78b238d5}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_acd01ef4be4086baffb3f12fd78b238d5}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetFalseBranchPointer@{GetFalseBranchPointer}}
+\index{GetFalseBranchPointer@{GetFalseBranchPointer}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetFalseBranchPointer()}{GetFalseBranchPointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+False\+Branch\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取假分支结果 
+
+\begin{DoxyReturn}{返回}
+返回指向假分支结果的const指针 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 756 行定义.
+
+
+
+引用了 false\+\_\+branch\+\_\+.
+
+
+
+被这些函数引用 Construct\+Result\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_acd01ef4be4086baffb3f12fd78b238d5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a705bb8d534472d8326dd50493dba83ea}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a705bb8d534472d8326dd50493dba83ea}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetFalseBranchReference@{GetFalseBranchReference}}
+\index{GetFalseBranchReference@{GetFalseBranchReference}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetFalseBranchReference()}{GetFalseBranchReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+False\+Branch\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取假分支结果 
+
+\begin{DoxyReturn}{返回}
+返回假分支结果的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 761 行定义.
+
+
+
+引用了 false\+\_\+branch\+\_\+.
+
+
+
+被这些函数引用 Construct\+Result\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a705bb8d534472d8326dd50493dba83ea_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ab617a155bead5c32428009e25f16e1c3}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ab617a155bead5c32428009e25f16e1c3}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetFlowControlNodeToGetConditionPointer@{GetFlowControlNodeToGetConditionPointer}}
+\index{GetFlowControlNodeToGetConditionPointer@{GetFlowControlNodeToGetConditionPointer}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetFlowControlNodeToGetConditionPointer()}{GetFlowControlNodeToGetConditionPointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const std\+::list$<$ std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}$>$ $>$ $>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Flow\+Control\+Node\+To\+Get\+Condition\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取得到分支条件的全部操作 
+
+\begin{DoxyReturn}{返回}
+返回指向获取分支条件操作的容器的const指针 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 692 行定义.
+
+
+
+引用了 condition\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a8506ecac948d7da6508965205b8e4eca}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a8506ecac948d7da6508965205b8e4eca}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetFlowControlNodeToGetConditionReference@{GetFlowControlNodeToGetConditionReference}}
+\index{GetFlowControlNodeToGetConditionReference@{GetFlowControlNodeToGetConditionReference}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetFlowControlNodeToGetConditionReference()}{GetFlowControlNodeToGetConditionReference()}}
+{\footnotesize\ttfamily const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ $>$ \& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Flow\+Control\+Node\+To\+Get\+Condition\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取得到分支条件的全部操作 
+
+\begin{DoxyReturn}{返回}
+返回获取分支条件操作的容器的const引用 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+cpp 第 417 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a2e61627839b6b97ec9e233b183e6ea55}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a2e61627839b6b97ec9e233b183e6ea55}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetFlowControlNodeToGetFalseBranchPointer@{GetFlowControlNodeToGetFalseBranchPointer}}
+\index{GetFlowControlNodeToGetFalseBranchPointer@{GetFlowControlNodeToGetFalseBranchPointer}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetFlowControlNodeToGetFalseBranchPointer()}{GetFlowControlNodeToGetFalseBranchPointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const std\+::list$<$ std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}$>$ $>$ $>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Flow\+Control\+Node\+To\+Get\+False\+Branch\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取得到假分支结果的操作 
+
+\begin{DoxyReturn}{返回}
+返回指向存储操作的容器的const指针 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 768 行定义.
+
+
+
+引用了 false\+\_\+branch\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a3e7a34905b3a3f5777ee59bff1c14f55}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a3e7a34905b3a3f5777ee59bff1c14f55}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetFlowControlNodeToGetFalseBranchReference@{GetFlowControlNodeToGetFalseBranchReference}}
+\index{GetFlowControlNodeToGetFalseBranchReference@{GetFlowControlNodeToGetFalseBranchReference}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetFlowControlNodeToGetFalseBranchReference()}{GetFlowControlNodeToGetFalseBranchReference()}}
+{\footnotesize\ttfamily const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ $>$ \& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Flow\+Control\+Node\+To\+Get\+False\+Branch\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取得到假分支结果的操作 
+
+\begin{DoxyReturn}{返回}
+返回存储操作的容器的const引用 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+cpp 第 423 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae8622001f5d885326d893ae7e9dcb1a2}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae8622001f5d885326d893ae7e9dcb1a2}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetFlowControlNodeToGetTrueBranchPointer@{GetFlowControlNodeToGetTrueBranchPointer}}
+\index{GetFlowControlNodeToGetTrueBranchPointer@{GetFlowControlNodeToGetTrueBranchPointer}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetFlowControlNodeToGetTrueBranchPointer()}{GetFlowControlNodeToGetTrueBranchPointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const std\+::list$<$ std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}$>$ $>$ $>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Flow\+Control\+Node\+To\+Get\+True\+Branch\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取得到真分支结果的操作 
+
+\begin{DoxyReturn}{返回}
+返回指向存储操作的容器的const指针 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 729 行定义.
+
+
+
+引用了 true\+\_\+branch\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae3c0c386350d531c0acf8cc55e0fb7df}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae3c0c386350d531c0acf8cc55e0fb7df}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetFlowControlNodeToGetTrueBranchReference@{GetFlowControlNodeToGetTrueBranchReference}}
+\index{GetFlowControlNodeToGetTrueBranchReference@{GetFlowControlNodeToGetTrueBranchReference}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetFlowControlNodeToGetTrueBranchReference()}{GetFlowControlNodeToGetTrueBranchReference()}}
+{\footnotesize\ttfamily const std\+::list$<$ std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}$>$ $>$\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Flow\+Control\+Node\+To\+Get\+True\+Branch\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取得到真分支结果的操作 
+
+\begin{DoxyReturn}{返回}
+返回存储操作的容器的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 736 行定义.
+
+
+
+引用了 true\+\_\+branch\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a72f3d2497e1aaca3a5bb71ea926c570a}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a72f3d2497e1aaca3a5bb71ea926c570a}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetResultConstTag@{GetResultConstTag}}
+\index{GetResultConstTag@{GetResultConstTag}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultConstTag()}{GetResultConstTag()}}
+{\footnotesize\ttfamily virtual Const\+Tag c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Result\+Const\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取该节点操作结果的const标记 
+
+\begin{DoxyReturn}{返回}
+返回操作结果的const标记
+\end{DoxyReturn}
+1.成员访问、解引用等操作的后续操作不是对原结构体/原指针操作，而是对得到的 新对象进行操作，不同操作类型操作的对象不同 2.通过这个函数抽象获取最终结果的过程以忽略操作的不同 3.以成员访问为例，该函数获取指定的成员在结构体中的const标记，以数学运算 为例，该函数获取运算结果的const标记（\+Const\+Tag\+::k\+Non\+Const），以变量声明 为例，该函数返回声明的变量的const标记（对象不变） 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 640 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Const\+Tag() , 以及 Get\+Result\+Reference().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a72f3d2497e1aaca3a5bb71ea926c570a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_af65bb4438ce3a492cf03919e6aef4631}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_af65bb4438ce3a492cf03919e6aef4631}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetResultOperatorNode@{GetResultOperatorNode}}
+\index{GetResultOperatorNode@{GetResultOperatorNode}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultOperatorNode()}{GetResultOperatorNode()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Result\+Operator\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取最终结果的节点 
+
+\begin{DoxyReturn}{返回}
+返回指向最终结果的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：自身是最终节点\\
+\hline
+\end{DoxyRetVals}
+1.该函数用于抽象获取操作最终结果的过程 2.基础变量和初始化变量最终操作节点就是本身，所以返回nullptr 3.赋值运算返回被赋值的对象，解引用返回解引用后得到的对象，以此为例 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 648 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Operator\+Node() , 以及 Get\+Result\+Reference().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_af65bb4438ce3a492cf03919e6aef4631_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a128bc08bae8a5b39c5bcd33a3608f2b3}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a128bc08bae8a5b39c5bcd33a3608f2b3}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetResultPointer@{GetResultPointer}}
+\index{GetResultPointer@{GetResultPointer}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultPointer()}{GetResultPointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Result\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 776 行定义.
+
+
+
+引用了 result\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ade075f315049b64b637b64abcc9dc728}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ade075f315049b64b637b64abcc9dc728}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetResultReference@{GetResultReference}}
+\index{GetResultReference@{GetResultReference}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultReference()}{GetResultReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Result\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取结果 
+
+\begin{DoxyReturn}{返回}
+返回结果节点的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 781 行定义.
+
+
+
+引用了 result\+\_\+.
+
+
+
+被这些函数引用 Get\+Result\+Const\+Tag(), Get\+Result\+Operator\+Node() , 以及 Get\+Result\+Type\+Pointer().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ade075f315049b64b637b64abcc9dc728_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_af0e8dcc1136bce4c2497ca0ef6921ec3}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_af0e8dcc1136bce4c2497ca0ef6921ec3}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetResultTypePointer@{GetResultTypePointer}}
+\index{GetResultTypePointer@{GetResultTypePointer}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultTypePointer()}{GetResultTypePointer()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取最终结果的类型 
+
+\begin{DoxyReturn}{返回}
+返回类型链头结点的const指针
+\end{DoxyReturn}
+设计思路同\+Get\+Result\+Const\+Tag 赋值语句等价于被赋值的变量
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 643 行定义.
+
+
+
+引用了 Get\+Result\+Reference() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Type\+Pointer().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_af0e8dcc1136bce4c2497ca0ef6921ec3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aed03c446991c9597c6499a3b7d6e33c8}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aed03c446991c9597c6499a3b7d6e33c8}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetTrueBranchPointer@{GetTrueBranchPointer}}
+\index{GetTrueBranchPointer@{GetTrueBranchPointer}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetTrueBranchPointer()}{GetTrueBranchPointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+True\+Branch\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取真分支结果 
+
+\begin{DoxyReturn}{返回}
+返回指向真分支结果的const指针 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 717 行定义.
+
+
+
+引用了 true\+\_\+branch\+\_\+.
+
+
+
+被这些函数引用 Construct\+Result\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aed03c446991c9597c6499a3b7d6e33c8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a0349ffd14404d64aca8a71748f0740fb}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a0349ffd14404d64aca8a71748f0740fb}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!GetTrueBranchReference@{GetTrueBranchReference}}
+\index{GetTrueBranchReference@{GetTrueBranchReference}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetTrueBranchReference()}{GetTrueBranchReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+True\+Branch\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取真分支结果 
+
+\begin{DoxyReturn}{返回}
+返回真分支结果的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 722 行定义.
+
+
+
+引用了 true\+\_\+branch\+\_\+.
+
+
+
+被这些函数引用 Construct\+Result\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a0349ffd14404d64aca8a71748f0740fb_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a0eaae8f08e933b4d6defbe82e0e4e03f}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a0eaae8f08e933b4d6defbe82e0e4e03f}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!SelfCopy@{SelfCopy}}
+\index{SelfCopy@{SelfCopy}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SelfCopy()}{SelfCopy()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Self\+Copy (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{new\+\_\+type,  }\item[{Const\+Tag}]{new\+\_\+const\+\_\+tag }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+拷贝自身并设置拷贝得到的对象类型为new\+\_\+type 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em new\+\_\+type} & ：拷贝后得到的对象的类型 \\
+\hline
+\mbox{\texttt{ in}}  & {\em new\+\_\+const\+\_\+tag} & ：拷贝后得到的对象的新const标记 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回指向拷贝后的对象的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：设置初始化数据为非const\\
+\hline
+\end{DoxyRetVals}
+该函数用于类型转换 \begin{DoxyAttention}{注意}
+仅允许对变量、初始化值和类型转换节点调用该函数 
+\end{DoxyAttention}
+防止警告
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_afaf8c7f881d6b57c275611312b5e0f78}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 652 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a440baeb7f54df4d2ac6429273c26c1e6}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a440baeb7f54df4d2ac6429273c26c1e6}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!SetBranchCondition@{SetBranchCondition}}
+\index{SetBranchCondition@{SetBranchCondition}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetBranchCondition()}{SetBranchCondition()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Set\+Branch\+Condition (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&}]{branch\+\_\+condition,  }\item[{const std\+::shared\+\_\+ptr$<$ const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$$>$$>$ \&}]{flow\+\_\+control\+\_\+node\+\_\+container }\end{DoxyParamCaption})}
+
+
+
+设置分支条件 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em branch\+\_\+condition} & ：分支条件 \\
+\hline
+\mbox{\texttt{ in}}  & {\em flow\+\_\+control\+\_\+node\+\_\+container} & ：获取分支条件的所有操作 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否可以设置 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：可以设置 \\
+\hline
+{\em false} & ：branch\+\_\+condition无法作为分支条件\\
+\hline
+\end{DoxyRetVals}
+1.分支条件的要求参考\+Check\+Branch\+Condition\+Valid 2.设置分支条件后如果需要改动则需要重新设置一遍真假分支，此时仍可以使用\+Get 函数获取之前存储的分支信息 \begin{DoxyNote}{注解}
+编译期常量的分支条件必须设置value为\char`\"{}0\char`\"{}或\char`\"{}1\char`\"{} 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+先设置分支条件后设置分支内容 
+\end{DoxyAttention}
+
+
+在文件 operator\+\_\+node.\+cpp 第 854 行定义.
+
+
+
+引用了 branch\+\_\+condition\+\_\+, Check\+Branch\+Condition\+Valid() , 以及 condition\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a440baeb7f54df4d2ac6429273c26c1e6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aed46590b486ee7477bb17dce3677c3fb}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aed46590b486ee7477bb17dce3677c3fb}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!SetFalseBranch@{SetFalseBranch}}
+\index{SetFalseBranch@{SetFalseBranch}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetFalseBranch()}{SetFalseBranch()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Set\+False\+Branch (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&}]{false\+\_\+branch,  }\item[{const std\+::shared\+\_\+ptr$<$ const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$$>$$>$ \&}]{flow\+\_\+control\+\_\+node\+\_\+container }\end{DoxyParamCaption})}
+
+
+
+设置条件为假时的分支 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em false\+\_\+branch} & ：假分支结果 \\
+\hline
+\mbox{\texttt{ in}}  & {\em flow\+\_\+control\+\_\+node\+\_\+container} & ：获取假分支结果的操作 \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：可以设置 \\
+\hline
+{\em false} & ：false\+\_\+branch无法作为假分支结果\\
+\hline
+\end{DoxyRetVals}
+1.\+false\+\_\+branch的要求参考\+Check\+Branch\+Valid 2.设置分支条件后如果需要改动则需要重新设置一遍真假分支 此时仍可以使用\+Get函数获取之前存储的分支信息 \begin{DoxyAttention}{注意}
+先设置分支条件后设置分支内容 
+\end{DoxyAttention}
+
+
+在文件 operator\+\_\+node.\+cpp 第 914 行定义.
+
+
+
+引用了 Check\+Branch\+Valid(), Construct\+Result\+Node(), false\+\_\+branch\+\_\+, false\+\_\+branch\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+, Get\+Branch\+Condition\+Pointer(), Get\+Branch\+Condition\+Reference(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+General\+Operator\+Type(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Initialize\+List, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Init\+Value , 以及 result\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aed46590b486ee7477bb17dce3677c3fb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a3bf8f22583fef107e37a3b9a51d1f7de}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a3bf8f22583fef107e37a3b9a51d1f7de}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!SetTrueBranch@{SetTrueBranch}}
+\index{SetTrueBranch@{SetTrueBranch}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetTrueBranch()}{SetTrueBranch()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Set\+True\+Branch (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&}]{true\+\_\+branch,  }\item[{const std\+::shared\+\_\+ptr$<$ const std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$$>$$>$ \&}]{flow\+\_\+control\+\_\+node\+\_\+container }\end{DoxyParamCaption})}
+
+
+
+设置条件为真时的分支 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em true\+\_\+branch} & ：真分支结果 \\
+\hline
+\mbox{\texttt{ in}}  & {\em flow\+\_\+control\+\_\+node\+\_\+container} & ：获取真分支结果的操作 \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：可以设置 \\
+\hline
+{\em false} & ：true\+\_\+branch无法作为真分支结果\\
+\hline
+\end{DoxyRetVals}
+1.\+true\+\_\+branch的要求参考\+Check\+Branch\+Valid 2.设置分支条件后如果需要改动则需要重新设置一遍真假分支 此时仍可以使用\+Get函数获取之前存储的分支信息 \begin{DoxyAttention}{注意}
+先设置分支条件后设置分支内容 
+\end{DoxyAttention}
+
+
+在文件 operator\+\_\+node.\+cpp 第 868 行定义.
+
+
+
+引用了 Check\+Branch\+Valid(), Construct\+Result\+Node(), Get\+Branch\+Condition\+Pointer(), Get\+Branch\+Condition\+Reference(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+General\+Operator\+Type(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Initialize\+List, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Init\+Value, result\+\_\+, true\+\_\+branch\+\_\+ , 以及 true\+\_\+branch\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a3bf8f22583fef107e37a3b9a51d1f7de_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a6b664c503794202345d5b94885c35ac0}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a6b664c503794202345d5b94885c35ac0}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!branch\_condition\_@{branch\_condition\_}}
+\index{branch\_condition\_@{branch\_condition\_}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{branch\_condition\_}{branch\_condition\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::branch\+\_\+condition\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+分支条件 
+
+
+
+在文件 operator\+\_\+node.\+h 第 815 行定义.
+
+
+
+被这些函数引用 Get\+Branch\+Condition\+Pointer(), Get\+Branch\+Condition\+Reference() , 以及 Set\+Branch\+Condition().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a933b96efcd1bbaa501a32cb99d871f10}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a933b96efcd1bbaa501a32cb99d871f10}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!condition\_flow\_control\_node\_container\_@{condition\_flow\_control\_node\_container\_}}
+\index{condition\_flow\_control\_node\_container\_@{condition\_flow\_control\_node\_container\_}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{condition\_flow\_control\_node\_container\_}{condition\_flow\_control\_node\_container\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const std\+::list$<$ std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}$>$ $>$ $>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::condition\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+获取分支条件的操作 
+
+
+
+在文件 operator\+\_\+node.\+h 第 819 行定义.
+
+
+
+被这些函数引用 Get\+Flow\+Control\+Node\+To\+Get\+Condition\+Pointer() , 以及 Set\+Branch\+Condition().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_adb24a57225ff3b03d496f0f08dd8275a}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_adb24a57225ff3b03d496f0f08dd8275a}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!false\_branch\_@{false\_branch\_}}
+\index{false\_branch\_@{false\_branch\_}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{false\_branch\_}{false\_branch\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::false\+\_\+branch\+\_\+ = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+条件为假时表达式的结果 
+
+
+
+在文件 operator\+\_\+node.\+h 第 827 行定义.
+
+
+
+被这些函数引用 Get\+False\+Branch\+Pointer(), Get\+False\+Branch\+Reference() , 以及 Set\+False\+Branch().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a7416a13f3f4b3cfa597f7cd55c95b0df}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a7416a13f3f4b3cfa597f7cd55c95b0df}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!false\_branch\_flow\_control\_node\_container\_@{false\_branch\_flow\_control\_node\_container\_}}
+\index{false\_branch\_flow\_control\_node\_container\_@{false\_branch\_flow\_control\_node\_container\_}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{false\_branch\_flow\_control\_node\_container\_}{false\_branch\_flow\_control\_node\_container\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const std\+::list$<$ std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}$>$ $>$ $>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::false\+\_\+branch\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+获取假分支结果的操作 
+
+
+
+在文件 operator\+\_\+node.\+h 第 831 行定义.
+
+
+
+被这些函数引用 Get\+Flow\+Control\+Node\+To\+Get\+False\+Branch\+Pointer() , 以及 Set\+False\+Branch().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae7e4cc66985febf62f689432f676f11f}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_ae7e4cc66985febf62f689432f676f11f}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!result\_@{result\_}}
+\index{result\_@{result\_}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{result\_}{result\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::result\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存储返回结果的节点 
+
+
+
+在文件 operator\+\_\+node.\+h 第 833 行定义.
+
+
+
+被这些函数引用 Construct\+Result\+Node(), Get\+Result\+Pointer(), Get\+Result\+Reference(), Set\+False\+Branch() , 以及 Set\+True\+Branch().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a0a7db1283226caa922a0d997659a6d74}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a0a7db1283226caa922a0d997659a6d74}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!true\_branch\_@{true\_branch\_}}
+\index{true\_branch\_@{true\_branch\_}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{true\_branch\_}{true\_branch\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::true\+\_\+branch\+\_\+ = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+条件为真时表达式的结果 
+
+
+
+在文件 operator\+\_\+node.\+h 第 821 行定义.
+
+
+
+被这些函数引用 Get\+True\+Branch\+Pointer(), Get\+True\+Branch\+Reference() , 以及 Set\+True\+Branch().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aff56208529d044620ada2f7c9bbb2d77}\label{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_aff56208529d044620ada2f7c9bbb2d77}} 
+\index{c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}!true\_branch\_flow\_control\_node\_container\_@{true\_branch\_flow\_control\_node\_container\_}}
+\index{true\_branch\_flow\_control\_node\_container\_@{true\_branch\_flow\_control\_node\_container\_}!c\_parser\_frontend::operator\_node::TemaryOperatorNode@{c\_parser\_frontend::operator\_node::TemaryOperatorNode}}
+\doxysubsubsection{\texorpdfstring{true\_branch\_flow\_control\_node\_container\_}{true\_branch\_flow\_control\_node\_container\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const std\+::list$<$ std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}$>$ $>$ $>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::true\+\_\+branch\+\_\+flow\+\_\+control\+\_\+node\+\_\+container\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+获取真分支结果的操作 
+
+
+
+在文件 operator\+\_\+node.\+h 第 825 行定义.
+
+
+
+被这些函数引用 Get\+Flow\+Control\+Node\+To\+Get\+True\+Branch\+Pointer(), Get\+Flow\+Control\+Node\+To\+Get\+True\+Branch\+Reference() , 以及 Set\+True\+Branch().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8h}{operator\+\_\+node.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{flow__control_8cpp}{flow\+\_\+control.\+cpp}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8cpp}{operator\+\_\+node.\+cpp}}\end{DoxyCompactItemize}

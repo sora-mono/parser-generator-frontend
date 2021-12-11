@@ -1,0 +1,36 @@
+\hypertarget{line__and__column_8cpp}{}\doxysection{src/\+Parser/line\+\_\+and\+\_\+column.cpp 文件参考}
+\label{line__and__column_8cpp}\index{src/Parser/line\_and\_column.cpp@{src/Parser/line\_and\_column.cpp}}
+{\ttfamily \#include \char`\"{}line\+\_\+and\+\_\+column.\+h\char`\"{}}\newline
+line\+\_\+and\+\_\+column.\+cpp 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{line__and__column_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{命名空间}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefrontend}{frontend}}
+\item 
+ \mbox{\hyperlink{namespacefrontend_1_1parser}{frontend\+::parser}}
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{namespacefrontend_1_1parser_a79d5fb6dfa446e6c683e6257d27a6944}{frontend\+::parser\+::\+Get\+Line}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前行数 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{namespacefrontend_1_1parser_aff0816dfe7d9e7d2a7f1349e4194d7b1}{frontend\+::parser\+::\+Get\+Column}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前列数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacefrontend_1_1parser_a59928cc6510133886f5b191062f76846}{frontend\+::parser\+::\+Set\+Line}} (size\+\_\+t line)
+\begin{DoxyCompactList}\small\item\em 设置当前行数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacefrontend_1_1parser_a633860090eb822d1fb009c8bef7ff745}{frontend\+::parser\+::\+Set\+Column}} (size\+\_\+t column)
+\begin{DoxyCompactList}\small\item\em 设置当前列数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+static thread\+\_\+local size\+\_\+t \mbox{\hyperlink{namespacefrontend_1_1parser_a862c9c427bf42a594bb864a93460ba99}{frontend\+::parser\+::line\+\_\+}} = 0
+\begin{DoxyCompactList}\small\item\em 线程全局变量，存储当前解析到的行数 \end{DoxyCompactList}\item 
+static thread\+\_\+local size\+\_\+t \mbox{\hyperlink{namespacefrontend_1_1parser_a935722bee5981074973c3846f7ce0886}{frontend\+::parser\+::column\+\_\+}} = 0
+\begin{DoxyCompactList}\small\item\em 线程全局变量，存储当前解析到的列数 \end{DoxyCompactList}\end{DoxyCompactItemize}

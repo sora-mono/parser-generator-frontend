@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::type_system::StructureTypeInterface::AddStructureMember" name="c_parser_frontend::type_system::StructureTypeInterface::AddStructureMember">
+<area shape="rect" id="node1" title="添加结构化类型的成员" alt="" coords="236,45,463,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1StructType.html#a823432b17facb534a138ef1ef23d0bed" title="添加结构体成员" alt="" coords="5,5,188,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1UnionType.html#abc0672ad0bb346aebf4405a3a9c3967a" title="添加共用体成员" alt="" coords="5,85,188,141"/>
+</map>

@@ -1,0 +1,57 @@
+\hypertarget{dfa__generator_8h}{}\doxysection{src/\+Generator/\+Dfa\+Generator/dfa\+\_\+generator.h 文件参考}
+\label{dfa__generator_8h}\index{src/Generator/DfaGenerator/dfa\_generator.h@{src/Generator/DfaGenerator/dfa\_generator.h}}
+
+
+D\+F\+A配置生成器  
+
+
+{\ttfamily \#include $<$boost/serialization/array.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/serialization/map.\+hpp$>$}\newline
+{\ttfamily \#include \char`\"{}Common/common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Common/id\+\_\+wrapper.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Common/object\+\_\+manager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Common/unordered\+\_\+struct\+\_\+manager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Generator/export\+\_\+types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Nfa\+Generator/nfa\+\_\+generator.\+h\char`\"{}}\newline
+dfa\+\_\+generator.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dfa__generator_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dfa__generator_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator}{frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator}}
+\begin{DoxyCompactList}\small\item\em D\+F\+A配置生成器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1UnorderedSetHasher}{frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Unordered\+Set\+Hasher}}
+\begin{DoxyCompactList}\small\item\em 哈希\+Set\+Type集合的类，用于实例化\+Unordered\+Struct\+Manager \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1PairOfIntermediateNodeIdAndWordAttachedDataHasher}{frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Pair\+Of\+Intermediate\+Node\+Id\+And\+Word\+Attached\+Data\+Hasher}}
+\begin{DoxyCompactList}\small\item\em 哈希中间节点\+I\+D和单词数据的结合体的结构，用于\+Sub\+Data\+Minimize \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1IntermediateDfaNode}{frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Intermediate\+Dfa\+Node}}
+\begin{DoxyCompactList}\small\item\em 分割save和load操作，\+D\+F\+A配置生成器只能执行save操作，不能执行load操作 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{命名空间}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefrontend}{frontend}}
+\item 
+ \mbox{\hyperlink{namespacefrontend_1_1generator}{frontend\+::generator}}
+\item 
+ \mbox{\hyperlink{namespacefrontend_1_1generator_1_1dfa__generator}{frontend\+::generator\+::dfa\+\_\+generator}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+D\+F\+A配置生成器 
+
+D\+F\+A配置生成器使用子集构造法在\+N\+F\+A配置基础上构建\+D\+F\+A配置以提高速度 D\+FA Generator构建配置时先通过子集构造法生成中间节点（\+Intermediate\+Dfa\+Node）， 每个中间节点对应子集构造法中唯一的一个集合；然后通过中间节点构造\+D\+F\+A转移表 

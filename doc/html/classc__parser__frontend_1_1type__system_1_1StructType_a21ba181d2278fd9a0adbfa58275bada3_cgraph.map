@@ -1,0 +1,7 @@
+<map id="c_parser_frontend::type_system::StructType::IsSameObject" name="c_parser_frontend::type_system::StructType::IsSameObject">
+<area shape="rect" id="node1" title=" " alt="" coords="5,45,188,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#afe3dbce8010be2813be1e258e3ecf9c4" title=" " alt="" coords="236,45,439,101"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a26e89e296553d917acc1d860fe4d3918" title="获取结构化类型名" alt="" coords="487,5,696,61"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a3027817a00d7034165ddc0fd56281da2" title=" " alt="" coords="490,85,693,141"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="744,85,947,141"/>
+</map>

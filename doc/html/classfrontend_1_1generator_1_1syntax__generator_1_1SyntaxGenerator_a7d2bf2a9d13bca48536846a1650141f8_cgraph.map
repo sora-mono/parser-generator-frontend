@@ -1,0 +1,10 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::SyntaxGeneratorInit" name="frontend::generator::syntax_generator::SyntaxGenerator::SyntaxGeneratorInit">
+<area shape="rect" id="node1" title="初始化" alt="" coords="5,191,276,247"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a765989368257c66b0b23d2b2ab43d711" title="初始化" alt="" coords="324,126,541,182"/>
+<area shape="rect" id="node7" href="$classfrontend_1_1common_1_1ObjectManager.html#af218c097d7fa411572f79043be378ee7" title="初始化，如果容器中存在节点则全部释放" alt="" coords="608,195,815,236"/>
+<area shape="rect" id="node8" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#a5912fd9f67bdee5098556fd6c5a32224" title="初始化容器" alt="" coords="591,260,832,301"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf" title="获取存储无效值的容器" alt="" coords="589,5,833,76"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a551e2d3ea7f472da85fe77dcdcd2a068" title="NFA初始化" alt="" coords="617,100,805,171"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1common_1_1MultimapObjectManager.html#a497a7c5bc722e5d3393c14b39b1e451e" title="创建对象并自动选择最佳位置放置对象" alt="" coords="923,83,1150,124"/>
+<area shape="rect" id="node6" href="$classfrontend_1_1common_1_1MultimapObjectManager.html#a46a3c456a48f53594855815131f9dbf9" title="初始化，如果容器中存在对象则全部释放" alt="" coords="881,148,1192,189"/>
+</map>

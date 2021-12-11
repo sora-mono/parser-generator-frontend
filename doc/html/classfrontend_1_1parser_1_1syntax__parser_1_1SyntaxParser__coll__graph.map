@@ -1,0 +1,11 @@
+<map id="frontend::parser::syntax_parser::SyntaxParser" name="frontend::parser::syntax_parser::SyntaxParser">
+<area shape="rect" id="node1" title="语法分析机" alt="" coords="1645,81,1824,123"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1common_1_1ObjectManager.html" title="管理对象，对象与ID一一对应" alt="" coords="1218,5,1410,47"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html" title="DFA解析器" alt="" coords="1237,188,1391,229"/>
+<area shape="rect" id="node4" href="$structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData.html" title="单词附属数据（在检测到相应单词时返回）" alt="" coords="753,122,975,178"/>
+<area shape="rect" id="node9" href="$structfrontend_1_1parser_1_1dfa__parser_1_1DfaParser_1_1WordInfo.html" title="单词数据" alt="" coords="1211,123,1417,164"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1common_1_1ExplicitIdWrapper.html" title="强制显式调用构造函数且使用默认无效值版Wrapper" alt="" coords="321,82,555,138"/>
+<area shape="rect" id="node6" href="$classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,82,272,138"/>
+<area shape="rect" id="node7" href="$classfrontend_1_1common_1_1ExplicitIdWrapper.html" title=" " alt="" coords="735,206,993,262"/>
+<area shape="rect" id="node8" href="$classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="322,199,554,269"/>
+</map>

@@ -1,0 +1,8 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::SetSyntaxAnalysisTableEntryIdToProductionItemSetIdMapping" name="frontend::generator::syntax_generator::SyntaxGenerator::SetSyntaxAnalysisTableEntryIdToProductionItemSetIdMapping">
+<area shape="rect" id="node1" title="设置语法分析表条目ID到项集ID的映射" alt="" coords="1363,53,1667,123"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a22553aaed4afe307361af5f07da29fe9" title="添加新的项集" alt="" coords="1049,53,1315,123"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,5,1001,91"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,53,643,123"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,53,355,123"/>
+<area shape="rect" id="node6" href="$Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,75,60,101"/>
+</map>

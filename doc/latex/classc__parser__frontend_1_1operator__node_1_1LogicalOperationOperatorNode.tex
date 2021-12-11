@@ -1,0 +1,679 @@
+\hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Logical\+Operation\+Operator\+Node类 参考}
+\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode}\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+
+
+逻辑运算  
+
+
+
+
+{\ttfamily \#include $<$operator\+\_\+node.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Logical\+Operation\+Operator\+Node 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=256pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Logical\+Operation\+Operator\+Node 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a837354a608988b28f09a2b636ec5846e}{Logical\+Operation\+Operator\+Node}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a47fb9d831bf75484a72ae2b308632cb7}{Logical\+Operation}} logical\+\_\+operation)
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a8f5811c0cd7ca76afd268a711ee36d0a}{Logical\+Operation\+Operator\+Node}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode}{Logical\+Operation\+Operator\+Node}} \&)=delete
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode}{Logical\+Operation\+Operator\+Node}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a24ca0d03afffdf82e01f33500a7b2aab}{operator=}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode}{Logical\+Operation\+Operator\+Node}} \&)=delete
+\item 
+virtual Const\+Tag \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a04ae13b00d5129b440e35c6944267cd2}{Get\+Result\+Const\+Tag}} () const override
+\begin{DoxyCompactList}\small\item\em 获取该节点操作结果的const标记 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_ad598158366edee851d51d4055e495335}{Get\+Result\+Type\+Pointer}} () const override
+\begin{DoxyCompactList}\small\item\em 获取最终结果的类型 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af0c8c3bf89b38a15d115339e21c45bbb}{Get\+Result\+Operator\+Node}} () const override
+\begin{DoxyCompactList}\small\item\em 获取最终结果的节点 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a1af976cd8866a9a83ae45468dd544cc2}{Self\+Copy}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&new\+\_\+type, Const\+Tag new\+\_\+const\+\_\+tag) const override
+\begin{DoxyCompactList}\small\item\em 拷贝自身并设置拷贝得到的对象类型为new\+\_\+type \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a47fb9d831bf75484a72ae2b308632cb7}{Logical\+Operation}} \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_abd44b239511d8076abe12835fdae6cea}{Get\+Logical\+Operation}} () const
+\begin{DoxyCompactList}\small\item\em 获取逻辑运算符 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_aa51c84d67878302d145ad922a4f98eef}{Set\+Left\+Operator\+Node}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&left\+\_\+operator\+\_\+node)
+\begin{DoxyCompactList}\small\item\em 设置左侧运算数/单目运算符运算数 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af68068a6d0414cdde7247142f4a12599}{Get\+Left\+Operator\+Node\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取左侧运算数/单目运算符运算数 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_ac7b79f12e72d5d473d2243f4bb31c69d}{Get\+Left\+Operator\+Node\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取左侧运算数/单目运算符运算数 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a4b9d81db855a00cc9e239a4fed5d1be5}{Set\+Right\+Operator\+Node}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&right\+\_\+operator\+\_\+node)
+\begin{DoxyCompactList}\small\item\em 设置右侧运算数 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_aeda82bd691fe0dc5d840d12b588f7f66}{Get\+Right\+Operator\+Node\+Pointer}} () const
+\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a2ceb749a61ad5cd27e90fe6ca93378e8}{Get\+Right\+Operator\+Node\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取右侧运算数 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a877fb8c844fe6f22d0f2461732d0a367}{Get\+Compute\+Result\+Node\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取右侧运算数 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a05f30b6056449cc9fd8b309e3292e5b2}{Get\+Compute\+Result\+Node\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取运算结果 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af8bef4d1659a471b39b1378401130144}{Check\+Logical\+Type\+Valid}} (const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&type\+\_\+interface)
+\begin{DoxyCompactList}\small\item\em 检查运算数是否可以参与逻辑运算 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a3e5065e0ee6042fc361990b81bdcb753}{Create\+And\+Set\+Result\+Node}} ()
+\begin{DoxyCompactList}\small\item\em 创建并设置结果节点 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a47fb9d831bf75484a72ae2b308632cb7}{Logical\+Operation}} \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a4a9fefd0c26cc497e80a7aaae5a59591}{logical\+\_\+operation\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 逻辑运算类型 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a90443c40b7f4254b8d7affe9fd7e842d}{left\+\_\+operator\+\_\+node\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 左运算数 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af20114f6205b99438f717e0d90e3ae41}{right\+\_\+operator\+\_\+node\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 右运算数 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af5433e2dd63c3595905948e29d539f19}{compute\+\_\+result\+\_\+node\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 运算结果 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+逻辑运算 
+
+在文件 operator\+\_\+node.\+h 第 1071 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a837354a608988b28f09a2b636ec5846e}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a837354a608988b28f09a2b636ec5846e}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!LogicalOperationOperatorNode@{LogicalOperationOperatorNode}}
+\index{LogicalOperationOperatorNode@{LogicalOperationOperatorNode}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{LogicalOperationOperatorNode()}{LogicalOperationOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Logical\+Operation\+Operator\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a47fb9d831bf75484a72ae2b308632cb7}{Logical\+Operation}}}]{logical\+\_\+operation }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 1073 行定义.
+
+
+
+引用了 Create\+And\+Set\+Result\+Node() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Logical\+Operation.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a837354a608988b28f09a2b636ec5846e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a8f5811c0cd7ca76afd268a711ee36d0a}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a8f5811c0cd7ca76afd268a711ee36d0a}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!LogicalOperationOperatorNode@{LogicalOperationOperatorNode}}
+\index{LogicalOperationOperatorNode@{LogicalOperationOperatorNode}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{LogicalOperationOperatorNode()}{LogicalOperationOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Logical\+Operation\+Operator\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode}{Logical\+Operation\+Operator\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af8bef4d1659a471b39b1378401130144}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af8bef4d1659a471b39b1378401130144}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!CheckLogicalTypeValid@{CheckLogicalTypeValid}}
+\index{CheckLogicalTypeValid@{CheckLogicalTypeValid}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{CheckLogicalTypeValid()}{CheckLogicalTypeValid()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Check\+Logical\+Type\+Valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&}]{type\+\_\+interface }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+检查运算数是否可以参与逻辑运算 
+
+\begin{DoxyReturn}{返回}
+返回运算数是否可以参与逻辑运算 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：运算数可以参与逻辑运算 \\
+\hline
+{\em false} & ：运算数不可以参与逻辑运算 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 operator\+\_\+node.\+cpp 第 822 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface\+::\+Get\+Type().
+
+
+
+被这些函数引用 Set\+Left\+Operator\+Node() , 以及 Set\+Right\+Operator\+Node().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af8bef4d1659a471b39b1378401130144_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af8bef4d1659a471b39b1378401130144_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a3e5065e0ee6042fc361990b81bdcb753}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a3e5065e0ee6042fc361990b81bdcb753}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!CreateAndSetResultNode@{CreateAndSetResultNode}}
+\index{CreateAndSetResultNode@{CreateAndSetResultNode}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{CreateAndSetResultNode()}{CreateAndSetResultNode()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Create\+And\+Set\+Result\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+创建并设置结果节点 
+
+
+
+在文件 operator\+\_\+node.\+h 第 1160 行定义.
+
+
+
+引用了 compute\+\_\+result\+\_\+node\+\_\+, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Commonly\+Used\+Type\+Generator\+::\+Get\+Basic\+Type() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Right\+Value.
+
+
+
+被这些函数引用 Logical\+Operation\+Operator\+Node() , 以及 Set\+Right\+Operator\+Node().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a3e5065e0ee6042fc361990b81bdcb753_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a3e5065e0ee6042fc361990b81bdcb753_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a877fb8c844fe6f22d0f2461732d0a367}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a877fb8c844fe6f22d0f2461732d0a367}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!GetComputeResultNodePointer@{GetComputeResultNodePointer}}
+\index{GetComputeResultNodePointer@{GetComputeResultNodePointer}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetComputeResultNodePointer()}{GetComputeResultNodePointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Get\+Compute\+Result\+Node\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取右侧运算数 
+
+\begin{DoxyReturn}{返回}
+返回右侧运算数节点的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 1142 行定义.
+
+
+
+引用了 compute\+\_\+result\+\_\+node\+\_\+.
+
+
+
+被这些函数引用 Get\+Result\+Operator\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a877fb8c844fe6f22d0f2461732d0a367_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a05f30b6056449cc9fd8b309e3292e5b2}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a05f30b6056449cc9fd8b309e3292e5b2}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!GetComputeResultNodeReference@{GetComputeResultNodeReference}}
+\index{GetComputeResultNodeReference@{GetComputeResultNodeReference}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetComputeResultNodeReference()}{GetComputeResultNodeReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Get\+Compute\+Result\+Node\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取运算结果 
+
+\begin{DoxyReturn}{返回}
+返回运算结果节点的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 1148 行定义.
+
+
+
+引用了 compute\+\_\+result\+\_\+node\+\_\+.
+
+
+
+被这些函数引用 Get\+Result\+Type\+Pointer().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a05f30b6056449cc9fd8b309e3292e5b2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af68068a6d0414cdde7247142f4a12599}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af68068a6d0414cdde7247142f4a12599}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!GetLeftOperatorNodePointer@{GetLeftOperatorNodePointer}}
+\index{GetLeftOperatorNodePointer@{GetLeftOperatorNodePointer}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetLeftOperatorNodePointer()}{GetLeftOperatorNodePointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Get\+Left\+Operator\+Node\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取左侧运算数/单目运算符运算数 
+
+\begin{DoxyReturn}{返回}
+返回指向左侧运算数/单目运算符运算数节点的const指针 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 1115 行定义.
+
+
+
+引用了 left\+\_\+operator\+\_\+node\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_ac7b79f12e72d5d473d2243f4bb31c69d}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_ac7b79f12e72d5d473d2243f4bb31c69d}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!GetLeftOperatorNodeReference@{GetLeftOperatorNodeReference}}
+\index{GetLeftOperatorNodeReference@{GetLeftOperatorNodeReference}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetLeftOperatorNodeReference()}{GetLeftOperatorNodeReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Get\+Left\+Operator\+Node\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取左侧运算数/单目运算符运算数 
+
+\begin{DoxyReturn}{返回}
+返回左侧运算数/单目运算符运算数节点的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 1121 行定义.
+
+
+
+引用了 left\+\_\+operator\+\_\+node\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_abd44b239511d8076abe12835fdae6cea}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_abd44b239511d8076abe12835fdae6cea}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!GetLogicalOperation@{GetLogicalOperation}}
+\index{GetLogicalOperation@{GetLogicalOperation}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetLogicalOperation()}{GetLogicalOperation()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a47fb9d831bf75484a72ae2b308632cb7}{Logical\+Operation}} c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Get\+Logical\+Operation (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取逻辑运算符 
+
+\begin{DoxyReturn}{返回}
+返回逻辑运算符 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 1104 行定义.
+
+
+
+引用了 logical\+\_\+operation\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a04ae13b00d5129b440e35c6944267cd2}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a04ae13b00d5129b440e35c6944267cd2}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!GetResultConstTag@{GetResultConstTag}}
+\index{GetResultConstTag@{GetResultConstTag}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultConstTag()}{GetResultConstTag()}}
+{\footnotesize\ttfamily virtual Const\+Tag c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Get\+Result\+Const\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取该节点操作结果的const标记 
+
+\begin{DoxyReturn}{返回}
+返回操作结果的const标记
+\end{DoxyReturn}
+1.成员访问、解引用等操作的后续操作不是对原结构体/原指针操作，而是对得到的 新对象进行操作，不同操作类型操作的对象不同 2.通过这个函数抽象获取最终结果的过程以忽略操作的不同 3.以成员访问为例，该函数获取指定的成员在结构体中的const标记，以数学运算 为例，该函数获取运算结果的const标记（\+Const\+Tag\+::k\+Non\+Const），以变量声明 为例，该函数返回声明的变量的const标记（对象不变） 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 1083 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af0c8c3bf89b38a15d115339e21c45bbb}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af0c8c3bf89b38a15d115339e21c45bbb}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!GetResultOperatorNode@{GetResultOperatorNode}}
+\index{GetResultOperatorNode@{GetResultOperatorNode}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultOperatorNode()}{GetResultOperatorNode()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Get\+Result\+Operator\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取最终结果的节点 
+
+\begin{DoxyReturn}{返回}
+返回指向最终结果的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：自身是最终节点\\
+\hline
+\end{DoxyRetVals}
+1.该函数用于抽象获取操作最终结果的过程 2.基础变量和初始化变量最终操作节点就是本身，所以返回nullptr 3.赋值运算返回被赋值的对象，解引用返回解引用后得到的对象，以此为例 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 1090 行定义.
+
+
+
+引用了 Get\+Compute\+Result\+Node\+Pointer().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af0c8c3bf89b38a15d115339e21c45bbb_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_ad598158366edee851d51d4055e495335}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_ad598158366edee851d51d4055e495335}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!GetResultTypePointer@{GetResultTypePointer}}
+\index{GetResultTypePointer@{GetResultTypePointer}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultTypePointer()}{GetResultTypePointer()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取最终结果的类型 
+
+\begin{DoxyReturn}{返回}
+返回类型链头结点的const指针
+\end{DoxyReturn}
+设计思路同\+Get\+Result\+Const\+Tag 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 1086 行定义.
+
+
+
+引用了 Get\+Compute\+Result\+Node\+Reference() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_ad598158366edee851d51d4055e495335_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_aeda82bd691fe0dc5d840d12b588f7f66}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_aeda82bd691fe0dc5d840d12b588f7f66}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!GetRightOperatorNodePointer@{GetRightOperatorNodePointer}}
+\index{GetRightOperatorNodePointer@{GetRightOperatorNodePointer}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetRightOperatorNodePointer()}{GetRightOperatorNodePointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Get\+Right\+Operator\+Node\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 1131 行定义.
+
+
+
+引用了 right\+\_\+operator\+\_\+node\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a2ceb749a61ad5cd27e90fe6ca93378e8}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a2ceb749a61ad5cd27e90fe6ca93378e8}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!GetRightOperatorNodeReference@{GetRightOperatorNodeReference}}
+\index{GetRightOperatorNodeReference@{GetRightOperatorNodeReference}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetRightOperatorNodeReference()}{GetRightOperatorNodeReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Get\+Right\+Operator\+Node\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取右侧运算数 
+
+\begin{DoxyReturn}{返回}
+返回指向右侧运算数节点的const指针 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 1137 行定义.
+
+
+
+引用了 right\+\_\+operator\+\_\+node\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a24ca0d03afffdf82e01f33500a7b2aab}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a24ca0d03afffdf82e01f33500a7b2aab}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!operator=@{operator=}}
+\index{operator=@{operator=}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode}{Logical\+Operation\+Operator\+Node}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode}{Logical\+Operation\+Operator\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a1af976cd8866a9a83ae45468dd544cc2}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a1af976cd8866a9a83ae45468dd544cc2}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!SelfCopy@{SelfCopy}}
+\index{SelfCopy@{SelfCopy}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SelfCopy()}{SelfCopy()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Self\+Copy (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{new\+\_\+type,  }\item[{Const\+Tag}]{new\+\_\+const\+\_\+tag }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+拷贝自身并设置拷贝得到的对象类型为new\+\_\+type 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em new\+\_\+type} & ：拷贝后得到的对象的类型 \\
+\hline
+\mbox{\texttt{ in}}  & {\em new\+\_\+const\+\_\+tag} & ：拷贝后得到的对象的新const标记 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回指向拷贝后的对象的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：设置初始化数据为非const\\
+\hline
+\end{DoxyRetVals}
+该函数用于类型转换 \begin{DoxyAttention}{注意}
+仅允许对变量、初始化值和类型转换节点调用该函数 
+\end{DoxyAttention}
+防止警告
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_afaf8c7f881d6b57c275611312b5e0f78}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 1094 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_aa51c84d67878302d145ad922a4f98eef}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_aa51c84d67878302d145ad922a4f98eef}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!SetLeftOperatorNode@{SetLeftOperatorNode}}
+\index{SetLeftOperatorNode@{SetLeftOperatorNode}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetLeftOperatorNode()}{SetLeftOperatorNode()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Set\+Left\+Operator\+Node (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&}]{left\+\_\+operator\+\_\+node }\end{DoxyParamCaption})}
+
+
+
+设置左侧运算数/单目运算符运算数 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em left\+\_\+operator\+\_\+node} & ：左侧运算数/单目运算符运算数 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否设置成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：设置成功 \\
+\hline
+{\em false} & ：left\+\_\+operator\+\_\+node不符合运算数的要求 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+对运算符的要求参考\+Check\+Logical\+Type\+Valid 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+cpp 第 795 行定义.
+
+
+
+引用了 Check\+Logical\+Type\+Valid() , 以及 left\+\_\+operator\+\_\+node\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_aa51c84d67878302d145ad922a4f98eef_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a4b9d81db855a00cc9e239a4fed5d1be5}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a4b9d81db855a00cc9e239a4fed5d1be5}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!SetRightOperatorNode@{SetRightOperatorNode}}
+\index{SetRightOperatorNode@{SetRightOperatorNode}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetRightOperatorNode()}{SetRightOperatorNode()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Set\+Right\+Operator\+Node (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&}]{right\+\_\+operator\+\_\+node }\end{DoxyParamCaption})}
+
+
+
+设置右侧运算数 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em right\+\_\+operator\+\_\+node} & ：右侧运算数 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否设置成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：设置成功 \\
+\hline
+{\em false} & ：该运算数不可用于逻辑运算 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 operator\+\_\+node.\+cpp 第 807 行定义.
+
+
+
+引用了 Check\+Logical\+Type\+Valid(), Create\+And\+Set\+Result\+Node() , 以及 right\+\_\+operator\+\_\+node\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a4b9d81db855a00cc9e239a4fed5d1be5_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af5433e2dd63c3595905948e29d539f19}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af5433e2dd63c3595905948e29d539f19}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!compute\_result\_node\_@{compute\_result\_node\_}}
+\index{compute\_result\_node\_@{compute\_result\_node\_}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{compute\_result\_node\_}{compute\_result\_node\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::compute\+\_\+result\+\_\+node\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+运算结果 
+
+
+
+在文件 operator\+\_\+node.\+h 第 1176 行定义.
+
+
+
+被这些函数引用 Create\+And\+Set\+Result\+Node(), Get\+Compute\+Result\+Node\+Pointer() , 以及 Get\+Compute\+Result\+Node\+Reference().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a90443c40b7f4254b8d7affe9fd7e842d}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a90443c40b7f4254b8d7affe9fd7e842d}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!left\_operator\_node\_@{left\_operator\_node\_}}
+\index{left\_operator\_node\_@{left\_operator\_node\_}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{left\_operator\_node\_}{left\_operator\_node\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::left\+\_\+operator\+\_\+node\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+左运算数 
+
+
+
+在文件 operator\+\_\+node.\+h 第 1172 行定义.
+
+
+
+被这些函数引用 Get\+Left\+Operator\+Node\+Pointer(), Get\+Left\+Operator\+Node\+Reference() , 以及 Set\+Left\+Operator\+Node().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a4a9fefd0c26cc497e80a7aaae5a59591}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a4a9fefd0c26cc497e80a7aaae5a59591}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!logical\_operation\_@{logical\_operation\_}}
+\index{logical\_operation\_@{logical\_operation\_}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{logical\_operation\_}{logical\_operation\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a47fb9d831bf75484a72ae2b308632cb7}{Logical\+Operation}} c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::logical\+\_\+operation\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+逻辑运算类型 
+
+
+
+在文件 operator\+\_\+node.\+h 第 1170 行定义.
+
+
+
+被这些函数引用 Get\+Logical\+Operation().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af20114f6205b99438f717e0d90e3ae41}\label{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af20114f6205b99438f717e0d90e3ae41}} 
+\index{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}!right\_operator\_node\_@{right\_operator\_node\_}}
+\index{right\_operator\_node\_@{right\_operator\_node\_}!c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode@{c\_parser\_frontend::operator\_node::LogicalOperationOperatorNode}}
+\doxysubsubsection{\texorpdfstring{right\_operator\_node\_}{right\_operator\_node\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::right\+\_\+operator\+\_\+node\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+右运算数 
+
+
+
+在文件 operator\+\_\+node.\+h 第 1174 行定义.
+
+
+
+被这些函数引用 Get\+Right\+Operator\+Node\+Pointer(), Get\+Right\+Operator\+Node\+Reference() , 以及 Set\+Right\+Operator\+Node().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8h}{operator\+\_\+node.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8cpp}{operator\+\_\+node.\+cpp}}\end{DoxyCompactItemize}

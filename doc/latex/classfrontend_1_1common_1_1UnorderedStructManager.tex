@@ -1,0 +1,486 @@
+\hypertarget{classfrontend_1_1common_1_1UnorderedStructManager}{}\doxysection{frontend\+::common\+::Unordered\+Struct\+Manager$<$ Struct\+Type, Hasher $>$ 模板类 参考}
+\label{classfrontend_1_1common_1_1UnorderedStructManager}\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+
+
+建立stl未提供hash方法的结构的哈希存储,通过\+I\+D一一标识对象  
+
+
+
+
+{\ttfamily \#include $<$unordered\+\_\+struct\+\_\+manager.\+h$>$}
+
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a699c54cca867bf66164e191452501cfe}{Wrapper\+Label}} \{ \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a699c54cca867bf66164e191452501cfea11e4f58e036dc6ab9d751f5e51434f9b}{Wrapper\+Label\+::k\+Object\+Hash\+Type}}
+ \}
+\item 
+using \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}} = \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ Struct\+Type $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}}
+\begin{DoxyCompactList}\small\item\em 标识对象的\+ID \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a7f6f9513b264639d604678da7dcc3387}{Object\+Hash\+Type}} = \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper}{Explicit\+Id\+Wrapper}}$<$ size\+\_\+t, \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a699c54cca867bf66164e191452501cfe}{Wrapper\+Label}}, \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a699c54cca867bf66164e191452501cfea11e4f58e036dc6ab9d751f5e51434f9b}{Wrapper\+Label\+::k\+Object\+Hash\+Type}} $>$
+\begin{DoxyCompactList}\small\item\em 对象hash后得到的类型 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_af43829ca9721687f1966aec2bee3d797}{Unordered\+Struct\+Manager}} ()
+\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_afabb5de5e153e5c536969db54dce7d83}{$\sim$\+Unordered\+Struct\+Manager}} ()
+\item 
+Struct\+Type \& \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a1959da3a072226c4cab199b6e1acf273}{Get\+Object}} (\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}} object\+\_\+id)
+\begin{DoxyCompactList}\small\item\em 返回指向管理的对象的引用 \end{DoxyCompactList}\item 
+const Struct\+Type \& \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_ab6208dce5fa5b84c16f896e195e69d59}{Get\+Object}} (\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}} object\+\_\+id) const
+\begin{DoxyCompactList}\small\item\em 返回指向管理的对象的const引用 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class... Args$>$ }\\std\+::pair$<$ \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}}, bool $>$ \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_acbd7bff0314ac667bce8e2bc92ccaeaa}{Emplace\+Object}} (Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em 插入一个待管理的对象 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_ad95b0bc3542bc949ad76039de0063fb7}{Get\+Object\+Id\+From\+Object\+Pointer}} (const Struct\+Type $\ast$object\+\_\+pointer) const
+\begin{DoxyCompactList}\small\item\em 通过指向对象的指针获取对象的\+ID \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a8843e773f9b1f958e9beb2373084704d}{Get\+Object\+Id\+From\+Object}} (const Struct\+Type \&object) const
+\begin{DoxyCompactList}\small\item\em 根据对象获取其\+ID \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a5912fd9f67bdee5098556fd6c5a32224}{Struct\+Manager\+Init}} ()
+\begin{DoxyCompactList}\small\item\em 初始化容器 \end{DoxyCompactList}\item 
+Struct\+Type \& \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a40fe617a709d1745521bd118a60c8f16}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}} object\+\_\+id)
+\begin{DoxyCompactList}\small\item\em 根据对象\+I\+D获取对象引用 \end{DoxyCompactList}\item 
+const Struct\+Type \& \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a60121a133af0aae584c62b32ae8ead2f}{operator\mbox{[}$\,$\mbox{]}}} (\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}} object\+\_\+id) const
+\begin{DoxyCompactList}\small\item\em 根据对象\+I\+D获取对象const引用 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class... Args$>$ }\\std\+::pair$<$ typename \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}}, bool $>$ \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_ac9d3edd0f2354c33f944c185af831b2d}{Emplace\+Object}} (Args \&\&... args)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+set$<$ Struct\+Type, Hasher $>$ \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_adbeed4088d927338043ca5f291d9e93b}{node\+\_\+manager\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 存储所有管理的对象 \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ const Struct\+Type $\ast$, \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}} $>$ \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a7593b55e4693786c401aba6e75265d8b}{object\+\_\+pointer\+\_\+to\+\_\+id\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 存储管理的对象的地址到\+I\+D的映射 \end{DoxyCompactList}\item 
+std\+::vector$<$ typename std\+::unordered\+\_\+set$<$ Struct\+Type, Hasher $>$\+::iterator $>$ \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_ad64db60bbeda863c0379e519ad520451}{id\+\_\+to\+\_\+object\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 存储\+I\+D到指向管理的对象的迭代器映射 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+\subsubsection*{template$<$class Struct\+Type, class Hasher = std\+::hash$<$\+Struct\+Type$>$$>$\newline
+class frontend\+::common\+::\+Unordered\+Struct\+Manager$<$ Struct\+Type, Hasher $>$}
+
+建立stl未提供hash方法的结构的哈希存储,通过\+I\+D一一标识对象 
+
+T\+O\+DO 设置使用std\+::string时的特化 
+\begin{DoxyTemplParams}{模板参数}
+{\em Struct\+Type} & ：要管理的对象类型 \\
+\hline
+{\em Hasher} & ：哈希\+Struct\+Type的函数的包装类 \\
+\hline
+\end{DoxyTemplParams}
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 20 行定义.
+
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_a7f6f9513b264639d604678da7dcc3387}\label{classfrontend_1_1common_1_1UnorderedStructManager_a7f6f9513b264639d604678da7dcc3387}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!ObjectHashType@{ObjectHashType}}
+\index{ObjectHashType@{ObjectHashType}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{ObjectHashType}{ObjectHashType}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+using \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a7f6f9513b264639d604678da7dcc3387}{Object\+Hash\+Type}} =  \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper}{Explicit\+Id\+Wrapper}}$<$size\+\_\+t, \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a699c54cca867bf66164e191452501cfe}{Wrapper\+Label}}, \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a699c54cca867bf66164e191452501cfea11e4f58e036dc6ab9d751f5e51434f9b}{Wrapper\+Label\+::k\+Object\+Hash\+Type}}$>$}
+
+
+
+对象hash后得到的类型 
+
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 27 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}\label{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!ObjectId@{ObjectId}}
+\index{ObjectId@{ObjectId}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{ObjectId}{ObjectId}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+using \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}} =  \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$Struct\+Type$>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}}}
+
+
+
+标识对象的\+ID 
+
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 24 行定义.
+
+
+
+\doxysubsection{成员枚举类型说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_a699c54cca867bf66164e191452501cfe}\label{classfrontend_1_1common_1_1UnorderedStructManager_a699c54cca867bf66164e191452501cfe}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!WrapperLabel@{WrapperLabel}}
+\index{WrapperLabel@{WrapperLabel}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{WrapperLabel}{WrapperLabel}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+enum \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a699c54cca867bf66164e191452501cfe}{frontend\+::common\+::\+Unordered\+Struct\+Manager\+::\+Wrapper\+Label}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kObjectHashType@{kObjectHashType}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!kObjectHashType@{kObjectHashType}}}\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_a699c54cca867bf66164e191452501cfea11e4f58e036dc6ab9d751f5e51434f9b}\label{classfrontend_1_1common_1_1UnorderedStructManager_a699c54cca867bf66164e191452501cfea11e4f58e036dc6ab9d751f5e51434f9b}} 
+k\+Object\+Hash\+Type&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 22 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_af43829ca9721687f1966aec2bee3d797}\label{classfrontend_1_1common_1_1UnorderedStructManager_af43829ca9721687f1966aec2bee3d797}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!UnorderedStructManager@{UnorderedStructManager}}
+\index{UnorderedStructManager@{UnorderedStructManager}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{UnorderedStructManager()}{UnorderedStructManager()}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{Unordered\+Struct\+Manager}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 29 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_afabb5de5e153e5c536969db54dce7d83}\label{classfrontend_1_1common_1_1UnorderedStructManager_afabb5de5e153e5c536969db54dce7d83}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!````~UnorderedStructManager@{$\sim$UnorderedStructManager}}
+\index{````~UnorderedStructManager@{$\sim$UnorderedStructManager}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{$\sim$UnorderedStructManager()}{~UnorderedStructManager()}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::$\sim$\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{Unordered\+Struct\+Manager}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 30 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_acbd7bff0314ac667bce8e2bc92ccaeaa}\label{classfrontend_1_1common_1_1UnorderedStructManager_acbd7bff0314ac667bce8e2bc92ccaeaa}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!EmplaceObject@{EmplaceObject}}
+\index{EmplaceObject@{EmplaceObject}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{EmplaceObject()}{EmplaceObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+template$<$class... Args$>$ \\
+std\+::pair$<$\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}}, bool$>$ \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::Emplace\+Object (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption})}
+
+
+
+插入一个待管理的对象 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in,out}}  & {\em args} & ：构建待管理的对象的参数 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为对象\+I\+D，后半部分为是否执行了插入操作 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+如果提供const左值引用则会复制一份对象存储， 如果提供右值引用则会移动构造该对象 如果待插入对象已存在则会返回已存在的对象的\+ID 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+该类不会管理传入的参数，真正管理的是根据传入参数构造的新对象 
+\end{DoxyAttention}
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Body\+Symbol(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Node\+Symbol() , 以及 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+In\+Or\+Insert().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1UnorderedStructManager_acbd7bff0314ac667bce8e2bc92ccaeaa_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_ac9d3edd0f2354c33f944c185af831b2d}\label{classfrontend_1_1common_1_1UnorderedStructManager_ac9d3edd0f2354c33f944c185af831b2d}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!EmplaceObject@{EmplaceObject}}
+\index{EmplaceObject@{EmplaceObject}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{EmplaceObject()}{EmplaceObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+template$<$class... Args$>$ \\
+std\+::pair$<$typename \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{Unordered\+Struct\+Manager}}$<$Struct\+Type, Hasher$>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}}, bool$>$ \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::Emplace\+Object (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 104 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_a1959da3a072226c4cab199b6e1acf273}\label{classfrontend_1_1common_1_1UnorderedStructManager_a1959da3a072226c4cab199b6e1acf273}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!GetObject@{GetObject}}
+\index{GetObject@{GetObject}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{GetObject()}{GetObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+Struct\+Type\& \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::Get\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}}}]{object\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+返回指向管理的对象的引用 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em object\+\_\+id} & ：要获取的对象的\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回object\+\_\+id对应的对象的引用 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+入参必须对应存在的对象 
+\end{DoxyAttention}
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 36 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Body\+Symbol\+String\+From\+Id(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Node\+Symbol\+String\+From\+Id(), frontend\+::common\+::\+Unordered\+Struct\+Manager$<$ Set\+Type, Unordered\+Set\+Hasher $>$\+::\+Get\+Object(), frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Get\+Set\+Object() , 以及 frontend\+::common\+::\+Unordered\+Struct\+Manager$<$ Set\+Type, Unordered\+Set\+Hasher $>$\+::operator\mbox{[}$\,$\mbox{]}().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1UnorderedStructManager_a1959da3a072226c4cab199b6e1acf273_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_ab6208dce5fa5b84c16f896e195e69d59}\label{classfrontend_1_1common_1_1UnorderedStructManager_ab6208dce5fa5b84c16f896e195e69d59}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!GetObject@{GetObject}}
+\index{GetObject@{GetObject}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{GetObject()}{GetObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+const Struct\+Type\& \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::Get\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}}}]{object\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+返回指向管理的对象的const引用 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em object\+\_\+id} & ：要获取的对象的\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回object\+\_\+id对应的对象的const引用 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+入参必须对应存在的对象 
+\end{DoxyAttention}
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 45 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_a8843e773f9b1f958e9beb2373084704d}\label{classfrontend_1_1common_1_1UnorderedStructManager_a8843e773f9b1f958e9beb2373084704d}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!GetObjectIdFromObject@{GetObjectIdFromObject}}
+\index{GetObjectIdFromObject@{GetObjectIdFromObject}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{GetObjectIdFromObject()}{GetObjectIdFromObject()}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::Get\+Object\+Id\+From\+Object (\begin{DoxyParamCaption}\item[{const Struct\+Type \&}]{object }\end{DoxyParamCaption}) const}
+
+
+
+根据对象获取其\+ID 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em object} & ：要获取\+I\+D的对象 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+获取到的对象\+ID 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper_a5286ddd962d1091679c76ba11beeacaf}{Object\+Id\+::\+Invalid\+Id()}}} & ：该对象不存在 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 118 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Body\+Symbol\+Id() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Node\+Symbol\+Id().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1UnorderedStructManager_a8843e773f9b1f958e9beb2373084704d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_ad95b0bc3542bc949ad76039de0063fb7}\label{classfrontend_1_1common_1_1UnorderedStructManager_ad95b0bc3542bc949ad76039de0063fb7}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!GetObjectIdFromObjectPointer@{GetObjectIdFromObjectPointer}}
+\index{GetObjectIdFromObjectPointer@{GetObjectIdFromObjectPointer}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{GetObjectIdFromObjectPointer()}{GetObjectIdFromObjectPointer()}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::Get\+Object\+Id\+From\+Object\+Pointer (\begin{DoxyParamCaption}\item[{const Struct\+Type $\ast$}]{object\+\_\+pointer }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+通过指向对象的指针获取对象的\+ID 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em object\+\_\+pointer} & ：指向（存储于node\+\_\+manager\+\_\+中的）对象的指针 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回对象的\+ID 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper_a5286ddd962d1091679c76ba11beeacaf}{Object\+Id\+::\+Invalid\+Id()}}} & ：对象不存在 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 129 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_a40fe617a709d1745521bd118a60c8f16}\label{classfrontend_1_1common_1_1UnorderedStructManager_a40fe617a709d1745521bd118a60c8f16}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+Struct\+Type\& \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}}}]{object\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+根据对象\+I\+D获取对象引用 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em object\+\_\+id} & ：要获取引用的对象\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回获取到的对象引用 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+语义同\+Get\+Object 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+入参必须对应存在的对象 
+\end{DoxyAttention}
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 78 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_a60121a133af0aae584c62b32ae8ead2f}\label{classfrontend_1_1common_1_1UnorderedStructManager_a60121a133af0aae584c62b32ae8ead2f}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+const Struct\+Type\& \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}}}]{object\+\_\+id }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+根据对象\+I\+D获取对象const引用 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em object\+\_\+id} & ：要获取引用的对象\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回获取到的对象const引用 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+语义同\+Get\+Object 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+入参必须对应存在的对象 
+\end{DoxyAttention}
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 86 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_a5912fd9f67bdee5098556fd6c5a32224}\label{classfrontend_1_1common_1_1UnorderedStructManager_a5912fd9f67bdee5098556fd6c5a32224}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!StructManagerInit@{StructManagerInit}}
+\index{StructManagerInit@{StructManagerInit}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{StructManagerInit()}{StructManagerInit()}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+void \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::Struct\+Manager\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+初始化容器 
+
+\begin{DoxyNote}{注解}
+如果容器中存在对象则全部释放 
+\end{DoxyNote}
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 69 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::dfa\+\_\+generator\+::\+Dfa\+Generator\+::\+Dfa\+Init() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Syntax\+Generator\+Init().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1UnorderedStructManager_a5912fd9f67bdee5098556fd6c5a32224_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_ad64db60bbeda863c0379e519ad520451}\label{classfrontend_1_1common_1_1UnorderedStructManager_ad64db60bbeda863c0379e519ad520451}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!id\_to\_object\_@{id\_to\_object\_}}
+\index{id\_to\_object\_@{id\_to\_object\_}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{id\_to\_object\_}{id\_to\_object\_}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+std\+::vector$<$typename std\+::unordered\+\_\+set$<$Struct\+Type, Hasher$>$\+::iterator$>$ \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::id\+\_\+to\+\_\+object\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存储\+I\+D到指向管理的对象的迭代器映射 
+
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 97 行定义.
+
+
+
+被这些函数引用 frontend\+::common\+::\+Unordered\+Struct\+Manager$<$ Set\+Type, Unordered\+Set\+Hasher $>$\+::\+Get\+Object() , 以及 frontend\+::common\+::\+Unordered\+Struct\+Manager$<$ Set\+Type, Unordered\+Set\+Hasher $>$\+::\+Struct\+Manager\+Init().
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_adbeed4088d927338043ca5f291d9e93b}\label{classfrontend_1_1common_1_1UnorderedStructManager_adbeed4088d927338043ca5f291d9e93b}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!node\_manager\_@{node\_manager\_}}
+\index{node\_manager\_@{node\_manager\_}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{node\_manager\_}{node\_manager\_}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+std\+::unordered\+\_\+set$<$Struct\+Type, Hasher$>$ \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::node\+\_\+manager\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存储所有管理的对象 
+
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 92 行定义.
+
+
+
+被这些函数引用 frontend\+::common\+::\+Unordered\+Struct\+Manager$<$ Set\+Type, Unordered\+Set\+Hasher $>$\+::\+Struct\+Manager\+Init().
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1UnorderedStructManager_a7593b55e4693786c401aba6e75265d8b}\label{classfrontend_1_1common_1_1UnorderedStructManager_a7593b55e4693786c401aba6e75265d8b}} 
+\index{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}!object\_pointer\_to\_id\_@{object\_pointer\_to\_id\_}}
+\index{object\_pointer\_to\_id\_@{object\_pointer\_to\_id\_}!frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$@{frontend::common::UnorderedStructManager$<$ StructType, Hasher $>$}}
+\doxysubsubsection{\texorpdfstring{object\_pointer\_to\_id\_}{object\_pointer\_to\_id\_}}
+{\footnotesize\ttfamily template$<$class Struct\+Type , class Hasher  = std\+::hash$<$\+Struct\+Type$>$$>$ \\
+std\+::unordered\+\_\+map$<$const Struct\+Type$\ast$, \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager_a291dc5daaa192e1baf39205f8481fd99}{Object\+Id}}$>$ \mbox{\hyperlink{classfrontend_1_1common_1_1UnorderedStructManager}{frontend\+::common\+::\+Unordered\+Struct\+Manager}}$<$ Struct\+Type, Hasher $>$\+::object\+\_\+pointer\+\_\+to\+\_\+id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存储管理的对象的地址到\+I\+D的映射 
+
+
+
+在文件 unordered\+\_\+struct\+\_\+manager.\+h 第 94 行定义.
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Common/\mbox{\hyperlink{unordered__struct__manager_8h}{unordered\+\_\+struct\+\_\+manager.\+h}}\end{DoxyCompactItemize}

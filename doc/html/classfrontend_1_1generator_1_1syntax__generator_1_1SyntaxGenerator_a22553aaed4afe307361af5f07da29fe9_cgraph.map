@@ -1,0 +1,6 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::EmplaceProductionItemSet" name="frontend::generator::syntax_generator::SyntaxGenerator::EmplaceProductionItemSet">
+<area shape="rect" id="node1" title="添加新的项集" alt="" coords="5,85,271,156"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a8c94017221bdd1690411ff8265987fea" title="添加一条语法分析表条目" alt="" coords="338,5,603,76"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1ObjectManager.html#adbb63b10c08fd65047c2b6ee5cae362d" title="系统自行选择最佳位置放置对象" alt="" coords="375,100,567,141"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a23ee36e1d63042cc98257aa03ee68021" title="设置语法分析表条目ID到项集ID的映射" alt="" coords="319,165,623,236"/>
+</map>

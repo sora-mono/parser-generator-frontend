@@ -1,0 +1,12 @@
+<map id="c_parser_frontend::action_scope_system::ActionScopeSystem::GetVarietyStack" name="c_parser_frontend::action_scope_system::ActionScopeSystem::GetVarietyStack">
+<area shape="rect" id="node1" title="获取变量栈" alt="" coords="1036,148,1203,219"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a2c8bdb9a8a217b69bccc63d08ac48fc3" title="定义变量或初始化常量" alt="" coords="805,100,988,171"/>
+<area shape="rect" id="node8" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a1d17eb37f21f42079ed3c066802389a4" title="弹出所有高于给定作用域等级的变量和流程控制语句" alt="" coords="813,195,980,265"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#ae2ea8a43f08c51a83b198a6fb8b1c132" title="定义变量" alt="" coords="564,5,731,76"/>
+<area shape="rect" id="node7" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#ac01d17fed7775b3fa28fc332b0ec1de9" title="创建函数定义控制块并压入流程控制节点栈中" alt="" coords="537,100,757,171"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1CParserFrontend.html#a2831b7890e9106f1529849d9514f748c" title="定义变量" alt="" coords="265,20,489,61"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#ac44ad28c95778bb6ca7fc51eee472f80" title="设置当前待构建函数" alt="" coords="290,93,465,164"/>
+<area shape="rect" id="node6" href="$classc__parser__frontend_1_1CParserFrontend.html#aa27c730d6112f2cf35380d8c98520349" title="设置当前待构建函数" alt="" coords="5,101,217,157"/>
+<area shape="rect" id="node9" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a27ee94c6536eb57c0b2401774d2a6ce7" title="弹出一级作用域" alt="" coords="564,195,731,265"/>
+<area shape="rect" id="node10" href="$classc__parser__frontend_1_1CParserFrontend.html#ad9ded9d6fde588d61a9ff71076489fed" title="弹出一级作用域" alt="" coords="277,202,478,258"/>
+</map>

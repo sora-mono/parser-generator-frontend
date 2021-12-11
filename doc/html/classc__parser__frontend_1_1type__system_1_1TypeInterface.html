@@ -1,0 +1,1007 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: c_parser_frontend::type_system::TypeInterface类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classc__parser__frontend_1_1type__system_1_1TypeInterface.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pub-static-methods">静态 Public 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="classc__parser__frontend_1_1type__system_1_1TypeInterface-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">c_parser_frontend::type_system::TypeInterface类 参考<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>类型基类  
+ <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="type__system_8h_source.html">type_system.h</a>&gt;</code></p>
+<div class="dynheader">
+类 c_parser_frontend::type_system::TypeInterface 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1type__system_1_1TypeInterface__inherit__graph.png" border="0" usemap="#c__parser__frontend_1_1type__system_1_1TypeInterface_inherit__map" alt="Inheritance graph"/></div>
+<map name="c__parser__frontend_1_1type__system_1_1TypeInterface_inherit__map" id="c__parser__frontend_1_1type__system_1_1TypeInterface_inherit__map">
+<area shape="rect" title="类型基类" alt="" coords="5,201,208,243"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1BasicType.html" title="预定义的基础类型" alt="" coords="278,5,457,47"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EndType.html" title="类型链尾部哨兵节点" alt="" coords="283,71,451,112"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EnumType.html" title="枚举类型" alt="" coords="277,136,458,177"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1FunctionType.html" title="函数类型" alt="" coords="268,201,467,243"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1InitializeListType.html" title="初始化列表类型" alt="" coords="256,267,479,308"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1PointerType.html" title="指针类型，一个*对应一个节点" alt="" coords="272,332,463,373"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html" title="结构化类型（结构体/共用体）的基类" alt="" coords="266,398,469,454"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructType.html" title="结构体类型" alt="" coords="527,372,709,413"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1UnionType.html" title=" " alt="" coords="527,437,709,479"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:aa983e38720b70c7df9725592fbd2af9d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#aa983e38720b70c7df9725592fbd2af9d">TypeInterface</a> (<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7">StructOrBasicType</a> type)</td></tr>
+<tr class="separator:aa983e38720b70c7df9725592fbd2af9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e5f31444179d4f38911444899aeac01"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a8e5f31444179d4f38911444899aeac01">TypeInterface</a> (<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7">StructOrBasicType</a> type, const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;next_type_node)</td></tr>
+<tr class="separator:a8e5f31444179d4f38911444899aeac01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a992abc416335c9fe58acb782862a089e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a992abc416335c9fe58acb782862a089e">~TypeInterface</a> ()</td></tr>
+<tr class="separator:a992abc416335c9fe58acb782862a089e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5aa9c19280d18ecedfc56f910f6d95bc"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a5aa9c19280d18ecedfc56f910f6d95bc">operator==</a> (const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &amp;type_interface) const =0</td></tr>
+<tr class="memdesc:a5aa9c19280d18ecedfc56f910f6d95bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较两个类型是否完全相同  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a5aa9c19280d18ecedfc56f910f6d95bc">更多...</a><br /></td></tr>
+<tr class="separator:a5aa9c19280d18ecedfc56f910f6d95bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a669b266fbf7be6477db5464916d7ddc6"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fe">AssignableCheckResult</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a669b266fbf7be6477db5464916d7ddc6">CanBeAssignedBy</a> (const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &amp;type_interface) const =0</td></tr>
+<tr class="memdesc:a669b266fbf7be6477db5464916d7ddc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断给定类型是否可以给该对象赋值  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a669b266fbf7be6477db5464916d7ddc6">更多...</a><br /></td></tr>
+<tr class="separator:a669b266fbf7be6477db5464916d7ddc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af141ec273bfe24c2b4e662680d3bad9c"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#af141ec273bfe24c2b4e662680d3bad9c">GetTypeStoreSize</a> () const =0</td></tr>
+<tr class="memdesc:af141ec273bfe24c2b4e662680d3bad9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取存储该类型变量所需空间的大小  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#af141ec273bfe24c2b4e662680d3bad9c">更多...</a><br /></td></tr>
+<tr class="separator:af141ec273bfe24c2b4e662680d3bad9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac226ef7e7ae3877dcbbe6bc23433884e"><td class="memItemLeft" align="right" valign="top">virtual size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ac226ef7e7ae3877dcbbe6bc23433884e">TypeSizeOf</a> () const =0</td></tr>
+<tr class="memdesc:ac226ef7e7ae3877dcbbe6bc23433884e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取sizeof语义下类型的大小  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ac226ef7e7ae3877dcbbe6bc23433884e">更多...</a><br /></td></tr>
+<tr class="separator:ac226ef7e7ae3877dcbbe6bc23433884e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3027817a00d7034165ddc0fd56281da2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a3027817a00d7034165ddc0fd56281da2">IsSameObject</a> (const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &amp;type_interface) const</td></tr>
+<tr class="separator:a3027817a00d7034165ddc0fd56281da2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a37cd2d815957be2c795e8b7ae8fe7d55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a37cd2d815957be2c795e8b7ae8fe7d55">SetType</a> (<a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7">StructOrBasicType</a> type)</td></tr>
+<tr class="memdesc:a37cd2d815957be2c795e8b7ae8fe7d55"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置类型节点的类型  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a37cd2d815957be2c795e8b7ae8fe7d55">更多...</a><br /></td></tr>
+<tr class="separator:a37cd2d815957be2c795e8b7ae8fe7d55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae80e4319279851922698bef4223b1872"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7">StructOrBasicType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872">GetType</a> () const</td></tr>
+<tr class="memdesc:ae80e4319279851922698bef4223b1872"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取类型节点的类型  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872">更多...</a><br /></td></tr>
+<tr class="separator:ae80e4319279851922698bef4223b1872"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee0d7c335ee3fa545379099dcddf6635"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#aee0d7c335ee3fa545379099dcddf6635">GetNextNodePointer</a> () const</td></tr>
+<tr class="memdesc:aee0d7c335ee3fa545379099dcddf6635"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取下一个类型节点的指针  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#aee0d7c335ee3fa545379099dcddf6635">更多...</a><br /></td></tr>
+<tr class="separator:aee0d7c335ee3fa545379099dcddf6635"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8cec75839b33ca3ed3e3e8df0fabaa5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ac8cec75839b33ca3ed3e3e8df0fabaa5">SetNextNode</a> (const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;next_type_node)</td></tr>
+<tr class="memdesc:ac8cec75839b33ca3ed3e3e8df0fabaa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置下一个节点  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ac8cec75839b33ca3ed3e3e8df0fabaa5">更多...</a><br /></td></tr>
+<tr class="separator:ac8cec75839b33ca3ed3e3e8df0fabaa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d34d13bdf090ead4b5c27f92250a63d"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a7d34d13bdf090ead4b5c27f92250a63d">GetNextNodeReference</a> () const</td></tr>
+<tr class="memdesc:a7d34d13bdf090ead4b5c27f92250a63d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取下一个节点的引用  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a7d34d13bdf090ead4b5c27f92250a63d">更多...</a><br /></td></tr>
+<tr class="separator:a7d34d13bdf090ead4b5c27f92250a63d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:a3869da413ff452a2a79b3e66602ee8a2"><td class="memItemLeft" align="right" valign="top">static std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1PointerType.html">PointerType</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a3869da413ff452a2a79b3e66602ee8a2">ObtainAddressOperatorNode</a> (const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;type_interface, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#a19d20e5542c29e0fbf656fc55ad88893">ConstTag</a> variety_const_tag)</td></tr>
+<tr class="memdesc:a3869da413ff452a2a79b3e66602ee8a2"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取给定类型取地址后得到的类型  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a3869da413ff452a2a79b3e66602ee8a2">更多...</a><br /></td></tr>
+<tr class="separator:a3869da413ff452a2a79b3e66602ee8a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a62c5e80b4b4140e77678fee207655160"><td class="memItemLeft" align="right" valign="top">static std::pair&lt; std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt;, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2b">DeclineMathematicalComputeTypeResult</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a62c5e80b4b4140e77678fee207655160">DeclineMathematicalComputeResult</a> (const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;left_compute_type, const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;right_compute_type)</td></tr>
+<tr class="memdesc:a62c5e80b4b4140e77678fee207655160"><td class="mdescLeft">&#160;</td><td class="mdescRight">推断两个类型进行数学运算后得到的类型和运算情况  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a62c5e80b4b4140e77678fee207655160">更多...</a><br /></td></tr>
+<tr class="separator:a62c5e80b4b4140e77678fee207655160"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:a09d1099888afc9e77f6e2c82caa8532e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7">StructOrBasicType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a09d1099888afc9e77f6e2c82caa8532e">type_</a></td></tr>
+<tr class="memdesc:a09d1099888afc9e77f6e2c82caa8532e"><td class="mdescLeft">&#160;</td><td class="mdescRight">类型节点的类型  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a09d1099888afc9e77f6e2c82caa8532e">更多...</a><br /></td></tr>
+<tr class="separator:a09d1099888afc9e77f6e2c82caa8532e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac8b9739bcc8390518311be79264ae92"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#aac8b9739bcc8390518311be79264ae92">next_type_node_</a></td></tr>
+<tr class="memdesc:aac8b9739bcc8390518311be79264ae92"><td class="mdescLeft">&#160;</td><td class="mdescRight">指向下一个类型节点的指针  <a href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#aac8b9739bcc8390518311be79264ae92">更多...</a><br /></td></tr>
+<tr class="separator:aac8b9739bcc8390518311be79264ae92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>类型基类 </p>
+<dl class="section note"><dt>注解</dt><dd>所有类型均从该基类派生 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00201">201</a> 行定义.</p>
+</div><h2 class="groupheader">构造及析构函数说明</h2>
+<a id="aa983e38720b70c7df9725592fbd2af9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa983e38720b70c7df9725592fbd2af9d">&#9670;&nbsp;</a></span>TypeInterface() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">c_parser_frontend::type_system::TypeInterface::TypeInterface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7">StructOrBasicType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00203">203</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8e5f31444179d4f38911444899aeac01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e5f31444179d4f38911444899aeac01">&#9670;&nbsp;</a></span>TypeInterface() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">c_parser_frontend::type_system::TypeInterface::TypeInterface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7">StructOrBasicType</a>&#160;</td>
+          <td class="paramname"><em>type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>next_type_node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00204">204</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a992abc416335c9fe58acb782862a089e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a992abc416335c9fe58acb782862a089e">&#9670;&nbsp;</a></span>~TypeInterface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual c_parser_frontend::type_system::TypeInterface::~TypeInterface </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00207">207</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="a669b266fbf7be6477db5464916d7ddc6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a669b266fbf7be6477db5464916d7ddc6">&#9670;&nbsp;</a></span>CanBeAssignedBy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abdba49f59bc164b6932d698ad6af20fe">AssignableCheckResult</a> c_parser_frontend::type_system::TypeInterface::CanBeAssignedBy </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &amp;&#160;</td>
+          <td class="paramname"><em>type_interface</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>判断给定类型是否可以给该对象赋值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type_interface</td><td>：待判断的类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回检查结果 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>返回值的意义见其定义 </dd></dl>
+
+<p>在 <a class="el" href="classc__parser__frontend_1_1type__system_1_1InitializeListType.html#a5d479380d94f50f5e3b5d29fe409f62d">c_parser_frontend::type_system::InitializeListType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1EnumType.html#a24fcfefbf4a5c3c328e5f703ced43fe1">c_parser_frontend::type_system::EnumType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1UnionType.html#ae410d60c2a04ef7b9c9b710f06c49cdf">c_parser_frontend::type_system::UnionType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1StructType.html#acb95f7d4f96f8aae06205295d22c06c3">c_parser_frontend::type_system::StructType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1FunctionType.html#ab5ba29b09d464a6ac23089eaca85c83a">c_parser_frontend::type_system::FunctionType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#a2e635862cc6ed9674889aedd73706042">c_parser_frontend::type_system::PointerType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1BasicType.html#a03a2d0a5c1388f66c3d3fff1d0c4330a">c_parser_frontend::type_system::BasicType</a> , 以及 <a class="el" href="classc__parser__frontend_1_1type__system_1_1EndType.html#a31c14a2881b156b0d20e58e8a61dcde4">c_parser_frontend::type_system::EndType</a> 内被实现.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="type__system_8cpp_source.html#l00195">c_parser_frontend::type_system::PointerType::CanBeAssignedBy()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1type__system_1_1TypeInterface_a669b266fbf7be6477db5464916d7ddc6_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1type__system_1_1TypeInterface_a669b266fbf7be6477db5464916d7ddc6_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1type__system_1_1TypeInterface_a669b266fbf7be6477db5464916d7ddc6_icgraph" id="classc__parser__frontend_1_1type__system_1_1TypeInterface_a669b266fbf7be6477db5464916d7ddc6_icgraph">
+<area shape="rect" title="判断给定类型是否可以给该对象赋值" alt="" coords="244,5,447,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#a2e635862cc6ed9674889aedd73706042" title="判断给定类型是否可以给该对象赋值" alt="" coords="5,5,196,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a62c5e80b4b4140e77678fee207655160"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a62c5e80b4b4140e77678fee207655160">&#9670;&nbsp;</a></span>DeclineMathematicalComputeResult()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt;, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2b">DeclineMathematicalComputeTypeResult</a> &gt; c_parser_frontend::type_system::TypeInterface::DeclineMathematicalComputeResult </td>
+          <td>(</td>
+          <td class="paramtype">const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>left_compute_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>right_compute_type</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>推断两个类型进行数学运算后得到的类型和运算情况 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">left_compute_type</td><td>：运算符左侧对象的类型 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">right_compute_type</td><td>：运算符右侧对象的类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>前半部分为运算后得到的类型，后半部分为运算情况 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>两钟类型不一定可以运算，必须先检查推断结果 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="type__system_8cpp_source.html">type_system.cpp</a> 第 <a class="el" href="type__system_8cpp_source.html#l00521">521</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7a27296922b87cce1a26d3d54419a74599">c_parser_frontend::type_system::kBasic</a>, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba85d2b3072333fccfbbcc96be951e37d3">c_parser_frontend::type_system::kConvertToLeft</a>, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba3aacaeb4659426801cfe7fc7bd65f204">c_parser_frontend::type_system::kConvertToRight</a>, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#aec297cf4e12aa9aa66034a08667ada28a9a78d6a569d086b524c3caf8c2522f96">c_parser_frontend::type_system::kFloat32</a>, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba1432a29dbee20f7f25402288a89b89d7">c_parser_frontend::type_system::kLeftNotComputableType</a>, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba33490b04e79dc1d9b7eb9a98b46d2c75">c_parser_frontend::type_system::kLeftNotIntger</a>, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba052ccdb30ea590ee39b37b99f6f56115">c_parser_frontend::type_system::kLeftOffsetRightPointer</a>, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba48258c9022e55bbc417d2eb1ec83ec76">c_parser_frontend::type_system::kLeftPointerRightOffset</a>, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2bac9cf64e875d9f10c38fbecaaa2ee86b9">c_parser_frontend::type_system::kLeftRightBothPointer</a>, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7afa1773a7a00e4d1723a5b0fbf0c435be">c_parser_frontend::type_system::kPointer</a>, <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba403b5e07ec03e4d6f6645ba562c8e662">c_parser_frontend::type_system::kRightNotComputableType</a> , 以及 <a class="el" href="namespacec__parser__frontend_1_1type__system.html#abda2c7df23bef8ddeaa9244a62fd8d2ba2c6ef4e6846a36fc373171c17249890b">c_parser_frontend::type_system::kRightNotIntger</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8cpp_source.html#l00211">c_parser_frontend::operator_node::MathematicalOperatorNode::DeclineComputeResult()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1type__system_1_1TypeInterface_a62c5e80b4b4140e77678fee207655160_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1type__system_1_1TypeInterface_a62c5e80b4b4140e77678fee207655160_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1type__system_1_1TypeInterface_a62c5e80b4b4140e77678fee207655160_icgraph" id="classc__parser__frontend_1_1type__system_1_1TypeInterface_a62c5e80b4b4140e77678fee207655160_icgraph">
+<area shape="rect" title="推断两个类型进行数学运算后得到的类型和运算情况" alt="" coords="639,5,908,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#a651835f1052952644ff0efb05a1c1075" title="推算运算后结果" alt="" coords="320,5,591,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#a430561941342b87319eaae43da17af20" title="设置双目运算符右侧运算数" alt="" coords="5,5,272,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aee0d7c335ee3fa545379099dcddf6635"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee0d7c335ee3fa545379099dcddf6635">&#9670;&nbsp;</a></span>GetNextNodePointer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a>&gt; c_parser_frontend::type_system::TypeInterface::GetNextNodePointer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取下一个类型节点的指针 </p>
+<dl class="section return"><dt>返回</dt><dd>返回指向下一个类型节点的const指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00252">252</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__system_8h_source.html#l00292">next_type_node_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="type__system_8h_source.html#l00438">c_parser_frontend::type_system::PointerType::DeReference()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1type__system_1_1TypeInterface_aee0d7c335ee3fa545379099dcddf6635_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1type__system_1_1TypeInterface_aee0d7c335ee3fa545379099dcddf6635_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1type__system_1_1TypeInterface_aee0d7c335ee3fa545379099dcddf6635_icgraph" id="classc__parser__frontend_1_1type__system_1_1TypeInterface_aee0d7c335ee3fa545379099dcddf6635_icgraph">
+<area shape="rect" title="获取下一个类型节点的指针" alt="" coords="563,5,765,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#a60a5978177acc63c9b523afeb487c22c" title="获取该指针解引用后得到的类型" alt="" coords="324,5,515,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#a082cac4f28ce1ff5d278a3a0c7cc6bea" title="设定被解引用的节点" alt="" coords="5,5,276,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7d34d13bdf090ead4b5c27f92250a63d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d34d13bdf090ead4b5c27f92250a63d">&#9670;&nbsp;</a></span>GetNextNodeReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a>&amp; c_parser_frontend::type_system::TypeInterface::GetNextNodeReference </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取下一个节点的引用 </p>
+<dl class="section return"><dt>返回</dt><dd>返回下一个节点的const引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00262">262</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__system_8h_source.html#l00292">next_type_node_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="type__system_8cpp_source.html#l00195">c_parser_frontend::type_system::PointerType::CanBeAssignedBy()</a>, <a class="el" href="type__system_8cpp_source.html#l00057">operator==()</a>, <a class="el" href="type__system_8cpp_source.html#l00067">c_parser_frontend::type_system::BasicType::operator==()</a>, <a class="el" href="type__system_8cpp_source.html#l00162">c_parser_frontend::type_system::PointerType::operator==()</a>, <a class="el" href="type__system_8cpp_source.html#l00169">c_parser_frontend::type_system::FunctionType::operator==()</a>, <a class="el" href="type__system_8h_source.html#l00657">c_parser_frontend::type_system::StructureTypeInterface::operator==()</a>, <a class="el" href="type__system_8h_source.html#l00904">c_parser_frontend::type_system::EnumType::operator==()</a>, <a class="el" href="type__system_8h_source.html#l01006">c_parser_frontend::type_system::InitializeListType::operator==()</a> , 以及 <a class="el" href="type__system_8cpp_source.html#l00271">c_parser_frontend::type_system::PointerType::TypeSizeOf()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1type__system_1_1TypeInterface_a7d34d13bdf090ead4b5c27f92250a63d_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1type__system_1_1TypeInterface_a7d34d13bdf090ead4b5c27f92250a63d_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1type__system_1_1TypeInterface_a7d34d13bdf090ead4b5c27f92250a63d_icgraph" id="classc__parser__frontend_1_1type__system_1_1TypeInterface_a7d34d13bdf090ead4b5c27f92250a63d_icgraph">
+<area shape="rect" title="获取下一个节点的引用" alt="" coords="487,325,689,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#a2e635862cc6ed9674889aedd73706042" title="判断给定类型是否可以给该对象赋值" alt="" coords="242,5,433,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a5aa9c19280d18ecedfc56f910f6d95bc" title="比较两个类型是否完全相同" alt="" coords="236,85,439,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1BasicType.html#a23b0071b2c288812c3955482d4186a51" title="比较两个类型是否完全相同" alt="" coords="248,165,427,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#aa64ede3652f3e1ff0a96e7a76c82a4fb" title="比较两个类型是否完全相同" alt="" coords="242,245,433,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1FunctionType.html#ac1fdbac52baf81b5ffae14d60daa6ad1" title="比较两个类型是否完全相同" alt="" coords="238,325,437,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a83d928e714bfb4a8aa758b2462db06a8" title="比较两个类型是否完全相同" alt="" coords="236,405,439,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EnumType.html#a2eead0fe62ca004bde766b819213c826" title="比较两个类型是否完全相同" alt="" coords="247,485,428,541"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1InitializeListType.html#afb573a97b14debe0ed84badfac6e0091" title="比较两个类型是否完全相同" alt="" coords="241,565,434,621"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#adf934102c4e9c172ea7fdb80527a9b25" title="获取sizeof语义下类型的大小" alt="" coords="242,645,433,701"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructType.html#ad57e4456caf14fca05a2752ff98f67e0" title="比较两个类型是否完全相同" alt="" coords="5,365,188,421"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1UnionType.html#a9e5eb68061afd992a8455dc20e92330f" title="比较两个类型是否完全相同" alt="" coords="5,445,188,501"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae80e4319279851922698bef4223b1872"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae80e4319279851922698bef4223b1872">&#9670;&nbsp;</a></span>GetType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7">StructOrBasicType</a> c_parser_frontend::type_system::TypeInterface::GetType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取类型节点的类型 </p>
+<dl class="section return"><dt>返回</dt><dd>返回类型节点的类型 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00248">248</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__system_8h_source.html#l00287">type_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="type__system_8cpp_source.html#l00075">c_parser_frontend::type_system::BasicType::CanBeAssignedBy()</a>, <a class="el" href="type__system_8cpp_source.html#l00195">c_parser_frontend::type_system::PointerType::CanBeAssignedBy()</a>, <a class="el" href="type__system_8cpp_source.html#l00283">c_parser_frontend::type_system::StructType::CanBeAssignedBy()</a>, <a class="el" href="type__system_8cpp_source.html#l00327">c_parser_frontend::type_system::UnionType::CanBeAssignedBy()</a>, <a class="el" href="type__system_8cpp_source.html#l00360">c_parser_frontend::type_system::EnumType::CanBeAssignedBy()</a>, <a class="el" href="operator__node_8cpp_source.html#l00080">c_parser_frontend::operator_node::BasicTypeInitializeOperatorNode::CheckBasicTypeInitializeValid()</a>, <a class="el" href="operator__node_8h_source.html#l01600">c_parser_frontend::operator_node::FunctionCallOperatorNode::CheckFunctionTypeValid()</a>, <a class="el" href="operator__node_8cpp_source.html#l00109">c_parser_frontend::operator_node::InitializeOperatorNodeInterface::CheckInitValueTypeValid()</a>, <a class="el" href="operator__node_8cpp_source.html#l00822">c_parser_frontend::operator_node::LogicalOperationOperatorNode::CheckLogicalTypeValid()</a>, <a class="el" href="operator__node_8cpp_source.html#l00036">c_parser_frontend::operator_node::VarietyOperatorNode::CheckVarietyTypeValid()</a>, <a class="el" href="type__system_8h_source.html#l00238">IsSameObject()</a> , 以及 <a class="el" href="operator__node_8cpp_source.html#l00542">c_parser_frontend::operator_node::AssignOperatorNode::VarietyAssignableByInitializeList()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1type__system_1_1TypeInterface_ae80e4319279851922698bef4223b1872_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1type__system_1_1TypeInterface_ae80e4319279851922698bef4223b1872_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1type__system_1_1TypeInterface_ae80e4319279851922698bef4223b1872_icgraph" id="classc__parser__frontend_1_1type__system_1_1TypeInterface_ae80e4319279851922698bef4223b1872_icgraph">
+<area shape="rect" title="获取类型节点的类型" alt="" coords="1988,445,2191,501"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1BasicType.html#a03a2d0a5c1388f66c3d3fff1d0c4330a" title="判断给定类型是否可以给该对象赋值" alt="" coords="1693,5,1872,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#a2e635862cc6ed9674889aedd73706042" title="判断给定类型是否可以给该对象赋值" alt="" coords="1687,85,1878,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructType.html#acb95f7d4f96f8aae06205295d22c06c3" title="判断给定类型是否可以给该对象赋值" alt="" coords="1691,165,1874,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1UnionType.html#ae410d60c2a04ef7b9c9b710f06c49cdf" title="判断给定类型是否可以给该对象赋值" alt="" coords="1691,245,1874,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EnumType.html#a24fcfefbf4a5c3c328e5f703ced43fe1" title="判断给定类型是否可以给该对象赋值" alt="" coords="1692,325,1873,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a0b162fe6e895671b445d561cdda95f7e" title="检查给定类型是否可以作为基础初始化数据的类型" alt="" coords="1625,405,1940,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#a8a20c4ae08f52b75b1c6bc6ea698ade1" title="检查类型是否可以用于调用" alt="" coords="1643,485,1922,541"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html#afb844e575c91cdbda40a6b6b6698149a" title="检查给定类型是否为有效的初始化数据类型" alt="" coords="1642,565,1923,621"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode.html#af8bef4d1659a471b39b1378401130144" title="检查运算数是否可以参与逻辑运算" alt="" coords="1648,645,1917,701"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a6672689ac26f0762b7fc0108659fdb32" title="检查给定类型是否可以作为普通变量的类型" alt="" coords="1669,757,1896,813"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a723c6c6897c0618d9577cece835a85c8" title="检查使用初始化列表初始化变量的情况" alt="" coords="648,915,925,971"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a3027817a00d7034165ddc0fd56281da2" title=" " alt="" coords="1681,1208,1884,1264"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#aa8eec206ebcf1953933a92fd50678a3b" title="设置初始化用数据的类型" alt="" coords="664,431,909,487"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a4348f1c094015c0feb6bb76e5ace630b" title=" " alt="" coords="260,431,593,487"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#afa55b4ed4be9c5b5216f0c572a132c91" title="设置要调用的对象" alt="" coords="1312,437,1539,493"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html#ad5ba8aacaa5eddde7b55dc53f060ee67" title="设置初始化数据的具体类型" alt="" coords="1307,517,1544,573"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a54b4e242ed930666c66aeb028a8836de" title=" " alt="" coords="980,437,1225,493"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1ListInitializeOperatorNode.html#a825f53ecf407d8c5f0f1431f0a4b7e65" title="设置初始化列表中含有的全部初始化值" alt="" coords="999,517,1207,573"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode.html#aa51c84d67878302d145ad922a4f98eef" title="设置左侧运算数/单目运算符运算数" alt="" coords="1297,597,1554,653"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode.html#a4b9d81db855a00cc9e239a4fed5d1be5" title="设置右侧运算数" alt="" coords="1292,677,1559,733"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a212a08cb0c6f8c89f43eb35dbd26897e" title="设置变量的类型" alt="" coords="1312,757,1539,813"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a91c6a50a9b916ea2db13739a8c5ed4bc" title="设置变量的类型，允许使用函数类型" alt="" coords="1273,837,1577,893"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#ae04475df3488b171fc37c245af4fa441" title="检查两个节点是否可以赋值" alt="" coords="991,755,1215,811"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#aaf0729f7e7c809dad9814ec9fecf5fe5" title="检查给定语句是否可以作为函数内执行的语句" alt="" coords="672,515,901,571"/>
+<area shape="rect" href="classc__parser__frontend_1_1parse__functions_1_1ObjectConstructData.html#a43157e073abf72995ee25488377ab23b" title=" " alt="" coords="984,835,1221,891"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#a42baddd3c0fb6f454c50d06472993ae2" title="添加调用参数" alt="" coords="641,595,932,651"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#ae59e55b700c8709ffc835891f6cd84f7" title="创建返回结果的节点" alt="" coords="672,675,901,731"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#ad2a310de687335d6658b0daead191637" title="按容器设置调用参数" alt="" coords="680,755,893,811"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca9910541d690b4040e6ba1ce4323a72" title="设置用来赋值的节点" alt="" coords="675,835,899,891"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a80ece7836e0b60e9abace2aef88b7f6e" title="添加一条函数内执行的语句" alt="" coords="323,512,530,568"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a1197ee4a48e2d37c82b402f6bd01246a" title="添加一个容器内的全部语句" alt="" coords="323,592,530,648"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a73416179a5655fc54cd037f7d9a43f43" title="向流程语句主体中中添加单条语句" alt="" coords="5,512,212,568"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a4e41329fb34ed861cb4ffa6e1677271d" title="向流程语句主体中中添加多条语句" alt="" coords="5,592,212,648"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#aed46590b486ee7477bb17dce3677c3fb" title="设置条件为假时的分支" alt="" coords="312,672,541,728"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a3bf8f22583fef107e37a3b9a51d1f7de" title="设置条件为真时的分支" alt="" coords="312,752,541,808"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1FunctionType.html#ab5ba29b09d464a6ac23089eaca85c83a" title="判断给定类型是否可以给该对象赋值" alt="" coords="1326,968,1525,1024"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EndType.html#a6f4ffe42bf33102bc2f52d8ad78b783a" title=" " alt="" coords="1341,1048,1509,1104"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1BasicType.html#ac78c52556f6bfec3ce16afb568253aa8" title=" " alt="" coords="1336,1128,1515,1184"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#abfe3ef81e6a6e5392bfd4b94c7163a0a" title=" " alt="" coords="1330,1208,1521,1264"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#afe3dbce8010be2813be1e258e3ecf9c4" title=" " alt="" coords="1324,1288,1527,1344"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EnumType.html#ab552effba9b33a679f018caf15d7d5b0" title=" " alt="" coords="1335,1368,1516,1424"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1InitializeListType.html#a94395e9acf4bcd5c13e4f5dabe880f9e" title=" " alt="" coords="1329,1448,1522,1504"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a5aa9c19280d18ecedfc56f910f6d95bc" title="比较两个类型是否完全相同" alt="" coords="1324,1528,1527,1584"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EndType.html#a16015e5c390d8490dc66a11ead3fd24d" title="比较两个类型是否完全相同" alt="" coords="1019,1008,1187,1064"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1BasicType.html#a23b0071b2c288812c3955482d4186a51" title="比较两个类型是否完全相同" alt="" coords="1013,1088,1192,1144"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#aa64ede3652f3e1ff0a96e7a76c82a4fb" title="比较两个类型是否完全相同" alt="" coords="1007,1168,1198,1224"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructType.html#a21ba181d2278fd9a0adbfa58275bada3" title=" " alt="" coords="1011,1248,1194,1304"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1UnionType.html#a98da5465489bd63a4b93c8a504f60765" title=" " alt="" coords="1011,1328,1194,1384"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a83d928e714bfb4a8aa758b2462db06a8" title="比较两个类型是否完全相同" alt="" coords="1001,1408,1204,1464"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructType.html#ad57e4456caf14fca05a2752ff98f67e0" title="比较两个类型是否完全相同" alt="" coords="695,1368,878,1424"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1UnionType.html#a9e5eb68061afd992a8455dc20e92330f" title="比较两个类型是否完全相同" alt="" coords="695,1448,878,1504"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EnumType.html#a2eead0fe62ca004bde766b819213c826" title="比较两个类型是否完全相同" alt="" coords="1012,1488,1193,1544"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1InitializeListType.html#afb573a97b14debe0ed84badfac6e0091" title="比较两个类型是否完全相同" alt="" coords="1006,1568,1199,1624"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af141ec273bfe24c2b4e662680d3bad9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af141ec273bfe24c2b4e662680d3bad9c">&#9670;&nbsp;</a></span>GetTypeStoreSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual size_t c_parser_frontend::type_system::TypeInterface::GetTypeStoreSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取存储该类型变量所需空间的大小 </p>
+<dl class="section return"><dt>返回</dt><dd>返回存储该类型变量所需空间大小 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>指针均为kPointerSize字节 </dd></dl>
+
+<p>在 <a class="el" href="classc__parser__frontend_1_1type__system_1_1InitializeListType.html#a282cc243eb7abc6ecb096a87e11e0c26">c_parser_frontend::type_system::InitializeListType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1EnumType.html#a806243244b66a8356793bbfbfc2b9158">c_parser_frontend::type_system::EnumType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1UnionType.html#abf9089bcac6d3b43a294069be10aee9a">c_parser_frontend::type_system::UnionType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1StructType.html#ab47b9512e57b7e64057712451d1bb8d8">c_parser_frontend::type_system::StructType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1FunctionType.html#aa3e2646037df2235a323ed706f3e2a4d">c_parser_frontend::type_system::FunctionType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#ad100f72bbb5a5398c0033fc28d00fb56">c_parser_frontend::type_system::PointerType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1BasicType.html#a9aacb43f70f8f31bb21e9ebc2e7dacf9">c_parser_frontend::type_system::BasicType</a> , 以及 <a class="el" href="classc__parser__frontend_1_1type__system_1_1EndType.html#a322bbb578ab661eac852c523741586d0">c_parser_frontend::type_system::EndType</a> 内被实现.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="type__system_8h_source.html#l00913">c_parser_frontend::type_system::EnumType::GetTypeStoreSize()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1type__system_1_1TypeInterface_af141ec273bfe24c2b4e662680d3bad9c_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1type__system_1_1TypeInterface_af141ec273bfe24c2b4e662680d3bad9c_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1type__system_1_1TypeInterface_af141ec273bfe24c2b4e662680d3bad9c_icgraph" id="classc__parser__frontend_1_1type__system_1_1TypeInterface_af141ec273bfe24c2b4e662680d3bad9c_icgraph">
+<area shape="rect" title="获取存储该类型变量所需空间的大小" alt="" coords="464,5,667,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EnumType.html#a806243244b66a8356793bbfbfc2b9158" title="获取存储该类型变量所需空间的大小" alt="" coords="235,5,416,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EnumType.html#a291d19836c2dcb6ceda20ea4ee76eb9d" title="获取sizeof语义下类型的大小" alt="" coords="5,5,187,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3027817a00d7034165ddc0fd56281da2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3027817a00d7034165ddc0fd56281da2">&#9670;&nbsp;</a></span>IsSameObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool c_parser_frontend::type_system::TypeInterface::IsSameObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &amp;&#160;</td>
+          <td class="paramname"><em>type_interface</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section note"><dt>注解</dt><dd><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a5aa9c19280d18ecedfc56f910f6d95bc" title="比较两个类型是否完全相同">operator==()</a>的子过程，仅比较该级类型，不调用下一级比较函数 </dd></dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type_interface</td><td>：待比较的类型</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>派生类均应重写该函数，先调用基类的同名函数，后判断派生类新增部分 从而实现为接受一个基类输入且可以安全输出结果的函数 不使用虚函数可以提升性能 </p><dl class="section note"><dt>注解</dt><dd>if分支多，建议内联 </dd></dl>
+<p>一般情况下写代码，需要比较的类型都是相同的，出错远少于正确</p>
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00238">238</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__system_8h_source.html#l00248">GetType()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="type__system_8cpp_source.html#l00176">c_parser_frontend::type_system::FunctionType::CanBeAssignedBy()</a>, <a class="el" href="type__system_8h_source.html#l00344">c_parser_frontend::type_system::EndType::IsSameObject()</a>, <a class="el" href="type__system_8cpp_source.html#l00152">c_parser_frontend::type_system::BasicType::IsSameObject()</a>, <a class="el" href="type__system_8cpp_source.html#l00407">c_parser_frontend::type_system::PointerType::IsSameObject()</a>, <a class="el" href="type__system_8cpp_source.html#l00767">c_parser_frontend::type_system::StructureTypeInterface::IsSameObject()</a>, <a class="el" href="type__system_8cpp_source.html#l00371">c_parser_frontend::type_system::EnumType::IsSameObject()</a>, <a class="el" href="type__system_8cpp_source.html#l00395">c_parser_frontend::type_system::InitializeListType::IsSameObject()</a> , 以及 <a class="el" href="type__system_8cpp_source.html#l00057">operator==()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1type__system_1_1TypeInterface_a3027817a00d7034165ddc0fd56281da2_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1type__system_1_1TypeInterface_a3027817a00d7034165ddc0fd56281da2_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1type__system_1_1TypeInterface_a3027817a00d7034165ddc0fd56281da2_cgraph" id="classc__parser__frontend_1_1type__system_1_1TypeInterface_a3027817a00d7034165ddc0fd56281da2_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,208,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="256,5,459,61"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1type__system_1_1TypeInterface_a3027817a00d7034165ddc0fd56281da2_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1type__system_1_1TypeInterface_a3027817a00d7034165ddc0fd56281da2_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1type__system_1_1TypeInterface_a3027817a00d7034165ddc0fd56281da2_icgraph" id="classc__parser__frontend_1_1type__system_1_1TypeInterface_a3027817a00d7034165ddc0fd56281da2_icgraph">
+<area shape="rect" title=" " alt="" coords="737,285,940,341"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1FunctionType.html#ab5ba29b09d464a6ac23089eaca85c83a" title="判断给定类型是否可以给该对象赋值" alt="" coords="489,5,687,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EndType.html#a6f4ffe42bf33102bc2f52d8ad78b783a" title=" " alt="" coords="504,85,672,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1BasicType.html#ac78c52556f6bfec3ce16afb568253aa8" title=" " alt="" coords="499,165,677,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#abfe3ef81e6a6e5392bfd4b94c7163a0a" title=" " alt="" coords="493,245,683,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#afe3dbce8010be2813be1e258e3ecf9c4" title=" " alt="" coords="487,325,689,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EnumType.html#ab552effba9b33a679f018caf15d7d5b0" title=" " alt="" coords="497,405,679,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1InitializeListType.html#a94395e9acf4bcd5c13e4f5dabe880f9e" title=" " alt="" coords="491,485,685,541"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a5aa9c19280d18ecedfc56f910f6d95bc" title="比较两个类型是否完全相同" alt="" coords="487,565,689,621"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EndType.html#a16015e5c390d8490dc66a11ead3fd24d" title="比较两个类型是否完全相同" alt="" coords="253,45,421,101"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1BasicType.html#a23b0071b2c288812c3955482d4186a51" title="比较两个类型是否完全相同" alt="" coords="248,125,427,181"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#aa64ede3652f3e1ff0a96e7a76c82a4fb" title="比较两个类型是否完全相同" alt="" coords="242,205,433,261"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructType.html#a21ba181d2278fd9a0adbfa58275bada3" title=" " alt="" coords="246,285,429,341"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1UnionType.html#a98da5465489bd63a4b93c8a504f60765" title=" " alt="" coords="246,365,429,421"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a83d928e714bfb4a8aa758b2462db06a8" title="比较两个类型是否完全相同" alt="" coords="236,445,439,501"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1StructType.html#ad57e4456caf14fca05a2752ff98f67e0" title="比较两个类型是否完全相同" alt="" coords="5,405,188,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1UnionType.html#a9e5eb68061afd992a8455dc20e92330f" title="比较两个类型是否完全相同" alt="" coords="5,485,188,541"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1EnumType.html#a2eead0fe62ca004bde766b819213c826" title="比较两个类型是否完全相同" alt="" coords="247,525,428,581"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1InitializeListType.html#afb573a97b14debe0ed84badfac6e0091" title="比较两个类型是否完全相同" alt="" coords="241,605,434,661"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3869da413ff452a2a79b3e66602ee8a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3869da413ff452a2a79b3e66602ee8a2">&#9670;&nbsp;</a></span>ObtainAddressOperatorNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static std::shared_ptr&lt;const <a class="el" href="classc__parser__frontend_1_1type__system_1_1PointerType.html">PointerType</a>&gt; c_parser_frontend::type_system::TypeInterface::ObtainAddressOperatorNode </td>
+          <td>(</td>
+          <td class="paramtype">const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>type_interface</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a19d20e5542c29e0fbf656fc55ad88893">ConstTag</a>&#160;</td>
+          <td class="paramname"><em>variety_const_tag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取给定类型取地址后得到的类型 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type_interface</td><td>：取地址前的类型 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">variety_const_tag</td><td>：被取地址的变量自身的const标记 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回取地址后的类型 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00268">268</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8cpp_source.html#l00716">c_parser_frontend::operator_node::ObtainAddressOperatorNode::SetNodeToObtainAddress()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1type__system_1_1TypeInterface_a3869da413ff452a2a79b3e66602ee8a2_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1type__system_1_1TypeInterface_a3869da413ff452a2a79b3e66602ee8a2_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1type__system_1_1TypeInterface_a3869da413ff452a2a79b3e66602ee8a2_icgraph" id="classc__parser__frontend_1_1type__system_1_1TypeInterface_a3869da413ff452a2a79b3e66602ee8a2_icgraph">
+<area shape="rect" title="获取给定类型取地址后得到的类型" alt="" coords="339,5,555,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#a941b7f5ade7a534b543f7e311c8267d5" title="设置被取地址的节点" alt="" coords="5,5,291,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5aa9c19280d18ecedfc56f910f6d95bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5aa9c19280d18ecedfc56f910f6d95bc">&#9670;&nbsp;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool c_parser_frontend::type_system::TypeInterface::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &amp;&#160;</td>
+          <td class="paramname"><em>type_interface</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>比较两个类型是否完全相同 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type_interface</td><td>：待比较的两个类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回两个类型是否完全相同 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：两个类型完全相同 </td></tr>
+    <tr><td class="paramname">false</td><td>：两个类型不完全相同 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>自动调用下一级比较函数 </dd></dl>
+
+<p>在 <a class="el" href="classc__parser__frontend_1_1type__system_1_1InitializeListType.html#afb573a97b14debe0ed84badfac6e0091">c_parser_frontend::type_system::InitializeListType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1EnumType.html#a2eead0fe62ca004bde766b819213c826">c_parser_frontend::type_system::EnumType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1UnionType.html#a9e5eb68061afd992a8455dc20e92330f">c_parser_frontend::type_system::UnionType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1StructType.html#ad57e4456caf14fca05a2752ff98f67e0">c_parser_frontend::type_system::StructType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a83d928e714bfb4a8aa758b2462db06a8">c_parser_frontend::type_system::StructureTypeInterface</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1FunctionType.html#ac1fdbac52baf81b5ffae14d60daa6ad1">c_parser_frontend::type_system::FunctionType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#aa64ede3652f3e1ff0a96e7a76c82a4fb">c_parser_frontend::type_system::PointerType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1BasicType.html#a23b0071b2c288812c3955482d4186a51">c_parser_frontend::type_system::BasicType</a> , 以及 <a class="el" href="classc__parser__frontend_1_1type__system_1_1EndType.html#a16015e5c390d8490dc66a11ead3fd24d">c_parser_frontend::type_system::EndType</a> 内被实现.</p>
+
+<p class="definition">在文件 <a class="el" href="type__system_8cpp_source.html">type_system.cpp</a> 第 <a class="el" href="type__system_8cpp_source.html#l00057">57</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__system_8h_source.html#l00262">GetNextNodeReference()</a> , 以及 <a class="el" href="type__system_8h_source.html#l00238">IsSameObject()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1type__system_1_1TypeInterface_a5aa9c19280d18ecedfc56f910f6d95bc_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1type__system_1_1TypeInterface_a5aa9c19280d18ecedfc56f910f6d95bc_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1type__system_1_1TypeInterface_a5aa9c19280d18ecedfc56f910f6d95bc_cgraph" id="classc__parser__frontend_1_1type__system_1_1TypeInterface_a5aa9c19280d18ecedfc56f910f6d95bc_cgraph">
+<area shape="rect" title="比较两个类型是否完全相同" alt="" coords="5,45,208,101"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a7d34d13bdf090ead4b5c27f92250a63d" title="获取下一个节点的引用" alt="" coords="256,5,459,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a3027817a00d7034165ddc0fd56281da2" title=" " alt="" coords="256,85,459,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="507,85,709,141"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac8cec75839b33ca3ed3e3e8df0fabaa5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8cec75839b33ca3ed3e3e8df0fabaa5">&#9670;&nbsp;</a></span>SetNextNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void c_parser_frontend::type_system::TypeInterface::SetNextNode </td>
+          <td>(</td>
+          <td class="paramtype">const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>next_type_node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置下一个节点 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">next_type_node</td><td>：指向下一个节点的const指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00257">257</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__system_8h_source.html#l00292">next_type_node_</a>.</p>
+
+</div>
+</div>
+<a id="a37cd2d815957be2c795e8b7ae8fe7d55"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a37cd2d815957be2c795e8b7ae8fe7d55">&#9670;&nbsp;</a></span>SetType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void c_parser_frontend::type_system::TypeInterface::SetType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7">StructOrBasicType</a>&#160;</td>
+          <td class="paramname"><em>type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置类型节点的类型 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">type</td><td>：类型节点的类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00245">245</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="type__system_8h_source.html#l00287">type_</a>.</p>
+
+</div>
+</div>
+<a id="ac226ef7e7ae3877dcbbe6bc23433884e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac226ef7e7ae3877dcbbe6bc23433884e">&#9670;&nbsp;</a></span>TypeSizeOf()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual size_t c_parser_frontend::type_system::TypeInterface::TypeSizeOf </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取sizeof语义下类型的大小 </p>
+<dl class="section return"><dt>返回</dt><dd>返回sizeof语义下类型的大小 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>指向数组的指针结果为类型大小乘以各维度大小 </dd></dl>
+
+<p>在 <a class="el" href="classc__parser__frontend_1_1type__system_1_1InitializeListType.html#a15ccf9d92b9dbb072a0b649384733821">c_parser_frontend::type_system::InitializeListType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1EnumType.html#a291d19836c2dcb6ceda20ea4ee76eb9d">c_parser_frontend::type_system::EnumType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1UnionType.html#ae32ffa7c5f4b8eae5018926d1dd78eb9">c_parser_frontend::type_system::UnionType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1StructType.html#adeefcb116c5db8a88c0de3a1789b8acb">c_parser_frontend::type_system::StructType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1FunctionType.html#a3059126c5c2ab786e7a5f0e5bb42ecb7">c_parser_frontend::type_system::FunctionType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#adf934102c4e9c172ea7fdb80527a9b25">c_parser_frontend::type_system::PointerType</a>, <a class="el" href="classc__parser__frontend_1_1type__system_1_1BasicType.html#a302bae5c8446b77bbc79159f4eb24a88">c_parser_frontend::type_system::BasicType</a> , 以及 <a class="el" href="classc__parser__frontend_1_1type__system_1_1EndType.html#a44c7e9407b3940a59c5e8da6ff4e14e0">c_parser_frontend::type_system::EndType</a> 内被实现.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="type__system_8cpp_source.html#l00271">c_parser_frontend::type_system::PointerType::TypeSizeOf()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1type__system_1_1TypeInterface_ac226ef7e7ae3877dcbbe6bc23433884e_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1type__system_1_1TypeInterface_ac226ef7e7ae3877dcbbe6bc23433884e_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1type__system_1_1TypeInterface_ac226ef7e7ae3877dcbbe6bc23433884e_icgraph" id="classc__parser__frontend_1_1type__system_1_1TypeInterface_ac226ef7e7ae3877dcbbe6bc23433884e_icgraph">
+<area shape="rect" title="获取sizeof语义下类型的大小" alt="" coords="244,5,447,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1PointerType.html#adf934102c4e9c172ea7fdb80527a9b25" title="获取sizeof语义下类型的大小" alt="" coords="5,5,196,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="aac8b9739bcc8390518311be79264ae92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac8b9739bcc8390518311be79264ae92">&#9670;&nbsp;</a></span>next_type_node_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a>&gt; c_parser_frontend::type_system::TypeInterface::next_type_node_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>指向下一个类型节点的指针 </p>
+<p>解引用、取地址都是引用同一条类型链不同部分，共用节点可以节省内存 使用shared_ptr以支持共享类型链节点和仅释放类型链部分节点的功能 </p>
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00292">292</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="type__system_8h_source.html#l00252">GetNextNodePointer()</a>, <a class="el" href="type__system_8h_source.html#l00262">GetNextNodeReference()</a> , 以及 <a class="el" href="type__system_8h_source.html#l00257">SetNextNode()</a>.</p>
+
+</div>
+</div>
+<a id="a09d1099888afc9e77f6e2c82caa8532e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09d1099888afc9e77f6e2c82caa8532e">&#9670;&nbsp;</a></span>type_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a7ada2ff0eba2205e6a1c0c5afa2d5bd7">StructOrBasicType</a> c_parser_frontend::type_system::TypeInterface::type_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>类型节点的类型 </p>
+
+<p class="definition">在文件 <a class="el" href="type__system_8h_source.html">type_system.h</a> 第 <a class="el" href="type__system_8h_source.html#l00287">287</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="type__system_8h_source.html#l00248">GetType()</a> , 以及 <a class="el" href="type__system_8h_source.html#l00245">SetType()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/CParserFrontend/<a class="el" href="type__system_8h_source.html">type_system.h</a></li>
+<li>src/CParserFrontend/<a class="el" href="type__system_8cpp_source.html">type_system.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacec__parser__frontend.html">c_parser_frontend</a></li><li class="navelem"><a class="el" href="namespacec__parser__frontend_1_1type__system.html">type_system</a></li><li class="navelem"><a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

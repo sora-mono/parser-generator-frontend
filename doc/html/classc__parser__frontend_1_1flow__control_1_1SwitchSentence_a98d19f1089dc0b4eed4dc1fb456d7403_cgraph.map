@@ -1,0 +1,12 @@
+<map id="c_parser_frontend::flow_control::SwitchSentence::AddSimpleCase" name="c_parser_frontend::flow_control::SwitchSentence::AddSimpleCase">
+<area shape="rect" id="node1" title="添加普通的case" alt="" coords="5,165,217,221"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a92c88836ad47c341cd6ff10f5713d983" title="向主体内添加一条语句" alt="" coords="269,45,475,101"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a5460ac252fb283e69254d6beab0173a7" title="检查给定case是否可以作为switch内的标签" alt="" coords="265,165,479,221"/>
+<area shape="rect" id="node9" href="$classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a19d01f9bb608dec88c7f432735a44ca6" title="根据case的值创建对应的标签" alt="" coords="266,245,478,301"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2afaacb18c830c6f59e4114511b88ea3" title="默认检查主体内语句的函数" alt="" coords="527,5,831,61"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#afca8c0d1489d1512d061573abd61a818" title="获取流程控制类型" alt="" coords="879,5,1077,61"/>
+<area shape="rect" id="node6" href="$classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html#a8759d34682bb031948e9ec241e95b0ff" title="获取初始化数据所属分类" alt="" coords="560,85,797,141"/>
+<area shape="rect" id="node7" href="$classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a04ee3a54a9ea899528559ac5b8cb3676" title="获取全部普通case标签" alt="" coords="573,165,785,221"/>
+<area shape="rect" id="node8" href="$classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a3eaeaca261e5860d4ca73accce3cf460" title="获取初始化数据的值" alt="" coords="556,245,801,301"/>
+<area shape="rect" id="node10" href="$classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a8bdcf8f28436c4ed94b84a7adf95a259" title="获取流程控制节点ID" alt="" coords="579,325,778,381"/>
+</map>

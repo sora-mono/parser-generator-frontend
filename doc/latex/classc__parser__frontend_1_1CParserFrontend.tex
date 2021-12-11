@@ -1,0 +1,993 @@
+\hypertarget{classc__parser__frontend_1_1CParserFrontend}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::C\+Parser\+Frontend类 参考}
+\label{classc__parser__frontend_1_1CParserFrontend}\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+
+
+{\ttfamily \#include $<$c\+\_\+parser\+\_\+frontend.\+h$>$}
+
+
+
+c\+\_\+parser\+\_\+frontend\+::C\+Parser\+Frontend 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Type\+Name $>$ }\\std\+::pair$<$ \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem_a1b3ab58d873399194caaf2ebf468e6fb}{Type\+System\+::\+Type\+Node\+Container\+Iter}}, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320d}{Add\+Type\+Result}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ae319d150047e06c65be1c7f458d85686}{Define\+Type}} (Type\+Name \&\&type\+\_\+name, const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a8b161bd4b10d6f23c3dd469f68e3e36f}{Type\+Interface}} $>$ \&type\+\_\+pointer)
+\begin{DoxyCompactList}\small\item\em 定义类型 \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a8b161bd4b10d6f23c3dd469f68e3e36f}{Type\+Interface}} $>$, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a8beb6f70423e49b45609ea37c23839d9}{Get\+Type\+Result}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ab9b9caaad9118e8dee19916368b9545a}{Get\+Type}} (const std\+::string \&type\+\_\+name, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7}{Struct\+Or\+Basic\+Type}} type\+\_\+prefer)
+\begin{DoxyCompactList}\small\item\em 根据类型名获取类型链 \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem_a1b3ab58d873399194caaf2ebf468e6fb}{Type\+System\+::\+Type\+Node\+Container\+Iter}}, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320d}{Add\+Type\+Result}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_aaf5c004c2492607f5133f87f871c517c}{Announce\+Function}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_aa2ce19936ba3fb8338c210a353da4440}{Function\+Type}} $>$ \&function\+\_\+type)
+\begin{DoxyCompactList}\small\item\em 声明函数使用该接口 \end{DoxyCompactList}\item 
+std\+::pair$<$ Action\+Scope\+System\+::\+Action\+Scope\+Container\+Type\+::const\+\_\+iterator, \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{Define\+Variety\+Result}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a2831b7890e9106f1529849d9514f748c}{Define\+Variety}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a92880ffd61df3f6bd68838ffb92a287b}{Variety\+Operator\+Node}} $>$ \&operator\+\_\+node)
+\begin{DoxyCompactList}\small\item\em 定义变量 \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{operator\+\_\+node\+::\+Operator\+Node\+Interface}} $>$, bool $>$ \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a6187966bdd490a62ff78d300185d9314}{Get\+Variety\+Or\+Function}} (const std\+::string \&variety\+\_\+name) const
+\begin{DoxyCompactList}\small\item\em 根据名字获取变量或函数名 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ae269a2f490c43c0f58cfb639fb9cecd8}{Add\+Action\+Scope\+Level}} ()
+\begin{DoxyCompactList}\small\item\em 增加一级作用域等级 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ad9ded9d6fde588d61a9ff71076489fed}{Pop\+Action\+Scope}} ()
+\begin{DoxyCompactList}\small\item\em 弹出一级作用域 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a3004754f07f91d21eb5401edadacb598}{Get\+Action\+Scope\+Level}} () const
+\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_aa27c730d6112f2cf35380d8c98520349}{Set\+Function\+To\+Construct}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_aa2ce19936ba3fb8338c210a353da4440}{Function\+Type}} $>$ \&function\+\_\+to\+\_\+construct)
+\begin{DoxyCompactList}\small\item\em 设置当前待构建函数 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a0b2eb6f30a1205049ad65335be6dff2e}{Push\+Flow\+Control\+Sentence}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a90d92d739c3c61889606810b2e32f5db}{Flow\+Interface}} $>$ \&\&flow\+\_\+control\+\_\+sentence)
+\begin{DoxyCompactList}\small\item\em 将流程控制语句压入栈 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a90d92d739c3c61889606810b2e32f5db}{Flow\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a7f59324cbacdc26a1b9b8ffed5abd0f3}{Get\+Top\+Flow\+Control\+Sentence}} ()
+\begin{DoxyCompactList}\small\item\em 获取最顶层的控制语句 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a38f5a0cc83fb4ff800cac0a9ef33acaa}{Function\+Define}} $\ast$ \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a63fe4e1fa22a016d22537da4314a0803}{Get\+Active\+Function\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取当前活跃函数（正在构建的函数） \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a38f5a0cc83fb4ff800cac0a9ef33acaa}{Function\+Define}} \& \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_adc9957b818c91254717fe933afa6146e}{Get\+Active\+Function\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取当前活跃函数（正在构建的函数） \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a723a6f578cfe74a188cfe16882d7241e}{Add\+Sentence}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a90d92d739c3c61889606810b2e32f5db}{Flow\+Interface}} $>$ \&\&sentence)
+\begin{DoxyCompactList}\small\item\em 向顶层流程控制语句内添加语句 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a31dac309cfc599ccefe7166b32538f20}{Add\+Sentences}} (std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a90d92d739c3c61889606810b2e32f5db}{Flow\+Interface}} $>$ $>$ \&\&sentence\+\_\+container)
+\begin{DoxyCompactList}\small\item\em 向当前活跃的流程控制语句内添加多条语句 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_aac44008400ce0775b98019b7a755fbd6}{Convert\+If\+Sentence\+To\+If\+Else\+Sentence}} ()
+\begin{DoxyCompactList}\small\item\em 将顶层流程控制语句从if语句转换为if-\/else语句 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ade9797e31481fe7b41edcf71a666fbd5}{Add\+Switch\+Simple\+Case}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Basic\+Type\+Initialize\+Operator\+Node}} $>$ \&case\+\_\+value)
+\begin{DoxyCompactList}\small\item\em 添加switch普通case \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a4aa20fbe4036d38860b20eeb155a6a66}{Add\+Switch\+Default\+Case}} ()
+\begin{DoxyCompactList}\small\item\em 添加switch的default分支标签 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 类型}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a684ba49799504a2969339056a152188f}{Define\+Variety\+Result}} = \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Define\+Variety\+Result}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ae3ce49e3502eab8cefa7388acfdf1aa3}{Action\+Scope\+System}} = \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem}{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a38f5a0cc83fb4ff800cac0a9ef33acaa}{Function\+Define}} = \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a92880ffd61df3f6bd68838ffb92a287b}{Variety\+Operator\+Node}} = \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_af8d02cfaa9dc9c77e839df1e08e67bdf}{Struct\+Or\+Basic\+Type}} = \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Struct\+Or\+Basic\+Type}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a8b161bd4b10d6f23c3dd469f68e3e36f}{Type\+Interface}} = \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ab451bdc799342dc421fdce278c7878fd}{Type\+System}} = \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a16c21643446d866cd66054d2f4b008cb}{Add\+Type\+Result}} = \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320d}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Add\+Type\+Result}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a5cb98974067268c2a00e9d352b589f57}{Get\+Type\+Result}} = \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a8beb6f70423e49b45609ea37c23839d9}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Get\+Type\+Result}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a3892afd48c5c564042a4630575674f69}{Flow\+Control\+System}} = \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowControlSystem}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_aa2ce19936ba3fb8338c210a353da4440}{Function\+Type}} = \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Function\+Type}}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a90d92d739c3c61889606810b2e32f5db}{Flow\+Interface}} = \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a6c14bf77496f247c9347800d6b83df04}{Finish\+Function\+Construct}} ()
+\begin{DoxyCompactList}\small\item\em 做一些完成函数构建后的清理操作 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+friend \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a48258698d3da4398fe0749724383ac44}{Action\+Scope\+System}}
+\begin{DoxyCompactList}\small\item\em 便于该类调用\+Finish\+Function\+Construct \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ab451bdc799342dc421fdce278c7878fd}{Type\+System}} \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_aa56ec99e72b01be1b964717b39d72b9e}{type\+\_\+system\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 类型系统 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ae3ce49e3502eab8cefa7388acfdf1aa3}{Action\+Scope\+System}} \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a35283ea6805c35e9b9f509a3eab03a14}{action\+\_\+scope\+\_\+system\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 作用域系统 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a3892afd48c5c564042a4630575674f69}{Flow\+Control\+System}} \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a38e4dcdb73bf019b74684888a270728e}{flow\+\_\+control\+\_\+system\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 流程控制系统 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 26 行定义.
+
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_ae3ce49e3502eab8cefa7388acfdf1aa3}\label{classc__parser__frontend_1_1CParserFrontend_ae3ce49e3502eab8cefa7388acfdf1aa3}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!ActionScopeSystem@{ActionScopeSystem}}
+\index{ActionScopeSystem@{ActionScopeSystem}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{ActionScopeSystem}{ActionScopeSystem}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ae3ce49e3502eab8cefa7388acfdf1aa3}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Action\+Scope\+System}} =  \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem}{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 31 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a16c21643446d866cd66054d2f4b008cb}\label{classc__parser__frontend_1_1CParserFrontend_a16c21643446d866cd66054d2f4b008cb}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!AddTypeResult@{AddTypeResult}}
+\index{AddTypeResult@{AddTypeResult}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{AddTypeResult}{AddTypeResult}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320d}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Add\+Type\+Result}} =  \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320d}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Add\+Type\+Result}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 38 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a684ba49799504a2969339056a152188f}\label{classc__parser__frontend_1_1CParserFrontend_a684ba49799504a2969339056a152188f}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!DefineVarietyResult@{DefineVarietyResult}}
+\index{DefineVarietyResult@{DefineVarietyResult}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{DefineVarietyResult}{DefineVarietyResult}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Define\+Variety\+Result}} =  \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Define\+Variety\+Result}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 29 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a3892afd48c5c564042a4630575674f69}\label{classc__parser__frontend_1_1CParserFrontend_a3892afd48c5c564042a4630575674f69}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!FlowControlSystem@{FlowControlSystem}}
+\index{FlowControlSystem@{FlowControlSystem}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{FlowControlSystem}{FlowControlSystem}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a3892afd48c5c564042a4630575674f69}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Flow\+Control\+System}} =  \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowControlSystem}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 40 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a90d92d739c3c61889606810b2e32f5db}\label{classc__parser__frontend_1_1CParserFrontend_a90d92d739c3c61889606810b2e32f5db}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!FlowInterface@{FlowInterface}}
+\index{FlowInterface@{FlowInterface}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{FlowInterface}{FlowInterface}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a90d92d739c3c61889606810b2e32f5db}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Flow\+Interface}} =  \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 42 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a38f5a0cc83fb4ff800cac0a9ef33acaa}\label{classc__parser__frontend_1_1CParserFrontend_a38f5a0cc83fb4ff800cac0a9ef33acaa}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!FunctionDefine@{FunctionDefine}}
+\index{FunctionDefine@{FunctionDefine}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{FunctionDefine}{FunctionDefine}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a38f5a0cc83fb4ff800cac0a9ef33acaa}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Function\+Define}} =  \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FunctionDefine}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 32 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_aa2ce19936ba3fb8338c210a353da4440}\label{classc__parser__frontend_1_1CParserFrontend_aa2ce19936ba3fb8338c210a353da4440}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!FunctionType@{FunctionType}}
+\index{FunctionType@{FunctionType}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{FunctionType}{FunctionType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_aa2ce19936ba3fb8338c210a353da4440}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Function\+Type}} =  \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Function\+Type}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 41 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a5cb98974067268c2a00e9d352b589f57}\label{classc__parser__frontend_1_1CParserFrontend_a5cb98974067268c2a00e9d352b589f57}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!GetTypeResult@{GetTypeResult}}
+\index{GetTypeResult@{GetTypeResult}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{GetTypeResult}{GetTypeResult}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a8beb6f70423e49b45609ea37c23839d9}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Get\+Type\+Result}} =  \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a8beb6f70423e49b45609ea37c23839d9}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Get\+Type\+Result}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 39 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_af8d02cfaa9dc9c77e839df1e08e67bdf}\label{classc__parser__frontend_1_1CParserFrontend_af8d02cfaa9dc9c77e839df1e08e67bdf}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!StructOrBasicType@{StructOrBasicType}}
+\index{StructOrBasicType@{StructOrBasicType}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{StructOrBasicType}{StructOrBasicType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Struct\+Or\+Basic\+Type}} =  \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Struct\+Or\+Basic\+Type}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 35 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a8b161bd4b10d6f23c3dd469f68e3e36f}\label{classc__parser__frontend_1_1CParserFrontend_a8b161bd4b10d6f23c3dd469f68e3e36f}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!TypeInterface@{TypeInterface}}
+\index{TypeInterface@{TypeInterface}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{TypeInterface}{TypeInterface}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a8b161bd4b10d6f23c3dd469f68e3e36f}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Type\+Interface}} =  \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 36 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_ab451bdc799342dc421fdce278c7878fd}\label{classc__parser__frontend_1_1CParserFrontend_ab451bdc799342dc421fdce278c7878fd}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!TypeSystem@{TypeSystem}}
+\index{TypeSystem@{TypeSystem}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{TypeSystem}{TypeSystem}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ab451bdc799342dc421fdce278c7878fd}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Type\+System}} =  \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 37 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a92880ffd61df3f6bd68838ffb92a287b}\label{classc__parser__frontend_1_1CParserFrontend_a92880ffd61df3f6bd68838ffb92a287b}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!VarietyOperatorNode@{VarietyOperatorNode}}
+\index{VarietyOperatorNode@{VarietyOperatorNode}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{VarietyOperatorNode}{VarietyOperatorNode}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a92880ffd61df3f6bd68838ffb92a287b}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Variety\+Operator\+Node}} =  \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 34 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_ae269a2f490c43c0f58cfb639fb9cecd8}\label{classc__parser__frontend_1_1CParserFrontend_ae269a2f490c43c0f58cfb639fb9cecd8}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!AddActionScopeLevel@{AddActionScopeLevel}}
+\index{AddActionScopeLevel@{AddActionScopeLevel}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{AddActionScopeLevel()}{AddActionScopeLevel()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Add\+Action\+Scope\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+增加一级作用域等级 
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 92 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Add\+Action\+Scope\+Level().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_ae269a2f490c43c0f58cfb639fb9cecd8_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a723a6f578cfe74a188cfe16882d7241e}\label{classc__parser__frontend_1_1CParserFrontend_a723a6f578cfe74a188cfe16882d7241e}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!AddSentence@{AddSentence}}
+\index{AddSentence@{AddSentence}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{AddSentence()}{AddSentence()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Add\+Sentence (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a90d92d739c3c61889606810b2e32f5db}{Flow\+Interface}} $>$ \&\&}]{sentence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+向顶层流程控制语句内添加语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentence} & ：待添加的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否添加成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功，夺取sentence控制权 \\
+\hline
+{\em false} & ：无活跃的流程控制语句或给定语句无法添加到当前的流程控制节点中，不修改参数 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+添加到已有的语句后 
+\end{DoxyNote}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 146 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Add\+Sentence().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_a723a6f578cfe74a188cfe16882d7241e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a31dac309cfc599ccefe7166b32538f20}\label{classc__parser__frontend_1_1CParserFrontend_a31dac309cfc599ccefe7166b32538f20}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!AddSentences@{AddSentences}}
+\index{AddSentences@{AddSentences}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{AddSentences()}{AddSentences()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Add\+Sentences (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a90d92d739c3c61889606810b2e32f5db}{Flow\+Interface}} $>$ $>$ \&\&}]{sentence\+\_\+container }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+向当前活跃的流程控制语句内添加多条语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentence\+\_\+container} & ：存储待添加的语句的容器 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否添加成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功，将sentence\+\_\+container中所有语句移动到活跃流程控制语句的主容器中 \\
+\hline
+{\em false} & ：给定语句无法添加到当前的流程控制节点中，不修改参数 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+按begin-\/$>$end的顺序添加，添加到已有的流程语句后 
+\end{DoxyNote}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 156 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Add\+Sentences().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_a31dac309cfc599ccefe7166b32538f20_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a4aa20fbe4036d38860b20eeb155a6a66}\label{classc__parser__frontend_1_1CParserFrontend_a4aa20fbe4036d38860b20eeb155a6a66}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!AddSwitchDefaultCase@{AddSwitchDefaultCase}}
+\index{AddSwitchDefaultCase@{AddSwitchDefaultCase}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{AddSwitchDefaultCase()}{AddSwitchDefaultCase()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Add\+Switch\+Default\+Case (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+添加switch的default分支标签 
+
+\begin{DoxyReturn}{返回}
+返回是否添加成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：已经添加过default标签或顶层流程控制语句不为switch \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 182 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Add\+Switch\+Default\+Case().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_a4aa20fbe4036d38860b20eeb155a6a66_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_ade9797e31481fe7b41edcf71a666fbd5}\label{classc__parser__frontend_1_1CParserFrontend_ade9797e31481fe7b41edcf71a666fbd5}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!AddSwitchSimpleCase@{AddSwitchSimpleCase}}
+\index{AddSwitchSimpleCase@{AddSwitchSimpleCase}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{AddSwitchSimpleCase()}{AddSwitchSimpleCase()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Add\+Switch\+Simple\+Case (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Basic\+Type\+Initialize\+Operator\+Node}} $>$ \&}]{case\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+添加switch普通case 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em case\+\_\+value} & ：分支的值 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否添加成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：待添加的值已存在或顶层流程控制语句不为switch \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 172 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Add\+Switch\+Simple\+Case().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_ade9797e31481fe7b41edcf71a666fbd5_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_aaf5c004c2492607f5133f87f871c517c}\label{classc__parser__frontend_1_1CParserFrontend_aaf5c004c2492607f5133f87f871c517c}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!AnnounceFunction@{AnnounceFunction}}
+\index{AnnounceFunction@{AnnounceFunction}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{AnnounceFunction()}{AnnounceFunction()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem_a1b3ab58d873399194caaf2ebf468e6fb}{C\+Parser\+Frontend\+::\+Type\+System\+::\+Type\+Node\+Container\+Iter}}, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320d}{C\+Parser\+Frontend\+::\+Add\+Type\+Result}} $>$ c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Announce\+Function (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_aa2ce19936ba3fb8338c210a353da4440}{Function\+Type}} $>$ \&}]{function\+\_\+type }\end{DoxyParamCaption})}
+
+
+
+声明函数使用该接口 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em function\+\_\+type} & ：待声明的函数类型 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为指向添加位置的迭代器，后半部分为添加结果 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+声明函数不会将该函数设置为当前活跃函数 
+\end{DoxyNote}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+cpp 第 12 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System\+::\+Announce\+Function(), c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System\+::\+Announce\+Function\+Type(), flow\+\_\+control\+\_\+system\+\_\+, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System\+::k\+Double\+Announce, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System\+::k\+Function\+Constructed, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Override\+Function, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System\+::k\+Override\+Function, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System\+::k\+Success , 以及 type\+\_\+system\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_aaf5c004c2492607f5133f87f871c517c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_aac44008400ce0775b98019b7a755fbd6}\label{classc__parser__frontend_1_1CParserFrontend_aac44008400ce0775b98019b7a755fbd6}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!ConvertIfSentenceToIfElseSentence@{ConvertIfSentenceToIfElseSentence}}
+\index{ConvertIfSentenceToIfElseSentence@{ConvertIfSentenceToIfElseSentence}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{ConvertIfSentenceToIfElseSentence()}{ConvertIfSentenceToIfElseSentence()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Convert\+If\+Sentence\+To\+If\+Else\+Sentence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+将顶层流程控制语句从if语句转换为if-\/else语句 
+
+\begin{DoxyNote}{注解}
+转换后执行\+Add\+Sentence系列函数时添加语句到假分支中 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+顶层流程控制语句必须是if语句 
+\end{DoxyAttention}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 164 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Convert\+If\+Sentence\+To\+If\+Else\+Sentence().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_aac44008400ce0775b98019b7a755fbd6_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_ae319d150047e06c65be1c7f458d85686}\label{classc__parser__frontend_1_1CParserFrontend_ae319d150047e06c65be1c7f458d85686}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!DefineType@{DefineType}}
+\index{DefineType@{DefineType}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{DefineType()}{DefineType()}}
+{\footnotesize\ttfamily template$<$class Type\+Name $>$ \\
+std\+::pair$<$\mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem_a1b3ab58d873399194caaf2ebf468e6fb}{Type\+System\+::\+Type\+Node\+Container\+Iter}}, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320d}{Add\+Type\+Result}}$>$ c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Define\+Type (\begin{DoxyParamCaption}\item[{Type\+Name \&\&}]{type\+\_\+name,  }\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a8b161bd4b10d6f23c3dd469f68e3e36f}{Type\+Interface}} $>$ \&}]{type\+\_\+pointer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+定义类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em type\+\_\+name} & ：类型名 \\
+\hline
+\mbox{\texttt{ in}}  & {\em type\+\_\+pointer} & ：类型链头结点指针 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为指向添加位置的迭代器，后半部分为添加结果 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+函数的声明与定义均走该接口，仅存在声明时可以多次声明，定义可以覆盖声明 已存在定义则返回\+Add\+Type\+Result\+::k\+Already\+In 
+\end{DoxyNote}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 53 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System\+::\+Define\+Type() , 以及 type\+\_\+system\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_ae319d150047e06c65be1c7f458d85686_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a2831b7890e9106f1529849d9514f748c}\label{classc__parser__frontend_1_1CParserFrontend_a2831b7890e9106f1529849d9514f748c}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!DefineVariety@{DefineVariety}}
+\index{DefineVariety@{DefineVariety}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{DefineVariety()}{DefineVariety()}}
+{\footnotesize\ttfamily std\+::pair$<$Action\+Scope\+System\+::\+Action\+Scope\+Container\+Type\+::const\+\_\+iterator, \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{Define\+Variety\+Result}}$>$ c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Define\+Variety (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a92880ffd61df3f6bd68838ffb92a287b}{Variety\+Operator\+Node}} $>$ \&}]{operator\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+定义变量 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em \mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node}{operator\+\_\+node}}} & ：变量节点 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为指向插入位置的迭代器，后半部分为添加结果 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+operator\+\_\+node必须已经设置变量名 
+\end{DoxyNote}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 80 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Define\+Variety().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_a2831b7890e9106f1529849d9514f748c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a6c14bf77496f247c9347800d6b83df04}\label{classc__parser__frontend_1_1CParserFrontend_a6c14bf77496f247c9347800d6b83df04}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!FinishFunctionConstruct@{FinishFunctionConstruct}}
+\index{FinishFunctionConstruct@{FinishFunctionConstruct}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{FinishFunctionConstruct()}{FinishFunctionConstruct()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Finish\+Function\+Construct (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+做一些完成函数构建后的清理操作 
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 191 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System\+::\+Announce\+Function\+Type(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System\+::\+Finish\+Function\+Construct(), flow\+\_\+control\+\_\+system\+\_\+, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System\+::\+Get\+Active\+Function\+Reference(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Get\+Function\+Type\+Pointer() , 以及 type\+\_\+system\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Pop\+Over\+Level().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_a6c14bf77496f247c9347800d6b83df04_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_a6c14bf77496f247c9347800d6b83df04_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a3004754f07f91d21eb5401edadacb598}\label{classc__parser__frontend_1_1CParserFrontend_a3004754f07f91d21eb5401edadacb598}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!GetActionScopeLevel@{GetActionScopeLevel}}
+\index{GetActionScopeLevel@{GetActionScopeLevel}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{GetActionScopeLevel()}{GetActionScopeLevel()}}
+{\footnotesize\ttfamily size\+\_\+t c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Get\+Action\+Scope\+Level (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 99 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Get\+Action\+Scope\+Level().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_a3004754f07f91d21eb5401edadacb598_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a63fe4e1fa22a016d22537da4314a0803}\label{classc__parser__frontend_1_1CParserFrontend_a63fe4e1fa22a016d22537da4314a0803}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!GetActiveFunctionPointer@{GetActiveFunctionPointer}}
+\index{GetActiveFunctionPointer@{GetActiveFunctionPointer}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{GetActiveFunctionPointer()}{GetActiveFunctionPointer()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a38f5a0cc83fb4ff800cac0a9ef33acaa}{Function\+Define}}$\ast$ c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Get\+Active\+Function\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取当前活跃函数（正在构建的函数） 
+
+\begin{DoxyReturn}{返回}
+返回指向当前活跃函数的const指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：当前没有活跃函数 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 130 行定义.
+
+
+
+引用了 flow\+\_\+control\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System\+::\+Get\+Active\+Function\+Pointer().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_a63fe4e1fa22a016d22537da4314a0803_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_adc9957b818c91254717fe933afa6146e}\label{classc__parser__frontend_1_1CParserFrontend_adc9957b818c91254717fe933afa6146e}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!GetActiveFunctionReference@{GetActiveFunctionReference}}
+\index{GetActiveFunctionReference@{GetActiveFunctionReference}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{GetActiveFunctionReference()}{GetActiveFunctionReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a38f5a0cc83fb4ff800cac0a9ef33acaa}{Function\+Define}}\& c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Get\+Active\+Function\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取当前活跃函数（正在构建的函数） 
+
+\begin{DoxyReturn}{返回}
+返回当前活跃函数的const引用 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+必须存在活跃函数 
+\end{DoxyNote}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 136 行定义.
+
+
+
+引用了 flow\+\_\+control\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System\+::\+Get\+Active\+Function\+Reference().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_adc9957b818c91254717fe933afa6146e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a7f59324cbacdc26a1b9b8ffed5abd0f3}\label{classc__parser__frontend_1_1CParserFrontend_a7f59324cbacdc26a1b9b8ffed5abd0f3}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!GetTopFlowControlSentence@{GetTopFlowControlSentence}}
+\index{GetTopFlowControlSentence@{GetTopFlowControlSentence}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{GetTopFlowControlSentence()}{GetTopFlowControlSentence()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a90d92d739c3c61889606810b2e32f5db}{Flow\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Get\+Top\+Flow\+Control\+Sentence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取最顶层的控制语句 
+
+\begin{DoxyReturn}{返回}
+返回流程控制语句的引用 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+用于完善do-\/while语句尾部和for语句头部 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+必须存在正在构建的流程控制语句或函数 
+\end{DoxyAttention}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 124 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Get\+Top\+Flow\+Control\+Sentence().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_a7f59324cbacdc26a1b9b8ffed5abd0f3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_ab9b9caaad9118e8dee19916368b9545a}\label{classc__parser__frontend_1_1CParserFrontend_ab9b9caaad9118e8dee19916368b9545a}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!GetType@{GetType}}
+\index{GetType@{GetType}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily std\+::pair$<$std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a8b161bd4b10d6f23c3dd469f68e3e36f}{Type\+Interface}}$>$, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a8beb6f70423e49b45609ea37c23839d9}{Get\+Type\+Result}}$>$ c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Get\+Type (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+\_\+name,  }\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7}{Struct\+Or\+Basic\+Type}}}]{type\+\_\+prefer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+根据类型名获取类型链 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em type\+\_\+name} & ：类型名 \\
+\hline
+\mbox{\texttt{ in}}  & {\em type\+\_\+prefer} & ：类型选择倾向 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为指向获取到的类型链头结点指针，后半部分为获取结果 \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem_aced9a8ca3d94b1528984e203601df3ff}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System\+::\+Get\+Type}} 
+\end{DoxyReturn}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 64 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System\+::\+Get\+Type() , 以及 type\+\_\+system\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_ab9b9caaad9118e8dee19916368b9545a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a6187966bdd490a62ff78d300185d9314}\label{classc__parser__frontend_1_1CParserFrontend_a6187966bdd490a62ff78d300185d9314}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!GetVarietyOrFunction@{GetVarietyOrFunction}}
+\index{GetVarietyOrFunction@{GetVarietyOrFunction}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{GetVarietyOrFunction()}{GetVarietyOrFunction()}}
+{\footnotesize\ttfamily std\+::pair$<$std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{operator\+\_\+node\+::\+Operator\+Node\+Interface}}$>$, bool$>$ c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Get\+Variety\+Or\+Function (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{variety\+\_\+name }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+根据名字获取变量或函数名 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em variety\+\_\+name} & ：查询的名字 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为指向变量或函数节点的指针，后半部分为节点是否存在 
+\end{DoxyReturn}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 88 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Get\+Variety\+Or\+Function().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_a6187966bdd490a62ff78d300185d9314_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_ad9ded9d6fde588d61a9ff71076489fed}\label{classc__parser__frontend_1_1CParserFrontend_ad9ded9d6fde588d61a9ff71076489fed}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!PopActionScope@{PopActionScope}}
+\index{PopActionScope@{PopActionScope}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{PopActionScope()}{PopActionScope()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Pop\+Action\+Scope (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+弹出一级作用域 
+
+自动弹出失效作用域内所有的变量和流程控制语句，并向上级语句添加弹出的 （构建完成的）流程控制语句 \begin{DoxyNote}{注解}
+结束函数构建时仅需调用该函数，无需调用其它函数 
+\end{DoxyNote}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 98 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Pop\+Action\+Scope().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_ad9ded9d6fde588d61a9ff71076489fed_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a0b2eb6f30a1205049ad65335be6dff2e}\label{classc__parser__frontend_1_1CParserFrontend_a0b2eb6f30a1205049ad65335be6dff2e}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!PushFlowControlSentence@{PushFlowControlSentence}}
+\index{PushFlowControlSentence@{PushFlowControlSentence}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{PushFlowControlSentence()}{PushFlowControlSentence()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Push\+Flow\+Control\+Sentence (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a90d92d739c3c61889606810b2e32f5db}{Flow\+Interface}} $>$ \&\&}]{flow\+\_\+control\+\_\+sentence }\end{DoxyParamCaption})}
+
+
+
+将流程控制语句压入栈 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em flow\+\_\+control\+\_\+sentence} & ：待入栈的控制语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否添加成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：无正在构建的函数，无法压入流程控制节点 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyAttention}{注意}
+必须压入可以存储流程控制节点的流程控制语句 
+\end{DoxyAttention}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+cpp 第 57 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+ , 以及 c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Push\+Flow\+Control\+Sentence().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_a0b2eb6f30a1205049ad65335be6dff2e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_aa27c730d6112f2cf35380d8c98520349}\label{classc__parser__frontend_1_1CParserFrontend_aa27c730d6112f2cf35380d8c98520349}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!SetFunctionToConstruct@{SetFunctionToConstruct}}
+\index{SetFunctionToConstruct@{SetFunctionToConstruct}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{SetFunctionToConstruct()}{SetFunctionToConstruct()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Set\+Function\+To\+Construct (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_aa2ce19936ba3fb8338c210a353da4440}{Function\+Type}} $>$ \&}]{function\+\_\+to\+\_\+construct }\end{DoxyParamCaption})}
+
+
+
+设置当前待构建函数 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em function\+\_\+to\+\_\+construct} & ：待构建函数的类型 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否设置成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：设置成功 \\
+\hline
+{\em false} & ：存在正在构建的函数，不允许嵌套定义函数或重定义/重声明函数\\
+\hline
+\end{DoxyRetVals}
+在作用域内声明函数的全部参数和函数类型的初始化数据且自动提升1级作用域等级 \begin{DoxyAttention}{注意}
+禁止使用\+Push\+Flow\+Control\+Sentence设置待构建函数 
+\end{DoxyAttention}
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+cpp 第 45 行定义.
+
+
+
+引用了 action\+\_\+scope\+\_\+system\+\_\+, flow\+\_\+control\+\_\+system\+\_\+, c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System\+::\+Get\+Active\+Function\+Pointer(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System\+::k\+Success, c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Set\+Function\+To\+Construct() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Control\+System\+::\+Set\+Function\+To\+Construct().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1CParserFrontend_aa27c730d6112f2cf35380d8c98520349_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a35283ea6805c35e9b9f509a3eab03a14}\label{classc__parser__frontend_1_1CParserFrontend_a35283ea6805c35e9b9f509a3eab03a14}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!action\_scope\_system\_@{action\_scope\_system\_}}
+\index{action\_scope\_system\_@{action\_scope\_system\_}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{action\_scope\_system\_}{action\_scope\_system\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ae3ce49e3502eab8cefa7388acfdf1aa3}{Action\+Scope\+System}} c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::action\+\_\+scope\+\_\+system\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+作用域系统 
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 202 行定义.
+
+
+
+被这些函数引用 Add\+Action\+Scope\+Level(), Add\+Sentence(), Add\+Sentences(), Add\+Switch\+Default\+Case(), Add\+Switch\+Simple\+Case(), Convert\+If\+Sentence\+To\+If\+Else\+Sentence(), Define\+Variety(), Get\+Action\+Scope\+Level(), Get\+Top\+Flow\+Control\+Sentence(), Get\+Variety\+Or\+Function(), Pop\+Action\+Scope(), Push\+Flow\+Control\+Sentence() , 以及 Set\+Function\+To\+Construct().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a48258698d3da4398fe0749724383ac44}\label{classc__parser__frontend_1_1CParserFrontend_a48258698d3da4398fe0749724383ac44}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!ActionScopeSystem@{ActionScopeSystem}}
+\index{ActionScopeSystem@{ActionScopeSystem}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{ActionScopeSystem}{ActionScopeSystem}}
+{\footnotesize\ttfamily friend \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ae3ce49e3502eab8cefa7388acfdf1aa3}{c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::\+Action\+Scope\+System}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+便于该类调用\+Finish\+Function\+Construct 
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 188 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_a38e4dcdb73bf019b74684888a270728e}\label{classc__parser__frontend_1_1CParserFrontend_a38e4dcdb73bf019b74684888a270728e}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!flow\_control\_system\_@{flow\_control\_system\_}}
+\index{flow\_control\_system\_@{flow\_control\_system\_}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{flow\_control\_system\_}{flow\_control\_system\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_a3892afd48c5c564042a4630575674f69}{Flow\+Control\+System}} c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::flow\+\_\+control\+\_\+system\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+流程控制系统 
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 204 行定义.
+
+
+
+被这些函数引用 Announce\+Function(), Finish\+Function\+Construct(), Get\+Active\+Function\+Pointer(), Get\+Active\+Function\+Reference() , 以及 Set\+Function\+To\+Construct().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1CParserFrontend_aa56ec99e72b01be1b964717b39d72b9e}\label{classc__parser__frontend_1_1CParserFrontend_aa56ec99e72b01be1b964717b39d72b9e}} 
+\index{c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}!type\_system\_@{type\_system\_}}
+\index{type\_system\_@{type\_system\_}!c\_parser\_frontend::CParserFrontend@{c\_parser\_frontend::CParserFrontend}}
+\doxysubsubsection{\texorpdfstring{type\_system\_}{type\_system\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1CParserFrontend_ab451bdc799342dc421fdce278c7878fd}{Type\+System}} c\+\_\+parser\+\_\+frontend\+::\+C\+Parser\+Frontend\+::type\+\_\+system\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+类型系统 
+
+
+
+在文件 c\+\_\+parser\+\_\+frontend.\+h 第 200 行定义.
+
+
+
+被这些函数引用 Announce\+Function(), Define\+Type(), Finish\+Function\+Construct() , 以及 Get\+Type().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{c__parser__frontend_8h}{c\+\_\+parser\+\_\+frontend.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{c__parser__frontend_8cpp}{c\+\_\+parser\+\_\+frontend.\+cpp}}\end{DoxyCompactItemize}

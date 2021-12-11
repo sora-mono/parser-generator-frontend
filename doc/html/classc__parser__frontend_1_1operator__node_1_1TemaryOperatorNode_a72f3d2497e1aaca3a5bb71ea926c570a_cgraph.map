@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::operator_node::TemaryOperatorNode::GetResultConstTag" name="c_parser_frontend::operator_node::TemaryOperatorNode::GetResultConstTag">
+<area shape="rect" id="node1" title="获取该节点操作结果的const标记" alt="" coords="5,45,235,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a1894f1b3888819c4584eef70953c6cff" title="获取该节点操作结果的const标记" alt="" coords="290,5,505,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#ade075f315049b64b637b64abcc9dc728" title="获取结果" alt="" coords="283,85,512,141"/>
+</map>

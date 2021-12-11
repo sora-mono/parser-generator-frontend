@@ -1,0 +1,9 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::SyntaxAnalysisTableEntryClassify" name="frontend::generator::syntax_generator::SyntaxGenerator::SyntaxAnalysisTableEntryClassify">
+<area shape="rect" id="node1" title="分类等价的语法分析表条目" alt="" coords="5,163,245,233"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a8740440629885e53b9b9c81194c91fd6" title="分类非终结产生式作为向前看符号时下动作相同的语法分析表条目" alt="" coords="293,115,533,185"/>
+<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aed97b43f50879b73c7b484e06a900e9a" title="分类在终结产生式作为向前看符号时下动作相同的语法分析表条目" alt="" coords="293,209,533,280"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry.html#a3dc8f7d8bab3a273b1cf8014c8a4ee3f" title="获取移入给定非终结节点后转移到的语法分析表条目ID" alt="" coords="619,5,810,76"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="581,125,848,181"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#af882ff147dad50a6e8636278872e9410" title="获取语法分析表条目" alt="" coords="583,205,846,276"/>
+<area shape="rect" id="node7" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry.html#a770a722c7f69f340ca9771063c3810cc" title="获取在给定待处理终结节点ID下的动作与附属数据" alt="" coords="619,300,810,371"/>
+</map>

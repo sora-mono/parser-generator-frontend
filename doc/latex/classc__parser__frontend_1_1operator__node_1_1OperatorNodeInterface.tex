@@ -1,0 +1,449 @@
+\hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Operator\+Node\+Interface类 参考}
+\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+
+
+操作节点基类  
+
+
+
+
+{\ttfamily \#include $<$operator\+\_\+node.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Operator\+Node\+Interface 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Operator\+Node\+Interface 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3fbeba19aeea8bcfd3bc918c9fbcc25b}{Operator\+Id}} = \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper}{frontend\+::common\+::\+Explicit\+Id\+Wrapper}}$<$ size\+\_\+t, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ab66c53c4bf384e6cfe9ae0bc952e8235}{Id\+Wrapper}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ab66c53c4bf384e6cfe9ae0bc952e8235aa61272c50e68d6331c93e9ad240c61ad}{Id\+Wrapper\+::k\+Operator\+Node\+Id}} $>$
+\begin{DoxyCompactList}\small\item\em 操作节点\+ID \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a39acd37eb650c12aaae71013fecf07e5}{Operator\+Node\+Interface}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a169362f30ead3c486d45d83d489b350f}{General\+Operation\+Type}} general\+\_\+operator\+\_\+type)
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a0705acbb3ea197e4453557b5f349dd15}{Operator\+Node\+Interface}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&operator\+\_\+node)
+\item 
+virtual \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a14a54224e3a137974faa169fc91d7621}{$\sim$\+Operator\+Node\+Interface}} ()
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a4dae4e68b0638caefe8fc9055500aa71}{operator=}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&old\+\_\+interface)
+\item 
+virtual Const\+Tag \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff}{Get\+Result\+Const\+Tag}} () const =0
+\begin{DoxyCompactList}\small\item\em 获取该节点操作结果的const标记 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e}{Get\+Result\+Type\+Pointer}} () const =0
+\begin{DoxyCompactList}\small\item\em 获取最终结果的类型 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f}{Get\+Result\+Operator\+Node}} () const =0
+\begin{DoxyCompactList}\small\item\em 获取最终结果的节点 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_afaf8c7f881d6b57c275611312b5e0f78}{Self\+Copy}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&new\+\_\+type, Const\+Tag new\+\_\+const\+\_\+tag) const =0
+\begin{DoxyCompactList}\small\item\em 拷贝自身并设置拷贝得到的对象类型为new\+\_\+type \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3fbeba19aeea8bcfd3bc918c9fbcc25b}{Operator\+Id}} \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a88ad86ef80377731bfd984f72774097a}{Get\+Operator\+Id}} () const
+\begin{DoxyCompactList}\small\item\em 获取操作节点\+ID \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a6b094af7b84d943d4522d09fe61f5c50}{Set\+General\+Operator\+Type}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a169362f30ead3c486d45d83d489b350f}{General\+Operation\+Type}} operator\+\_\+type)
+\begin{DoxyCompactList}\small\item\em 设置操作类型 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a169362f30ead3c486d45d83d489b350f}{General\+Operation\+Type}} \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_aa533e1f444a8a0fcc9cf1d73436ed9da}{Get\+General\+Operator\+Type}} () const
+\begin{DoxyCompactList}\small\item\em 获取操作类型所属大类 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 类型}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ab66c53c4bf384e6cfe9ae0bc952e8235}{Id\+Wrapper}} \{ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ab66c53c4bf384e6cfe9ae0bc952e8235aa61272c50e68d6331c93e9ad240c61ad}{Id\+Wrapper\+::k\+Operator\+Node\+Id}}
+ \}
+\begin{DoxyCompactList}\small\item\em 操作节点\+I\+D的分发标签 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3fbeba19aeea8bcfd3bc918c9fbcc25b}{Operator\+Id}} \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a8fd7102f990192843de60c4f9d543f04}{Get\+New\+Operator\+Id}} ()
+\begin{DoxyCompactList}\small\item\em 获取一个从未被分配过的\+Operator\+Id \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3fbeba19aeea8bcfd3bc918c9fbcc25b}{Operator\+Id}} \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ac43ec5932f7d289feaa7e4411bcc896e}{operator\+\_\+id\+\_\+}} = \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a88ad86ef80377731bfd984f72774097a}{Get\+Operator\+Id}}()
+\begin{DoxyCompactList}\small\item\em 操作节点\+I\+D，同时作为存放结果的\+L\+L\+V\+M的寄存器编号 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a169362f30ead3c486d45d83d489b350f}{General\+Operation\+Type}} \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a48d972f9443f5d3cf794e922be29e964}{general\+\_\+operator\+\_\+type\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 操作所属大类 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+操作节点基类 
+
+\begin{DoxyNote}{注解}
+所有操作节点均从该类派生 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+h 第 112 行定义.
+
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3fbeba19aeea8bcfd3bc918c9fbcc25b}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3fbeba19aeea8bcfd3bc918c9fbcc25b}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!OperatorId@{OperatorId}}
+\index{OperatorId@{OperatorId}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{OperatorId}{OperatorId}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3fbeba19aeea8bcfd3bc918c9fbcc25b}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Operator\+Id}} =  \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper}{frontend\+::common\+::\+Explicit\+Id\+Wrapper}}$<$size\+\_\+t, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ab66c53c4bf384e6cfe9ae0bc952e8235}{Id\+Wrapper}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ab66c53c4bf384e6cfe9ae0bc952e8235aa61272c50e68d6331c93e9ad240c61ad}{Id\+Wrapper\+::k\+Operator\+Node\+Id}}$>$}
+
+
+
+操作节点\+ID 
+
+
+
+在文件 operator\+\_\+node.\+h 第 120 行定义.
+
+
+
+\doxysubsection{成员枚举类型说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ab66c53c4bf384e6cfe9ae0bc952e8235}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ab66c53c4bf384e6cfe9ae0bc952e8235}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!IdWrapper@{IdWrapper}}
+\index{IdWrapper@{IdWrapper}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{IdWrapper}{IdWrapper}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ab66c53c4bf384e6cfe9ae0bc952e8235}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Id\+Wrapper}}\hspace{0.3cm}{\ttfamily [strong]}, {\ttfamily [private]}}
+
+
+
+操作节点\+I\+D的分发标签 
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kOperatorNodeId@{kOperatorNodeId}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!kOperatorNodeId@{kOperatorNodeId}}}\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ab66c53c4bf384e6cfe9ae0bc952e8235aa61272c50e68d6331c93e9ad240c61ad}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ab66c53c4bf384e6cfe9ae0bc952e8235aa61272c50e68d6331c93e9ad240c61ad}} 
+k\+Operator\+Node\+Id&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+在文件 operator\+\_\+node.\+h 第 114 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a39acd37eb650c12aaae71013fecf07e5}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a39acd37eb650c12aaae71013fecf07e5}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!OperatorNodeInterface@{OperatorNodeInterface}}
+\index{OperatorNodeInterface@{OperatorNodeInterface}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{OperatorNodeInterface()}{OperatorNodeInterface()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Operator\+Node\+Interface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a169362f30ead3c486d45d83d489b350f}{General\+Operation\+Type}}}]{general\+\_\+operator\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 122 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a0705acbb3ea197e4453557b5f349dd15}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a0705acbb3ea197e4453557b5f349dd15}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!OperatorNodeInterface@{OperatorNodeInterface}}
+\index{OperatorNodeInterface@{OperatorNodeInterface}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{OperatorNodeInterface()}{OperatorNodeInterface()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Operator\+Node\+Interface (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&}]{operator\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyAttention}{注意}
+复制构造函数不复制节点编号而是生成新的编号 
+\end{DoxyAttention}
+
+
+在文件 operator\+\_\+node.\+h 第 125 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a14a54224e3a137974faa169fc91d7621}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a14a54224e3a137974faa169fc91d7621}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!````~OperatorNodeInterface@{$\sim$OperatorNodeInterface}}
+\index{````~OperatorNodeInterface@{$\sim$OperatorNodeInterface}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{$\sim$OperatorNodeInterface()}{~OperatorNodeInterface()}}
+{\footnotesize\ttfamily virtual c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::$\sim$\+Operator\+Node\+Interface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 127 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_aa533e1f444a8a0fcc9cf1d73436ed9da}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_aa533e1f444a8a0fcc9cf1d73436ed9da}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!GetGeneralOperatorType@{GetGeneralOperatorType}}
+\index{GetGeneralOperatorType@{GetGeneralOperatorType}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{GetGeneralOperatorType()}{GetGeneralOperatorType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a169362f30ead3c486d45d83d489b350f}{General\+Operation\+Type}} c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+General\+Operator\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取操作类型所属大类 
+
+\begin{DoxyReturn}{返回}
+返回操作类型所属大类 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 180 行定义.
+
+
+
+引用了 general\+\_\+operator\+\_\+type\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Allocate\+Operator\+Node\+::\+Check\+Allocatable(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Check\+Assignable(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Obtain\+Address\+Operator\+Node\+::\+Check\+Node\+To\+Obtain\+Address(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Simple\+Sentence\+::\+Check\+Operator\+Node\+Valid(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Construct\+Result\+Node(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Set\+False\+Branch() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Set\+True\+Branch().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_aa533e1f444a8a0fcc9cf1d73436ed9da_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a8fd7102f990192843de60c4f9d543f04}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a8fd7102f990192843de60c4f9d543f04}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!GetNewOperatorId@{GetNewOperatorId}}
+\index{GetNewOperatorId@{GetNewOperatorId}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{GetNewOperatorId()}{GetNewOperatorId()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3fbeba19aeea8bcfd3bc918c9fbcc25b}{Operator\+Id}} c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+New\+Operator\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+获取一个从未被分配过的\+Operator\+Id 
+
+\begin{DoxyReturn}{返回}
+返回\+Operator\+Id 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+线程间\+Operator\+Id独立 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+h 第 188 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a88ad86ef80377731bfd984f72774097a}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a88ad86ef80377731bfd984f72774097a}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!GetOperatorId@{GetOperatorId}}
+\index{GetOperatorId@{GetOperatorId}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{GetOperatorId()}{GetOperatorId()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3fbeba19aeea8bcfd3bc918c9fbcc25b}{Operator\+Id}} c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Operator\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取操作节点\+ID 
+
+\begin{DoxyReturn}{返回}
+返回操作节点\+ID 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 172 行定义.
+
+
+
+引用了 operator\+\_\+id\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!GetResultConstTag@{GetResultConstTag}}
+\index{GetResultConstTag@{GetResultConstTag}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{GetResultConstTag()}{GetResultConstTag()}}
+{\footnotesize\ttfamily virtual Const\+Tag c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Const\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+获取该节点操作结果的const标记 
+
+\begin{DoxyReturn}{返回}
+返回操作结果的const标记
+\end{DoxyReturn}
+1.成员访问、解引用等操作的后续操作不是对原结构体/原指针操作，而是对得到的 新对象进行操作，不同操作类型操作的对象不同 2.通过这个函数抽象获取最终结果的过程以忽略操作的不同 3.以成员访问为例，该函数获取指定的成员在结构体中的const标记，以数学运算 为例，该函数获取运算结果的const标记（\+Const\+Tag\+::k\+Non\+Const），以变量声明 为例，该函数返回声明的变量的const标记（对象不变） 
+
+在 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface_af4dc8b3414d212cf9183ccbf61e8ed5b}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Initialize\+Operator\+Node\+Interface}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_acc9ca9a4d4a1241c4900cfa41d7ae824}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a9218122090e0051b3b97bfb7a31b6d0e}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode_a263b76537fb8d85185f371f03ea16695}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Obtain\+Address\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode_a3dc1fe0c134243ec553aa6d35a8565e0}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Dereference\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a04ae13b00d5129b440e35c6944267cd2}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode_abbaaa0b29eb0b03572742566f4566926}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Mathematical\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aa4039570c5ff24bfd05b76631de6a47d}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a72f3d2497e1aaca3a5bb71ea926c570a}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ad4d6a4c142e34ff22142eca6d4701ac6}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TypeConvert_a05275d0d35972c97bf6f5165987e5d36}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Type\+Convert}} , 以及 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode_ac27f8f88194b4d6ad09cd2e66a604c9f}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Allocate\+Operator\+Node}} 内被实现.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Check\+Assignable(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Type\+Convert\+::\+Get\+Result\+Const\+Tag(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Result\+Const\+Tag(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Get\+Result\+Const\+Tag() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Get\+Result\+Const\+Tag().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!GetResultOperatorNode@{GetResultOperatorNode}}
+\index{GetResultOperatorNode@{GetResultOperatorNode}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{GetResultOperatorNode()}{GetResultOperatorNode()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Operator\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+获取最终结果的节点 
+
+\begin{DoxyReturn}{返回}
+返回指向最终结果的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：自身是最终节点\\
+\hline
+\end{DoxyRetVals}
+1.该函数用于抽象获取操作最终结果的过程 2.基础变量和初始化变量最终操作节点就是本身，所以返回nullptr 3.赋值运算返回被赋值的对象，解引用返回解引用后得到的对象，以此为例 
+
+在 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface_a7edc1b9b463a948140f032c71eb74f8d}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Initialize\+Operator\+Node\+Interface}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_a8c71a0e54a1b7e7aa25eb9406835563e}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a7b3872da36eda2707b680ab154d4fb65}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode_aac70ae07e5b8808c16d95ddd94df2530}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Obtain\+Address\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode_a4bda9f5d4c8fcf54c5f73931a267c439}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Dereference\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_af0c8c3bf89b38a15d115339e21c45bbb}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode_a1eec593c064314d177caf3f421dfa0ea}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Mathematical\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a49f018702a4feb4974a574deebc4e2bd}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_af65bb4438ce3a492cf03919e6aef4631}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_afd01150de53e83866ba3eb2fac9ec047}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TypeConvert_ae0599d1cedb23955353b0884f2e94eac}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Type\+Convert}} , 以及 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode_a646aca2bc50b0706e4f2638678c7dddd}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Allocate\+Operator\+Node}} 内被实现.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Type\+Convert\+::\+Generate\+Destination\+Node() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Result\+Operator\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!GetResultTypePointer@{GetResultTypePointer}}
+\index{GetResultTypePointer@{GetResultTypePointer}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{GetResultTypePointer()}{GetResultTypePointer()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Type\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+获取最终结果的类型 
+
+\begin{DoxyReturn}{返回}
+返回类型链头结点的const指针
+\end{DoxyReturn}
+设计思路同\+Get\+Result\+Const\+Tag 
+
+在 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface_ad1d7c21f9fb6dafe02b0e6f2c160246b}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Initialize\+Operator\+Node\+Interface}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_ada79d2b09beeac848eea907376b95bce}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a7c309aa4aa6cbc43dc1aa5ce6c00d790}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode_a7a68435eb982c0200338f6be3ecac531}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Obtain\+Address\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode_ae74f38305bae9c440eeea7481882901d}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Dereference\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_ad598158366edee851d51d4055e495335}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode_aa72992ffa23964013d138121456d8429}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Mathematical\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca8bf9ef313ae917878d6e7b3f8d59f0}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_af0e8dcc1136bce4c2497ca0ef6921ec3}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_ac39bc02e1f25358d37ba2688300a8cae}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TypeConvert_a9d577bd625e3c6134e8d25536207af6d}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Type\+Convert}} , 以及 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode_a240e7f7e64fa45873a9aa376ead80b97}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Allocate\+Operator\+Node}} 内被实现.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Check\+Assignable(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Check\+Branch\+Condition\+Valid(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Dereference\+Operator\+Node\+::\+Check\+Node\+Dereference\+Able(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Check\+Node\+To\+Access\+Valid(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Construct\+Result\+Node(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Default\+Condition\+Check(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Type\+Convert\+::\+Get\+Result\+Type\+Pointer(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Obtain\+Address\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node\+::\+Set\+Accessed\+Node\+And\+Member\+Name().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a4dae4e68b0638caefe8fc9055500aa71}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a4dae4e68b0638caefe8fc9055500aa71}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!operator=@{operator=}}
+\index{operator=@{operator=}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&}]{old\+\_\+interface }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 129 行定义.
+
+
+
+引用了 general\+\_\+operator\+\_\+type\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_afaf8c7f881d6b57c275611312b5e0f78}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_afaf8c7f881d6b57c275611312b5e0f78}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!SelfCopy@{SelfCopy}}
+\index{SelfCopy@{SelfCopy}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{SelfCopy()}{SelfCopy()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Self\+Copy (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{new\+\_\+type,  }\item[{Const\+Tag}]{new\+\_\+const\+\_\+tag }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+拷贝自身并设置拷贝得到的对象类型为new\+\_\+type 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em new\+\_\+type} & ：拷贝后得到的对象的类型 \\
+\hline
+\mbox{\texttt{ in}}  & {\em new\+\_\+const\+\_\+tag} & ：拷贝后得到的对象的新const标记 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回指向拷贝后的对象的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：设置初始化数据为非const\\
+\hline
+\end{DoxyRetVals}
+该函数用于类型转换 \begin{DoxyAttention}{注意}
+仅允许对变量、初始化值和类型转换节点调用该函数 
+\end{DoxyAttention}
+
+
+在 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_ab29ded8d95b1a83c81b039c649c5b60e}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode_a80f1eed9bf1a5fceb092e9270d860f86}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Member\+Access\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode_af0d0ea0cd6fc49b63a840242dea5508d}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Obtain\+Address\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode_a1f63f83072e23ac5f827794c1f7e9cc3}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Dereference\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode_a1af976cd8866a9a83ae45468dd544cc2}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode_a67a8402bb9bd65fa7a0d26762dfe6160}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Mathematical\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a057ea31c373bc19b3e8979a0b9f4a558}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode_a0eaae8f08e933b4d6defbe82e0e4e03f}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1ListInitializeOperatorNode_ace94308807a70fe385e9e9d0354455cf}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+List\+Initialize\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a8e45080b68667d2586d93cffa6386225}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode_a908868d3daf19c0dac817eeecd0bdf86}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node}}, \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1TypeConvert_ae89c332d83a61b25a5731ac7d32a67d5}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Type\+Convert}} , 以及 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode_a1db09f598c361b1386a37ac35cb9bd77}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Allocate\+Operator\+Node}} 内被实现.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a6b094af7b84d943d4522d09fe61f5c50}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a6b094af7b84d943d4522d09fe61f5c50}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!SetGeneralOperatorType@{SetGeneralOperatorType}}
+\index{SetGeneralOperatorType@{SetGeneralOperatorType}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{SetGeneralOperatorType()}{SetGeneralOperatorType()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Set\+General\+Operator\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a169362f30ead3c486d45d83d489b350f}{General\+Operation\+Type}}}]{operator\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置操作类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em operator\+\_\+type} & ：操作类型 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 operator\+\_\+node.\+h 第 175 行定义.
+
+
+
+引用了 general\+\_\+operator\+\_\+type\+\_\+.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a48d972f9443f5d3cf794e922be29e964}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a48d972f9443f5d3cf794e922be29e964}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!general\_operator\_type\_@{general\_operator\_type\_}}
+\index{general\_operator\_type\_@{general\_operator\_type\_}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{general\_operator\_type\_}{general\_operator\_type\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a169362f30ead3c486d45d83d489b350f}{General\+Operation\+Type}} c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::general\+\_\+operator\+\_\+type\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+操作所属大类 
+
+
+
+在文件 operator\+\_\+node.\+h 第 196 行定义.
+
+
+
+被这些函数引用 Get\+General\+Operator\+Type(), operator=() , 以及 Set\+General\+Operator\+Type().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ac43ec5932f7d289feaa7e4411bcc896e}\label{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_ac43ec5932f7d289feaa7e4411bcc896e}} 
+\index{c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}!operator\_id\_@{operator\_id\_}}
+\index{operator\_id\_@{operator\_id\_}!c\_parser\_frontend::operator\_node::OperatorNodeInterface@{c\_parser\_frontend::operator\_node::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{operator\_id\_}{operator\_id\_}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3fbeba19aeea8bcfd3bc918c9fbcc25b}{Operator\+Id}} c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::operator\+\_\+id\+\_\+ = \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a88ad86ef80377731bfd984f72774097a}{Get\+Operator\+Id}}()\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+操作节点\+I\+D，同时作为存放结果的\+L\+L\+V\+M的寄存器编号 
+
+
+
+在文件 operator\+\_\+node.\+h 第 194 行定义.
+
+
+
+被这些函数引用 Get\+Operator\+Id().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8h}{operator\+\_\+node.\+h}}\end{DoxyCompactItemize}

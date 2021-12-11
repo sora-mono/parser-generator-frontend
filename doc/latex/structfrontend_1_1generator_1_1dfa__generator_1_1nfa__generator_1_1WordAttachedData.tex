@@ -1,0 +1,397 @@
+\hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData}{}\doxysection{frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::Word\+Attached\+Data类 参考}
+\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData}\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+
+
+单词附属数据（在检测到相应单词时返回）  
+
+
+
+
+{\ttfamily \#include $<$export\+\_\+types.\+h$>$}
+
+
+
+frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::Word\+Attached\+Data 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a9950f652ed75219a88207b27d0c17f49}{Production\+Node\+Id}} = \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Production\+Node\+Id}}
+\item 
+using \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a878befdf99c33c9845be83dfbe5788d6}{Production\+Node\+Type}} = \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Production\+Node\+Type}}
+\item 
+using \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a7172e413f8b1af3cbdca47996c3af93c}{Operator\+Associatity\+Type}} = \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Associatity\+Type}}
+\item 
+using \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a26d5f5c8a5ac4889372cab9a069041f1}{Operator\+Priority}} = \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a0ad97a4d5fab4fdc87f80845081898de}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Priority}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Archive $>$ }\\void \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_adcea55a4c4976fdf75acb984987bbe06}{serialize}} (Archive \&ar, const unsigned int version)
+\begin{DoxyCompactList}\small\item\em 序列化配置的函数 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_abb44066bf92cc8ee207ff028a58db742}{operator==}} (const \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData}{Word\+Attached\+Data}} \&saved\+\_\+data) const
+\item 
+bool \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a42bdf299768835a6b1c49a7cda1118e9}{operator!=}} (const \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData}{Word\+Attached\+Data}} \&saved\+\_\+data) const
+\item 
+std\+::pair$<$ \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{Operator\+Associatity\+Type}}, \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a26d5f5c8a5ac4889372cab9a069041f1}{Operator\+Priority}} $>$ \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_ad534b2d15d94aff4646414a8e8ad0596}{Get\+Associatity\+Type\+And\+Priority}} (bool is\+\_\+last\+\_\+operate\+\_\+reduct) const
+\begin{DoxyCompactList}\small\item\em 获取结合性和运算符优先级 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a9950f652ed75219a88207b27d0c17f49}{Production\+Node\+Id}} \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_aec88e23d0283bc613908513686985e33}{production\+\_\+node\+\_\+id}} = Production\+Node\+Id\+::\+Invalid\+Id()
+\begin{DoxyCompactList}\small\item\em 产生式节点\+ID \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{Production\+Node\+Type}} \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_acdfa502067f9d4cba587e1028e356aaa}{node\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em 节点类型 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{Operator\+Associatity\+Type}} \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a6798a2d5eda64d57f7e7326480599726}{binary\+\_\+operator\+\_\+associate\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em 双目运算符结合性 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a26d5f5c8a5ac4889372cab9a069041f1}{Operator\+Priority}} \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a57cae840a890fed5a01b873eb703f212}{binary\+\_\+operator\+\_\+priority}} = Operator\+Priority\+::\+Invalid\+Id()
+\begin{DoxyCompactList}\small\item\em 双目运算符优先级 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{Operator\+Associatity\+Type}} \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a2d615c9e0c1831afa284a8807c8a1e89}{unary\+\_\+operator\+\_\+associate\+\_\+type}}
+\begin{DoxyCompactList}\small\item\em 左侧单目运算符结合性 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a26d5f5c8a5ac4889372cab9a069041f1}{Operator\+Priority}} \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a918e464ef2c99de1c856a15149531ea0}{unary\+\_\+operator\+\_\+priority}} = Operator\+Priority\+::\+Invalid\+Id()
+\begin{DoxyCompactList}\small\item\em 左侧单目运算符优先级 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{友元}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_ac98d07dd8f7b70e16ccb9a01abf56b9c}{boost\+::serialization\+::access}}
+\begin{DoxyCompactList}\small\item\em 允许序列化类访问 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+单词附属数据（在检测到相应单词时返回） 
+
+在文件 export\+\_\+types.\+h 第 98 行定义.
+
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a7172e413f8b1af3cbdca47996c3af93c}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a7172e413f8b1af3cbdca47996c3af93c}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!OperatorAssociatityType@{OperatorAssociatityType}}
+\index{OperatorAssociatityType@{OperatorAssociatityType}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{OperatorAssociatityType}{OperatorAssociatityType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::\+Operator\+Associatity\+Type}} =  \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Associatity\+Type}}}
+
+
+
+在文件 export\+\_\+types.\+h 第 104 行定义.
+
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a26d5f5c8a5ac4889372cab9a069041f1}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a26d5f5c8a5ac4889372cab9a069041f1}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!OperatorPriority@{OperatorPriority}}
+\index{OperatorPriority@{OperatorPriority}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{OperatorPriority}{OperatorPriority}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a26d5f5c8a5ac4889372cab9a069041f1}{frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::\+Operator\+Priority}} =  \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a0ad97a4d5fab4fdc87f80845081898de}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Priority}}}
+
+
+
+在文件 export\+\_\+types.\+h 第 106 行定义.
+
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a9950f652ed75219a88207b27d0c17f49}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a9950f652ed75219a88207b27d0c17f49}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!ProductionNodeId@{ProductionNodeId}}
+\index{ProductionNodeId@{ProductionNodeId}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{ProductionNodeId}{ProductionNodeId}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a9950f652ed75219a88207b27d0c17f49}{frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::\+Production\+Node\+Id}} =  \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Production\+Node\+Id}}}
+
+
+
+在文件 export\+\_\+types.\+h 第 100 行定义.
+
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a878befdf99c33c9845be83dfbe5788d6}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a878befdf99c33c9845be83dfbe5788d6}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!ProductionNodeType@{ProductionNodeType}}
+\index{ProductionNodeType@{ProductionNodeType}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{ProductionNodeType}{ProductionNodeType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::\+Production\+Node\+Type}} =  \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Production\+Node\+Type}}}
+
+
+
+在文件 export\+\_\+types.\+h 第 102 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_ad534b2d15d94aff4646414a8e8ad0596}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_ad534b2d15d94aff4646414a8e8ad0596}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!GetAssociatityTypeAndPriority@{GetAssociatityTypeAndPriority}}
+\index{GetAssociatityTypeAndPriority@{GetAssociatityTypeAndPriority}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{GetAssociatityTypeAndPriority()}{GetAssociatityTypeAndPriority()}}
+{\footnotesize\ttfamily std\+::pair$<$ \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{Word\+Attached\+Data\+::\+Operator\+Associatity\+Type}}, \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a26d5f5c8a5ac4889372cab9a069041f1}{Word\+Attached\+Data\+::\+Operator\+Priority}} $>$ frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::\+Get\+Associatity\+Type\+And\+Priority (\begin{DoxyParamCaption}\item[{bool}]{is\+\_\+last\+\_\+operate\+\_\+reduct }\end{DoxyParamCaption}) const}
+
+
+
+获取结合性和运算符优先级 
+
+\begin{DoxyReturn}{返回}
+前半部分为结合性，后半部分为运算符优先级
+\end{DoxyReturn}
+根据上一个操作是否为规约确定使用左侧单目还是双目运算符语义
+
+根据上一个操作是否为规约判断使用左侧单目运算符优先级还是双目运算符优先级 返回获取到的结合类型和优先级 两种语义均存在
+
+上次操作为规约，应使用左侧单目运算符语义
+
+上次操作为移入，应使用双目运算符语义
+
+仅存在双目运算符语义，直接返回
+
+仅存在单目运算符语义，直接返回
+
+在文件 export\+\_\+types.\+cpp 第 10 行定义.
+
+
+
+引用了 binary\+\_\+operator\+\_\+associate\+\_\+type, binary\+\_\+operator\+\_\+priority, frontend\+::generator\+::syntax\+\_\+generator\+::k\+Operator\+Node, node\+\_\+type, unary\+\_\+operator\+\_\+associate\+\_\+type , 以及 unary\+\_\+operator\+\_\+priority.
+
+
+
+被这些函数引用 frontend\+::parser\+::syntax\+\_\+parser\+::\+Syntax\+Parser\+::\+Shift\+Terminal\+Word().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_ad534b2d15d94aff4646414a8e8ad0596_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a42bdf299768835a6b1c49a7cda1118e9}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a42bdf299768835a6b1c49a7cda1118e9}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily bool frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData}{Word\+Attached\+Data}} \&}]{saved\+\_\+data }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 export\+\_\+types.\+h 第 127 行定义.
+
+
+
+引用了 operator==().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a42bdf299768835a6b1c49a7cda1118e9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_abb44066bf92cc8ee207ff028a58db742}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_abb44066bf92cc8ee207ff028a58db742}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!operator==@{operator==}}
+\index{operator==@{operator==}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData}{Word\+Attached\+Data}} \&}]{saved\+\_\+data }\end{DoxyParamCaption}) const}
+
+
+
+在文件 export\+\_\+types.\+cpp 第 38 行定义.
+
+
+
+引用了 binary\+\_\+operator\+\_\+associate\+\_\+type, binary\+\_\+operator\+\_\+priority, node\+\_\+type, production\+\_\+node\+\_\+id, unary\+\_\+operator\+\_\+associate\+\_\+type , 以及 unary\+\_\+operator\+\_\+priority.
+
+
+
+被这些函数引用 operator!=().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_abb44066bf92cc8ee207ff028a58db742_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_adcea55a4c4976fdf75acb984987bbe06}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_adcea55a4c4976fdf75acb984987bbe06}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!serialize@{serialize}}
+\index{serialize@{serialize}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{serialize()}{serialize()}}
+{\footnotesize\ttfamily template$<$class Archive $>$ \\
+void frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::serialize (\begin{DoxyParamCaption}\item[{Archive \&}]{ar,  }\item[{const unsigned int}]{version }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+序列化配置的函数 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in,out}}  & {\em ar} & ：序列化使用的档案 \\
+\hline
+\mbox{\texttt{ in}}  & {\em version} & ：序列化文件版本 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{注意}
+该函数应由boost库调用而非手动调用 
+\end{DoxyAttention}
+
+
+在文件 export\+\_\+types.\+h 第 116 行定义.
+
+
+
+引用了 binary\+\_\+operator\+\_\+associate\+\_\+type, binary\+\_\+operator\+\_\+priority, node\+\_\+type, production\+\_\+node\+\_\+id, unary\+\_\+operator\+\_\+associate\+\_\+type , 以及 unary\+\_\+operator\+\_\+priority.
+
+
+
+\doxysubsection{友元及相关函数文档}
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_ac98d07dd8f7b70e16ccb9a01abf56b9c}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_ac98d07dd8f7b70e16ccb9a01abf56b9c}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!boost::serialization::access@{boost::serialization::access}}
+\index{boost::serialization::access@{boost::serialization::access}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{boost::serialization::access}{boost::serialization::access}}
+{\footnotesize\ttfamily friend class boost\+::serialization\+::access\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+允许序列化类访问 
+
+
+
+在文件 export\+\_\+types.\+h 第 109 行定义.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a6798a2d5eda64d57f7e7326480599726}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a6798a2d5eda64d57f7e7326480599726}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!binary\_operator\_associate\_type@{binary\_operator\_associate\_type}}
+\index{binary\_operator\_associate\_type@{binary\_operator\_associate\_type}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{binary\_operator\_associate\_type}{binary\_operator\_associate\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{Operator\+Associatity\+Type}} frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::binary\+\_\+operator\+\_\+associate\+\_\+type}
+
+{\bfseries 初始值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      OperatorAssociatityType::kLeftToRight}
+
+\end{DoxyCode}
+
+
+双目运算符结合性 
+
+\begin{DoxyNote}{注解}
+仅对运算符有效，非运算符请使用默认值以保持==和!=语义 
+\end{DoxyNote}
+
+
+在文件 export\+\_\+types.\+h 第 144 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Binary\+Left\+Unary\+Operator(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Binary\+Operator(), Get\+Associatity\+Type\+And\+Priority(), operator==() , 以及 serialize().
+
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a57cae840a890fed5a01b873eb703f212}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a57cae840a890fed5a01b873eb703f212}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!binary\_operator\_priority@{binary\_operator\_priority}}
+\index{binary\_operator\_priority@{binary\_operator\_priority}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{binary\_operator\_priority}{binary\_operator\_priority}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a26d5f5c8a5ac4889372cab9a069041f1}{Operator\+Priority}} frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::binary\+\_\+operator\+\_\+priority = Operator\+Priority\+::\+Invalid\+Id()}
+
+
+
+双目运算符优先级 
+
+\begin{DoxyNote}{注解}
+仅对运算符有效，非运算符请使用默认值以保持==和!=语义 
+\end{DoxyNote}
+
+
+在文件 export\+\_\+types.\+h 第 148 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Binary\+Left\+Unary\+Operator(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Binary\+Operator(), Get\+Associatity\+Type\+And\+Priority(), operator==() , 以及 serialize().
+
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_acdfa502067f9d4cba587e1028e356aaa}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_acdfa502067f9d4cba587e1028e356aaa}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!node\_type@{node\_type}}
+\index{node\_type@{node\_type}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{node\_type}{node\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{Production\+Node\+Type}} frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::node\+\_\+type}
+
+
+
+节点类型 
+
+
+
+在文件 export\+\_\+types.\+h 第 141 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Binary\+Left\+Unary\+Operator(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Binary\+Operator(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Left\+Unary\+Operator(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Terminal\+Production(), Get\+Associatity\+Type\+And\+Priority(), operator==(), serialize(), frontend\+::parser\+::syntax\+\_\+parser\+::\+Syntax\+Parser\+::\+Shift\+Terminal\+Word() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Syntax\+Analysis\+Table\+Construct().
+
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_aec88e23d0283bc613908513686985e33}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_aec88e23d0283bc613908513686985e33}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!production\_node\_id@{production\_node\_id}}
+\index{production\_node\_id@{production\_node\_id}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{production\_node\_id}{production\_node\_id}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a9950f652ed75219a88207b27d0c17f49}{Production\+Node\+Id}} frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::production\+\_\+node\+\_\+id = Production\+Node\+Id\+::\+Invalid\+Id()}
+
+
+
+产生式节点\+ID 
+
+\begin{DoxyAttention}{注意}
+I\+D是唯一的，且一个\+I\+D对应的其余数据唯一 
+\end{DoxyAttention}
+
+
+在文件 export\+\_\+types.\+h 第 139 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Binary\+Left\+Unary\+Operator(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Binary\+Operator(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Left\+Unary\+Operator(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Terminal\+Production(), operator==(), serialize(), frontend\+::parser\+::syntax\+\_\+parser\+::\+Syntax\+Parser\+::\+Shift\+Terminal\+Word(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Syntax\+Analysis\+Table\+Construct() , 以及 frontend\+::parser\+::syntax\+\_\+parser\+::\+Syntax\+Parser\+::\+Terminal\+Word\+Waiting\+Process().
+
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a2d615c9e0c1831afa284a8807c8a1e89}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a2d615c9e0c1831afa284a8807c8a1e89}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!unary\_operator\_associate\_type@{unary\_operator\_associate\_type}}
+\index{unary\_operator\_associate\_type@{unary\_operator\_associate\_type}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{unary\_operator\_associate\_type}{unary\_operator\_associate\_type}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{Operator\+Associatity\+Type}} frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::unary\+\_\+operator\+\_\+associate\+\_\+type}
+
+{\bfseries 初始值\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{      OperatorAssociatityType::kLeftToRight}
+
+\end{DoxyCode}
+
+
+左侧单目运算符结合性 
+
+\begin{DoxyNote}{注解}
+仅对运算符有效，非运算符请使用默认值以保持==和!=语义 
+\end{DoxyNote}
+
+
+在文件 export\+\_\+types.\+h 第 151 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Binary\+Left\+Unary\+Operator(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Left\+Unary\+Operator(), Get\+Associatity\+Type\+And\+Priority(), operator==() , 以及 serialize().
+
+\mbox{\Hypertarget{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a918e464ef2c99de1c856a15149531ea0}\label{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a918e464ef2c99de1c856a15149531ea0}} 
+\index{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}!unary\_operator\_priority@{unary\_operator\_priority}}
+\index{unary\_operator\_priority@{unary\_operator\_priority}!frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData@{frontend::generator::dfa\_generator::nfa\_generator::WordAttachedData}}
+\doxysubsubsection{\texorpdfstring{unary\_operator\_priority}{unary\_operator\_priority}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData_a26d5f5c8a5ac4889372cab9a069041f1}{Operator\+Priority}} frontend\+::generator\+::dfa\+\_\+generator\+::nfa\+\_\+generator\+::\+Word\+Attached\+Data\+::unary\+\_\+operator\+\_\+priority = Operator\+Priority\+::\+Invalid\+Id()}
+
+
+
+左侧单目运算符优先级 
+
+\begin{DoxyNote}{注解}
+仅对运算符有效，非运算符请使用默认值以保持==和!=语义 
+\end{DoxyNote}
+
+
+在文件 export\+\_\+types.\+h 第 155 行定义.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Binary\+Left\+Unary\+Operator(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Left\+Unary\+Operator(), Get\+Associatity\+Type\+And\+Priority(), operator==() , 以及 serialize().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Generator/\mbox{\hyperlink{export__types_8h}{export\+\_\+types.\+h}}\item 
+src/\+Generator/\mbox{\hyperlink{export__types_8cpp}{export\+\_\+types.\+cpp}}\end{DoxyCompactItemize}

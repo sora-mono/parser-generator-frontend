@@ -1,0 +1,63 @@
+\hypertarget{id__wrapper_8h}{}\doxysection{src/\+Common/id\+\_\+wrapper.h 文件参考}
+\label{id__wrapper_8h}\index{src/Common/id\_wrapper.h@{src/Common/id\_wrapper.h}}
+
+
+I\+D包装器，包装\+I\+D以避免\+I\+D混用导致运行时错误  
+
+
+{\ttfamily \#include $<$boost/archive/binary\+\_\+iarchive.\+hpp$>$}\newline
+{\ttfamily \#include $<$boost/serialization/access.\+hpp$>$}\newline
+id\+\_\+wrapper.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=322pt]{id__wrapper_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{id__wrapper_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1BaseIdWrapper}{frontend\+::common\+::\+Base\+Id\+Wrapper$<$ Id\+Type\+\_\+, Label\+Enum\+\_\+, label\+\_\+, invalid\+\_\+value\+\_\+ $>$}}
+\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper}{frontend\+::common\+::\+Explicit\+Id\+Wrapper$<$ Id\+Type\+\_\+, Label\+Enum\+\_\+, label\+\_\+ $>$}}
+\begin{DoxyCompactList}\small\item\em 强制显式调用构造函数且使用默认无效值版\+Wrapper \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapperCustomizeInvalidValue}{frontend\+::common\+::\+Explicit\+Id\+Wrapper\+Customize\+Invalid\+Value$<$ Id\+Type\+\_\+, Label\+Enum\+\_\+, label\+\_\+, invalid\+\_\+value\+\_\+ $>$}}
+\begin{DoxyCompactList}\small\item\em 强制显示调用构造函数不使用默认无效值版 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1NonExplicitIdWrapper}{frontend\+::common\+::\+Non\+Explicit\+Id\+Wrapper$<$ Id\+Type\+\_\+, Label\+Enum\+\_\+, label\+\_\+ $>$}}
+\begin{DoxyCompactList}\small\item\em 不强制显示调用构造函数使用默认无效值版 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1common_1_1NonExplicitIdWrapperCustomizeInvalidValue}{frontend\+::common\+::\+Non\+Explicit\+Id\+Wrapper\+Customize\+Invalid\+Value$<$ Id\+Type\+\_\+, Label\+Enum\+\_\+, label\+\_\+, invalid\+\_\+value\+\_\+ $>$}}
+\begin{DoxyCompactList}\small\item\em 不强制显示调用构造函数不使用默认无效值版 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structstd_1_1hash_3_01frontend_1_1common_1_1ExplicitIdWrapper_3_01IdType___00_01LabelEnum___00_01label___01_4_01_4}{std\+::hash$<$ frontend\+::common\+::\+Explicit\+Id\+Wrapper$<$ Id\+Type\+\_\+, Label\+Enum\+\_\+, label\+\_\+ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em 具体化hash模板，否则使用unordered系列容器时编译器无法自动将类类型转换为 Id\+Type类型导致报错 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structstd_1_1hash_3_01frontend_1_1common_1_1ExplicitIdWrapperCustomizeInvalidValue_3_01IdType___7607f8b0b0c9181952733d543bfe1b84}{std\+::hash$<$ frontend\+::common\+::\+Explicit\+Id\+Wrapper\+Customize\+Invalid\+Value$<$ Id\+Type\+\_\+, Label\+Enum\+\_\+, label\+\_\+, invalid\+\_\+value\+\_\+ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em 具体化hash模板，否则使用unordered系列容器时编译器无法自动将类类型转换为 Id\+Type类型导致报错 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structstd_1_1hash_3_01frontend_1_1common_1_1NonExplicitIdWrapper_3_01IdType___00_01LabelEnum___00_01label___01_4_01_4}{std\+::hash$<$ frontend\+::common\+::\+Non\+Explicit\+Id\+Wrapper$<$ Id\+Type\+\_\+, Label\+Enum\+\_\+, label\+\_\+ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em 具体化hash模板，否则使用unordered系列容器时编译器无法自动将类类型转换为 Id\+Type类型导致报错 \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structstd_1_1hash_3_01frontend_1_1common_1_1NonExplicitIdWrapperCustomizeInvalidValue_3_01IdType000c03dcbc2a689300b8fa5afb0b2dc9}{std\+::hash$<$ frontend\+::common\+::\+Non\+Explicit\+Id\+Wrapper\+Customize\+Invalid\+Value$<$ Id\+Type\+\_\+, Label\+Enum\+\_\+, label\+\_\+, invalid\+\_\+value\+\_\+ $>$ $>$}}
+\begin{DoxyCompactList}\small\item\em 具体化hash模板，否则使用unordered系列容器时编译器无法自动将类类型转换为 Id\+Type类型导致报错 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{命名空间}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefrontend}{frontend}}
+\item 
+ \mbox{\hyperlink{namespacefrontend_1_1common}{frontend\+::common}}
+\item 
+ \mbox{\hyperlink{namespacestd}{std}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+I\+D包装器，包装\+I\+D以避免\+I\+D混用导致运行时错误 
+
+该头文件包含boost-\/serialization库的头文件，从而允许被序列化 该头文件定义了四个生成不同的\+I\+D包装类的模板类 占用空间与不包装相同，编译器优化够好则不会导致额外的开销 无参构造函数会将值赋为default\+\_\+invalid\+\_\+value且\+Is\+Valid()返回false default\+\_\+invalid\+\_\+value默认为\+Id\+Type(-\/1) \begin{DoxyAttention}{注意}
+由于使用boost进行序列化，使用该头文件时需要与boost库链接 T\+O\+DO 特化std\+::swap 
+\end{DoxyAttention}

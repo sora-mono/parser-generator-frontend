@@ -1,0 +1,343 @@
+\hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::Enum\+Return\+Data类 参考}
+\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData}\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+
+
+枚举参数规约时得到的数据  
+
+
+
+
+{\ttfamily \#include $<$reduct\+\_\+functions.\+h$>$}
+
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1EnumType_af96c6d98f36a8b421f22b1663f80f46f}{Enum\+Type\+::\+Enum\+Container\+Type}} \& \mbox{\hyperlink{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_af73feb4a62674233426c9757048dbdc8}{Get\+Container}} ()
+\item 
+std\+::pair$<$ Enum\+Type\+::\+Enum\+Container\+Type\+::iterator, bool $>$ \mbox{\hyperlink{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_adcbda97027125f4bde934b7639301d35}{Add\+Member}} (std\+::string \&\&member\+\_\+name, long long value)
+\begin{DoxyCompactList}\small\item\em 返回插入位置的迭代器和是否插入 \end{DoxyCompactList}\item 
+long long \mbox{\hyperlink{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a37621b1aa6cbd516588f7c17857d08f5}{Get\+Max\+Value}} () const
+\item 
+long long \mbox{\hyperlink{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a028bdff01fb62243a8f3bbb9be51d010}{Get\+Min\+Value}} () const
+\item 
+long long \mbox{\hyperlink{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_aaf1d79a5f9d13a1bb8ebd92375546631}{Get\+Last\+Value}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a6be064708a4226341230f2652de8c79d}{Set\+Max\+Value}} (long long max\+\_\+value)
+\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_aa53063e057702c4bf7b882a763520367}{Set\+Min\+Value}} (long long min\+\_\+value)
+\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a1c4f1856c3d8a00589289d17c3a1b674}{Set\+Last\+Value}} (long long last\+\_\+value)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1EnumType_af96c6d98f36a8b421f22b1663f80f46f}{Enum\+Type\+::\+Enum\+Container\+Type}} \mbox{\hyperlink{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a062a16dced934eb2a8673d23daec6cf2}{enum\+\_\+container\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 枚举名与值的关联容器 \end{DoxyCompactList}\item 
+long long \mbox{\hyperlink{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a430b9614d4356cd9c83b2c4018127ac9}{max\+\_\+value\+\_\+}} = L\+L\+O\+N\+G\+\_\+\+M\+IN
+\begin{DoxyCompactList}\small\item\em 最大的枚举值 \end{DoxyCompactList}\item 
+long long \mbox{\hyperlink{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_aaadffbdf85df6e3ff2682d6f38bdfc8c}{min\+\_\+value\+\_\+}} = L\+L\+O\+N\+G\+\_\+\+M\+AX
+\begin{DoxyCompactList}\small\item\em 最小的枚举值 \end{DoxyCompactList}\item 
+long long \mbox{\hyperlink{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a01e5d179656ea553a9198422a7b37183}{last\+\_\+value\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 上次添加的枚举值 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+枚举参数规约时得到的数据 
+
+在文件 reduct\+\_\+functions.\+h 第 172 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_adcbda97027125f4bde934b7639301d35}\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_adcbda97027125f4bde934b7639301d35}} 
+\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}!AddMember@{AddMember}}
+\index{AddMember@{AddMember}!c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+\doxysubsubsection{\texorpdfstring{AddMember()}{AddMember()}}
+{\footnotesize\ttfamily std\+::pair$<$ Enum\+Type\+::\+Enum\+Container\+Type\+::iterator, bool $>$ c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Enum\+Return\+Data\+::\+Add\+Member (\begin{DoxyParamCaption}\item[{std\+::string \&\&}]{member\+\_\+name,  }\item[{long long}]{value }\end{DoxyParamCaption})}
+
+
+
+返回插入位置的迭代器和是否插入 
+
+
+
+在文件 reduct\+\_\+functions.\+cpp 第 8 行定义.
+
+
+
+引用了 enum\+\_\+container\+\_\+, Get\+Max\+Value(), Get\+Min\+Value(), Set\+Last\+Value(), Set\+Max\+Value() , 以及 Set\+Min\+Value().
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Not\+Empty\+Enum\+Arguments\+Id\+Assign\+Num\+Base(), c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Not\+Empty\+Enum\+Arguments\+Id\+Assign\+Num\+Extend(), c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Not\+Empty\+Enum\+Arguments\+Id\+Base() , 以及 c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Not\+Empty\+Enum\+Arguments\+Id\+Extend().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_adcbda97027125f4bde934b7639301d35_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_adcbda97027125f4bde934b7639301d35_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_af73feb4a62674233426c9757048dbdc8}\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_af73feb4a62674233426c9757048dbdc8}} 
+\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}!GetContainer@{GetContainer}}
+\index{GetContainer@{GetContainer}!c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+\doxysubsubsection{\texorpdfstring{GetContainer()}{GetContainer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1EnumType_af96c6d98f36a8b421f22b1663f80f46f}{Enum\+Type\+::\+Enum\+Container\+Type}}\& c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Enum\+Return\+Data\+::\+Get\+Container (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 reduct\+\_\+functions.\+h 第 174 行定义.
+
+
+
+引用了 enum\+\_\+container\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_aaf1d79a5f9d13a1bb8ebd92375546631}\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_aaf1d79a5f9d13a1bb8ebd92375546631}} 
+\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}!GetLastValue@{GetLastValue}}
+\index{GetLastValue@{GetLastValue}!c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+\doxysubsubsection{\texorpdfstring{GetLastValue()}{GetLastValue()}}
+{\footnotesize\ttfamily long long c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Enum\+Return\+Data\+::\+Get\+Last\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 reduct\+\_\+functions.\+h 第 180 行定义.
+
+
+
+引用了 last\+\_\+value\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Not\+Empty\+Enum\+Arguments\+Id\+Extend().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_aaf1d79a5f9d13a1bb8ebd92375546631_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a37621b1aa6cbd516588f7c17857d08f5}\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a37621b1aa6cbd516588f7c17857d08f5}} 
+\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}!GetMaxValue@{GetMaxValue}}
+\index{GetMaxValue@{GetMaxValue}!c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+\doxysubsubsection{\texorpdfstring{GetMaxValue()}{GetMaxValue()}}
+{\footnotesize\ttfamily long long c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Enum\+Return\+Data\+::\+Get\+Max\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 reduct\+\_\+functions.\+h 第 178 行定义.
+
+
+
+引用了 max\+\_\+value\+\_\+.
+
+
+
+被这些函数引用 Add\+Member().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a37621b1aa6cbd516588f7c17857d08f5_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a028bdff01fb62243a8f3bbb9be51d010}\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a028bdff01fb62243a8f3bbb9be51d010}} 
+\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}!GetMinValue@{GetMinValue}}
+\index{GetMinValue@{GetMinValue}!c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+\doxysubsubsection{\texorpdfstring{GetMinValue()}{GetMinValue()}}
+{\footnotesize\ttfamily long long c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Enum\+Return\+Data\+::\+Get\+Min\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 reduct\+\_\+functions.\+h 第 179 行定义.
+
+
+
+引用了 min\+\_\+value\+\_\+.
+
+
+
+被这些函数引用 Add\+Member().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a028bdff01fb62243a8f3bbb9be51d010_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a1c4f1856c3d8a00589289d17c3a1b674}\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a1c4f1856c3d8a00589289d17c3a1b674}} 
+\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}!SetLastValue@{SetLastValue}}
+\index{SetLastValue@{SetLastValue}!c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+\doxysubsubsection{\texorpdfstring{SetLastValue()}{SetLastValue()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Enum\+Return\+Data\+::\+Set\+Last\+Value (\begin{DoxyParamCaption}\item[{long long}]{last\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+在文件 reduct\+\_\+functions.\+h 第 185 行定义.
+
+
+
+引用了 last\+\_\+value\+\_\+.
+
+
+
+被这些函数引用 Add\+Member().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a1c4f1856c3d8a00589289d17c3a1b674_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a6be064708a4226341230f2652de8c79d}\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a6be064708a4226341230f2652de8c79d}} 
+\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}!SetMaxValue@{SetMaxValue}}
+\index{SetMaxValue@{SetMaxValue}!c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+\doxysubsubsection{\texorpdfstring{SetMaxValue()}{SetMaxValue()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Enum\+Return\+Data\+::\+Set\+Max\+Value (\begin{DoxyParamCaption}\item[{long long}]{max\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+在文件 reduct\+\_\+functions.\+h 第 183 行定义.
+
+
+
+引用了 max\+\_\+value\+\_\+.
+
+
+
+被这些函数引用 Add\+Member().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a6be064708a4226341230f2652de8c79d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_aa53063e057702c4bf7b882a763520367}\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_aa53063e057702c4bf7b882a763520367}} 
+\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}!SetMinValue@{SetMinValue}}
+\index{SetMinValue@{SetMinValue}!c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+\doxysubsubsection{\texorpdfstring{SetMinValue()}{SetMinValue()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Enum\+Return\+Data\+::\+Set\+Min\+Value (\begin{DoxyParamCaption}\item[{long long}]{min\+\_\+value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+在文件 reduct\+\_\+functions.\+h 第 184 行定义.
+
+
+
+引用了 min\+\_\+value\+\_\+.
+
+
+
+被这些函数引用 Add\+Member().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_aa53063e057702c4bf7b882a763520367_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a062a16dced934eb2a8673d23daec6cf2}\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a062a16dced934eb2a8673d23daec6cf2}} 
+\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}!enum\_container\_@{enum\_container\_}}
+\index{enum\_container\_@{enum\_container\_}!c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+\doxysubsubsection{\texorpdfstring{enum\_container\_}{enum\_container\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1EnumType_af96c6d98f36a8b421f22b1663f80f46f}{Enum\+Type\+::\+Enum\+Container\+Type}} c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Enum\+Return\+Data\+::enum\+\_\+container\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+枚举名与值的关联容器 
+
+
+
+在文件 reduct\+\_\+functions.\+h 第 188 行定义.
+
+
+
+被这些函数引用 Add\+Member() , 以及 Get\+Container().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a01e5d179656ea553a9198422a7b37183}\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a01e5d179656ea553a9198422a7b37183}} 
+\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}!last\_value\_@{last\_value\_}}
+\index{last\_value\_@{last\_value\_}!c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+\doxysubsubsection{\texorpdfstring{last\_value\_}{last\_value\_}}
+{\footnotesize\ttfamily long long c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Enum\+Return\+Data\+::last\+\_\+value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+上次添加的枚举值 
+
+
+
+在文件 reduct\+\_\+functions.\+h 第 194 行定义.
+
+
+
+被这些函数引用 Get\+Last\+Value() , 以及 Set\+Last\+Value().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a430b9614d4356cd9c83b2c4018127ac9}\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_a430b9614d4356cd9c83b2c4018127ac9}} 
+\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}!max\_value\_@{max\_value\_}}
+\index{max\_value\_@{max\_value\_}!c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+\doxysubsubsection{\texorpdfstring{max\_value\_}{max\_value\_}}
+{\footnotesize\ttfamily long long c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Enum\+Return\+Data\+::max\+\_\+value\+\_\+ = L\+L\+O\+N\+G\+\_\+\+M\+IN\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+最大的枚举值 
+
+
+
+在文件 reduct\+\_\+functions.\+h 第 190 行定义.
+
+
+
+被这些函数引用 Get\+Max\+Value() , 以及 Set\+Max\+Value().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_aaadffbdf85df6e3ff2682d6f38bdfc8c}\label{classc__parser__frontend_1_1parse__functions_1_1EnumReturnData_aaadffbdf85df6e3ff2682d6f38bdfc8c}} 
+\index{c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}!min\_value\_@{min\_value\_}}
+\index{min\_value\_@{min\_value\_}!c\_parser\_frontend::parse\_functions::EnumReturnData@{c\_parser\_frontend::parse\_functions::EnumReturnData}}
+\doxysubsubsection{\texorpdfstring{min\_value\_}{min\_value\_}}
+{\footnotesize\ttfamily long long c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Enum\+Return\+Data\+::min\+\_\+value\+\_\+ = L\+L\+O\+N\+G\+\_\+\+M\+AX\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+最小的枚举值 
+
+
+
+在文件 reduct\+\_\+functions.\+h 第 192 行定义.
+
+
+
+被这些函数引用 Get\+Min\+Value() , 以及 Set\+Min\+Value().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{reduct__functions_8h}{reduct\+\_\+functions.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{reduct__functions_8cpp}{reduct\+\_\+functions.\+cpp}}\end{DoxyCompactItemize}

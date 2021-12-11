@@ -1,0 +1,4 @@
+<map id="c_parser_frontend::type_system::TypeInterface::ObtainAddressOperatorNode" name="c_parser_frontend::type_system::TypeInterface::ObtainAddressOperatorNode">
+<area shape="rect" id="node1" title="获取给定类型取地址后得到的类型" alt="" coords="339,5,555,61"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#a941b7f5ade7a534b543f7e311c8267d5" title="设置被取地址的节点" alt="" coords="5,5,291,61"/>
+</map>

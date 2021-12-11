@@ -1,0 +1,27 @@
+<map id="frontend::common::BaseIdWrapper::IsValid" name="frontend::common::BaseIdWrapper::IsValid">
+<area shape="rect" id="node1" title="判断当前存储的值是否有效" alt="" coords="1535,481,1729,523"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#adc8a8b9ef6516d04b2ad19bb8d8bbfea" title="添加非终结产生式" alt="" coords="923,28,1169,99"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a27e6f4cf5b7f1f2b149ed7d2657a95c0" title="添加因为产生式体中某个产生式未定义而导致不能继续添加的记录" alt="" coords="1217,5,1487,76"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a21776396cecfb452b42e56dca43b5724" title="构建最小化DFA" alt="" coords="937,815,1155,871"/>
+<area shape="rect" id="node8" href="$classfrontend_1_1common_1_1ObjectManager.html#adbb63b10c08fd65047c2b6ee5cae362d" title="系统自行选择最佳位置放置对象" alt="" coords="1245,218,1459,274"/>
+<area shape="rect" id="node9" href="$classfrontend_1_1common_1_1ObjectManager.html#a19c9433885906dddf365a8c05dbb5f52" title="在指定位置放置对象" alt="" coords="1245,298,1459,354"/>
+<area shape="rect" id="node10" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface_1_1StructureMemberContainer.html#a8994e85707007599955dea201262c52b" title="根据成员下标获取成员信息" alt="" coords="1220,379,1484,449"/>
+<area shape="rect" id="node11" href="$classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a4ac1595c7162d2867f6e2703d06814a5" title="获取下一个单词" alt="" coords="1234,152,1470,193"/>
+<area shape="rect" id="node17" href="$classc__parser__frontend_1_1type__system_1_1StructType.html#a1afa29fd410de3c917b46b76f92c2346" title="根据成员下标获取成员信息" alt="" coords="955,555,1137,611"/>
+<area shape="rect" id="node18" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a78ad419fe8d7cd9eb05d3e690d8b7919" title="获取结构化类型成员的信息" alt="" coords="1227,605,1477,661"/>
+<area shape="rect" id="node19" href="$classc__parser__frontend_1_1type__system_1_1UnionType.html#a33e88332a45dc197f4fe0abcd7f315dd" title="根据成员下标获取成员信息" alt="" coords="955,637,1137,693"/>
+<area shape="rect" id="node20" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a52c8b5c40bdc50f5048f61a267f7dfc0" title="获取给定NFA节点在转移条件下可以到达的等效节点" alt="" coords="1239,474,1465,530"/>
+<area shape="rect" id="node22" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a4826ed2c4c0620c974bdc20a57b7bb69" title="合并两个节点" alt="" coords="1258,736,1446,807"/>
+<area shape="rect" id="node24" href="$classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#aefd53de131f70e5127cd9b30d098d30a" title="设置访问的成员名" alt="" coords="1221,883,1483,953"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="657,727,875,783"/>
+<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="363,720,609,791"/>
+<area shape="rect" id="node7" href="$Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="184,742,239,769"/>
+<area shape="rect" id="node12" href="$classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ab8cca22114e97039f99d0ad9cd5a661d" title="获取下一个单词的数据并存在dfa_return_data_中" alt="" coords="957,145,1135,201"/>
+<area shape="rect" id="node13" href="$classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,153,315,195"/>
+<area shape="rect" id="node15" href="$classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adfdf296bdfa36975bcc31bbcf2d66367" title="处理向前看符号待移入的情况" alt="" coords="677,178,855,234"/>
+<area shape="rect" id="node14" href="$Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,161,60,187"/>
+<area shape="rect" id="node16" href="$classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="381,178,591,234"/>
+<area shape="rect" id="node21" href="$classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="937,474,1155,530"/>
+<area shape="rect" id="node23" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a9c66fbc2e3302533f3ef3d3b693b3691" title="合并优化，降低节点数和转移路径以降低子集构造法集合大小" alt="" coords="952,720,1140,791"/>
+<area shape="rect" id="node25" href="$classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#ae95a9a06b45870ad8675b330273cecde" title="设置访问的成员名" alt="" coords="929,895,1163,951"/>
+</map>

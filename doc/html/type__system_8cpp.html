@@ -1,0 +1,142 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: src/CParserFrontend/type_system.cpp 文件参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('type__system_8cpp.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#namespaces">命名空间</a> &#124;
+<a href="#func-members">函数</a>  </div>
+  <div class="headertitle">
+<div class="title">type_system.cpp 文件参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="type__system_8h_source.html">type_system.h</a>&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+type_system.cpp 的引用(Include)关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="type__system_8cpp__incl.png" border="0" usemap="#src_2CParserFrontend_2type__system_8cpp" alt=""/></div>
+<map name="src_2CParserFrontend_2type__system_8cpp" id="src_2CParserFrontend_2type__system_8cpp">
+<area shape="rect" title=" " alt="" coords="270,5,421,47"/>
+<area shape="rect" href="type__system_8h.html" title="类型系统" alt="" coords="286,95,405,121"/>
+<area shape="rect" title=" " alt="" coords="5,169,75,196"/>
+<area shape="rect" title=" " alt="" coords="99,169,176,196"/>
+<area shape="rect" title=" " alt="" coords="200,169,259,196"/>
+<area shape="rect" title=" " alt="" coords="283,169,407,196"/>
+<area shape="rect" title=" " alt="" coords="431,169,499,196"/>
+<area shape="rect" title=" " alt="" coords="523,169,586,196"/>
+<area shape="rect" href="id__wrapper_8h.html" title="ID包装器，包装ID以避免ID混用导致运行时错误" alt="" coords="611,169,779,196"/>
+<area shape="rect" title=" " alt="" coords="531,244,685,285"/>
+<area shape="rect" title=" " alt="" coords="710,244,853,285"/>
+</map>
+</div>
+</div>
+<p><a href="type__system_8cpp_source.html">浏览源代码.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+命名空间</h2></td></tr>
+<tr class="memitem:namespacec__parser__frontend"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend.html">c_parser_frontend</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:namespacec__parser__frontend_1_1type__system"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html">c_parser_frontend::type_system</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+函数</h2></td></tr>
+<tr class="memitem:aa707ca7f6ac783c7a99b24e92f764595"><td class="memItemLeft" align="right" valign="top">BuiltInType&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#aa707ca7f6ac783c7a99b24e92f764595">c_parser_frontend::type_system::CalculateBuiltInType</a> (const std::string &amp;value)</td></tr>
+<tr class="memdesc:aa707ca7f6ac783c7a99b24e92f764595"><td class="mdescLeft">&#160;</td><td class="mdescRight">计算存储给定值所需的最小类型  <a href="namespacec__parser__frontend_1_1type__system.html#aa707ca7f6ac783c7a99b24e92f764595">更多...</a><br /></td></tr>
+<tr class="separator:aa707ca7f6ac783c7a99b24e92f764595"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0915baa55b6cdf79c3c28cb8b6249f18"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacec__parser__frontend_1_1type__system.html#a0915baa55b6cdf79c3c28cb8b6249f18">c_parser_frontend::type_system::operator==</a> (const std::shared_ptr&lt; TypeInterface &gt; &amp;type_interface1, const std::shared_ptr&lt; TypeInterface &gt; &amp;type_interface2)</td></tr>
+<tr class="memdesc:a0915baa55b6cdf79c3c28cb8b6249f18"><td class="mdescLeft">&#160;</td><td class="mdescRight">比较节点指针指向的节点是否相同  <a href="namespacec__parser__frontend_1_1type__system.html#a0915baa55b6cdf79c3c28cb8b6249f18">更多...</a><br /></td></tr>
+<tr class="separator:a0915baa55b6cdf79c3c28cb8b6249f18"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9d6b2bf2bb0a0ac49f2e2316cb4c6dde.html">CParserFrontend</a></li><li class="navelem"><a class="el" href="type__system_8cpp.html">type_system.cpp</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

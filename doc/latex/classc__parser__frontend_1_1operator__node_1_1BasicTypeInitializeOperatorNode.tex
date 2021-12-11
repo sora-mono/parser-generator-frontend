@@ -1,0 +1,394 @@
+\hypertarget{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Basic\+Type\+Initialize\+Operator\+Node类 参考}
+\label{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode}\index{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}}
+
+
+基础初始化类型（数值/字符串/函数）  
+
+
+
+
+{\ttfamily \#include $<$operator\+\_\+node.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Basic\+Type\+Initialize\+Operator\+Node 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=264pt]{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Basic\+Type\+Initialize\+Operator\+Node 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$class Value $>$ }\\\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_acf7ff94037d2f16ea1b883debdd31304}{Basic\+Type\+Initialize\+Operator\+Node}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a174c2dc0ea451920c3608685cee9b699}{Initialize\+Type}} initialize\+\_\+type, Value \&\&value)
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a4348f1c094015c0feb6bb76e5ace630b}{Basic\+Type\+Initialize\+Operator\+Node}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{type\+\_\+system\+::\+Function\+Type}} $>$ \&function\+\_\+type)
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a1b4de08bce0591e0c06a838e7ce1abbd}{Basic\+Type\+Initialize\+Operator\+Node}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode}{Basic\+Type\+Initialize\+Operator\+Node}} \&)=default
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode}{Basic\+Type\+Initialize\+Operator\+Node}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_aa62b01567662bba846c60ce4f4bd53bb}{operator=}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode}{Basic\+Type\+Initialize\+Operator\+Node}} \&)=default
+\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a8e45080b68667d2586d93cffa6386225}{Self\+Copy}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&new\+\_\+type, Const\+Tag new\+\_\+const\+\_\+tag) const override
+\begin{DoxyCompactList}\small\item\em 拷贝自身并设置拷贝得到的对象类型为new\+\_\+type \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Value $>$ }\\void \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a111daf903108b5471b35d31d35f0db66}{Set\+Value}} (Value \&\&value)
+\begin{DoxyCompactList}\small\item\em 设置初始化数据值 \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a3eaeaca261e5860d4ca73accce3cf460}{Get\+Value}} () const
+\begin{DoxyCompactList}\small\item\em 获取初始化数据的值 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_aa8eec206ebcf1953933a92fd50678a3b}{Set\+Init\+Data\+Type}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&data\+\_\+type)
+\begin{DoxyCompactList}\small\item\em 设置初始化用数据的类型 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a0b162fe6e895671b445d561cdda95f7e}{Check\+Basic\+Type\+Initialize\+Valid}} (const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&variety\+\_\+type)
+\begin{DoxyCompactList}\small\item\em 检查给定类型是否可以作为基础初始化数据的类型 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a54b4e242ed930666c66aeb028a8836de}{Set\+Init\+Value\+Type}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&init\+\_\+value\+\_\+type)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_ab1b0c3d76088b8451247796c9ef5f44a}{value\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 初始化值 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+基础初始化类型（数值/字符串/函数） 
+
+\begin{DoxyNote}{注解}
+保存函数时value留空 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+h 第 529 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_acf7ff94037d2f16ea1b883debdd31304}\label{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_acf7ff94037d2f16ea1b883debdd31304}} 
+\index{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}!BasicTypeInitializeOperatorNode@{BasicTypeInitializeOperatorNode}}
+\index{BasicTypeInitializeOperatorNode@{BasicTypeInitializeOperatorNode}!c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}}
+\doxysubsubsection{\texorpdfstring{BasicTypeInitializeOperatorNode()}{BasicTypeInitializeOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily template$<$class Value $>$ \\
+c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::\+Basic\+Type\+Initialize\+Operator\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node_a174c2dc0ea451920c3608685cee9b699}{Initialize\+Type}}}]{initialize\+\_\+type,  }\item[{Value \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 532 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a4348f1c094015c0feb6bb76e5ace630b}\label{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a4348f1c094015c0feb6bb76e5ace630b}} 
+\index{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}!BasicTypeInitializeOperatorNode@{BasicTypeInitializeOperatorNode}}
+\index{BasicTypeInitializeOperatorNode@{BasicTypeInitializeOperatorNode}!c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}}
+\doxysubsubsection{\texorpdfstring{BasicTypeInitializeOperatorNode()}{BasicTypeInitializeOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::\+Basic\+Type\+Initialize\+Operator\+Node (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{type\+\_\+system\+::\+Function\+Type}} $>$ \&}]{function\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 535 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Function , 以及 Set\+Init\+Data\+Type().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a4348f1c094015c0feb6bb76e5ace630b_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a1b4de08bce0591e0c06a838e7ce1abbd}\label{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a1b4de08bce0591e0c06a838e7ce1abbd}} 
+\index{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}!BasicTypeInitializeOperatorNode@{BasicTypeInitializeOperatorNode}}
+\index{BasicTypeInitializeOperatorNode@{BasicTypeInitializeOperatorNode}!c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}}
+\doxysubsubsection{\texorpdfstring{BasicTypeInitializeOperatorNode()}{BasicTypeInitializeOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::\+Basic\+Type\+Initialize\+Operator\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode}{Basic\+Type\+Initialize\+Operator\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a0b162fe6e895671b445d561cdda95f7e}\label{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a0b162fe6e895671b445d561cdda95f7e}} 
+\index{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}!CheckBasicTypeInitializeValid@{CheckBasicTypeInitializeValid}}
+\index{CheckBasicTypeInitializeValid@{CheckBasicTypeInitializeValid}!c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}}
+\doxysubsubsection{\texorpdfstring{CheckBasicTypeInitializeValid()}{CheckBasicTypeInitializeValid()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::\+Check\+Basic\+Type\+Initialize\+Valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&}]{variety\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+检查给定类型是否可以作为基础初始化数据的类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em variety\+\_\+type} & ：待检查的类型 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回给定类型是否可以作为基础初始化数据的类型 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：有效的基础初始化数据类型 \\
+\hline
+{\em false} & ：无效的基础初始化数据类型 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+允许使用基础类型/const char$\ast$/函数类型 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+cpp 第 80 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Commonly\+Used\+Type\+Generator\+::\+Get\+Const\+Expr\+String\+Type() , 以及 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface\+::\+Get\+Type().
+
+
+
+被这些函数引用 Set\+Init\+Data\+Type().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a0b162fe6e895671b445d561cdda95f7e_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a0b162fe6e895671b445d561cdda95f7e_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a3eaeaca261e5860d4ca73accce3cf460}\label{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a3eaeaca261e5860d4ca73accce3cf460}} 
+\index{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}!GetValue@{GetValue}}
+\index{GetValue@{GetValue}!c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetValue()}{GetValue()}}
+{\footnotesize\ttfamily const std\+::string\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::\+Get\+Value (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取初始化数据的值 
+
+\begin{DoxyReturn}{返回}
+返回初始化数据字符串的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 560 行定义.
+
+
+
+引用了 value\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Check\+Assignable(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Switch\+Sentence\+::\+Check\+Switch\+Case\+Able\+To\+Add() , 以及 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Switch\+Sentence\+::\+Convert\+Case\+Value\+To\+Label().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a3eaeaca261e5860d4ca73accce3cf460_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_aa62b01567662bba846c60ce4f4bd53bb}\label{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_aa62b01567662bba846c60ce4f4bd53bb}} 
+\index{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}!operator=@{operator=}}
+\index{operator=@{operator=}!c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode}{Basic\+Type\+Initialize\+Operator\+Node}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode}{Basic\+Type\+Initialize\+Operator\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a8e45080b68667d2586d93cffa6386225}\label{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a8e45080b68667d2586d93cffa6386225}} 
+\index{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}!SelfCopy@{SelfCopy}}
+\index{SelfCopy@{SelfCopy}!c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SelfCopy()}{SelfCopy()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::\+Self\+Copy (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{new\+\_\+type,  }\item[{Const\+Tag}]{new\+\_\+const\+\_\+tag }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+拷贝自身并设置拷贝得到的对象类型为new\+\_\+type 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em new\+\_\+type} & ：拷贝后得到的对象的类型 \\
+\hline
+\mbox{\texttt{ in}}  & {\em new\+\_\+const\+\_\+tag} & ：拷贝后得到的对象的新const标记 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回指向拷贝后的对象的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：设置初始化数据为非const\\
+\hline
+\end{DoxyRetVals}
+该函数用于类型转换 \begin{DoxyAttention}{注意}
+仅允许对变量、初始化值和类型转换节点调用该函数 
+\end{DoxyAttention}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_afaf8c7f881d6b57c275611312b5e0f78}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+cpp 第 59 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_aa8eec206ebcf1953933a92fd50678a3b}\label{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_aa8eec206ebcf1953933a92fd50678a3b}} 
+\index{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}!SetInitDataType@{SetInitDataType}}
+\index{SetInitDataType@{SetInitDataType}!c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetInitDataType()}{SetInitDataType()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::\+Set\+Init\+Data\+Type (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{data\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置初始化用数据的类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em data\+\_\+type} & ：初始化数据类型链头结点指针 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+允许的类型参考\+Check\+Basic\+Type\+Initialize\+Valid 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+cpp 第 71 行定义.
+
+
+
+引用了 Check\+Basic\+Type\+Initialize\+Valid() , 以及 Set\+Init\+Value\+Type().
+
+
+
+被这些函数引用 Basic\+Type\+Initialize\+Operator\+Node().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_aa8eec206ebcf1953933a92fd50678a3b_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_aa8eec206ebcf1953933a92fd50678a3b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a54b4e242ed930666c66aeb028a8836de}\label{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a54b4e242ed930666c66aeb028a8836de}} 
+\index{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}!SetInitValueType@{SetInitValueType}}
+\index{SetInitValueType@{SetInitValueType}!c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetInitValueType()}{SetInitValueType()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::\+Set\+Init\+Value\+Type (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{init\+\_\+value\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\begin{DoxyNote}{注解}
+1.外部访问时不应使用该函数设置类型，使用\+Set\+Init\+Data\+Type代替 2.调用该函数设置初始化数据类型会导致跳过\+Check\+Basic\+Type\+Initialize\+Valid检查 3.放在private供内部函数调用 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+h 第 578 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Initialize\+Operator\+Node\+Interface\+::\+Set\+Init\+Value\+Type().
+
+
+
+被这些函数引用 Set\+Init\+Data\+Type().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a54b4e242ed930666c66aeb028a8836de_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a54b4e242ed930666c66aeb028a8836de_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a111daf903108b5471b35d31d35f0db66}\label{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_a111daf903108b5471b35d31d35f0db66}} 
+\index{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}!SetValue@{SetValue}}
+\index{SetValue@{SetValue}!c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetValue()}{SetValue()}}
+{\footnotesize\ttfamily template$<$class Value $>$ \\
+void c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::\+Set\+Value (\begin{DoxyParamCaption}\item[{Value \&\&}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置初始化数据值 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em value} & ：字符串形式表示的初始化数据 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+使用字符串形式表示以防止精度损失等问题 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+h 第 555 行定义.
+
+
+
+引用了 value\+\_\+.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_ab1b0c3d76088b8451247796c9ef5f44a}\label{classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode_ab1b0c3d76088b8451247796c9ef5f44a}} 
+\index{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}!value\_@{value\_}}
+\index{value\_@{value\_}!c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode@{c\_parser\_frontend::operator\_node::BasicTypeInitializeOperatorNode}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}}
+{\footnotesize\ttfamily std\+::string c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+初始化值 
+
+\begin{DoxyNote}{注解}
+使用字符串形式避免精度损失 函数类型初始化数据该项维持应默认值 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+h 第 586 行定义.
+
+
+
+被这些函数引用 Get\+Value() , 以及 Set\+Value().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8h}{operator\+\_\+node.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8cpp}{operator\+\_\+node.\+cpp}}\end{DoxyCompactItemize}

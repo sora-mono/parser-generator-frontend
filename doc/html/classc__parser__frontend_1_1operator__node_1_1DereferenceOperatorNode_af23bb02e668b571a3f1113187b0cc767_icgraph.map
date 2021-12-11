@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::operator_node::DereferenceOperatorNode::GetDereferencedNodeReference" name="c_parser_frontend::operator_node::DereferenceOperatorNode::GetDereferencedNodeReference">
+<area shape="rect" id="node1" title="获取解引用得到的节点" alt="" coords="315,38,581,109"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#a3dc1fe0c134243ec553aa6d35a8565e0" title="获取该节点操作结果的const标记" alt="" coords="14,5,258,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#ae74f38305bae9c440eeea7481882901d" title="获取最终结果的类型" alt="" coords="5,85,267,141"/>
+</map>

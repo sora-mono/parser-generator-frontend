@@ -1,0 +1,296 @@
+\hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::Action\+Scope\+System\+::Variety\+Data类 参考}
+\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData}\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}}
+
+
+管理变量信息的存储  
+
+
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a6e82da15474dcd515cc48e412cbd7b0b}{Single\+Pointer\+Type}} = std\+::pair$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a0f3f1f71fdcc6eaf478bf5087da35c9b}{Operator\+Node\+Interface}} $>$, \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}} $>$
+\begin{DoxyCompactList}\small\item\em 存储单个指针的类型 \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_abfb1df465379d28fba4ba9f6a3c6d8c9}{Pointer\+Stack\+Type}} = std\+::stack$<$ \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a6e82da15474dcd515cc48e412cbd7b0b}{Single\+Pointer\+Type}} $>$
+\begin{DoxyCompactList}\small\item\em 存储多个指针的栈类型 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a24685ed95f18202f535e510719989fe4}{Variety\+Data}} ()=default
+\item 
+{\footnotesize template$<$class Data $>$ }\\\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a7478a9ae98c9677f6642e46c575a53fa}{Variety\+Data}} (Data \&\&data)
+\item 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{Define\+Variety\+Result}} \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a02714f17f7b6d024604bc7ab7b62f941}{Add\+Variety\+Or\+Init\+Data}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a0f3f1f71fdcc6eaf478bf5087da35c9b}{Operator\+Node\+Interface}} $>$ \&operator\+\_\+node, \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}} action\+\_\+scope\+\_\+level)
+\begin{DoxyCompactList}\small\item\em 添加一条变量数据或初始化数据 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a431d7169469b11ee98230cd825edd0ad}{Pop\+Top\+Data}} ()
+\begin{DoxyCompactList}\small\item\em 弹出最顶层数据 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a6e82da15474dcd515cc48e412cbd7b0b}{Single\+Pointer\+Type}} \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_ac96ff9521cd5562dd94b780ed8a2747e}{Get\+Top\+Data}} () const
+\begin{DoxyCompactList}\small\item\em 获取最顶层变量指针 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_abf27649989d9c4809675bbc60e6d0f6d}{Empty}} () const
+\begin{DoxyCompactList}\small\item\em 判断容器是否未存储任何指针 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+auto \& \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a9be9ac6cacb9f1b031d71a3aaeec3842}{Get\+Variety\+Data}} ()
+\begin{DoxyCompactList}\small\item\em 获取存储指针的容器 \end{DoxyCompactList}\item 
+const auto \& \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a29f852e9bfd8d76d17ae83b2f52fff58}{Get\+Variety\+Data}} () const
+\begin{DoxyCompactList}\small\item\em 获取存储指针的容器 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::variant$<$ std\+::monostate, \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a6e82da15474dcd515cc48e412cbd7b0b}{Single\+Pointer\+Type}}, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_abfb1df465379d28fba4ba9f6a3c6d8c9}{Pointer\+Stack\+Type}} $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_ac1b280bac79dd49afefbeabaa346d0cf}{variety\+\_\+data\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 存储指向节点的指针，std\+::monostate为容器空时保存的内容 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+管理变量信息的存储 
+
+1.默认存储指向变量节点的指针 2.存在同名变量覆盖浅层变量的情况时转换为栈 3.弹出同名变量后自动恢复单个指针存储 
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 52 行定义.
+
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_abfb1df465379d28fba4ba9f6a3c6d8c9}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_abfb1df465379d28fba4ba9f6a3c6d8c9}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}!PointerStackType@{PointerStackType}}
+\index{PointerStackType@{PointerStackType}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}}
+\doxysubsubsection{\texorpdfstring{PointerStackType}{PointerStackType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_abfb1df465379d28fba4ba9f6a3c6d8c9}{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Data\+::\+Pointer\+Stack\+Type}} =  std\+::stack$<$\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a6e82da15474dcd515cc48e412cbd7b0b}{Single\+Pointer\+Type}}$>$}
+
+
+
+存储多个指针的栈类型 
+
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 59 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a6e82da15474dcd515cc48e412cbd7b0b}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a6e82da15474dcd515cc48e412cbd7b0b}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}!SinglePointerType@{SinglePointerType}}
+\index{SinglePointerType@{SinglePointerType}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}}
+\doxysubsubsection{\texorpdfstring{SinglePointerType}{SinglePointerType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a6e82da15474dcd515cc48e412cbd7b0b}{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Data\+::\+Single\+Pointer\+Type}} =  std\+::pair$<$std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a0f3f1f71fdcc6eaf478bf5087da35c9b}{Operator\+Node\+Interface}}$>$, \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}}$>$}
+
+
+
+存储单个指针的类型 
+
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 57 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a24685ed95f18202f535e510719989fe4}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a24685ed95f18202f535e510719989fe4}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}!VarietyData@{VarietyData}}
+\index{VarietyData@{VarietyData}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}}
+\doxysubsubsection{\texorpdfstring{VarietyData()}{VarietyData()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Data\+::\+Variety\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a7478a9ae98c9677f6642e46c575a53fa}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a7478a9ae98c9677f6642e46c575a53fa}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}!VarietyData@{VarietyData}}
+\index{VarietyData@{VarietyData}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}}
+\doxysubsubsection{\texorpdfstring{VarietyData()}{VarietyData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class Data $>$ \\
+c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Data\+::\+Variety\+Data (\begin{DoxyParamCaption}\item[{Data \&\&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 63 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a02714f17f7b6d024604bc7ab7b62f941}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a02714f17f7b6d024604bc7ab7b62f941}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}!AddVarietyOrInitData@{AddVarietyOrInitData}}
+\index{AddVarietyOrInitData@{AddVarietyOrInitData}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}}
+\doxysubsubsection{\texorpdfstring{AddVarietyOrInitData()}{AddVarietyOrInitData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{Define\+Variety\+Result}} c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Data\+::\+Add\+Variety\+Or\+Init\+Data (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a0f3f1f71fdcc6eaf478bf5087da35c9b}{Operator\+Node\+Interface}} $>$ \&}]{operator\+\_\+node,  }\item[{\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_a9e7e67932922f081704125f9540b9665}{Action\+Scope\+Level}}}]{action\+\_\+scope\+\_\+level }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+添加一条变量数据或初始化数据 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em \mbox{\hyperlink{namespacec__parser__frontend_1_1operator__node}{operator\+\_\+node}}} & ：变量数据或初始化数据节点 \\
+\hline
+\mbox{\texttt{ in}}  & {\em action\+\_\+scope\+\_\+level} & ：作用域等级 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回检查结果，意义见定义
+\end{DoxyReturn}
+建议先创建空节点后调用该函数，可以提升性能 \begin{DoxyNote}{注解}
+如需转换成栈则自动执行 
+\end{DoxyNote}
+
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 9 行定义.
+
+
+
+引用了 Get\+Variety\+Data(), c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::k\+Add\+To\+Stack, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Init\+Value, c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::k\+New, c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::k\+Re\+Define, c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::k\+Shift\+To\+Stack , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Variety.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a02714f17f7b6d024604bc7ab7b62f941_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_abf27649989d9c4809675bbc60e6d0f6d}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_abf27649989d9c4809675bbc60e6d0f6d}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}!Empty@{Empty}}
+\index{Empty@{Empty}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}}
+\doxysubsubsection{\texorpdfstring{Empty()}{Empty()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Data\+::\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+判断容器是否未存储任何指针 
+
+\begin{DoxyReturn}{返回}
+返回容器是否未存储任何指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & 容器内未存储任何指针 \\
+\hline
+{\em false} & 容器内存储至少一个指针 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 88 行定义.
+
+
+
+引用了 variety\+\_\+data\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_ac96ff9521cd5562dd94b780ed8a2747e}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_ac96ff9521cd5562dd94b780ed8a2747e}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}!GetTopData@{GetTopData}}
+\index{GetTopData@{GetTopData}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}}
+\doxysubsubsection{\texorpdfstring{GetTopData()}{GetTopData()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a6e82da15474dcd515cc48e412cbd7b0b}{Action\+Scope\+System\+::\+Variety\+Data\+::\+Single\+Pointer\+Type}} c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Data\+::\+Get\+Top\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+获取最顶层变量指针 
+
+\begin{DoxyReturn}{返回}
+返回变量指针 
+\end{DoxyReturn}
+
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 76 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a9be9ac6cacb9f1b031d71a3aaeec3842}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a9be9ac6cacb9f1b031d71a3aaeec3842}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}!GetVarietyData@{GetVarietyData}}
+\index{GetVarietyData@{GetVarietyData}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}}
+\doxysubsubsection{\texorpdfstring{GetVarietyData()}{GetVarietyData()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily auto\& c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Data\+::\+Get\+Variety\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+获取存储指针的容器 
+
+\begin{DoxyReturn}{返回}
+返回存储指针的容器的引用 
+\end{DoxyReturn}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 95 行定义.
+
+
+
+引用了 variety\+\_\+data\+\_\+.
+
+
+
+被这些函数引用 Add\+Variety\+Or\+Init\+Data().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a9be9ac6cacb9f1b031d71a3aaeec3842_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a29f852e9bfd8d76d17ae83b2f52fff58}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a29f852e9bfd8d76d17ae83b2f52fff58}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}!GetVarietyData@{GetVarietyData}}
+\index{GetVarietyData@{GetVarietyData}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}}
+\doxysubsubsection{\texorpdfstring{GetVarietyData()}{GetVarietyData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const auto\& c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Data\+::\+Get\+Variety\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+获取存储指针的容器 
+
+\begin{DoxyReturn}{返回}
+返回存储指针的容器的引用 
+\end{DoxyReturn}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 98 行定义.
+
+
+
+引用了 variety\+\_\+data\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a431d7169469b11ee98230cd825edd0ad}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a431d7169469b11ee98230cd825edd0ad}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}!PopTopData@{PopTopData}}
+\index{PopTopData@{PopTopData}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}}
+\doxysubsubsection{\texorpdfstring{PopTopData()}{PopTopData()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Data\+::\+Pop\+Top\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+弹出最顶层数据 
+
+\begin{DoxyReturn}{返回}
+返回是否应该删除\+Variety\+Data节点 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：所有数据均弹出，应删除该节点 \\
+\hline
+{\em false} & ：节点中仍有数据 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+自动处理转换 
+\end{DoxyNote}
+
+
+在文件 acion\+\_\+scope\+\_\+system.\+cpp 第 55 行定义.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_ac1b280bac79dd49afefbeabaa346d0cf}\label{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_ac1b280bac79dd49afefbeabaa346d0cf}} 
+\index{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}!variety\_data\_@{variety\_data\_}}
+\index{variety\_data\_@{variety\_data\_}!c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData@{c\_parser\_frontend::action\_scope\_system::ActionScopeSystem::VarietyData}}
+\doxysubsubsection{\texorpdfstring{variety\_data\_}{variety\_data\_}}
+{\footnotesize\ttfamily std\+::variant$<$std\+::monostate, \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_a6e82da15474dcd515cc48e412cbd7b0b}{Single\+Pointer\+Type}}, std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_1_1VarietyData_abfb1df465379d28fba4ba9f6a3c6d8c9}{Pointer\+Stack\+Type}}$>$ $>$ c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Action\+Scope\+System\+::\+Variety\+Data\+::variety\+\_\+data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存储指向节点的指针，std\+::monostate为容器空时保存的内容 
+
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 103 行定义.
+
+
+
+被这些函数引用 Empty() , 以及 Get\+Variety\+Data().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{action__scope__system_8h}{action\+\_\+scope\+\_\+system.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{acion__scope__system_8cpp}{acion\+\_\+scope\+\_\+system.\+cpp}}\end{DoxyCompactItemize}

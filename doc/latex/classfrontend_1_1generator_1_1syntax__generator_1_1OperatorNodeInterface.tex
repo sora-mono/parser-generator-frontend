@@ -1,0 +1,285 @@
+\hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{}\doxysection{frontend\+::generator\+::syntax\+\_\+generator\+::Operator\+Node\+Interface类 参考}
+\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}
+
+
+表示运算符的类的基类  
+
+
+
+
+{\ttfamily \#include $<$production\+\_\+node.\+h$>$}
+
+
+
+类 frontend\+::generator\+::syntax\+\_\+generator\+::Operator\+Node\+Interface 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+frontend\+::generator\+::syntax\+\_\+generator\+::Operator\+Node\+Interface 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6f}{Operator\+Type}} \{ \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6fa212f9f34e4e151a9ba569c71e1aace47}{Operator\+Type\+::k\+Binary}}, 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6fa928a9f284c3edcd86b231bd2d31b8012}{Operator\+Type\+::k\+Left\+Unary}}, 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6faa72abf2244a51c76aea32dbcae6f8d40}{Operator\+Type\+::k\+Binary\+Left\+Unary}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{Production\+Node\+Id}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a31750cb1d3449127e841469e5e092dd9}{Get\+Production\+Node\+In\+Body}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} production\+\_\+body\+\_\+id, \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a947b9e3a6819c29acb6bfca1cfbdf281}{Next\+Word\+To\+Shift\+Index}} next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index) const final
+\begin{DoxyCompactList}\small\item\em 获取产生式体内的产生式 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a5f66ab70ee9fd51233c565ae238efe97}{Set\+Operator\+Type}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6f}{Operator\+Type}} operator\+\_\+type)
+\begin{DoxyCompactList}\small\item\em 设置运算符类型 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6f}{Operator\+Type}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a0b9de14fe6d340fae6c90134b0e79bdc}{Get\+Operator\+Type}} () const
+\begin{DoxyCompactList}\small\item\em 获取运算符类型 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a69ce7329cc2cf3953fc68fbf8653c2df}{Operator\+Node\+Interface}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6f}{Operator\+Type}} operator\+\_\+type, \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}} operator\+\_\+symbol\+\_\+id)
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a151f46b0d3a92756ce3b75b16939dd6e}{Operator\+Node\+Interface}} (const \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&)=delete
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ad522d514e4107bc7ed67e4534adc6eac}{operator=}} (const \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&)=delete
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a9cf0ebf6d00cad0243f25880404500b6}{Operator\+Node\+Interface}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&\&operator\+\_\+production\+\_\+node)
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ad29acd45afbc6d77108f994aaee7f922}{operator=}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&\&operator\+\_\+production\+\_\+node)
+\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6f}{Operator\+Type}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a164c3e21582e70b8acafa4cd87234d73}{operator\+\_\+type\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+表示运算符的类的基类 
+
+运算符支持区分双目运算符语义和单目运算符语义 双目运算符语义使用时运算符所在的产生式体中两侧都应存在产生式 例： Example-\/$>$ Example1 \char`\"{}+\char`\"{} Example2 其中\char`\"{}+\char`\"{}为运算符，这里使用双目运算符语义 单目运算符语义仅支持左侧单目运算符语义，不支持右侧单目运算符语义 例： Assignable -\/$>$ \char`\"{}!\char`\"{} Assignable 其中\char`\"{}!\char`\"{}为运算符，这里使用单目运算符语义 \begin{DoxyAttention}{注意}
+所有表示运算符的类都应从该类派生 
+\end{DoxyAttention}
+
+
+在文件 production\+\_\+node.\+h 第 155 行定义.
+
+
+
+\doxysubsection{成员枚举类型说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6f}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6f}} 
+\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!OperatorType@{OperatorType}}
+\index{OperatorType@{OperatorType}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{OperatorType}{OperatorType}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6f}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface\+::\+Operator\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kBinary@{kBinary}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!kBinary@{kBinary}}}\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6fa212f9f34e4e151a9ba569c71e1aace47}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6fa212f9f34e4e151a9ba569c71e1aace47}} 
+k\+Binary&双目运算符 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kLeftUnary@{kLeftUnary}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!kLeftUnary@{kLeftUnary}}}\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6fa928a9f284c3edcd86b231bd2d31b8012}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6fa928a9f284c3edcd86b231bd2d31b8012}} 
+k\+Left\+Unary&左侧单目运算符 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kBinaryLeftUnary@{kBinaryLeftUnary}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!kBinaryLeftUnary@{kBinaryLeftUnary}}}\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6faa72abf2244a51c76aea32dbcae6f8d40}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6faa72abf2244a51c76aea32dbcae6f8d40}} 
+k\+Binary\+Left\+Unary&同时具有双目运算符语义和左侧单目运算符语义的运算符 \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+在文件 production\+\_\+node.\+h 第 157 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a69ce7329cc2cf3953fc68fbf8653c2df}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a69ce7329cc2cf3953fc68fbf8653c2df}} 
+\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!OperatorNodeInterface@{OperatorNodeInterface}}
+\index{OperatorNodeInterface@{OperatorNodeInterface}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{OperatorNodeInterface()}{OperatorNodeInterface()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface\+::\+Operator\+Node\+Interface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6f}{Operator\+Type}}}]{operator\+\_\+type,  }\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}}}]{operator\+\_\+symbol\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+在文件 production\+\_\+node.\+h 第 185 行定义.
+
+
+
+引用了 frontend\+::generator\+::syntax\+\_\+generator\+::k\+Operator\+Node.
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a151f46b0d3a92756ce3b75b16939dd6e}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a151f46b0d3a92756ce3b75b16939dd6e}} 
+\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!OperatorNodeInterface@{OperatorNodeInterface}}
+\index{OperatorNodeInterface@{OperatorNodeInterface}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{OperatorNodeInterface()}{OperatorNodeInterface()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface\+::\+Operator\+Node\+Interface (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a9cf0ebf6d00cad0243f25880404500b6}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a9cf0ebf6d00cad0243f25880404500b6}} 
+\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!OperatorNodeInterface@{OperatorNodeInterface}}
+\index{OperatorNodeInterface@{OperatorNodeInterface}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{OperatorNodeInterface()}{OperatorNodeInterface()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface\+::\+Operator\+Node\+Interface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&\&}]{operator\+\_\+production\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}
+
+
+
+在文件 production\+\_\+node.\+h 第 191 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a0b9de14fe6d340fae6c90134b0e79bdc}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a0b9de14fe6d340fae6c90134b0e79bdc}} 
+\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!GetOperatorType@{GetOperatorType}}
+\index{GetOperatorType@{GetOperatorType}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{GetOperatorType()}{GetOperatorType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6f}{Operator\+Type}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface\+::\+Get\+Operator\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取运算符类型 
+
+\begin{DoxyReturn}{返回}
+返回运算符类型 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6fa212f9f34e4e151a9ba569c71e1aace47}{Operator\+Type\+::k\+Binary}}} & ：双目运算符 \\
+\hline
+{\em \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6fa928a9f284c3edcd86b231bd2d31b8012}{Operator\+Type\+::k\+Left\+Unary}}} & ：左侧单目运算符 \\
+\hline
+{\em \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6faa72abf2244a51c76aea32dbcae6f8d40}{Operator\+Type\+::k\+Binary\+Left\+Unary}}} & ：同时具有双目运算符与左侧单目运算符语义 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 production\+\_\+node.\+h 第 182 行定义.
+
+
+
+引用了 operator\+\_\+type\+\_\+.
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a31750cb1d3449127e841469e5e092dd9}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a31750cb1d3449127e841469e5e092dd9}} 
+\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!GetProductionNodeInBody@{GetProductionNodeInBody}}
+\index{GetProductionNodeInBody@{GetProductionNodeInBody}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{GetProductionNodeInBody()}{GetProductionNodeInBody()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{Production\+Node\+Id}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface\+::\+Get\+Production\+Node\+In\+Body (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}}}]{production\+\_\+body\+\_\+id,  }\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a947b9e3a6819c29acb6bfca1cfbdf281}{Next\+Word\+To\+Shift\+Index}}}]{next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [final]}, {\ttfamily [virtual]}}
+
+
+
+获取产生式体内的产生式 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em production\+\_\+body\+\_\+id} & ：待获取的产生式体\+ID \\
+\hline
+\mbox{\texttt{ in}}  & {\em next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index} & ：待获取的子产生式位置 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{注意}
+终结节点调用该函数时production\+\_\+body\+\_\+id必须为0 next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index不是0时则返回\+Next\+Word\+To\+Shift\+Index\+::\+Invalid\+Id() 
+\end{DoxyAttention}
+
+
+实现了 \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a59f98cd7ca7b0906985c8bc053e92e65}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node}}.
+
+
+
+在文件 production\+\_\+node.\+cpp 第 29 行定义.
+
+
+
+引用了 frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::\+Get\+Node\+Id().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a31750cb1d3449127e841469e5e092dd9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ad522d514e4107bc7ed67e4534adc6eac}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ad522d514e4107bc7ed67e4534adc6eac}} 
+\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!operator=@{operator=}}
+\index{operator=@{operator=}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ad29acd45afbc6d77108f994aaee7f922}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ad29acd45afbc6d77108f994aaee7f922}} 
+\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!operator=@{operator=}}
+\index{operator=@{operator=}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&\&}]{operator\+\_\+production\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+在文件 production\+\_\+node.\+cpp 第 12 行定义.
+
+
+
+引用了 frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::operator=() , 以及 operator\+\_\+type\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ad29acd45afbc6d77108f994aaee7f922_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a5f66ab70ee9fd51233c565ae238efe97}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a5f66ab70ee9fd51233c565ae238efe97}} 
+\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!SetOperatorType@{SetOperatorType}}
+\index{SetOperatorType@{SetOperatorType}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{SetOperatorType()}{SetOperatorType()}}
+{\footnotesize\ttfamily void frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface\+::\+Set\+Operator\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6f}{Operator\+Type}}}]{operator\+\_\+type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置运算符类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em operator\+\_\+type} & ：新的运算符类型 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 production\+\_\+node.\+h 第 173 行定义.
+
+
+
+引用了 operator\+\_\+type\+\_\+.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a164c3e21582e70b8acafa4cd87234d73}\label{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a164c3e21582e70b8acafa4cd87234d73}} 
+\index{frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}!operator\_type\_@{operator\_type\_}}
+\index{operator\_type\_@{operator\_type\_}!frontend::generator::syntax\_generator::OperatorNodeInterface@{frontend::generator::syntax\_generator::OperatorNodeInterface}}
+\doxysubsubsection{\texorpdfstring{operator\_type\_}{operator\_type\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_ae6ea6bc7382b7e6924391e5ed0d62a6f}{Operator\+Type}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface\+::operator\+\_\+type\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 production\+\_\+node.\+h 第 198 行定义.
+
+
+
+被这些函数引用 Get\+Operator\+Type(), operator=() , 以及 Set\+Operator\+Type().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Generator/\+Syntax\+Generator/\mbox{\hyperlink{production__node_8h}{production\+\_\+node.\+h}}\item 
+src/\+Generator/\+Syntax\+Generator/\mbox{\hyperlink{production__node_8cpp}{production\+\_\+node.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,1009 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: c_parser_frontend::operator_node::AssignOperatorNode类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pub-static-methods">静态 Public 成员函数</a> &#124;
+<a href="#pri-static-methods">静态 Private 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">c_parser_frontend::operator_node::AssignOperatorNode类 参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>赋值节点  
+ <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="operator__node_8h_source.html">operator_node.h</a>&gt;</code></p>
+<div class="dynheader">
+类 c_parser_frontend::operator_node::AssignOperatorNode 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode__inherit__graph.png" border="0" usemap="#c__parser__frontend_1_1operator__node_1_1AssignOperatorNode_inherit__map" alt="Inheritance graph"/></div>
+<map name="c__parser__frontend_1_1operator__node_1_1AssignOperatorNode_inherit__map" id="c__parser__frontend_1_1operator__node_1_1AssignOperatorNode_inherit__map">
+<area shape="rect" title="赋值节点" alt="" coords="5,109,264,151"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html" title="操作节点基类" alt="" coords="27,5,242,61"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<div class="dynheader">
+c_parser_frontend::operator_node::AssignOperatorNode 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode__coll__graph.png" border="0" usemap="#c__parser__frontend_1_1operator__node_1_1AssignOperatorNode_coll__map" alt="Collaboration graph"/></div>
+<map name="c__parser__frontend_1_1operator__node_1_1AssignOperatorNode_coll__map" id="c__parser__frontend_1_1operator__node_1_1AssignOperatorNode_coll__map">
+<area shape="rect" title="赋值节点" alt="" coords="952,13,1211,54"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html" title="操作节点基类" alt="" coords="688,5,903,61"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html" title="强制显式调用构造函数且使用默认无效值版Wrapper" alt="" coords="321,5,555,61"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,5,272,61"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:acec5107189d14fb8545d777cde1f5b64"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#acec5107189d14fb8545d777cde1f5b64">AssignOperatorNode</a> ()</td></tr>
+<tr class="separator:acec5107189d14fb8545d777cde1f5b64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa52a775a8b09ea06699f62e46ea1c85b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aa52a775a8b09ea06699f62e46ea1c85b">AssignOperatorNode</a> (const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html">AssignOperatorNode</a> &amp;)=delete</td></tr>
+<tr class="separator:aa52a775a8b09ea06699f62e46ea1c85b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8dcb6f1410e4bfc2dff2e348466523d5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html">AssignOperatorNode</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a8dcb6f1410e4bfc2dff2e348466523d5">operator=</a> (const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html">AssignOperatorNode</a> &amp;)=delete</td></tr>
+<tr class="separator:a8dcb6f1410e4bfc2dff2e348466523d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4039570c5ff24bfd05b76631de6a47d"><td class="memItemLeft" align="right" valign="top">virtual ConstTag&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aa4039570c5ff24bfd05b76631de6a47d">GetResultConstTag</a> () const override</td></tr>
+<tr class="memdesc:aa4039570c5ff24bfd05b76631de6a47d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取该节点操作结果的const标记  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aa4039570c5ff24bfd05b76631de6a47d">更多...</a><br /></td></tr>
+<tr class="separator:aa4039570c5ff24bfd05b76631de6a47d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca8bf9ef313ae917878d6e7b3f8d59f0"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca8bf9ef313ae917878d6e7b3f8d59f0">GetResultTypePointer</a> () const override</td></tr>
+<tr class="memdesc:aca8bf9ef313ae917878d6e7b3f8d59f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最终结果的类型  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca8bf9ef313ae917878d6e7b3f8d59f0">更多...</a><br /></td></tr>
+<tr class="separator:aca8bf9ef313ae917878d6e7b3f8d59f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49f018702a4feb4974a574deebc4e2bd"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a49f018702a4feb4974a574deebc4e2bd">GetResultOperatorNode</a> () const override</td></tr>
+<tr class="memdesc:a49f018702a4feb4974a574deebc4e2bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最终结果的节点  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a49f018702a4feb4974a574deebc4e2bd">更多...</a><br /></td></tr>
+<tr class="separator:a49f018702a4feb4974a574deebc4e2bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a057ea31c373bc19b3e8979a0b9f4a558"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a057ea31c373bc19b3e8979a0b9f4a558">SelfCopy</a> (const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;new_type, ConstTag new_const_tag) const override</td></tr>
+<tr class="memdesc:a057ea31c373bc19b3e8979a0b9f4a558"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝自身并设置拷贝得到的对象类型为new_type  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a057ea31c373bc19b3e8979a0b9f4a558">更多...</a><br /></td></tr>
+<tr class="separator:a057ea31c373bc19b3e8979a0b9f4a558"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd1b267e61f5c750b2731ce0efddab6f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#acd1b267e61f5c750b2731ce0efddab6f">SetNodeToBeAssigned</a> (const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt; &amp;node_to_be_assigned)</td></tr>
+<tr class="memdesc:acd1b267e61f5c750b2731ce0efddab6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置待被赋值的节点  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#acd1b267e61f5c750b2731ce0efddab6f">更多...</a><br /></td></tr>
+<tr class="separator:acd1b267e61f5c750b2731ce0efddab6f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4a5d7fce466466e1f773d13e6b1e6586"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a4a5d7fce466466e1f773d13e6b1e6586">GetNodeToBeAssignedPointer</a> () const</td></tr>
+<tr class="memdesc:a4a5d7fce466466e1f773d13e6b1e6586"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取待被赋值的节点  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a4a5d7fce466466e1f773d13e6b1e6586">更多...</a><br /></td></tr>
+<tr class="separator:a4a5d7fce466466e1f773d13e6b1e6586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7750f0579651a012f00051f5510cc09c"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a7750f0579651a012f00051f5510cc09c">GetNodeToBeAssignedReference</a> () const</td></tr>
+<tr class="memdesc:a7750f0579651a012f00051f5510cc09c"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取待被赋值的节点  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a7750f0579651a012f00051f5510cc09c">更多...</a><br /></td></tr>
+<tr class="separator:a7750f0579651a012f00051f5510cc09c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aca9910541d690b4040e6ba1ce4323a72"><td class="memItemLeft" align="right" valign="top">AssignableCheckResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca9910541d690b4040e6ba1ce4323a72">SetNodeForAssign</a> (const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt; &amp;node_for_assign, bool is_announce)</td></tr>
+<tr class="memdesc:aca9910541d690b4040e6ba1ce4323a72"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置用来赋值的节点  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca9910541d690b4040e6ba1ce4323a72">更多...</a><br /></td></tr>
+<tr class="separator:aca9910541d690b4040e6ba1ce4323a72"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a329d5fdae4eba675281c79a393aa1b54"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a329d5fdae4eba675281c79a393aa1b54">GetNodeForAssignPointer</a> () const</td></tr>
+<tr class="memdesc:a329d5fdae4eba675281c79a393aa1b54"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取用来赋值的节点  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a329d5fdae4eba675281c79a393aa1b54">更多...</a><br /></td></tr>
+<tr class="separator:a329d5fdae4eba675281c79a393aa1b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad30a61a47647a009a89b8e5063ca6272"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#ad30a61a47647a009a89b8e5063ca6272">GetNodeForAssignReference</a> () const</td></tr>
+<tr class="memdesc:ad30a61a47647a009a89b8e5063ca6272"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取用来赋值的节点  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#ad30a61a47647a009a89b8e5063ca6272">更多...</a><br /></td></tr>
+<tr class="separator:ad30a61a47647a009a89b8e5063ca6272"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface')"><img src="closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">c_parser_frontend::operator_node::OperatorNodeInterface</a></td></tr>
+<tr class="memitem:a39acd37eb650c12aaae71013fecf07e5 inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a39acd37eb650c12aaae71013fecf07e5">OperatorNodeInterface</a> (<a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350f">GeneralOperationType</a> general_operator_type)</td></tr>
+<tr class="separator:a39acd37eb650c12aaae71013fecf07e5 inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0705acbb3ea197e4453557b5f349dd15 inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a0705acbb3ea197e4453557b5f349dd15">OperatorNodeInterface</a> (const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;operator_node)</td></tr>
+<tr class="separator:a0705acbb3ea197e4453557b5f349dd15 inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14a54224e3a137974faa169fc91d7621 inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a14a54224e3a137974faa169fc91d7621">~OperatorNodeInterface</a> ()</td></tr>
+<tr class="separator:a14a54224e3a137974faa169fc91d7621 inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dae4e68b0638caefe8fc9055500aa71 inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a4dae4e68b0638caefe8fc9055500aa71">operator=</a> (const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;old_interface)</td></tr>
+<tr class="separator:a4dae4e68b0638caefe8fc9055500aa71 inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88ad86ef80377731bfd984f72774097a inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3fbeba19aeea8bcfd3bc918c9fbcc25b">OperatorId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a88ad86ef80377731bfd984f72774097a">GetOperatorId</a> () const</td></tr>
+<tr class="memdesc:a88ad86ef80377731bfd984f72774097a inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取操作节点ID  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a88ad86ef80377731bfd984f72774097a">更多...</a><br /></td></tr>
+<tr class="separator:a88ad86ef80377731bfd984f72774097a inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b094af7b84d943d4522d09fe61f5c50 inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a6b094af7b84d943d4522d09fe61f5c50">SetGeneralOperatorType</a> (<a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350f">GeneralOperationType</a> operator_type)</td></tr>
+<tr class="memdesc:a6b094af7b84d943d4522d09fe61f5c50 inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置操作类型  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a6b094af7b84d943d4522d09fe61f5c50">更多...</a><br /></td></tr>
+<tr class="separator:a6b094af7b84d943d4522d09fe61f5c50 inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa533e1f444a8a0fcc9cf1d73436ed9da inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350f">GeneralOperationType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#aa533e1f444a8a0fcc9cf1d73436ed9da">GetGeneralOperatorType</a> () const</td></tr>
+<tr class="memdesc:aa533e1f444a8a0fcc9cf1d73436ed9da inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取操作类型所属大类  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#aa533e1f444a8a0fcc9cf1d73436ed9da">更多...</a><br /></td></tr>
+<tr class="separator:aa533e1f444a8a0fcc9cf1d73436ed9da inherit pub_methods_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:ae04475df3488b171fc37c245af4fa441"><td class="memItemLeft" align="right" valign="top">static AssignableCheckResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#ae04475df3488b171fc37c245af4fa441">CheckAssignable</a> (const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;node_to_be_assigned, const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;node_for_assign, bool is_announce)</td></tr>
+<tr class="memdesc:ae04475df3488b171fc37c245af4fa441"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查两个节点是否可以赋值  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#ae04475df3488b171fc37c245af4fa441">更多...</a><br /></td></tr>
+<tr class="separator:ae04475df3488b171fc37c245af4fa441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
+静态 Private 成员函数</h2></td></tr>
+<tr class="memitem:a723c6c6897c0618d9577cece835a85c8"><td class="memItemLeft" align="right" valign="top">static AssignableCheckResult&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a723c6c6897c0618d9577cece835a85c8">VarietyAssignableByInitializeList</a> (const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html">VarietyOperatorNode</a> &amp;variety_node, const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1ListInitializeOperatorNode.html">ListInitializeOperatorNode</a> &amp;list_initialize_operator_node)</td></tr>
+<tr class="memdesc:a723c6c6897c0618d9577cece835a85c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查使用初始化列表初始化变量的情况  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a723c6c6897c0618d9577cece835a85c8">更多...</a><br /></td></tr>
+<tr class="separator:a723c6c6897c0618d9577cece835a85c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:a946b17bda1aca04f6c6c590909206c20"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a946b17bda1aca04f6c6c590909206c20">node_to_be_assigned_</a></td></tr>
+<tr class="memdesc:a946b17bda1aca04f6c6c590909206c20"><td class="mdescLeft">&#160;</td><td class="mdescRight">将要被赋值的节点  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a946b17bda1aca04f6c6c590909206c20">更多...</a><br /></td></tr>
+<tr class="separator:a946b17bda1aca04f6c6c590909206c20"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5b8f228e8b2050ac5872bfa9bbdab782"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a5b8f228e8b2050ac5872bfa9bbdab782">node_for_assign_</a></td></tr>
+<tr class="memdesc:a5b8f228e8b2050ac5872bfa9bbdab782"><td class="mdescLeft">&#160;</td><td class="mdescRight">用来赋值的节点  <a href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a5b8f228e8b2050ac5872bfa9bbdab782">更多...</a><br /></td></tr>
+<tr class="separator:a5b8f228e8b2050ac5872bfa9bbdab782"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+额外继承的成员函数</h2></td></tr>
+<tr class="inherit_header pub_types_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface')"><img src="closed.png" alt="-"/>&#160;Public 类型 继承自 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">c_parser_frontend::operator_node::OperatorNodeInterface</a></td></tr>
+<tr class="memitem:a3fbeba19aeea8bcfd3bc918c9fbcc25b inherit pub_types_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3fbeba19aeea8bcfd3bc918c9fbcc25b">OperatorId</a> = <a class="el" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html">frontend::common::ExplicitIdWrapper</a>&lt; size_t, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#ab66c53c4bf384e6cfe9ae0bc952e8235">IdWrapper</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#ab66c53c4bf384e6cfe9ae0bc952e8235aa61272c50e68d6331c93e9ad240c61ad">IdWrapper::kOperatorNodeId</a> &gt;</td></tr>
+<tr class="memdesc:a3fbeba19aeea8bcfd3bc918c9fbcc25b inherit pub_types_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">操作节点ID  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3fbeba19aeea8bcfd3bc918c9fbcc25b">更多...</a><br /></td></tr>
+<tr class="separator:a3fbeba19aeea8bcfd3bc918c9fbcc25b inherit pub_types_classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>赋值节点 </p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00838">838</a> 行定义.</p>
+</div><h2 class="groupheader">构造及析构函数说明</h2>
+<a id="acec5107189d14fb8545d777cde1f5b64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acec5107189d14fb8545d777cde1f5b64">&#9670;&nbsp;</a></span>AssignOperatorNode() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">c_parser_frontend::operator_node::AssignOperatorNode::AssignOperatorNode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00840">840</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350fa4bf03a5b9add1cfbbc9bd41c2155f568">c_parser_frontend::operator_node::kAssign</a>.</p>
+
+</div>
+</div>
+<a id="aa52a775a8b09ea06699f62e46ea1c85b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa52a775a8b09ea06699f62e46ea1c85b">&#9670;&nbsp;</a></span>AssignOperatorNode() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">c_parser_frontend::operator_node::AssignOperatorNode::AssignOperatorNode </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html">AssignOperatorNode</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="ae04475df3488b171fc37c245af4fa441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae04475df3488b171fc37c245af4fa441">&#9670;&nbsp;</a></span>CheckAssignable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AssignableCheckResult c_parser_frontend::operator_node::AssignOperatorNode::CheckAssignable </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_to_be_assigned</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;&#160;</td>
+          <td class="paramname"><em>node_for_assign</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_announce</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查两个节点是否可以赋值 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_to_be_assigned</td><td>；被赋值的节点 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_for_assign</td><td>：用来赋值的节点 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">is_announce</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回检查结果，含义见定义</dd></dl>
+<p>1.自动检查AssignableCheckResut::kMayBeZeroToPointer的具体情况并改变返回结果 2.当is_announce == true时 忽略const标记和LeftRightValue标记的检查且允许使用初始化列表 3.如果使用自动数组大小推断则更新数组大小（违反const原则） 4.如果被赋值的节点与用来赋值的节点类型完全相同（operator==()）且为变量类型 则设置被赋值的节点的类型链指针指向用来赋值的类型链以节省内存 （违反const原则） </p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8cpp_source.html">operator_node.cpp</a> 第 <a class="el" href="operator__node_8cpp_source.html#l00430">430</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00180">c_parser_frontend::operator_node::OperatorNodeInterface::GetGeneralOperatorType()</a>, <a class="el" href="operator__node_8h_source.html#l00496">c_parser_frontend::operator_node::InitializeOperatorNodeInterface::GetInitializeType()</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a1894f1b3888819c4584eef70953c6cff">c_parser_frontend::operator_node::OperatorNodeInterface::GetResultConstTag()</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e">c_parser_frontend::operator_node::OperatorNodeInterface::GetResultTypePointer()</a>, <a class="el" href="operator__node_8h_source.html#l00560">c_parser_frontend::operator_node::BasicTypeInitializeOperatorNode::GetValue()</a>, <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350fa4bf03a5b9add1cfbbc9bd41c2155f568">c_parser_frontend::operator_node::kAssign</a>, <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a174c2dc0ea451920c3608685cee9b699a27296922b87cce1a26d3d54419a74599">c_parser_frontend::operator_node::kBasic</a>, <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350fa547d27ef9c2dc9f7881f94368af23fb1">c_parser_frontend::operator_node::kDeReference</a>, <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350fa7be94822b9c1fc47714021ad7e1c1d44">c_parser_frontend::operator_node::kFunctionCall</a>, <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350fae74f01d7083d3e4fe9a8f02c1d2737fc">c_parser_frontend::operator_node::kInitValue</a>, <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350fa0f34afb752ff05dba51bc86321a5abbd">c_parser_frontend::operator_node::kLogicalOperation</a>, <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350fa1c739d15a85a6bd95c1c44ef53e85e9c">c_parser_frontend::operator_node::kMathematicalOperation</a>, <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350fa5bd1fb4f7fe9afbd4bcb54443a2aebca">c_parser_frontend::operator_node::kMemberAccess</a>, <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a37f6ee0d8ea3f194ac7943f4d32a4a0aab09bfa0519fcbc6ee7b5fde9ec872cf2">c_parser_frontend::operator_node::kRightValue</a>, <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350fa045acd1cb02b66a0ced4f74701dbe8ff">c_parser_frontend::operator_node::kVariety</a>, <a class="el" href="operator__node_8cpp_source.html#l00014">c_parser_frontend::operator_node::VarietyOperatorNode::SetVarietyType()</a> , 以及 <a class="el" href="operator__node_8cpp_source.html#l00542">VarietyAssignableByInitializeList()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8cpp_source.html#l00273">c_parser_frontend::operator_node::FunctionCallOperatorNode::AddFunctionCallArgument()</a>, <a class="el" href="flow__control_8cpp_source.html#l00299">c_parser_frontend::flow_control::FunctionDefine::CheckSentenceInFunctionValid()</a>, <a class="el" href="operator__node_8cpp_source.html#l00979">c_parser_frontend::operator_node::TemaryOperatorNode::ConstructResultNode()</a>, <a class="el" href="flow__control_8cpp_source.html#l00427">c_parser_frontend::operator_node::FunctionCallOperatorNode::SetArguments()</a>, <a class="el" href="operator__node_8cpp_source.html#l00409">SetNodeForAssign()</a> , 以及 <a class="el" href="operator__node_8cpp_source.html#l00542">VarietyAssignableByInitializeList()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441_cgraph" id="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441_cgraph">
+<area shape="rect" title="检查两个节点是否可以赋值" alt="" coords="5,285,229,341"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#aa533e1f444a8a0fcc9cf1d73436ed9da" title="获取操作类型所属大类" alt="" coords="291,5,541,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html#a8759d34682bb031948e9ec241e95b0ff" title="获取初始化数据所属分类" alt="" coords="297,85,535,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a1894f1b3888819c4584eef70953c6cff" title="获取该节点操作结果的const标记" alt="" coords="309,165,523,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e" title="获取最终结果的类型" alt="" coords="302,245,530,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a3eaeaca261e5860d4ca73accce3cf460" title="获取初始化数据的值" alt="" coords="293,325,539,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a212a08cb0c6f8c89f43eb35dbd26897e" title="设置变量的类型" alt="" coords="303,405,529,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a723c6c6897c0618d9577cece835a85c8" title="检查使用初始化列表初始化变量的情况" alt="" coords="277,485,555,541"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a6672689ac26f0762b7fc0108659fdb32" title="检查给定类型是否可以作为普通变量的类型" alt="" coords="604,380,831,436"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="880,413,1083,469"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1ListInitializeOperatorNode.html#a6e5405a2927f5e86c4b30428d61a25e5" title="获取初始化列表中所有的初始化值" alt="" coords="612,511,823,567"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a1c5421e70225e5de9db2c7f26e650de9" title="获取变量类型链" alt="" coords="603,591,832,647"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441_icgraph" id="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441_icgraph">
+<area shape="rect" title="检查两个节点是否可以赋值" alt="" coords="876,245,1100,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#a42baddd3c0fb6f454c50d06472993ae2" title="添加调用参数" alt="" coords="537,5,828,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#aaf0729f7e7c809dad9814ec9fecf5fe5" title="检查给定语句是否可以作为函数内执行的语句" alt="" coords="568,85,797,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#ae59e55b700c8709ffc835891f6cd84f7" title="创建返回结果的节点" alt="" coords="568,165,797,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#ad2a310de687335d6658b0daead191637" title="按容器设置调用参数" alt="" coords="576,245,789,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca9910541d690b4040e6ba1ce4323a72" title="设置用来赋值的节点" alt="" coords="571,325,795,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a723c6c6897c0618d9577cece835a85c8" title="检查使用初始化列表初始化变量的情况" alt="" coords="544,405,821,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a80ece7836e0b60e9abace2aef88b7f6e" title="添加一条函数内执行的语句" alt="" coords="271,5,478,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a1197ee4a48e2d37c82b402f6bd01246a" title="添加一个容器内的全部语句" alt="" coords="271,85,478,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a73416179a5655fc54cd037f7d9a43f43" title="向流程语句主体中中添加单条语句" alt="" coords="5,5,212,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a4e41329fb34ed861cb4ffa6e1677271d" title="向流程语句主体中中添加多条语句" alt="" coords="5,85,212,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#aed46590b486ee7477bb17dce3677c3fb" title="设置条件为假时的分支" alt="" coords="260,165,489,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a3bf8f22583fef107e37a3b9a51d1f7de" title="设置条件为真时的分支" alt="" coords="260,245,489,301"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a329d5fdae4eba675281c79a393aa1b54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a329d5fdae4eba675281c79a393aa1b54">&#9670;&nbsp;</a></span>GetNodeForAssignPointer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a>&gt; c_parser_frontend::operator_node::AssignOperatorNode::GetNodeForAssignPointer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取用来赋值的节点 </p>
+<dl class="section return"><dt>返回</dt><dd>返回指向用来赋值的节点的const指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00899">899</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00941">node_for_assign_</a>.</p>
+
+</div>
+</div>
+<a id="ad30a61a47647a009a89b8e5063ca6272"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad30a61a47647a009a89b8e5063ca6272">&#9670;&nbsp;</a></span>GetNodeForAssignReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a>&amp; c_parser_frontend::operator_node::AssignOperatorNode::GetNodeForAssignReference </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取用来赋值的节点 </p>
+<dl class="section return"><dt>返回</dt><dd>返回用来赋值的节点的const引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00904">904</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00941">node_for_assign_</a>.</p>
+
+</div>
+</div>
+<a id="a4a5d7fce466466e1f773d13e6b1e6586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4a5d7fce466466e1f773d13e6b1e6586">&#9670;&nbsp;</a></span>GetNodeToBeAssignedPointer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a>&gt; c_parser_frontend::operator_node::AssignOperatorNode::GetNodeToBeAssignedPointer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取待被赋值的节点 </p>
+<dl class="section return"><dt>返回</dt><dd>返回指向待被赋值的节点的const指针 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00874">874</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00939">node_to_be_assigned_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8h_source.html#l00853">GetResultOperatorNode()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a4a5d7fce466466e1f773d13e6b1e6586_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a4a5d7fce466466e1f773d13e6b1e6586_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a4a5d7fce466466e1f773d13e6b1e6586_icgraph" id="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a4a5d7fce466466e1f773d13e6b1e6586_icgraph">
+<area shape="rect" title="获取待被赋值的节点" alt="" coords="277,5,535,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a49f018702a4feb4974a574deebc4e2bd" title="获取最终结果的节点" alt="" coords="5,5,229,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7750f0579651a012f00051f5510cc09c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7750f0579651a012f00051f5510cc09c">&#9670;&nbsp;</a></span>GetNodeToBeAssignedReference()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a>&amp; c_parser_frontend::operator_node::AssignOperatorNode::GetNodeToBeAssignedReference </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取待被赋值的节点 </p>
+<dl class="section return"><dt>返回</dt><dd>返回待被赋值的节点的const引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00880">880</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00939">node_to_be_assigned_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8h_source.html#l00845">GetResultConstTag()</a>, <a class="el" href="operator__node_8h_source.html#l00848">GetResultTypePointer()</a> , 以及 <a class="el" href="operator__node_8cpp_source.html#l00409">SetNodeForAssign()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a7750f0579651a012f00051f5510cc09c_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a7750f0579651a012f00051f5510cc09c_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a7750f0579651a012f00051f5510cc09c_icgraph" id="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a7750f0579651a012f00051f5510cc09c_icgraph">
+<area shape="rect" title="获取待被赋值的节点" alt="" coords="277,85,555,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aa4039570c5ff24bfd05b76631de6a47d" title="获取该节点操作结果的const标记" alt="" coords="5,5,229,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca8bf9ef313ae917878d6e7b3f8d59f0" title="获取最终结果的类型" alt="" coords="5,85,229,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca9910541d690b4040e6ba1ce4323a72" title="设置用来赋值的节点" alt="" coords="5,165,229,221"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa4039570c5ff24bfd05b76631de6a47d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4039570c5ff24bfd05b76631de6a47d">&#9670;&nbsp;</a></span>GetResultConstTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual ConstTag c_parser_frontend::operator_node::AssignOperatorNode::GetResultConstTag </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取该节点操作结果的const标记 </p>
+<dl class="section return"><dt>返回</dt><dd>返回操作结果的const标记</dd></dl>
+<p>1.成员访问、解引用等操作的后续操作不是对原结构体/原指针操作，而是对得到的 新对象进行操作，不同操作类型操作的对象不同 2.通过这个函数抽象获取最终结果的过程以忽略操作的不同 3.以成员访问为例，该函数获取指定的成员在结构体中的const标记，以数学运算 为例，该函数获取运算结果的const标记（ConstTag::kNonConst），以变量声明 为例，该函数返回声明的变量的const标记（对象不变） </p>
+
+<p>实现了 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a1894f1b3888819c4584eef70953c6cff">c_parser_frontend::operator_node::OperatorNodeInterface</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00845">845</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00880">GetNodeToBeAssignedReference()</a> , 以及 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a1894f1b3888819c4584eef70953c6cff">c_parser_frontend::operator_node::OperatorNodeInterface::GetResultConstTag()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aa4039570c5ff24bfd05b76631de6a47d_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aa4039570c5ff24bfd05b76631de6a47d_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aa4039570c5ff24bfd05b76631de6a47d_cgraph" id="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aa4039570c5ff24bfd05b76631de6a47d_cgraph">
+<area shape="rect" title="获取该节点操作结果的const标记" alt="" coords="5,45,229,101"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a7750f0579651a012f00051f5510cc09c" title="获取待被赋值的节点" alt="" coords="277,5,555,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a1894f1b3888819c4584eef70953c6cff" title="获取该节点操作结果的const标记" alt="" coords="309,85,523,141"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a49f018702a4feb4974a574deebc4e2bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49f018702a4feb4974a574deebc4e2bd">&#9670;&nbsp;</a></span>GetResultOperatorNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::shared_ptr&lt;const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a>&gt; c_parser_frontend::operator_node::AssignOperatorNode::GetResultOperatorNode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最终结果的节点 </p>
+<dl class="section return"><dt>返回</dt><dd>返回指向最终结果的指针 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">nullptr</td><td>：自身是最终节点</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>1.该函数用于抽象获取操作最终结果的过程 2.基础变量和初始化变量最终操作节点就是本身，所以返回nullptr 3.赋值运算返回被赋值的对象，解引用返回解引用后得到的对象，以此为例 </p>
+
+<p>实现了 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3f80ebfb819902849c09e74038f6f72f">c_parser_frontend::operator_node::OperatorNodeInterface</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00853">853</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00874">GetNodeToBeAssignedPointer()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a49f018702a4feb4974a574deebc4e2bd_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a49f018702a4feb4974a574deebc4e2bd_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a49f018702a4feb4974a574deebc4e2bd_cgraph" id="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a49f018702a4feb4974a574deebc4e2bd_cgraph">
+<area shape="rect" title="获取最终结果的节点" alt="" coords="5,5,229,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a4a5d7fce466466e1f773d13e6b1e6586" title="获取待被赋值的节点" alt="" coords="277,5,535,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aca8bf9ef313ae917878d6e7b3f8d59f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca8bf9ef313ae917878d6e7b3f8d59f0">&#9670;&nbsp;</a></span>GetResultTypePointer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::shared_ptr&lt;const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a>&gt; c_parser_frontend::operator_node::AssignOperatorNode::GetResultTypePointer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最终结果的类型 </p>
+<dl class="section return"><dt>返回</dt><dd>返回类型链头结点的const指针</dd></dl>
+<p>设计思路同GetResultConstTag </p>
+
+<p>实现了 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e">c_parser_frontend::operator_node::OperatorNodeInterface</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00848">848</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00880">GetNodeToBeAssignedReference()</a> , 以及 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e">c_parser_frontend::operator_node::OperatorNodeInterface::GetResultTypePointer()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca8bf9ef313ae917878d6e7b3f8d59f0_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca8bf9ef313ae917878d6e7b3f8d59f0_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca8bf9ef313ae917878d6e7b3f8d59f0_cgraph" id="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca8bf9ef313ae917878d6e7b3f8d59f0_cgraph">
+<area shape="rect" title="获取最终结果的类型" alt="" coords="5,45,229,101"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a7750f0579651a012f00051f5510cc09c" title="获取待被赋值的节点" alt="" coords="277,5,555,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e" title="获取最终结果的类型" alt="" coords="302,85,530,141"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8dcb6f1410e4bfc2dff2e348466523d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dcb6f1410e4bfc2dff2e348466523d5">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html">AssignOperatorNode</a>&amp; c_parser_frontend::operator_node::AssignOperatorNode::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html">AssignOperatorNode</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a057ea31c373bc19b3e8979a0b9f4a558"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a057ea31c373bc19b3e8979a0b9f4a558">&#9670;&nbsp;</a></span>SelfCopy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::shared_ptr&lt;<a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a>&gt; c_parser_frontend::operator_node::AssignOperatorNode::SelfCopy </td>
+          <td>(</td>
+          <td class="paramtype">const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>new_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ConstTag&#160;</td>
+          <td class="paramname"><em>new_const_tag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝自身并设置拷贝得到的对象类型为new_type </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">new_type</td><td>：拷贝后得到的对象的类型 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">new_const_tag</td><td>：拷贝后得到的对象的新const标记 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回指向拷贝后的对象的指针 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">nullptr</td><td>：设置初始化数据为非const</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>该函数用于类型转换 </p><dl class="section attention"><dt>注意</dt><dd>仅允许对变量、初始化值和类型转换节点调用该函数 </dd></dl>
+
+<p>实现了 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#afaf8c7f881d6b57c275611312b5e0f78">c_parser_frontend::operator_node::OperatorNodeInterface</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00857">857</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aca9910541d690b4040e6ba1ce4323a72"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aca9910541d690b4040e6ba1ce4323a72">&#9670;&nbsp;</a></span>SetNodeForAssign()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">AssignableCheckResult c_parser_frontend::operator_node::AssignOperatorNode::SetNodeForAssign </td>
+          <td>(</td>
+          <td class="paramtype">const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>node_for_assign</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>is_announce</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>设置用来赋值的节点 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_for_assign</td><td>：用来赋值的节点 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">is_announce</td><td>：是否为变量声明 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回检查结果，具体意义见定义</dd></dl>
+<p>1.如果不是可以赋值的情况则不会设置 2.声明时赋值不检查被赋值的节点自身的const属性和LeftRightValue属性 并且允许使用初始化列表 3.需要先设置被赋值的节点（调用SetNodeToBeAssigned） 4.如果被赋值的节点与用来赋值的节点类型完全相同（operator==()）则 设置被赋值的节点的类型链指针指向用来赋值的类型链以节省内存 </p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8cpp_source.html">operator_node.cpp</a> 第 <a class="el" href="operator__node_8cpp_source.html#l00409">409</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8cpp_source.html#l00430">CheckAssignable()</a>, <a class="el" href="operator__node_8h_source.html#l00880">GetNodeToBeAssignedReference()</a> , 以及 <a class="el" href="operator__node_8h_source.html#l00941">node_for_assign_</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca9910541d690b4040e6ba1ce4323a72_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca9910541d690b4040e6ba1ce4323a72_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca9910541d690b4040e6ba1ce4323a72_cgraph" id="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca9910541d690b4040e6ba1ce4323a72_cgraph">
+<area shape="rect" title="设置用来赋值的节点" alt="" coords="5,325,229,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#ae04475df3488b171fc37c245af4fa441" title="检查两个节点是否可以赋值" alt="" coords="304,285,528,341"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a7750f0579651a012f00051f5510cc09c" title="获取待被赋值的节点" alt="" coords="277,365,555,421"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#aa533e1f444a8a0fcc9cf1d73436ed9da" title="获取操作类型所属大类" alt="" coords="617,5,866,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html#a8759d34682bb031948e9ec241e95b0ff" title="获取初始化数据所属分类" alt="" coords="623,85,860,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a1894f1b3888819c4584eef70953c6cff" title="获取该节点操作结果的const标记" alt="" coords="634,165,849,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e" title="获取最终结果的类型" alt="" coords="627,245,855,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a3eaeaca261e5860d4ca73accce3cf460" title="获取初始化数据的值" alt="" coords="619,325,864,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a212a08cb0c6f8c89f43eb35dbd26897e" title="设置变量的类型" alt="" coords="628,405,855,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a723c6c6897c0618d9577cece835a85c8" title="检查使用初始化列表初始化变量的情况" alt="" coords="603,485,880,541"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a6672689ac26f0762b7fc0108659fdb32" title="检查给定类型是否可以作为普通变量的类型" alt="" coords="929,380,1156,436"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="1205,413,1408,469"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1ListInitializeOperatorNode.html#a6e5405a2927f5e86c4b30428d61a25e5" title="获取初始化列表中所有的初始化值" alt="" coords="937,511,1148,567"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a1c5421e70225e5de9db2c7f26e650de9" title="获取变量类型链" alt="" coords="928,591,1157,647"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="acd1b267e61f5c750b2731ce0efddab6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd1b267e61f5c750b2731ce0efddab6f">&#9670;&nbsp;</a></span>SetNodeToBeAssigned()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void c_parser_frontend::operator_node::AssignOperatorNode::SetNodeToBeAssigned </td>
+          <td>(</td>
+          <td class="paramtype">const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>node_to_be_assigned</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置待被赋值的节点 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_to_be_assigned</td><td>：待被赋值的节点 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>先设置被赋值的节点，后设置用来赋值的节点 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00868">868</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00939">node_to_be_assigned_</a>.</p>
+
+</div>
+</div>
+<a id="a723c6c6897c0618d9577cece835a85c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a723c6c6897c0618d9577cece835a85c8">&#9670;&nbsp;</a></span>VarietyAssignableByInitializeList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">AssignableCheckResult c_parser_frontend::operator_node::AssignOperatorNode::VarietyAssignableByInitializeList </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html">VarietyOperatorNode</a> &amp;&#160;</td>
+          <td class="paramname"><em>variety_node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1ListInitializeOperatorNode.html">ListInitializeOperatorNode</a> &amp;&#160;</td>
+          <td class="paramname"><em>list_initialize_operator_node</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查使用初始化列表初始化变量的情况 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">variety_node</td><td>：被赋值的变量 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">list_initialize_operator_node</td><td>：用来赋值的初始化列表 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回检查结果，含义见定义</dd></dl>
+<p>1.CheckAssignable的子过程，处理使用初始化变量列表初始化变量的情况 2.不会返回AssignableCheckResult::kInitializeList 3.如果使用自动数组大小推断则更新数组大小（违反const原则） </p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8cpp_source.html">operator_node.cpp</a> 第 <a class="el" href="operator__node_8cpp_source.html#l00542">542</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8cpp_source.html#l00430">CheckAssignable()</a>, <a class="el" href="operator__node_8h_source.html#l00620">c_parser_frontend::operator_node::ListInitializeOperatorNode::GetListValues()</a>, <a class="el" href="type__system_8h_source.html#l00248">c_parser_frontend::type_system::TypeInterface::GetType()</a>, <a class="el" href="operator__node_8h_source.html#l00433">c_parser_frontend::operator_node::VarietyOperatorNode::GetVarietyTypeReference()</a>, <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a174c2dc0ea451920c3608685cee9b699a11fbe471298d80d0a97ca6227e23074a">c_parser_frontend::operator_node::kInitializeList</a> , 以及 <a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a37f6ee0d8ea3f194ac7943f4d32a4a0aaa2baf12c40baf489cffcefcb9b81b926">c_parser_frontend::operator_node::kLeftValue</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8cpp_source.html#l00430">CheckAssignable()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8_cgraph" id="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8_cgraph">
+<area shape="rect" title="检查使用初始化列表初始化变量的情况" alt="" coords="5,471,283,527"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#ae04475df3488b171fc37c245af4fa441" title="检查两个节点是否可以赋值" alt="" coords="333,285,557,341"/>
+<area shape="rect" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="1180,439,1383,495"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1ListInitializeOperatorNode.html#a6e5405a2927f5e86c4b30428d61a25e5" title="获取初始化列表中所有的初始化值" alt="" coords="340,536,551,592"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a1c5421e70225e5de9db2c7f26e650de9" title="获取变量类型链" alt="" coords="331,616,560,672"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#aa533e1f444a8a0fcc9cf1d73436ed9da" title="获取操作类型所属大类" alt="" coords="608,5,857,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html#a8759d34682bb031948e9ec241e95b0ff" title="获取初始化数据所属分类" alt="" coords="614,85,851,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a1894f1b3888819c4584eef70953c6cff" title="获取该节点操作结果的const标记" alt="" coords="625,165,840,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e" title="获取最终结果的类型" alt="" coords="619,245,847,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a3eaeaca261e5860d4ca73accce3cf460" title="获取初始化数据的值" alt="" coords="610,325,855,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a212a08cb0c6f8c89f43eb35dbd26897e" title="设置变量的类型" alt="" coords="619,405,846,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a6672689ac26f0762b7fc0108659fdb32" title="检查给定类型是否可以作为普通变量的类型" alt="" coords="905,405,1132,461"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8_icgraph" id="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8_icgraph">
+<area shape="rect" title="检查使用初始化列表初始化变量的情况" alt="" coords="1148,165,1425,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#ae04475df3488b171fc37c245af4fa441" title="检查两个节点是否可以赋值" alt="" coords="876,165,1100,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#a42baddd3c0fb6f454c50d06472993ae2" title="添加调用参数" alt="" coords="537,5,828,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#aaf0729f7e7c809dad9814ec9fecf5fe5" title="检查给定语句是否可以作为函数内执行的语句" alt="" coords="568,85,797,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#ae59e55b700c8709ffc835891f6cd84f7" title="创建返回结果的节点" alt="" coords="568,165,797,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#ad2a310de687335d6658b0daead191637" title="按容器设置调用参数" alt="" coords="576,245,789,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca9910541d690b4040e6ba1ce4323a72" title="设置用来赋值的节点" alt="" coords="571,325,795,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a80ece7836e0b60e9abace2aef88b7f6e" title="添加一条函数内执行的语句" alt="" coords="271,5,478,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a1197ee4a48e2d37c82b402f6bd01246a" title="添加一个容器内的全部语句" alt="" coords="271,85,478,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a73416179a5655fc54cd037f7d9a43f43" title="向流程语句主体中中添加单条语句" alt="" coords="5,5,212,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a4e41329fb34ed861cb4ffa6e1677271d" title="向流程语句主体中中添加多条语句" alt="" coords="5,85,212,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#aed46590b486ee7477bb17dce3677c3fb" title="设置条件为假时的分支" alt="" coords="260,165,489,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a3bf8f22583fef107e37a3b9a51d1f7de" title="设置条件为真时的分支" alt="" coords="260,245,489,301"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="a5b8f228e8b2050ac5872bfa9bbdab782"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5b8f228e8b2050ac5872bfa9bbdab782">&#9670;&nbsp;</a></span>node_for_assign_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a>&gt; c_parser_frontend::operator_node::AssignOperatorNode::node_for_assign_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>用来赋值的节点 </p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00941">941</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8h_source.html#l00899">GetNodeForAssignPointer()</a>, <a class="el" href="operator__node_8h_source.html#l00904">GetNodeForAssignReference()</a> , 以及 <a class="el" href="operator__node_8cpp_source.html#l00409">SetNodeForAssign()</a>.</p>
+
+</div>
+</div>
+<a id="a946b17bda1aca04f6c6c590909206c20"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a946b17bda1aca04f6c6c590909206c20">&#9670;&nbsp;</a></span>node_to_be_assigned_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::shared_ptr&lt;const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a>&gt; c_parser_frontend::operator_node::AssignOperatorNode::node_to_be_assigned_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将要被赋值的节点 </p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00939">939</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8h_source.html#l00874">GetNodeToBeAssignedPointer()</a>, <a class="el" href="operator__node_8h_source.html#l00880">GetNodeToBeAssignedReference()</a> , 以及 <a class="el" href="operator__node_8h_source.html#l00868">SetNodeToBeAssigned()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/CParserFrontend/<a class="el" href="operator__node_8h_source.html">operator_node.h</a></li>
+<li>src/CParserFrontend/<a class="el" href="operator__node_8cpp_source.html">operator_node.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacec__parser__frontend.html">c_parser_frontend</a></li><li class="navelem"><a class="el" href="namespacec__parser__frontend_1_1operator__node.html">operator_node</a></li><li class="navelem"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html">AssignOperatorNode</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

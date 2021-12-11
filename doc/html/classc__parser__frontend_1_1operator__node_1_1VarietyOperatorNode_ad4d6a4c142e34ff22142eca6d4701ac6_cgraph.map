@@ -1,0 +1,4 @@
+<map id="c_parser_frontend::operator_node::VarietyOperatorNode::GetResultConstTag" name="c_parser_frontend::operator_node::VarietyOperatorNode::GetResultConstTag">
+<area shape="rect" id="node1" title="获取该节点操作结果的const标记" alt="" coords="5,5,232,61"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a4b3e53fe55d1873cff0394cd55ddf9d1" title="获取变量的const标记" alt="" coords="280,5,507,61"/>
+</map>

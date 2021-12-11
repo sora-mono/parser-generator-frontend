@@ -1,0 +1,648 @@
+\hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::For\+Sentence类 参考}
+\label{classc__parser__frontend_1_1flow__control_1_1ForSentence}\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+
+
+for循环  
+
+
+
+
+{\ttfamily \#include $<$flow\+\_\+control.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::For\+Sentence 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=235pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::For\+Sentence 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a1b4e2042192cf01ef6ba00b8bf9933c9}{For\+Sentence}} ()
+\item 
+virtual bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a2f199b1f7492ec410da2095e5dfdb058}{Add\+Main\+Sentence}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&sentence) override
+\begin{DoxyCompactList}\small\item\em 向流程语句主体中中添加单条语句 \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a6b17cfdbc29103008773c656c51d14de}{Add\+Main\+Sentences}} (std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&sentences) override
+\begin{DoxyCompactList}\small\item\em 向流程语句主体中中添加多条语句 \end{DoxyCompactList}\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a476967568ac50dbc04bf3b2cc4be743f}{Get\+Loop\+Condition\+Start\+Label}} () const override
+\begin{DoxyCompactList}\small\item\em 获取循环块循环条件判断开始处标签（即将开始判断循环条件） \end{DoxyCompactList}\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a822d559708b631c9ddd00a7a8fc966ff}{Get\+Loop\+Condition\+End\+Label}} () const override
+\begin{DoxyCompactList}\small\item\em 获取循环块循环条件判断结束处标签（刚刚完成循环条件判断） \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a393c32a641042beb4718cce5e7dd5cfc}{Add\+For\+Init\+Sentence}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&init\+\_\+body\+\_\+sentence)
+\begin{DoxyCompactList}\small\item\em 添加一条for语句执行前的初始化语句 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a08ff8cf706bdc0a35bd54568d76dc758}{Add\+For\+Init\+Sentences}} (std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&init\+\_\+body\+\_\+sentences)
+\begin{DoxyCompactList}\small\item\em 添加多条for语句执行前的初始化语句 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a95006d9ad30a0e4681aa1e6a4cd58c80}{Add\+For\+Renew\+Sentence}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&after\+\_\+body\+\_\+sentence)
+\begin{DoxyCompactList}\small\item\em 添加一条for语句执行后更新循环条件的语句 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_af62357ca94c6c9c66d8b19bae32bdd86}{Add\+For\+Renew\+Sentences}} (std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&after\+\_\+body\+\_\+sentences)
+\begin{DoxyCompactList}\small\item\em 添加多条for语句执行后更新循环条件的语句 \end{DoxyCompactList}\item 
+const auto \& \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a6584458e81f52e31432f3a3ebbd41b07}{Get\+For\+Body}} () const
+\begin{DoxyCompactList}\small\item\em 获取for主体内所有语句 \end{DoxyCompactList}\item 
+const auto \& \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a2b8e80f7fc95801818b253716c2ed4a7}{Get\+For\+Init\+Sentences}} () const
+\begin{DoxyCompactList}\small\item\em 获取for初始化语句 \end{DoxyCompactList}\item 
+const auto \& \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_aedb6a986d3d9eeeaa4f8d4e6899e6ff9}{Get\+For\+After\+Body\+Sentences}} () const
+\begin{DoxyCompactList}\small\item\em 获取更新循环条件的语句 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_ab841ab4beb1e56f11a1f68e961e33199}{Check\+For\+Condition\+Valid}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&for\+\_\+condition)
+\begin{DoxyCompactList}\small\item\em 检查给定节点是否可以作为for条件 \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a17fbd7258f0a2410b900e1e86184f369}{Check\+For\+Body\+Sentence\+Valid}} (const \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} \&for\+\_\+body\+\_\+sentence)
+\begin{DoxyCompactList}\small\item\em 检查给定节点是否可以作为for主体内执行的语句 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a8e94004125b8308df277776fb90bc2a4}{init\+\_\+block\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 初始化语句 \end{DoxyCompactList}\item 
+std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1ForSentence_a33ef196a8c577bf419fd46034ac27ee9}{renew\+\_\+sentences\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 循环结束后更新循环条件的语句 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+for循环 
+
+在文件 flow\+\_\+control.\+h 第 668 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a1b4e2042192cf01ef6ba00b8bf9933c9}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a1b4e2042192cf01ef6ba00b8bf9933c9}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!ForSentence@{ForSentence}}
+\index{ForSentence@{ForSentence}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{ForSentence()}{ForSentence()}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+For\+Sentence (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 flow\+\_\+control.\+h 第 670 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::k\+For\+Sentence.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a393c32a641042beb4718cce5e7dd5cfc}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a393c32a641042beb4718cce5e7dd5cfc}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!AddForInitSentence@{AddForInitSentence}}
+\index{AddForInitSentence@{AddForInitSentence}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{AddForInitSentence()}{AddForInitSentence()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Add\+For\+Init\+Sentence (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&}]{init\+\_\+body\+\_\+sentence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+添加一条for语句执行前的初始化语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em init\+\_\+body\+\_\+sentence} & ：for循环初始化语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否可以添加 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功，夺取init\+\_\+body\+\_\+sentence控制权 \\
+\hline
+{\em false} & ：不可以添加，不会添加且不修改参数 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+对语句的要求参考\+Add\+Sentence 添加到已有的初始化语句后 
+\end{DoxyNote}
+
+
+在文件 flow\+\_\+control.\+cpp 第 95 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Add\+Sentence() , 以及 Check\+For\+Body\+Sentence\+Valid().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence_a393c32a641042beb4718cce5e7dd5cfc_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a08ff8cf706bdc0a35bd54568d76dc758}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a08ff8cf706bdc0a35bd54568d76dc758}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!AddForInitSentences@{AddForInitSentences}}
+\index{AddForInitSentences@{AddForInitSentences}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{AddForInitSentences()}{AddForInitSentences()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Add\+For\+Init\+Sentences (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&}]{init\+\_\+body\+\_\+sentences }\end{DoxyParamCaption})}
+
+
+
+添加多条for语句执行前的初始化语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em init\+\_\+body\+\_\+sentences} & ：存储for循环初始化语句的容器 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否可以添加 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功，将init\+\_\+body\+\_\+sentences中所有语句移动到初始化容器中 \\
+\hline
+{\em false} & ：不可以添加，不会添加且不修改参数 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+对语句的要求参考\+Add\+Sentence 添加顺序：begin-\/$>$end，添加到已有的初始化语句后 
+\end{DoxyNote}
+
+
+在文件 flow\+\_\+control.\+cpp 第 104 行定义.
+
+
+
+引用了 Check\+For\+Body\+Sentence\+Valid() , 以及 init\+\_\+block\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence_a08ff8cf706bdc0a35bd54568d76dc758_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a95006d9ad30a0e4681aa1e6a4cd58c80}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a95006d9ad30a0e4681aa1e6a4cd58c80}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!AddForRenewSentence@{AddForRenewSentence}}
+\index{AddForRenewSentence@{AddForRenewSentence}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{AddForRenewSentence()}{AddForRenewSentence()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Add\+For\+Renew\+Sentence (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&}]{after\+\_\+body\+\_\+sentence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+添加一条for语句执行后更新循环条件的语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em after\+\_\+body\+\_\+sentence} & ：for执行后更新循环条件的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否可以添加 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功，夺取after\+\_\+body\+\_\+sentences的控制权 \\
+\hline
+{\em false} & ：不可以添加，不会添加且不修改参数 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+对语句的要求参考\+Check\+For\+Body\+Sentence\+Valid 添加到已有的初始化语句后 
+\end{DoxyNote}
+
+
+在文件 flow\+\_\+control.\+cpp 第 114 行定义.
+
+
+
+引用了 Check\+For\+Body\+Sentence\+Valid() , 以及 renew\+\_\+sentences\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence_a95006d9ad30a0e4681aa1e6a4cd58c80_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_af62357ca94c6c9c66d8b19bae32bdd86}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_af62357ca94c6c9c66d8b19bae32bdd86}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!AddForRenewSentences@{AddForRenewSentences}}
+\index{AddForRenewSentences@{AddForRenewSentences}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{AddForRenewSentences()}{AddForRenewSentences()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Add\+For\+Renew\+Sentences (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&}]{after\+\_\+body\+\_\+sentences }\end{DoxyParamCaption})}
+
+
+
+添加多条for语句执行后更新循环条件的语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em after\+\_\+body\+\_\+sentences} & ：存储for执行后更新循环条件的容器 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否可以添加 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功，将after\+\_\+body\+\_\+sentences中所有语句移动到初始化容器 \\
+\hline
+{\em false} & ：不可以添加，不会添加且不修改参数 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+对语句的要求参考\+Check\+For\+Body\+Sentence\+Valid 添加顺序：begin-\/$>$end，添加到已有的初始化语句后 
+\end{DoxyNote}
+
+
+在文件 flow\+\_\+control.\+cpp 第 124 行定义.
+
+
+
+引用了 Check\+For\+Body\+Sentence\+Valid() , 以及 renew\+\_\+sentences\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence_af62357ca94c6c9c66d8b19bae32bdd86_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a2f199b1f7492ec410da2095e5dfdb058}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a2f199b1f7492ec410da2095e5dfdb058}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!AddMainSentence@{AddMainSentence}}
+\index{AddMainSentence@{AddMainSentence}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{AddMainSentence()}{AddMainSentence()}}
+{\footnotesize\ttfamily virtual bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Add\+Main\+Sentence (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$ \&\&}]{sentence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+向流程语句主体中中添加单条语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentence} & ：待添加的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回添加是否成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：sentence不能添加到流程控制语句中\\
+\hline
+\end{DoxyRetVals}
+1.对do-\/while/while/for调用该函数时添加到循环体中 2.对if语句调用时添加到if成立时执行的语句内 3.对if-\/else语句调用时添加到else成立时执行的语句内 4.对switch语句调用时添加到switch主体内 \begin{DoxyNote}{注解}
+添加语句时添加到已有的语句后 
+\end{DoxyNote}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface_a8de24ac57738cf0fdd5bb48b8b05df4b}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}.
+
+
+
+在文件 flow\+\_\+control.\+h 第 672 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Add\+Sentence().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence_a2f199b1f7492ec410da2095e5dfdb058_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a6b17cfdbc29103008773c656c51d14de}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a6b17cfdbc29103008773c656c51d14de}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!AddMainSentences@{AddMainSentences}}
+\index{AddMainSentences@{AddMainSentences}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{AddMainSentences()}{AddMainSentences()}}
+{\footnotesize\ttfamily virtual bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Add\+Main\+Sentences (\begin{DoxyParamCaption}\item[{std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} $>$$>$ \&\&}]{sentences }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+向流程语句主体中中添加多条语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em sentences} & ：待添加的语句 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回添加是否成功 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：添加成功 \\
+\hline
+{\em false} & ：sentences中含有不能添加到流程控制语句的语句\\
+\hline
+\end{DoxyRetVals}
+1.对do-\/while/while/for调用该函数时添加到循环体中 2.对if语句调用时添加到if成立时执行的语句内 3.对if-\/else语句调用时添加到else成立时执行的语句内 4.对switch语句调用时添加到switch主体内 \begin{DoxyNote}{注解}
+添加语句时添加到已有的语句后 
+\end{DoxyNote}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface_a3a89f0b4c77f952a520a58a7107e6787}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}.
+
+
+
+在文件 flow\+\_\+control.\+h 第 676 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Add\+Sentences().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence_a6b17cfdbc29103008773c656c51d14de_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a17fbd7258f0a2410b900e1e86184f369}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a17fbd7258f0a2410b900e1e86184f369}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!CheckForBodySentenceValid@{CheckForBodySentenceValid}}
+\index{CheckForBodySentenceValid@{CheckForBodySentenceValid}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{CheckForBodySentenceValid()}{CheckForBodySentenceValid()}}
+{\footnotesize\ttfamily static bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Check\+For\+Body\+Sentence\+Valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}} \&}]{for\+\_\+body\+\_\+sentence }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+检查给定节点是否可以作为for主体内执行的语句 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em for\+\_\+body\+\_\+sentence} & ：待检查的条件节点 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否可以添加 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：可以添加 \\
+\hline
+{\em false} & ：不可以添加 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 flow\+\_\+control.\+h 第 746 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Default\+Main\+Block\+Sentence\+Check().
+
+
+
+被这些函数引用 Add\+For\+Init\+Sentence(), Add\+For\+Init\+Sentences(), Add\+For\+Renew\+Sentence() , 以及 Add\+For\+Renew\+Sentences().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence_a17fbd7258f0a2410b900e1e86184f369_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence_a17fbd7258f0a2410b900e1e86184f369_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_ab841ab4beb1e56f11a1f68e961e33199}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_ab841ab4beb1e56f11a1f68e961e33199}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!CheckForConditionValid@{CheckForConditionValid}}
+\index{CheckForConditionValid@{CheckForConditionValid}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{CheckForConditionValid()}{CheckForConditionValid()}}
+{\footnotesize\ttfamily static bool c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Check\+For\+Condition\+Valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&}]{for\+\_\+condition }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+检查给定节点是否可以作为for条件 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em for\+\_\+condition} & ：待检查的条件节点 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回是否可以添加 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：可以添加 \\
+\hline
+{\em false} & ：不可以添加 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 flow\+\_\+control.\+h 第 737 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Default\+Condition\+Check().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence_ab841ab4beb1e56f11a1f68e961e33199_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_aedb6a986d3d9eeeaa4f8d4e6899e6ff9}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_aedb6a986d3d9eeeaa4f8d4e6899e6ff9}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!GetForAfterBodySentences@{GetForAfterBodySentences}}
+\index{GetForAfterBodySentences@{GetForAfterBodySentences}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{GetForAfterBodySentences()}{GetForAfterBodySentences()}}
+{\footnotesize\ttfamily const auto\& c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Get\+For\+After\+Body\+Sentences (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取更新循环条件的语句 
+
+\begin{DoxyReturn}{返回}
+返回存储更新循环条件的语句的容器的const引用 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 730 行定义.
+
+
+
+引用了 renew\+\_\+sentences\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a6584458e81f52e31432f3a3ebbd41b07}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a6584458e81f52e31432f3a3ebbd41b07}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!GetForBody@{GetForBody}}
+\index{GetForBody@{GetForBody}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{GetForBody()}{GetForBody()}}
+{\footnotesize\ttfamily const auto\& c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Get\+For\+Body (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取for主体内所有语句 
+
+\begin{DoxyReturn}{返回}
+返回存储语句的容器的const引用 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 724 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Get\+Sentences().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence_a6584458e81f52e31432f3a3ebbd41b07_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a2b8e80f7fc95801818b253716c2ed4a7}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a2b8e80f7fc95801818b253716c2ed4a7}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!GetForInitSentences@{GetForInitSentences}}
+\index{GetForInitSentences@{GetForInitSentences}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{GetForInitSentences()}{GetForInitSentences()}}
+{\footnotesize\ttfamily const auto\& c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Get\+For\+Init\+Sentences (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取for初始化语句 
+
+\begin{DoxyReturn}{返回}
+返回存储初始化语句的容器的const引用 
+\end{DoxyReturn}
+
+
+在文件 flow\+\_\+control.\+h 第 727 行定义.
+
+
+
+引用了 init\+\_\+block\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a822d559708b631c9ddd00a7a8fc966ff}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a822d559708b631c9ddd00a7a8fc966ff}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!GetLoopConditionEndLabel@{GetLoopConditionEndLabel}}
+\index{GetLoopConditionEndLabel@{GetLoopConditionEndLabel}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{GetLoopConditionEndLabel()}{GetLoopConditionEndLabel()}}
+{\footnotesize\ttfamily virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Get\+Loop\+Condition\+End\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取循环块循环条件判断结束处标签（刚刚完成循环条件判断） 
+
+\begin{DoxyReturn}{返回}
+返回循环块循环条件判断结束处标签 
+\end{DoxyReturn}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a8a128d977a1efa3eb7173ff7fe26ab7f}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Loop\+Sentence\+Interface}}.
+
+
+
+在文件 flow\+\_\+control.\+h 第 683 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Loop\+Sentence\+Interface\+::\+Get\+Loop\+Main\+Block\+Start\+Label().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence_a822d559708b631c9ddd00a7a8fc966ff_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a476967568ac50dbc04bf3b2cc4be743f}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a476967568ac50dbc04bf3b2cc4be743f}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!GetLoopConditionStartLabel@{GetLoopConditionStartLabel}}
+\index{GetLoopConditionStartLabel@{GetLoopConditionStartLabel}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{GetLoopConditionStartLabel()}{GetLoopConditionStartLabel()}}
+{\footnotesize\ttfamily virtual std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1Label}{Label}}$>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::\+Get\+Loop\+Condition\+Start\+Label (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取循环块循环条件判断开始处标签（即将开始判断循环条件） 
+
+\begin{DoxyReturn}{返回}
+返回循环块循环条件判断开始处标签 
+\end{DoxyReturn}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1LoopSentenceInterface_a5111343f1df4f345141ec0695d0717c1}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Loop\+Sentence\+Interface}}.
+
+
+
+在文件 flow\+\_\+control.\+h 第 680 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Condition\+Block\+Interface\+::\+Get\+Sentence\+Start\+Label().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1flow__control_1_1ForSentence_a476967568ac50dbc04bf3b2cc4be743f_cgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a8e94004125b8308df277776fb90bc2a4}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a8e94004125b8308df277776fb90bc2a4}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!init\_block\_@{init\_block\_}}
+\index{init\_block\_@{init\_block\_}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{init\_block\_}{init\_block\_}}
+{\footnotesize\ttfamily std\+::list$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}}$>$ $>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::init\+\_\+block\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+初始化语句 
+
+
+
+在文件 flow\+\_\+control.\+h 第 754 行定义.
+
+
+
+被这些函数引用 Add\+For\+Init\+Sentences() , 以及 Get\+For\+Init\+Sentences().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1flow__control_1_1ForSentence_a33ef196a8c577bf419fd46034ac27ee9}\label{classc__parser__frontend_1_1flow__control_1_1ForSentence_a33ef196a8c577bf419fd46034ac27ee9}} 
+\index{c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}!renew\_sentences\_@{renew\_sentences\_}}
+\index{renew\_sentences\_@{renew\_sentences\_}!c\_parser\_frontend::flow\_control::ForSentence@{c\_parser\_frontend::flow\_control::ForSentence}}
+\doxysubsubsection{\texorpdfstring{renew\_sentences\_}{renew\_sentences\_}}
+{\footnotesize\ttfamily std\+::list$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{Flow\+Interface}}$>$ $>$ c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+For\+Sentence\+::renew\+\_\+sentences\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+循环结束后更新循环条件的语句 
+
+
+
+在文件 flow\+\_\+control.\+h 第 756 行定义.
+
+
+
+被这些函数引用 Add\+For\+Renew\+Sentence(), Add\+For\+Renew\+Sentences() , 以及 Get\+For\+After\+Body\+Sentences().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{flow__control_8h}{flow\+\_\+control.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{flow__control_8cpp}{flow\+\_\+control.\+cpp}}\end{DoxyCompactItemize}

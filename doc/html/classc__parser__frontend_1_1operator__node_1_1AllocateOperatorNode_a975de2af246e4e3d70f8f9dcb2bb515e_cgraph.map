@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::operator_node::AllocateOperatorNode::SetTargetVariety" name="c_parser_frontend::operator_node::AllocateOperatorNode::SetTargetVariety">
+<area shape="rect" id="node1" title="设置要分配内存的节点" alt="" coords="5,5,240,61"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode.html#afc5f21853a75614f592c783f797a18a7" title="检查操作节点是否可以分配栈上空间" alt="" coords="288,5,523,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#aa533e1f444a8a0fcc9cf1d73436ed9da" title="获取操作类型所属大类" alt="" coords="571,5,820,61"/>
+</map>

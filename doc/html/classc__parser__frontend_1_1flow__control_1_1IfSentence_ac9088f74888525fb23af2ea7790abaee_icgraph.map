@@ -1,0 +1,7 @@
+<map id="c_parser_frontend::flow_control::IfSentence::CheckElseBodySentenceValid" name="c_parser_frontend::flow_control::IfSentence::CheckElseBodySentenceValid">
+<area shape="rect" id="node1" title="检查给定语句是否可以添加到假分支内" alt="" coords="480,45,703,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1IfSentence.html#af8835fd71c230b42c089f22a41e20f49" title="添加假分支内执行的一条语句" alt="" coords="235,5,429,61"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1flow__control_1_1IfSentence.html#ae5d7c213b8ec902dfead5015f1f48938" title="添加假分支内执行的多条语句" alt="" coords="232,85,432,141"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1flow__control_1_1IfSentence.html#aa932ed891d5a4e61e7f3cbe8788610ec" title=" " alt="" coords="5,5,184,61"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1flow__control_1_1IfSentence.html#ab9131fb58144598ffebf468e8ae0caeb" title=" " alt="" coords="5,85,184,141"/>
+</map>

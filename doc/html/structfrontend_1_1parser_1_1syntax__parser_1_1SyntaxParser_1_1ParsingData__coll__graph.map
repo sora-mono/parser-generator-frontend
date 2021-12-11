@@ -1,0 +1,6 @@
+<map id="frontend::parser::syntax_parser::SyntaxParser::ParsingData" name="frontend::parser::syntax_parser::SyntaxParser::ParsingData">
+<area shape="rect" id="node1" title="解析时使用的数据" alt="" coords="748,71,927,127"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1common_1_1ExplicitIdWrapper.html" title="强制显式调用构造函数且使用默认无效值版Wrapper" alt="" coords="321,5,555,61"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,5,272,61"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html" title=" " alt="" coords="345,86,531,157"/>
+</map>

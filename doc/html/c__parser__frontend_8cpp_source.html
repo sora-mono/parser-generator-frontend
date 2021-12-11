@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: src/CParserFrontend/c_parser_frontend.cpp 源文件</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('c__parser__frontend_8cpp_source.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">c_parser_frontend.cpp</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="c__parser__frontend_8cpp.html">浏览该文件的文档.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="c__parser__frontend_8h.html">c_parser_frontend.h</a>&quot;</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &lt;format&gt;</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">// 获取函数信息</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">// 如果不存在给定名称的函数则返回空指针</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacec__parser__frontend.html">c_parser_frontend</a> {</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno"><a class="line" href="namespacec__parser__frontend.html#a772334e0ba549c0cb075d49821001a53">    8</a></span>&#160;thread_local <a class="code" href="classc__parser__frontend_1_1CParserFrontend.html">CParserFrontend</a> <a class="code" href="namespacec__parser__frontend.html#a772334e0ba549c0cb075d49821001a53">c_parser_frontend</a>;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;std::pair&lt;<a class="code" href="classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a1b3ab58d873399194caaf2ebf468e6fb">CParserFrontend::TypeSystem::TypeNodeContainerIter</a>,</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;          <a class="code" href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320d">CParserFrontend::AddTypeResult</a>&gt;</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classc__parser__frontend_1_1CParserFrontend.html#aaf5c004c2492607f5133f87f871c517c">   12</a></span>&#160;<a class="code" href="classc__parser__frontend_1_1CParserFrontend.html#aaf5c004c2492607f5133f87f871c517c">CParserFrontend::AnnounceFunction</a>(</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <span class="keyword">const</span> std::shared_ptr&lt;const FunctionType&gt;&amp; function_type) {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;  <a class="code" href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a98b9fbb934b3e02838b06d8697bf8a54">FlowControlSystem::FunctionCheckResult</a> check_result =</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;      <a class="code" href="classc__parser__frontend_1_1CParserFrontend.html#a38e4dcdb73bf019b74684888a270728e">flow_control_system_</a>.<a class="code" href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a9c1a3d54f38c0dce420b5bb28708acc5">AnnounceFunction</a>(function_type);</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;  <span class="keywordflow">switch</span> (check_result) {</div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a98b9fbb934b3e02838b06d8697bf8a54a8c632159fa131f09d04f94e3cbcd8782">FlowControlSystem::FunctionCheckResult::kSuccess</a>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;      <span class="keywordflow">return</span> <a class="code" href="classc__parser__frontend_1_1CParserFrontend.html#aa56ec99e72b01be1b964717b39d72b9e">type_system_</a>.<a class="code" href="classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a55119a508fa7ca1257475ec7795315c8">AnnounceFunctionType</a>(function_type);</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a98b9fbb934b3e02838b06d8697bf8a54a2720a88b1ed0140ebb9224313cf50033">FlowControlSystem::FunctionCheckResult::kOverrideFunction</a>:</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;      <span class="keywordflow">return</span> std::make_pair(<a class="code" href="classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a1b3ab58d873399194caaf2ebf468e6fb">TypeSystem::TypeNodeContainerIter</a>(),</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                            <a class="code" href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320da2720a88b1ed0140ebb9224313cf50033">AddTypeResult::kOverrideFunction</a>);</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a98b9fbb934b3e02838b06d8697bf8a54ae020ec05105b3671a42642ecf6355f85">FlowControlSystem::FunctionCheckResult::kDoubleAnnounce</a>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      <span class="keywordflow">return</span> std::make_pair(<a class="code" href="classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a1b3ab58d873399194caaf2ebf468e6fb">TypeSystem::TypeNodeContainerIter</a>(),</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                            AddTypeResult::kDoubleAnnounceFunction);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordflow">case</span> <a class="code" href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a98b9fbb934b3e02838b06d8697bf8a54a19d937ec65bc55f1dac2372a7eea1d7d">FlowControlSystem::FunctionCheckResult::kFunctionConstructed</a>:</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;      <span class="keywordflow">return</span> std::make_pair(<a class="code" href="classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a1b3ab58d873399194caaf2ebf468e6fb">TypeSystem::TypeNodeContainerIter</a>(),</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                            AddTypeResult::kTypeAlreadyIn);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <span class="keywordflow">default</span>:</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;      assert(<span class="keyword">false</span>);</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      <span class="comment">// 防止警告</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      <span class="keywordflow">return</span> std::make_pair(<a class="code" href="classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a1b3ab58d873399194caaf2ebf468e6fb">TypeSystem::TypeNodeContainerIter</a>(),</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                            <a class="code" href="classc__parser__frontend_1_1CParserFrontend.html#a16c21643446d866cd66054d2f4b008cb">AddTypeResult</a>());</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;      <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;  }</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;}</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">// 设置当前待构建函数</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">// 在作用域内声明函数的全部参数和函数类型的对象且自动提升作用域等级</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">// 返回是否设置成功</span></div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classc__parser__frontend_1_1CParserFrontend.html#aa27c730d6112f2cf35380d8c98520349">   45</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classc__parser__frontend_1_1CParserFrontend.html#aa27c730d6112f2cf35380d8c98520349">CParserFrontend::SetFunctionToConstruct</a>(</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keyword">const</span> std::shared_ptr&lt;const FunctionType&gt;&amp; function_to_construct) {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;  <span class="keyword">auto</span> result =</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      <a class="code" href="classc__parser__frontend_1_1CParserFrontend.html#a38e4dcdb73bf019b74684888a270728e">flow_control_system_</a>.<a class="code" href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a1a8218d82724ca90ef2e3767700b2f8b">SetFunctionToConstruct</a>(function_to_construct);</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;  <span class="keywordflow">if</span> (result == <a class="code" href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a98b9fbb934b3e02838b06d8697bf8a54a8c632159fa131f09d04f94e3cbcd8782">FlowControlSystem::FunctionCheckResult::kSuccess</a>) [[likely]] {</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="classc__parser__frontend_1_1CParserFrontend.html#a35283ea6805c35e9b9f509a3eab03a14">action_scope_system_</a>.<a class="code" href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#ac44ad28c95778bb6ca7fc51eee472f80">SetFunctionToConstruct</a>(</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;        <a class="code" href="classc__parser__frontend_1_1CParserFrontend.html#a38e4dcdb73bf019b74684888a270728e">flow_control_system_</a>.<a class="code" href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a3ee7d9d6ddb63e17a6f398f526716958">GetActiveFunctionPointer</a>());</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;  } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordflow">return</span> <span class="keyword">false</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;  }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;}</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="classc__parser__frontend_1_1CParserFrontend.html#a0b2eb6f30a1205049ad65335be6dff2e">   57</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="classc__parser__frontend_1_1CParserFrontend.html#a0b2eb6f30a1205049ad65335be6dff2e">CParserFrontend::PushFlowControlSentence</a>(</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    std::unique_ptr&lt;c_parser_frontend::flow_control::FlowInterface&gt;&amp;&amp;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        flow_control_sentence) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  <span class="keywordtype">bool</span> result = <a class="code" href="classc__parser__frontend_1_1CParserFrontend.html#a35283ea6805c35e9b9f509a3eab03a14">action_scope_system_</a>.<a class="code" href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#aa1729e785acbaa7379f65a06cf9e17f5">PushFlowControlSentence</a>(</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;      std::move(flow_control_sentence));</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordflow">return</span> result;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;}  <span class="comment">// namespace c_parser_frontend</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespacec__parser__frontend_1_1action__scope__system.html">c_parser_frontend::action_scope_system</a> {</div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="line" href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a1d17eb37f21f42079ed3c066802389a4">   68</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a1d17eb37f21f42079ed3c066802389a4">ActionScopeSystem::PopOverLevel</a>(<a class="code" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html">ActionScopeLevel</a> level) {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;  <span class="keyword">auto</span>&amp; variety_stack = <a class="code" href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a01d1f19c1a4d3a5b26427cb46b63b6e4">GetVarietyStack</a>();</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;  <span class="comment">// 因为存在哨兵，所以无需判断栈是否为空</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;  <span class="comment">// 弹出变量</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;  <span class="keywordflow">while</span> (variety_stack.top()-&gt;second.GetTopData().second &gt; level) {</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">bool</span> should_erase_this_node = variety_stack.top()-&gt;second.PopTopData();</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordflow">if</span> (should_erase_this_node) [[likely]] {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="comment">// 该变量名并不与任何节点绑定</span></div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="comment">// 删除该数据节点</span></div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      <a class="code" href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a4fff2178d35bc39a63f972e82b66d6a5">GetVarietyOrFunctionNameToOperatorNodePointer</a>().erase(</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;          variety_stack.top());</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    }</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    variety_stack.pop();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;  }</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;  <span class="keywordflow">while</span> (!<a class="code" href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a543ae6bc8aed1b39e690cef86b10ffdd">flow_control_stack_</a>.empty() &amp;&amp;</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;         <a class="code" href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a543ae6bc8aed1b39e690cef86b10ffdd">flow_control_stack_</a>.top().second &gt; level) {</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="comment">// 弹出流程控制语句</span></div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <span class="keyword">auto</span> flow_control_sentence = std::move(<a class="code" href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a543ae6bc8aed1b39e690cef86b10ffdd">flow_control_stack_</a>.top().first);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <a class="code" href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a543ae6bc8aed1b39e690cef86b10ffdd">flow_control_stack_</a>.pop();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    <span class="keywordflow">if</span> (!<a class="code" href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a543ae6bc8aed1b39e690cef86b10ffdd">flow_control_stack_</a>.empty()) [[likely]] {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;      <span class="comment">// 如果栈不空则添加到栈顶的流程控制语句中</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;      <a class="code" href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a352a7a0c33d507358a5a37f1a0e95677">AddSentence</a>(std::move(flow_control_sentence));</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      <span class="comment">// 如果栈空则说明当前构建的函数已完成</span></div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <span class="comment">// 函数构建完成，创建构建完成的函数类型对象并添加到全局成员的作用域</span></div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      assert(flow_control_sentence-&gt;GetFlowType() ==</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;             <a class="code" href="namespacec__parser__frontend_1_1flow__control.html#ad0c5d7192b629f67cd18bb2ba05cbceba8ca744848dcd84c3547df6ef437bbef5">c_parser_frontend::flow_control::FlowType::kFunctionDefine</a>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="comment">// 释放指向函数数据的指针，防止该指针在flow_control_sentence析构时被释放</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      <span class="comment">// 该指针管辖权在FlowControlSystem</span></div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      flow_control_sentence.release();</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      <span class="comment">// 通知控制器完成函数构建</span></div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <a class="code" href="namespacec__parser__frontend.html#a772334e0ba549c0cb075d49821001a53">c_parser_frontend::c_parser_frontend</a>.<a class="code" href="classc__parser__frontend_1_1CParserFrontend.html#a6c14bf77496f247c9347800d6b83df04">FinishFunctionConstruct</a>();</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;  }</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;}</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}  <span class="comment">// namespace c_parser_frontend::action_scope_system</span></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<div class="ttc" id="aclassc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_html_ac44ad28c95778bb6ca7fc51eee472f80"><div class="ttname"><a href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#ac44ad28c95778bb6ca7fc51eee472f80">c_parser_frontend::action_scope_system::ActionScopeSystem::SetFunctionToConstruct</a></div><div class="ttdeci">bool SetFunctionToConstruct(c_parser_frontend::flow_control::FunctionDefine *function_data)</div><div class="ttdoc">设置当前待构建函数</div><div class="ttdef"><b>Definition:</b> <a href="acion__scope__system_8cpp_source.html#l00184">acion_scope_system.cpp:184</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1flow__control_1_1FlowControlSystem_html_a98b9fbb934b3e02838b06d8697bf8a54"><div class="ttname"><a href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a98b9fbb934b3e02838b06d8697bf8a54">c_parser_frontend::flow_control::FlowControlSystem::FunctionCheckResult</a></div><div class="ttdeci">FunctionCheckResult</div><div class="ttdoc">声明/设置活跃函数时返回的结果</div><div class="ttdef"><b>Definition:</b> <a href="flow__control_8h_source.html#l00854">flow_control.h:854</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1common_1_1ExplicitIdWrapper_html"><div class="ttname"><a href="classfrontend_1_1common_1_1ExplicitIdWrapper.html">frontend::common::ExplicitIdWrapper&lt; size_t, IdWrapperLabel, IdWrapperLabel::kActionScopeLevelType &gt;</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1type__system_1_1TypeSystem_html_a55119a508fa7ca1257475ec7795315c8"><div class="ttname"><a href="classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a55119a508fa7ca1257475ec7795315c8">c_parser_frontend::type_system::TypeSystem::AnnounceFunctionType</a></div><div class="ttdeci">std::pair&lt; TypeNodeContainerType::const_iterator, AddTypeResult &gt; AnnounceFunctionType(const std::shared_ptr&lt; const FunctionType &gt; &amp;function_type)</div><div class="ttdoc">声明函数类型</div><div class="ttdef"><b>Definition:</b> <a href="type__system_8h_source.html#l01191">type_system.h:1191</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1CParserFrontend_html_a38e4dcdb73bf019b74684888a270728e"><div class="ttname"><a href="classc__parser__frontend_1_1CParserFrontend.html#a38e4dcdb73bf019b74684888a270728e">c_parser_frontend::CParserFrontend::flow_control_system_</a></div><div class="ttdeci">FlowControlSystem flow_control_system_</div><div class="ttdoc">流程控制系统</div><div class="ttdef"><b>Definition:</b> <a href="c__parser__frontend_8h_source.html#l00204">c_parser_frontend.h:204</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1CParserFrontend_html_a6c14bf77496f247c9347800d6b83df04"><div class="ttname"><a href="classc__parser__frontend_1_1CParserFrontend.html#a6c14bf77496f247c9347800d6b83df04">c_parser_frontend::CParserFrontend::FinishFunctionConstruct</a></div><div class="ttdeci">void FinishFunctionConstruct()</div><div class="ttdoc">做一些完成函数构建后的清理操作</div><div class="ttdef"><b>Definition:</b> <a href="c__parser__frontend_8h_source.html#l00191">c_parser_frontend.h:191</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1CParserFrontend_html_aaf5c004c2492607f5133f87f871c517c"><div class="ttname"><a href="classc__parser__frontend_1_1CParserFrontend.html#aaf5c004c2492607f5133f87f871c517c">c_parser_frontend::CParserFrontend::AnnounceFunction</a></div><div class="ttdeci">std::pair&lt; TypeSystem::TypeNodeContainerIter, AddTypeResult &gt; AnnounceFunction(const std::shared_ptr&lt; const FunctionType &gt; &amp;function_type)</div><div class="ttdoc">声明函数使用该接口</div><div class="ttdef"><b>Definition:</b> <a href="c__parser__frontend_8cpp_source.html#l00012">c_parser_frontend.cpp:12</a></div></div>
+<div class="ttc" id="anamespacec__parser__frontend_1_1type__system_html_a53035d13ed98c1c9c754e011d3c3320d"><div class="ttname"><a href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320d">c_parser_frontend::type_system::AddTypeResult</a></div><div class="ttdeci">AddTypeResult</div><div class="ttdoc">添加类型的结果</div><div class="ttdef"><b>Definition:</b> <a href="type__system_8h_source.html#l00158">type_system.h:158</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_html_a352a7a0c33d507358a5a37f1a0e95677"><div class="ttname"><a href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a352a7a0c33d507358a5a37f1a0e95677">c_parser_frontend::action_scope_system::ActionScopeSystem::AddSentence</a></div><div class="ttdeci">bool AddSentence(std::unique_ptr&lt; c_parser_frontend::flow_control::FlowInterface &gt; &amp;&amp;sentence)</div><div class="ttdoc">向当前活跃的流程控制语句内添加一条语句</div><div class="ttdef"><b>Definition:</b> <a href="action__scope__system_8h_source.html#l00230">action_scope_system.h:230</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1CParserFrontend_html_aa27c730d6112f2cf35380d8c98520349"><div class="ttname"><a href="classc__parser__frontend_1_1CParserFrontend.html#aa27c730d6112f2cf35380d8c98520349">c_parser_frontend::CParserFrontend::SetFunctionToConstruct</a></div><div class="ttdeci">bool SetFunctionToConstruct(const std::shared_ptr&lt; const FunctionType &gt; &amp;function_to_construct)</div><div class="ttdoc">设置当前待构建函数</div><div class="ttdef"><b>Definition:</b> <a href="c__parser__frontend_8cpp_source.html#l00045">c_parser_frontend.cpp:45</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1flow__control_1_1FlowControlSystem_html_a98b9fbb934b3e02838b06d8697bf8a54ae020ec05105b3671a42642ecf6355f85"><div class="ttname"><a href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a98b9fbb934b3e02838b06d8697bf8a54ae020ec05105b3671a42642ecf6355f85">c_parser_frontend::flow_control::FlowControlSystem::FunctionCheckResult::kDoubleAnnounce</a></div><div class="ttdeci">@ kDoubleAnnounce</div><div class="ttdoc">声明已经声明/定义的函数</div></div>
+<div class="ttc" id="anamespacec__parser__frontend_html"><div class="ttname"><a href="namespacec__parser__frontend.html">c_parser_frontend</a></div><div class="ttdef"><b>Definition:</b> <a href="acion__scope__system_8cpp_source.html#l00004">acion_scope_system.cpp:4</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_html_a543ae6bc8aed1b39e690cef86b10ffdd"><div class="ttname"><a href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a543ae6bc8aed1b39e690cef86b10ffdd">c_parser_frontend::action_scope_system::ActionScopeSystem::flow_control_stack_</a></div><div class="ttdeci">std::stack&lt; std::pair&lt; std::unique_ptr&lt; c_parser_frontend::flow_control::FlowInterface &gt;, ActionScopeLevel &gt; &gt; flow_control_stack_</div><div class="ttdoc">存储当前所有正在构建的流程语句和流程语句的作用域等级</div><div class="ttdef"><b>Definition:</b> <a href="action__scope__system_8h_source.html#l00297">action_scope_system.h:297</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1flow__control_1_1FlowControlSystem_html_a98b9fbb934b3e02838b06d8697bf8a54a8c632159fa131f09d04f94e3cbcd8782"><div class="ttname"><a href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a98b9fbb934b3e02838b06d8697bf8a54a8c632159fa131f09d04f94e3cbcd8782">c_parser_frontend::flow_control::FlowControlSystem::FunctionCheckResult::kSuccess</a></div><div class="ttdeci">@ kSuccess</div><div class="ttdoc">失败的情况</div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1flow__control_1_1FlowControlSystem_html_a98b9fbb934b3e02838b06d8697bf8a54a2720a88b1ed0140ebb9224313cf50033"><div class="ttname"><a href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a98b9fbb934b3e02838b06d8697bf8a54a2720a88b1ed0140ebb9224313cf50033">c_parser_frontend::flow_control::FlowControlSystem::FunctionCheckResult::kOverrideFunction</a></div><div class="ttdeci">@ kOverrideFunction</div><div class="ttdoc">试图重载函数</div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1flow__control_1_1FlowControlSystem_html_a1a8218d82724ca90ef2e3767700b2f8b"><div class="ttname"><a href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a1a8218d82724ca90ef2e3767700b2f8b">c_parser_frontend::flow_control::FlowControlSystem::SetFunctionToConstruct</a></div><div class="ttdeci">FunctionCheckResult SetFunctionToConstruct(const std::shared_ptr&lt; const FunctionType &gt; &amp;active_function)</div><div class="ttdoc">设置当前构建的函数</div><div class="ttdef"><b>Definition:</b> <a href="flow__control_8cpp_source.html#l00367">flow_control.cpp:367</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1CParserFrontend_html_a35283ea6805c35e9b9f509a3eab03a14"><div class="ttname"><a href="classc__parser__frontend_1_1CParserFrontend.html#a35283ea6805c35e9b9f509a3eab03a14">c_parser_frontend::CParserFrontend::action_scope_system_</a></div><div class="ttdeci">ActionScopeSystem action_scope_system_</div><div class="ttdoc">作用域系统</div><div class="ttdef"><b>Definition:</b> <a href="c__parser__frontend_8h_source.html#l00202">c_parser_frontend.h:202</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1CParserFrontend_html"><div class="ttname"><a href="classc__parser__frontend_1_1CParserFrontend.html">c_parser_frontend::CParserFrontend</a></div><div class="ttdef"><b>Definition:</b> <a href="c__parser__frontend_8h_source.html#l00026">c_parser_frontend.h:26</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_html_a4fff2178d35bc39a63f972e82b66d6a5"><div class="ttname"><a href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a4fff2178d35bc39a63f972e82b66d6a5">c_parser_frontend::action_scope_system::ActionScopeSystem::GetVarietyOrFunctionNameToOperatorNodePointer</a></div><div class="ttdeci">ActionScopeContainerType &amp; GetVarietyOrFunctionNameToOperatorNodePointer()</div><div class="ttdoc">获取存储变量/函数名到节点指针的映射的容器</div><div class="ttdef"><b>Definition:</b> <a href="action__scope__system_8h_source.html#l00257">action_scope_system.h:257</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1CParserFrontend_html_aa56ec99e72b01be1b964717b39d72b9e"><div class="ttname"><a href="classc__parser__frontend_1_1CParserFrontend.html#aa56ec99e72b01be1b964717b39d72b9e">c_parser_frontend::CParserFrontend::type_system_</a></div><div class="ttdeci">TypeSystem type_system_</div><div class="ttdoc">类型系统</div><div class="ttdef"><b>Definition:</b> <a href="c__parser__frontend_8h_source.html#l00200">c_parser_frontend.h:200</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_html_a01d1f19c1a4d3a5b26427cb46b63b6e4"><div class="ttname"><a href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a01d1f19c1a4d3a5b26427cb46b63b6e4">c_parser_frontend::action_scope_system::ActionScopeSystem::GetVarietyStack</a></div><div class="ttdeci">auto &amp; GetVarietyStack()</div><div class="ttdoc">获取变量栈</div><div class="ttdef"><b>Definition:</b> <a href="action__scope__system_8h_source.html#l00268">action_scope_system.h:268</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1CParserFrontend_html_a0b2eb6f30a1205049ad65335be6dff2e"><div class="ttname"><a href="classc__parser__frontend_1_1CParserFrontend.html#a0b2eb6f30a1205049ad65335be6dff2e">c_parser_frontend::CParserFrontend::PushFlowControlSentence</a></div><div class="ttdeci">bool PushFlowControlSentence(std::unique_ptr&lt; FlowInterface &gt; &amp;&amp;flow_control_sentence)</div><div class="ttdoc">将流程控制语句压入栈</div><div class="ttdef"><b>Definition:</b> <a href="c__parser__frontend_8cpp_source.html#l00057">c_parser_frontend.cpp:57</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1flow__control_1_1FlowControlSystem_html_a9c1a3d54f38c0dce420b5bb28708acc5"><div class="ttname"><a href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a9c1a3d54f38c0dce420b5bb28708acc5">c_parser_frontend::flow_control::FlowControlSystem::AnnounceFunction</a></div><div class="ttdeci">FunctionCheckResult AnnounceFunction(const std::shared_ptr&lt; const FunctionType &gt; &amp;function_type)</div><div class="ttdoc">声明函数</div><div class="ttdef"><b>Definition:</b> <a href="flow__control_8cpp_source.html#l00387">flow_control.cpp:387</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_html_a1d17eb37f21f42079ed3c066802389a4"><div class="ttname"><a href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a1d17eb37f21f42079ed3c066802389a4">c_parser_frontend::action_scope_system::ActionScopeSystem::PopOverLevel</a></div><div class="ttdeci">void PopOverLevel(ActionScopeLevel level)</div><div class="ttdoc">弹出所有高于给定作用域等级的变量和流程控制语句</div><div class="ttdef"><b>Definition:</b> <a href="c__parser__frontend_8cpp_source.html#l00068">c_parser_frontend.cpp:68</a></div></div>
+<div class="ttc" id="ac__parser__frontend_8h_html"><div class="ttname"><a href="c__parser__frontend_8h.html">c_parser_frontend.h</a></div><div class="ttdoc">C语言编译器前端控制器</div></div>
+<div class="ttc" id="anamespacec__parser__frontend_1_1type__system_html_a53035d13ed98c1c9c754e011d3c3320da2720a88b1ed0140ebb9224313cf50033"><div class="ttname"><a href="namespacec__parser__frontend_1_1type__system.html#a53035d13ed98c1c9c754e011d3c3320da2720a88b1ed0140ebb9224313cf50033">c_parser_frontend::type_system::AddTypeResult::kOverrideFunction</a></div><div class="ttdeci">@ kOverrideFunction</div><div class="ttdoc">声明已经定义/声明的函数</div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1flow__control_1_1FlowControlSystem_html_a98b9fbb934b3e02838b06d8697bf8a54a19d937ec65bc55f1dac2372a7eea1d7d"><div class="ttname"><a href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a98b9fbb934b3e02838b06d8697bf8a54a19d937ec65bc55f1dac2372a7eea1d7d">c_parser_frontend::flow_control::FlowControlSystem::FunctionCheckResult::kFunctionConstructed</a></div><div class="ttdeci">@ kFunctionConstructed</div><div class="ttdoc">试图设置已经构建完成的函数为待构建函数</div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1type__system_1_1TypeSystem_html_a1b3ab58d873399194caaf2ebf468e6fb"><div class="ttname"><a href="classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a1b3ab58d873399194caaf2ebf468e6fb">c_parser_frontend::type_system::TypeSystem::TypeNodeContainerIter</a></div><div class="ttdeci">TypeNodeContainerType::const_iterator TypeNodeContainerIter</div><div class="ttdoc">指向类型名和对应类型链的迭代器</div><div class="ttdef"><b>Definition:</b> <a href="type__system_8h_source.html#l01176">type_system.h:1176</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem_html_aa1729e785acbaa7379f65a06cf9e17f5"><div class="ttname"><a href="classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#aa1729e785acbaa7379f65a06cf9e17f5">c_parser_frontend::action_scope_system::ActionScopeSystem::PushFlowControlSentence</a></div><div class="ttdeci">bool PushFlowControlSentence(std::unique_ptr&lt; c_parser_frontend::flow_control::FlowInterface &gt; &amp;&amp;flow_control_sentence)</div><div class="ttdoc">压入流程控制节点</div><div class="ttdef"><b>Definition:</b> <a href="acion__scope__system_8cpp_source.html#l00206">acion_scope_system.cpp:206</a></div></div>
+<div class="ttc" id="anamespacec__parser__frontend_html_a772334e0ba549c0cb075d49821001a53"><div class="ttname"><a href="namespacec__parser__frontend.html#a772334e0ba549c0cb075d49821001a53">c_parser_frontend::c_parser_frontend</a></div><div class="ttdeci">thread_local CParserFrontend c_parser_frontend</div><div class="ttdoc">全局CParserFrontend变量</div><div class="ttdef"><b>Definition:</b> <a href="c__parser__frontend_8cpp_source.html#l00008">c_parser_frontend.cpp:8</a></div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1CParserFrontend_html_a16c21643446d866cd66054d2f4b008cb"><div class="ttname"><a href="classc__parser__frontend_1_1CParserFrontend.html#a16c21643446d866cd66054d2f4b008cb">c_parser_frontend::CParserFrontend::AddTypeResult</a></div><div class="ttdeci">c_parser_frontend::type_system::AddTypeResult AddTypeResult</div><div class="ttdef"><b>Definition:</b> <a href="c__parser__frontend_8h_source.html#l00038">c_parser_frontend.h:38</a></div></div>
+<div class="ttc" id="anamespacec__parser__frontend_1_1flow__control_html_ad0c5d7192b629f67cd18bb2ba05cbceba8ca744848dcd84c3547df6ef437bbef5"><div class="ttname"><a href="namespacec__parser__frontend_1_1flow__control.html#ad0c5d7192b629f67cd18bb2ba05cbceba8ca744848dcd84c3547df6ef437bbef5">c_parser_frontend::flow_control::FlowType::kFunctionDefine</a></div><div class="ttdeci">@ kFunctionDefine</div><div class="ttdoc">函数定义</div></div>
+<div class="ttc" id="aclassc__parser__frontend_1_1flow__control_1_1FlowControlSystem_html_a3ee7d9d6ddb63e17a6f398f526716958"><div class="ttname"><a href="classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a3ee7d9d6ddb63e17a6f398f526716958">c_parser_frontend::flow_control::FlowControlSystem::GetActiveFunctionPointer</a></div><div class="ttdeci">FunctionDefine * GetActiveFunctionPointer() const</div><div class="ttdoc">获取指向当前活跃函数节点的指针</div><div class="ttdef"><b>Definition:</b> <a href="flow__control_8h_source.html#l00871">flow_control.h:871</a></div></div>
+<div class="ttc" id="anamespacec__parser__frontend_1_1action__scope__system_html"><div class="ttname"><a href="namespacec__parser__frontend_1_1action__scope__system.html">c_parser_frontend::action_scope_system</a></div><div class="ttdef"><b>Definition:</b> <a href="acion__scope__system_8cpp_source.html#l00004">acion_scope_system.cpp:4</a></div></div>
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="dir_9d6b2bf2bb0a0ac49f2e2316cb4c6dde.html">CParserFrontend</a></li><li class="navelem"><a class="el" href="c__parser__frontend_8cpp.html">c_parser_frontend.cpp</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

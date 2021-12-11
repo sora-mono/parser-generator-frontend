@@ -1,0 +1,4 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::GetBodySymbolId" name="frontend::generator::syntax_generator::SyntaxGenerator::GetBodySymbolId">
+<area shape="rect" id="node1" title="根据产生式体字符串获取对应ID" alt="" coords="5,5,263,61"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#a8843e773f9b1f958e9beb2373084704d" title="根据对象获取其ID" alt="" coords="311,13,588,54"/>
+</map>

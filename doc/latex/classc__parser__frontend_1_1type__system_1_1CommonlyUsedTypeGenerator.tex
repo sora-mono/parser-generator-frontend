@@ -1,0 +1,160 @@
+\hypertarget{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::Commonly\+Used\+Type\+Generator类 参考}
+\label{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator}\index{c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator@{c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator}}
+
+
+常用类型节点的生成器  
+
+
+
+
+{\ttfamily \#include $<$type\+\_\+system.\+h$>$}
+
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$Built\+In\+Type built\+\_\+in\+\_\+type, Sign\+Tag sign\+\_\+tag$>$ }\\static std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType}{Basic\+Type}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator_ac551037fc8f266d242f9ab35ec5c045b}{Get\+Basic\+Type}} ()
+\begin{DoxyCompactList}\small\item\em 获取基础类型的类型链 \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType}{Basic\+Type}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator_a58afc8f81ae9c121ea54949051743f7c}{Get\+Basic\+Type\+Not\+Template}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_aec297cf4e12aa9aa66034a08667ada28}{Built\+In\+Type}} built\+\_\+in\+\_\+type, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_ab49a05ac9449cbab0efc2c3380d1172c}{Sign\+Tag}} sign\+\_\+tag)
+\begin{DoxyCompactList}\small\item\em 获取基础类型的类型链 \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1PointerType}{Pointer\+Type}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator_a1a42e808be44d5f7c6f3bc673ad78e43}{Get\+Const\+Expr\+String\+Type}} ()
+\begin{DoxyCompactList}\small\item\em 获取初始化用字符串类型（const char$\ast$） \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+常用类型节点的生成器 
+
+\begin{DoxyNote}{注解}
+全局共享一份节点以节省内存和避免多次分配的消耗 
+\end{DoxyNote}
+
+
+在文件 type\+\_\+system.\+h 第 1047 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator_ac551037fc8f266d242f9ab35ec5c045b}\label{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator_ac551037fc8f266d242f9ab35ec5c045b}} 
+\index{c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator@{c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator}!GetBasicType@{GetBasicType}}
+\index{GetBasicType@{GetBasicType}!c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator@{c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator}}
+\doxysubsubsection{\texorpdfstring{GetBasicType()}{GetBasicType()}}
+{\footnotesize\ttfamily template$<$Built\+In\+Type built\+\_\+in\+\_\+type, Sign\+Tag sign\+\_\+tag$>$ \\
+static std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType}{Basic\+Type}}$>$ c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Commonly\+Used\+Type\+Generator\+::\+Get\+Basic\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+获取基础类型的类型链 
+
+
+\begin{DoxyTemplParams}{模板参数}
+{\em built\+\_\+in\+\_\+type} & ：内置类型 \\
+\hline
+{\em sign\+\_\+tag} & ：类型的符号标记 \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{返回}
+返回指向类型链头结点的const指针
+\end{DoxyReturn}
+返回的指针指向全局共享的一个类型节点对象 \begin{DoxyNote}{注解}
+void类型和bool类型使用\+Sign\+Tag\+::k\+Unsigned 
+\end{DoxyNote}
+
+
+在文件 type\+\_\+system.\+h 第 1057 行定义.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Pointer\+Type\+::\+Can\+Be\+Assigned\+By(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Logical\+Operation\+Operator\+Node\+::\+Create\+And\+Set\+Result\+Node(), c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Prefix\+Plus\+Or\+Minus(), c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Single\+Constexpr\+Value\+Char() , 以及 c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Single\+Constexpr\+Value\+Indexed\+String().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator_ac551037fc8f266d242f9ab35ec5c045b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator_a58afc8f81ae9c121ea54949051743f7c}\label{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator_a58afc8f81ae9c121ea54949051743f7c}} 
+\index{c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator@{c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator}!GetBasicTypeNotTemplate@{GetBasicTypeNotTemplate}}
+\index{GetBasicTypeNotTemplate@{GetBasicTypeNotTemplate}!c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator@{c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator}}
+\doxysubsubsection{\texorpdfstring{GetBasicTypeNotTemplate()}{GetBasicTypeNotTemplate()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1BasicType}{Basic\+Type}} $>$ c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Commonly\+Used\+Type\+Generator\+::\+Get\+Basic\+Type\+Not\+Template (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_aec297cf4e12aa9aa66034a08667ada28}{Built\+In\+Type}}}]{built\+\_\+in\+\_\+type,  }\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_ab49a05ac9449cbab0efc2c3380d1172c}{Sign\+Tag}}}]{sign\+\_\+tag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+获取基础类型的类型链 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em built\+\_\+in\+\_\+type} & ：内置类型 \\
+\hline
+\mbox{\texttt{ in}}  & {\em sign\+\_\+tag} & ：类型的符号标记 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回指向类型链头结点的const指针
+\end{DoxyReturn}
+返回的指针指向全局共享的一个类型节点对象 该函数用于运行期调用同名模板函数 \begin{DoxyNote}{注解}
+void类型和bool类型使用\+Sign\+Tag\+::k\+Unsigned 
+\end{DoxyNote}
+
+
+在文件 type\+\_\+system.\+cpp 第 417 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Float32, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Float64, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Int1, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Int16, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Int32, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Int8, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Signed, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Unsigned , 以及 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Void.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Assignable\+Size\+Of\+Assignable(), c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Assignable\+Size\+Of\+Type(), c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Basic\+Type\+Fundamental() , 以及 c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Single\+Constexpr\+Value\+Num().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator_a58afc8f81ae9c121ea54949051743f7c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator_a1a42e808be44d5f7c6f3bc673ad78e43}\label{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator_a1a42e808be44d5f7c6f3bc673ad78e43}} 
+\index{c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator@{c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator}!GetConstExprStringType@{GetConstExprStringType}}
+\index{GetConstExprStringType@{GetConstExprStringType}!c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator@{c\_parser\_frontend::type\_system::CommonlyUsedTypeGenerator}}
+\doxysubsubsection{\texorpdfstring{GetConstExprStringType()}{GetConstExprStringType()}}
+{\footnotesize\ttfamily static std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1PointerType}{Pointer\+Type}}$>$ c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Commonly\+Used\+Type\+Generator\+::\+Get\+Const\+Expr\+String\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+获取初始化用字符串类型（const char$\ast$） 
+
+\begin{DoxyReturn}{返回}
+返回指向类型链的const指针 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+全局共享一条类型链 
+\end{DoxyNote}
+
+
+在文件 type\+\_\+system.\+h 第 1076 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Const.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::\+Check\+Basic\+Type\+Initialize\+Valid(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Initialize\+Operator\+Node\+Interface\+::\+Check\+Init\+Value\+Type\+Valid() , 以及 c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Single\+Constexpr\+Value\+String().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator_a1a42e808be44d5f7c6f3bc673ad78e43_icgraph}
+\end{center}
+\end{figure}
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{type__system_8h}{type\+\_\+system.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{type__system_8cpp}{type\+\_\+system.\+cpp}}\end{DoxyCompactItemize}

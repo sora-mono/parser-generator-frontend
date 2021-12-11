@@ -1,0 +1,51 @@
+\hypertarget{namespacec__parser__frontend_1_1action__scope__system}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system 命名空间参考}
+\label{namespacec__parser__frontend_1_1action__scope__system}\index{c\_parser\_frontend::action\_scope\_system@{c\_parser\_frontend::action\_scope\_system}}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem}{Action\+Scope\+System}}
+\begin{DoxyCompactList}\small\item\em 作用域系统 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{枚举}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{Define\+Variety\+Result}} \{ \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15aaf1adf7ec3673b4f5765cfbc5d43b7dc}{Define\+Variety\+Result\+::k\+New}}, 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15a5a09da40366439f025b0a5a09e62890b}{Define\+Variety\+Result\+::k\+Shift\+To\+Stack}}, 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15aca35124b599e0a4df9534644f3afacbd}{Define\+Variety\+Result\+::k\+Add\+To\+Stack}}, 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15abb66826fd207dfee6ea55923cb2758b1}{Define\+Variety\+Result\+::k\+Re\+Define}}
+ \}
+\begin{DoxyCompactList}\small\item\em 定义变量的检查结果 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{枚举类型说明}
+\mbox{\Hypertarget{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}\label{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}} 
+\index{c\_parser\_frontend::action\_scope\_system@{c\_parser\_frontend::action\_scope\_system}!DefineVarietyResult@{DefineVarietyResult}}
+\index{DefineVarietyResult@{DefineVarietyResult}!c\_parser\_frontend::action\_scope\_system@{c\_parser\_frontend::action\_scope\_system}}
+\doxysubsubsection{\texorpdfstring{DefineVarietyResult}{DefineVarietyResult}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15}{c\+\_\+parser\+\_\+frontend\+::action\+\_\+scope\+\_\+system\+::\+Define\+Variety\+Result}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+定义变量的检查结果 
+
+\begin{DoxyEnumFields}{枚举值}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kNew@{kNew}!c\_parser\_frontend::action\_scope\_system@{c\_parser\_frontend::action\_scope\_system}}\index{c\_parser\_frontend::action\_scope\_system@{c\_parser\_frontend::action\_scope\_system}!kNew@{kNew}}}\mbox{\Hypertarget{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15aaf1adf7ec3673b4f5765cfbc5d43b7dc}\label{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15aaf1adf7ec3673b4f5765cfbc5d43b7dc}} 
+k\+New&可以添加的情况 新增指针，该节点不曾存储指针 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kShiftToStack@{kShiftToStack}!c\_parser\_frontend::action\_scope\_system@{c\_parser\_frontend::action\_scope\_system}}\index{c\_parser\_frontend::action\_scope\_system@{c\_parser\_frontend::action\_scope\_system}!kShiftToStack@{kShiftToStack}}}\mbox{\Hypertarget{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15a5a09da40366439f025b0a5a09e62890b}\label{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15a5a09da40366439f025b0a5a09e62890b}} 
+k\+Shift\+To\+Stack&该节点以前存储了一个指针，现在存储第二个，转化为指针栈 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kAddToStack@{kAddToStack}!c\_parser\_frontend::action\_scope\_system@{c\_parser\_frontend::action\_scope\_system}}\index{c\_parser\_frontend::action\_scope\_system@{c\_parser\_frontend::action\_scope\_system}!kAddToStack@{kAddToStack}}}\mbox{\Hypertarget{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15aca35124b599e0a4df9534644f3afacbd}\label{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15aca35124b599e0a4df9534644f3afacbd}} 
+k\+Add\+To\+Stack&不可以添加的情况 向指针栈中添加一个指针 \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{kReDefine@{kReDefine}!c\_parser\_frontend::action\_scope\_system@{c\_parser\_frontend::action\_scope\_system}}\index{c\_parser\_frontend::action\_scope\_system@{c\_parser\_frontend::action\_scope\_system}!kReDefine@{kReDefine}}}\mbox{\Hypertarget{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15abb66826fd207dfee6ea55923cb2758b1}\label{namespacec__parser__frontend_1_1action__scope__system_a5e9742aa52f66db4400913122de61f15abb66826fd207dfee6ea55923cb2758b1}} 
+k\+Re\+Define&重定义 \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+在文件 action\+\_\+scope\+\_\+system.\+h 第 16 行定义.
+

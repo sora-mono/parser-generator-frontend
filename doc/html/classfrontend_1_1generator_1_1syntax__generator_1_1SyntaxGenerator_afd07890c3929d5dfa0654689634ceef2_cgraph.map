@@ -1,0 +1,7 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::SubAddTerminalNode" name="frontend::generator::syntax_generator::SyntaxGenerator::SubAddTerminalNode">
+<area shape="rect" id="node1" title="AddTerminalProduction的子过程，仅用于创建终结节点" alt="" coords="5,103,284,159"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1common_1_1ObjectManager.html#adbb63b10c08fd65047c2b6ee5cae362d" title="系统自行选择最佳位置放置对象" alt="" coords="358,5,550,47"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1ObjectManager.html#a204350a871426aaf21ddc9cd535925b6" title="获取对象的const引用" alt="" coords="358,71,550,112"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aa9f784a5bdae74c344ec5ecd4185c0ea" title="设置产生式体字符串ID到产生式节点ID的映射" alt="" coords="333,136,575,207"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aacf80506134caabbc3833538bec6ea66" title="设置产生式名ID到产生式节点ID的映射" alt="" coords="332,231,576,301"/>
+</map>

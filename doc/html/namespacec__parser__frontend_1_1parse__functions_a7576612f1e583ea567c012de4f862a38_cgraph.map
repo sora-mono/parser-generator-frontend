@@ -1,0 +1,10 @@
+<map id="c_parser_frontend::parse_functions::VarietyAnnounceWithAssign" name="c_parser_frontend::parse_functions::VarietyAnnounceWithAssign">
+<area shape="rect" id="node1" title=" " alt="" coords="5,31,248,87"/>
+<area shape="rect" id="node2" href="$namespacec__parser__frontend_1_1parse__functions.html#af2adac6cd67ab20f6c72d62e76bb5570" title="检查赋值时类型检查结果，输出相应的错误信息，如果是error则不返回" alt="" coords="296,31,540,87"/>
+<area shape="rect" id="node3" href="$namespacec__parser__frontend_1_1parse__functions.html#a5f8edb724df3e619e4e564071fa023ae" title="输出错误信息" alt="" coords="599,5,807,47"/>
+<area shape="rect" id="node8" href="$namespacec__parser__frontend_1_1parse__functions.html#ab180d83631834ffd8a7990828f2d4e84" title="输出警告信息" alt="" coords="588,71,819,112"/>
+<area shape="rect" id="node4" href="$namespacec__parser__frontend.html#ade457c7a24ac32bc77b2267b6705ead7" title="获取当前列数" alt="" coords="867,5,1013,47"/>
+<area shape="rect" id="node6" href="$namespacec__parser__frontend.html#aeb2197ec97ed9ffc51a5a9217ebf0458" title="获取当前行数" alt="" coords="867,71,1013,112"/>
+<area shape="rect" id="node5" href="$namespacefrontend_1_1parser.html#aff0816dfe7d9e7d2a7f1349e4194d7b1" title="获取当前列数" alt="" coords="1061,13,1268,39"/>
+<area shape="rect" id="node7" href="$namespacefrontend_1_1parser.html#a79d5fb6dfa446e6c683e6257d27a6944" title="获取当前行数" alt="" coords="1073,78,1257,105"/>
+</map>

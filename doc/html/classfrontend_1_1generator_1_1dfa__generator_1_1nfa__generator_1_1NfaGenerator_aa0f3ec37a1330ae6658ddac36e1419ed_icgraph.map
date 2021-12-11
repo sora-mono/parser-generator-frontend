@@ -1,0 +1,20 @@
+<map id="frontend::generator::dfa_generator::nfa_generator::NfaGenerator::GetNfaNode" name="frontend::generator::dfa_generator::nfa_generator::NfaGenerator::GetNfaNode">
+<area shape="rect" id="node1" title="根据NFA节点ID获取NFA节点" alt="" coords="1495,162,1683,233"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a36fe0f238a5663a90c8b1100d723eb33" title="获取给定NFA节点的所有等效节点ID（包含自身）" alt="" coords="1259,63,1447,134"/>
+<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a52c8b5c40bdc50f5048f61a267f7dfc0" title="获取给定NFA节点在转移条件下可以到达的等效节点" alt="" coords="984,5,1211,61"/>
+<area shape="rect" id="node8" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac8852c9c0a00070c87e253e996644c59" title="根据输入生成可选字符结构" alt="" coords="1259,261,1447,331"/>
+<area shape="rect" id="node9" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#afd38661549adcda0d029c24112c485d0" title="解析正则" alt="" coords="1003,255,1191,326"/>
+<area shape="rect" id="node13" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a9c66fbc2e3302533f3ef3d3b693b3691" title="合并优化，降低节点数和转移路径以降低子集构造法集合大小" alt="" coords="1003,137,1191,207"/>
+<area shape="rect" id="node14" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a6b41f5800ea965e440f7451d3cd0e320" title="添加一个纯单词" alt="" coords="1259,365,1447,435"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="405,71,622,127"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,63,355,134"/>
+<area shape="rect" id="node5" href="$Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,85,60,112"/>
+<area shape="rect" id="node7" href="$classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="695,5,913,61"/>
+<area shape="rect" id="node10" href="$classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a676342993bb701a3c1c9574f9ae7e441" title="添加单词的正则" alt="" coords="695,252,913,308"/>
+<area shape="rect" id="node11" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4dc1e67e686137062266790650bbe67a" title="添加终结产生式" alt="" coords="403,277,624,347"/>
+<area shape="rect" id="node12" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a36db9122a028b29ec3c60e13c4837583" title="添加关键字" alt="" coords="120,284,343,340"/>
+<area shape="rect" id="node15" href="$classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a527079ed92f9a58295df07567975b274" title="添加纯单词" alt="" coords="989,391,1206,447"/>
+<area shape="rect" id="node16" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a929e48b9bce49002c7b89d6ca4f997c9" title="添加具有双目运算符和左侧单目运算符语义的运算符" alt="" coords="689,383,919,454"/>
+<area shape="rect" id="node17" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aec2d0760baf4095f4f2183c8e84e37ea" title="添加双目运算符" alt="" coords="672,479,936,535"/>
+<area shape="rect" id="node18" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a35ff252e20e90814c0040237d4be5fea" title="添加单目运算符" alt="" coords="690,559,918,630"/>
+</map>

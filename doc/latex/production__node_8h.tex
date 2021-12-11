@@ -1,0 +1,60 @@
+\hypertarget{production__node_8h}{}\doxysection{src/\+Generator/\+Syntax\+Generator/production\+\_\+node.h 文件参考}
+\label{production__node_8h}\index{src/Generator/SyntaxGenerator/production\_node.h@{src/Generator/SyntaxGenerator/production\_node.h}}
+
+
+描述产生式的类  
+
+
+{\ttfamily \#include \char`\"{}Generator/export\+\_\+types.\+h\char`\"{}}\newline
+production\+\_\+node.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{production__node_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{production__node_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node}}
+\begin{DoxyCompactList}\small\item\em 该类是所有表示具体产生式类别的派生类的基类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1TerminalProductionNode}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Terminal\+Production\+Node}}
+\begin{DoxyCompactList}\small\item\em 表示终结产生式 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface}}
+\begin{DoxyCompactList}\small\item\em 表示运算符的类的基类 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BinaryOperatorNode}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Binary\+Operator\+Node}}
+\begin{DoxyCompactList}\small\item\em 表示双目运算符 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1UnaryOperatorNode}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Unary\+Operator\+Node}}
+\begin{DoxyCompactList}\small\item\em 表示单目运算符 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BinaryUnaryOperatorNode}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Binary\+Unary\+Operator\+Node}}
+\begin{DoxyCompactList}\small\item\em 表示同时具有双目运算符和单目运算符语义的运算符 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node}}
+\begin{DoxyCompactList}\small\item\em 表示非终结产生式 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_1_1ProductionBodyType}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::\+Production\+Body\+Type}}
+\begin{DoxyCompactList}\small\item\em 表示单个非终结产生式体 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1EndNode}{frontend\+::generator\+::syntax\+\_\+generator\+::\+End\+Node}}
+\begin{DoxyCompactList}\small\item\em 表示文件尾 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{命名空间}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefrontend}{frontend}}
+\item 
+ \mbox{\hyperlink{namespacefrontend_1_1generator}{frontend\+::generator}}
+\item 
+ \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator}{frontend\+::generator\+::syntax\+\_\+generator}}
+\begin{DoxyCompactList}\small\item\em T\+O\+DO 添加删除未使用产生式的功能 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+描述产生式的类 
+
+该文件中定义多个描述产生式的类 Terminal\+Production\+Node ：终结产生式 Operator\+Production\+Node ：运算符 Non\+Terminal\+Production\+Node ：非终结产生式 End\+Node ：文件尾 这些类用来表示不同产生式 

@@ -1,0 +1,4 @@
+<map id="c_parser_frontend::parse_functions::ObjectConstructData::AddFunctionTypeArgument" name="c_parser_frontend::parse_functions::ObjectConstructData::AddFunctionTypeArgument">
+<area shape="rect" id="node1" title="向尾部节点添加函数参数，要求尾部节点为函数类型" alt="" coords="5,5,243,61"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1FunctionType.html#a0e1adeb78e03105853f01622cf8b291d" title="添加函数参数" alt="" coords="291,5,489,61"/>
+</map>

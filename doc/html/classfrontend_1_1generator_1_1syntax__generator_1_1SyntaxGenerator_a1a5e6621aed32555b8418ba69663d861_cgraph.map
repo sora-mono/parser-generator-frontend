@@ -1,0 +1,13 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::FormatProductionItemAndLookForwardSymbols" name="frontend::generator::syntax_generator::SyntaxGenerator::FormatProductionItemAndLookForwardSymbols">
+<area shape="rect" id="node1" title="格式化项和项的向前看符号" alt="" coords="5,129,260,199"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aea6ba153b8d9e32107ffde3655c41877" title="格式化向前看符号集" alt="" coords="342,75,559,146"/>
+<area shape="rect" id="node9" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aa0fd2aa1188025239754e6a491f77542" title="格式化项" alt="" coords="308,180,593,236"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a6e838cc21976d781be783fbe0da27cc3" title="通过产生式节点ID获取产生式名" alt="" coords="641,66,888,137"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#afa97ab3763b61a50e57a7f06eb87f85b" title="根据产生式名获取对应ID" alt="" coords="940,5,1199,61"/>
+<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5e851a1d4c3dd84f61105ea2b3a9f027" title="根据产生式名ID获取对应产生式名" alt="" coords="946,190,1193,261"/>
+<area shape="rect" id="node8" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="936,109,1203,165"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#a8843e773f9b1f958e9beb2373084704d" title="根据对象获取其ID" alt="" coords="1251,13,1528,54"/>
+<area shape="rect" id="node7" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#a1959da3a072226c4cab199b6e1acf273" title="返回指向管理的对象的引用" alt="" coords="1280,205,1499,246"/>
+<area shape="rect" id="node10" href="$classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a4142e3ce887dd6fe46021459c4e35e27" title="获取产生式体" alt="" coords="661,263,868,334"/>
+<area shape="rect" id="node11" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#ada56e50b8f4c0b75de3ae7553376f1b1" title="获取该节点表示的产生式名ID" alt="" coords="653,358,876,429"/>
+</map>

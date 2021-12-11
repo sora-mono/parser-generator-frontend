@@ -1,0 +1,216 @@
+\hypertarget{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Function\+Call\+Operator\+Node\+::Function\+Call\+Arguments\+Container类 参考}
+\label{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer}\index{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}}
+
+
+存储函数调用时参数的容器  
+
+
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a5a8d405e9dbb0831d183c954bed93685}{Container\+Type}} = std\+::list$<$ std\+::pair$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$, std\+::shared\+\_\+ptr$<$ std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$ $>$$>$ $>$$>$
+\begin{DoxyCompactList}\small\item\em 存储调用参数的容器 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_aaa4f89b540004fbd1d1f8e434cd920b3}{Function\+Call\+Arguments\+Container}} ()
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a7ed60324427c4266a38fbead05a7f268}{$\sim$\+Function\+Call\+Arguments\+Container}} ()
+\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_aef1922b015daf9b05ffea27de3df87a1}{Add\+Function\+Call\+Argument}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&argument, const std\+::shared\+\_\+ptr$<$ std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$$>$$>$ \&flow\+\_\+control\+\_\+node\+\_\+container)
+\begin{DoxyCompactList}\small\item\em 添加函数调用参数 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a5a8d405e9dbb0831d183c954bed93685}{Container\+Type}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a7ffcec21808c7affdddf958f3641244c}{Get\+Function\+Call\+Arguments}} () const
+\begin{DoxyCompactList}\small\item\em 获取全部函数调用参数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a5a8d405e9dbb0831d183c954bed93685}{Container\+Type}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_ae12cc68cf34cfa44c7304495a9e59e09}{Get\+Function\+Call\+Arguments}} ()
+\begin{DoxyCompactList}\small\item\em 获取全部函数调用参数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+friend \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_acfa15e1d01e7819b07569a94a2b3da42}{Function\+Call\+Operator\+Node}}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a5a8d405e9dbb0831d183c954bed93685}{Container\+Type}} \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_aa7d892faa657b3f8259d82d8e71fc2e6}{function\+\_\+call\+\_\+arguments\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 存储函数调用参数的容器 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+存储函数调用时参数的容器 
+
+在文件 operator\+\_\+node.\+h 第 1468 行定义.
+
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a5a8d405e9dbb0831d183c954bed93685}\label{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a5a8d405e9dbb0831d183c954bed93685}} 
+\index{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}!ContainerType@{ContainerType}}
+\index{ContainerType@{ContainerType}!c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}}
+\doxysubsubsection{\texorpdfstring{ContainerType}{ContainerType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a5a8d405e9dbb0831d183c954bed93685}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Function\+Call\+Arguments\+Container\+::\+Container\+Type}} =  std\+::list$<$ std\+::pair$<$std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$, std\+::shared\+\_\+ptr$<$std\+::list$<$std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}}$>$ $>$$>$ $>$$>$}
+
+
+
+存储调用参数的容器 
+
+
+
+在文件 operator\+\_\+node.\+h 第 1477 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_aaa4f89b540004fbd1d1f8e434cd920b3}\label{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_aaa4f89b540004fbd1d1f8e434cd920b3}} 
+\index{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}!FunctionCallArgumentsContainer@{FunctionCallArgumentsContainer}}
+\index{FunctionCallArgumentsContainer@{FunctionCallArgumentsContainer}!c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}}
+\doxysubsubsection{\texorpdfstring{FunctionCallArgumentsContainer()}{FunctionCallArgumentsContainer()}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Function\+Call\+Arguments\+Container\+::\+Function\+Call\+Arguments\+Container (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+在文件 flow\+\_\+control.\+cpp 第 410 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a7ed60324427c4266a38fbead05a7f268}\label{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a7ed60324427c4266a38fbead05a7f268}} 
+\index{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}!````~FunctionCallArgumentsContainer@{$\sim$FunctionCallArgumentsContainer}}
+\index{````~FunctionCallArgumentsContainer@{$\sim$FunctionCallArgumentsContainer}!c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}}
+\doxysubsubsection{\texorpdfstring{$\sim$FunctionCallArgumentsContainer()}{~FunctionCallArgumentsContainer()}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Function\+Call\+Arguments\+Container\+::$\sim$\+Function\+Call\+Arguments\+Container (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+在文件 flow\+\_\+control.\+cpp 第 413 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_aef1922b015daf9b05ffea27de3df87a1}\label{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_aef1922b015daf9b05ffea27de3df87a1}} 
+\index{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}!AddFunctionCallArgument@{AddFunctionCallArgument}}
+\index{AddFunctionCallArgument@{AddFunctionCallArgument}!c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}}
+\doxysubsubsection{\texorpdfstring{AddFunctionCallArgument()}{AddFunctionCallArgument()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Function\+Call\+Arguments\+Container\+::\+Add\+Function\+Call\+Argument (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&}]{argument,  }\item[{const std\+::shared\+\_\+ptr$<$ std\+::list$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1flow__control_1_1FlowInterface}{c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Flow\+Interface}} $>$$>$$>$ \&}]{flow\+\_\+control\+\_\+node\+\_\+container }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+添加函数调用参数 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em argument} & ：参数节点 \\
+\hline
+\mbox{\texttt{ in}}  & {\em flow\+\_\+control\+\_\+node\+\_\+container} & ：获取参数节点的操作\\
+\hline
+\end{DoxyParams}
+每次添加都添加到已有参数的尾部 使用时按书写顺序排列参数 \begin{DoxyNote}{注解}
+不检查参数有效性 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+h 第 1485 行定义.
+
+
+
+引用了 function\+\_\+call\+\_\+arguments\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Add\+Function\+Call\+Argument().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_aef1922b015daf9b05ffea27de3df87a1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_ae12cc68cf34cfa44c7304495a9e59e09}\label{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_ae12cc68cf34cfa44c7304495a9e59e09}} 
+\index{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}!GetFunctionCallArguments@{GetFunctionCallArguments}}
+\index{GetFunctionCallArguments@{GetFunctionCallArguments}!c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}}
+\doxysubsubsection{\texorpdfstring{GetFunctionCallArguments()}{GetFunctionCallArguments()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a5a8d405e9dbb0831d183c954bed93685}{Container\+Type}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Function\+Call\+Arguments\+Container\+::\+Get\+Function\+Call\+Arguments (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+获取全部函数调用参数 
+
+\begin{DoxyReturn}{返回}
+返回存储函数调用参数的容器的引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 1505 行定义.
+
+
+
+引用了 function\+\_\+call\+\_\+arguments\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a7ffcec21808c7affdddf958f3641244c}\label{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a7ffcec21808c7affdddf958f3641244c}} 
+\index{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}!GetFunctionCallArguments@{GetFunctionCallArguments}}
+\index{GetFunctionCallArguments@{GetFunctionCallArguments}!c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}}
+\doxysubsubsection{\texorpdfstring{GetFunctionCallArguments()}{GetFunctionCallArguments()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a5a8d405e9dbb0831d183c954bed93685}{Container\+Type}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Function\+Call\+Arguments\+Container\+::\+Get\+Function\+Call\+Arguments (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取全部函数调用参数 
+
+\begin{DoxyReturn}{返回}
+返回存储函数调用参数的容器的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 1495 行定义.
+
+
+
+引用了 function\+\_\+call\+\_\+arguments\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Add\+Function\+Call\+Argument() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Set\+Function\+Type().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a7ffcec21808c7affdddf958f3641244c_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_aa7d892faa657b3f8259d82d8e71fc2e6}\label{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_aa7d892faa657b3f8259d82d8e71fc2e6}} 
+\index{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}!function\_call\_arguments\_@{function\_call\_arguments\_}}
+\index{function\_call\_arguments\_@{function\_call\_arguments\_}!c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}}
+\doxysubsubsection{\texorpdfstring{function\_call\_arguments\_}{function\_call\_arguments\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_a5a8d405e9dbb0831d183c954bed93685}{Container\+Type}} c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Function\+Call\+Arguments\+Container\+::function\+\_\+call\+\_\+arguments\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存储函数调用参数的容器 
+
+
+
+在文件 operator\+\_\+node.\+h 第 1510 行定义.
+
+
+
+被这些函数引用 Add\+Function\+Call\+Argument() , 以及 Get\+Function\+Call\+Arguments().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_acfa15e1d01e7819b07569a94a2b3da42}\label{classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer_acfa15e1d01e7819b07569a94a2b3da42}} 
+\index{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}!FunctionCallOperatorNode@{FunctionCallOperatorNode}}
+\index{FunctionCallOperatorNode@{FunctionCallOperatorNode}!c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer@{c\_parser\_frontend::operator\_node::FunctionCallOperatorNode::FunctionCallArgumentsContainer}}
+\doxysubsubsection{\texorpdfstring{FunctionCallOperatorNode}{FunctionCallOperatorNode}}
+{\footnotesize\ttfamily friend c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Function\+Call\+Arguments\+Container\+::\+Function\+Call\+Operator\+Node\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 1501 行定义.
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8h}{operator\+\_\+node.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{flow__control_8cpp}{flow\+\_\+control.\+cpp}}\end{DoxyCompactItemize}

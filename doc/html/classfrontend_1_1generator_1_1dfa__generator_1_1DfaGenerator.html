@@ -1,0 +1,1945 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: frontend::generator::dfa_generator::DfaGenerator类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#pub-types">Public 类型</a> &#124;
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pri-methods">Private 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="#friends">友元</a> &#124;
+<a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">frontend::generator::dfa_generator::DfaGenerator类 参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>DFA配置生成器  
+ <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a>&gt;</code></p>
+<div class="dynheader">
+frontend::generator::dfa_generator::DfaGenerator 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator__coll__graph.png" border="0" usemap="#frontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_coll__map" alt="Collaboration graph"/></div>
+<map name="frontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_coll__map" id="frontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_coll__map">
+<area shape="rect" title="DFA配置生成器" alt="" coords="1803,195,2020,237"/>
+<area shape="rect" href="classfrontend_1_1common_1_1UnorderedStructManager.html" title=" " alt="" coords="1327,5,1545,61"/>
+<area shape="rect" href="structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData.html" title="单词附属数据（在检测到相应单词时返回）" alt="" coords="1325,85,1547,141"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html" title="强制显式调用构造函数且使用默认无效值版Wrapper" alt="" coords="860,85,1093,141"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="287,85,553,141"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html" title=" " alt="" coords="1311,166,1561,207"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html" title=" " alt="" coords="577,217,836,273"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,291,237,362"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html" title=" " alt="" coords="298,379,542,435"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html" title=" " alt="" coords="1326,370,1546,441"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html" title=" " alt="" coords="1342,289,1530,345"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html" title=" " alt="" coords="868,283,1085,368"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html" title=" " alt="" coords="871,393,1083,434"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html" title=" " alt="" coords="310,283,530,354"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html" title=" " alt="" coords="324,459,516,501"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1IntermediateDfaNode.html">IntermediateDfaNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">分割save和load操作，DFA配置生成器只能执行save操作，不能执行load操作  <a href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1IntermediateDfaNode.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1PairOfIntermediateNodeIdAndWordAttachedDataHasher.html">PairOfIntermediateNodeIdAndWordAttachedDataHasher</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">哈希中间节点ID和单词数据的结合体的结构，用于SubDataMinimize  <a href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1PairOfIntermediateNodeIdAndWordAttachedDataHasher.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1UnorderedSetHasher.html">UnorderedSetHasher</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">哈希SetType集合的类，用于实例化UnorderedStructManager  <a href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1UnorderedSetHasher.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a675b731bba8662bb908f5886a7cb3934"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a675b731bba8662bb908f5886a7cb3934">NfaNodeId</a> = <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaGenerator::NfaNodeId</a></td></tr>
+<tr class="memdesc:a675b731bba8662bb908f5886a7cb3934"><td class="mdescLeft">&#160;</td><td class="mdescRight">Nfa节点ID  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a675b731bba8662bb908f5886a7cb3934">更多...</a><br /></td></tr>
+<tr class="separator:a675b731bba8662bb908f5886a7cb3934"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a833f8bda0c065af5142044656f55d0d1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a833f8bda0c065af5142044656f55d0d1">SetType</a> = std::unordered_set&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a675b731bba8662bb908f5886a7cb3934">NfaNodeId</a> &gt;</td></tr>
+<tr class="memdesc:a833f8bda0c065af5142044656f55d0d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">子集构造法使用的集合的类型  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a833f8bda0c065af5142044656f55d0d1">更多...</a><br /></td></tr>
+<tr class="separator:a833f8bda0c065af5142044656f55d0d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a680962e94840d611fdd8c75b8cec2a9a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a680962e94840d611fdd8c75b8cec2a9a">TailNodeData</a> = <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">NfaGenerator::TailNodeData</a></td></tr>
+<tr class="memdesc:a680962e94840d611fdd8c75b8cec2a9a"><td class="mdescLeft">&#160;</td><td class="mdescRight">尾节点数据  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a680962e94840d611fdd8c75b8cec2a9a">更多...</a><br /></td></tr>
+<tr class="separator:a680962e94840d611fdd8c75b8cec2a9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acec790759b6d1b002d3ebe22bf6cf465"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#acec790759b6d1b002d3ebe22bf6cf465">WordPriority</a> = <a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator_1_1nfa__generator.html#a9f86071c52342524eef847930c54db95">nfa_generator::WordPriority</a></td></tr>
+<tr class="memdesc:acec790759b6d1b002d3ebe22bf6cf465"><td class="mdescLeft">&#160;</td><td class="mdescRight">尾节点优先级  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#acec790759b6d1b002d3ebe22bf6cf465">更多...</a><br /></td></tr>
+<tr class="separator:acec790759b6d1b002d3ebe22bf6cf465"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6bde8c43b0cfbaa15d016d7ea1156616"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a> = <a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData.html">nfa_generator::WordAttachedData</a></td></tr>
+<tr class="memdesc:a6bde8c43b0cfbaa15d016d7ea1156616"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析出单词后随单词返回的附属数据  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">更多...</a><br /></td></tr>
+<tr class="separator:a6bde8c43b0cfbaa15d016d7ea1156616"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa2512956c989c27f93d4adce1bccd911"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa2512956c989c27f93d4adce1bccd911">SetManagerType</a> = <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a833f8bda0c065af5142044656f55d0d1">SetType</a>, <a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1UnorderedSetHasher.html">UnorderedSetHasher</a> &gt;</td></tr>
+<tr class="memdesc:aa2512956c989c27f93d4adce1bccd911"><td class="mdescLeft">&#160;</td><td class="mdescRight">管理子集构造法使用的集合的结构  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa2512956c989c27f93d4adce1bccd911">更多...</a><br /></td></tr>
+<tr class="separator:aa2512956c989c27f93d4adce1bccd911"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a45ce476e574ac5c7ec4c5191fb41895a"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a45ce476e574ac5c7ec4c5191fb41895a">SetId</a> = <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">SetManagerType::ObjectId</a></td></tr>
+<tr class="memdesc:a45ce476e574ac5c7ec4c5191fb41895a"><td class="mdescLeft">&#160;</td><td class="mdescRight">子集构造法使用的集合的ID  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a45ce476e574ac5c7ec4c5191fb41895a">更多...</a><br /></td></tr>
+<tr class="separator:a45ce476e574ac5c7ec4c5191fb41895a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bafc3cd9f98c824d4ce4692221dea8b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a> = <a class="el" href="classfrontend_1_1common_1_1ObjectManager.html">ObjectManager</a>&lt; <a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1IntermediateDfaNode.html">IntermediateDfaNode</a> &gt;::ObjectId</td></tr>
+<tr class="memdesc:a7bafc3cd9f98c824d4ce4692221dea8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">DFA中间节点ID  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">更多...</a><br /></td></tr>
+<tr class="separator:a7bafc3cd9f98c824d4ce4692221dea8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a6443ff4d9744ef5a4053106754fe8cf3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6443ff4d9744ef5a4053106754fe8cf3">DfaGenerator</a> ()=default</td></tr>
+<tr class="separator:a6443ff4d9744ef5a4053106754fe8cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5affe30a27880c8f95bc92af118ff505"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a5affe30a27880c8f95bc92af118ff505">DfaGenerator</a> (const <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html">DfaGenerator</a> &amp;)=delete</td></tr>
+<tr class="separator:a5affe30a27880c8f95bc92af118ff505"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad894f75949205c1962013ec44afe040d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#ad894f75949205c1962013ec44afe040d">DfaGenerator</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html">DfaGenerator</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:ad894f75949205c1962013ec44afe040d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a765989368257c66b0b23d2b2ab43d711"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a765989368257c66b0b23d2b2ab43d711">DfaInit</a> ()</td></tr>
+<tr class="memdesc:a765989368257c66b0b23d2b2ab43d711"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a765989368257c66b0b23d2b2ab43d711">更多...</a><br /></td></tr>
+<tr class="separator:a765989368257c66b0b23d2b2ab43d711"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a527079ed92f9a58295df07567975b274"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a527079ed92f9a58295df07567975b274">AddWord</a> (const std::string &amp;word, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a> &amp;&amp;word_attached_data, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#acec790759b6d1b002d3ebe22bf6cf465">WordPriority</a> priority_tag)</td></tr>
+<tr class="memdesc:a527079ed92f9a58295df07567975b274"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加纯单词  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a527079ed92f9a58295df07567975b274">更多...</a><br /></td></tr>
+<tr class="separator:a527079ed92f9a58295df07567975b274"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a676342993bb701a3c1c9574f9ae7e441"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a676342993bb701a3c1c9574f9ae7e441">AddRegexpression</a> (const std::string &amp;regex_str, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a> &amp;&amp;regex_attached_data, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#acec790759b6d1b002d3ebe22bf6cf465">WordPriority</a> regex_priority)</td></tr>
+<tr class="memdesc:a676342993bb701a3c1c9574f9ae7e441"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加单词的正则  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a676342993bb701a3c1c9574f9ae7e441">更多...</a><br /></td></tr>
+<tr class="separator:a676342993bb701a3c1c9574f9ae7e441"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2e2c3d8bfb4049c5798afa334d8889bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a2e2c3d8bfb4049c5798afa334d8889bd">SetEndOfFileSavedData</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a> &amp;&amp;saved_data)</td></tr>
+<tr class="memdesc:a2e2c3d8bfb4049c5798afa334d8889bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置到达文件尾时返回的数据  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a2e2c3d8bfb4049c5798afa334d8889bd">更多...</a><br /></td></tr>
+<tr class="separator:a2e2c3d8bfb4049c5798afa334d8889bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b169ce3914f5ecb5633c59b3118de82"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6b169ce3914f5ecb5633c59b3118de82">GetEndOfFileSavedData</a> () const</td></tr>
+<tr class="memdesc:a6b169ce3914f5ecb5633c59b3118de82"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取到达文件尾时返回的数据  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6b169ce3914f5ecb5633c59b3118de82">更多...</a><br /></td></tr>
+<tr class="separator:a6b169ce3914f5ecb5633c59b3118de82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a38ac19e197f39feecbc47b67a65f7a3f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f">DfaConstruct</a> ()</td></tr>
+<tr class="memdesc:a38ac19e197f39feecbc47b67a65f7a3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建DFA配置  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f">更多...</a><br /></td></tr>
+<tr class="separator:a38ac19e197f39feecbc47b67a65f7a3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3e202423198da5fa4b91d0e24228a30"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa3e202423198da5fa4b91d0e24228a30">SaveConfig</a> () const</td></tr>
+<tr class="memdesc:aa3e202423198da5fa4b91d0e24228a30"><td class="mdescLeft">&#160;</td><td class="mdescRight">保存DFA配置  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa3e202423198da5fa4b91d0e24228a30">更多...</a><br /></td></tr>
+<tr class="separator:aa3e202423198da5fa4b91d0e24228a30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private 成员函数</h2></td></tr>
+<tr class="memitem:aa9d4ac6efbab13fbc4223712befe604c"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:aa9d4ac6efbab13fbc4223712befe604c"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa9d4ac6efbab13fbc4223712befe604c">save</a> (Archive &amp;ar, const unsigned int version) const</td></tr>
+<tr class="memdesc:aa9d4ac6efbab13fbc4223712befe604c"><td class="mdescLeft">&#160;</td><td class="mdescRight">序列化配置的函数  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa9d4ac6efbab13fbc4223712befe604c">更多...</a><br /></td></tr>
+<tr class="separator:aa9d4ac6efbab13fbc4223712befe604c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a21776396cecfb452b42e56dca43b5724"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a21776396cecfb452b42e56dca43b5724">DfaMinimize</a> ()</td></tr>
+<tr class="memdesc:a21776396cecfb452b42e56dca43b5724"><td class="mdescLeft">&#160;</td><td class="mdescRight">构建最小化DFA  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a21776396cecfb452b42e56dca43b5724">更多...</a><br /></td></tr>
+<tr class="separator:a21776396cecfb452b42e56dca43b5724"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a067fa9c2c4907f35de5bd576f000f317"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1IntermediateDfaNode.html">IntermediateDfaNode</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a067fa9c2c4907f35de5bd576f000f317">GetIntermediateNode</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a> id)</td></tr>
+<tr class="memdesc:a067fa9c2c4907f35de5bd576f000f317"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取中间节点引用  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a067fa9c2c4907f35de5bd576f000f317">更多...</a><br /></td></tr>
+<tr class="separator:a067fa9c2c4907f35de5bd576f000f317"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f70e362a1ff341993c87e8b876f467f"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1IntermediateDfaNode.html">IntermediateDfaNode</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a2f70e362a1ff341993c87e8b876f467f">GetIntermediateNode</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a> id) const</td></tr>
+<tr class="memdesc:a2f70e362a1ff341993c87e8b876f467f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取中间节点const引用  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a2f70e362a1ff341993c87e8b876f467f">更多...</a><br /></td></tr>
+<tr class="separator:a2f70e362a1ff341993c87e8b876f467f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a504c3213c736bdf80fdbf90cf17865eb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a833f8bda0c065af5142044656f55d0d1">SetType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a504c3213c736bdf80fdbf90cf17865eb">GetSetObject</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a45ce476e574ac5c7ec4c5191fb41895a">SetId</a> set_id)</td></tr>
+<tr class="memdesc:a504c3213c736bdf80fdbf90cf17865eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取子集构造法的集合的引用  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a504c3213c736bdf80fdbf90cf17865eb">更多...</a><br /></td></tr>
+<tr class="separator:a504c3213c736bdf80fdbf90cf17865eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af3c335d2350582155b03c199d67397fb"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a>, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb">SetGoto</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a45ce476e574ac5c7ec4c5191fb41895a">SetId</a> set_src, char c_transform)</td></tr>
+<tr class="memdesc:af3c335d2350582155b03c199d67397fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取NFA节点集合在给定字符下的转移结果  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb">更多...</a><br /></td></tr>
+<tr class="separator:af3c335d2350582155b03c199d67397fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9914bd8b7f3354aa0cd7ef8271f5d1a6"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a9914bd8b7f3354aa0cd7ef8271f5d1a6">IntermediateGoto</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a> dfa_src, char c_transform) const</td></tr>
+<tr class="memdesc:a9914bd8b7f3354aa0cd7ef8271f5d1a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询DFA中间节点在给定条件下的转移情况  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a9914bd8b7f3354aa0cd7ef8271f5d1a6">更多...</a><br /></td></tr>
+<tr class="separator:a9914bd8b7f3354aa0cd7ef8271f5d1a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4947460d8c6114ebdfb00f71f1cdd6a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#ac4947460d8c6114ebdfb00f71f1cdd6a">SetIntermediateNodeTransform</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a> node_intermediate_src, char c_transform, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a> node_intermediate_dst)</td></tr>
+<tr class="memdesc:ac4947460d8c6114ebdfb00f71f1cdd6a"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置DFA中间节点条件转移  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#ac4947460d8c6114ebdfb00f71f1cdd6a">更多...</a><br /></td></tr>
+<tr class="separator:ac4947460d8c6114ebdfb00f71f1cdd6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1d1bc4c8b084e3ca3e28011d63ededc4"><td class="memTemplParams" colspan="2">template&lt;class IntermediateNodeSet &gt; </td></tr>
+<tr class="memitem:a1d1bc4c8b084e3ca3e28011d63ededc4"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a>, bool &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a1d1bc4c8b084e3ca3e28011d63ededc4">InOrInsert</a> (IntermediateNodeSet &amp;&amp;uset, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a> &amp;&amp;word_attached_data=<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a>())</td></tr>
+<tr class="memdesc:a1d1bc4c8b084e3ca3e28011d63ededc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取集合对应的中间节点ID，如果不存在则创建新的中间节点  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a1d1bc4c8b084e3ca3e28011d63ededc4">更多...</a><br /></td></tr>
+<tr class="separator:a1d1bc4c8b084e3ca3e28011d63ededc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa38cc668b660a10ec56f354b6051dbad"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa38cc668b660a10ec56f354b6051dbad">IntermediateNodeClassify</a> (std::list&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a> &gt; &amp;&amp;node_ids, char c_transform=CHAR_MIN)</td></tr>
+<tr class="memdesc:aa38cc668b660a10ec56f354b6051dbad"><td class="mdescLeft">&#160;</td><td class="mdescRight">对中间节点进行分类  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa38cc668b660a10ec56f354b6051dbad">更多...</a><br /></td></tr>
+<tr class="separator:aa38cc668b660a10ec56f354b6051dbad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:ad5b2f55649a93ca071767b96d0cac404"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator.html#a0c8fce6f124b40aa19b482095d90092d">DfaConfigType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#ad5b2f55649a93ca071767b96d0cac404">dfa_config_</a></td></tr>
+<tr class="memdesc:ad5b2f55649a93ca071767b96d0cac404"><td class="mdescLeft">&#160;</td><td class="mdescRight">DFA配置  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#ad5b2f55649a93ca071767b96d0cac404">更多...</a><br /></td></tr>
+<tr class="separator:ad5b2f55649a93ca071767b96d0cac404"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accf375e27b2c36cbb71c88e0f74b8aa0"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator.html#a975429f01ebef4fa047565091eeab434">TransformArrayId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#accf375e27b2c36cbb71c88e0f74b8aa0">root_transform_array_id_</a></td></tr>
+<tr class="memdesc:accf375e27b2c36cbb71c88e0f74b8aa0"><td class="mdescLeft">&#160;</td><td class="mdescRight">DFA转移表初始条目序号  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#accf375e27b2c36cbb71c88e0f74b8aa0">更多...</a><br /></td></tr>
+<tr class="separator:accf375e27b2c36cbb71c88e0f74b8aa0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aef7afdcf2b9948b9f6d02fb2951dafc3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aef7afdcf2b9948b9f6d02fb2951dafc3">file_end_saved_data_</a></td></tr>
+<tr class="memdesc:aef7afdcf2b9948b9f6d02fb2951dafc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">遇到文件尾时返回的数据  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aef7afdcf2b9948b9f6d02fb2951dafc3">更多...</a><br /></td></tr>
+<tr class="separator:aef7afdcf2b9948b9f6d02fb2951dafc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa569178dd48a4c7106c828dc4b3a0e2b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html">NfaGenerator</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa569178dd48a4c7106c828dc4b3a0e2b">nfa_generator_</a></td></tr>
+<tr class="memdesc:aa569178dd48a4c7106c828dc4b3a0e2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">NFA配置生成器  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa569178dd48a4c7106c828dc4b3a0e2b">更多...</a><br /></td></tr>
+<tr class="separator:aa569178dd48a4c7106c828dc4b3a0e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4f67babfcfb663815de851eb2c85eac"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#ae4f67babfcfb663815de851eb2c85eac">root_intermediate_node_id_</a></td></tr>
+<tr class="memdesc:ae4f67babfcfb663815de851eb2c85eac"><td class="mdescLeft">&#160;</td><td class="mdescRight">中间节点初始节点ID  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#ae4f67babfcfb663815de851eb2c85eac">更多...</a><br /></td></tr>
+<tr class="separator:ae4f67babfcfb663815de851eb2c85eac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58fb0b84fcb22a9c1256f886a66f1e8b"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a58fb0b84fcb22a9c1256f886a66f1e8b">transform_array_size_</a> = 0</td></tr>
+<tr class="memdesc:a58fb0b84fcb22a9c1256f886a66f1e8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">DFA转移表条目数  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a58fb0b84fcb22a9c1256f886a66f1e8b">更多...</a><br /></td></tr>
+<tr class="separator:a58fb0b84fcb22a9c1256f886a66f1e8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad41826afef09b5e4841e28ff3dbbe73b"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a>, <a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator.html#a975429f01ebef4fa047565091eeab434">TransformArrayId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#ad41826afef09b5e4841e28ff3dbbe73b">intermediate_node_to_final_node_</a></td></tr>
+<tr class="memdesc:ad41826afef09b5e4841e28ff3dbbe73b"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储DFA中间节点到转移表条目的映射  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#ad41826afef09b5e4841e28ff3dbbe73b">更多...</a><br /></td></tr>
+<tr class="separator:ad41826afef09b5e4841e28ff3dbbe73b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6991b5377cd8cbc978a1a5ca99f7166b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1common_1_1ObjectManager.html">ObjectManager</a>&lt; <a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1IntermediateDfaNode.html">IntermediateDfaNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6991b5377cd8cbc978a1a5ca99f7166b">node_manager_intermediate_node_</a></td></tr>
+<tr class="memdesc:a6991b5377cd8cbc978a1a5ca99f7166b"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储中间节点  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6991b5377cd8cbc978a1a5ca99f7166b">更多...</a><br /></td></tr>
+<tr class="separator:a6991b5377cd8cbc978a1a5ca99f7166b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a26300b7dfd31f9703938f4c3fb3a84a4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa2512956c989c27f93d4adce1bccd911">SetManagerType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a26300b7dfd31f9703938f4c3fb3a84a4">node_manager_set_</a></td></tr>
+<tr class="memdesc:a26300b7dfd31f9703938f4c3fb3a84a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">管理中间节点对应的集合  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a26300b7dfd31f9703938f4c3fb3a84a4">更多...</a><br /></td></tr>
+<tr class="separator:a26300b7dfd31f9703938f4c3fb3a84a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc5e41a6bdf418944f08f78ed5f20c8f"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a45ce476e574ac5c7ec4c5191fb41895a">SetId</a>, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#acc5e41a6bdf418944f08f78ed5f20c8f">setid_to_intermediate_nodeid_</a></td></tr>
+<tr class="memdesc:acc5e41a6bdf418944f08f78ed5f20c8f"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储集合ID到中间节点ID的映射  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#acc5e41a6bdf418944f08f78ed5f20c8f">更多...</a><br /></td></tr>
+<tr class="separator:acc5e41a6bdf418944f08f78ed5f20c8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+友元</h2></td></tr>
+<tr class="memitem:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">boost::serialization::access</a></td></tr>
+<tr class="memdesc:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">声明友元，允许序列化类访问成员  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">更多...</a><br /></td></tr>
+<tr class="separator:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>DFA配置生成器 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00026">26</a> 行定义.</p>
+</div><h2 class="groupheader">成员类型定义说明</h2>
+<a id="a7bafc3cd9f98c824d4ce4692221dea8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bafc3cd9f98c824d4ce4692221dea8b">&#9670;&nbsp;</a></span>IntermediateNodeId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">frontend::generator::dfa_generator::DfaGenerator::IntermediateNodeId</a> =  <a class="el" href="classfrontend_1_1common_1_1ObjectManager.html">ObjectManager</a>&lt;<a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1IntermediateDfaNode.html">IntermediateDfaNode</a>&gt;::ObjectId</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>DFA中间节点ID </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00063">63</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a675b731bba8662bb908f5886a7cb3934"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a675b731bba8662bb908f5886a7cb3934">&#9670;&nbsp;</a></span>NfaNodeId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a675b731bba8662bb908f5886a7cb3934">frontend::generator::dfa_generator::DfaGenerator::NfaNodeId</a> =  <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaGenerator::NfaNodeId</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Nfa节点ID </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00032">32</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a45ce476e574ac5c7ec4c5191fb41895a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a45ce476e574ac5c7ec4c5191fb41895a">&#9670;&nbsp;</a></span>SetId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a45ce476e574ac5c7ec4c5191fb41895a">frontend::generator::dfa_generator::DfaGenerator::SetId</a> =  <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">SetManagerType::ObjectId</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>子集构造法使用的集合的ID </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00061">61</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa2512956c989c27f93d4adce1bccd911"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2512956c989c27f93d4adce1bccd911">&#9670;&nbsp;</a></span>SetManagerType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa2512956c989c27f93d4adce1bccd911">frontend::generator::dfa_generator::DfaGenerator::SetManagerType</a> =  <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt;<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a833f8bda0c065af5142044656f55d0d1">SetType</a>, <a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1UnorderedSetHasher.html">UnorderedSetHasher</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>管理子集构造法使用的集合的结构 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00059">59</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a833f8bda0c065af5142044656f55d0d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a833f8bda0c065af5142044656f55d0d1">&#9670;&nbsp;</a></span>SetType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a833f8bda0c065af5142044656f55d0d1">frontend::generator::dfa_generator::DfaGenerator::SetType</a> =  std::unordered_set&lt;<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a675b731bba8662bb908f5886a7cb3934">NfaNodeId</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>子集构造法使用的集合的类型 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00034">34</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a680962e94840d611fdd8c75b8cec2a9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a680962e94840d611fdd8c75b8cec2a9a">&#9670;&nbsp;</a></span>TailNodeData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a680962e94840d611fdd8c75b8cec2a9a">frontend::generator::dfa_generator::DfaGenerator::TailNodeData</a> =  <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">NfaGenerator::TailNodeData</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>尾节点数据 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00047">47</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6bde8c43b0cfbaa15d016d7ea1156616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6bde8c43b0cfbaa15d016d7ea1156616">&#9670;&nbsp;</a></span>WordAttachedData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">frontend::generator::dfa_generator::DfaGenerator::WordAttachedData</a> =  <a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData.html">nfa_generator::WordAttachedData</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>解析出单词后随单词返回的附属数据 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00056">56</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acec790759b6d1b002d3ebe22bf6cf465"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acec790759b6d1b002d3ebe22bf6cf465">&#9670;&nbsp;</a></span>WordPriority</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#acec790759b6d1b002d3ebe22bf6cf465">frontend::generator::dfa_generator::DfaGenerator::WordPriority</a> =  <a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator_1_1nfa__generator.html#a9f86071c52342524eef847930c54db95">nfa_generator::WordPriority</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>尾节点优先级 </p>
+<p>数字越大优先级越高 所有终结产生式的单词都有该参数 与运算符节点的优先级意义不同，该优先级决定在多个正则同时匹配成功时选择哪个 正则得出词和附属数据 </p><dl class="section note"><dt>注解</dt><dd>普通单词使用优先级0，运算符使用优先级1，关键字使用优先级2 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00054">54</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">构造及析构函数说明</h2>
+<a id="a6443ff4d9744ef5a4053106754fe8cf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6443ff4d9744ef5a4053106754fe8cf3">&#9670;&nbsp;</a></span>DfaGenerator() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::dfa_generator::DfaGenerator::DfaGenerator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5affe30a27880c8f95bc92af118ff505"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5affe30a27880c8f95bc92af118ff505">&#9670;&nbsp;</a></span>DfaGenerator() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::dfa_generator::DfaGenerator::DfaGenerator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html">DfaGenerator</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad894f75949205c1962013ec44afe040d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad894f75949205c1962013ec44afe040d">&#9670;&nbsp;</a></span>DfaGenerator() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::dfa_generator::DfaGenerator::DfaGenerator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html">DfaGenerator</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="a676342993bb701a3c1c9574f9ae7e441"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a676342993bb701a3c1c9574f9ae7e441">&#9670;&nbsp;</a></span>AddRegexpression()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::dfa_generator::DfaGenerator::AddRegexpression </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>regex_str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>regex_attached_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#acec790759b6d1b002d3ebe22bf6cf465">WordPriority</a>&#160;</td>
+          <td class="paramname"><em>regex_priority</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加单词的正则 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">regex_str</td><td>：待添加单词的正则表达式 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">regex_attached_data</td><td>：单词的附属数据 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">regex_priority</td><td>：单词的优先级 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回是否添加成功 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：添加成功 </td></tr>
+    <tr><td class="paramname">false</td><td>：添加失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>单词优先级定义见WordPriority说明 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8cpp_source.html">dfa_generator.cpp</a> 第 <a class="el" href="dfa__generator_8cpp_source.html#l00034">34</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="dfa__generator_8h_source.html#l00267">nfa_generator_</a> , 以及 <a class="el" href="nfa__generator_8cpp_source.html#l00140">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::RegexConstruct()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l00006">frontend::generator::syntax_generator::SyntaxGenerator::AddTerminalProduction()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a676342993bb701a3c1c9574f9ae7e441_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a676342993bb701a3c1c9574f9ae7e441_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a676342993bb701a3c1c9574f9ae7e441_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a676342993bb701a3c1c9574f9ae7e441_cgraph">
+<area shape="rect" title="添加单词的正则" alt="" coords="5,247,223,303"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#afd38661549adcda0d029c24112c485d0" title="解析正则" alt="" coords="271,240,459,311"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#abb62451b0984b0ccd9a4a35a44a18732" title="添加无条件转移节点" alt="" coords="507,5,757,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac8852c9c0a00070c87e253e996644c59" title="根据输入生成可选字符结构" alt="" coords="538,203,726,273"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a497a7c5bc722e5d3393c14b39b1e451e" title="创建对象并自动选择最佳位置放置对象" alt="" coords="817,43,1044,84"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed" title="根据NFA节点ID获取NFA节点" alt="" coords="837,108,1025,179"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a474cb83413346466f801cd8033bbc34e" title=" " alt="" coords="818,297,1043,339"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a8cfe67102175bd60fa952d4764376ee5" title="设置条件转移条目" alt="" coords="815,363,1046,433"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf" title="获取存储无效值的容器" alt="" coords="510,400,754,471"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aabdd9849ae9d8831534733ce6e6eb688" title="设置尾节点信息" alt="" coords="538,495,726,565"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#ab65f8095016ee5dbf4a5d50383129a6e" title="获取该节点全部转移条件和在转移条件下可以转移到的节点ID" alt="" coords="805,203,1056,273"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a271ef9fe0032f1eeb8585fb329f53cbb" title="获取指向有效对象的引用" alt="" coords="1104,123,1316,164"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a676342993bb701a3c1c9574f9ae7e441_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a676342993bb701a3c1c9574f9ae7e441_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a676342993bb701a3c1c9574f9ae7e441_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a676342993bb701a3c1c9574f9ae7e441_icgraph">
+<area shape="rect" title="添加单词的正则" alt="" coords="545,13,763,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4dc1e67e686137062266790650bbe67a" title="添加终结产生式" alt="" coords="276,5,497,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a36db9122a028b29ec3c60e13c4837583" title="添加关键字" alt="" coords="5,13,228,69"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a527079ed92f9a58295df07567975b274"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a527079ed92f9a58295df07567975b274">&#9670;&nbsp;</a></span>AddWord()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::dfa_generator::DfaGenerator::AddWord </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>word</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>word_attached_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#acec790759b6d1b002d3ebe22bf6cf465">WordPriority</a>&#160;</td>
+          <td class="paramname"><em>priority_tag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加纯单词 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">word</td><td>：待添加的单词 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">word_attached_data</td><td>：单词的附属数据 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">priority_tag</td><td>：单词的优先级 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回是否添加成功 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：添加成功 </td></tr>
+    <tr><td class="paramname">false</td><td>：添加失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>单词优先级定义见WordPriority说明 </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd>该函数将word视为纯单词而不是正则表达式进行添加 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8cpp_source.html">dfa_generator.cpp</a> 第 <a class="el" href="dfa__generator_8cpp_source.html#l00025">25</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="dfa__generator_8h_source.html#l00267">nfa_generator_</a> , 以及 <a class="el" href="nfa__generator_8cpp_source.html#l00241">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::WordConstruct()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l00168">frontend::generator::syntax_generator::SyntaxGenerator::AddBinaryLeftUnaryOperator()</a>, <a class="el" href="syntax__generator_8cpp_source.html#l00070">frontend::generator::syntax_generator::SyntaxGenerator::AddBinaryOperator()</a>, <a class="el" href="syntax__generator_8cpp_source.html#l00119">frontend::generator::syntax_generator::SyntaxGenerator::AddLeftUnaryOperator()</a> , 以及 <a class="el" href="syntax__generator_8cpp_source.html#l00006">frontend::generator::syntax_generator::SyntaxGenerator::AddTerminalProduction()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a527079ed92f9a58295df07567975b274_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a527079ed92f9a58295df07567975b274_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a527079ed92f9a58295df07567975b274_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a527079ed92f9a58295df07567975b274_cgraph">
+<area shape="rect" title="添加纯单词" alt="" coords="5,173,223,229"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a6b41f5800ea965e440f7451d3cd0e320" title="添加一个纯单词" alt="" coords="271,165,459,236"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#abb62451b0984b0ccd9a4a35a44a18732" title="添加无条件转移节点" alt="" coords="507,5,757,76"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a497a7c5bc722e5d3393c14b39b1e451e" title="创建对象并自动选择最佳位置放置对象" alt="" coords="519,100,745,141"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed" title="根据NFA节点ID获取NFA节点" alt="" coords="538,165,726,236"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a8cfe67102175bd60fa952d4764376ee5" title="设置条件转移条目" alt="" coords="517,260,747,331"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aabdd9849ae9d8831534733ce6e6eb688" title="设置尾节点信息" alt="" coords="538,355,726,425"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a271ef9fe0032f1eeb8585fb329f53cbb" title="获取指向有效对象的引用" alt="" coords="805,180,1017,221"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a527079ed92f9a58295df07567975b274_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a527079ed92f9a58295df07567975b274_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a527079ed92f9a58295df07567975b274_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a527079ed92f9a58295df07567975b274_icgraph">
+<area shape="rect" title="添加纯单词" alt="" coords="588,145,805,201"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a929e48b9bce49002c7b89d6ca4f997c9" title="添加具有双目运算符和左侧单目运算符语义的运算符" alt="" coords="293,5,523,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aec2d0760baf4095f4f2183c8e84e37ea" title="添加双目运算符" alt="" coords="276,101,540,157"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a35ff252e20e90814c0040237d4be5fea" title="添加单目运算符" alt="" coords="294,181,522,252"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4dc1e67e686137062266790650bbe67a" title="添加终结产生式" alt="" coords="297,276,519,347"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a36db9122a028b29ec3c60e13c4837583" title="添加关键字" alt="" coords="5,283,228,339"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a38ac19e197f39feecbc47b67a65f7a3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a38ac19e197f39feecbc47b67a65f7a3f">&#9670;&nbsp;</a></span>DfaConstruct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::dfa_generator::DfaGenerator::DfaConstruct </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>构建DFA配置 </p>
+<dl class="section note"><dt>注解</dt><dd>该函数仅生成DFA配置，不会自动保存配置到文件 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8cpp_source.html">dfa_generator.cpp</a> 第 <a class="el" href="dfa__generator_8cpp_source.html#l00043">43</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="nfa__generator_8cpp_source.html#l00041">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::Closure()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00079">DfaMinimize()</a>, <a class="el" href="dfa__generator_8h_source.html#l00169">frontend::generator::dfa_generator::DfaGenerator::IntermediateDfaNode::forward_nodes</a>, <a class="el" href="nfa__generator_8h_source.html#l00141">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::GetHeadNfaNodeId()</a>, <a class="el" href="dfa__generator_8h_source.html#l00183">GetIntermediateNode()</a>, <a class="el" href="dfa__generator_8h_source.html#l00286">InOrInsert()</a>, <a class="el" href="nfa__generator_8h_source.html#l00215">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::kNotTailNodeTag</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00256">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::MergeOptimization()</a>, <a class="el" href="dfa__generator_8h_source.html#l00267">nfa_generator_</a>, <a class="el" href="dfa__generator_8h_source.html#l00269">root_intermediate_node_id_</a>, <a class="el" href="dfa__generator_8h_source.html#l00173">frontend::generator::dfa_generator::DfaGenerator::IntermediateDfaNode::set_handler</a> , 以及 <a class="el" href="dfa__generator_8cpp_source.html#l00131">SetGoto()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l01286">frontend::generator::syntax_generator::SyntaxGenerator::ConstructSyntaxConfig()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a38ac19e197f39feecbc47b67a65f7a3f_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a38ac19e197f39feecbc47b67a65f7a3f_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a38ac19e197f39feecbc47b67a65f7a3f_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a38ac19e197f39feecbc47b67a65f7a3f_cgraph">
+<area shape="rect" title="构建DFA配置" alt="" coords="5,1131,223,1187"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a36fe0f238a5663a90c8b1100d723eb33" title="获取给定NFA节点的所有等效节点ID（包含自身）" alt="" coords="905,1807,1093,1877"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a21776396cecfb452b42e56dca43b5724" title="构建最小化DFA" alt="" coords="271,321,488,377"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a067fa9c2c4907f35de5bd576f000f317" title="获取中间节点引用" alt="" coords="1185,63,1403,119"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa6064ffbfc016cd8c14626928b894616" title="获取NFA节点头结点ID" alt="" coords="587,576,775,647"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a1d1bc4c8b084e3ca3e28011d63ededc4" title="获取集合对应的中间节点ID，如果不存在则创建新的中间节点" alt="" coords="572,1959,789,2015"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a9c66fbc2e3302533f3ef3d3b693b3691" title="合并优化，降低节点数和转移路径以降低子集构造法集合大小" alt="" coords="285,1124,473,1195"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="271,1879,488,1935"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a533e7b18b83514f9782c24c1781646b2" title="通过一个id查询引用相同底层对象的所有id" alt="" coords="1179,1821,1409,1877"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed" title="根据NFA节点ID获取NFA节点" alt="" coords="1200,1725,1388,1796"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a271ef9fe0032f1eeb8585fb329f53cbb" title="获取指向有效对象的引用" alt="" coords="1464,1740,1676,1781"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a4347527ee933efa32065a14e90be53dc" title="获取指向第一个有效节点的迭代器" alt="" coords="585,393,777,435"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a99d1a3c63580f5a44f26e2c1351398f7" title="获取指向超尾的迭代器" alt="" coords="585,459,777,500"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa38cc668b660a10ec56f354b6051dbad" title="对中间节点进行分类" alt="" coords="572,81,789,137"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf" title="获取存储无效值的容器" alt="" coords="1172,907,1416,977"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html#aa088b185f8650169d2e53c4372db529b" title="判断当前存储的值是否有效" alt="" coords="901,744,1096,785"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#af218c097d7fa411572f79043be378ee7" title="初始化，如果容器中存在节点则全部释放" alt="" coords="577,263,784,304"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#ace94586d70da1f07e0af846ad52d42be" title="调用成员变量的shrink_to_fit来节省空间" alt="" coords="585,328,777,369"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a204350a871426aaf21ddc9cd535925b6" title="获取对象的const引用" alt="" coords="1474,71,1666,112"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a9914bd8b7f3354aa0cd7ef8271f5d1a6" title="查询DFA中间节点在给定条件下的转移情况" alt="" coords="890,30,1107,86"/>
+<area shape="rect" href="classfrontend_1_1common_1_1UnorderedStructManager.html#acbd7bff0314ac667bce8e2bc92ccaeaa" title="插入一个待管理的对象" alt="" coords="887,2032,1110,2073"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#adbb63b10c08fd65047c2b6ee5cae362d" title="系统自行选择最佳位置放置对象" alt="" coords="903,1967,1095,2008"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#afcb26d4dca905b39d4f83e72187dc283" title="返回入参对应对象是否可合并" alt="" coords="547,912,815,953"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#ab65f8095016ee5dbf4a5d50383129a6e" title="获取该节点全部转移条件和在转移条件下可以转移到的节点ID" alt="" coords="873,649,1124,720"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a7809a54c44c233d956e1a0d3b10f2b82" title="根据NFA节点ID获取尾节点数据" alt="" coords="587,977,775,1048"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#aed4bf2120860b512aa58944ef74db9de" title="获取所有可以无条件转移到的节点ID" alt="" coords="557,1073,805,1158"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a4826ed2c4c0620c974bdc20a57b7bb69" title="合并两个节点" alt="" coords="587,723,775,793"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a16f9f323dfb681713c30de2662e4a207" title="将id_src对应的节点合并到id_dst对应的节点" alt="" coords="571,1183,790,1224"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a6123301c8e968a642436e9b57068e0df" title="移除一条转移条目" alt="" coords="543,1248,818,1319"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#af82e02943c97174e032f27988c4844bb" title="移除一个无条件转移节点" alt="" coords="536,1343,825,1413"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aaf1122d36ed3eced824030181ea7ff3f" title="移除尾节点信息" alt="" coords="587,1437,775,1508"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#afa5329d293067a1afb82750be49c98f4" title="设置所有对象允许合并" alt="" coords="560,1533,801,1589"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a2a3fe55defeb8a18be2c166063be5c34" title="设置对象禁止合并标志" alt="" coords="561,1613,801,1669"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aabdd9849ae9d8831534733ce6e6eb688" title="设置尾节点信息" alt="" coords="587,817,775,888"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a504c3213c736bdf80fdbf90cf17865eb" title="获取子集构造法的集合的引用" alt="" coords="572,1879,789,1935"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a52c8b5c40bdc50f5048f61a267f7dfc0" title="获取给定NFA节点在转移条件下可以到达的等效节点" alt="" coords="567,1743,794,1799"/>
+<area shape="rect" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a1959da3a072226c4cab199b6e1acf273" title="返回指向管理的对象的引用" alt="" coords="889,1901,1108,1943"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a185d61353094ddb4fd9f478aa1a5c63e" title="根据要移入的字母获取转移到的下一个节点ID" alt="" coords="891,1660,1107,1731"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a38ac19e197f39feecbc47b67a65f7a3f_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a38ac19e197f39feecbc47b67a65f7a3f_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a38ac19e197f39feecbc47b67a65f7a3f_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a38ac19e197f39feecbc47b67a65f7a3f_icgraph">
+<area shape="rect" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a765989368257c66b0b23d2b2ab43d711"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a765989368257c66b0b23d2b2ab43d711">&#9670;&nbsp;</a></span>DfaInit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::dfa_generator::DfaGenerator::DfaInit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>初始化 </p>
+<dl class="section note"><dt>注解</dt><dd>该函数可用于清除所有已添加单词 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8cpp_source.html">dfa_generator.cpp</a> 第 <a class="el" href="dfa__generator_8cpp_source.html#l00012">12</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="dfa__generator_8h_source.html#l00258">dfa_config_</a>, <a class="el" href="dfa__generator_8h_source.html#l00264">file_end_saved_data_</a>, <a class="el" href="dfa__generator_8h_source.html#l00275">intermediate_node_to_final_node_</a>, <a class="el" href="id__wrapper_8h_source.html#l00155">frontend::common::ExplicitIdWrapper&lt; size_t, WrapperLabel, WrapperLabel::kTransformArrayId &gt;::InvalidId()</a>, <a class="el" href="dfa__generator_8h_source.html#l00267">nfa_generator_</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00101">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaInit()</a>, <a class="el" href="dfa__generator_8h_source.html#l00277">node_manager_intermediate_node_</a>, <a class="el" href="dfa__generator_8h_source.html#l00279">node_manager_set_</a>, <a class="el" href="object__manager_8h_source.html#l00569">frontend::common::ObjectManager&lt; T &gt;::ObjectManagerInit()</a>, <a class="el" href="dfa__generator_8h_source.html#l00269">root_intermediate_node_id_</a>, <a class="el" href="dfa__generator_8h_source.html#l00261">root_transform_array_id_</a>, <a class="el" href="dfa__generator_8h_source.html#l00281">setid_to_intermediate_nodeid_</a>, <a class="el" href="unordered__struct__manager_8h_source.html#l00069">frontend::common::UnorderedStructManager&lt; StructType, Hasher &gt;::StructManagerInit()</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00271">transform_array_size_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l01296">frontend::generator::syntax_generator::SyntaxGenerator::SyntaxGeneratorInit()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a765989368257c66b0b23d2b2ab43d711_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a765989368257c66b0b23d2b2ab43d711_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a765989368257c66b0b23d2b2ab43d711_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a765989368257c66b0b23d2b2ab43d711_cgraph">
+<area shape="rect" title="初始化" alt="" coords="5,147,223,203"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf" title="获取存储无效值的容器" alt="" coords="271,5,515,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a551e2d3ea7f472da85fe77dcdcd2a068" title="NFA初始化" alt="" coords="299,100,487,171"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#af218c097d7fa411572f79043be378ee7" title="初始化，如果容器中存在节点则全部释放" alt="" coords="289,195,496,236"/>
+<area shape="rect" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a5912fd9f67bdee5098556fd6c5a32224" title="初始化容器" alt="" coords="272,260,513,301"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a497a7c5bc722e5d3393c14b39b1e451e" title="创建对象并自动选择最佳位置放置对象" alt="" coords="605,83,831,124"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a46a3c456a48f53594855815131f9dbf9" title="初始化，如果容器中存在对象则全部释放" alt="" coords="563,148,873,189"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a765989368257c66b0b23d2b2ab43d711_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a765989368257c66b0b23d2b2ab43d711_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a765989368257c66b0b23d2b2ab43d711_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a765989368257c66b0b23d2b2ab43d711_icgraph">
+<area shape="rect" title="初始化" alt="" coords="721,13,939,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a7d2bf2a9d13bca48536846a1650141f8" title="初始化" alt="" coords="403,13,673,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a21776396cecfb452b42e56dca43b5724"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a21776396cecfb452b42e56dca43b5724">&#9670;&nbsp;</a></span>DfaMinimize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::dfa_generator::DfaGenerator::DfaMinimize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>构建最小化DFA </p>
+<dl class="section note"><dt>注解</dt><dd>该函数在DfaConstruct操作后调用，合并相同转移项并填充DFA配置表 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8cpp_source.html">dfa_generator.cpp</a> 第 <a class="el" href="dfa__generator_8cpp_source.html#l00079">79</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="object__manager_8h_source.html#l00641">frontend::common::ObjectManager&lt; T &gt;::Begin()</a>, <a class="el" href="dfa__generator_8h_source.html#l00258">dfa_config_</a>, <a class="el" href="object__manager_8h_source.html#l00349">frontend::common::ObjectManager&lt; T &gt;::End()</a>, <a class="el" href="dfa__generator_8h_source.html#l00169">frontend::generator::dfa_generator::DfaGenerator::IntermediateDfaNode::forward_nodes</a>, <a class="el" href="dfa__generator_8h_source.html#l00183">GetIntermediateNode()</a>, <a class="el" href="dfa__generator_8h_source.html#l00275">intermediate_node_to_final_node_</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00169">IntermediateNodeClassify()</a>, <a class="el" href="id__wrapper_8h_source.html#l00155">frontend::common::ExplicitIdWrapper&lt; size_t, WrapperLabel, WrapperLabel::kTransformArrayId &gt;::InvalidId()</a>, <a class="el" href="id__wrapper_8h_source.html#l00076">frontend::common::BaseIdWrapper&lt; IdType_, LabelEnum_, label_, invalid_value_ &gt;::IsValid()</a>, <a class="el" href="dfa__generator_8h_source.html#l00277">node_manager_intermediate_node_</a>, <a class="el" href="object__manager_8h_source.html#l00569">frontend::common::ObjectManager&lt; T &gt;::ObjectManagerInit()</a>, <a class="el" href="dfa__generator_8h_source.html#l00269">root_intermediate_node_id_</a>, <a class="el" href="dfa__generator_8h_source.html#l00261">root_transform_array_id_</a>, <a class="el" href="object__manager_8h_source.html#l00584">frontend::common::ObjectManager&lt; T &gt;::ShrinkToFit()</a>, <a class="el" href="dfa__generator_8h_source.html#l00271">transform_array_size_</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00171">frontend::generator::dfa_generator::DfaGenerator::IntermediateDfaNode::word_attached_data</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00043">DfaConstruct()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a21776396cecfb452b42e56dca43b5724_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a21776396cecfb452b42e56dca43b5724_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a21776396cecfb452b42e56dca43b5724_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a21776396cecfb452b42e56dca43b5724_cgraph">
+<area shape="rect" title="构建最小化DFA" alt="" coords="5,231,223,287"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a4347527ee933efa32065a14e90be53dc" title="获取指向第一个有效节点的迭代器" alt="" coords="297,5,489,47"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a99d1a3c63580f5a44f26e2c1351398f7" title="获取指向超尾的迭代器" alt="" coords="297,71,489,112"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a067fa9c2c4907f35de5bd576f000f317" title="获取中间节点引用" alt="" coords="828,173,1045,229"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa38cc668b660a10ec56f354b6051dbad" title="对中间节点进行分类" alt="" coords="284,187,501,243"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf" title="获取存储无效值的容器" alt="" coords="271,268,515,339"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html#aa088b185f8650169d2e53c4372db529b" title="判断当前存储的值是否有效" alt="" coords="295,363,490,404"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#af218c097d7fa411572f79043be378ee7" title="初始化，如果容器中存在节点则全部释放" alt="" coords="289,428,496,469"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#ace94586d70da1f07e0af846ad52d42be" title="调用成员变量的shrink_to_fit来节省空间" alt="" coords="297,493,489,535"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a204350a871426aaf21ddc9cd535925b6" title="获取对象的const引用" alt="" coords="1093,180,1285,221"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a9914bd8b7f3354aa0cd7ef8271f5d1a6" title="查询DFA中间节点在给定条件下的转移情况" alt="" coords="563,238,780,294"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a21776396cecfb452b42e56dca43b5724_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a21776396cecfb452b42e56dca43b5724_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a21776396cecfb452b42e56dca43b5724_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a21776396cecfb452b42e56dca43b5724_icgraph">
+<area shape="rect" title="构建最小化DFA" alt="" coords="668,13,885,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6b169ce3914f5ecb5633c59b3118de82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b169ce3914f5ecb5633c59b3118de82">&#9670;&nbsp;</a></span>GetEndOfFileSavedData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a>&amp; frontend::generator::dfa_generator::DfaGenerator::GetEndOfFileSavedData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取到达文件尾时返回的数据 </p>
+<dl class="section return"><dt>返回</dt><dd>返回到达文件尾时返回的数据的const引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00104">104</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="dfa__generator_8h_source.html#l00264">file_end_saved_data_</a>.</p>
+
+</div>
+</div>
+<a id="a067fa9c2c4907f35de5bd576f000f317"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a067fa9c2c4907f35de5bd576f000f317">&#9670;&nbsp;</a></span>GetIntermediateNode() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1IntermediateDfaNode.html">IntermediateDfaNode</a>&amp; frontend::generator::dfa_generator::DfaGenerator::GetIntermediateNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a>&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取中间节点引用 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">id</td><td>：中间节点ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回对应的中间节点引用 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>id必须对应已存在的中间节点 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00183">183</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="object__manager_8h_source.html#l00418">frontend::common::ObjectManager&lt; T &gt;::GetObject()</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00277">node_manager_intermediate_node_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00043">DfaConstruct()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00079">DfaMinimize()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00156">IntermediateGoto()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00169">IntermediateNodeClassify()</a> , 以及 <a class="el" href="dfa__generator_8cpp_source.html#l00161">SetIntermediateNodeTransform()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a067fa9c2c4907f35de5bd576f000f317_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a067fa9c2c4907f35de5bd576f000f317_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a067fa9c2c4907f35de5bd576f000f317_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a067fa9c2c4907f35de5bd576f000f317_cgraph">
+<area shape="rect" title="获取中间节点引用" alt="" coords="5,5,223,61"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a204350a871426aaf21ddc9cd535925b6" title="获取对象的const引用" alt="" coords="271,13,463,54"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a067fa9c2c4907f35de5bd576f000f317_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a067fa9c2c4907f35de5bd576f000f317_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a067fa9c2c4907f35de5bd576f000f317_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a067fa9c2c4907f35de5bd576f000f317_icgraph">
+<area shape="rect" title="获取中间节点引用" alt="" coords="1481,95,1699,151"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a21776396cecfb452b42e56dca43b5724" title="构建最小化DFA" alt="" coords="668,45,885,101"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a9914bd8b7f3354aa0cd7ef8271f5d1a6" title="查询DFA中间节点在给定条件下的转移情况" alt="" coords="1207,95,1425,151"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa38cc668b660a10ec56f354b6051dbad" title="对中间节点进行分类" alt="" coords="933,95,1151,151"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#ac4947460d8c6114ebdfb00f71f1cdd6a" title="设置DFA中间节点条件转移" alt="" coords="1199,226,1433,282"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2f70e362a1ff341993c87e8b876f467f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f70e362a1ff341993c87e8b876f467f">&#9670;&nbsp;</a></span>GetIntermediateNode() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1IntermediateDfaNode.html">IntermediateDfaNode</a>&amp; frontend::generator::dfa_generator::DfaGenerator::GetIntermediateNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a>&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取中间节点const引用 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">id</td><td>：中间节点ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回对应的中间节点const引用 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>id必须对应已存在的中间节点 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00190">190</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="object__manager_8h_source.html#l00418">frontend::common::ObjectManager&lt; T &gt;::GetObject()</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00277">node_manager_intermediate_node_</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a2f70e362a1ff341993c87e8b876f467f_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a2f70e362a1ff341993c87e8b876f467f_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a2f70e362a1ff341993c87e8b876f467f_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a2f70e362a1ff341993c87e8b876f467f_cgraph">
+<area shape="rect" title="获取中间节点const引用" alt="" coords="5,5,223,61"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a204350a871426aaf21ddc9cd535925b6" title="获取对象的const引用" alt="" coords="271,13,463,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a504c3213c736bdf80fdbf90cf17865eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a504c3213c736bdf80fdbf90cf17865eb">&#9670;&nbsp;</a></span>GetSetObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a833f8bda0c065af5142044656f55d0d1">SetType</a>&amp; frontend::generator::dfa_generator::DfaGenerator::GetSetObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a45ce476e574ac5c7ec4c5191fb41895a">SetId</a>&#160;</td>
+          <td class="paramname"><em>set_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取子集构造法的集合的引用 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">set_id</td><td>：集合ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回集合的引用 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>set_id必须对应已存在的集合 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00197">197</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="unordered__struct__manager_8h_source.html#l00036">frontend::common::UnorderedStructManager&lt; StructType, Hasher &gt;::GetObject()</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00279">node_manager_set_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00131">SetGoto()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a504c3213c736bdf80fdbf90cf17865eb_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a504c3213c736bdf80fdbf90cf17865eb_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a504c3213c736bdf80fdbf90cf17865eb_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a504c3213c736bdf80fdbf90cf17865eb_cgraph">
+<area shape="rect" title="获取子集构造法的集合的引用" alt="" coords="5,5,223,61"/>
+<area shape="rect" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a1959da3a072226c4cab199b6e1acf273" title="返回指向管理的对象的引用" alt="" coords="271,13,489,54"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a504c3213c736bdf80fdbf90cf17865eb_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a504c3213c736bdf80fdbf90cf17865eb_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a504c3213c736bdf80fdbf90cf17865eb_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a504c3213c736bdf80fdbf90cf17865eb_icgraph">
+<area shape="rect" title="获取子集构造法的集合的引用" alt="" coords="933,13,1151,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="668,13,885,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1d1bc4c8b084e3ca3e28011d63ededc4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1d1bc4c8b084e3ca3e28011d63ededc4">&#9670;&nbsp;</a></span>InOrInsert()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class IntermediateNodeSet &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">DfaGenerator::IntermediateNodeId</a>, bool &gt; frontend::generator::dfa_generator::DfaGenerator::InOrInsert </td>
+          <td>(</td>
+          <td class="paramtype">IntermediateNodeSet &amp;&amp;&#160;</td>
+          <td class="paramname"><em>uset</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>word_attached_data</em> = <code><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a>()</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取集合对应的中间节点ID，如果不存在则创建新的中间节点 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">uset</td><td>：获取对应中间节点的集合 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">word_attached_data</td><td>：如果创建中间节点则该中间节点使用该单词数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回获取到的中间节点ID和是否新插入该集合（是否新建中间节点） </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>IntermediateNodeSet仅支持SetType的const左值引用或右值引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00286">286</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#acbd7bff0314ac667bce8e2bc92ccaeaa">frontend::common::UnorderedStructManager&lt; StructType, Hasher &gt;::EmplaceObject()</a>, <a class="el" href="object__manager_8h_source.html#l00452">frontend::common::ObjectManager&lt; T &gt;::EmplaceObject()</a>, <a class="el" href="dfa__generator_8h_source.html#l00277">node_manager_intermediate_node_</a>, <a class="el" href="dfa__generator_8h_source.html#l00279">node_manager_set_</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00281">setid_to_intermediate_nodeid_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00043">DfaConstruct()</a> , 以及 <a class="el" href="dfa__generator_8cpp_source.html#l00131">SetGoto()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a1d1bc4c8b084e3ca3e28011d63ededc4_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a1d1bc4c8b084e3ca3e28011d63ededc4_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a1d1bc4c8b084e3ca3e28011d63ededc4_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a1d1bc4c8b084e3ca3e28011d63ededc4_cgraph">
+<area shape="rect" title="获取集合对应的中间节点ID，如果不存在则创建新的中间节点" alt="" coords="5,31,223,87"/>
+<area shape="rect" href="classfrontend_1_1common_1_1UnorderedStructManager.html#acbd7bff0314ac667bce8e2bc92ccaeaa" title="插入一个待管理的对象" alt="" coords="271,5,493,47"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#adbb63b10c08fd65047c2b6ee5cae362d" title="系统自行选择最佳位置放置对象" alt="" coords="286,71,478,112"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a1d1bc4c8b084e3ca3e28011d63ededc4_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a1d1bc4c8b084e3ca3e28011d63ededc4_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a1d1bc4c8b084e3ca3e28011d63ededc4_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a1d1bc4c8b084e3ca3e28011d63ededc4_icgraph">
+<area shape="rect" title="获取集合对应的中间节点ID，如果不存在则创建新的中间节点" alt="" coords="933,13,1151,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="668,45,885,101"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9914bd8b7f3354aa0cd7ef8271f5d1a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9914bd8b7f3354aa0cd7ef8271f5d1a6">&#9670;&nbsp;</a></span>IntermediateGoto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">DfaGenerator::IntermediateNodeId</a> frontend::generator::dfa_generator::DfaGenerator::IntermediateGoto </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a>&#160;</td>
+          <td class="paramname"><em>dfa_src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c_transform</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查询DFA中间节点在给定条件下的转移情况 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dfa_src</td><td>：转移起点的DFA中间节点 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">c_transform</td><td>：转移条件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回转移到的DFA中间节点ID </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">IntermediateNodeId::InvalidId()</td><td>：该节点在c_transform条件下无法转移 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>该函数仅查询，SetGoto如果不存在会创建新集合和中间节点 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8cpp_source.html">dfa_generator.cpp</a> 第 <a class="el" href="dfa__generator_8cpp_source.html#l00156">156</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="dfa__generator_8h_source.html#l00169">frontend::generator::dfa_generator::DfaGenerator::IntermediateDfaNode::forward_nodes</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00183">GetIntermediateNode()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00169">IntermediateNodeClassify()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a9914bd8b7f3354aa0cd7ef8271f5d1a6_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a9914bd8b7f3354aa0cd7ef8271f5d1a6_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a9914bd8b7f3354aa0cd7ef8271f5d1a6_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a9914bd8b7f3354aa0cd7ef8271f5d1a6_cgraph">
+<area shape="rect" title="查询DFA中间节点在给定条件下的转移情况" alt="" coords="5,5,223,61"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a067fa9c2c4907f35de5bd576f000f317" title="获取中间节点引用" alt="" coords="271,5,488,61"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a204350a871426aaf21ddc9cd535925b6" title="获取对象的const引用" alt="" coords="536,13,728,54"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a9914bd8b7f3354aa0cd7ef8271f5d1a6_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a9914bd8b7f3354aa0cd7ef8271f5d1a6_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a9914bd8b7f3354aa0cd7ef8271f5d1a6_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a9914bd8b7f3354aa0cd7ef8271f5d1a6_icgraph">
+<area shape="rect" title="查询DFA中间节点在给定条件下的转移情况" alt="" coords="1199,13,1416,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa38cc668b660a10ec56f354b6051dbad" title="对中间节点进行分类" alt="" coords="933,13,1151,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a21776396cecfb452b42e56dca43b5724" title="构建最小化DFA" alt="" coords="668,13,885,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa38cc668b660a10ec56f354b6051dbad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa38cc668b660a10ec56f354b6051dbad">&#9670;&nbsp;</a></span>IntermediateNodeClassify()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::dfa_generator::DfaGenerator::IntermediateNodeClassify </td>
+          <td>(</td>
+          <td class="paramtype">std::list&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>node_ids</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c_transform</em> = <code>CHAR_MIN</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>对中间节点进行分类 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_ids</td><td>：待分类的节点集合 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">c_transform</td><td>：本轮分类使用的转移字符</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>该函数每次调用都对当前中间节点根据在当前转移字符下的转移结果进行分类 分类方法： 每轮分类后得到&gt;=1个子集合，如果子集合内含有多个节点且c_transform!=CHAR_MIN 则使用c_transform+1和每个含有多个元素的集合调用该函数进行下一轮分类 否则每个子集合映射为一条DFA转移表条目，这个集合内所有节点等效 调用方式： 初次调用时c_transform代表第一个开始判断的字符 每轮调用后如果需要进行下一轮分类则自动调用，无需手动控制 </p><dl class="section note"><dt>注解</dt><dd>每一轮转移结果都相同的中间节点为等效节点，可以合并 该函数会填写intermediate_node_to_final_node_和transform_array_size_ </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd>node_ids所有元素不允许重复 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8cpp_source.html">dfa_generator.cpp</a> 第 <a class="el" href="dfa__generator_8cpp_source.html#l00169">169</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="dfa__generator_8h_source.html#l00183">GetIntermediateNode()</a>, <a class="el" href="dfa__generator_8h_source.html#l00275">intermediate_node_to_final_node_</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00156">IntermediateGoto()</a>, <a class="el" href="dfa__generator_8h_source.html#l00271">transform_array_size_</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00171">frontend::generator::dfa_generator::DfaGenerator::IntermediateDfaNode::word_attached_data</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00079">DfaMinimize()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_aa38cc668b660a10ec56f354b6051dbad_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_aa38cc668b660a10ec56f354b6051dbad_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_aa38cc668b660a10ec56f354b6051dbad_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_aa38cc668b660a10ec56f354b6051dbad_cgraph">
+<area shape="rect" title="对中间节点进行分类" alt="" coords="5,5,223,61"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a067fa9c2c4907f35de5bd576f000f317" title="获取中间节点引用" alt="" coords="536,5,753,61"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a9914bd8b7f3354aa0cd7ef8271f5d1a6" title="查询DFA中间节点在给定条件下的转移情况" alt="" coords="271,37,488,93"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a204350a871426aaf21ddc9cd535925b6" title="获取对象的const引用" alt="" coords="801,13,993,54"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_aa38cc668b660a10ec56f354b6051dbad_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_aa38cc668b660a10ec56f354b6051dbad_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_aa38cc668b660a10ec56f354b6051dbad_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_aa38cc668b660a10ec56f354b6051dbad_icgraph">
+<area shape="rect" title="对中间节点进行分类" alt="" coords="933,13,1151,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a21776396cecfb452b42e56dca43b5724" title="构建最小化DFA" alt="" coords="668,13,885,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa9d4ac6efbab13fbc4223712befe604c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9d4ac6efbab13fbc4223712befe604c">&#9670;&nbsp;</a></span>save()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Archive &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::dfa_generator::DfaGenerator::save </td>
+          <td>(</td>
+          <td class="paramtype">Archive &amp;&#160;</td>
+          <td class="paramname"><em>ar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>version</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>序列化配置的函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">ar</td><td>：序列化使用的档案 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">version</td><td>：序列化文件版本 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section attention"><dt>注意</dt><dd>该函数应由boost库调用而非手动调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00131">131</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="dfa__generator_8h_source.html#l00258">dfa_config_</a>, <a class="el" href="dfa__generator_8h_source.html#l00264">file_end_saved_data_</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00261">root_transform_array_id_</a>.</p>
+
+</div>
+</div>
+<a id="aa3e202423198da5fa4b91d0e24228a30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa3e202423198da5fa4b91d0e24228a30">&#9670;&nbsp;</a></span>SaveConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::dfa_generator::DfaGenerator::SaveConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>保存DFA配置 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8cpp_source.html">dfa_generator.cpp</a> 第 <a class="el" href="dfa__generator_8cpp_source.html#l00211">211</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="common_8h_source.html#l00013">frontend::common::kDfaConfigFileName</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l01134">frontend::generator::syntax_generator::SyntaxGenerator::SaveConfig()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_aa3e202423198da5fa4b91d0e24228a30_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_aa3e202423198da5fa4b91d0e24228a30_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_aa3e202423198da5fa4b91d0e24228a30_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_aa3e202423198da5fa4b91d0e24228a30_icgraph">
+<area shape="rect" title="保存DFA配置" alt="" coords="664,13,881,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a82180d7b3fd461e84c0570173d521ca0" title="将语法分析表配置写入文件 文件名为frontend::common::kSyntaxConfigFileName" alt="" coords="403,13,616,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2e2c3d8bfb4049c5798afa334d8889bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2e2c3d8bfb4049c5798afa334d8889bd">&#9670;&nbsp;</a></span>SetEndOfFileSavedData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::dfa_generator::DfaGenerator::SetEndOfFileSavedData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>saved_data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置到达文件尾时返回的数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">saved_data</td><td>：到达文件尾返回的数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section attention"><dt>注意</dt><dd>仅在未获取到任何单词且到达文件尾时返回 如果已经获取了一些字符后遇到文件尾则返回这些字符对应的单词 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00099">99</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="dfa__generator_8h_source.html#l00264">file_end_saved_data_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l01247">frontend::generator::syntax_generator::SyntaxGenerator::SyntaxAnalysisTableConstruct()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a2e2c3d8bfb4049c5798afa334d8889bd_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a2e2c3d8bfb4049c5798afa334d8889bd_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a2e2c3d8bfb4049c5798afa334d8889bd_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_a2e2c3d8bfb4049c5798afa334d8889bd_icgraph">
+<area shape="rect" title="设置到达文件尾时返回的数据" alt="" coords="691,13,908,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,5,643,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af3c335d2350582155b03c199d67397fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af3c335d2350582155b03c199d67397fb">&#9670;&nbsp;</a></span>SetGoto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">DfaGenerator::IntermediateNodeId</a>, bool &gt; frontend::generator::dfa_generator::DfaGenerator::SetGoto </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a45ce476e574ac5c7ec4c5191fb41895a">SetId</a>&#160;</td>
+          <td class="paramname"><em>set_src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c_transform</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取NFA节点集合在给定字符下的转移结果 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">set_src</td><td>：转移起点的NFA节点ID的集合 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">c_transform</td><td>：转移条件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回值前半部分为对应中间节点句柄，后半部分表示是否新创建了集合 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">std::pair(IntermediateNodeId::InvalidId(),false)</td><td>：该集合在给定条件下无法转移 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8cpp_source.html">dfa_generator.cpp</a> 第 <a class="el" href="dfa__generator_8cpp_source.html#l00131">131</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="dfa__generator_8h_source.html#l00197">GetSetObject()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00092">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::Goto()</a>, <a class="el" href="dfa__generator_8h_source.html#l00286">InOrInsert()</a>, <a class="el" href="nfa__generator_8h_source.html#l00215">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::kNotTailNodeTag</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00267">nfa_generator_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00043">DfaConstruct()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_af3c335d2350582155b03c199d67397fb_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_af3c335d2350582155b03c199d67397fb_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_af3c335d2350582155b03c199d67397fb_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_af3c335d2350582155b03c199d67397fb_cgraph">
+<area shape="rect" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="5,189,223,245"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a504c3213c736bdf80fdbf90cf17865eb" title="获取子集构造法的集合的引用" alt="" coords="275,35,493,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a52c8b5c40bdc50f5048f61a267f7dfc0" title="获取给定NFA节点在转移条件下可以到达的等效节点" alt="" coords="271,189,497,245"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a1d1bc4c8b084e3ca3e28011d63ededc4" title="获取集合对应的中间节点ID，如果不存在则创建新的中间节点" alt="" coords="275,370,493,426"/>
+<area shape="rect" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a1959da3a072226c4cab199b6e1acf273" title="返回指向管理的对象的引用" alt="" coords="547,5,766,47"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a36fe0f238a5663a90c8b1100d723eb33" title="获取给定NFA节点的所有等效节点ID（包含自身）" alt="" coords="563,71,751,141"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed" title="根据NFA节点ID获取NFA节点" alt="" coords="844,133,1032,204"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a185d61353094ddb4fd9f478aa1a5c63e" title="根据要移入的字母获取转移到的下一个节点ID" alt="" coords="549,217,765,288"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html#aa088b185f8650169d2e53c4372db529b" title="判断当前存储的值是否有效" alt="" coords="559,312,754,353"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a533e7b18b83514f9782c24c1781646b2" title="通过一个id查询引用相同底层对象的所有id" alt="" coords="823,53,1053,109"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a271ef9fe0032f1eeb8585fb329f53cbb" title="获取指向有效对象的引用" alt="" coords="1108,148,1320,189"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf" title="获取存储无效值的容器" alt="" coords="816,228,1060,299"/>
+<area shape="rect" href="classfrontend_1_1common_1_1UnorderedStructManager.html#acbd7bff0314ac667bce8e2bc92ccaeaa" title="插入一个待管理的对象" alt="" coords="545,377,768,419"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#adbb63b10c08fd65047c2b6ee5cae362d" title="系统自行选择最佳位置放置对象" alt="" coords="561,443,753,484"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_af3c335d2350582155b03c199d67397fb_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_af3c335d2350582155b03c199d67397fb_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_af3c335d2350582155b03c199d67397fb_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_af3c335d2350582155b03c199d67397fb_icgraph">
+<area shape="rect" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="668,13,885,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac4947460d8c6114ebdfb00f71f1cdd6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4947460d8c6114ebdfb00f71f1cdd6a">&#9670;&nbsp;</a></span>SetIntermediateNodeTransform()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::dfa_generator::DfaGenerator::SetIntermediateNodeTransform </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a>&#160;</td>
+          <td class="paramname"><em>node_intermediate_src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c_transform</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a>&#160;</td>
+          <td class="paramname"><em>node_intermediate_dst</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置DFA中间节点条件转移 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_intermediate_src</td><td>：源节点 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">c_transform</td><td>：转移条件 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_intermediate_dst</td><td>：目的节点 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回是否设置成功 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：设置成功 </td></tr>
+    <tr><td class="paramname">false</td><td>：设置失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>一定返回true </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8cpp_source.html">dfa_generator.cpp</a> 第 <a class="el" href="dfa__generator_8cpp_source.html#l00161">161</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="dfa__generator_8h_source.html#l00169">frontend::generator::dfa_generator::DfaGenerator::IntermediateDfaNode::forward_nodes</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00183">GetIntermediateNode()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_ac4947460d8c6114ebdfb00f71f1cdd6a_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_ac4947460d8c6114ebdfb00f71f1cdd6a_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_ac4947460d8c6114ebdfb00f71f1cdd6a_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_ac4947460d8c6114ebdfb00f71f1cdd6a_cgraph">
+<area shape="rect" title="设置DFA中间节点条件转移" alt="" coords="5,5,240,61"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a067fa9c2c4907f35de5bd576f000f317" title="获取中间节点引用" alt="" coords="288,5,505,61"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html#a204350a871426aaf21ddc9cd535925b6" title="获取对象的const引用" alt="" coords="553,13,745,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">友元及相关函数文档</h2>
+<a id="ac98d07dd8f7b70e16ccb9a01abf56b9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac98d07dd8f7b70e16ccb9a01abf56b9c">&#9670;&nbsp;</a></span>boost::serialization::access</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class boost::serialization::access</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>声明友元，允许序列化类访问成员 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00115">115</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="ad5b2f55649a93ca071767b96d0cac404"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad5b2f55649a93ca071767b96d0cac404">&#9670;&nbsp;</a></span>dfa_config_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator.html#a0c8fce6f124b40aa19b482095d90092d">DfaConfigType</a> frontend::generator::dfa_generator::DfaGenerator::dfa_config_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>DFA配置 </p>
+<dl class="section note"><dt>注解</dt><dd>写入配置文件 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00258">258</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00012">DfaInit()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00079">DfaMinimize()</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00131">save()</a>.</p>
+
+</div>
+</div>
+<a id="aef7afdcf2b9948b9f6d02fb2951dafc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aef7afdcf2b9948b9f6d02fb2951dafc3">&#9670;&nbsp;</a></span>file_end_saved_data_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a6bde8c43b0cfbaa15d016d7ea1156616">WordAttachedData</a> frontend::generator::dfa_generator::DfaGenerator::file_end_saved_data_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>遇到文件尾时返回的数据 </p>
+<dl class="section note"><dt>注解</dt><dd>写入配置文件 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00264">264</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00012">DfaInit()</a>, <a class="el" href="dfa__generator_8h_source.html#l00104">GetEndOfFileSavedData()</a>, <a class="el" href="dfa__generator_8h_source.html#l00131">save()</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00099">SetEndOfFileSavedData()</a>.</p>
+
+</div>
+</div>
+<a id="ad41826afef09b5e4841e28ff3dbbe73b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad41826afef09b5e4841e28ff3dbbe73b">&#9670;&nbsp;</a></span>intermediate_node_to_final_node_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a>, <a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator.html#a975429f01ebef4fa047565091eeab434">TransformArrayId</a>&gt; frontend::generator::dfa_generator::DfaGenerator::intermediate_node_to_final_node_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>存储DFA中间节点到转移表条目的映射 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00275">275</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00012">DfaInit()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00079">DfaMinimize()</a> , 以及 <a class="el" href="dfa__generator_8cpp_source.html#l00169">IntermediateNodeClassify()</a>.</p>
+
+</div>
+</div>
+<a id="aa569178dd48a4c7106c828dc4b3a0e2b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa569178dd48a4c7106c828dc4b3a0e2b">&#9670;&nbsp;</a></span>nfa_generator_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html">NfaGenerator</a> frontend::generator::dfa_generator::DfaGenerator::nfa_generator_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>NFA配置生成器 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00267">267</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00034">AddRegexpression()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00025">AddWord()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00043">DfaConstruct()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00012">DfaInit()</a> , 以及 <a class="el" href="dfa__generator_8cpp_source.html#l00131">SetGoto()</a>.</p>
+
+</div>
+</div>
+<a id="a6991b5377cd8cbc978a1a5ca99f7166b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6991b5377cd8cbc978a1a5ca99f7166b">&#9670;&nbsp;</a></span>node_manager_intermediate_node_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1common_1_1ObjectManager.html">ObjectManager</a>&lt;<a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1IntermediateDfaNode.html">IntermediateDfaNode</a>&gt; frontend::generator::dfa_generator::DfaGenerator::node_manager_intermediate_node_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>存储中间节点 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00277">277</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00012">DfaInit()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00079">DfaMinimize()</a>, <a class="el" href="dfa__generator_8h_source.html#l00183">GetIntermediateNode()</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00286">InOrInsert()</a>.</p>
+
+</div>
+</div>
+<a id="a26300b7dfd31f9703938f4c3fb3a84a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26300b7dfd31f9703938f4c3fb3a84a4">&#9670;&nbsp;</a></span>node_manager_set_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#aa2512956c989c27f93d4adce1bccd911">SetManagerType</a> frontend::generator::dfa_generator::DfaGenerator::node_manager_set_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>管理中间节点对应的集合 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00279">279</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00012">DfaInit()</a>, <a class="el" href="dfa__generator_8h_source.html#l00197">GetSetObject()</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00286">InOrInsert()</a>.</p>
+
+</div>
+</div>
+<a id="ae4f67babfcfb663815de851eb2c85eac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae4f67babfcfb663815de851eb2c85eac">&#9670;&nbsp;</a></span>root_intermediate_node_id_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a> frontend::generator::dfa_generator::DfaGenerator::root_intermediate_node_id_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>中间节点初始节点ID </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00269">269</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00043">DfaConstruct()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00012">DfaInit()</a> , 以及 <a class="el" href="dfa__generator_8cpp_source.html#l00079">DfaMinimize()</a>.</p>
+
+</div>
+</div>
+<a id="accf375e27b2c36cbb71c88e0f74b8aa0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accf375e27b2c36cbb71c88e0f74b8aa0">&#9670;&nbsp;</a></span>root_transform_array_id_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator.html#a975429f01ebef4fa047565091eeab434">TransformArrayId</a> frontend::generator::dfa_generator::DfaGenerator::root_transform_array_id_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>DFA转移表初始条目序号 </p>
+<dl class="section note"><dt>注解</dt><dd>写入配置文件 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00261">261</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00012">DfaInit()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00079">DfaMinimize()</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00131">save()</a>.</p>
+
+</div>
+</div>
+<a id="acc5e41a6bdf418944f08f78ed5f20c8f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acc5e41a6bdf418944f08f78ed5f20c8f">&#9670;&nbsp;</a></span>setid_to_intermediate_nodeid_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a45ce476e574ac5c7ec4c5191fb41895a">SetId</a>, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a7bafc3cd9f98c824d4ce4692221dea8b">IntermediateNodeId</a>&gt; frontend::generator::dfa_generator::DfaGenerator::setid_to_intermediate_nodeid_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>存储集合ID到中间节点ID的映射 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00281">281</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00012">DfaInit()</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00286">InOrInsert()</a>.</p>
+
+</div>
+</div>
+<a id="a58fb0b84fcb22a9c1256f886a66f1e8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58fb0b84fcb22a9c1256f886a66f1e8b">&#9670;&nbsp;</a></span>transform_array_size_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t frontend::generator::dfa_generator::DfaGenerator::transform_array_size_ = 0</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>DFA转移表条目数 </p>
+
+<p class="definition">在文件 <a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a> 第 <a class="el" href="dfa__generator_8h_source.html#l00271">271</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00012">DfaInit()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00079">DfaMinimize()</a> , 以及 <a class="el" href="dfa__generator_8cpp_source.html#l00169">IntermediateNodeClassify()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/Generator/DfaGenerator/<a class="el" href="dfa__generator_8h_source.html">dfa_generator.h</a></li>
+<li>src/Generator/DfaGenerator/<a class="el" href="dfa__generator_8cpp_source.html">dfa_generator.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacefrontend.html">frontend</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1generator.html">generator</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator.html">dfa_generator</a></li><li class="navelem"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html">DfaGenerator</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

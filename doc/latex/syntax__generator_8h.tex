@@ -1,0 +1,62 @@
+\hypertarget{syntax__generator_8h}{}\doxysection{src/\+Generator/\+Syntax\+Generator/syntax\+\_\+generator.h 文件参考}
+\label{syntax__generator_8h}\index{src/Generator/SyntaxGenerator/syntax\_generator.h@{src/Generator/SyntaxGenerator/syntax\_generator.h}}
+
+
+语法分析机配置生成器  
+
+
+{\ttfamily \#include $<$any$>$}\newline
+{\ttfamily \#include $<$boost/archive/binary\+\_\+oarchive.\+hpp$>$}\newline
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include $<$format$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$regex$>$}\newline
+{\ttfamily \#include $<$tuple$>$}\newline
+{\ttfamily \#include \char`\"{}Common/common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Common/id\+\_\+wrapper.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Common/object\+\_\+manager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Common/unordered\+\_\+struct\+\_\+manager.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Generator/\+Dfa\+Generator/dfa\+\_\+generator.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Generator/export\+\_\+types.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}process\+\_\+function\+\_\+interface.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}production\+\_\+item\+\_\+set.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}production\+\_\+node.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}syntax\+\_\+analysis\+\_\+table.\+h\char`\"{}}\newline
+syntax\+\_\+generator.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{syntax__generator_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{syntax__generator_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{类}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator}}
+\begin{DoxyCompactList}\small\item\em 语法分析机配置生成器 \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator_1_1SyntaxAnalysisTableEntryI653189df2f5bfa3bfc34c16a5c53a194}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Syntax\+Analysis\+Table\+Entry\+Id\+And\+Process\+Function\+Class\+Id\+Hasher}}
+\begin{DoxyCompactList}\small\item\em 将序列化分为保存与加载，\+Generator仅保存配置，不加载 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{命名空间}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefrontend}{frontend}}
+\item 
+ \mbox{\hyperlink{namespacefrontend_1_1generator}{frontend\+::generator}}
+\item 
+ \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator}{frontend\+::generator\+::syntax\+\_\+generator}}
+\begin{DoxyCompactList}\small\item\em T\+O\+DO 添加删除未使用产生式的功能 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+语法分析机配置生成器 
+
+1.语法分析机配置生成器使用\+L\+A\+L\+R(1)语法 2.支持非终结产生式空规约 3.支持运算符优先级（二义性文法） 4.支持双目和左侧单目语义共存 5.支持产生式循环引用 6.向前看符号不是运算符时采用移入优先原则 例： IF -\/$>$ if() \{\} else if() \{\} 优先选择if-\/else路径 

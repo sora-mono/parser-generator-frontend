@@ -1,0 +1,4 @@
+<map id="frontend::generator::syntax_generator::ProductionItemSet::IsMainItem" name="frontend::generator::syntax_generator::ProductionItemSet::IsMainItem">
+<area shape="rect" id="node1" title="判断给定项是否为该项集的核心项" alt="" coords="5,13,228,69"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab2846ee0686a10fa320b574031676d58" title="获取全部指向核心项的迭代器" alt="" coords="276,5,511,76"/>
+</map>

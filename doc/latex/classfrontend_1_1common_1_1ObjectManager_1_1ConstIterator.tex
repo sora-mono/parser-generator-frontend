@@ -1,0 +1,469 @@
+\hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{}\doxysection{frontend\+::common\+::Object\+Manager$<$ T $>$\+::Const\+Iterator类 参考}
+\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+
+
+{\ttfamily \#include $<$object\+\_\+manager.\+h$>$}
+
+
+
+frontend\+::common\+::Object\+Manager$<$ T $>$\+::Const\+Iterator 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a0472ccc0af686b4fe428a81c71f5047b}{Const\+Iterator}} ()
+\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a4ae16e2f3a9a45b0d7ac8b556eaffe7c}{Const\+Iterator}} (const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$ $\ast$manager\+\_\+pointer, \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id)
+\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a2477bdb431bb711f18e2d830cc8cfa50}{Const\+Iterator}} (const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1Iterator}{Iterator}} \&iterator)
+\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a13068c829a206a85911f44f1d931291d}{Const\+Iterator}} (const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \&iter)
+\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a6915b5804e782bcc9c2101d91a4ec4b4}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em 获取该迭代器等效的\+ID \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a85a0d6bcdb79dbc70b28bb3117821b2f}{Set\+Manager\+Pointer}} (const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$ $\ast$manager\+\_\+pointer)
+\begin{DoxyCompactList}\small\item\em 设置该迭代器绑定到的容器 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_ae97f37252a047d346fa2b825c13006cb}{Set\+Id}} (\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} id)
+\begin{DoxyCompactList}\small\item\em 设置该迭代器等效的\+ID \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \& \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a786cc0d5d9b193803006b74e92eb8a6b}{operator++}} ()
+\begin{DoxyCompactList}\small\item\em 向后移动迭代器直至下一个有效对象或超尾，使用前缀++语义 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a5e8ceedd356daed7c798606a3df5d6a4}{operator++}} (int)
+\begin{DoxyCompactList}\small\item\em 向后移动迭代器直至下一个有效对象或超尾，使用后缀++语义 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \& \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_adef036573ad8fbed339a697a49e34674}{operator-\/-\/}} ()
+\begin{DoxyCompactList}\small\item\em 向前移动迭代器直至上一个有效对象，使用前缀--语义 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_aaf46a0ad205570ad9dca4232b2dce2f5}{operator-\/-\/}} (int)
+\begin{DoxyCompactList}\small\item\em 向前移动迭代器直至上一个有效对象，使用后缀--语义 \end{DoxyCompactList}\item 
+const T \& \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_adfe50fff596de486e130f2ee89f4cf4d}{operator$\ast$}} () const
+\begin{DoxyCompactList}\small\item\em 对迭代器解引用 \end{DoxyCompactList}\item 
+const T $\ast$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a4a9c36d680e93907f99d4d9ba162ae97}{operator-\/$>$}} () const
+\begin{DoxyCompactList}\small\item\em 对迭代器解引用 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a4eb5eab1082ca8db1bc17310abefa04d}{operator==}} (const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \&iter) const
+\begin{DoxyCompactList}\small\item\em 判断两个迭代器是否相同（与相同容器绑定且指向相同位置） \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a56f6926248446d1acdc78b5e9a4f01be}{operator!=}} (const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \&iter) const
+\begin{DoxyCompactList}\small\item\em 判断两个迭代器是否不同（与不同容器绑定或指向不同位置） \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$ $\ast$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a3bf7d5182132e2c9bb35c18c6e3d9783}{manager\+\_\+pointer\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 迭代器绑定到的容器 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a0d6dbd6f9d4763fb8a8eb5ee561bc55d}{id\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 迭代器指向的对象位置 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+\subsubsection*{template$<$class T$>$\newline
+class frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator}
+
+
+
+在文件 object\+\_\+manager.\+h 第 118 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a0472ccc0af686b4fe428a81c71f5047b}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a0472ccc0af686b4fe428a81c71f5047b}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!ConstIterator@{ConstIterator}}
+\index{ConstIterator@{ConstIterator}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{ConstIterator()}{ConstIterator()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::\+Const\+Iterator (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 object\+\_\+manager.\+h 第 120 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a4ae16e2f3a9a45b0d7ac8b556eaffe7c}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a4ae16e2f3a9a45b0d7ac8b556eaffe7c}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!ConstIterator@{ConstIterator}}
+\index{ConstIterator@{ConstIterator}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{ConstIterator()}{ConstIterator()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::\+Const\+Iterator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$ $\ast$}]{manager\+\_\+pointer,  }\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 object\+\_\+manager.\+h 第 121 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a2477bdb431bb711f18e2d830cc8cfa50}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a2477bdb431bb711f18e2d830cc8cfa50}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!ConstIterator@{ConstIterator}}
+\index{ConstIterator@{ConstIterator}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{ConstIterator()}{ConstIterator()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::\+Const\+Iterator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1Iterator}{Iterator}} \&}]{iterator }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 object\+\_\+manager.\+h 第 123 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a13068c829a206a85911f44f1d931291d}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a13068c829a206a85911f44f1d931291d}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!ConstIterator@{ConstIterator}}
+\index{ConstIterator@{ConstIterator}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{ConstIterator()}{ConstIterator()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::\+Const\+Iterator (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \&}]{iter }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 object\+\_\+manager.\+h 第 125 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a6915b5804e782bcc9c2101d91a4ec4b4}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a6915b5804e782bcc9c2101d91a4ec4b4}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!GetId@{GetId}}
+\index{GetId@{GetId}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{GetId()}{GetId()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::\+Get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取该迭代器等效的\+ID 
+
+\begin{DoxyReturn}{返回}
+返回该迭代器等效的\+ID 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+如果该迭代器为超尾则返回\+Object\+Id\+::\+Invalid\+Id() 
+\end{DoxyNote}
+
+
+在文件 object\+\_\+manager.\+h 第 131 行定义.
+
+
+
+引用了 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::id\+\_\+.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a56f6926248446d1acdc78b5e9a4f01be}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a56f6926248446d1acdc78b5e9a4f01be}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \&}]{iter }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+判断两个迭代器是否不同（与不同容器绑定或指向不同位置） 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em iter} & ：待判断的另一个迭代器 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+两个迭代器是否不同 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：两个迭代器不同 \\
+\hline
+{\em false} & ：两个迭代器相同 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+允许传入$\ast$this 
+\end{DoxyNote}
+
+
+在文件 object\+\_\+manager.\+h 第 190 行定义.
+
+
+
+引用了 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::operator==().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a56f6926248446d1acdc78b5e9a4f01be_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_adfe50fff596de486e130f2ee89f4cf4d}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_adfe50fff596de486e130f2ee89f4cf4d}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!operator$\ast$@{operator$\ast$}}
+\index{operator$\ast$@{operator$\ast$}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{operator$\ast$()}{operator*()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const T\& \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::operator$\ast$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+对迭代器解引用 
+
+\begin{DoxyReturn}{返回}
+返回迭代器指向的对象的const引用 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+调用该函数前必须已经设置等效\+I\+D和绑定到的容器 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 170 行定义.
+
+
+
+引用了 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::id\+\_\+ , 以及 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::manager\+\_\+pointer\+\_\+.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a786cc0d5d9b193803006b74e92eb8a6b}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a786cc0d5d9b193803006b74e92eb8a6b}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!operator++@{operator++}}
+\index{operator++@{operator++}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \& Const\+Iterator\+::operator++\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+向后移动迭代器直至下一个有效对象或超尾，使用前缀++语义 
+
+\begin{DoxyReturn}{返回}
+返回移动后的迭代器的引用（$\ast$this） 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+调用该函数前必须已经设置等效\+I\+D和绑定到的容器 不允许对超尾调用该函数 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 724 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a5e8ceedd356daed7c798606a3df5d6a4}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a5e8ceedd356daed7c798606a3df5d6a4}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!operator++@{operator++}}
+\index{operator++@{operator++}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{operator++()}{operator++()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} Const\+Iterator\+::operator++ (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+向后移动迭代器直至下一个有效对象或超尾，使用后缀++语义 
+
+\begin{DoxyReturn}{返回}
+返回移动前的迭代器 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+调用该函数前必须已经设置等效\+I\+D和绑定到的容器 不允许对超尾调用该函数 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 738 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_adef036573ad8fbed339a697a49e34674}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_adef036573ad8fbed339a697a49e34674}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!operator-\/-\/@{operator-\/-\/}}
+\index{operator-\/-\/@{operator-\/-\/}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{operator-\/-\/()}{operator--()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \& Const\+Iterator\+::operator-\/-\/\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+向前移动迭代器直至上一个有效对象，使用前缀--语义 
+
+\begin{DoxyReturn}{返回}
+返回移动后的迭代器的引用（$\ast$this） 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+调用该函数前必须已经设置等效\+I\+D和绑定到的容器 不允许对指向第一个有效对象的迭代器调用该函数 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 756 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_aaf46a0ad205570ad9dca4232b2dce2f5}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_aaf46a0ad205570ad9dca4232b2dce2f5}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!operator-\/-\/@{operator-\/-\/}}
+\index{operator-\/-\/@{operator-\/-\/}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{operator-\/-\/()}{operator--()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$\+::\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} Const\+Iterator\+::operator-\/-\/ (\begin{DoxyParamCaption}\item[{int}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+向前移动迭代器直至上一个有效对象，使用后缀--语义 
+
+\begin{DoxyReturn}{返回}
+返回移动前的迭代器 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+调用该函数前必须已经设置等效\+I\+D和绑定到的容器 不允许对指向第一个有效对象的迭代器调用该函数 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 768 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a4a9c36d680e93907f99d4d9ba162ae97}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a4a9c36d680e93907f99d4d9ba162ae97}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const T$\ast$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::operator-\/$>$ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+对迭代器解引用 
+
+\begin{DoxyReturn}{返回}
+返回迭代器指向的对象的const指针 
+\end{DoxyReturn}
+\begin{DoxyAttention}{注意}
+调用该函数前必须已经设置等效\+I\+D和绑定到的容器 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 174 行定义.
+
+
+
+引用了 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::id\+\_\+ , 以及 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::manager\+\_\+pointer\+\_\+.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a4eb5eab1082ca8db1bc17310abefa04d}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a4eb5eab1082ca8db1bc17310abefa04d}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!operator==@{operator==}}
+\index{operator==@{operator==}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+bool \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator}{Const\+Iterator}} \&}]{iter }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+判断两个迭代器是否相同（与相同容器绑定且指向相同位置） 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em iter} & ：待判断的另一个迭代器 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+两个迭代器是否相同 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：两个迭代器相同 \\
+\hline
+{\em false} & ：两个迭代器不同 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+允许传入$\ast$this 
+\end{DoxyNote}
+
+
+在文件 object\+\_\+manager.\+h 第 181 行定义.
+
+
+
+引用了 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::id\+\_\+ , 以及 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::manager\+\_\+pointer\+\_\+.
+
+
+
+被这些函数引用 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::operator!=().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a4eb5eab1082ca8db1bc17310abefa04d_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_ae97f37252a047d346fa2b825c13006cb}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_ae97f37252a047d346fa2b825c13006cb}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!SetId@{SetId}}
+\index{SetId@{SetId}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{SetId()}{SetId()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::\+Set\+Id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}}}]{id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置该迭代器等效的\+ID 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em id} & ：要设置的\+ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{注意}
+必须使用有效\+I\+D，并且已经设置绑定到的容器 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 141 行定义.
+
+
+
+引用了 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::id\+\_\+, frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::manager\+\_\+pointer\+\_\+ , 以及 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::nodes\+\_\+.
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a85a0d6bcdb79dbc70b28bb3117821b2f}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a85a0d6bcdb79dbc70b28bb3117821b2f}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!SetManagerPointer@{SetManagerPointer}}
+\index{SetManagerPointer@{SetManagerPointer}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{SetManagerPointer()}{SetManagerPointer()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+void \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::\+Set\+Manager\+Pointer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$ T $>$ $\ast$}]{manager\+\_\+pointer }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置该迭代器绑定到的容器 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em manager\+\_\+pointer} & ：该迭代器绑定到的容器 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAttention}{注意}
+不允许输入nullptr 
+\end{DoxyAttention}
+
+
+在文件 object\+\_\+manager.\+h 第 135 行定义.
+
+
+
+引用了 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::manager\+\_\+pointer\+\_\+.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a0d6dbd6f9d4763fb8a8eb5ee561bc55d}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a0d6dbd6f9d4763fb8a8eb5ee561bc55d}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!id\_@{id\_}}
+\index{id\_@{id\_}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{id\_}{id\_}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager_a7f25cea040867f3b59abe9e8b93bcb14}{Object\+Id}} \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+迭代器指向的对象位置 
+
+
+
+在文件 object\+\_\+manager.\+h 第 198 行定义.
+
+
+
+被这些函数引用 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::\+Get\+Id(), frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::operator$\ast$(), frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::operator-\/$>$(), frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::operator==() , 以及 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::\+Set\+Id().
+
+\mbox{\Hypertarget{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a3bf7d5182132e2c9bb35c18c6e3d9783}\label{classfrontend_1_1common_1_1ObjectManager_1_1ConstIterator_a3bf7d5182132e2c9bb35c18c6e3d9783}} 
+\index{frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}!manager\_pointer\_@{manager\_pointer\_}}
+\index{manager\_pointer\_@{manager\_pointer\_}!frontend::common::ObjectManager$<$ T $>$::ConstIterator@{frontend::common::ObjectManager$<$ T $>$::ConstIterator}}
+\doxysubsubsection{\texorpdfstring{manager\_pointer\_}{manager\_pointer\_}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+const \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{Object\+Manager}}$<$T$>$$\ast$ \mbox{\hyperlink{classfrontend_1_1common_1_1ObjectManager}{frontend\+::common\+::\+Object\+Manager}}$<$ T $>$\+::Const\+Iterator\+::manager\+\_\+pointer\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+迭代器绑定到的容器 
+
+
+
+在文件 object\+\_\+manager.\+h 第 196 行定义.
+
+
+
+被这些函数引用 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::operator$\ast$(), frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::operator-\/$>$(), frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::operator==(), frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::\+Set\+Id() , 以及 frontend\+::common\+::\+Object\+Manager$<$ T $>$\+::\+Const\+Iterator\+::\+Set\+Manager\+Pointer().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Common/\mbox{\hyperlink{object__manager_8h}{object\+\_\+manager.\+h}}\end{DoxyCompactItemize}

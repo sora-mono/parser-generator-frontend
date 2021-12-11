@@ -1,0 +1,223 @@
+\hypertarget{namespacefrontend_1_1parser}{}\doxysection{frontend\+::parser 命名空间参考}
+\label{namespacefrontend_1_1parser}\index{frontend::parser@{frontend::parser}}
+\doxysubsection*{命名空间}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacefrontend_1_1parser_1_1dfa__parser}{dfa\+\_\+parser}}
+\item 
+ \mbox{\hyperlink{namespacefrontend_1_1parser_1_1syntax__parser}{syntax\+\_\+parser}}
+\end{DoxyCompactItemize}
+\doxysubsection*{函数}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{namespacefrontend_1_1parser_a79d5fb6dfa446e6c683e6257d27a6944}{Get\+Line}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前行数 \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{namespacefrontend_1_1parser_aff0816dfe7d9e7d2a7f1349e4194d7b1}{Get\+Column}} ()
+\begin{DoxyCompactList}\small\item\em 获取当前列数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacefrontend_1_1parser_a59928cc6510133886f5b191062f76846}{Set\+Line}} (size\+\_\+t line)
+\begin{DoxyCompactList}\small\item\em 设置当前行数 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{namespacefrontend_1_1parser_a633860090eb822d1fb009c8bef7ff745}{Set\+Column}} (size\+\_\+t column)
+\begin{DoxyCompactList}\small\item\em 设置当前列数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{变量}
+\begin{DoxyCompactItemize}
+\item 
+static thread\+\_\+local size\+\_\+t \mbox{\hyperlink{namespacefrontend_1_1parser_a862c9c427bf42a594bb864a93460ba99}{line\+\_\+}} = 0
+\begin{DoxyCompactList}\small\item\em 线程全局变量，存储当前解析到的行数 \end{DoxyCompactList}\item 
+static thread\+\_\+local size\+\_\+t \mbox{\hyperlink{namespacefrontend_1_1parser_a935722bee5981074973c3846f7ce0886}{column\+\_\+}} = 0
+\begin{DoxyCompactList}\small\item\em 线程全局变量，存储当前解析到的列数 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{函数说明}
+\mbox{\Hypertarget{namespacefrontend_1_1parser_aff0816dfe7d9e7d2a7f1349e4194d7b1}\label{namespacefrontend_1_1parser_aff0816dfe7d9e7d2a7f1349e4194d7b1}} 
+\index{frontend::parser@{frontend::parser}!GetColumn@{GetColumn}}
+\index{GetColumn@{GetColumn}!frontend::parser@{frontend::parser}}
+\doxysubsubsection{\texorpdfstring{GetColumn()}{GetColumn()}}
+{\footnotesize\ttfamily size\+\_\+t frontend\+::parser\+::\+Get\+Column (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取当前列数 
+
+\begin{DoxyReturn}{返回}
+返回当前行数 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+从0开始计算 
+\end{DoxyNote}
+
+
+在文件 line\+\_\+and\+\_\+column.\+cpp 第 12 行定义.
+
+
+
+引用了 column\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+Get\+Column() , 以及 frontend\+::parser\+::dfa\+\_\+parser\+::\+Dfa\+Parser\+::\+Get\+Next\+Word().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{namespacefrontend_1_1parser_aff0816dfe7d9e7d2a7f1349e4194d7b1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefrontend_1_1parser_a79d5fb6dfa446e6c683e6257d27a6944}\label{namespacefrontend_1_1parser_a79d5fb6dfa446e6c683e6257d27a6944}} 
+\index{frontend::parser@{frontend::parser}!GetLine@{GetLine}}
+\index{GetLine@{GetLine}!frontend::parser@{frontend::parser}}
+\doxysubsubsection{\texorpdfstring{GetLine()}{GetLine()}}
+{\footnotesize\ttfamily size\+\_\+t frontend\+::parser\+::\+Get\+Line (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取当前行数 
+
+\begin{DoxyReturn}{返回}
+返回当前行数 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+从0开始计算 
+\end{DoxyNote}
+
+
+在文件 line\+\_\+and\+\_\+column.\+cpp 第 11 行定义.
+
+
+
+引用了 line\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::\+Get\+Line() , 以及 frontend\+::parser\+::dfa\+\_\+parser\+::\+Dfa\+Parser\+::\+Get\+Next\+Word().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=550pt]{namespacefrontend_1_1parser_a79d5fb6dfa446e6c683e6257d27a6944_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefrontend_1_1parser_a633860090eb822d1fb009c8bef7ff745}\label{namespacefrontend_1_1parser_a633860090eb822d1fb009c8bef7ff745}} 
+\index{frontend::parser@{frontend::parser}!SetColumn@{SetColumn}}
+\index{SetColumn@{SetColumn}!frontend::parser@{frontend::parser}}
+\doxysubsubsection{\texorpdfstring{SetColumn()}{SetColumn()}}
+{\footnotesize\ttfamily void frontend\+::parser\+::\+Set\+Column (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{column }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置当前列数 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em column} & ：待设置的列数 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+从0开始计算 
+\end{DoxyNote}
+
+
+在文件 line\+\_\+and\+\_\+column.\+cpp 第 14 行定义.
+
+
+
+引用了 column\+\_\+.
+
+
+
+被这些函数引用 frontend\+::parser\+::dfa\+\_\+parser\+::\+Dfa\+Parser\+::\+Get\+Next\+Word() , 以及 frontend\+::parser\+::dfa\+\_\+parser\+::\+Dfa\+Parser\+::\+Reset().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefrontend_1_1parser_a633860090eb822d1fb009c8bef7ff745_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{namespacefrontend_1_1parser_a59928cc6510133886f5b191062f76846}\label{namespacefrontend_1_1parser_a59928cc6510133886f5b191062f76846}} 
+\index{frontend::parser@{frontend::parser}!SetLine@{SetLine}}
+\index{SetLine@{SetLine}!frontend::parser@{frontend::parser}}
+\doxysubsubsection{\texorpdfstring{SetLine()}{SetLine()}}
+{\footnotesize\ttfamily void frontend\+::parser\+::\+Set\+Line (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{line }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置当前行数 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em line} & ：待设置的行数 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+从0开始计算 
+\end{DoxyNote}
+
+
+在文件 line\+\_\+and\+\_\+column.\+cpp 第 13 行定义.
+
+
+
+引用了 line\+\_\+.
+
+
+
+被这些函数引用 frontend\+::parser\+::dfa\+\_\+parser\+::\+Dfa\+Parser\+::\+Get\+Next\+Word() , 以及 frontend\+::parser\+::dfa\+\_\+parser\+::\+Dfa\+Parser\+::\+Reset().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{namespacefrontend_1_1parser_a59928cc6510133886f5b191062f76846_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{变量说明}
+\mbox{\Hypertarget{namespacefrontend_1_1parser_a935722bee5981074973c3846f7ce0886}\label{namespacefrontend_1_1parser_a935722bee5981074973c3846f7ce0886}} 
+\index{frontend::parser@{frontend::parser}!column\_@{column\_}}
+\index{column\_@{column\_}!frontend::parser@{frontend::parser}}
+\doxysubsubsection{\texorpdfstring{column\_}{column\_}}
+{\footnotesize\ttfamily thread\+\_\+local size\+\_\+t frontend\+::parser\+::column\+\_\+ = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+线程全局变量，存储当前解析到的列数 
+
+\begin{DoxyNote}{注解}
+从0开始计数 
+\end{DoxyNote}
+
+
+在文件 line\+\_\+and\+\_\+column.\+cpp 第 9 行定义.
+
+
+
+被这些函数引用 Get\+Column() , 以及 Set\+Column().
+
+\mbox{\Hypertarget{namespacefrontend_1_1parser_a862c9c427bf42a594bb864a93460ba99}\label{namespacefrontend_1_1parser_a862c9c427bf42a594bb864a93460ba99}} 
+\index{frontend::parser@{frontend::parser}!line\_@{line\_}}
+\index{line\_@{line\_}!frontend::parser@{frontend::parser}}
+\doxysubsubsection{\texorpdfstring{line\_}{line\_}}
+{\footnotesize\ttfamily thread\+\_\+local size\+\_\+t frontend\+::parser\+::line\+\_\+ = 0\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+线程全局变量，存储当前解析到的行数 
+
+\begin{DoxyNote}{注解}
+从0开始计数 
+\end{DoxyNote}
+
+
+在文件 line\+\_\+and\+\_\+column.\+cpp 第 6 行定义.
+
+
+
+被这些函数引用 Get\+Line() , 以及 Set\+Line().
+

@@ -1,0 +1,8 @@
+<map id="c_parser_frontend::parse_functions::PrefixPlusOrMinus" name="c_parser_frontend::parse_functions::PrefixPlusOrMinus">
+<area shape="rect" id="node1" title=" " alt="" coords="509,85,707,141"/>
+<area shape="rect" id="node2" href="$namespacec__parser__frontend_1_1parse__functions.html#a6bfb313671c096470847abd158372f9e" title="Assignable &#45;&gt; &quot;&#45;&#45;&quot; Assignable" alt="" coords="257,5,461,61"/>
+<area shape="rect" id="node3" href="$namespacec__parser__frontend_1_1parse__functions.html#a2f2244a09caf40ed7f412dfa56e6d50e" title="Assignable &#45;&gt; &quot;++&quot; Assignable" alt="" coords="257,85,461,141"/>
+<area shape="rect" id="node4" href="$namespacec__parser__frontend_1_1parse__functions.html#a4e985010c6d94cd95161c487f5181b4e" title=" " alt="" coords="261,165,458,221"/>
+<area shape="rect" id="node5" href="$namespacec__parser__frontend_1_1parse__functions.html#aa8335bfba1a2f7d9c746ce1f1c731162" title="Assignable &#45;&gt; Assignable &quot;&#45;&#45;&quot;" alt="" coords="5,125,209,181"/>
+<area shape="rect" id="node6" href="$namespacec__parser__frontend_1_1parse__functions.html#ad4b90ec096289edfb3f0a72785d4a85b" title="Assignable &#45;&gt; Assignable &quot;++&quot;" alt="" coords="5,205,209,261"/>
+</map>

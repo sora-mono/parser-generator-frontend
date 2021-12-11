@@ -1,0 +1,9 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::First" name="frontend::generator::syntax_generator::SyntaxGenerator::First">
+<area shape="rect" id="node1" title="闭包操作中的first操作，用来提取非终结产生式的向前看节点" alt="" coords="5,197,173,253"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a23442cd8c8b98b58a2d9b9f6bff2e060" title="First的子过程，提取一个非终结节点全部第一个可移入的产生式节点ID" alt="" coords="221,101,467,172"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="515,205,781,261"/>
+<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a643c8951dd8962770cabe71d0eed5d68" title="获取产生式体中指定位置的产生式节点ID" alt="" coords="228,263,460,333"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a72c90ff7ee70f81e41c8103afdbceb12" title="获取全部产生式体" alt="" coords="545,5,751,76"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a1aa8dcd59b8c2220d5af4db2c656d23b" title="获取产生式类型" alt="" coords="539,101,757,157"/>
+<area shape="rect" id="node7" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a59f98cd7ca7b0906985c8bc053e92e65" title="根据给定产生式体和下一个移入的产生式位置获取下一个移入的产生式ID" alt="" coords="519,285,777,356"/>
+</map>

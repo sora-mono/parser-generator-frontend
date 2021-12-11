@@ -1,0 +1,832 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: c_parser_frontend::operator_node::OperatorNodeInterface类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public 类型</a> &#124;
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pri-types">Private 类型</a> &#124;
+<a href="#pri-static-methods">静态 Private 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">c_parser_frontend::operator_node::OperatorNodeInterface类 参考<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>操作节点基类  
+ <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="operator__node_8h_source.html">operator_node.h</a>&gt;</code></p>
+<div class="dynheader">
+类 c_parser_frontend::operator_node::OperatorNodeInterface 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface__inherit__graph.png" border="0" usemap="#c__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_inherit__map" alt="Inheritance graph"/></div>
+<map name="c__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_inherit__map" id="c__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_inherit__map">
+<area shape="rect" title="操作节点基类" alt="" coords="5,417,220,473"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode.html" title="分配栈上空间" alt="" coords="268,5,536,47"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html" title="赋值节点" alt="" coords="273,71,531,112"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html" title="解引用" alt="" coords="300,137,504,193"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html" title="FunctionCallOperatorNode operator_node.h" alt="" coords="300,217,504,273"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html" title="所有初始化数据（编译期常量）的基类" alt="" coords="283,297,521,353"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode.html" title="逻辑运算" alt="" coords="285,377,519,433"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html" title="数学运算" alt="" coords="295,457,509,513"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html" title="成员访问节点" alt="" coords="291,537,513,593"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html" title="取地址" alt="" coords="293,617,511,673"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html" title="三目运算符" alt="" coords="271,697,533,739"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TypeConvert.html" title="类型转换" alt="" coords="299,763,505,804"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html" title="表示变量" alt="" coords="271,828,533,869"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html" title="基础初始化类型（数值/字符串/函数）" alt="" coords="584,257,829,313"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1ListInitializeOperatorNode.html" title="初始化列表" alt="" coords="605,337,808,393"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<div class="dynheader">
+c_parser_frontend::operator_node::OperatorNodeInterface 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface__coll__graph.png" border="0" usemap="#c__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_coll__map" alt="Collaboration graph"/></div>
+<map name="c__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_coll__map" id="c__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_coll__map">
+<area shape="rect" title="操作节点基类" alt="" coords="688,5,903,61"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html" title="强制显式调用构造函数且使用默认无效值版Wrapper" alt="" coords="321,5,555,61"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,5,272,61"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a3fbeba19aeea8bcfd3bc918c9fbcc25b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3fbeba19aeea8bcfd3bc918c9fbcc25b">OperatorId</a> = <a class="el" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html">frontend::common::ExplicitIdWrapper</a>&lt; size_t, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#ab66c53c4bf384e6cfe9ae0bc952e8235">IdWrapper</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#ab66c53c4bf384e6cfe9ae0bc952e8235aa61272c50e68d6331c93e9ad240c61ad">IdWrapper::kOperatorNodeId</a> &gt;</td></tr>
+<tr class="memdesc:a3fbeba19aeea8bcfd3bc918c9fbcc25b"><td class="mdescLeft">&#160;</td><td class="mdescRight">操作节点ID  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3fbeba19aeea8bcfd3bc918c9fbcc25b">更多...</a><br /></td></tr>
+<tr class="separator:a3fbeba19aeea8bcfd3bc918c9fbcc25b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a39acd37eb650c12aaae71013fecf07e5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a39acd37eb650c12aaae71013fecf07e5">OperatorNodeInterface</a> (<a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350f">GeneralOperationType</a> general_operator_type)</td></tr>
+<tr class="separator:a39acd37eb650c12aaae71013fecf07e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0705acbb3ea197e4453557b5f349dd15"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a0705acbb3ea197e4453557b5f349dd15">OperatorNodeInterface</a> (const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;operator_node)</td></tr>
+<tr class="separator:a0705acbb3ea197e4453557b5f349dd15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a14a54224e3a137974faa169fc91d7621"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a14a54224e3a137974faa169fc91d7621">~OperatorNodeInterface</a> ()</td></tr>
+<tr class="separator:a14a54224e3a137974faa169fc91d7621"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4dae4e68b0638caefe8fc9055500aa71"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a4dae4e68b0638caefe8fc9055500aa71">operator=</a> (const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;old_interface)</td></tr>
+<tr class="separator:a4dae4e68b0638caefe8fc9055500aa71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1894f1b3888819c4584eef70953c6cff"><td class="memItemLeft" align="right" valign="top">virtual ConstTag&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a1894f1b3888819c4584eef70953c6cff">GetResultConstTag</a> () const =0</td></tr>
+<tr class="memdesc:a1894f1b3888819c4584eef70953c6cff"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取该节点操作结果的const标记  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a1894f1b3888819c4584eef70953c6cff">更多...</a><br /></td></tr>
+<tr class="separator:a1894f1b3888819c4584eef70953c6cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b53f7340627ba67b3088e559961b47e"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e">GetResultTypePointer</a> () const =0</td></tr>
+<tr class="memdesc:a9b53f7340627ba67b3088e559961b47e"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最终结果的类型  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e">更多...</a><br /></td></tr>
+<tr class="separator:a9b53f7340627ba67b3088e559961b47e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f80ebfb819902849c09e74038f6f72f"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3f80ebfb819902849c09e74038f6f72f">GetResultOperatorNode</a> () const =0</td></tr>
+<tr class="memdesc:a3f80ebfb819902849c09e74038f6f72f"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取最终结果的节点  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3f80ebfb819902849c09e74038f6f72f">更多...</a><br /></td></tr>
+<tr class="separator:a3f80ebfb819902849c09e74038f6f72f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaf8c7f881d6b57c275611312b5e0f78"><td class="memItemLeft" align="right" valign="top">virtual std::shared_ptr&lt; <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#afaf8c7f881d6b57c275611312b5e0f78">SelfCopy</a> (const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;new_type, ConstTag new_const_tag) const =0</td></tr>
+<tr class="memdesc:afaf8c7f881d6b57c275611312b5e0f78"><td class="mdescLeft">&#160;</td><td class="mdescRight">拷贝自身并设置拷贝得到的对象类型为new_type  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#afaf8c7f881d6b57c275611312b5e0f78">更多...</a><br /></td></tr>
+<tr class="separator:afaf8c7f881d6b57c275611312b5e0f78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a88ad86ef80377731bfd984f72774097a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3fbeba19aeea8bcfd3bc918c9fbcc25b">OperatorId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a88ad86ef80377731bfd984f72774097a">GetOperatorId</a> () const</td></tr>
+<tr class="memdesc:a88ad86ef80377731bfd984f72774097a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取操作节点ID  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a88ad86ef80377731bfd984f72774097a">更多...</a><br /></td></tr>
+<tr class="separator:a88ad86ef80377731bfd984f72774097a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b094af7b84d943d4522d09fe61f5c50"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a6b094af7b84d943d4522d09fe61f5c50">SetGeneralOperatorType</a> (<a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350f">GeneralOperationType</a> operator_type)</td></tr>
+<tr class="memdesc:a6b094af7b84d943d4522d09fe61f5c50"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置操作类型  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a6b094af7b84d943d4522d09fe61f5c50">更多...</a><br /></td></tr>
+<tr class="separator:a6b094af7b84d943d4522d09fe61f5c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa533e1f444a8a0fcc9cf1d73436ed9da"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350f">GeneralOperationType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#aa533e1f444a8a0fcc9cf1d73436ed9da">GetGeneralOperatorType</a> () const</td></tr>
+<tr class="memdesc:aa533e1f444a8a0fcc9cf1d73436ed9da"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取操作类型所属大类  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#aa533e1f444a8a0fcc9cf1d73436ed9da">更多...</a><br /></td></tr>
+<tr class="separator:aa533e1f444a8a0fcc9cf1d73436ed9da"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private 类型</h2></td></tr>
+<tr class="memitem:ab66c53c4bf384e6cfe9ae0bc952e8235"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#ab66c53c4bf384e6cfe9ae0bc952e8235">IdWrapper</a> { <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#ab66c53c4bf384e6cfe9ae0bc952e8235aa61272c50e68d6331c93e9ad240c61ad">IdWrapper::kOperatorNodeId</a>
+ }</td></tr>
+<tr class="memdesc:ab66c53c4bf384e6cfe9ae0bc952e8235"><td class="mdescLeft">&#160;</td><td class="mdescRight">操作节点ID的分发标签  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#ab66c53c4bf384e6cfe9ae0bc952e8235">更多...</a><br /></td></tr>
+<tr class="separator:ab66c53c4bf384e6cfe9ae0bc952e8235"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-static-methods"></a>
+静态 Private 成员函数</h2></td></tr>
+<tr class="memitem:a8fd7102f990192843de60c4f9d543f04"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3fbeba19aeea8bcfd3bc918c9fbcc25b">OperatorId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a8fd7102f990192843de60c4f9d543f04">GetNewOperatorId</a> ()</td></tr>
+<tr class="memdesc:a8fd7102f990192843de60c4f9d543f04"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取一个从未被分配过的OperatorId  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a8fd7102f990192843de60c4f9d543f04">更多...</a><br /></td></tr>
+<tr class="separator:a8fd7102f990192843de60c4f9d543f04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:ac43ec5932f7d289feaa7e4411bcc896e"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3fbeba19aeea8bcfd3bc918c9fbcc25b">OperatorId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#ac43ec5932f7d289feaa7e4411bcc896e">operator_id_</a> = <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a88ad86ef80377731bfd984f72774097a">GetOperatorId</a>()</td></tr>
+<tr class="memdesc:ac43ec5932f7d289feaa7e4411bcc896e"><td class="mdescLeft">&#160;</td><td class="mdescRight">操作节点ID，同时作为存放结果的LLVM的寄存器编号  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#ac43ec5932f7d289feaa7e4411bcc896e">更多...</a><br /></td></tr>
+<tr class="separator:ac43ec5932f7d289feaa7e4411bcc896e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48d972f9443f5d3cf794e922be29e964"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350f">GeneralOperationType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a48d972f9443f5d3cf794e922be29e964">general_operator_type_</a></td></tr>
+<tr class="memdesc:a48d972f9443f5d3cf794e922be29e964"><td class="mdescLeft">&#160;</td><td class="mdescRight">操作所属大类  <a href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a48d972f9443f5d3cf794e922be29e964">更多...</a><br /></td></tr>
+<tr class="separator:a48d972f9443f5d3cf794e922be29e964"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>操作节点基类 </p>
+<dl class="section note"><dt>注解</dt><dd>所有操作节点均从该类派生 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00112">112</a> 行定义.</p>
+</div><h2 class="groupheader">成员类型定义说明</h2>
+<a id="a3fbeba19aeea8bcfd3bc918c9fbcc25b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fbeba19aeea8bcfd3bc918c9fbcc25b">&#9670;&nbsp;</a></span>OperatorId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3fbeba19aeea8bcfd3bc918c9fbcc25b">c_parser_frontend::operator_node::OperatorNodeInterface::OperatorId</a> =  <a class="el" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html">frontend::common::ExplicitIdWrapper</a>&lt;size_t, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#ab66c53c4bf384e6cfe9ae0bc952e8235">IdWrapper</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#ab66c53c4bf384e6cfe9ae0bc952e8235aa61272c50e68d6331c93e9ad240c61ad">IdWrapper::kOperatorNodeId</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>操作节点ID </p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00120">120</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员枚举类型说明</h2>
+<a id="ab66c53c4bf384e6cfe9ae0bc952e8235"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab66c53c4bf384e6cfe9ae0bc952e8235">&#9670;&nbsp;</a></span>IdWrapper</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#ab66c53c4bf384e6cfe9ae0bc952e8235">c_parser_frontend::operator_node::OperatorNodeInterface::IdWrapper</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>操作节点ID的分发标签 </p>
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="ab66c53c4bf384e6cfe9ae0bc952e8235aa61272c50e68d6331c93e9ad240c61ad"></a>kOperatorNodeId&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00114">114</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">构造及析构函数说明</h2>
+<a id="a39acd37eb650c12aaae71013fecf07e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a39acd37eb650c12aaae71013fecf07e5">&#9670;&nbsp;</a></span>OperatorNodeInterface() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">c_parser_frontend::operator_node::OperatorNodeInterface::OperatorNodeInterface </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350f">GeneralOperationType</a>&#160;</td>
+          <td class="paramname"><em>general_operator_type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00122">122</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0705acbb3ea197e4453557b5f349dd15"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0705acbb3ea197e4453557b5f349dd15">&#9670;&nbsp;</a></span>OperatorNodeInterface() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">c_parser_frontend::operator_node::OperatorNodeInterface::OperatorNodeInterface </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;&#160;</td>
+          <td class="paramname"><em>operator_node</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<dl class="section attention"><dt>注意</dt><dd>复制构造函数不复制节点编号而是生成新的编号 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00125">125</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a14a54224e3a137974faa169fc91d7621"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a14a54224e3a137974faa169fc91d7621">&#9670;&nbsp;</a></span>~OperatorNodeInterface()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual c_parser_frontend::operator_node::OperatorNodeInterface::~OperatorNodeInterface </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00127">127</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="aa533e1f444a8a0fcc9cf1d73436ed9da"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa533e1f444a8a0fcc9cf1d73436ed9da">&#9670;&nbsp;</a></span>GetGeneralOperatorType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350f">GeneralOperationType</a> c_parser_frontend::operator_node::OperatorNodeInterface::GetGeneralOperatorType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取操作类型所属大类 </p>
+<dl class="section return"><dt>返回</dt><dd>返回操作类型所属大类 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00180">180</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00196">general_operator_type_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8h_source.html#l00259">c_parser_frontend::operator_node::AllocateOperatorNode::CheckAllocatable()</a>, <a class="el" href="operator__node_8cpp_source.html#l00430">c_parser_frontend::operator_node::AssignOperatorNode::CheckAssignable()</a>, <a class="el" href="operator__node_8cpp_source.html#l00740">c_parser_frontend::operator_node::ObtainAddressOperatorNode::CheckNodeToObtainAddress()</a>, <a class="el" href="flow__control_8cpp_source.html#l00020">c_parser_frontend::flow_control::SimpleSentence::CheckOperatorNodeValid()</a>, <a class="el" href="operator__node_8cpp_source.html#l00979">c_parser_frontend::operator_node::TemaryOperatorNode::ConstructResultNode()</a>, <a class="el" href="operator__node_8cpp_source.html#l00914">c_parser_frontend::operator_node::TemaryOperatorNode::SetFalseBranch()</a> , 以及 <a class="el" href="operator__node_8cpp_source.html#l00868">c_parser_frontend::operator_node::TemaryOperatorNode::SetTrueBranch()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_aa533e1f444a8a0fcc9cf1d73436ed9da_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_aa533e1f444a8a0fcc9cf1d73436ed9da_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_aa533e1f444a8a0fcc9cf1d73436ed9da_icgraph" id="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_aa533e1f444a8a0fcc9cf1d73436ed9da_icgraph">
+<area shape="rect" title="获取操作类型所属大类" alt="" coords="1228,536,1477,592"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode.html#afc5f21853a75614f592c783f797a18a7" title="检查操作节点是否可以分配栈上空间" alt="" coords="911,45,1145,101"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#ae04475df3488b171fc37c245af4fa441" title="检查两个节点是否可以赋值" alt="" coords="916,416,1140,472"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#ae59e55b700c8709ffc835891f6cd84f7" title="创建返回结果的节点" alt="" coords="568,536,797,592"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#aed46590b486ee7477bb17dce3677c3fb" title="设置条件为假时的分支" alt="" coords="260,327,489,383"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a3bf8f22583fef107e37a3b9a51d1f7de" title="设置条件为真时的分支" alt="" coords="260,568,489,624"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#af08ea88eaa5c9e93e1dd038ccce50395" title="检查节点是否可以取地址" alt="" coords="876,667,1180,723"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1SimpleSentence.html#a9c416154c228a43f24d9617623ef9beb" title="检查给定节点是否可以保存" alt="" coords="921,747,1135,803"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode.html#a975de2af246e4e3d70f8f9dcb2bb515e" title="设置要分配内存的节点" alt="" coords="565,5,800,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#a42baddd3c0fb6f454c50d06472993ae2" title="添加调用参数" alt="" coords="537,376,828,432"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#aaf0729f7e7c809dad9814ec9fecf5fe5" title="检查给定语句是否可以作为函数内执行的语句" alt="" coords="568,85,797,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#ad2a310de687335d6658b0daead191637" title="按容器设置调用参数" alt="" coords="576,216,789,272"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca9910541d690b4040e6ba1ce4323a72" title="设置用来赋值的节点" alt="" coords="571,296,795,352"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a723c6c6897c0618d9577cece835a85c8" title="检查使用初始化列表初始化变量的情况" alt="" coords="544,456,821,512"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a80ece7836e0b60e9abace2aef88b7f6e" title="添加一条函数内执行的语句" alt="" coords="271,45,478,101"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a1197ee4a48e2d37c82b402f6bd01246a" title="添加一个容器内的全部语句" alt="" coords="271,125,478,181"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a73416179a5655fc54cd037f7d9a43f43" title="向流程语句主体中中添加单条语句" alt="" coords="5,45,212,101"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a4e41329fb34ed861cb4ffa6e1677271d" title="向流程语句主体中中添加多条语句" alt="" coords="5,125,212,181"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#a941b7f5ade7a534b543f7e311c8267d5" title="设置被取地址的节点" alt="" coords="540,667,825,723"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1SimpleSentence.html#a8a3f84d957586ddccf91cea344a063f6" title="设置该语句保存的语句" alt="" coords="575,747,790,803"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8fd7102f990192843de60c4f9d543f04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8fd7102f990192843de60c4f9d543f04">&#9670;&nbsp;</a></span>GetNewOperatorId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3fbeba19aeea8bcfd3bc918c9fbcc25b">OperatorId</a> c_parser_frontend::operator_node::OperatorNodeInterface::GetNewOperatorId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取一个从未被分配过的OperatorId </p>
+<dl class="section return"><dt>返回</dt><dd>返回OperatorId </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>线程间OperatorId独立 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00188">188</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a88ad86ef80377731bfd984f72774097a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a88ad86ef80377731bfd984f72774097a">&#9670;&nbsp;</a></span>GetOperatorId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3fbeba19aeea8bcfd3bc918c9fbcc25b">OperatorId</a> c_parser_frontend::operator_node::OperatorNodeInterface::GetOperatorId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取操作节点ID </p>
+<dl class="section return"><dt>返回</dt><dd>返回操作节点ID </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00172">172</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00194">operator_id_</a>.</p>
+
+</div>
+</div>
+<a id="a1894f1b3888819c4584eef70953c6cff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1894f1b3888819c4584eef70953c6cff">&#9670;&nbsp;</a></span>GetResultConstTag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual ConstTag c_parser_frontend::operator_node::OperatorNodeInterface::GetResultConstTag </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取该节点操作结果的const标记 </p>
+<dl class="section return"><dt>返回</dt><dd>返回操作结果的const标记</dd></dl>
+<p>1.成员访问、解引用等操作的后续操作不是对原结构体/原指针操作，而是对得到的 新对象进行操作，不同操作类型操作的对象不同 2.通过这个函数抽象获取最终结果的过程以忽略操作的不同 3.以成员访问为例，该函数获取指定的成员在结构体中的const标记，以数学运算 为例，该函数获取运算结果的const标记（ConstTag::kNonConst），以变量声明 为例，该函数返回声明的变量的const标记（对象不变） </p>
+
+<p>在 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html#af4dc8b3414d212cf9183ccbf61e8ed5b">c_parser_frontend::operator_node::InitializeOperatorNodeInterface</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#acc9ca9a4d4a1241c4900cfa41d7ae824">c_parser_frontend::operator_node::FunctionCallOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#a9218122090e0051b3b97bfb7a31b6d0e">c_parser_frontend::operator_node::MemberAccessOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#a263b76537fb8d85185f371f03ea16695">c_parser_frontend::operator_node::ObtainAddressOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#a3dc1fe0c134243ec553aa6d35a8565e0">c_parser_frontend::operator_node::DereferenceOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode.html#a04ae13b00d5129b440e35c6944267cd2">c_parser_frontend::operator_node::LogicalOperationOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#abbaaa0b29eb0b03572742566f4566926">c_parser_frontend::operator_node::MathematicalOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aa4039570c5ff24bfd05b76631de6a47d">c_parser_frontend::operator_node::AssignOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a72f3d2497e1aaca3a5bb71ea926c570a">c_parser_frontend::operator_node::TemaryOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#ad4d6a4c142e34ff22142eca6d4701ac6">c_parser_frontend::operator_node::VarietyOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1TypeConvert.html#a05275d0d35972c97bf6f5165987e5d36">c_parser_frontend::operator_node::TypeConvert</a> , 以及 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode.html#ac27f8f88194b4d6ad09cd2e66a604c9f">c_parser_frontend::operator_node::AllocateOperatorNode</a> 内被实现.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8cpp_source.html#l00430">c_parser_frontend::operator_node::AssignOperatorNode::CheckAssignable()</a>, <a class="el" href="operator__node_8h_source.html#l00286">c_parser_frontend::operator_node::TypeConvert::GetResultConstTag()</a>, <a class="el" href="operator__node_8h_source.html#l00640">c_parser_frontend::operator_node::TemaryOperatorNode::GetResultConstTag()</a>, <a class="el" href="operator__node_8h_source.html#l00845">c_parser_frontend::operator_node::AssignOperatorNode::GetResultConstTag()</a> , 以及 <a class="el" href="operator__node_8h_source.html#l01357">c_parser_frontend::operator_node::MemberAccessOperatorNode::GetResultConstTag()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff_icgraph" id="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff_icgraph">
+<area shape="rect" title="获取该节点操作结果的const标记" alt="" coords="1168,405,1383,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#ae04475df3488b171fc37c245af4fa441" title="检查两个节点是否可以赋值" alt="" coords="886,245,1110,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TypeConvert.html#a05275d0d35972c97bf6f5165987e5d36" title="获取该节点操作结果的const标记" alt="" coords="895,325,1101,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a72f3d2497e1aaca3a5bb71ea926c570a" title="获取该节点操作结果的const标记" alt="" coords="883,405,1113,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aa4039570c5ff24bfd05b76631de6a47d" title="获取该节点操作结果的const标记" alt="" coords="886,485,1110,541"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#a9218122090e0051b3b97bfb7a31b6d0e" title="获取该节点操作结果的const标记" alt="" coords="876,565,1120,621"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#a42baddd3c0fb6f454c50d06472993ae2" title="添加调用参数" alt="" coords="537,5,828,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#aaf0729f7e7c809dad9814ec9fecf5fe5" title="检查给定语句是否可以作为函数内执行的语句" alt="" coords="568,85,797,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#ae59e55b700c8709ffc835891f6cd84f7" title="创建返回结果的节点" alt="" coords="568,165,797,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#ad2a310de687335d6658b0daead191637" title="按容器设置调用参数" alt="" coords="576,245,789,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca9910541d690b4040e6ba1ce4323a72" title="设置用来赋值的节点" alt="" coords="571,325,795,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a723c6c6897c0618d9577cece835a85c8" title="检查使用初始化列表初始化变量的情况" alt="" coords="544,405,821,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a80ece7836e0b60e9abace2aef88b7f6e" title="添加一条函数内执行的语句" alt="" coords="271,5,478,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a1197ee4a48e2d37c82b402f6bd01246a" title="添加一个容器内的全部语句" alt="" coords="271,85,478,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a73416179a5655fc54cd037f7d9a43f43" title="向流程语句主体中中添加单条语句" alt="" coords="5,5,212,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a4e41329fb34ed861cb4ffa6e1677271d" title="向流程语句主体中中添加多条语句" alt="" coords="5,85,212,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#aed46590b486ee7477bb17dce3677c3fb" title="设置条件为假时的分支" alt="" coords="260,165,489,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a3bf8f22583fef107e37a3b9a51d1f7de" title="设置条件为真时的分支" alt="" coords="260,245,489,301"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3f80ebfb819902849c09e74038f6f72f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f80ebfb819902849c09e74038f6f72f">&#9670;&nbsp;</a></span>GetResultOperatorNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::shared_ptr&lt;const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a>&gt; c_parser_frontend::operator_node::OperatorNodeInterface::GetResultOperatorNode </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最终结果的节点 </p>
+<dl class="section return"><dt>返回</dt><dd>返回指向最终结果的指针 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">nullptr</td><td>：自身是最终节点</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>1.该函数用于抽象获取操作最终结果的过程 2.基础变量和初始化变量最终操作节点就是本身，所以返回nullptr 3.赋值运算返回被赋值的对象，解引用返回解引用后得到的对象，以此为例 </p>
+
+<p>在 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html#a7edc1b9b463a948140f032c71eb74f8d">c_parser_frontend::operator_node::InitializeOperatorNodeInterface</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#a8c71a0e54a1b7e7aa25eb9406835563e">c_parser_frontend::operator_node::FunctionCallOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#a7b3872da36eda2707b680ab154d4fb65">c_parser_frontend::operator_node::MemberAccessOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#aac70ae07e5b8808c16d95ddd94df2530">c_parser_frontend::operator_node::ObtainAddressOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#a4bda9f5d4c8fcf54c5f73931a267c439">c_parser_frontend::operator_node::DereferenceOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode.html#af0c8c3bf89b38a15d115339e21c45bbb">c_parser_frontend::operator_node::LogicalOperationOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#a1eec593c064314d177caf3f421dfa0ea">c_parser_frontend::operator_node::MathematicalOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a49f018702a4feb4974a574deebc4e2bd">c_parser_frontend::operator_node::AssignOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#af65bb4438ce3a492cf03919e6aef4631">c_parser_frontend::operator_node::TemaryOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#afd01150de53e83866ba3eb2fac9ec047">c_parser_frontend::operator_node::VarietyOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1TypeConvert.html#ae0599d1cedb23955353b0884f2e94eac">c_parser_frontend::operator_node::TypeConvert</a> , 以及 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode.html#a646aca2bc50b0706e4f2638678c7dddd">c_parser_frontend::operator_node::AllocateOperatorNode</a> 内被实现.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8cpp_source.html#l00835">c_parser_frontend::operator_node::TypeConvert::GenerateDestinationNode()</a> , 以及 <a class="el" href="operator__node_8h_source.html#l00648">c_parser_frontend::operator_node::TemaryOperatorNode::GetResultOperatorNode()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f_icgraph" id="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f_icgraph">
+<area shape="rect" title="获取最终结果的节点" alt="" coords="536,45,779,101"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TypeConvert.html#a15bca849b2cd5ffd68f77dc732c669d3" title="生成转换后的节点" alt="" coords="271,5,476,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#af65bb4438ce3a492cf03919e6aef4631" title="获取最终结果的节点" alt="" coords="259,85,488,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TypeConvert.html#a6fced0b58c500621109b722429397899" title=" " alt="" coords="5,5,211,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9b53f7340627ba67b3088e559961b47e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b53f7340627ba67b3088e559961b47e">&#9670;&nbsp;</a></span>GetResultTypePointer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::shared_ptr&lt;const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a>&gt; c_parser_frontend::operator_node::OperatorNodeInterface::GetResultTypePointer </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取最终结果的类型 </p>
+<dl class="section return"><dt>返回</dt><dd>返回类型链头结点的const指针</dd></dl>
+<p>设计思路同GetResultConstTag </p>
+
+<p>在 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html#ad1d7c21f9fb6dafe02b0e6f2c160246b">c_parser_frontend::operator_node::InitializeOperatorNodeInterface</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#ada79d2b09beeac848eea907376b95bce">c_parser_frontend::operator_node::FunctionCallOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#a7c309aa4aa6cbc43dc1aa5ce6c00d790">c_parser_frontend::operator_node::MemberAccessOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#a7a68435eb982c0200338f6be3ecac531">c_parser_frontend::operator_node::ObtainAddressOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#ae74f38305bae9c440eeea7481882901d">c_parser_frontend::operator_node::DereferenceOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode.html#ad598158366edee851d51d4055e495335">c_parser_frontend::operator_node::LogicalOperationOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#aa72992ffa23964013d138121456d8429">c_parser_frontend::operator_node::MathematicalOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca8bf9ef313ae917878d6e7b3f8d59f0">c_parser_frontend::operator_node::AssignOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#af0e8dcc1136bce4c2497ca0ef6921ec3">c_parser_frontend::operator_node::TemaryOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#ac39bc02e1f25358d37ba2688300a8cae">c_parser_frontend::operator_node::VarietyOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1TypeConvert.html#a9d577bd625e3c6134e8d25536207af6d">c_parser_frontend::operator_node::TypeConvert</a> , 以及 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode.html#a240e7f7e64fa45873a9aa376ead80b97">c_parser_frontend::operator_node::AllocateOperatorNode</a> 内被实现.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8cpp_source.html#l00430">c_parser_frontend::operator_node::AssignOperatorNode::CheckAssignable()</a>, <a class="el" href="operator__node_8cpp_source.html#l00960">c_parser_frontend::operator_node::TemaryOperatorNode::CheckBranchConditionValid()</a>, <a class="el" href="operator__node_8cpp_source.html#l00780">c_parser_frontend::operator_node::DereferenceOperatorNode::CheckNodeDereferenceAble()</a>, <a class="el" href="operator__node_8cpp_source.html#l00321">c_parser_frontend::operator_node::MemberAccessOperatorNode::CheckNodeToAccessValid()</a>, <a class="el" href="operator__node_8cpp_source.html#l00979">c_parser_frontend::operator_node::TemaryOperatorNode::ConstructResultNode()</a>, <a class="el" href="flow__control_8cpp_source.html#l00169">c_parser_frontend::flow_control::ConditionBlockInterface::DefaultConditionCheck()</a>, <a class="el" href="operator__node_8h_source.html#l00289">c_parser_frontend::operator_node::TypeConvert::GetResultTypePointer()</a>, <a class="el" href="operator__node_8h_source.html#l00643">c_parser_frontend::operator_node::TemaryOperatorNode::GetResultTypePointer()</a>, <a class="el" href="operator__node_8h_source.html#l00848">c_parser_frontend::operator_node::AssignOperatorNode::GetResultTypePointer()</a>, <a class="el" href="operator__node_8h_source.html#l01276">c_parser_frontend::operator_node::ObtainAddressOperatorNode::GetResultTypePointer()</a>, <a class="el" href="operator__node_8h_source.html#l01360">c_parser_frontend::operator_node::MemberAccessOperatorNode::GetResultTypePointer()</a> , 以及 <a class="el" href="operator__node_8cpp_source.html#l00336">c_parser_frontend::operator_node::MemberAccessOperatorNode::SetAccessedNodeAndMemberName()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e_icgraph" id="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e_icgraph">
+<area shape="rect" title="获取最终结果的类型" alt="" coords="1228,845,1456,901"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#ae04475df3488b171fc37c245af4fa441" title="检查两个节点是否可以赋值" alt="" coords="916,405,1140,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#ae59e55b700c8709ffc835891f6cd84f7" title="创建返回结果的节点" alt="" coords="568,165,797,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a8bbcf79237101cc951de40d07f3a5085" title="检查分支条件是否有效" alt="" coords="907,85,1149,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#afecbf5df68d69241c8f666f7e4452e67" title="检查节点是否可以解引用" alt="" coords="876,645,1180,701"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#a548bfce6c0ae11b7a9570b82938eb490" title="检查给定节点是否可以作为被访问成员的节点" alt="" coords="885,725,1171,781"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a0f872e3820348d686f46708f07d91d29" title="默认对循环条件节点进行类型检查的函数" alt="" coords="909,805,1147,861"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TypeConvert.html#a9d577bd625e3c6134e8d25536207af6d" title="获取最终结果的类型" alt="" coords="925,885,1131,941"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#af0e8dcc1136bce4c2497ca0ef6921ec3" title="获取最终结果的类型" alt="" coords="913,965,1143,1021"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca8bf9ef313ae917878d6e7b3f8d59f0" title="获取最终结果的类型" alt="" coords="916,1045,1140,1101"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#a7a68435eb982c0200338f6be3ecac531" title="获取最终结果的类型" alt="" coords="897,1125,1159,1181"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#a7c309aa4aa6cbc43dc1aa5ce6c00d790" title="获取最终结果的类型" alt="" coords="897,1205,1159,1261"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#aefd53de131f70e5127cd9b30d098d30a" title="设置访问的成员名" alt="" coords="897,1286,1159,1357"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#a42baddd3c0fb6f454c50d06472993ae2" title="添加调用参数" alt="" coords="537,325,828,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#aaf0729f7e7c809dad9814ec9fecf5fe5" title="检查给定语句是否可以作为函数内执行的语句" alt="" coords="568,245,797,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#ad2a310de687335d6658b0daead191637" title="按容器设置调用参数" alt="" coords="576,485,789,541"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca9910541d690b4040e6ba1ce4323a72" title="设置用来赋值的节点" alt="" coords="571,565,795,621"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a723c6c6897c0618d9577cece835a85c8" title="检查使用初始化列表初始化变量的情况" alt="" coords="544,405,821,461"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a80ece7836e0b60e9abace2aef88b7f6e" title="添加一条函数内执行的语句" alt="" coords="271,245,478,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a1197ee4a48e2d37c82b402f6bd01246a" title="添加一个容器内的全部语句" alt="" coords="271,325,478,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a73416179a5655fc54cd037f7d9a43f43" title="向流程语句主体中中添加单条语句" alt="" coords="5,245,212,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FunctionDefine.html#a4e41329fb34ed861cb4ffa6e1677271d" title="向流程语句主体中中添加多条语句" alt="" coords="5,325,212,381"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#aed46590b486ee7477bb17dce3677c3fb" title="设置条件为假时的分支" alt="" coords="260,145,489,201"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a3bf8f22583fef107e37a3b9a51d1f7de" title="设置条件为真时的分支" alt="" coords="260,25,489,81"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#aa2d2461fd18663c1ed73484328b81fc3" title="检查条件分支结果是否有效" alt="" coords="568,5,797,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a440baeb7f54df4d2ac6429273c26c1e6" title="设置分支条件" alt="" coords="568,85,797,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#a082cac4f28ce1ff5d278a3a0c7cc6bea" title="设定被解引用的节点" alt="" coords="547,645,818,701"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#ac22f0f73cebcb75eac556e5a5a15f43e" title="设置要访问的结构化数据节点" alt="" coords="565,725,800,781"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ForSentence.html#ab841ab4beb1e56f11a1f68e961e33199" title="检查给定节点是否可以作为for条件" alt="" coords="588,805,777,861"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a1556d7a7178522a674e67e52046728bf" title="设定条件控制语句的条件与获取条件的操作" alt="" coords="579,885,786,941"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#ae95a9a06b45870ad8675b330273cecde" title="设置访问的成员名" alt="" coords="565,1293,800,1349"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4dae4e68b0638caefe8fc9055500aa71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4dae4e68b0638caefe8fc9055500aa71">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a>&amp; c_parser_frontend::operator_node::OperatorNodeInterface::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;&#160;</td>
+          <td class="paramname"><em>old_interface</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00129">129</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00196">general_operator_type_</a>.</p>
+
+</div>
+</div>
+<a id="afaf8c7f881d6b57c275611312b5e0f78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaf8c7f881d6b57c275611312b5e0f78">&#9670;&nbsp;</a></span>SelfCopy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual std::shared_ptr&lt;<a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a>&gt; c_parser_frontend::operator_node::OperatorNodeInterface::SelfCopy </td>
+          <td>(</td>
+          <td class="paramtype">const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1type__system_1_1TypeInterface.html">TypeInterface</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>new_type</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ConstTag&#160;</td>
+          <td class="paramname"><em>new_const_tag</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>拷贝自身并设置拷贝得到的对象类型为new_type </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">new_type</td><td>：拷贝后得到的对象的类型 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">new_const_tag</td><td>：拷贝后得到的对象的新const标记 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回指向拷贝后的对象的指针 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">nullptr</td><td>：设置初始化数据为非const</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>该函数用于类型转换 </p><dl class="section attention"><dt>注意</dt><dd>仅允许对变量、初始化值和类型转换节点调用该函数 </dd></dl>
+
+<p>在 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#ab29ded8d95b1a83c81b039c649c5b60e">c_parser_frontend::operator_node::FunctionCallOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#a80f1eed9bf1a5fceb092e9270d860f86">c_parser_frontend::operator_node::MemberAccessOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#af0d0ea0cd6fc49b63a840242dea5508d">c_parser_frontend::operator_node::ObtainAddressOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#a1f63f83072e23ac5f827794c1f7e9cc3">c_parser_frontend::operator_node::DereferenceOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1LogicalOperationOperatorNode.html#a1af976cd8866a9a83ae45468dd544cc2">c_parser_frontend::operator_node::LogicalOperationOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#a67a8402bb9bd65fa7a0d26762dfe6160">c_parser_frontend::operator_node::MathematicalOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#a057ea31c373bc19b3e8979a0b9f4a558">c_parser_frontend::operator_node::AssignOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a0eaae8f08e933b4d6defbe82e0e4e03f">c_parser_frontend::operator_node::TemaryOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1ListInitializeOperatorNode.html#ace94308807a70fe385e9e9d0354455cf">c_parser_frontend::operator_node::ListInitializeOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a8e45080b68667d2586d93cffa6386225">c_parser_frontend::operator_node::BasicTypeInitializeOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a908868d3daf19c0dac817eeecd0bdf86">c_parser_frontend::operator_node::VarietyOperatorNode</a>, <a class="el" href="classc__parser__frontend_1_1operator__node_1_1TypeConvert.html#ae89c332d83a61b25a5731ac7d32a67d5">c_parser_frontend::operator_node::TypeConvert</a> , 以及 <a class="el" href="classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode.html#a1db09f598c361b1386a37ac35cb9bd77">c_parser_frontend::operator_node::AllocateOperatorNode</a> 内被实现.</p>
+
+</div>
+</div>
+<a id="a6b094af7b84d943d4522d09fe61f5c50"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b094af7b84d943d4522d09fe61f5c50">&#9670;&nbsp;</a></span>SetGeneralOperatorType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void c_parser_frontend::operator_node::OperatorNodeInterface::SetGeneralOperatorType </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350f">GeneralOperationType</a>&#160;</td>
+          <td class="paramname"><em>operator_type</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置操作类型 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">operator_type</td><td>：操作类型 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00175">175</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00196">general_operator_type_</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="a48d972f9443f5d3cf794e922be29e964"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48d972f9443f5d3cf794e922be29e964">&#9670;&nbsp;</a></span>general_operator_type_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacec__parser__frontend_1_1operator__node.html#a169362f30ead3c486d45d83d489b350f">GeneralOperationType</a> c_parser_frontend::operator_node::OperatorNodeInterface::general_operator_type_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>操作所属大类 </p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00196">196</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8h_source.html#l00180">GetGeneralOperatorType()</a>, <a class="el" href="operator__node_8h_source.html#l00129">operator=()</a> , 以及 <a class="el" href="operator__node_8h_source.html#l00175">SetGeneralOperatorType()</a>.</p>
+
+</div>
+</div>
+<a id="ac43ec5932f7d289feaa7e4411bcc896e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac43ec5932f7d289feaa7e4411bcc896e">&#9670;&nbsp;</a></span>operator_id_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3fbeba19aeea8bcfd3bc918c9fbcc25b">OperatorId</a> c_parser_frontend::operator_node::OperatorNodeInterface::operator_id_ = <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a88ad86ef80377731bfd984f72774097a">GetOperatorId</a>()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>操作节点ID，同时作为存放结果的LLVM的寄存器编号 </p>
+
+<p class="definition">在文件 <a class="el" href="operator__node_8h_source.html">operator_node.h</a> 第 <a class="el" href="operator__node_8h_source.html#l00194">194</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="operator__node_8h_source.html#l00172">GetOperatorId()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/CParserFrontend/<a class="el" href="operator__node_8h_source.html">operator_node.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacec__parser__frontend.html">c_parser_frontend</a></li><li class="navelem"><a class="el" href="namespacec__parser__frontend_1_1operator__node.html">operator_node</a></li><li class="navelem"><a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+<map id="c_parser_frontend::operator_node::TemaryOperatorNode::GetResultReference" name="c_parser_frontend::operator_node::TemaryOperatorNode::GetResultReference">
+<area shape="rect" id="node1" title="获取结果" alt="" coords="283,85,512,141"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#a72f3d2497e1aaca3a5bb71ea926c570a" title="获取该节点操作结果的const标记" alt="" coords="5,5,235,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#af65bb4438ce3a492cf03919e6aef4631" title="获取最终结果的节点" alt="" coords="5,85,235,141"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#af0e8dcc1136bce4c2497ca0ef6921ec3" title="获取最终结果的类型" alt="" coords="5,165,235,221"/>
+</map>

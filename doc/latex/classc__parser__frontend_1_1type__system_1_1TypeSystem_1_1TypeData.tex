@@ -1,0 +1,255 @@
+\hypertarget{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::Type\+System\+::Type\+Data类 参考}
+\label{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData}\index{c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}}
+
+
+存储某个类型名下的不同类型链信息  
+
+
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320d}{Add\+Type\+Result}} \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_a58716d70558dd04ec69f7c7fab5fb398}{Add\+Type}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&type\+\_\+to\+\_\+add)
+\begin{DoxyCompactList}\small\item\em 添加一个类型 \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a8beb6f70423e49b45609ea37c23839d9}{Get\+Type\+Result}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_af9e4bc7ca19eeef5036c87bd53ad5968}{Get\+Type}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7}{Struct\+Or\+Basic\+Type}} type\+\_\+prefer) const
+\begin{DoxyCompactList}\small\item\em 根据类型偏好获取类型 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_ad77dba67434e4ddeec35794f90a74a58}{Empty}} () const
+\begin{DoxyCompactList}\small\item\em 查询容器是否为空 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_ae430e23f4c0e0ca0fd6c389091b6e16d}{Is\+Same\+Kind}} (\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7}{Struct\+Or\+Basic\+Type}} type1, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7}{Struct\+Or\+Basic\+Type}} type2)
+\begin{DoxyCompactList}\small\item\em 检查两种类型是否属于同一大类 \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320d}{Add\+Type\+Result}} \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_a14ad72a299ae2ac3ec015a00f1f5a824}{Check\+Function\+Define\+Add\+Result}} (const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}} \&function\+\_\+type\+\_\+exist, const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}} \&function\+\_\+type\+\_\+to\+\_\+add)
+\begin{DoxyCompactList}\small\item\em 检查已存在函数声明/定义条件下添加同名函数声明/定义的错误情况 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::variant$<$ std\+::monostate, std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$, std\+::unique\+\_\+ptr$<$ std\+::list$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ $>$ $>$ $>$ \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_abcce5994bb6d78d3e445b5a56d1c0676}{type\+\_\+data\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 存储某类型名下的全部类型 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+存储某个类型名下的不同类型链信息 
+
+在文件 type\+\_\+system.\+h 第 1099 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_a58716d70558dd04ec69f7c7fab5fb398}\label{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_a58716d70558dd04ec69f7c7fab5fb398}} 
+\index{c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}!AddType@{AddType}}
+\index{AddType@{AddType}!c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}}
+\doxysubsubsection{\texorpdfstring{AddType()}{AddType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320d}{Add\+Type\+Result}} c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System\+::\+Type\+Data\+::\+Add\+Type (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{type\+\_\+to\+\_\+add }\end{DoxyParamCaption})}
+
+
+
+添加一个类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em type\+\_\+to\+\_\+add} & ：待添加的类型链 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回添加结果，具体解释见\+Add\+Type\+Result定义
+\end{DoxyReturn}
+1.添加某个类型名下的一个类型，如果需要从单个指针转换为list则自动处理 2.同类型名下每种类型大类仅允许添加一种类型，根据 Type\+System\+::\+Type\+Data\+::\+Is\+Same\+Kind判断两个类型是否属于同一大类， Struct\+Or\+Basic\+Type中除了\+Basic\+Type和\+Pointer\+Type属于同一大类以外，其余 类型各自成一大类 3.只有函数签名相同时才允许重复添加函数类型，后添加的函数类型会覆盖已有 的函数类型 
+
+在文件 type\+\_\+system.\+cpp 第 601 行定义.
+
+
+
+引用了 Check\+Function\+Define\+Add\+Result(), Is\+Same\+Kind(), c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Add\+To\+Vector, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Basic, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Function, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Function\+Define, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+New, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Shift\+To\+Vector, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Type\+Already\+In , 以及 type\+\_\+data\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_a58716d70558dd04ec69f7c7fab5fb398_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_a14ad72a299ae2ac3ec015a00f1f5a824}\label{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_a14ad72a299ae2ac3ec015a00f1f5a824}} 
+\index{c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}!CheckFunctionDefineAddResult@{CheckFunctionDefineAddResult}}
+\index{CheckFunctionDefineAddResult@{CheckFunctionDefineAddResult}!c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}}
+\doxysubsubsection{\texorpdfstring{CheckFunctionDefineAddResult()}{CheckFunctionDefineAddResult()}}
+{\footnotesize\ttfamily static \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320d}{Add\+Type\+Result}} c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System\+::\+Type\+Data\+::\+Check\+Function\+Define\+Add\+Result (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}} \&}]{function\+\_\+type\+\_\+exist,  }\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1FunctionType}{Function\+Type}} \&}]{function\+\_\+type\+\_\+to\+\_\+add }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+检查已存在函数声明/定义条件下添加同名函数声明/定义的错误情况 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em function\+\_\+type\+\_\+exist} & ：已存在的函数类型 \\
+\hline
+\mbox{\texttt{ in}}  & {\em function\+\_\+type\+\_\+to\+\_\+add} & ：待添加的函数类型 \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyRetVals}{返回值}
+{\em \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320dafa8b9c0a25d3665edcca92567975f749}{Add\+Type\+Result\+::k\+Type\+Already\+In}}} & 已存在相同的函数类型 \\
+\hline
+{\em \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a53035d13ed98c1c9c754e011d3c3320da2720a88b1ed0140ebb9224313cf50033}{Add\+Type\+Result\+::k\+Override\+Function}}} & 已存在参数不同的函数类型 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyAttention}{注意}
+该函数仅返回以上两种结果 
+\end{DoxyAttention}
+
+
+在文件 type\+\_\+system.\+h 第 1149 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Function\+Type\+::\+Is\+Same\+Signature(), c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Override\+Function , 以及 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Type\+Already\+In.
+
+
+
+被这些函数引用 Add\+Type().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_a14ad72a299ae2ac3ec015a00f1f5a824_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_a14ad72a299ae2ac3ec015a00f1f5a824_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_ad77dba67434e4ddeec35794f90a74a58}\label{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_ad77dba67434e4ddeec35794f90a74a58}} 
+\index{c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}!Empty@{Empty}}
+\index{Empty@{Empty}!c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}}
+\doxysubsubsection{\texorpdfstring{Empty()}{Empty()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System\+::\+Type\+Data\+::\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+查询容器是否为空 
+
+\begin{DoxyReturn}{返回}
+返回容器是否为空 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：容器空 \\
+\hline
+{\em false} & ：容器不空 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 type\+\_\+system.\+h 第 1129 行定义.
+
+
+
+引用了 type\+\_\+data\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_af9e4bc7ca19eeef5036c87bd53ad5968}\label{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_af9e4bc7ca19eeef5036c87bd53ad5968}} 
+\index{c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}!GetType@{GetType}}
+\index{GetType@{GetType}!c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily std\+::pair$<$ std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a8beb6f70423e49b45609ea37c23839d9}{Get\+Type\+Result}} $>$ c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System\+::\+Type\+Data\+::\+Get\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7}{Struct\+Or\+Basic\+Type}}}]{type\+\_\+prefer }\end{DoxyParamCaption}) const}
+
+
+
+根据类型偏好获取类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em type\+\_\+prefer} & ：类型偏好 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为获取到的类型链头结点指针，后半部分为获取结果
+\end{DoxyReturn}
+1.无类型偏好时使用\+Struct\+Or\+Basic\+Type\+::k\+Not\+Specified 2.含有多种类型时如果不指定要获取的类型则返回属于 \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7a27296922b87cce1a26d3d54419a74599}{Struct\+Or\+Basic\+Type\+::k\+Basic}}/k\+Pointer大类的类型，不存在该大类的类型则返回 \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a8beb6f70423e49b45609ea37c23839d9a19e8786f486af27826888a7f57e871fc}{Get\+Type\+Result\+::k\+Several\+Same\+Level\+Matches}} 3.指定类型不存在时返回\+Get\+Type\+Result\+::k\+Several\+Same\+Level\+Matches 
+
+在文件 type\+\_\+system.\+cpp 第 695 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Basic, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+No\+Match\+Type\+Prefer, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Not\+Specified, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Several\+Same\+Level\+Matches, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Success , 以及 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Type\+Name\+Not\+Found.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_ae430e23f4c0e0ca0fd6c389091b6e16d}\label{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_ae430e23f4c0e0ca0fd6c389091b6e16d}} 
+\index{c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}!IsSameKind@{IsSameKind}}
+\index{IsSameKind@{IsSameKind}!c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}}
+\doxysubsubsection{\texorpdfstring{IsSameKind()}{IsSameKind()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System\+::\+Type\+Data\+::\+Is\+Same\+Kind (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7}{Struct\+Or\+Basic\+Type}}}]{type1,  }\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7}{Struct\+Or\+Basic\+Type}}}]{type2 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+检查两种类型是否属于同一大类 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em type1} & ：一种类型 \\
+\hline
+\mbox{\texttt{ in}}  & {\em type2} & ：另一种类型 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回两种类型是否属于同一大类 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：两种类型属于同一大类 \\
+\hline
+{\em false} & ：两种类型不属于同一大类\\
+\hline
+\end{DoxyRetVals}
+Struct\+Or\+Basic\+Type\+::k\+Basic和\+Struct\+Or\+Basic\+Type\+::k\+Pointer属于同一大类 除此以外类型各自成一大类 
+
+在文件 type\+\_\+system.\+cpp 第 743 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Basic , 以及 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Pointer.
+
+
+
+被这些函数引用 Add\+Type().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_ae430e23f4c0e0ca0fd6c389091b6e16d_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_abcce5994bb6d78d3e445b5a56d1c0676}\label{classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData_abcce5994bb6d78d3e445b5a56d1c0676}} 
+\index{c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}!type\_data\_@{type\_data\_}}
+\index{type\_data\_@{type\_data\_}!c\_parser\_frontend::type\_system::TypeSystem::TypeData@{c\_parser\_frontend::type\_system::TypeSystem::TypeData}}
+\doxysubsubsection{\texorpdfstring{type\_data\_}{type\_data\_}}
+{\footnotesize\ttfamily std\+::variant$<$ std\+::monostate, std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}}$>$, std\+::unique\+\_\+ptr$<$std\+::list$<$std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}}$>$ $>$ $>$ $>$ c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+System\+::\+Type\+Data\+::type\+\_\+data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+存储某类型名下的全部类型 
+
+初始构建时为空，添加类型指针后根据添加的数量使用直接存储或list存储 将\+Struct\+Or\+Basic\+Type\+::k\+Basic/k\+Pointer类型的指针放到最前面从而 在无类型偏好时加速查找，无需遍历全部存储的指针 \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a7ada2ff0eba2205e6a1c0c5afa2d5bd7a27296922b87cce1a26d3d54419a74599}{Struct\+Or\+Basic\+Type\+::k\+Basic}}/k\+Pointer只允许声明一种，防止歧义 
+
+在文件 type\+\_\+system.\+h 第 1169 行定义.
+
+
+
+被这些函数引用 Add\+Type() , 以及 Empty().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{type__system_8h}{type\+\_\+system.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{type__system_8cpp}{type\+\_\+system.\+cpp}}\end{DoxyCompactItemize}

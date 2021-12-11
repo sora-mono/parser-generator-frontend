@@ -1,0 +1,280 @@
+\hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser}{}\doxysection{frontend\+::generator\+::syntax\+\_\+generator\+::Process\+Function\+Interface\+::Word\+Data\+To\+User类 参考}
+\label{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser}\index{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}}
+
+
+{\ttfamily \#include $<$process\+\_\+function\+\_\+interface.\+h$>$}
+
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData}{Terminal\+Word\+Data}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_aa5afb8805890febb8a7ed31b3cdd67d4}{Get\+Terminal\+Word\+Data}} () const
+\begin{DoxyCompactList}\small\item\em 获取终结产生式数据const引用 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData}{Terminal\+Word\+Data}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a2bd02ac5b621ac4cb2e266e3ad413458}{Get\+Terminal\+Word\+Data}} ()
+\begin{DoxyCompactList}\small\item\em 获取终结产生式数据引用 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData}{Non\+Terminal\+Word\+Data}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a62a2c5cb95555b4799957ced1c807e33}{Get\+Non\+Terminal\+Word\+Data}} () const
+\begin{DoxyCompactList}\small\item\em 获取非终结产生式数据const引用 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData}{Non\+Terminal\+Word\+Data}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_aa77ad3a89af9c9557df78cf5c063b8f7}{Get\+Non\+Terminal\+Word\+Data}} ()
+\begin{DoxyCompactList}\small\item\em 获取非终结产生式数据引用 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a20be5f05aa692eddd03f76d8a87572da}{Empty}} () const
+\begin{DoxyCompactList}\small\item\em 获取是否有产生式数据 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Basic\+Object\+Type $>$ }\\void \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a9e0b9c345a98949418730a086168b953}{Set\+Word\+Data\+To\+User}} (Basic\+Object\+Type \&\&word\+\_\+data)
+\begin{DoxyCompactList}\small\item\em 设置存储的数据 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::variant$<$ std\+::monostate, \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData}{Terminal\+Word\+Data}}, \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData}{Non\+Terminal\+Word\+Data}} $>$ \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_aa48e56700f191d30007fea8b50686149}{word\+\_\+data\+\_\+to\+\_\+user\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 该单词的数据 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+
+
+在文件 process\+\_\+function\+\_\+interface.\+h 第 37 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a20be5f05aa692eddd03f76d8a87572da}\label{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a20be5f05aa692eddd03f76d8a87572da}} 
+\index{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}!Empty@{Empty}}
+\index{Empty@{Empty}!frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}}
+\doxysubsubsection{\texorpdfstring{Empty()}{Empty()}}
+{\footnotesize\ttfamily bool frontend\+::generator\+::syntax\+\_\+generator\+::\+Process\+Function\+Interface\+::\+Word\+Data\+To\+User\+::\+Empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取是否有产生式数据 
+
+\begin{DoxyReturn}{返回}
+返回是否携带产生式数据 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：携带产生式数据 \\
+\hline
+{\em false} & ：不携带产生式数据（对应产生式空规约） \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 process\+\_\+function\+\_\+interface.\+h 第 69 行定义.
+
+
+
+引用了 word\+\_\+data\+\_\+to\+\_\+user\+\_\+.
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Get\+Const\+Tag() , 以及 c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Get\+Sign\+Tag().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a20be5f05aa692eddd03f76d8a87572da_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_aa77ad3a89af9c9557df78cf5c063b8f7}\label{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_aa77ad3a89af9c9557df78cf5c063b8f7}} 
+\index{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}!GetNonTerminalWordData@{GetNonTerminalWordData}}
+\index{GetNonTerminalWordData@{GetNonTerminalWordData}!frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}}
+\doxysubsubsection{\texorpdfstring{GetNonTerminalWordData()}{GetNonTerminalWordData()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData}{Non\+Terminal\+Word\+Data}}\& frontend\+::generator\+::syntax\+\_\+generator\+::\+Process\+Function\+Interface\+::\+Word\+Data\+To\+User\+::\+Get\+Non\+Terminal\+Word\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取非终结产生式数据引用 
+
+\begin{DoxyReturn}{返回}
+将存储的数据转换为非终结产生式数据类型的引用 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+不检查是否可以正确转换 
+\end{DoxyNote}
+
+
+在文件 process\+\_\+function\+\_\+interface.\+h 第 61 行定义.
+
+
+
+引用了 Get\+Non\+Terminal\+Word\+Data().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_aa77ad3a89af9c9557df78cf5c063b8f7_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a62a2c5cb95555b4799957ced1c807e33}\label{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a62a2c5cb95555b4799957ced1c807e33}} 
+\index{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}!GetNonTerminalWordData@{GetNonTerminalWordData}}
+\index{GetNonTerminalWordData@{GetNonTerminalWordData}!frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}}
+\doxysubsubsection{\texorpdfstring{GetNonTerminalWordData()}{GetNonTerminalWordData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData}{Non\+Terminal\+Word\+Data}}\& frontend\+::generator\+::syntax\+\_\+generator\+::\+Process\+Function\+Interface\+::\+Word\+Data\+To\+User\+::\+Get\+Non\+Terminal\+Word\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取非终结产生式数据const引用 
+
+\begin{DoxyReturn}{返回}
+将存储的数据转换为非终结产生式数据类型的const引用 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+不检查是否可以正确转换 
+\end{DoxyNote}
+
+
+在文件 process\+\_\+function\+\_\+interface.\+h 第 55 行定义.
+
+
+
+引用了 word\+\_\+data\+\_\+to\+\_\+user\+\_\+.
+
+
+
+被这些函数引用 Get\+Non\+Terminal\+Word\+Data() , 以及 c\+\_\+parser\+\_\+frontend\+::parse\+\_\+functions\+::\+Get\+Sign\+Tag().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a62a2c5cb95555b4799957ced1c807e33_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a2bd02ac5b621ac4cb2e266e3ad413458}\label{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a2bd02ac5b621ac4cb2e266e3ad413458}} 
+\index{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}!GetTerminalWordData@{GetTerminalWordData}}
+\index{GetTerminalWordData@{GetTerminalWordData}!frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}}
+\doxysubsubsection{\texorpdfstring{GetTerminalWordData()}{GetTerminalWordData()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData}{Terminal\+Word\+Data}}\& frontend\+::generator\+::syntax\+\_\+generator\+::\+Process\+Function\+Interface\+::\+Word\+Data\+To\+User\+::\+Get\+Terminal\+Word\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取终结产生式数据引用 
+
+\begin{DoxyReturn}{返回}
+将存储的数据转换为终结产生式数据类型的引用 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+不检查是否可以正确转换 
+\end{DoxyNote}
+
+
+在文件 process\+\_\+function\+\_\+interface.\+h 第 48 行定义.
+
+
+
+引用了 Get\+Terminal\+Word\+Data().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a2bd02ac5b621ac4cb2e266e3ad413458_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_aa5afb8805890febb8a7ed31b3cdd67d4}\label{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_aa5afb8805890febb8a7ed31b3cdd67d4}} 
+\index{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}!GetTerminalWordData@{GetTerminalWordData}}
+\index{GetTerminalWordData@{GetTerminalWordData}!frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}}
+\doxysubsubsection{\texorpdfstring{GetTerminalWordData()}{GetTerminalWordData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData}{Terminal\+Word\+Data}}\& frontend\+::generator\+::syntax\+\_\+generator\+::\+Process\+Function\+Interface\+::\+Word\+Data\+To\+User\+::\+Get\+Terminal\+Word\+Data (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取终结产生式数据const引用 
+
+\begin{DoxyReturn}{返回}
+将存储的数据转换为终结产生式数据类型的const引用 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+不检查是否可以正确转换 
+\end{DoxyNote}
+
+
+在文件 process\+\_\+function\+\_\+interface.\+h 第 42 行定义.
+
+
+
+引用了 word\+\_\+data\+\_\+to\+\_\+user\+\_\+.
+
+
+
+被这些函数引用 Get\+Terminal\+Word\+Data().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_aa5afb8805890febb8a7ed31b3cdd67d4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a9e0b9c345a98949418730a086168b953}\label{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a9e0b9c345a98949418730a086168b953}} 
+\index{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}!SetWordDataToUser@{SetWordDataToUser}}
+\index{SetWordDataToUser@{SetWordDataToUser}!frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}}
+\doxysubsubsection{\texorpdfstring{SetWordDataToUser()}{SetWordDataToUser()}}
+{\footnotesize\ttfamily template$<$class Basic\+Object\+Type $>$ \\
+void frontend\+::generator\+::syntax\+\_\+generator\+::\+Process\+Function\+Interface\+::\+Word\+Data\+To\+User\+::\+Set\+Word\+Data\+To\+User (\begin{DoxyParamCaption}\item[{Basic\+Object\+Type \&\&}]{word\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置存储的数据 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em word\+\_\+data} & ：新数据 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+仅支持std\+::monostate、\+Terminal\+Word\+Data和\+Non\+Terminal\+Word\+Data的 const左值引用和右值引用 
+\end{DoxyNote}
+
+
+在文件 process\+\_\+function\+\_\+interface.\+h 第 78 行定义.
+
+
+
+引用了 word\+\_\+data\+\_\+to\+\_\+user\+\_\+.
+
+
+
+被这些函数引用 frontend\+::parser\+::syntax\+\_\+parser\+::\+Syntax\+Parser\+::\+Shift\+Non\+Terminal\+Word() , 以及 frontend\+::parser\+::syntax\+\_\+parser\+::\+Syntax\+Parser\+::\+Shift\+Terminal\+Word().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_a9e0b9c345a98949418730a086168b953_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_aa48e56700f191d30007fea8b50686149}\label{classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser_aa48e56700f191d30007fea8b50686149}} 
+\index{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}!word\_data\_to\_user\_@{word\_data\_to\_user\_}}
+\index{word\_data\_to\_user\_@{word\_data\_to\_user\_}!frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser@{frontend::generator::syntax\_generator::ProcessFunctionInterface::WordDataToUser}}
+\doxysubsubsection{\texorpdfstring{word\_data\_to\_user\_}{word\_data\_to\_user\_}}
+{\footnotesize\ttfamily std\+::variant$<$std\+::monostate, \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData}{Terminal\+Word\+Data}}, \mbox{\hyperlink{structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData}{Non\+Terminal\+Word\+Data}}$>$ frontend\+::generator\+::syntax\+\_\+generator\+::\+Process\+Function\+Interface\+::\+Word\+Data\+To\+User\+::word\+\_\+data\+\_\+to\+\_\+user\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+该单词的数据 
+
+\begin{DoxyNote}{注解}
+空规约节点存储std\+::monostate 
+\end{DoxyNote}
+
+
+在文件 process\+\_\+function\+\_\+interface.\+h 第 86 行定义.
+
+
+
+被这些函数引用 Empty(), Get\+Non\+Terminal\+Word\+Data(), Get\+Terminal\+Word\+Data() , 以及 Set\+Word\+Data\+To\+User().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Generator/\+Syntax\+Generator/\mbox{\hyperlink{process__function__interface_8h}{process\+\_\+function\+\_\+interface.\+h}}\end{DoxyCompactItemize}

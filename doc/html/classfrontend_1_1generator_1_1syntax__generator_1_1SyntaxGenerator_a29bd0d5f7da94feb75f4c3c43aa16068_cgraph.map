@@ -1,0 +1,10 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::SetRootProduction" name="frontend::generator::syntax_generator::SyntaxGenerator::SetRootProduction">
+<area shape="rect" id="node1" title="设置用户定义的产生式根节点" alt="" coords="5,188,265,244"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0c623efe1db965b3ae044243b21cb226" title="根据产生式名获取产生式节点ID" alt="" coords="329,42,561,113"/>
+<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a29be86f204dd6a6cc2887846795791f8" title="获取用户定义的根产生式ID" alt="" coords="313,137,576,207"/>
+<area shape="rect" id="node7" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a736c60d18820ddf9b08bb7e4cdc8e6ec" title="输出Error级诊断信息" alt="" coords="337,232,552,288"/>
+<area shape="rect" id="node8" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a3b59ad72b95ff5b071e223021a2fdf34" title="设置用户定义的根产生式节点ID" alt="" coords="315,313,575,383"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#afa97ab3763b61a50e57a7f06eb87f85b" title="根据产生式名获取对应ID" alt="" coords="624,5,883,61"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae482dcdd29e61fc9ca3dab48827f83fa" title="根据产生式名ID获取对应产生式节点ID" alt="" coords="637,86,869,157"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#a8843e773f9b1f958e9beb2373084704d" title="根据对象获取其ID" alt="" coords="931,13,1208,54"/>
+</map>

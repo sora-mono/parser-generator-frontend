@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::CParserFrontend::AddSwitchDefaultCase" name="c_parser_frontend::CParserFrontend::AddSwitchDefaultCase">
+<area shape="rect" id="node1" title="添加switch的default分支标签" alt="" coords="5,13,209,69"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a1fee8d1a66636749a8afb374a586fec0" title="向switch语句中添加default标签" alt="" coords="257,5,428,76"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a121f8773a5ec18de2fd09e2873bdf5bf" title="获取最顶层流程控制语句" alt="" coords="476,5,681,76"/>
+</map>

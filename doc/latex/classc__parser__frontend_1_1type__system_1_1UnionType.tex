@@ -1,0 +1,543 @@
+\hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::Union\+Type类 参考}
+\label{classc__parser__frontend_1_1type__system_1_1UnionType}\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+
+
+{\ttfamily \#include $<$type\+\_\+system.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::Union\+Type 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{classc__parser__frontend_1_1type__system_1_1UnionType__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::Union\+Type 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 类型}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a7657eab72aad50065ff33a0ee4ad543b}{Union\+Member\+Container\+Type}} = \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1StructureTypeInterface_1_1StructureMemberContainer}{Structure\+Member\+Container}}
+\begin{DoxyCompactList}\small\item\em 存储成员的结构类型 \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a34dd2dcb27cd1bfc53667b23cfb92a3c}{Union\+Member\+Index}} = \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1StructureTypeInterface_1_1StructureMemberContainer_a199582c831055c6130bc59d0ecdca5b5}{Union\+Member\+Container\+Type\+::\+Member\+Index}}
+\begin{DoxyCompactList}\small\item\em 成员在容器中的下标 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_ab4f3d46e8da95de044fd7741ac08ceb4}{Union\+Type}} (const std\+::string \&union\+\_\+name)
+\item 
+virtual bool \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a9e5eb68061afd992a8455dc20e92330f}{operator==}} (const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&type\+\_\+interface) const override
+\begin{DoxyCompactList}\small\item\em 比较两个类型是否完全相同 \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_abdba49f59bc164b6932d698ad6af20fe}{Assignable\+Check\+Result}} \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_ae410d60c2a04ef7b9c9b710f06c49cdf}{Can\+Be\+Assigned\+By}} (const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&type\+\_\+interface) const override
+\begin{DoxyCompactList}\small\item\em 判断给定类型是否可以给该对象赋值 \end{DoxyCompactList}\item 
+virtual size\+\_\+t \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_abf9089bcac6d3b43a294069be10aee9a}{Get\+Type\+Store\+Size}} () const override
+\begin{DoxyCompactList}\small\item\em 获取存储该类型变量所需空间的大小 \end{DoxyCompactList}\item 
+virtual size\+\_\+t \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_ae32ffa7c5f4b8eae5018926d1dd78eb9}{Type\+Size\+Of}} () const override
+\begin{DoxyCompactList}\small\item\em 获取sizeof语义下类型的大小 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Union\+Members $>$ }\\requires std\+::is\+\_\+same\+\_\+v$<$ std\+::decay\+\_\+t$<$ Union\+Members $>$, \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a7657eab72aad50065ff33a0ee4ad543b}{Union\+Member\+Container\+Type}} $>$ void \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a0a2258d0c66f4dcc4ec927786882716f}{Set\+Union\+Members}} (Union\+Members \&\&union\+\_\+members)
+\begin{DoxyCompactList}\small\item\em 按容器设置共用体成员信息 \end{DoxyCompactList}\item 
+{\footnotesize template$<$class Member\+Name $>$ }\\auto \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_abc0672ad0bb346aebf4405a3a9c3967a}{Add\+Union\+Member}} (Member\+Name \&\&member\+\_\+name, const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&member\+\_\+type\+\_\+pointer, \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a19d20e5542c29e0fbf656fc55ad88893}{Const\+Tag}} member\+\_\+const\+\_\+tag)
+\begin{DoxyCompactList}\small\item\em 添加共用体成员 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a34dd2dcb27cd1bfc53667b23cfb92a3c}{Union\+Member\+Index}} \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a866a8166343a8fcbef89a1565f4e8eb2}{Get\+Union\+Member\+Index}} (const std\+::string \&member\+\_\+name) const
+\begin{DoxyCompactList}\small\item\em 查询成员的下标 \end{DoxyCompactList}\item 
+const auto \& \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a33e88332a45dc197f4fe0abcd7f315dd}{Get\+Union\+Member\+Info}} (\mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a34dd2dcb27cd1bfc53667b23cfb92a3c}{Union\+Member\+Index}} member\+\_\+index) const
+\begin{DoxyCompactList}\small\item\em 根据成员下标获取成员信息 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a997f96c4b375e8b443bc9efd7a5f9634}{Set\+Union\+Name}} (const std\+::string \&union\+\_\+name)
+\begin{DoxyCompactList}\small\item\em 设置共用体名 \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a8fee59f81f551f3a7bde7521b649adc2}{Get\+Union\+Name}} () const
+\begin{DoxyCompactList}\small\item\em 获取共用体名 \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a98da5465489bd63a4b93c8a504f60765}{Is\+Same\+Object}} (const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&type\+\_\+interface) const
+\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+
+
+在文件 type\+\_\+system.\+h 第 816 行定义.
+
+
+
+\doxysubsection{成员类型定义说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_a7657eab72aad50065ff33a0ee4ad543b}\label{classc__parser__frontend_1_1type__system_1_1UnionType_a7657eab72aad50065ff33a0ee4ad543b}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!UnionMemberContainerType@{UnionMemberContainerType}}
+\index{UnionMemberContainerType@{UnionMemberContainerType}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{UnionMemberContainerType}{UnionMemberContainerType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a7657eab72aad50065ff33a0ee4ad543b}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Union\+Member\+Container\+Type}} =  \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1StructureTypeInterface_1_1StructureMemberContainer}{Structure\+Member\+Container}}}
+
+
+
+存储成员的结构类型 
+
+
+
+在文件 type\+\_\+system.\+h 第 819 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_a34dd2dcb27cd1bfc53667b23cfb92a3c}\label{classc__parser__frontend_1_1type__system_1_1UnionType_a34dd2dcb27cd1bfc53667b23cfb92a3c}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!UnionMemberIndex@{UnionMemberIndex}}
+\index{UnionMemberIndex@{UnionMemberIndex}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{UnionMemberIndex}{UnionMemberIndex}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a34dd2dcb27cd1bfc53667b23cfb92a3c}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Union\+Member\+Index}} =  \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1StructureTypeInterface_1_1StructureMemberContainer_a199582c831055c6130bc59d0ecdca5b5}{Union\+Member\+Container\+Type\+::\+Member\+Index}}}
+
+
+
+成员在容器中的下标 
+
+
+
+在文件 type\+\_\+system.\+h 第 821 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_ab4f3d46e8da95de044fd7741ac08ceb4}\label{classc__parser__frontend_1_1type__system_1_1UnionType_ab4f3d46e8da95de044fd7741ac08ceb4}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!UnionType@{UnionType}}
+\index{UnionType@{UnionType}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{UnionType()}{UnionType()}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Union\+Type (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{union\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 type\+\_\+system.\+h 第 823 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Union.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_abc0672ad0bb346aebf4405a3a9c3967a}\label{classc__parser__frontend_1_1type__system_1_1UnionType_abc0672ad0bb346aebf4405a3a9c3967a}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!AddUnionMember@{AddUnionMember}}
+\index{AddUnionMember@{AddUnionMember}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{AddUnionMember()}{AddUnionMember()}}
+{\footnotesize\ttfamily template$<$class Member\+Name $>$ \\
+auto c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Add\+Union\+Member (\begin{DoxyParamCaption}\item[{Member\+Name \&\&}]{member\+\_\+name,  }\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{member\+\_\+type\+\_\+pointer,  }\item[{\mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_a19d20e5542c29e0fbf656fc55ad88893}{Const\+Tag}}}]{member\+\_\+const\+\_\+tag }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+添加共用体成员 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em member\+\_\+name} & ：成员名 \\
+\hline
+\mbox{\texttt{ in}}  & {\em member\+\_\+type\+\_\+pointer} & ：成员类型 \\
+\hline
+\mbox{\texttt{ in}}  & {\em member\+\_\+const\+\_\+tag} & ：成员的const标记 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回成员的下标 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em \mbox{\hyperlink{classfrontend_1_1common_1_1ExplicitIdWrapper_a5286ddd962d1091679c76ba11beeacaf}{Member\+Index\+::\+Invalid\+Id()}}} & ：待添加成员名已存在 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+向已有成员列表的尾部添加 
+\end{DoxyNote}
+
+
+在文件 type\+\_\+system.\+h 第 852 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Structure\+Type\+Interface\+::\+Add\+Structure\+Member().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType_abc0672ad0bb346aebf4405a3a9c3967a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_ae410d60c2a04ef7b9c9b710f06c49cdf}\label{classc__parser__frontend_1_1type__system_1_1UnionType_ae410d60c2a04ef7b9c9b710f06c49cdf}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!CanBeAssignedBy@{CanBeAssignedBy}}
+\index{CanBeAssignedBy@{CanBeAssignedBy}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{CanBeAssignedBy()}{CanBeAssignedBy()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacec__parser__frontend_1_1type__system_abdba49f59bc164b6932d698ad6af20fe}{Assignable\+Check\+Result}} c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Can\+Be\+Assigned\+By (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&}]{type\+\_\+interface }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+判断给定类型是否可以给该对象赋值 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em type\+\_\+interface} & ：待判断的类型 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回检查结果 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+返回值的意义见其定义 
+\end{DoxyNote}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface_a669b266fbf7be6477db5464916d7ddc6}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface}}.
+
+
+
+在文件 type\+\_\+system.\+cpp 第 327 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface\+::\+Get\+Type(), c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Can\+Not\+Convert, c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Initialize\+List , 以及 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::k\+Non\+Convert.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType_ae410d60c2a04ef7b9c9b710f06c49cdf_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_abf9089bcac6d3b43a294069be10aee9a}\label{classc__parser__frontend_1_1type__system_1_1UnionType_abf9089bcac6d3b43a294069be10aee9a}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!GetTypeStoreSize@{GetTypeStoreSize}}
+\index{GetTypeStoreSize@{GetTypeStoreSize}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{GetTypeStoreSize()}{GetTypeStoreSize()}}
+{\footnotesize\ttfamily size\+\_\+t c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Get\+Type\+Store\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取存储该类型变量所需空间的大小 
+
+\begin{DoxyReturn}{返回}
+返回存储该类型变量所需空间大小 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+指针均为k\+Pointer\+Size字节 
+\end{DoxyNote}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface_af141ec273bfe24c2b4e662680d3bad9c}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface}}.
+
+
+
+在文件 type\+\_\+system.\+cpp 第 338 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Structure\+Type\+Interface\+::\+Get\+Structure\+Members().
+
+
+
+被这些函数引用 Type\+Size\+Of().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType_abf9089bcac6d3b43a294069be10aee9a_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType_abf9089bcac6d3b43a294069be10aee9a_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_a866a8166343a8fcbef89a1565f4e8eb2}\label{classc__parser__frontend_1_1type__system_1_1UnionType_a866a8166343a8fcbef89a1565f4e8eb2}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!GetUnionMemberIndex@{GetUnionMemberIndex}}
+\index{GetUnionMemberIndex@{GetUnionMemberIndex}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{GetUnionMemberIndex()}{GetUnionMemberIndex()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a34dd2dcb27cd1bfc53667b23cfb92a3c}{Union\+Member\+Index}} c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Get\+Union\+Member\+Index (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{member\+\_\+name }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+查询成员的下标 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em member\+\_\+name} & ：成员名 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回成员下标 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em Struct\+Member\+Index\+::\+Invalid\+Id()} & 给定成员名不存在 \\
+\hline
+\end{DoxyRetVals}
+
+
+在文件 type\+\_\+system.\+h 第 863 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Structure\+Type\+Interface\+::\+Get\+Structure\+Member\+Index().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType_a866a8166343a8fcbef89a1565f4e8eb2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_a33e88332a45dc197f4fe0abcd7f315dd}\label{classc__parser__frontend_1_1type__system_1_1UnionType_a33e88332a45dc197f4fe0abcd7f315dd}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!GetUnionMemberInfo@{GetUnionMemberInfo}}
+\index{GetUnionMemberInfo@{GetUnionMemberInfo}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{GetUnionMemberInfo()}{GetUnionMemberInfo()}}
+{\footnotesize\ttfamily const auto\& c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Get\+Union\+Member\+Info (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a34dd2dcb27cd1bfc53667b23cfb92a3c}{Union\+Member\+Index}}}]{member\+\_\+index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+根据成员下标获取成员信息 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em member\+\_\+index} & ：成员下标 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+前半部分为成员类型，后半部分为成员的const标记 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+member\+\_\+index必须有效 
+\end{DoxyNote}
+
+
+在文件 type\+\_\+system.\+h 第 870 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Structure\+Type\+Interface\+::\+Get\+Structure\+Member\+Info() , 以及 frontend\+::common\+::\+Base\+Id\+Wrapper$<$ Id\+Type\+\_\+, Label\+Enum\+\_\+, label\+\_\+, invalid\+\_\+value\+\_\+ $>$\+::\+Is\+Valid().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType_a33e88332a45dc197f4fe0abcd7f315dd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_a8fee59f81f551f3a7bde7521b649adc2}\label{classc__parser__frontend_1_1type__system_1_1UnionType_a8fee59f81f551f3a7bde7521b649adc2}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!GetUnionName@{GetUnionName}}
+\index{GetUnionName@{GetUnionName}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{GetUnionName()}{GetUnionName()}}
+{\footnotesize\ttfamily const std\+::string\& c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Get\+Union\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取共用体名 
+
+\begin{DoxyReturn}{返回}
+返回共用体名的const引用 
+\end{DoxyReturn}
+
+
+在文件 type\+\_\+system.\+h 第 882 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Structure\+Type\+Interface\+::\+Get\+Structure\+Name().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType_a8fee59f81f551f3a7bde7521b649adc2_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_a98da5465489bd63a4b93c8a504f60765}\label{classc__parser__frontend_1_1type__system_1_1UnionType_a98da5465489bd63a4b93c8a504f60765}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!IsSameObject@{IsSameObject}}
+\index{IsSameObject@{IsSameObject}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{IsSameObject()}{IsSameObject()}}
+{\footnotesize\ttfamily bool c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Is\+Same\+Object (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&}]{type\+\_\+interface }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 type\+\_\+system.\+h 第 883 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Structure\+Type\+Interface\+::\+Is\+Same\+Object().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType_a98da5465489bd63a4b93c8a504f60765_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_a9e5eb68061afd992a8455dc20e92330f}\label{classc__parser__frontend_1_1type__system_1_1UnionType_a9e5eb68061afd992a8455dc20e92330f}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!operator==@{operator==}}
+\index{operator==@{operator==}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily virtual bool c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} \&}]{type\+\_\+interface }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+比较两个类型是否完全相同 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em type\+\_\+interface} & ：待比较的两个类型 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回两个类型是否完全相同 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em true} & ：两个类型完全相同 \\
+\hline
+{\em false} & ：两个类型不完全相同 \\
+\hline
+\end{DoxyRetVals}
+\begin{DoxyNote}{注解}
+自动调用下一级比较函数 
+\end{DoxyNote}
+
+
+重载 \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1StructureTypeInterface_a83d928e714bfb4a8aa758b2462db06a8}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Structure\+Type\+Interface}} .
+
+
+
+在文件 type\+\_\+system.\+h 第 826 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Structure\+Type\+Interface\+::operator==().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType_a9e5eb68061afd992a8455dc20e92330f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_a0a2258d0c66f4dcc4ec927786882716f}\label{classc__parser__frontend_1_1type__system_1_1UnionType_a0a2258d0c66f4dcc4ec927786882716f}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!SetUnionMembers@{SetUnionMembers}}
+\index{SetUnionMembers@{SetUnionMembers}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{SetUnionMembers()}{SetUnionMembers()}}
+{\footnotesize\ttfamily template$<$class Union\+Members $>$ \\
+requires std\+::is\+\_\+same\+\_\+v$<$std\+::decay\+\_\+t$<$Union\+Members$>$, \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1UnionType_a7657eab72aad50065ff33a0ee4ad543b}{Union\+Member\+Container\+Type}}$>$ void c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Set\+Union\+Members (\begin{DoxyParamCaption}\item[{Union\+Members \&\&}]{union\+\_\+members }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+按容器设置共用体成员信息 
+
+
+\begin{DoxyTemplParams}{模板参数}
+{\em Union\+Members} & ：\+Union\+Member\+Container\+Type不同引用 \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em union\+\_\+members} & ：成员信息 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 type\+\_\+system.\+h 第 841 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Structure\+Type\+Interface\+::\+Set\+Structure\+Members().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType_a0a2258d0c66f4dcc4ec927786882716f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_a997f96c4b375e8b443bc9efd7a5f9634}\label{classc__parser__frontend_1_1type__system_1_1UnionType_a997f96c4b375e8b443bc9efd7a5f9634}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!SetUnionName@{SetUnionName}}
+\index{SetUnionName@{SetUnionName}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{SetUnionName()}{SetUnionName()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Set\+Union\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{union\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置共用体名 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em union\+\_\+name} & ：共用体名 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+允许使用空名字以表示匿名共用体 
+\end{DoxyNote}
+
+
+在文件 type\+\_\+system.\+h 第 877 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Structure\+Type\+Interface\+::\+Set\+Structure\+Name().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType_a997f96c4b375e8b443bc9efd7a5f9634_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1type__system_1_1UnionType_ae32ffa7c5f4b8eae5018926d1dd78eb9}\label{classc__parser__frontend_1_1type__system_1_1UnionType_ae32ffa7c5f4b8eae5018926d1dd78eb9}} 
+\index{c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}!TypeSizeOf@{TypeSizeOf}}
+\index{TypeSizeOf@{TypeSizeOf}!c\_parser\_frontend::type\_system::UnionType@{c\_parser\_frontend::type\_system::UnionType}}
+\doxysubsubsection{\texorpdfstring{TypeSizeOf()}{TypeSizeOf()}}
+{\footnotesize\ttfamily virtual size\+\_\+t c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Union\+Type\+::\+Type\+Size\+Of (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取sizeof语义下类型的大小 
+
+\begin{DoxyReturn}{返回}
+返回sizeof语义下类型的大小 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+指向数组的指针结果为类型大小乘以各维度大小 
+\end{DoxyNote}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface_ac226ef7e7ae3877dcbbe6bc23433884e}{c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface}}.
+
+
+
+在文件 type\+\_\+system.\+h 第 832 行定义.
+
+
+
+引用了 Get\+Type\+Store\+Size().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1type__system_1_1UnionType_ae32ffa7c5f4b8eae5018926d1dd78eb9_cgraph}
+\end{center}
+\end{figure}
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{type__system_8h}{type\+\_\+system.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{type__system_8cpp}{type\+\_\+system.\+cpp}}\end{DoxyCompactItemize}

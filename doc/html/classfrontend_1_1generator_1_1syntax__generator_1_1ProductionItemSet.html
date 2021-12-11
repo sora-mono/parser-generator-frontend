@@ -1,0 +1,1666 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: frontend::generator::syntax_generator::ProductionItemSet类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#pub-types">Public 类型</a> &#124;
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pri-methods">Private 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">frontend::generator::syntax_generator::ProductionItemSet类 参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>存储项集与向前看符号的类  
+ <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="production__item__set_8h_source.html">production_item_set.h</a>&gt;</code></p>
+<div class="dynheader">
+frontend::generator::syntax_generator::ProductionItemSet 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet__coll__graph.png" border="0" usemap="#frontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_coll__map" alt="Collaboration graph"/></div>
+<map name="frontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_coll__map" id="frontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_coll__map">
+<area shape="rect" title="存储项集与向前看符号的类" alt="" coords="825,63,977,119"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html" title=" " alt="" coords="287,13,613,69"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,5,237,76"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html" title=" " alt="" coords="335,93,565,135"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_1_1ProductionItemHasher.html">ProductionItemHasher</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">哈希ProductionItem的类 通过该类允许ProductionItem可以作为std::unordered_map键值  <a href="structfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_1_1ProductionItemHasher.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a9ed1cd1ccfa967eebf6c5e3d9762e684"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a> = std::tuple&lt; <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a8d03686ef93995074fb23ce1faf35b77">ProductionNodeId</a>, <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a>, <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a947b9e3a6819c29acb6bfca1cfbdf281">NextWordToShiftIndex</a> &gt;</td></tr>
+<tr class="memdesc:a9ed1cd1ccfa967eebf6c5e3d9762e684"><td class="mdescLeft">&#160;</td><td class="mdescRight">项集内单个项，内容从左到右依次为 产生式节点ID，产生式体ID，下一个移入的单词的位置  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">更多...</a><br /></td></tr>
+<tr class="separator:a9ed1cd1ccfa967eebf6c5e3d9762e684"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75a85b96d97a5466de77c256fbceba80"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a75a85b96d97a5466de77c256fbceba80">ForwardNodesContainer</a> = std::unordered_set&lt; <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a8d03686ef93995074fb23ce1faf35b77">ProductionNodeId</a> &gt;</td></tr>
+<tr class="memdesc:a75a85b96d97a5466de77c256fbceba80"><td class="mdescLeft">&#160;</td><td class="mdescRight">向前看符号容器  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a75a85b96d97a5466de77c256fbceba80">更多...</a><br /></td></tr>
+<tr class="separator:a75a85b96d97a5466de77c256fbceba80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a204923fb76ba7abf56fef1e1000d2d96"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a204923fb76ba7abf56fef1e1000d2d96">ProductionItemAndForwardNodesContainer</a> = std::unordered_map&lt; <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a>, <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a75a85b96d97a5466de77c256fbceba80">ForwardNodesContainer</a>, <a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_1_1ProductionItemHasher.html">ProductionItemHasher</a> &gt;</td></tr>
+<tr class="memdesc:a204923fb76ba7abf56fef1e1000d2d96"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储项和向前看节点的容器  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a204923fb76ba7abf56fef1e1000d2d96">更多...</a><br /></td></tr>
+<tr class="separator:a204923fb76ba7abf56fef1e1000d2d96"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:ace0dd491a44e8ae55effb9431951f560"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ace0dd491a44e8ae55effb9431951f560">ProductionItemSet</a> ()</td></tr>
+<tr class="separator:ace0dd491a44e8ae55effb9431951f560"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a169bfeb74243e2b42526e830721b1461"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a169bfeb74243e2b42526e830721b1461">ProductionItemSet</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a15626a86cc3914cad26a07cd778dae99">SyntaxAnalysisTableEntryId</a> syntax_analysis_table_entry_id)</td></tr>
+<tr class="separator:a169bfeb74243e2b42526e830721b1461"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ade733af1448dc9bad5c755152c872c"><td class="memTemplParams" colspan="2">template&lt;class ItemAndForwardNodes &gt; </td></tr>
+<tr class="memitem:a7ade733af1448dc9bad5c755152c872c"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a7ade733af1448dc9bad5c755152c872c">ProductionItemSet</a> (ItemAndForwardNodes &amp;&amp;item_and_forward_node_ids, <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a15626a86cc3914cad26a07cd778dae99">SyntaxAnalysisTableEntryId</a> syntax_analysis_table_entry_id)</td></tr>
+<tr class="separator:a7ade733af1448dc9bad5c755152c872c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7428544536dd71b07ec49383e19756ea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a7428544536dd71b07ec49383e19756ea">ProductionItemSet</a> (const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a> &amp;)=delete</td></tr>
+<tr class="separator:a7428544536dd71b07ec49383e19756ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab75bd8da7dbf0260a1b1d22487362eb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab75bd8da7dbf0260a1b1d22487362eb7">operator=</a> (const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a> &amp;)=delete</td></tr>
+<tr class="separator:ab75bd8da7dbf0260a1b1d22487362eb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98e66f2d7b8869b4438a98d52fe050c2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a98e66f2d7b8869b4438a98d52fe050c2">ProductionItemSet</a> (<a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a> &amp;&amp;production_item_set)</td></tr>
+<tr class="separator:a98e66f2d7b8869b4438a98d52fe050c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a27566ad7465bc8f6d1ef575010e4194f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a27566ad7465bc8f6d1ef575010e4194f">operator=</a> (<a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a> &amp;&amp;production_item_set)</td></tr>
+<tr class="separator:a27566ad7465bc8f6d1ef575010e4194f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a19bc83f8d64e0d4975f66c694026aaf6"><td class="memTemplParams" colspan="2">template&lt;class ForwardNodeIdContainer &gt; </td></tr>
+<tr class="memitem:a19bc83f8d64e0d4975f66c694026aaf6"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; ProductionItemAndForwardNodesContainer::iterator, bool &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a19bc83f8d64e0d4975f66c694026aaf6">AddItemAndForwardNodeIds</a> (const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a> &amp;item, ForwardNodeIdContainer &amp;&amp;forward_node_ids)</td></tr>
+<tr class="memdesc:a19bc83f8d64e0d4975f66c694026aaf6"><td class="mdescLeft">&#160;</td><td class="mdescRight">向项集中插入项和对应的向前看符号  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a19bc83f8d64e0d4975f66c694026aaf6">更多...</a><br /></td></tr>
+<tr class="separator:a19bc83f8d64e0d4975f66c694026aaf6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9b99c668d7a0c10456fdab8ebc351178"><td class="memTemplParams" colspan="2">template&lt;class ForwardNodeIdContainer &gt; </td></tr>
+<tr class="memitem:a9b99c668d7a0c10456fdab8ebc351178"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; ProductionItemAndForwardNodesContainer::iterator, bool &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9b99c668d7a0c10456fdab8ebc351178">AddMainItemAndForwardNodeIds</a> (const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a> &amp;item, ForwardNodeIdContainer &amp;&amp;forward_node_ids)</td></tr>
+<tr class="memdesc:a9b99c668d7a0c10456fdab8ebc351178"><td class="mdescLeft">&#160;</td><td class="mdescRight">向项集中插入核心项和对应的向前看符号  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9b99c668d7a0c10456fdab8ebc351178">更多...</a><br /></td></tr>
+<tr class="separator:a9b99c668d7a0c10456fdab8ebc351178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08e0819bbda524352cbffcc979d252a4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a08e0819bbda524352cbffcc979d252a4">IsItemIn</a> (const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a> &amp;item) const</td></tr>
+<tr class="memdesc:a08e0819bbda524352cbffcc979d252a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断给定项是否在该项集内  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a08e0819bbda524352cbffcc979d252a4">更多...</a><br /></td></tr>
+<tr class="separator:a08e0819bbda524352cbffcc979d252a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3ff0fee566735401041a4e71cd8f48ce"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a3ff0fee566735401041a4e71cd8f48ce">IsClosureAvailable</a> () const</td></tr>
+<tr class="memdesc:a3ff0fee566735401041a4e71cd8f48ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取该项集求的闭包是否有效  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a3ff0fee566735401041a4e71cd8f48ce">更多...</a><br /></td></tr>
+<tr class="separator:a3ff0fee566735401041a4e71cd8f48ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c50533628e6eb32477b4bf2b6c269bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a4c50533628e6eb32477b4bf2b6c269bb">SetProductionItemSetId</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#ad1086df60fade324297d10771daa1066">ProductionItemSetId</a> production_item_set_id)</td></tr>
+<tr class="memdesc:a4c50533628e6eb32477b4bf2b6c269bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置项集ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a4c50533628e6eb32477b4bf2b6c269bb">更多...</a><br /></td></tr>
+<tr class="separator:a4c50533628e6eb32477b4bf2b6c269bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1b6a5df8242a9dbed0f7bf04514e005a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#ad1086df60fade324297d10771daa1066">ProductionItemSetId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a1b6a5df8242a9dbed0f7bf04514e005a">GetProductionItemSetId</a> () const</td></tr>
+<tr class="memdesc:a1b6a5df8242a9dbed0f7bf04514e005a"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取项集ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a1b6a5df8242a9dbed0f7bf04514e005a">更多...</a><br /></td></tr>
+<tr class="separator:a1b6a5df8242a9dbed0f7bf04514e005a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a48373d0ee24607a4958cbd143db8999b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a48373d0ee24607a4958cbd143db8999b">SetClosureAvailable</a> ()</td></tr>
+<tr class="memdesc:a48373d0ee24607a4958cbd143db8999b"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置该项集求的闭包有效  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a48373d0ee24607a4958cbd143db8999b">更多...</a><br /></td></tr>
+<tr class="separator:a48373d0ee24607a4958cbd143db8999b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab2846ee0686a10fa320b574031676d58"><td class="memItemLeft" align="right" valign="top">const std::list&lt; ProductionItemAndForwardNodesContainer::const_iterator &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab2846ee0686a10fa320b574031676d58">GetMainItemIters</a> () const</td></tr>
+<tr class="memdesc:ab2846ee0686a10fa320b574031676d58"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取全部指向核心项的迭代器  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab2846ee0686a10fa320b574031676d58">更多...</a><br /></td></tr>
+<tr class="separator:ab2846ee0686a10fa320b574031676d58"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2561445bc68c7a5ea773f56c43d84074"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a204923fb76ba7abf56fef1e1000d2d96">ProductionItemAndForwardNodesContainer</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a2561445bc68c7a5ea773f56c43d84074">GetItemsAndForwardNodeIds</a> () const</td></tr>
+<tr class="memdesc:a2561445bc68c7a5ea773f56c43d84074"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取全部项和对应的向前看节点  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a2561445bc68c7a5ea773f56c43d84074">更多...</a><br /></td></tr>
+<tr class="separator:a2561445bc68c7a5ea773f56c43d84074"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a4a8966b76688ea2a0c385801e21416"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a15626a86cc3914cad26a07cd778dae99">SyntaxAnalysisTableEntryId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a0a4a8966b76688ea2a0c385801e21416">GetSyntaxAnalysisTableEntryId</a> () const</td></tr>
+<tr class="memdesc:a0a4a8966b76688ea2a0c385801e21416"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取该项集对应的语法分析表条目ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a0a4a8966b76688ea2a0c385801e21416">更多...</a><br /></td></tr>
+<tr class="separator:a0a4a8966b76688ea2a0c385801e21416"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c9b1e17a45652254737e5ffa6e64824"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a8c9b1e17a45652254737e5ffa6e64824">SetSyntaxAnalysisTableEntryId</a> (<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a15626a86cc3914cad26a07cd778dae99">SyntaxAnalysisTableEntryId</a> syntax_analysis_table_entry_id)</td></tr>
+<tr class="memdesc:a8c9b1e17a45652254737e5ffa6e64824"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置该项集对应的语法分析表条目ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a8c9b1e17a45652254737e5ffa6e64824">更多...</a><br /></td></tr>
+<tr class="separator:a8c9b1e17a45652254737e5ffa6e64824"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4c65d18edde8ef3e0a24e7e762fb944"><td class="memTemplParams" colspan="2">template&lt;class ForwardNodeIdContainer &gt; </td></tr>
+<tr class="memitem:aa4c65d18edde8ef3e0a24e7e762fb944"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#aa4c65d18edde8ef3e0a24e7e762fb944">AddForwardNodes</a> (const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a> &amp;item, ForwardNodeIdContainer &amp;&amp;forward_node_id_container)</td></tr>
+<tr class="memdesc:aa4c65d18edde8ef3e0a24e7e762fb944"><td class="mdescLeft">&#160;</td><td class="mdescRight">向给定项中添加向前看符号  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#aa4c65d18edde8ef3e0a24e7e762fb944">更多...</a><br /></td></tr>
+<tr class="separator:aa4c65d18edde8ef3e0a24e7e762fb944"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f5b6a16b4faae23094dd37bbe24724b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a2f5b6a16b4faae23094dd37bbe24724b">ClearNotMainItem</a> ()</td></tr>
+<tr class="memdesc:a2f5b6a16b4faae23094dd37bbe24724b"><td class="mdescLeft">&#160;</td><td class="mdescRight">清空所有非核心项  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a2f5b6a16b4faae23094dd37bbe24724b">更多...</a><br /></td></tr>
+<tr class="separator:a2f5b6a16b4faae23094dd37bbe24724b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63bdfe8072065bdd3aa74418f020eb04"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a63bdfe8072065bdd3aa74418f020eb04">IsMainItem</a> (const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a> &amp;item)</td></tr>
+<tr class="memdesc:a63bdfe8072065bdd3aa74418f020eb04"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断给定项是否为该项集的核心项  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a63bdfe8072065bdd3aa74418f020eb04">更多...</a><br /></td></tr>
+<tr class="separator:a63bdfe8072065bdd3aa74418f020eb04"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afde9b86e5239e36dd00896d468588355"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#afde9b86e5239e36dd00896d468588355">Size</a> () const</td></tr>
+<tr class="memdesc:afde9b86e5239e36dd00896d468588355"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取项集中项的个数  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#afde9b86e5239e36dd00896d468588355">更多...</a><br /></td></tr>
+<tr class="separator:afde9b86e5239e36dd00896d468588355"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private 成员函数</h2></td></tr>
+<tr class="memitem:a662065072b4b9a5a9c8b810161f75bcd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a662065072b4b9a5a9c8b810161f75bcd">SetMainItem</a> (<a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a204923fb76ba7abf56fef1e1000d2d96">ProductionItemAndForwardNodesContainer</a> ::const_iterator &amp;item_iter)</td></tr>
+<tr class="memdesc:a662065072b4b9a5a9c8b810161f75bcd"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置一项为核心项  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a662065072b4b9a5a9c8b810161f75bcd">更多...</a><br /></td></tr>
+<tr class="separator:a662065072b4b9a5a9c8b810161f75bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a83c21a7f412cf87bf04b4af8993cb7eb"><td class="memTemplParams" colspan="2">template&lt;class ForwardNodeIdContainer &gt; </td></tr>
+<tr class="memitem:a83c21a7f412cf87bf04b4af8993cb7eb"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a83c21a7f412cf87bf04b4af8993cb7eb">AddForwardNodes</a> (const ProductionItemAndForwardNodesContainer::iterator &amp;iter, ForwardNodeIdContainer &amp;&amp;forward_node_id_container)</td></tr>
+<tr class="memdesc:a83c21a7f412cf87bf04b4af8993cb7eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">向给定项中添加向前看符号  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a83c21a7f412cf87bf04b4af8993cb7eb">更多...</a><br /></td></tr>
+<tr class="separator:a83c21a7f412cf87bf04b4af8993cb7eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4f603a832778f5431d52fd488cb9a44"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ac4f603a832778f5431d52fd488cb9a44">SetClosureNotAvailable</a> ()</td></tr>
+<tr class="memdesc:ac4f603a832778f5431d52fd488cb9a44"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置闭包无效  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ac4f603a832778f5431d52fd488cb9a44">更多...</a><br /></td></tr>
+<tr class="separator:ac4f603a832778f5431d52fd488cb9a44"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52209edf90bd12493a7f38fd39c83d83"><td class="memItemLeft" align="right" valign="top">std::list&lt; ProductionItemAndForwardNodesContainer::const_iterator &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a52209edf90bd12493a7f38fd39c83d83">GetMainItemIters</a> ()</td></tr>
+<tr class="memdesc:a52209edf90bd12493a7f38fd39c83d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取全部指向核心项的迭代器  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a52209edf90bd12493a7f38fd39c83d83">更多...</a><br /></td></tr>
+<tr class="separator:a52209edf90bd12493a7f38fd39c83d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:a27737ea4a06a06befd208133f14c1e13"><td class="memItemLeft" align="right" valign="top">std::list&lt; ProductionItemAndForwardNodesContainer::const_iterator &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a27737ea4a06a06befd208133f14c1e13">main_items_</a></td></tr>
+<tr class="memdesc:a27737ea4a06a06befd208133f14c1e13"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储指向核心项的迭代器  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a27737ea4a06a06befd208133f14c1e13">更多...</a><br /></td></tr>
+<tr class="separator:a27737ea4a06a06befd208133f14c1e13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9c625f732c8d8cf48a2f01329576b10"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#aa9c625f732c8d8cf48a2f01329576b10">production_item_set_closure_available_</a> = false</td></tr>
+<tr class="memdesc:aa9c625f732c8d8cf48a2f01329576b10"><td class="mdescLeft">&#160;</td><td class="mdescRight">该项集求的闭包是否有效（求过闭包且未更改过则为true）  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#aa9c625f732c8d8cf48a2f01329576b10">更多...</a><br /></td></tr>
+<tr class="separator:aa9c625f732c8d8cf48a2f01329576b10"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91acc3366d2e86ba706b858ce0b47992"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#ad1086df60fade324297d10771daa1066">ProductionItemSetId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a91acc3366d2e86ba706b858ce0b47992">production_item_set_id_</a></td></tr>
+<tr class="memdesc:a91acc3366d2e86ba706b858ce0b47992"><td class="mdescLeft">&#160;</td><td class="mdescRight">项集ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a91acc3366d2e86ba706b858ce0b47992">更多...</a><br /></td></tr>
+<tr class="separator:a91acc3366d2e86ba706b858ce0b47992"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a7ce0682fe416b1f3c33c3477968f26"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a15626a86cc3914cad26a07cd778dae99">SyntaxAnalysisTableEntryId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a6a7ce0682fe416b1f3c33c3477968f26">syntax_analysis_table_entry_id_</a></td></tr>
+<tr class="memdesc:a6a7ce0682fe416b1f3c33c3477968f26"><td class="mdescLeft">&#160;</td><td class="mdescRight">项集对应的语法分析表条目ID  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a6a7ce0682fe416b1f3c33c3477968f26">更多...</a><br /></td></tr>
+<tr class="separator:a6a7ce0682fe416b1f3c33c3477968f26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7b7815b4b2f65a7eff44115ef981ab8d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a204923fb76ba7abf56fef1e1000d2d96">ProductionItemAndForwardNodesContainer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a7b7815b4b2f65a7eff44115ef981ab8d">item_and_forward_node_ids_</a></td></tr>
+<tr class="memdesc:a7b7815b4b2f65a7eff44115ef981ab8d"><td class="mdescLeft">&#160;</td><td class="mdescRight">项和对应的向前看符号  <a href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a7b7815b4b2f65a7eff44115ef981ab8d">更多...</a><br /></td></tr>
+<tr class="separator:a7b7815b4b2f65a7eff44115ef981ab8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>存储项集与向前看符号的类 </p>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00014">14</a> 行定义.</p>
+</div><h2 class="groupheader">成员类型定义说明</h2>
+<a id="a75a85b96d97a5466de77c256fbceba80"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75a85b96d97a5466de77c256fbceba80">&#9670;&nbsp;</a></span>ForwardNodesContainer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a75a85b96d97a5466de77c256fbceba80">frontend::generator::syntax_generator::ProductionItemSet::ForwardNodesContainer</a> =  std::unordered_set&lt;<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a8d03686ef93995074fb23ce1faf35b77">ProductionNodeId</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>向前看符号容器 </p>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00021">21</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9ed1cd1ccfa967eebf6c5e3d9762e684"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ed1cd1ccfa967eebf6c5e3d9762e684">&#9670;&nbsp;</a></span>ProductionItem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">frontend::generator::syntax_generator::ProductionItemSet::ProductionItem</a> =  std::tuple&lt;<a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a8d03686ef93995074fb23ce1faf35b77">ProductionNodeId</a>, <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a148278258ab36e6b32323a79e91b3b7e">ProductionBodyId</a>, <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a947b9e3a6819c29acb6bfca1cfbdf281">NextWordToShiftIndex</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>项集内单个项，内容从左到右依次为 产生式节点ID，产生式体ID，下一个移入的单词的位置 </p>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00019">19</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a204923fb76ba7abf56fef1e1000d2d96"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a204923fb76ba7abf56fef1e1000d2d96">&#9670;&nbsp;</a></span>ProductionItemAndForwardNodesContainer</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a204923fb76ba7abf56fef1e1000d2d96">frontend::generator::syntax_generator::ProductionItemSet::ProductionItemAndForwardNodesContainer</a> =  std::unordered_map&lt;<a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a>, <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a75a85b96d97a5466de77c256fbceba80">ForwardNodesContainer</a>, <a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_1_1ProductionItemHasher.html">ProductionItemHasher</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>存储项和向前看节点的容器 </p>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00034">34</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">构造及析构函数说明</h2>
+<a id="ace0dd491a44e8ae55effb9431951f560"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ace0dd491a44e8ae55effb9431951f560">&#9670;&nbsp;</a></span>ProductionItemSet() <span class="overload">[1/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::syntax_generator::ProductionItemSet::ProductionItemSet </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00036">36</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a169bfeb74243e2b42526e830721b1461"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a169bfeb74243e2b42526e830721b1461">&#9670;&nbsp;</a></span>ProductionItemSet() <span class="overload">[2/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::syntax_generator::ProductionItemSet::ProductionItemSet </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a15626a86cc3914cad26a07cd778dae99">SyntaxAnalysisTableEntryId</a>&#160;</td>
+          <td class="paramname"><em>syntax_analysis_table_entry_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00037">37</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7ade733af1448dc9bad5c755152c872c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ade733af1448dc9bad5c755152c872c">&#9670;&nbsp;</a></span>ProductionItemSet() <span class="overload">[3/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ItemAndForwardNodes &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::syntax_generator::ProductionItemSet::ProductionItemSet </td>
+          <td>(</td>
+          <td class="paramtype">ItemAndForwardNodes &amp;&amp;&#160;</td>
+          <td class="paramname"><em>item_and_forward_node_ids</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a15626a86cc3914cad26a07cd778dae99">SyntaxAnalysisTableEntryId</a>&#160;</td>
+          <td class="paramname"><em>syntax_analysis_table_entry_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00040">40</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7428544536dd71b07ec49383e19756ea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7428544536dd71b07ec49383e19756ea">&#9670;&nbsp;</a></span>ProductionItemSet() <span class="overload">[4/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::syntax_generator::ProductionItemSet::ProductionItemSet </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98e66f2d7b8869b4438a98d52fe050c2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98e66f2d7b8869b4438a98d52fe050c2">&#9670;&nbsp;</a></span>ProductionItemSet() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::syntax_generator::ProductionItemSet::ProductionItemSet </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>production_item_set</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00048">48</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="aa4c65d18edde8ef3e0a24e7e762fb944"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4c65d18edde8ef3e0a24e7e762fb944">&#9670;&nbsp;</a></span>AddForwardNodes() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ForwardNodeIdContainer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::syntax_generator::ProductionItemSet::AddForwardNodes </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a> &amp;&#160;</td>
+          <td class="paramname"><em>item</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ForwardNodeIdContainer &amp;&amp;&#160;</td>
+          <td class="paramname"><em>forward_node_id_container</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>向给定项中添加向前看符号 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">item</td><td>：待添加向前看符号的项 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">forward_node_id_container</td><td>：待添加的向前看符号 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回是否添加了向前看符号 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：添加了向前看符号 </td></tr>
+    <tr><td class="paramname">false</td><td>：forward_node_id_container中全部向前看符号均已存在 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>1.forward_node_id_container支持输入单个向前看符号和存储向前看符号的容器 2.item必须为核心项，否则请调用AddItemAndForwardNodeIds及类似函数 3.如果添加了新的向前看符号则设置闭包无效 </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd>item必须已经添加到该项集中 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00243">243</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00126">GetMainItemIters()</a> , 以及 <a class="el" href="production__item__set_8h_source.html#l00218">item_and_forward_node_ids_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8h_source.html#l00568">frontend::generator::syntax_generator::SyntaxGenerator::AddForwardNodes()</a> , 以及 <a class="el" href="production__item__set_8h_source.html#l00224">AddItemAndForwardNodeIds()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_aa4c65d18edde8ef3e0a24e7e762fb944_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_aa4c65d18edde8ef3e0a24e7e762fb944_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_aa4c65d18edde8ef3e0a24e7e762fb944_cgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_aa4c65d18edde8ef3e0a24e7e762fb944_cgraph">
+<area shape="rect" title="向给定项中添加向前看符号" alt="" coords="5,5,232,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab2846ee0686a10fa320b574031676d58" title="获取全部指向核心项的迭代器" alt="" coords="280,5,515,76"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_aa4c65d18edde8ef3e0a24e7e762fb944_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_aa4c65d18edde8ef3e0a24e7e762fb944_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_aa4c65d18edde8ef3e0a24e7e762fb944_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_aa4c65d18edde8ef3e0a24e7e762fb944_icgraph">
+<area shape="rect" title="向给定项中添加向前看符号" alt="" coords="1929,53,2156,124"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae342de44b6d6aedcec6a98586d3f133a" title="向给定核心项中添加向前看符号" alt="" coords="1657,5,1875,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a19bc83f8d64e0d4975f66c694026aaf6" title="向项集中插入项和对应的向前看符号" alt="" coords="1651,100,1881,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,115,1001,201"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,207,643,277"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,207,355,277"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,229,60,255"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5129208be8ce5779d5b75d3169a23592" title="向项集中添加项和项的向前看符号" alt="" coords="1363,79,1603,149"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9b99c668d7a0c10456fdab8ebc351178" title="向项集中插入核心项和对应的向前看符号" alt="" coords="1364,173,1601,244"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1077,79,1287,149"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#af9e3df47546b3fe233595849cfd1c5c9" title="向项集中添加核心项和核心项的向前看符号" alt="" coords="1049,173,1315,244"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a83c21a7f412cf87bf04b4af8993cb7eb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a83c21a7f412cf87bf04b4af8993cb7eb">&#9670;&nbsp;</a></span>AddForwardNodes() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ForwardNodeIdContainer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::syntax_generator::ProductionItemSet::AddForwardNodes </td>
+          <td>(</td>
+          <td class="paramtype">const ProductionItemAndForwardNodesContainer::iterator &amp;&#160;</td>
+          <td class="paramname"><em>iter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ForwardNodeIdContainer &amp;&amp;&#160;</td>
+          <td class="paramname"><em>forward_node_id_container</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>向给定项中添加向前看符号 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">iter</td><td>：待添加向前看符号的项 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">forward_node_id_container</td><td>：待添加的向前看符号 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回是否添加了新的向前看符号 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：添加了向前看符号 </td></tr>
+    <tr><td class="paramname">false</td><td>：forward_node_id_container中全部向前看符号均已存在 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>1.向已有的项集中添加向前看符号最终都应走该接口 2.forward_node_id_container支持输入单个向前看符号和存储向前看符号的容器 3.如果添加了新的向前看符号则设置闭包无效 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00264">264</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00218">item_and_forward_node_ids_</a> , 以及 <a class="el" href="production__item__set_8h_source.html#l00197">SetClosureNotAvailable()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a83c21a7f412cf87bf04b4af8993cb7eb_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a83c21a7f412cf87bf04b4af8993cb7eb_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a83c21a7f412cf87bf04b4af8993cb7eb_cgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a83c21a7f412cf87bf04b4af8993cb7eb_cgraph">
+<area shape="rect" title="向给定项中添加向前看符号" alt="" coords="5,5,232,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ac4f603a832778f5431d52fd488cb9a44" title="设置闭包无效" alt="" coords="280,5,500,76"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a19bc83f8d64e0d4975f66c694026aaf6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19bc83f8d64e0d4975f66c694026aaf6">&#9670;&nbsp;</a></span>AddItemAndForwardNodeIds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ForwardNodeIdContainer &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; ProductionItemSet::ProductionItemAndForwardNodesContainer::iterator, bool &gt; frontend::generator::syntax_generator::ProductionItemSet::AddItemAndForwardNodeIds </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a> &amp;&#160;</td>
+          <td class="paramname"><em>item</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ForwardNodeIdContainer &amp;&amp;&#160;</td>
+          <td class="paramname"><em>forward_node_ids</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>向项集中插入项和对应的向前看符号 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">item</td><td>：待插入的项 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">forward_node_ids</td><td>：待插入的项的向前看符号 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回指向给定Item的iterator和是否插入了新项 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>如果Item已存在则仅添加向前看符号且第二个返回参数为false 可以使用单个未包装ID </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd>插入时该项集必须没求过闭包，因为求过闭包的项集可能在之后的构建 过程中被再次引用 forward_node_ids必须不为空，所有项都一定有向前看符号 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00224">224</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00243">AddForwardNodes()</a>, <a class="el" href="production__item__set_8h_source.html#l00106">IsClosureAvailable()</a> , 以及 <a class="el" href="production__item__set_8h_source.html#l00218">item_and_forward_node_ids_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8h_source.html#l00947">frontend::generator::syntax_generator::SyntaxGenerator::AddItemAndForwardNodeIdsToProductionItem()</a> , 以及 <a class="el" href="production__item__set_8h_source.html#l00086">AddMainItemAndForwardNodeIds()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a19bc83f8d64e0d4975f66c694026aaf6_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a19bc83f8d64e0d4975f66c694026aaf6_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a19bc83f8d64e0d4975f66c694026aaf6_cgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a19bc83f8d64e0d4975f66c694026aaf6_cgraph">
+<area shape="rect" title="向项集中插入项和对应的向前看符号" alt="" coords="5,53,236,124"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#aa4c65d18edde8ef3e0a24e7e762fb944" title="向给定项中添加向前看符号" alt="" coords="284,5,511,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a3ff0fee566735401041a4e71cd8f48ce" title="获取该项集求的闭包是否有效" alt="" coords="292,100,503,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab2846ee0686a10fa320b574031676d58" title="获取全部指向核心项的迭代器" alt="" coords="559,5,793,76"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a19bc83f8d64e0d4975f66c694026aaf6_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a19bc83f8d64e0d4975f66c694026aaf6_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a19bc83f8d64e0d4975f66c694026aaf6_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a19bc83f8d64e0d4975f66c694026aaf6_icgraph">
+<area shape="rect" title="向项集中插入项和对应的向前看符号" alt="" coords="1651,53,1881,124"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5129208be8ce5779d5b75d3169a23592" title="向项集中添加项和项的向前看符号" alt="" coords="1363,5,1603,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9b99c668d7a0c10456fdab8ebc351178" title="向项集中插入核心项和对应的向前看符号" alt="" coords="1364,100,1601,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1077,5,1287,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,86,1001,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,133,643,204"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,133,355,204"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,155,60,182"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#af9e3df47546b3fe233595849cfd1c5c9" title="向项集中添加核心项和核心项的向前看符号" alt="" coords="1049,100,1315,171"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9b99c668d7a0c10456fdab8ebc351178"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b99c668d7a0c10456fdab8ebc351178">&#9670;&nbsp;</a></span>AddMainItemAndForwardNodeIds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ForwardNodeIdContainer &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;ProductionItemAndForwardNodesContainer::iterator, bool&gt; frontend::generator::syntax_generator::ProductionItemSet::AddMainItemAndForwardNodeIds </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a> &amp;&#160;</td>
+          <td class="paramname"><em>item</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">ForwardNodeIdContainer &amp;&amp;&#160;</td>
+          <td class="paramname"><em>forward_node_ids</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>向项集中插入核心项和对应的向前看符号 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">item</td><td>：待插入的项 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">forward_node_ids</td><td>：待插入的项的向前看符号 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回指向给定Item的iterator和是否插入了新项 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>如果Item已存在则仅添加向前看符号且第二个返回参数为false 可以使用单个未包装ID 在求闭包时从核心项开始展开 </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd>插入时该项集必须没求过闭包，因为求过闭包的项集可能在之后的构建 过程中被再次引用 forward_node_ids必须不为空，所有项都一定有向前看符号 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00086">86</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00224">AddItemAndForwardNodeIds()</a> , 以及 <a class="el" href="production__item__set_8cpp_source.html#l00035">SetMainItem()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8h_source.html#l00962">frontend::generator::syntax_generator::SyntaxGenerator::AddMainItemAndForwardNodeIdsToProductionItem()</a> , 以及 <a class="el" href="syntax__generator_8cpp_source.html#l01247">frontend::generator::syntax_generator::SyntaxGenerator::SyntaxAnalysisTableConstruct()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a9b99c668d7a0c10456fdab8ebc351178_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a9b99c668d7a0c10456fdab8ebc351178_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a9b99c668d7a0c10456fdab8ebc351178_cgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a9b99c668d7a0c10456fdab8ebc351178_cgraph">
+<area shape="rect" title="向项集中插入核心项和对应的向前看符号" alt="" coords="5,137,243,208"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a19bc83f8d64e0d4975f66c694026aaf6" title="向项集中插入项和对应的向前看符号" alt="" coords="292,93,523,164"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a662065072b4b9a5a9c8b810161f75bcd" title="设置一项为核心项" alt="" coords="291,189,524,245"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#aa4c65d18edde8ef3e0a24e7e762fb944" title="向给定项中添加向前看符号" alt="" coords="572,5,799,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a3ff0fee566735401041a4e71cd8f48ce" title="获取该项集求的闭包是否有效" alt="" coords="580,100,791,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab2846ee0686a10fa320b574031676d58" title="获取全部指向核心项的迭代器" alt="" coords="847,89,1081,160"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ac4f603a832778f5431d52fd488cb9a44" title="设置闭包无效" alt="" coords="575,247,795,317"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a9b99c668d7a0c10456fdab8ebc351178_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a9b99c668d7a0c10456fdab8ebc351178_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a9b99c668d7a0c10456fdab8ebc351178_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a9b99c668d7a0c10456fdab8ebc351178_icgraph">
+<area shape="rect" title="向项集中插入核心项和对应的向前看符号" alt="" coords="1363,57,1600,127"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#af9e3df47546b3fe233595849cfd1c5c9" title="向项集中添加核心项和核心项的向前看符号" alt="" coords="1049,17,1315,87"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,53,643,123"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,5,1001,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,53,355,123"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,75,60,101"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2f5b6a16b4faae23094dd37bbe24724b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f5b6a16b4faae23094dd37bbe24724b">&#9670;&nbsp;</a></span>ClearNotMainItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::syntax_generator::ProductionItemSet::ClearNotMainItem </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>清空所有非核心项 </p>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8cpp_source.html">production_item_set.cpp</a> 第 <a class="el" href="production__item__set_8cpp_source.html#l00018">18</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00126">GetMainItemIters()</a> , 以及 <a class="el" href="production__item__set_8h_source.html#l00218">item_and_forward_node_ids_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l00517">frontend::generator::syntax_generator::SyntaxGenerator::ProductionItemSetClosure()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a2f5b6a16b4faae23094dd37bbe24724b_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a2f5b6a16b4faae23094dd37bbe24724b_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a2f5b6a16b4faae23094dd37bbe24724b_cgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a2f5b6a16b4faae23094dd37bbe24724b_cgraph">
+<area shape="rect" title="清空所有非核心项" alt="" coords="5,5,212,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab2846ee0686a10fa320b574031676d58" title="获取全部指向核心项的迭代器" alt="" coords="260,5,495,76"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a2f5b6a16b4faae23094dd37bbe24724b_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a2f5b6a16b4faae23094dd37bbe24724b_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a2f5b6a16b4faae23094dd37bbe24724b_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a2f5b6a16b4faae23094dd37bbe24724b_icgraph">
+<area shape="rect" title="清空所有非核心项" alt="" coords="1307,13,1513,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1049,13,1259,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,5,1001,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,13,643,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,13,355,83"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,35,60,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2561445bc68c7a5ea773f56c43d84074"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2561445bc68c7a5ea773f56c43d84074">&#9670;&nbsp;</a></span>GetItemsAndForwardNodeIds()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a204923fb76ba7abf56fef1e1000d2d96">ProductionItemAndForwardNodesContainer</a>&amp; frontend::generator::syntax_generator::ProductionItemSet::GetItemsAndForwardNodeIds </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取全部项和对应的向前看节点 </p>
+<dl class="section return"><dt>返回</dt><dd>返回全部项和对应的向前看节点的const引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00131">131</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00218">item_and_forward_node_ids_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l01228">frontend::generator::syntax_generator::SyntaxGenerator::FormatProductionItems()</a>, <a class="el" href="syntax__generator_8h_source.html#l00608">frontend::generator::syntax_generator::SyntaxGenerator::GetForwardNodeIds()</a> , 以及 <a class="el" href="syntax__generator_8h_source.html#l00656">frontend::generator::syntax_generator::SyntaxGenerator::GetProductionItemsAndForwardNodes()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a2561445bc68c7a5ea773f56c43d84074_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a2561445bc68c7a5ea773f56c43d84074_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a2561445bc68c7a5ea773f56c43d84074_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a2561445bc68c7a5ea773f56c43d84074_icgraph">
+<area shape="rect" title="获取全部项和对应的向前看节点" alt="" coords="1609,100,1820,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4b4afd286d8c501a7f1aa80041e9920d" title="格式化项集中全部项及项对应的向前看符号" alt="" coords="1307,5,1561,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a529caa60820d405cc7c238c75164f9d9" title="获取项的向前看符号" alt="" coords="1327,100,1541,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a21ad1e543b5d0bb9fad0aae2e485c898" title="获取项集的全部项和项的向前看符号" alt="" coords="1318,195,1550,265"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1049,121,1259,192"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,151,1001,237"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,159,643,229"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,159,355,229"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,181,60,207"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a52209edf90bd12493a7f38fd39c83d83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52209edf90bd12493a7f38fd39c83d83">&#9670;&nbsp;</a></span>GetMainItemIters() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::list&lt;ProductionItemAndForwardNodesContainer::const_iterator&gt;&amp; frontend::generator::syntax_generator::ProductionItemSet::GetMainItemIters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取全部指向核心项的迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>返回全部指向核心项的迭代器的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00203">203</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00208">main_items_</a>.</p>
+
+</div>
+</div>
+<a id="ab2846ee0686a10fa320b574031676d58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab2846ee0686a10fa320b574031676d58">&#9670;&nbsp;</a></span>GetMainItemIters() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::list&lt;ProductionItemAndForwardNodesContainer::const_iterator&gt;&amp; frontend::generator::syntax_generator::ProductionItemSet::GetMainItemIters </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取全部指向核心项的迭代器 </p>
+<dl class="section return"><dt>返回</dt><dd>返回全部指向核心项的迭代器的const引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00126">126</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00208">main_items_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="production__item__set_8h_source.html#l00243">AddForwardNodes()</a>, <a class="el" href="production__item__set_8cpp_source.html#l00018">ClearNotMainItem()</a>, <a class="el" href="syntax__generator_8h_source.html#l00586">frontend::generator::syntax_generator::SyntaxGenerator::GetProductionItemSetMainItems()</a>, <a class="el" href="production__item__set_8cpp_source.html#l00026">IsMainItem()</a> , 以及 <a class="el" href="production__item__set_8cpp_source.html#l00035">SetMainItem()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_ab2846ee0686a10fa320b574031676d58_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_ab2846ee0686a10fa320b574031676d58_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_ab2846ee0686a10fa320b574031676d58_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_ab2846ee0686a10fa320b574031676d58_icgraph">
+<area shape="rect" title="获取全部指向核心项的迭代器" alt="" coords="2212,188,2447,259"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#aa4c65d18edde8ef3e0a24e7e762fb944" title="向给定项中添加向前看符号" alt="" coords="1934,188,2161,259"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a2f5b6a16b4faae23094dd37bbe24724b" title="清空所有非核心项" alt="" coords="1379,5,1586,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a77eab058e01b34db9ad35789e671dfba" title="获取项集的全部核心项" alt="" coords="1651,79,1883,149"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a63bdfe8072065bdd3aa74418f020eb04" title="判断给定项是否为该项集的核心项" alt="" coords="1936,374,2159,430"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a662065072b4b9a5a9c8b810161f75bcd" title="设置一项为核心项" alt="" coords="1931,287,2164,343"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae342de44b6d6aedcec6a98586d3f133a" title="向给定核心项中添加向前看符号" alt="" coords="1073,173,1291,244"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a19bc83f8d64e0d4975f66c694026aaf6" title="向项集中插入项和对应的向前看符号" alt="" coords="1651,173,1882,244"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,254,1001,339"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,301,643,372"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,301,355,372"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,323,60,350"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5129208be8ce5779d5b75d3169a23592" title="向项集中添加项和项的向前看符号" alt="" coords="1363,161,1603,232"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9b99c668d7a0c10456fdab8ebc351178" title="向项集中插入核心项和对应的向前看符号" alt="" coords="1364,319,1601,389"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1077,79,1287,149"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#af9e3df47546b3fe233595849cfd1c5c9" title="向项集中添加核心项和核心项的向前看符号" alt="" coords="1049,268,1315,339"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a13e771dd708af5749a2119d63fe66165" title="获取给定项移入相同产生式后构成的项集" alt="" coords="1651,387,1883,457"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1b6a5df8242a9dbed0f7bf04514e005a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b6a5df8242a9dbed0f7bf04514e005a">&#9670;&nbsp;</a></span>GetProductionItemSetId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#ad1086df60fade324297d10771daa1066">ProductionItemSetId</a> frontend::generator::syntax_generator::ProductionItemSet::GetProductionItemSetId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取项集ID </p>
+<dl class="section return"><dt>返回</dt><dd>返回项集ID </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00116">116</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00212">production_item_set_id_</a>.</p>
+
+</div>
+</div>
+<a id="a0a4a8966b76688ea2a0c385801e21416"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a4a8966b76688ea2a0c385801e21416">&#9670;&nbsp;</a></span>GetSyntaxAnalysisTableEntryId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a15626a86cc3914cad26a07cd778dae99">SyntaxAnalysisTableEntryId</a> frontend::generator::syntax_generator::ProductionItemSet::GetSyntaxAnalysisTableEntryId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取该项集对应的语法分析表条目ID </p>
+<dl class="section return"><dt>返回</dt><dd>该项集对应的语法分析表条目ID </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00137">137</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00215">syntax_analysis_table_entry_id_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l00517">frontend::generator::syntax_generator::SyntaxGenerator::ProductionItemSetClosure()</a>, <a class="el" href="syntax__generator_8cpp_source.html#l00717">frontend::generator::syntax_generator::SyntaxGenerator::SpreadLookForwardSymbolAndConstructSyntaxAnalysisTableEntry()</a> , 以及 <a class="el" href="syntax__generator_8cpp_source.html#l01247">frontend::generator::syntax_generator::SyntaxGenerator::SyntaxAnalysisTableConstruct()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a0a4a8966b76688ea2a0c385801e21416_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a0a4a8966b76688ea2a0c385801e21416_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a0a4a8966b76688ea2a0c385801e21416_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a0a4a8966b76688ea2a0c385801e21416_icgraph">
+<area shape="rect" title="获取该项集对应的语法分析表条目ID" alt="" coords="1307,79,1525,149"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1049,5,1259,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,42,1001,127"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,89,643,160"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,89,355,160"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,111,60,138"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3ff0fee566735401041a4e71cd8f48ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3ff0fee566735401041a4e71cd8f48ce">&#9670;&nbsp;</a></span>IsClosureAvailable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::syntax_generator::ProductionItemSet::IsClosureAvailable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取该项集求的闭包是否有效 </p>
+<dl class="section return"><dt>返回</dt><dd>返回该项集求的闭包是否有效 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：该项集闭包有效，无需重求 </td></tr>
+    <tr><td class="paramname">false</td><td>：该项集闭包无效，需要求闭包才能使用 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00106">106</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00210">production_item_set_closure_available_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="production__item__set_8h_source.html#l00224">AddItemAndForwardNodeIds()</a>, <a class="el" href="syntax__generator_8h_source.html#l00690">frontend::generator::syntax_generator::SyntaxGenerator::IsClosureAvailable()</a> , 以及 <a class="el" href="syntax__generator_8cpp_source.html#l00517">frontend::generator::syntax_generator::SyntaxGenerator::ProductionItemSetClosure()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a3ff0fee566735401041a4e71cd8f48ce_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a3ff0fee566735401041a4e71cd8f48ce_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a3ff0fee566735401041a4e71cd8f48ce_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a3ff0fee566735401041a4e71cd8f48ce_icgraph">
+<area shape="rect" title="获取该项集求的闭包是否有效" alt="" coords="1959,173,2169,244"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a19bc83f8d64e0d4975f66c694026aaf6" title="向项集中插入项和对应的向前看符号" alt="" coords="1665,100,1896,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1077,137,1287,208"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a71a560a7d12997021add47d555801a1f" title="查询一个项集是否闭包有效" alt="" coords="1651,246,1911,302"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5129208be8ce5779d5b75d3169a23592" title="向项集中添加项和项的向前看符号" alt="" coords="1363,100,1603,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9b99c668d7a0c10456fdab8ebc351178" title="向项集中插入核心项和对应的向前看符号" alt="" coords="1364,5,1601,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,42,1001,127"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,9,643,80"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,9,355,80"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,31,60,58"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#af9e3df47546b3fe233595849cfd1c5c9" title="向项集中添加核心项和核心项的向前看符号" alt="" coords="1049,43,1315,113"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a08e0819bbda524352cbffcc979d252a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08e0819bbda524352cbffcc979d252a4">&#9670;&nbsp;</a></span>IsItemIn()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::syntax_generator::ProductionItemSet::IsItemIn </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a> &amp;&#160;</td>
+          <td class="paramname"><em>item</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>判断给定项是否在该项集内 </p>
+<dl class="section return"><dt>返回</dt><dd>返回给定项是否在该项集内 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：给定项在该项集内 </td></tr>
+    <tr><td class="paramname">false</td><td>：给定项不在该项集内 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00098">98</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00218">item_and_forward_node_ids_</a>.</p>
+
+</div>
+</div>
+<a id="a63bdfe8072065bdd3aa74418f020eb04"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63bdfe8072065bdd3aa74418f020eb04">&#9670;&nbsp;</a></span>IsMainItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::syntax_generator::ProductionItemSet::IsMainItem </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9ed1cd1ccfa967eebf6c5e3d9762e684">ProductionItem</a> &amp;&#160;</td>
+          <td class="paramname"><em>item</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>判断给定项是否为该项集的核心项 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">item</td><td>：待判断的项 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回给定项是否为该项集的核心项的判断结果 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>给定项是该项集的核心项 </td></tr>
+    <tr><td class="paramname">false</td><td>给定项不是该项集的核心项或不存在于该项集 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section warning"><dt>警告</dt><dd>时间复杂度O(n)，n为该项集核心项数 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8cpp_source.html">production_item_set.cpp</a> 第 <a class="el" href="production__item__set_8cpp_source.html#l00026">26</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00126">GetMainItemIters()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8cpp_source.html#l00647">frontend::generator::syntax_generator::SyntaxGenerator::GetProductionItemSetIdFromProductionItems()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a63bdfe8072065bdd3aa74418f020eb04_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a63bdfe8072065bdd3aa74418f020eb04_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a63bdfe8072065bdd3aa74418f020eb04_cgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a63bdfe8072065bdd3aa74418f020eb04_cgraph">
+<area shape="rect" title="判断给定项是否为该项集的核心项" alt="" coords="5,13,228,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab2846ee0686a10fa320b574031676d58" title="获取全部指向核心项的迭代器" alt="" coords="276,5,511,76"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a63bdfe8072065bdd3aa74418f020eb04_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a63bdfe8072065bdd3aa74418f020eb04_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a63bdfe8072065bdd3aa74418f020eb04_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a63bdfe8072065bdd3aa74418f020eb04_icgraph">
+<area shape="rect" title="判断给定项是否为该项集的核心项" alt="" coords="1329,20,1552,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a13e771dd708af5749a2119d63fe66165" title="获取给定项移入相同产生式后构成的项集" alt="" coords="1049,13,1281,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,5,1001,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,13,643,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,13,355,83"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,35,60,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab75bd8da7dbf0260a1b1d22487362eb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab75bd8da7dbf0260a1b1d22487362eb7">&#9670;&nbsp;</a></span>operator=() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a>&amp; frontend::generator::syntax_generator::ProductionItemSet::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a27566ad7465bc8f6d1ef575010e4194f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27566ad7465bc8f6d1ef575010e4194f">&#9670;&nbsp;</a></span>operator=() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a> &amp; frontend::generator::syntax_generator::ProductionItemSet::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>production_item_set</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8cpp_source.html">production_item_set.cpp</a> 第 <a class="el" href="production__item__set_8cpp_source.html#l00005">5</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00218">item_and_forward_node_ids_</a>, <a class="el" href="production__item__set_8h_source.html#l00210">production_item_set_closure_available_</a>, <a class="el" href="production__item__set_8h_source.html#l00212">production_item_set_id_</a> , 以及 <a class="el" href="production__item__set_8h_source.html#l00215">syntax_analysis_table_entry_id_</a>.</p>
+
+</div>
+</div>
+<a id="a48373d0ee24607a4958cbd143db8999b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a48373d0ee24607a4958cbd143db8999b">&#9670;&nbsp;</a></span>SetClosureAvailable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::syntax_generator::ProductionItemSet::SetClosureAvailable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置该项集求的闭包有效 </p>
+<dl class="section attention"><dt>注意</dt><dd>该函数仅应由闭包函数调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00122">122</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00210">production_item_set_closure_available_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8h_source.html#l00681">frontend::generator::syntax_generator::SyntaxGenerator::SetProductionItemSetClosureAvailable()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a48373d0ee24607a4958cbd143db8999b_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a48373d0ee24607a4958cbd143db8999b_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a48373d0ee24607a4958cbd143db8999b_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a48373d0ee24607a4958cbd143db8999b_icgraph">
+<area shape="rect" title="设置该项集求的闭包有效" alt="" coords="1585,13,1805,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aa0d2052b84467619ee479fc86b2c944c" title="设置项集闭包有效" alt="" coords="1307,13,1537,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1049,13,1259,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,5,1001,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,13,643,83"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,13,355,83"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,35,60,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac4f603a832778f5431d52fd488cb9a44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4f603a832778f5431d52fd488cb9a44">&#9670;&nbsp;</a></span>SetClosureNotAvailable()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::syntax_generator::ProductionItemSet::SetClosureNotAvailable </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置闭包无效 </p>
+<dl class="section note"><dt>注解</dt><dd>每个修改了项/项的向前看符号的函数都应设置闭包无效 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00197">197</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00210">production_item_set_closure_available_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="production__item__set_8h_source.html#l00264">AddForwardNodes()</a> , 以及 <a class="el" href="production__item__set_8cpp_source.html#l00035">SetMainItem()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_ac4f603a832778f5431d52fd488cb9a44_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_ac4f603a832778f5431d52fd488cb9a44_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_ac4f603a832778f5431d52fd488cb9a44_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_ac4f603a832778f5431d52fd488cb9a44_icgraph">
+<area shape="rect" title="设置闭包无效" alt="" coords="1929,49,2149,120"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a83c21a7f412cf87bf04b4af8993cb7eb" title="向给定项中添加向前看符号" alt="" coords="1651,5,1878,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a662065072b4b9a5a9c8b810161f75bcd" title="设置一项为核心项" alt="" coords="1648,101,1881,157"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9b99c668d7a0c10456fdab8ebc351178" title="向项集中插入核心项和对应的向前看符号" alt="" coords="1363,93,1600,164"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#af9e3df47546b3fe233595849cfd1c5c9" title="向项集中添加核心项和核心项的向前看符号" alt="" coords="1049,53,1315,124"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,89,643,160"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,42,1001,127"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,89,355,160"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,111,60,138"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a662065072b4b9a5a9c8b810161f75bcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a662065072b4b9a5a9c8b810161f75bcd">&#9670;&nbsp;</a></span>SetMainItem()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::syntax_generator::ProductionItemSet::SetMainItem </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a204923fb76ba7abf56fef1e1000d2d96">ProductionItemAndForwardNodesContainer</a> ::const_iterator &amp;&#160;</td>
+          <td class="paramname"><em>item_iter</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置一项为核心项 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">item_iter</td><td>：指向要被设置为核心项的项的迭代器 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>要求指定的项未被设置成核心项过 自动设置闭包无效 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8cpp_source.html">production_item_set.cpp</a> 第 <a class="el" href="production__item__set_8cpp_source.html#l00035">35</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00126">GetMainItemIters()</a>, <a class="el" href="production__item__set_8h_source.html#l00208">main_items_</a> , 以及 <a class="el" href="production__item__set_8h_source.html#l00197">SetClosureNotAvailable()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="production__item__set_8h_source.html#l00086">AddMainItemAndForwardNodeIds()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a662065072b4b9a5a9c8b810161f75bcd_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a662065072b4b9a5a9c8b810161f75bcd_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a662065072b4b9a5a9c8b810161f75bcd_cgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a662065072b4b9a5a9c8b810161f75bcd_cgraph">
+<area shape="rect" title="设置一项为核心项" alt="" coords="5,61,239,117"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab2846ee0686a10fa320b574031676d58" title="获取全部指向核心项的迭代器" alt="" coords="287,5,521,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ac4f603a832778f5431d52fd488cb9a44" title="设置闭包无效" alt="" coords="294,100,514,171"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a662065072b4b9a5a9c8b810161f75bcd_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a662065072b4b9a5a9c8b810161f75bcd_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a662065072b4b9a5a9c8b810161f75bcd_icgraph" id="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet_a662065072b4b9a5a9c8b810161f75bcd_icgraph">
+<area shape="rect" title="设置一项为核心项" alt="" coords="1648,64,1881,120"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a9b99c668d7a0c10456fdab8ebc351178" title="向项集中插入核心项和对应的向前看符号" alt="" coords="1363,57,1600,127"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#af9e3df47546b3fe233595849cfd1c5c9" title="向项集中添加核心项和核心项的向前看符号" alt="" coords="1049,17,1315,87"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,53,643,123"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,5,1001,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,53,355,123"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,75,60,101"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a4c50533628e6eb32477b4bf2b6c269bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c50533628e6eb32477b4bf2b6c269bb">&#9670;&nbsp;</a></span>SetProductionItemSetId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::syntax_generator::ProductionItemSet::SetProductionItemSetId </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#ad1086df60fade324297d10771daa1066">ProductionItemSetId</a>&#160;</td>
+          <td class="paramname"><em>production_item_set_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置项集ID </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">production_item_set_id</td><td>：项集ID </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00111">111</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00212">production_item_set_id_</a>.</p>
+
+</div>
+</div>
+<a id="a8c9b1e17a45652254737e5ffa6e64824"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c9b1e17a45652254737e5ffa6e64824">&#9670;&nbsp;</a></span>SetSyntaxAnalysisTableEntryId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::syntax_generator::ProductionItemSet::SetSyntaxAnalysisTableEntryId </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a15626a86cc3914cad26a07cd778dae99">SyntaxAnalysisTableEntryId</a>&#160;</td>
+          <td class="paramname"><em>syntax_analysis_table_entry_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置该项集对应的语法分析表条目ID </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">syntax_analysis_table_entry_id</td><td>：该项集对应的语法分析表条目ID </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00142">142</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00215">syntax_analysis_table_entry_id_</a>.</p>
+
+</div>
+</div>
+<a id="afde9b86e5239e36dd00896d468588355"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afde9b86e5239e36dd00896d468588355">&#9670;&nbsp;</a></span>Size()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t frontend::generator::syntax_generator::ProductionItemSet::Size </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取项集中项的个数 </p>
+<dl class="section return"><dt>返回</dt><dd>返回项的个数 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00171">171</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="production__item__set_8h_source.html#l00218">item_and_forward_node_ids_</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="a7b7815b4b2f65a7eff44115ef981ab8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7b7815b4b2f65a7eff44115ef981ab8d">&#9670;&nbsp;</a></span>item_and_forward_node_ids_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a204923fb76ba7abf56fef1e1000d2d96">ProductionItemAndForwardNodesContainer</a> frontend::generator::syntax_generator::ProductionItemSet::item_and_forward_node_ids_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>项和对应的向前看符号 </p>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00218">218</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="production__item__set_8h_source.html#l00243">AddForwardNodes()</a>, <a class="el" href="production__item__set_8h_source.html#l00224">AddItemAndForwardNodeIds()</a>, <a class="el" href="production__item__set_8cpp_source.html#l00018">ClearNotMainItem()</a>, <a class="el" href="production__item__set_8h_source.html#l00131">GetItemsAndForwardNodeIds()</a>, <a class="el" href="production__item__set_8h_source.html#l00098">IsItemIn()</a>, <a class="el" href="production__item__set_8cpp_source.html#l00005">operator=()</a> , 以及 <a class="el" href="production__item__set_8h_source.html#l00171">Size()</a>.</p>
+
+</div>
+</div>
+<a id="a27737ea4a06a06befd208133f14c1e13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a27737ea4a06a06befd208133f14c1e13">&#9670;&nbsp;</a></span>main_items_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::list&lt;ProductionItemAndForwardNodesContainer::const_iterator&gt; frontend::generator::syntax_generator::ProductionItemSet::main_items_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>存储指向核心项的迭代器 </p>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00208">208</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="production__item__set_8h_source.html#l00126">GetMainItemIters()</a> , 以及 <a class="el" href="production__item__set_8cpp_source.html#l00035">SetMainItem()</a>.</p>
+
+</div>
+</div>
+<a id="aa9c625f732c8d8cf48a2f01329576b10"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9c625f732c8d8cf48a2f01329576b10">&#9670;&nbsp;</a></span>production_item_set_closure_available_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::syntax_generator::ProductionItemSet::production_item_set_closure_available_ = false</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>该项集求的闭包是否有效（求过闭包且未更改过则为true） </p>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00210">210</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="production__item__set_8h_source.html#l00106">IsClosureAvailable()</a>, <a class="el" href="production__item__set_8cpp_source.html#l00005">operator=()</a>, <a class="el" href="production__item__set_8h_source.html#l00122">SetClosureAvailable()</a> , 以及 <a class="el" href="production__item__set_8h_source.html#l00197">SetClosureNotAvailable()</a>.</p>
+
+</div>
+</div>
+<a id="a91acc3366d2e86ba706b858ce0b47992"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a91acc3366d2e86ba706b858ce0b47992">&#9670;&nbsp;</a></span>production_item_set_id_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#ad1086df60fade324297d10771daa1066">ProductionItemSetId</a> frontend::generator::syntax_generator::ProductionItemSet::production_item_set_id_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>初始值:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      ProductionItemSetId::InvalidId()</div>
+</div><!-- fragment -->
+<p>项集ID </p>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00212">212</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="production__item__set_8h_source.html#l00116">GetProductionItemSetId()</a>, <a class="el" href="production__item__set_8cpp_source.html#l00005">operator=()</a> , 以及 <a class="el" href="production__item__set_8h_source.html#l00111">SetProductionItemSetId()</a>.</p>
+
+</div>
+</div>
+<a id="a6a7ce0682fe416b1f3c33c3477968f26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6a7ce0682fe416b1f3c33c3477968f26">&#9670;&nbsp;</a></span>syntax_analysis_table_entry_id_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a15626a86cc3914cad26a07cd778dae99">SyntaxAnalysisTableEntryId</a> frontend::generator::syntax_generator::ProductionItemSet::syntax_analysis_table_entry_id_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>初始值:</b><div class="fragment"><div class="line">=</div>
+<div class="line">      SyntaxAnalysisTableEntryId::InvalidId()</div>
+</div><!-- fragment -->
+<p>项集对应的语法分析表条目ID </p>
+
+<p class="definition">在文件 <a class="el" href="production__item__set_8h_source.html">production_item_set.h</a> 第 <a class="el" href="production__item__set_8h_source.html#l00215">215</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="production__item__set_8h_source.html#l00137">GetSyntaxAnalysisTableEntryId()</a>, <a class="el" href="production__item__set_8cpp_source.html#l00005">operator=()</a> , 以及 <a class="el" href="production__item__set_8h_source.html#l00142">SetSyntaxAnalysisTableEntryId()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/Generator/SyntaxGenerator/<a class="el" href="production__item__set_8h_source.html">production_item_set.h</a></li>
+<li>src/Generator/SyntaxGenerator/<a class="el" href="production__item__set_8cpp_source.html">production_item_set.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacefrontend.html">frontend</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1generator.html">generator</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html">syntax_generator</a></li><li class="navelem"><a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html">ProductionItemSet</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

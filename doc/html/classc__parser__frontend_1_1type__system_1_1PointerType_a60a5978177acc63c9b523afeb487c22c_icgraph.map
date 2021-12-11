@@ -1,0 +1,4 @@
+<map id="c_parser_frontend::type_system::PointerType::DeReference" name="c_parser_frontend::type_system::PointerType::DeReference">
+<area shape="rect" id="node1" title="获取该指针解引用后得到的类型" alt="" coords="324,5,515,61"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#a082cac4f28ce1ff5d278a3a0c7cc6bea" title="设定被解引用的节点" alt="" coords="5,5,276,61"/>
+</map>

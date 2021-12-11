@@ -1,0 +1,7 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::AddForwardNodes" name="frontend::generator::syntax_generator::SyntaxGenerator::AddForwardNodes">
+<area shape="rect" id="node1" title="向给定核心项中添加向前看符号" alt="" coords="5,53,223,124"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#aa4c65d18edde8ef3e0a24e7e762fb944" title="向给定项中添加向前看符号" alt="" coords="273,5,500,76"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0c9987d677e8acbbb2b19a82a2b37815" title="根据项集ID获取项集" alt="" coords="271,100,503,171"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab2846ee0686a10fa320b574031676d58" title="获取全部指向核心项的迭代器" alt="" coords="551,5,785,76"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1common_1_1ObjectManager.html#a1c27178f6f5cf8e5ce2ddec1863f9533" title="获取容器实际存储的有效对象数量" alt="" coords="572,115,764,156"/>
+</map>

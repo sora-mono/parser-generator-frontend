@@ -1,0 +1,21 @@
+<map id="c_parser_frontend::type_system::TypeInterface::IsSameObject" name="c_parser_frontend::type_system::TypeInterface::IsSameObject">
+<area shape="rect" id="node1" title=" " alt="" coords="737,285,940,341"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1FunctionType.html#ab5ba29b09d464a6ac23089eaca85c83a" title="判断给定类型是否可以给该对象赋值" alt="" coords="489,5,687,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1EndType.html#a6f4ffe42bf33102bc2f52d8ad78b783a" title=" " alt="" coords="504,85,672,141"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#ac78c52556f6bfec3ce16afb568253aa8" title=" " alt="" coords="499,165,677,221"/>
+<area shape="rect" id="node7" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#abfe3ef81e6a6e5392bfd4b94c7163a0a" title=" " alt="" coords="493,245,683,301"/>
+<area shape="rect" id="node9" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#afe3dbce8010be2813be1e258e3ecf9c4" title=" " alt="" coords="487,325,689,381"/>
+<area shape="rect" id="node15" href="$classc__parser__frontend_1_1type__system_1_1EnumType.html#ab552effba9b33a679f018caf15d7d5b0" title=" " alt="" coords="497,405,679,461"/>
+<area shape="rect" id="node17" href="$classc__parser__frontend_1_1type__system_1_1InitializeListType.html#a94395e9acf4bcd5c13e4f5dabe880f9e" title=" " alt="" coords="491,485,685,541"/>
+<area shape="rect" id="node19" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a5aa9c19280d18ecedfc56f910f6d95bc" title="比较两个类型是否完全相同" alt="" coords="487,565,689,621"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1EndType.html#a16015e5c390d8490dc66a11ead3fd24d" title="比较两个类型是否完全相同" alt="" coords="253,45,421,101"/>
+<area shape="rect" id="node6" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#a23b0071b2c288812c3955482d4186a51" title="比较两个类型是否完全相同" alt="" coords="248,125,427,181"/>
+<area shape="rect" id="node8" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#aa64ede3652f3e1ff0a96e7a76c82a4fb" title="比较两个类型是否完全相同" alt="" coords="242,205,433,261"/>
+<area shape="rect" id="node10" href="$classc__parser__frontend_1_1type__system_1_1StructType.html#a21ba181d2278fd9a0adbfa58275bada3" title=" " alt="" coords="246,285,429,341"/>
+<area shape="rect" id="node11" href="$classc__parser__frontend_1_1type__system_1_1UnionType.html#a98da5465489bd63a4b93c8a504f60765" title=" " alt="" coords="246,365,429,421"/>
+<area shape="rect" id="node12" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a83d928e714bfb4a8aa758b2462db06a8" title="比较两个类型是否完全相同" alt="" coords="236,445,439,501"/>
+<area shape="rect" id="node13" href="$classc__parser__frontend_1_1type__system_1_1StructType.html#ad57e4456caf14fca05a2752ff98f67e0" title="比较两个类型是否完全相同" alt="" coords="5,405,188,461"/>
+<area shape="rect" id="node14" href="$classc__parser__frontend_1_1type__system_1_1UnionType.html#a9e5eb68061afd992a8455dc20e92330f" title="比较两个类型是否完全相同" alt="" coords="5,485,188,541"/>
+<area shape="rect" id="node16" href="$classc__parser__frontend_1_1type__system_1_1EnumType.html#a2eead0fe62ca004bde766b819213c826" title="比较两个类型是否完全相同" alt="" coords="247,525,428,581"/>
+<area shape="rect" id="node18" href="$classc__parser__frontend_1_1type__system_1_1InitializeListType.html#afb573a97b14debe0ed84badfac6e0091" title="比较两个类型是否完全相同" alt="" coords="241,605,434,661"/>
+</map>

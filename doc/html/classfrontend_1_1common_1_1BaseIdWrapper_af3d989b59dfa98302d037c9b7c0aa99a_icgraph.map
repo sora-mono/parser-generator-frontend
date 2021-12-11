@@ -1,0 +1,6 @@
+<map id="frontend::common::BaseIdWrapper::InvalidValue" name="frontend::common::BaseIdWrapper::InvalidValue">
+<area shape="rect" id="node1" title="获取原始的无效值" alt="" coords="297,108,492,149"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1common_1_1BaseIdWrapper.html#ad2c51a0b8d85f3f8c33e1205fe69ccce" title="获取存储无效值的容器" alt="" coords="5,5,249,76"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1ExplicitIdWrapperCustomizeInvalidValue.html#a7eab4219fcafb53a07ccf1f0ddb90dee" title="获取存储无效值的容器" alt="" coords="8,101,247,157"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1common_1_1NonExplicitIdWrapperCustomizeInvalidValue.html#ace531a39d9588626fece9a7405c7715c" title="获取存储无效值的容器" alt="" coords="8,181,247,237"/>
+</map>

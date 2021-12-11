@@ -1,0 +1,9 @@
+<map id="c_parser_frontend::type_system::UnionType::operator==" name="c_parser_frontend::type_system::UnionType::operator==">
+<area shape="rect" id="node1" title="比较两个类型是否完全相同" alt="" coords="5,45,188,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a83d928e714bfb4a8aa758b2462db06a8" title="比较两个类型是否完全相同" alt="" coords="236,45,439,101"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a7d34d13bdf090ead4b5c27f92250a63d" title="获取下一个节点的引用" alt="" coords="487,5,689,61"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#afe3dbce8010be2813be1e258e3ecf9c4" title=" " alt="" coords="487,85,689,141"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a26e89e296553d917acc1d860fe4d3918" title="获取结构化类型名" alt="" coords="737,45,947,101"/>
+<area shape="rect" id="node6" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a3027817a00d7034165ddc0fd56281da2" title=" " alt="" coords="741,125,943,181"/>
+<area shape="rect" id="node7" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="995,125,1197,181"/>
+</map>

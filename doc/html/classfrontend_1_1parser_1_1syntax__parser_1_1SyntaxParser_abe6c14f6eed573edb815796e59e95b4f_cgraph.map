@@ -1,0 +1,7 @@
+<map id="frontend::parser::syntax_parser::SyntaxParser::ShiftNonTerminalWord" name="frontend::parser::syntax_parser::SyntaxParser::ShiftNonTerminalWord">
+<area shape="rect" id="node1" title="移入非终结节点" alt="" coords="5,125,184,181"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6fddec7524fb0130a82277027537e1ee" title="获取移入非终结产生式节点后到达的产生式条目" alt="" coords="280,5,459,61"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a50d8d56021539fdda1a646cb605c3194" title="获取当前活跃的解析数据（解析数据栈顶对象）" alt="" coords="280,85,459,141"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a5f0c3ac537d527e9dc8147e210090935" title="将数据压入解析数据栈" alt="" coords="280,165,459,221"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a9e0b9c345a98949418730a086168b953" title="设置存储的数据" alt="" coords="232,246,507,317"/>
+</map>

@@ -1,0 +1,853 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: frontend::common::UnorderedStructManager&lt; StructType, Hasher &gt; 模板类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classfrontend_1_1common_1_1UnorderedStructManager.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-types">Public 类型</a> &#124;
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="classfrontend_1_1common_1_1UnorderedStructManager-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">frontend::common::UnorderedStructManager&lt; StructType, Hasher &gt; 模板类 参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>建立stl未提供hash方法的结构的哈希存储,通过ID一一标识对象  
+ <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a699c54cca867bf66164e191452501cfe"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a699c54cca867bf66164e191452501cfe">WrapperLabel</a> { <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a699c54cca867bf66164e191452501cfea11e4f58e036dc6ab9d751f5e51434f9b">WrapperLabel::kObjectHashType</a>
+ }</td></tr>
+<tr class="separator:a699c54cca867bf66164e191452501cfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a291dc5daaa192e1baf39205f8481fd99"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a> = <a class="el" href="classfrontend_1_1common_1_1ObjectManager.html">ObjectManager</a>&lt; StructType &gt;::<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a></td></tr>
+<tr class="memdesc:a291dc5daaa192e1baf39205f8481fd99"><td class="mdescLeft">&#160;</td><td class="mdescRight">标识对象的ID  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">更多...</a><br /></td></tr>
+<tr class="separator:a291dc5daaa192e1baf39205f8481fd99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7f6f9513b264639d604678da7dcc3387"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a7f6f9513b264639d604678da7dcc3387">ObjectHashType</a> = <a class="el" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html">ExplicitIdWrapper</a>&lt; size_t, <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a699c54cca867bf66164e191452501cfe">WrapperLabel</a>, <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a699c54cca867bf66164e191452501cfea11e4f58e036dc6ab9d751f5e51434f9b">WrapperLabel::kObjectHashType</a> &gt;</td></tr>
+<tr class="memdesc:a7f6f9513b264639d604678da7dcc3387"><td class="mdescLeft">&#160;</td><td class="mdescRight">对象hash后得到的类型  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#a7f6f9513b264639d604678da7dcc3387">更多...</a><br /></td></tr>
+<tr class="separator:a7f6f9513b264639d604678da7dcc3387"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:af43829ca9721687f1966aec2bee3d797"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#af43829ca9721687f1966aec2bee3d797">UnorderedStructManager</a> ()</td></tr>
+<tr class="separator:af43829ca9721687f1966aec2bee3d797"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afabb5de5e153e5c536969db54dce7d83"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#afabb5de5e153e5c536969db54dce7d83">~UnorderedStructManager</a> ()</td></tr>
+<tr class="separator:afabb5de5e153e5c536969db54dce7d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1959da3a072226c4cab199b6e1acf273"><td class="memItemLeft" align="right" valign="top">StructType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a1959da3a072226c4cab199b6e1acf273">GetObject</a> (<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a> object_id)</td></tr>
+<tr class="memdesc:a1959da3a072226c4cab199b6e1acf273"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回指向管理的对象的引用  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#a1959da3a072226c4cab199b6e1acf273">更多...</a><br /></td></tr>
+<tr class="separator:a1959da3a072226c4cab199b6e1acf273"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6208dce5fa5b84c16f896e195e69d59"><td class="memItemLeft" align="right" valign="top">const StructType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#ab6208dce5fa5b84c16f896e195e69d59">GetObject</a> (<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a> object_id) const</td></tr>
+<tr class="memdesc:ab6208dce5fa5b84c16f896e195e69d59"><td class="mdescLeft">&#160;</td><td class="mdescRight">返回指向管理的对象的const引用  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#ab6208dce5fa5b84c16f896e195e69d59">更多...</a><br /></td></tr>
+<tr class="separator:ab6208dce5fa5b84c16f896e195e69d59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbd7bff0314ac667bce8e2bc92ccaeaa"><td class="memTemplParams" colspan="2">template&lt;class... Args&gt; </td></tr>
+<tr class="memitem:acbd7bff0314ac667bce8e2bc92ccaeaa"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a>, bool &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#acbd7bff0314ac667bce8e2bc92ccaeaa">EmplaceObject</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="memdesc:acbd7bff0314ac667bce8e2bc92ccaeaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">插入一个待管理的对象  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#acbd7bff0314ac667bce8e2bc92ccaeaa">更多...</a><br /></td></tr>
+<tr class="separator:acbd7bff0314ac667bce8e2bc92ccaeaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad95b0bc3542bc949ad76039de0063fb7"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#ad95b0bc3542bc949ad76039de0063fb7">GetObjectIdFromObjectPointer</a> (const StructType *object_pointer) const</td></tr>
+<tr class="memdesc:ad95b0bc3542bc949ad76039de0063fb7"><td class="mdescLeft">&#160;</td><td class="mdescRight">通过指向对象的指针获取对象的ID  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#ad95b0bc3542bc949ad76039de0063fb7">更多...</a><br /></td></tr>
+<tr class="separator:ad95b0bc3542bc949ad76039de0063fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8843e773f9b1f958e9beb2373084704d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a8843e773f9b1f958e9beb2373084704d">GetObjectIdFromObject</a> (const StructType &amp;object) const</td></tr>
+<tr class="memdesc:a8843e773f9b1f958e9beb2373084704d"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据对象获取其ID  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#a8843e773f9b1f958e9beb2373084704d">更多...</a><br /></td></tr>
+<tr class="separator:a8843e773f9b1f958e9beb2373084704d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5912fd9f67bdee5098556fd6c5a32224"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a5912fd9f67bdee5098556fd6c5a32224">StructManagerInit</a> ()</td></tr>
+<tr class="memdesc:a5912fd9f67bdee5098556fd6c5a32224"><td class="mdescLeft">&#160;</td><td class="mdescRight">初始化容器  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#a5912fd9f67bdee5098556fd6c5a32224">更多...</a><br /></td></tr>
+<tr class="separator:a5912fd9f67bdee5098556fd6c5a32224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a40fe617a709d1745521bd118a60c8f16"><td class="memItemLeft" align="right" valign="top">StructType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a40fe617a709d1745521bd118a60c8f16">operator[]</a> (<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a> object_id)</td></tr>
+<tr class="memdesc:a40fe617a709d1745521bd118a60c8f16"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据对象ID获取对象引用  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#a40fe617a709d1745521bd118a60c8f16">更多...</a><br /></td></tr>
+<tr class="separator:a40fe617a709d1745521bd118a60c8f16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60121a133af0aae584c62b32ae8ead2f"><td class="memItemLeft" align="right" valign="top">const StructType &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a60121a133af0aae584c62b32ae8ead2f">operator[]</a> (<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a> object_id) const</td></tr>
+<tr class="memdesc:a60121a133af0aae584c62b32ae8ead2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据对象ID获取对象const引用  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#a60121a133af0aae584c62b32ae8ead2f">更多...</a><br /></td></tr>
+<tr class="separator:a60121a133af0aae584c62b32ae8ead2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9d3edd0f2354c33f944c185af831b2d"><td class="memTemplParams" colspan="2">template&lt;class... Args&gt; </td></tr>
+<tr class="memitem:ac9d3edd0f2354c33f944c185af831b2d"><td class="memTemplItemLeft" align="right" valign="top">std::pair&lt; typename <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">UnorderedStructManager</a>&lt; StructType, Hasher &gt;::<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a>, bool &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#ac9d3edd0f2354c33f944c185af831b2d">EmplaceObject</a> (Args &amp;&amp;... args)</td></tr>
+<tr class="separator:ac9d3edd0f2354c33f944c185af831b2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:adbeed4088d927338043ca5f291d9e93b"><td class="memItemLeft" align="right" valign="top">std::unordered_set&lt; StructType, Hasher &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#adbeed4088d927338043ca5f291d9e93b">node_manager_</a></td></tr>
+<tr class="memdesc:adbeed4088d927338043ca5f291d9e93b"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储所有管理的对象  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#adbeed4088d927338043ca5f291d9e93b">更多...</a><br /></td></tr>
+<tr class="separator:adbeed4088d927338043ca5f291d9e93b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7593b55e4693786c401aba6e75265d8b"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; const StructType *, <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a7593b55e4693786c401aba6e75265d8b">object_pointer_to_id_</a></td></tr>
+<tr class="memdesc:a7593b55e4693786c401aba6e75265d8b"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储管理的对象的地址到ID的映射  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#a7593b55e4693786c401aba6e75265d8b">更多...</a><br /></td></tr>
+<tr class="separator:a7593b55e4693786c401aba6e75265d8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad64db60bbeda863c0379e519ad520451"><td class="memItemLeft" align="right" valign="top">std::vector&lt; typename std::unordered_set&lt; StructType, Hasher &gt;::iterator &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#ad64db60bbeda863c0379e519ad520451">id_to_object_</a></td></tr>
+<tr class="memdesc:ad64db60bbeda863c0379e519ad520451"><td class="mdescLeft">&#160;</td><td class="mdescRight">存储ID到指向管理的对象的迭代器映射  <a href="classfrontend_1_1common_1_1UnorderedStructManager.html#ad64db60bbeda863c0379e519ad520451">更多...</a><br /></td></tr>
+<tr class="separator:ad64db60bbeda863c0379e519ad520451"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><h3>template&lt;class StructType, class Hasher = std::hash&lt;StructType&gt;&gt;<br />
+class frontend::common::UnorderedStructManager&lt; StructType, Hasher &gt;</h3>
+
+<p>建立stl未提供hash方法的结构的哈希存储,通过ID一一标识对象 </p>
+<p>TODO 设置使用std::string时的特化 </p><dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">StructType</td><td>：要管理的对象类型 </td></tr>
+    <tr><td class="paramname">Hasher</td><td>：哈希StructType的函数的包装类 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00020">20</a> 行定义.</p>
+</div><h2 class="groupheader">成员类型定义说明</h2>
+<a id="a7f6f9513b264639d604678da7dcc3387"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7f6f9513b264639d604678da7dcc3387">&#9670;&nbsp;</a></span>ObjectHashType</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a7f6f9513b264639d604678da7dcc3387">ObjectHashType</a> =  <a class="el" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html">ExplicitIdWrapper</a>&lt;size_t, <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a699c54cca867bf66164e191452501cfe">WrapperLabel</a>, <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a699c54cca867bf66164e191452501cfea11e4f58e036dc6ab9d751f5e51434f9b">WrapperLabel::kObjectHashType</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>对象hash后得到的类型 </p>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00027">27</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a291dc5daaa192e1baf39205f8481fd99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a291dc5daaa192e1baf39205f8481fd99">&#9670;&nbsp;</a></span>ObjectId</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a> =  <a class="el" href="classfrontend_1_1common_1_1ObjectManager.html">ObjectManager</a>&lt;StructType&gt;::<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>标识对象的ID </p>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00024">24</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员枚举类型说明</h2>
+<a id="a699c54cca867bf66164e191452501cfe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a699c54cca867bf66164e191452501cfe">&#9670;&nbsp;</a></span>WrapperLabel</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a699c54cca867bf66164e191452501cfe">frontend::common::UnorderedStructManager::WrapperLabel</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">strong</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">枚举值</th></tr><tr><td class="fieldname"><a id="a699c54cca867bf66164e191452501cfea11e4f58e036dc6ab9d751f5e51434f9b"></a>kObjectHashType&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00022">22</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">构造及析构函数说明</h2>
+<a id="af43829ca9721687f1966aec2bee3d797"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af43829ca9721687f1966aec2bee3d797">&#9670;&nbsp;</a></span>UnorderedStructManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">UnorderedStructManager</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00029">29</a> 行定义.</p>
+
+</div>
+</div>
+<a id="afabb5de5e153e5c536969db54dce7d83"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afabb5de5e153e5c536969db54dce7d83">&#9670;&nbsp;</a></span>~UnorderedStructManager()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::~<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">UnorderedStructManager</a> </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00030">30</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="acbd7bff0314ac667bce8e2bc92ccaeaa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbd7bff0314ac667bce8e2bc92ccaeaa">&#9670;&nbsp;</a></span>EmplaceObject() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;class... Args&gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a>, bool&gt; <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::EmplaceObject </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>插入一个待管理的对象 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">args</td><td>：构建待管理的对象的参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>前半部分为对象ID，后半部分为是否执行了插入操作 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>如果提供const左值引用则会复制一份对象存储， 如果提供右值引用则会移动构造该对象 如果待插入对象已存在则会返回已存在的对象的ID </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd>该类不会管理传入的参数，真正管理的是根据传入参数构造的新对象 </dd></dl>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8h_source.html#l00090">frontend::generator::syntax_generator::SyntaxGenerator::AddBodySymbol()</a>, <a class="el" href="syntax__generator_8h_source.html#l00080">frontend::generator::syntax_generator::SyntaxGenerator::AddNodeSymbol()</a> , 以及 <a class="el" href="dfa__generator_8h_source.html#l00286">frontend::generator::dfa_generator::DfaGenerator::InOrInsert()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1common_1_1UnorderedStructManager_acbd7bff0314ac667bce8e2bc92ccaeaa_icgraph.png" border="0" usemap="#classfrontend_1_1common_1_1UnorderedStructManager_acbd7bff0314ac667bce8e2bc92ccaeaa_icgraph" alt=""/></div>
+<map name="classfrontend_1_1common_1_1UnorderedStructManager_acbd7bff0314ac667bce8e2bc92ccaeaa_icgraph" id="classfrontend_1_1common_1_1UnorderedStructManager_acbd7bff0314ac667bce8e2bc92ccaeaa_icgraph">
+<area shape="rect" title="插入一个待管理的对象" alt="" coords="1299,293,1521,335"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a2fa903aeb13ca2d2ae8845b1d4427ddb" title="添加产生式体字符串" alt="" coords="1003,202,1250,258"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae0b4802e9c60b7e57990233f17095dd2" title="添加产生式名" alt="" coords="1003,286,1251,342"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a1d1bc4c8b084e3ca3e28011d63ededc4" title="获取集合对应的中间节点ID，如果不存在则创建新的中间节点" alt="" coords="1018,531,1235,587"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a929e48b9bce49002c7b89d6ca4f997c9" title="添加具有双目运算符和左侧单目运算符语义的运算符" alt="" coords="707,195,938,265"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aec2d0760baf4095f4f2183c8e84e37ea" title="添加双目运算符" alt="" coords="691,290,955,346"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a35ff252e20e90814c0040237d4be5fea" title="添加单目运算符" alt="" coords="709,5,937,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4dc1e67e686137062266790650bbe67a" title="添加终结产生式" alt="" coords="712,100,933,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a36db9122a028b29ec3c60e13c4837583" title="添加关键字" alt="" coords="411,107,634,163"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae42f4e8c267e3c13e1bc7931dec5736f" title="新建文件尾节点" alt="" coords="711,466,934,522"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#adc8a8b9ef6516d04b2ad19bb8d8bbfea" title="添加非终结产生式" alt="" coords="699,371,946,441"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,459,643,529"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,503,355,573"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,525,60,551"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="414,554,631,610"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="714,597,931,653"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac9d3edd0f2354c33f944c185af831b2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9d3edd0f2354c33f944c185af831b2d">&#9670;&nbsp;</a></span>EmplaceObject() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<div class="memtemplate">
+template&lt;class... Args&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt;typename <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">UnorderedStructManager</a>&lt;StructType, Hasher&gt;::<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a>, bool&gt; <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::EmplaceObject </td>
+          <td>(</td>
+          <td class="paramtype">Args &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>args</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00104">104</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a1959da3a072226c4cab199b6e1acf273"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1959da3a072226c4cab199b6e1acf273">&#9670;&nbsp;</a></span>GetObject() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">StructType&amp; <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::GetObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a>&#160;</td>
+          <td class="paramname"><em>object_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>返回指向管理的对象的引用 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">object_id</td><td>：要获取的对象的ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回object_id对应的对象的引用 </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd>入参必须对应存在的对象 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00036">36</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8h_source.html#l00122">frontend::generator::syntax_generator::SyntaxGenerator::GetBodySymbolStringFromId()</a>, <a class="el" href="syntax__generator_8h_source.html#l00114">frontend::generator::syntax_generator::SyntaxGenerator::GetNodeSymbolStringFromId()</a>, <a class="el" href="unordered__struct__manager_8h_source.html#l00036">frontend::common::UnorderedStructManager&lt; SetType, UnorderedSetHasher &gt;::GetObject()</a>, <a class="el" href="dfa__generator_8h_source.html#l00197">frontend::generator::dfa_generator::DfaGenerator::GetSetObject()</a> , 以及 <a class="el" href="unordered__struct__manager_8h_source.html#l00078">frontend::common::UnorderedStructManager&lt; SetType, UnorderedSetHasher &gt;::operator[]()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1common_1_1UnorderedStructManager_a1959da3a072226c4cab199b6e1acf273_icgraph.png" border="0" usemap="#classfrontend_1_1common_1_1UnorderedStructManager_a1959da3a072226c4cab199b6e1acf273_icgraph" alt=""/></div>
+<map name="classfrontend_1_1common_1_1UnorderedStructManager_a1959da3a072226c4cab199b6e1acf273_icgraph" id="classfrontend_1_1common_1_1UnorderedStructManager_a1959da3a072226c4cab199b6e1acf273_icgraph">
+<area shape="rect" title="返回指向管理的对象的引用" alt="" coords="2560,400,2779,442"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a450071727387673138962c5c24f811fc" title="根据产生式体字符串ID获取产生式体字符串" alt="" coords="2265,247,2510,318"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5e851a1d4c3dd84f61105ea2b3a9f027" title="根据产生式名ID获取对应产生式名" alt="" coords="2264,342,2511,412"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a504c3213c736bdf80fdbf90cf17865eb" title="获取子集构造法的集合的引用" alt="" coords="2279,437,2496,493"/>
+<area shape="rect" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a40fe617a709d1745521bd118a60c8f16" title="根据对象ID获取对象引用" alt="" coords="2263,517,2512,573"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a929e48b9bce49002c7b89d6ca4f997c9" title="添加具有双目运算符和左侧单目运算符语义的运算符" alt="" coords="1967,166,2198,236"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aec2d0760baf4095f4f2183c8e84e37ea" title="添加双目运算符" alt="" coords="1951,261,2215,317"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a35ff252e20e90814c0040237d4be5fea" title="添加单目运算符" alt="" coords="1969,342,2197,412"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aa0fd2aa1188025239754e6a491f77542" title="格式化项" alt="" coords="1617,84,1903,140"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0356a8c7b3b39a6beb6a46750e36fcc2" title="格式化产生式" alt="" coords="1647,560,1873,631"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a6e838cc21976d781be783fbe0da27cc3" title="通过产生式节点ID获取产生式名" alt="" coords="1959,436,2206,507"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1a5e6621aed32555b8418ba69663d861" title="格式化项和项的向前看符号" alt="" coords="1315,71,1569,142"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1053,203,1263,274"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,316,1001,401"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4b4afd286d8c501a7f1aa80041e9920d" title="格式化项集中全部项及项对应的向前看符号" alt="" coords="1315,166,1569,236"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,487,643,558"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,566,355,636"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,588,60,614"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#adc8a8b9ef6516d04b2ad19bb8d8bbfea" title="添加非终结产生式" alt="" coords="1319,560,1565,631"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a70a4d44740b413762658641c9a48f7a6" title="格式化非终结节点全部产生式" alt="" coords="1315,655,1569,726"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aea6ba153b8d9e32107ffde3655c41877" title="格式化向前看符号集" alt="" coords="1651,203,1869,274"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae5854dc97cb2ccfa054c83f4f82c8501" title="查询项中下一个移入的产生式名" alt="" coords="1646,363,1874,434"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5625ad82de54a2b797b7a54c4e5802b4" title="通过项查询下一个移入的节点名" alt="" coords="1328,363,1556,434"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="1974,684,2191,740"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="1049,693,1267,749"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab6208dce5fa5b84c16f896e195e69d59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6208dce5fa5b84c16f896e195e69d59">&#9670;&nbsp;</a></span>GetObject() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const StructType&amp; <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::GetObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a>&#160;</td>
+          <td class="paramname"><em>object_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>返回指向管理的对象的const引用 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">object_id</td><td>：要获取的对象的ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回object_id对应的对象的const引用 </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd>入参必须对应存在的对象 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00045">45</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a8843e773f9b1f958e9beb2373084704d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8843e773f9b1f958e9beb2373084704d">&#9670;&nbsp;</a></span>GetObjectIdFromObject()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher &gt; </div>
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">UnorderedStructManager</a>&lt; StructType, Hasher &gt;::<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a> <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::GetObjectIdFromObject </td>
+          <td>(</td>
+          <td class="paramtype">const StructType &amp;&#160;</td>
+          <td class="paramname"><em>object</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>根据对象获取其ID </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">object</td><td>：要获取ID的对象 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>获取到的对象ID </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname"><a class="el" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf" title="获取存储无效值的容器">ObjectId::InvalidId()</a></td><td>：该对象不存在 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00118">118</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__generator_8h_source.html#l00106">frontend::generator::syntax_generator::SyntaxGenerator::GetBodySymbolId()</a> , 以及 <a class="el" href="syntax__generator_8h_source.html#l00098">frontend::generator::syntax_generator::SyntaxGenerator::GetNodeSymbolId()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1common_1_1UnorderedStructManager_a8843e773f9b1f958e9beb2373084704d_icgraph.png" border="0" usemap="#classfrontend_1_1common_1_1UnorderedStructManager_a8843e773f9b1f958e9beb2373084704d_icgraph" alt=""/></div>
+<map name="classfrontend_1_1common_1_1UnorderedStructManager_a8843e773f9b1f958e9beb2373084704d_icgraph" id="classfrontend_1_1common_1_1UnorderedStructManager_a8843e773f9b1f958e9beb2373084704d_icgraph">
+<area shape="rect" title="根据对象获取其ID" alt="" coords="2544,75,2821,116"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a38d46a8950ebef15467e3a3c4b0a2d50" title="根据产生式体字符串获取对应ID" alt="" coords="2238,21,2495,77"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#afa97ab3763b61a50e57a7f06eb87f85b" title="根据产生式名获取对应ID" alt="" coords="2237,107,2496,163"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a99a1e9a4983c31a1aa6dcd81a743606e" title="将产生式体符号转换为产生式节点ID" alt="" coords="1950,5,2182,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a6e838cc21976d781be783fbe0da27cc3" title="通过产生式节点ID获取产生式名" alt="" coords="1943,427,2189,497"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0c623efe1db965b3ae044243b21cb226" title="根据产生式名获取产生式节点ID" alt="" coords="1950,100,2182,171"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aea6ba153b8d9e32107ffde3655c41877" title="格式化向前看符号集" alt="" coords="1643,555,1861,625"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1e99d186b69f4582b9e07002be000050" title="传播向前看符号，同时在传播过程中构建语法分析表shift操作的部分" alt="" coords="691,411,1001,497"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,711,643,781"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aa0fd2aa1188025239754e6a491f77542" title="格式化项" alt="" coords="1609,434,1895,490"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0356a8c7b3b39a6beb6a46750e36fcc2" title="格式化产生式" alt="" coords="1639,232,1865,303"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae5854dc97cb2ccfa054c83f4f82c8501" title="查询项中下一个移入的产生式名" alt="" coords="1638,699,1866,769"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a1a5e6621aed32555b8418ba69663d861" title="格式化项和项的向前看符号" alt="" coords="1307,575,1561,645"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0eb66494a1dbfeb40c6bd78a97f1f60c" title="对项集求闭包，同时构建语法分析表reduct操作部分" alt="" coords="1049,528,1259,599"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4b4afd286d8c501a7f1aa80041e9920d" title="格式化项集中全部项及项对应的向前看符号" alt="" coords="1307,480,1561,551"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,711,355,781"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,733,60,759"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#adc8a8b9ef6516d04b2ad19bb8d8bbfea" title="添加非终结产生式" alt="" coords="1311,60,1557,131"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a70a4d44740b413762658641c9a48f7a6" title="格式化非终结节点全部产生式" alt="" coords="1307,232,1561,303"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5625ad82de54a2b797b7a54c4e5802b4" title="通过项查询下一个移入的节点名" alt="" coords="1320,772,1548,843"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5100679b94d5727f0c7de415f9639c39" title="设置非终结产生式可以空规约" alt="" coords="1631,56,1873,127"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a29bd0d5f7da94feb75f4c3c43aa16068" title="设置用户定义的产生式根节点" alt="" coords="1622,151,1882,207"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad95b0bc3542bc949ad76039de0063fb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad95b0bc3542bc949ad76039de0063fb7">&#9670;&nbsp;</a></span>GetObjectIdFromObjectPointer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">UnorderedStructManager</a>&lt; StructType, Hasher &gt;::<a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a> <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::GetObjectIdFromObjectPointer </td>
+          <td>(</td>
+          <td class="paramtype">const StructType *&#160;</td>
+          <td class="paramname"><em>object_pointer</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>通过指向对象的指针获取对象的ID </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">object_pointer</td><td>：指向（存储于node_manager_中的）对象的指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回对象的ID </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname"><a class="el" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf" title="获取存储无效值的容器">ObjectId::InvalidId()</a></td><td>：对象不存在 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00129">129</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a40fe617a709d1745521bd118a60c8f16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a40fe617a709d1745521bd118a60c8f16">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">StructType&amp; <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a>&#160;</td>
+          <td class="paramname"><em>object_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>根据对象ID获取对象引用 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">object_id</td><td>：要获取引用的对象ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回获取到的对象引用 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>语义同GetObject </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd>入参必须对应存在的对象 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00078">78</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a60121a133af0aae584c62b32ae8ead2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60121a133af0aae584c62b32ae8ead2f">&#9670;&nbsp;</a></span>operator[]() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const StructType&amp; <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a>&#160;</td>
+          <td class="paramname"><em>object_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>根据对象ID获取对象const引用 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">object_id</td><td>：要获取引用的对象ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回获取到的对象const引用 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>语义同GetObject </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd>入参必须对应存在的对象 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00086">86</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5912fd9f67bdee5098556fd6c5a32224"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5912fd9f67bdee5098556fd6c5a32224">&#9670;&nbsp;</a></span>StructManagerInit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::StructManagerInit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初始化容器 </p>
+<dl class="section note"><dt>注解</dt><dd>如果容器中存在对象则全部释放 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00069">69</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00012">frontend::generator::dfa_generator::DfaGenerator::DfaInit()</a> , 以及 <a class="el" href="syntax__generator_8cpp_source.html#l01296">frontend::generator::syntax_generator::SyntaxGenerator::SyntaxGeneratorInit()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1common_1_1UnorderedStructManager_a5912fd9f67bdee5098556fd6c5a32224_icgraph.png" border="0" usemap="#classfrontend_1_1common_1_1UnorderedStructManager_a5912fd9f67bdee5098556fd6c5a32224_icgraph" alt=""/></div>
+<map name="classfrontend_1_1common_1_1UnorderedStructManager_a5912fd9f67bdee5098556fd6c5a32224_icgraph" id="classfrontend_1_1common_1_1UnorderedStructManager_a5912fd9f67bdee5098556fd6c5a32224_icgraph">
+<area shape="rect" title="初始化容器" alt="" coords="987,46,1228,87"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a765989368257c66b0b23d2b2ab43d711" title="初始化" alt="" coords="721,5,939,61"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a7d2bf2a9d13bca48536846a1650141f8" title="初始化" alt="" coords="403,39,673,95"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,31,355,102"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,53,60,80"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="ad64db60bbeda863c0379e519ad520451"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad64db60bbeda863c0379e519ad520451">&#9670;&nbsp;</a></span>id_to_object_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;typename std::unordered_set&lt;StructType, Hasher&gt;::iterator&gt; <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::id_to_object_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>存储ID到指向管理的对象的迭代器映射 </p>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00097">97</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="unordered__struct__manager_8h_source.html#l00045">frontend::common::UnorderedStructManager&lt; SetType, UnorderedSetHasher &gt;::GetObject()</a> , 以及 <a class="el" href="unordered__struct__manager_8h_source.html#l00069">frontend::common::UnorderedStructManager&lt; SetType, UnorderedSetHasher &gt;::StructManagerInit()</a>.</p>
+
+</div>
+</div>
+<a id="adbeed4088d927338043ca5f291d9e93b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbeed4088d927338043ca5f291d9e93b">&#9670;&nbsp;</a></span>node_manager_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_set&lt;StructType, Hasher&gt; <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::node_manager_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>存储所有管理的对象 </p>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00092">92</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="unordered__struct__manager_8h_source.html#l00069">frontend::common::UnorderedStructManager&lt; SetType, UnorderedSetHasher &gt;::StructManagerInit()</a>.</p>
+
+</div>
+</div>
+<a id="a7593b55e4693786c401aba6e75265d8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7593b55e4693786c401aba6e75265d8b">&#9670;&nbsp;</a></span>object_pointer_to_id_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class StructType , class Hasher  = std::hash&lt;StructType&gt;&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;const StructType*, <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html#a291dc5daaa192e1baf39205f8481fd99">ObjectId</a>&gt; <a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">frontend::common::UnorderedStructManager</a>&lt; StructType, Hasher &gt;::object_pointer_to_id_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>存储管理的对象的地址到ID的映射 </p>
+
+<p class="definition">在文件 <a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a> 第 <a class="el" href="unordered__struct__manager_8h_source.html#l00094">94</a> 行定义.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/Common/<a class="el" href="unordered__struct__manager_8h_source.html">unordered_struct_manager.h</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacefrontend.html">frontend</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1common.html">common</a></li><li class="navelem"><a class="el" href="classfrontend_1_1common_1_1UnorderedStructManager.html">UnorderedStructManager</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

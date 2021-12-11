@@ -1,0 +1,6 @@
+<map id="c_parser_frontend::type_system::StructureTypeInterface" name="c_parser_frontend::type_system::StructureTypeInterface">
+<area shape="rect" id="node1" title="结构化类型（结构体/共用体）的基类" alt="" coords="256,31,459,87"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1StructType.html" title="结构体类型" alt="" coords="507,5,689,47"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1UnionType.html" title=" " alt="" coords="507,71,689,112"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html" title="类型基类" alt="" coords="5,39,208,80"/>
+</map>

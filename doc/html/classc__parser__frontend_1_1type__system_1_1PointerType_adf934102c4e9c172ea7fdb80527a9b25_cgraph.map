@@ -1,0 +1,7 @@
+<map id="c_parser_frontend::type_system::PointerType::TypeSizeOf" name="c_parser_frontend::type_system::PointerType::TypeSizeOf">
+<area shape="rect" id="node1" title="获取sizeof语义下类型的大小" alt="" coords="5,125,196,181"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#ae6e5878b17ec9843a1a257c9b8cb3cea" title="获取指针指向的数组大小" alt="" coords="250,5,441,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a7d34d13bdf090ead4b5c27f92250a63d" title="获取下一个节点的引用" alt="" coords="244,85,447,141"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#ad100f72bbb5a5398c0033fc28d00fb56" title="获取存储该类型变量所需空间的大小" alt="" coords="250,165,441,221"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ac226ef7e7ae3877dcbbe6bc23433884e" title="获取sizeof语义下类型的大小" alt="" coords="244,245,447,301"/>
+</map>

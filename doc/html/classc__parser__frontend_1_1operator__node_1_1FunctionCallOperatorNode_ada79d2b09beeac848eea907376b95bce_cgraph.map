@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::operator_node::FunctionCallOperatorNode::GetResultTypePointer" name="c_parser_frontend::operator_node::FunctionCallOperatorNode::GetResultTypePointer">
+<area shape="rect" id="node1" title="获取最终结果的类型" alt="" coords="5,45,267,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#ac39bc02e1f25358d37ba2688300a8cae" title="获取最终结果的类型" alt="" coords="349,5,575,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#ad1f4a2ea38bce289a57fcfaec76ce2f4" title="获取函数返回对象" alt="" coords="315,85,609,141"/>
+</map>

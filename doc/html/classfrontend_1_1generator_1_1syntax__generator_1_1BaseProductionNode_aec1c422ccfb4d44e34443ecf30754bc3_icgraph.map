@@ -1,0 +1,5 @@
+<map id="frontend::generator::syntax_generator::BaseProductionNode::GetNodeId" name="frontend::generator::syntax_generator::BaseProductionNode::GetNodeId">
+<area shape="rect" id="node1" title="获取该节点ID" alt="" coords="255,61,489,117"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1TerminalProductionNode.html#a444f5903df02c96773ba5c0b23685679" title="获取产生式体内的产生式" alt="" coords="5,5,207,76"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface.html#a31750cb1d3449127e841469e5e092dd9" title="获取产生式体内的产生式" alt="" coords="5,100,207,171"/>
+</map>

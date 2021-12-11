@@ -1,0 +1,891 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: c_parser_frontend::flow_control::SwitchSentence类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pub-static-methods">静态 Public 成员函数</a> &#124;
+<a href="#pri-methods">Private 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">c_parser_frontend::flow_control::SwitchSentence类 参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>switch分支语句  
+ <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="flow__control_8h_source.html">flow_control.h</a>&gt;</code></p>
+<div class="dynheader">
+类 c_parser_frontend::flow_control::SwitchSentence 继承关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence__inherit__graph.png" border="0" usemap="#c__parser__frontend_1_1flow__control_1_1SwitchSentence_inherit__map" alt="Inheritance graph"/></div>
+<map name="c__parser__frontend_1_1flow__control_1_1SwitchSentence_inherit__map" id="c__parser__frontend_1_1flow__control_1_1SwitchSentence_inherit__map">
+<area shape="rect" title="switch分支语句" alt="" coords="5,199,217,240"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html" title="条件控制块基类（if、for、while、switch等）" alt="" coords="8,95,215,151"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html" title="流程控制节点基类" alt="" coords="12,5,211,47"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<div class="dynheader">
+c_parser_frontend::flow_control::SwitchSentence 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence__coll__graph.png" border="0" usemap="#c__parser__frontend_1_1flow__control_1_1SwitchSentence_coll__map" alt="Collaboration graph"/></div>
+<map name="c__parser__frontend_1_1flow__control_1_1SwitchSentence_coll__map" id="c__parser__frontend_1_1flow__control_1_1SwitchSentence_coll__map">
+<area shape="rect" title="switch分支语句" alt="" coords="1164,13,1376,54"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html" title="条件控制块基类（if、for、while、switch等）" alt="" coords="908,5,1115,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html" title="流程控制节点基类" alt="" coords="660,13,859,54"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html" title="强制显式调用构造函数且使用默认无效值版Wrapper" alt="" coords="321,5,555,61"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,5,272,61"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a9e4012c9e4bbb11c9aaf6535ca434c5c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a9e4012c9e4bbb11c9aaf6535ca434c5c">SwitchSentence</a> ()</td></tr>
+<tr class="separator:a9e4012c9e4bbb11c9aaf6535ca434c5c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3983ac3552fad5ed325783ae0e1a3bcb"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a3983ac3552fad5ed325783ae0e1a3bcb">AddMainSentence</a> (std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">FlowInterface</a> &gt; &amp;&amp;sentence) override</td></tr>
+<tr class="memdesc:a3983ac3552fad5ed325783ae0e1a3bcb"><td class="mdescLeft">&#160;</td><td class="mdescRight">向流程语句主体中中添加单条语句  <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a3983ac3552fad5ed325783ae0e1a3bcb">更多...</a><br /></td></tr>
+<tr class="separator:a3983ac3552fad5ed325783ae0e1a3bcb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74f7407a0d837ec203f8683e4983efb4"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a74f7407a0d837ec203f8683e4983efb4">AddMainSentences</a> (std::list&lt; std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">FlowInterface</a> &gt;&gt; &amp;&amp;sentences) override</td></tr>
+<tr class="memdesc:a74f7407a0d837ec203f8683e4983efb4"><td class="mdescLeft">&#160;</td><td class="mdescRight">向流程语句主体中中添加多条语句  <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a74f7407a0d837ec203f8683e4983efb4">更多...</a><br /></td></tr>
+<tr class="separator:a74f7407a0d837ec203f8683e4983efb4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98d19f1089dc0b4eed4dc1fb456d7403"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a98d19f1089dc0b4eed4dc1fb456d7403">AddSimpleCase</a> (const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html">BasicTypeInitializeOperatorNode</a> &gt; &amp;case_value)</td></tr>
+<tr class="memdesc:a98d19f1089dc0b4eed4dc1fb456d7403"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加普通的case  <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a98d19f1089dc0b4eed4dc1fb456d7403">更多...</a><br /></td></tr>
+<tr class="separator:a98d19f1089dc0b4eed4dc1fb456d7403"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae863ad7c2544b501e149453c1302a97e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#ae863ad7c2544b501e149453c1302a97e">AddDefaultCase</a> ()</td></tr>
+<tr class="memdesc:ae863ad7c2544b501e149453c1302a97e"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加default标签  <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#ae863ad7c2544b501e149453c1302a97e">更多...</a><br /></td></tr>
+<tr class="separator:ae863ad7c2544b501e149453c1302a97e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a04ee3a54a9ea899528559ac5b8cb3676"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a04ee3a54a9ea899528559ac5b8cb3676">GetSimpleCases</a> () const</td></tr>
+<tr class="memdesc:a04ee3a54a9ea899528559ac5b8cb3676"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取全部普通case标签  <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a04ee3a54a9ea899528559ac5b8cb3676">更多...</a><br /></td></tr>
+<tr class="separator:a04ee3a54a9ea899528559ac5b8cb3676"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a252c6fad321a531c17a5489f116bc6b1"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a252c6fad321a531c17a5489f116bc6b1">GetDefaultCase</a> () const</td></tr>
+<tr class="memdesc:a252c6fad321a531c17a5489f116bc6b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取default分支标签  <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a252c6fad321a531c17a5489f116bc6b1">更多...</a><br /></td></tr>
+<tr class="separator:a252c6fad321a531c17a5489f116bc6b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface')"><img src="closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html">c_parser_frontend::flow_control::ConditionBlockInterface</a></td></tr>
+<tr class="memitem:adcd3a7e995944aa86601008c3401d061 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#adcd3a7e995944aa86601008c3401d061">ConditionBlockInterface</a> (<a class="el" href="namespacec__parser__frontend_1_1flow__control.html#ad0c5d7192b629f67cd18bb2ba05cbceb">FlowType</a> flow_type)</td></tr>
+<tr class="separator:adcd3a7e995944aa86601008c3401d061 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1556d7a7178522a674e67e52046728bf inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a1556d7a7178522a674e67e52046728bf">SetCondition</a> (const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt; &amp;condition, std::list&lt; std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">FlowInterface</a> &gt;&gt; &amp;&amp;sentences_to_get_condition)</td></tr>
+<tr class="memdesc:a1556d7a7178522a674e67e52046728bf inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">设定条件控制语句的条件与获取条件的操作  <a href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a1556d7a7178522a674e67e52046728bf">更多...</a><br /></td></tr>
+<tr class="separator:a1556d7a7178522a674e67e52046728bf inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d179af22d9e216e28669fa7209b0c4f inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memItemLeft" align="right" valign="top">const std::list&lt; std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">FlowInterface</a> &gt; &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a7d179af22d9e216e28669fa7209b0c4f">GetSentenceToGetCondition</a> () const</td></tr>
+<tr class="memdesc:a7d179af22d9e216e28669fa7209b0c4f inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取得到条件节点的操作  <a href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a7d179af22d9e216e28669fa7209b0c4f">更多...</a><br /></td></tr>
+<tr class="separator:a7d179af22d9e216e28669fa7209b0c4f inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d71dc8fe05daefecc8c37194aca073e inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a9d71dc8fe05daefecc8c37194aca073e">GetConditionPointer</a> () const</td></tr>
+<tr class="memdesc:a9d71dc8fe05daefecc8c37194aca073e inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取条件节点  <a href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a9d71dc8fe05daefecc8c37194aca073e">更多...</a><br /></td></tr>
+<tr class="separator:a9d71dc8fe05daefecc8c37194aca073e inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a144533dc1cb4e466e7198348ccd63bc3 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a144533dc1cb4e466e7198348ccd63bc3">GetConditionReference</a> () const</td></tr>
+<tr class="memdesc:a144533dc1cb4e466e7198348ccd63bc3 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取条件节点  <a href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a144533dc1cb4e466e7198348ccd63bc3">更多...</a><br /></td></tr>
+<tr class="separator:a144533dc1cb4e466e7198348ccd63bc3 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92c88836ad47c341cd6ff10f5713d983 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a92c88836ad47c341cd6ff10f5713d983">AddSentence</a> (std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">FlowInterface</a> &gt; &amp;&amp;sentence)</td></tr>
+<tr class="memdesc:a92c88836ad47c341cd6ff10f5713d983 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">向主体内添加一条语句  <a href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a92c88836ad47c341cd6ff10f5713d983">更多...</a><br /></td></tr>
+<tr class="separator:a92c88836ad47c341cd6ff10f5713d983 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c0bc6ba39e025c43b8b66a9a11f9b3d inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2c0bc6ba39e025c43b8b66a9a11f9b3d">AddSentences</a> (std::list&lt; std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">FlowInterface</a> &gt;&gt; &amp;&amp;sentences)</td></tr>
+<tr class="memdesc:a2c0bc6ba39e025c43b8b66a9a11f9b3d inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">向主体内添加多条语句  <a href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2c0bc6ba39e025c43b8b66a9a11f9b3d">更多...</a><br /></td></tr>
+<tr class="separator:a2c0bc6ba39e025c43b8b66a9a11f9b3d inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b470bb6d1f6d180504d13028efaddd1 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memItemLeft" align="right" valign="top">const auto &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a0b470bb6d1f6d180504d13028efaddd1">GetSentences</a> () const</td></tr>
+<tr class="memdesc:a0b470bb6d1f6d180504d13028efaddd1 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取所有已添加的语句  <a href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a0b470bb6d1f6d180504d13028efaddd1">更多...</a><br /></td></tr>
+<tr class="separator:a0b470bb6d1f6d180504d13028efaddd1 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32b50be3e4eec7dd0d293569a7b016dc inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a32b50be3e4eec7dd0d293569a7b016dc">GetSentenceStartLabel</a> () const</td></tr>
+<tr class="memdesc:a32b50be3e4eec7dd0d293569a7b016dc inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取块起始处标签  <a href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a32b50be3e4eec7dd0d293569a7b016dc">更多...</a><br /></td></tr>
+<tr class="separator:a32b50be3e4eec7dd0d293569a7b016dc inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a722e793ee81fc3e2c4f35e42da955d80 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a722e793ee81fc3e2c4f35e42da955d80">GetSentenceEndLabel</a> () const</td></tr>
+<tr class="memdesc:a722e793ee81fc3e2c4f35e42da955d80 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取块结束处标签  <a href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a722e793ee81fc3e2c4f35e42da955d80">更多...</a><br /></td></tr>
+<tr class="separator:a722e793ee81fc3e2c4f35e42da955d80 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface')"><img src="closed.png" alt="-"/>&#160;Public 成员函数 继承自 <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">c_parser_frontend::flow_control::FlowInterface</a></td></tr>
+<tr class="memitem:a2c52a7796608561e5cd9622b6f8986c8 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a2c52a7796608561e5cd9622b6f8986c8">FlowInterface</a> (<a class="el" href="namespacec__parser__frontend_1_1flow__control.html#ad0c5d7192b629f67cd18bb2ba05cbceb">FlowType</a> flow_type)</td></tr>
+<tr class="separator:a2c52a7796608561e5cd9622b6f8986c8 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63e67324a0674929777a27208e90caca inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a63e67324a0674929777a27208e90caca">~FlowInterface</a> ()</td></tr>
+<tr class="separator:a63e67324a0674929777a27208e90caca inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afca8c0d1489d1512d061573abd61a818 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="namespacec__parser__frontend_1_1flow__control.html#ad0c5d7192b629f67cd18bb2ba05cbceb">FlowType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#afca8c0d1489d1512d061573abd61a818">GetFlowType</a> () const</td></tr>
+<tr class="memdesc:afca8c0d1489d1512d061573abd61a818 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取流程控制类型  <a href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#afca8c0d1489d1512d061573abd61a818">更多...</a><br /></td></tr>
+<tr class="separator:afca8c0d1489d1512d061573abd61a818 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8bdcf8f28436c4ed94b84a7adf95a259 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a57810388170128a076680808fcc4b71b">FlowId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a8bdcf8f28436c4ed94b84a7adf95a259">GetFlowId</a> () const</td></tr>
+<tr class="memdesc:a8bdcf8f28436c4ed94b84a7adf95a259 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取流程控制节点ID  <a href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a8bdcf8f28436c4ed94b84a7adf95a259">更多...</a><br /></td></tr>
+<tr class="separator:a8bdcf8f28436c4ed94b84a7adf95a259 inherit pub_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+静态 Public 成员函数</h2></td></tr>
+<tr class="memitem:ab946eed4eb974212e44b35ced95644fb"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#ab946eed4eb974212e44b35ced95644fb">CheckSwitchBodySentenceValid</a> (const <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">FlowInterface</a> &amp;switch_body_sentence)</td></tr>
+<tr class="memdesc:ab946eed4eb974212e44b35ced95644fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查给定节点是否可以作为switch主体内执行的语句  <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#ab946eed4eb974212e44b35ced95644fb">更多...</a><br /></td></tr>
+<tr class="separator:ab946eed4eb974212e44b35ced95644fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5460ac252fb283e69254d6beab0173a7"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a5460ac252fb283e69254d6beab0173a7">CheckSwitchCaseAbleToAdd</a> (const <a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html">SwitchSentence</a> &amp;switch_node, const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html">BasicTypeInitializeOperatorNode</a> &amp;case_value)</td></tr>
+<tr class="memdesc:a5460ac252fb283e69254d6beab0173a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">检查给定case是否可以作为switch内的标签  <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a5460ac252fb283e69254d6beab0173a7">更多...</a><br /></td></tr>
+<tr class="separator:a5460ac252fb283e69254d6beab0173a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_static_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td colspan="2" onclick="javascript:toggleInherit('pub_static_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface')"><img src="closed.png" alt="-"/>&#160;静态 Public 成员函数 继承自 <a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html">c_parser_frontend::flow_control::ConditionBlockInterface</a></td></tr>
+<tr class="memitem:a0f872e3820348d686f46708f07d91d29 inherit pub_static_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a0f872e3820348d686f46708f07d91d29">DefaultConditionCheck</a> (const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html">OperatorNodeInterface</a> &amp;condition_node)</td></tr>
+<tr class="memdesc:a0f872e3820348d686f46708f07d91d29 inherit pub_static_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认对循环条件节点进行类型检查的函数  <a href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a0f872e3820348d686f46708f07d91d29">更多...</a><br /></td></tr>
+<tr class="separator:a0f872e3820348d686f46708f07d91d29 inherit pub_static_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2afaacb18c830c6f59e4114511b88ea3 inherit pub_static_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memItemLeft" align="right" valign="top">static bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2afaacb18c830c6f59e4114511b88ea3">DefaultMainBlockSentenceCheck</a> (const <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">FlowInterface</a> &amp;flow_interface)</td></tr>
+<tr class="memdesc:a2afaacb18c830c6f59e4114511b88ea3 inherit pub_static_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">默认检查主体内语句的函数  <a href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2afaacb18c830c6f59e4114511b88ea3">更多...</a><br /></td></tr>
+<tr class="separator:a2afaacb18c830c6f59e4114511b88ea3 inherit pub_static_methods_classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private 成员函数</h2></td></tr>
+<tr class="memitem:a19d01f9bb608dec88c7f432735a44ca6"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> &gt;, std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a19d01f9bb608dec88c7f432735a44ca6">ConvertCaseValueToLabel</a> (const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html">BasicTypeInitializeOperatorNode</a> &amp;case_value) const</td></tr>
+<tr class="memdesc:a19d01f9bb608dec88c7f432735a44ca6"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据case的值创建对应的标签  <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a19d01f9bb608dec88c7f432735a44ca6">更多...</a><br /></td></tr>
+<tr class="separator:a19d01f9bb608dec88c7f432735a44ca6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9bc9a9c266a8a4d419b4969e7c7f587"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> &gt;, std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#aa9bc9a9c266a8a4d419b4969e7c7f587">CreateDefaultLabel</a> () const</td></tr>
+<tr class="memdesc:aa9bc9a9c266a8a4d419b4969e7c7f587"><td class="mdescLeft">&#160;</td><td class="mdescRight">创建default标签  <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#aa9bc9a9c266a8a4d419b4969e7c7f587">更多...</a><br /></td></tr>
+<tr class="separator:aa9bc9a9c266a8a4d419b4969e7c7f587"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:aa5aa348266e52b9a3e0a3b2702cd7c9f"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::pair&lt; std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html">BasicTypeInitializeOperatorNode</a> &gt;, std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> &gt; &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#aa5aa348266e52b9a3e0a3b2702cd7c9f">simple_cases_</a></td></tr>
+<tr class="memdesc:aa5aa348266e52b9a3e0a3b2702cd7c9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">switch的分支(case)  <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#aa5aa348266e52b9a3e0a3b2702cd7c9f">更多...</a><br /></td></tr>
+<tr class="separator:aa5aa348266e52b9a3e0a3b2702cd7c9f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46ef00ae52b065ac92ba9240f1eeb3f0"><td class="memItemLeft" align="right" valign="top">std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a46ef00ae52b065ac92ba9240f1eeb3f0">default_case_</a> = nullptr</td></tr>
+<tr class="memdesc:a46ef00ae52b065ac92ba9240f1eeb3f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">default分支标签  <a href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a46ef00ae52b065ac92ba9240f1eeb3f0">更多...</a><br /></td></tr>
+<tr class="separator:a46ef00ae52b065ac92ba9240f1eeb3f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
+额外继承的成员函数</h2></td></tr>
+<tr class="inherit_header pub_types_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td colspan="2" onclick="javascript:toggleInherit('pub_types_classc__parser__frontend_1_1flow__control_1_1FlowInterface')"><img src="closed.png" alt="-"/>&#160;Public 类型 继承自 <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">c_parser_frontend::flow_control::FlowInterface</a></td></tr>
+<tr class="memitem:a57810388170128a076680808fcc4b71b inherit pub_types_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a57810388170128a076680808fcc4b71b">FlowId</a> = <a class="el" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html">frontend::common::ExplicitIdWrapper</a>&lt; size_t, <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a37ac0d2b234b9673c0c975caa250fb4d">IdWrapper</a>, <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a37ac0d2b234b9673c0c975caa250fb4da9f097af0f1121a0637fac34e2873fa11">IdWrapper::kFlowNodeId</a> &gt;</td></tr>
+<tr class="memdesc:a57810388170128a076680808fcc4b71b inherit pub_types_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">流程节点ID  <a href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a57810388170128a076680808fcc4b71b">更多...</a><br /></td></tr>
+<tr class="separator:a57810388170128a076680808fcc4b71b inherit pub_types_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pro_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td colspan="2" onclick="javascript:toggleInherit('pro_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface')"><img src="closed.png" alt="-"/>&#160;Protected 成员函数 继承自 <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">c_parser_frontend::flow_control::FlowInterface</a></td></tr>
+<tr class="memitem:a2d2909d8d0650212e04ed1f18dae5989 inherit pro_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a2d2909d8d0650212e04ed1f18dae5989">SetFlowType</a> (<a class="el" href="namespacec__parser__frontend_1_1flow__control.html#ad0c5d7192b629f67cd18bb2ba05cbceb">FlowType</a> flow_type)</td></tr>
+<tr class="memdesc:a2d2909d8d0650212e04ed1f18dae5989 inherit pro_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置流程控制类型  <a href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a2d2909d8d0650212e04ed1f18dae5989">更多...</a><br /></td></tr>
+<tr class="separator:a2d2909d8d0650212e04ed1f18dae5989 inherit pro_methods_classc__parser__frontend_1_1flow__control_1_1FlowInterface"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>switch分支语句 </p>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8h_source.html">flow_control.h</a> 第 <a class="el" href="flow__control_8h_source.html#l00761">761</a> 行定义.</p>
+</div><h2 class="groupheader">构造及析构函数说明</h2>
+<a id="a9e4012c9e4bbb11c9aaf6535ca434c5c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e4012c9e4bbb11c9aaf6535ca434c5c">&#9670;&nbsp;</a></span>SwitchSentence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">c_parser_frontend::flow_control::SwitchSentence::SwitchSentence </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="flow__control_8h_source.html">flow_control.h</a> 第 <a class="el" href="flow__control_8h_source.html#l00763">763</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="namespacec__parser__frontend_1_1flow__control.html#ad0c5d7192b629f67cd18bb2ba05cbceba69e5de40348c5473a4fb27cae926f39f">c_parser_frontend::flow_control::kSwitchSentence</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="ae863ad7c2544b501e149453c1302a97e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae863ad7c2544b501e149453c1302a97e">&#9670;&nbsp;</a></span>AddDefaultCase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool c_parser_frontend::flow_control::SwitchSentence::AddDefaultCase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加default标签 </p>
+<dl class="section return"><dt>返回</dt><dd>返回是否添加成功 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>添加成功 </td></tr>
+    <tr><td class="paramname">false</td><td>添加失败，该函数已经被调用过 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8cpp_source.html">flow_control.cpp</a> 第 <a class="el" href="flow__control_8cpp_source.html#l00237">237</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="flow__control_8cpp_source.html#l00148">c_parser_frontend::flow_control::ConditionBlockInterface::AddSentence()</a>, <a class="el" href="flow__control_8cpp_source.html#l00262">CreateDefaultLabel()</a> , 以及 <a class="el" href="flow__control_8h_source.html#l00839">default_case_</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_ae863ad7c2544b501e149453c1302a97e_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1flow__control_1_1SwitchSentence_ae863ad7c2544b501e149453c1302a97e_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_ae863ad7c2544b501e149453c1302a97e_cgraph" id="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_ae863ad7c2544b501e149453c1302a97e_cgraph">
+<area shape="rect" title="添加default标签" alt="" coords="5,45,217,101"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a92c88836ad47c341cd6ff10f5713d983" title="向主体内添加一条语句" alt="" coords="268,5,475,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#aa9bc9a9c266a8a4d419b4969e7c7f587" title="创建default标签" alt="" coords="265,85,477,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2afaacb18c830c6f59e4114511b88ea3" title="默认检查主体内语句的函数" alt="" coords="525,5,829,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#afca8c0d1489d1512d061573abd61a818" title="获取流程控制类型" alt="" coords="877,5,1076,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a8bdcf8f28436c4ed94b84a7adf95a259" title="获取流程控制节点ID" alt="" coords="578,85,777,141"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a3983ac3552fad5ed325783ae0e1a3bcb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3983ac3552fad5ed325783ae0e1a3bcb">&#9670;&nbsp;</a></span>AddMainSentence()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool c_parser_frontend::flow_control::SwitchSentence::AddMainSentence </td>
+          <td>(</td>
+          <td class="paramtype">std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">FlowInterface</a> &gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>sentence</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>向流程语句主体中中添加单条语句 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">sentence</td><td>：待添加的语句 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回添加是否成功 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：添加成功 </td></tr>
+    <tr><td class="paramname">false</td><td>：sentence不能添加到流程控制语句中</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>1.对do-while/while/for调用该函数时添加到循环体中 2.对if语句调用时添加到if成立时执行的语句内 3.对if-else语句调用时添加到else成立时执行的语句内 4.对switch语句调用时添加到switch主体内 </p><dl class="section note"><dt>注解</dt><dd>添加语句时添加到已有的语句后 </dd></dl>
+
+<p>实现了 <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a8de24ac57738cf0fdd5bb48b8b05df4b">c_parser_frontend::flow_control::FlowInterface</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8h_source.html">flow_control.h</a> 第 <a class="el" href="flow__control_8h_source.html#l00765">765</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="flow__control_8cpp_source.html#l00148">c_parser_frontend::flow_control::ConditionBlockInterface::AddSentence()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a3983ac3552fad5ed325783ae0e1a3bcb_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a3983ac3552fad5ed325783ae0e1a3bcb_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a3983ac3552fad5ed325783ae0e1a3bcb_cgraph" id="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a3983ac3552fad5ed325783ae0e1a3bcb_cgraph">
+<area shape="rect" title="向流程语句主体中中添加单条语句" alt="" coords="5,5,217,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a92c88836ad47c341cd6ff10f5713d983" title="向主体内添加一条语句" alt="" coords="265,5,472,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2afaacb18c830c6f59e4114511b88ea3" title="默认检查主体内语句的函数" alt="" coords="520,5,824,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#afca8c0d1489d1512d061573abd61a818" title="获取流程控制类型" alt="" coords="872,5,1071,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a74f7407a0d837ec203f8683e4983efb4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74f7407a0d837ec203f8683e4983efb4">&#9670;&nbsp;</a></span>AddMainSentences()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual bool c_parser_frontend::flow_control::SwitchSentence::AddMainSentences </td>
+          <td>(</td>
+          <td class="paramtype">std::list&lt; std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">FlowInterface</a> &gt;&gt; &amp;&amp;&#160;</td>
+          <td class="paramname"><em>sentences</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>向流程语句主体中中添加多条语句 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">sentences</td><td>：待添加的语句 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回添加是否成功 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：添加成功 </td></tr>
+    <tr><td class="paramname">false</td><td>：sentences中含有不能添加到流程控制语句的语句</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>1.对do-while/while/for调用该函数时添加到循环体中 2.对if语句调用时添加到if成立时执行的语句内 3.对if-else语句调用时添加到else成立时执行的语句内 4.对switch语句调用时添加到switch主体内 </p><dl class="section note"><dt>注解</dt><dd>添加语句时添加到已有的语句后 </dd></dl>
+
+<p>实现了 <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a3a89f0b4c77f952a520a58a7107e6787">c_parser_frontend::flow_control::FlowInterface</a>.</p>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8h_source.html">flow_control.h</a> 第 <a class="el" href="flow__control_8h_source.html#l00769">769</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="flow__control_8cpp_source.html#l00158">c_parser_frontend::flow_control::ConditionBlockInterface::AddSentences()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a74f7407a0d837ec203f8683e4983efb4_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a74f7407a0d837ec203f8683e4983efb4_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a74f7407a0d837ec203f8683e4983efb4_cgraph" id="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a74f7407a0d837ec203f8683e4983efb4_cgraph">
+<area shape="rect" title="向流程语句主体中中添加多条语句" alt="" coords="5,5,217,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2c0bc6ba39e025c43b8b66a9a11f9b3d" title="向主体内添加多条语句" alt="" coords="265,5,472,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2afaacb18c830c6f59e4114511b88ea3" title="默认检查主体内语句的函数" alt="" coords="520,5,824,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#afca8c0d1489d1512d061573abd61a818" title="获取流程控制类型" alt="" coords="872,5,1071,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a98d19f1089dc0b4eed4dc1fb456d7403"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98d19f1089dc0b4eed4dc1fb456d7403">&#9670;&nbsp;</a></span>AddSimpleCase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool c_parser_frontend::flow_control::SwitchSentence::AddSimpleCase </td>
+          <td>(</td>
+          <td class="paramtype">const std::shared_ptr&lt; const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html">BasicTypeInitializeOperatorNode</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>case_value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加普通的case </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">case_value</td><td>：分支条件（编译期常量） </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回是否添加成功 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>添加成功，夺取case_value控制权 </td></tr>
+    <tr><td class="paramname">false</td><td>添加失败，不添加且不修改参数 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>对case的要求参考CheckSwitchCaseAbleToAdd </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8cpp_source.html">flow_control.cpp</a> 第 <a class="el" href="flow__control_8cpp_source.html#l00219">219</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="flow__control_8cpp_source.html#l00148">c_parser_frontend::flow_control::ConditionBlockInterface::AddSentence()</a>, <a class="el" href="flow__control_8cpp_source.html#l00205">CheckSwitchCaseAbleToAdd()</a>, <a class="el" href="flow__control_8cpp_source.html#l00248">ConvertCaseValueToLabel()</a> , 以及 <a class="el" href="flow__control_8h_source.html#l00837">simple_cases_</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a98d19f1089dc0b4eed4dc1fb456d7403_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a98d19f1089dc0b4eed4dc1fb456d7403_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a98d19f1089dc0b4eed4dc1fb456d7403_cgraph" id="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a98d19f1089dc0b4eed4dc1fb456d7403_cgraph">
+<area shape="rect" title="添加普通的case" alt="" coords="5,165,217,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a92c88836ad47c341cd6ff10f5713d983" title="向主体内添加一条语句" alt="" coords="269,45,475,101"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a5460ac252fb283e69254d6beab0173a7" title="检查给定case是否可以作为switch内的标签" alt="" coords="265,165,479,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a19d01f9bb608dec88c7f432735a44ca6" title="根据case的值创建对应的标签" alt="" coords="266,245,478,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2afaacb18c830c6f59e4114511b88ea3" title="默认检查主体内语句的函数" alt="" coords="527,5,831,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#afca8c0d1489d1512d061573abd61a818" title="获取流程控制类型" alt="" coords="879,5,1077,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html#a8759d34682bb031948e9ec241e95b0ff" title="获取初始化数据所属分类" alt="" coords="560,85,797,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a04ee3a54a9ea899528559ac5b8cb3676" title="获取全部普通case标签" alt="" coords="573,165,785,221"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a3eaeaca261e5860d4ca73accce3cf460" title="获取初始化数据的值" alt="" coords="556,245,801,301"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a8bdcf8f28436c4ed94b84a7adf95a259" title="获取流程控制节点ID" alt="" coords="579,325,778,381"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab946eed4eb974212e44b35ced95644fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab946eed4eb974212e44b35ced95644fb">&#9670;&nbsp;</a></span>CheckSwitchBodySentenceValid()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static bool c_parser_frontend::flow_control::SwitchSentence::CheckSwitchBodySentenceValid </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html">FlowInterface</a> &amp;&#160;</td>
+          <td class="paramname"><em>switch_body_sentence</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查给定节点是否可以作为switch主体内执行的语句 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">switch_body_sentence</td><td>：待检查的条件节点 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回是否可以添加 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：可以添加 </td></tr>
+    <tr><td class="paramname">false</td><td>：不可以添加 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8h_source.html">flow_control.h</a> 第 <a class="el" href="flow__control_8h_source.html#l00800">800</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="flow__control_8cpp_source.html#l00184">c_parser_frontend::flow_control::ConditionBlockInterface::DefaultMainBlockSentenceCheck()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_ab946eed4eb974212e44b35ced95644fb_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1flow__control_1_1SwitchSentence_ab946eed4eb974212e44b35ced95644fb_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_ab946eed4eb974212e44b35ced95644fb_cgraph" id="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_ab946eed4eb974212e44b35ced95644fb_cgraph">
+<area shape="rect" title="检查给定节点是否可以作为switch主体内执行的语句" alt="" coords="5,5,244,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2afaacb18c830c6f59e4114511b88ea3" title="默认检查主体内语句的函数" alt="" coords="292,5,596,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#afca8c0d1489d1512d061573abd61a818" title="获取流程控制类型" alt="" coords="644,5,843,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5460ac252fb283e69254d6beab0173a7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5460ac252fb283e69254d6beab0173a7">&#9670;&nbsp;</a></span>CheckSwitchCaseAbleToAdd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool c_parser_frontend::flow_control::SwitchSentence::CheckSwitchCaseAbleToAdd </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html">SwitchSentence</a> &amp;&#160;</td>
+          <td class="paramname"><em>switch_node</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html">BasicTypeInitializeOperatorNode</a> &amp;&#160;</td>
+          <td class="paramname"><em>case_value</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>检查给定case是否可以作为switch内的标签 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">switch_node</td><td>：添加到的switch节点 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">case_value</td><td>：标签的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回能否作为作为switch内的标签使用 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：可以添加 </td></tr>
+    <tr><td class="paramname">false</td><td>：标签不是立即数或与已有的case值重复 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8cpp_source.html">flow_control.cpp</a> 第 <a class="el" href="flow__control_8cpp_source.html#l00205">205</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="operator__node_8h_source.html#l00496">c_parser_frontend::operator_node::InitializeOperatorNodeInterface::GetInitializeType()</a>, <a class="el" href="flow__control_8h_source.html#l00789">GetSimpleCases()</a> , 以及 <a class="el" href="operator__node_8h_source.html#l00560">c_parser_frontend::operator_node::BasicTypeInitializeOperatorNode::GetValue()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flow__control_8cpp_source.html#l00219">AddSimpleCase()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a5460ac252fb283e69254d6beab0173a7_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a5460ac252fb283e69254d6beab0173a7_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a5460ac252fb283e69254d6beab0173a7_cgraph" id="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a5460ac252fb283e69254d6beab0173a7_cgraph">
+<area shape="rect" title="检查给定case是否可以作为switch内的标签" alt="" coords="5,85,219,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1InitializeOperatorNodeInterface.html#a8759d34682bb031948e9ec241e95b0ff" title="获取初始化数据所属分类" alt="" coords="271,5,508,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a04ee3a54a9ea899528559ac5b8cb3676" title="获取全部普通case标签" alt="" coords="283,85,495,141"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a3eaeaca261e5860d4ca73accce3cf460" title="获取初始化数据的值" alt="" coords="267,165,512,221"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a5460ac252fb283e69254d6beab0173a7_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a5460ac252fb283e69254d6beab0173a7_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a5460ac252fb283e69254d6beab0173a7_icgraph" id="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a5460ac252fb283e69254d6beab0173a7_icgraph">
+<area shape="rect" title="检查给定case是否可以作为switch内的标签" alt="" coords="265,5,479,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a98d19f1089dc0b4eed4dc1fb456d7403" title="添加普通的case" alt="" coords="5,5,217,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a19d01f9bb608dec88c7f432735a44ca6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a19d01f9bb608dec88c7f432735a44ca6">&#9670;&nbsp;</a></span>ConvertCaseValueToLabel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> &gt;, std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> &gt; &gt; c_parser_frontend::flow_control::SwitchSentence::ConvertCaseValueToLabel </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html">BasicTypeInitializeOperatorNode</a> &amp;&#160;</td>
+          <td class="paramname"><em>case_value</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>根据case的值创建对应的标签 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">case_value</td><td>：case的值 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>前半部分为跳转语句中使用的标签，后半部分为switch主体内使用的标签 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>只创建不设置 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8cpp_source.html">flow_control.cpp</a> 第 <a class="el" href="flow__control_8cpp_source.html#l00248">248</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="flow__control_8h_source.html#l00103">c_parser_frontend::flow_control::FlowInterface::GetFlowId()</a> , 以及 <a class="el" href="operator__node_8h_source.html#l00560">c_parser_frontend::operator_node::BasicTypeInitializeOperatorNode::GetValue()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flow__control_8cpp_source.html#l00219">AddSimpleCase()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a19d01f9bb608dec88c7f432735a44ca6_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a19d01f9bb608dec88c7f432735a44ca6_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a19d01f9bb608dec88c7f432735a44ca6_cgraph" id="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a19d01f9bb608dec88c7f432735a44ca6_cgraph">
+<area shape="rect" title="根据case的值创建对应的标签" alt="" coords="5,45,217,101"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a8bdcf8f28436c4ed94b84a7adf95a259" title="获取流程控制节点ID" alt="" coords="289,5,487,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a3eaeaca261e5860d4ca73accce3cf460" title="获取初始化数据的值" alt="" coords="265,85,511,141"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a19d01f9bb608dec88c7f432735a44ca6_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a19d01f9bb608dec88c7f432735a44ca6_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a19d01f9bb608dec88c7f432735a44ca6_icgraph" id="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a19d01f9bb608dec88c7f432735a44ca6_icgraph">
+<area shape="rect" title="根据case的值创建对应的标签" alt="" coords="265,5,477,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a98d19f1089dc0b4eed4dc1fb456d7403" title="添加普通的case" alt="" coords="5,5,217,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa9bc9a9c266a8a4d419b4969e7c7f587"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9bc9a9c266a8a4d419b4969e7c7f587">&#9670;&nbsp;</a></span>CreateDefaultLabel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> &gt;, std::unique_ptr&lt; <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a> &gt; &gt; c_parser_frontend::flow_control::SwitchSentence::CreateDefaultLabel </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>创建default标签 </p>
+<p>前半部分为跳转语句中使用的标签，后半部分为switch主体内使用的标签 </p><dl class="section note"><dt>注解</dt><dd>只创建不设置 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8cpp_source.html">flow_control.cpp</a> 第 <a class="el" href="flow__control_8cpp_source.html#l00262">262</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="flow__control_8h_source.html#l00103">c_parser_frontend::flow_control::FlowInterface::GetFlowId()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flow__control_8cpp_source.html#l00237">AddDefaultCase()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_aa9bc9a9c266a8a4d419b4969e7c7f587_cgraph.png" border="0" usemap="#classc__parser__frontend_1_1flow__control_1_1SwitchSentence_aa9bc9a9c266a8a4d419b4969e7c7f587_cgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_aa9bc9a9c266a8a4d419b4969e7c7f587_cgraph" id="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_aa9bc9a9c266a8a4d419b4969e7c7f587_cgraph">
+<area shape="rect" title="创建default标签" alt="" coords="5,5,217,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#a8bdcf8f28436c4ed94b84a7adf95a259" title="获取流程控制节点ID" alt="" coords="265,5,464,61"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_aa9bc9a9c266a8a4d419b4969e7c7f587_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1flow__control_1_1SwitchSentence_aa9bc9a9c266a8a4d419b4969e7c7f587_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_aa9bc9a9c266a8a4d419b4969e7c7f587_icgraph" id="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_aa9bc9a9c266a8a4d419b4969e7c7f587_icgraph">
+<area shape="rect" title="创建default标签" alt="" coords="265,5,477,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#ae863ad7c2544b501e149453c1302a97e" title="添加default标签" alt="" coords="5,5,217,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a252c6fad321a531c17a5489f116bc6b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a252c6fad321a531c17a5489f116bc6b1">&#9670;&nbsp;</a></span>GetDefaultCase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a>* c_parser_frontend::flow_control::SwitchSentence::GetDefaultCase </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取default分支标签 </p>
+<dl class="section return"><dt>返回</dt><dd>返回指向default分支标签的const指针 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">nullptr</td><td>：未调用AddDefaultCase创建并添加default标签 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8h_source.html">flow_control.h</a> 第 <a class="el" href="flow__control_8h_source.html#l00793">793</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="flow__control_8h_source.html#l00839">default_case_</a>.</p>
+
+</div>
+</div>
+<a id="a04ee3a54a9ea899528559ac5b8cb3676"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a04ee3a54a9ea899528559ac5b8cb3676">&#9670;&nbsp;</a></span>GetSimpleCases()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const auto&amp; c_parser_frontend::flow_control::SwitchSentence::GetSimpleCases </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取全部普通case标签 </p>
+<dl class="section return"><dt>返回</dt><dd>返回存储普通case标签的容器的const引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8h_source.html">flow_control.h</a> 第 <a class="el" href="flow__control_8h_source.html#l00789">789</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="flow__control_8h_source.html#l00837">simple_cases_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flow__control_8cpp_source.html#l00205">CheckSwitchCaseAbleToAdd()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a04ee3a54a9ea899528559ac5b8cb3676_icgraph.png" border="0" usemap="#classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a04ee3a54a9ea899528559ac5b8cb3676_icgraph" alt=""/></div>
+<map name="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a04ee3a54a9ea899528559ac5b8cb3676_icgraph" id="classc__parser__frontend_1_1flow__control_1_1SwitchSentence_a04ee3a54a9ea899528559ac5b8cb3676_icgraph">
+<area shape="rect" title="获取全部普通case标签" alt="" coords="527,5,739,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a5460ac252fb283e69254d6beab0173a7" title="检查给定case是否可以作为switch内的标签" alt="" coords="265,5,479,61"/>
+<area shape="rect" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a98d19f1089dc0b4eed4dc1fb456d7403" title="添加普通的case" alt="" coords="5,5,217,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="a46ef00ae52b065ac92ba9240f1eeb3f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46ef00ae52b065ac92ba9240f1eeb3f0">&#9670;&nbsp;</a></span>default_case_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unique_ptr&lt;<a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a>&gt; c_parser_frontend::flow_control::SwitchSentence::default_case_ = nullptr</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>default分支标签 </p>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8h_source.html">flow_control.h</a> 第 <a class="el" href="flow__control_8h_source.html#l00839">839</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flow__control_8cpp_source.html#l00237">AddDefaultCase()</a> , 以及 <a class="el" href="flow__control_8h_source.html#l00793">GetDefaultCase()</a>.</p>
+
+</div>
+</div>
+<a id="aa5aa348266e52b9a3e0a3b2702cd7c9f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5aa348266e52b9a3e0a3b2702cd7c9f">&#9670;&nbsp;</a></span>simple_cases_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt; std::string, std::pair&lt;std::shared_ptr&lt;const <a class="el" href="classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html">BasicTypeInitializeOperatorNode</a>&gt;, std::unique_ptr&lt;<a class="el" href="classc__parser__frontend_1_1flow__control_1_1Label.html">Label</a>&gt; &gt; &gt; c_parser_frontend::flow_control::SwitchSentence::simple_cases_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>switch的分支(case) </p>
+<p>键为case的值 值前半部分为编译期常量节点，后半部分为该case的标签 </p>
+
+<p class="definition">在文件 <a class="el" href="flow__control_8h_source.html">flow_control.h</a> 第 <a class="el" href="flow__control_8h_source.html#l00837">837</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="flow__control_8cpp_source.html#l00219">AddSimpleCase()</a> , 以及 <a class="el" href="flow__control_8h_source.html#l00789">GetSimpleCases()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/CParserFrontend/<a class="el" href="flow__control_8h_source.html">flow_control.h</a></li>
+<li>src/CParserFrontend/<a class="el" href="flow__control_8cpp_source.html">flow_control.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacec__parser__frontend.html">c_parser_frontend</a></li><li class="navelem"><a class="el" href="namespacec__parser__frontend_1_1flow__control.html">flow_control</a></li><li class="navelem"><a class="el" href="classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html">SwitchSentence</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

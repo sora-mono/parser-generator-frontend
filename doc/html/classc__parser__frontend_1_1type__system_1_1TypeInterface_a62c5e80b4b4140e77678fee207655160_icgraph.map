@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::type_system::TypeInterface::DeclineMathematicalComputeResult" name="c_parser_frontend::type_system::TypeInterface::DeclineMathematicalComputeResult">
+<area shape="rect" id="node1" title="推断两个类型进行数学运算后得到的类型和运算情况" alt="" coords="639,5,908,61"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#a651835f1052952644ff0efb05a1c1075" title="推算运算后结果" alt="" coords="320,5,591,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#a430561941342b87319eaae43da17af20" title="设置双目运算符右侧运算数" alt="" coords="5,5,272,61"/>
+</map>

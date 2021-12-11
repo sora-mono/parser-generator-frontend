@@ -1,0 +1,6 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::GetProductionBody" name="frontend::generator::syntax_generator::SyntaxGenerator::GetProductionBody">
+<area shape="rect" id="node1" title="获取非终结节点中的一个产生式体" alt="" coords="5,125,271,181"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a4142e3ce887dd6fe46021459c4e35e27" title="获取产生式体" alt="" coords="349,5,555,76"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="319,125,585,181"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a1aa8dcd59b8c2220d5af4db2c656d23b" title="获取产生式类型" alt="" coords="343,205,561,261"/>
+</map>

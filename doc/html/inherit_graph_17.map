@@ -1,0 +1,5 @@
+<map id="类继承关系图" name="类继承关系图">
+<area shape="rect" id="node1" href="$classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,45,272,101"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1common_1_1ExplicitIdWrapper.html" title="强制显式调用构造函数且使用默认无效值版Wrapper" alt="" coords="320,5,553,61"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1NonExplicitIdWrapper.html" title="不强制显示调用构造函数使用默认无效值版" alt="" coords="320,85,553,141"/>
+</map>

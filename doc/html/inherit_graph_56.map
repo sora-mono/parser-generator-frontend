@@ -1,0 +1,7 @@
+<map id="类继承关系图" name="类继承关系图">
+<area shape="rect" id="node1" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html" title="动作和附属数据基类" alt="" coords="5,148,248,219"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1AcceptAttachedData.html" title="表示Accept动作的节点" alt="" coords="297,5,488,76"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html" title="执行规约动作时的附属数据" alt="" coords="297,100,488,171"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ShiftAttachedData.html" title="执行移入动作时的附属数据" alt="" coords="297,195,488,265"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ShiftReductAttachedData.html" title="移入与规约动作的附属数据" alt="" coords="296,289,489,360"/>
+</map>

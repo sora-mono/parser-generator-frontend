@@ -1,0 +1,9 @@
+<map id="c_parser_frontend::operator_node::DereferenceOperatorNode::SetNodeToDereference" name="c_parser_frontend::operator_node::DereferenceOperatorNode::SetNodeToDereference">
+<area shape="rect" id="node1" title="设定被解引用的节点" alt="" coords="5,85,276,141"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#afecbf5df68d69241c8f666f7e4452e67" title="检查节点是否可以解引用" alt="" coords="324,5,628,61"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#a60a5978177acc63c9b523afeb487c22c" title="获取该指针解引用后得到的类型" alt="" coords="381,85,571,141"/>
+<area shape="rect" id="node7" href="$classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#ad8c4f2339eb809bdb0dd843ae4f1663f" title="设置解引用后得到的节点" alt="" coords="344,165,608,221"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e" title="获取最终结果的类型" alt="" coords="676,5,904,61"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#a8fe1e202c2f1f5482701b35707a4205b" title="获取指针指向的对象的const状态" alt="" coords="695,85,885,141"/>
+<area shape="rect" id="node6" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#aee0d7c335ee3fa545379099dcddf6635" title="获取下一个类型节点的指针" alt="" coords="689,165,891,221"/>
+</map>

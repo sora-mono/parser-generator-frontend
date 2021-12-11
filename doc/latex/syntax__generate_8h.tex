@@ -1,0 +1,333 @@
+\hypertarget{syntax__generate_8h}{}\doxysection{src/\+Generator/\+Syntax\+Generator/syntax\+\_\+generate.h 文件参考}
+\label{syntax__generate_8h}\index{src/Generator/SyntaxGenerator/syntax\_generate.h@{src/Generator/SyntaxGenerator/syntax\_generate.h}}
+
+
+定义表示产生式的宏以简化配置生成过程  
+
+
+{\ttfamily \#include \char`\"{}Common/common.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Config/\+Production\+Config/user\+\_\+defined\+\_\+functions.\+h\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Generator/export\+\_\+types.\+h\char`\"{}}\newline
+syntax\+\_\+generate.\+h 的引用(Include)关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{syntax__generate_8h__incl}
+\end{center}
+\end{figure}
+此图展示该文件直接或间接的被哪些文件引用了\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{syntax__generate_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{宏定义}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{syntax__generate_8h_a225f579fc2b24c7eb8a27171a3c37250}{N\+O\+N\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+O\+N\+\_\+\+S\+Y\+M\+B\+O\+L\+\_\+\+M\+O\+D\+I\+FY}}(production\+\_\+symbol,  production\+\_\+body\+\_\+seq)~production\+\_\+symbol\#\#\+\_\+\#\#production\+\_\+body\+\_\+seq\#\#\+\_\+
+\begin{DoxyCompactList}\small\item\em 修饰非终结节点产生式名 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{syntax__generate_8h_a2a46cfbd29070bbdbe701ee58bf4e8dd}{N\+O\+N\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+O\+N\+\_\+\+S\+Y\+M\+B\+O\+L\+\_\+\+M\+O\+D\+I\+F\+Y\+\_\+\+S\+TR}}(production\+\_\+symbol,  production\+\_\+body\+\_\+seq)~\#production\+\_\+symbol\#\#\char`\"{}\+\_\+\char`\"{}\#\# \#production\+\_\+body\+\_\+seq\#\#\char`\"{}\+\_\+\char`\"{}
+\begin{DoxyCompactList}\small\item\em 修饰非终结节点产生式名 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{syntax__generate_8h_af2cbd6d371dbdea6cf374b11767c5b56}{G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+K\+E\+Y\+\_\+\+W\+O\+RD}}(key\+\_\+word)
+\begin{DoxyCompactList}\small\item\em 定义关键字 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{syntax__generate_8h_af205c01403e0e50ef68c36a71a39a747}{G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+O\+P\+E\+R\+A\+T\+OR}}(operator\+\_\+symbol,  binary\+\_\+operator\+\_\+associatity,  binary\+\_\+operator\+\_\+priority)
+\begin{DoxyCompactList}\small\item\em 定义双目运算符 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{syntax__generate_8h_ae92be0f09acbe6bd93bf83c15c887bae}{G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+A\+R\+Y\+\_\+\+O\+P\+E\+R\+A\+T\+OR}}(operator\+\_\+symbol,  unary\+\_\+operator\+\_\+associatity,  unary\+\_\+operator\+\_\+priority)
+\begin{DoxyCompactList}\small\item\em 定义左侧单目运算符 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{syntax__generate_8h_a345eeb43ffa0e1068cdc5148a30277ef}{G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+U\+N\+A\+R\+Y\+\_\+\+O\+P\+E\+R\+A\+T\+OR}}( operator\+\_\+symbol,  binary\+\_\+operator\+\_\+associatity,  binary\+\_\+operator\+\_\+priority,  unary\+\_\+operator\+\_\+associatity,  unary\+\_\+operator\+\_\+priority)
+\begin{DoxyCompactList}\small\item\em 定义同时具有双目和左侧单目语义的运算符 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{syntax__generate_8h_a15af39ce8327b4a13a1158fb7f60e8f8}{G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+ON}}(production\+\_\+symbol,  production\+\_\+body)
+\begin{DoxyCompactList}\small\item\em 定义终结产生式 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{syntax__generate_8h_aab4b2e7e92821a74322b97956e3040c3}{G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+N\+O\+N\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+ON}}(production\+\_\+symbol,  reduct\+\_\+function\+\_\+name,  production\+\_\+body\+\_\+seq, ...)
+\begin{DoxyCompactList}\small\item\em 定义非终结产生式 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{syntax__generate_8h_ad45376c70fae4cf4e8a614c8721412ce}{G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+S\+E\+T\+\_\+\+N\+O\+N\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+O\+N\+\_\+\+C\+O\+U\+L\+D\+\_\+\+E\+M\+P\+T\+Y\+\_\+\+R\+E\+D\+U\+CT}}(production\+\_\+symbol)
+\begin{DoxyCompactList}\small\item\em 设置非终结产生式可以空规约 \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{syntax__generate_8h_ac9e12db60e40c9394a174c94ba22072a}{G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+R\+O\+O\+T\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+ON}}(production\+\_\+symbol)
+\begin{DoxyCompactList}\small\item\em 设置根产生式 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{类型定义}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{syntax__generate_8h_a41d5a5eec01165c102a15607a3fc19bb}{Operator\+Associatity\+Type}} = \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Associatity\+Type}}
+\begin{DoxyCompactList}\small\item\em 提供运算符结合性的枚举 \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+定义表示产生式的宏以简化配置生成过程 
+
+1.作者能力所限，无法在文件中存储规约用函数，只能曲线救国，将每个规约函数 包装到类中，每个包装类实例化一个对象，对象中通过虚函数包装规约函数， 利用虚函数机制运行时调用正确的规约函数，创建的对象可通过boost-\/serialization 序列化，从而在配置文件中保存规约函数 2.作者能力有限，假如通过读取配置文件解析，然后生成配置则步骤如下： 1)运行\+Generator根据配置文件生成生成配置所需要追加的源代码 2)再次编译 3)运行\+Generator生成配置 3)这步作者没有方法去除，存在用户定义的规约函数如何保存到配置文件的问题，在 生成配置时这些函数都只是函数名，如果通过宏将函数名绑定到具体函数，那么用户 需要在配置文件中写两遍函数，其中一遍还是定义\+E\+X\+P\+O\+RT(func,\char`\"{}func\char`\"{})这样的宏， 浪费有效时间而且维护不便，还需要运行两次\+Generator，严重影响使用体验。 3.由于2的原因作者选择通过宏在配置文件中描述产生式和相关信息来定义产生式， 只需定义配置一次，编译一次，运行一次，宏自动在需要的文件中生成相关代码 4.该文件内定义多个表示产生式的宏，这些宏均用于表示产生式，并在需要的文件内 转化为相应代码，避免每个需要生成代码的文件中都手动定义产生式 5.该文件必须且仅被\+Config/\+Production\+Config/production\+\_\+config-\/inc.h包含， \mbox{\hyperlink{production__config-inc_8h}{production\+\_\+config-\/inc.\+h}}需要且仅被process\+\_\+functions\+\_\+classes.\+h process\+\_\+functions\+\_\+classes\+\_\+register.\+h和config\+\_\+construct.\+cpp三个文件包含， 并在三个文件中生成不同代码 6.该文件不应使用标准头文件保护，下面有特化的的宏保护 7.用户定义头文件请在user\+\_\+defined\+\_\+functions.\+h中添加， 禁止在production\+\_\+config-\/inc.h中添加用户定义的头文件 8.关键字词法分析优先级高于运算符，运算符词法分析优先级高于普通单词 
+
+\doxysubsection{宏定义说明}
+\mbox{\Hypertarget{syntax__generate_8h_af205c01403e0e50ef68c36a71a39a747}\label{syntax__generate_8h_af205c01403e0e50ef68c36a71a39a747}} 
+\index{syntax\_generate.h@{syntax\_generate.h}!GENERATOR\_DEFINE\_BINARY\_OPERATOR@{GENERATOR\_DEFINE\_BINARY\_OPERATOR}}
+\index{GENERATOR\_DEFINE\_BINARY\_OPERATOR@{GENERATOR\_DEFINE\_BINARY\_OPERATOR}!syntax\_generate.h@{syntax\_generate.h}}
+\doxysubsubsection{\texorpdfstring{GENERATOR\_DEFINE\_BINARY\_OPERATOR}{GENERATOR\_DEFINE\_BINARY\_OPERATOR}}
+{\footnotesize\ttfamily \#define G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+O\+P\+E\+R\+A\+T\+OR(\begin{DoxyParamCaption}\item[{}]{operator\+\_\+symbol,  }\item[{}]{binary\+\_\+operator\+\_\+associatity,  }\item[{}]{binary\+\_\+operator\+\_\+priority }\end{DoxyParamCaption})}
+
+
+
+定义双目运算符 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em operator\+\_\+symbol} & ：运算符字符串 \\
+\hline
+\mbox{\texttt{ in}}  & {\em binary\+\_\+operator\+\_\+associatity} & ：双目运算符结合性（枚举\+Operator\+Associatity\+Type） \\
+\hline
+\mbox{\texttt{ in}}  & {\em binary\+\_\+operator\+\_\+priority} & ：双目运算符优先级\\
+\hline
+\end{DoxyParams}
+例：\+G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+O\+P\+E\+R\+A\+T\+OR(\char`\"{}example\+\_\+symbol\char`\"{}, Operator\+Associatity\+Type\+::k\+Left\+To\+Right, 2) \begin{DoxyNote}{注解}
+运算符优先级数值越大优先级越高 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+相同operator\+\_\+symbol的运算符只能定义一次 
+\end{DoxyAttention}
+
+
+在文件 syntax\+\_\+generate.\+h 第 83 行定义.
+
+\mbox{\Hypertarget{syntax__generate_8h_a345eeb43ffa0e1068cdc5148a30277ef}\label{syntax__generate_8h_a345eeb43ffa0e1068cdc5148a30277ef}} 
+\index{syntax\_generate.h@{syntax\_generate.h}!GENERATOR\_DEFINE\_BINARY\_UNARY\_OPERATOR@{GENERATOR\_DEFINE\_BINARY\_UNARY\_OPERATOR}}
+\index{GENERATOR\_DEFINE\_BINARY\_UNARY\_OPERATOR@{GENERATOR\_DEFINE\_BINARY\_UNARY\_OPERATOR}!syntax\_generate.h@{syntax\_generate.h}}
+\doxysubsubsection{\texorpdfstring{GENERATOR\_DEFINE\_BINARY\_UNARY\_OPERATOR}{GENERATOR\_DEFINE\_BINARY\_UNARY\_OPERATOR}}
+{\footnotesize\ttfamily \#define G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+U\+N\+A\+R\+Y\+\_\+\+O\+P\+E\+R\+A\+T\+OR(\begin{DoxyParamCaption}\item[{}]{operator\+\_\+symbol,  }\item[{}]{binary\+\_\+operator\+\_\+associatity,  }\item[{}]{binary\+\_\+operator\+\_\+priority,  }\item[{}]{unary\+\_\+operator\+\_\+associatity,  }\item[{}]{unary\+\_\+operator\+\_\+priority }\end{DoxyParamCaption})}
+
+
+
+定义同时具有双目和左侧单目语义的运算符 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em operator\+\_\+symbol} & ：双语义运算符字符串 \\
+\hline
+\mbox{\texttt{ in}}  & {\em binary\+\_\+operator\+\_\+associatity} & ：双目运算符结合性（枚举\+Operator\+Associatity\+Type） \\
+\hline
+\mbox{\texttt{ in}}  & {\em binary\+\_\+operator\+\_\+priority} & ：双目运算符优先级 \\
+\hline
+\mbox{\texttt{ in}}  & {\em unary\+\_\+operator\+\_\+associatity} & ：左侧单目运算符结合性（枚举\+Operator\+Associatity\+Type） \\
+\hline
+\mbox{\texttt{ in}}  & {\em unary\+\_\+operator\+\_\+priority} & ：左侧单目运算符优先级\\
+\hline
+\end{DoxyParams}
+例：\+G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+U\+N\+A\+R\+Y\+\_\+\+O\+P\+E\+R\+A\+T\+OR(\char`\"{}example\+\_\+symbol\char`\"{}, Operator\+Associatity\+Type\+::k\+Left\+To\+Right, 2) \begin{DoxyAttention}{注意}
+相同operator\+\_\+symbol的运算符只能定义一次 不允许通过组合\+G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+A\+R\+Y\+\_\+\+O\+P\+E\+R\+A\+T\+O\+R和 G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+B\+I\+N\+A\+R\+Y\+\_\+\+O\+P\+E\+R\+A\+T\+O\+R来声明同时支持双目和左侧单目语义的运算符， 必须使用该宏一次性声明这种运算符 
+\end{DoxyAttention}
+
+
+在文件 syntax\+\_\+generate.\+h 第 122 行定义.
+
+\mbox{\Hypertarget{syntax__generate_8h_af2cbd6d371dbdea6cf374b11767c5b56}\label{syntax__generate_8h_af2cbd6d371dbdea6cf374b11767c5b56}} 
+\index{syntax\_generate.h@{syntax\_generate.h}!GENERATOR\_DEFINE\_KEY\_WORD@{GENERATOR\_DEFINE\_KEY\_WORD}}
+\index{GENERATOR\_DEFINE\_KEY\_WORD@{GENERATOR\_DEFINE\_KEY\_WORD}!syntax\_generate.h@{syntax\_generate.h}}
+\doxysubsubsection{\texorpdfstring{GENERATOR\_DEFINE\_KEY\_WORD}{GENERATOR\_DEFINE\_KEY\_WORD}}
+{\footnotesize\ttfamily \#define G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+K\+E\+Y\+\_\+\+W\+O\+RD(\begin{DoxyParamCaption}\item[{}]{key\+\_\+word }\end{DoxyParamCaption})}
+
+
+
+定义关键字 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em key\+\_\+word} & ：待定义的关键字字符串\\
+\hline
+\end{DoxyParams}
+例：\+G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+K\+E\+Y\+\_\+\+W\+O\+RD(\char`\"{}example\+\_\+key\+\_\+word\char`\"{}) \begin{DoxyNote}{注解}
+仅支持单词，不支持正则表达式 关键字词法分析优先级高于运算符和普通单词 
+\end{DoxyNote}
+
+
+在文件 syntax\+\_\+generate.\+h 第 67 行定义.
+
+\mbox{\Hypertarget{syntax__generate_8h_aab4b2e7e92821a74322b97956e3040c3}\label{syntax__generate_8h_aab4b2e7e92821a74322b97956e3040c3}} 
+\index{syntax\_generate.h@{syntax\_generate.h}!GENERATOR\_DEFINE\_NONTERMINAL\_PRODUCTION@{GENERATOR\_DEFINE\_NONTERMINAL\_PRODUCTION}}
+\index{GENERATOR\_DEFINE\_NONTERMINAL\_PRODUCTION@{GENERATOR\_DEFINE\_NONTERMINAL\_PRODUCTION}!syntax\_generate.h@{syntax\_generate.h}}
+\doxysubsubsection{\texorpdfstring{GENERATOR\_DEFINE\_NONTERMINAL\_PRODUCTION}{GENERATOR\_DEFINE\_NONTERMINAL\_PRODUCTION}}
+{\footnotesize\ttfamily \#define G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+N\+O\+N\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+ON(\begin{DoxyParamCaption}\item[{}]{production\+\_\+symbol,  }\item[{}]{reduct\+\_\+function\+\_\+name,  }\item[{}]{production\+\_\+body\+\_\+seq,  }\item[{}]{... }\end{DoxyParamCaption})}
+
+
+
+定义非终结产生式 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em production\+\_\+symbol} & ：非终结产生式名 \\
+\hline
+\mbox{\texttt{ in}}  & {\em reduct\+\_\+function\+\_\+name} & ：规约非终结产生式的函数名 \\
+\hline
+\mbox{\texttt{ in}}  & {\em production\+\_\+body\+\_\+seq} & ：区分不同产生式体的字符 \\
+\hline
+\mbox{\texttt{ in}}  & {\em ...} & ：产生式体\\
+\hline
+\end{DoxyParams}
+产生式体部分使用初始化列表书写法 例：\{\char`\"{}production\+\_\+body1\char`\"{},\char`\"{}production\+\_\+body2\char`\"{}\} 每一个相同的产生式名下各产生式体编号必须不同，可使用\mbox{[}a-\/z\+A-\/\+Z0-\/9\+\_\+\mbox{]}+ 该编号用于区分不同的产生式体并为其构建相应的包装函数 例：\+G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+N\+O\+N\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+ON(example\+\_\+symbol, Example\+Function\+Name, 0, false, \{\char`\"{}\+Id\char`\"{}, \char`\"{}=\char`\"{}, \char`\"{}\+Assignable\char`\"{}\}) 
+
+在文件 syntax\+\_\+generate.\+h 第 152 行定义.
+
+\mbox{\Hypertarget{syntax__generate_8h_ac9e12db60e40c9394a174c94ba22072a}\label{syntax__generate_8h_ac9e12db60e40c9394a174c94ba22072a}} 
+\index{syntax\_generate.h@{syntax\_generate.h}!GENERATOR\_DEFINE\_ROOT\_PRODUCTION@{GENERATOR\_DEFINE\_ROOT\_PRODUCTION}}
+\index{GENERATOR\_DEFINE\_ROOT\_PRODUCTION@{GENERATOR\_DEFINE\_ROOT\_PRODUCTION}!syntax\_generate.h@{syntax\_generate.h}}
+\doxysubsubsection{\texorpdfstring{GENERATOR\_DEFINE\_ROOT\_PRODUCTION}{GENERATOR\_DEFINE\_ROOT\_PRODUCTION}}
+{\footnotesize\ttfamily \#define G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+R\+O\+O\+T\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+ON(\begin{DoxyParamCaption}\item[{}]{production\+\_\+symbol }\end{DoxyParamCaption})}
+
+
+
+设置根产生式 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em production\+\_\+symbol} & ：待设置的根非终结产生式名 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+调用时仅需已定义该非终结节点，不要求已定义非终结产生式依赖的产生式 例：\+G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+R\+O\+O\+T\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+O\+N(example\+\_\+symbol) 
+\end{DoxyNote}
+
+
+在文件 syntax\+\_\+generate.\+h 第 176 行定义.
+
+\mbox{\Hypertarget{syntax__generate_8h_a15af39ce8327b4a13a1158fb7f60e8f8}\label{syntax__generate_8h_a15af39ce8327b4a13a1158fb7f60e8f8}} 
+\index{syntax\_generate.h@{syntax\_generate.h}!GENERATOR\_DEFINE\_TERMINAL\_PRODUCTION@{GENERATOR\_DEFINE\_TERMINAL\_PRODUCTION}}
+\index{GENERATOR\_DEFINE\_TERMINAL\_PRODUCTION@{GENERATOR\_DEFINE\_TERMINAL\_PRODUCTION}!syntax\_generate.h@{syntax\_generate.h}}
+\doxysubsubsection{\texorpdfstring{GENERATOR\_DEFINE\_TERMINAL\_PRODUCTION}{GENERATOR\_DEFINE\_TERMINAL\_PRODUCTION}}
+{\footnotesize\ttfamily \#define G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+ON(\begin{DoxyParamCaption}\item[{}]{production\+\_\+symbol,  }\item[{}]{production\+\_\+body }\end{DoxyParamCaption})}
+
+
+
+定义终结产生式 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em production\+\_\+symbol} & ：终结节点名字符串 \\
+\hline
+\mbox{\texttt{ in}}  & {\em production\+\_\+body} & ：终结节点体字符串（正则表达式形式）\\
+\hline
+\end{DoxyParams}
+例：\+G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+ON(\char`\"{}example\+\_\+symbol\char`\"{}, \char`\"{}\mbox{[}a-\/z\+A-\/\+Z\+\_\+\mbox{]}\mbox{[}a-\/z\+A-\/\+Z\+\_\+0-\/9\mbox{]}$\ast$\char`\"{}) 
+
+在文件 syntax\+\_\+generate.\+h 第 135 行定义.
+
+\mbox{\Hypertarget{syntax__generate_8h_ae92be0f09acbe6bd93bf83c15c887bae}\label{syntax__generate_8h_ae92be0f09acbe6bd93bf83c15c887bae}} 
+\index{syntax\_generate.h@{syntax\_generate.h}!GENERATOR\_DEFINE\_UNARY\_OPERATOR@{GENERATOR\_DEFINE\_UNARY\_OPERATOR}}
+\index{GENERATOR\_DEFINE\_UNARY\_OPERATOR@{GENERATOR\_DEFINE\_UNARY\_OPERATOR}!syntax\_generate.h@{syntax\_generate.h}}
+\doxysubsubsection{\texorpdfstring{GENERATOR\_DEFINE\_UNARY\_OPERATOR}{GENERATOR\_DEFINE\_UNARY\_OPERATOR}}
+{\footnotesize\ttfamily \#define G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+A\+R\+Y\+\_\+\+O\+P\+E\+R\+A\+T\+OR(\begin{DoxyParamCaption}\item[{}]{operator\+\_\+symbol,  }\item[{}]{unary\+\_\+operator\+\_\+associatity,  }\item[{}]{unary\+\_\+operator\+\_\+priority }\end{DoxyParamCaption})}
+
+
+
+定义左侧单目运算符 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em operator\+\_\+symbol} & ：运算符字符串 \\
+\hline
+\mbox{\texttt{ in}}  & {\em unary\+\_\+operator\+\_\+associatity} & ：左侧单目运算符结合性（枚举\+Operator\+Associatity\+Type） \\
+\hline
+\mbox{\texttt{ in}}  & {\em unary\+\_\+operator\+\_\+priority} & ：左侧单目运算符优先级\\
+\hline
+\end{DoxyParams}
+例：\+G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+D\+E\+F\+I\+N\+E\+\_\+\+U\+N\+A\+R\+Y\+\_\+\+O\+P\+E\+R\+A\+T\+OR(\char`\"{}example\+\_\+symbol\char`\"{}, Operator\+Associatity\+Type\+::k\+Left\+To\+Right, 2) \begin{DoxyNote}{注解}
+运算符优先级数值越大优先级越高 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+相同operator\+\_\+symbol的运算符只能定义一次 
+\end{DoxyAttention}
+
+
+在文件 syntax\+\_\+generate.\+h 第 100 行定义.
+
+\mbox{\Hypertarget{syntax__generate_8h_ad45376c70fae4cf4e8a614c8721412ce}\label{syntax__generate_8h_ad45376c70fae4cf4e8a614c8721412ce}} 
+\index{syntax\_generate.h@{syntax\_generate.h}!GENERATOR\_SET\_NONTERMINAL\_PRODUCTION\_COULD\_EMPTY\_REDUCT@{GENERATOR\_SET\_NONTERMINAL\_PRODUCTION\_COULD\_EMPTY\_REDUCT}}
+\index{GENERATOR\_SET\_NONTERMINAL\_PRODUCTION\_COULD\_EMPTY\_REDUCT@{GENERATOR\_SET\_NONTERMINAL\_PRODUCTION\_COULD\_EMPTY\_REDUCT}!syntax\_generate.h@{syntax\_generate.h}}
+\doxysubsubsection{\texorpdfstring{GENERATOR\_SET\_NONTERMINAL\_PRODUCTION\_COULD\_EMPTY\_REDUCT}{GENERATOR\_SET\_NONTERMINAL\_PRODUCTION\_COULD\_EMPTY\_REDUCT}}
+{\footnotesize\ttfamily \#define G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+S\+E\+T\+\_\+\+N\+O\+N\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+O\+N\+\_\+\+C\+O\+U\+L\+D\+\_\+\+E\+M\+P\+T\+Y\+\_\+\+R\+E\+D\+U\+CT(\begin{DoxyParamCaption}\item[{}]{production\+\_\+symbol }\end{DoxyParamCaption})}
+
+
+
+设置非终结产生式可以空规约 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em production\+\_\+symbol} & ：待设置可以空规约的非终结产生式名 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+未调用此方法的非终结节点默认不可以空规约 调用时仅需保证给定的非终结产生式已经定义， 不要求已定义非终结产生式依赖的产生式 例：\+G\+E\+N\+E\+R\+A\+T\+O\+R\+\_\+\+S\+E\+T\+\_\+\+N\+O\+N\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+O\+N\+\_\+\+C\+O\+U\+L\+D\+\_\+\+E\+M\+P\+T\+Y\+\_\+\+R\+E\+D\+U\+C\+T(example\+\_\+symbol) 
+\end{DoxyNote}
+
+
+在文件 syntax\+\_\+generate.\+h 第 165 行定义.
+
+\mbox{\Hypertarget{syntax__generate_8h_a225f579fc2b24c7eb8a27171a3c37250}\label{syntax__generate_8h_a225f579fc2b24c7eb8a27171a3c37250}} 
+\index{syntax\_generate.h@{syntax\_generate.h}!NONTERMINAL\_PRODUCTION\_SYMBOL\_MODIFY@{NONTERMINAL\_PRODUCTION\_SYMBOL\_MODIFY}}
+\index{NONTERMINAL\_PRODUCTION\_SYMBOL\_MODIFY@{NONTERMINAL\_PRODUCTION\_SYMBOL\_MODIFY}!syntax\_generate.h@{syntax\_generate.h}}
+\doxysubsubsection{\texorpdfstring{NONTERMINAL\_PRODUCTION\_SYMBOL\_MODIFY}{NONTERMINAL\_PRODUCTION\_SYMBOL\_MODIFY}}
+{\footnotesize\ttfamily \#define N\+O\+N\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+O\+N\+\_\+\+S\+Y\+M\+B\+O\+L\+\_\+\+M\+O\+D\+I\+FY(\begin{DoxyParamCaption}\item[{}]{production\+\_\+symbol,  }\item[{}]{production\+\_\+body\+\_\+seq }\end{DoxyParamCaption})~production\+\_\+symbol\#\#\+\_\+\#\#production\+\_\+body\+\_\+seq\#\#\+\_\+}
+
+
+
+修饰非终结节点产生式名 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em production\+\_\+symbol} & ：产生式名 \\
+\hline
+\mbox{\texttt{ in}}  & {\em production\+\_\+body\+\_\+seq} & ：区分产生式体的字符 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回裸的包装\+Reduct函数用的类名 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+例： \mbox{\hyperlink{syntax__generate_8h_a225f579fc2b24c7eb8a27171a3c37250}{N\+O\+N\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+O\+N\+\_\+\+S\+Y\+M\+B\+O\+L\+\_\+\+M\+O\+D\+I\+F\+Y(example1,2)}} 展开为 example1\+\_\+2\+\_\+ 
+\end{DoxyNote}
+
+
+在文件 syntax\+\_\+generate.\+h 第 43 行定义.
+
+\mbox{\Hypertarget{syntax__generate_8h_a2a46cfbd29070bbdbe701ee58bf4e8dd}\label{syntax__generate_8h_a2a46cfbd29070bbdbe701ee58bf4e8dd}} 
+\index{syntax\_generate.h@{syntax\_generate.h}!NONTERMINAL\_PRODUCTION\_SYMBOL\_MODIFY\_STR@{NONTERMINAL\_PRODUCTION\_SYMBOL\_MODIFY\_STR}}
+\index{NONTERMINAL\_PRODUCTION\_SYMBOL\_MODIFY\_STR@{NONTERMINAL\_PRODUCTION\_SYMBOL\_MODIFY\_STR}!syntax\_generate.h@{syntax\_generate.h}}
+\doxysubsubsection{\texorpdfstring{NONTERMINAL\_PRODUCTION\_SYMBOL\_MODIFY\_STR}{NONTERMINAL\_PRODUCTION\_SYMBOL\_MODIFY\_STR}}
+{\footnotesize\ttfamily \#define N\+O\+N\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+O\+N\+\_\+\+S\+Y\+M\+B\+O\+L\+\_\+\+M\+O\+D\+I\+F\+Y\+\_\+\+S\+TR(\begin{DoxyParamCaption}\item[{}]{production\+\_\+symbol,  }\item[{}]{production\+\_\+body\+\_\+seq }\end{DoxyParamCaption})~\#production\+\_\+symbol\#\#\char`\"{}\+\_\+\char`\"{}\#\# \#production\+\_\+body\+\_\+seq\#\#\char`\"{}\+\_\+\char`\"{}}
+
+
+
+修饰非终结节点产生式名 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em production\+\_\+symbol} & ：产生式名 \\
+\hline
+\mbox{\texttt{ in}}  & {\em production\+\_\+body\+\_\+seq} & ：区分产生式体的字符 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回包装\+Reduct函数用的类名的字符串形式 
+\end{DoxyReturn}
+\begin{DoxyNote}{注解}
+例： \mbox{\hyperlink{syntax__generate_8h_a2a46cfbd29070bbdbe701ee58bf4e8dd}{N\+O\+N\+T\+E\+R\+M\+I\+N\+A\+L\+\_\+\+P\+R\+O\+D\+U\+C\+T\+I\+O\+N\+\_\+\+S\+Y\+M\+B\+O\+L\+\_\+\+M\+O\+D\+I\+F\+Y\+\_\+\+S\+T\+R(example1,2)}} 展开为 \char`\"{}example1\+\_\+2\+\_\+\char`\"{} 
+\end{DoxyNote}
+
+
+在文件 syntax\+\_\+generate.\+h 第 54 行定义.
+
+
+
+\doxysubsection{类型定义说明}
+\mbox{\Hypertarget{syntax__generate_8h_a41d5a5eec01165c102a15607a3fc19bb}\label{syntax__generate_8h_a41d5a5eec01165c102a15607a3fc19bb}} 
+\index{syntax\_generate.h@{syntax\_generate.h}!OperatorAssociatityType@{OperatorAssociatityType}}
+\index{OperatorAssociatityType@{OperatorAssociatityType}!syntax\_generate.h@{syntax\_generate.h}}
+\doxysubsubsection{\texorpdfstring{OperatorAssociatityType}{OperatorAssociatityType}}
+{\footnotesize\ttfamily using \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{Operator\+Associatity\+Type}} =  \mbox{\hyperlink{namespacefrontend_1_1common_a2e54554d6d568b7d64c64545ff662a73}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Associatity\+Type}}}
+
+
+
+提供运算符结合性的枚举 
+
+为了使用\+Intellisense在这个宏里包含需要的头文件 此处的头文件在代码生成过程中会被忽略 用户请在user\+\_\+defined\+\_\+functions.\+h内添加自己定义的头文件 在每个包含该文件的文件中都应定义\+S\+H\+I\+E\+L\+D\+\_\+\+H\+E\+A\+D\+E\+R\+S\+\_\+\+F\+O\+R\+\_\+\+I\+N\+T\+E\+L\+L\+I\+S\+E\+N\+S\+E宏以屏蔽这些 文件，否则会出现各种奇怪报错 
+
+在文件 syntax\+\_\+generate.\+h 第 332 行定义.
+

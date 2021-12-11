@@ -1,0 +1,458 @@
+\hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{}\doxysection{frontend\+::generator\+::syntax\+\_\+generator\+::Base\+Production\+Node类 参考}
+\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+
+
+该类是所有表示具体产生式类别的派生类的基类  
+
+
+
+
+{\ttfamily \#include $<$production\+\_\+node.\+h$>$}
+
+
+
+类 frontend\+::generator\+::syntax\+\_\+generator\+::Base\+Production\+Node 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode__inherit__graph}
+\end{center}
+\end{figure}
+
+
+frontend\+::generator\+::syntax\+\_\+generator\+::Base\+Production\+Node 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a330f363b48b0ad0e56997c3a2bc9b98b}{Base\+Production\+Node}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{Production\+Node\+Type}} type, \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}} symbol\+\_\+id)
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a1221f412fcd14e41285ecbf4cbdb9280}{Base\+Production\+Node}} (const \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{Base\+Production\+Node}} \&)=delete
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{Base\+Production\+Node}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a7dd2b9f25b6936a97a6df95fb0cde367}{operator=}} (const \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{Base\+Production\+Node}} \&)=delete
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a0af3298d0c47c779f9c5c30867d6ecc5}{Base\+Production\+Node}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{Base\+Production\+Node}} \&\&base\+\_\+production\+\_\+node)
+\item 
+\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{Base\+Production\+Node}} \& \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_af5d787731137b40b0a18e17e2e65d2ed}{operator=}} (\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{Base\+Production\+Node}} \&\&base\+\_\+production\+\_\+node)
+\item 
+virtual \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_abf7f0903039567513c830e77c39a64d0}{$\sim$\+Base\+Production\+Node}} ()
+\item 
+void \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a049e3d1e5df5370aa487431b3c0c7415}{Set\+Type}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{Production\+Node\+Type}} type)
+\begin{DoxyCompactList}\small\item\em 设置产生式类型 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{Production\+Node\+Type}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a1aa8dcd59b8c2220d5af4db2c656d23b}{Get\+Type}} () const
+\begin{DoxyCompactList}\small\item\em 获取产生式类型 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a21cb460db9c35e2953b20d40ee9bf5b2}{Set\+Node\+Id}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{Production\+Node\+Id}} production\+\_\+node\+\_\+id)
+\begin{DoxyCompactList}\small\item\em 设置该节点\+ID \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{Production\+Node\+Id}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_aec1c422ccfb4d44e34443ecf30754bc3}{Get\+Node\+Id}} () const
+\begin{DoxyCompactList}\small\item\em 获取该节点\+ID \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a5aca6099a8cc54e3ffa0f63f0c5f6cb4}{Set\+Symbol\+Id}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}} production\+\_\+node\+\_\+id)
+\begin{DoxyCompactList}\small\item\em 设置该节点表示的产生式名\+ID \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_ada56e50b8f4c0b75de3ae7553376f1b1}{Get\+Node\+Symbol\+Id}} () const
+\begin{DoxyCompactList}\small\item\em 获取该节点表示的产生式名\+ID \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{Production\+Node\+Id}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a59f98cd7ca7b0906985c8bc053e92e65}{Get\+Production\+Node\+In\+Body}} (\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}} production\+\_\+body\+\_\+id, \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a947b9e3a6819c29acb6bfca1cfbdf281}{Next\+Word\+To\+Shift\+Index}} next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index) const =0
+\begin{DoxyCompactList}\small\item\em 根据给定产生式体和下一个移入的产生式位置获取下一个移入的产生式\+ID \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{Production\+Node\+Type}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a900c87e65f514d63939b4fa8076a795a}{base\+\_\+type\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 产生式类型 \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{Production\+Node\+Id}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a482173a7bbc7b16a22c99a816da2c8f6}{base\+\_\+id\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 节点\+ID \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}} \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_aa06698c8b1ca694e7845d0a7c3d5748d}{base\+\_\+symbol\+\_\+id\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 产生式名\+ID \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{详细描述}
+该类是所有表示具体产生式类别的派生类的基类 
+
+该类中包含：节点类型、节点\+I\+D、产生式名\+ID \begin{DoxyAttention}{注意}
+所有表示具体产生式的派生类都应继承自该类 
+\end{DoxyAttention}
+
+
+在文件 production\+\_\+node.\+h 第 20 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a330f363b48b0ad0e56997c3a2bc9b98b}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a330f363b48b0ad0e56997c3a2bc9b98b}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!BaseProductionNode@{BaseProductionNode}}
+\index{BaseProductionNode@{BaseProductionNode}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{BaseProductionNode()}{BaseProductionNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::\+Base\+Production\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{Production\+Node\+Type}}}]{type,  }\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}}}]{symbol\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 production\+\_\+node.\+h 第 22 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a1221f412fcd14e41285ecbf4cbdb9280}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a1221f412fcd14e41285ecbf4cbdb9280}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!BaseProductionNode@{BaseProductionNode}}
+\index{BaseProductionNode@{BaseProductionNode}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{BaseProductionNode()}{BaseProductionNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::\+Base\+Production\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{Base\+Production\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a0af3298d0c47c779f9c5c30867d6ecc5}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a0af3298d0c47c779f9c5c30867d6ecc5}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!BaseProductionNode@{BaseProductionNode}}
+\index{BaseProductionNode@{BaseProductionNode}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{BaseProductionNode()}{BaseProductionNode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::\+Base\+Production\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{Base\+Production\+Node}} \&\&}]{base\+\_\+production\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 production\+\_\+node.\+h 第 28 行定义.
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_abf7f0903039567513c830e77c39a64d0}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_abf7f0903039567513c830e77c39a64d0}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!````~BaseProductionNode@{$\sim$BaseProductionNode}}
+\index{````~BaseProductionNode@{$\sim$BaseProductionNode}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{$\sim$BaseProductionNode()}{~BaseProductionNode()}}
+{\footnotesize\ttfamily virtual frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::$\sim$\+Base\+Production\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+在文件 production\+\_\+node.\+h 第 33 行定义.
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_aec1c422ccfb4d44e34443ecf30754bc3}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_aec1c422ccfb4d44e34443ecf30754bc3}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!GetNodeId@{GetNodeId}}
+\index{GetNodeId@{GetNodeId}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{GetNodeId()}{GetNodeId()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{Production\+Node\+Id}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::\+Get\+Node\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取该节点\+ID 
+
+\begin{DoxyReturn}{返回}
+返回该节点\+ID 
+\end{DoxyReturn}
+
+
+在文件 production\+\_\+node.\+h 第 48 行定义.
+
+
+
+引用了 base\+\_\+id\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Terminal\+Production\+Node\+::\+Get\+Production\+Node\+In\+Body() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface\+::\+Get\+Production\+Node\+In\+Body().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_aec1c422ccfb4d44e34443ecf30754bc3_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_ada56e50b8f4c0b75de3ae7553376f1b1}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_ada56e50b8f4c0b75de3ae7553376f1b1}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!GetNodeSymbolId@{GetNodeSymbolId}}
+\index{GetNodeSymbolId@{GetNodeSymbolId}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{GetNodeSymbolId()}{GetNodeSymbolId()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::\+Get\+Node\+Symbol\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取该节点表示的产生式名\+ID 
+
+\begin{DoxyReturn}{返回}
+返回该节点表示的产生式名\+ID 
+\end{DoxyReturn}
+
+
+在文件 production\+\_\+node.\+h 第 56 行定义.
+
+
+
+引用了 base\+\_\+symbol\+\_\+id\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Format\+Production\+Item() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Format\+Single\+Production\+Body().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_ada56e50b8f4c0b75de3ae7553376f1b1_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a59f98cd7ca7b0906985c8bc053e92e65}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a59f98cd7ca7b0906985c8bc053e92e65}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!GetProductionNodeInBody@{GetProductionNodeInBody}}
+\index{GetProductionNodeInBody@{GetProductionNodeInBody}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{GetProductionNodeInBody()}{GetProductionNodeInBody()}}
+{\footnotesize\ttfamily virtual \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{Production\+Node\+Id}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::\+Get\+Production\+Node\+In\+Body (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{Production\+Body\+Id}}}]{production\+\_\+body\+\_\+id,  }\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a947b9e3a6819c29acb6bfca1cfbdf281}{Next\+Word\+To\+Shift\+Index}}}]{next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+根据给定产生式体和下一个移入的产生式位置获取下一个移入的产生式\+ID 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em production\+\_\+body\+\_\+id} & ：子产生式体标号 \\
+\hline
+\mbox{\texttt{ in}}  & {\em next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index} & ：产生式体中产生式\+I\+D的位置 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回production\+\_\+body\+\_\+id和next\+\_\+word\+\_\+to\+\_\+shift\+\_\+index指定的产生式\+ID
+\end{DoxyReturn}
+point\+\_\+index越界（大于等于production\+\_\+body\+\_\+id指定的子产生式中产生式数目）时 返回\+Produc\+Node\+Id\+::\+Invalid\+Id() production\+\_\+body\+\_\+id不得超出该产生式拥有的产生式体个数 终结产生式和运算符产生式只存在一个子产生式，子产生式中只含有一个产生式， 所以应使用 Production\+Body\+Id(0),Next\+Word\+To\+Shift\+Index(0)才可以获取有效产生式\+ID \begin{DoxyNote}{注解}
+使用举例： 产生式例： Id\+Or\+Equivence -\/$>$ Const\+Tag Id Id\+Or\+Equivence -\/$>$ Id\+Or\+Equivence \char`\"{}\mbox{[}\char`\"{} Num \char`\"{}\mbox{]}\char`\"{} Id\+Or\+Equivence -\/$>$ Id\+Or\+Equivence \char`\"{}\mbox{[}\char`\"{} \char`\"{}\mbox{]}\char`\"{} Id\+Or\+Equivence -\/$>$ Const\+Tag \char`\"{}$\ast$\char`\"{} Id\+Or\+Equivence 获取\+Id\+Or\+Equivence产生式内第二个子产生式中第三个产生式（\char`\"{}\+Num\char`\"{}）的\+ID 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{NonTerminalProductionNode example\_node;}
+\DoxyCodeLine{example\_node.GetProductionNodeInBody(\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a148278258ab36e6b32323a79e91b3b7e}{ProductionBodyId}}(1),}
+\DoxyCodeLine{                                     \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a947b9e3a6819c29acb6bfca1cfbdf281}{NextWordToShiftIndex}}(2));}
+\end{DoxyCode}
+ 
+\end{DoxyNote}
+\begin{DoxyAttention}{注意}
+所有派生类均应重写该函数，不得改变原始语义 
+\end{DoxyAttention}
+
+
+在 \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1EndNode_afa14c003ca54fa56eeaeb2a7cac4e0a6}{frontend\+::generator\+::syntax\+\_\+generator\+::\+End\+Node}}, \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode_a665b8d003098bd29e75de8bc30bb1f84}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node}}, \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1TerminalProductionNode_a444f5903df02c96773ba5c0b23685679}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Terminal\+Production\+Node}} , 以及 \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface_a31750cb1d3449127e841469e5e092dd9}{frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface}} 内被实现.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Production\+Node\+Id\+In\+Body().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a59f98cd7ca7b0906985c8bc053e92e65_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a1aa8dcd59b8c2220d5af4db2c656d23b}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a1aa8dcd59b8c2220d5af4db2c656d23b}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!GetType@{GetType}}
+\index{GetType@{GetType}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{Production\+Node\+Type}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::\+Get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取产生式类型 
+
+\begin{DoxyReturn}{返回}
+返回产生式类型 
+\end{DoxyReturn}
+
+
+在文件 production\+\_\+node.\+h 第 40 行定义.
+
+
+
+引用了 base\+\_\+type\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+Production\+Item\+Belong\+To\+Production\+Item\+Set\+Id(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Format\+Production\+Bodys(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Format\+Single\+Production\+Body(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Non\+Terminal\+Node\+First\+Node\+Ids(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Process\+Function\+Class(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Production\+Body(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Get\+Production\+Item\+Set\+Id\+From\+Production\+Item(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Production\+Item\+Set\+Closure(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Set\+Non\+Terminal\+Node\+Could\+Empty\+Reduct() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Spread\+Look\+Forward\+Symbol\+And\+Construct\+Syntax\+Analysis\+Table\+Entry().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a1aa8dcd59b8c2220d5af4db2c656d23b_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_af5d787731137b40b0a18e17e2e65d2ed}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_af5d787731137b40b0a18e17e2e65d2ed}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!operator=@{operator=}}
+\index{operator=@{operator=}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{Base\+Production\+Node}} \& frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{Base\+Production\+Node}} \&\&}]{base\+\_\+production\+\_\+node }\end{DoxyParamCaption})}
+
+
+
+在文件 production\+\_\+node.\+cpp 第 4 行定义.
+
+
+
+引用了 base\+\_\+id\+\_\+, base\+\_\+symbol\+\_\+id\+\_\+ , 以及 base\+\_\+type\+\_\+.
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a7dd2b9f25b6936a97a6df95fb0cde367}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a7dd2b9f25b6936a97a6df95fb0cde367}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!operator=@{operator=}}
+\index{operator=@{operator=}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{Base\+Production\+Node}}\& frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode}{Base\+Production\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Terminal\+Production\+Node\+::operator=(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Operator\+Node\+Interface\+::operator=(), frontend\+::generator\+::syntax\+\_\+generator\+::\+Non\+Terminal\+Production\+Node\+::operator=() , 以及 frontend\+::generator\+::syntax\+\_\+generator\+::\+End\+Node\+::operator=().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a7dd2b9f25b6936a97a6df95fb0cde367_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a21cb460db9c35e2953b20d40ee9bf5b2}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a21cb460db9c35e2953b20d40ee9bf5b2}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!SetNodeId@{SetNodeId}}
+\index{SetNodeId@{SetNodeId}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{SetNodeId()}{SetNodeId()}}
+{\footnotesize\ttfamily void frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::\+Set\+Node\+Id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{Production\+Node\+Id}}}]{production\+\_\+node\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置该节点\+ID 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em production\+\_\+node\+\_\+id} & ：待设置的节点\+ID \\
+\hline
+\end{DoxyParams}
+
+
+在文件 production\+\_\+node.\+h 第 43 行定义.
+
+
+
+引用了 base\+\_\+id\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+End\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a21cb460db9c35e2953b20d40ee9bf5b2_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a5aca6099a8cc54e3ffa0f63f0c5f6cb4}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a5aca6099a8cc54e3ffa0f63f0c5f6cb4}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!SetSymbolId@{SetSymbolId}}
+\index{SetSymbolId@{SetSymbolId}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{SetSymbolId()}{SetSymbolId()}}
+{\footnotesize\ttfamily void frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::\+Set\+Symbol\+Id (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}}}]{production\+\_\+node\+\_\+id }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置该节点表示的产生式名\+ID 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em production\+\_\+node\+\_\+id} & ：待设置的产生式名\+ID \\
+\hline
+\end{DoxyParams}
+
+
+在文件 production\+\_\+node.\+h 第 51 行定义.
+
+
+
+引用了 base\+\_\+symbol\+\_\+id\+\_\+.
+
+
+
+被这些函数引用 frontend\+::generator\+::syntax\+\_\+generator\+::\+Syntax\+Generator\+::\+Add\+End\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a5aca6099a8cc54e3ffa0f63f0c5f6cb4_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a049e3d1e5df5370aa487431b3c0c7415}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a049e3d1e5df5370aa487431b3c0c7415}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!SetType@{SetType}}
+\index{SetType@{SetType}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{SetType()}{SetType()}}
+{\footnotesize\ttfamily void frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::\+Set\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{Production\+Node\+Type}}}]{type }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置产生式类型 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em type} & ：产生式类型 \\
+\hline
+\end{DoxyParams}
+
+
+在文件 production\+\_\+node.\+h 第 37 行定义.
+
+
+
+引用了 base\+\_\+type\+\_\+.
+
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a482173a7bbc7b16a22c99a816da2c8f6}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a482173a7bbc7b16a22c99a816da2c8f6}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!base\_id\_@{base\_id\_}}
+\index{base\_id\_@{base\_id\_}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{base\_id\_}{base\_id\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_a8d03686ef93995074fb23ce1faf35b77}{Production\+Node\+Id}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::base\+\_\+id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+节点\+ID 
+
+
+
+在文件 production\+\_\+node.\+h 第 91 行定义.
+
+
+
+被这些函数引用 Get\+Node\+Id(), operator=() , 以及 Set\+Node\+Id().
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_aa06698c8b1ca694e7845d0a7c3d5748d}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_aa06698c8b1ca694e7845d0a7c3d5748d}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!base\_symbol\_id\_@{base\_symbol\_id\_}}
+\index{base\_symbol\_id\_@{base\_symbol\_id\_}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{base\_symbol\_id\_}{base\_symbol\_id\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa5441d8d67eb2b259fb6924ed9b91200}{Symbol\+Id}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::base\+\_\+symbol\+\_\+id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+产生式名\+ID 
+
+
+
+在文件 production\+\_\+node.\+h 第 93 行定义.
+
+
+
+被这些函数引用 Get\+Node\+Symbol\+Id(), operator=() , 以及 Set\+Symbol\+Id().
+
+\mbox{\Hypertarget{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a900c87e65f514d63939b4fa8076a795a}\label{classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode_a900c87e65f514d63939b4fa8076a795a}} 
+\index{frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}!base\_type\_@{base\_type\_}}
+\index{base\_type\_@{base\_type\_}!frontend::generator::syntax\_generator::BaseProductionNode@{frontend::generator::syntax\_generator::BaseProductionNode}}
+\doxysubsubsection{\texorpdfstring{base\_type\_}{base\_type\_}}
+{\footnotesize\ttfamily \mbox{\hyperlink{namespacefrontend_1_1generator_1_1syntax__generator_aa3b76f72027c071e3140ceb5fa56d0b8}{Production\+Node\+Type}} frontend\+::generator\+::syntax\+\_\+generator\+::\+Base\+Production\+Node\+::base\+\_\+type\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+产生式类型 
+
+
+
+在文件 production\+\_\+node.\+h 第 89 行定义.
+
+
+
+被这些函数引用 Get\+Type(), operator=() , 以及 Set\+Type().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Generator/\+Syntax\+Generator/\mbox{\hyperlink{production__node_8h}{production\+\_\+node.\+h}}\item 
+src/\+Generator/\+Syntax\+Generator/\mbox{\hyperlink{production__node_8cpp}{production\+\_\+node.\+cpp}}\end{DoxyCompactItemize}

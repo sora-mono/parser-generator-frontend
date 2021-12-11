@@ -1,0 +1,5 @@
+<map id="c_parser_frontend::operator_node::TemaryOperatorNode::GetResultTypePointer" name="c_parser_frontend::operator_node::TemaryOperatorNode::GetResultTypePointer">
+<area shape="rect" id="node1" title="获取最终结果的类型" alt="" coords="5,45,235,101"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#ade075f315049b64b637b64abcc9dc728" title="获取结果" alt="" coords="283,5,512,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e" title="获取最终结果的类型" alt="" coords="283,85,511,141"/>
+</map>

@@ -1,0 +1,570 @@
+\hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode}{}\doxysection{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Assign\+Operator\+Node类 参考}
+\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode}\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+
+
+赋值节点  
+
+
+
+
+{\ttfamily \#include $<$operator\+\_\+node.\+h$>$}
+
+
+
+类 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Assign\+Operator\+Node 继承关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=274pt]{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode__inherit__graph}
+\end{center}
+\end{figure}
+
+
+c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::Assign\+Operator\+Node 的协作图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_acec5107189d14fb8545d777cde1f5b64}{Assign\+Operator\+Node}} ()
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aa52a775a8b09ea06699f62e46ea1c85b}{Assign\+Operator\+Node}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode}{Assign\+Operator\+Node}} \&)=delete
+\item 
+\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode}{Assign\+Operator\+Node}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a8dcb6f1410e4bfc2dff2e348466523d5}{operator=}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode}{Assign\+Operator\+Node}} \&)=delete
+\item 
+virtual Const\+Tag \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aa4039570c5ff24bfd05b76631de6a47d}{Get\+Result\+Const\+Tag}} () const override
+\begin{DoxyCompactList}\small\item\em 获取该节点操作结果的const标记 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca8bf9ef313ae917878d6e7b3f8d59f0}{Get\+Result\+Type\+Pointer}} () const override
+\begin{DoxyCompactList}\small\item\em 获取最终结果的类型 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a49f018702a4feb4974a574deebc4e2bd}{Get\+Result\+Operator\+Node}} () const override
+\begin{DoxyCompactList}\small\item\em 获取最终结果的节点 \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a057ea31c373bc19b3e8979a0b9f4a558}{Self\+Copy}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&new\+\_\+type, Const\+Tag new\+\_\+const\+\_\+tag) const override
+\begin{DoxyCompactList}\small\item\em 拷贝自身并设置拷贝得到的对象类型为new\+\_\+type \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_acd1b267e61f5c750b2731ce0efddab6f}{Set\+Node\+To\+Be\+Assigned}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&node\+\_\+to\+\_\+be\+\_\+assigned)
+\begin{DoxyCompactList}\small\item\em 设置待被赋值的节点 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a4a5d7fce466466e1f773d13e6b1e6586}{Get\+Node\+To\+Be\+Assigned\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取待被赋值的节点 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a7750f0579651a012f00051f5510cc09c}{Get\+Node\+To\+Be\+Assigned\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取待被赋值的节点 \end{DoxyCompactList}\item 
+Assignable\+Check\+Result \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca9910541d690b4040e6ba1ce4323a72}{Set\+Node\+For\+Assign}} (const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&node\+\_\+for\+\_\+assign, bool is\+\_\+announce)
+\begin{DoxyCompactList}\small\item\em 设置用来赋值的节点 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a329d5fdae4eba675281c79a393aa1b54}{Get\+Node\+For\+Assign\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em 获取用来赋值的节点 \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \& \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ad30a61a47647a009a89b8e5063ca6272}{Get\+Node\+For\+Assign\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em 获取用来赋值的节点 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Public 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static Assignable\+Check\+Result \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441}{Check\+Assignable}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&node\+\_\+to\+\_\+be\+\_\+assigned, const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&node\+\_\+for\+\_\+assign, bool is\+\_\+announce)
+\begin{DoxyCompactList}\small\item\em 检查两个节点是否可以赋值 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{静态 Private 成员函数}
+\begin{DoxyCompactItemize}
+\item 
+static Assignable\+Check\+Result \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8}{Variety\+Assignable\+By\+Initialize\+List}} (const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}} \&variety\+\_\+node, const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1ListInitializeOperatorNode}{List\+Initialize\+Operator\+Node}} \&list\+\_\+initialize\+\_\+operator\+\_\+node)
+\begin{DoxyCompactList}\small\item\em 检查使用初始化列表初始化变量的情况 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Private 属性}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a946b17bda1aca04f6c6c590909206c20}{node\+\_\+to\+\_\+be\+\_\+assigned\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 将要被赋值的节点 \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a5b8f228e8b2050ac5872bfa9bbdab782}{node\+\_\+for\+\_\+assign\+\_\+}}
+\begin{DoxyCompactList}\small\item\em 用来赋值的节点 \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{额外继承的成员函数}
+
+
+\doxysubsection{详细描述}
+赋值节点 
+
+在文件 operator\+\_\+node.\+h 第 838 行定义.
+
+
+
+\doxysubsection{构造及析构函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_acec5107189d14fb8545d777cde1f5b64}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_acec5107189d14fb8545d777cde1f5b64}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!AssignOperatorNode@{AssignOperatorNode}}
+\index{AssignOperatorNode@{AssignOperatorNode}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{AssignOperatorNode()}{AssignOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Assign\+Operator\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+在文件 operator\+\_\+node.\+h 第 840 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Assign.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aa52a775a8b09ea06699f62e46ea1c85b}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aa52a775a8b09ea06699f62e46ea1c85b}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!AssignOperatorNode@{AssignOperatorNode}}
+\index{AssignOperatorNode@{AssignOperatorNode}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{AssignOperatorNode()}{AssignOperatorNode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Assign\+Operator\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode}{Assign\+Operator\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+\doxysubsection{成员函数说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!CheckAssignable@{CheckAssignable}}
+\index{CheckAssignable@{CheckAssignable}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{CheckAssignable()}{CheckAssignable()}}
+{\footnotesize\ttfamily Assignable\+Check\+Result c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Check\+Assignable (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&}]{node\+\_\+to\+\_\+be\+\_\+assigned,  }\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} \&}]{node\+\_\+for\+\_\+assign,  }\item[{bool}]{is\+\_\+announce }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+检查两个节点是否可以赋值 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em node\+\_\+to\+\_\+be\+\_\+assigned} & ；被赋值的节点 \\
+\hline
+\mbox{\texttt{ in}}  & {\em node\+\_\+for\+\_\+assign} & ：用来赋值的节点 \\
+\hline
+\mbox{\texttt{ in}}  & {\em is\+\_\+announce} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回检查结果，含义见定义
+\end{DoxyReturn}
+1.自动检查\+Assignable\+Check\+Resut\+::k\+May\+Be\+Zero\+To\+Pointer的具体情况并改变返回结果 2.当is\+\_\+announce == true时 忽略const标记和\+Left\+Right\+Value标记的检查且允许使用初始化列表 3.如果使用自动数组大小推断则更新数组大小（违反const原则） 4.如果被赋值的节点与用来赋值的节点类型完全相同（operator==()）且为变量类型 则设置被赋值的节点的类型链指针指向用来赋值的类型链以节省内存 （违反const原则） 
+
+在文件 operator\+\_\+node.\+cpp 第 430 行定义.
+
+
+
+引用了 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+General\+Operator\+Type(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Initialize\+Operator\+Node\+Interface\+::\+Get\+Initialize\+Type(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Const\+Tag(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Type\+Pointer(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Basic\+Type\+Initialize\+Operator\+Node\+::\+Get\+Value(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Assign, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Basic, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+De\+Reference, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Function\+Call, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Init\+Value, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Logical\+Operation, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Mathematical\+Operation, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Member\+Access, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Right\+Value, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Variety, c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Set\+Variety\+Type() , 以及 Variety\+Assignable\+By\+Initialize\+List().
+
+
+
+被这些函数引用 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Add\+Function\+Call\+Argument(), c\+\_\+parser\+\_\+frontend\+::flow\+\_\+control\+::\+Function\+Define\+::\+Check\+Sentence\+In\+Function\+Valid(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Temary\+Operator\+Node\+::\+Construct\+Result\+Node(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Function\+Call\+Operator\+Node\+::\+Set\+Arguments(), Set\+Node\+For\+Assign() , 以及 Variety\+Assignable\+By\+Initialize\+List().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ae04475df3488b171fc37c245af4fa441_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a329d5fdae4eba675281c79a393aa1b54}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a329d5fdae4eba675281c79a393aa1b54}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!GetNodeForAssignPointer@{GetNodeForAssignPointer}}
+\index{GetNodeForAssignPointer@{GetNodeForAssignPointer}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetNodeForAssignPointer()}{GetNodeForAssignPointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Get\+Node\+For\+Assign\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取用来赋值的节点 
+
+\begin{DoxyReturn}{返回}
+返回指向用来赋值的节点的const指针 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 899 行定义.
+
+
+
+引用了 node\+\_\+for\+\_\+assign\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ad30a61a47647a009a89b8e5063ca6272}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_ad30a61a47647a009a89b8e5063ca6272}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!GetNodeForAssignReference@{GetNodeForAssignReference}}
+\index{GetNodeForAssignReference@{GetNodeForAssignReference}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetNodeForAssignReference()}{GetNodeForAssignReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Get\+Node\+For\+Assign\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取用来赋值的节点 
+
+\begin{DoxyReturn}{返回}
+返回用来赋值的节点的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 904 行定义.
+
+
+
+引用了 node\+\_\+for\+\_\+assign\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a4a5d7fce466466e1f773d13e6b1e6586}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a4a5d7fce466466e1f773d13e6b1e6586}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!GetNodeToBeAssignedPointer@{GetNodeToBeAssignedPointer}}
+\index{GetNodeToBeAssignedPointer@{GetNodeToBeAssignedPointer}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetNodeToBeAssignedPointer()}{GetNodeToBeAssignedPointer()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Get\+Node\+To\+Be\+Assigned\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取待被赋值的节点 
+
+\begin{DoxyReturn}{返回}
+返回指向待被赋值的节点的const指针 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 874 行定义.
+
+
+
+引用了 node\+\_\+to\+\_\+be\+\_\+assigned\+\_\+.
+
+
+
+被这些函数引用 Get\+Result\+Operator\+Node().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a4a5d7fce466466e1f773d13e6b1e6586_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a7750f0579651a012f00051f5510cc09c}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a7750f0579651a012f00051f5510cc09c}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!GetNodeToBeAssignedReference@{GetNodeToBeAssignedReference}}
+\index{GetNodeToBeAssignedReference@{GetNodeToBeAssignedReference}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetNodeToBeAssignedReference()}{GetNodeToBeAssignedReference()}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Get\+Node\+To\+Be\+Assigned\+Reference (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+获取待被赋值的节点 
+
+\begin{DoxyReturn}{返回}
+返回待被赋值的节点的const引用 
+\end{DoxyReturn}
+
+
+在文件 operator\+\_\+node.\+h 第 880 行定义.
+
+
+
+引用了 node\+\_\+to\+\_\+be\+\_\+assigned\+\_\+.
+
+
+
+被这些函数引用 Get\+Result\+Const\+Tag(), Get\+Result\+Type\+Pointer() , 以及 Set\+Node\+For\+Assign().
+
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a7750f0579651a012f00051f5510cc09c_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aa4039570c5ff24bfd05b76631de6a47d}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aa4039570c5ff24bfd05b76631de6a47d}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!GetResultConstTag@{GetResultConstTag}}
+\index{GetResultConstTag@{GetResultConstTag}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultConstTag()}{GetResultConstTag()}}
+{\footnotesize\ttfamily virtual Const\+Tag c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Get\+Result\+Const\+Tag (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取该节点操作结果的const标记 
+
+\begin{DoxyReturn}{返回}
+返回操作结果的const标记
+\end{DoxyReturn}
+1.成员访问、解引用等操作的后续操作不是对原结构体/原指针操作，而是对得到的 新对象进行操作，不同操作类型操作的对象不同 2.通过这个函数抽象获取最终结果的过程以忽略操作的不同 3.以成员访问为例，该函数获取指定的成员在结构体中的const标记，以数学运算 为例，该函数获取运算结果的const标记（\+Const\+Tag\+::k\+Non\+Const），以变量声明 为例，该函数返回声明的变量的const标记（对象不变） 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a1894f1b3888819c4584eef70953c6cff}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 845 行定义.
+
+
+
+引用了 Get\+Node\+To\+Be\+Assigned\+Reference() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Const\+Tag().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aa4039570c5ff24bfd05b76631de6a47d_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a49f018702a4feb4974a574deebc4e2bd}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a49f018702a4feb4974a574deebc4e2bd}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!GetResultOperatorNode@{GetResultOperatorNode}}
+\index{GetResultOperatorNode@{GetResultOperatorNode}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultOperatorNode()}{GetResultOperatorNode()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Get\+Result\+Operator\+Node (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取最终结果的节点 
+
+\begin{DoxyReturn}{返回}
+返回指向最终结果的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：自身是最终节点\\
+\hline
+\end{DoxyRetVals}
+1.该函数用于抽象获取操作最终结果的过程 2.基础变量和初始化变量最终操作节点就是本身，所以返回nullptr 3.赋值运算返回被赋值的对象，解引用返回解引用后得到的对象，以此为例 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a3f80ebfb819902849c09e74038f6f72f}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 853 行定义.
+
+
+
+引用了 Get\+Node\+To\+Be\+Assigned\+Pointer().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a49f018702a4feb4974a574deebc4e2bd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca8bf9ef313ae917878d6e7b3f8d59f0}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca8bf9ef313ae917878d6e7b3f8d59f0}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!GetResultTypePointer@{GetResultTypePointer}}
+\index{GetResultTypePointer@{GetResultTypePointer}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{GetResultTypePointer()}{GetResultTypePointer()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Get\+Result\+Type\+Pointer (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+获取最终结果的类型 
+
+\begin{DoxyReturn}{返回}
+返回类型链头结点的const指针
+\end{DoxyReturn}
+设计思路同\+Get\+Result\+Const\+Tag 
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_a9b53f7340627ba67b3088e559961b47e}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 848 行定义.
+
+
+
+引用了 Get\+Node\+To\+Be\+Assigned\+Reference() , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface\+::\+Get\+Result\+Type\+Pointer().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca8bf9ef313ae917878d6e7b3f8d59f0_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a8dcb6f1410e4bfc2dff2e348466523d5}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a8dcb6f1410e4bfc2dff2e348466523d5}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!operator=@{operator=}}
+\index{operator=@{operator=}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode}{Assign\+Operator\+Node}}\& c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode}{Assign\+Operator\+Node}} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a057ea31c373bc19b3e8979a0b9f4a558}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a057ea31c373bc19b3e8979a0b9f4a558}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!SelfCopy@{SelfCopy}}
+\index{SelfCopy@{SelfCopy}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SelfCopy()}{SelfCopy()}}
+{\footnotesize\ttfamily virtual std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Self\+Copy (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1type__system_1_1TypeInterface}{Type\+Interface}} $>$ \&}]{new\+\_\+type,  }\item[{Const\+Tag}]{new\+\_\+const\+\_\+tag }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+拷贝自身并设置拷贝得到的对象类型为new\+\_\+type 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em new\+\_\+type} & ：拷贝后得到的对象的类型 \\
+\hline
+\mbox{\texttt{ in}}  & {\em new\+\_\+const\+\_\+tag} & ：拷贝后得到的对象的新const标记 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回指向拷贝后的对象的指针 
+\end{DoxyReturn}
+
+\begin{DoxyRetVals}{返回值}
+{\em nullptr} & ：设置初始化数据为非const\\
+\hline
+\end{DoxyRetVals}
+该函数用于类型转换 \begin{DoxyAttention}{注意}
+仅允许对变量、初始化值和类型转换节点调用该函数 
+\end{DoxyAttention}
+
+
+实现了 \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface_afaf8c7f881d6b57c275611312b5e0f78}{c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Operator\+Node\+Interface}}.
+
+
+
+在文件 operator\+\_\+node.\+h 第 857 行定义.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca9910541d690b4040e6ba1ce4323a72}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca9910541d690b4040e6ba1ce4323a72}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!SetNodeForAssign@{SetNodeForAssign}}
+\index{SetNodeForAssign@{SetNodeForAssign}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetNodeForAssign()}{SetNodeForAssign()}}
+{\footnotesize\ttfamily Assignable\+Check\+Result c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Set\+Node\+For\+Assign (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&}]{node\+\_\+for\+\_\+assign,  }\item[{bool}]{is\+\_\+announce }\end{DoxyParamCaption})}
+
+
+
+设置用来赋值的节点 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em node\+\_\+for\+\_\+assign} & ：用来赋值的节点 \\
+\hline
+\mbox{\texttt{ in}}  & {\em is\+\_\+announce} & ：是否为变量声明 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回检查结果，具体意义见定义
+\end{DoxyReturn}
+1.如果不是可以赋值的情况则不会设置 2.声明时赋值不检查被赋值的节点自身的const属性和\+Left\+Right\+Value属性 并且允许使用初始化列表 3.需要先设置被赋值的节点（调用\+Set\+Node\+To\+Be\+Assigned） 4.如果被赋值的节点与用来赋值的节点类型完全相同（operator==()）则 设置被赋值的节点的类型链指针指向用来赋值的类型链以节省内存 
+
+在文件 operator\+\_\+node.\+cpp 第 409 行定义.
+
+
+
+引用了 Check\+Assignable(), Get\+Node\+To\+Be\+Assigned\+Reference() , 以及 node\+\_\+for\+\_\+assign\+\_\+.
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_aca9910541d690b4040e6ba1ce4323a72_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_acd1b267e61f5c750b2731ce0efddab6f}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_acd1b267e61f5c750b2731ce0efddab6f}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!SetNodeToBeAssigned@{SetNodeToBeAssigned}}
+\index{SetNodeToBeAssigned@{SetNodeToBeAssigned}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{SetNodeToBeAssigned()}{SetNodeToBeAssigned()}}
+{\footnotesize\ttfamily void c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Set\+Node\+To\+Be\+Assigned (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}} $>$ \&}]{node\+\_\+to\+\_\+be\+\_\+assigned }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+设置待被赋值的节点 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em node\+\_\+to\+\_\+be\+\_\+assigned} & ：待被赋值的节点 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyNote}{注解}
+先设置被赋值的节点，后设置用来赋值的节点 
+\end{DoxyNote}
+
+
+在文件 operator\+\_\+node.\+h 第 868 行定义.
+
+
+
+引用了 node\+\_\+to\+\_\+be\+\_\+assigned\+\_\+.
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!VarietyAssignableByInitializeList@{VarietyAssignableByInitializeList}}
+\index{VarietyAssignableByInitializeList@{VarietyAssignableByInitializeList}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{VarietyAssignableByInitializeList()}{VarietyAssignableByInitializeList()}}
+{\footnotesize\ttfamily Assignable\+Check\+Result c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::\+Variety\+Assignable\+By\+Initialize\+List (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode}{Variety\+Operator\+Node}} \&}]{variety\+\_\+node,  }\item[{const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1ListInitializeOperatorNode}{List\+Initialize\+Operator\+Node}} \&}]{list\+\_\+initialize\+\_\+operator\+\_\+node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+检查使用初始化列表初始化变量的情况 
+
+
+\begin{DoxyParams}[1]{参数}
+\mbox{\texttt{ in}}  & {\em variety\+\_\+node} & ：被赋值的变量 \\
+\hline
+\mbox{\texttt{ in}}  & {\em list\+\_\+initialize\+\_\+operator\+\_\+node} & ：用来赋值的初始化列表 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{返回}
+返回检查结果，含义见定义
+\end{DoxyReturn}
+1.\+Check\+Assignable的子过程，处理使用初始化变量列表初始化变量的情况 2.不会返回\+Assignable\+Check\+Result\+::k\+Initialize\+List 3.如果使用自动数组大小推断则更新数组大小（违反const原则） 
+
+在文件 operator\+\_\+node.\+cpp 第 542 行定义.
+
+
+
+引用了 Check\+Assignable(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+List\+Initialize\+Operator\+Node\+::\+Get\+List\+Values(), c\+\_\+parser\+\_\+frontend\+::type\+\_\+system\+::\+Type\+Interface\+::\+Get\+Type(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Variety\+Operator\+Node\+::\+Get\+Variety\+Type\+Reference(), c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Initialize\+List , 以及 c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::k\+Left\+Value.
+
+
+
+被这些函数引用 Check\+Assignable().
+
+函数调用图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8_cgraph}
+\end{center}
+\end{figure}
+这是这个函数的调用关系图\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a723c6c6897c0618d9577cece835a85c8_icgraph}
+\end{center}
+\end{figure}
+
+
+\doxysubsection{类成员变量说明}
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a5b8f228e8b2050ac5872bfa9bbdab782}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a5b8f228e8b2050ac5872bfa9bbdab782}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!node\_for\_assign\_@{node\_for\_assign\_}}
+\index{node\_for\_assign\_@{node\_for\_assign\_}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{node\_for\_assign\_}{node\_for\_assign\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::node\+\_\+for\+\_\+assign\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+用来赋值的节点 
+
+
+
+在文件 operator\+\_\+node.\+h 第 941 行定义.
+
+
+
+被这些函数引用 Get\+Node\+For\+Assign\+Pointer(), Get\+Node\+For\+Assign\+Reference() , 以及 Set\+Node\+For\+Assign().
+
+\mbox{\Hypertarget{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a946b17bda1aca04f6c6c590909206c20}\label{classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode_a946b17bda1aca04f6c6c590909206c20}} 
+\index{c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}!node\_to\_be\_assigned\_@{node\_to\_be\_assigned\_}}
+\index{node\_to\_be\_assigned\_@{node\_to\_be\_assigned\_}!c\_parser\_frontend::operator\_node::AssignOperatorNode@{c\_parser\_frontend::operator\_node::AssignOperatorNode}}
+\doxysubsubsection{\texorpdfstring{node\_to\_be\_assigned\_}{node\_to\_be\_assigned\_}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$const \mbox{\hyperlink{classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface}{Operator\+Node\+Interface}}$>$ c\+\_\+parser\+\_\+frontend\+::operator\+\_\+node\+::\+Assign\+Operator\+Node\+::node\+\_\+to\+\_\+be\+\_\+assigned\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+将要被赋值的节点 
+
+
+
+在文件 operator\+\_\+node.\+h 第 939 行定义.
+
+
+
+被这些函数引用 Get\+Node\+To\+Be\+Assigned\+Pointer(), Get\+Node\+To\+Be\+Assigned\+Reference() , 以及 Set\+Node\+To\+Be\+Assigned().
+
+
+
+该类的文档由以下文件生成\+:\begin{DoxyCompactItemize}
+\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8h}{operator\+\_\+node.\+h}}\item 
+src/\+C\+Parser\+Frontend/\mbox{\hyperlink{operator__node_8cpp}{operator\+\_\+node.\+cpp}}\end{DoxyCompactItemize}

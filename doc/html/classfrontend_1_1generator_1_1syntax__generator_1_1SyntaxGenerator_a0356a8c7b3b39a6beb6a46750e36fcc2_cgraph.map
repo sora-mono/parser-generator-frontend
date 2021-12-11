@@ -1,0 +1,12 @@
+<map id="frontend::generator::syntax_generator::SyntaxGenerator::FormatSingleProductionBody" name="frontend::generator::syntax_generator::SyntaxGenerator::FormatSingleProductionBody">
+<area shape="rect" id="node1" title="格式化产生式" alt="" coords="5,211,232,281"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a4142e3ce887dd6fe46021459c4e35e27" title="获取产生式体" alt="" coords="300,5,507,76"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#ada56e50b8f4c0b75de3ae7553376f1b1" title="获取该节点表示的产生式名ID" alt="" coords="292,100,515,171"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5e851a1d4c3dd84f61105ea2b3a9f027" title="根据产生式名ID获取对应产生式名" alt="" coords="585,159,831,229"/>
+<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a6e838cc21976d781be783fbe0da27cc3" title="通过产生式节点ID获取产生式名" alt="" coords="280,247,527,317"/>
+<area shape="rect" id="node9" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="575,358,841,414"/>
+<area shape="rect" id="node10" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a1aa8dcd59b8c2220d5af4db2c656d23b" title="获取产生式类型" alt="" coords="294,393,513,449"/>
+<area shape="rect" id="node5" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#a1959da3a072226c4cab199b6e1acf273" title="返回指向管理的对象的引用" alt="" coords="919,173,1137,215"/>
+<area shape="rect" id="node7" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#afa97ab3763b61a50e57a7f06eb87f85b" title="根据产生式名获取对应ID" alt="" coords="579,254,837,310"/>
+<area shape="rect" id="node8" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#a8843e773f9b1f958e9beb2373084704d" title="根据对象获取其ID" alt="" coords="889,261,1167,303"/>
+</map>

@@ -1,0 +1,1262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: frontend::generator::dfa_generator::nfa_generator::NfaGenerator类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#pub-types">Public 类型</a> &#124;
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pub-static-attribs">静态 Public 属性</a> &#124;
+<a href="#pri-methods">Private 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">frontend::generator::dfa_generator::nfa_generator::NfaGenerator类 参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p><code>#include &lt;<a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a>&gt;</code></p>
+<div class="dynheader">
+frontend::generator::dfa_generator::nfa_generator::NfaGenerator 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator__coll__graph.png" border="0" usemap="#frontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_coll__map" alt="Collaboration graph"/></div>
+<map name="frontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_coll__map" id="frontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_coll__map">
+<area shape="rect" title=" " alt="" coords="1063,79,1251,135"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html" title=" " alt="" coords="688,109,905,194"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html" title=" " alt="" coords="287,71,531,127"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html" title=" " alt="" coords="691,43,903,84"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,64,237,135"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html" title=" " alt="" coords="299,152,519,223"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html" title=" " alt="" coords="313,5,505,47"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html">NfaNode</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">表示正则的Nfa节点  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:ad07eafdc898343115c3415bd6514e71b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> = <a class="el" href="classfrontend_1_1common_1_1MultimapObjectManager.html">frontend::common::MultimapObjectManager</a>&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html">NfaNode</a> &gt;::ObjectId</td></tr>
+<tr class="memdesc:ad07eafdc898343115c3415bd6514e71b"><td class="mdescLeft">&#160;</td><td class="mdescRight">NfaNode在管理类中的ID  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">更多...</a><br /></td></tr>
+<tr class="separator:ad07eafdc898343115c3415bd6514e71b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac4e941bb614deadf6f71db643d52c80c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">TailNodeData</a> = std::pair&lt; <a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData.html">WordAttachedData</a>, <a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator_1_1nfa__generator.html#a9f86071c52342524eef847930c54db95">WordPriority</a> &gt;</td></tr>
+<tr class="memdesc:ac4e941bb614deadf6f71db643d52c80c"><td class="mdescLeft">&#160;</td><td class="mdescRight">尾节点数据，内容为该单词所附带的属性  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">更多...</a><br /></td></tr>
+<tr class="separator:ac4e941bb614deadf6f71db643d52c80c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:a87346bdc0f454735c958b64934b0177d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a87346bdc0f454735c958b64934b0177d">NfaGenerator</a> ()</td></tr>
+<tr class="separator:a87346bdc0f454735c958b64934b0177d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa9dc3c9da3425f331cb952876b9f7b2c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa9dc3c9da3425f331cb952876b9f7b2c">NfaGenerator</a> (const <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html">NfaGenerator</a> &amp;)=delete</td></tr>
+<tr class="separator:aa9dc3c9da3425f331cb952876b9f7b2c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cbdfdd5e3eb8af36b14306ac21d429e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a7cbdfdd5e3eb8af36b14306ac21d429e">NfaGenerator</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html">NfaGenerator</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a7cbdfdd5e3eb8af36b14306ac21d429e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa6064ffbfc016cd8c14626928b894616"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa6064ffbfc016cd8c14626928b894616">GetHeadNfaNodeId</a> () const</td></tr>
+<tr class="memdesc:aa6064ffbfc016cd8c14626928b894616"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取NFA节点头结点ID  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa6064ffbfc016cd8c14626928b894616">更多...</a><br /></td></tr>
+<tr class="separator:aa6064ffbfc016cd8c14626928b894616"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7809a54c44c233d956e1a0d3b10f2b82"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">TailNodeData</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a7809a54c44c233d956e1a0d3b10f2b82">GetTailNodeData</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> node_id)</td></tr>
+<tr class="memdesc:a7809a54c44c233d956e1a0d3b10f2b82"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据NFA节点ID获取尾节点数据  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a7809a54c44c233d956e1a0d3b10f2b82">更多...</a><br /></td></tr>
+<tr class="separator:a7809a54c44c233d956e1a0d3b10f2b82"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0f3ec37a1330ae6658ddac36e1419ed"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html">NfaNode</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed">GetNfaNode</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> node_id)</td></tr>
+<tr class="memdesc:aa0f3ec37a1330ae6658ddac36e1419ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据NFA节点ID获取NFA节点  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed">更多...</a><br /></td></tr>
+<tr class="separator:aa0f3ec37a1330ae6658ddac36e1419ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afd38661549adcda0d029c24112c485d0"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#afd38661549adcda0d029c24112c485d0">RegexConstruct</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">TailNodeData</a> &amp;&amp;tail_node_data, const std::string &amp;raw_regex_string, size_t &amp;&amp;next_character_index=0, const bool add_to_nfa_head=true)</td></tr>
+<tr class="memdesc:afd38661549adcda0d029c24112c485d0"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析正则  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#afd38661549adcda0d029c24112c485d0">更多...</a><br /></td></tr>
+<tr class="separator:afd38661549adcda0d029c24112c485d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b41f5800ea965e440f7451d3cd0e320"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a6b41f5800ea965e440f7451d3cd0e320">WordConstruct</a> (const std::string &amp;str, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">TailNodeData</a> &amp;&amp;word_attached_data)</td></tr>
+<tr class="memdesc:a6b41f5800ea965e440f7451d3cd0e320"><td class="mdescLeft">&#160;</td><td class="mdescRight">添加一个纯单词  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a6b41f5800ea965e440f7451d3cd0e320">更多...</a><br /></td></tr>
+<tr class="separator:a6b41f5800ea965e440f7451d3cd0e320"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c66fbc2e3302533f3ef3d3b693b3691"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a9c66fbc2e3302533f3ef3d3b693b3691">MergeOptimization</a> ()</td></tr>
+<tr class="memdesc:a9c66fbc2e3302533f3ef3d3b693b3691"><td class="mdescLeft">&#160;</td><td class="mdescRight">合并优化，降低节点数和转移路径以降低子集构造法集合大小  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a9c66fbc2e3302533f3ef3d3b693b3691">更多...</a><br /></td></tr>
+<tr class="separator:a9c66fbc2e3302533f3ef3d3b693b3691"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a36fe0f238a5663a90c8b1100d723eb33"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::unordered_set&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> &gt;, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">TailNodeData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a36fe0f238a5663a90c8b1100d723eb33">Closure</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> node_id)</td></tr>
+<tr class="memdesc:a36fe0f238a5663a90c8b1100d723eb33"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取给定NFA节点的所有等效节点ID（包含自身）  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a36fe0f238a5663a90c8b1100d723eb33">更多...</a><br /></td></tr>
+<tr class="separator:a36fe0f238a5663a90c8b1100d723eb33"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52c8b5c40bdc50f5048f61a267f7dfc0"><td class="memItemLeft" align="right" valign="top">std::pair&lt; std::unordered_set&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> &gt;, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">TailNodeData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a52c8b5c40bdc50f5048f61a267f7dfc0">Goto</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> id_src, char c_transform)</td></tr>
+<tr class="memdesc:a52c8b5c40bdc50f5048f61a267f7dfc0"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取给定NFA节点在转移条件下可以到达的等效节点  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a52c8b5c40bdc50f5048f61a267f7dfc0">更多...</a><br /></td></tr>
+<tr class="separator:a52c8b5c40bdc50f5048f61a267f7dfc0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a551e2d3ea7f472da85fe77dcdcd2a068"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a551e2d3ea7f472da85fe77dcdcd2a068">NfaInit</a> ()</td></tr>
+<tr class="memdesc:a551e2d3ea7f472da85fe77dcdcd2a068"><td class="mdescLeft">&#160;</td><td class="mdescRight">NFA初始化  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a551e2d3ea7f472da85fe77dcdcd2a068">更多...</a><br /></td></tr>
+<tr class="separator:a551e2d3ea7f472da85fe77dcdcd2a068"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+静态 Public 属性</h2></td></tr>
+<tr class="memitem:afa18192c64defc0544485a4fa7c9a410"><td class="memItemLeft" align="right" valign="top">static const <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">TailNodeData</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#afa18192c64defc0544485a4fa7c9a410">kNotTailNodeTag</a></td></tr>
+<tr class="memdesc:afa18192c64defc0544485a4fa7c9a410"><td class="mdescLeft">&#160;</td><td class="mdescRight">非尾节点标记  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#afa18192c64defc0544485a4fa7c9a410">更多...</a><br /></td></tr>
+<tr class="separator:afa18192c64defc0544485a4fa7c9a410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private 成员函数</h2></td></tr>
+<tr class="memitem:aaf1122d36ed3eced824030181ea7ff3f"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aaf1122d36ed3eced824030181ea7ff3f">RemoveTailNode</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> tail_node_id)</td></tr>
+<tr class="memdesc:aaf1122d36ed3eced824030181ea7ff3f"><td class="mdescLeft">&#160;</td><td class="mdescRight">移除尾节点信息  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aaf1122d36ed3eced824030181ea7ff3f">更多...</a><br /></td></tr>
+<tr class="separator:aaf1122d36ed3eced824030181ea7ff3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabdd9849ae9d8831534733ce6e6eb688"><td class="memTemplParams" colspan="2">template&lt;class TailNodeDataType &gt; </td></tr>
+<tr class="memitem:aabdd9849ae9d8831534733ce6e6eb688"><td class="memTemplItemLeft" align="right" valign="top">bool&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aabdd9849ae9d8831534733ce6e6eb688">SetTailNode</a> (<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> node_id, TailNodeDataType &amp;&amp;tail_node_data)</td></tr>
+<tr class="memdesc:aabdd9849ae9d8831534733ce6e6eb688"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置尾节点信息  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aabdd9849ae9d8831534733ce6e6eb688">更多...</a><br /></td></tr>
+<tr class="separator:aabdd9849ae9d8831534733ce6e6eb688"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8852c9c0a00070c87e253e996644c59"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac8852c9c0a00070c87e253e996644c59">CreateSwitchTree</a> (const std::string &amp;raw_regex_string, size_t *const next_character_index)</td></tr>
+<tr class="memdesc:ac8852c9c0a00070c87e253e996644c59"><td class="mdescLeft">&#160;</td><td class="mdescRight">根据输入生成可选字符结构  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac8852c9c0a00070c87e253e996644c59">更多...</a><br /></td></tr>
+<tr class="separator:ac8852c9c0a00070c87e253e996644c59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:a02e466281eb3f8f9c62ccd3bd4b52be4"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a02e466281eb3f8f9c62ccd3bd4b52be4">head_node_id_</a></td></tr>
+<tr class="memdesc:a02e466281eb3f8f9c62ccd3bd4b52be4"><td class="mdescLeft">&#160;</td><td class="mdescRight">NFA头结点ID  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a02e466281eb3f8f9c62ccd3bd4b52be4">更多...</a><br /></td></tr>
+<tr class="separator:a02e466281eb3f8f9c62ccd3bd4b52be4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2325bf96b0a3597eaaaf9cc4dc425592"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">TailNodeData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a2325bf96b0a3597eaaaf9cc4dc425592">tail_nodes_</a></td></tr>
+<tr class="memdesc:a2325bf96b0a3597eaaaf9cc4dc425592"><td class="mdescLeft">&#160;</td><td class="mdescRight">储存尾节点ID到尾节点数据的映射  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a2325bf96b0a3597eaaaf9cc4dc425592">更多...</a><br /></td></tr>
+<tr class="separator:a2325bf96b0a3597eaaaf9cc4dc425592"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e68c1ef2912bd9b41037d7a6f0ad5c5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1common_1_1MultimapObjectManager.html">frontend::common::MultimapObjectManager</a>&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html">NfaNode</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a5e68c1ef2912bd9b41037d7a6f0ad5c5">node_manager_</a></td></tr>
+<tr class="memdesc:a5e68c1ef2912bd9b41037d7a6f0ad5c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">储存NFA节点  <a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a5e68c1ef2912bd9b41037d7a6f0ad5c5">更多...</a><br /></td></tr>
+<tr class="separator:a5e68c1ef2912bd9b41037d7a6f0ad5c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>该NFA配置生成器支持char的所有值作为NFA的转移字符，支持*，+，?限定重复次数 该生成器设计初衷为了作为DFAGenerator的组件使用，所以未添加将配置写入文件功能 </p>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a> 第 <a class="el" href="nfa__generator_8h_source.html#l00027">27</a> 行定义.</p>
+</div><h2 class="groupheader">成员类型定义说明</h2>
+<a id="ad07eafdc898343115c3415bd6514e71b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad07eafdc898343115c3415bd6514e71b">&#9670;&nbsp;</a></span>NfaNodeId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNodeId</a> =  <a class="el" href="classfrontend_1_1common_1_1MultimapObjectManager.html">frontend::common::MultimapObjectManager</a>&lt;<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html">NfaNode</a>&gt;::ObjectId</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>NfaNode在管理类中的ID </p>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a> 第 <a class="el" href="nfa__generator_8h_source.html#l00034">34</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac4e941bb614deadf6f71db643d52c80c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac4e941bb614deadf6f71db643d52c80c">&#9670;&nbsp;</a></span>TailNodeData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::TailNodeData</a> =  std::pair&lt;<a class="el" href="structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData.html">WordAttachedData</a>, <a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator_1_1nfa__generator.html#a9f86071c52342524eef847930c54db95">WordPriority</a>&gt;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>尾节点数据，内容为该单词所附带的属性 </p>
+<p>前半部分为用户定义数据，后半部分为单词优先级，数字越大优先级越高 </p>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a> 第 <a class="el" href="nfa__generator_8h_source.html#l00038">38</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">构造及析构函数说明</h2>
+<a id="a87346bdc0f454735c958b64934b0177d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87346bdc0f454735c958b64934b0177d">&#9670;&nbsp;</a></span>NfaGenerator() <span class="overload">[1/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaGenerator </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a> 第 <a class="el" href="nfa__generator_8h_source.html#l00135">135</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aa9dc3c9da3425f331cb952876b9f7b2c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa9dc3c9da3425f331cb952876b9f7b2c">&#9670;&nbsp;</a></span>NfaGenerator() <span class="overload">[2/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaGenerator </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html">NfaGenerator</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7cbdfdd5e3eb8af36b14306ac21d429e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cbdfdd5e3eb8af36b14306ac21d429e">&#9670;&nbsp;</a></span>NfaGenerator() <span class="overload">[3/3]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaGenerator </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html">NfaGenerator</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="a36fe0f238a5663a90c8b1100d723eb33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a36fe0f238a5663a90c8b1100d723eb33">&#9670;&nbsp;</a></span>Closure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; std::unordered_set&lt; typename <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaGenerator::NfaNodeId</a> &gt;, typename <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">NfaGenerator::TailNodeData</a> &gt; frontend::generator::dfa_generator::nfa_generator::NfaGenerator::Closure </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>&#160;</td>
+          <td class="paramname"><em>node_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取给定NFA节点的所有等效节点ID（包含自身） </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_id</td><td>：要获取所有等效节点的NFA节点ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>前半部分为所有等效节点的集合，后半部分为这些等效节点代表的单词的 附属数据 </dd></dl>
+<dl class="section note"><dt>注解</dt><dd>返回值后半部分为所有可能代表的单词中最高优先级的单词的数据 如果所有等效节点都无法代表任何单词，那么后半部分返回kNotTailNodeTag </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8cpp_source.html">nfa_generator.cpp</a> 第 <a class="el" href="nfa__generator_8cpp_source.html#l00041">41</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap__object__manager_8h_source.html#l00060">frontend::common::MultimapObjectManager&lt; T &gt;::GetIdsReferringSameObject()</a>, <a class="el" href="nfa__generator_8h_source.html#l00151">GetNfaNode()</a>, <a class="el" href="nfa__generator_8h_source.html#l00215">kNotTailNodeTag</a>, <a class="el" href="nfa__generator_8h_source.html#l00260">node_manager_</a> , 以及 <a class="el" href="nfa__generator_8h_source.html#l00258">tail_nodes_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00043">frontend::generator::dfa_generator::DfaGenerator::DfaConstruct()</a> , 以及 <a class="el" href="nfa__generator_8cpp_source.html#l00092">Goto()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33_cgraph">
+<area shape="rect" title="获取给定NFA节点的所有等效节点ID（包含自身）" alt="" coords="5,42,193,113"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a533e7b18b83514f9782c24c1781646b2" title="通过一个id查询引用相同底层对象的所有id" alt="" coords="241,5,472,61"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed" title="根据NFA节点ID获取NFA节点" alt="" coords="263,86,451,157"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a271ef9fe0032f1eeb8585fb329f53cbb" title="获取指向有效对象的引用" alt="" coords="520,101,732,142"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a36fe0f238a5663a90c8b1100d723eb33_icgraph">
+<area shape="rect" title="获取给定NFA节点的所有等效节点ID（包含自身）" alt="" coords="1208,5,1396,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a52c8b5c40bdc50f5048f61a267f7dfc0" title="获取给定NFA节点在转移条件下可以到达的等效节点" alt="" coords="933,45,1160,101"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="668,45,885,101"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac8852c9c0a00070c87e253e996644c59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8852c9c0a00070c87e253e996644c59">&#9670;&nbsp;</a></span>CreateSwitchTree()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaGenerator::NfaNodeId</a>, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaGenerator::NfaNodeId</a> &gt; frontend::generator::dfa_generator::nfa_generator::NfaGenerator::CreateSwitchTree </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>raw_regex_string</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t *const&#160;</td>
+          <td class="paramname"><em>next_character_index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>根据输入生成可选字符结构 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">raw_regex_string</td><td>：表示单词的正则表达式字符串 </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">next_character_index</td><td>：指向下一个读取的字符位置的下标的指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回生成的NFA数据结构的头结点ID和尾节点ID</dd></dl>
+<p>1.raw_regex_string内对应[]部分必须为有效正则 否则在std::cerr输出错误信息后退出 2.next_character_index调用时解引用的值应为'['右侧第一个字符的下标 成功调用后解引用的值为']'右侧第一个字符的下标 3.不会读取]后的*,+,?等限定符 4.例：raw_regex_string == "[a-zA-Z_]" next_character_index == 1 </p>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8cpp_source.html">nfa_generator.cpp</a> 第 <a class="el" href="nfa__generator_8cpp_source.html#l00360">360</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap__object__manager_8h_source.html#l00281">frontend::common::MultimapObjectManager&lt; T &gt;::EmplaceObject()</a>, <a class="el" href="nfa__generator_8h_source.html#l00088">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNode::GetConditionalTransfers()</a>, <a class="el" href="nfa__generator_8h_source.html#l00151">GetNfaNode()</a>, <a class="el" href="nfa__generator_8h_source.html#l00260">node_manager_</a>, <a class="el" href="multimap__object__manager_8h_source.html#l00365">frontend::common::MultimapObjectManager&lt; T &gt;::RemoveObject()</a> , 以及 <a class="el" href="nfa__generator_8cpp_source.html#l00018">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNode::SetConditionTransfer()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="nfa__generator_8cpp_source.html#l00140">RegexConstruct()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59_cgraph">
+<area shape="rect" title="根据输入生成可选字符结构" alt="" coords="5,165,193,236"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a497a7c5bc722e5d3393c14b39b1e451e" title="创建对象并自动选择最佳位置放置对象" alt="" coords="253,5,480,47"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#ab65f8095016ee5dbf4a5d50383129a6e" title="获取该节点全部转移条件和在转移条件下可以转移到的节点ID" alt="" coords="241,71,492,141"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed" title="根据NFA节点ID获取NFA节点" alt="" coords="273,165,461,236"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a474cb83413346466f801cd8033bbc34e" title=" " alt="" coords="254,260,479,301"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a8cfe67102175bd60fa952d4764376ee5" title="设置条件转移条目" alt="" coords="251,325,482,396"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a271ef9fe0032f1eeb8585fb329f53cbb" title="获取指向有效对象的引用" alt="" coords="540,180,752,221"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_ac8852c9c0a00070c87e253e996644c59_icgraph">
+<area shape="rect" title="根据输入生成可选字符结构" alt="" coords="1047,29,1235,100"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#afd38661549adcda0d029c24112c485d0" title="解析正则" alt="" coords="811,29,999,100"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a676342993bb701a3c1c9574f9ae7e441" title="添加单词的正则" alt="" coords="545,37,763,93"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4dc1e67e686137062266790650bbe67a" title="添加终结产生式" alt="" coords="276,29,497,100"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a36db9122a028b29ec3c60e13c4837583" title="添加关键字" alt="" coords="5,37,228,93"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa6064ffbfc016cd8c14626928b894616"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6064ffbfc016cd8c14626928b894616">&#9670;&nbsp;</a></span>GetHeadNfaNodeId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> frontend::generator::dfa_generator::nfa_generator::NfaGenerator::GetHeadNfaNodeId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取NFA节点头结点ID </p>
+<dl class="section return"><dt>返回</dt><dd>返回NFA节点头结点ID </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a> 第 <a class="el" href="nfa__generator_8h_source.html#l00141">141</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="nfa__generator_8h_source.html#l00256">head_node_id_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00043">frontend::generator::dfa_generator::DfaGenerator::DfaConstruct()</a> , 以及 <a class="el" href="nfa__generator_8cpp_source.html#l00256">MergeOptimization()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa6064ffbfc016cd8c14626928b894616_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa6064ffbfc016cd8c14626928b894616_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa6064ffbfc016cd8c14626928b894616_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa6064ffbfc016cd8c14626928b894616_icgraph">
+<area shape="rect" title="获取NFA节点头结点ID" alt="" coords="904,5,1092,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a9c66fbc2e3302533f3ef3d3b693b3691" title="合并优化，降低节点数和转移路径以降低子集构造法集合大小" alt="" coords="668,41,856,112"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa0f3ec37a1330ae6658ddac36e1419ed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0f3ec37a1330ae6658ddac36e1419ed">&#9670;&nbsp;</a></span>GetNfaNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html">NfaNode</a>&amp; frontend::generator::dfa_generator::nfa_generator::NfaGenerator::GetNfaNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>&#160;</td>
+          <td class="paramname"><em>node_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>根据NFA节点ID获取NFA节点 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_id</td><td>：NFA节点ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回获取到的NFA节点 </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd>node_id必须对应已存在的NFA节点 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a> 第 <a class="el" href="nfa__generator_8h_source.html#l00151">151</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap__object__manager_8h_source.html#l00260">frontend::common::MultimapObjectManager&lt; T &gt;::GetObject()</a> , 以及 <a class="el" href="nfa__generator_8h_source.html#l00260">node_manager_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="nfa__generator_8cpp_source.html#l00041">Closure()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00360">CreateSwitchTree()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00092">Goto()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00256">MergeOptimization()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00140">RegexConstruct()</a> , 以及 <a class="el" href="nfa__generator_8cpp_source.html#l00241">WordConstruct()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed_cgraph">
+<area shape="rect" title="根据NFA节点ID获取NFA节点" alt="" coords="5,5,193,76"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a271ef9fe0032f1eeb8585fb329f53cbb" title="获取指向有效对象的引用" alt="" coords="241,20,453,61"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aa0f3ec37a1330ae6658ddac36e1419ed_icgraph">
+<area shape="rect" title="根据NFA节点ID获取NFA节点" alt="" coords="1495,162,1683,233"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a36fe0f238a5663a90c8b1100d723eb33" title="获取给定NFA节点的所有等效节点ID（包含自身）" alt="" coords="1259,63,1447,134"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a52c8b5c40bdc50f5048f61a267f7dfc0" title="获取给定NFA节点在转移条件下可以到达的等效节点" alt="" coords="984,5,1211,61"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac8852c9c0a00070c87e253e996644c59" title="根据输入生成可选字符结构" alt="" coords="1259,261,1447,331"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#afd38661549adcda0d029c24112c485d0" title="解析正则" alt="" coords="1003,255,1191,326"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a9c66fbc2e3302533f3ef3d3b693b3691" title="合并优化，降低节点数和转移路径以降低子集构造法集合大小" alt="" coords="1003,137,1191,207"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a6b41f5800ea965e440f7451d3cd0e320" title="添加一个纯单词" alt="" coords="1259,365,1447,435"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="405,71,622,127"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,63,355,134"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,85,60,112"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="695,5,913,61"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a676342993bb701a3c1c9574f9ae7e441" title="添加单词的正则" alt="" coords="695,252,913,308"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4dc1e67e686137062266790650bbe67a" title="添加终结产生式" alt="" coords="403,277,624,347"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a36db9122a028b29ec3c60e13c4837583" title="添加关键字" alt="" coords="120,284,343,340"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a527079ed92f9a58295df07567975b274" title="添加纯单词" alt="" coords="989,391,1206,447"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a929e48b9bce49002c7b89d6ca4f997c9" title="添加具有双目运算符和左侧单目运算符语义的运算符" alt="" coords="689,383,919,454"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aec2d0760baf4095f4f2183c8e84e37ea" title="添加双目运算符" alt="" coords="672,479,936,535"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a35ff252e20e90814c0040237d4be5fea" title="添加单目运算符" alt="" coords="690,559,918,630"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7809a54c44c233d956e1a0d3b10f2b82"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7809a54c44c233d956e1a0d3b10f2b82">&#9670;&nbsp;</a></span>GetTailNodeData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">NfaGenerator::TailNodeData</a> &amp; frontend::generator::dfa_generator::nfa_generator::NfaGenerator::GetTailNodeData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>&#160;</td>
+          <td class="paramname"><em>node_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>根据NFA节点ID获取尾节点数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_id</td><td>：要获取尾节点数据的NFA节点ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回获取到的尾节点数据 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">：kNotTailNodeTag</td><td>node_id不是尾节点时返回该内容 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8cpp_source.html">nfa_generator.cpp</a> 第 <a class="el" href="nfa__generator_8cpp_source.html#l00130">130</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="nfa__generator_8h_source.html#l00215">kNotTailNodeTag</a> , 以及 <a class="el" href="nfa__generator_8h_source.html#l00258">tail_nodes_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="nfa__generator_8cpp_source.html#l00256">MergeOptimization()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a7809a54c44c233d956e1a0d3b10f2b82_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a7809a54c44c233d956e1a0d3b10f2b82_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a7809a54c44c233d956e1a0d3b10f2b82_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a7809a54c44c233d956e1a0d3b10f2b82_icgraph">
+<area shape="rect" title="根据NFA节点ID获取尾节点数据" alt="" coords="904,5,1092,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a9c66fbc2e3302533f3ef3d3b693b3691" title="合并优化，降低节点数和转移路径以降低子集构造法集合大小" alt="" coords="668,5,856,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a52c8b5c40bdc50f5048f61a267f7dfc0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52c8b5c40bdc50f5048f61a267f7dfc0">&#9670;&nbsp;</a></span>Goto()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; std::unordered_set&lt; typename <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaGenerator::NfaNodeId</a> &gt;, typename <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">NfaGenerator::TailNodeData</a> &gt; frontend::generator::dfa_generator::nfa_generator::NfaGenerator::Goto </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>&#160;</td>
+          <td class="paramname"><em>id_src</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char&#160;</td>
+          <td class="paramname"><em>c_transform</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>获取给定NFA节点在转移条件下可以到达的等效节点 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">id_src</td><td>：源节点 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">c_transform</td><td>：转移条件 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>前半部分为所有等效节点的集合，后半部分为这些等效节点代表的单词的 附属数据</dd></dl>
+<p>该函数获取转移后达到的NfaNodeId，然后返回该ID的Closure结果 </p>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8cpp_source.html">nfa_generator.cpp</a> 第 <a class="el" href="nfa__generator_8cpp_source.html#l00092">92</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="nfa__generator_8cpp_source.html#l00041">Closure()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00008">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNode::GetForwardNodeId()</a>, <a class="el" href="nfa__generator_8h_source.html#l00151">GetNfaNode()</a>, <a class="el" href="id__wrapper_8h_source.html#l00076">frontend::common::BaseIdWrapper&lt; IdType_, LabelEnum_, label_, invalid_value_ &gt;::IsValid()</a> , 以及 <a class="el" href="nfa__generator_8h_source.html#l00215">kNotTailNodeTag</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00131">frontend::generator::dfa_generator::DfaGenerator::SetGoto()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0_cgraph">
+<area shape="rect" title="获取给定NFA节点在转移条件下可以到达的等效节点" alt="" coords="5,141,232,197"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a36fe0f238a5663a90c8b1100d723eb33" title="获取给定NFA节点的所有等效节点ID（包含自身）" alt="" coords="294,23,482,94"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed" title="根据NFA节点ID获取NFA节点" alt="" coords="572,86,760,157"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a185d61353094ddb4fd9f478aa1a5c63e" title="根据要移入的字母获取转移到的下一个节点ID" alt="" coords="280,170,496,241"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html#aa088b185f8650169d2e53c4372db529b" title="判断当前存储的值是否有效" alt="" coords="291,265,485,306"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a533e7b18b83514f9782c24c1781646b2" title="通过一个id查询引用相同底层对象的所有id" alt="" coords="551,5,781,61"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a271ef9fe0032f1eeb8585fb329f53cbb" title="获取指向有效对象的引用" alt="" coords="836,101,1048,142"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf" title="获取存储无效值的容器" alt="" coords="544,181,788,251"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a52c8b5c40bdc50f5048f61a267f7dfc0_icgraph">
+<area shape="rect" title="获取给定NFA节点在转移条件下可以到达的等效节点" alt="" coords="933,13,1160,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#af3c335d2350582155b03c199d67397fb" title="获取NFA节点集合在给定字符下的转移结果" alt="" coords="668,13,885,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a9c66fbc2e3302533f3ef3d3b693b3691"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c66fbc2e3302533f3ef3d3b693b3691">&#9670;&nbsp;</a></span>MergeOptimization()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::dfa_generator::nfa_generator::NfaGenerator::MergeOptimization </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>合并优化，降低节点数和转移路径以降低子集构造法集合大小 </p>
+<p>合并优化由两部分组成，一部分为删除当前处理节点与等效节点重复的转移项 另一部分为当前处理节点仅存在无条件转移到等效节点的转移条目时合并两个节点 直接使用NFA也可以降低成本 </p>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8cpp_source.html">nfa_generator.cpp</a> 第 <a class="el" href="nfa__generator_8cpp_source.html#l00256">256</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap__object__manager_8h_source.html#l00304">frontend::common::MultimapObjectManager&lt; T &gt;::CanBeSourceInMerge()</a>, <a class="el" href="nfa__generator_8h_source.html#l00088">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNode::GetConditionalTransfers()</a>, <a class="el" href="nfa__generator_8h_source.html#l00141">GetHeadNfaNodeId()</a>, <a class="el" href="nfa__generator_8h_source.html#l00151">GetNfaNode()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00130">GetTailNodeData()</a>, <a class="el" href="nfa__generator_8h_source.html#l00083">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNode::GetUnconditionTransferNodesIds()</a>, <a class="el" href="nfa__generator_8h_source.html#l00215">kNotTailNodeTag</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00107">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNode::MergeNodes()</a>, <a class="el" href="multimap__object__manager_8h_source.html#l00311">frontend::common::MultimapObjectManager&lt; T &gt;::MergeObjects()</a>, <a class="el" href="nfa__generator_8h_source.html#l00260">node_manager_</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00029">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNode::RemoveConditionalTransfer()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00034">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNode::RemoveConditionlessTransfer()</a>, <a class="el" href="nfa__generator_8h_source.html#l00223">RemoveTailNode()</a>, <a class="el" href="multimap__object__manager_8h_source.html#l00138">frontend::common::MultimapObjectManager&lt; T &gt;::SetAllObjectsCanBeSourceInMerge()</a>, <a class="el" href="multimap__object__manager_8h_source.html#l00297">frontend::common::MultimapObjectManager&lt; T &gt;::SetObjectCanNotBeSourceInMerge()</a> , 以及 <a class="el" href="nfa__generator_8h_source.html#l00236">SetTailNode()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00043">frontend::generator::dfa_generator::DfaGenerator::DfaConstruct()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691_cgraph">
+<area shape="rect" title="合并优化，降低节点数和转移路径以降低子集构造法集合大小" alt="" coords="5,557,193,628"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#afcb26d4dca905b39d4f83e72187dc283" title="返回入参对应对象是否可合并" alt="" coords="252,5,520,47"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#ab65f8095016ee5dbf4a5d50383129a6e" title="获取该节点全部转移条件和在转移条件下可以转移到的节点ID" alt="" coords="579,337,829,408"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa6064ffbfc016cd8c14626928b894616" title="获取NFA节点头结点ID" alt="" coords="292,165,480,236"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed" title="根据NFA节点ID获取NFA节点" alt="" coords="292,71,480,141"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a7809a54c44c233d956e1a0d3b10f2b82" title="根据NFA节点ID获取尾节点数据" alt="" coords="292,312,480,383"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#aed4bf2120860b512aa58944ef74db9de" title="获取所有可以无条件转移到的节点ID" alt="" coords="262,407,510,493"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a4826ed2c4c0620c974bdc20a57b7bb69" title="合并两个节点" alt="" coords="292,517,480,588"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a16f9f323dfb681713c30de2662e4a207" title="将id_src对应的节点合并到id_dst对应的节点" alt="" coords="277,612,495,653"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a6123301c8e968a642436e9b57068e0df" title="移除一条转移条目" alt="" coords="249,677,523,748"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#af82e02943c97174e032f27988c4844bb" title="移除一个无条件转移节点" alt="" coords="241,772,531,843"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aaf1122d36ed3eced824030181ea7ff3f" title="移除尾节点信息" alt="" coords="292,867,480,937"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#afa5329d293067a1afb82750be49c98f4" title="设置所有对象允许合并" alt="" coords="265,962,507,1018"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a2a3fe55defeb8a18be2c166063be5c34" title="设置对象禁止合并标志" alt="" coords="266,1042,506,1098"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aabdd9849ae9d8831534733ce6e6eb688" title="设置尾节点信息" alt="" coords="292,1123,480,1193"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a271ef9fe0032f1eeb8585fb329f53cbb" title="获取指向有效对象的引用" alt="" coords="598,85,810,127"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html#aa088b185f8650169d2e53c4372db529b" title="判断当前存储的值是否有效" alt="" coords="607,532,801,573"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a9c66fbc2e3302533f3ef3d3b693b3691_icgraph">
+<area shape="rect" title="合并优化，降低节点数和转移路径以降低子集构造法集合大小" alt="" coords="668,5,856,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a551e2d3ea7f472da85fe77dcdcd2a068"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a551e2d3ea7f472da85fe77dcdcd2a068">&#9670;&nbsp;</a></span>NfaInit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaInit </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>NFA初始化 </p>
+<dl class="section note"><dt>注解</dt><dd>可以通过调用该函数清空已有的NFA配置 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8cpp_source.html">nfa_generator.cpp</a> 第 <a class="el" href="nfa__generator_8cpp_source.html#l00101">101</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="multimap__object__manager_8h_source.html#l00281">frontend::common::MultimapObjectManager&lt; T &gt;::EmplaceObject()</a>, <a class="el" href="nfa__generator_8h_source.html#l00256">head_node_id_</a>, <a class="el" href="multimap__object__manager_8h_source.html#l00424">frontend::common::MultimapObjectManager&lt; T &gt;::MultimapObjectManagerInit()</a>, <a class="el" href="nfa__generator_8h_source.html#l00260">node_manager_</a> , 以及 <a class="el" href="nfa__generator_8h_source.html#l00258">tail_nodes_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00012">frontend::generator::dfa_generator::DfaGenerator::DfaInit()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068_cgraph">
+<area shape="rect" title="NFA初始化" alt="" coords="5,24,193,95"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a497a7c5bc722e5d3393c14b39b1e451e" title="创建对象并自动选择最佳位置放置对象" alt="" coords="283,5,510,47"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a46a3c456a48f53594855815131f9dbf9" title="初始化，如果容器中存在对象则全部释放" alt="" coords="241,71,552,112"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a551e2d3ea7f472da85fe77dcdcd2a068_icgraph">
+<area shape="rect" title="NFA初始化" alt="" coords="987,5,1175,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a765989368257c66b0b23d2b2ab43d711" title="初始化" alt="" coords="721,13,939,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a7d2bf2a9d13bca48536846a1650141f8" title="初始化" alt="" coords="403,13,673,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="afd38661549adcda0d029c24112c485d0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afd38661549adcda0d029c24112c485d0">&#9670;&nbsp;</a></span>RegexConstruct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaGenerator::NfaNodeId</a>, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaGenerator::NfaNodeId</a> &gt; frontend::generator::dfa_generator::nfa_generator::NfaGenerator::RegexConstruct </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">TailNodeData</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>tail_node_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>raw_regex_string</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">size_t &amp;&amp;&#160;</td>
+          <td class="paramname"><em>next_character_index</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const bool&#160;</td>
+          <td class="paramname"><em>add_to_nfa_head</em> = <code>true</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>解析正则 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">tail_node_data</td><td>：获取到该单词时返回的数据 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">raw_regex_string</td><td>：表示单词的正则表达式 </td></tr>
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">next_character_index</td><td>：下一个读取的raw_regex_string中的单词的位置 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">add_to_nfa_head</td><td>：构建完成后是否设置NFA头结点到生成的结构链头结点的无条件转移路径 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回生成的NFA结构链的头结点ID和尾节点ID</dd></dl>
+<p>next_character_index决定调用该函数时从哪里开始读取raw_regex_string中的字符 add_to_nfa_head用于内部遇到'('时递归调用该函数时防止将子正则作为有效单词 添加到配置中，第一次调用应使用true（默认值），递归调用时应使用false 如果next_character_index指向的字符左侧为'('，则读取到与之匹配的')'时返回 （读取到第一个')'时返回，因为递归调用时会自动处理对应的')'），否则读取到 raw_regex_string末尾时返回 如果遇到')'，返回时不自动处理')'后的范围限制符号（?、+、*等） </p><dl class="section note"><dt>注解</dt><dd>返回时next_character_index指向下一个要读取的字符 add_to_nfa_head == false时tail_node_data可以提供任意参数 </dd></dl>
+<dl class="section attention"><dt>注意</dt><dd>如果next_character_index &gt;= raw_regex_string.size() 则返回值两部分都为NfaNodeId::InvalidId() </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8cpp_source.html">nfa_generator.cpp</a> 第 <a class="el" href="nfa__generator_8cpp_source.html#l00140">140</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="nfa__generator_8cpp_source.html#l00024">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNode::AddNoconditionTransfer()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00360">CreateSwitchTree()</a>, <a class="el" href="multimap__object__manager_8h_source.html#l00281">frontend::common::MultimapObjectManager&lt; T &gt;::EmplaceObject()</a>, <a class="el" href="nfa__generator_8h_source.html#l00151">GetNfaNode()</a>, <a class="el" href="nfa__generator_8h_source.html#l00256">head_node_id_</a>, <a class="el" href="id__wrapper_8h_source.html#l00155">frontend::common::ExplicitIdWrapper&lt; size_t, WrapperLabel, WrapperLabel::kObjectId &gt;::InvalidId()</a>, <a class="el" href="nfa__generator_8h_source.html#l00260">node_manager_</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00140">RegexConstruct()</a>, <a class="el" href="multimap__object__manager_8h_source.html#l00365">frontend::common::MultimapObjectManager&lt; T &gt;::RemoveObject()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00018">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNode::SetConditionTransfer()</a> , 以及 <a class="el" href="nfa__generator_8h_source.html#l00236">SetTailNode()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00034">frontend::generator::dfa_generator::DfaGenerator::AddRegexpression()</a> , 以及 <a class="el" href="nfa__generator_8cpp_source.html#l00140">RegexConstruct()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0_cgraph">
+<area shape="rect" title="解析正则" alt="" coords="5,240,193,311"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#abb62451b0984b0ccd9a4a35a44a18732" title="添加无条件转移节点" alt="" coords="241,5,492,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac8852c9c0a00070c87e253e996644c59" title="根据输入生成可选字符结构" alt="" coords="273,203,461,273"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a497a7c5bc722e5d3393c14b39b1e451e" title="创建对象并自动选择最佳位置放置对象" alt="" coords="552,43,779,84"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed" title="根据NFA节点ID获取NFA节点" alt="" coords="571,108,759,179"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a474cb83413346466f801cd8033bbc34e" title=" " alt="" coords="553,297,778,339"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a8cfe67102175bd60fa952d4764376ee5" title="设置条件转移条目" alt="" coords="550,363,781,433"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf" title="获取存储无效值的容器" alt="" coords="245,400,489,471"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aabdd9849ae9d8831534733ce6e6eb688" title="设置尾节点信息" alt="" coords="273,495,461,565"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#ab65f8095016ee5dbf4a5d50383129a6e" title="获取该节点全部转移条件和在转移条件下可以转移到的节点ID" alt="" coords="540,203,791,273"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a271ef9fe0032f1eeb8585fb329f53cbb" title="获取指向有效对象的引用" alt="" coords="839,123,1051,164"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_afd38661549adcda0d029c24112c485d0_icgraph">
+<area shape="rect" title="解析正则" alt="" coords="811,29,999,100"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a676342993bb701a3c1c9574f9ae7e441" title="添加单词的正则" alt="" coords="545,37,763,93"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4dc1e67e686137062266790650bbe67a" title="添加终结产生式" alt="" coords="276,29,497,100"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a36db9122a028b29ec3c60e13c4837583" title="添加关键字" alt="" coords="5,37,228,93"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aaf1122d36ed3eced824030181ea7ff3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf1122d36ed3eced824030181ea7ff3f">&#9670;&nbsp;</a></span>RemoveTailNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t frontend::generator::dfa_generator::nfa_generator::NfaGenerator::RemoveTailNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>&#160;</td>
+          <td class="paramname"><em>tail_node_id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移除尾节点信息 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">tail_node_id</td><td>：要移除尾节点信息的节点ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回删除的条目个数 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">0</td><td>：未删除任何条目（node_id指定的节点不存在或不为尾节点） </td></tr>
+    <tr><td class="paramname">1</td><td>：删除了已有的一个条目 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a> 第 <a class="el" href="nfa__generator_8h_source.html#l00223">223</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="nfa__generator_8h_source.html#l00258">tail_nodes_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="nfa__generator_8cpp_source.html#l00256">MergeOptimization()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aaf1122d36ed3eced824030181ea7ff3f_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aaf1122d36ed3eced824030181ea7ff3f_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aaf1122d36ed3eced824030181ea7ff3f_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aaf1122d36ed3eced824030181ea7ff3f_icgraph">
+<area shape="rect" title="移除尾节点信息" alt="" coords="904,5,1092,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a9c66fbc2e3302533f3ef3d3b693b3691" title="合并优化，降低节点数和转移路径以降低子集构造法集合大小" alt="" coords="668,5,856,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aabdd9849ae9d8831534733ce6e6eb688"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabdd9849ae9d8831534733ce6e6eb688">&#9670;&nbsp;</a></span>SetTailNode()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class TailNodeDataType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::generator::dfa_generator::nfa_generator::NfaGenerator::SetTailNode </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>&#160;</td>
+          <td class="paramname"><em>node_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">TailNodeDataType &amp;&amp;&#160;</td>
+          <td class="paramname"><em>tail_node_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置尾节点信息 </p>
+<dl class="tparams"><dt>模板参数</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">TailNodeDataType</td><td>：尾节点数据类型，仅支持const TailNodeData&amp;和TailNodeData&amp;&amp; </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_id</td><td>：待设置为尾节点的节点ID </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">tail_node_data</td><td>：尾节点数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>是否设置成功 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>：设置成功 </td></tr>
+    <tr><td class="paramname">false</td><td>：设置失败 已存在node_id的尾节点记录，需要先调用RemoveTailNode然后再调用该函数 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a> 第 <a class="el" href="nfa__generator_8h_source.html#l00236">236</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="nfa__generator_8h_source.html#l00258">tail_nodes_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="nfa__generator_8cpp_source.html#l00256">MergeOptimization()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00140">RegexConstruct()</a> , 以及 <a class="el" href="nfa__generator_8cpp_source.html#l00241">WordConstruct()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aabdd9849ae9d8831534733ce6e6eb688_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aabdd9849ae9d8831534733ce6e6eb688_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aabdd9849ae9d8831534733ce6e6eb688_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_aabdd9849ae9d8831534733ce6e6eb688_icgraph">
+<area shape="rect" title="设置尾节点信息" alt="" coords="1089,124,1277,195"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a9c66fbc2e3302533f3ef3d3b693b3691" title="合并优化，降低节点数和转移路径以降低子集构造法集合大小" alt="" coords="853,5,1041,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#afd38661549adcda0d029c24112c485d0" title="解析正则" alt="" coords="853,124,1041,195"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a6b41f5800ea965e440f7451d3cd0e320" title="添加一个纯单词" alt="" coords="853,219,1041,289"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="588,13,805,69"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="285,5,531,76"/>
+<area shape="rect" href="Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="89,27,144,54"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a676342993bb701a3c1c9574f9ae7e441" title="添加单词的正则" alt="" coords="588,131,805,187"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4dc1e67e686137062266790650bbe67a" title="添加终结产生式" alt="" coords="297,124,519,195"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a36db9122a028b29ec3c60e13c4837583" title="添加关键字" alt="" coords="5,131,228,187"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a527079ed92f9a58295df07567975b274" title="添加纯单词" alt="" coords="588,226,805,282"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a929e48b9bce49002c7b89d6ca4f997c9" title="添加具有双目运算符和左侧单目运算符语义的运算符" alt="" coords="293,219,523,289"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aec2d0760baf4095f4f2183c8e84e37ea" title="添加双目运算符" alt="" coords="276,314,540,370"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a35ff252e20e90814c0040237d4be5fea" title="添加单目运算符" alt="" coords="294,395,522,465"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6b41f5800ea965e440f7451d3cd0e320"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b41f5800ea965e440f7451d3cd0e320">&#9670;&nbsp;</a></span>WordConstruct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::pair&lt; <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaGenerator::NfaNodeId</a>, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaGenerator::NfaNodeId</a> &gt; frontend::generator::dfa_generator::nfa_generator::NfaGenerator::WordConstruct </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>str</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">TailNodeData</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>word_attached_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>添加一个纯单词 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">str</td><td>：单词的字符串 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">word_attached_data</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回生成的NFA结构链的头结点ID和尾节点ID</dd></dl>
+<p>该函数与RegexConstruct区别在于它将str视为纯单词而非正则表达式来添加 </p><dl class="section return"><dt>返回</dt><dd>返回生成的NFA结构链的头结点和尾节点 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8cpp_source.html">nfa_generator.cpp</a> 第 <a class="el" href="nfa__generator_8cpp_source.html#l00241">241</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="nfa__generator_8cpp_source.html#l00024">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNode::AddNoconditionTransfer()</a>, <a class="el" href="multimap__object__manager_8h_source.html#l00281">frontend::common::MultimapObjectManager&lt; T &gt;::EmplaceObject()</a>, <a class="el" href="nfa__generator_8h_source.html#l00151">GetNfaNode()</a>, <a class="el" href="nfa__generator_8h_source.html#l00256">head_node_id_</a>, <a class="el" href="nfa__generator_8h_source.html#l00260">node_manager_</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00018">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaNode::SetConditionTransfer()</a> , 以及 <a class="el" href="nfa__generator_8h_source.html#l00236">SetTailNode()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="dfa__generator_8cpp_source.html#l00025">frontend::generator::dfa_generator::DfaGenerator::AddWord()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320_cgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320_cgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320_cgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320_cgraph">
+<area shape="rect" title="添加一个纯单词" alt="" coords="5,165,193,236"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#abb62451b0984b0ccd9a4a35a44a18732" title="添加无条件转移节点" alt="" coords="241,5,492,76"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a497a7c5bc722e5d3393c14b39b1e451e" title="创建对象并自动选择最佳位置放置对象" alt="" coords="253,100,480,141"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aa0f3ec37a1330ae6658ddac36e1419ed" title="根据NFA节点ID获取NFA节点" alt="" coords="273,165,461,236"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html#a8cfe67102175bd60fa952d4764376ee5" title="设置条件转移条目" alt="" coords="251,260,482,331"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#aabdd9849ae9d8831534733ce6e6eb688" title="设置尾节点信息" alt="" coords="273,355,461,425"/>
+<area shape="rect" href="classfrontend_1_1common_1_1MultimapObjectManager.html#a271ef9fe0032f1eeb8585fb329f53cbb" title="获取指向有效对象的引用" alt="" coords="540,180,752,221"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320_icgraph.png" border="0" usemap="#classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320_icgraph" alt=""/></div>
+<map name="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320_icgraph" id="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_a6b41f5800ea965e440f7451d3cd0e320_icgraph">
+<area shape="rect" title="添加一个纯单词" alt="" coords="853,137,1041,208"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a527079ed92f9a58295df07567975b274" title="添加纯单词" alt="" coords="588,145,805,201"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a929e48b9bce49002c7b89d6ca4f997c9" title="添加具有双目运算符和左侧单目运算符语义的运算符" alt="" coords="293,5,523,76"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#aec2d0760baf4095f4f2183c8e84e37ea" title="添加双目运算符" alt="" coords="276,101,540,157"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a35ff252e20e90814c0040237d4be5fea" title="添加单目运算符" alt="" coords="294,181,522,252"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4dc1e67e686137062266790650bbe67a" title="添加终结产生式" alt="" coords="297,276,519,347"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a36db9122a028b29ec3c60e13c4837583" title="添加关键字" alt="" coords="5,283,228,339"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="a02e466281eb3f8f9c62ccd3bd4b52be4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a02e466281eb3f8f9c62ccd3bd4b52be4">&#9670;&nbsp;</a></span>head_node_id_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a> frontend::generator::dfa_generator::nfa_generator::NfaGenerator::head_node_id_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>NFA头结点ID </p>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a> 第 <a class="el" href="nfa__generator_8h_source.html#l00256">256</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="nfa__generator_8h_source.html#l00141">GetHeadNfaNodeId()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00101">NfaInit()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00140">RegexConstruct()</a> , 以及 <a class="el" href="nfa__generator_8cpp_source.html#l00241">WordConstruct()</a>.</p>
+
+</div>
+</div>
+<a id="afa18192c64defc0544485a4fa7c9a410"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa18192c64defc0544485a4fa7c9a410">&#9670;&nbsp;</a></span>kNotTailNodeTag</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">NfaGenerator::TailNodeData</a> frontend::generator::dfa_generator::nfa_generator::NfaGenerator::kNotTailNodeTag</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<b>初始值:</b><div class="fragment"><div class="line">=</div>
+<div class="line">    <a class="code" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">NfaGenerator::TailNodeData</a>(<a class="code" href="namespacefrontend_1_1generator_1_1dfa__generator.html#ace8ccb7b6f5392490ab9907d95e26cf9">WordAttachedData</a>(), <a class="code" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf">WordPriority::InvalidId</a>())</div>
+</div><!-- fragment -->
+<p>非尾节点标记 </p>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a> 第 <a class="el" href="nfa__generator_8h_source.html#l00215">215</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="nfa__generator_8cpp_source.html#l00041">Closure()</a>, <a class="el" href="dfa__generator_8cpp_source.html#l00043">frontend::generator::dfa_generator::DfaGenerator::DfaConstruct()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00130">GetTailNodeData()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00092">Goto()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00256">MergeOptimization()</a> , 以及 <a class="el" href="dfa__generator_8cpp_source.html#l00131">frontend::generator::dfa_generator::DfaGenerator::SetGoto()</a>.</p>
+
+</div>
+</div>
+<a id="a5e68c1ef2912bd9b41037d7a6f0ad5c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e68c1ef2912bd9b41037d7a6f0ad5c5">&#9670;&nbsp;</a></span>node_manager_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1common_1_1MultimapObjectManager.html">frontend::common::MultimapObjectManager</a>&lt;<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_1_1NfaNode.html">NfaNode</a>&gt; frontend::generator::dfa_generator::nfa_generator::NfaGenerator::node_manager_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>储存NFA节点 </p>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a> 第 <a class="el" href="nfa__generator_8h_source.html#l00260">260</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="nfa__generator_8cpp_source.html#l00041">Closure()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00360">CreateSwitchTree()</a>, <a class="el" href="nfa__generator_8h_source.html#l00151">GetNfaNode()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00256">MergeOptimization()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00101">NfaInit()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00140">RegexConstruct()</a> , 以及 <a class="el" href="nfa__generator_8cpp_source.html#l00241">WordConstruct()</a>.</p>
+
+</div>
+</div>
+<a id="a2325bf96b0a3597eaaaf9cc4dc425592"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2325bf96b0a3597eaaaf9cc4dc425592">&#9670;&nbsp;</a></span>tail_nodes_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::unordered_map&lt;<a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ad07eafdc898343115c3415bd6514e71b">NfaNodeId</a>, <a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">TailNodeData</a>&gt; frontend::generator::dfa_generator::nfa_generator::NfaGenerator::tail_nodes_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>储存尾节点ID到尾节点数据的映射 </p>
+
+<p class="definition">在文件 <a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a> 第 <a class="el" href="nfa__generator_8h_source.html#l00258">258</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="nfa__generator_8cpp_source.html#l00041">Closure()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00130">GetTailNodeData()</a>, <a class="el" href="nfa__generator_8cpp_source.html#l00101">NfaInit()</a>, <a class="el" href="nfa__generator_8h_source.html#l00223">RemoveTailNode()</a> , 以及 <a class="el" href="nfa__generator_8h_source.html#l00236">SetTailNode()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/Generator/DfaGenerator/NfaGenerator/<a class="el" href="nfa__generator_8h_source.html">nfa_generator.h</a></li>
+<li>src/Generator/DfaGenerator/NfaGenerator/<a class="el" href="nfa__generator_8cpp_source.html">nfa_generator.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<div class="ttc" id="aclassfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator_html_ac4e941bb614deadf6f71db643d52c80c"><div class="ttname"><a href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac4e941bb614deadf6f71db643d52c80c">frontend::generator::dfa_generator::nfa_generator::NfaGenerator::TailNodeData</a></div><div class="ttdeci">std::pair&lt; WordAttachedData, WordPriority &gt; TailNodeData</div><div class="ttdoc">尾节点数据，内容为该单词所附带的属性</div><div class="ttdef"><b>Definition:</b> <a href="nfa__generator_8h_source.html#l00038">nfa_generator.h:38</a></div></div>
+<div class="ttc" id="aclassfrontend_1_1common_1_1ExplicitIdWrapper_html_a5286ddd962d1091679c76ba11beeacaf"><div class="ttname"><a href="classfrontend_1_1common_1_1ExplicitIdWrapper.html#a5286ddd962d1091679c76ba11beeacaf">frontend::common::ExplicitIdWrapper::InvalidId</a></div><div class="ttdeci">static constexpr ExplicitIdWrapper InvalidId()</div><div class="ttdoc">获取存储无效值的容器</div><div class="ttdef"><b>Definition:</b> <a href="id__wrapper_8h_source.html#l00155">id_wrapper.h:155</a></div></div>
+<div class="ttc" id="anamespacefrontend_1_1generator_1_1dfa__generator_html_ace8ccb7b6f5392490ab9907d95e26cf9"><div class="ttname"><a href="namespacefrontend_1_1generator_1_1dfa__generator.html#ace8ccb7b6f5392490ab9907d95e26cf9">frontend::generator::dfa_generator::WordAttachedData</a></div><div class="ttdeci">nfa_generator::WordAttachedData WordAttachedData</div><div class="ttdoc">单词附属数据（在检测到相应单词时返回）</div><div class="ttdef"><b>Definition:</b> <a href="export__types_8h_source.html#l00200">export_types.h:200</a></div></div>
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacefrontend.html">frontend</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1generator.html">generator</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator.html">dfa_generator</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1generator_1_1dfa__generator_1_1nfa__generator.html">nfa_generator</a></li><li class="navelem"><a class="el" href="classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html">NfaGenerator</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>

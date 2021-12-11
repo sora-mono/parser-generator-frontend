@@ -1,0 +1,7 @@
+<map id="c_parser_frontend::CParserFrontend::AnnounceFunction" name="c_parser_frontend::CParserFrontend::AnnounceFunction">
+<area shape="rect" id="node1" title="声明函数使用该接口" alt="" coords="5,53,260,94"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a9c1a3d54f38c0dce420b5bb28708acc5" title="声明函数" alt="" coords="308,5,544,61"/>
+<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a55119a508fa7ca1257475ec7795315c8" title="声明函数类型" alt="" coords="329,85,523,141"/>
+<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1TypeSystem.html#af8ea1dc56730fbe42ad70ff578ae532b" title="向类型系统中添加类型" alt="" coords="592,85,785,141"/>
+<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a758de256c4f407f85ef4a1113075b2a1" title="获取全部类型名到类型链的映射" alt="" coords="833,85,1027,141"/>
+</map>

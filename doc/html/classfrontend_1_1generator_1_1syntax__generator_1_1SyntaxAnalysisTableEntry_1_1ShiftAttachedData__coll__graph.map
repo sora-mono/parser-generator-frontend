@@ -1,0 +1,6 @@
+<map id="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ShiftAttachedData" name="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ShiftAttachedData">
+<area shape="rect" id="node1" title="执行移入动作时的附属数据" alt="" coords="763,49,953,120"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html" title="动作和附属数据基类" alt="" coords="329,5,571,76"/>
+<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1ExplicitIdWrapper.html" title=" " alt="" coords="287,101,613,157"/>
+<area shape="rect" id="node4" href="$classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,93,237,164"/>
+</map>

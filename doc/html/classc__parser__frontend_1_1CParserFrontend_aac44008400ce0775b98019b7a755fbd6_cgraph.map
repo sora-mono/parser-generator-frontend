@@ -1,0 +1,4 @@
+<map id="c_parser_frontend::CParserFrontend::ConvertIfSentenceToIfElseSentence" name="c_parser_frontend::CParserFrontend::ConvertIfSentenceToIfElseSentence">
+<area shape="rect" id="node1" title="将顶层流程控制语句从if语句转换为if&#45;else语句" alt="" coords="5,13,201,69"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a22685d0a7f4d826cdc20d5c6004fe1e5" title="将流程控制语句栈顶的if流程控制语句转化为if&#45;else语句" alt="" coords="249,5,501,76"/>
+</map>

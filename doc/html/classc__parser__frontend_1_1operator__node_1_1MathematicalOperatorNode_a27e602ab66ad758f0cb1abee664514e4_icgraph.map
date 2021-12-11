@@ -1,0 +1,4 @@
+<map id="c_parser_frontend::operator_node::MathematicalOperatorNode::GetComputeResultNodePointer" name="c_parser_frontend::operator_node::MathematicalOperatorNode::GetComputeResultNodePointer">
+<area shape="rect" id="node1" title="获取运算结果" alt="" coords="329,5,608,76"/>
+<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#a1eec593c064314d177caf3f421dfa0ea" title="获取最终结果的节点" alt="" coords="5,13,281,69"/>
+</map>

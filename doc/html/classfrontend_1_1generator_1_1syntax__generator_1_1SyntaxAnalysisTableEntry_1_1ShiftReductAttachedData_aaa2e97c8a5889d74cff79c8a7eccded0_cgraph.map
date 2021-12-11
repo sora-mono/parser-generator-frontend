@@ -1,0 +1,5 @@
+<map id="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ShiftReductAttachedData::IsSameOrPart" name="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ShiftReductAttachedData::IsSameOrPart">
+<area shape="rect" id="node1" title="判断两个对象是否相应部分相同" alt="" coords="5,49,199,135"/>
+<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html#a771a6314c7763f7ceff0aab9d0a75fd9" title="获取动作类型" alt="" coords="247,5,489,91"/>
+<area shape="rect" id="node3" href="$namespacec__parser__frontend_1_1type__system.html#a0915baa55b6cdf79c3c28cb8b6249f18" title="比较节点指针指向的节点是否相同" alt="" coords="273,115,463,157"/>
+</map>

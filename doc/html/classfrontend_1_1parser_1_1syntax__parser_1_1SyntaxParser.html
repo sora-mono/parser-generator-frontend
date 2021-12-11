@@ -1,0 +1,2198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Compliner Frontend Generator: frontend::parser::syntax_parser::SyntaxParser类 参考</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Compliner Frontend Generator
+   </div>
+   <div id="projectbrief">编译器前端生成器</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- 制作者 Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'搜索');
+/* @license-end */
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(function() {
+  initMenu('',true,false,'search.php','搜索');
+  $(document).ready(function() { init_search(); });
+});
+/* @license-end */</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">类</a> &#124;
+<a href="#pub-types">Public 类型</a> &#124;
+<a href="#pub-methods">Public 成员函数</a> &#124;
+<a href="#pri-types">Private 类型</a> &#124;
+<a href="#pri-methods">Private 成员函数</a> &#124;
+<a href="#pri-attribs">Private 属性</a> &#124;
+<a href="#friends">友元</a> &#124;
+<a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser-members.html">所有成员列表</a>  </div>
+  <div class="headertitle">
+<div class="title">frontend::parser::syntax_parser::SyntaxParser类 参考</div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>语法分析机  
+ <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#details">更多...</a></p>
+
+<p><code>#include &lt;<a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a>&gt;</code></p>
+<div class="dynheader">
+frontend::parser::syntax_parser::SyntaxParser 的协作图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser__coll__graph.png" border="0" usemap="#frontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_coll__map" alt="Collaboration graph"/></div>
+<map name="frontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_coll__map" id="frontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_coll__map">
+<area shape="rect" title="语法分析机" alt="" coords="1645,81,1824,123"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ObjectManager.html" title="管理对象，对象与ID一一对应" alt="" coords="1218,5,1410,47"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html" title="DFA解析器" alt="" coords="1237,188,1391,229"/>
+<area shape="rect" href="structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData.html" title="单词附属数据（在检测到相应单词时返回）" alt="" coords="753,122,975,178"/>
+<area shape="rect" href="structfrontend_1_1parser_1_1dfa__parser_1_1DfaParser_1_1WordInfo.html" title="单词数据" alt="" coords="1211,123,1417,164"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html" title="强制显式调用构造函数且使用默认无效值版Wrapper" alt="" coords="321,82,555,138"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,82,272,138"/>
+<area shape="rect" href="classfrontend_1_1common_1_1ExplicitIdWrapper.html" title=" " alt="" coords="735,206,993,262"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="322,199,554,269"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">图例</a>]</span></center></div>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+类</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_1_1ParsingData.html">ParsingData</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析时使用的数据  <a href="structfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_1_1ParsingData.html#details">更多...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-types"></a>
+Public 类型</h2></td></tr>
+<tr class="memitem:a6426316cba1fcdf15b79d48b5eb7c653"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6426316cba1fcdf15b79d48b5eb7c653">WordInfo</a> = <a class="el" href="structfrontend_1_1parser_1_1dfa__parser_1_1DfaParser_1_1WordInfo.html">DfaParser::WordInfo</a></td></tr>
+<tr class="memdesc:a6426316cba1fcdf15b79d48b5eb7c653"><td class="mdescLeft">&#160;</td><td class="mdescRight">DFA引擎返回的单词信息  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6426316cba1fcdf15b79d48b5eb7c653">更多...</a><br /></td></tr>
+<tr class="separator:a6426316cba1fcdf15b79d48b5eb7c653"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acf03dbd5859d9a1912b7c6ce134cb91e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">SyntaxAnalysisTableEntryId</a> = <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a15626a86cc3914cad26a07cd778dae99">frontend::generator::syntax_generator::SyntaxAnalysisTableEntryId</a></td></tr>
+<tr class="memdesc:acf03dbd5859d9a1912b7c6ce134cb91e"><td class="mdescLeft">&#160;</td><td class="mdescRight">语法分析表条目ID  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">更多...</a><br /></td></tr>
+<tr class="separator:acf03dbd5859d9a1912b7c6ce134cb91e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad092ddd576e0b4aafd7413e13ff8f3b1"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad092ddd576e0b4aafd7413e13ff8f3b1">SyntaxAnalysisTableType</a> = <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a0e522e8ed04f0cbd5be2f6b084f6e28e">frontend::generator::syntax_generator::SyntaxAnalysisTableType</a></td></tr>
+<tr class="memdesc:ad092ddd576e0b4aafd7413e13ff8f3b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">语法分析表  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad092ddd576e0b4aafd7413e13ff8f3b1">更多...</a><br /></td></tr>
+<tr class="separator:ad092ddd576e0b4aafd7413e13ff8f3b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa26a38b417733ba3612b30362002813"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#aaa26a38b417733ba3612b30362002813">ProductionNodeId</a> = <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a8d03686ef93995074fb23ce1faf35b77">frontend::generator::syntax_generator::ProductionNodeId</a></td></tr>
+<tr class="memdesc:aaa26a38b417733ba3612b30362002813"><td class="mdescLeft">&#160;</td><td class="mdescRight">产生式ID  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#aaa26a38b417733ba3612b30362002813">更多...</a><br /></td></tr>
+<tr class="separator:aaa26a38b417733ba3612b30362002813"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac41a4089e01e260c57db658f820e8707"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac41a4089e01e260c57db658f820e8707">ProductionNodeType</a> = <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa3b76f72027c071e3140ceb5fa56d0b8">frontend::generator::syntax_generator::ProductionNodeType</a></td></tr>
+<tr class="memdesc:ac41a4089e01e260c57db658f820e8707"><td class="mdescLeft">&#160;</td><td class="mdescRight">产生式节点类型  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac41a4089e01e260c57db658f820e8707">更多...</a><br /></td></tr>
+<tr class="separator:ac41a4089e01e260c57db658f820e8707"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6fb362ed5e101369bae5cc9ad0b20a4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ab6fb362ed5e101369bae5cc9ad0b20a4">OperatorAssociatityType</a> = <a class="el" href="namespacefrontend_1_1common.html#a2e54554d6d568b7d64c64545ff662a73">frontend::generator::syntax_generator::OperatorAssociatityType</a></td></tr>
+<tr class="memdesc:ab6fb362ed5e101369bae5cc9ad0b20a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">运算符结合性  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ab6fb362ed5e101369bae5cc9ad0b20a4">更多...</a><br /></td></tr>
+<tr class="separator:ab6fb362ed5e101369bae5cc9ad0b20a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fb19e1b6ce9b96d7f41a8c59fcd60d8"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a7fb19e1b6ce9b96d7f41a8c59fcd60d8">ProcessFunctionClassManagerType</a> = <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#af8d10cce133346a4d962864dcc8f2029">frontend::generator::syntax_generator::ProcessFunctionClassManagerType</a></td></tr>
+<tr class="memdesc:a7fb19e1b6ce9b96d7f41a8c59fcd60d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">包装规约函数的类的实例化对象管理器  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a7fb19e1b6ce9b96d7f41a8c59fcd60d8">更多...</a><br /></td></tr>
+<tr class="separator:a7fb19e1b6ce9b96d7f41a8c59fcd60d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6b27371eede391dec98a032eda2fd8c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad6b27371eede391dec98a032eda2fd8c">ProcessFunctionClassId</a> = <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#af8388c16e5ec8eb818f984e81d014de7">frontend::generator::syntax_generator::ProcessFunctionClassId</a></td></tr>
+<tr class="memdesc:ad6b27371eede391dec98a032eda2fd8c"><td class="mdescLeft">&#160;</td><td class="mdescRight">包装规约函数的类的实例化对象ID  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad6b27371eede391dec98a032eda2fd8c">更多...</a><br /></td></tr>
+<tr class="separator:ad6b27371eede391dec98a032eda2fd8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af8a4b87d69ce299629c90d70e471d891"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#af8a4b87d69ce299629c90d70e471d891">ProcessFunctionInterface</a> = <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html">frontend::generator::syntax_generator::ProcessFunctionInterface</a></td></tr>
+<tr class="memdesc:af8a4b87d69ce299629c90d70e471d891"><td class="mdescLeft">&#160;</td><td class="mdescRight">包装规约函数的类的基类  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#af8a4b87d69ce299629c90d70e471d891">更多...</a><br /></td></tr>
+<tr class="separator:af8a4b87d69ce299629c90d70e471d891"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3f5e9ea48621dcf0733a3408af047d60"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a3f5e9ea48621dcf0733a3408af047d60">ActionAndAttachedDataInterface</a> = <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html">frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface</a></td></tr>
+<tr class="memdesc:a3f5e9ea48621dcf0733a3408af047d60"><td class="mdescLeft">&#160;</td><td class="mdescRight">动作和附属数据的基类  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a3f5e9ea48621dcf0733a3408af047d60">更多...</a><br /></td></tr>
+<tr class="separator:a3f5e9ea48621dcf0733a3408af047d60"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3fc32ad82ebe17f84468369049329b5f"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a3fc32ad82ebe17f84468369049329b5f">ActionType</a> = <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a141c90fd40d418e49ce0c6c18a87b4b3">frontend::generator::syntax_generator::ActionType</a></td></tr>
+<tr class="memdesc:a3fc32ad82ebe17f84468369049329b5f"><td class="mdescLeft">&#160;</td><td class="mdescRight">面对向前看符号时的动作  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a3fc32ad82ebe17f84468369049329b5f">更多...</a><br /></td></tr>
+<tr class="separator:a3fc32ad82ebe17f84468369049329b5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2216b4676a3812e4fd617a9044f05e3e"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a2216b4676a3812e4fd617a9044f05e3e">ShiftAttachedData</a> = <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ShiftAttachedData.html">frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ShiftAttachedData</a></td></tr>
+<tr class="memdesc:a2216b4676a3812e4fd617a9044f05e3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">移入动作的数据  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a2216b4676a3812e4fd617a9044f05e3e">更多...</a><br /></td></tr>
+<tr class="separator:a2216b4676a3812e4fd617a9044f05e3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ab1045eeeea78c57a26f9c4e96fde29"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a9ab1045eeeea78c57a26f9c4e96fde29">ReductAttachedData</a> = <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html">frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ReductAttachedData</a></td></tr>
+<tr class="memdesc:a9ab1045eeeea78c57a26f9c4e96fde29"><td class="mdescLeft">&#160;</td><td class="mdescRight">归约动作的数据  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a9ab1045eeeea78c57a26f9c4e96fde29">更多...</a><br /></td></tr>
+<tr class="separator:a9ab1045eeeea78c57a26f9c4e96fde29"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35cc389d260f9763d5f65887186dc14c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a35cc389d260f9763d5f65887186dc14c">WordDataToUser</a> = <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html">ProcessFunctionInterface::WordDataToUser</a></td></tr>
+<tr class="memdesc:a35cc389d260f9763d5f65887186dc14c"><td class="mdescLeft">&#160;</td><td class="mdescRight">传递给用户的单个单词的数据  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a35cc389d260f9763d5f65887186dc14c">更多...</a><br /></td></tr>
+<tr class="separator:a35cc389d260f9763d5f65887186dc14c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5131d19d589733ede9625996a9b3de4b"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a5131d19d589733ede9625996a9b3de4b">TerminalWordData</a> = <a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html">ProcessFunctionInterface::TerminalWordData</a></td></tr>
+<tr class="memdesc:a5131d19d589733ede9625996a9b3de4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">终结节点数据  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a5131d19d589733ede9625996a9b3de4b">更多...</a><br /></td></tr>
+<tr class="separator:a5131d19d589733ede9625996a9b3de4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60bb263837fd7f02ce650d50c219fc22"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a60bb263837fd7f02ce650d50c219fc22">NonTerminalWordData</a> = <a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html">ProcessFunctionInterface::NonTerminalWordData</a></td></tr>
+<tr class="memdesc:a60bb263837fd7f02ce650d50c219fc22"><td class="mdescLeft">&#160;</td><td class="mdescRight">非终结节点数据  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a60bb263837fd7f02ce650d50c219fc22">更多...</a><br /></td></tr>
+<tr class="separator:a60bb263837fd7f02ce650d50c219fc22"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0eea98df993fb62aeeb701dcab78e557"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a0eea98df993fb62aeeb701dcab78e557">OperatorPriority</a> = <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a0ad97a4d5fab4fdc87f80845081898de">frontend::generator::syntax_generator::OperatorPriority</a></td></tr>
+<tr class="memdesc:a0eea98df993fb62aeeb701dcab78e557"><td class="mdescLeft">&#160;</td><td class="mdescRight">运算符优先级，等于已移入的最高优先级运算符优先级，0保留为非运算符优先级  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a0eea98df993fb62aeeb701dcab78e557">更多...</a><br /></td></tr>
+<tr class="separator:a0eea98df993fb62aeeb701dcab78e557"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Public 成员函数</h2></td></tr>
+<tr class="memitem:adbd0bf396c6e70d9563aa419cf7afae9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adbd0bf396c6e70d9563aa419cf7afae9">SyntaxParser</a> ()</td></tr>
+<tr class="separator:adbd0bf396c6e70d9563aa419cf7afae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7cd6f4224b96789908bd993df5fb798f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a7cd6f4224b96789908bd993df5fb798f">SyntaxParser</a> (const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html">SyntaxParser</a> &amp;)=delete</td></tr>
+<tr class="separator:a7cd6f4224b96789908bd993df5fb798f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0cc580f3a7978adaf6d5c0fb9a88942c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html">SyntaxParser</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a0cc580f3a7978adaf6d5c0fb9a88942c">operator=</a> (<a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html">SyntaxParser</a> &amp;&amp;)=delete</td></tr>
+<tr class="separator:a0cc580f3a7978adaf6d5c0fb9a88942c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa1c7653889692625d698e276cfe13175"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#aa1c7653889692625d698e276cfe13175">LoadConfig</a> ()</td></tr>
+<tr class="memdesc:aa1c7653889692625d698e276cfe13175"><td class="mdescLeft">&#160;</td><td class="mdescRight">加载配置  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#aa1c7653889692625d698e276cfe13175">更多...</a><br /></td></tr>
+<tr class="separator:aa1c7653889692625d698e276cfe13175"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd2469d9562c650506a132829a3373be"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abd2469d9562c650506a132829a3373be">SetDfaReturnData</a> (<a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6426316cba1fcdf15b79d48b5eb7c653">WordInfo</a> &amp;&amp;dfa_return_data)</td></tr>
+<tr class="memdesc:abd2469d9562c650506a132829a3373be"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置DFA返回的待移入单词数据  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abd2469d9562c650506a132829a3373be">更多...</a><br /></td></tr>
+<tr class="separator:abd2469d9562c650506a132829a3373be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abbfadb47f432290662ba96b22a181457"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6426316cba1fcdf15b79d48b5eb7c653">WordInfo</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abbfadb47f432290662ba96b22a181457">GetWaitingProcessWordInfo</a> ()</td></tr>
+<tr class="memdesc:abbfadb47f432290662ba96b22a181457"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取DFA返回的待移入单词的数据  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abbfadb47f432290662ba96b22a181457">更多...</a><br /></td></tr>
+<tr class="separator:abbfadb47f432290662ba96b22a181457"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8cca22114e97039f99d0ad9cd5a661d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ab8cca22114e97039f99d0ad9cd5a661d">GetNextWord</a> ()</td></tr>
+<tr class="memdesc:ab8cca22114e97039f99d0ad9cd5a661d"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取下一个单词的数据并存在dfa_return_data_中  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ab8cca22114e97039f99d0ad9cd5a661d">更多...</a><br /></td></tr>
+<tr class="separator:ab8cca22114e97039f99d0ad9cd5a661d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89afa9f465ff4935c2279396f52a72ab"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">SyntaxAnalysisTableEntryId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a89afa9f465ff4935c2279396f52a72ab">GetRootParsingEntryId</a> () const</td></tr>
+<tr class="memdesc:a89afa9f465ff4935c2279396f52a72ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取根语法分析表条目D  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a89afa9f465ff4935c2279396f52a72ab">更多...</a><br /></td></tr>
+<tr class="separator:a89afa9f465ff4935c2279396f52a72ab"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a624a0dcee37dd2db03b137d091db2e86"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#af8a4b87d69ce299629c90d70e471d891">ProcessFunctionInterface</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a624a0dcee37dd2db03b137d091db2e86">GetProcessFunctionClass</a> (<a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad6b27371eede391dec98a032eda2fd8c">ProcessFunctionClassId</a> class_id) const</td></tr>
+<tr class="memdesc:a624a0dcee37dd2db03b137d091db2e86"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取包装规约函数的类的实例化对象  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a624a0dcee37dd2db03b137d091db2e86">更多...</a><br /></td></tr>
+<tr class="separator:a624a0dcee37dd2db03b137d091db2e86"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a351d099ac5b1d6c540ab280a12b905c5"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a3f5e9ea48621dcf0733a3408af047d60">ActionAndAttachedDataInterface</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a351d099ac5b1d6c540ab280a12b905c5">GetActionAndTarget</a> (<a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">SyntaxAnalysisTableEntryId</a> src_entry_id, <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#aaa26a38b417733ba3612b30362002813">ProductionNodeId</a> node_id) const</td></tr>
+<tr class="memdesc:a351d099ac5b1d6c540ab280a12b905c5"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取在给定向前看产生式节点条件下的动作和附属数据  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a351d099ac5b1d6c540ab280a12b905c5">更多...</a><br /></td></tr>
+<tr class="separator:a351d099ac5b1d6c540ab280a12b905c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6fddec7524fb0130a82277027537e1ee"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">SyntaxAnalysisTableEntryId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6fddec7524fb0130a82277027537e1ee">GetNextEntryId</a> (<a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">SyntaxAnalysisTableEntryId</a> src_entry_id, <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#aaa26a38b417733ba3612b30362002813">ProductionNodeId</a> node_id) const</td></tr>
+<tr class="memdesc:a6fddec7524fb0130a82277027537e1ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取移入非终结产生式节点后到达的产生式条目  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6fddec7524fb0130a82277027537e1ee">更多...</a><br /></td></tr>
+<tr class="separator:a6fddec7524fb0130a82277027537e1ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a50d8d56021539fdda1a646cb605c3194"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_1_1ParsingData.html">ParsingData</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a50d8d56021539fdda1a646cb605c3194">GetParsingDataNow</a> ()</td></tr>
+<tr class="memdesc:a50d8d56021539fdda1a646cb605c3194"><td class="mdescLeft">&#160;</td><td class="mdescRight">获取当前活跃的解析数据（解析数据栈顶对象）  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a50d8d56021539fdda1a646cb605c3194">更多...</a><br /></td></tr>
+<tr class="separator:a50d8d56021539fdda1a646cb605c3194"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5f0c3ac537d527e9dc8147e210090935"><td class="memTemplParams" colspan="2">template&lt;class ParsingDataType &gt; </td></tr>
+<tr class="memitem:a5f0c3ac537d527e9dc8147e210090935"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a5f0c3ac537d527e9dc8147e210090935">PushParsingData</a> (ParsingDataType &amp;&amp;parsing_data)</td></tr>
+<tr class="memdesc:a5f0c3ac537d527e9dc8147e210090935"><td class="mdescLeft">&#160;</td><td class="mdescRight">将数据压入解析数据栈  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a5f0c3ac537d527e9dc8147e210090935">更多...</a><br /></td></tr>
+<tr class="separator:a5f0c3ac537d527e9dc8147e210090935"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5ffdfe0169019f4fd13eedfb521535b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac5ffdfe0169019f4fd13eedfb521535b">PopTopParsingData</a> ()</td></tr>
+<tr class="memdesc:ac5ffdfe0169019f4fd13eedfb521535b"><td class="mdescLeft">&#160;</td><td class="mdescRight">弹出解析数据栈顶部数据  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac5ffdfe0169019f4fd13eedfb521535b">更多...</a><br /></td></tr>
+<tr class="separator:ac5ffdfe0169019f4fd13eedfb521535b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae992da7f543858abc788ead04c70e6aa"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ae992da7f543858abc788ead04c70e6aa">GetParsingStackSize</a> () const</td></tr>
+<tr class="memdesc:ae992da7f543858abc788ead04c70e6aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">查询解析数据栈数据数目  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ae992da7f543858abc788ead04c70e6aa">更多...</a><br /></td></tr>
+<tr class="separator:ae992da7f543858abc788ead04c70e6aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3c6b4ae872fd522352015f9410801a6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6">Parse</a> (const std::string &amp;filename)</td></tr>
+<tr class="memdesc:ac3c6b4ae872fd522352015f9410801a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">分析代码文件并构建AST  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6">更多...</a><br /></td></tr>
+<tr class="separator:ac3c6b4ae872fd522352015f9410801a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-types"></a>
+Private 类型</h2></td></tr>
+<tr class="memitem:abdf24ea2cb7eafe127980f9a473d5f49"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abdf24ea2cb7eafe127980f9a473d5f49">DfaParser</a> = <a class="el" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html">frontend::parser::dfa_parser::DfaParser</a></td></tr>
+<tr class="separator:abdf24ea2cb7eafe127980f9a473d5f49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private 成员函数</h2></td></tr>
+<tr class="memitem:a1faf452a3c9de5a616625febb241979f"><td class="memTemplParams" colspan="2">template&lt;class Archive &gt; </td></tr>
+<tr class="memitem:a1faf452a3c9de5a616625febb241979f"><td class="memTemplItemLeft" align="right" valign="top">void&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a1faf452a3c9de5a616625febb241979f">load</a> (Archive &amp;ar, const unsigned int version)</td></tr>
+<tr class="memdesc:a1faf452a3c9de5a616625febb241979f"><td class="mdescLeft">&#160;</td><td class="mdescRight">boost-serialization加载语法分析配置的函数  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a1faf452a3c9de5a616625febb241979f">更多...</a><br /></td></tr>
+<tr class="separator:a1faf452a3c9de5a616625febb241979f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a415fe35c45184b529b83d4ceb30fcd64"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64">TerminalWordWaitingProcess</a> ()</td></tr>
+<tr class="memdesc:a415fe35c45184b529b83d4ceb30fcd64"><td class="mdescLeft">&#160;</td><td class="mdescRight">将序列化分为保存与加载，Parser仅加载配置，不保存  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64">更多...</a><br /></td></tr>
+<tr class="separator:a415fe35c45184b529b83d4ceb30fcd64"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfdf296bdfa36975bcc31bbcf2d66367"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adfdf296bdfa36975bcc31bbcf2d66367">ShiftTerminalWord</a> (const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a2216b4676a3812e4fd617a9044f05e3e">ShiftAttachedData</a> &amp;action_and_target)</td></tr>
+<tr class="memdesc:adfdf296bdfa36975bcc31bbcf2d66367"><td class="mdescLeft">&#160;</td><td class="mdescRight">处理向前看符号待移入的情况  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adfdf296bdfa36975bcc31bbcf2d66367">更多...</a><br /></td></tr>
+<tr class="separator:adfdf296bdfa36975bcc31bbcf2d66367"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a29c66383016bd433bb3c8797477ffd0b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b">Reduct</a> (const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a9ab1045eeeea78c57a26f9c4e96fde29">ReductAttachedData</a> &amp;action_and_target)</td></tr>
+<tr class="memdesc:a29c66383016bd433bb3c8797477ffd0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">处理产生式待规约的情况  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b">更多...</a><br /></td></tr>
+<tr class="separator:a29c66383016bd433bb3c8797477ffd0b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abe6c14f6eed573edb815796e59e95b4f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abe6c14f6eed573edb815796e59e95b4f">ShiftNonTerminalWord</a> (<a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a60bb263837fd7f02ce650d50c219fc22">NonTerminalWordData</a> &amp;&amp;non_terminal_word_data, <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#aaa26a38b417733ba3612b30362002813">ProductionNodeId</a> reducted_nonterminal_node_id)</td></tr>
+<tr class="memdesc:abe6c14f6eed573edb815796e59e95b4f"><td class="mdescLeft">&#160;</td><td class="mdescRight">移入非终结节点  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abe6c14f6eed573edb815796e59e95b4f">更多...</a><br /></td></tr>
+<tr class="separator:abe6c14f6eed573edb815796e59e95b4f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad2a7156e67ba43b48899fc447af59fcf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad2a7156e67ba43b48899fc447af59fcf">SetLastOperateIsReduct</a> ()</td></tr>
+<tr class="memdesc:ad2a7156e67ba43b48899fc447af59fcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置上一次是规约操作  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad2a7156e67ba43b48899fc447af59fcf">更多...</a><br /></td></tr>
+<tr class="separator:ad2a7156e67ba43b48899fc447af59fcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54fcfccbbb7937a6159978d603572edb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a54fcfccbbb7937a6159978d603572edb">SetLastOperateIsNotReduct</a> ()</td></tr>
+<tr class="memdesc:a54fcfccbbb7937a6159978d603572edb"><td class="mdescLeft">&#160;</td><td class="mdescRight">设置上一次操作不是规约操作  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a54fcfccbbb7937a6159978d603572edb">更多...</a><br /></td></tr>
+<tr class="separator:a54fcfccbbb7937a6159978d603572edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:add35fc926745596420571e1abbf88013"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#add35fc926745596420571e1abbf88013">LastOperateIsReduct</a> () const</td></tr>
+<tr class="memdesc:add35fc926745596420571e1abbf88013"><td class="mdescLeft">&#160;</td><td class="mdescRight">判断上一次操作是否为规约操作  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#add35fc926745596420571e1abbf88013">更多...</a><br /></td></tr>
+<tr class="separator:add35fc926745596420571e1abbf88013"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private 属性</h2></td></tr>
+<tr class="memitem:afc5b8369888652a1f549a8b0ab8b39df"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abdf24ea2cb7eafe127980f9a473d5f49">DfaParser</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#afc5b8369888652a1f549a8b0ab8b39df">dfa_parser_</a></td></tr>
+<tr class="memdesc:afc5b8369888652a1f549a8b0ab8b39df"><td class="mdescLeft">&#160;</td><td class="mdescRight">DFA分析机  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#afc5b8369888652a1f549a8b0ab8b39df">更多...</a><br /></td></tr>
+<tr class="separator:afc5b8369888652a1f549a8b0ab8b39df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8614b01e36fe966ec6bee5b073c36230"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">SyntaxAnalysisTableEntryId</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a8614b01e36fe966ec6bee5b073c36230">root_parsing_entry_id_</a></td></tr>
+<tr class="memdesc:a8614b01e36fe966ec6bee5b073c36230"><td class="mdescLeft">&#160;</td><td class="mdescRight">根分析表条目ID，只有加载配置时可以修改  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a8614b01e36fe966ec6bee5b073c36230">更多...</a><br /></td></tr>
+<tr class="separator:a8614b01e36fe966ec6bee5b073c36230"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90a8a528b600045aaedabe36fb589a07"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a7fb19e1b6ce9b96d7f41a8c59fcd60d8">ProcessFunctionClassManagerType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a90a8a528b600045aaedabe36fb589a07">manager_process_function_class_</a></td></tr>
+<tr class="memdesc:a90a8a528b600045aaedabe36fb589a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">包装规约函数的类的实例化对象的管理器，只有加载配置时可以修改  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a90a8a528b600045aaedabe36fb589a07">更多...</a><br /></td></tr>
+<tr class="separator:a90a8a528b600045aaedabe36fb589a07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76718b542ad457a192dbf061de107b54"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad092ddd576e0b4aafd7413e13ff8f3b1">SyntaxAnalysisTableType</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a76718b542ad457a192dbf061de107b54">syntax_analysis_table_</a></td></tr>
+<tr class="memdesc:a76718b542ad457a192dbf061de107b54"><td class="mdescLeft">&#160;</td><td class="mdescRight">语法分析表，只有加载配置时可以修改  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a76718b542ad457a192dbf061de107b54">更多...</a><br /></td></tr>
+<tr class="separator:a76718b542ad457a192dbf061de107b54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0b92c1ffd130447cd48b93c2ba4d102b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6426316cba1fcdf15b79d48b5eb7c653">WordInfo</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a0b92c1ffd130447cd48b93c2ba4d102b">dfa_return_data_</a></td></tr>
+<tr class="memdesc:a0b92c1ffd130447cd48b93c2ba4d102b"><td class="mdescLeft">&#160;</td><td class="mdescRight">DFA返回的数据  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a0b92c1ffd130447cd48b93c2ba4d102b">更多...</a><br /></td></tr>
+<tr class="separator:a0b92c1ffd130447cd48b93c2ba4d102b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a22a03aca9a4bb7359ad613762a224bdd"><td class="memItemLeft" align="right" valign="top">std::stack&lt; <a class="el" href="structfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_1_1ParsingData.html">ParsingData</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a22a03aca9a4bb7359ad613762a224bdd">parsing_stack_</a></td></tr>
+<tr class="memdesc:a22a03aca9a4bb7359ad613762a224bdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">解析用数据栈，栈顶为当前解析数据  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a22a03aca9a4bb7359ad613762a224bdd">更多...</a><br /></td></tr>
+<tr class="separator:a22a03aca9a4bb7359ad613762a224bdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac5b92ec8ae15bd7f8b83603201351e6e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac5b92ec8ae15bd7f8b83603201351e6e">last_operate_is_reduct_</a> = true</td></tr>
+<tr class="memdesc:ac5b92ec8ae15bd7f8b83603201351e6e"><td class="mdescLeft">&#160;</td><td class="mdescRight">标记上次操作是否为规约操作  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac5b92ec8ae15bd7f8b83603201351e6e">更多...</a><br /></td></tr>
+<tr class="separator:ac5b92ec8ae15bd7f8b83603201351e6e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
+友元</h2></td></tr>
+<tr class="memitem:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="memItemLeft" align="right" valign="top">class&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">boost::serialization::access</a></td></tr>
+<tr class="memdesc:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="mdescLeft">&#160;</td><td class="mdescRight">允许序列化类访问  <a href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac98d07dd8f7b70e16ccb9a01abf56b9c">更多...</a><br /></td></tr>
+<tr class="separator:ac98d07dd8f7b70e16ccb9a01abf56b9c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">详细描述</h2>
+<div class="textblock"><p>语法分析机 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00018">18</a> 行定义.</p>
+</div><h2 class="groupheader">成员类型定义说明</h2>
+<a id="a3f5e9ea48621dcf0733a3408af047d60"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3f5e9ea48621dcf0733a3408af047d60">&#9670;&nbsp;</a></span>ActionAndAttachedDataInterface</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a3f5e9ea48621dcf0733a3408af047d60">frontend::parser::syntax_parser::SyntaxParser::ActionAndAttachedDataInterface</a> =  frontend::generator::syntax_generator:: SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>动作和附属数据的基类 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00050">50</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a3fc32ad82ebe17f84468369049329b5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3fc32ad82ebe17f84468369049329b5f">&#9670;&nbsp;</a></span>ActionType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a141c90fd40d418e49ce0c6c18a87b4b3">frontend::parser::syntax_parser::SyntaxParser::ActionType</a> =  <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a141c90fd40d418e49ce0c6c18a87b4b3">frontend::generator::syntax_generator::ActionType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>面对向前看符号时的动作 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00052">52</a> 行定义.</p>
+
+</div>
+</div>
+<a id="abdf24ea2cb7eafe127980f9a473d5f49"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abdf24ea2cb7eafe127980f9a473d5f49">&#9670;&nbsp;</a></span>DfaParser</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abdf24ea2cb7eafe127980f9a473d5f49">frontend::parser::syntax_parser::SyntaxParser::DfaParser</a> =  <a class="el" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html">frontend::parser::dfa_parser::DfaParser</a></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00019">19</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a60bb263837fd7f02ce650d50c219fc22"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60bb263837fd7f02ce650d50c219fc22">&#9670;&nbsp;</a></span>NonTerminalWordData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a60bb263837fd7f02ce650d50c219fc22">frontend::parser::syntax_parser::SyntaxParser::NonTerminalWordData</a> =  <a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1NonTerminalWordData.html">ProcessFunctionInterface::NonTerminalWordData</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>非终结节点数据 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00064">64</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ab6fb362ed5e101369bae5cc9ad0b20a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6fb362ed5e101369bae5cc9ad0b20a4">&#9670;&nbsp;</a></span>OperatorAssociatityType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacefrontend_1_1common.html#a2e54554d6d568b7d64c64545ff662a73">frontend::parser::syntax_parser::SyntaxParser::OperatorAssociatityType</a> =  <a class="el" href="namespacefrontend_1_1common.html#a2e54554d6d568b7d64c64545ff662a73">frontend::generator::syntax_generator::OperatorAssociatityType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>运算符结合性 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00038">38</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a0eea98df993fb62aeeb701dcab78e557"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0eea98df993fb62aeeb701dcab78e557">&#9670;&nbsp;</a></span>OperatorPriority</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a0eea98df993fb62aeeb701dcab78e557">frontend::parser::syntax_parser::SyntaxParser::OperatorPriority</a> =  <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a0ad97a4d5fab4fdc87f80845081898de">frontend::generator::syntax_generator::OperatorPriority</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>运算符优先级，等于已移入的最高优先级运算符优先级，0保留为非运算符优先级 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00068">68</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad6b27371eede391dec98a032eda2fd8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6b27371eede391dec98a032eda2fd8c">&#9670;&nbsp;</a></span>ProcessFunctionClassId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad6b27371eede391dec98a032eda2fd8c">frontend::parser::syntax_parser::SyntaxParser::ProcessFunctionClassId</a> =  <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#af8388c16e5ec8eb818f984e81d014de7">frontend::generator::syntax_generator::ProcessFunctionClassId</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>包装规约函数的类的实例化对象ID </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00044">44</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a7fb19e1b6ce9b96d7f41a8c59fcd60d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7fb19e1b6ce9b96d7f41a8c59fcd60d8">&#9670;&nbsp;</a></span>ProcessFunctionClassManagerType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a7fb19e1b6ce9b96d7f41a8c59fcd60d8">frontend::parser::syntax_parser::SyntaxParser::ProcessFunctionClassManagerType</a> =  <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#af8d10cce133346a4d962864dcc8f2029">frontend::generator::syntax_generator::ProcessFunctionClassManagerType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>包装规约函数的类的实例化对象管理器 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00041">41</a> 行定义.</p>
+
+</div>
+</div>
+<a id="af8a4b87d69ce299629c90d70e471d891"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af8a4b87d69ce299629c90d70e471d891">&#9670;&nbsp;</a></span>ProcessFunctionInterface</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#af8a4b87d69ce299629c90d70e471d891">frontend::parser::syntax_parser::SyntaxParser::ProcessFunctionInterface</a> =  <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html">frontend::generator::syntax_generator::ProcessFunctionInterface</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>包装规约函数的类的基类 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00047">47</a> 行定义.</p>
+
+</div>
+</div>
+<a id="aaa26a38b417733ba3612b30362002813"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa26a38b417733ba3612b30362002813">&#9670;&nbsp;</a></span>ProductionNodeId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#aaa26a38b417733ba3612b30362002813">frontend::parser::syntax_parser::SyntaxParser::ProductionNodeId</a> =  <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a8d03686ef93995074fb23ce1faf35b77">frontend::generator::syntax_generator::ProductionNodeId</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>产生式ID </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00032">32</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ac41a4089e01e260c57db658f820e8707"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac41a4089e01e260c57db658f820e8707">&#9670;&nbsp;</a></span>ProductionNodeType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa3b76f72027c071e3140ceb5fa56d0b8">frontend::parser::syntax_parser::SyntaxParser::ProductionNodeType</a> =  <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#aa3b76f72027c071e3140ceb5fa56d0b8">frontend::generator::syntax_generator::ProductionNodeType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>产生式节点类型 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00035">35</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a9ab1045eeeea78c57a26f9c4e96fde29"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ab1045eeeea78c57a26f9c4e96fde29">&#9670;&nbsp;</a></span>ReductAttachedData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a9ab1045eeeea78c57a26f9c4e96fde29">frontend::parser::syntax_parser::SyntaxParser::ReductAttachedData</a> =  frontend::generator::syntax_generator:: SyntaxAnalysisTableEntry::ReductAttachedData</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>归约动作的数据 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00058">58</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a2216b4676a3812e4fd617a9044f05e3e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2216b4676a3812e4fd617a9044f05e3e">&#9670;&nbsp;</a></span>ShiftAttachedData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a2216b4676a3812e4fd617a9044f05e3e">frontend::parser::syntax_parser::SyntaxParser::ShiftAttachedData</a> =  frontend::generator::syntax_generator:: SyntaxAnalysisTableEntry::ShiftAttachedData</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>移入动作的数据 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00055">55</a> 行定义.</p>
+
+</div>
+</div>
+<a id="acf03dbd5859d9a1912b7c6ce134cb91e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acf03dbd5859d9a1912b7c6ce134cb91e">&#9670;&nbsp;</a></span>SyntaxAnalysisTableEntryId</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">frontend::parser::syntax_parser::SyntaxParser::SyntaxAnalysisTableEntryId</a> =  <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a15626a86cc3914cad26a07cd778dae99">frontend::generator::syntax_generator::SyntaxAnalysisTableEntryId</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>语法分析表条目ID </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00026">26</a> 行定义.</p>
+
+</div>
+</div>
+<a id="ad092ddd576e0b4aafd7413e13ff8f3b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad092ddd576e0b4aafd7413e13ff8f3b1">&#9670;&nbsp;</a></span>SyntaxAnalysisTableType</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad092ddd576e0b4aafd7413e13ff8f3b1">frontend::parser::syntax_parser::SyntaxParser::SyntaxAnalysisTableType</a> =  <a class="el" href="namespacefrontend_1_1generator_1_1syntax__generator.html#a0e522e8ed04f0cbd5be2f6b084f6e28e">frontend::generator::syntax_generator::SyntaxAnalysisTableType</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>语法分析表 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00029">29</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a5131d19d589733ede9625996a9b3de4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5131d19d589733ede9625996a9b3de4b">&#9670;&nbsp;</a></span>TerminalWordData</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a5131d19d589733ede9625996a9b3de4b">frontend::parser::syntax_parser::SyntaxParser::TerminalWordData</a> =  <a class="el" href="structfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1TerminalWordData.html">ProcessFunctionInterface::TerminalWordData</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>终结节点数据 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00062">62</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a35cc389d260f9763d5f65887186dc14c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35cc389d260f9763d5f65887186dc14c">&#9670;&nbsp;</a></span>WordDataToUser</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a35cc389d260f9763d5f65887186dc14c">frontend::parser::syntax_parser::SyntaxParser::WordDataToUser</a> =  <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html">ProcessFunctionInterface::WordDataToUser</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>传递给用户的单个单词的数据 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00060">60</a> 行定义.</p>
+
+</div>
+</div>
+<a id="a6426316cba1fcdf15b79d48b5eb7c653"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6426316cba1fcdf15b79d48b5eb7c653">&#9670;&nbsp;</a></span>WordInfo</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">using <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6426316cba1fcdf15b79d48b5eb7c653">frontend::parser::syntax_parser::SyntaxParser::WordInfo</a> =  <a class="el" href="structfrontend_1_1parser_1_1dfa__parser_1_1DfaParser_1_1WordInfo.html">DfaParser::WordInfo</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>DFA引擎返回的单词信息 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00023">23</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">构造及析构函数说明</h2>
+<a id="adbd0bf396c6e70d9563aa419cf7afae9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adbd0bf396c6e70d9563aa419cf7afae9">&#9670;&nbsp;</a></span>SyntaxParser() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::parser::syntax_parser::SyntaxParser::SyntaxParser </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00084">84</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8cpp_source.html#l00005">LoadConfig()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_adbd0bf396c6e70d9563aa419cf7afae9_cgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_adbd0bf396c6e70d9563aa419cf7afae9_cgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_adbd0bf396c6e70d9563aa419cf7afae9_cgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_adbd0bf396c6e70d9563aa419cf7afae9_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,184,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#aa1c7653889692625d698e276cfe13175" title="加载配置" alt="" coords="232,5,411,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#aa6e3b0e4ddfec75c817e42a0520d7d3f" title="加载配置" alt="" coords="459,13,680,54"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7cd6f4224b96789908bd993df5fb798f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7cd6f4224b96789908bd993df5fb798f">&#9670;&nbsp;</a></span>SyntaxParser() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">frontend::parser::syntax_parser::SyntaxParser::SyntaxParser </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html">SyntaxParser</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">成员函数说明</h2>
+<a id="a351d099ac5b1d6c540ab280a12b905c5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a351d099ac5b1d6c540ab280a12b905c5">&#9670;&nbsp;</a></span>GetActionAndTarget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a3f5e9ea48621dcf0733a3408af047d60">ActionAndAttachedDataInterface</a>* frontend::parser::syntax_parser::SyntaxParser::GetActionAndTarget </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">SyntaxAnalysisTableEntryId</a>&#160;</td>
+          <td class="paramname"><em>src_entry_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#aaa26a38b417733ba3612b30362002813">ProductionNodeId</a>&#160;</td>
+          <td class="paramname"><em>node_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取在给定向前看产生式节点条件下的动作和附属数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">src_entry_id</td><td>：起始语法分析表条目ID </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_id</td><td>：向前看产生式节点ID </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回指向动作和附属数据基类的const指针 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">nullptr</td><td>不存在该转移条件则返回空指针 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00115">115</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00218">syntax_analysis_table_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00035">TerminalWordWaitingProcess()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a351d099ac5b1d6c540ab280a12b905c5_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a351d099ac5b1d6c540ab280a12b905c5_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a351d099ac5b1d6c540ab280a12b905c5_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a351d099ac5b1d6c540ab280a12b905c5_icgraph">
+<area shape="rect" title="获取在给定向前看产生式节点条件下的动作和附属数据" alt="" coords="621,5,800,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,5,573,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a6fddec7524fb0130a82277027537e1ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6fddec7524fb0130a82277027537e1ee">&#9670;&nbsp;</a></span>GetNextEntryId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">SyntaxAnalysisTableEntryId</a> frontend::parser::syntax_parser::SyntaxParser::GetNextEntryId </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">SyntaxAnalysisTableEntryId</a>&#160;</td>
+          <td class="paramname"><em>src_entry_id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#aaa26a38b417733ba3612b30362002813">ProductionNodeId</a>&#160;</td>
+          <td class="paramname"><em>node_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取移入非终结产生式节点后到达的产生式条目 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">src_entry_id</td><td>：起始语法分析表条目ID </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">node_id</td><td>：移入的非终结产生式节点 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>返回移入非终结产生式后转移到的语法分析表条目ID </dd>
+<dd>
+SyntaxAnalysisTableEntryId::InvalidId() 无法移入给定的非终结产生式节点ID </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00126">126</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00218">syntax_analysis_table_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00192">ShiftNonTerminalWord()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a6fddec7524fb0130a82277027537e1ee_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a6fddec7524fb0130a82277027537e1ee_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a6fddec7524fb0130a82277027537e1ee_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a6fddec7524fb0130a82277027537e1ee_icgraph">
+<area shape="rect" title="获取移入非终结产生式节点后到达的产生式条目" alt="" coords="1112,5,1291,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abe6c14f6eed573edb815796e59e95b4f" title="移入非终结节点" alt="" coords="885,5,1064,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b" title="处理产生式待规约的情况" alt="" coords="621,13,837,54"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,5,573,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab8cca22114e97039f99d0ad9cd5a661d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8cca22114e97039f99d0ad9cd5a661d">&#9670;&nbsp;</a></span>GetNextWord()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::parser::syntax_parser::SyntaxParser::GetNextWord </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取下一个单词的数据并存在dfa_return_data_中 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00098">98</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00212">dfa_parser_</a>, <a class="el" href="dfa__parser_8cpp_source.html#l00018">frontend::parser::dfa_parser::DfaParser::GetNextWord()</a> , 以及 <a class="el" href="syntax__parser_8h_source.html#l00092">SetDfaReturnData()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00012">Parse()</a> , 以及 <a class="el" href="syntax__parser_8cpp_source.html#l00111">ShiftTerminalWord()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ab8cca22114e97039f99d0ad9cd5a661d_cgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ab8cca22114e97039f99d0ad9cd5a661d_cgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ab8cca22114e97039f99d0ad9cd5a661d_cgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ab8cca22114e97039f99d0ad9cd5a661d_cgraph">
+<area shape="rect" title="获取下一个单词的数据并存在dfa_return_data_中" alt="" coords="5,254,184,310"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a4ac1595c7162d2867f6e2703d06814a5" title="获取下一个单词" alt="" coords="232,224,468,265"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abd2469d9562c650506a132829a3373be" title="设置DFA返回的待移入单词数据" alt="" coords="261,290,439,346"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a660b0b268b42daddae94460bd081a6ee" title="获取当前待处理字符" alt="" coords="516,5,780,47"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#aff0816dfe7d9e7d2a7f1349e4194d7b1" title="获取当前列数" alt="" coords="545,71,751,98"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#afbb3ef9a9bd4c870afaed377253afaa3" title="获取达到文件尾且未获取到任何单词时返回的单词数据" alt="" coords="543,122,753,178"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#a79d5fb6dfa446e6c683e6257d27a6944" title="获取当前行数" alt="" coords="556,202,740,229"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html#aa088b185f8650169d2e53c4372db529b" title="判断当前存储的值是否有效" alt="" coords="551,253,745,295"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a3743059d0021546d13d9a20ada05b78c" title="设置当前待处理字符" alt="" coords="517,319,779,360"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#a633860090eb822d1fb009c8bef7ff745" title="设置当前列数" alt="" coords="545,385,751,411"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#a59928cc6510133886f5b191062f76846" title="设置当前行数" alt="" coords="557,435,739,462"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ab8cca22114e97039f99d0ad9cd5a661d_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ab8cca22114e97039f99d0ad9cd5a661d_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ab8cca22114e97039f99d0ad9cd5a661d_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ab8cca22114e97039f99d0ad9cd5a661d_icgraph">
+<area shape="rect" title="获取下一个单词的数据并存在dfa_return_data_中" alt="" coords="848,5,1027,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adfdf296bdfa36975bcc31bbcf2d66367" title="处理向前看符号待移入的情况" alt="" coords="621,37,800,93"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,37,573,93"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a50d8d56021539fdda1a646cb605c3194"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a50d8d56021539fdda1a646cb605c3194">&#9670;&nbsp;</a></span>GetParsingDataNow()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_1_1ParsingData.html">ParsingData</a>&amp; frontend::parser::syntax_parser::SyntaxParser::GetParsingDataNow </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取当前活跃的解析数据（解析数据栈顶对象） </p>
+<dl class="section return"><dt>返回</dt><dd>返回解析数据栈顶层对象的引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00133">133</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00223">parsing_stack_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00145">Reduct()</a>, <a class="el" href="syntax__parser_8cpp_source.html#l00192">ShiftNonTerminalWord()</a>, <a class="el" href="syntax__parser_8cpp_source.html#l00111">ShiftTerminalWord()</a> , 以及 <a class="el" href="syntax__parser_8cpp_source.html#l00035">TerminalWordWaitingProcess()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a50d8d56021539fdda1a646cb605c3194_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a50d8d56021539fdda1a646cb605c3194_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a50d8d56021539fdda1a646cb605c3194_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a50d8d56021539fdda1a646cb605c3194_icgraph">
+<area shape="rect" title="获取当前活跃的解析数据（解析数据栈顶对象）" alt="" coords="1112,61,1291,117"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b" title="处理产生式待规约的情况" alt="" coords="621,35,837,76"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,93,573,149"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abe6c14f6eed573edb815796e59e95b4f" title="移入非终结节点" alt="" coords="885,28,1064,84"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adfdf296bdfa36975bcc31bbcf2d66367" title="处理向前看符号待移入的情况" alt="" coords="640,158,819,214"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,100,315,142"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,108,60,134"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ae992da7f543858abc788ead04c70e6aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae992da7f543858abc788ead04c70e6aa">&#9670;&nbsp;</a></span>GetParsingStackSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">size_t frontend::parser::syntax_parser::SyntaxParser::GetParsingStackSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>查询解析数据栈数据数目 </p>
+<dl class="section return"><dt>返回</dt><dd>返回解析数据栈中数据数目 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00145">145</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00223">parsing_stack_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00012">Parse()</a> , 以及 <a class="el" href="syntax__parser_8cpp_source.html#l00145">Reduct()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ae992da7f543858abc788ead04c70e6aa_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ae992da7f543858abc788ead04c70e6aa_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ae992da7f543858abc788ead04c70e6aa_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ae992da7f543858abc788ead04c70e6aa_icgraph">
+<area shape="rect" title="查询解析数据栈数据数目" alt="" coords="885,5,1064,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,14,315,55"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b" title="处理产生式待规约的情况" alt="" coords="621,42,837,83"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,21,60,48"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,39,573,95"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a624a0dcee37dd2db03b137d091db2e86"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a624a0dcee37dd2db03b137d091db2e86">&#9670;&nbsp;</a></span>GetProcessFunctionClass()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#af8a4b87d69ce299629c90d70e471d891">ProcessFunctionInterface</a>&amp; frontend::parser::syntax_parser::SyntaxParser::GetProcessFunctionClass </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad6b27371eede391dec98a032eda2fd8c">ProcessFunctionClassId</a>&#160;</td>
+          <td class="paramname"><em>class_id</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取包装规约函数的类的实例化对象 </p>
+<dl class="section return"><dt>返回</dt><dd>返回包装规约函数的类的实例化对象的const引用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00106">106</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00216">manager_process_function_class_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00145">Reduct()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a624a0dcee37dd2db03b137d091db2e86_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a624a0dcee37dd2db03b137d091db2e86_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a624a0dcee37dd2db03b137d091db2e86_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a624a0dcee37dd2db03b137d091db2e86_icgraph">
+<area shape="rect" title="获取包装规约函数的类的实例化对象" alt="" coords="885,5,1071,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b" title="处理产生式待规约的情况" alt="" coords="621,13,837,54"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,5,573,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a89afa9f465ff4935c2279396f52a72ab"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a89afa9f465ff4935c2279396f52a72ab">&#9670;&nbsp;</a></span>GetRootParsingEntryId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">SyntaxAnalysisTableEntryId</a> frontend::parser::syntax_parser::SyntaxParser::GetRootParsingEntryId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取根语法分析表条目D </p>
+<dl class="section return"><dt>返回</dt><dd>返回根语法分析表条目ID </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00101">101</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00214">root_parsing_entry_id_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00012">Parse()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a89afa9f465ff4935c2279396f52a72ab_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a89afa9f465ff4935c2279396f52a72ab_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a89afa9f465ff4935c2279396f52a72ab_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a89afa9f465ff4935c2279396f52a72ab_icgraph">
+<area shape="rect" title="获取根语法分析表条目D" alt="" coords="363,5,541,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abbfadb47f432290662ba96b22a181457"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbfadb47f432290662ba96b22a181457">&#9670;&nbsp;</a></span>GetWaitingProcessWordInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6426316cba1fcdf15b79d48b5eb7c653">WordInfo</a>&amp; frontend::parser::syntax_parser::SyntaxParser::GetWaitingProcessWordInfo </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>获取DFA返回的待移入单词的数据 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00096">96</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00221">dfa_return_data_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00111">ShiftTerminalWord()</a> , 以及 <a class="el" href="syntax__parser_8cpp_source.html#l00035">TerminalWordWaitingProcess()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abbfadb47f432290662ba96b22a181457_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abbfadb47f432290662ba96b22a181457_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abbfadb47f432290662ba96b22a181457_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abbfadb47f432290662ba96b22a181457_icgraph">
+<area shape="rect" title="获取DFA返回的待移入单词的数据" alt="" coords="848,39,1051,95"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adfdf296bdfa36975bcc31bbcf2d66367" title="处理向前看符号待移入的情况" alt="" coords="621,5,800,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,39,573,95"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,46,315,87"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,53,60,80"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="add35fc926745596420571e1abbf88013"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#add35fc926745596420571e1abbf88013">&#9670;&nbsp;</a></span>LastOperateIsReduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::parser::syntax_parser::SyntaxParser::LastOperateIsReduct </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>判断上一次操作是否为规约操作 </p>
+<dl class="section return"><dt>返回</dt><dd>返回上一次操作是否为规约操作 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>上一次操作是规约操作 </td></tr>
+    <tr><td class="paramname">false</td><td>上一次操作不是规约操作 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00209">209</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00227">last_operate_is_reduct_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00111">ShiftTerminalWord()</a> , 以及 <a class="el" href="syntax__parser_8cpp_source.html#l00035">TerminalWordWaitingProcess()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_add35fc926745596420571e1abbf88013_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_add35fc926745596420571e1abbf88013_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_add35fc926745596420571e1abbf88013_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_add35fc926745596420571e1abbf88013_icgraph">
+<area shape="rect" title="判断上一次操作是否为规约操作" alt="" coords="848,39,1027,95"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adfdf296bdfa36975bcc31bbcf2d66367" title="处理向前看符号待移入的情况" alt="" coords="621,5,800,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,39,573,95"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,46,315,87"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,53,60,80"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a1faf452a3c9de5a616625febb241979f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1faf452a3c9de5a616625febb241979f">&#9670;&nbsp;</a></span>load()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class Archive &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::parser::syntax_parser::SyntaxParser::load </td>
+          <td>(</td>
+          <td class="paramtype">Archive &amp;&#160;</td>
+          <td class="paramname"><em>ar</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const unsigned int&#160;</td>
+          <td class="paramname"><em>version</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>boost-serialization加载语法分析配置的函数 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in,out]</td><td class="paramname">ar</td><td>：序列化使用的档案 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">version</td><td>：序列化文件版本 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section attention"><dt>注意</dt><dd>该函数应由boost库调用而非手动调用 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00162">162</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00216">manager_process_function_class_</a>, <a class="el" href="syntax__parser_8h_source.html#l00214">root_parsing_entry_id_</a> , 以及 <a class="el" href="syntax__parser_8h_source.html#l00218">syntax_analysis_table_</a>.</p>
+
+</div>
+</div>
+<a id="aa1c7653889692625d698e276cfe13175"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa1c7653889692625d698e276cfe13175">&#9670;&nbsp;</a></span>LoadConfig()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::parser::syntax_parser::SyntaxParser::LoadConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>加载配置 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8cpp_source.html">syntax_parser.cpp</a> 第 <a class="el" href="syntax__parser_8cpp_source.html#l00005">5</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00212">dfa_parser_</a>, <a class="el" href="common_8h_source.html#l00011">frontend::common::kSyntaxConfigFileName</a> , 以及 <a class="el" href="dfa__parser_8h_source.html#l00089">frontend::parser::dfa_parser::DfaParser::LoadConfig()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8h_source.html#l00084">SyntaxParser()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_aa1c7653889692625d698e276cfe13175_cgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_aa1c7653889692625d698e276cfe13175_cgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_aa1c7653889692625d698e276cfe13175_cgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_aa1c7653889692625d698e276cfe13175_cgraph">
+<area shape="rect" title="加载配置" alt="" coords="5,5,184,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#aa6e3b0e4ddfec75c817e42a0520d7d3f" title="加载配置" alt="" coords="232,13,453,54"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_aa1c7653889692625d698e276cfe13175_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_aa1c7653889692625d698e276cfe13175_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_aa1c7653889692625d698e276cfe13175_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_aa1c7653889692625d698e276cfe13175_icgraph">
+<area shape="rect" title="加载配置" alt="" coords="232,5,411,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adbd0bf396c6e70d9563aa419cf7afae9" title=" " alt="" coords="5,5,184,61"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a0cc580f3a7978adaf6d5c0fb9a88942c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0cc580f3a7978adaf6d5c0fb9a88942c">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html">SyntaxParser</a>&amp; frontend::parser::syntax_parser::SyntaxParser::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html">SyntaxParser</a> &amp;&amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac3c6b4ae872fd522352015f9410801a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3c6b4ae872fd522352015f9410801a6">&#9670;&nbsp;</a></span>Parse()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::parser::syntax_parser::SyntaxParser::Parse </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>分析代码文件并构建AST </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">filename</td><td>：代码文件名 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>返回</dt><dd>解析是否成功 </dd></dl>
+<dl class="retval"><dt>返回值</dt><dd>
+  <table class="retval">
+    <tr><td class="paramname">true</td><td>解析成功 </td></tr>
+    <tr><td class="paramname">false</td><td>无法打开文件/解析失败 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8cpp_source.html">syntax_parser.cpp</a> 第 <a class="el" href="syntax__parser_8cpp_source.html#l00012">12</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00212">dfa_parser_</a>, <a class="el" href="syntax__parser_8h_source.html#l00098">GetNextWord()</a>, <a class="el" href="syntax__parser_8h_source.html#l00145">GetParsingStackSize()</a>, <a class="el" href="syntax__parser_8h_source.html#l00101">GetRootParsingEntryId()</a>, <a class="el" href="syntax__parser_8h_source.html#l00223">parsing_stack_</a>, <a class="el" href="syntax__parser_8h_source.html#l00138">PushParsingData()</a>, <a class="el" href="dfa__parser_8cpp_source.html#l00006">frontend::parser::dfa_parser::DfaParser::SetInputFile()</a>, <a class="el" href="syntax__parser_8h_source.html#l00074">frontend::parser::syntax_parser::SyntaxParser::ParsingData::syntax_analysis_table_entry_id</a> , 以及 <a class="el" href="syntax__parser_8cpp_source.html#l00035">TerminalWordWaitingProcess()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="Parser_8cpp_source.html#l00007">main()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ac3c6b4ae872fd522352015f9410801a6_cgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ac3c6b4ae872fd522352015f9410801a6_cgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ac3c6b4ae872fd522352015f9410801a6_cgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ac3c6b4ae872fd522352015f9410801a6_cgraph">
+<area shape="rect" title="分析代码文件并构建AST" alt="" coords="5,763,212,805"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ab8cca22114e97039f99d0ad9cd5a661d" title="获取下一个单词的数据并存在dfa_return_data_中" alt="" coords="885,1813,1063,1869"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ae992da7f543858abc788ead04c70e6aa" title="查询解析数据栈数据数目" alt="" coords="885,144,1063,200"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a89afa9f465ff4935c2279396f52a72ab" title="获取根语法分析表条目D" alt="" coords="284,1864,463,1920"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a5f0c3ac537d527e9dc8147e210090935" title="将数据压入解析数据栈" alt="" coords="1219,709,1397,765"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a807be44eaf76f52dfca5dfe1fec55ce6" title="设置输入文件" alt="" coords="260,27,487,69"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="268,1124,479,1180"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a4ac1595c7162d2867f6e2703d06814a5" title="获取下一个单词" alt="" coords="1190,1821,1426,1862"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abd2469d9562c650506a132829a3373be" title="设置DFA返回的待移入单词数据" alt="" coords="1219,1740,1397,1796"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a660b0b268b42daddae94460bd081a6ee" title="获取当前待处理字符" alt="" coords="1493,1697,1757,1738"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#aff0816dfe7d9e7d2a7f1349e4194d7b1" title="获取当前列数" alt="" coords="1522,1763,1729,1789"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#afbb3ef9a9bd4c870afaed377253afaa3" title="获取达到文件尾且未获取到任何单词时返回的单词数据" alt="" coords="1520,1813,1731,1869"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#a79d5fb6dfa446e6c683e6257d27a6944" title="获取当前行数" alt="" coords="1533,1893,1717,1920"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html#aa088b185f8650169d2e53c4372db529b" title="判断当前存储的值是否有效" alt="" coords="1528,1945,1723,1986"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a3743059d0021546d13d9a20ada05b78c" title="设置当前待处理字符" alt="" coords="1494,803,1757,845"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#a633860090eb822d1fb009c8bef7ff745" title="设置当前列数" alt="" coords="1523,2011,1728,2037"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#a59928cc6510133886f5b191062f76846" title="设置当前行数" alt="" coords="1534,1645,1717,1672"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a351d099ac5b1d6c540ab280a12b905c5" title="获取在给定向前看产生式节点条件下的动作和附属数据" alt="" coords="567,989,745,1045"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html#a771a6314c7763f7ceff0aab9d0a75fd9" title="获取动作类型" alt="" coords="535,1069,777,1155"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a50d8d56021539fdda1a646cb605c3194" title="获取当前活跃的解析数据（解析数据栈顶对象）" alt="" coords="1219,1375,1397,1431"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html#a7c3c208fa567238b4222d7dbe082966b" title="获取规约操作的附属数据" alt="" coords="535,1229,777,1315"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html#a663ca02ebf3ecda69b8c148dd23dd30c" title="获取移入操作的附属数据" alt="" coords="535,1339,777,1424"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abbfadb47f432290662ba96b22a181457" title="获取DFA返回的待移入单词的数据" alt="" coords="873,1216,1075,1272"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#add35fc926745596420571e1abbf88013" title="判断上一次操作是否为规约操作" alt="" coords="885,1296,1063,1352"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b" title="处理产生式待规约的情况" alt="" coords="548,706,764,747"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adfdf296bdfa36975bcc31bbcf2d66367" title="处理向前看符号待移入的情况" alt="" coords="567,1448,745,1504"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a624a0dcee37dd2db03b137d091db2e86" title="获取包装规约函数的类的实例化对象" alt="" coords="881,955,1067,1011"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html#a45603078cdce7ce90cdde78dfaaa83e2" title="获取包装规约函数的类的实例化对象ID" alt="" coords="851,224,1097,309"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html#a90535ee842f76de9af433fdd56299503" title="获取产生式体" alt="" coords="825,334,1123,405"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html#a305da9a710b20a5c8c0c256007d2acb7" title="获取规约操作的附属数据" alt="" coords="854,480,1094,565"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html#ad787fca3b5527338f944959a13db870b" title="获取规约得到的非终结产生式ID" alt="" coords="846,589,1102,675"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac5ffdfe0169019f4fd13eedfb521535b" title="弹出解析数据栈顶部数据" alt="" coords="885,699,1063,755"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a16cbfd0a0ee1d62abe35741177e9e458" title="调用用户定义的规约函数" alt="" coords="881,779,1067,850"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad2a7156e67ba43b48899fc447af59fcf" title="设置上一次是规约操作" alt="" coords="885,875,1063,931"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abe6c14f6eed573edb815796e59e95b4f" title="移入非终结节点" alt="" coords="885,1085,1063,1141"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6fddec7524fb0130a82277027537e1ee" title="获取移入非终结产生式节点后到达的产生式条目" alt="" coords="1219,1085,1397,1141"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a9e0b9c345a98949418730a086168b953" title="设置存储的数据" alt="" coords="1171,1241,1445,1311"/>
+<area shape="rect" href="structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData.html#ad534b2d15d94aff4646414a8e8ad0596" title="获取结合性和运算符优先级" alt="" coords="861,1478,1087,1549"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ShiftAttachedData.html#a68586152e7d246635d9fb9ab07ea6ffc" title="获取移入单词后转移到的语法分析表条目ID" alt="" coords="847,1573,1101,1659"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a54fcfccbbb7937a6159978d603572edb" title="设置上一次操作不是规约操作" alt="" coords="873,1683,1075,1739"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ac3c6b4ae872fd522352015f9410801a6_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ac3c6b4ae872fd522352015f9410801a6_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ac3c6b4ae872fd522352015f9410801a6_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ac3c6b4ae872fd522352015f9410801a6_icgraph">
+<area shape="rect" title="分析代码文件并构建AST" alt="" coords="108,5,315,47"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,13,60,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac5ffdfe0169019f4fd13eedfb521535b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5ffdfe0169019f4fd13eedfb521535b">&#9670;&nbsp;</a></span>PopTopParsingData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::parser::syntax_parser::SyntaxParser::PopTopParsingData </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>弹出解析数据栈顶部数据 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00142">142</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00223">parsing_stack_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00145">Reduct()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ac5ffdfe0169019f4fd13eedfb521535b_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ac5ffdfe0169019f4fd13eedfb521535b_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ac5ffdfe0169019f4fd13eedfb521535b_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ac5ffdfe0169019f4fd13eedfb521535b_icgraph">
+<area shape="rect" title="弹出解析数据栈顶部数据" alt="" coords="885,5,1064,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b" title="处理产生式待规约的情况" alt="" coords="621,13,837,54"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,5,573,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5f0c3ac537d527e9dc8147e210090935"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5f0c3ac537d527e9dc8147e210090935">&#9670;&nbsp;</a></span>PushParsingData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;class ParsingDataType &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::parser::syntax_parser::SyntaxParser::PushParsingData </td>
+          <td>(</td>
+          <td class="paramtype">ParsingDataType &amp;&amp;&#160;</td>
+          <td class="paramname"><em>parsing_data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将数据压入解析数据栈 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">parsing_data</td><td>：解析数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>仅支持ParsingData类型的parsing_data作为参数 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00138">138</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00223">parsing_stack_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00012">Parse()</a>, <a class="el" href="syntax__parser_8cpp_source.html#l00145">Reduct()</a>, <a class="el" href="syntax__parser_8cpp_source.html#l00192">ShiftNonTerminalWord()</a> , 以及 <a class="el" href="syntax__parser_8cpp_source.html#l00111">ShiftTerminalWord()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a5f0c3ac537d527e9dc8147e210090935_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a5f0c3ac537d527e9dc8147e210090935_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a5f0c3ac537d527e9dc8147e210090935_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a5f0c3ac537d527e9dc8147e210090935_icgraph">
+<area shape="rect" title="将数据压入解析数据栈" alt="" coords="1112,27,1291,83"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,5,315,47"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b" title="处理产生式待规约的情况" alt="" coords="621,37,837,79"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abe6c14f6eed573edb815796e59e95b4f" title="移入非终结节点" alt="" coords="885,59,1064,115"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adfdf296bdfa36975bcc31bbcf2d66367" title="处理向前看符号待移入的情况" alt="" coords="640,114,819,170"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,13,60,39"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,30,573,86"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a29c66383016bd433bb3c8797477ffd0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29c66383016bd433bb3c8797477ffd0b">&#9670;&nbsp;</a></span>Reduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::parser::syntax_parser::SyntaxParser::Reduct </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a9ab1045eeeea78c57a26f9c4e96fde29">ReductAttachedData</a> &amp;&#160;</td>
+          <td class="paramname"><em>action_and_target</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>处理产生式待规约的情况 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">action_and_target</td><td>：规约动作和附属数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>1.规约后自动移入得到的非终结节点并GetNextWord() 2.TerminalWordWaitingShift函数的子过程 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8cpp_source.html">syntax_parser.cpp</a> 第 <a class="el" href="syntax__parser_8cpp_source.html#l00145">145</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00133">GetParsingDataNow()</a>, <a class="el" href="syntax__parser_8h_source.html#l00145">GetParsingStackSize()</a>, <a class="el" href="syntax__parser_8h_source.html#l00106">GetProcessFunctionClass()</a>, <a class="el" href="syntax__analysis__table_8h_source.html#l00253">frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ReductAttachedData::GetProcessFunctionClassId()</a>, <a class="el" href="syntax__analysis__table_8h_source.html#l00266">frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ReductAttachedData::GetProductionBody()</a>, <a class="el" href="syntax__analysis__table_8h_source.html#l00225">frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ReductAttachedData::GetReductAttachedData()</a>, <a class="el" href="syntax__analysis__table_8h_source.html#l00241">frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ReductAttachedData::GetReductedNonTerminalNodeId()</a>, <a class="el" href="syntax__parser_8h_source.html#l00142">PopTopParsingData()</a>, <a class="el" href="syntax__parser_8h_source.html#l00138">PushParsingData()</a>, <a class="el" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a16cbfd0a0ee1d62abe35741177e9e458">frontend::generator::syntax_generator::ProcessFunctionInterface::Reduct()</a>, <a class="el" href="syntax__parser_8h_source.html#l00199">SetLastOperateIsReduct()</a> , 以及 <a class="el" href="syntax__parser_8cpp_source.html#l00192">ShiftNonTerminalWord()</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00035">TerminalWordWaitingProcess()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a29c66383016bd433bb3c8797477ffd0b_cgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a29c66383016bd433bb3c8797477ffd0b_cgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a29c66383016bd433bb3c8797477ffd0b_cgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a29c66383016bd433bb3c8797477ffd0b_cgraph">
+<area shape="rect" title="处理产生式待规约的情况" alt="" coords="5,457,221,498"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a50d8d56021539fdda1a646cb605c3194" title="获取当前活跃的解析数据（解析数据栈顶对象）" alt="" coords="663,5,841,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ae992da7f543858abc788ead04c70e6aa" title="查询解析数据栈数据数目" alt="" coords="329,223,507,279"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a624a0dcee37dd2db03b137d091db2e86" title="获取包装规约函数的类的实例化对象" alt="" coords="325,303,511,359"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html#a45603078cdce7ce90cdde78dfaaa83e2" title="获取包装规约函数的类的实例化对象ID" alt="" coords="295,383,541,468"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html#a90535ee842f76de9af433fdd56299503" title="获取产生式体" alt="" coords="269,493,567,563"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html#a305da9a710b20a5c8c0c256007d2acb7" title="获取规约操作的附属数据" alt="" coords="298,588,538,673"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html#ad787fca3b5527338f944959a13db870b" title="获取规约得到的非终结产生式ID" alt="" coords="290,697,546,783"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac5ffdfe0169019f4fd13eedfb521535b" title="弹出解析数据栈顶部数据" alt="" coords="329,807,507,863"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a5f0c3ac537d527e9dc8147e210090935" title="将数据压入解析数据栈" alt="" coords="663,85,841,141"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a16cbfd0a0ee1d62abe35741177e9e458" title="调用用户定义的规约函数" alt="" coords="325,887,511,958"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad2a7156e67ba43b48899fc447af59fcf" title="设置上一次是规约操作" alt="" coords="329,983,507,1039"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abe6c14f6eed573edb815796e59e95b4f" title="移入非终结节点" alt="" coords="329,143,507,199"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6fddec7524fb0130a82277027537e1ee" title="获取移入非终结产生式节点后到达的产生式条目" alt="" coords="663,165,841,221"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a9e0b9c345a98949418730a086168b953" title="设置存储的数据" alt="" coords="615,246,889,317"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a29c66383016bd433bb3c8797477ffd0b_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a29c66383016bd433bb3c8797477ffd0b_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a29c66383016bd433bb3c8797477ffd0b_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a29c66383016bd433bb3c8797477ffd0b_icgraph">
+<area shape="rect" title="处理产生式待规约的情况" alt="" coords="621,13,837,54"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,5,573,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abd2469d9562c650506a132829a3373be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd2469d9562c650506a132829a3373be">&#9670;&nbsp;</a></span>SetDfaReturnData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::parser::syntax_parser::SyntaxParser::SetDfaReturnData </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6426316cba1fcdf15b79d48b5eb7c653">WordInfo</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>dfa_return_data</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置DFA返回的待移入单词数据 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">dfa_return_data</td><td>：DFA返回的待移入单词数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00092">92</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00221">dfa_return_data_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8h_source.html#l00098">GetNextWord()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abd2469d9562c650506a132829a3373be_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abd2469d9562c650506a132829a3373be_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abd2469d9562c650506a132829a3373be_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abd2469d9562c650506a132829a3373be_icgraph">
+<area shape="rect" title="设置DFA返回的待移入单词数据" alt="" coords="1075,5,1253,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ab8cca22114e97039f99d0ad9cd5a661d" title="获取下一个单词的数据并存在dfa_return_data_中" alt="" coords="848,5,1027,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adfdf296bdfa36975bcc31bbcf2d66367" title="处理向前看符号待移入的情况" alt="" coords="621,37,800,93"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,37,573,93"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a54fcfccbbb7937a6159978d603572edb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54fcfccbbb7937a6159978d603572edb">&#9670;&nbsp;</a></span>SetLastOperateIsNotReduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::parser::syntax_parser::SyntaxParser::SetLastOperateIsNotReduct </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置上一次操作不是规约操作 </p>
+<dl class="section note"><dt>注解</dt><dd>影响双语义运算符语义的选择，上一次为规约操作则使用左侧单目语义 否则使用双目语义 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00204">204</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00227">last_operate_is_reduct_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00111">ShiftTerminalWord()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a54fcfccbbb7937a6159978d603572edb_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a54fcfccbbb7937a6159978d603572edb_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a54fcfccbbb7937a6159978d603572edb_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a54fcfccbbb7937a6159978d603572edb_icgraph">
+<area shape="rect" title="设置上一次操作不是规约操作" alt="" coords="848,5,1049,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adfdf296bdfa36975bcc31bbcf2d66367" title="处理向前看符号待移入的情况" alt="" coords="621,5,800,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,5,573,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ad2a7156e67ba43b48899fc447af59fcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad2a7156e67ba43b48899fc447af59fcf">&#9670;&nbsp;</a></span>SetLastOperateIsReduct()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::parser::syntax_parser::SyntaxParser::SetLastOperateIsReduct </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>设置上一次是规约操作 </p>
+<dl class="section note"><dt>注解</dt><dd>影响双语义运算符语义的选择，上一次为规约操作则使用左侧单目语义 否则使用双目语义 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00199">199</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00227">last_operate_is_reduct_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00145">Reduct()</a>.</p>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ad2a7156e67ba43b48899fc447af59fcf_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ad2a7156e67ba43b48899fc447af59fcf_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ad2a7156e67ba43b48899fc447af59fcf_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_ad2a7156e67ba43b48899fc447af59fcf_icgraph">
+<area shape="rect" title="设置上一次是规约操作" alt="" coords="885,5,1064,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b" title="处理产生式待规约的情况" alt="" coords="621,13,837,54"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,5,573,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abe6c14f6eed573edb815796e59e95b4f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abe6c14f6eed573edb815796e59e95b4f">&#9670;&nbsp;</a></span>ShiftNonTerminalWord()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::parser::syntax_parser::SyntaxParser::ShiftNonTerminalWord </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a60bb263837fd7f02ce650d50c219fc22">NonTerminalWordData</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>non_terminal_word_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#aaa26a38b417733ba3612b30362002813">ProductionNodeId</a>&#160;</td>
+          <td class="paramname"><em>reducted_nonterminal_node_id</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>移入非终结节点 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">non_terminal_word_data</td><td>：规约后用户返回的数据 </td></tr>
+    <tr><td class="paramdir">[in]</td><td class="paramname">reducted_nonterminal_node_id</td><td>：规约后得到的非终结产生式ID </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8cpp_source.html">syntax_parser.cpp</a> 第 <a class="el" href="syntax__parser_8cpp_source.html#l00192">192</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00126">GetNextEntryId()</a>, <a class="el" href="syntax__parser_8h_source.html#l00133">GetParsingDataNow()</a>, <a class="el" href="syntax__parser_8h_source.html#l00081">frontend::parser::syntax_parser::SyntaxParser::ParsingData::operator_priority</a>, <a class="el" href="syntax__parser_8h_source.html#l00138">PushParsingData()</a>, <a class="el" href="process__function__interface_8h_source.html#l00078">frontend::generator::syntax_generator::ProcessFunctionInterface::WordDataToUser::SetWordDataToUser()</a>, <a class="el" href="syntax__parser_8h_source.html#l00077">frontend::parser::syntax_parser::SyntaxParser::ParsingData::shift_node_id</a>, <a class="el" href="syntax__parser_8h_source.html#l00074">frontend::parser::syntax_parser::SyntaxParser::ParsingData::syntax_analysis_table_entry_id</a> , 以及 <a class="el" href="syntax__parser_8h_source.html#l00079">frontend::parser::syntax_parser::SyntaxParser::ParsingData::word_data_to_user</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00145">Reduct()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abe6c14f6eed573edb815796e59e95b4f_cgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abe6c14f6eed573edb815796e59e95b4f_cgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abe6c14f6eed573edb815796e59e95b4f_cgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abe6c14f6eed573edb815796e59e95b4f_cgraph">
+<area shape="rect" title="移入非终结节点" alt="" coords="5,125,184,181"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6fddec7524fb0130a82277027537e1ee" title="获取移入非终结产生式节点后到达的产生式条目" alt="" coords="280,5,459,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a50d8d56021539fdda1a646cb605c3194" title="获取当前活跃的解析数据（解析数据栈顶对象）" alt="" coords="280,85,459,141"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a5f0c3ac537d527e9dc8147e210090935" title="将数据压入解析数据栈" alt="" coords="280,165,459,221"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a9e0b9c345a98949418730a086168b953" title="设置存储的数据" alt="" coords="232,246,507,317"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abe6c14f6eed573edb815796e59e95b4f_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abe6c14f6eed573edb815796e59e95b4f_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abe6c14f6eed573edb815796e59e95b4f_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_abe6c14f6eed573edb815796e59e95b4f_icgraph">
+<area shape="rect" title="移入非终结节点" alt="" coords="885,5,1064,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b" title="处理产生式待规约的情况" alt="" coords="621,13,837,54"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,5,573,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="adfdf296bdfa36975bcc31bbcf2d66367"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfdf296bdfa36975bcc31bbcf2d66367">&#9670;&nbsp;</a></span>ShiftTerminalWord()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::parser::syntax_parser::SyntaxParser::ShiftTerminalWord </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a2216b4676a3812e4fd617a9044f05e3e">ShiftAttachedData</a> &amp;&#160;</td>
+          <td class="paramname"><em>action_and_target</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>处理向前看符号待移入的情况 </p>
+<dl class="params"><dt>参数</dt><dd>
+  <table class="params">
+    <tr><td class="paramdir">[in]</td><td class="paramname">action_and_target</td><td>：移入动作和附属数据 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>注解</dt><dd>1.处理后自动执行GetNextWord() 2.该函数为TerminalWordWaitingShift函数的子过程 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8cpp_source.html">syntax_parser.cpp</a> 第 <a class="el" href="syntax__parser_8cpp_source.html#l00111">111</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="export__types_8cpp_source.html#l00010">frontend::generator::dfa_generator::nfa_generator::WordAttachedData::GetAssociatityTypeAndPriority()</a>, <a class="el" href="syntax__analysis__table_8h_source.html#l00163">frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ShiftAttachedData::GetNextSyntaxAnalysisTableEntryId()</a>, <a class="el" href="syntax__parser_8h_source.html#l00098">GetNextWord()</a>, <a class="el" href="syntax__parser_8h_source.html#l00133">GetParsingDataNow()</a>, <a class="el" href="syntax__parser_8h_source.html#l00096">GetWaitingProcessWordInfo()</a>, <a class="el" href="syntax__parser_8h_source.html#l00209">LastOperateIsReduct()</a>, <a class="el" href="export__types_8h_source.html#l00141">frontend::generator::dfa_generator::nfa_generator::WordAttachedData::node_type</a>, <a class="el" href="syntax__parser_8h_source.html#l00081">frontend::parser::syntax_parser::SyntaxParser::ParsingData::operator_priority</a>, <a class="el" href="export__types_8h_source.html#l00139">frontend::generator::dfa_generator::nfa_generator::WordAttachedData::production_node_id</a>, <a class="el" href="syntax__parser_8h_source.html#l00138">PushParsingData()</a>, <a class="el" href="syntax__parser_8h_source.html#l00204">SetLastOperateIsNotReduct()</a>, <a class="el" href="process__function__interface_8h_source.html#l00078">frontend::generator::syntax_generator::ProcessFunctionInterface::WordDataToUser::SetWordDataToUser()</a>, <a class="el" href="syntax__parser_8h_source.html#l00077">frontend::parser::syntax_parser::SyntaxParser::ParsingData::shift_node_id</a>, <a class="el" href="dfa__parser_8h_source.html#l00053">frontend::parser::dfa_parser::DfaParser::WordInfo::symbol_</a>, <a class="el" href="syntax__parser_8h_source.html#l00074">frontend::parser::syntax_parser::SyntaxParser::ParsingData::syntax_analysis_table_entry_id</a>, <a class="el" href="process__function__interface_8h_source.html#l00023">frontend::generator::syntax_generator::ProcessFunctionInterface::TerminalWordData::word</a>, <a class="el" href="dfa__parser_8h_source.html#l00051">frontend::parser::dfa_parser::DfaParser::WordInfo::word_attached_data_</a> , 以及 <a class="el" href="syntax__parser_8h_source.html#l00079">frontend::parser::syntax_parser::SyntaxParser::ParsingData::word_data_to_user</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00035">TerminalWordWaitingProcess()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_adfdf296bdfa36975bcc31bbcf2d66367_cgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_adfdf296bdfa36975bcc31bbcf2d66367_cgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_adfdf296bdfa36975bcc31bbcf2d66367_cgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_adfdf296bdfa36975bcc31bbcf2d66367_cgraph">
+<area shape="rect" title="处理向前看符号待移入的情况" alt="" coords="5,414,184,470"/>
+<area shape="rect" href="structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData.html#ad534b2d15d94aff4646414a8e8ad0596" title="获取结合性和运算符优先级" alt="" coords="256,49,483,120"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ShiftAttachedData.html#a68586152e7d246635d9fb9ab07ea6ffc" title="获取移入单词后转移到的语法分析表条目ID" alt="" coords="242,145,497,230"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ab8cca22114e97039f99d0ad9cd5a661d" title="获取下一个单词的数据并存在dfa_return_data_中" alt="" coords="280,254,459,310"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a50d8d56021539fdda1a646cb605c3194" title="获取当前活跃的解析数据（解析数据栈顶对象）" alt="" coords="280,334,459,390"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abbfadb47f432290662ba96b22a181457" title="获取DFA返回的待移入单词的数据" alt="" coords="268,414,471,470"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#add35fc926745596420571e1abbf88013" title="判断上一次操作是否为规约操作" alt="" coords="280,494,459,550"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a5f0c3ac537d527e9dc8147e210090935" title="将数据压入解析数据栈" alt="" coords="280,574,459,630"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a54fcfccbbb7937a6159978d603572edb" title="设置上一次操作不是规约操作" alt="" coords="269,654,470,710"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a9e0b9c345a98949418730a086168b953" title="设置存储的数据" alt="" coords="232,735,507,805"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a4ac1595c7162d2867f6e2703d06814a5" title="获取下一个单词" alt="" coords="555,224,791,265"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abd2469d9562c650506a132829a3373be" title="设置DFA返回的待移入单词数据" alt="" coords="583,290,762,346"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a660b0b268b42daddae94460bd081a6ee" title="获取当前待处理字符" alt="" coords="839,5,1103,47"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#aff0816dfe7d9e7d2a7f1349e4194d7b1" title="获取当前列数" alt="" coords="867,71,1074,98"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#afbb3ef9a9bd4c870afaed377253afaa3" title="获取达到文件尾且未获取到任何单词时返回的单词数据" alt="" coords="865,122,1076,178"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#a79d5fb6dfa446e6c683e6257d27a6944" title="获取当前行数" alt="" coords="879,202,1063,229"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html#aa088b185f8650169d2e53c4372db529b" title="判断当前存储的值是否有效" alt="" coords="873,253,1068,295"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a3743059d0021546d13d9a20ada05b78c" title="设置当前待处理字符" alt="" coords="839,319,1102,360"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#a633860090eb822d1fb009c8bef7ff745" title="设置当前列数" alt="" coords="868,385,1073,411"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#a59928cc6510133886f5b191062f76846" title="设置当前行数" alt="" coords="879,435,1062,462"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_adfdf296bdfa36975bcc31bbcf2d66367_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_adfdf296bdfa36975bcc31bbcf2d66367_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_adfdf296bdfa36975bcc31bbcf2d66367_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_adfdf296bdfa36975bcc31bbcf2d66367_icgraph">
+<area shape="rect" title="处理向前看符号待移入的情况" alt="" coords="621,5,800,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,5,573,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a415fe35c45184b529b83d4ceb30fcd64"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a415fe35c45184b529b83d4ceb30fcd64">&#9670;&nbsp;</a></span>TerminalWordWaitingProcess()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void frontend::parser::syntax_parser::SyntaxParser::TerminalWordWaitingProcess </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>将序列化分为保存与加载，Parser仅加载配置，不保存 </p>
+<p>处理待移入单词是终结节点的情况</p>
+<p>1.自动选择移入和归并 2.移入后执行GetNextWord() 3.归并后将得到的非终结节点移入 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8cpp_source.html">syntax_parser.cpp</a> 第 <a class="el" href="syntax__parser_8cpp_source.html#l00035">35</a> 行定义.</p>
+
+<p class="reference">引用了 <a class="el" href="syntax__parser_8h_source.html#l00115">GetActionAndTarget()</a>, <a class="el" href="syntax__analysis__table_8h_source.html#l00078">frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface::GetActionType()</a>, <a class="el" href="syntax__parser_8h_source.html#l00133">GetParsingDataNow()</a>, <a class="el" href="syntax__analysis__table_8cpp_source.html#l00101">frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface::GetReductAttachedData()</a>, <a class="el" href="syntax__analysis__table_8cpp_source.html#l00093">frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface::GetShiftAttachedData()</a>, <a class="el" href="syntax__parser_8h_source.html#l00096">GetWaitingProcessWordInfo()</a>, <a class="el" href="syntax__parser_8h_source.html#l00209">LastOperateIsReduct()</a>, <a class="el" href="syntax__parser_8h_source.html#l00081">frontend::parser::syntax_parser::SyntaxParser::ParsingData::operator_priority</a>, <a class="el" href="export__types_8h_source.html#l00139">frontend::generator::dfa_generator::nfa_generator::WordAttachedData::production_node_id</a>, <a class="el" href="syntax__parser_8cpp_source.html#l00145">Reduct()</a>, <a class="el" href="syntax__parser_8cpp_source.html#l00111">ShiftTerminalWord()</a> , 以及 <a class="el" href="dfa__parser_8h_source.html#l00051">frontend::parser::dfa_parser::DfaParser::WordInfo::word_attached_data_</a>.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8cpp_source.html#l00012">Parse()</a>.</p>
+<div class="dynheader">
+函数调用图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a415fe35c45184b529b83d4ceb30fcd64_cgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a415fe35c45184b529b83d4ceb30fcd64_cgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a415fe35c45184b529b83d4ceb30fcd64_cgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a415fe35c45184b529b83d4ceb30fcd64_cgraph">
+<area shape="rect" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="5,1128,216,1184"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a351d099ac5b1d6c540ab280a12b905c5" title="获取在给定向前看产生式节点条件下的动作和附属数据" alt="" coords="296,428,475,484"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html#a771a6314c7763f7ceff0aab9d0a75fd9" title="获取动作类型" alt="" coords="264,508,507,593"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a50d8d56021539fdda1a646cb605c3194" title="获取当前活跃的解析数据（解析数据栈顶对象）" alt="" coords="948,1052,1127,1108"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html#a7c3c208fa567238b4222d7dbe082966b" title="获取规约操作的附属数据" alt="" coords="264,1360,507,1445"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html#a663ca02ebf3ecda69b8c148dd23dd30c" title="获取移入操作的附属数据" alt="" coords="264,1469,507,1555"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abbfadb47f432290662ba96b22a181457" title="获取DFA返回的待移入单词的数据" alt="" coords="602,1128,805,1184"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#add35fc926745596420571e1abbf88013" title="判断上一次操作是否为规约操作" alt="" coords="614,1675,793,1731"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a29c66383016bd433bb3c8797477ffd0b" title="处理产生式待规约的情况" alt="" coords="277,618,493,659"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#adfdf296bdfa36975bcc31bbcf2d66367" title="处理向前看符号待移入的情况" alt="" coords="296,1229,475,1285"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ae992da7f543858abc788ead04c70e6aa" title="查询解析数据栈数据数目" alt="" coords="614,531,793,587"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a624a0dcee37dd2db03b137d091db2e86" title="获取包装规约函数的类的实例化对象" alt="" coords="611,611,796,667"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html#a45603078cdce7ce90cdde78dfaaa83e2" title="获取包装规约函数的类的实例化对象ID" alt="" coords="581,691,826,776"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html#a90535ee842f76de9af433fdd56299503" title="获取产生式体" alt="" coords="555,801,852,871"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html#a305da9a710b20a5c8c0c256007d2acb7" title="获取规约操作的附属数据" alt="" coords="583,5,823,91"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ReductAttachedData.html#ad787fca3b5527338f944959a13db870b" title="获取规约得到的非终结产生式ID" alt="" coords="575,115,831,200"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac5ffdfe0169019f4fd13eedfb521535b" title="弹出解析数据栈顶部数据" alt="" coords="614,224,793,280"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a5f0c3ac537d527e9dc8147e210090935" title="将数据压入解析数据栈" alt="" coords="948,875,1127,931"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface.html#a16cbfd0a0ee1d62abe35741177e9e458" title="调用用户定义的规约函数" alt="" coords="611,305,796,375"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad2a7156e67ba43b48899fc447af59fcf" title="设置上一次是规约操作" alt="" coords="614,400,793,456"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abe6c14f6eed573edb815796e59e95b4f" title="移入非终结节点" alt="" coords="614,947,793,1003"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6fddec7524fb0130a82277027537e1ee" title="获取移入非终结产生式节点后到达的产生式条目" alt="" coords="948,955,1127,1011"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a9e0b9c345a98949418730a086168b953" title="设置存储的数据" alt="" coords="900,1314,1175,1385"/>
+<area shape="rect" href="structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData.html#ad534b2d15d94aff4646414a8e8ad0596" title="获取结合性和运算符优先级" alt="" coords="590,1259,817,1330"/>
+<area shape="rect" href="classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ShiftAttachedData.html#a68586152e7d246635d9fb9ab07ea6ffc" title="获取移入单词后转移到的语法分析表条目ID" alt="" coords="576,1355,831,1440"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ab8cca22114e97039f99d0ad9cd5a661d" title="获取下一个单词的数据并存在dfa_return_data_中" alt="" coords="614,1595,793,1651"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a54fcfccbbb7937a6159978d603572edb" title="设置上一次操作不是规约操作" alt="" coords="603,1464,804,1520"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a4ac1595c7162d2867f6e2703d06814a5" title="获取下一个单词" alt="" coords="919,1566,1155,1607"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abd2469d9562c650506a132829a3373be" title="设置DFA返回的待移入单词数据" alt="" coords="948,1632,1127,1688"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a660b0b268b42daddae94460bd081a6ee" title="获取当前待处理字符" alt="" coords="1223,1347,1487,1389"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#aff0816dfe7d9e7d2a7f1349e4194d7b1" title="获取当前列数" alt="" coords="1251,1413,1458,1440"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#afbb3ef9a9bd4c870afaed377253afaa3" title="获取达到文件尾且未获取到任何单词时返回的单词数据" alt="" coords="1249,1464,1460,1520"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#a79d5fb6dfa446e6c683e6257d27a6944" title="获取当前行数" alt="" coords="1263,1544,1447,1571"/>
+<area shape="rect" href="classfrontend_1_1common_1_1BaseIdWrapper.html#aa088b185f8650169d2e53c4372db529b" title="判断当前存储的值是否有效" alt="" coords="1257,1595,1452,1637"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1dfa__parser_1_1DfaParser.html#a3743059d0021546d13d9a20ada05b78c" title="设置当前待处理字符" alt="" coords="1223,1661,1486,1702"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#a633860090eb822d1fb009c8bef7ff745" title="设置当前列数" alt="" coords="1252,1727,1457,1753"/>
+<area shape="rect" href="namespacefrontend_1_1parser.html#a59928cc6510133886f5b191062f76846" title="设置当前行数" alt="" coords="1263,1777,1446,1804"/>
+</map>
+</div>
+<div class="dynheader">
+这是这个函数的调用关系图:</div>
+<div class="dyncontent">
+<div class="center"><img src="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a415fe35c45184b529b83d4ceb30fcd64_icgraph.png" border="0" usemap="#classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a415fe35c45184b529b83d4ceb30fcd64_icgraph" alt=""/></div>
+<map name="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a415fe35c45184b529b83d4ceb30fcd64_icgraph" id="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_a415fe35c45184b529b83d4ceb30fcd64_icgraph">
+<area shape="rect" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="363,5,573,61"/>
+<area shape="rect" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
+<area shape="rect" href="Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">友元及相关函数文档</h2>
+<a id="ac98d07dd8f7b70e16ccb9a01abf56b9c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac98d07dd8f7b70e16ccb9a01abf56b9c">&#9670;&nbsp;</a></span>boost::serialization::access</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">friend class boost::serialization::access</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>允许序列化类访问 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00155">155</a> 行定义.</p>
+
+</div>
+</div>
+<h2 class="groupheader">类成员变量说明</h2>
+<a id="afc5b8369888652a1f549a8b0ab8b39df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc5b8369888652a1f549a8b0ab8b39df">&#9670;&nbsp;</a></span>dfa_parser_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#abdf24ea2cb7eafe127980f9a473d5f49">DfaParser</a> frontend::parser::syntax_parser::SyntaxParser::dfa_parser_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>DFA分析机 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00212">212</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8h_source.html#l00098">GetNextWord()</a>, <a class="el" href="syntax__parser_8cpp_source.html#l00005">LoadConfig()</a> , 以及 <a class="el" href="syntax__parser_8cpp_source.html#l00012">Parse()</a>.</p>
+
+</div>
+</div>
+<a id="a0b92c1ffd130447cd48b93c2ba4d102b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0b92c1ffd130447cd48b93c2ba4d102b">&#9670;&nbsp;</a></span>dfa_return_data_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a6426316cba1fcdf15b79d48b5eb7c653">WordInfo</a> frontend::parser::syntax_parser::SyntaxParser::dfa_return_data_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>DFA返回的数据 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00221">221</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8h_source.html#l00096">GetWaitingProcessWordInfo()</a> , 以及 <a class="el" href="syntax__parser_8h_source.html#l00092">SetDfaReturnData()</a>.</p>
+
+</div>
+</div>
+<a id="ac5b92ec8ae15bd7f8b83603201351e6e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac5b92ec8ae15bd7f8b83603201351e6e">&#9670;&nbsp;</a></span>last_operate_is_reduct_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool frontend::parser::syntax_parser::SyntaxParser::last_operate_is_reduct_ = true</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>标记上次操作是否为规约操作 </p>
+<dl class="section note"><dt>注解</dt><dd>用来支持运算符优先级时同一个运算符可以细分为左侧单目运算符和双目运算符功能 </dd></dl>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00227">227</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8h_source.html#l00209">LastOperateIsReduct()</a>, <a class="el" href="syntax__parser_8h_source.html#l00204">SetLastOperateIsNotReduct()</a> , 以及 <a class="el" href="syntax__parser_8h_source.html#l00199">SetLastOperateIsReduct()</a>.</p>
+
+</div>
+</div>
+<a id="a90a8a528b600045aaedabe36fb589a07"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a90a8a528b600045aaedabe36fb589a07">&#9670;&nbsp;</a></span>manager_process_function_class_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a7fb19e1b6ce9b96d7f41a8c59fcd60d8">ProcessFunctionClassManagerType</a> frontend::parser::syntax_parser::SyntaxParser::manager_process_function_class_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>包装规约函数的类的实例化对象的管理器，只有加载配置时可以修改 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00216">216</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8h_source.html#l00106">GetProcessFunctionClass()</a> , 以及 <a class="el" href="syntax__parser_8h_source.html#l00162">load()</a>.</p>
+
+</div>
+</div>
+<a id="a22a03aca9a4bb7359ad613762a224bdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a22a03aca9a4bb7359ad613762a224bdd">&#9670;&nbsp;</a></span>parsing_stack_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::stack&lt;<a class="el" href="structfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser_1_1ParsingData.html">ParsingData</a>&gt; frontend::parser::syntax_parser::SyntaxParser::parsing_stack_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>解析用数据栈，栈顶为当前解析数据 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00223">223</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8h_source.html#l00133">GetParsingDataNow()</a>, <a class="el" href="syntax__parser_8h_source.html#l00145">GetParsingStackSize()</a>, <a class="el" href="syntax__parser_8cpp_source.html#l00012">Parse()</a>, <a class="el" href="syntax__parser_8h_source.html#l00142">PopTopParsingData()</a> , 以及 <a class="el" href="syntax__parser_8h_source.html#l00138">PushParsingData()</a>.</p>
+
+</div>
+</div>
+<a id="a8614b01e36fe966ec6bee5b073c36230"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8614b01e36fe966ec6bee5b073c36230">&#9670;&nbsp;</a></span>root_parsing_entry_id_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#acf03dbd5859d9a1912b7c6ce134cb91e">SyntaxAnalysisTableEntryId</a> frontend::parser::syntax_parser::SyntaxParser::root_parsing_entry_id_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>根分析表条目ID，只有加载配置时可以修改 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00214">214</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8h_source.html#l00101">GetRootParsingEntryId()</a> , 以及 <a class="el" href="syntax__parser_8h_source.html#l00162">load()</a>.</p>
+
+</div>
+</div>
+<a id="a76718b542ad457a192dbf061de107b54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76718b542ad457a192dbf061de107b54">&#9670;&nbsp;</a></span>syntax_analysis_table_</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ad092ddd576e0b4aafd7413e13ff8f3b1">SyntaxAnalysisTableType</a> frontend::parser::syntax_parser::SyntaxParser::syntax_analysis_table_</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>语法分析表，只有加载配置时可以修改 </p>
+
+<p class="definition">在文件 <a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a> 第 <a class="el" href="syntax__parser_8h_source.html#l00218">218</a> 行定义.</p>
+
+<p class="reference">被这些函数引用 <a class="el" href="syntax__parser_8h_source.html#l00115">GetActionAndTarget()</a>, <a class="el" href="syntax__parser_8h_source.html#l00126">GetNextEntryId()</a> , 以及 <a class="el" href="syntax__parser_8h_source.html#l00162">load()</a>.</p>
+
+</div>
+</div>
+<hr/>该类的文档由以下文件生成:<ul>
+<li>src/Parser/SyntaxParser/<a class="el" href="syntax__parser_8h_source.html">syntax_parser.h</a></li>
+<li>src/Parser/SyntaxParser/<a class="el" href="syntax__parser_8cpp_source.html">syntax_parser.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="namespacefrontend.html">frontend</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1parser.html">parser</a></li><li class="navelem"><a class="el" href="namespacefrontend_1_1parser_1_1syntax__parser.html">syntax_parser</a></li><li class="navelem"><a class="el" href="classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html">SyntaxParser</a></li>
+    <li class="footer">制作者
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>
