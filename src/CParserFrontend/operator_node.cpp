@@ -165,7 +165,7 @@ bool MathematicalOperatorNode::SetLeftOperatorNode(
     case MathematicalOperation::kLogicalNegative: {
       // 按位取反和逻辑非为一元运算符，结果类型与运算数类型相同
       auto compute_result_node = std::make_shared<VarietyOperatorNode>(
-          nullptr, ConstTag::kNonConst, LeftRightValueTag::kRightValue);
+          std::string(), ConstTag::kNonConst, LeftRightValueTag::kRightValue);
       bool result = compute_result_node->SetVarietyType(
           left_operator_node->GetResultTypePointer());
       if (result) [[likely]] {
@@ -352,7 +352,8 @@ bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
           struct_type.GetStructMemberInfo(struct_member_index);
       // 生成访问成员后得到的节点
       auto struct_node = std::make_shared<VarietyOperatorNode>(
-          nullptr, struct_member_info.second, LeftRightValueTag::kLeftValue);
+          std::string(), struct_member_info.second,
+          LeftRightValueTag::kLeftValue);
       bool result = struct_node->SetVarietyType(struct_member_info.first);
       assert(result);
       SetAccessedNode(struct_node);
@@ -373,7 +374,8 @@ bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
           union_type.GetUnionMemberInfo(union_member_index);
       // 生成访问成员后得到的节点
       auto union_node = std::make_shared<VarietyOperatorNode>(
-          nullptr, union_member_info.second, LeftRightValueTag::kLeftValue);
+          std::string(), union_member_info.second,
+          LeftRightValueTag::kLeftValue);
       bool result = union_node->SetVarietyType(union_member_info.first);
       assert(result);
       SetAccessedNode(union_node);
@@ -585,7 +587,7 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
       // 构建参与下一轮比较的临时节点
       auto [dereferenced_type, const_tag] = pointer_type.DeReference();
       auto sub_variety_node = std::make_unique<VarietyOperatorNode>(
-          nullptr, const_tag, LeftRightValueTag::kLeftValue);
+          std::string(), const_tag, LeftRightValueTag::kLeftValue);
       auto set_type_result =
           sub_variety_node->SetVarietyTypeNoCheckFunctionType(
               dereferenced_type);
@@ -658,7 +660,7 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
               .GetStructureMembers();
       // 构建比较用临时节点
       auto sub_variety_node = std::make_unique<VarietyOperatorNode>(
-          nullptr, ConstTag::kNonConst, LeftRightValueTag::kLeftValue);
+          std::string(), ConstTag::kNonConst, LeftRightValueTag::kLeftValue);
       if (list_values.size() > structure_members.size()) [[unlikely]] {
         // 给定的初始化成员列表大小大于结构体内成员数目
         return AssignableCheckResult::kInitializeListTooLarge;
@@ -726,7 +728,7 @@ bool ObtainAddressOperatorNode::SetNodeToObtainAddress(
         node_to_obtain_address->GetConstTag());
     // 创建取地址后得到的节点（生成匿名右值中间变量）
     auto node_obtained_address = std::make_shared<VarietyOperatorNode>(
-        nullptr, ConstTag::kNonConst, LeftRightValueTag::kRightValue);
+        std::string(), ConstTag::kNonConst, LeftRightValueTag::kRightValue);
     // 设置取地址后的变量节点类型
     bool result =
         node_obtained_address->SetVarietyType(std::move(obtained_type));
@@ -1036,7 +1038,7 @@ bool TemaryOperatorNode::ConstructResultNode() {
         break;
     }
     auto result = std::make_shared<VarietyOperatorNode>(
-        nullptr, ConstTag::kNonConst, LeftRightValueTag::kRightValue);
+        std::string(), ConstTag::kNonConst, LeftRightValueTag::kRightValue);
     bool set_type_result = result->SetVarietyType(common_type);
     assert(set_type_result);
     result_ = result;

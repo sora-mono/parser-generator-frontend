@@ -211,6 +211,7 @@ void DfaGenerator::IntermediateNodeClassify(
 void DfaGenerator::SaveConfig() const {
   std::ofstream ofile(frontend::common::kDfaConfigFileName,
                       std::ios_base::binary | std::ios_base::out);
+  assert(ofile.is_open());
   // oarchive要在config_file析构前析构，否则文件不完整在反序列化时会抛异常
   {
     boost::archive::binary_oarchive oarchive(ofile);

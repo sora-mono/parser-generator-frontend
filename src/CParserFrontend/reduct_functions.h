@@ -1028,7 +1028,8 @@ std::shared_ptr<FlowInterface> SingleAnnounceNoAssignVariety(
       /// 函数或函数指针声明中省略参数名
       construct_data = std::make_shared<ObjectConstructData>(std::string());
       construct_data->ConstructBasicObjectPart<VarietyOperatorNode>(
-          nullptr, const_tag_before_final_type, LeftRightValueTag::kLeftValue);
+          std::string(), const_tag_before_final_type,
+          LeftRightValueTag::kLeftValue);
     } else {
       construct_data = std::any_cast<std::shared_ptr<ObjectConstructData>&>(
           word_data[1].GetNonTerminalWordData().user_returned_data);

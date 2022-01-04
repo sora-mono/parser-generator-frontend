@@ -1272,6 +1272,11 @@ void SyntaxGenerator::SyntaxAnalysisTableConstruct() {
   // 传播向前看符号同时构造语法分析表
   SpreadLookForwardSymbolAndConstructSyntaxAnalysisTableEntry(
       root_production_item_set_id);
+  // 设置内部根产生式遇到文件尾时可以接受，用来应对空输入的情况
+  SyntaxAnalysisTableEntryId inside_root_syntax_analysis_entry_id =
+      root_production_item_set.GetSyntaxAnalysisTableEntryId();
+  GetSyntaxAnalysisTableEntry(inside_root_syntax_analysis_entry_id)
+      .SetAcceptInEofForwardNode(end_production_node_id);
   // 设置移入用户设置的root节点后在遇到文件尾返回的节点时使用Accept动作
   SyntaxAnalysisTableEntryId entry_after_shift_user_defined_root =
       GetSyntaxAnalysisTableEntry(

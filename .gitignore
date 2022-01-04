@@ -1,4 +1,4 @@
-out
-/.vs/*
-*/out
-cpp.hint
+﻿/.vs
+/out
+/动态库+conan.cmake
+/cpp.hint
