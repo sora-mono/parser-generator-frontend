@@ -5,7 +5,7 @@
 // 如果不存在给定名称的函数则返回空指针
 namespace c_parser_frontend {
 
-thread_local CParserFrontend c_parser_frontend;
+thread_local CParserFrontend c_parser_controller;
 
 std::pair<CParserFrontend::TypeSystem::TypeNodeContainerIter,
           CParserFrontend::AddTypeResult>
@@ -96,7 +96,7 @@ void ActionScopeSystem::PopOverLevel(ActionScopeLevel level) {
       // 该指针管辖权在FlowControlSystem
       flow_control_sentence.release();
       // 通知控制器完成函数构建
-      c_parser_frontend::c_parser_frontend.FinishFunctionConstruct();
+      c_parser_frontend::c_parser_controller.FinishFunctionConstruct();
     }
   }
 }

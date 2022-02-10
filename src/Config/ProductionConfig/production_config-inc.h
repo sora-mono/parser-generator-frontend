@@ -534,7 +534,7 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     5, {"sizeof", "(", "Assignable", ")"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Assignable, c_parser_frontend::parse_functions::AssignableMemberAccess, 6,
-    {"Assignable", ",", "Id"})
+    {"Assignable", ".", "Id"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     Assignable,
     c_parser_frontend::parse_functions::AssignablePointerMemberAccess, 7,
@@ -612,8 +612,12 @@ GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     c_parser_frontend::parse_functions::FunctionCallArguments, 0,
     {"NotEmptyFunctionCallArguments"})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
-    FunctionCallInit, c_parser_frontend::parse_functions::FunctionCallInit, 0,
+    FunctionCallInit,
+    c_parser_frontend::parse_functions::FunctionCallInitAssignable, 0,
     {"Assignable", "("})
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
+    FunctionCallInit, c_parser_frontend::parse_functions::FunctionCallInitId, 1,
+    {"Id", "("})
 GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(
     FunctionCall, c_parser_frontend::parse_functions::FunctionCall, 0,
     {"FunctionCallInit", "FunctionCallArguments", ")"})

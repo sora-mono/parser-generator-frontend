@@ -208,7 +208,7 @@ class CParserFrontend {
 /// @details
 /// 用于子系统交互和用户访问
 /// 线程间独立
-extern thread_local CParserFrontend c_parser_frontend;
+extern thread_local CParserFrontend c_parser_controller;
 
 }  // namespace c_parser_frontend
 

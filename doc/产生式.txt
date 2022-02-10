@@ -199,7 +199,6 @@ Assignable -> Id
 Assignable -> TemaryOperator
 Assignable -> FunctionCall
 Assignable -> "sizeof" "(" Assignable ")"
-Assignable -> Assignable "," Id
 Assignable -> Assignable "->" Id
 Assignable -> "(" Assignable ")"
 Assignable -> "(" Type ")" Assignable
@@ -223,6 +222,7 @@ NotEmptyFunctionCallArguments -> Assignable
 NotEmptyFunctionCallArguments -> NotEmptyFunctionCallArguments "," Assignable
 FunctionCallArguments -> NotEmptyFunctionCallArguments
 FunctionCallInit -> Assignable "("
+FunctionCallInit -> Id "("
 FunctionCall -> FunctionCallInit FunctionCallArguments ")"
 Assignables -> Assignable
 Assignables -> Assignables "," Assignable
