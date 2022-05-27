@@ -31,6 +31,8 @@
 // 强烈建议调用宏时使用最简单的语法，避免运算
 // 使用字符串时直接使用双引号类型（可以使用生肉字）
 // 从而避免宏生成时表达式计算结果错误等问题
+// 当前实现中使用3个单词优先级：0~2，普通单词优先级为0，运算符优先级为1，
+// 关键字优先级为2；当一个单词对应多个正则解析为优先级高的正则
 
 /// @brief 修饰非终结节点产生式名
 /// @param[in] production_symbol ：产生式名
@@ -62,7 +64,7 @@
 /// @param[in] key_word ：待定义的关键字字符串
 /// @details
 /// 例：GENERATOR_DEFINE_KEY_WORD("example_key_word")
-/// @note 仅支持单词，不支持正则表达式
+/// @note 支持正则表达式
 /// 关键字词法分析优先级高于运算符和普通单词
 #define GENERATOR_DEFINE_KEY_WORD(key_word)
 

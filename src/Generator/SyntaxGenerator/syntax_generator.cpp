@@ -1377,7 +1377,7 @@ void SyntaxGenerator::AddKeyWord(std::string&& key_word) {
   // 自动生成同名终结节点
   // 关键字定义时将key_word视作单词而不是正则表达式
   AddTerminalProduction(
-      std::string(key_word), std::string(key_word),
+      std::string(key_word), std::move(key_word),
       frontend::generator::dfa_generator::DfaGenerator::WordPriority(2), true);
 }
 ProductionNodeId SyntaxGenerator::GetProductionNodeIdFromNodeSymbolId(

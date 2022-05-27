@@ -40,7 +40,14 @@
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
-      "inheritEnvironments": [ "msvc_x64_x64" ]
+      "inheritEnvironments": [ "msvc_x64_x64" ],
+      "variables": [
+        {
+          "name": "CMAKE_CXX_FLAGS",
+          "value": "/bigobj /MP /std:c++latest /EHsc",
+          "type": "STRING"
+        }
+      ]
     }
   ]
 }

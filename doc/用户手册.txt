@@ -4,41 +4,88 @@
 1.基础概念介绍
   1) 产生式分类：产生式分为终结产生式和非终结产生式，终结产生式分为普通终结
      产生式、运算符、关键字；非终结产生式分为普通非终结产生式、根非终结产生式
-  2) 本生成器使用lALR(1)语法，支持特性如下所示：
-     非终结产生式空规约
-     二义性文法（仅支持左侧单目和双目运算符，右侧单目运算符同双目运算符语义）
-     产生式循环引用
-     非运算符单词产生移入、规约冲突时优先选择移入操作
+  2) 本生成器使用LALR(1)语法，支持特性如下所示：
+     ①非终结产生式空规约：空规约时不调用指定的规约函数
+     ②二义性文法（仅支持左侧单目和双目运算符，右侧单目运算符同双目运算符语义）
+       产生式循环引用。
+       例：A->Bc A->e B->D D->A（小写字母代表终结产生式，大写字母代表非终结产生
+       式）
+     ③非运算符单词产生移入、规约冲突时优先选择移入操作
+     ④LALR(1)语法具有的全部特性
   3) 正则支持特性如下所示：
-     可使用char的全部字符
-     *、+、?三种限制符
-     []可选字符序列，支持X-Y表示X到Y的全部字符
-     ()分组
-  4) 向前看符号不是运算符时使用移入优先策略
+     ①可使用char能够表示的任何值
+     ②支持*、+、?三种通配符
+       例：abc*代表ab开头，后面跟任意个数c的字符串
+           ab+代表a开头，后面跟[1,∞)个b的字符串
+           ab?c代表字符串abc或ac
+     ③使用[]包含可选字符序列，支持X-Z表示X到Z的全部字符，所有位于[]中的字符均
+       视为可选的字符。
+       例：[a-zA-Z0-9+-]
+     ④通过()分组，一个分组在使用通配符时视为一个字符
+       例：(abc)?xyz代表字符串abcxyz或xyz
+     ⑤单斜杠\后跟任何值都作为普通字符使用
+     ⑥读取字符前会跳过所有未读取的空白字符
+  4) 向前看符号不是运算符时在移入规约冲突的情况下使用移入优先策略
 2.产生式定义方法：
   1) 产生式定义于src/Config/ProductionConfig/production_config-inc.h中
   2) 规约用函数的头文件在src/Config/ProductionConfig/user_defined_functions.h中
      添加，禁止在定义产生式的文件中添加任何额外的头文件
   3) 产生式通过宏定义，定义产生式的宏如下所示：
+     // 定义关键字，支持正则表达式
      GENERATOR_DEFINE_KEY_WORD(key_word)
+     // 定义左侧单目运算符
      GENERATOR_DEFINE_BINARY_OPERATOR( \
        operator_symbol, binary_operator_associatity, binary_operator_priority)
+    // 定义双目运算符
      GENERATOR_DEFINE_UNARY_OPERATOR( \
        operator_symbol, unary_operator_associatity, unary_operator_priority)
+    // 定义同时具有左侧单目运算符和双目运算符语义的运算符
      GENERATOR_DEFINE_BINARY_UNARY_OPERATOR(                             \
        operator_symbol, binary_operator_associatity, binary_operator_priority, \
        unary_operator_associatity, unary_operator_priority)
+     // 定义终结产生式
      GENERATOR_DEFINE_TERMINAL_PRODUCTION(production_symbol, production_body)
+     // 定义非终结产生式
      GENERATOR_DEFINE_NONTERMINAL_PRODUCTION( \
        production_symbol, reduct_function_name, production_body_seq, ...)
+     // 设定非终结产生式允许空规约
+     // 指定非终结产生式必须已定义
      GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT( \
        production_symbol)
+     // 设定根产生式（根产生式仅且必须规约一次，只能设置一个非终结产生式）
+     // 指定根产生式必须已定义
      GENERATOR_DEFINE_ROOT_PRODUCTION(production_symbol)
-  4) 宏的使用方法见src/Generator/SyntaxGenerator/syntax_generate.h
+  4) 宏的使用方法及具体例子见src/Generator/SyntaxGenerator/syntax_generate.h
   5) 3)中所提供的宏仅允许在1)所述文件中使用
 3.库链接方法：
   1) 用户自定义库需要链接到SyntaxGenerator和SyntaxParser
-  2) 修改对应文件夹中的CMakeLists.txt，在target_link_libraries中添加规约产生式的
-     函数所在库，SynatxGenerator链接到syntax_generator，SyntaxParser链接到
-     syntax_machine
-  3) c_parser_frontend是样例的规约函数所在的库，使用时应删除
+  2) 用户定义的头文件应填入src/Config/ProductionConfig/user_defined_functions.h
+  2) 规约函数必须拥有下述参数列表：
+     (std::vector<frontend::generator::syntax_generator::
+                        ProcessFunctionInterface::WordDataToUser>&&)
+     函数调用后的返回值将被封装到std::any后在规约时返回给用户
+     参数为终结产生式信息或非终结产生式规约返回值，顺序同产生式定义顺序
+     对参数调用GetTerminalWordData()方法以获取终结产生式信息
+     对参数调用GetNonTerminalWordData()方法以获取非终结产生式规约返回值
+     参数的具体信息和其它方法见process_function_interface.h中的类：
+     NonTerminalWordData、TerminalWordData、NonTerminalWordData、WordDataToUser
+  3) 修改src/CmakeLists.txt，使用add_subdirectory()添加规约产生式所用函数实现
+     所在文件夹，删除add_subdirectory(CParserFrontend)这一行
+     修改src/Generator/SyntaxGenerator/CMakeLists.txt，
+     在target_link_libraries(syntax_generator, ...)中添加规约产生式所用函数的库,
+     删除c_parser_frontend
+     修改src/Parser/SyntaxParser/CmakeLists.txt，
+     在target_link_libraries(syntax_machine, ...)中重复上述操作
+4.生成器、解析器保证
+  1) 每个文件编译时对用户定义的规约函数的调用为串行
+  2) 在Visual Studio 2019及更高版本编译环境下成功编译运行
+5.使用方法
+  1) 按照2，3中描述的方法实现规约用函数，定义产生式并修改CmakeLists.txt
+  2) 在${CMAKE_BINARY_DIR}/src中运行conan install命令安装所需库，
+     conanfile.txt存放于src下；
+     注意：conan安装库时使用的Release/Debug模式必须与项目相同，否则运行时
+     boost_serialization报错；如果使用了动态库要将动态库路径加入PATH或复制到与
+     可执行文件同一个文件夹下
+  3) 编译整个解决方案，运行Generator
+  4) 将生成的syntax_config.conf和dfa_config.conf移动到与Parser同一文件夹
+  5) 运行Parser（未制作命令行选项，请修改src/Parser/Parser.cpp来解析不同文件）
