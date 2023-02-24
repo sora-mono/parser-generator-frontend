@@ -8,9 +8,8 @@
 /// 规约时先获取对应产生式的对象，然后调用Reduct虚函数规约
 #ifndef GENERATOR_SYNTAXGENERATOR_SYNTAXCONFIG_PROCESS_FUNCTIONS_CLASSES_H_
 #define GENERATOR_SYNTAXGENERATOR_SYNTAXCONFIG_PROCESS_FUNCTIONS_CLASSES_H_
-
-#include "Config/ProductionConfig/user_defined_functions.h"
 #include "process_function_interface.h"
+#include "reduct_type_register.h"
 
 namespace frontend::generator::syntax_generator {
 // 下面的宏将包含的文件中用户定义的非终结产生式转化为包装规约函数的类
@@ -18,9 +17,7 @@ namespace frontend::generator::syntax_generator {
 // NONTERMINAL_PRODUCTION_SYMBOL_MODIFY_STR
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_
 #include "Config/ProductionConfig/production_config-inc.h"
-#undef GENERATOR_LEXICALGENERATOR_PROCESS_FUNCTIONS_CLASSES_
-// 定义结束标志
-#define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_END
+#undef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_
 }  // namespace frontend::generator::syntax_generator
 
 #endif  /// !GENERATOR_SYNTAXGENERATOR_SYNTAXCONFIG_PROCESSFUNCTIONS_H_

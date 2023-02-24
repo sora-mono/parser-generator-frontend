@@ -2,6 +2,7 @@
 /// @brief 语法分析机
 #ifndef PARSER_SYNTAXPARSER_SYNTAXPARSER_H_
 #define PARSER_SYNTAXPARSER_SYNTAXPARSER_H_
+#include <any>
 #include <queue>
 #include <stack>
 
@@ -56,12 +57,6 @@ class SyntaxParser {
   /// @brief 归约动作的数据
   using ReductAttachedData = frontend::generator::syntax_generator::
       SyntaxAnalysisTableEntry::ReductAttachedData;
-  /// @brief 传递给用户的单个单词的数据
-  using WordDataToUser = ProcessFunctionInterface::WordDataToUser;
-  /// @brief 终结节点数据
-  using TerminalWordData = ProcessFunctionInterface::TerminalWordData;
-  /// @brief 非终结节点数据
-  using NonTerminalWordData = ProcessFunctionInterface::NonTerminalWordData;
   /// @brief
   /// 运算符优先级，等于已移入的最高优先级运算符优先级，0保留为非运算符优先级
   using OperatorPriority =
@@ -76,7 +71,7 @@ class SyntaxParser {
     /// @note 提供该项为了支持空规约功能
     ProductionNodeId shift_node_id = ProductionNodeId::InvalidId();
     /// @brief 移入的终结节点数据或非终结节点规约后用户返回的数据
-    WordDataToUser word_data_to_user;
+    std::any word_data_to_user;
     /// @brief 非运算符优先级为0
     OperatorPriority operator_priority = OperatorPriority(0);
   };
@@ -190,7 +185,7 @@ class SyntaxParser {
   /// @brief 移入非终结节点
   /// @param[in] non_terminal_word_data ：规约后用户返回的数据
   /// @param[in] reducted_nonterminal_node_id ：规约后得到的非终结产生式ID
-  void ShiftNonTerminalWord(NonTerminalWordData&& non_terminal_word_data,
+  void ShiftNonTerminalWord(std::any&& non_terminal_word_data,
                             ProductionNodeId reducted_nonterminal_node_id);
   /// @brief 设置上一次是规约操作
   /// @note

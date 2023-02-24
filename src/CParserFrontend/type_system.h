@@ -85,9 +85,9 @@ class VarietyOperatorNode;
 
 namespace c_parser_frontend::type_system {
 /// @brief const标记
-enum class ConstTag { kNonConst, kConst };
+enum class ConstTag { kNonConst = 0, kConst };
 /// @brief 符号标记
-enum class SignTag { kSigned, kUnsigned };
+enum class SignTag { kSigned = 0, kUnsigned };
 
 /// @brief 宽泛的变量类型
 enum class StructOrBasicType {

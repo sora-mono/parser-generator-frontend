@@ -46,13 +46,14 @@ void SyntaxParser::TerminalWordWaitingProcess() {
                           production_node_to_shift_id);
   switch (action_and_attached_data.GetActionType()) {
     // TODO 添加接受时的后续处理
-    [[unlikely]] case ActionType::kAccept : exit(0);
-    break;
+    [[unlikely]] case ActionType::kAccept:
+      exit(0);
+      break;
     // TODO 添加错误处理功能
-    [[unlikely]] case ActionType::kError : std::cerr << std::format("语法错误")
-                                                     << std::endl;
-    exit(-1);
-    break;
+    [[unlikely]] case ActionType::kError:
+      std::cerr << std::format("语法错误") << std::endl;
+      exit(-1);
+      break;
     case ActionType::kReduct:
       Reduct(action_and_attached_data.GetReductAttachedData());
       break;
@@ -117,8 +118,7 @@ inline void SyntaxParser::ShiftTerminalWord(
   parsing_data_now.shift_node_id =
       word_info.word_attached_data_.production_node_id;
   // 添加待移入节点信息到当前解析用信息
-  parsing_data_now.word_data_to_user.SetWordDataToUser(
-      TerminalWordData{.word = std::move(word_info.symbol_)});
+  parsing_data_now.word_data_to_user = std::move(word_info.symbol_);
   // 如果移入了运算符则更新优先级为新的优先级
   OperatorPriority new_parsing_data_priority;
   if (word_info.word_attached_data_.node_type ==
@@ -149,9 +149,7 @@ void SyntaxParser::Reduct(const ReductAttachedData& action_and_target) {
       GetProcessFunctionClass(reduct_attached_data.GetProcessFunctionClassId());
   const auto& production_body = reduct_attached_data.GetProductionBody();
   // 传递给用户定义函数的数据
-  std::vector<WordDataToUser> word_data_to_user;
-  // 预分配空间，防止多次扩容
-  word_data_to_user.resize(production_body.size());
+  std::vector<std::any> word_data_to_user(production_body.size());
 
   // 弹出栈顶数据，露出word_data_to_user存储有效数据的部分
   // 除了这里任何时候栈顶数据的word_data_to_user都不包含有效数据
@@ -166,31 +164,26 @@ void SyntaxParser::Reduct(const ReductAttachedData& action_and_target) {
         [[likely]] {
       // 当前产生式正常参与规约，获取之前保存下来提供给用户规约使用的数据
       *user_data_iter = std::move(GetParsingDataNow().word_data_to_user);
-      ++user_data_iter;
       // 弹出解析数据栈顶部无附属数据的部分，露出之前存入的解析数据
       old_parsing_data = std::move(GetParsingDataNow());
       PopTopParsingData();
       // 由于有哨兵，解析数据栈永远不空
       assert(GetParsingStackSize() != 0);
-    } else {
-      // 该节点空规约，设置空规约节点标记
-      // 空规约节点存储std::monostate
-      user_data_iter->SetWordDataToUser(std::monostate{});
-      ++user_data_iter;
     }
+    ++user_data_iter;
   }
   // 恢复栈顶数据
   // 栈顶数据储存有效信息：当前语法分析表条目和运算符优先级
   PushParsingData(std::move(old_parsing_data));
   ShiftNonTerminalWord(
       process_function_object.Reduct(std::move(word_data_to_user)),
-      action_and_target.GetReductAttachedData().GetReductedNonTerminalNodeId());
+      reduct_attached_data.GetReductedNonTerminalNodeId());
   // 执行了一次完整的规约操作，需要设置上一步执行了规约操作的标记
   SetLastOperateIsReduct();
 }
 
 void SyntaxParser::ShiftNonTerminalWord(
-    NonTerminalWordData&& non_terminal_word_data,
+    std::any&& non_terminal_word_data,
     ProductionNodeId reducted_nonterminal_node_id) {
   ParsingData& parsing_data_now = GetParsingDataNow();
   // 获取移入非终结节点后转移到的语法分析表条目
@@ -199,8 +192,7 @@ void SyntaxParser::ShiftNonTerminalWord(
                      reducted_nonterminal_node_id);
   // 更新移入节点的ID和附属数据
   parsing_data_now.shift_node_id = reducted_nonterminal_node_id;
-  parsing_data_now.word_data_to_user.SetWordDataToUser(
-      std::move(non_terminal_word_data));
+  parsing_data_now.word_data_to_user = std::move(non_terminal_word_data);
   // 移入非终结节点不改变运算符优先级
   PushParsingData(
       ParsingData{.syntax_analysis_table_entry_id = next_entry_id,

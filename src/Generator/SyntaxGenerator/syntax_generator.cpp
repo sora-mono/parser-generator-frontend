@@ -1,11 +1,15 @@
-#include "syntax_generator.h"
+ï»¿#include "syntax_generator.h"
 
+#include <graphviz/GVContext.h>
+#include <graphviz/gvc.h>
+
+#include <codecvt>
 #include <queue>
 
 namespace frontend::generator::syntax_generator {
 ProductionNodeId SyntaxGenerator::AddTerminalProduction(
     std::string&& node_symbol, std::string&& body_symbol,
-    WordPriority node_priority, bool is_key_word) {
+    WordPriority node_priority, bool regex_allowed) {
   auto [node_symbol_id, node_symbol_inserted] = AddNodeSymbol(node_symbol);
   auto [body_symbol_id, body_symbol_inserted] = AddBodySymbol(body_symbol);
   ProductionNodeId production_node_id;
@@ -13,45 +17,45 @@ ProductionNodeId SyntaxGenerator::AddTerminalProduction(
     ProductionNodeId old_node_symbol_id =
         GetProductionNodeIdFromNodeSymbolId(node_symbol_id);
     if (old_node_symbol_id.IsValid()) {
-      // ¸ÃÖÕ½á½ÚµãÃûÒÑ±»Ê¹ÓÃ
-      OutPutError(std::format("ÖÕ½á½ÚµãÃûÒÑ¶¨Òå£º{:}", node_symbol));
+      // è¯¥ç»ˆç»“èŠ‚ç‚¹åå·²è¢«ä½¿ç”¨
+      OutPutError(std::format("ç»ˆç»“èŠ‚ç‚¹åå·²å®šä¹‰ï¼š{:}", node_symbol));
       return ProductionNodeId::InvalidId();
     }
-    // ĞèÒªÌí¼ÓÒ»¸öĞÂµÄÖÕ½á½Úµã
+    // éœ€è¦æ·»åŠ ä¸€ä¸ªæ–°çš„ç»ˆç»“èŠ‚ç‚¹
     production_node_id = SubAddTerminalNode(node_symbol_id, body_symbol_id);
     frontend::generator::dfa_generator::DfaGenerator::WordAttachedData
         word_attached_data;
     word_attached_data.production_node_id = production_node_id;
     word_attached_data.node_type = ProductionNodeType::kTerminalNode;
-    // ÏòDFAÉú³ÉÆ÷×¢²á¹Ø¼ü´Ê
+    // å‘DFAç”Ÿæˆå™¨æ³¨å†Œå…³é”®è¯
     bool result;
-    if (!is_key_word) [[likely]] {
-      assert(node_priority == 0 || node_priority == 1);
+    if (regex_allowed) [[likely]] {
+      assert(node_priority == 0);
       result = dfa_generator_.AddRegexpression(
           body_symbol, std::move(word_attached_data), node_priority);
     } else {
-      assert(node_priority == 2);
+      assert(node_priority == 1 || node_priority == 2);
       result = dfa_generator_.AddWord(
           body_symbol, std::move(word_attached_data), node_priority);
     }
     if (!result) [[unlikely]] {
       OutPutError(
-          std::format("ÄÚ²¿´íÎó£ºÎŞ·¨Ìí¼ÓÖÕ½á½ÚµãÕıÔò±í´ïÊ½ {:}", body_symbol));
+          std::format("å†…éƒ¨é”™è¯¯ï¼šæ— æ³•æ·»åŠ ç»ˆç»“èŠ‚ç‚¹æ­£åˆ™è¡¨è¾¾å¼ {:}", body_symbol));
       exit(-1);
     }
   } else {
-    // ¸ÃÖÕ½á½ÚµãµÄÄÚÈİÒÑ´æÔÚ£¬²»Ó¦ÖØ¸´Ìí¼Ó
-    OutPutError(std::format("¶à´ÎÉùÃ÷Í¬Ò»ÕıÔò£º{:}", body_symbol));
+    // è¯¥ç»ˆç»“èŠ‚ç‚¹çš„å†…å®¹å·²å­˜åœ¨ï¼Œä¸åº”é‡å¤æ·»åŠ 
+    OutPutError(std::format("å¤šæ¬¡å£°æ˜åŒä¸€æ­£åˆ™ï¼š{:}", body_symbol));
     return ProductionNodeId::InvalidId();
   }
-  // Êä³ö¹¹½¨¹ı³Ì
+  // è¾“å‡ºæ„å»ºè¿‡ç¨‹
   OutPutInfo(
-      std::format("³É¹¦Ìí¼ÓÖÕ½á²úÉúÊ½£º {:} -> {:}", node_symbol, body_symbol));
+      std::format("æˆåŠŸæ·»åŠ ç»ˆç»“äº§ç”Ÿå¼ï¼š {:} -> {:}", node_symbol, body_symbol));
   OutPutInfo(std::format(
-      "²úÉúÊ½ÃûID£º{:} ²úÉúÊ½ÌåID£º{:} ÖÕ½á²úÉúÊ½ID£º{:} ²úÉúÊ½ÓÅÏÈ¼¶£º{:}",
+      "äº§ç”Ÿå¼åIDï¼š{:} äº§ç”Ÿå¼ä½“IDï¼š{:} ç»ˆç»“äº§ç”Ÿå¼IDï¼š{:} äº§ç”Ÿå¼ä¼˜å…ˆçº§ï¼š{:}",
       node_symbol_id.GetRawValue(), body_symbol_id.GetRawValue(),
       production_node_id.GetRawValue(), node_priority.GetRawValue()));
-  // ÅĞ¶ÏĞÂÌí¼ÓµÄÖÕ½á½ÚµãÊÇ·ñÎªÄ³¸öÎ´¶¨Òå²úÉúÊ½
+  // åˆ¤æ–­æ–°æ·»åŠ çš„ç»ˆç»“èŠ‚ç‚¹æ˜¯å¦ä¸ºæŸä¸ªæœªå®šä¹‰äº§ç”Ÿå¼
   CheckNonTerminalNodeCanContinue(node_symbol);
   return production_node_id;
 }
@@ -68,20 +72,20 @@ inline ProductionNodeId SyntaxGenerator::SubAddTerminalNode(
 }
 
 ProductionNodeId SyntaxGenerator::AddBinaryOperator(
-    std::string&& operator_symbol,
+    std::string node_symbol, std::string operator_symbol,
     OperatorAssociatityType binary_operator_associatity_type,
     OperatorPriority binary_operator_priority) {
-  // ÔËËã·û²úÉúÊ½ÃûÓëÔËËã·ûÏàÍ¬
+  // è¿ç®—ç¬¦äº§ç”Ÿå¼åä¸è¿ç®—ç¬¦ç›¸åŒ
   auto [operator_node_symbol_id, operator_node_symbol_inserted] =
-      AddNodeSymbol(operator_symbol);
+      AddNodeSymbol(node_symbol);
   if (!operator_node_symbol_inserted) [[unlikely]] {
-    OutPutError(std::format("ÔËËã·û£º{:} ÒÑ¶¨Òå", operator_symbol));
+    OutPutError(std::format("è¿ç®—ç¬¦ï¼š{:} å·²å®šä¹‰", node_symbol));
     return ProductionNodeId::InvalidId();
   }
   auto [operator_body_symbol_id, operator_body_symbol_inserted] =
       AddBodySymbol(operator_symbol);
   if (!operator_body_symbol_inserted) {
-    OutPutError(std::format("ÔËËã·û£º{:} ÒÑÔÚDFAÖĞÌí¼Ó£¬ÎŞ·¨¶¨ÒåÎªÔËËã·û",
+    OutPutError(std::format("è¿ç®—ç¬¦ï¼š{:} å·²åœ¨DFAä¸­æ·»åŠ ï¼Œæ— æ³•å®šä¹‰ä¸ºè¿ç®—ç¬¦",
                             operator_symbol));
     return ProductionNodeId::InvalidId();
   }
@@ -96,20 +100,20 @@ ProductionNodeId SyntaxGenerator::AddBinaryOperator(
   word_attached_data.binary_operator_associate_type =
       binary_operator_associatity_type;
   word_attached_data.binary_operator_priority = binary_operator_priority;
-  // ÏòDFAÉú³ÉÆ÷×¢²á¹Ø¼ü´Ê
+  // å‘DFAç”Ÿæˆå™¨æ³¨å†Œå…³é”®è¯
   bool result = dfa_generator_.AddWord(
       operator_symbol, std::move(word_attached_data),
       frontend::generator::dfa_generator::DfaGenerator::WordPriority(1));
   if (!result) {
-    OutPutError(std::format("ÄÚ²¿´íÎó£ºÎŞ·¨Ìí¼ÓË«Ä¿ÔËËã·ûÕıÔò±í´ïÊ½ {:}",
+    OutPutError(std::format("å†…éƒ¨é”™è¯¯ï¼šæ— æ³•æ·»åŠ åŒç›®è¿ç®—ç¬¦æ­£åˆ™è¡¨è¾¾å¼ {:}",
                             operator_symbol));
     exit(-1);
   }
-  // Êä³ö¹¹½¨¹ı³Ì
-  OutPutInfo(std::format("³É¹¦Ìí¼ÓË«Ä¿ÔËËã·û {:}",
+  // è¾“å‡ºæ„å»ºè¿‡ç¨‹
+  OutPutInfo(std::format("æˆåŠŸæ·»åŠ åŒç›®è¿ç®—ç¬¦ {:}",
                          GetNodeSymbolStringFromId(operator_node_symbol_id)));
   OutPutInfo(std::format(
-      "ÔËËã·ûÃûID£º{:} ÔËËã·ûÌåID£º{:} ÔËËã·ûID£º{:} Ë«Ä¿ÔËËã·ûÓÅÏÈ¼¶£º{:}",
+      "è¿ç®—ç¬¦åIDï¼š{:} è¿ç®—ç¬¦ä½“IDï¼š{:} è¿ç®—ç¬¦IDï¼š{:} åŒç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§ï¼š{:}",
       operator_node_symbol_id.GetRawValue(),
       operator_body_symbol_id.GetRawValue(), operator_node_id.GetRawValue(),
       binary_operator_priority.GetRawValue()));
@@ -117,20 +121,20 @@ ProductionNodeId SyntaxGenerator::AddBinaryOperator(
 }
 
 ProductionNodeId SyntaxGenerator::AddLeftUnaryOperator(
-    std::string&& operator_symbol,
+    std::string node_symbol, std::string operator_symbol,
     OperatorAssociatityType unary_operator_associatity_type,
     OperatorPriority unary_operator_priority) {
-  // ÔËËã·û²úÉúÊ½ÃûÓëÔËËã·ûÏàÍ¬
+  // è¿ç®—ç¬¦äº§ç”Ÿå¼åä¸è¿ç®—ç¬¦ç›¸åŒ
   auto [operator_node_symbol_id, operator_node_symbol_inserted] =
-      AddNodeSymbol(operator_symbol);
+      AddNodeSymbol(node_symbol);
   if (!operator_node_symbol_inserted) [[unlikely]] {
-    OutPutError(std::format("ÔËËã·û£º{:} ÒÑ¶¨Òå\n", operator_symbol));
+    OutPutError(std::format("è¿ç®—ç¬¦ï¼š{:} å·²å®šä¹‰\n", node_symbol));
     return ProductionNodeId::InvalidId();
   }
   auto [operator_body_symbol_id, operator_body_symbol_inserted] =
       AddBodySymbol(operator_symbol);
   if (!operator_body_symbol_inserted) {
-    OutPutError(std::format("ÔËËã·û£º{:} ÒÑÔÚDFAÖĞÌí¼Ó£¬ÎŞ·¨¶¨ÒåÎªÔËËã·û\n",
+    OutPutError(std::format("è¿ç®—ç¬¦ï¼š{:} å·²åœ¨DFAä¸­æ·»åŠ ï¼Œæ— æ³•å®šä¹‰ä¸ºè¿ç®—ç¬¦\n",
                             operator_symbol));
     return ProductionNodeId::InvalidId();
   }
@@ -145,20 +149,20 @@ ProductionNodeId SyntaxGenerator::AddLeftUnaryOperator(
   word_attached_data.unary_operator_associate_type =
       unary_operator_associatity_type;
   word_attached_data.unary_operator_priority = unary_operator_priority;
-  // ÏòDFAÉú³ÉÆ÷×¢²á¹Ø¼ü´Ê
+  // å‘DFAç”Ÿæˆå™¨æ³¨å†Œå…³é”®è¯
   bool result = dfa_generator_.AddWord(
       operator_symbol, std::move(word_attached_data),
       frontend::generator::dfa_generator::DfaGenerator::WordPriority(1));
   if (!result) [[unlikely]] {
-    OutPutError(std::format("ÄÚ²¿´íÎó£ºÎŞ·¨Ìí¼Ó×ó²àµ¥Ä¿ÔËËã·ûÕıÔò±í´ïÊ½ {:}",
+    OutPutError(std::format("å†…éƒ¨é”™è¯¯ï¼šæ— æ³•æ·»åŠ å·¦ä¾§å•ç›®è¿ç®—ç¬¦æ­£åˆ™è¡¨è¾¾å¼ {:}",
                             operator_symbol));
     exit(-1);
   }
-  // Êä³ö¹¹½¨¹ı³Ì
-  OutPutInfo(std::format("³É¹¦Ìí¼Ó×ó²àµ¥Ä¿ÔËËã·û {:}",
+  // è¾“å‡ºæ„å»ºè¿‡ç¨‹
+  OutPutInfo(std::format("æˆåŠŸæ·»åŠ å·¦ä¾§å•ç›®è¿ç®—ç¬¦ {:}",
                          GetNodeSymbolStringFromId(operator_node_symbol_id)));
   OutPutInfo(std::format(
-      "ÔËËã·ûÃûID£º{:} ÔËËã·ûÌåID£º{:} ÔËËã·ûID£º{:} ×ó²àµ¥Ä¿ÔËËã·ûÓÅÏÈ¼¶£º{:}",
+      "è¿ç®—ç¬¦åIDï¼š{:} è¿ç®—ç¬¦ä½“IDï¼š{:} è¿ç®—ç¬¦IDï¼š{:} å·¦ä¾§å•ç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§ï¼š{:}",
       operator_node_symbol_id.GetRawValue(),
       operator_body_symbol_id.GetRawValue(), operator_node_id.GetRawValue(),
       unary_operator_priority.GetRawValue()));
@@ -166,22 +170,22 @@ ProductionNodeId SyntaxGenerator::AddLeftUnaryOperator(
 }
 
 ProductionNodeId SyntaxGenerator::AddBinaryLeftUnaryOperator(
-    std::string&& operator_symbol,
+    std::string node_symbol, std::string operator_symbol,
     OperatorAssociatityType binary_operator_associatity_type,
     OperatorPriority binary_operator_priority,
     OperatorAssociatityType unary_operator_associatity_type,
     OperatorPriority unary_operator_priority) {
-  // ÔËËã·û²úÉúÊ½ÃûÓëÔËËã·ûÏàÍ¬
+  // è¿ç®—ç¬¦äº§ç”Ÿå¼åä¸è¿ç®—ç¬¦ç›¸åŒ
   auto [operator_node_symbol_id, operator_node_symbol_inserted] =
-      AddNodeSymbol(operator_symbol);
+      AddNodeSymbol(node_symbol);
   if (!operator_node_symbol_inserted) [[unlikely]] {
-    OutPutError(std::format("ÔËËã·û£º{:} ÒÑ¶¨Òå\n", operator_symbol));
+    OutPutError(std::format("è¿ç®—ç¬¦ï¼š{:} å·²å®šä¹‰\n", node_symbol));
     return ProductionNodeId::InvalidId();
   }
   auto [operator_body_symbol_id, operator_body_symbol_inserted] =
       AddBodySymbol(operator_symbol);
   if (!operator_body_symbol_inserted) {
-    OutPutError(std::format("ÔËËã·û£º{:} ÒÑÔÚDFAÖĞÌí¼Ó£¬ÎŞ·¨¶¨ÒåÎªÔËËã·û\n",
+    OutPutError(std::format("è¿ç®—ç¬¦ï¼š{:} å·²åœ¨DFAä¸­æ·»åŠ ï¼Œæ— æ³•å®šä¹‰ä¸ºè¿ç®—ç¬¦\n",
                             operator_symbol));
     return ProductionNodeId::InvalidId();
   }
@@ -200,22 +204,22 @@ ProductionNodeId SyntaxGenerator::AddBinaryLeftUnaryOperator(
   word_attached_data.unary_operator_associate_type =
       unary_operator_associatity_type;
   word_attached_data.unary_operator_priority = unary_operator_priority;
-  // ÏòDFAÉú³ÉÆ÷×¢²á¹Ø¼ü´Ê
+  // å‘DFAç”Ÿæˆå™¨æ³¨å†Œå…³é”®è¯
   bool result = dfa_generator_.AddWord(
       operator_symbol, std::move(word_attached_data),
       frontend::generator::dfa_generator::DfaGenerator::WordPriority(1));
   if (!result) [[unlikely]] {
     OutPutError(
-        std::format("ÄÚ²¿´íÎó£ºÎŞ·¨Ìí¼ÓË«Ä¿ºÍ×ó²àµ¥Ä¿ÔËËã·ûÕıÔò±í´ïÊ½ {:}",
+        std::format("å†…éƒ¨é”™è¯¯ï¼šæ— æ³•æ·»åŠ åŒç›®å’Œå·¦ä¾§å•ç›®è¿ç®—ç¬¦æ­£åˆ™è¡¨è¾¾å¼ {:}",
                     operator_symbol));
     exit(-1);
   }
-  // Êä³ö¹¹½¨¹ı³Ì
-  OutPutInfo(std::format("³É¹¦Ìí¼ÓË«Ä¿ºÍ×ó²àµ¥Ä¿ÔËËã·û {:}",
+  // è¾“å‡ºæ„å»ºè¿‡ç¨‹
+  OutPutInfo(std::format("æˆåŠŸæ·»åŠ åŒç›®å’Œå·¦ä¾§å•ç›®è¿ç®—ç¬¦ {:}",
                          GetNodeSymbolStringFromId(operator_node_symbol_id)));
   OutPutInfo(std::format(
-      "ÔËËã·ûÃûID£º{:} ÔËËã·ûÌåID£º{:} ÔËËã·ûID£º{:} Ë«Ä¿ÔËËã·ûÓÅÏÈ¼¶£º{:} "
-      "×ó²àµ¥Ä¿ÔËËã·ûÓÅÏÈ¼¶£º{:}",
+      "è¿ç®—ç¬¦åIDï¼š{:} è¿ç®—ç¬¦ä½“IDï¼š{:} è¿ç®—ç¬¦IDï¼š{:} åŒç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§ï¼š{:} "
+      "å·¦ä¾§å•ç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§ï¼š{:}",
       operator_node_symbol_id.GetRawValue(),
       operator_body_symbol_id.GetRawValue(), operator_node_id.GetRawValue(),
       binary_operator_priority.GetRawValue(),
@@ -266,28 +270,28 @@ ProductionNodeId SyntaxGenerator::AddNonTerminalProduction(
   assert(!node_symbol.empty() && !subnode_symbols.empty() &&
          class_id.IsValid());
   std::vector<ProductionNodeId> node_ids;
-  // ·ÇÖÕ½á½ÚµãÓë½ÚµãÃûÒ»Ò»¶ÔÓ¦
+  // éç»ˆç»“èŠ‚ç‚¹ä¸èŠ‚ç‚¹åä¸€ä¸€å¯¹åº”
   ProductionNodeId production_node_id =
       GetProductionNodeIdFromNodeSymbol(node_symbol);
   if (!production_node_id.IsValid()) {
-    // ¸Ã·ÇÖÕ½á½ÚµãÃûÎ´×¢²á
+    // è¯¥éç»ˆç»“èŠ‚ç‚¹åæœªæ³¨å†Œ
     SymbolId symbol_id = AddNodeSymbol(node_symbol).first;
     assert(symbol_id.IsValid());
     production_node_id = SubAddNonTerminalNode(symbol_id);
-    // ¼ì²éÌí¼ÓµÄ½ÚµãÊÇ·ñ±»Ç°ÏòÒÀÀµ
+    // æ£€æŸ¥æ·»åŠ çš„èŠ‚ç‚¹æ˜¯å¦è¢«å‰å‘ä¾èµ–
     CheckNonTerminalNodeCanContinue(node_symbol);
   }
   NonTerminalProductionNode& production_node =
       static_cast<NonTerminalProductionNode&>(
           GetProductionNode(production_node_id));
   for (auto& subnode_symbol : subnode_symbols) {
-    // ½«²úÉúÊ½ÌåµÄËùÓĞ²úÉúÊ½Ãû×ª»»Îª½ÚµãID
+    // å°†äº§ç”Ÿå¼ä½“çš„æ‰€æœ‰äº§ç”Ÿå¼åè½¬æ¢ä¸ºèŠ‚ç‚¹ID
     ProductionNodeId subproduction_node_id =
         GetProductionNodeIdFromNodeSymbol(subnode_symbol);
-    // ²úÉúÊ½Ãû
+    // äº§ç”Ÿå¼å
     if (!subproduction_node_id.IsValid()) {
-      // ²úÉúÊ½½ÚµãÎ´¶¨Òå
-      // Ìí¼Ó´ı´¦Àí¼ÇÂ¼
+      // äº§ç”Ÿå¼èŠ‚ç‚¹æœªå®šä¹‰
+      // æ·»åŠ å¾…å¤„ç†è®°å½•
       AddUnableContinueNonTerminalNode(subnode_symbol, std::move(node_symbol),
                                        std::move(subnode_symbols), class_id);
       return ProductionNodeId::InvalidId();
@@ -297,9 +301,9 @@ ProductionNodeId SyntaxGenerator::AddNonTerminalProduction(
   }
   ProductionBodyId body_id =
       production_node.AddBody(std::move(node_ids), class_id);
-  OutPutInfo(std::format("³É¹¦Ìí¼Ó·ÇÖÕ½á½Úµã ") +
+  OutPutInfo(std::format("æˆåŠŸæ·»åŠ éç»ˆç»“èŠ‚ç‚¹ ") +
              FormatSingleProductionBody(production_node_id, body_id));
-  OutPutInfo(std::format("·ÇÖÕ½á½ÚµãID£º{:} µ±Ç°²úÉúÊ½ÌåID£º{:}",
+  OutPutInfo(std::format("éç»ˆç»“èŠ‚ç‚¹IDï¼š{:} å½“å‰äº§ç”Ÿå¼ä½“IDï¼š{:}",
                          production_node_id.GetRawValue(),
                          body_id.GetRawValue()));
   return production_node_id;
@@ -315,7 +319,7 @@ void SyntaxGenerator::SetNonTerminalNodeCouldEmptyReduct(
           GetProductionNode(nonterminal_node_id));
   if (nonterminal_production_node.GetType() !=
       ProductionNodeType::kNonTerminalNode) [[unlikely]] {
-    OutPutError(std::format("ÎŞ·¨ÉèÖÃ·ÇÖÕ½á²úÉúÊ½ÒÔÍâµÄ²úÉúÊ½£º{:} ÔÊĞí¿Õ¹æÔ¼",
+    OutPutError(std::format("æ— æ³•è®¾ç½®éç»ˆç»“äº§ç”Ÿå¼ä»¥å¤–çš„äº§ç”Ÿå¼ï¼š{:} å…è®¸ç©ºè§„çº¦",
                             nonterminal_node_symbol));
     exit(-1);
   }
@@ -341,13 +345,13 @@ inline ProductionNodeId SyntaxGenerator::AddEndNode() {
 void SyntaxGenerator::SetRootProduction(
     const std::string& production_node_symbol) {
   if (GetRootProductionNodeId().IsValid()) [[unlikely]] {
-    OutPutError(std::format("½öÇÒ±ØĞëÉùÃ÷Ò»¸ö¸ù²úÉúÊ½"));
+    OutPutError(std::format("ä»…ä¸”å¿…é¡»å£°æ˜ä¸€ä¸ªæ ¹äº§ç”Ÿå¼"));
     exit(-1);
   }
   ProductionNodeId production_node_id =
       GetProductionNodeIdFromNodeSymbol(production_node_symbol);
   if (!production_node_id.IsValid()) [[unlikely]] {
-    OutPutError(std::format("²»´æÔÚ·ÇÖÕ½á²úÉúÊ½ {:}", production_node_symbol));
+    OutPutError(std::format("ä¸å­˜åœ¨éç»ˆç»“äº§ç”Ÿå¼ {:}", production_node_symbol));
     exit(-1);
   }
   SetRootProductionNodeId(production_node_id);
@@ -386,7 +390,7 @@ inline const std::vector<ProductionNodeId>& SyntaxGenerator::GetProductionBody(
   NonTerminalProductionNode& nonterminal_node =
       static_cast<NonTerminalProductionNode&>(
           GetProductionNode(production_node_id));
-  // Ö»ÓĞ·ÇÖÕ½á½Úµã²ÅÓĞ¶à¸ö²úÉúÊ½Ìå£¬¶ÔÆäËü½Úµãµ÷ÓÃ¸Ãº¯ÊıÎŞÒâÒå
+  // åªæœ‰éç»ˆç»“èŠ‚ç‚¹æ‰æœ‰å¤šä¸ªäº§ç”Ÿå¼ä½“ï¼Œå¯¹å…¶å®ƒèŠ‚ç‚¹è°ƒç”¨è¯¥å‡½æ•°æ— æ„ä¹‰
   assert(nonterminal_node.GetType() == ProductionNodeType::kNonTerminalNode);
   return nonterminal_node.GetBody(production_body_id).production_body;
 }
@@ -451,7 +455,7 @@ void SyntaxGenerator::GetNonTerminalNodeFirstNodeIds(
   assert(production_node.GetType() == ProductionNodeType::kNonTerminalNode);
   for (auto& body : production_node.GetAllBody()) {
     NextWordToShiftIndex node_id_index(0);
-    // ÕıÔÚ´¦ÀíµÄ²úÉúÊ½½ÚµãµÄID
+    // æ­£åœ¨å¤„ç†çš„äº§ç”Ÿå¼èŠ‚ç‚¹çš„ID
     ProductionNodeId node_id;
     while (node_id_index < body.production_body.size()) {
       node_id = body.production_body[node_id_index];
@@ -461,18 +465,18 @@ void SyntaxGenerator::GetNonTerminalNodeFirstNodeIds(
         break;
       }
       assert(node_id.IsValid());
-      // ¼ì²é¸Ã½ÚµãÊÇ·ñÒÑ¾­´¦Àí¹ı
+      // æ£€æŸ¥è¯¥èŠ‚ç‚¹æ˜¯å¦å·²ç»å¤„ç†è¿‡
       if (processed_nodes.find(node_id) == processed_nodes.end()) {
-        // Èç¹û¸Ã½ÚµãÎ´´¦ÀíÔò»ñÈ¡¸Ã½ÚµãµÄfirst½ÚµãID²¢Ìí¼Óµ½Ö÷first½ÚµãID¼¯ºÏÖĞ
+        // å¦‚æœè¯¥èŠ‚ç‚¹æœªå¤„ç†åˆ™è·å–è¯¥èŠ‚ç‚¹çš„firstèŠ‚ç‚¹IDå¹¶æ·»åŠ åˆ°ä¸»firstèŠ‚ç‚¹IDé›†åˆä¸­
         GetNonTerminalNodeFirstNodeIds(node_id, result,
                                        std::move(processed_nodes));
       }
       if (static_cast<NonTerminalProductionNode&>(GetProductionNode(node_id))
               .CouldBeEmptyReduct()) {
-        // ¸Ã·ÇÖÕ½á½Úµã¿ÉÒÔ¿Õ¹æÔ¼£¬ĞèÒª¿¼ÂÇºóÃæµÄ½Úµã
+        // è¯¥éç»ˆç»“èŠ‚ç‚¹å¯ä»¥ç©ºè§„çº¦ï¼Œéœ€è¦è€ƒè™‘åé¢çš„èŠ‚ç‚¹
         ++node_id_index;
       } else {
-        // ÒÑ´¦ÀíËùÓĞ½Úµã£¬Ìø³öÑ­»·
+        // å·²å¤„ç†æ‰€æœ‰èŠ‚ç‚¹ï¼Œè·³å‡ºå¾ªç¯
         break;
       }
     }
@@ -493,11 +497,11 @@ SyntaxGenerator::ForwardNodesContainer SyntaxGenerator::First(
         forward_nodes.insert(node_id);
         break;
       case ProductionNodeType::kNonTerminalNode:
-        // ºÏ²¢µ±Ç°¡¤ÓÒ²à·ÇÖÕ½á½Úµã¿ÉÄÜµÄËùÓĞµ¥´ÊID
+        // åˆå¹¶å½“å‰Â·å³ä¾§éç»ˆç»“èŠ‚ç‚¹å¯èƒ½çš„æ‰€æœ‰å•è¯ID
         GetNonTerminalNodeFirstNodeIds(node_id, &forward_nodes);
         if (static_cast<NonTerminalProductionNode&>(GetProductionNode(node_id))
                 .CouldBeEmptyReduct()) {
-          // µ±Ç°¡¤ÓÒ²àµÄ·ÇÖÕ½á½Úµã¿ÉÒÔ¿Õ¹æÔ¼£¬ĞèÒª¿¼ÂÇËüÏÂÒ»¸ö½ÚµãµÄÇé¿ö
+          // å½“å‰Â·å³ä¾§çš„éç»ˆç»“èŠ‚ç‚¹å¯ä»¥ç©ºè§„çº¦ï¼Œéœ€è¦è€ƒè™‘å®ƒä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„æƒ…å†µ
           forward_nodes.merge(
               First(production_node_id, production_body_id,
                     NextWordToShiftIndex(next_word_to_shift_index + 1),
@@ -516,31 +520,31 @@ SyntaxGenerator::ForwardNodesContainer SyntaxGenerator::First(
 
 bool SyntaxGenerator::ProductionItemSetClosure(
     ProductionItemSetId production_item_set_id) {
-  OutPutInfo(std::format("¶ÔID = {:}µÄÏî¼¯Ö´ĞĞ±Õ°ü²Ù×÷",
+  OutPutInfo(std::format("å¯¹ID = {:}çš„é¡¹é›†æ‰§è¡Œé—­åŒ…æ“ä½œ",
                          production_item_set_id.GetRawValue()));
-  OutPutInfo(std::format("¸ÃÏî¼¯¾ßÓĞµÄÏîºÍÏòÇ°¿´·ûºÅÈçÏÂ£º\n") +
+  OutPutInfo(std::format("è¯¥é¡¹é›†å…·æœ‰çš„é¡¹å’Œå‘å‰çœ‹ç¬¦å·å¦‚ä¸‹ï¼š\n") +
              FormatProductionItems(production_item_set_id));
   ProductionItemSet& production_item_set =
       GetProductionItemSet(production_item_set_id);
   if (production_item_set.IsClosureAvailable()) {
-    // ±Õ°üÓĞĞ§£¬ÎŞĞèÖØÇó
+    // é—­åŒ…æœ‰æ•ˆï¼Œæ— éœ€é‡æ±‚
     return false;
   }
   SyntaxAnalysisTableEntry& syntax_analysis_table_entry =
       GetSyntaxAnalysisTableEntry(
           production_item_set.GetSyntaxAnalysisTableEntryId());
-  // Çå¿ÕÓï·¨·ÖÎö±í
+  // æ¸…ç©ºè¯­æ³•åˆ†æè¡¨
   syntax_analysis_table_entry.Clear();
-  // Çå¿Õ·ÇºËĞÄÏî
+  // æ¸…ç©ºéæ ¸å¿ƒé¡¹
   production_item_set.ClearNotMainItem();
-  // ´æ´¢µ±Ç°´ıÕ¹¿ªµÄÏî
-  // ´æ´¢Ö¸Ïò´ıÕ¹¿ªÏîµÄµü´úÆ÷
+  // å­˜å‚¨å½“å‰å¾…å±•å¼€çš„é¡¹
+  // å­˜å‚¨æŒ‡å‘å¾…å±•å¼€é¡¹çš„è¿­ä»£å™¨
   std::queue<ProductionItemAndForwardNodesContainer::const_iterator>
       items_waiting_process;
   const auto& production_items_and_forward_nodes =
       GetProductionItemsAndForwardNodes(production_item_set_id);
   for (auto& iter : GetProductionItemSetMainItems(production_item_set_id)) {
-    // ½«Ïî¼¯ÖĞËùÓĞºËĞÄÏîÑ¹Èë´ı´¦Àí¶ÓÁĞ
+    // å°†é¡¹é›†ä¸­æ‰€æœ‰æ ¸å¿ƒé¡¹å‹å…¥å¾…å¤„ç†é˜Ÿåˆ—
     items_waiting_process.push(iter);
   }
   while (!items_waiting_process.empty()) {
@@ -556,20 +560,20 @@ bool SyntaxGenerator::ProductionItemSetClosure(
     ProductionNodeId next_production_node_id = GetProductionNodeIdInBody(
         production_node_id, production_body_id, next_word_to_shift_index);
     if (!next_production_node_id.IsValid()) {
-      // ÎŞºó¼Ì½Úµã£¬ÉèÖÃ¹æÔ¼ÌõÄ¿
+      // æ— åç»§èŠ‚ç‚¹ï¼Œè®¾ç½®è§„çº¦æ¡ç›®
 
-      // ×é×°¹æÔ¼Ê¹ÓÃµÄÊı¾İ
+      // ç»„è£…è§„çº¦ä½¿ç”¨çš„æ•°æ®
       SyntaxAnalysisTableEntry::ReductAttachedData reduct_attached_data(
           production_node_id,
           GetProcessFunctionClass(production_node_id, production_body_id),
           GetProductionBody(production_node_id, production_body_id));
-      OutPutInfo(std::format("Ïî£º") + FormatProductionItem(item_now->first));
-      OutPutInfo(std::format("ÔÚÏòÇ°¿´·ûºÅ£º") +
-                 FormatLookForwardSymbols(item_now->second) + " ÏÂÖ´ĞĞ¹æÔ¼");
+      OutPutInfo(std::format("é¡¹ï¼š") + FormatProductionItem(item_now->first));
+      OutPutInfo(std::format("åœ¨å‘å‰çœ‹ç¬¦å·ï¼š") +
+                 FormatLookForwardSymbols(item_now->second) + " ä¸‹æ‰§è¡Œè§„çº¦");
       const auto& production_body =
           production_node_now.GetBody(production_body_id).production_body;
       for (auto node_id : item_now->second) {
-        // ¶ÔÃ¿¸öÏòÇ°¿´·ûºÅÉèÖÃ¹æÔ¼²Ù×÷
+        // å¯¹æ¯ä¸ªå‘å‰çœ‹ç¬¦å·è®¾ç½®è§„çº¦æ“ä½œ
         syntax_analysis_table_entry.SetTerminalNodeActionAndAttachedData(
             node_id, reduct_attached_data);
       }
@@ -580,50 +584,50 @@ bool SyntaxGenerator::ProductionItemSetClosure(
             GetProductionNode(next_production_node_id));
     if (next_production_node.GetType() !=
         ProductionNodeType::kNonTerminalNode) {
-      OutPutInfo(std::format("Ïî£º") + FormatProductionItem(item_now->first) +
-                 std::format(" ÓÉÓÚÏÂÒ»¸öÒÆÈëµÄ·ûºÅÎªÖÕ½á½Úµã¶øÖÕÖ¹Õ¹¿ª"));
+      OutPutInfo(std::format("é¡¹ï¼š") + FormatProductionItem(item_now->first) +
+                 std::format(" ç”±äºä¸‹ä¸€ä¸ªç§»å…¥çš„ç¬¦å·ä¸ºç»ˆç»“èŠ‚ç‚¹è€Œç»ˆæ­¢å±•å¼€"));
       continue;
     }
-    // Õ¹¿ª·ÇÖÕ½á½Úµã£¬²¢ÎªÆä´´½¨ÏòÇ°¿´·ûºÅ¼¯
+    // å±•å¼€éç»ˆç»“èŠ‚ç‚¹ï¼Œå¹¶ä¸ºå…¶åˆ›å»ºå‘å‰çœ‹ç¬¦å·é›†
     ForwardNodesContainer&& forward_node_ids = First(
         production_node_id, production_body_id,
         NextWordToShiftIndex(next_word_to_shift_index + 1), item_now->second);
-    OutPutInfo(std::format("Ïî£º") + FormatProductionItem(item_now->first) +
-               std::format(" ÕıÔÚÕ¹¿ª·ÇÖÕ½á½Úµã {:}",
+    OutPutInfo(std::format("é¡¹ï¼š") + FormatProductionItem(item_now->first) +
+               std::format(" æ­£åœ¨å±•å¼€éç»ˆç»“èŠ‚ç‚¹ {:}",
                            GetNextNodeToShiftSymbolString(
                                production_node_id, production_body_id,
                                next_word_to_shift_index)));
-    OutPutInfo(std::format("¸Ã·ÇÖÕ½á½Úµã¾ßÓĞµÄÈ«²¿ÏòÇ°¿´·ûºÅ£º") +
+    OutPutInfo(std::format("è¯¥éç»ˆç»“èŠ‚ç‚¹å…·æœ‰çš„å…¨éƒ¨å‘å‰çœ‹ç¬¦å·ï¼š") +
                FormatLookForwardSymbols(forward_node_ids));
     for (auto body_id : next_production_node.GetAllBodyIds()) {
-      // ½«¸Ã·ÇÖÕ½á½ÚµãÖĞµÄÃ¿¸ö²úÉúÊ½Ìå¼ÓÈëµ½production_item_setÖĞ£¬µãÔÚ×î×ó²à
+      // å°†è¯¥éç»ˆç»“èŠ‚ç‚¹ä¸­çš„æ¯ä¸ªäº§ç”Ÿå¼ä½“åŠ å…¥åˆ°production_item_setä¸­ï¼Œç‚¹åœ¨æœ€å·¦ä¾§
       auto [iter, inserted] = AddItemAndForwardNodeIdsToProductionItem(
           production_item_set_id,
           ProductionItem(next_production_node_id, body_id,
                          NextWordToShiftIndex(0)),
           forward_node_ids);
       if (inserted) {
-        // Èç¹û²åÈëĞÂµÄÏîÔòÌí¼Óµ½¶ÓÁĞÖĞµÈ´ı´¦Àí£¬²¢¼ÇÂ¼¸ÃÏîÊôÓÚµÄĞÂÏî¼¯ID
+        // å¦‚æœæ’å…¥æ–°çš„é¡¹åˆ™æ·»åŠ åˆ°é˜Ÿåˆ—ä¸­ç­‰å¾…å¤„ç†ï¼Œå¹¶è®°å½•è¯¥é¡¹å±äºçš„æ–°é¡¹é›†ID
         items_waiting_process.push(iter);
-        OutPutInfo(std::format("ÏòÏî¼¯ÖĞ²åÈëĞÂÏî£º") +
+        OutPutInfo(std::format("å‘é¡¹é›†ä¸­æ’å…¥æ–°é¡¹ï¼š") +
                    FormatProductionItem(iter->first) +
-                   std::format(" ÏòÇ°¿´·ûºÅ£º") +
+                   std::format(" å‘å‰çœ‹ç¬¦å·ï¼š") +
                    FormatLookForwardSymbols(forward_node_ids));
       }
     }
     if (next_production_node.CouldBeEmptyReduct()) {
-      // ¡¤ÓÒ²àµÄ·ÇÖÕ½á½Úµã¿ÉÒÔ¿Õ¹æÔ¼
-      // ÏòÏî¼¯ÖĞÌí¼Ó¿Õ¹æÔ¼ºóµÃµ½µÄÏî£¬ÏòÇ°¿´·ûºÅ¸´ÖÆÔ­À´µÄÏîµÄÏòÇ°¿´·ûºÅ¼¯
+      // Â·å³ä¾§çš„éç»ˆç»“èŠ‚ç‚¹å¯ä»¥ç©ºè§„çº¦
+      // å‘é¡¹é›†ä¸­æ·»åŠ ç©ºè§„çº¦åå¾—åˆ°çš„é¡¹ï¼Œå‘å‰çœ‹ç¬¦å·å¤åˆ¶åŸæ¥çš„é¡¹çš„å‘å‰çœ‹ç¬¦å·é›†
       auto [iter, inserted] = AddItemAndForwardNodeIdsToProductionItem(
           production_item_set_id,
           ProductionItem(production_node_id, production_body_id,
                          NextWordToShiftIndex(next_word_to_shift_index + 1)),
           item_now->second);
       if (inserted) {
-        // Èç¹û²åÈëĞÂµÄÏîÔòÌí¼Óµ½¶ÓÁĞÖĞµÈ´ı´¦Àí
+        // å¦‚æœæ’å…¥æ–°çš„é¡¹åˆ™æ·»åŠ åˆ°é˜Ÿåˆ—ä¸­ç­‰å¾…å¤„ç†
         items_waiting_process.push(iter);
         OutPutInfo(
-            std::format("ÓÉÓÚ·ÇÖÕ½á²úÉúÊ½ {:} ¿ÉÒÔ¿Õ¹æÔ¼£¬ÏòÏî¼¯ÖĞ²åÈëĞÂÏî£º",
+            std::format("ç”±äºéç»ˆç»“äº§ç”Ÿå¼ {:} å¯ä»¥ç©ºè§„çº¦ï¼Œå‘é¡¹é›†ä¸­æ’å…¥æ–°é¡¹ï¼š",
                         GetNextNodeToShiftSymbolString(
                             production_node_id, production_body_id,
                             next_word_to_shift_index)) +
@@ -631,15 +635,15 @@ bool SyntaxGenerator::ProductionItemSetClosure(
                                                       item_now->second));
       }
     }
-    OutPutInfo(std::format("Ïî£º") +
+    OutPutInfo(std::format("é¡¹ï¼š") +
                FormatProductionItemAndLookForwardSymbols(item_now->first,
                                                          item_now->second) +
-               std::format(" ÒÑÕ¹¿ª"));
+               std::format(" å·²å±•å¼€"));
   }
   SetProductionItemSetClosureAvailable(production_item_set_id);
-  OutPutInfo(std::format("Íê³É¶ÔProductionItemID = {:}µÄÏî¼¯µÄ±Õ°ü²Ù×÷",
+  OutPutInfo(std::format("å®Œæˆå¯¹ProductionItemID = {:}çš„é¡¹é›†çš„é—­åŒ…æ“ä½œ",
                          production_item_set_id.GetRawValue()));
-  OutPutInfo(std::format("¸ÃÏî¼¯¾ßÓĞµÄÏîºÍÏòÇ°¿´·ûºÅÈçÏÂ£º\n") +
+  OutPutInfo(std::format("è¯¥é¡¹é›†å…·æœ‰çš„é¡¹å’Œå‘å‰çœ‹ç¬¦å·å¦‚ä¸‹ï¼š\n") +
              FormatProductionItems(production_item_set_id));
   return true;
 }
@@ -648,10 +652,10 @@ ProductionItemSetId SyntaxGenerator::GetProductionItemSetIdFromProductionItems(
     const std::list<SyntaxGenerator::ProductionItemAndForwardNodesContainer::
                         const_iterator>& items) {
 #ifdef _DEBUG
-  // ¼ì²é²ÎÊıÖĞ²»´æÔÚÖØ¸´Ïî
-  // ËùÓĞµÄ²ÎÊı¶¼ÊÇÒÆÈëÏàÍ¬µÄ½ÚµãÇ°µÄÏî£¬ÒÆÈëÏàÍ¬½ÚµãºóµÄÏîÏàÍ¬µÄ³ä·Ö±ØÒªÌõ¼şÎª
-  // ÒÆÈëÏàÍ¬½ÚµãÇ°µÄÏîÏàÍ¬
-  // ËùÒÔÖ»Ğè¼ì²éÒÆÈëÏàÍ¬½ÚµãÇ°µÄÏîÊÇ·ñÏàÍ¬
+  // æ£€æŸ¥å‚æ•°ä¸­ä¸å­˜åœ¨é‡å¤é¡¹
+  // æ‰€æœ‰çš„å‚æ•°éƒ½æ˜¯ç§»å…¥ç›¸åŒçš„èŠ‚ç‚¹å‰çš„é¡¹ï¼Œç§»å…¥ç›¸åŒèŠ‚ç‚¹åçš„é¡¹ç›¸åŒçš„å……åˆ†å¿…è¦æ¡ä»¶ä¸º
+  // ç§»å…¥ç›¸åŒèŠ‚ç‚¹å‰çš„é¡¹ç›¸åŒ
+  // æ‰€ä»¥åªéœ€æ£€æŸ¥ç§»å…¥ç›¸åŒèŠ‚ç‚¹å‰çš„é¡¹æ˜¯å¦ç›¸åŒ
   for (auto iter = items.cbegin(); iter != items.cend(); ++iter) {
     auto compare_iter = iter;
     while (++compare_iter != items.cend()) {
@@ -660,20 +664,20 @@ ProductionItemSetId SyntaxGenerator::GetProductionItemSetIdFromProductionItems(
   }
 #endif  // _DEBUG
 
-  // ´æ´¢Ïî¼¯ID°üº¬¼¸¸ö¸ø¶¨ÏîµÄ¸öÊı£¬Ö»ÓĞ°üº¬È«²¿¸ø¶¨Ïî²Å¿ÉÄÜ³ÉÎªÕâĞ©ÏîÊôÓÚµÄÏî¼¯
+  // å­˜å‚¨é¡¹é›†IDåŒ…å«å‡ ä¸ªç»™å®šé¡¹çš„ä¸ªæ•°ï¼Œåªæœ‰åŒ…å«å…¨éƒ¨ç»™å®šé¡¹æ‰å¯èƒ½æˆä¸ºè¿™äº›é¡¹å±äºçš„é¡¹é›†
   std::unordered_map<ProductionItemSetId, size_t>
       production_item_set_includes_item_size;
-  // Í³¼ÆÏî¼¯°üº¬¸ø¶¨ÏîµÄ¸öÊı
+  // ç»Ÿè®¡é¡¹é›†åŒ…å«ç»™å®šé¡¹çš„ä¸ªæ•°
   for (const auto& item : items) {
-    // ²ğ·ÖÒÆÈë½ÚµãÇ°µÄÏîÊı¾İ
+    // æ‹†åˆ†ç§»å…¥èŠ‚ç‚¹å‰çš„é¡¹æ•°æ®
     auto [production_node_id, production_body_id, next_word_to_shift_index] =
         item->first;
-    // »ñÈ¡ÒÆÈë½ÚµãºóµÄÏîÊı¾İ
+    // è·å–ç§»å…¥èŠ‚ç‚¹åçš„é¡¹æ•°æ®
     ++next_word_to_shift_index;
     const auto& production_item_set_ids_item_belong_to =
         GetProductionItemSetIdFromProductionItem(
             production_node_id, production_body_id, next_word_to_shift_index);
-    // ÓÅ»¯ÊÖ¶Î£¬ÈÎÒâ¸ø¶¨Ïî²»ÊôÓÚÈÎºÎÏî¼¯Ôò²»´æÔÚ°üº¬ËùÓĞ¸ø¶¨ÏîµÄÏî¼¯
+    // ä¼˜åŒ–æ‰‹æ®µï¼Œä»»æ„ç»™å®šé¡¹ä¸å±äºä»»ä½•é¡¹é›†åˆ™ä¸å­˜åœ¨åŒ…å«æ‰€æœ‰ç»™å®šé¡¹çš„é¡¹é›†
     if (production_item_set_ids_item_belong_to.empty()) [[likely]] {
       return ProductionItemSetId::InvalidId();
     }
@@ -681,24 +685,24 @@ ProductionItemSetId SyntaxGenerator::GetProductionItemSetIdFromProductionItems(
       auto [iter, inserted] = production_item_set_includes_item_size.emplace(
           production_item_set_id, 1);
       if (!inserted) {
-        // ¸ÃÏî¼¯IDÒÑ¾­¼ÇÂ¼£¬Ôö¼Ó¸ÃÏî¼¯ID³öÏÖµÄ´ÎÊı
+        // è¯¥é¡¹é›†IDå·²ç»è®°å½•ï¼Œå¢åŠ è¯¥é¡¹é›†IDå‡ºç°çš„æ¬¡æ•°
         ++iter->second;
       }
     }
   }
-  // ¼ì²éËùÓĞ³öÏÖ¹ıµÄÏî¼¯ID£¬ÕÒ³ö°üº¬ËùÓĞ¸ø¶¨ÏîµÄÏî¼¯ID
+  // æ£€æŸ¥æ‰€æœ‰å‡ºç°è¿‡çš„é¡¹é›†IDï¼Œæ‰¾å‡ºåŒ…å«æ‰€æœ‰ç»™å®šé¡¹çš„é¡¹é›†ID
   auto iter = production_item_set_includes_item_size.begin();
   for (; iter != production_item_set_includes_item_size.end(); ++iter) {
     if (iter->second != items.size()) [[likely]] {
-      // ¸ÃÏî¼¯Ã»°üº¬ËùÓĞÏî
+      // è¯¥é¡¹é›†æ²¡åŒ…å«æ‰€æœ‰é¡¹
       continue;
     }
-    // ¼ì²éÊÇ·ñËùÓĞÏî¶¼ÊÇ¸ÃÏî¼¯µÄºËĞÄÏî
+    // æ£€æŸ¥æ˜¯å¦æ‰€æœ‰é¡¹éƒ½æ˜¯è¯¥é¡¹é›†çš„æ ¸å¿ƒé¡¹
     bool all_item_is_main_item = true;
     ProductionItemSet& production_item_set_may_belong_to =
         GetProductionItemSet(iter->first);
     for (const auto& item : items) {
-      // ¹¹ÔìÒÆÈë½ÚµãºóµÃµ½µÄÏî
+      // æ„é€ ç§»å…¥èŠ‚ç‚¹åå¾—åˆ°çš„é¡¹
       auto item_after_shift = item->first;
       ++std::get<NextWordToShiftIndex>(item_after_shift);
       if (!production_item_set_may_belong_to.IsMainItem(item_after_shift)) {
@@ -706,7 +710,8 @@ ProductionItemSetId SyntaxGenerator::GetProductionItemSetIdFromProductionItems(
         break;
       }
     }
-    if (all_item_is_main_item) {
+    if (all_item_is_main_item &&
+        items.size() == production_item_set_may_belong_to.MainItemSize()) {
       return iter->first;
     }
   }
@@ -716,30 +721,30 @@ ProductionItemSetId SyntaxGenerator::GetProductionItemSetIdFromProductionItems(
 bool SyntaxGenerator::
     SpreadLookForwardSymbolAndConstructSyntaxAnalysisTableEntry(
         ProductionItemSetId production_item_set_id) {
-  // Èç¹ûÎ´Ö´ĞĞ±Õ°ü²Ù×÷ÔòÎŞĞèÖ´ĞĞ´«²¥²½Öè
+  // å¦‚æœæœªæ‰§è¡Œé—­åŒ…æ“ä½œåˆ™æ— éœ€æ‰§è¡Œä¼ æ’­æ­¥éª¤
   if (!ProductionItemSetClosure(production_item_set_id)) [[unlikely]] {
     OutPutInfo(std::format(
-        "ID = {:}µÄÏî¼¯ÔÚÇó±Õ°üºóÃ»ÓĞÈÎºÎ¸ü¸Ä£¬ÎŞĞèÖØĞÂ´«²¥ÏòÇ°¿´·ûºÅ",
+        "ID = {:}çš„é¡¹é›†åœ¨æ±‚é—­åŒ…åæ²¡æœ‰ä»»ä½•æ›´æ”¹ï¼Œæ— éœ€é‡æ–°ä¼ æ’­å‘å‰çœ‹ç¬¦å·",
         production_item_set_id.GetRawValue()));
     return false;
   }
-  OutPutInfo(std::format("¶ÔID = {:}µÄÏî¼¯´«²¥ÏòÇ°¿´·ûºÅ",
+  OutPutInfo(std::format("å¯¹ID = {:}çš„é¡¹é›†ä¼ æ’­å‘å‰çœ‹ç¬¦å·",
                          production_item_set_id.GetRawValue()));
-  // Ö´ĞĞ±Õ°ü²Ù×÷ºó¿ÉÒÔ¿Õ¹æÔ¼´ïµ½µÄÃ¿Ò»Ïî¶¼ÔÚproduction_item_setÄÚ
-  // ËùÒÔ´¦ÀíÊ±ÎŞĞè¿¼ÂÇÄ³Ïî¿Õ¹æÔ¼¿ÉÄÜ´ïµ½µÄÏî£¬ÒòÎªÕâĞ©Ïî¶¼´æÔÚÓÚproduction_item_setÄÚ
+  // æ‰§è¡Œé—­åŒ…æ“ä½œåå¯ä»¥ç©ºè§„çº¦è¾¾åˆ°çš„æ¯ä¸€é¡¹éƒ½åœ¨production_item_setå†…
+  // æ‰€ä»¥å¤„ç†æ—¶æ— éœ€è€ƒè™‘æŸé¡¹ç©ºè§„çº¦å¯èƒ½è¾¾åˆ°çš„é¡¹ï¼Œå› ä¸ºè¿™äº›é¡¹éƒ½å­˜åœ¨äºproduction_item_setå†…
 
-  // ĞèÒª´«²¥ÏòÇ°¿´·ûºÅµÄproduction_item_setµÄID£¬ÀïÃæµÄID¿ÉÄÜÖØ¸´
+  // éœ€è¦ä¼ æ’­å‘å‰çœ‹ç¬¦å·çš„production_item_setçš„IDï¼Œé‡Œé¢çš„IDå¯èƒ½é‡å¤
   std::list<ProductionItemSetId> production_item_set_waiting_spread_ids;
   SyntaxAnalysisTableEntryId syntax_analysis_table_entry_id =
       GetProductionItemSet(production_item_set_id)
           .GetSyntaxAnalysisTableEntryId();
-  // ¸ù¾İ×ªÒÆÌõ¼ş·ÖÀàÏî£¬ÒÔ±ãÖ®ºóÑ°ÕÒgotoºóµÄÏîËùÊôÏî¼¯
-  // ¼üÊÇ×ªÒÆÌõ¼ş£¬ÖµÊÇÒÆÈë¼üÖµÇ°µÄÏî
+  // æ ¹æ®è½¬ç§»æ¡ä»¶åˆ†ç±»é¡¹ï¼Œä»¥ä¾¿ä¹‹åå¯»æ‰¾gotoåçš„é¡¹æ‰€å±é¡¹é›†
+  // é”®æ˜¯è½¬ç§»æ¡ä»¶ï¼Œå€¼æ˜¯ç§»å…¥é”®å€¼å‰çš„é¡¹
   std::unordered_map<
       ProductionNodeId,
       std::list<ProductionItemAndForwardNodesContainer::const_iterator>>
       goto_table;
-  // ÊÕ¼¯ËùÓĞ×ªÒÆÌõ¼ş
+  // æ”¶é›†æ‰€æœ‰è½¬ç§»æ¡ä»¶
   const auto& items_and_forward_nodes =
       GetProductionItemsAndForwardNodes(production_item_set_id);
   for (auto iter = items_and_forward_nodes.cbegin();
@@ -753,62 +758,62 @@ bool SyntaxGenerator::
         production_node_now.GetProductionNodeInBody(production_body_id,
                                                     next_word_to_shift_index);
     if (next_production_node_id.IsValid()) [[unlikely]] {
-      // ¸ÃÏî¿ÉÒÔ¼ÌĞøÒÆÈë·ûºÅ
+      // è¯¥é¡¹å¯ä»¥ç»§ç»­ç§»å…¥ç¬¦å·
       goto_table[next_production_node_id].emplace_back(iter);
     }
   }
-  // ÕÒµ½Ã¿¸ö×ªÒÆÌõ¼şÏÂµÄËùÓĞÏîÊÇ·ñ´æÔÚ¹²Í¬ËùÊôÏî¼¯
-  // Èç¹û´æÔÚÔòÉèÖÃ×ªÒÆµ½¸ÃÏî¼¯²¢´«²¥ÏòÇ°¿´·ûºÅ£¬·ñÔò½¨Á¢ĞÂÏî¼¯²¢Ìí¼ÓËùÓĞÏî
+  // æ‰¾åˆ°æ¯ä¸ªè½¬ç§»æ¡ä»¶ä¸‹çš„æ‰€æœ‰é¡¹æ˜¯å¦å­˜åœ¨å…±åŒæ‰€å±é¡¹é›†
+  // å¦‚æœå­˜åœ¨åˆ™è®¾ç½®è½¬ç§»åˆ°è¯¥é¡¹é›†å¹¶ä¼ æ’­å‘å‰çœ‹ç¬¦å·ï¼Œå¦åˆ™å»ºç«‹æ–°é¡¹é›†å¹¶æ·»åŠ æ‰€æœ‰é¡¹
   for (const auto& transform_condition_and_transformed_data : goto_table) {
-    // »ñÈ¡×ªÒÆºóÏî¼¯ÊôÓÚµÄÏî¼¯µÄID
+    // è·å–è½¬ç§»åé¡¹é›†å±äºçš„é¡¹é›†çš„ID
     ProductionItemSetId production_item_set_after_transform_id =
         GetProductionItemSetIdFromProductionItems(
             transform_condition_and_transformed_data.second);
     SyntaxAnalysisTableEntryId syntax_analysis_table_entry_id_after_transform;
     if (production_item_set_after_transform_id.IsValid()) [[unlikely]] {
-      // ×ªÒÆµ½µÄÏî¼¯ÒÑ´æÔÚ
-      // ×ªÒÆºóµ½´ïµÄÓï·¨·ÖÎö±íÌõÄ¿
+      // è½¬ç§»åˆ°çš„é¡¹é›†å·²å­˜åœ¨
+      // è½¬ç§»ååˆ°è¾¾çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®
       syntax_analysis_table_entry_id_after_transform =
           GetProductionItemSet(production_item_set_after_transform_id)
               .GetSyntaxAnalysisTableEntryId();
       bool new_forward_node_inserted = false;
-      // Ìí¼Ó×ªÒÆÌõ¼şÏÂ×ªÒÆµ½µÄÕâĞ©ÏîµÄÏòÇ°¿´·ûºÅ
+      // æ·»åŠ è½¬ç§»æ¡ä»¶ä¸‹è½¬ç§»åˆ°çš„è¿™äº›é¡¹çš„å‘å‰çœ‹ç¬¦å·
       for (auto& item_and_forward_nodes_iter :
            transform_condition_and_transformed_data.second) {
-        // ¹¹½¨ÒÆÈë·ûºÅºóµÄÏî
+        // æ„å»ºç§»å…¥ç¬¦å·åçš„é¡¹
         ProductionItem shifted_item = item_and_forward_nodes_iter->first;
-        // »ñÈ¡ÒÆÈë·ûºÅºóµÄÏîÊı¾İ
+        // è·å–ç§»å…¥ç¬¦å·åçš„é¡¹æ•°æ®
         ++std::get<NextWordToShiftIndex>(shifted_item);
         new_forward_node_inserted |=
             AddForwardNodes(production_item_set_after_transform_id,
                             shifted_item, item_and_forward_nodes_iter->second);
         OutPutInfo(std::format(
-            "ÉèÖÃÏî£º{:} ÔÚÏòÇ°¿´·ûºÅ {:} ÏÂÖ´ĞĞÒÆÈë²Ù×÷",
+            "è®¾ç½®é¡¹ï¼š{:} åœ¨å‘å‰çœ‹ç¬¦å· {:} ä¸‹æ‰§è¡Œç§»å…¥æ“ä½œ",
             FormatProductionItem(item_and_forward_nodes_iter->first),
             GetNodeSymbolStringFromProductionNodeId(
                 transform_condition_and_transformed_data.first)));
       }
-      // Èç¹ûÏòÒÑÓĞÏî¼¯µÄÏîÖĞÌí¼ÓÁËĞÂµÄÏòÇ°¿´·ûºÅÔòÖØĞÂ´«²¥¸ÃÏî
+      // å¦‚æœå‘å·²æœ‰é¡¹é›†çš„é¡¹ä¸­æ·»åŠ äº†æ–°çš„å‘å‰çœ‹ç¬¦å·åˆ™é‡æ–°ä¼ æ’­è¯¥é¡¹
       if (new_forward_node_inserted) {
         production_item_set_waiting_spread_ids.push_back(
             production_item_set_after_transform_id);
         OutPutInfo(std::format(
             "ProductionItemSet ID:{:} "
-            "µÄÏî¼¯ÓÉÓÚÌí¼ÓÁËĞÂÏî/ĞÂÏòÇ°¿´·ûºÅ£¬ÖØĞÂ´«²¥¸ÃÏî¼¯µÄÏòÇ°¿´·ûºÅ",
+            "çš„é¡¹é›†ç”±äºæ·»åŠ äº†æ–°é¡¹/æ–°å‘å‰çœ‹ç¬¦å·ï¼Œé‡æ–°ä¼ æ’­è¯¥é¡¹é›†çš„å‘å‰çœ‹ç¬¦å·",
             production_item_set_after_transform_id.GetRawValue()));
       }
     } else {
-      // ²»´æÔÚÕâĞ©Ïî¹¹³ÉµÄÏî¼¯£¬ĞèÒªĞÂ½¨
+      // ä¸å­˜åœ¨è¿™äº›é¡¹æ„æˆçš„é¡¹é›†ï¼Œéœ€è¦æ–°å»º
       production_item_set_after_transform_id = EmplaceProductionItemSet();
       syntax_analysis_table_entry_id_after_transform =
           GetProductionItemSet(production_item_set_after_transform_id)
               .GetSyntaxAnalysisTableEntryId();
-      // ÌîÈëËùÓĞºËĞÄÏî
+      // å¡«å…¥æ‰€æœ‰æ ¸å¿ƒé¡¹
       for (auto& item_and_forward_nodes_iter :
            transform_condition_and_transformed_data.second) {
-        // ¹¹½¨ÒÆÈë·ûºÅºóµÄÏî
+        // æ„å»ºç§»å…¥ç¬¦å·åçš„é¡¹
         ProductionItem shifted_item = item_and_forward_nodes_iter->first;
-        // »ñÈ¡ÒÆÈë·ûºÅºóµÄÏîÊı¾İ
+        // è·å–ç§»å…¥ç¬¦å·åçš„é¡¹æ•°æ®
         ++std::get<NextWordToShiftIndex>(shifted_item);
         auto result = AddMainItemAndForwardNodeIdsToProductionItem(
             production_item_set_after_transform_id, shifted_item,
@@ -820,7 +825,7 @@ bool SyntaxGenerator::
     }
     SyntaxAnalysisTableEntry& syntax_analysis_table_entry =
         GetSyntaxAnalysisTableEntry(syntax_analysis_table_entry_id);
-    // ÉèÖÃ×ªÒÆÌõ¼şÏÂ×ªÒÆµ½ÒÑÓĞµÄÏî¼¯
+    // è®¾ç½®è½¬ç§»æ¡ä»¶ä¸‹è½¬ç§»åˆ°å·²æœ‰çš„é¡¹é›†
     switch (GetProductionNode(transform_condition_and_transformed_data.first)
                 .GetType()) {
       case ProductionNodeType::kTerminalNode:
@@ -830,7 +835,7 @@ bool SyntaxGenerator::
             SyntaxAnalysisTableEntry::ShiftAttachedData(
                 syntax_analysis_table_entry_id_after_transform));
         OutPutInfo(std::format(
-            "ID = {:}µÄÏî¼¯ÔÚÒÆÈëÖÕ½á·ûºÅ {:} ºó×ªÒÆµ½ID = {:}µÄÏî¼¯",
+            "ID = {:}çš„é¡¹é›†åœ¨ç§»å…¥ç»ˆç»“ç¬¦å· {:} åè½¬ç§»åˆ°ID = {:}çš„é¡¹é›†",
             production_item_set_id.GetRawValue(),
             GetNodeSymbolStringFromProductionNodeId(
                 transform_condition_and_transformed_data.first),
@@ -841,7 +846,7 @@ bool SyntaxGenerator::
             transform_condition_and_transformed_data.first,
             syntax_analysis_table_entry_id_after_transform);
         OutPutInfo(std::format(
-            "ID = {:}µÄÏî¼¯ÔÚÒÆÈë·ÇÖÕ½á·ûºÅ {:} ºó×ªÒÆµ½ID = {:}µÄÏî¼¯",
+            "ID = {:}çš„é¡¹é›†åœ¨ç§»å…¥éç»ˆç»“ç¬¦å· {:} åè½¬ç§»åˆ°ID = {:}çš„é¡¹é›†",
             production_item_set_id.GetRawValue(),
             GetNodeSymbolStringFromProductionNodeId(
                 transform_condition_and_transformed_data.first),
@@ -852,11 +857,11 @@ bool SyntaxGenerator::
         break;
     }
   }
-  OutPutInfo(std::format("ID = {:}µÄÏî¼¯´«²¥ÏòÇ°¿´·ûºÅ²Ù×÷ÒÑÍê³É",
+  OutPutInfo(std::format("ID = {:}çš„é¡¹é›†ä¼ æ’­å‘å‰çœ‹ç¬¦å·æ“ä½œå·²å®Œæˆ",
                          production_item_set_id.GetRawValue()));
   for (auto production_item_set_waiting_spread_id :
        production_item_set_waiting_spread_ids) {
-    // ¶ÔĞÂÉú³ÉµÄÃ¿¸öÏî¼¯¶¼´«²¥ÏòÇ°¿´·ûºÅ
+    // å¯¹æ–°ç”Ÿæˆçš„æ¯ä¸ªé¡¹é›†éƒ½ä¼ æ’­å‘å‰çœ‹ç¬¦å·
     SpreadLookForwardSymbolAndConstructSyntaxAnalysisTableEntry(
         production_item_set_waiting_spread_id);
   }
@@ -881,7 +886,7 @@ void SyntaxGenerator::SyntaxAnalysisTableTerminalNodeClassify(
     std::list<SyntaxAnalysisTableEntryId>&& syntax_analysis_table_entry_ids,
     std::vector<std::list<SyntaxAnalysisTableEntryId>>* equivalent_ids) {
   if (index >= terminal_node_ids.size()) [[unlikely]] {
-    // ·ÖÀàÍê³É£¬½«¿ÉÒÔºÏ²¢µÄ×éÌí¼Óµ½½á¹û
+    // åˆ†ç±»å®Œæˆï¼Œå°†å¯ä»¥åˆå¹¶çš„ç»„æ·»åŠ åˆ°ç»“æœ
     assert(syntax_analysis_table_entry_ids.size() > 1);
     equivalent_ids->emplace_back(std::move(syntax_analysis_table_entry_ids));
     return;
@@ -890,34 +895,34 @@ void SyntaxGenerator::SyntaxAnalysisTableTerminalNodeClassify(
              ProductionNodeType::kTerminalNode ||
          GetProductionNode(terminal_node_ids[index]).GetType() ==
              ProductionNodeType::kOperatorNode);
-  // ÒÔÏÂÈı¸ö·ÖÀà±í£¬¸ù¾İ×ªÒÆÌõ¼şÏÂµÄ×ªÒÆ½á¹û·ÖÀà
-  // Ê¹ÓÃActionAndAttachedDataPointerEqualToÀ´ÅĞ¶ÏÁ½¸ö×ªÒÆ½á¹ûÊÇ·ñÏàÍ¬
-  // ¼üÖµÎªShiftAttachedDataÒÆÈë·ûºÅºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
+  // ä»¥ä¸‹ä¸‰ä¸ªåˆ†ç±»è¡¨ï¼Œæ ¹æ®è½¬ç§»æ¡ä»¶ä¸‹çš„è½¬ç§»ç»“æœåˆ†ç±»
+  // ä½¿ç”¨ActionAndAttachedDataPointerEqualToæ¥åˆ¤æ–­ä¸¤ä¸ªè½¬ç§»ç»“æœæ˜¯å¦ç›¸åŒ
+  // é”®å€¼ä¸ºShiftAttachedDataç§»å…¥ç¬¦å·åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   std::unordered_map<SyntaxAnalysisTableEntryId,
                      std::list<SyntaxAnalysisTableEntryId>>
       shift_classify_table;
-  // ¼üÖµÎªReductAttachedData¹æÔ¼Ê±Ê¹ÓÃµÄ°ü×°Reductº¯ÊıµÄÀàµÄ¶ÔÏóµÄID
-  // Õâ¸öIDÊÇÎ¨Ò»µÄ¹æÔ¼Êı¾İ£¬ËùÒÔ¿ÉÒÔÓÃÀ´±êÊ¶¹æÔ¼Êı¾İ
+  // é”®å€¼ä¸ºReductAttachedDataè§„çº¦æ—¶ä½¿ç”¨çš„åŒ…è£…Reductå‡½æ•°çš„ç±»çš„å¯¹è±¡çš„ID
+  // è¿™ä¸ªIDæ˜¯å”¯ä¸€çš„è§„çº¦æ•°æ®ï¼Œæ‰€ä»¥å¯ä»¥ç”¨æ¥æ ‡è¯†è§„çº¦æ•°æ®
   std::unordered_map<ProcessFunctionClassId,
                      std::list<SyntaxAnalysisTableEntryId>>
       reduct_classify_table;
-  // ¼üÖµÇ°°ë²¿·ÖÎªShiftReductAttachedDataÒÆÈë·ûºÅºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
-  // ¼üÖµºó°ë²¿·ÖÎªReductAttachedData¹æÔ¼Ê±Ê¹ÓÃµÄ°ü×°Reductº¯ÊıµÄÀàµÄ¶ÔÏóID
+  // é”®å€¼å‰åŠéƒ¨åˆ†ä¸ºShiftReductAttachedDataç§»å…¥ç¬¦å·åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+  // é”®å€¼ååŠéƒ¨åˆ†ä¸ºReductAttachedDataè§„çº¦æ—¶ä½¿ç”¨çš„åŒ…è£…Reductå‡½æ•°çš„ç±»çš„å¯¹è±¡ID
   std::unordered_map<
       std::pair<SyntaxAnalysisTableEntryId, ProcessFunctionClassId>,
       std::list<SyntaxAnalysisTableEntryId>,
       SyntaxAnalysisTableEntryIdAndProcessFunctionClassIdHasher>
       shift_reduct_classify_table;
-  // ÔÚ¸ÃÌõ¼şÏÂ²»ÄÜ¹æÔ¼Ò²²»ÄÜÒÆÈëµÄÓï·¨·ÖÎö±íÌõÄ¿ID
+  // åœ¨è¯¥æ¡ä»¶ä¸‹ä¸èƒ½è§„çº¦ä¹Ÿä¸èƒ½ç§»å…¥çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   std::list<SyntaxAnalysisTableEntryId> nothing_to_do_entry_ids;
   ProductionNodeId transform_id = terminal_node_ids[index];
   for (auto syntax_analysis_table_entry_id : syntax_analysis_table_entry_ids) {
-    // ÀûÓÃunordered_map½øĞĞ·ÖÀà
+    // åˆ©ç”¨unordered_mapè¿›è¡Œåˆ†ç±»
     auto action_and_attahced_data =
         GetSyntaxAnalysisTableEntry(syntax_analysis_table_entry_id)
             .AtTerminalNode(transform_id);
     if (action_and_attahced_data) [[unlikely]] {
-      // ÔÚ¸ÃÏòÇ°¿´½Úµã´¦´æÔÚ
+      // åœ¨è¯¥å‘å‰çœ‹èŠ‚ç‚¹å¤„å­˜åœ¨
       switch (action_and_attahced_data->GetActionType()) {
         case ActionType::kShift:
           shift_classify_table[action_and_attahced_data->GetShiftAttachedData()
@@ -948,36 +953,36 @@ void SyntaxGenerator::SyntaxAnalysisTableTerminalNodeClassify(
   }
 
   size_t next_index = index + 1;
-  // ´¦ÀíÔÚµ±Ç°Ìõ¼şÏÂÒÆÈëµÄ½Úµã
+  // å¤„ç†åœ¨å½“å‰æ¡ä»¶ä¸‹ç§»å…¥çš„èŠ‚ç‚¹
   for (auto& syntax_analysis_table_entry_ids : shift_classify_table) {
     if (syntax_analysis_table_entry_ids.second.size() > 1) {
-      // º¬ÓĞ¶à¸öÌõÄ¿ÇÒÓĞÊ£ÓàÎ´±È½ÏµÄ×ªÒÆÌõ¼ş£¬ĞèÒª¼ÌĞø·ÖÀà
+      // å«æœ‰å¤šä¸ªæ¡ç›®ä¸”æœ‰å‰©ä½™æœªæ¯”è¾ƒçš„è½¬ç§»æ¡ä»¶ï¼Œéœ€è¦ç»§ç»­åˆ†ç±»
       SyntaxAnalysisTableTerminalNodeClassify(
           terminal_node_ids, next_index,
           std::move(syntax_analysis_table_entry_ids.second), equivalent_ids);
     }
   }
-  // ´¦ÀíÔÚµ±Ç°Ìõ¼şÏÂ¹æÔ¼µÄ½Úµã
+  // å¤„ç†åœ¨å½“å‰æ¡ä»¶ä¸‹è§„çº¦çš„èŠ‚ç‚¹
   for (auto& syntax_analysis_table_entry_ids : reduct_classify_table) {
     if (syntax_analysis_table_entry_ids.second.size() > 1) {
-      // º¬ÓĞ¶à¸öÌõÄ¿ÇÒÓĞÊ£ÓàÎ´±È½ÏµÄ×ªÒÆÌõ¼ş£¬ĞèÒª¼ÌĞø·ÖÀà
+      // å«æœ‰å¤šä¸ªæ¡ç›®ä¸”æœ‰å‰©ä½™æœªæ¯”è¾ƒçš„è½¬ç§»æ¡ä»¶ï¼Œéœ€è¦ç»§ç»­åˆ†ç±»
       SyntaxAnalysisTableTerminalNodeClassify(
           terminal_node_ids, next_index,
           std::move(syntax_analysis_table_entry_ids.second), equivalent_ids);
     }
   }
-  // ´¦ÀíÔÚµ±Ç°Ìõ¼şÏÂ¼È¿ÉÒÔÒÆÈëÒ²¿ÉÒÔ¹æÔ¼µÄ½Úµã
+  // å¤„ç†åœ¨å½“å‰æ¡ä»¶ä¸‹æ—¢å¯ä»¥ç§»å…¥ä¹Ÿå¯ä»¥è§„çº¦çš„èŠ‚ç‚¹
   for (auto& syntax_analysis_table_entry_ids : shift_reduct_classify_table) {
     if (syntax_analysis_table_entry_ids.second.size() > 1) {
-      // º¬ÓĞ¶à¸öÌõÄ¿ÇÒÓĞÊ£ÓàÎ´±È½ÏµÄ×ªÒÆÌõ¼ş£¬ĞèÒª¼ÌĞø·ÖÀà
+      // å«æœ‰å¤šä¸ªæ¡ç›®ä¸”æœ‰å‰©ä½™æœªæ¯”è¾ƒçš„è½¬ç§»æ¡ä»¶ï¼Œéœ€è¦ç»§ç»­åˆ†ç±»
       SyntaxAnalysisTableTerminalNodeClassify(
           terminal_node_ids, next_index,
           std::move(syntax_analysis_table_entry_ids.second), equivalent_ids);
     }
   }
-  // ´¦ÀíÔÚµ±Ç°Ìõ¼şÏÂ¼È¿ÉÒÔÒÆÈëÒ²¿ÉÒÔ¹æÔ¼µÄ½Úµã
+  // å¤„ç†åœ¨å½“å‰æ¡ä»¶ä¸‹æ—¢å¯ä»¥ç§»å…¥ä¹Ÿå¯ä»¥è§„çº¦çš„èŠ‚ç‚¹
   if (nothing_to_do_entry_ids.size() > 1) [[likely]] {
-    // º¬ÓĞ¶à¸öÌõÄ¿ÇÒÓĞÊ£ÓàÎ´±È½ÏµÄ×ªÒÆÌõ¼ş£¬ĞèÒª¼ÌĞø·ÖÀà
+    // å«æœ‰å¤šä¸ªæ¡ç›®ä¸”æœ‰å‰©ä½™æœªæ¯”è¾ƒçš„è½¬ç§»æ¡ä»¶ï¼Œéœ€è¦ç»§ç»­åˆ†ç±»
     SyntaxAnalysisTableTerminalNodeClassify(terminal_node_ids, next_index,
                                             std::move(nothing_to_do_entry_ids),
                                             equivalent_ids);
@@ -989,19 +994,19 @@ void SyntaxGenerator::SyntaxAnalysisTableNonTerminalNodeClassify(
     std::list<SyntaxAnalysisTableEntryId>&& syntax_analysis_table_entry_ids,
     std::vector<std::list<SyntaxAnalysisTableEntryId>>* equivalent_ids) {
   if (index >= nonterminal_node_ids.size()) {
-    // ·ÖÀàÍê³É£¬½«¿ÉÒÔºÏ²¢µÄÌõÄ¿Ìí¼Óµ½½á¹û
+    // åˆ†ç±»å®Œæˆï¼Œå°†å¯ä»¥åˆå¹¶çš„æ¡ç›®æ·»åŠ åˆ°ç»“æœ
     assert(syntax_analysis_table_entry_ids.size() > 1);
     equivalent_ids->emplace_back(std::move(syntax_analysis_table_entry_ids));
   } else {
     assert(GetProductionNode(nonterminal_node_ids[index]).GetType() ==
            ProductionNodeType::kNonTerminalNode);
-    // ·ÖÀà±í£¬¸ù¾İ×ªÒÆÌõ¼şÏÂµÄ×ªÒÆ½á¹û·ÖÀà
+    // åˆ†ç±»è¡¨ï¼Œæ ¹æ®è½¬ç§»æ¡ä»¶ä¸‹çš„è½¬ç§»ç»“æœåˆ†ç±»
     std::unordered_map<SyntaxAnalysisTableEntryId,
                        std::list<SyntaxAnalysisTableEntryId>>
         classify_table;
     ProductionNodeId transform_id = nonterminal_node_ids[index];
     for (auto production_node_id : syntax_analysis_table_entry_ids) {
-      // ÀûÓÃunordered_map½øĞĞ·ÖÀà
+      // åˆ©ç”¨unordered_mapè¿›è¡Œåˆ†ç±»
       classify_table[GetSyntaxAnalysisTableEntry(production_node_id)
                          .AtNonTerminalNode(transform_id)]
           .push_back(production_node_id);
@@ -1009,7 +1014,7 @@ void SyntaxGenerator::SyntaxAnalysisTableNonTerminalNodeClassify(
     size_t next_index = index + 1;
     for (auto syntax_analysis_table_entry_ids : classify_table) {
       if (syntax_analysis_table_entry_ids.second.size() > 1) {
-        // ¸ÃÀàº¬ÓĞ¶à¸öÌõÄ¿ÇÒÓĞÊ£ÓàÎ´±È½ÏµÄ×ªÒÆÌõ¼ş£¬ĞèÒª¼ÌĞø·ÖÀà
+        // è¯¥ç±»å«æœ‰å¤šä¸ªæ¡ç›®ä¸”æœ‰å‰©ä½™æœªæ¯”è¾ƒçš„è½¬ç§»æ¡ä»¶ï¼Œéœ€è¦ç»§ç»­åˆ†ç±»
         SyntaxAnalysisTableNonTerminalNodeClassify(
             nonterminal_node_ids, next_index,
             std::move(syntax_analysis_table_entry_ids.second), equivalent_ids);
@@ -1023,12 +1028,12 @@ SyntaxGenerator::SyntaxAnalysisTableEntryClassify(
     std::vector<ProductionNodeId>&& operator_node_ids,
     std::vector<ProductionNodeId>&& terminal_node_ids,
     std::vector<ProductionNodeId>&& nonterminal_node_ids) {
-  // ´æ´¢ÏàÍ¬×ªÒÆÌõ¼şµÄ×ªÒÆ±íÌõÄ¿ID
+  // å­˜å‚¨ç›¸åŒè½¬ç§»æ¡ä»¶çš„è½¬ç§»è¡¨æ¡ç›®ID
   std::vector<std::list<SyntaxAnalysisTableEntryId>> operator_classify_result,
       terminal_classify_result, final_classify_result;
   std::list<SyntaxAnalysisTableEntryId> entry_ids;
   for (size_t i = 0; i < syntax_analysis_table_.size(); i++) {
-    // Ìí¼ÓËùÓĞ´ı·ÖÀàµÄÓï·¨·ÖÎö±íÌõÄ¿ID
+    // æ·»åŠ æ‰€æœ‰å¾…åˆ†ç±»çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
     entry_ids.push_back(SyntaxAnalysisTableEntryId(i));
   }
   SyntaxAnalysisTableTerminalNodeClassify(
@@ -1056,6 +1061,344 @@ inline void SyntaxGenerator::RemapSyntaxAnalysisTableEntryId(
   for (auto& entry : syntax_analysis_table_) {
     entry.ResetEntryId(old_id_to_new_id);
   }
+
+  std::unordered_map<SyntaxAnalysisTableEntryId, ProductionItemSetId>
+      new_syntax_analysis_table_entry_id_to_production_item_set_id;
+
+  for (const auto& remapped_ids : old_id_to_new_id) {
+    new_syntax_analysis_table_entry_id_to_production_item_set_id[remapped_ids
+                                                                     .second] =
+        GetProductionItemSetIdFromSyntaxAnalysisTableEntryId(
+            remapped_ids.first);
+  }
+
+  syntax_analysis_table_entry_id_to_production_item_set_id_.swap(
+      new_syntax_analysis_table_entry_id_to_production_item_set_id);
+
+  auto production_item_set_iter = production_item_sets_.Begin();
+  while (production_item_set_iter != production_item_sets_.End()) {
+    SyntaxAnalysisTableEntryId old_entry_id =
+        production_item_set_iter->GetSyntaxAnalysisTableEntryId();
+    auto iter = old_id_to_new_id.find(old_entry_id);
+    if (iter != old_id_to_new_id.end()) {
+      production_item_set_iter->SetSyntaxAnalysisTableEntryId(iter->second);
+    }
+    ++production_item_set_iter;
+  }
+}
+
+void SyntaxGenerator::FormatProductionItemSetToImageGraphivz(
+    ProductionItemSetId root_production_item_set_id,
+    const std::string& image_output_path) {
+  std::unordered_set<SyntaxAnalysisTableEntryId>
+      outputed_production_item_set_ids;
+  std::unordered_map<SyntaxAnalysisTableEntryId, Agnode_t*> entry_id_to_node;
+  std::queue<SyntaxAnalysisTableEntryId>
+      syntax_analysis_table_entry_id_waiting_output;
+
+  SyntaxAnalysisTableEntryId root_entry_id =
+      GetProductionItemSet(root_production_item_set_id)
+          .GetSyntaxAnalysisTableEntryId();
+
+  syntax_analysis_table_entry_id_waiting_output.push(root_entry_id);
+
+  // winä¸‹é“¾æ¥ä¸ä¸ŠAgdirectedè¿™ä¸ªå¯¹è±¡ï¼Œä½œä¸ºæ›¿ä»£å“ä½¿ç”¨
+  Agdesc_t agdirected{.directed = 1, .maingraph = 1};
+  char8_t graph_name[] = u8"è¯­æ³•åˆ†æè¡¨";
+  char8_t label_attr[] = u8"label";
+  Agraph_t* graph =
+      agopen(reinterpret_cast<char*>(graph_name), agdirected, nullptr);
+  char root_node_name[] = "";
+  Agnode_t* root_node = agnode(graph, root_node_name, true);
+  entry_id_to_node[root_entry_id] = root_node;
+
+  std::string_view title_template =
+      reinterpret_cast<const char*>(u8"è¯­æ³•åˆ†æè¡¨ID = {:}");
+  std::string_view shift_template = reinterpret_cast<const char*>(u8"ç§»å…¥ {:}");
+  std::string_view node_label_template =
+      reinterpret_cast<const char*>(u8"{:} | {:} | {:}");
+
+  while (!syntax_analysis_table_entry_id_waiting_output.empty()) {
+    SyntaxAnalysisTableEntryId syntax_analysis_table_entry_id =
+        syntax_analysis_table_entry_id_waiting_output.front();
+    syntax_analysis_table_entry_id_waiting_output.pop();
+
+    // æ’é‡
+    if (!outputed_production_item_set_ids.insert(syntax_analysis_table_entry_id)
+             .second) {
+      continue;
+    }
+
+    const auto& syntax_analysis_table_entry =
+        GetSyntaxAnalysisTableEntry(syntax_analysis_table_entry_id);
+
+    ProductionItemSetId production_item_set_id =
+        GetProductionItemSetIdFromSyntaxAnalysisTableEntryId(
+            syntax_analysis_table_entry_id);
+    const auto& production_item_set =
+        GetProductionItemSet(production_item_set_id);
+
+    Agnode_t* node;
+    auto iter = entry_id_to_node.find(syntax_analysis_table_entry_id);
+    if (iter == entry_id_to_node.end()) {
+      // ä¸å­˜åœ¨åˆ™åˆ›å»ºèŠ‚ç‚¹
+      node = agnode(
+          graph, std::to_string(syntax_analysis_table_entry_id).data(), true);
+      entry_id_to_node[syntax_analysis_table_entry_id] = node;
+    } else {
+      node = iter->second;
+    }
+
+    std::string title = std::vformat(
+        title_template,
+        std::make_format_args(syntax_analysis_table_entry_id.GetRawValue()));
+    std::string reduct_symbols =
+        reinterpret_cast<const char*>(u8"æœ¬æ¡ç›®åœ¨ä»¥ä¸‹å‘å‰çœ‹ç¬¦å·ä¸‹å¯è§„çº¦ï¼š ");
+    std::string production_items = EscapeLabelSpecialCharacter(
+        FormatProductionItems(production_item_set_id));
+
+    for (const auto& action_and_attached_data :
+         syntax_analysis_table_entry.GetAllActionAndAttachedData()) {
+      switch (action_and_attached_data.second->GetActionType()) {
+        case ActionType::kAccept:
+        case ActionType::kError:
+          break;
+        case ActionType::kShiftReduct:
+        case ActionType::kShift: {
+          const auto& attach_data =
+              static_cast<const SyntaxAnalysisTableEntry::
+                              ActionAndAttachedDataInterface&>(
+                  *action_and_attached_data.second)
+                  .GetShiftAttachedData();
+          SyntaxAnalysisTableEntryId next_entry_id =
+              attach_data.GetNextSyntaxAnalysisTableEntryId();
+          auto iter = entry_id_to_node.find(next_entry_id);
+          Agnode_t* target_node;
+          if (iter == entry_id_to_node.end()) {
+            // åˆ›å»ºèŠ‚ç‚¹
+            std::string node_name = std::vformat(
+                title_template,
+                std::make_format_args(next_entry_id.GetRawValue()));
+            target_node = agnode(graph, node_name.data(), true);
+          } else {
+            target_node = iter->second;
+          }
+
+          // ç”Ÿæˆè¾¹çš„label
+          std::string edge_label = std::vformat(
+              shift_template,
+              std::make_format_args(GetNodeSymbolStringFromProductionNodeId(
+                  action_and_attached_data.first)));
+          Agedge_t* edge =
+              agedge(graph, node, target_node, edge_label.data(), true);
+
+          agsafeset(edge, reinterpret_cast<char*>(label_attr),
+                    edge_label.c_str(), "");
+
+          syntax_analysis_table_entry_id_waiting_output.push(next_entry_id);
+        }
+          if (action_and_attached_data.second->GetActionType() ==
+              ActionType::kShift) {
+            break;
+          } else {
+            assert(action_and_attached_data.second->GetActionType() ==
+                   ActionType::kShiftReduct);
+            [[fallthrough]];
+          }
+        case ActionType::kReduct:
+          reduct_symbols += GetNodeSymbolStringFromProductionNodeId(
+              action_and_attached_data.first);
+          reduct_symbols += ' ';
+          break;
+        default:
+          assert(false);
+          break;
+      }
+    }
+
+    for (const auto& nonterminal_node_and_next_entry :
+         syntax_analysis_table_entry.GetAllNonTerminalNodeTransformTarget()) {
+      SyntaxAnalysisTableEntryId next_entry_id =
+          nonterminal_node_and_next_entry.second;
+      auto iter = entry_id_to_node.find(next_entry_id);
+      Agnode_t* target_node;
+      if (iter == entry_id_to_node.end()) {
+        // åˆ›å»ºèŠ‚ç‚¹
+        std::string node_name = std::vformat(
+            title_template, std::make_format_args(next_entry_id.GetRawValue()));
+        target_node = agnode(graph, node_name.data(), true);
+      } else {
+        target_node = iter->second;
+      }
+
+      // ç”Ÿæˆè¾¹çš„label
+      std::string edge_label = std::vformat(
+          shift_template,
+          std::make_format_args(GetNodeSymbolStringFromProductionNodeId(
+              nonterminal_node_and_next_entry.first)));
+      Agedge_t* edge =
+          agedge(graph, node, target_node, edge_label.data(), true);
+
+      agsafeset(edge, reinterpret_cast<char*>(label_attr), edge_label.c_str(),
+                "");
+
+      syntax_analysis_table_entry_id_waiting_output.push(next_entry_id);
+    }
+
+    reduct_symbols = EscapeLabelSpecialCharacter(std::move(reduct_symbols));
+    std::string node_label = std::vformat(
+        node_label_template,
+        std::make_format_args(title, production_items, reduct_symbols));
+
+    agsafeset(node, reinterpret_cast<char*>(label_attr), node_label.c_str(),
+              "");
+  }
+
+  // char dpi_name[] = "dpi";
+  // agsafeset(graph, dpi_name, "400", "96");
+
+  GVC_t* gvc = gvContext();
+  FILE* output_file;
+  fopen_s(&output_file, (image_output_path + "syntax_graph.png").c_str(), "w");
+  gvLayout(gvc, graph, "dot");
+  gvRender(gvc, graph, "svg", output_file);
+  gvFreeLayout(gvc, graph);
+  agclose(graph);
+  gvFreeContext(gvc);
+  fclose(output_file);
+}
+
+void SyntaxGenerator::FormatProductionItemSetToMarkdown(
+    ProductionItemSetId root_production_item_set_id,
+    const std::string& image_output_path) {
+  constexpr auto get_node_name = [](SyntaxAnalysisTableEntryId id) {
+    return '_' + std::to_string(id.GetRawValue());
+  };
+
+  std::string_view shift_edge_template =
+      reinterpret_cast<const char*>(u8"{:}--\"{:}\"-->{:}\n");
+
+  std::ofstream output_file(image_output_path + "syntax_graph.md");
+
+  output_file << "```mermaid\ngraph TB;\n";
+
+  std::unordered_set<SyntaxAnalysisTableEntryId>
+      outputed_production_item_set_ids;
+  std::queue<SyntaxAnalysisTableEntryId>
+      syntax_analysis_table_entry_id_waiting_output;
+
+  SyntaxAnalysisTableEntryId root_entry_id =
+      GetProductionItemSet(root_production_item_set_id)
+          .GetSyntaxAnalysisTableEntryId();
+
+  syntax_analysis_table_entry_id_waiting_output.push(root_entry_id);
+
+  while (!syntax_analysis_table_entry_id_waiting_output.empty()) {
+    SyntaxAnalysisTableEntryId syntax_analysis_table_entry_id =
+        syntax_analysis_table_entry_id_waiting_output.front();
+    syntax_analysis_table_entry_id_waiting_output.pop();
+
+    // æ’é‡
+    if (!outputed_production_item_set_ids.insert(syntax_analysis_table_entry_id)
+             .second) {
+      continue;
+    }
+
+    const auto& syntax_analysis_table_entry =
+        GetSyntaxAnalysisTableEntry(syntax_analysis_table_entry_id);
+
+    ProductionItemSetId production_item_set_id =
+        GetProductionItemSetIdFromSyntaxAnalysisTableEntryId(
+            syntax_analysis_table_entry_id);
+    const auto& production_item_set =
+        GetProductionItemSet(production_item_set_id);
+
+    std::string entry_node_name = get_node_name(syntax_analysis_table_entry_id);
+
+    std::string reduct_symbols =
+        reinterpret_cast<const char*>(u8"æœ¬æ¡ç›®åœ¨ä»¥ä¸‹å‘å‰çœ‹ç¬¦å·ä¸‹å¯è§„çº¦ï¼š ");
+
+    std::string production_items =
+        FormatProductionItems(production_item_set_id, "<br>");
+
+    for (const auto& action_and_attached_data :
+         syntax_analysis_table_entry.GetAllActionAndAttachedData()) {
+      switch (action_and_attached_data.second->GetActionType()) {
+        case ActionType::kAccept:
+        case ActionType::kError:
+          break;
+        case ActionType::kShiftReduct:
+        case ActionType::kShift: {
+          const auto& attach_data =
+              static_cast<const SyntaxAnalysisTableEntry::
+                              ActionAndAttachedDataInterface&>(
+                  *action_and_attached_data.second)
+                  .GetShiftAttachedData();
+          SyntaxAnalysisTableEntryId next_entry_id =
+              attach_data.GetNextSyntaxAnalysisTableEntryId();
+
+          std::string next_entry_node_name = get_node_name(next_entry_id);
+
+          // ç”Ÿæˆè¾¹çš„label
+          std::string edge_label = reinterpret_cast<const char*>(u8"ç§»å…¥ ") +
+                                   GetNodeSymbolStringFromProductionNodeId(
+                                       action_and_attached_data.first);
+
+          output_file << std::vformat(
+              shift_edge_template,
+              std::make_format_args(entry_node_name, std::move(edge_label),
+                                    std::move(next_entry_node_name)));
+
+          syntax_analysis_table_entry_id_waiting_output.push(next_entry_id);
+        }
+          if (action_and_attached_data.second->GetActionType() ==
+              ActionType::kShift) {
+            break;
+          } else {
+            assert(action_and_attached_data.second->GetActionType() ==
+                   ActionType::kShiftReduct);
+            [[fallthrough]];
+          }
+        case ActionType::kReduct:
+          reduct_symbols += GetNodeSymbolStringFromProductionNodeId(
+              action_and_attached_data.first);
+          reduct_symbols += ' ';
+          break;
+        default:
+          assert(false);
+          break;
+      }
+    }
+
+    for (const auto& nonterminal_node_and_next_entry :
+         syntax_analysis_table_entry.GetAllNonTerminalNodeTransformTarget()) {
+      SyntaxAnalysisTableEntryId next_entry_id =
+          nonterminal_node_and_next_entry.second;
+      std::string next_entry_node_name = get_node_name(next_entry_id);
+
+      // ç”Ÿæˆè¾¹çš„label
+      std::string edge_label = reinterpret_cast<const char*>(u8"ç§»å…¥ ") +
+                               GetNodeSymbolStringFromProductionNodeId(
+                                   nonterminal_node_and_next_entry.first);
+
+      output_file << std::vformat(
+          shift_edge_template,
+          std::make_format_args(entry_node_name, std::move(edge_label),
+                                std::move(next_entry_node_name)));
+
+      syntax_analysis_table_entry_id_waiting_output.push(next_entry_id);
+    }
+
+    std::string_view node_label_template = reinterpret_cast<const char*>(
+        u8"{:}[\"è¯­æ³•åˆ†æè¡¨ID = {:}<br>{:}<br>{:}\"]\n");
+
+    output_file << std::vformat(
+        node_label_template,
+        std::make_format_args(
+            entry_node_name,
+            std::to_string(syntax_analysis_table_entry_id.GetRawValue()),
+            production_items, reduct_symbols));
+  }
 }
 
 void SyntaxGenerator::SyntaxAnalysisTableMergeOptimize() {
@@ -1072,12 +1415,12 @@ void SyntaxGenerator::SyntaxAnalysisTableMergeOptimize() {
           std::move(classified_production_node_ids[operator_index]),
           std::move(classified_production_node_ids[terminal_index]),
           std::move(classified_production_node_ids[nonterminal_index]));
-  // ´æ´¢ĞèÒªÖØÓ³ÉäµÄÌõÄ¿IDºÍĞÂÌõÄ¿ID
+  // å­˜å‚¨éœ€è¦é‡æ˜ å°„çš„æ¡ç›®IDå’Œæ–°æ¡ç›®ID
   std::unordered_map<SyntaxAnalysisTableEntryId, SyntaxAnalysisTableEntryId>
       remapped_entry_id_to_new_entry_id;
   for (auto& entry_ids : classified_ids) {
-    // Ìí¼Ó±»ºÏ²¢µÄ¾ÉÌõÄ¿µ½ÏàÍ¬ÌõÄ¿µÄÓ³Éä
-    // ÖØ¸´µÄÌõÄ¿Ö»±£Áô·µ»ØÊı×éÖĞµÄµÚÒ»Ìõ£¬ÆäÓàµÄÈ«²¿Ó³Éäµ½¸ÃÌõ
+    // æ·»åŠ è¢«åˆå¹¶çš„æ—§æ¡ç›®åˆ°ç›¸åŒæ¡ç›®çš„æ˜ å°„
+    // é‡å¤çš„æ¡ç›®åªä¿ç•™è¿”å›æ•°ç»„ä¸­çš„ç¬¬ä¸€æ¡ï¼Œå…¶ä½™çš„å…¨éƒ¨æ˜ å°„åˆ°è¯¥æ¡
     auto iter = entry_ids.begin();
     SyntaxAnalysisTableEntryId new_id = *iter;
     ++iter;
@@ -1088,54 +1431,55 @@ void SyntaxGenerator::SyntaxAnalysisTableMergeOptimize() {
       ++iter;
     }
   }
-  // ´æ´¢ÒÆ¶¯ºóµÄÌõÄ¿µÄĞÂÌõÄ¿ID
+  // å­˜å‚¨ç§»åŠ¨åçš„æ¡ç›®çš„æ–°æ¡ç›®ID
   std::unordered_map<SyntaxAnalysisTableEntryId, SyntaxAnalysisTableEntryId>
       moved_entry_to_new_entry_id;
-  // ¿ªÊ¼ºÏ²¢
+  // å¼€å§‹åˆå¹¶
   assert(syntax_analysis_table_.size() > 0);
-  // ÀàËÆ¿ìÅÅ·ÖÀàµÄËã·¨
-  // Ñ°ÕÒÃ»ÓĞ±»ºÏ²¢µÄÌõÄ¿²¢½ô´ÕÅÅÁĞÔÚvectorµÍÏÂ±êÒ»²à
+  // ç±»ä¼¼å¿«æ’åˆ†ç±»çš„ç®—æ³•
+  // å¯»æ‰¾æ²¡æœ‰è¢«åˆå¹¶çš„æ¡ç›®å¹¶ç´§å‡‘æ’åˆ—åœ¨vectorä½ä¸‹æ ‡ä¸€ä¾§
 
-  // ÏÂÒ»¸öÒª´¦ÀíµÄÌõÄ¿
+  // ä¸‹ä¸€ä¸ªè¦å¤„ç†çš„æ¡ç›®
   SyntaxAnalysisTableEntryId next_process_entry_index(0);
-  // Ìø¹ıÇ°ÃæÎ¬³ÖÔ­Î»µÄÓï·¨·ÖÎö±íÌõÄ¿
+  // è·³è¿‡å‰é¢ç»´æŒåŸä½çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®
   while (next_process_entry_index < syntax_analysis_table_.size() &&
          remapped_entry_id_to_new_entry_id.find(next_process_entry_index) ==
-             remapped_entry_id_to_new_entry_id.end())
-    [[likely]] {
-      // ±£ÁôµÄÌõÄ¿ÈÔ´¦ÓÚÔ­Î»
-      ++next_process_entry_index;
-    }
-  // ÏÂÒ»¸ö²åÈëÎ»ÖÃ
+             remapped_entry_id_to_new_entry_id.end()) [[likely]] {
+    // ä¿ç•™çš„æ¡ç›®ä»å¤„äºåŸä½
+    ++next_process_entry_index;
+  }
+  // ä¸‹ä¸€ä¸ªæ’å…¥ä½ç½®
   SyntaxAnalysisTableEntryId next_insert_position_index(
       next_process_entry_index);
   ++next_process_entry_index;
   while (next_process_entry_index < syntax_analysis_table_.size()) {
     if (remapped_entry_id_to_new_entry_id.find(next_process_entry_index) ==
         remapped_entry_id_to_new_entry_id.end()) {
-      // ¸ÃÌõÄ¿±£Áô
+      // è¯¥æ¡ç›®ä¿ç•™
       assert(next_insert_position_index != next_process_entry_index);
-      // ĞèÒªÒÆ¶¯µ½ĞÂÎ»ÖÃ±£³Övector½ô´Õ
+      // éœ€è¦ç§»åŠ¨åˆ°æ–°ä½ç½®ä¿æŒvectorç´§å‡‘
       syntax_analysis_table_[next_insert_position_index] =
           std::move(syntax_analysis_table_[next_process_entry_index]);
-      // ÖØÓ³Éä±£ÁôÌõÄ¿µÄĞÂÎ»ÖÃ
+      // é‡æ˜ å°„ä¿ç•™æ¡ç›®çš„æ–°ä½ç½®
       moved_entry_to_new_entry_id[next_process_entry_index] =
           next_insert_position_index;
       ++next_insert_position_index;
     }
     ++next_process_entry_index;
   }
-  // ÊÍ·Å¶àÓà¿Õ¼ä
+  // é‡Šæ”¾å¤šä½™ç©ºé—´
   syntax_analysis_table_.resize(next_insert_position_index);
-  // ½«ËùÓĞ¾ÉID¸üĞÂÎªĞÂID
+  // å°†æ‰€æœ‰æ—§IDæ›´æ–°ä¸ºæ–°ID
   RemapSyntaxAnalysisTableEntryId(moved_entry_to_new_entry_id);
 }
 
-inline void SyntaxGenerator::SaveConfig() const {
-  dfa_generator_.SaveConfig();
-  std::ofstream config_file(frontend::common::kSyntaxConfigFileName,
-                            std::ios_base::binary | std::ios_base::out);
-  // oarchiveÒªÔÚconfig_fileÎö¹¹Ç°Îö¹¹£¬·ñÔòÎÄ¼ş²»ÍêÕûÔÚ·´ĞòÁĞ»¯Ê±»áÅ×Òì³£
+inline void SyntaxGenerator::SaveConfig(
+    const std::string& config_file_output_path) const {
+  dfa_generator_.SaveConfig(config_file_output_path);
+  std::ofstream config_file(
+      config_file_output_path + frontend::common::kSyntaxConfigFileName,
+      std::ios_base::binary | std::ios_base::out);
+  // oarchiveè¦åœ¨config_fileææ„å‰ææ„ï¼Œå¦åˆ™æ–‡ä»¶ä¸å®Œæ•´åœ¨ååºåˆ—åŒ–æ—¶ä¼šæŠ›å¼‚å¸¸
   {
     boost::archive::binary_oarchive oarchive(config_file);
     oarchive << *this;
@@ -1161,20 +1505,6 @@ std::string SyntaxGenerator::FormatSingleProductionBody(
   return format_result;
 }
 
-std::string SyntaxGenerator::FormatProductionBodys(
-    ProductionNodeId nonterminal_node_id) {
-  std::string format_result;
-  const NonTerminalProductionNode& production_node_now =
-      static_cast<const NonTerminalProductionNode&>(
-          GetProductionNode(nonterminal_node_id));
-  assert(production_node_now.GetType() == ProductionNodeType::kNonTerminalNode);
-  for (auto& body_id : production_node_now.GetAllBodyIds()) {
-    format_result += FormatSingleProductionBody(nonterminal_node_id, body_id);
-    format_result += '\n';
-  }
-  return format_result;
-}
-
 std::string SyntaxGenerator::FormatProductionItem(
     const ProductionItem& production_item) const {
   std::string format_result;
@@ -1193,7 +1523,7 @@ std::string SyntaxGenerator::FormatProductionItem(
         std::format(" {:}", GetNodeSymbolStringFromProductionNodeId(
                                 production_node_waiting_spread_body[i]));
   }
-  format_result += std::format(" ¡¤");
+  format_result += reinterpret_cast<const char*>(u8" Â·");
   for (size_t i = next_word_to_shift_index;
        i < production_node_waiting_spread_body.size(); i++) {
     format_result +=
@@ -1206,7 +1536,8 @@ std::string SyntaxGenerator::FormatProductionItem(
 std::string SyntaxGenerator::FormatProductionItemAndLookForwardSymbols(
     const ProductionItem& production_item,
     const ForwardNodesContainer& look_forward_node_ids) const {
-  return FormatProductionItem(production_item) + std::format(" ÏòÇ°¿´·ûºÅ£º") +
+  return FormatProductionItem(production_item) +
+         reinterpret_cast<const char*>(u8" å‘å‰çœ‹ç¬¦å·ï¼š") +
          FormatLookForwardSymbols(look_forward_node_ids);
 }
 
@@ -1220,45 +1551,68 @@ std::string SyntaxGenerator::FormatLookForwardSymbols(
     format_result += GetNodeSymbolStringFromProductionNodeId(node_id);
     format_result += ' ';
   }
-  // µ¯³öÎ²²¿¿Õ¸ñ
+  // å¼¹å‡ºå°¾éƒ¨ç©ºæ ¼
   format_result.pop_back();
   return format_result;
 }
 
 std::string SyntaxGenerator::FormatProductionItems(
-    ProductionItemSetId production_item_set_id) const {
+    ProductionItemSetId production_item_set_id, std::string line_feed) const {
   std::string format_result;
   const ProductionItemSet& production_item_set =
       GetProductionItemSet(production_item_set_id);
   for (const auto& item_and_forward_nodes :
        production_item_set.GetItemsAndForwardNodeIds()) {
     format_result += FormatProductionItem(item_and_forward_nodes.first);
-    format_result += std::format(" ÏòÇ°¿´·ûºÅ£º");
+    format_result += reinterpret_cast<const char*>(u8" å‘å‰çœ‹ç¬¦å·ï¼š");
     format_result += FormatLookForwardSymbols(item_and_forward_nodes.second);
-    format_result += '\n';
+    format_result += line_feed;
   }
   if (!format_result.empty()) [[likely]] {
-    // µ¯³ö×îºóµÄ»»ĞĞ·û
-    format_result.pop_back();
+    // å¼¹å‡ºæœ€åçš„æ¢è¡Œç¬¦
+    format_result.resize(format_result.size() - line_feed.size());
   }
   return format_result;
 }
 
+std::string SyntaxGenerator::EscapeLabelSpecialCharacter(
+    const std::string& source) {
+  std::string result;
+  result.reserve(static_cast<size_t>(source.size() * 1.5));
+
+  for (char c : source) {
+    switch (c) {
+      case '\\':
+      case '|':
+      case '{':
+      case '}':
+      case '<':
+      case '>':
+        result.push_back('\\');
+        break;
+      default:
+        break;
+    }
+    result.push_back(c);
+  }
+  return result;
+}
+
 void SyntaxGenerator::SyntaxAnalysisTableConstruct() {
-  // ´´½¨ÊäÈëµ½ÎÄ¼şÎ²Ê±·µ»ØµÄ½Úµã
+  // åˆ›å»ºè¾“å…¥åˆ°æ–‡ä»¶å°¾æ—¶è¿”å›çš„èŠ‚ç‚¹
   ProductionNodeId end_production_node_id = AddEndNode();
-  // ÉèÖÃÓöµ½´úÂëÎÄ¼şÎ²²¿Ê±·µ»ØµÄÊı¾İ
+  // è®¾ç½®é‡åˆ°ä»£ç æ–‡ä»¶å°¾éƒ¨æ—¶è¿”å›çš„æ•°æ®
   frontend::generator::dfa_generator::DfaGenerator::WordAttachedData
       end_of_file_saved_data;
   end_of_file_saved_data.production_node_id = end_production_node_id;
   end_of_file_saved_data.node_type = ProductionNodeType::kEndNode;
   dfa_generator_.SetEndOfFileSavedData(std::move(end_of_file_saved_data));
-  // Éú³É³õÊ¼µÄÏî¼¯£¬²¢½«¸ù²úÉúÊ½ÌîÈë
+  // ç”Ÿæˆåˆå§‹çš„é¡¹é›†ï¼Œå¹¶å°†æ ¹äº§ç”Ÿå¼å¡«å…¥
   ProductionItemSetId root_production_item_set_id = EmplaceProductionItemSet();
   ProductionItemSet& root_production_item_set =
       GetProductionItemSet(root_production_item_set_id);
-  // Éú³ÉÄÚ²¿¸ù²úÉúÊ½£¬·ÀÖ¹ÓÃ»§¶¨ÒåµÄ¸ù²úÉúÊ½¾ßÓĞ¶à¸ö²úÉúÊ½Ìåµ¼ÖÂÒ»ÏµÁĞÎÊÌâ
-  // ¸ù²úÉúÊ½ÃûÊ¹ÓÃÁËÎŞ·¨Í¨¹ıºê¶¨ÒåµÄ×Ö·û@ÒÔ·ÀÖ¹ÓëÓÃ»§¶¨ÒåµÄ½ÚµãÃû³åÍ»
+  // ç”Ÿæˆå†…éƒ¨æ ¹äº§ç”Ÿå¼ï¼Œé˜²æ­¢ç”¨æˆ·å®šä¹‰çš„æ ¹äº§ç”Ÿå¼å…·æœ‰å¤šä¸ªäº§ç”Ÿå¼ä½“å¯¼è‡´ä¸€ç³»åˆ—é—®é¢˜
+  // æ ¹äº§ç”Ÿå¼åä½¿ç”¨äº†æ— æ³•é€šè¿‡å®å®šä¹‰çš„å­—ç¬¦@ä»¥é˜²æ­¢ä¸ç”¨æˆ·å®šä¹‰çš„èŠ‚ç‚¹åå†²çª
   ProductionNodeId inside_root_production_node_id =
       AddNonTerminalProduction<RootReductClass>(
           "@RootNode",
@@ -1269,22 +1623,23 @@ void SyntaxGenerator::SyntaxAnalysisTableConstruct() {
       std::initializer_list<ProductionNodeId>{end_production_node_id});
   SetRootSyntaxAnalysisTableEntryId(
       root_production_item_set.GetSyntaxAnalysisTableEntryId());
-  // ´«²¥ÏòÇ°¿´·ûºÅÍ¬Ê±¹¹ÔìÓï·¨·ÖÎö±í
+  // ä¼ æ’­å‘å‰çœ‹ç¬¦å·åŒæ—¶æ„é€ è¯­æ³•åˆ†æè¡¨
   SpreadLookForwardSymbolAndConstructSyntaxAnalysisTableEntry(
       root_production_item_set_id);
-  // ÉèÖÃÄÚ²¿¸ù²úÉúÊ½Óöµ½ÎÄ¼şÎ²Ê±¿ÉÒÔ½ÓÊÜ£¬ÓÃÀ´Ó¦¶Ô¿ÕÊäÈëµÄÇé¿ö
+  // è®¾ç½®å†…éƒ¨æ ¹äº§ç”Ÿå¼é‡åˆ°æ–‡ä»¶å°¾æ—¶å¯ä»¥æ¥å—ï¼Œç”¨æ¥åº”å¯¹ç©ºè¾“å…¥çš„æƒ…å†µ
   SyntaxAnalysisTableEntryId inside_root_syntax_analysis_entry_id =
       root_production_item_set.GetSyntaxAnalysisTableEntryId();
   GetSyntaxAnalysisTableEntry(inside_root_syntax_analysis_entry_id)
       .SetAcceptInEofForwardNode(end_production_node_id);
-  // ÉèÖÃÒÆÈëÓÃ»§ÉèÖÃµÄroot½ÚµãºóÔÚÓöµ½ÎÄ¼şÎ²·µ»ØµÄ½ÚµãÊ±Ê¹ÓÃAccept¶¯×÷
+  // è®¾ç½®ç§»å…¥ç”¨æˆ·è®¾ç½®çš„rootèŠ‚ç‚¹ååœ¨é‡åˆ°æ–‡ä»¶å°¾è¿”å›çš„èŠ‚ç‚¹æ—¶ä½¿ç”¨AcceptåŠ¨ä½œ
   SyntaxAnalysisTableEntryId entry_after_shift_user_defined_root =
       GetSyntaxAnalysisTableEntry(
           root_production_item_set.GetSyntaxAnalysisTableEntryId())
           .AtNonTerminalNode(GetRootProductionNodeId());
   GetSyntaxAnalysisTableEntry(entry_after_shift_user_defined_root)
       .SetAcceptInEofForwardNode(end_production_node_id);
-  // ºÏ²¢µÈĞ§Ïî£¬Ñ¹ËõÓï·¨·ÖÎö±í
+  FormatProductionItemSetToMarkdown(root_production_item_set_id);
+  // åˆå¹¶ç­‰æ•ˆé¡¹ï¼Œå‹ç¼©è¯­æ³•åˆ†æè¡¨
   SyntaxAnalysisTableMergeOptimize();
 }
 
@@ -1294,7 +1649,7 @@ void SyntaxGenerator::ConstructSyntaxConfig() {
   CheckUndefinedProductionRemained();
   dfa_generator_.DfaConstruct();
   SyntaxAnalysisTableConstruct();
-  // ±£´æÅäÖÃ
+  // ä¿å­˜é…ç½®
   SaveConfig();
 }
 
@@ -1321,13 +1676,13 @@ void SyntaxGenerator::AddUnableContinueNonTerminalNode(
     ProcessFunctionClassId class_id) {
   assert(!undefined_symbol.empty() && !node_symbol.empty() &&
          !subnode_symbols.empty() && class_id.IsValid());
-  std::string temp_output(std::format("·ÇÖÕ½á²úÉúÊ½ {:} ->", node_symbol));
+  std::string temp_output(std::format("éç»ˆç»“äº§ç”Ÿå¼ {:} ->", node_symbol));
   for (const auto& subnode_symbol : subnode_symbols) {
     temp_output += std::format(" {:}", subnode_symbol);
   }
   OutPutInfo(temp_output);
   OutPutInfo(
-      std::format("ÓÉÓÚÉĞÎ´¶¨Òå²úÉúÊ½{:}¶ø±»ÍÆ³ÙÌí¼Ó", undefined_symbol));
+      std::format("ç”±äºå°šæœªå®šä¹‰äº§ç”Ÿå¼{:}è€Œè¢«æ¨è¿Ÿæ·»åŠ ", undefined_symbol));
   undefined_productions_.emplace(
       undefined_symbol, std::make_tuple(std::move(node_symbol),
                                         std::move(subnode_symbols), class_id));
@@ -1341,13 +1696,13 @@ void SyntaxGenerator::CheckNonTerminalNodeCanContinue(
     auto& [node_could_continue_to_add_symbol, node_body,
            process_function_class_id_] = iter_begin->second;
     std::string temp_output(
-        std::format("·ÇÖÕ½á²úÉúÊ½ {:} ->", node_could_continue_to_add_symbol));
+        std::format("éç»ˆç»“äº§ç”Ÿå¼ {:} ->", node_could_continue_to_add_symbol));
     for (const auto& subnode_symbol : node_body) {
       temp_output += std::format(" {:}", subnode_symbol);
     }
-    temp_output += std::format("»Ö¸´Ìí¼Ó");
+    temp_output += std::format("æ¢å¤æ·»åŠ ");
     OutPutInfo(temp_output);
-    // Èç¹ûÎŞ·¨¼ÌĞøÌí¼ÓÔò»áÔÙ´Îµ÷ÓÃAddUnableContinueNonTerminalNodeº¯ÊıÌí¼Ó
+    // å¦‚æœæ— æ³•ç»§ç»­æ·»åŠ åˆ™ä¼šå†æ¬¡è°ƒç”¨AddUnableContinueNonTerminalNodeå‡½æ•°æ·»åŠ 
     AddNonTerminalProduction(std::move(node_could_continue_to_add_symbol),
                              std::move(node_body), process_function_class_id_);
     undefined_productions_.erase(iter_begin++);
@@ -1356,29 +1711,35 @@ void SyntaxGenerator::CheckNonTerminalNodeCanContinue(
 
 void SyntaxGenerator::CheckUndefinedProductionRemained() {
   if (!undefined_productions_.empty()) {
-    // ÈÔ´æÔÚÎ´¶¨Òå²úÉúÊ½
+    // ä»å­˜åœ¨æœªå®šä¹‰äº§ç”Ÿå¼
     for (auto& item : undefined_productions_) {
       auto& [node_symbol, node_bodys, class_id] = item.second;
       std::string temp_output(
-          std::format("·ÇÖÕ½á²úÉúÊ½£º {:} ->", node_symbol));
+          std::format("éç»ˆç»“äº§ç”Ÿå¼ï¼š {:} ->", node_symbol));
       for (auto& body : node_bodys) {
         temp_output += std::format(" {:}", body);
       }
-      temp_output += "ÖĞ";
+      temp_output += "ä¸­";
       OutPutError(temp_output);
-      OutPutError(std::format("²úÉúÊ½£º {:} Î´¶¨Òå", item.first));
+      OutPutError(std::format("äº§ç”Ÿå¼ï¼š {:} æœªå®šä¹‰", item.first));
     }
     exit(-1);
   }
 }
 
-void SyntaxGenerator::AddKeyWord(std::string&& key_word) {
-  // ¹Ø¼ü×ÖÓÅÏÈ¼¶Ä¬ÈÏÎª2
-  // ×Ô¶¯Éú³ÉÍ¬ÃûÖÕ½á½Úµã
-  // ¹Ø¼ü×Ö¶¨ÒåÊ±½«key_wordÊÓ×÷µ¥´Ê¶ø²»ÊÇÕıÔò±í´ïÊ½
+void SyntaxGenerator::AddKeyWord(std::string node_symbol,
+                                 std::string key_word) {
+  // å…³é”®å­—ä¼˜å…ˆçº§é»˜è®¤ä¸º2
+  // å…³é”®å­—å®šä¹‰æ—¶å°†key_wordè§†ä½œå•è¯è€Œä¸æ˜¯æ­£åˆ™è¡¨è¾¾å¼
   AddTerminalProduction(
-      std::string(key_word), std::move(key_word),
-      frontend::generator::dfa_generator::DfaGenerator::WordPriority(2), true);
+      std::move(node_symbol), std::move(key_word),
+      frontend::generator::dfa_generator::DfaGenerator::WordPriority(2), false);
+}
+void SyntaxGenerator::AddSimpleTerminalProduction(std::string node_symbol,
+                                                  std::string regex_string) {
+  AddTerminalProduction(
+      std::move(node_symbol), std::move(regex_string),
+      frontend::generator::dfa_generator::DfaGenerator::WordPriority(0), true);
 }
 ProductionNodeId SyntaxGenerator::GetProductionNodeIdFromNodeSymbolId(
     SymbolId node_symbol_id) {

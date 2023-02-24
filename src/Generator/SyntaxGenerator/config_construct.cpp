@@ -20,7 +20,5 @@ void SyntaxGenerator::ConfigConstruct() {
 #define GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_
 #include "Config/ProductionConfig/production_config-inc.h"
 #undef GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_
-  // 定义结束标志宏
-#define GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_END
 }
 }  // namespace frontend::generator::syntax_generator

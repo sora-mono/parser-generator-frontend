@@ -1,3 +1,7 @@
+if(NOT EXISTS ${CMAKE_BINARY_DIR}/src/conanbuildinfo.cmake)
+	execute_process(COMMAND conan install ${CMAKE_SOURCE_DIR}/src/conanfile.txt -if ${CMAKE_BINARY_DIR}/src --build=missing -s build_type=${CMAKE_BUILD_TYPE})
+endif()
+
 include(${CMAKE_BINARY_DIR}/src/conanbuildinfo.cmake)
 
 CONAN_BASIC_SETUP(TARGETS)

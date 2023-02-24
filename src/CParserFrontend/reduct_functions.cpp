@@ -23,7 +23,8 @@ void VarietyOrFunctionConstructError(
     ObjectConstructData::CheckResult check_result,
     const std::string& object_name) {
   switch (check_result) {
-    [[likely]] case ObjectConstructData::CheckResult::kSuccess : break;
+    [[likely]] case ObjectConstructData::CheckResult::kSuccess:
+      break;
     case ObjectConstructData::CheckResult::kAttachToTerminalType:
       OutputError(std::format(
           "待构建对象{:}已存在终结类型，不可声明更多类型结构", object_name));
@@ -44,25 +45,6 @@ void VarietyOrFunctionConstructError(
     default:
       assert(false);
       break;
-  }
-}
-
-// 从ConstTag的规约信息中获取ConstTag类型
-// 需要保证输入为非终结产生式ConstTag规约得到的数据（无论是否为空规约）
-ConstTag GetConstTag(const WordDataToUser& raw_const_tag_data) {
-  if (raw_const_tag_data.Empty()) [[likely]] {
-    return ConstTag::kNonConst;
-  } else {
-    return ConstTag::kConst;
-  }
-}
-
-SignTag GetSignTag(const WordDataToUser& raw_sign_tag_data) {
-  if (raw_sign_tag_data.Empty()) [[likely]] {
-    return SignTag::kSigned;
-  } else {
-    return std::any_cast<SignTag>(
-        raw_sign_tag_data.GetNonTerminalWordData().user_returned_data);
   }
 }
 
@@ -205,58 +187,58 @@ void OutputInfo(const std::string& info) {
 }
 
 std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueChar(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  std::string& word = word_data.front().GetTerminalWordData().word;
+    std::string&& word_data) {
   // ''中夹一个字符或夹一个带转义字符的字符
-  assert(word.size() == 3 || word.size() == 4);
   // 提取单个字符作为值
-  std::shared_ptr<BasicTypeInitializeOperatorNode> initialize_node;
-  if (word.size() == 3) [[likely]] {
+  std::string character;
+  if (word_data.size() == 3) [[likely]] {
     // 不带转义字符
-    initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
-        InitializeType::kBasic, std::to_string(word[1]));
+    character = std::to_string(word_data[1]);
   } else {
     // 带转义字符
-    initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
-        InitializeType::kBasic, std::to_string(word[2]));
+    character = std::to_string(word_data[2]);
   }
+  auto initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
+      InitializeType::kBasic, std::move(character));
   initialize_node->SetInitDataType(
       CommonlyUsedTypeGenerator::GetBasicType<BuiltInType::kInt8,
                                               SignTag::kSigned>());
   return initialize_node;
 }
 std::shared_ptr<BasicTypeInitializeOperatorNode>
-SingleConstexprValueIndexedString(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 4);
+SingleConstexprValueIndexedString(std::string&& str,
+                                  std::string&& left_square_bracket,
+                                  std::string&& num,
+                                  std::string&& right_square_bracket) {
+  assert(left_square_bracket == "[");
+  assert(right_square_bracket == "]");
+
   size_t converted_num;
-  std::string& index_str = word_data[2].GetTerminalWordData().word;
-  std::string& string_str = word_data[0].GetTerminalWordData().word;
-  for (auto iter = string_str.begin(); iter < string_str.end(); iter++) {
+  for (auto iter = str.begin(); iter < str.end(); iter++) {
     // 删除转义字符
     if (*iter == '\\') [[unlikely]] {
-      iter = string_str.erase(iter);
+      iter = str.erase(iter);
       if (*iter == '\\') [[unlikely]] {
         ++iter;
       }
     }
   }
-  size_t index = std::stoull(index_str, &converted_num);
+  size_t index = std::stoull(num, &converted_num);
   // 检查使用的下标是否全部转换
-  if (converted_num != index_str.size()) [[unlikely]] {
+  if (converted_num != num.size()) [[unlikely]] {
     OutputError(std::format("无法转换下标，可能为浮点数或超出可用下标范围"));
     exit(-1);
   }
   // 检查下标是否越界
   char result;
-  if (index > string_str.size()) [[unlikely]] {
+  if (index > str.size()) [[unlikely]] {
     OutputError(std::format("使用的下标大于字符串大小"));
     exit(-1);
-  } else if (index == string_str.size()) [[unlikely]] {
+  } else if (index == str.size()) [[unlikely]] {
     result = '\0';
   } else {
     // +1以跳过开头的"
-    result = string_str[index + 1];
+    result = str[index + 1];
   }
   auto initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
       InitializeType::kBasic, std::to_string(result));
@@ -266,11 +248,9 @@ SingleConstexprValueIndexedString(std::vector<WordDataToUser>&& word_data) {
   return initialize_node;
 }
 std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueNum(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  std::string& word = word_data.front().GetTerminalWordData().word;
+    std::string&& num) {
   auto initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
-      InitializeType::kBasic, std::move(word));
+      InitializeType::kBasic, std::move(num));
   initialize_node->SetInitDataType(
       type_system::CommonlyUsedTypeGenerator::GetBasicTypeNotTemplate(
           type_system::CalculateBuiltInType(initialize_node->GetValue()),
@@ -278,9 +258,7 @@ std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueNum(
   return initialize_node;
 }
 std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueString(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  std::string& str = word_data.front().GetTerminalWordData().word;
+    std::string&& str) {
   // 字符串使用""作为分隔标记
   assert(str.front() == '"');
   assert(str.back() == '"');
@@ -304,159 +282,137 @@ std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueString(
   return initialize_node;
 }
 
-// FundamentalType -> "char"
-BuiltInType FundamentalTypeChar(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  assert(word_data.front().GetTerminalWordData().word == "char");
+BuiltInType FundamentalTypeChar(std::string&& str) {
   return BuiltInType::kInt8;
 }
 
-// FundamentalType -> "short"
-BuiltInType FundamentalTypeShort(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  assert(word_data.front().GetTerminalWordData().word == "short");
+BuiltInType FundamentalTypeShort(std::string&& str) {
+  assert(str == "short");
   return BuiltInType::kInt16;
 }
 
-// FundamentalType -> "int"
-BuiltInType FundamentalTypeInt(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  assert(word_data.front().GetTerminalWordData().word == "int");
+BuiltInType FundamentalTypeInt(std::string&& str) {
+  assert(str == "int");
   return BuiltInType::kInt32;
 }
 
-// FundamentalType -> "long"
-BuiltInType FundamentalTypeLong(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  assert(word_data.front().GetTerminalWordData().word == "long");
+BuiltInType FundamentalTypeLong(std::string&& str) {
+  assert(str == "long");
   return BuiltInType::kInt32;
 }
 
-// FundamentalType -> "float"
-BuiltInType FundamentalTypeFloat(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  assert(word_data.front().GetTerminalWordData().word == "float");
+BuiltInType FundamentalTypeFloat(std::string&& str) {
+  assert(str == "float");
   return BuiltInType::kFloat32;
 }
 
-// FundamentalType -> "double"
-BuiltInType FundamentalTypeDouble(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  assert(word_data.front().GetTerminalWordData().word == "double");
+BuiltInType FundamentalTypeDouble(std::string&& str) {
+  assert(str == "double");
   return BuiltInType::kFloat64;
 }
 
-// FundamentalType -> "void"
-BuiltInType FundamentalTypeVoid(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  assert(word_data.front().GetTerminalWordData().word == "void");
+BuiltInType FundamentalTypeVoid(std::string&& str) {
+  assert(str == "void");
   return BuiltInType::kVoid;
 }
 
-// SignTag  -> "signed"
-SignTag SignTagSigned(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  assert(word_data.front().GetTerminalWordData().word == "signed");
+SignTag SignTagSigned(std::string&& str) {
+  assert(str == "signed");
   return SignTag::kSigned;
 }
 
-// SignTag -> "unsigned"
-SignTag SignTagUnSigned(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  assert(word_data.front().GetTerminalWordData().word == "unsigned");
+SignTag SignTagUnSigned(std::string&& str) {
+  assert(str == "unsigned");
   return SignTag::kUnsigned;
 }
 
-// ConstTag -> "const"
-ConstTag ConstTagConst(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  assert(word_data.front().GetTerminalWordData().word == "const");
+ConstTag ConstTagConst(std::string&& str) {
+  assert(str == "const");
   return ConstTag::kConst;
 }
-std::shared_ptr<ObjectConstructData> IdOrEquivenceConstTagId(
-    std::vector<WordDataToUser>&& word_data) {
-  // 无论Consttag是否空规约都应该是2个节点
-  assert(word_data.size() == 2);
-  ConstTag const_tag = GetConstTag(word_data[0]);
-  std::string& name = word_data[1].GetTerminalWordData().word;
+std::shared_ptr<ObjectConstructData> IdOrEquivenceConstTagId(ConstTag const_tag,
+                                                             std::string&& id) {
   std::shared_ptr<ObjectConstructData> construct_data =
-      std::make_shared<ObjectConstructData>(std::move(name));
+      std::make_shared<ObjectConstructData>(std::move(id));
   construct_data->ConstructBasicObjectPart<VarietyOperatorNode>(
       std::string(), const_tag, LeftRightValueTag::kLeftValue);
   return construct_data;
 }
 
-std::any&& IdOrEquivenceNumAddressing(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 4);
-  // 获取之前解析到的信息
-  auto& data_before = std::any_cast<std::shared_ptr<ObjectConstructData>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<ObjectConstructData>&& IdOrEquivenceNumAddressing(
+    std::shared_ptr<ObjectConstructData>&& sub_reduct_result,
+    std::string&& left_square_bracket, std::string&& num,
+    std::string&& right_square_bracket) {
+  assert(left_square_bracket == "[");
+  assert(right_square_bracket == "]");
+
   // 转换为long long的字符数
   size_t chars_converted_to_longlong;
-  std::string& array_size_or_index_string =
-      word_data[2].GetTerminalWordData().word;
-  size_t array_size =
-      std::stoull(array_size_or_index_string, &chars_converted_to_longlong);
+  size_t array_size = std::stoull(num, &chars_converted_to_longlong);
   // 检查是否所有的数字均参与转换
-  if (chars_converted_to_longlong != array_size_or_index_string.size())
-      [[unlikely]] {
+  if (chars_converted_to_longlong != num.size()) [[unlikely]] {
     // 不是所有的数字都参与了转换，说明使用了浮点数
     OutputError(std::format(
-        "{:}无法作为数组大小或偏移量，原因可能为浮点数、数值过大、负数",
-        array_size_or_index_string));
+        "{:}无法作为数组大小或偏移量，原因可能为浮点数、数值过大、负数", num));
     exit(-1);
   }
   // 添加一层指针和指针指向的数组大小
-  auto result = data_before->AttachSingleNodeToTailNodeEmplace<PointerType>(
-      ConstTag::kNonConst, array_size);
+  auto result =
+      sub_reduct_result->AttachSingleNodeToTailNodeEmplace<PointerType>(
+          ConstTag::kNonConst, array_size);
   // 检查添加结果
   if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
-    VarietyOrFunctionConstructError(result, data_before->GetObjectName());
+    VarietyOrFunctionConstructError(result, sub_reduct_result->GetObjectName());
   }
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+  return std::move(sub_reduct_result);
 }
-std::any&& IdOrEquivenceAnonymousAddressing(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  // 获取之前解析到的信息
-  std::shared_ptr<ObjectConstructData>& data_before =
-      std::any_cast<std::shared_ptr<ObjectConstructData>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<ObjectConstructData>&& IdOrEquivenceAnonymousAddressing(
+    std::shared_ptr<ObjectConstructData>&& sub_reduct_result,
+    std::string&& left_square_bracket, std::string&& right_square_bracket) {
+  assert(left_square_bracket == "[");
+  assert(right_square_bracket == "]");
+
   // 添加一层指针和指针指向的数组大小
   // -1代表待推断大小
-  auto result = data_before->AttachSingleNodeToTailNodeEmplace<PointerType>(
-      ConstTag::kNonConst, -1);
+  auto result =
+      sub_reduct_result->AttachSingleNodeToTailNodeEmplace<PointerType>(
+          ConstTag::kNonConst, -1);
   // 检查是否成功添加
   if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
-    VarietyOrFunctionConstructError(result, data_before->GetObjectName());
+    VarietyOrFunctionConstructError(result, sub_reduct_result->GetObjectName());
   }
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+  return std::move(sub_reduct_result);
 }
-std::any&& IdOrEquivencePointerAnnounce(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  // 获取之前解析到的信息
-  std::shared_ptr<ObjectConstructData>& data_before =
-      std::any_cast<std::shared_ptr<ObjectConstructData>&>(
-          word_data[2].GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<ObjectConstructData>&& IdOrEquivencePointerAnnounce(
+    ConstTag const_tag, std::string&& operator_pointer,
+    std::shared_ptr<ObjectConstructData>&& sub_reduct_result) {
+  assert(operator_pointer == "*");
+
   // 添加一层指针和指针指向的数组大小
   // 0代表纯指针
-  auto result = data_before->AttachSingleNodeToTailNodeEmplace<PointerType>(
-      ConstTag::kNonConst, 0);
+  auto result =
+      sub_reduct_result->AttachSingleNodeToTailNodeEmplace<PointerType>(
+          const_tag, 0);
   // 检查添加结果
   if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
-    VarietyOrFunctionConstructError(result, data_before->GetObjectName());
+    VarietyOrFunctionConstructError(result, sub_reduct_result->GetObjectName());
   }
-  return std::move(word_data[2].GetNonTerminalWordData().user_returned_data);
+  return std::move(sub_reduct_result);
 }
-std::any&& IdOrEquivenceInBrackets(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  return std::move(word_data[1].GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<ObjectConstructData>&& IdOrEquivenceInBrackets(
+    std::string&& left_bracket,
+    std::shared_ptr<ObjectConstructData>&& sub_reduct_result,
+    std::string&& right_bracket) {
+  assert(left_bracket == "(");
+  assert(right_bracket == ")");
+
+  return std::move(sub_reduct_result);
 }
 
 std::shared_ptr<ObjectConstructData> AnonymousIdOrEquivenceConst(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
+    std::string&& str_const) {
+  assert(str_const == "const");
+
   std::shared_ptr<ObjectConstructData> construct_data =
       std::make_shared<ObjectConstructData>(std::string());
   construct_data->ConstructBasicObjectPart<VarietyOperatorNode>(
@@ -464,47 +420,53 @@ std::shared_ptr<ObjectConstructData> AnonymousIdOrEquivenceConst(
   return construct_data;
 }
 
-// AnonymousIdOrEquivence -> AnonymousIdOrEquivence "[" Num "]"
-inline std::any&& AnonymousIdOrEquivenceNumAddressing(
-    std::vector<WordDataToUser>&& word_data) {
-  return IdOrEquivenceNumAddressing(std::move(word_data));
+std::shared_ptr<ObjectConstructData>&& AnonymousIdOrEquivenceNumAddressing(
+    std::shared_ptr<ObjectConstructData>&& sub_reduct_result,
+    std::string&& left_square_bracket, std::string&& num,
+    std::string&& right_square_bracket) {
+  return IdOrEquivenceNumAddressing(
+      std::move(sub_reduct_result), std::move(left_square_bracket),
+      std::move(num), std::move(right_square_bracket));
 }
 
-// AnonymousIdOrEquivence -> AnonymousIdOrEquivence "[" "]"
-inline std::any&& AnonymousIdOrEquivenceAnonymousAddressing(
-    std::vector<WordDataToUser>&& word_data) {
-  return IdOrEquivenceAnonymousAddressing(std::move(word_data));
+std::shared_ptr<ObjectConstructData>&&
+AnonymousIdOrEquivenceAnonymousAddressing(
+    std::shared_ptr<ObjectConstructData>&& sub_reduct_result,
+    std::string&& left_square_bracket, std::string&& right_square_bracket) {
+  return IdOrEquivenceAnonymousAddressing(std::move(sub_reduct_result),
+                                          std::move(left_square_bracket),
+                                          std::move(right_square_bracket));
 }
 
-// AnonymousIdOrEquivence -> ConstTag "*" AnonymousIdOrEquivence
-inline std::any&& AnonymousIdOrEquivencePointerAnnounce(
-    std::vector<WordDataToUser>&& word_data) {
-  return IdOrEquivencePointerAnnounce(std::move(word_data));
+std::shared_ptr<ObjectConstructData>&& AnonymousIdOrEquivencePointerAnnounce(
+    ConstTag const_tag, std::string&& operator_pointer,
+    std::shared_ptr<ObjectConstructData>&& sub_reduct_result) {
+  return IdOrEquivencePointerAnnounce(std::move(const_tag),
+                                      std::move(operator_pointer),
+                                      std::move(sub_reduct_result));
 }
 
-// AnonymousIdOrEquivence -> "(" AnonymousIdOrEquivence ")"
-inline std::any&& AnonymousIdOrEquivenceInBrackets(
-    std::vector<WordDataToUser>&& word_data) {
-  return IdOrEquivenceInBrackets(std::move(word_data));
+std::shared_ptr<ObjectConstructData>&& AnonymousIdOrEquivenceInBrackets(
+    std::string&& left_bracket,
+    std::shared_ptr<ObjectConstructData>&& sub_reduct_result,
+    std::string&& right_bracket) {
+  return IdOrEquivenceInBrackets(std::move(left_bracket),
+                                 std::move(sub_reduct_result),
+                                 std::move(right_bracket));
 }
 
-EnumReturnData NotEmptyEnumArgumentsIdBase(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  std::string& enum_member_name = word_data.front().GetTerminalWordData().word;
-  EnumReturnData enum_return_data;
+std::shared_ptr<EnumReturnData> NotEmptyEnumArgumentsIdBase(std::string&& id) {
+  auto enum_return_data = std::make_shared<EnumReturnData>();
   // 第一个枚举值默认从0开始
-  auto [iter, inserted] =
-      enum_return_data.AddMember(std::move(enum_member_name), 0);
+  auto [iter, inserted] = enum_return_data->AddMember(std::move(id), 0);
   assert(inserted);
   return enum_return_data;
 }
-EnumReturnData NotEmptyEnumArgumentsIdAssignNumBase(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  std::string& enum_member_name = word_data[0].GetTerminalWordData().word;
-  std::string& num = word_data[2].GetTerminalWordData().word;
-  EnumReturnData enum_return_data;
+std::shared_ptr<EnumReturnData> NotEmptyEnumArgumentsIdAssignNumBase(
+    std::string&& id, std::string&& operator_assign, std::string&& num) {
+  assert(operator_assign == "=");
+
+  auto enum_return_data = std::make_shared<EnumReturnData>();
   size_t chars_converted_to_longlong;
   // 枚举项的值
   long long enum_member_value = std::stoll(num, &chars_converted_to_longlong);
@@ -514,39 +476,37 @@ EnumReturnData NotEmptyEnumArgumentsIdAssignNumBase(
     exit(-1);
   }
   // 添加给定值的枚举值
-  auto [iter, inserted] = enum_return_data.AddMember(
-      std::move(enum_member_name), enum_member_value);
+  auto [iter, inserted] =
+      enum_return_data->AddMember(std::move(id), enum_member_value);
   if (!inserted) [[unlikely]] {
     // 插入失败，存在同名成员
-    OutputError(std::format("枚举项：{:}已定义", enum_member_name));
+    OutputError(std::format("枚举项：{:}已定义", id));
     exit(-1);
   }
   return enum_return_data;
 }
-std::any&& NotEmptyEnumArgumentsIdExtend(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  EnumReturnData& data_before = std::any_cast<EnumReturnData&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
-  std::string& enum_member_name = word_data[2].GetTerminalWordData().word;
+std::shared_ptr<EnumReturnData>&& NotEmptyEnumArgumentsIdExtend(
+    std::shared_ptr<EnumReturnData>&& enum_data, std::string&& str_comma,
+    std::string&& id) {
+  assert(str_comma == ",");
+
   // 未指定项的值则顺延上一个定义的项的值
-  long long enum_member_value = data_before.GetLastValue() + 1;
+  long long enum_member_value = enum_data->GetLastValue() + 1;
   auto [iter, inserted] =
-      data_before.AddMember(std::move(enum_member_name), enum_member_value);
+      enum_data->AddMember(std::move(id), enum_member_value);
   if (!inserted) [[unlikely]] {
     // 待添加的项的ID已经存在
-    OutputError(std::format("枚举项：{:}已定义", enum_member_name));
+    OutputError(std::format("枚举项：{:}已定义", id));
     exit(-1);
   }
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+  return std::move(enum_data);
 }
-std::any&& NotEmptyEnumArgumentsIdAssignNumExtend(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 5);
-  EnumReturnData& data_before = std::any_cast<EnumReturnData&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
-  std::string& enum_member_name = word_data[2].GetTerminalWordData().word;
-  std::string& num = word_data[4].GetTerminalWordData().word;
+std::shared_ptr<EnumReturnData>&& NotEmptyEnumArgumentsIdAssignNumExtend(
+    std::shared_ptr<EnumReturnData>&& enum_data, std::string&& str_comma,
+    std::string&& id, std::string&& operator_assign, std::string&& num) {
+  assert(str_comma == ",");
+  assert(operator_assign == "=");
+
   size_t chars_converted_to_longlong;
   // 未指定项的值则顺延上一个定义的项的值
   long long enum_member_value = std::stoll(num, &chars_converted_to_longlong);
@@ -555,128 +515,99 @@ std::any&& NotEmptyEnumArgumentsIdAssignNumExtend(
     OutputError(
         std::format("枚举项{0:} = {1:}中 "
                     "{1:}不能作为枚举项的值，可能原因为浮点数",
-                    enum_member_name, num));
+                    id, num));
     exit(-1);
   }
   auto [iter, inserted] =
-      data_before.AddMember(std::move(enum_member_name), enum_member_value);
+      enum_data->AddMember(std::move(id), enum_member_value);
   if (!inserted) [[unlikely]] {
     // 待添加的项的ID已经存在
-    OutputError(std::format("枚举项{0:} = {1:}中 枚举项：{0:}已定义",
-                            enum_member_name, num));
+    OutputError(std::format("枚举项{0:} = {1:}中 枚举项：{0:}已定义", id, num));
     exit(-1);
   }
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+  return std::move(enum_data);
 }
 
-// EnumArguments -> NotEmptyEnumArguments
-// 返回值类型：EnumReturnData
-std::any&& EnumArgumentsNotEmptyEnumArguments(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<EnumReturnData>&& EnumArgumentsNotEmptyEnumArguments(
+    std::shared_ptr<EnumReturnData>&& enum_data) {
+  return std::move(enum_data);
 }
-std::shared_ptr<EnumType> EnumDefine(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 5);
+std::shared_ptr<EnumType> EnumDefine(
+    std::string&& str_enum, std::string&& id, std::string&& left_curly_bracket,
+    std::shared_ptr<EnumReturnData>&& enum_data,
+    std::string&& right_curly_bracket) {
+  assert(str_enum == "enum");
+  assert(left_curly_bracket == "{");
+  assert(right_curly_bracket == "}");
 
-  std::string& enum_name = word_data[1].GetTerminalWordData().word;
-  std::shared_ptr<EnumType> enum_type;
-  if (!word_data[3].Empty()) [[likely]] {
-    // 该枚举有成员
-    enum_type = std::make_shared<EnumType>(
-        enum_name,
-        std::move(std::any_cast<EnumReturnData&>(
-                      word_data[3].GetNonTerminalWordData().user_returned_data)
-                      .GetContainer()));
-  } else {
-    // 该枚举没有成员
-    enum_type = std::make_shared<EnumType>(enum_name);
-  }
+  std::shared_ptr<EnumType> enum_type =
+      std::make_shared<EnumType>(id, std::move(enum_data->GetContainer()));
   // 添加该枚举的定义
   auto [insert_iter, result] =
-      c_parser_controller.DefineType(std::move(enum_name), enum_type);
+      c_parser_controller.DefineType(std::move(id), enum_type);
   CheckAddTypeResult(result);
   return enum_type;
 }
 std::shared_ptr<EnumType> EnumAnonymousDefine(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 4);
-  std::shared_ptr<EnumType> enum_type;
-  if (!word_data[3].Empty()) [[likely]] {
-    // 该枚举有成员
-    enum_type = std::make_shared<EnumType>(
-        std::string(),
-        std::move(std::any_cast<EnumReturnData&>(
-                      word_data[3].GetNonTerminalWordData().user_returned_data)
-                      .GetContainer()));
-  } else {
-    // 该枚举没有成员
-    enum_type = std::make_shared<EnumType>(std::string());
-  }
+    std::string&& str_enum, std::string&& left_curly_bracket,
+    std::shared_ptr<EnumReturnData>&& enum_data,
+    std::string&& right_curly_bracket) {
+  assert(str_enum == "enum");
+  assert(left_curly_bracket == "{");
+  assert(right_curly_bracket == "}");
+
+  std::shared_ptr<EnumType> enum_type = std::make_shared<EnumType>(
+      std::string(), std::move(enum_data->GetContainer()));
+  ;
   // 匿名枚举无需定义
   return enum_type;
 }
 
-// EnumAnnounce -> "enum" Id
-// 返回声明的结构名与结构类型（kStruct）
-// 额外返回类型为了与结构体和共用体声明返回类型保持一致
-std::pair<std::string, StructOrBasicType> EnumAnnounce(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  std::string& enum_name = word_data[1].GetTerminalWordData().word;
-  return std::make_pair(std::move(enum_name), StructOrBasicType::kEnum);
+std::pair<std::string, StructOrBasicType> EnumAnnounce(std::string&& str_enum,
+                                                       std::string&& id) {
+  assert(str_enum == "enum");
+
+  return std::make_pair(std::move(id), StructOrBasicType::kEnum);
 }
 
-// StructureAnnounce -> "struct" Id
-// 返回声明的结构名与结构类型（kStruct）
 std::pair<std::string, StructOrBasicType> StructureAnnounceStructId(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  return std::make_pair(std::move(word_data[1].GetTerminalWordData().word),
-                        StructOrBasicType::kStruct);
+    std::string&& str_struct, std::string&& id) {
+  assert(str_struct == "struct");
+
+  return std::make_pair(std::move(id), StructOrBasicType::kStruct);
 }
 
-// StructureAnnounce -> "union" Id
-// 返回声明的结构名与结构类型（kUnion）
 std::pair<std::string, StructOrBasicType> StructureAnnounceUnionId(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  return std::make_pair(std::move(word_data[1].GetTerminalWordData().word),
-                        StructOrBasicType::kUnion);
+    std::string&& str_union, std::string&& id) {
+  assert(str_union == "union");
+
+  return std::make_pair(std::move(id), StructOrBasicType::kUnion);
 }
 
-// StructureDefineHead -> "struct"
 std::pair<std::string, StructOrBasicType> StructureDefineHeadStruct(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
+    std::string&& str_struct) {
+  assert(str_struct == "struct");
+
   return std::make_pair(std::string(), StructOrBasicType::kStruct);
 }
 
-// StructureDefineHead -> "union"
 std::pair<std::string, StructOrBasicType> StructureDefineHeadUnion(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
+    std::string&& str_union) {
+  assert(str_union == "union");
+
   return std::make_pair(std::string(), StructOrBasicType::kUnion);
 }
 
-// StructureDefineHead -> StructureAnnounce
-// 返回值类型：std::pair<std::string, StructOrBasicType>
-// 返回值意义见StructureAnnounce
-std::any&& StructureDefineHeadStructureAnnounce(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+std::pair<std::string, StructOrBasicType>&&
+StructureDefineHeadStructureAnnounce(
+    std::pair<std::string, StructOrBasicType>&& struct_data) {
+  return std::move(struct_data);
 }
+
 std::shared_ptr<StructureTypeInterface> StructureDefineInitHead(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  // 创建结构体成员存储对象
-  // std::any无法使用std::unique_ptr构造，只能使用std::shared_ptr
-  auto& [struct_name, struct_type] =
-      std::any_cast<std::pair<std::string, StructOrBasicType>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data);
+    std::pair<std::string, StructOrBasicType>&& struct_data,
+    std::string&& left_purly_bracket) {
+  auto& [struct_name, struct_type] = struct_data;
   switch (struct_type) {
     case StructOrBasicType::kStruct:
       structure_type_constructuring = std::make_shared<StructType>(struct_name);
@@ -697,23 +628,20 @@ std::shared_ptr<StructureTypeInterface> StructureDefineInitHead(
   }
   return structure_type_constructuring;
 }
-std::any&& StructureDefine(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<StructureTypeInterface>&& StructureDefine(
+    std::shared_ptr<StructureTypeInterface>&& struct_data, std::nullptr_t,
+    std::string&& right_curly_bracket) {
+  assert(right_curly_bracket == "}");
+
+  return std::move(struct_data);
 }
 
-// StructType -> StructureDefine
 std::shared_ptr<const StructureTypeInterface> StructTypeStructDefine(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any_cast<std::shared_ptr<StructureTypeInterface>&>(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+    std::shared_ptr<StructureTypeInterface>&& struct_data) {
+  return std::move(struct_data);
 }
 std::shared_ptr<const StructureTypeInterface> StructTypeStructAnnounce(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  auto& struct_data = std::any_cast<std::pair<std::string, StructOrBasicType>&>(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+    std::pair<std::string, StructOrBasicType>&& struct_data) {
   std::string& struct_name = struct_data.first;
   StructOrBasicType struct_type = struct_data.second;
   auto [type_pointer, get_type_result] =
@@ -739,12 +667,7 @@ std::shared_ptr<const StructureTypeInterface> StructTypeStructAnnounce(
   return std::static_pointer_cast<const StructureTypeInterface>(type_pointer);
 }
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeFundamental(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  ConstTag const_tag = GetConstTag(word_data[0]);
-  SignTag sign_tag = GetSignTag(word_data[1]);
-  BuiltInType builtin_type = std::any_cast<BuiltInType&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
+    ConstTag const_tag, SignTag sign_tag, BuiltInType builtin_type) {
   switch (builtin_type) {
       // 这两种类型只能使用无符号
     case c_parser_frontend::type_system::BuiltInType::kVoid:
@@ -759,16 +682,10 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeFundamental(
                         const_tag);
 }
 
-// BasicType->ConstTag StructType
-// 返回获取到的类型与ConstTag
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeStructType(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  ConstTag const_tag = GetConstTag(word_data[0]);
-  return std::make_pair(
-      std::move(std::any_cast<std::shared_ptr<StructureTypeInterface>&>(
-          word_data[1].GetNonTerminalWordData().user_returned_data)),
-      const_tag);
+    ConstTag const_tag,
+    std::shared_ptr<const StructureTypeInterface>&& struct_data) {
+  return std::make_pair(std::move(struct_data), const_tag);
 }
 
 //// BasicType->ConstTag Id
@@ -802,14 +719,10 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeStructType(
 //  }
 //  return std::make_pair(std::move(type_pointer), const_tag);
 //}
+
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeEnumAnnounce(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  ConstTag const_tag = GetConstTag(word_data[0]);
-  std::string& enum_name =
-      std::any_cast<std::pair<std::string, StructOrBasicType>&>(
-          word_data[1].GetNonTerminalWordData().user_returned_data)
-          .first;
+    ConstTag const_tag, std::pair<std::string, StructOrBasicType>&& enum_data) {
+  std::string& enum_name = enum_data.first;
   auto [type_pointer, result] =
       c_parser_controller.GetType(enum_name, StructOrBasicType::kNotSpecified);
   switch (result) {
@@ -833,13 +746,11 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeEnumAnnounce(
   return std::make_pair(std::move(type_pointer), const_tag);
 }
 
-std::any&& FunctionRelaventBasePartFunctionInitBase(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  // IdOrEquivence产生式规约得到的数据
-  std::shared_ptr<ObjectConstructData>& construct_data =
-      std::any_cast<std::shared_ptr<ObjectConstructData>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<ObjectConstructData>&& FunctionRelaventBasePartFunctionInitBase(
+    std::shared_ptr<ObjectConstructData>&& construct_data,
+    std::string&& left_bracket) {
+  assert(left_bracket == "(");
+
   // 设置构建数据，在构建函数参数时使用
   function_type_construct_data = construct_data;
   // 创建匿名函数类型并设置函数参数
@@ -851,45 +762,30 @@ std::any&& FunctionRelaventBasePartFunctionInitBase(
     VarietyOrFunctionConstructError(
         result, function_type_construct_data->GetObjectName());
   }
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+  return std::move(construct_data);
 }
 
-std::any&& FunctionRelaventBasePartFunctionInitExtend(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  std::shared_ptr<ObjectConstructData>& construct_data =
-      std::any_cast<std::shared_ptr<ObjectConstructData>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data);
-  // 设置构建数据，在构建函数参数时使用
-  function_type_construct_data = construct_data;
-  // 创建匿名函数类型并设置函数参数
-  auto result =
-      function_type_construct_data
-          ->AttachSingleNodeToTailNodeEmplace<FunctionType>(std::string());
-  // 检查添加结果
-  if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
-    VarietyOrFunctionConstructError(
-        result, function_type_construct_data->GetObjectName());
-  }
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<ObjectConstructData>&&
+FunctionRelaventBasePartFunctionInitExtend(
+    std::shared_ptr<ObjectConstructData>&& construct_data,
+    std::string&& left_bracket) {
+  return FunctionRelaventBasePartFunctionInitBase(std::move(construct_data),
+                                                  std::move(left_bracket));
 }
 
-// FunctionRelaventBasePart -> FunctionRelaventBasePartFunctionInit
-// FunctionRelaventArguments ")"
-// 返回值类型：std::shared_ptr<ObjectConstructData>
-std::any&& FunctionRelaventBasePartFunction(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<ObjectConstructData>&& FunctionRelaventBasePartFunction(
+    std::shared_ptr<ObjectConstructData>&& construct_data, std::nullptr_t&&,
+    std::string&& right_bracket) {
+  assert(right_bracket == ")");
+
+  return std::move(construct_data);
 }
 
-std::any&& FunctionRelaventBasePartPointer(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  ConstTag const_tag = GetConstTag(word_data[0]);
-  std::shared_ptr<ObjectConstructData>& construct_data =
-      std::any_cast<std::shared_ptr<ObjectConstructData>&>(
-          word_data[2].GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<ObjectConstructData>&& FunctionRelaventBasePartPointer(
+    ConstTag const_tag, std::string&& str_pointer,
+    std::shared_ptr<ObjectConstructData>&& construct_data) {
+  assert(str_pointer == "*");
+
   // 添加一个指针节点
   auto result = construct_data->AttachSingleNodeToTailNodeEmplace<PointerType>(
       const_tag, 0);
@@ -897,26 +793,23 @@ std::any&& FunctionRelaventBasePartPointer(
   if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
     VarietyOrFunctionConstructError(result, construct_data->GetObjectName());
   }
-  return std::move(word_data[2].GetNonTerminalWordData().user_returned_data);
+  return std::move(construct_data);
 }
 
-// FunctionRelaventBasePart -> "(" FunctionRelaventBasePart ")"
-// 返回值类型：std::shared_ptr<ObjectConstructData>
-std::any&& FunctionRelaventBasePartBranckets(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  return std::move(word_data[1].GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<ObjectConstructData>&& FunctionRelaventBasePartBranckets(
+    std::string&& left_bracket,
+    std::shared_ptr<ObjectConstructData>&& construct_data,
+    std::string&& right_bracket) {
+  assert(left_bracket == "(");
+  assert(right_bracket == ")");
+
+  return std::move(construct_data);
 }
 
 std::shared_ptr<FlowInterface> FunctionRelavent(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto [final_type, const_tag_before_final_type] =
-      std::any_cast<std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data);
-  std::shared_ptr<ObjectConstructData>& construct_data =
-      std::any_cast<std::shared_ptr<ObjectConstructData>&>(
-          word_data[1].GetNonTerminalWordData().user_returned_data);
+    std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& basic_type_data,
+    std::shared_ptr<ObjectConstructData>&& construct_data) {
+  auto& [final_type, const_tag_before_final_type] = basic_type_data;
   auto [flow_control_node, construct_result] = construct_data->ConstructObject(
       const_tag_before_final_type, std::move(final_type));
   // 检查节点构建是否成功
@@ -929,26 +822,22 @@ std::shared_ptr<FlowInterface> FunctionRelavent(
 }
 
 std::shared_ptr<FlowInterface> SingleAnnounceNoAssignNotPodVariety(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  ConstTag const_tag_before_final_type = GetConstTag(word_data[0]);
-  std::string& type_name = word_data[1].GetTerminalWordData().word;
-  auto& construct_data = std::any_cast<std::shared_ptr<ObjectConstructData>&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
+    ConstTag const_tag, std::string&& id,
+    std::shared_ptr<ObjectConstructData>&& construct_data) {
   if (construct_data->GetObjectName().empty()) [[unlikely]] {
     OutputError(std::format("声明的变量必须有名"));
     exit(-1);
   }
   auto [final_type, result] =
-      c_parser_controller.GetType(type_name, StructOrBasicType::kNotSpecified);
+      c_parser_controller.GetType(id, StructOrBasicType::kNotSpecified);
   switch (result) {
     case GetTypeResult::kSeveralSameLevelMatches:
-      OutputError(std::format("类型名 {:} 对应多种类型，无法确定要使用的类型",
-                              type_name));
+      OutputError(
+          std::format("类型名 {:} 对应多种类型，无法确定要使用的类型", id));
       exit(-1);
       break;
     case GetTypeResult::kTypeNameNotFound:
-      OutputError(std::format("不存在类型 {:}", type_name));
+      OutputError(std::format("不存在类型 {:}", id));
       exit(-1);
       break;
     case GetTypeResult::kSuccess:
@@ -958,8 +847,8 @@ std::shared_ptr<FlowInterface> SingleAnnounceNoAssignNotPodVariety(
       assert(false);
       break;
   }
-  auto [flow_control_node, construct_result] = construct_data->ConstructObject(
-      const_tag_before_final_type, std::move(final_type));
+  auto [flow_control_node, construct_result] =
+      construct_data->ConstructObject(const_tag, std::move(final_type));
   if (construct_result != ObjectConstructData::CheckResult::kSuccess)
       [[unlikely]] {
     VarietyOrFunctionConstructError(construct_result,
@@ -968,11 +857,11 @@ std::shared_ptr<FlowInterface> SingleAnnounceNoAssignNotPodVariety(
   return std::move(flow_control_node);
 }
 
-std::any TypeDef(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& announced_object = std::any_cast<std::shared_ptr<FlowInterface>&>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
-  switch (announced_object->GetFlowType()) {
+std::nullptr_t TypeDef(std::string&& str_typedef,
+                       std::shared_ptr<FlowInterface>&& flow_control_node) {
+  assert(str_typedef == "typedef");
+
+  switch (flow_control_node->GetFlowType()) {
     case FlowType::kSimpleSentence:
       break;
     case FlowType::kFunctionDefine:
@@ -984,7 +873,7 @@ std::any TypeDef(std::vector<WordDataToUser>&& word_data) {
       break;
   }
   auto variety_pointer = static_pointer_cast<VarietyOperatorNode>(
-      static_cast<SimpleSentence&>(*announced_object)
+      static_cast<SimpleSentence&>(*flow_control_node)
           .GetSentenceOperateNodePointer());
   auto type_pointer = variety_pointer->GetVarietyTypePointer();
   const std::string& type_name = variety_pointer->GetVarietyName();
@@ -995,15 +884,11 @@ std::any TypeDef(std::vector<WordDataToUser>&& word_data) {
         "使用typedef定义别名时使用的名字{:}已存在相同类型的定义", type_name));
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
-std::any NotEmptyFunctionRelaventArgumentsBase(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  std::shared_ptr<FlowInterface>& flow_control_node =
-      std::any_cast<std::shared_ptr<FlowInterface>&>(
-          word_data.front().GetNonTerminalWordData().user_returned_data);
+std::nullptr_t NotEmptyFunctionRelaventArgumentsBase(
+    std::shared_ptr<FlowInterface>&& flow_control_node) {
   switch (flow_control_node->GetFlowType()) {
     case FlowType::kSimpleSentence:
       // 只有变量可以作为函数参数
@@ -1028,21 +913,19 @@ std::any NotEmptyFunctionRelaventArgumentsBase(
           .GetSentenceOperateNodePointer());
   // 添加函数参数
   function_type_construct_data->AddFunctionTypeArgument(variety_pointer);
-  return std::any();
+  return nullptr;
 }
 
-// NotEmptyFunctionRelaventArguments -> AnonymousSingleAnnounceNoAssign
-// 不返回数据
-inline std::any NotEmptyFunctionRelaventArgumentsAnonymousBase(
-    std::vector<WordDataToUser>&& word_data) {
-  return NotEmptyFunctionRelaventArgumentsBase(std::move(word_data));
+std::nullptr_t NotEmptyFunctionRelaventArgumentsAnonymousBase(
+    std::shared_ptr<FlowInterface>&& flow_control_node) {
+  return NotEmptyFunctionRelaventArgumentsBase(std::move(flow_control_node));
 }
 
-std::any NotEmptyFunctionRelaventArgumentsExtend(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& flow_control_node = std::any_cast<std::shared_ptr<FlowInterface>&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
+std::nullptr_t NotEmptyFunctionRelaventArgumentsExtend(
+    std::nullptr_t&&, std::string&& str_comma,
+    std::shared_ptr<FlowInterface>&& flow_control_node) {
+  assert(str_comma == ",");
+
   switch (flow_control_node->GetFlowType()) {
     case FlowType::kSimpleSentence:
       // 只有变量可以作为函数参数
@@ -1067,28 +950,23 @@ std::any NotEmptyFunctionRelaventArgumentsExtend(
           .GetSentenceOperateNodePointer());
   // 添加函数参数
   function_type_construct_data->AddFunctionTypeArgument(variety_pointer);
-  return std::any();
+  return nullptr;
 }
 
-// NotEmptyFunctionRelaventArguments -> NotEmptyFunctionRelaventArguments ","
-// AnonymousSingleAnnounceNoAssign
-// 返回值类型：std::shared_ptr<FunctionType::ArgumentInfoContainer>
-inline std::any NotEmptyFunctionRelaventArgumentsAnonymousExtend(
-    std::vector<WordDataToUser>&& word_data) {
-  return NotEmptyFunctionRelaventArgumentsExtend(std::move(word_data));
+std::nullptr_t NotEmptyFunctionRelaventArgumentsAnonymousExtend(
+    std::nullptr_t&&, std::string&& str_comma,
+    std::shared_ptr<FlowInterface>&& flow_control_node) {
+  return NotEmptyFunctionRelaventArgumentsExtend(nullptr, std::move(str_comma),
+                                                 std::move(flow_control_node));
 }
 
-std::any&& FunctionRelaventArguments(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
-}
+std::nullptr_t FunctionRelaventArguments(std::nullptr_t) { return nullptr; }
 
 std::shared_ptr<c_parser_frontend::flow_control::FunctionDefine>
-FunctionDefineHead(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& function_head = std::any_cast<std::shared_ptr<FlowInterface>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+FunctionDefineHead(std::shared_ptr<FlowInterface>&& function_head,
+                   std::string&& left_curly_bracket) {
+  assert(left_curly_bracket == "{");
+
   // 检查是否为函数头
   switch (function_head->GetFlowType()) {
     case FlowType::kFunctionDefine:
@@ -1118,11 +996,15 @@ FunctionDefineHead(std::vector<WordDataToUser>&& word_data) {
     exit(-1);
   }
   return std::static_pointer_cast<
-      c_parser_frontend::flow_control::FunctionDefine>(function_head);
+      c_parser_frontend::flow_control::FunctionDefine>(
+      std::move(function_head));
 }
 
-std::any FunctionDefine(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
+std::nullptr_t FunctionDefine(
+    std::shared_ptr<c_parser_frontend::flow_control::FunctionDefine>&&,
+    std::nullptr_t, std::string&& right_curly_bracket) {
+  assert(right_curly_bracket == "}");
+
   // 检查函数体是否为空，如果为空则添加无返回值返回语句或报错
   auto& active_function = c_parser_controller.GetActiveFunctionReference();
   if (active_function.GetSentences().empty()) [[unlikely]] {
@@ -1144,14 +1026,11 @@ std::any FunctionDefine(std::vector<WordDataToUser>&& word_data) {
   // 添加函数内语句已经在Sentences构建过程中完成
   // 只需清理作用域
   c_parser_controller.PopActionScope();
-  return std::any();
+  return nullptr;
 }
 
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag>
-SingleStructureBodyBase(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  auto& flow_control_node = std::any_cast<std::shared_ptr<FlowInterface>&>(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+SingleStructureBodyBase(std::shared_ptr<FlowInterface>&& flow_control_node) {
   // 检查是否为变量声明
   switch (flow_control_node->GetFlowType()) {
     case FlowType::kSimpleSentence:
@@ -1182,12 +1061,13 @@ SingleStructureBodyBase(std::vector<WordDataToUser>&& word_data) {
   return std::make_pair(std::move(extend_type), extend_const_tag);
 }
 
-std::any&& SingleStructureBodyExtend(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& [extend_type, extend_const_tag] =
-      std::any_cast<std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data);
-  std::string& new_member_name = word_data[2].GetTerminalWordData().word;
+std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&&
+SingleStructureBodyExtend(
+    std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& struct_data,
+    std::string&& str_comma, std::string&& new_member_name) {
+  assert(str_comma == ",");
+
+  auto& [extend_type, extend_const_tag] = struct_data;
   auto structure_member_index =
       structure_type_constructuring->AddStructureMember(
           std::move(new_member_name), extend_type, extend_const_tag);
@@ -1196,42 +1076,36 @@ std::any&& SingleStructureBodyExtend(std::vector<WordDataToUser>&& word_data) {
     OutputError(std::format("重定义成员{:}", new_member_name));
     exit(-1);
   }
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+  return std::move(struct_data);
 }
 
-// NotEmptyStructureBody -> SingleStructureBody
-// 不返回任何数据
-std::any NotEmptyStructureBodyBase(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
+std::nullptr_t NotEmptyStructureBodyBase(
+    std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&&) {
+  return nullptr;
 }
 
-// NotEmptyStructureBody -> NotEmptyStructureBody SingleStructureBody ";"
-// 不返回任何数据
-std::any NotEmptyStructureBodyExtend(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  return std::any();
+std::nullptr_t NotEmptyStructureBodyExtend(
+    std::nullptr_t, std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&&,
+    std::string&& semicolon) {
+  assert(semicolon == ";");
+
+  return nullptr;
 }
 
-// StructureBody -> NotEmptyStructureBody
-// 不返回任何数据
-std::any StructureBody(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
-}
+std::nullptr_t StructureBody(std::nullptr_t) { return nullptr; }
 
 std::shared_ptr<ListInitializeOperatorNode> InitializeList(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
+    std::string&& left_curly_bracket,
+    std::shared_ptr<
+        std::list<std::shared_ptr<InitializeOperatorNodeInterface>>>&&
+        list_arguments,
+    std::string&& right_curly_bracket) {
   auto initialize_list = std::make_shared<ListInitializeOperatorNode>();
   // 获取初始化列表参数
-  auto& list_argument_pointer = std::any_cast<std::shared_ptr<
-      std::list<std::shared_ptr<InitializeOperatorNodeInterface>>>&>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
   std::list<std::shared_ptr<const InitializeOperatorNodeInterface>>
       argument_pointers_to_add;
-  for (const auto& pointer : *list_argument_pointer) {
-    argument_pointers_to_add.emplace_back(pointer);
+  for (auto& pointer : *list_arguments) {
+    argument_pointers_to_add.emplace_back(std::move(pointer));
   }
   // 将初始化列表的所有参数添加到容器中
   bool result =
@@ -1239,65 +1113,54 @@ std::shared_ptr<ListInitializeOperatorNode> InitializeList(
   return std::move(initialize_list);
 }
 
-// SingleInitializeListArgument -> SingleConstexprValue
-// 返回值类型：std::shared_ptr<InitializeOperatorNodeInterface>
-std::shared_ptr<InitializeOperatorNodeInterface>
+std::shared_ptr<InitializeOperatorNodeInterface>&&
 SingleInitializeListArgumentConstexprValue(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any_cast<std::shared_ptr<BasicTypeInitializeOperatorNode>&>(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+    std::shared_ptr<BasicTypeInitializeOperatorNode>&& value) {
+  return std::move(value);
 }
 
-std::any&& SingleInitializeListArgumentList(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<InitializeOperatorNodeInterface>&&
+SingleInitializeListArgumentList(
+    std::shared_ptr<ListInitializeOperatorNode>&& value) {
+  return std::move(value);
 }
 
 std::shared_ptr<std::list<std::shared_ptr<InitializeOperatorNodeInterface>>>
-InitializeListArgumentsBase(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  auto& init_data_pointer =
-      std::any_cast<std::shared_ptr<InitializeOperatorNodeInterface>&>(
-          word_data.front().GetNonTerminalWordData().user_returned_data);
+InitializeListArgumentsBase(
+    std::shared_ptr<InitializeOperatorNodeInterface>&& init_data_pointer) {
   auto list_pointer = std::make_shared<
       std::list<std::shared_ptr<InitializeOperatorNodeInterface>>>();
+  list_pointer->emplace_back(std::move(init_data_pointer));
+  return list_pointer;
+}
+
+std::shared_ptr<std::list<std::shared_ptr<InitializeOperatorNodeInterface>>>&&
+InitializeListArgumentsExtend(
+    std::shared_ptr<std::list<
+        std::shared_ptr<InitializeOperatorNodeInterface>>>&& list_pointer,
+    std::string&& str_comma,
+    std::shared_ptr<InitializeOperatorNodeInterface>&& init_data_pointer) {
+  assert(str_comma == ",");
+
   list_pointer->emplace_back(std::move(init_data_pointer));
   return std::move(list_pointer);
 }
 
-std::any&& InitializeListArgumentsExtend(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& list_pointer = std::any_cast<std::shared_ptr<
-      std::list<std::shared_ptr<InitializeOperatorNodeInterface>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
-  auto& init_data_pointer =
-      std::any_cast<std::shared_ptr<InitializeOperatorNodeInterface>&>(
-          word_data[2].GetNonTerminalWordData().user_returned_data);
-  list_pointer->emplace_back(std::move(init_data_pointer));
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
-}
-
-// AnnounceAssignable -> Assignable
-// 返回值类型：std::pair<std::shared_ptr<const OperatorNodeInterface>,
-//                   std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-std::any&& AnnounceAssignableAssignable(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+std::pair<std::shared_ptr<const OperatorNodeInterface>,
+          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+AnnounceAssignableAssignable(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        value) {
+  return std::move(value);
 }
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AnnounceAssignableInitializeList(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
+AnnounceAssignableInitializeList(
+    std::shared_ptr<ListInitializeOperatorNode>&& initialize_list) {
   return std::make_pair(
-      std::move(std::any_cast<std::shared_ptr<ListInitializeOperatorNode>&>(
-          word_data.front().GetNonTerminalWordData().user_returned_data)),
+      std::move(initialize_list),
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>());
 }
 
@@ -1409,10 +1272,8 @@ VarietyAnnounceWithAssign(
 
 std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
            std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-SingleAnnounceAndAssignNoAssignBase(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  auto& flow_control_node = std::any_cast<std::shared_ptr<FlowInterface>&>(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+SingleAnnounceAndAssignNoAssignBase(
+    std::shared_ptr<FlowInterface>&& flow_control_node) {
   switch (flow_control_node->GetFlowType()) {
     case FlowType::kSimpleSentence:
       break;
@@ -1431,10 +1292,14 @@ SingleAnnounceAndAssignNoAssignBase(std::vector<WordDataToUser>&& word_data) {
 
 std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
            std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-SingleAnnounceAndAssignWithAssignBase(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& flow_control_node = std::any_cast<std::shared_ptr<FlowInterface>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+SingleAnnounceAndAssignWithAssignBase(
+    std::shared_ptr<FlowInterface>&& flow_control_node,
+    std::string&& str_assign,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        container) {
+  assert(str_assign == "=");
+
   // 检查是否为变量声明
   switch (flow_control_node->GetFlowType()) {
     case FlowType::kSimpleSentence:
@@ -1447,28 +1312,27 @@ SingleAnnounceAndAssignWithAssignBase(std::vector<WordDataToUser>&& word_data) {
       assert(false);
       break;
   }
-  auto& [node_for_assign, statements_to_get_node_for_assign] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
+  auto& [node_for_assign, statements_to_get_node_for_assign] = container;
   c_parser_controller.AddSentences(
       std::move(*statements_to_get_node_for_assign));
   return VarietyAnnounceWithAssign(
       std::static_pointer_cast<VarietyOperatorNode>(
           static_cast<SimpleSentence&>(*flow_control_node)
               .GetSentenceOperateNodePointer()),
-      node_for_assign);
+      std::move(node_for_assign));
 }
 
-std::any&& SingleAnnounceAndAssignNoAssignExtend(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
+std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
+           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+SingleAnnounceAndAssignNoAssignExtend(
+    std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
+               std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        container,
+    std::string&& str_comma, std::string&& variety_name) {
+  assert(str_comma == ",");
+
   auto& [extend_announce_type, extend_const_tag, flow_control_node_container] =
-      std::any_cast<std::tuple<
-          std::shared_ptr<const TypeInterface>, ConstTag,
-          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data);
-  std::string& variety_name = word_data[2].GetTerminalWordData().word;
+      container;
   // 构建变量节点
   auto variety_node = std::make_shared<VarietyOperatorNode>(
       std::move(variety_name), extend_const_tag, LeftRightValueTag::kLeftValue);
@@ -1480,27 +1344,31 @@ std::any&& SingleAnnounceAndAssignNoAssignExtend(
   flow_control_node_container->splice(
       flow_control_node_container->end(),
       std::move(*sub_flow_control_node_container));
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+  return std::move(container);
 }
 
-std::any&& SingleAnnounceAndAssignWithAssignExtend(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 5);
+std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
+           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+SingleAnnounceAndAssignWithAssignExtend(
+    std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
+               std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        container,
+    std::string&& str_comma, std::string&& variety_name,
+    std::string&& str_assign,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        assigned_container) {
+  assert(str_comma == ",");
+  assert(str_assign == "=");
+
   auto& [extend_announce_type, extend_const_tag, flow_control_node_container] =
-      std::any_cast<std::tuple<
-          std::shared_ptr<const TypeInterface>, ConstTag,
-          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data);
+      container;
   auto& [node_for_assign, flow_control_nodes_to_get_node_for_assign] =
-      std::any_cast<std::pair<
-          std::shared_ptr<const OperatorNodeInterface>,
-          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-          word_data[4].GetNonTerminalWordData().user_returned_data);
+      assigned_container;
   // 将获取待赋值变量的操作合并到主容器中
   flow_control_node_container->splice(
       flow_control_node_container->end(),
       std::move(*flow_control_nodes_to_get_node_for_assign));
-  std::string& variety_name = word_data[2].GetTerminalWordData().word;
   // 构建变量节点
   auto variety_node = std::make_shared<VarietyOperatorNode>(
       std::move(variety_name), extend_const_tag, LeftRightValueTag::kLeftValue);
@@ -1513,23 +1381,16 @@ std::any&& SingleAnnounceAndAssignWithAssignExtend(
   flow_control_node_container->splice(
       flow_control_node_container->end(),
       std::move(*sub_flow_control_node_container));
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+  return std::move(container);
 }
 
-// GetType -> BasicType
-// 返回类型和变量的ConstTag
-// 返回值类型：std::pair<std::shared_ptr<const TypeInterface>, ConstTag>
-std::any&& TypeBasicType(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& TypeBasicType(
+    std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& type_data) {
+  return std::move(type_data);
 }
 
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> TypeFunctionRelavent(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  auto& flow_control_node = std::any_cast<std::shared_ptr<FlowInterface>&>(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+    std::shared_ptr<FlowInterface>&& flow_control_node) {
   // 检查类型是否为函数声明
   if (flow_control_node->GetFlowType() == FlowType::kFunctionDefine)
       [[unlikely]] {
@@ -1549,281 +1410,176 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> TypeFunctionRelavent(
                         operator_node->GetConstTag());
 }
 
-// MathematicalOperator -> "+"
-// 返回数学运算符
-MathematicalOperation MathematicalOperatorPlus(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "+");
+MathematicalOperation MathematicalOperatorPlus(std::string&& str_operator) {
+  assert(str_operator == "+");
   return MathematicalOperation::kPlus;
 }
 
-// MathematicalOperator -> "-"
-// 返回数学运算符
-MathematicalOperation MathematicalOperatorMinus(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "-");
+MathematicalOperation MathematicalOperatorMinus(std::string&& str_operator) {
+  assert(str_operator == "-");
   return MathematicalOperation::kMinus;
 }
 
-// MathematicalOperator -> "*"
-// 返回数学运算符
-MathematicalOperation MathematicalOperatorMultiple(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "*");
+MathematicalOperation MathematicalOperatorMultiple(std::string&& str_operator) {
+  assert(str_operator == "*");
   return MathematicalOperation::kMultiple;
 }
 
-// MathematicalOperator -> "/"
-// 返回数学运算符
-MathematicalOperation MathematicalOperatorDivide(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "/");
+MathematicalOperation MathematicalOperatorDivide(std::string&& str_operator) {
+  assert(str_operator == "/");
   return MathematicalOperation::kDivide;
 }
 
-// MathematicalOperator -> "%"
-// 返回数学运算符
-MathematicalOperation MathematicalOperatorMod(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "%");
+MathematicalOperation MathematicalOperatorMod(std::string&& str_operator) {
+  assert(str_operator == "%");
   return MathematicalOperation::kMod;
 }
 
-// MathematicalOperator -> "<<"
-// 返回数学运算符
 MathematicalOperation MathematicalOperatorLeftShift(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "<<");
+    std::string&& str_operator) {
+  assert(str_operator == "<<");
   return MathematicalOperation::kLeftShift;
 }
 
-// MathematicalOperator -> ">>"
-// 返回数学运算符
 MathematicalOperation MathematicalOperatorRightShift(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == ">>");
+    std::string&& str_operator) {
+  assert(str_operator == ">>");
   return MathematicalOperation::kRightShift;
 }
 
-// MathematicalOperator -> "&"
-// 返回数学运算符
-MathematicalOperation MathematicalOperatorAnd(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "&");
+MathematicalOperation MathematicalOperatorAnd(std::string&& str_operator) {
+  assert(str_operator == "&");
   return MathematicalOperation::kAnd;
 }
 
-// MathematicalOperator -> "|"
-// 返回数学运算符
-MathematicalOperation MathematicalOperatorOr(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "|");
+MathematicalOperation MathematicalOperatorOr(std::string&& str_operator) {
+  assert(str_operator == "|");
   return MathematicalOperation::kOr;
 }
 
-// MathematicalOperator -> "^"
-// 返回数学运算符
-MathematicalOperation MathematicalOperatorXor(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "^");
+MathematicalOperation MathematicalOperatorXor(std::string&& str_operator) {
+  assert(str_operator == "^");
   return MathematicalOperation::kXor;
 }
 
-// MathematicalOperator -> "!"
-// 返回数学运算符
-MathematicalOperation MathematicalOperatorNot(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "!");
+MathematicalOperation MathematicalOperatorNot(std::string&& str_operator) {
+  assert(str_operator == "!");
   return MathematicalOperation::kNot;
 }
 
-// MathematicalAndAssignOperator -> "+="
-// 返回数学赋值运算符
 MathematicalAndAssignOperation MathematicalAndAssignOperatorPlusAssign(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "+=");
+    std::string&& str_operator) {
+  assert(str_operator == "+=");
   return MathematicalAndAssignOperation::kPlusAssign;
 }
 
-// MathematicalAndAssignOperator -> "-="
-// 返回数学赋值运算符
 MathematicalAndAssignOperation MathematicalAndAssignOperatorMinusAssign(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "-=");
+    std::string&& str_operator) {
+  assert(str_operator == "-=");
   return MathematicalAndAssignOperation::kMinusAssign;
 }
 
-// MathematicalAndAssignOperator -> "*="
-// 返回数学赋值运算符
 MathematicalAndAssignOperation MathematicalAndAssignOperatorMultipleAssign(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "*=");
+    std::string&& str_operator) {
+  assert(str_operator == "*=");
   return MathematicalAndAssignOperation::kMultipleAssign;
 }
 
-// MathematicalAndAssignOperator -> "/="
-// 返回数学赋值运算符
 MathematicalAndAssignOperation MathematicalAndAssignOperatorDivideAssign(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "/=");
+    std::string&& str_operator) {
+  assert(str_operator == "/=");
   return MathematicalAndAssignOperation::kDivideAssign;
 }
 
-// MathematicalAndAssignOperator -> "%="
-// 返回数学赋值运算符
 MathematicalAndAssignOperation MathematicalAndAssignOperatorModAssign(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "%=");
+    std::string&& str_operator) {
+  assert(str_operator == "%=");
   return MathematicalAndAssignOperation::kModAssign;
 }
 
-// MathematicalAndAssignOperator -> "<<="
-// 返回数学赋值运算符
 MathematicalAndAssignOperation MathematicalAndAssignOperatorLeftShiftAssign(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "<<=");
+    std::string&& str_operator) {
+  assert(str_operator == "<<=");
   return MathematicalAndAssignOperation::kLeftShiftAssign;
 }
 
-// MathematicalAndAssignOperator -> ">>="
-// 返回数学赋值运算符
 MathematicalAndAssignOperation MathematicalAndAssignOperatorRightShiftAssign(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == ">>=");
+    std::string&& str_operator) {
+  assert(str_operator == ">>=");
   return MathematicalAndAssignOperation::kRightShiftAssign;
 }
 
-// MathematicalAndAssignOperator -> "&="
-// 返回数学赋值运算符
 MathematicalAndAssignOperation MathematicalAndAssignOperatorAndAssign(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "&=");
+    std::string&& str_operator) {
+  assert(str_operator == "&=");
   return MathematicalAndAssignOperation::kAndAssign;
 }
 
-// MathematicalAndAssignOperator -> "|="
-// 返回数学赋值运算符
 MathematicalAndAssignOperation MathematicalAndAssignOperatorOrAssign(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "|=");
+    std::string&& str_operator) {
+  assert(str_operator == "|=");
   return MathematicalAndAssignOperation::kOrAssign;
 }
 
-// MathematicalAndAssignOperator -> "^="
-// 返回数学赋值运算符
 MathematicalAndAssignOperation MathematicalAndAssignOperatorXorAssign(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "^=");
+    std::string&& str_operator) {
+  assert(str_operator == "^=");
   return MathematicalAndAssignOperation::kXorAssign;
 }
 
-// LogicalOperator -> "&&"
-// 返回逻辑运算符
-LogicalOperation LogicalOperatorAndAnd(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "&&");
+LogicalOperation LogicalOperatorAndAnd(std::string&& str_operator) {
+  assert(str_operator == "&&");
   return LogicalOperation::kAndAnd;
 }
 
-// LogicalOperator -> "||"
-// 返回逻辑运算符
-LogicalOperation LogicalOperatorOrOr(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "||");
+LogicalOperation LogicalOperatorOrOr(std::string&& str_operator) {
+  assert(str_operator == "||");
   return LogicalOperation::kOrOr;
 }
 
-// LogicalOperator -> ">"
-// 返回逻辑运算符
-LogicalOperation LogicalOperatorGreater(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == ">");
+LogicalOperation LogicalOperatorGreater(std::string&& str_operator) {
+  assert(str_operator == ">");
   return LogicalOperation::kGreater;
 }
 
-// LogicalOperator -> ">="
-// 返回逻辑运算符
-LogicalOperation LogicalOperatorGreaterEqual(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == ">=");
+LogicalOperation LogicalOperatorGreaterEqual(std::string&& str_operator) {
+  assert(str_operator == ">=");
   return LogicalOperation::kGreaterEqual;
 }
 
-// LogicalOperator -> "<"
-// 返回逻辑运算符
-LogicalOperation LogicalOperatorLess(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "<");
+LogicalOperation LogicalOperatorLess(std::string&& str_operator) {
+  assert(str_operator == "<");
   return LogicalOperation::kLess;
 }
 
-// LogicalOperator -> "<="
-// 返回逻辑运算符
-LogicalOperation LogicalOperatorLessEqual(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "<=");
+LogicalOperation LogicalOperatorLessEqual(std::string&& str_operator) {
+  assert(str_operator == "<=");
   return LogicalOperation::kLessEqual;
 }
 
-// LogicalOperator -> "=="
-// 返回逻辑运算符
-LogicalOperation LogicalOperatorEqual(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "==");
+LogicalOperation LogicalOperatorEqual(std::string&& str_operator) {
+  assert(str_operator == "==");
   return LogicalOperation::kEqual;
 }
 
-// LogicalOperator -> "!="
-// 返回逻辑运算符
-LogicalOperation LogicalOperatorNotEqual(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1 &&
-         word_data.front().GetTerminalWordData().word == "!=");
+LogicalOperation LogicalOperatorNotEqual(std::string&& str_operator) {
+  assert(str_operator == "!=");
   return LogicalOperation::kNotEqual;
 }
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableConstexprValue(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
+AssignableConstexprValue(
+    std::shared_ptr<BasicTypeInitializeOperatorNode>&& value) {
   // 构建存储获取常量/变量的操作的容器
   return std::make_pair(
-      std::move(
-          std::any_cast<std::shared_ptr<BasicTypeInitializeOperatorNode>&>(
-              word_data.front().GetNonTerminalWordData().user_returned_data)),
+      std::move(value),
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>());
 }
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableId(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  std::string& variety_name = word_data.front().GetTerminalWordData().word;
+AssignableId(std::string&& variety_name) {
   auto [variety_operator_node, found] =
       c_parser_controller.GetVarietyOrFunction(variety_name);
   if (!found) [[unlikely]] {
@@ -1836,37 +1592,42 @@ AssignableId(std::vector<WordDataToUser>&& word_data) {
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>());
 }
 
-// Assignable -> TemaryOperator
-// 返回这一步得到的最终可运算节点和获取过程的操作
-// 返回值类型：std::pair<std::shared_ptr<const OperatorNodeInterface>,
-//                   std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-std::any&& AssignableTemaryOperator(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
-}
-
-// Assignable -> "(" Assignable ")"
-// 返回这一步得到的最终可运算节点和获取过程的操作
-// 返回值类型：std::pair<std::shared_ptr<const OperatorNodeInterface>,
-//                   std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-std::any&& AssignableBracket(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+std::pair<std::shared_ptr<const OperatorNodeInterface>,
+          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+AssignableTemaryOperator(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        value) {
+  return std::move(value);
 }
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
+          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+AssignableBracket(
+    std::string&& left_bracket,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        value,
+    std::string&& right_bracket) {
+  assert(left_bracket == "(");
+  assert(right_bracket == ")");
+
+  return std::move(value);
+}
+std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableTypeConvert(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 4);
-  auto [new_type, new_const_tag] =
-      std::any_cast<std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&>(
-          word_data[1].GetNonTerminalWordData().user_returned_data);
-  auto& [old_operator_node, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[3].GetNonTerminalWordData().user_returned_data);
+AssignableTypeConvert(
+    std::string&& left_bracket,
+    std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& type_data,
+    std::string&& right_bracket,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        old_variety_data) {
+  assert(left_bracket == "(");
+  assert(right_bracket == ")");
+
+  auto& [new_type, new_const_tag] = type_data;
+  auto& [old_operator_node, flow_control_node_container] = old_variety_data;
   if (old_operator_node->GetGeneralOperatorType() ==
           GeneralOperationType::kInitValue &&
       new_const_tag == ConstTag::kNonConst) [[unlikely]] {
@@ -1892,17 +1653,20 @@ AssignableTypeConvert(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableAssign(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
+AssignableAssign(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        destination_variety_data,
+    std::string&& str_assign,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        source_variety_data) {
+  assert(str_assign == "=");
+
   auto& [node_to_be_assigned, statements_to_get_node_to_be_assigned] =
-      std::any_cast<std::pair<
-          std::shared_ptr<const OperatorNodeInterface>,
-          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data);
-  auto& [node_for_assign, statements_to_get_node_for_assign] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
+      destination_variety_data;
+  auto& [node_for_assign, statements_to_get_node_for_assign] =
+      source_variety_data;
   // 获取真正的待赋值对象
   auto real_node_to_be_assigned = node_to_be_assigned->GetResultOperatorNode();
   if (real_node_to_be_assigned == nullptr) {
@@ -1942,22 +1706,26 @@ AssignableAssign(std::vector<WordDataToUser>&& word_data) {
                         std::move(statements_to_get_node_to_be_assigned));
 }
 
-// Assignable -> FunctionCall
-// 返回值类型：std::pair<std::shared_ptr<const OperatorNodeInterface>,
-//                   std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-std::any&& AssignableFunctionCall(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+std::pair<std::shared_ptr<const OperatorNodeInterface>,
+          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+AssignableFunctionCall(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        value) {
+  return std::move(value);
 }
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableSizeOfType(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 4);
-  auto [type_pointer, variety_const_tag] =
-      std::any_cast<std::pair<std::shared_ptr<TypeInterface>, ConstTag>&>(
-          word_data[2].GetNonTerminalWordData().user_returned_data);
+AssignableSizeOfType(
+    std::string&& str_sizeof, std::string&& str_left_bracket,
+    std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& type_data,
+    std::string&& str_right_bracket) {
+  assert(str_sizeof == "sizeof");
+  assert(str_left_bracket == "(");
+  assert(str_right_bracket == ")");
+
+  auto& [type_pointer, variety_const_tag] = type_data;
   size_t type_size = type_pointer->TypeSizeOf();
   auto return_constexpr_value =
       std::make_shared<BasicTypeInitializeOperatorNode>(
@@ -1978,12 +1746,17 @@ AssignableSizeOfType(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableSizeOfAssignable(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 4);
-  auto& [assignable_node, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
+AssignableSizeOfAssignable(
+    std::string&& str_sizeof, std::string&& str_left_bracket,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data,
+    std::string&& str_right_bracket) {
+  assert(str_sizeof == "sizeof");
+  assert(str_left_bracket == "(");
+  assert(str_right_bracket == ")");
+
+  auto& [assignable_node, flow_control_node_container] = variety_data;
   size_t type_size = assignable_node->GetResultTypePointer()->TypeSizeOf();
   auto return_constexpr_value =
       std::make_shared<BasicTypeInitializeOperatorNode>(
@@ -2004,23 +1777,23 @@ AssignableSizeOfAssignable(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableMemberAccess(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& [assignable, sentences_to_get_assignable] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+AssignableMemberAccess(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data,
+    std::string&& str_member_access, std::string&& member_name) {
+  assert(str_member_access == ".");
+
+  auto& [assignable, sentences_to_get_assignable] = variety_data;
   auto member_access_node = std::make_shared<MemberAccessOperatorNode>();
   bool result = member_access_node->SetNodeToAccess(assignable);
   if (!result) [[unlikely]] {
     OutputError(std::format("无法对非结构数据或枚举类型访问成员"));
     exit(-1);
   }
-  result = member_access_node->SetMemberName(
-      std::move(word_data[2].GetTerminalWordData().word));
+  result = member_access_node->SetMemberName(std::move(member_name));
   if (!result) [[unlikely]] {
-    OutputError(std::format("给定结构体不存在成员{:}",
-                            word_data[2].GetTerminalWordData().word));
+    OutputError(std::format("给定结构体不存在成员{:}", member_name));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
@@ -2033,12 +1806,14 @@ AssignableMemberAccess(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignablePointerMemberAccess(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& [assignable, sentences_to_get_assignable] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+AssignablePointerMemberAccess(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data,
+    std::string&& str_member_access, std::string&& member_name) {
+  assert(str_member_access == "->");
+
+  auto& [assignable, sentences_to_get_assignable] = variety_data;
   // 对指针解引用后访问成员
   auto dereference_node = std::make_shared<DereferenceOperatorNode>();
   bool result = dereference_node->SetNodeToDereference(assignable);
@@ -2053,11 +1828,9 @@ AssignablePointerMemberAccess(std::vector<WordDataToUser>&& word_data) {
     OutputError(std::format("无法对非结构数据或枚举类型访问成员"));
     exit(-1);
   }
-  result = member_access_node->SetMemberName(
-      std::move(word_data[2].GetTerminalWordData().word));
+  result = member_access_node->SetMemberName(std::move(member_name));
   if (!result) [[unlikely]] {
-    OutputError(std::format("给定结构数据不存在成员{:}",
-                            word_data[2].GetTerminalWordData().word));
+    OutputError(std::format("给定结构数据不存在成员{:}", member_name));
     exit(-1);
   }
   // 添加解引用节点和成员访问节点
@@ -2075,19 +1848,18 @@ AssignablePointerMemberAccess(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableMathematicalOperate(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& [left_operator_node, left_flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
-  auto mathematical_operation = std::any_cast<MathematicalOperation>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
+AssignableMathematicalOperate(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        destination_variety_data,
+    MathematicalOperation mathematical_operation,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        source_variety_data) {
+  auto& [left_operator_node, left_flow_control_node_container] =
+      destination_variety_data;
   auto& [right_operator_node, right_flow_control_node_container] =
-      std::any_cast<std::pair<
-          std::shared_ptr<const OperatorNodeInterface>,
-          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-          word_data[2].GetNonTerminalWordData().user_returned_data);
+      source_variety_data;
   auto mathematical_operator_node =
       std::make_shared<MathematicalOperatorNode>(mathematical_operation);
   bool left_operator_node_check_result =
@@ -2119,20 +1891,17 @@ AssignableMathematicalOperate(std::vector<WordDataToUser>&& word_data) {
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 AssignableMathematicalAndAssignOperate(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& [left_operator_node, left_flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
-  auto mathematical_and_assign_operation =
-      std::any_cast<MathematicalAndAssignOperation>(
-          word_data[1].GetNonTerminalWordData().user_returned_data);
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        destination_variety_data,
+    MathematicalAndAssignOperation mathematical_and_assign_operation,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        source_variety_data) {
+  auto& [left_operator_node, left_flow_control_node_container] =
+      destination_variety_data;
   auto& [right_operator_node, right_flow_control_node_container] =
-      std::any_cast<std::pair<
-          std::shared_ptr<const OperatorNodeInterface>,
-          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-          word_data[2].GetNonTerminalWordData().user_returned_data);
+      source_variety_data;
   // 获取数学运算符
   MathematicalOperation mathematical_operation = c_parser_frontend::
       operator_node::MathematicalAndAssignOperationToMathematicalOperation(
@@ -2179,19 +1948,15 @@ AssignableMathematicalAndAssignOperate(
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableLogicalOperate(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& [left_operator_node, left_flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
-  auto logical_operation = std::any_cast<LogicalOperation>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
-  auto& [right_operator_node, right_flow_control_node_container] =
-      std::any_cast<std::pair<
-          std::shared_ptr<const OperatorNodeInterface>,
-          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-          word_data[2].GetNonTerminalWordData().user_returned_data);
+AssignableLogicalOperate(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&& lhr,
+    LogicalOperation logical_operation,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        rhr) {
+  auto& [left_operator_node, left_flow_control_node_container] = lhr;
+  auto& [right_operator_node, right_flow_control_node_container] = rhr;
   // 构建逻辑运算节点
   auto logical_operator_node =
       std::make_shared<LogicalOperationOperatorNode>(logical_operation);
@@ -2224,12 +1989,14 @@ AssignableLogicalOperate(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableNot(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& [sub_assignable_node, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
+AssignableNot(
+    std::string&& str_operator,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data) {
+  assert(str_operator == "!");
+
+  auto& [sub_assignable_node, flow_control_node_container] = variety_data;
   auto not_operator_node =
       std::make_shared<MathematicalOperatorNode>(MathematicalOperation::kNot);
   bool check_result =
@@ -2249,62 +2016,68 @@ AssignableNot(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableLogicalNegative(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& [sub_assignable_node, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
-  auto not_operator_node = std::make_shared<MathematicalOperatorNode>(
+AssignableLogicalNegative(
+    std::string&& str_operator,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data) {
+  assert(str_operator == "~");
+
+  auto& [sub_assignable_node, flow_control_node_container] = variety_data;
+  auto logic_negative_node = std::make_shared<MathematicalOperatorNode>(
       MathematicalOperation::kLogicalNegative);
   bool check_result =
-      not_operator_node->SetLeftOperatorNode(sub_assignable_node);
+      logic_negative_node->SetLeftOperatorNode(sub_assignable_node);
   if (!check_result) [[unlikely]] {
     OutputError(std::format("无法进行按位取反运算"));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
-  check_result = flow_control_node->SetSentenceOperateNode(not_operator_node);
+  check_result = flow_control_node->SetSentenceOperateNode(logic_negative_node);
   assert(check_result);
   flow_control_node_container->emplace_back(std::move(flow_control_node));
   // 返回运算得到的节点而不是运算节点
-  return std::make_pair(not_operator_node->GetResultOperatorNode(),
+  return std::make_pair(logic_negative_node->GetResultOperatorNode(),
                         std::move(flow_control_node_container));
 }
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableMathematicalNegative(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& [sub_assignable_node, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
-  auto not_operator_node = std::make_shared<MathematicalOperatorNode>(
+AssignableMathematicalNegative(
+    std::string&& str_operator,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data) {
+  assert(str_operator == "-");
+
+  auto& [sub_assignable_node, flow_control_node_container] = variety_data;
+  auto math_negative_node = std::make_shared<MathematicalOperatorNode>(
       MathematicalOperation::kMathematicalNegative);
   bool check_result =
-      not_operator_node->SetLeftOperatorNode(sub_assignable_node);
+      math_negative_node->SetLeftOperatorNode(sub_assignable_node);
   if (!check_result) [[unlikely]] {
     OutputError(std::format("无法进行取负运算"));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
-  check_result = flow_control_node->SetSentenceOperateNode(not_operator_node);
+  check_result = flow_control_node->SetSentenceOperateNode(math_negative_node);
   assert(check_result);
   flow_control_node_container->emplace_back(std::move(flow_control_node));
   // 返回运算得到的节点而不是运算节点
-  return std::make_pair(not_operator_node->GetResultOperatorNode(),
+  return std::make_pair(math_negative_node->GetResultOperatorNode(),
                         std::move(flow_control_node_container));
 }
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableObtainAddress(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& [sub_assignable_node, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
+AssignableObtainAddress(
+    std::string&& str_operator,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data) {
+  assert(str_operator == "&");
+
+  auto& [sub_assignable_node, flow_control_node_container] = variety_data;
   auto node_to_obtain_address =
       std::static_pointer_cast<const VarietyOperatorNode>(sub_assignable_node);
   // 检查被取地址的节点
@@ -2336,12 +2109,14 @@ AssignableObtainAddress(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableDereference(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& [sub_assignable_node, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
+AssignableDereference(
+    std::string&& str_operator,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data) {
+  assert(str_operator == "*");
+
+  auto& [sub_assignable_node, flow_control_node_container] = variety_data;
   auto dereference_node = std::make_shared<DereferenceOperatorNode>();
   bool result = dereference_node->SetNodeToDereference(sub_assignable_node);
   if (!result) [[unlikely]] {
@@ -2359,16 +2134,20 @@ AssignableDereference(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableArrayAccess(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 4);
-  auto& [node_to_dereference, main_flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
-  auto& [index_node, sub_flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
+AssignableArrayAccess(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        array_data,
+    std::string&& left_square_bracket,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        index_data,
+    std::string&& right_square_bracket) {
+  assert(left_square_bracket == "[");
+  assert(right_square_bracket == "]");
+
+  auto& [node_to_dereference, main_flow_control_node_container] = array_data;
+  auto& [index_node, sub_flow_control_node_container] = index_data;
   // 创建将指针地址与偏移量相加的节点
   auto plus_operator_node =
       std::make_shared<MathematicalOperatorNode>(MathematicalOperation::kPlus);
@@ -2492,12 +2271,14 @@ std::shared_ptr<const OperatorNodeInterface> SuffixPlusOrMinus(
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignablePrefixPlus(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& [node_to_plus, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
+AssignablePrefixPlus(
+    std::string&& str_operator,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data) {
+  assert(str_operator == "++");
+
+  auto& [node_to_plus, flow_control_node_container] = variety_data;
   return std::make_pair(
       PrefixPlusOrMinus(MathematicalOperation::kPlus, node_to_plus,
                         flow_control_node_container.get()),
@@ -2506,12 +2287,14 @@ AssignablePrefixPlus(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignablePrefixMinus(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& [node_to_minus, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
+AssignablePrefixMinus(
+    std::string&& str_operator,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data) {
+  assert(str_operator == "--");
+
+  auto& [node_to_minus, flow_control_node_container] = variety_data;
   return std::make_pair(
       PrefixPlusOrMinus(MathematicalOperation::kMinus, node_to_minus,
                         flow_control_node_container.get()),
@@ -2520,12 +2303,14 @@ AssignablePrefixMinus(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableSuffixPlus(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& [node_to_plus, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+AssignableSuffixPlus(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data,
+    std::string&& str_operator) {
+  assert(str_operator == "++");
+
+  auto& [node_to_plus, flow_control_node_container] = variety_data;
   return std::make_pair(
       SuffixPlusOrMinus(MathematicalOperation::kPlus, node_to_plus,
                         flow_control_node_container.get()),
@@ -2534,24 +2319,29 @@ AssignableSuffixPlus(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-AssignableSuffixMinus(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& [node_to_plus, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+AssignableSuffixMinus(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data,
+    std::string&& str_operator) {
+  assert(str_operator == "--");
+  auto& [node_to_plus, flow_control_node_container] = variety_data;
   return std::make_pair(
       SuffixPlusOrMinus(MathematicalOperation::kMinus, node_to_plus,
                         flow_control_node_container.get()),
       std::move(flow_control_node_container));
 }
 
-std::any ReturnWithValue(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& [return_target, sentences_to_get_assignable] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
+std::nullptr_t ReturnWithValue(
+    std::string&& str_return,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        variety_data,
+    std::string&& str_semicolon) {
+  assert(str_return == "return");
+  assert(str_semicolon == ";");
+
+  auto& [return_target, sentences_to_get_assignable] = variety_data;
   auto return_flow_control_node = std::make_unique<Return>();
   auto active_function = c_parser_controller.GetActiveFunctionPointer();
   if (active_function == nullptr) [[unlikely]] {
@@ -2572,11 +2362,14 @@ std::any ReturnWithValue(std::vector<WordDataToUser>&& word_data) {
         active_function->GetFunctionTypeReference().GetFunctionName()));
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
-std::any ReturnWithoutValue(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
+std::nullptr_t ReturnWithoutValue(std::string&& str_return,
+                                  std::string&& str_semicolon) {
+  assert(str_return == "return");
+  assert(str_semicolon == ";");
+
   auto sentences_to_get_assignable =
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>();
   auto return_flow_control_node = std::make_unique<Return>();
@@ -2599,28 +2392,31 @@ std::any ReturnWithoutValue(std::vector<WordDataToUser>&& word_data) {
         active_function->GetFunctionTypeReference().GetFunctionName()));
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-TemaryOperator(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 5);
-  auto& [temary_condition, condition_flow_control_node_container] =
-      std::any_cast<std::pair<
-          std::shared_ptr<const OperatorNodeInterface>,
-          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data);
+TemaryOperator(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        condition,
+    std::string&& str_question_mark,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        true_value,
+    std::string&& str_colon,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        false_value) {
+  assert(str_question_mark == "?");
+  assert(str_colon == ":");
+
+  auto& [temary_condition, condition_flow_control_node_container] = condition;
   auto& [temary_true_branch, true_branch_flow_control_node_container] =
-      std::any_cast<std::pair<
-          std::shared_ptr<const OperatorNodeInterface>,
-          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-          word_data[2].GetNonTerminalWordData().user_returned_data);
+      true_value;
   auto& [temary_false_branch, false_branch_flow_control_node_container] =
-      std::any_cast<std::pair<
-          std::shared_ptr<const OperatorNodeInterface>,
-          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-          word_data[4].GetNonTerminalWordData().user_returned_data);
+      false_value;
   // 生成三目运算符节点
   auto temary_operator_node = std::make_shared<TemaryOperatorNode>();
   bool condition_check_result = temary_operator_node->SetBranchCondition(
@@ -2655,54 +2451,48 @@ TemaryOperator(std::vector<WordDataToUser>&& word_data) {
                         std::move(flow_control_node_container));
 }
 
-std::any NotEmptyFunctionCallArgumentsBase(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  auto& [argument_node, sentences_to_get_argument] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+std::nullptr_t NotEmptyFunctionCallArgumentsBase(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        value_data) {
+  auto& [argument_node, sentences_to_get_argument] = value_data;
   AssignableCheckResult check_result =
       function_call_operator_node->AddFunctionCallArgument(
           argument_node, sentences_to_get_argument);
   CheckAssignableCheckResult(check_result);
-  return std::any();
+  return nullptr;
 }
 
-std::any NotEmptyFunctionCallArgumentsExtend(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& [argument_node, sentences_to_get_argument] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
+std::nullptr_t NotEmptyFunctionCallArgumentsExtend(
+    std::nullptr_t, std::string&& str_comma,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        value_data) {
+  assert(str_comma == ",");
+
+  auto& [argument_node, sentences_to_get_argument] = value_data;
   AssignableCheckResult check_result =
       function_call_operator_node->AddFunctionCallArgument(
           argument_node, sentences_to_get_argument);
   CheckAssignableCheckResult(check_result);
-  return std::any();
+  return nullptr;
 }
 
-// FunctionCallArguments -> NotEmptyFunctionCallArguments
-// 返回值类型：
-// std::shared_ptr<FunctionCallOperatorNode::FunctionCallArgumentsContainer>
-std::any&& FunctionCallArguments(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
-}
+std::nullptr_t FunctionCallArguments(std::nullptr_t) { return nullptr; }
 
 std::pair<std::shared_ptr<FunctionCallOperatorNode>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-FunctionCallInitAssignable(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
+FunctionCallInitAssignable(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        call_target,
+    std::string&& left_bracket) {
+  assert(left_bracket == "(");
+
   auto function_call_node = std::make_shared<FunctionCallOperatorNode>();
   // 设置全局变量，以便添加函数调用实参时使用
   function_call_operator_node = function_call_node;
-  auto& [node_to_call, sentences_to_get_node_to_call] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+  auto& [node_to_call, sentences_to_get_node_to_call] = call_target;
   // 检查是否为函数类型或一重函数指针，如果是指针则做一次解引用
   // 同时设置函数调用节点用来调用的对象
   if (node_to_call->GetResultTypePointer()->GetType() !=
@@ -2738,14 +2528,16 @@ FunctionCallInitAssignable(std::vector<WordDataToUser>&& word_data) {
   return std::make_pair(std::move(function_call_node),
                         std::move(sentences_to_get_node_to_call));
 }
+
 std::pair<std::shared_ptr<FunctionCallOperatorNode>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-FunctionCallInitId(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
+FunctionCallInitId(std::string&& function_name,
+                   std::string&& str_left_bracket) {
+  assert(str_left_bracket == "(");
+
   auto function_call_node = std::make_shared<FunctionCallOperatorNode>();
   // 设置全局变量，以便添加函数调用实参时使用
   function_call_operator_node = function_call_node;
-  std::string& function_name = word_data[0].GetTerminalWordData().word;
   auto [node_to_call, exist] =
       c_parser_controller.GetVarietyOrFunction(function_name);
   if (!exist) {
@@ -2793,12 +2585,14 @@ FunctionCallInitId(std::vector<WordDataToUser>&& word_data) {
 
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-FunctionCall(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& [node_to_call, sentences_to_get_node_to_call] = std::any_cast<
-      std::pair<std::shared_ptr<FunctionCallOperatorNode>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+FunctionCall(
+    std::pair<std::shared_ptr<FunctionCallOperatorNode>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        function_call_data,
+    std::nullptr_t, std::string&& right_bracket) {
+  assert(right_bracket == ")");
+
+  auto& [node_to_call, sentences_to_get_node_to_call] = function_call_data;
   // 创建流程控制节点并添加
   auto function_call_flow_control_node = std::make_unique<SimpleSentence>();
   bool result = function_call_flow_control_node->SetSentenceOperateNode(
@@ -2811,35 +2605,35 @@ FunctionCall(std::vector<WordDataToUser>&& word_data) {
                         std::move(sentences_to_get_node_to_call));
 }
 
-std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>> AssignablesBase(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  auto& [ignore_assignable, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
-  return std::move(flow_control_node_container);
+std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&& AssignablesBase(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        value_data) {
+  return std::move(value_data.second);
 }
 
-std::any&& AssignablesExtend(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  // 存储流程控制节点的主容器
-  auto& main_control_node_container = std::any_cast<
-      std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&& AssignablesExtend(
+    std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&&
+        main_control_node_container,
+    std::string&& str_comma,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        value_data) {
+  assert(str_comma == ",");
+
   // 当前Assignable产生的控制节点的容器
-  auto& [ignore_assignable, now_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
+  auto& [ignore_assignable, now_control_node_container] = value_data;
   // 合并到主容器中
   main_control_node_container->splice(main_control_node_container->end(),
                                       std::move(*now_control_node_container));
-  return std::move(word_data[0].GetNonTerminalWordData().user_returned_data);
+  return std::move(main_control_node_container);
 }
 
-std::shared_ptr<std::unique_ptr<Jmp>> Break(
-    std::vector<WordDataToUser>&& word_data) {
+std::shared_ptr<std::unique_ptr<Jmp>> Break(std::string&& str_break,
+                                            std::string&& str_semicolon) {
+  assert(str_break == "break");
+  assert(str_semicolon == ";");
+
   auto& top_flow_control_sentence = static_cast<ConditionBlockInterface&>(
       c_parser_controller.GetTopFlowControlSentence());
   switch (top_flow_control_sentence.GetFlowType()) {
@@ -2859,8 +2653,11 @@ std::shared_ptr<std::unique_ptr<Jmp>> Break(
   }
 }
 
-std::shared_ptr<std::unique_ptr<Jmp>> Continue(
-    std::vector<WordDataToUser>&& word_data) {
+std::shared_ptr<std::unique_ptr<Jmp>> Continue(std::string&& str_continue,
+                                               std::string&& str_semicolon) {
+  assert(str_continue == "continue");
+  assert(str_semicolon == ";");
+
   auto& top_flow_control_sentence = static_cast<LoopSentenceInterface&>(
       c_parser_controller.GetTopFlowControlSentence());
   switch (top_flow_control_sentence.GetFlowType()) {
@@ -2879,110 +2676,87 @@ std::shared_ptr<std::unique_ptr<Jmp>> Continue(
   }
 }
 
-// SingleStatement -> If
-// 不做任何操作
-std::any SingleStatementIf(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
-}
+std::nullptr_t SingleStatementIf(std::nullptr_t) { return nullptr; }
 
-// SingleStatement -> DoWhile
-// 不做任何操作
-std::any SingleStatementDoWhile(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
-}
+std::nullptr_t SingleStatementDoWhile(std::nullptr_t) { return nullptr; }
 
-// SingleStatement -> While
-// 不做任何操作
-std::any SingleStatementWhile(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
-}
+std::nullptr_t SingleStatementWhile(std::nullptr_t) { return nullptr; }
 
-// SingleStatement -> For
-// 不做任何操作
-std::any SingleStatementFor(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
-}
+std::nullptr_t SingleStatementFor(std::nullptr_t) { return nullptr; }
 
-// SingleStatement -> Switch
-// 不做任何操作
-std::any SingleStatementSwitch(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
-}
+std::nullptr_t SingleStatementSwitch(std::nullptr_t) { return nullptr; }
 
-std::any SingleStatementAssignable(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto& [ignore_assignable, flow_control_node_container] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[0].GetNonTerminalWordData().user_returned_data);
+std::nullptr_t SingleStatementAssignable(
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        expression,
+    std::string&& str_semicolon) {
+  assert(str_semicolon == ";");
+
+  auto& [ignore_assignable, flow_control_node_container] = expression;
   bool result =
       c_parser_controller.AddSentences(std::move(*flow_control_node_container));
   if (!result) [[unlikely]] {
     OutputError(std::format("此语句不应出现在该范围内"));
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
-std::any SingleStatementAnnounce(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  auto [ignore_type, ignore_const_tag, flow_control_node_container] =
-      std::any_cast<std::tuple<
-          std::shared_ptr<const TypeInterface>, ConstTag,
-          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-          word_data[0].GetNonTerminalWordData().user_returned_data);
+std::nullptr_t SingleStatementAnnounce(
+    std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
+               std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        announce_statement,
+    std::string&& str_semicolon) {
+  assert(str_semicolon == ";");
+
+  auto& [ignore_type, ignore_const_tag, flow_control_node_container] =
+      announce_statement;
   bool result =
       c_parser_controller.AddSentences(std::move(*flow_control_node_container));
   if (!result) [[unlikely]] {
     OutputError(std::format("此语句不应出现在该范围内"));
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
-std::any SingleStatementReturn(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
-}
+std::nullptr_t SingleStatementReturn(std::nullptr_t) { return nullptr; }
 
-std::any SingleStatementBreak(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  auto& jmp_sentence = *std::any_cast<std::shared_ptr<std::unique_ptr<Jmp>>&>(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
-  bool result = c_parser_controller.AddSentence(std::move(jmp_sentence));
+std::nullptr_t SingleStatementBreak(
+    std::shared_ptr<std::unique_ptr<Jmp>>&& jmp_sentence) {
+  bool result = c_parser_controller.AddSentence(std::move(*jmp_sentence));
   // 所有报错应在这步规约前进行
   assert(result);
-  return std::any();
+  return nullptr;
 }
 
-std::any SingleStatementContinue(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  auto& jmp_sentence = *std::any_cast<std::shared_ptr<std::unique_ptr<Jmp>>&>(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
-  bool result = c_parser_controller.AddSentence(std::move(jmp_sentence));
+std::nullptr_t SingleStatementContinue(
+    std::shared_ptr<std::unique_ptr<Jmp>>&& jmp_sentence) {
+  bool result = c_parser_controller.AddSentence(std::move(*jmp_sentence));
   // 所有报错应在这步规约前进行
   assert(result);
-  return std::any();
+  return nullptr;
 }
 
-std::any SingleStatementEmptyStatement(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
+std::nullptr_t SingleStatementEmptyStatement(std::string&& str_semicolon) {
+  assert(str_semicolon == ";");
+
+  return nullptr;
 }
 
-std::any IfCondition(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 4);
+std::nullptr_t IfCondition(
+    std::string&& str_if, std::string&& str_left_bracket,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        condition,
+    std::string&& str_right_bracket) {
+  assert(str_if == "if");
+  assert(str_left_bracket == "(");
+  assert(str_right_bracket == ")");
+
   // if条件和获取条件的操作
-  auto& [if_condition, sentences_to_get_if_condition] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
+  auto& [if_condition, sentences_to_get_if_condition] = condition;
   auto if_flow_control_node = std::make_unique<IfSentence>();
   bool result = if_flow_control_node->SetCondition(
       if_condition, std::move(*sentences_to_get_if_condition));
@@ -2999,64 +2773,52 @@ std::any IfCondition(std::vector<WordDataToUser>&& word_data) {
               << std::endl;
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
-std::any IfWithElse(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
+std::nullptr_t IfWithElse(std::nullptr_t, std::nullptr_t,
+                          std::string str_else) {
+  assert(str_else == "else");
+
   // 转换为if-else语句
   c_parser_controller.ConvertIfSentenceToIfElseSentence();
-  return std::any();
+  return nullptr;
 }
 
-// If->IfWithElse ProcessControlSentenceBody
-// 不返回任何值
-std::any IfElseSence(std::vector<WordDataToUser>&& word_data) {
+std::nullptr_t IfElseSence(std::nullptr_t, std::nullptr_t) {
   c_parser_controller.PopActionScope();
-  return std::any();
+  return nullptr;
 }
 
-// If -> IfCondition ProcessControlSentenceBody
-// 不返回任何值
-std::any IfIfSentence(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
+std::nullptr_t IfIfSentence(std::nullptr_t, std::nullptr_t) {
   c_parser_controller.PopActionScope();
-  return std::any();
+  return nullptr;
 }
 
-// ForRenewSentence -> Assignables
-// 返回值类型：std::pair<std::shared_ptr<const OperatorNodeInterface>,
-//                   std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
-std::any&& ForRenewSentence(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&& ForRenewSentence(
+    std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&& expression) {
+  return std::move(expression);
 }
 
-// ForInitSentence -> Assignables
-std::any&& ForInitSentenceAssignables(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::move(
-      word_data.front().GetNonTerminalWordData().user_returned_data);
+std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&&
+ForInitSentenceAssignables(
+    std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&& expression) {
+  return std::move(expression);
 }
 
 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>
-ForInitSentenceAnnounce(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
+ForInitSentenceAnnounce(
+    std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
+               std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        announce_data) {
   auto& [ignore_extend_type, ignore_extend_const_tag,
-         flow_control_node_container] =
-      std::any_cast<std::tuple<
-          std::shared_ptr<const TypeInterface>, ConstTag,
-          std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-          word_data.front().GetNonTerminalWordData().user_returned_data);
+         flow_control_node_container] = announce_data;
   return std::move(flow_control_node_container);
 }
 
-// ForInitHead -> "for"
-// 做一些准备工作
-// 不返回任何值
-std::any ForInitHead(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
+std::nullptr_t ForInitHead(std::string&& str_for) {
+  assert(str_for == "for");
+
   bool push_result = c_parser_controller.PushFlowControlSentence(
       std::make_unique<ForSentence>());
   if (!push_result) [[unlikely]] {
@@ -3066,24 +2828,30 @@ std::any ForInitHead(std::vector<WordDataToUser>&& word_data) {
               << std::endl;
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
-std::any ForHead(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 8);
+std::nullptr_t ForHead(
+    std::nullptr_t, std::string&& str_left_bracket,
+    std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&&
+        for_init_sentences,
+    std::string&& str_semicolon1,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        condition,
+    std::string&& str_semicolon2,
+    std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&&
+        for_renew_sentences,
+    std::string&& str_right_bracket) {
+  assert(str_left_bracket == "(");
+  assert(str_semicolon1 == ";");
+  assert(str_semicolon2 == ";");
+  assert(str_right_bracket == ")");
+
   auto& for_sentence = static_cast<ForSentence&>(
       c_parser_controller.GetTopFlowControlSentence());
   assert(for_sentence.GetFlowType() == FlowType::kForSentence);
-  auto& for_init_sentences = std::any_cast<
-      std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
-  auto& [for_condition, sentences_to_get_for_condition] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[4].GetNonTerminalWordData().user_returned_data);
-  auto& for_renew_sentences = std::any_cast<
-      std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&>(
-      word_data[6].GetNonTerminalWordData().user_returned_data);
+  auto& [for_condition, sentences_to_get_for_condition] = condition;
   bool result =
       for_sentence.AddForInitSentences(std::move(*for_init_sentences));
   if (!result) [[unlikely]] {
@@ -3101,24 +2869,25 @@ std::any ForHead(std::vector<WordDataToUser>&& word_data) {
     OutputError(std::format("给定语句无法用在for语句中更新循环条件"));
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
-// For -> ForHead ProcessControlSentenceBody
-// 弹出作用域
-// 不返回任何值
-std::any For(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
+std::nullptr_t For(std::nullptr_t, std::nullptr_t) {
   c_parser_controller.PopActionScope();
-  return std::any();
+  return nullptr;
 }
 
-std::any WhileInitHead(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 4);
-  auto& [while_condition, sentences_to_get_condition] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
+std::nullptr_t WhileInitHead(
+    std::string&& str_while, std::string&& str_left_bracket,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        condition,
+    std::string&& str_right_bracket) {
+  assert(str_while == "while");
+  assert(str_left_bracket == "(");
+  assert(str_right_bracket == ")");
+
+  auto& [while_condition, sentences_to_get_condition] = condition;
   auto pointer_to_while_sentence =
       std::make_shared<std::unique_ptr<WhileSentence>>(
           std::make_unique<WhileSentence>());
@@ -3138,23 +2907,17 @@ std::any WhileInitHead(std::vector<WordDataToUser>&& word_data) {
               << std::endl;
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
-// While -> WhileInitHead ProcessControlSentenceBody
-// 弹出作用域
-// 不返回任何值
-std::any While(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
+std::nullptr_t While(std::nullptr_t, std::nullptr_t) {
   c_parser_controller.PopActionScope();
-  return std::any();
+  return nullptr;
 }
 
-// DoWhileInitHead -> "do"
-// 做一些准备工作
-// 不返回任何数据
-std::any DoWhileInitHead(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
+std::nullptr_t DoWhileInitHead(std::string&& str_do) {
+  assert(str_do == "do");
+
   bool push_result = c_parser_controller.PushFlowControlSentence(
       std::make_unique<DoWhileSentence>());
   if (!push_result) [[unlikely]] {
@@ -3164,15 +2927,22 @@ std::any DoWhileInitHead(std::vector<WordDataToUser>&& word_data) {
               << std::endl;
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
-std::any DoWhile(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 7);
-  auto& [assignable, sentences_to_get_assignable] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[4].GetNonTerminalWordData().user_returned_data);
+std::nullptr_t DoWhile(
+    std::nullptr_t, std::nullptr_t, std::string&& str_while,
+    std::string&& str_left_bracket,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        condition,
+    std::string&& str_right_bracket, std::string&& str_semicolon) {
+  assert(str_while == "while");
+  assert(str_left_bracket == "(");
+  assert(str_right_bracket == ")");
+  assert(str_semicolon == ";");
+
+  auto& [assignable, sentences_to_get_assignable] = condition;
   DoWhileSentence& do_while_sentence = static_cast<DoWhileSentence&>(
       c_parser_controller.GetTopFlowControlSentence());
   assert(do_while_sentence.GetFlowType() == FlowType::kDoWhileSentence);
@@ -3180,62 +2950,60 @@ std::any DoWhile(std::vector<WordDataToUser>&& word_data) {
   do_while_sentence.SetCondition(assignable,
                                  std::move(*sentences_to_get_assignable));
   c_parser_controller.PopActionScope();
-  return std::any();
+  return nullptr;
 }
 
-std::any SwitchCaseSimple(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto& case_data =
-      std::any_cast<std::shared_ptr<BasicTypeInitializeOperatorNode>&>(
-          word_data[1].GetNonTerminalWordData().user_returned_data);
+std::nullptr_t SwitchCaseSimple(
+    std::string&& str_case,
+    std::shared_ptr<BasicTypeInitializeOperatorNode>&& case_data,
+    std::string&& str_colon) {
+  assert(str_case == "case");
+  assert(str_colon == ":");
+
   bool result = c_parser_controller.AddSwitchSimpleCase(case_data);
   if (!result) [[unlikely]] {
     OutputError(std::format(
         "无法添加给定的case选项，可能是不位于switch语句内或case条件已存在"));
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
-std::any SwitchCaseDefault(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
+std::nullptr_t SwitchCaseDefault(std::string&& str_default,
+                                 std::string&& str_colon) {
+  assert(str_default == "default");
+  assert(str_colon == ":");
+
   bool result = c_parser_controller.AddSwitchDefaultCase();
   if (!result) [[unlikely]] {
     OutputError(std::format(
         "无法添加default标签，可能不位于switch语句内或已存在default标签"));
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
-// SingleSwitchStatement -> SwitchCase
-// 不做任何操作
-std::any SingleSwitchStatementCase(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
+std::nullptr_t SingleSwitchStatementCase(std::nullptr_t) { return nullptr; }
+
+std::nullptr_t SingleSwitchStatementStatements(std::nullptr_t) {
+  return nullptr;
 }
 
-// SingleSwitchStatement -> Statements
-// 不做任何操作
-std::any SingleSwitchStatementStatements(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
+std::nullptr_t SwitchStatements(std::nullptr_t, std::nullptr_t) {
+  return nullptr;
 }
 
-// SwitchStatements -> SwitchStatements SingleSwitchStatement
-// 不作任何操作
-std::any SwitchStatements(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  return std::any();
-}
+std::nullptr_t SwitchCondition(
+    std::string&& str_switch, std::string&& str_left_bracket,
+    std::pair<std::shared_ptr<const OperatorNodeInterface>,
+              std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
+        condition,
+    std::string&& str_right_bracket) {
+  assert(str_switch == "switch");
+  assert(str_left_bracket == "(");
+  assert(str_right_bracket == ")");
 
-std::any SwitchCondition(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 4);
-  auto& [assignable, sentences_to_get_assignable] = std::any_cast<
-      std::pair<std::shared_ptr<const OperatorNodeInterface>,
-                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&>(
-      word_data[2].GetNonTerminalWordData().user_returned_data);
+  auto& [assignable, sentences_to_get_assignable] = condition;
   auto switch_sentence = std::make_unique<SwitchSentence>();
   bool result = switch_sentence->SetCondition(
       assignable, std::move(*sentences_to_get_assignable));
@@ -3252,64 +3020,62 @@ std::any SwitchCondition(std::vector<WordDataToUser>&& word_data) {
               << std::endl;
     exit(-1);
   }
-  return std::any();
+  return nullptr;
 }
 
-// Switch -> SwitchCondition "{" SwitchStatements "}"
-// 不做任何操作
-std::any Switch(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 4);
-  return std::any();
+std::nullptr_t Switch(std::nullptr_t, std::string&& str_left_curly_bracket,
+                      std::nullptr_t, std::string&& str_right_curly_bracket) {
+  assert(str_left_curly_bracket == "{");
+  assert(str_right_curly_bracket == "}");
+
+  return nullptr;
 }
 
-// Statements -> Statements SingleStatement
-// 不做任何操作
-std::any StatementsSingleStatement(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  return std::any();
+std::nullptr_t StatementsSingleStatement(std::nullptr_t, std::nullptr_t) {
+  return nullptr;
 }
 
-std::any StatementsLeftBrace(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
+std::nullptr_t StatementsLeftBrace(std::nullptr_t,
+                                   std::string&& left_curly_bracket) {
+  assert(left_curly_bracket == "{");
   c_parser_controller.AddActionScopeLevel();
-  return std::any();
+  return nullptr;
 }
 
-std::any StatementsBrace(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
+std::nullptr_t StatementsBrace(std::nullptr_t, std::nullptr_t,
+                               std::string&& right_curly_bracket) {
+  assert(right_curly_bracket == "}");
   c_parser_controller.PopActionScope();
-  return std::any();
+  return nullptr;
+}
+std::nullptr_t ProcessControlSentenceBodySingleStatement(std::nullptr_t) {
+  return nullptr;
+}
+//
+// std::any ProcessControlSentenceBodyLeftBrace(
+//    std::vector<WordDataToUser>&& word_data) {
+//  assert(word_data.size() == 1);
+//  return std::any();
+//}
+
+std::nullptr_t ProcessControlSentenceBodyStatements(
+    std::string&& str_left_curly_bracket, std::nullptr_t,
+    std::string&& str_right_curly_bracket) {
+  assert(str_left_curly_bracket == "{");
+  assert(str_right_curly_bracket == "}");
+
+  return nullptr;
 }
 
-// ProcessControlSentenceBody -> SingleStatement
-// 不做任何操作
-std::any ProcessControlSentenceBodySingleStatement(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
+std::nullptr_t RootFunctionDefine(std::nullptr_t, std::nullptr_t) {
+  return nullptr;
 }
 
-std::any ProcessControlSentenceBodyLeftBrace(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 1);
-  return std::any();
-}
+std::nullptr_t RootAnnounce(std::nullptr_t,
+                            std::shared_ptr<FlowInterface>&& flow_control_node,
+                            std::string&& str_colon) {
+  assert(str_colon == ";");
 
-std::any ProcessControlSentenceBodyStatements(
-    std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  return std::any();
-}
-
-std::any RootFunctionDefine(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 2);
-  return std::any();
-}
-
-std::any RootAnnounce(std::vector<WordDataToUser>&& word_data) {
-  assert(word_data.size() == 3);
-  auto flow_control_node = std::any_cast<std::shared_ptr<FlowInterface>&>(
-      word_data[1].GetNonTerminalWordData().user_returned_data);
   switch (flow_control_node->GetFlowType()) {
     case FlowType::kSimpleSentence: {
       // 全局变量定义
@@ -3333,7 +3099,7 @@ std::any RootAnnounce(std::vector<WordDataToUser>&& word_data) {
       assert(false);
       break;
   }
-  return std::any();
+  return nullptr;
 }
 
 ObjectConstructData::CheckResult
@@ -3435,7 +3201,8 @@ ObjectConstructData::ConstructObject(
         case StructOrBasicType::kUnion:
         case StructOrBasicType::kEnum:
           break;
-          [[unlikely]] default : assert(false);
+        [[unlikely]] default:
+          assert(false);
           break;
       }
       static_cast<VarietyOperatorNode&>(static_cast<SimpleSentence&>(*object_)
@@ -3448,16 +3215,16 @@ ObjectConstructData::ConstructObject(
   }
   AttachSingleNodeToTailNodePointer(std::move(final_node_to_attach));
   switch (type_chain_tail_->GetType()) {
-    [[unlikely]] case StructOrBasicType::kPointer :
-        // 未完全构建类型链导致类型链以指针结尾
-        return std::make_pair(std::unique_ptr<FlowInterface>(),
-                              CheckResult::kPointerEnd);
-    break;
-    [[unlikely]] case StructOrBasicType::kEnd :
-        // 空类型链
-        return std::make_pair(std::unique_ptr<FlowInterface>(),
-                              CheckResult::kEmptyChain);
-    break;
+    [[unlikely]] case StructOrBasicType::kPointer:
+      // 未完全构建类型链导致类型链以指针结尾
+      return std::make_pair(std::unique_ptr<FlowInterface>(),
+                            CheckResult::kPointerEnd);
+      break;
+    [[unlikely]] case StructOrBasicType::kEnd:
+      // 空类型链
+      return std::make_pair(std::unique_ptr<FlowInterface>(),
+                            CheckResult::kEmptyChain);
+      break;
     default:
       break;
   }

@@ -20,11 +20,6 @@
           "type": "STRING"
         },
         {
-          "name": "CMAKE_CXX_FLAGS_DEBUG",
-          "value": "/MDd /ZI /Ob0 /Od /RTC1 /W3 /bigobj /MP /std:c++latest",
-          "type": "STRING"
-        },
-        {
           "name": "CMAKE_EXE_LINKER_FLAGS_DEBUG",
           "value": "/debug /INCREMENTAL",
           "type": "STRING"
@@ -32,7 +27,7 @@
       ]
     },
     {
-      "name": "x64-Release",
+      "name": "x64-RelWithDebInfo",
       "generator": "Ninja",
       "configurationType": "RelWithDebInfo",
       "buildRoot": "${projectDir}\\out\\build\\${name}",

@@ -169,6 +169,8 @@ class ProductionItemSet {
   /// @brief 获取项集中项的个数
   /// @return 返回项的个数
   size_t Size() const { return item_and_forward_node_ids_.size(); }
+  /// @brief 获取核心项集个数
+  size_t MainItemSize() const { return GetMainItemIters().size(); }
 
  private:
   /// @brief 设置一项为核心项

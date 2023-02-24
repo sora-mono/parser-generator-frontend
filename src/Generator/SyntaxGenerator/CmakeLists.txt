@@ -12,5 +12,6 @@ add_library(production_node "production_node.cpp")
 target_link_libraries(production_node export_types)
 
 add_library(syntax_generator "syntax_generator.cpp" "config_construct.cpp")
-target_link_libraries(syntax_generator syntax_analysis_table production_item_set production_node dfa_generator CONAN_PKG::boost c_parser_frontend)
+target_include_directories(syntax_generator PRIVATE ${GRAPHVIZ_INCLUDE_DIR})
+target_link_libraries(syntax_generator syntax_analysis_table production_item_set production_node dfa_generator CONAN_PKG::boost c_parser_frontend ${CGRAPH_LIBRARY} ${GVC_LIBRARY})
 install(TARGETS syntax_generator RUNTIME)

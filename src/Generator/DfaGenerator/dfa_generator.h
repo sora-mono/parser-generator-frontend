@@ -108,7 +108,9 @@ class DfaGenerator {
   /// @note 该函数仅生成DFA配置，不会自动保存配置到文件
   bool DfaConstruct();
   /// @brief 保存DFA配置
-  void SaveConfig() const;
+  /// @param[in] DFA配置保存路径（不含文件名，以'/'结尾）
+  /// @details DFA配置输出文件名为frontend::common::kDfaConfigFileName
+  void SaveConfig(const std::string& config_file_output_path = "./") const;
 
  private:
   /// @brief 声明友元，允许序列化类访问成员

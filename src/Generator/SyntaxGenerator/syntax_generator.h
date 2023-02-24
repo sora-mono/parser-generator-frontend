@@ -272,14 +272,18 @@ class SyntaxGenerator {
   /// 2.如果有则输出错误信息后退出
   void CheckUndefinedProductionRemained();
   /// @brief 添加关键字
+  /// @param[in] node_symbol ：产生式名
   /// @param[in] key_word ：关键字字符串
   /// @note
   /// 1.支持正则
-  /// 2.自动创建同名终结节点
-  /// 3.创建的终结节点名与终结节点体字符串相同
-  /// 4.关键字已存在则输出错误信息
-  void AddKeyWord(std::string&& key_word);
-  /// @brief 添加终结产生式
+  /// 2.关键字已存在则输出错误信息
+  void AddKeyWord(std::string node_symbol, std::string key_word);
+  /// @brief 添加普通终结产生式
+  /// @param[in] node_symbol ：产生式名
+  /// @param[in] regex_string ：产生式的正则表示
+  void AddSimpleTerminalProduction(std::string node_symbol,
+                                   std::string regex_string);
+  /// @brief 添加终结产生式（关键字、运算符、普通终结产生式）
   /// @param[in] node_symbol ：终结产生式名
   /// @param[in] body_symbol ：产生式体字符串（正则形式）
   /// @param[in] node_priority ：产生式体的单词优先级
@@ -292,9 +296,10 @@ class SyntaxGenerator {
   /// 2.单词优先级：0保留为普通词的优先级，1保留为运算符优先级，2保留为关键字
   /// 优先级，其余的优先级尚未指定
   /// @attention 词优先级与运算符优先级不同，请注意区分
-  ProductionNodeId AddTerminalProduction(
-      std::string&& node_symbol, std::string&& body_symbol,
-      WordPriority node_priority = WordPriority(0), bool is_key_word = false);
+  ProductionNodeId AddTerminalProduction(std::string&& node_symbol,
+                                         std::string&& body_symbol,
+                                         WordPriority node_priority,
+                                         bool regex_allowed);
   /// @brief AddTerminalProduction的子过程，仅用于创建终结节点
   /// @param[in] node_symbol_id ：终结节点名ID
   /// @param[in] body_symbol_id ：终结节点体字符串ID
@@ -314,7 +319,7 @@ class SyntaxGenerator {
   /// 1.节点已存在则返回ProductionNodeId::InvalidId()
   /// 2.运算符词法分析优先级高于普通终结产生式低于关键字
   ProductionNodeId AddBinaryOperator(
-      std::string&& operator_symbol,
+      std::string node_symbol, std::string operator_symbol,
       OperatorAssociatityType binary_operator_associatity_type,
       OperatorPriority binary_operator_priority);
   /// @brief 添加单目运算符
@@ -327,7 +332,7 @@ class SyntaxGenerator {
   /// 2.运算符词法分析优先级高于普通终结产生式低于关键字
   /// @attention 仅支持左侧单目运算符，不支持右侧单目运算符
   ProductionNodeId AddLeftUnaryOperator(
-      std::string&& operator_symbol,
+      std::string node_symbol, std::string operator_symbol,
       OperatorAssociatityType unary_operator_associatity_type,
       OperatorPriority unary_operator_priority);
   /// @brief 添加具有双目运算符和左侧单目运算符语义的运算符
@@ -342,7 +347,7 @@ class SyntaxGenerator {
   /// 2.运算符词法分析优先级高于普通终结产生式低于关键字
   /// 3.一个运算符节点含有两种语义
   ProductionNodeId AddBinaryLeftUnaryOperator(
-      std::string&& operator_symbol,
+      std::string node_symbol, std::string operator_symbol,
       OperatorAssociatityType binary_operator_associatity_type,
       OperatorPriority binary_operator_priority,
       OperatorAssociatityType unary_operator_associatity_type,
@@ -401,8 +406,8 @@ class SyntaxGenerator {
   /// @details
   /// 拆成模板函数和非模板函数从而降低代码生成量，阻止代码膨胀，二者等价
   template <class ProcessFunctionClass>
-  ProductionNodeId AddNonTerminalProduction(
-      std::string&& node_symbol, std::vector<std::string>&& subnode_symbols);
+  ProductionNodeId AddNonTerminalProduction(std::string node_symbol,
+                                            std::string subnode_symbols);
   /// @brief 添加非终结产生式
   /// @param[in] node_symbol ：非终结产生式名
   /// @param[in] subnode_symbols ：非终结产生式体
@@ -772,12 +777,28 @@ class SyntaxGenerator {
   void RemapSyntaxAnalysisTableEntryId(
       const std::unordered_map<SyntaxAnalysisTableEntryId,
                                SyntaxAnalysisTableEntryId>& old_id_to_new_id);
+  /// @brief 将项集输出为图片
+  /// @param[in] root_production_set_id ：根项集ID
+  /// @param[in] image_output_path ：图片输出路径（不含文件名， 以'/'结尾）
+  void FormatProductionItemSetToImageGraphivz(
+      ProductionItemSetId root_production_item_set_id,
+      const std::string& image_output_path = "./");
+  /// @brief 将项集输出为markdown描述的图表
+  /// @param[in] root_production_set_id ：根项集ID
+  /// @param[in] image_output_path ：文件输出路径（不含文件名， 以'/'结尾）
+  void FormatProductionItemSetToMarkdown(
+      ProductionItemSetId root_production_item_set_id,
+      const std::string& image_output_path = "./");
   /// @brief 合并语法分析表内等价条目以缩减语法分析表大小
   void SyntaxAnalysisTableMergeOptimize();
 
   /// @brief 将语法分析表配置写入文件
-  /// 文件名为frontend::common::kSyntaxConfigFileName
-  void SaveConfig() const;
+  /// @param[in] config_file_output_path
+  /// ：配置文件输出路径（不含文件名，以'/'结尾）
+  /// @details 在指定路径处输出语法分析表和词法分析表，
+  /// 语法分析表配置文件名为frontend::common::kSyntaxConfigFileName，
+  /// 词法分析表配置文件名为frontend::common::kDfaConfigFileName
+  void SaveConfig(const std::string& config_file_output_path = "./") const;
 
   /// @brief 格式化产生式
   /// @param[in] nonterminal_node_id ：非终结产生式ID
@@ -788,12 +809,6 @@ class SyntaxGenerator {
   std::string FormatSingleProductionBody(
       ProductionNodeId nonterminal_node_id,
       ProductionBodyId production_body_id) const;
-  /// @brief 格式化非终结节点全部产生式
-  /// @param[in] nonterminal_node_id ：非终结产生式ID
-  /// @return 返回格式化后的字符串
-  /// @details 输出单个产生式格式同FormatSingleProductionBody
-  /// @note 不同产生式间使用换行符（'\n'）分隔
-  std::string FormatProductionBodys(ProductionNodeId nonterminal_node_id);
   /// @brief 格式化项
   /// @param[in] production_item ：待格式化的项
   /// @return 返回格式化后的字符串
@@ -828,18 +843,20 @@ class SyntaxGenerator {
   /// @return 返回格式化后的字符串
   /// @details
   /// 1.产生式格式同FormatProductionItem
-  /// 2.项与项之间通过'\n'分隔
-  /// 3.最后一项后无'\n'
-  /// 4.返回值例：
+  /// 2.项与项之间通过line_feed分隔
+  /// 3.最后一项后无line_feed
+  /// 4.返回值例（line_feed为"\n"）：
   /// StructureDefineHead -> union · 向前看符号：{
   /// StructureAnnounce -> union · Id 向前看符号：const , Id * ( { [ )
-  std::string FormatProductionItems(
-      ProductionItemSetId production_item_set_id) const;
+  std::string FormatProductionItems(ProductionItemSetId production_item_set_id,
+                                    std::string line_feed = "\n") const;
+  /// @brief 对graphviz中label的特殊字符转义
+  static std::string EscapeLabelSpecialCharacter(const std::string& source);
   /// @brief 输出Info级诊断信息
   /// @param[in] info ：Info级诊断信息
   /// @note 输出后自动换行
   static void OutPutInfo(const std::string& info) {
-    std::cout << std::format("SyntaxGenerator Info: ") << info << std::endl;
+     //std::cout << std::format("SyntaxGenerator Info: ") << info << std::endl;
   }
   /// @brief 输出Warning级诊断信息
   /// @param[in] warning ：Warning级诊断信息
@@ -934,11 +951,23 @@ inline ProductionBodyId NonTerminalProductionNode::AddBody(
 
 template <class ProcessFunctionClass>
 inline ProductionNodeId SyntaxGenerator::AddNonTerminalProduction(
-    std::string&& node_symbol, std::vector<std::string>&& subnode_symbols) {
+    std::string node_symbol, std::string subnode_symbols) {
+  // 受#__VA_ARGS__规则所限，只能将__VA_ARGS__代表的所有内容转为一个字符串，需要手动分割
+  std::vector<std::string> splited_subnode_symbols(1);
+  for (char c : subnode_symbols) {
+    if (c == ',') {
+      // 当前字符串结束，准备处理下一个字符串
+      splited_subnode_symbols.emplace_back();
+    } else if (!isblank(c)) {
+        // [a-zA-Z_][a-zA-Z0-9_]*
+      splited_subnode_symbols.back().push_back(c);
+    }
+  }
+
   ProcessFunctionClassId class_id =
       CreateProcessFunctionClassObject<ProcessFunctionClass>();
   return AddNonTerminalProduction(std::move(node_symbol),
-                                  std::move(subnode_symbols), class_id);
+                                  std::move(splited_subnode_symbols), class_id);
 }
 
 template <class ForwardNodeIdContainer>

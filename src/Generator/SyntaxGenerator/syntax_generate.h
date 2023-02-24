@@ -1,285 +1,267 @@
-/// @file syntax_generate.h
-/// @brief ¶¨Òå±íÊ¾²úÉúÊ½µÄºêÒÔ¼ò»¯ÅäÖÃÉú³É¹ı³Ì
+ï»¿/// @file syntax_generate.h
+/// @brief å®šä¹‰è¡¨ç¤ºäº§ç”Ÿå¼çš„å®ä»¥ç®€åŒ–é…ç½®ç”Ÿæˆè¿‡ç¨‹
 /// @details
-/// 1.×÷ÕßÄÜÁ¦ËùÏŞ£¬ÎŞ·¨ÔÚÎÄ¼şÖĞ´æ´¢¹æÔ¼ÓÃº¯Êı£¬Ö»ÄÜÇúÏß¾È¹ú£¬½«Ã¿¸ö¹æÔ¼º¯Êı
-/// °ü×°µ½ÀàÖĞ£¬Ã¿¸ö°ü×°ÀàÊµÀı»¯Ò»¸ö¶ÔÏó£¬¶ÔÏóÖĞÍ¨¹ıĞéº¯Êı°ü×°¹æÔ¼º¯Êı£¬
-/// ÀûÓÃĞéº¯Êı»úÖÆÔËĞĞÊ±µ÷ÓÃÕıÈ·µÄ¹æÔ¼º¯Êı£¬´´½¨µÄ¶ÔÏó¿ÉÍ¨¹ıboost-serialization
-/// ĞòÁĞ»¯£¬´Ó¶øÔÚÅäÖÃÎÄ¼şÖĞ±£´æ¹æÔ¼º¯Êı
-/// 2.×÷ÕßÄÜÁ¦ÓĞÏŞ£¬¼ÙÈçÍ¨¹ı¶ÁÈ¡ÅäÖÃÎÄ¼ş½âÎö£¬È»ºóÉú³ÉÅäÖÃÔò²½ÖèÈçÏÂ£º
-///   1)ÔËĞĞGenerator¸ù¾İÅäÖÃÎÄ¼şÉú³ÉÉú³ÉÅäÖÃËùĞèÒª×·¼ÓµÄÔ´´úÂë
-///   2)ÔÙ´Î±àÒë
-///   3)ÔËĞĞGeneratorÉú³ÉÅäÖÃ
-/// 3)Õâ²½×÷ÕßÃ»ÓĞ·½·¨È¥³ı£¬´æÔÚÓÃ»§¶¨ÒåµÄ¹æÔ¼º¯ÊıÈçºÎ±£´æµ½ÅäÖÃÎÄ¼şµÄÎÊÌâ£¬ÔÚ
-/// Éú³ÉÅäÖÃÊ±ÕâĞ©º¯Êı¶¼Ö»ÊÇº¯ÊıÃû£¬Èç¹ûÍ¨¹ıºê½«º¯ÊıÃû°ó¶¨µ½¾ßÌåº¯Êı£¬ÄÇÃ´ÓÃ»§
-/// ĞèÒªÔÚÅäÖÃÎÄ¼şÖĞĞ´Á½±éº¯Êı£¬ÆäÖĞÒ»±é»¹ÊÇ¶¨ÒåEXPORT(func,"func")ÕâÑùµÄºê£¬
-/// ÀË·ÑÓĞĞ§Ê±¼ä¶øÇÒÎ¬»¤²»±ã£¬»¹ĞèÒªÔËĞĞÁ½´ÎGenerator£¬ÑÏÖØÓ°ÏìÊ¹ÓÃÌåÑé¡£
-/// 3.ÓÉÓÚ2µÄÔ­Òò×÷ÕßÑ¡ÔñÍ¨¹ıºêÔÚÅäÖÃÎÄ¼şÖĞÃèÊö²úÉúÊ½ºÍÏà¹ØĞÅÏ¢À´¶¨Òå²úÉúÊ½£¬
-/// Ö»Ğè¶¨ÒåÅäÖÃÒ»´Î£¬±àÒëÒ»´Î£¬ÔËĞĞÒ»´Î£¬ºê×Ô¶¯ÔÚĞèÒªµÄÎÄ¼şÖĞÉú³ÉÏà¹Ø´úÂë
-/// 4.¸ÃÎÄ¼şÄÚ¶¨Òå¶à¸ö±íÊ¾²úÉúÊ½µÄºê£¬ÕâĞ©ºê¾ùÓÃÓÚ±íÊ¾²úÉúÊ½£¬²¢ÔÚĞèÒªµÄÎÄ¼şÄÚ
-/// ×ª»¯ÎªÏàÓ¦´úÂë£¬±ÜÃâÃ¿¸öĞèÒªÉú³É´úÂëµÄÎÄ¼şÖĞ¶¼ÊÖ¶¯¶¨Òå²úÉúÊ½
-/// 5.¸ÃÎÄ¼ş±ØĞëÇÒ½ö±»Config/ProductionConfig/production_config-inc.h°üº¬£¬
-/// production_config-inc.hĞèÒªÇÒ½ö±»process_functions_classes.h
-/// process_functions_classes_register.hºÍconfig_construct.cppÈı¸öÎÄ¼ş°üº¬£¬
-/// ²¢ÔÚÈı¸öÎÄ¼şÖĞÉú³É²»Í¬´úÂë
-/// 6.¸ÃÎÄ¼ş²»Ó¦Ê¹ÓÃ±ê×¼Í·ÎÄ¼ş±£»¤£¬ÏÂÃæÓĞÌØ»¯µÄµÄºê±£»¤
-/// 7.ÓÃ»§¶¨ÒåÍ·ÎÄ¼şÇëÔÚuser_defined_functions.hÖĞÌí¼Ó£¬
-/// ½ûÖ¹ÔÚproduction_config-inc.hÖĞÌí¼ÓÓÃ»§¶¨ÒåµÄÍ·ÎÄ¼ş
-/// 8.¹Ø¼ü×Ö´Ê·¨·ÖÎöÓÅÏÈ¼¶¸ßÓÚÔËËã·û£¬ÔËËã·û´Ê·¨·ÖÎöÓÅÏÈ¼¶¸ßÓÚÆÕÍ¨µ¥´Ê
+/// 1.å°†æ¯ä¸ªè§„çº¦å‡½æ•°é€šè¿‡è™šå‡½æ•°åŒ…è£…åˆ°ç±»ä¸­ï¼Œæ¯ä¸ªåŒ…è£…ç±»å®ä¾‹åŒ–ä¸€ä¸ªå¯¹è±¡ç”¨äºåºåˆ—åŒ–åˆ°æ–‡ä»¶ä¸­ï¼Œ
+/// åˆ©ç”¨è™šå‡½æ•°æœºåˆ¶è¿è¡Œæ—¶è°ƒç”¨æ­£ç¡®çš„è§„çº¦å‡½æ•°
+/// 2.ä¸ºäº†å°½é‡ç®€åŒ–ä½¿ç”¨æ–¹æ³•å’Œå®ç°éš¾åº¦ï¼Œä½œè€…é€‰æ‹©é€šè¿‡å®åœ¨é…ç½®æ–‡ä»¶ä¸­æè¿°äº§ç”Ÿå¼å’Œç›¸å…³ä¿¡æ¯æ¥å®šä¹‰äº§ç”Ÿå¼ï¼Œ
+/// åªéœ€ç¼–è¯‘ä¸€æ¬¡ï¼Œè¿è¡Œä¸€æ¬¡å°±èƒ½ç”Ÿæˆé€‚ç”¨äºè§£æå™¨çš„é…ç½®ï¼›
+/// ç›¸æ¯”äºyaccå’Œlexï¼Œå‡å°‘äº†ä¸€æ¬¡è§£æçš„æ­¥éª¤
+/// 3.è¯¥æ–‡ä»¶å†…å®šä¹‰å¤šä¸ªè¡¨ç¤ºäº§ç”Ÿå¼çš„å®ï¼Œè¿™äº›å®å‡ç”¨äºè¡¨ç¤ºäº§ç”Ÿå¼ï¼Œå¹¶åœ¨éœ€è¦çš„æ–‡ä»¶å†…
+/// è½¬åŒ–ä¸ºç›¸åº”ä»£ç ï¼Œé¿å…æ¯ä¸ªéœ€è¦ç”Ÿæˆä»£ç çš„æ–‡ä»¶ä¸­éƒ½æ‰‹åŠ¨å®šä¹‰äº§ç”Ÿå¼
+/// 4.è¯¥æ–‡ä»¶å¿…é¡»ä¸”ä»…è¢«Config/ProductionConfig/production_config-inc.håŒ…å«ï¼Œ
+/// 5.è¯¥æ–‡ä»¶ä¸åº”ä½¿ç”¨æ ‡å‡†å¤´æ–‡ä»¶ä¿æŠ¤ï¼Œä¸‹é¢æœ‰ç‰¹åŒ–çš„çš„å®ä¿æŠ¤
+/// 6.ç”¨æˆ·å®šä¹‰å¤´æ–‡ä»¶è¯·åœ¨user_defined_functions.hä¸­æ·»åŠ ï¼Œ
+/// ç¦æ­¢åœ¨production_config-inc.hä¸­æ·»åŠ ç”¨æˆ·å®šä¹‰çš„å¤´æ–‡ä»¶
+/// 7.å…³é”®å­—ï¼ˆ2ï¼‰è¯æ³•åˆ†æä¼˜å…ˆçº§é«˜äºè¿ç®—ç¬¦ï¼ˆ1ï¼‰ï¼Œè¿ç®—ç¬¦è¯æ³•åˆ†æä¼˜å…ˆçº§é«˜äºæ™®é€šå•è¯ï¼ˆ0ï¼‰
 
-// Õâ²¿·ÖÉùÃ÷ÓÃ»§¶¨Òå²úÉúÊ½ÓÃµÄºêµÄÔ­ĞÍ
-// Í¬Ê±»¹Ô­ÕâĞ©ºêÎªÎŞÊµÏÖ£¬·ÀÖ¹²»Í¬ÎÄ¼ş¶ÔºêµÄÌØ»¯³åÍ»»òÍü¼Ç#undefµÈÎÊÌâ
-// Ç¿ÁÒ½¨Òéµ÷ÓÃºêÊ±Ê¹ÓÃ×î¼òµ¥µÄÓï·¨£¬±ÜÃâÔËËã
-// Ê¹ÓÃ×Ö·û´®Ê±Ö±½ÓÊ¹ÓÃË«ÒıºÅÀàĞÍ£¨¿ÉÒÔÊ¹ÓÃÉúÈâ×Ö£©
-// ´Ó¶ø±ÜÃâºêÉú³ÉÊ±±í´ïÊ½¼ÆËã½á¹û´íÎóµÈÎÊÌâ
-// µ±Ç°ÊµÏÖÖĞÊ¹ÓÃ3¸öµ¥´ÊÓÅÏÈ¼¶£º0~2£¬ÆÕÍ¨µ¥´ÊÓÅÏÈ¼¶Îª0£¬ÔËËã·ûÓÅÏÈ¼¶Îª1£¬
-// ¹Ø¼ü×ÖÓÅÏÈ¼¶Îª2£»µ±Ò»¸öµ¥´Ê¶ÔÓ¦¶à¸öÕıÔò½âÎöÎªÓÅÏÈ¼¶¸ßµÄÕıÔò
+// è¿™éƒ¨åˆ†å£°æ˜ç”¨æˆ·å®šä¹‰äº§ç”Ÿå¼ç”¨çš„å®çš„åŸå‹
+// åŒæ—¶è¿˜åŸè¿™äº›å®ä¸ºæ— å®ç°ï¼Œé˜²æ­¢ä¸åŒæ–‡ä»¶å¯¹å®çš„ç‰¹åŒ–å†²çªæˆ–å¿˜è®°#undefç­‰é—®é¢˜
+// å¼ºçƒˆå»ºè®®è°ƒç”¨å®æ—¶ä½¿ç”¨æœ€ç®€å•çš„è¯­æ³•ï¼Œé¿å…è¿ç®—
+// ä»è€Œé¿å…å®ç”Ÿæˆæ—¶è¡¨è¾¾å¼è®¡ç®—ç»“æœé”™è¯¯ç­‰é—®é¢˜
+// å½“å‰å®ç°ä¸­ä½¿ç”¨3ä¸ªå•è¯ä¼˜å…ˆçº§ï¼š0~2ï¼Œæ™®é€šå•è¯ä¼˜å…ˆçº§ä¸º0ï¼Œè¿ç®—ç¬¦ä¼˜å…ˆçº§ä¸º1ï¼Œ
+// å…³é”®å­—ä¼˜å…ˆçº§ä¸º2ï¼›å½“ä¸€ä¸ªå•è¯å¯¹åº”å¤šä¸ªæ­£åˆ™è§£æä¸ºä¼˜å…ˆçº§é«˜çš„æ­£åˆ™
 
-/// @brief ĞŞÊÎ·ÇÖÕ½á½Úµã²úÉúÊ½Ãû
-/// @param[in] production_symbol £º²úÉúÊ½Ãû
-/// @param[in] production_body_seq £ºÇø·Ö²úÉúÊ½ÌåµÄ×Ö·û
-/// @return ·µ»ØÂãµÄ°ü×°Reductº¯ÊıÓÃµÄÀàÃû
+/// @brief ä¿®é¥°éç»ˆç»“èŠ‚ç‚¹äº§ç”Ÿå¼å
+/// @param[in] node_symbol ï¼šäº§ç”Ÿå¼å
+/// @param[in] production_body_seq ï¼šåŒºåˆ†äº§ç”Ÿå¼ä½“çš„å­—ç¬¦
+/// @return è¿”å›è£¸çš„åŒ…è£…Reductå‡½æ•°ç”¨çš„ç±»å
 /// @note
-/// Àı£º
-/// NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(example1,2)
-/// Õ¹¿ªÎª example1_2_
-#define NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,   \
-                                             production_body_seq) \
-  production_symbol##_##production_body_seq##_
-/// @brief ĞŞÊÎ·ÇÖÕ½á½Úµã²úÉúÊ½Ãû
-/// @param[in] production_symbol £º²úÉúÊ½Ãû
-/// @param[in] production_body_seq £ºÇø·Ö²úÉúÊ½ÌåµÄ×Ö·û
-/// @return ·µ»Ø°ü×°Reductº¯ÊıÓÃµÄÀàÃûµÄ×Ö·û´®ĞÎÊ½
+/// ä¾‹ï¼š
+/// NONTERMINAL_NODE_SYMBOL_MODIFY(example1,2)
+/// å±•å¼€ä¸º example1_2_
+#define NONTERMINAL_NODE_SYMBOL_MODIFY(node_symbol, production_body_seq) \
+  node_symbol##_##production_body_seq##_
+/// @brief ä¿®é¥°éç»ˆç»“èŠ‚ç‚¹äº§ç”Ÿå¼å
+/// @param[in] node_symbol ï¼šäº§ç”Ÿå¼å
+/// @param[in] production_body_seq ï¼šåŒºåˆ†äº§ç”Ÿå¼ä½“çš„å­—ç¬¦
+/// @return è¿”å›åŒ…è£…Reductå‡½æ•°ç”¨çš„ç±»åçš„å­—ç¬¦ä¸²å½¢å¼
 /// @note
-/// Àı£º
-/// NONTERMINAL_PRODUCTION_SYMBOL_MODIFY_STR(example1,2)
-/// Õ¹¿ªÎª "example1_2_"
-#define NONTERMINAL_PRODUCTION_SYMBOL_MODIFY_STR(production_symbol,   \
-                                                 production_body_seq) \
-#production_symbol##"_"## #production_body_seq##"_"
+/// ä¾‹ï¼š
+/// NONTERMINAL_NODE_SYMBOL_MODIFY_STR(example1,2)
+/// å±•å¼€ä¸º "example1_2_"
+#define NONTERMINAL_NODE_SYMBOL_MODIFY_STR(node_symbol, production_body_seq) \
+#node_symbol##"_"## #production_body_seq##"_"
 
-#ifdef GENERATOR_DEFINE_KEY_WORD
 #undef GENERATOR_DEFINE_KEY_WORD
-#endif  // !GENERATOR_DEFINE_KEY_WORD
-/// @brief ¶¨Òå¹Ø¼ü×Ö
-/// @param[in] key_word £º´ı¶¨ÒåµÄ¹Ø¼ü×Ö×Ö·û´®
+/// @brief å®šä¹‰å…³é”®å­—
+/// @param[in] node_symbol ï¼šäº§ç”Ÿå¼åï¼ˆå…³é”®å­—æ˜¯ç»ˆç»“äº§ç”Ÿå¼ï¼‰
+/// @param[in] key_word ï¼šå¾…å®šä¹‰çš„å…³é”®å­—å­—ç¬¦ä¸²ï¼ˆä¸æ”¯æŒæ­£åˆ™ï¼‰
 /// @details
-/// Àı£ºGENERATOR_DEFINE_KEY_WORD("example_key_word")
-/// @note Ö§³ÖÕıÔò±í´ïÊ½
-/// ¹Ø¼ü×Ö´Ê·¨·ÖÎöÓÅÏÈ¼¶¸ßÓÚÔËËã·ûºÍÆÕÍ¨µ¥´Ê
-#define GENERATOR_DEFINE_KEY_WORD(key_word)
+/// ä¾‹ï¼šGENERATOR_DEFINE_KEY_WORD(KeyWordExample, "example_key_word")
+/// @note key_wordä¸æ”¯æŒæ­£åˆ™è¡¨è¾¾å¼
+/// å…³é”®å­—è¯æ³•åˆ†æä¼˜å…ˆçº§é«˜äºè¿ç®—ç¬¦å’Œæ™®é€šå•è¯
+#define GENERATOR_DEFINE_KEY_WORD(node_symbol, key_word)
 
-#ifdef GENERATOR_DEFINE_BINARY_OPERATOR
 #undef GENERATOR_DEFINE_BINARY_OPERATOR
-#endif  // !GENERATOR_DEFINE_BINARY_OPERATOR
-/// @brief ¶¨ÒåË«Ä¿ÔËËã·û
-/// @param[in] operator_symbol £ºÔËËã·û×Ö·û´®
+/// @brief å®šä¹‰åŒç›®è¿ç®—ç¬¦
+/// @param[in] node_symbol ï¼šäº§ç”Ÿå¼åï¼ˆè¿ç®—ç¬¦ä¹Ÿæ˜¯ä¸€ç§ç»ˆç»“äº§ç”Ÿå¼ï¼‰
+/// @param[in] operator_symbol ï¼šè¿ç®—ç¬¦å­—ç¬¦ä¸²ï¼ˆä¸æ”¯æŒæ­£åˆ™ï¼‰
 /// @param[in] binary_operator_associatity
-/// £ºË«Ä¿ÔËËã·û½áºÏĞÔ£¨Ã¶¾ÙOperatorAssociatityType£©
-/// @param[in] binary_operator_priority £ºË«Ä¿ÔËËã·ûÓÅÏÈ¼¶
+/// ï¼šåŒç›®è¿ç®—ç¬¦ç»“åˆæ€§ï¼ˆæšä¸¾OperatorAssociatityTypeï¼‰
+/// @param[in] binary_operator_priority ï¼šåŒç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
 /// @details
-/// Àı£ºGENERATOR_DEFINE_BINARY_OPERATOR("example_symbol",
+/// ä¾‹ï¼šGENERATOR_DEFINE_BINARY_OPERATOR(PlusOperator, "+",
 ///                                      OperatorAssociatityType::kLeftToRight,
-///                                      2)
-/// @note ÔËËã·ûÓÅÏÈ¼¶ÊıÖµÔ½´óÓÅÏÈ¼¶Ô½¸ß
-/// @attention ÏàÍ¬operator_symbolµÄÔËËã·ûÖ»ÄÜ¶¨ÒåÒ»´Î
-#define GENERATOR_DEFINE_BINARY_OPERATOR( \
-    operator_symbol, binary_operator_associatity, binary_operator_priority)
+///                                      12)
+/// @note è¿ç®—ç¬¦ä¼˜å…ˆçº§æ•°å€¼è¶Šå¤§ä¼˜å…ˆçº§è¶Šé«˜
+/// @attention ç›¸åŒoperator_symbolçš„è¿ç®—ç¬¦åªèƒ½å®šä¹‰ä¸€æ¬¡
+#define GENERATOR_DEFINE_BINARY_OPERATOR(node_symbol, operator_symbol, \
+                                         binary_operator_associatity,  \
+                                         binary_operator_priority)
 
-#ifdef GENERATOR_DEFINE_UNARY_OPERATOR
 #undef GENERATOR_DEFINE_UNARY_OPERATOR
-#endif  // !GENERATOR_DEFINE_UNARY_OPERATOR
-/// @brief ¶¨Òå×ó²àµ¥Ä¿ÔËËã·û
-/// @param[in] operator_symbol £ºÔËËã·û×Ö·û´®
+/// @brief å®šä¹‰å·¦ä¾§å•ç›®è¿ç®—ç¬¦
+/// @param[in] node_symbol ï¼šäº§ç”Ÿå¼åï¼ˆè¿ç®—ç¬¦ä¹Ÿæ˜¯ä¸€ç§ç»ˆç»“äº§ç”Ÿå¼ï¼‰
+/// @param[in] operator_symbol ï¼šè¿ç®—ç¬¦å­—ç¬¦ä¸²ï¼ˆä¸æ”¯æŒæ­£åˆ™ï¼‰
 /// @param[in] unary_operator_associatity
-/// £º×ó²àµ¥Ä¿ÔËËã·û½áºÏĞÔ£¨Ã¶¾ÙOperatorAssociatityType£©
-/// @param[in] unary_operator_priority £º×ó²àµ¥Ä¿ÔËËã·ûÓÅÏÈ¼¶
+/// ï¼šå·¦ä¾§å•ç›®è¿ç®—ç¬¦ç»“åˆæ€§ï¼ˆæšä¸¾OperatorAssociatityTypeï¼‰
+/// @param[in] unary_operator_priority ï¼šå·¦ä¾§å•ç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
 /// @details
-/// Àı£ºGENERATOR_DEFINE_UNARY_OPERATOR("example_symbol",
-///                                      OperatorAssociatityType::kLeftToRight,
-///                                      2)
-/// @note ÔËËã·ûÓÅÏÈ¼¶ÊıÖµÔ½´óÓÅÏÈ¼¶Ô½¸ß
-/// @attention ÏàÍ¬operator_symbolµÄÔËËã·ûÖ»ÄÜ¶¨ÒåÒ»´Î
-#define GENERATOR_DEFINE_UNARY_OPERATOR( \
-    operator_symbol, unary_operator_associatity, unary_operator_priority)
+/// ä¾‹ï¼šGENERATOR_DEFINE_UNARY_OPERATOR(SizeofOperator, "sizeof",
+///                                     OperatorAssociatityType::kLeftToRight,
+///                                     2)
+/// @note è¿ç®—ç¬¦ä¼˜å…ˆçº§æ•°å€¼è¶Šå¤§ä¼˜å…ˆçº§è¶Šé«˜
+/// @attention ç›¸åŒoperator_symbolçš„è¿ç®—ç¬¦åªèƒ½å®šä¹‰ä¸€æ¬¡
+#define GENERATOR_DEFINE_UNARY_OPERATOR(node_symbol, operator_symbol, \
+                                        unary_operator_associatity,   \
+                                        unary_operator_priority)
 
-#ifdef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
 #undef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
-#endif  // !GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
-/// @brief ¶¨ÒåÍ¬Ê±¾ßÓĞË«Ä¿ºÍ×ó²àµ¥Ä¿ÓïÒåµÄÔËËã·û
-/// @param[in] operator_symbol £ºË«ÓïÒåÔËËã·û×Ö·û´®
+/// @brief å®šä¹‰åŒæ—¶å…·æœ‰åŒç›®å’Œå·¦ä¾§å•ç›®è¯­ä¹‰çš„è¿ç®—ç¬¦
+/// @param[in] node_symbol ï¼šäº§ç”Ÿå¼åï¼ˆè¿ç®—ç¬¦ä¹Ÿæ˜¯ä¸€ç§ç»ˆç»“äº§ç”Ÿå¼ï¼‰
+/// @param[in] operator_symbol ï¼šåŒè¯­ä¹‰è¿ç®—ç¬¦å­—ç¬¦ä¸²ï¼ˆä¸æ”¯æŒæ­£åˆ™ï¼‰
 /// @param[in] binary_operator_associatity
-/// £ºË«Ä¿ÔËËã·û½áºÏĞÔ£¨Ã¶¾ÙOperatorAssociatityType£©
-/// @param[in] binary_operator_priority £ºË«Ä¿ÔËËã·ûÓÅÏÈ¼¶
+/// ï¼šåŒç›®è¿ç®—ç¬¦ç»“åˆæ€§ï¼ˆæšä¸¾OperatorAssociatityTypeï¼‰
+/// @param[in] binary_operator_priority ï¼šåŒç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
 /// @param[in] unary_operator_associatity
-/// £º×ó²àµ¥Ä¿ÔËËã·û½áºÏĞÔ£¨Ã¶¾ÙOperatorAssociatityType£©
-/// @param[in] unary_operator_priority £º×ó²àµ¥Ä¿ÔËËã·ûÓÅÏÈ¼¶
+/// ï¼šå·¦ä¾§å•ç›®è¿ç®—ç¬¦ç»“åˆæ€§ï¼ˆæšä¸¾OperatorAssociatityTypeï¼‰
+/// @param[in] unary_operator_priority ï¼šå·¦ä¾§å•ç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
 /// @details
-/// Àı£ºGENERATOR_DEFINE_BINARY_UNARY_OPERATOR("example_symbol",
+/// ä¾‹ï¼šGENERATOR_DEFINE_BINARY_UNARY_OPERATOR(kMultiResolveRefOperator, "*",
 ///                                      OperatorAssociatityType::kLeftToRight,
-///                                      2)
-/// @attention ÏàÍ¬operator_symbolµÄÔËËã·ûÖ»ÄÜ¶¨ÒåÒ»´Î
-/// ²»ÔÊĞíÍ¨¹ı×éºÏGENERATOR_DEFINE_UNARY_OPERATORºÍ
-/// GENERATOR_DEFINE_BINARY_OPERATORÀ´ÉùÃ÷Í¬Ê±Ö§³ÖË«Ä¿ºÍ×ó²àµ¥Ä¿ÓïÒåµÄÔËËã·û£¬
-/// ±ØĞëÊ¹ÓÃ¸ÃºêÒ»´ÎĞÔÉùÃ÷ÕâÖÖÔËËã·û
-#define GENERATOR_DEFINE_BINARY_UNARY_OPERATOR(                             \
-    operator_symbol, binary_operator_associatity, binary_operator_priority, \
-    unary_operator_associatity, unary_operator_priority)
+///                                      13
+///                                      OperatorAssociatityType::kRightToLeft,
+///                                      14)
+/// @attention ç›¸åŒoperator_symbolçš„è¿ç®—ç¬¦åªèƒ½å®šä¹‰ä¸€æ¬¡
+/// ä¸å…è®¸é€šè¿‡ç»„åˆGENERATOR_DEFINE_UNARY_OPERATORå’Œ
+/// GENERATOR_DEFINE_BINARY_OPERATORæ¥å£°æ˜åŒæ—¶æ”¯æŒåŒç›®å’Œå·¦ä¾§å•ç›®è¯­ä¹‰çš„è¿ç®—ç¬¦ï¼Œ
+/// å¿…é¡»ä½¿ç”¨è¯¥å®ä¸€æ¬¡æ€§å£°æ˜è¿™ç§è¿ç®—ç¬¦
+#define GENERATOR_DEFINE_BINARY_UNARY_OPERATOR(                \
+    node_symbol, operator_symbol, binary_operator_associatity, \
+    binary_operator_priority, unary_operator_associatity,      \
+    unary_operator_priority)
 
-#ifdef GENERATOR_DEFINE_TERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_TERMINAL_PRODUCTION
-#endif  // GENERATOR_DEFINE_TERMINAL_PRODUCTION
-/// @brief ¶¨ÒåÖÕ½á²úÉúÊ½
-/// @param[in] production_symbol £ºÖÕ½á½ÚµãÃû×Ö·û´®
-/// @param[in] production_body £ºÖÕ½á½ÚµãÌå×Ö·û´®£¨ÕıÔò±í´ïÊ½ĞÎÊ½£©
+/// @brief å®šä¹‰ç»ˆç»“äº§ç”Ÿå¼
+/// @param[in] node_symbol ï¼šç»ˆç»“èŠ‚ç‚¹åå­—ç¬¦ä¸²
+/// @param[in] production_body ï¼šç»ˆç»“èŠ‚ç‚¹ä½“å­—ç¬¦ä¸²ï¼ˆæ­£åˆ™è¡¨è¾¾å¼å½¢å¼ï¼‰
 /// @details
-/// Àı£ºGENERATOR_DEFINE_TERMINAL_PRODUCTION("example_symbol",
-///                                          "[a-zA-Z_][a-zA-Z_0-9]*")
-#define GENERATOR_DEFINE_TERMINAL_PRODUCTION(production_symbol, production_body)
+/// ä¾‹ï¼šGENERATOR_DEFINE_TERMINAL_PRODUCTION("Id", "[a-zA-Z_][a-zA-Z_0-9]*")
+#define GENERATOR_DEFINE_TERMINAL_PRODUCTION(node_symbol, production_body)
 
-#ifdef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
-#endif  // GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
-/// @brief ¶¨Òå·ÇÖÕ½á²úÉúÊ½
-/// @param[in] production_symbol £º·ÇÖÕ½á²úÉúÊ½Ãû
-/// @param[in] reduct_function_name £º¹æÔ¼·ÇÖÕ½á²úÉúÊ½µÄº¯ÊıÃû
-/// @param[in] production_body_seq £ºÇø·Ö²»Í¬²úÉúÊ½ÌåµÄ×Ö·û
-/// @param[in] ... £º²úÉúÊ½Ìå
+/// @brief å®šä¹‰éç»ˆç»“äº§ç”Ÿå¼
+/// @param[in] node_symbol ï¼šéç»ˆç»“äº§ç”Ÿå¼å
+/// @param[in] reduct_function ï¼šè§„çº¦éç»ˆç»“äº§ç”Ÿå¼çš„å‡½æ•°å
+/// @param[in] ... ï¼šäº§ç”Ÿå¼ä½“
 /// @details
-/// ²úÉúÊ½Ìå²¿·ÖÊ¹ÓÃ³õÊ¼»¯ÁĞ±íÊéĞ´·¨
-/// Àı£º{"production_body1","production_body2"}
-/// Ã¿Ò»¸öÏàÍ¬µÄ²úÉúÊ½ÃûÏÂ¸÷²úÉúÊ½Ìå±àºÅ±ØĞë²»Í¬£¬¿ÉÊ¹ÓÃ[a-zA-Z0-9_]+
-/// ¸Ã±àºÅÓÃÓÚÇø·Ö²»Í¬µÄ²úÉúÊ½Ìå²¢ÎªÆä¹¹½¨ÏàÓ¦µÄ°ü×°º¯Êı
-/// Àı£ºGENERATOR_DEFINE_NONTERMINAL_PRODUCTION(example_symbol,
-///                ExampleFunctionName, 0, false, {"Id", "=", "Assignable"})
-#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION( \
-    production_symbol, reduct_function_name, production_body_seq, ...)
+/// ä¾‹ï¼šGENERATOR_DEFINE_NONTERMINAL_PRODUCTION(example_symbol,
+///                ReductFunctionName, Id, AssignOperator, Assignable)
+/// @attention æ¯è¡Œåªèƒ½ä½¿ç”¨ä¸€æ¬¡è¯¥å®
+#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(node_symbol, reduct_function, \
+                                                ...)
 
-#ifdef GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT
 #undef GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT
-#endif  // GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT
-/// @brief ÉèÖÃ·ÇÖÕ½á²úÉúÊ½¿ÉÒÔ¿Õ¹æÔ¼
-/// @param[in] production_symbol £º´ıÉèÖÃ¿ÉÒÔ¿Õ¹æÔ¼µÄ·ÇÖÕ½á²úÉúÊ½Ãû
+/// @brief è®¾ç½®éç»ˆç»“äº§ç”Ÿå¼å¯ä»¥ç©ºè§„çº¦
+/// @param[in] node_symbol ï¼šå¾…è®¾ç½®å¯ä»¥ç©ºè§„çº¦çš„éç»ˆç»“äº§ç”Ÿå¼å
 /// @note
-/// Î´µ÷ÓÃ´Ë·½·¨µÄ·ÇÖÕ½á½ÚµãÄ¬ÈÏ²»¿ÉÒÔ¿Õ¹æÔ¼
-/// µ÷ÓÃÊ±½öĞè±£Ö¤¸ø¶¨µÄ·ÇÖÕ½á²úÉúÊ½ÒÑ¾­¶¨Òå£¬
-/// ²»ÒªÇóÒÑ¶¨Òå·ÇÖÕ½á²úÉúÊ½ÒÀÀµµÄ²úÉúÊ½
-/// Àı£ºGENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(example_symbol)
-#define GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT( \
-    production_symbol)
+/// æœªè°ƒç”¨æ­¤æ–¹æ³•çš„éç»ˆç»“èŠ‚ç‚¹é»˜è®¤ä¸å¯ä»¥ç©ºè§„çº¦
+/// è°ƒç”¨æ—¶ä»…éœ€ä¿è¯ç»™å®šçš„éç»ˆç»“äº§ç”Ÿå¼å·²ç»å®šä¹‰ï¼Œ
+/// ä¸è¦æ±‚å·²å®šä¹‰éç»ˆç»“äº§ç”Ÿå¼ä¾èµ–çš„äº§ç”Ÿå¼
+/// ä¾‹ï¼šGENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(example_symbol)
+#define GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(node_symbol)
 
-#ifdef GENERATOR_DEFINE_ROOT_PRODUCTION
 #undef GENERATOR_DEFINE_ROOT_PRODUCTION
-#endif  // GENERATOR_DEFINE_BINARY_OPERATOR
-/// @brief ÉèÖÃ¸ù²úÉúÊ½
-/// @param[in] production_symbol £º´ıÉèÖÃµÄ¸ù·ÇÖÕ½á²úÉúÊ½Ãû
+/// @brief è®¾ç½®æ ¹äº§ç”Ÿå¼
+/// @param[in] node_symbol ï¼šå¾…è®¾ç½®çš„æ ¹éç»ˆç»“äº§ç”Ÿå¼å
 /// @note
-/// µ÷ÓÃÊ±½öĞèÒÑ¶¨Òå¸Ã·ÇÖÕ½á½Úµã£¬²»ÒªÇóÒÑ¶¨Òå·ÇÖÕ½á²úÉúÊ½ÒÀÀµµÄ²úÉúÊ½
-/// Àı£ºGENERATOR_DEFINE_ROOT_PRODUCTION(example_symbol)
-#define GENERATOR_DEFINE_ROOT_PRODUCTION(production_symbol)
+/// è°ƒç”¨æ—¶ä»…éœ€å·²å®šä¹‰è¯¥éç»ˆç»“èŠ‚ç‚¹ï¼Œä¸è¦æ±‚å·²å®šä¹‰éç»ˆç»“äº§ç”Ÿå¼ä¾èµ–çš„äº§ç”Ÿå¼
+/// ä¾‹ï¼šGENERATOR_DEFINE_ROOT_PRODUCTION(example_symbol)
+#define GENERATOR_DEFINE_ROOT_PRODUCTION(node_symbol)
 
-// Õâ²¿·Öºê¶ÔÁ½ÖÖĞèÒª²úÉúÊ½ĞÅÏ¢µÄÎÄ¼şÌØ»¯
-
-// ÔÚconfig_construct.cppÖĞ×ª»¯Îª¶ÔSyntaxGenerator³ÉÔ±º¯ÊıµÄµ÷ÓÃ´úÂë
-// ´æ·ÅÔÚConfigConstructº¯ÊıÖĞ£¬ÏòSyntaxGenerator´«´ï²úÉúÊ½ĞÅÏ¢
+// åœ¨config_construct.cppä¸­è½¬åŒ–ä¸ºå¯¹SyntaxGeneratoræˆå‘˜å‡½æ•°çš„è°ƒç”¨ä»£ç 
+// å­˜æ”¾åœ¨ConfigConstructå‡½æ•°ä¸­ï¼Œå‘SyntaxGeneratorä¼ è¾¾äº§ç”Ÿå¼ä¿¡æ¯
 #ifdef GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_
 
-// ·ÀÖ¹ÖØ¸´°üº¬
-#ifndef GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_END
-// ¶¨Òå¸ÃºêÒÔÆÁ±ÎÓÃÀ´ÔÊĞíÊ¹ÓÃIntelliSense¶ø°üº¬µÄÍ·ÎÄ¼ş
-// ÔÚº¯Êı¶¨ÒåÄÚ°üº¬Í·ÎÄ¼ş»áµ¼ÖÂ´óÁ¿Ææ¹Ö´íÎó
-#define SHIELD_HEADERS_FOR_INTELLISENSE
-
-#ifdef GENERATOR_DEFINE_KEY_WORD
 #undef GENERATOR_DEFINE_KEY_WORD
-#endif  // GENERATOR_DEFINE_KEY_WORD
-#define GENERATOR_DEFINE_KEY_WORD(key_word) AddKeyWord(key_word);
+#define GENERATOR_DEFINE_KEY_WORD(node_symbol, key_word) \
+  AddKeyWord(#node_symbol, key_word);
 
-#ifdef GENERATOR_DEFINE_BINARY_OPERATOR
 #undef GENERATOR_DEFINE_BINARY_OPERATOR
-#endif  // GENERATOR_DEFINE_BINARY_OPERATOR
-#define GENERATOR_DEFINE_BINARY_OPERATOR(                                   \
-    operator_symbol, binary_operator_associatity, binary_operator_priority) \
-  AddBinaryOperator(operator_symbol, binary_operator_associatity,           \
+#define GENERATOR_DEFINE_BINARY_OPERATOR(node_symbol, operator_symbol, \
+                                         binary_operator_associatity,  \
+                                         binary_operator_priority)     \
+  AddBinaryOperator(#node_symbol, operator_symbol,                     \
+                    binary_operator_associatity,                       \
                     OperatorPriority(binary_operator_priority));
 
-#ifdef GENERATOR_DEFINE_UNARY_OPERATOR
 #undef GENERATOR_DEFINE_UNARY_OPERATOR
-#endif  // GENERATOR_DEFINE_UNARY_OPERATOR
-#define GENERATOR_DEFINE_UNARY_OPERATOR(                                  \
-    operator_symbol, unary_operator_associatity, unary_operator_priority) \
-  AddLeftUnaryOperator(operator_symbol, unary_operator_associatity,       \
+#define GENERATOR_DEFINE_UNARY_OPERATOR(node_symbol, operator_symbol, \
+                                        unary_operator_associatity,   \
+                                        unary_operator_priority)      \
+  AddLeftUnaryOperator(#node_symbol, operator_symbol,                 \
+                       unary_operator_associatity,                    \
                        OperatorPriority(unary_operator_priority));
 
-#ifdef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
 #undef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
-#endif  // !GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
-#define GENERATOR_DEFINE_BINARY_UNARY_OPERATOR(                             \
-    operator_symbol, binary_operator_associatity, binary_operator_priority, \
-    unary_operator_associatity, unary_operator_priority)                    \
-  AddBinaryLeftUnaryOperator(operator_symbol, binary_operator_associatity,  \
-                             OperatorPriority(binary_operator_priority),    \
-                             unary_operator_associatity,                    \
-                             OperatorPriority(unary_operator_priority));
+#define GENERATOR_DEFINE_BINARY_UNARY_OPERATOR(                               \
+    node_symbol, operator_symbol, binary_operator_associatity,                \
+    binary_operator_priority, unary_operator_associatity,                     \
+    unary_operator_priority)                                                  \
+  AddBinaryLeftUnaryOperator(                                                 \
+      #node_symbol, operator_symbol, binary_operator_associatity,             \
+      OperatorPriority(binary_operator_priority), unary_operator_associatity, \
+      OperatorPriority(unary_operator_priority));
 
-#ifdef GENERATOR_DEFINE_TERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_TERMINAL_PRODUCTION
-#endif  // GENERATOR_DEFINE_TERMINAL_PRODUCTION
-#define GENERATOR_DEFINE_TERMINAL_PRODUCTION(production_symbol, \
-                                             production_body)   \
-  AddTerminalProduction(production_symbol, production_body);
+#define GENERATOR_DEFINE_TERMINAL_PRODUCTION(node_symbol, production_body) \
+  AddSimpleTerminalProduction(#node_symbol, production_body);
 
-#ifdef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
-#endif  // GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
-#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                   \
-    production_symbol, reduct_function, production_body_seq, ...)  \
-  AddNonTerminalProduction<NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(   \
-      production_symbol, production_body_seq)>(#production_symbol, \
-                                               __VA_ARGS__);
+#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(node_symbol, reduct_function, \
+                                                ...)                          \
+  GENERATOR_DEFINE_NONTERMINAL_PRODUCTION_IMPL(node_symbol, reduct_function,  \
+                                               __LINE__, __VA_ARGS__)
 
-#ifdef GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT
+#undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION_IMPL
+#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION_IMPL(      \
+    node_symbol, reduct_function, node_symbol_seq, ...)    \
+  AddNonTerminalProduction<NONTERMINAL_NODE_SYMBOL_MODIFY( \
+      node_symbol, node_symbol_seq)>(#node_symbol, #__VA_ARGS__);
+
 #undef GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT
-#endif
-#define GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT( \
-    production_symbol)                                           \
-  SetNonTerminalNodeCouldEmptyReduct(#production_symbol);
+#define GENERATOR_SET_NONTERMINAL_PRODUCTION_COULD_EMPTY_REDUCT(node_symbol) \
+  SetNonTerminalNodeCouldEmptyReduct(#node_symbol);
 
-#ifdef GENERATOR_DEFINE_ROOT_PRODUCTION
 #undef GENERATOR_DEFINE_ROOT_PRODUCTION
-#endif  // GENERATOR_DEFINE_ROOT_PRODUCTION
-#define GENERATOR_DEFINE_ROOT_PRODUCTION(production_symbol) \
-  SetRootProduction(#production_symbol);
+#define GENERATOR_DEFINE_ROOT_PRODUCTION(node_symbol) \
+  SetRootProduction(#node_symbol);
 
-#else
-#error ÇëÎğÔÚconfig_construct.cppÒÔÍâ°üº¬production_config-inc.h»òÖØ¸´°üº¬
-#endif
-#endif
+// åœ¨process_function_classes.hä¸­è½¬åŒ–ä¸ºåŒ…è£…è§„çº¦å‡½æ•°çš„ç±»
+// ç±»åä¿®é¥°æ–¹æ³•è§å®NONTERMINAL_NODE_SYMBOL_MODIFYå’Œ
+// NONTERMINAL_NODE_SYMBOL_MODIFY_STR
+#elif defined GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_
+using namespace frontend::generator::syntax_generator::type_register;
 
-// ÔÚprocess_function_classes.hÖĞ×ª»¯Îª°ü×°¹æÔ¼º¯ÊıµÄÀà
-// ÀàÃûĞŞÊÎ·½·¨¼ûºêNONTERMINAL_PRODUCTION_SYMBOL_MODIFYºÍ
-// NONTERMINAL_PRODUCTION_SYMBOL_MODIFY_STR
-#ifdef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_
-// ·ÀÖ¹±»ÖØ¸´°üº¬
-#ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_END
-
-#ifdef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
-#endif  // GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
+#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(node_symbol, reduct_function, \
+                                                ...)                          \
+  GENERATOR_DEFINE_NONTERMINAL_PRODUCTION_IMPL(node_symbol, reduct_function,  \
+                                               __LINE__, __VA_ARGS__)
 
-/// ¶¨Òå¸ÃºêÒÔÆÁ±ÎÓÃÀ´ÔÊĞíÊ¹ÓÃIntelliSense¶ø°üº¬µÄÍ·ÎÄ¼ş
-/// ÔÚÃüÃû¿Õ¼äÄÚ°üº¬ÕâĞ©Í·ÎÄ¼ş»áµ¼ÖÂ¸÷ÖÖÆæ¹ÖµÄ´íÎó
-#define SHIELD_HEADERS_FOR_INTELLISENSE
-
-#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                              \
-    production_symbol, reduct_function, production_body_seq, ...)             \
-  class NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,               \
-                                             production_body_seq)             \
+#undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION_IMPL
+#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION_IMPL(                         \
+    node_symbol, reduct_function, node_symbol_seq, ...)                       \
+  class NONTERMINAL_NODE_SYMBOL_MODIFY(node_symbol, node_symbol_seq)          \
       : public ProcessFunctionInterface {                                     \
    public:                                                                    \
-    virtual ProcessFunctionInterface::UserData Reduct(                        \
-        std::vector<ProcessFunctionInterface::WordDataToUser>&& word_data)    \
-        const override {                                                      \
-      return reduct_function(std::move(word_data));                           \
+    template <class TargetType>                                               \
+    static TargetType&& GetArgument(std::any* container,                      \
+                                    std::list<std::any>* temp_obj) {          \
+      if (!container->has_value()) {                                          \
+        temp_obj->emplace_back(TargetType());                                 \
+        container = &temp_obj->back();                                        \
+      }                                                                       \
+      return std::move(*std::any_cast<TargetType>(container));                \
+    }                                                                         \
+    template <class TupleTypes, class IntegerSequence>                        \
+    struct CallReductFunctionImpl;                                            \
+                                                                              \
+    template <class... Types, class SeqType, size_t... seq>                   \
+    struct CallReductFunctionImpl<std::tuple<Types...>,                       \
+                                  std::integer_sequence<SeqType, seq...>> {   \
+      static std::any DoCall(std::vector<std::any>&& args) {                  \
+        std::cout << #reduct_function << std::endl;                           \
+        std::list<std::any> temp_obj;                                         \
+        return reduct_function(GetArgument<Types>(&args[seq], &temp_obj)...); \
+      }                                                                       \
+    };                                                                        \
+                                                                              \
+    template <class... T>                                                     \
+    struct CallReductFunction                                                 \
+        : public CallReductFunctionImpl<                                      \
+              std::tuple<T...>,                                               \
+              std::make_index_sequence<CountTypeSize<__VA_ARGS__>()>> {};     \
+                                                                              \
+    virtual std::any Reduct(                                                  \
+        std::vector<std::any>&& word_data) const override {                   \
+      static_assert(CountTypeSize<__VA_ARGS__>() ==                           \
+                        FunctionTraits<decltype(reduct_function)>::arg_size,  \
+                    "è°ƒç”¨è§„çº¦å‡½æ•°æ‰€éœ€å‚æ•°ä¸ªæ•°ä¸å­äº§ç”Ÿå¼æ•°é‡ä¸åŒ¹é…ï¼Œè¯·æ£€æŸ¥");  \
+      static_assert(                                                          \
+          FunctionCallableWithArgs<decltype(reduct_function), __VA_ARGS__>,   \
+          "è°ƒç”¨è§„çº¦å‡½æ•°æ‰€éœ€å‚æ•°ç±»å‹ä¸å­äº§ç”Ÿå¼è§„çº¦ç»“æœçš„ç±»å‹ä¸åŒ¹é…ï¼Œè¯·æ£€æŸ¥");  \
+      return CallReductFunction<__VA_ARGS__>::DoCall(std::move(word_data));   \
     }                                                                         \
                                                                               \
    private:                                                                   \
@@ -289,47 +271,76 @@
       ar& boost::serialization::base_object<ProcessFunctionInterface>(*this); \
     }                                                                         \
   };
-#endif
-#endif
 
-// ÔÚprocess_functions_classes_register.hÖĞ×ª»¯Îª×¢²á
-// process_function_classes.hÖĞÅÉÉúÀàµÄºê£¬ÅäºÏboost-serializationÊ¹ÓÃ
-#ifdef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER
-/// ·ÀÖ¹ÖØ¸´°üº¬
-#ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER_END
+// åœ¨process_functions_classes_register.hä¸­è½¬åŒ–ä¸ºæ³¨å†Œ
+// process_function_classes.hä¸­æ´¾ç”Ÿç±»çš„å®ï¼Œé…åˆboost-serializationä½¿ç”¨
+#elif defined GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER
 
-/// ¶¨Òå¸ÃºêÒÔÆÁ±ÎÓÃÀ´ÔÊĞíÊ¹ÓÃIntelliSense¶ø°üº¬µÄÍ·ÎÄ¼ş
-#define SHIELD_HEADERS_FOR_INTELLISENSE
-
-#ifdef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 #undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
-#endif  /// GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
 
-#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(                     \
-    production_symbol, reduct_function, production_body_seq, ...)    \
-  BOOST_CLASS_EXPORT_GUID(                                           \
-      frontend::generator::syntax_generator::                        \
-          NONTERMINAL_PRODUCTION_SYMBOL_MODIFY(production_symbol,    \
-                                               production_body_seq), \
-      "frontend::generator::"                                        \
-      "syntax_generator::" NONTERMINAL_PRODUCTION_SYMBOL_MODIFY_STR( \
-          production_symbol, production_body_seq))
+#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(node_symbol, reduct_function, \
+                                                ...)                          \
+  GENERATOR_DEFINE_NONTERMINAL_PRODUCTION_IMPL(node_symbol, reduct_function,  \
+                                               __LINE__, __VA_ARGS__)
+
+#undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION_IMPL
+#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION_IMPL(                        \
+    node_symbol, reduct_function, node_symbol_seq, ...)                      \
+  BOOST_CLASS_EXPORT_GUID(                                                   \
+      frontend::generator::syntax_generator::NONTERMINAL_NODE_SYMBOL_MODIFY( \
+          node_symbol, node_symbol_seq),                                     \
+      "frontend::generator::"                                                \
+      "syntax_generator::" NONTERMINAL_NODE_SYMBOL_MODIFY_STR(               \
+          node_symbol, node_symbol_seq))
+
+// åœ¨reduct_type_register.hä¸­æ³¨å†Œè§„çº¦å‡½æ•°çš„è¿”å›å€¼ç±»å‹ï¼Œç”¨äºæ£€æŸ¥è§„çº¦å‡½æ•°çš„è¿”å›å€¼ç±»å‹å’Œå®ç°ç¼–è¯‘æœŸè‡ªåŠ¨ç±»å‹è½¬æ¢
+#elif defined GENERATOR_SYNTAXGENERATOR_REDUCT_TYPE_REGISTER
+
+#undef GENERATOR_DEFINE_KEY_WORD
+#define GENERATOR_DEFINE_KEY_WORD(node_symbol, key_word)           \
+  namespace frontend::generator::syntax_generator::type_register { \
+  using node_symbol = std::string;                                 \
+  }
+
+#undef GENERATOR_DEFINE_BINARY_OPERATOR
+#define GENERATOR_DEFINE_BINARY_OPERATOR(node_symbol, operator_symbol, \
+                                         binary_operator_associatity,  \
+                                         binary_operator_priority)     \
+  namespace frontend::generator::syntax_generator::type_register {     \
+  using node_symbol = std::string;                                     \
+  }
+
+#undef GENERATOR_DEFINE_UNARY_OPERATOR
+#define GENERATOR_DEFINE_UNARY_OPERATOR(node_symbol, operator_symbol, \
+                                        unary_operator_associatity,   \
+                                        unary_operator_priority)      \
+  namespace frontend::generator::syntax_generator::type_register {    \
+  using node_symbol = std::string;                                    \
+  }
+
+#undef GENERATOR_DEFINE_BINARY_UNARY_OPERATOR
+#define GENERATOR_DEFINE_BINARY_UNARY_OPERATOR(                    \
+    node_symbol, operator_symbol, binary_operator_associatity,     \
+    binary_operator_priority, unary_operator_associatity,          \
+    unary_operator_priority)                                       \
+  namespace frontend::generator::syntax_generator::type_register { \
+  using node_symbol = std::string;                                 \
+  }
+
+#undef GENERATOR_DEFINE_TERMINAL_PRODUCTION
+#define GENERATOR_DEFINE_TERMINAL_PRODUCTION(node_symbol, production_body) \
+  namespace frontend::generator::syntax_generator::type_register {         \
+  using node_symbol = std::string;                                         \
+  }
+
+#undef GENERATOR_DEFINE_NONTERMINAL_PRODUCTION
+#define GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(node_symbol, reduct_function, \
+                                                ...)                          \
+  namespace frontend::generator::syntax_generator::type_register {            \
+  using node_symbol =                                                         \
+      std::decay_t<FunctionTraits<decltype(reduct_function)>::return_type>;   \
+  }
+
 #else
-#errror ÇëÎğÔÚprocess_functions_classes_register.hÎÄ¼şÒÔÍâ°üº¬ \
-    "production_config-inc.h"»òÖØ¸´°üº¬
+#error è¯·å‹¿åœ¨process_functions_classes_register.hã€process_function_classes.hã€config_construct.cppä»¥å¤–åŒ…å«production_config-inc.hæˆ–é‡å¤åŒ…å«
 #endif
-#endif
-
-/// ÎªÁËÊ¹ÓÃIntellisenseÔÚÕâ¸öºêÀï°üº¬ĞèÒªµÄÍ·ÎÄ¼ş
-/// ´Ë´¦µÄÍ·ÎÄ¼şÔÚ´úÂëÉú³É¹ı³ÌÖĞ»á±»ºöÂÔ
-/// ÓÃ»§ÇëÔÚuser_defined_functions.hÄÚÌí¼Ó×Ô¼º¶¨ÒåµÄÍ·ÎÄ¼ş
-/// ÔÚÃ¿¸ö°üº¬¸ÃÎÄ¼şµÄÎÄ¼şÖĞ¶¼Ó¦¶¨ÒåSHIELD_HEADERS_FOR_INTELLISENSEºêÒÔÆÁ±ÎÕâĞ©
-/// ÎÄ¼ş£¬·ñÔò»á³öÏÖ¸÷ÖÖÆæ¹Ö±¨´í
-#ifndef SHIELD_HEADERS_FOR_INTELLISENSE
-#include "Common/common.h"
-#include "Config/ProductionConfig/user_defined_functions.h"
-#include "Generator/export_types.h"
-/// Ìá¹©ÔËËã·û½áºÏĞÔµÄÃ¶¾Ù
-using OperatorAssociatityType =
-    frontend::generator::syntax_generator::OperatorAssociatityType;
-#endif  /// !SHIELD_HEADERS_FOR_INTELLIGENCE

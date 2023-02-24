@@ -2,6 +2,12 @@ Project(Generator)
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
+set(GRAPHVIZ_INCLUDE_DIR "C:/Program\ Files/Graphviz/include")
+set(GRAPHVIZ_LIB_DIR "C:/Program Files/Graphviz/lib")
+
+find_library(CGRAPH_LIBRARY cgraph HINTS "${GRAPHVIZ_LIB_DIR}" REQUIRED)
+find_library(GVC_LIBRARY gvc HINTS "${GRAPHVIZ_LIB_DIR}" REQUIRED)
+
 add_subdirectory(DfaGenerator)
 add_subdirectory(SyntaxGenerator)
 
