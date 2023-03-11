@@ -9,6 +9,7 @@
 #include <string>
 
 #include "syntax_generator_type_traits.h"
+#include "Config/ProductionConfig/user_defined_functions.h"
 
 #define GENERATOR_SYNTAXGENERATOR_REDUCT_TYPE_REGISTER
 #include "Config/ProductionConfig/production_config-inc.h"

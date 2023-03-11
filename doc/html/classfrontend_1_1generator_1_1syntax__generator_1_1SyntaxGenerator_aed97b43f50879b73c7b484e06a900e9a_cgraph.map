@@ -1,6 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxGenerator::SyntaxAnalysisTableTerminalNodeClassify" name="frontend::generator::syntax_generator::SyntaxGenerator::SyntaxAnalysisTableTerminalNodeClassify">
-<area shape="rect" id="node1" title="分类在终结产生式作为向前看符号时下动作相同的语法分析表条目" alt="" coords="5,117,245,188"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry.html#a770a722c7f69f340ca9771063c3810cc" title="获取在给定待处理终结节点ID下的动作与附属数据" alt="" coords="331,5,522,76"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="293,125,560,181"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#af882ff147dad50a6e8636278872e9410" title="获取语法分析表条目" alt="" coords="295,205,558,276"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="c_parser_frontend::flow_control::ConditionBlockInterface::AddSentences" name="c_parser_frontend::flow_control::ConditionBlockInterface::AddSentences">
-<area shape="rect" id="node1" title="向主体内添加多条语句" alt="" coords="504,165,711,221"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1WhileSentence.html#adbd23283bf01d0dad94a6ab5d6195bc6" title="向流程语句主体中中添加多条语句" alt="" coords="241,5,447,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1flow__control_1_1DoWhileSentence.html#abc862fc3dbeff5253ab1a6ea57c8973e" title="向流程语句主体中中添加多条语句" alt="" coords="232,85,456,141"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1flow__control_1_1ForSentence.html#a6b17cfdbc29103008773c656c51d14de" title="向流程语句主体中中添加多条语句" alt="" coords="249,165,439,221"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a74f7407a0d837ec203f8683e4983efb4" title="向流程语句主体中中添加多条语句" alt="" coords="238,245,450,301"/>
-<area shape="rect" id="node6" href="$classc__parser__frontend_1_1flow__control_1_1IfSentence.html#abf596da6c74a7c8e8523451f03e686c2" title="添加真分支内执行的多条语句" alt="" coords="247,325,441,381"/>
-<area shape="rect" id="node7" href="$classc__parser__frontend_1_1flow__control_1_1IfSentence.html#ab9131fb58144598ffebf468e8ae0caeb" title=" " alt="" coords="5,325,184,381"/>
-</map>

@@ -5,5 +5,6 @@ include_directories(${CMAKE_SOURCE_DIR}/src)
 aux_source_directory(. NFA_GENERATOR_SRC)
 
 add_library(nfa_generator ${NFA_GENERATOR_SRC})
-target_link_libraries(nfa_generator CONAN_PKG::boost export_types)
+target_compile_options(nfa_generator PRIVATE /std:c++latest)
+target_link_libraries(nfa_generator export_types)
 install(TARGETS nfa_generator RUNTIME)

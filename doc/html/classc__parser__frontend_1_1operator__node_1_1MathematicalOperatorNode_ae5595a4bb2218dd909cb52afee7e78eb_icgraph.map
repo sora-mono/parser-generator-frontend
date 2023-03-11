@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::operator_node::MathematicalOperatorNode::GetMathematicalOperation" name="c_parser_frontend::operator_node::MathematicalOperatorNode::GetMathematicalOperation">
-<area shape="rect" id="node1" title="获取数学运算符号" alt="" coords="320,45,619,101"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#a2862555c4d243d3440986379214967f0" title="设置左侧运算数/单目运算符运算数节点" alt="" coords="10,5,267,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#a430561941342b87319eaae43da17af20" title="设置双目运算符右侧运算数" alt="" coords="5,85,272,141"/>
-</map>

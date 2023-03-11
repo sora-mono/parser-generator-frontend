@@ -1,8 +1,0 @@
-<map id="c_parser_frontend::parse_functions::BasicTypeFundamental" name="c_parser_frontend::parse_functions::BasicTypeFundamental">
-<area shape="rect" id="node1" title=" " alt="" coords="5,79,204,135"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator.html#a58afc8f81ae9c121ea54949051743f7c" title="获取基础类型的类型链" alt="" coords="252,5,519,61"/>
-<area shape="rect" id="node3" href="$namespacec__parser__frontend_1_1parse__functions.html#afaa35bba3e70794c654dae9dabd2b580" title=" " alt="" coords="278,86,493,127"/>
-<area shape="rect" id="node5" href="$namespacec__parser__frontend_1_1parse__functions.html#a1f3e08db309acd2e8a50f1de4f77942a" title=" " alt="" coords="282,151,489,193"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a20be5f05aa692eddd03f76d8a87572da" title="获取是否有产生式数据" alt="" coords="598,71,786,142"/>
-<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#a62a2c5cb95555b4799957ced1c807e33" title="获取非终结产生式数据const引用" alt="" coords="567,167,817,252"/>
-</map>

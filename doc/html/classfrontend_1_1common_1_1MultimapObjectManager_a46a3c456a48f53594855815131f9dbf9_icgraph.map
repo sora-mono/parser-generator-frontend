@@ -1,8 +1,0 @@
-<map id="frontend::common::MultimapObjectManager::MultimapObjectManagerInit" name="frontend::common::MultimapObjectManager::MultimapObjectManagerInit">
-<area shape="rect" id="node1" title="初始化，如果容器中存在对象则全部释放" alt="" coords="1223,20,1533,61"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a551e2d3ea7f472da85fe77dcdcd2a068" title="NFA初始化" alt="" coords="987,5,1175,76"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a765989368257c66b0b23d2b2ab43d711" title="初始化" alt="" coords="721,13,939,69"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a7d2bf2a9d13bca48536846a1650141f8" title="初始化" alt="" coords="403,13,673,69"/>
-<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
-<area shape="rect" id="node6" href="$Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
-</map>

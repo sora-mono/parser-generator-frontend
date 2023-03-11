@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::flow_control::SwitchSentence" name="c_parser_frontend::flow_control::SwitchSentence">
-<area shape="rect" id="node1" title="switch分支语句" alt="" coords="5,199,217,240"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html" title="条件控制块基类（if、for、while、switch等）" alt="" coords="8,95,215,151"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1flow__control_1_1FlowInterface.html" title="流程控制节点基类" alt="" coords="12,5,211,47"/>
-</map>

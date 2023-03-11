@@ -4,7 +4,6 @@
 #include <iostream>
 #include <limits>
 
-#include "Generator/SyntaxGenerator/process_function_interface.h"
 #include "c_parser_frontend.h"
 #include "flow_control.h"
 #include "operator_node.h"

@@ -1,4 +1,0 @@
-<map id="c_parser_frontend::operator_node::AllocateOperatorNode::CheckAllocatable" name="c_parser_frontend::operator_node::AllocateOperatorNode::CheckAllocatable">
-<area shape="rect" id="node1" title="检查操作节点是否可以分配栈上空间" alt="" coords="288,5,523,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1AllocateOperatorNode.html#a975de2af246e4e3d70f8f9dcb2bb515e" title="设置要分配内存的节点" alt="" coords="5,5,240,61"/>
-</map>

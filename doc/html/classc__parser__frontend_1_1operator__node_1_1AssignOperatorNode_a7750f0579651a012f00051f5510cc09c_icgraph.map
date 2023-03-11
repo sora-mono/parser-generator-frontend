@@ -1,6 +1,0 @@
-<map id="c_parser_frontend::operator_node::AssignOperatorNode::GetNodeToBeAssignedReference" name="c_parser_frontend::operator_node::AssignOperatorNode::GetNodeToBeAssignedReference">
-<area shape="rect" id="node1" title="获取待被赋值的节点" alt="" coords="277,85,555,141"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aa4039570c5ff24bfd05b76631de6a47d" title="获取该节点操作结果的const标记" alt="" coords="5,5,229,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca8bf9ef313ae917878d6e7b3f8d59f0" title="获取最终结果的类型" alt="" coords="5,85,229,141"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1operator__node_1_1AssignOperatorNode.html#aca9910541d690b4040e6ba1ce4323a72" title="设置用来赋值的节点" alt="" coords="5,165,229,221"/>
-</map>

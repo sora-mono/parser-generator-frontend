@@ -7,6 +7,8 @@
 #ifndef COMMON_OBJECT_MANAGER_H_
 #define COMMON_OBJECT_MANAGER_H_
 
+#include <functional>
+
 #include <assert.h>
 
 #include <boost/serialization/export.hpp>

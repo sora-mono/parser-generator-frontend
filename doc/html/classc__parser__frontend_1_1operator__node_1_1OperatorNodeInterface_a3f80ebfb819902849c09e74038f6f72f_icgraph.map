@@ -1,6 +1,0 @@
-<map id="c_parser_frontend::operator_node::OperatorNodeInterface::GetResultOperatorNode" name="c_parser_frontend::operator_node::OperatorNodeInterface::GetResultOperatorNode">
-<area shape="rect" id="node1" title="获取最终结果的节点" alt="" coords="536,45,779,101"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1TypeConvert.html#a15bca849b2cd5ffd68f77dc732c669d3" title="生成转换后的节点" alt="" coords="271,5,476,61"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#af65bb4438ce3a492cf03919e6aef4631" title="获取最终结果的节点" alt="" coords="259,85,488,141"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1TypeConvert.html#a6fced0b58c500621109b722429397899" title=" " alt="" coords="5,5,211,61"/>
-</map>

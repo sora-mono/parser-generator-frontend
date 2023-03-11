@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::type_system::EnumType::GetContainerTypeReference" name="c_parser_frontend::type_system::EnumType::GetContainerTypeReference">
-<area shape="rect" id="node1" title="获取储存枚举值的类型对应的类型链" alt="" coords="464,5,676,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1EnumType.html#a806243244b66a8356793bbfbfc2b9158" title="获取存储该类型变量所需空间的大小" alt="" coords="235,5,416,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1EnumType.html#a291d19836c2dcb6ceda20ea4ee76eb9d" title="获取sizeof语义下类型的大小" alt="" coords="5,5,187,61"/>
-</map>

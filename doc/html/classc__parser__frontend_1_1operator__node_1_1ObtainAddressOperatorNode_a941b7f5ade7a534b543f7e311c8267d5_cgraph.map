@@ -1,7 +1,0 @@
-<map id="c_parser_frontend::operator_node::ObtainAddressOperatorNode::SetNodeToObtainAddress" name="c_parser_frontend::operator_node::ObtainAddressOperatorNode::SetNodeToObtainAddress">
-<area shape="rect" id="node1" title="设置被取地址的节点" alt="" coords="5,85,291,141"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#af08ea88eaa5c9e93e1dd038ccce50395" title="检查节点是否可以取地址" alt="" coords="339,5,643,61"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a3869da413ff452a2a79b3e66602ee8a2" title="获取给定类型取地址后得到的类型" alt="" coords="383,85,599,141"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1operator__node_1_1ObtainAddressOperatorNode.html#a52cfea878ae98d902d57cd87ec0ae179" title="设置取地址后得到的节点" alt="" coords="347,165,634,221"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#aa533e1f444a8a0fcc9cf1d73436ed9da" title="获取操作类型所属大类" alt="" coords="691,5,940,61"/>
-</map>

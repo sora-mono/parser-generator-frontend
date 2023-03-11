@@ -1,6 +1,0 @@
-<map id="c_parser_frontend::flow_control::IfSentence::AddFalseBranchSentence" name="c_parser_frontend::flow_control::IfSentence::AddFalseBranchSentence">
-<area shape="rect" id="node1" title="添加假分支内执行的一条语句" alt="" coords="5,5,199,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1IfSentence.html#ac9088f74888525fb23af2ea7790abaee" title="检查给定语句是否可以添加到假分支内" alt="" coords="247,5,469,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a2afaacb18c830c6f59e4114511b88ea3" title="默认检查主体内语句的函数" alt="" coords="517,5,821,61"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1flow__control_1_1FlowInterface.html#afca8c0d1489d1512d061573abd61a818" title="获取流程控制类型" alt="" coords="869,5,1068,61"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="c_parser_frontend::operator_node::FunctionCallOperatorNode::SetFunctionType" name="c_parser_frontend::operator_node::FunctionCallOperatorNode::SetFunctionType">
-<area shape="rect" id="node1" title="设置要调用的对象" alt="" coords="5,49,232,105"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode.html#a8a20c4ae08f52b75b1c6bc6ea698ade1" title="检查类型是否可以用于调用" alt="" coords="280,5,559,61"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1operator__node_1_1FunctionCallOperatorNode_1_1FunctionCallArgumentsContainer.html#a7ffcec21808c7affdddf958f3641244c" title="获取全部函数调用参数" alt="" coords="283,86,555,157"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="607,5,809,61"/>
-</map>

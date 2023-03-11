@@ -1,4 +1,0 @@
-<map id="c_parser_frontend::CParserFrontend::GetActiveFunctionReference" name="c_parser_frontend::CParserFrontend::GetActiveFunctionReference">
-<area shape="rect" id="node1" title="获取当前活跃函数（正在构建的函数）" alt="" coords="5,5,205,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1FlowControlSystem.html#a6d5728e43702302c2289df69c7b02069" title="获取当前活跃函数节点的引用" alt="" coords="253,5,489,61"/>
-</map>

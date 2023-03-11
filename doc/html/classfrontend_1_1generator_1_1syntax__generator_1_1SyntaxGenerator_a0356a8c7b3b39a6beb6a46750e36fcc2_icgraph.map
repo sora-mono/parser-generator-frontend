@@ -1,5 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxGenerator::FormatSingleProductionBody" name="frontend::generator::syntax_generator::SyntaxGenerator::FormatSingleProductionBody">
-<area shape="rect" id="node1" title="格式化产生式" alt="" coords="308,53,535,124"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#adc8a8b9ef6516d04b2ad19bb8d8bbfea" title="添加非终结产生式" alt="" coords="9,5,256,76"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a70a4d44740b413762658641c9a48f7a6" title="格式化非终结节点全部产生式" alt="" coords="5,100,260,171"/>
-</map>

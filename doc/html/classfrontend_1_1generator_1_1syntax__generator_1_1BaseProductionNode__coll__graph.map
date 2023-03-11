@@ -1,5 +1,0 @@
-<map id="frontend::generator::syntax_generator::BaseProductionNode" name="frontend::generator::syntax_generator::BaseProductionNode">
-<area shape="rect" id="node1" title="该类是所有表示具体产生式类别的派生类的基类" alt="" coords="415,43,572,99"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1common_1_1UnorderedStructManager.html" title=" " alt="" coords="18,5,237,61"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1ObjectManager.html" title=" " alt="" coords="5,86,249,127"/>
-</map>

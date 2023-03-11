@@ -10,6 +10,7 @@
 
 #include "Common/common.h"
 #include "Common/id_wrapper.h"
+#include "Common/id_wrapper_serializer.h"
 #include "Common/object_manager.h"
 #include "Common/unordered_struct_manager.h"
 

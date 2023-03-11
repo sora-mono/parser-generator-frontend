@@ -1,5 +1,0 @@
-<map id="frontend::parser::syntax_parser::SyntaxParser::GetRootParsingEntryId" name="frontend::parser::syntax_parser::SyntaxParser::GetRootParsingEntryId">
-<area shape="rect" id="node1" title="获取根语法分析表条目D" alt="" coords="363,5,541,61"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,13,315,54"/>
-<area shape="rect" id="node3" href="$Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,20,60,47"/>
-</map>

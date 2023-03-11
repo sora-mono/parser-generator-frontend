@@ -1,6 +1,0 @@
-<map id="c_parser_frontend::type_system::BasicType::CanBeAssignedBy" name="c_parser_frontend::type_system::BasicType::CanBeAssignedBy">
-<area shape="rect" id="node1" title="判断给定类型是否可以给该对象赋值" alt="" coords="5,85,184,141"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#a06a15a1c51d15f2a9358b470263caf7d" title="获取内置类型" alt="" coords="244,5,423,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#ad716d6cf27f71599ef52d22c4c824ee0" title="获取内置类型的符号标记" alt="" coords="244,85,423,141"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="232,165,435,221"/>
-</map>

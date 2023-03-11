@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::CParserFrontend::DefineType" name="c_parser_frontend::CParserFrontend::DefineType">
-<area shape="rect" id="node1" title="定义类型" alt="" coords="5,13,213,54"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1TypeSystem.html#af8ea1dc56730fbe42ad70ff578ae532b" title="向类型系统中添加类型" alt="" coords="261,5,455,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a758de256c4f407f85ef4a1113075b2a1" title="获取全部类型名到类型链的映射" alt="" coords="503,5,696,61"/>
-</map>

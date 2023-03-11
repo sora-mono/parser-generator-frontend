@@ -2,18 +2,14 @@ Project(Generator)
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
 
-set(GRAPHVIZ_INCLUDE_DIR "C:/Program\ Files/Graphviz/include")
-set(GRAPHVIZ_LIB_DIR "C:/Program Files/Graphviz/lib")
-
-find_library(CGRAPH_LIBRARY cgraph HINTS "${GRAPHVIZ_LIB_DIR}" REQUIRED)
-find_library(GVC_LIBRARY gvc HINTS "${GRAPHVIZ_LIB_DIR}" REQUIRED)
-
 add_subdirectory(DfaGenerator)
 add_subdirectory(SyntaxGenerator)
 
 add_library(export_types "export_types.cpp")
+target_compile_options(export_types PRIVATE /std:c++latest)
+
 target_link_libraries(export_types CONAN_PKG::boost)
 
 add_executable(Generator "Generator.cpp")
+target_compile_options(Generator PRIVATE /std:c++latest /bigobj)
 target_link_libraries(Generator syntax_generator)
-install(TARGETS Generator RUNTIME)

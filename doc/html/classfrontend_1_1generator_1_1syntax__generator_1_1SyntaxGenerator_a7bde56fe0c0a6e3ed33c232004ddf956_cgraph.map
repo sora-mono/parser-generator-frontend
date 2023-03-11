@@ -1,4 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxGenerator::CheckUndefinedProductionRemained" name="frontend::generator::syntax_generator::SyntaxGenerator::CheckUndefinedProductionRemained">
-<area shape="rect" id="node1" title="检查是否存在未定义的产生式体" alt="" coords="5,5,252,76"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a736c60d18820ddf9b08bb7e4cdc8e6ec" title="输出Error级诊断信息" alt="" coords="300,13,515,69"/>
-</map>

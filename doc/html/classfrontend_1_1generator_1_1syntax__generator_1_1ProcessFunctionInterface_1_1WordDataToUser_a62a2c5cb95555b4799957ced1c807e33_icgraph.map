@@ -1,6 +1,0 @@
-<map id="frontend::generator::syntax_generator::ProcessFunctionInterface::WordDataToUser::GetNonTerminalWordData" name="frontend::generator::syntax_generator::ProcessFunctionInterface::WordDataToUser::GetNonTerminalWordData">
-<area shape="rect" id="node1" title="获取非终结产生式数据const引用" alt="" coords="551,49,801,135"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProcessFunctionInterface_1_1WordDataToUser.html#aa77ad3a89af9c9557df78cf5c063b8f7" title="获取非终结产生式数据引用" alt="" coords="252,5,503,91"/>
-<area shape="rect" id="node3" href="$namespacec__parser__frontend_1_1parse__functions.html#a1f3e08db309acd2e8a50f1de4f77942a" title=" " alt="" coords="274,115,481,157"/>
-<area shape="rect" id="node4" href="$namespacec__parser__frontend_1_1parse__functions.html#ac28352dade642fae0186ddc6323d47c6" title=" " alt="" coords="5,108,204,164"/>
-</map>

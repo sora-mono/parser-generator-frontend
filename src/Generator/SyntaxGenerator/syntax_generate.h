@@ -241,7 +241,7 @@ using namespace frontend::generator::syntax_generator::type_register;
     struct CallReductFunctionImpl<std::tuple<Types...>,                       \
                                   std::integer_sequence<SeqType, seq...>> {   \
       static std::any DoCall(std::vector<std::any>&& args) {                  \
-        std::cout << #reduct_function << std::endl;                           \
+        LOG_INFO("Parser", "Reduct Function Called: "## #reduct_function)     \
         std::list<std::any> temp_obj;                                         \
         return reduct_function(GetArgument<Types>(&args[seq], &temp_obj)...); \
       }                                                                       \
@@ -257,10 +257,10 @@ using namespace frontend::generator::syntax_generator::type_register;
         std::vector<std::any>&& word_data) const override {                   \
       static_assert(CountTypeSize<__VA_ARGS__>() ==                           \
                         FunctionTraits<decltype(reduct_function)>::arg_size,  \
-                    "调用规约函数所需参数个数与子产生式数量不匹配，请检查");  \
+                    "Arguments number required by reduct function doesn't match subproduction number");  \
       static_assert(                                                          \
           FunctionCallableWithArgs<decltype(reduct_function), __VA_ARGS__>,   \
-          "调用规约函数所需参数类型与子产生式规约结果的类型不匹配，请检查");  \
+          "Argument types required by reduct function can't be converted from one or more subproduction reduct result type");  \
       return CallReductFunction<__VA_ARGS__>::DoCall(std::move(word_data));   \
     }                                                                         \
                                                                               \

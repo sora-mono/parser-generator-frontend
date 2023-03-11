@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::operator_node::VarietyOperatorNode::SetVarietyType" name="c_parser_frontend::operator_node::VarietyOperatorNode::SetVarietyType">
-<area shape="rect" id="node1" title="设置变量的类型" alt="" coords="5,5,232,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#a6672689ac26f0762b7fc0108659fdb32" title="检查给定类型是否可以作为普通变量的类型" alt="" coords="280,5,507,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="555,5,757,61"/>
-</map>

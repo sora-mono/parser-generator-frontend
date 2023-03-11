@@ -6,13 +6,12 @@
 /// 占用空间与不包装相同，编译器优化够好则不会导致额外的开销
 /// 无参构造函数会将值赋为default_invalid_value且IsValid()返回false
 /// default_invalid_value默认为IdType(-1)
-/// @attention 由于使用boost进行序列化，使用该头文件时需要与boost库链接
+/// 如果需要使用boost序列化功能，请包含头文件：id_wrapper_serializer.h
 /// TODO 特化std::swap
 #ifndef COMMON_ID_WRAPPER_H_
 #define COMMON_ID_WRAPPER_H_
 
-#include <boost/archive/binary_iarchive.hpp>
-#include <boost/serialization/access.hpp>
+#include <algorithm>
 
 namespace frontend::common {
 
@@ -85,18 +84,6 @@ class BaseIdWrapper {
   }
 
  private:
-  /// @brief 允许序列化库访问该类的成员
-  friend class boost::serialization::access;
-
-  /// @brief 序列化该类的函数
-  /// @param[in] ar ：序列化使用的档案
-  /// @param[in] version ：序列化文件版本
-  /// @attention 该函数应由boost库调用而非手动调用
-  template <class Archive>
-  void serialize(Archive& ar, const unsigned int version) {
-    ar& id_;
-  }
-
   /// @var id_
   /// @brief ID的值
   IdType id_;
@@ -154,19 +141,6 @@ class ExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   /// @return 存储无效值的容器，无效值同InvalidValue
   static constexpr ExplicitIdWrapper InvalidId() {
     return ExplicitIdWrapper<IdType, LabelEnum, label>(MyBase::InvalidValue());
-  }
-
- private:
-  /// @brief 允许序列化库访问该类的成员
-  friend class boost::serialization::access;
-
-  /// @brief 序列化该类的函数
-  /// @param[in] ar ：序列化使用的档案
-  /// @param[in] version ：序列化文件版本
-  /// @attention 该函数应由boost库调用而非手动调用
-  template <class Archive>
-  void serialize(Archive& ar, const unsigned int version) {
-    ar& boost::serialization::base_object<MyBase>(*this);
   }
 };
 
@@ -228,19 +202,6 @@ class ExplicitIdWrapperCustomizeInvalidValue
                                                   static_cast<IdType>(-1)>(
         MyBase::InvalidValue());
   }
-
- private:
-  /// @brief 允许序列化库访问该类的成员
-  friend class boost::serialization::access;
-
-  /// @brief 序列化该类的函数
-  /// @param[in] ar ：序列化使用的档案
-  /// @param[in] version ：序列化文件版本
-  /// @attention 该函数应由boost库调用而非手动调用
-  template <class Archive>
-  void serialize(Archive& ar, const unsigned int version) {
-    ar& boost::serialization::base_object<MyBase>(*this);
-  }
 };
 
 /// @class NonExplicitIdWrapper id_wrapper.h
@@ -298,19 +259,6 @@ class NonExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   static constexpr NonExplicitIdWrapper InvalidId() {
     return NonExplicitIdWrapper<IdType, LabelEnum, label>(
         MyBase::InvalidValue());
-  }
-
- private:
-  /// @brief 允许序列化库访问该类的成员
-  friend class boost::serialization::access;
-
-  /// @brief 序列化该类的函数
-  /// @param[in] ar ：序列化使用的档案
-  /// @param[in] version ：序列化文件版本
-  /// @attention 该函数应由boost库调用而非手动调用
-  template <class Archive>
-  void serialize(Archive& ar, const unsigned int version) {
-    ar& boost::serialization::base_object<MyBase>(*this);
   }
 };
 
@@ -376,19 +324,6 @@ class NonExplicitIdWrapperCustomizeInvalidValue
     return NonExplicitIdWrapperCustomizeInvalidValue<IdType, LabelEnum, label,
                                                      static_cast<IdType>(-1)>(
         MyBase::InvalidValue());
-  }
-
- private:
-  /// @brief 允许序列化库访问该类的成员
-  friend class boost::serialization::access;
-
-  /// @brief 序列化该类的函数
-  /// @param[in] ar ：序列化使用的档案
-  /// @param[in] version ：序列化文件版本
-  /// @attention 该函数应由boost库调用而非手动调用
-  template <class Archive>
-  void serialize(Archive& ar, const unsigned int version) {
-    ar& boost::serialization::base_object<MyBase>(*this);
   }
 };
 

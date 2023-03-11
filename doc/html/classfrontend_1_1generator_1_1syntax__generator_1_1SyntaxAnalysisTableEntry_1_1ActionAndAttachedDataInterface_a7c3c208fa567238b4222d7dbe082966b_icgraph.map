@@ -1,7 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface::GetReductAttachedData" name="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface::GetReductAttachedData">
-<area shape="rect" id="node1" title="获取规约操作的附属数据" alt="" coords="653,53,896,139"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html#afec29d0ed32877239bd91a6a3d506616" title="获取规约操作的附属数据" alt="" coords="363,5,605,91"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#a415fe35c45184b529b83d4ceb30fcd64" title="将序列化分为保存与加载，Parser仅加载配置，不保存" alt="" coords="379,115,589,171"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,122,315,163"/>
-<area shape="rect" id="node5" href="$Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,129,60,156"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="c_parser_frontend::parse_functions::CheckAddTypeResult" name="c_parser_frontend::parse_functions::CheckAddTypeResult">
-<area shape="rect" id="node1" title="检查声明/定义类型时的结果，输出相应错误信息，如果是error则不返回" alt="" coords="280,63,508,119"/>
-<area shape="rect" id="node2" href="$namespacec__parser__frontend_1_1parse__functions.html#af488f704873d061096f47c3bb71d2ec3" title="Enum &#45;&gt; &quot;enum&quot; Id &quot;{&quot; EnumArguments &quot;}&quot;" alt="" coords="13,5,225,47"/>
-<area shape="rect" id="node3" href="$namespacec__parser__frontend_1_1parse__functions.html#ae38a2eb14fcaa18fe302227c260d40ed" title=" " alt="" coords="5,71,232,112"/>
-<area shape="rect" id="node4" href="$namespacec__parser__frontend_1_1parse__functions.html#a667ee1924668371b26dc7315fbfd854a" title=" " alt="" coords="23,137,215,193"/>
-</map>

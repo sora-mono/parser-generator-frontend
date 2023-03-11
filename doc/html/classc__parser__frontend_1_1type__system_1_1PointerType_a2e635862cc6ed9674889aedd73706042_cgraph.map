@@ -1,8 +1,0 @@
-<map id="c_parser_frontend::type_system::PointerType::CanBeAssignedBy" name="c_parser_frontend::type_system::PointerType::CanBeAssignedBy">
-<area shape="rect" id="node1" title="判断给定类型是否可以给该对象赋值" alt="" coords="5,165,196,221"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a669b266fbf7be6477db5464916d7ddc6" title="判断给定类型是否可以给该对象赋值" alt="" coords="267,5,469,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1CommonlyUsedTypeGenerator.html#ac551037fc8f266d242f9ab35ec5c045b" title="获取基础类型的类型链" alt="" coords="244,85,492,141"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#a8fe1e202c2f1f5482701b35707a4205b" title="获取指针指向的对象的const状态" alt="" coords="273,165,463,221"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a7d34d13bdf090ead4b5c27f92250a63d" title="获取下一个节点的引用" alt="" coords="267,245,469,301"/>
-<area shape="rect" id="node6" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="267,325,469,381"/>
-</map>

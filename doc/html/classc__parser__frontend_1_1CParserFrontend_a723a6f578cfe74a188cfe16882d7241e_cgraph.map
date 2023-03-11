@@ -1,4 +1,0 @@
-<map id="c_parser_frontend::CParserFrontend::AddSentence" name="c_parser_frontend::CParserFrontend::AddSentence">
-<area shape="rect" id="node1" title="向顶层流程控制语句内添加语句" alt="" coords="5,20,227,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a352a7a0c33d507358a5a37f1a0e95677" title="向当前活跃的流程控制语句内添加一条语句" alt="" coords="275,5,441,76"/>
-</map>

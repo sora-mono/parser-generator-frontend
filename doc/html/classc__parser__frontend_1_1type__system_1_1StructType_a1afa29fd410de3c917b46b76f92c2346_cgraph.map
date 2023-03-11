@@ -1,6 +1,0 @@
-<map id="c_parser_frontend::type_system::StructType::GetStructMemberInfo" name="c_parser_frontend::type_system::StructType::GetStructMemberInfo">
-<area shape="rect" id="node1" title="根据成员下标获取成员信息" alt="" coords="5,47,188,103"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a78ad419fe8d7cd9eb05d3e690d8b7919" title="获取结构化类型成员的信息" alt="" coords="236,13,485,69"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1common_1_1BaseIdWrapper.html#aa088b185f8650169d2e53c4372db529b" title="判断当前存储的值是否有效" alt="" coords="579,86,774,127"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a8e65f4dc9e6f00a67e12299e13195ddf" title="获取结构化类型存储成员信息的容器" alt="" coords="533,5,820,61"/>
-</map>

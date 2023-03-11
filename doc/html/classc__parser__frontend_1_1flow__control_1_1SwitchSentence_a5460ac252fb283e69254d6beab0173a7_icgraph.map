@@ -1,4 +1,0 @@
-<map id="c_parser_frontend::flow_control::SwitchSentence::CheckSwitchCaseAbleToAdd" name="c_parser_frontend::flow_control::SwitchSentence::CheckSwitchCaseAbleToAdd">
-<area shape="rect" id="node1" title="检查给定case是否可以作为switch内的标签" alt="" coords="265,5,479,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a98d19f1089dc0b4eed4dc1fb456d7403" title="添加普通的case" alt="" coords="5,5,217,61"/>
-</map>

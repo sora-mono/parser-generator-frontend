@@ -1,7 +1,0 @@
-<map id="c_parser_frontend::parse_functions::OutputInfo" name="c_parser_frontend::parse_functions::OutputInfo">
-<area shape="rect" id="node1" title="输出info信息" alt="" coords="5,39,208,80"/>
-<area shape="rect" id="node2" href="$namespacec__parser__frontend.html#ade457c7a24ac32bc77b2267b6705ead7" title="获取当前列数" alt="" coords="256,5,403,47"/>
-<area shape="rect" id="node4" href="$namespacec__parser__frontend.html#aeb2197ec97ed9ffc51a5a9217ebf0458" title="获取当前行数" alt="" coords="256,71,403,112"/>
-<area shape="rect" id="node3" href="$namespacefrontend_1_1parser.html#aff0816dfe7d9e7d2a7f1349e4194d7b1" title="获取当前列数" alt="" coords="451,13,657,39"/>
-<area shape="rect" id="node5" href="$namespacefrontend_1_1parser.html#a79d5fb6dfa446e6c683e6257d27a6944" title="获取当前行数" alt="" coords="462,78,646,105"/>
-</map>

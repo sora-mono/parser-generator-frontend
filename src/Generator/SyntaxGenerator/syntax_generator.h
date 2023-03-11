@@ -777,12 +777,6 @@ class SyntaxGenerator {
   void RemapSyntaxAnalysisTableEntryId(
       const std::unordered_map<SyntaxAnalysisTableEntryId,
                                SyntaxAnalysisTableEntryId>& old_id_to_new_id);
-  /// @brief 将项集输出为图片
-  /// @param[in] root_production_set_id ：根项集ID
-  /// @param[in] image_output_path ：图片输出路径（不含文件名， 以'/'结尾）
-  void FormatProductionItemSetToImageGraphivz(
-      ProductionItemSetId root_production_item_set_id,
-      const std::string& image_output_path = "./");
   /// @brief 将项集输出为markdown描述的图表
   /// @param[in] root_production_set_id ：根项集ID
   /// @param[in] image_output_path ：文件输出路径（不含文件名， 以'/'结尾）
@@ -850,27 +844,6 @@ class SyntaxGenerator {
   /// StructureAnnounce -> union · Id 向前看符号：const , Id * ( { [ )
   std::string FormatProductionItems(ProductionItemSetId production_item_set_id,
                                     std::string line_feed = "\n") const;
-  /// @brief 对graphviz中label的特殊字符转义
-  static std::string EscapeLabelSpecialCharacter(const std::string& source);
-  /// @brief 输出Info级诊断信息
-  /// @param[in] info ：Info级诊断信息
-  /// @note 输出后自动换行
-  static void OutPutInfo(const std::string& info) {
-     //std::cout << std::format("SyntaxGenerator Info: ") << info << std::endl;
-  }
-  /// @brief 输出Warning级诊断信息
-  /// @param[in] warning ：Warning级诊断信息
-  /// @note 输出后自动换行
-  static void OutPutWarning(const std::string& warning) {
-    std::cerr << std::format("SyntaxGenerator Warning: ") << warning
-              << std::endl;
-  }
-  /// @brief 输出Error级诊断信息
-  /// @param[in] error ：Error级诊断信息
-  /// @note 输出后自动换行
-  static void OutPutError(const std::string& error) {
-    std::cerr << std::format("SyntaxGenerator Error: ") << error << std::endl;
-  }
 
   /// @brief 允许序列化类访问
   friend class boost::serialization::access;

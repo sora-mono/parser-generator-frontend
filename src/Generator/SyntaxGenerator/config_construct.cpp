@@ -6,6 +6,8 @@
 /// 这些类用于AddNonTerminalNode
 #include "process_functions_classes.h"
 #include "syntax_generator.h"
+#include "Common/common.h"
+#include "Config/ProductionConfig/user_defined_functions.h"
 
 namespace frontend::generator::syntax_generator {
 /// @brief 添加构建配置所需外围信息

@@ -1,7 +1,0 @@
-<map id="c_parser_frontend::action_scope_system::ActionScopeSystem::PushFlowControlSentence" name="c_parser_frontend::action_scope_system::ActionScopeSystem::PushFlowControlSentence">
-<area shape="rect" id="node1" title="压入流程控制节点" alt="" coords="781,42,972,113"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1CParserFrontend.html#a0b2eb6f30a1205049ad65335be6dff2e" title="将流程控制语句压入栈" alt="" coords="488,5,733,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#ac01d17fed7775b3fa28fc332b0ec1de9" title="创建函数定义控制块并压入流程控制节点栈中" alt="" coords="501,86,721,157"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#ac44ad28c95778bb6ca7fc51eee472f80" title="设置当前待构建函数" alt="" coords="265,86,440,157"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1CParserFrontend.html#aa27c730d6112f2cf35380d8c98520349" title="设置当前待构建函数" alt="" coords="5,93,217,149"/>
-</map>

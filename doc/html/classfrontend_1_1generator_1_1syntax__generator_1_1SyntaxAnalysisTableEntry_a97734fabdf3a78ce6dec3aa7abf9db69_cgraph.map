@@ -1,9 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ResetEntryId" name="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ResetEntryId">
-<area shape="rect" id="node1" title="修改语法分析表中所有指定的语法分析表ID为新ID" alt="" coords="5,269,196,340"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry.html#ae02a12a70e051cd6ce65e9a0f96e8b89" title="获取全部终结节点的动作和附属数据" alt="" coords="280,5,505,76"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry.html#a8fae97c65064e17849362f5859706f04" title="获取全部非终结节点转移到的语法分析表条目ID" alt="" coords="267,101,518,186"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ShiftAttachedData.html#a68586152e7d246635d9fb9ab07ea6ffc" title="获取移入单词后转移到的语法分析表条目ID" alt="" coords="265,210,520,295"/>
-<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ShiftAttachedData.html#a72a85bc3ae6770a6c72402442545ac4f" title="获取移入操作的附属数据" alt="" coords="244,320,541,391"/>
-<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ShiftAttachedData.html#a8e9ffca9e76101443c7a7c84af86874a" title="设置移入单词后转移到的语法分析表条目ID" alt="" coords="266,415,519,501"/>
-<area shape="rect" id="node7" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry.html#a9a3ad1b6a01bf74ce75ed80ef0c73986" title="设置该条目移入非终结节点后转移到的语法分析表条目ID" alt="" coords="271,525,515,596"/>
-</map>

@@ -1,4 +1,0 @@
-<map id="frontend::generator::syntax_generator::ProcessFunctionInterface" name="frontend::generator::syntax_generator::ProcessFunctionInterface">
-<area shape="rect" id="node1" title="所有包装用户定义函数的类均从该类派生" alt="" coords="5,5,191,61"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1RootReductClass.html" title="内部实现用根节点的规约函数" alt="" coords="22,109,174,165"/>
-</map>

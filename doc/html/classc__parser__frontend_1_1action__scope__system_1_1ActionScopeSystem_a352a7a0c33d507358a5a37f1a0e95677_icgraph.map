@@ -1,7 +1,0 @@
-<map id="c_parser_frontend::action_scope_system::ActionScopeSystem::AddSentence" name="c_parser_frontend::action_scope_system::ActionScopeSystem::AddSentence">
-<area shape="rect" id="node1" title="向当前活跃的流程控制语句内添加一条语句" alt="" coords="739,31,905,101"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1CParserFrontend.html#a723a6f578cfe74a188cfe16882d7241e" title="向顶层流程控制语句内添加语句" alt="" coords="469,5,691,47"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a1d17eb37f21f42079ed3c066802389a4" title="弹出所有高于给定作用域等级的变量和流程控制语句" alt="" coords="497,71,663,141"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a27ee94c6536eb57c0b2401774d2a6ce7" title="弹出一级作用域" alt="" coords="255,71,421,141"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1CParserFrontend.html#ad9ded9d6fde588d61a9ff71076489fed" title="弹出一级作用域" alt="" coords="5,78,207,134"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxGenerator::AddEndNode" name="frontend::generator::syntax_generator::SyntaxGenerator::AddEndNode">
-<area shape="rect" id="node1" title="新建文件尾节点" alt="" coords="5,176,228,232"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae0b4802e9c60b7e57990233f17095dd2" title="添加产生式名" alt="" coords="285,5,533,61"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1common_1_1ObjectManager.html#adbb63b10c08fd65047c2b6ee5cae362d" title="系统自行选择最佳位置放置对象" alt="" coords="313,86,505,127"/>
-<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="276,176,543,232"/>
-<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a21cb460db9c35e2953b20d40ee9bf5b2" title="设置该节点ID" alt="" coords="293,256,525,312"/>
-<area shape="rect" id="node7" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a5aca6099a8cc54e3ffa0f63f0c5f6cb4" title="设置该节点表示的产生式名ID" alt="" coords="286,336,533,392"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#acbd7bff0314ac667bce8e2bc92ccaeaa" title="插入一个待管理的对象" alt="" coords="591,13,813,54"/>
-</map>

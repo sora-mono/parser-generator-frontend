@@ -1,7 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ReductAttachedData" name="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ReductAttachedData">
-<area shape="rect" id="node1" title="执行规约动作时的附属数据" alt="" coords="795,93,985,164"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html" title="动作和附属数据基类" alt="" coords="322,5,565,76"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1ExplicitIdWrapper.html" title="强制显式调用构造函数且使用默认无效值版Wrapper" alt="" coords="327,101,560,157"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,101,272,157"/>
-<area shape="rect" id="node5" href="$classfrontend_1_1common_1_1ObjectManager.html" title=" " alt="" coords="321,181,565,223"/>
-</map>

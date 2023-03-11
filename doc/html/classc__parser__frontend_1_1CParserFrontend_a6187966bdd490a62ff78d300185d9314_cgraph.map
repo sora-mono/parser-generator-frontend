@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::CParserFrontend::GetVarietyOrFunction" name="c_parser_frontend::CParserFrontend::GetVarietyOrFunction">
-<area shape="rect" id="node1" title="根据名字获取变量或函数名" alt="" coords="5,20,211,76"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a5831df991c23f266e44d23e5f72e1f90" title="根据名字获取变量或函数名" alt="" coords="259,13,425,83"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a4fff2178d35bc39a63f972e82b66d6a5" title="获取存储变量/函数名到节点指针的映射的容器" alt="" coords="473,5,744,91"/>
-</map>

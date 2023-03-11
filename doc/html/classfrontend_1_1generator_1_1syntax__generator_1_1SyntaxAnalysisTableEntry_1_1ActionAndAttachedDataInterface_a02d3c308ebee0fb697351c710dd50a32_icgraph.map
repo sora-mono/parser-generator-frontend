@@ -1,6 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface::operator==" name="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface::operator==">
-<area shape="rect" id="node1" title=" " alt="" coords="579,50,821,135"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ShiftAttachedData.html#ac75aa141abb389e8b44cf8a41f377640" title=" " alt="" coords="297,5,531,76"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ShiftReductAttachedData.html#a94aac0cb49df0a66b60642c575719654" title=" " alt="" coords="317,101,511,186"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ShiftAttachedData.html#a6e55682e3ac3815917a3d1965b7acfe0" title="判断两个对象是否相应部分相同" alt="" coords="5,5,249,76"/>
-</map>

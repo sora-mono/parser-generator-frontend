@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::type_system::EnumType::GetTypeStoreSize" name="c_parser_frontend::type_system::EnumType::GetTypeStoreSize">
-<area shape="rect" id="node1" title="获取存储该类型变量所需空间的大小" alt="" coords="5,45,187,101"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1EnumType.html#aab60da4467ae5a81294ed10c2ab7b226" title="获取储存枚举值的类型对应的类型链" alt="" coords="235,5,447,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#af141ec273bfe24c2b4e662680d3bad9c" title="获取存储该类型变量所需空间的大小" alt="" coords="239,85,442,141"/>
-</map>

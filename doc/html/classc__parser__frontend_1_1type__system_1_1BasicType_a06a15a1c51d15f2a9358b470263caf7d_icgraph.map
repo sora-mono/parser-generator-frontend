@@ -1,8 +1,0 @@
-<map id="c_parser_frontend::type_system::BasicType::GetBuiltInType" name="c_parser_frontend::type_system::BasicType::GetBuiltInType">
-<area shape="rect" id="node1" title="获取内置类型" alt="" coords="459,85,637,141"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#a03a2d0a5c1388f66c3d3fff1d0c4330a" title="判断给定类型是否可以给该对象赋值" alt="" coords="232,5,411,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#a9aacb43f70f8f31bb21e9ebc2e7dacf9" title="获取存储该类型变量所需空间的大小" alt="" coords="232,85,411,141"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#ac78c52556f6bfec3ce16afb568253aa8" title=" " alt="" coords="232,165,411,221"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#a302bae5c8446b77bbc79159f4eb24a88" title="获取sizeof语义下类型的大小" alt="" coords="5,85,184,141"/>
-<area shape="rect" id="node6" href="$classc__parser__frontend_1_1type__system_1_1BasicType.html#a23b0071b2c288812c3955482d4186a51" title="比较两个类型是否完全相同" alt="" coords="5,165,184,221"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="c_parser_frontend::parse_functions::NotEmptyEnumArgumentsIdBase" name="c_parser_frontend::parse_functions::NotEmptyEnumArgumentsIdBase">
-<area shape="rect" id="node1" title="NotEmptyEnumArguments &#45;&gt; Id" alt="" coords="5,165,240,221"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1parse__functions_1_1EnumReturnData.html#adcbda97027125f4bde934b7639301d35" title="返回插入位置的迭代器和是否插入" alt="" coords="288,165,501,221"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1parse__functions_1_1EnumReturnData.html#a37621b1aa6cbd516588f7c17857d08f5" title=" " alt="" coords="549,5,763,61"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1parse__functions_1_1EnumReturnData.html#a028bdff01fb62243a8f3bbb9be51d010" title=" " alt="" coords="549,85,763,141"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1parse__functions_1_1EnumReturnData.html#a1c4f1856c3d8a00589289d17c3a1b674" title=" " alt="" coords="549,165,763,221"/>
-<area shape="rect" id="node6" href="$classc__parser__frontend_1_1parse__functions_1_1EnumReturnData.html#a6be064708a4226341230f2652de8c79d" title=" " alt="" coords="549,245,763,301"/>
-<area shape="rect" id="node7" href="$classc__parser__frontend_1_1parse__functions_1_1EnumReturnData.html#aa53063e057702c4bf7b882a763520367" title=" " alt="" coords="549,325,763,381"/>
-</map>

@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::flow_control::ConditionBlockInterface::GetSentenceStartLabel" name="c_parser_frontend::flow_control::ConditionBlockInterface::GetSentenceStartLabel">
-<area shape="rect" id="node1" title="获取块起始处标签" alt="" coords="265,45,503,101"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1WhileSentence.html#ac976d748ead3f05849286120941d059f" title="获取循环块循环条件判断开始处标签（即将开始判断循环条件）" alt="" coords="5,5,217,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1flow__control_1_1ForSentence.html#a476967568ac50dbc04bf3b2cc4be743f" title="获取循环块循环条件判断开始处标签（即将开始判断循环条件）" alt="" coords="5,85,217,141"/>
-</map>

@@ -1,6 +1,0 @@
-<map id="frontend::common::BaseIdWrapper::GetRawValue" name="frontend::common::BaseIdWrapper::GetRawValue">
-<area shape="rect" id="node1" title="获取未包装的原始值" alt="" coords="571,68,765,109"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#adc8a8b9ef6516d04b2ad19bb8d8bbfea" title="添加非终结产生式" alt="" coords="276,5,523,76"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4dc1e67e686137062266790650bbe67a" title="添加终结产生式" alt="" coords="289,100,510,171"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a36db9122a028b29ec3c60e13c4837583" title="添加关键字" alt="" coords="5,107,228,163"/>
-</map>

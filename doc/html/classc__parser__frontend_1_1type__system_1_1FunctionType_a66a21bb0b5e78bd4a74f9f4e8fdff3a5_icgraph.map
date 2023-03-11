@@ -1,7 +1,0 @@
-<map id="c_parser_frontend::type_system::FunctionType::GetReturnTypeReference" name="c_parser_frontend::type_system::FunctionType::GetReturnTypeReference">
-<area shape="rect" id="node1" title="获取函数的返回类型链头结点引用" alt="" coords="777,49,976,105"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1FunctionType.html#a415931fb8ef9d81ad8c6f09a1c4dbb92" title="比较两个函数签名是否相同" alt="" coords="531,49,729,105"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1FunctionType.html#ab5ba29b09d464a6ac23089eaca85c83a" title="判断给定类型是否可以给该对象赋值" alt="" coords="265,5,464,61"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData.html#a14ad72a299ae2ac3ec015a00f1f5a824" title="检查已存在函数声明/定义条件下添加同名函数声明/定义的错误情况" alt="" coords="247,86,483,157"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1TypeSystem_1_1TypeData.html#a58716d70558dd04ec69f7c7fab5fb398" title="添加一个类型" alt="" coords="5,93,199,149"/>
-</map>

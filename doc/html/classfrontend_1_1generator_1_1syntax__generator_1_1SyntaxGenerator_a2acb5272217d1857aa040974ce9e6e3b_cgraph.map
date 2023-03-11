@@ -1,4 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxGenerator::AddNonTerminalNodeBody" name="frontend::generator::syntax_generator::SyntaxGenerator::AddNonTerminalNodeBody">
-<area shape="rect" id="node1" title="向非终结节点中添加产生式体" alt="" coords="5,22,252,93"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="300,29,567,85"/>
-</map>

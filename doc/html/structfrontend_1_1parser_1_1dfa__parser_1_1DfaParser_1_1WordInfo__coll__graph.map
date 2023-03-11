@@ -1,6 +1,0 @@
-<map id="frontend::parser::dfa_parser::DfaParser::WordInfo" name="frontend::parser::dfa_parser::DfaParser::WordInfo">
-<area shape="rect" id="node1" title="单词数据" alt="" coords="1149,13,1356,54"/>
-<area shape="rect" id="node2" href="$structfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1WordAttachedData.html" title="单词附属数据（在检测到相应单词时返回）" alt="" coords="735,5,957,61"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1ExplicitIdWrapper.html" title="强制显式调用构造函数且使用默认无效值版Wrapper" alt="" coords="321,5,555,61"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,5,272,61"/>
-</map>

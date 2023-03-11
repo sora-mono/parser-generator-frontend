@@ -1,4 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ShiftAttachedData::GetShiftAttachedData" name="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::ShiftAttachedData::GetShiftAttachedData">
-<area shape="rect" id="node1" title="获取移入操作的附属数据" alt="" coords="244,5,541,76"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry.html#a97734fabdf3a78ce6dec3aa7abf9db69" title="修改语法分析表中所有指定的语法分析表ID为新ID" alt="" coords="5,5,196,76"/>
-</map>

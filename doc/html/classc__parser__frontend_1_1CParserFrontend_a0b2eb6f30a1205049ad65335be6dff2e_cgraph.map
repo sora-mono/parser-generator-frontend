@@ -1,6 +1,0 @@
-<map id="c_parser_frontend::CParserFrontend::PushFlowControlSentence" name="c_parser_frontend::CParserFrontend::PushFlowControlSentence">
-<area shape="rect" id="node1" title="将流程控制语句压入栈" alt="" coords="5,61,251,117"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#aa1729e785acbaa7379f65a06cf9e17f5" title="压入流程控制节点" alt="" coords="299,53,489,124"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a7094c400291ef7c10d01727a2b8bf3d2" title="增加一级作用域等级" alt="" coords="537,5,704,76"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a7ac1dd24d92bf630f4969bd35bec6860" title="获取当前作用域等级" alt="" coords="537,100,704,171"/>
-</map>

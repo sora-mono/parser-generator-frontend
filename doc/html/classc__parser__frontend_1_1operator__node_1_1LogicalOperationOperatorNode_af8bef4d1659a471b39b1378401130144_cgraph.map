@@ -1,4 +1,0 @@
-<map id="c_parser_frontend::operator_node::LogicalOperationOperatorNode::CheckLogicalTypeValid" name="c_parser_frontend::operator_node::LogicalOperationOperatorNode::CheckLogicalTypeValid">
-<area shape="rect" id="node1" title="检查运算数是否可以参与逻辑运算" alt="" coords="5,5,275,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="323,5,525,61"/>
-</map>

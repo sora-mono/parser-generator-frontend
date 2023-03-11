@@ -1,8 +1,0 @@
-<map id="c_parser_frontend::action_scope_system::ActionScopeSystem::GetTopFlowControlSentence" name="c_parser_frontend::action_scope_system::ActionScopeSystem::GetTopFlowControlSentence">
-<area shape="rect" id="node1" title="获取最顶层流程控制语句" alt="" coords="517,100,723,171"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a1fee8d1a66636749a8afb374a586fec0" title="向switch语句中添加default标签" alt="" coords="278,5,449,76"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a39a4c96164e6ab725102c5bc8cd4b0b9" title="向switch语句中添加普通case" alt="" coords="280,100,447,171"/>
-<area shape="rect" id="node6" href="$classc__parser__frontend_1_1CParserFrontend.html#a7f59324cbacdc26a1b9b8ffed5abd0f3" title="获取最顶层的控制语句" alt="" coords="257,195,469,251"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1CParserFrontend.html#a4aa20fbe4036d38860b20eeb155a6a66" title="添加switch的default分支标签" alt="" coords="5,13,209,69"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1CParserFrontend.html#ade9797e31481fe7b41edcf71a666fbd5" title="添加switch普通case" alt="" coords="5,107,209,163"/>
-</map>

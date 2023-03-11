@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::flow_control::ConditionBlockInterface::GetSentences" name="c_parser_frontend::flow_control::ConditionBlockInterface::GetSentences">
-<area shape="rect" id="node1" title="获取所有已添加的语句" alt="" coords="245,45,452,101"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1ForSentence.html#a6584458e81f52e31432f3a3ebbd41b07" title="获取for主体内所有语句" alt="" coords="7,5,196,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1flow__control_1_1IfSentence.html#aa19358c8f33da3f3fd99cc97ee6931db" title="获取真分支执行的全部语句" alt="" coords="5,85,197,141"/>
-</map>

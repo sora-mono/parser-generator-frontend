@@ -1,5 +1,0 @@
-<map id="frontend::generator::syntax_generator::BinaryOperatorNode" name="frontend::generator::syntax_generator::BinaryOperatorNode">
-<area shape="rect" id="node1" title="表示双目运算符" alt="" coords="13,213,168,269"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1OperatorNodeInterface.html" title="表示运算符的类的基类" alt="" coords="5,109,176,165"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html" title="该类是所有表示具体产生式类别的派生类的基类" alt="" coords="12,5,169,61"/>
-</map>

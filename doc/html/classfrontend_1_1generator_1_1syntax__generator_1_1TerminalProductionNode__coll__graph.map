@@ -1,6 +1,0 @@
-<map id="frontend::generator::syntax_generator::TerminalProductionNode" name="frontend::generator::syntax_generator::TerminalProductionNode">
-<area shape="rect" id="node1" title="表示终结产生式" alt="" coords="621,40,803,96"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html" title="该类是所有表示具体产生式类别的派生类的基类" alt="" coords="415,77,572,133"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1UnorderedStructManager.html" title=" " alt="" coords="18,5,237,61"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1common_1_1ObjectManager.html" title=" " alt="" coords="5,89,249,130"/>
-</map>

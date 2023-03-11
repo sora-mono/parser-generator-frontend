@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::operator_node::BasicTypeInitializeOperatorNode::CheckBasicTypeInitializeValid" name="c_parser_frontend::operator_node::BasicTypeInitializeOperatorNode::CheckBasicTypeInitializeValid">
-<area shape="rect" id="node1" title="检查给定类型是否可以作为基础初始化数据的类型" alt="" coords="680,5,995,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#aa8eec206ebcf1953933a92fd50678a3b" title="设置初始化用数据的类型" alt="" coords="387,5,632,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1BasicTypeInitializeOperatorNode.html#a4348f1c094015c0feb6bb76e5ace630b" title=" " alt="" coords="5,5,339,61"/>
-</map>

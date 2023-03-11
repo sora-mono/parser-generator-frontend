@@ -1,3 +1,0 @@
-<map id="类继承关系图" name="类继承关系图">
-<area shape="rect" id="node1" href="$structfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator_1_1IntermediateDfaNode.html" title="分割save和load操作，DFA配置生成器只能执行save操作，不能执行load操作" alt="" coords="5,5,223,61"/>
-</map>

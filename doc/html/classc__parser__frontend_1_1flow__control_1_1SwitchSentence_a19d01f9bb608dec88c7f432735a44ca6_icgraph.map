@@ -1,4 +1,0 @@
-<map id="c_parser_frontend::flow_control::SwitchSentence::ConvertCaseValueToLabel" name="c_parser_frontend::flow_control::SwitchSentence::ConvertCaseValueToLabel">
-<area shape="rect" id="node1" title="根据case的值创建对应的标签" alt="" coords="265,5,477,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1SwitchSentence.html#a98d19f1089dc0b4eed4dc1fb456d7403" title="添加普通的case" alt="" coords="5,5,217,61"/>
-</map>

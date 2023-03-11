@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::operator_node::TemaryOperatorNode::GetResultOperatorNode" name="c_parser_frontend::operator_node::TemaryOperatorNode::GetResultOperatorNode">
-<area shape="rect" id="node1" title="获取最终结果的节点" alt="" coords="5,45,235,101"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a3f80ebfb819902849c09e74038f6f72f" title="获取最终结果的节点" alt="" coords="283,5,525,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1TemaryOperatorNode.html#ade075f315049b64b637b64abcc9dc728" title="获取结果" alt="" coords="289,85,519,141"/>
-</map>

@@ -1,4 +1,0 @@
-<map id="c_parser_frontend::type_system::TypeInterface::CanBeAssignedBy" name="c_parser_frontend::type_system::TypeInterface::CanBeAssignedBy">
-<area shape="rect" id="node1" title="判断给定类型是否可以给该对象赋值" alt="" coords="244,5,447,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#a2e635862cc6ed9674889aedd73706042" title="判断给定类型是否可以给该对象赋值" alt="" coords="5,5,196,61"/>
-</map>

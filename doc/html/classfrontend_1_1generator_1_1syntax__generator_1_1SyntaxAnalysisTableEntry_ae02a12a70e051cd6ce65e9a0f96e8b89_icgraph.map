@@ -1,5 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::GetAllActionAndAttachedData" name="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::GetAllActionAndAttachedData">
-<area shape="rect" id="node1" title="获取全部终结节点的动作和附属数据" alt="" coords="279,53,504,124"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry.html#a2c0c0bee9cf0bafa88b44b9bbc9e296a" title="获取全部终结节点的动作和附属数据" alt="" coords="5,5,231,76"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry.html#a97734fabdf3a78ce6dec3aa7abf9db69" title="修改语法分析表中所有指定的语法分析表ID为新ID" alt="" coords="23,100,213,171"/>
-</map>

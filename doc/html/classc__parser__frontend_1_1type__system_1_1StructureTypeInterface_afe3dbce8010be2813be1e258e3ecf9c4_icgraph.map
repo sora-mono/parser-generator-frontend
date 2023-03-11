@@ -1,8 +1,0 @@
-<map id="c_parser_frontend::type_system::StructureTypeInterface::IsSameObject" name="c_parser_frontend::type_system::StructureTypeInterface::IsSameObject">
-<area shape="rect" id="node1" title=" " alt="" coords="487,85,689,141"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1StructType.html#a21ba181d2278fd9a0adbfa58275bada3" title=" " alt="" coords="246,5,429,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1UnionType.html#a98da5465489bd63a4b93c8a504f60765" title=" " alt="" coords="246,85,429,141"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1StructureTypeInterface.html#a83d928e714bfb4a8aa758b2462db06a8" title="比较两个类型是否完全相同" alt="" coords="236,165,439,221"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1StructType.html#ad57e4456caf14fca05a2752ff98f67e0" title="比较两个类型是否完全相同" alt="" coords="5,125,188,181"/>
-<area shape="rect" id="node6" href="$classc__parser__frontend_1_1type__system_1_1UnionType.html#a9e5eb68061afd992a8455dc20e92330f" title="比较两个类型是否完全相同" alt="" coords="5,205,188,261"/>
-</map>

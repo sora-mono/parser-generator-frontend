@@ -3048,15 +3048,10 @@ std::nullptr_t StatementsBrace(std::nullptr_t, std::nullptr_t,
   c_parser_controller.PopActionScope();
   return nullptr;
 }
+
 std::nullptr_t ProcessControlSentenceBodySingleStatement(std::nullptr_t) {
   return nullptr;
 }
-//
-// std::any ProcessControlSentenceBodyLeftBrace(
-//    std::vector<WordDataToUser>&& word_data) {
-//  assert(word_data.size() == 1);
-//  return std::any();
-//}
 
 std::nullptr_t ProcessControlSentenceBodyStatements(
     std::string&& str_left_curly_bracket, std::nullptr_t,

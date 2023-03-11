@@ -1,7 +1,0 @@
-<map id="c_parser_frontend::operator_node::MathematicalOperatorNode::SetRightOperatorNode" name="c_parser_frontend::operator_node::MathematicalOperatorNode::SetRightOperatorNode">
-<area shape="rect" id="node1" title="设置双目运算符右侧运算数" alt="" coords="5,93,272,149"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#a651835f1052952644ff0efb05a1c1075" title="推算运算后结果" alt="" coords="334,5,605,61"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#a2cfca0e1d0b9a50c83304c9e6b667a98" title="获取左侧运算数/单目运算符的运算数" alt="" coords="340,86,599,157"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1operator__node_1_1MathematicalOperatorNode.html#ae5595a4bb2218dd909cb52afee7e78eb" title="获取数学运算符号" alt="" coords="320,181,619,237"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a62c5e80b4b4140e77678fee207655160" title="推断两个类型进行数学运算后得到的类型和运算情况" alt="" coords="667,5,936,61"/>
-</map>

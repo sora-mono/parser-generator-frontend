@@ -1,8 +1,0 @@
-<map id="c_parser_frontend::action_scope_system::ActionScopeSystem::DefineVarietyOrInitValue" name="c_parser_frontend::action_scope_system::ActionScopeSystem::DefineVarietyOrInitValue">
-<area shape="rect" id="node1" title="定义变量或初始化常量" alt="" coords="805,53,988,124"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#ae2ea8a43f08c51a83b198a6fb8b1c132" title="定义变量" alt="" coords="564,5,731,76"/>
-<area shape="rect" id="node6" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#ac01d17fed7775b3fa28fc332b0ec1de9" title="创建函数定义控制块并压入流程控制节点栈中" alt="" coords="537,100,757,171"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1CParserFrontend.html#a2831b7890e9106f1529849d9514f748c" title="定义变量" alt="" coords="265,20,489,61"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#ac44ad28c95778bb6ca7fc51eee472f80" title="设置当前待构建函数" alt="" coords="290,92,465,163"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1CParserFrontend.html#aa27c730d6112f2cf35380d8c98520349" title="设置当前待构建函数" alt="" coords="5,99,217,155"/>
-</map>

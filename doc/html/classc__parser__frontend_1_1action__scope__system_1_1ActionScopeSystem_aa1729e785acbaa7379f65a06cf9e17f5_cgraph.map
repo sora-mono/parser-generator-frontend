@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::action_scope_system::ActionScopeSystem::PushFlowControlSentence" name="c_parser_frontend::action_scope_system::ActionScopeSystem::PushFlowControlSentence">
-<area shape="rect" id="node1" title="压入流程控制节点" alt="" coords="5,53,196,124"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a7094c400291ef7c10d01727a2b8bf3d2" title="增加一级作用域等级" alt="" coords="244,5,411,76"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a7ac1dd24d92bf630f4969bd35bec6860" title="获取当前作用域等级" alt="" coords="244,100,411,171"/>
-</map>

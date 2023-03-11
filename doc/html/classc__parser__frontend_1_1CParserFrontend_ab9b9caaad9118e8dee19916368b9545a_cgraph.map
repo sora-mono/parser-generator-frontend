@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::CParserFrontend::GetType" name="c_parser_frontend::CParserFrontend::GetType">
-<area shape="rect" id="node1" title="根据类型名获取类型链" alt="" coords="5,13,195,54"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1TypeSystem.html#aced9a8ca3d94b1528984e203601df3ff" title="根据类型名和类型的选择倾向获取类型" alt="" coords="243,5,436,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1TypeSystem.html#a758de256c4f407f85ef4a1113075b2a1" title="获取全部类型名到类型链的映射" alt="" coords="484,5,677,61"/>
-</map>

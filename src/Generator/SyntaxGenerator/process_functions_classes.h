@@ -10,6 +10,8 @@
 #define GENERATOR_SYNTAXGENERATOR_SYNTAXCONFIG_PROCESS_FUNCTIONS_CLASSES_H_
 #include "process_function_interface.h"
 #include "reduct_type_register.h"
+#include <list>
+#include "Logger/logger.h"
 
 namespace frontend::generator::syntax_generator {
 // 下面的宏将包含的文件中用户定义的非终结产生式转化为包装规约函数的类

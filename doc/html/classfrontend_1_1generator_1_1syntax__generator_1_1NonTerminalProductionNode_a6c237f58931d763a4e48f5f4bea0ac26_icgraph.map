@@ -1,4 +1,0 @@
-<map id="frontend::generator::syntax_generator::NonTerminalProductionNode::SetProductionCouldBeEmptyRedut" name="frontend::generator::syntax_generator::NonTerminalProductionNode::SetProductionCouldBeEmptyRedut">
-<area shape="rect" id="node1" title="设置该产生式可以空规约" alt="" coords="296,5,551,76"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5100679b94d5727f0c7de415f9639c39" title="设置非终结产生式可以空规约" alt="" coords="5,5,248,76"/>
-</map>

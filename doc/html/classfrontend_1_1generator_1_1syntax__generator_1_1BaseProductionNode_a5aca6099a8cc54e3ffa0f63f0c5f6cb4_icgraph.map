@@ -1,7 +1,0 @@
-<map id="frontend::generator::syntax_generator::BaseProductionNode::SetSymbolId" name="frontend::generator::syntax_generator::BaseProductionNode::SetSymbolId">
-<area shape="rect" id="node1" title="设置该节点表示的产生式名ID" alt="" coords="961,13,1208,69"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae42f4e8c267e3c13e1bc7931dec5736f" title="新建文件尾节点" alt="" coords="691,13,913,69"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ab3e1d6822d98c5dacfc07898b237c0d8" title="构建语法分析表" alt="" coords="403,5,643,76"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
-<area shape="rect" id="node5" href="$Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
-</map>

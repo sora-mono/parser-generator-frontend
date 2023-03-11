@@ -1,4 +1,0 @@
-<map id="c_parser_frontend::operator_node::TemaryOperatorNode::CheckBranchConditionValid" name="c_parser_frontend::operator_node::TemaryOperatorNode::CheckBranchConditionValid">
-<area shape="rect" id="node1" title="检查分支条件是否有效" alt="" coords="5,5,248,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e" title="获取最终结果的类型" alt="" coords="296,5,524,61"/>
-</map>

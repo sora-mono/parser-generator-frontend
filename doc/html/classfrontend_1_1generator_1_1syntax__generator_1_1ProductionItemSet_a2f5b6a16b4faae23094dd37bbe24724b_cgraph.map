@@ -1,4 +1,0 @@
-<map id="frontend::generator::syntax_generator::ProductionItemSet::ClearNotMainItem" name="frontend::generator::syntax_generator::ProductionItemSet::ClearNotMainItem">
-<area shape="rect" id="node1" title="清空所有非核心项" alt="" coords="5,5,212,76"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab2846ee0686a10fa320b574031676d58" title="获取全部指向核心项的迭代器" alt="" coords="260,5,495,76"/>
-</map>

@@ -1,7 +1,0 @@
-<map id="frontend::common::MultimapObjectManager::MergeObjects" name="frontend::common::MultimapObjectManager::MergeObjects">
-<area shape="rect" id="node1" title="将id_src对应的节点合并到id_dst对应的节点" alt="" coords="904,20,1123,61"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#a9c66fbc2e3302533f3ef3d3b693b3691" title="合并优化，降低节点数和转移路径以降低子集构造法集合大小" alt="" coords="668,5,856,76"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a38ac19e197f39feecbc47b67a65f7a3f" title="构建DFA配置" alt="" coords="403,13,620,69"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a65842a44f027ec8edd45c6fcfccf50b3" title="构建并保存编译器前端配置" alt="" coords="108,5,355,76"/>
-<area shape="rect" id="node5" href="$Generator_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Generator.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,27,60,54"/>
-</map>

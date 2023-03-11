@@ -483,12 +483,12 @@ class SyntaxAnalysisTableEntry {
   /// @note 待添加的操作类型必须与node_id已有的动作类型不同，或动作类型和
   /// 附属数据完全相同
   template <class AttachedData>
-  requires std::is_same_v<std::decay_t<AttachedData>,
-                          SyntaxAnalysisTableEntry::ShiftAttachedData> ||
-      std::is_same_v<std::decay_t<AttachedData>,
-                     SyntaxAnalysisTableEntry::ReductAttachedData> ||
-      std::is_same_v<std::decay_t<AttachedData>,
-                     SyntaxAnalysisTableEntry::AcceptAttachedData>
+    requires std::is_same_v<std::decay_t<AttachedData>,
+                            SyntaxAnalysisTableEntry::ShiftAttachedData> ||
+             std::is_same_v<std::decay_t<AttachedData>,
+                            SyntaxAnalysisTableEntry::ReductAttachedData> ||
+             std::is_same_v<std::decay_t<AttachedData>,
+                            SyntaxAnalysisTableEntry::AcceptAttachedData>
   void SetTerminalNodeActionAndAttachedData(ProductionNodeId node_id,
                                             AttachedData&& attached_data);
   /// @brief 设置该条目移入非终结节点后转移到的语法分析表条目ID
@@ -591,20 +591,23 @@ class SyntaxAnalysisTableEntry {
 };
 
 template <class AttachedData>
-requires std::is_same_v<std::decay_t<AttachedData>,
-                        SyntaxAnalysisTableEntry::ShiftAttachedData> ||
-    std::is_same_v<std::decay_t<AttachedData>,
-                   SyntaxAnalysisTableEntry::ReductAttachedData> ||
-    std::is_same_v<std::decay_t<AttachedData>,
-                   SyntaxAnalysisTableEntry::AcceptAttachedData>
+  requires std::is_same_v<std::decay_t<AttachedData>,
+                          SyntaxAnalysisTableEntry::ShiftAttachedData> ||
+           std::is_same_v<std::decay_t<AttachedData>,
+                          SyntaxAnalysisTableEntry::ReductAttachedData> ||
+           std::is_same_v<std::decay_t<AttachedData>,
+                          SyntaxAnalysisTableEntry::AcceptAttachedData>
 void SyntaxAnalysisTableEntry::SetTerminalNodeActionAndAttachedData(
     ProductionNodeId node_id, AttachedData&& attached_data) {
   if constexpr (std::is_same_v<std::decay_t<AttachedData>,
                                SyntaxAnalysisTableEntry::AcceptAttachedData>) {
-    // 传播向前看符号后，根语法分析表条目移入内置根节点后到达的条目在向前看符号
+    // 传播向前看符号后，根语法分析表条目移入用户定义的根节点后到达的条目在向前看符号
     // 是文件尾节点时执行规约操作，需要设置为接受操作
-    assert(action_and_attached_data_.find(node_id)->second->GetActionType() ==
-           ActionType::kReduct);
+    // 或者在空输入时直接规约成功
+    assert(action_and_attached_data_.find(node_id) ==
+               action_and_attached_data_.end() ||
+           action_and_attached_data_.find(node_id)->second->GetActionType() ==
+               ActionType::kReduct);
     action_and_attached_data_[node_id] = std::make_unique<AcceptAttachedData>(
         std::forward<AttachedData>(attached_data));
     return;

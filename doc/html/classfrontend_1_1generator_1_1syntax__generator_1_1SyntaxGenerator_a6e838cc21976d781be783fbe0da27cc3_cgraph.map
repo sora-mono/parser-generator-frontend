@@ -1,8 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxGenerator::GetNodeSymbolStringFromProductionNodeId" name="frontend::generator::syntax_generator::SyntaxGenerator::GetNodeSymbolStringFromProductionNodeId">
-<area shape="rect" id="node1" title="通过产生式节点ID获取产生式名" alt="" coords="5,86,252,157"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#afa97ab3763b61a50e57a7f06eb87f85b" title="根据产生式名获取对应ID" alt="" coords="304,5,563,61"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a5e851a1d4c3dd84f61105ea2b3a9f027" title="根据产生式名ID获取对应产生式名" alt="" coords="310,86,557,157"/>
-<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="300,205,567,261"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#a8843e773f9b1f958e9beb2373084704d" title="根据对象获取其ID" alt="" coords="615,13,892,54"/>
-<area shape="rect" id="node5" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#a1959da3a072226c4cab199b6e1acf273" title="返回指向管理的对象的引用" alt="" coords="644,101,863,142"/>
-</map>

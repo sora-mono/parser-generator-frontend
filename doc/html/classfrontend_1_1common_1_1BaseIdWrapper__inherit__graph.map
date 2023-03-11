@@ -1,5 +1,0 @@
-<map id="frontend::common::BaseIdWrapper&lt; IdType_, LabelEnum_, label_, invalid_value_ &gt;" name="frontend::common::BaseIdWrapper&lt; IdType_, LabelEnum_, label_, invalid_value_ &gt;">
-<area shape="rect" id="node1" title=" " alt="" coords="5,61,227,117"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1common_1_1ExplicitIdWrapperCustomizeInvalidValue.html" title="强制显示调用构造函数不使用默认无效值版" alt="" coords="275,5,513,76"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1NonExplicitIdWrapperCustomizeInvalidValue.html" title="不强制显示调用构造函数不使用默认无效值版" alt="" coords="275,100,513,171"/>
-</map>

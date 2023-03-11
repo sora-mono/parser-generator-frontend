@@ -1,8 +1,0 @@
-<map id="c_parser_frontend::type_system::PointerType::GetConstTag" name="c_parser_frontend::type_system::PointerType::GetConstTag">
-<area shape="rect" id="node1" title="获取指针指向的对象的const状态" alt="" coords="563,85,753,141"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#a2e635862cc6ed9674889aedd73706042" title="判断给定类型是否可以给该对象赋值" alt="" coords="324,5,515,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#a60a5978177acc63c9b523afeb487c22c" title="获取该指针解引用后得到的类型" alt="" coords="324,85,515,141"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#abfe3ef81e6a6e5392bfd4b94c7163a0a" title=" " alt="" coords="324,165,515,221"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1operator__node_1_1DereferenceOperatorNode.html#a082cac4f28ce1ff5d278a3a0c7cc6bea" title="设定被解引用的节点" alt="" coords="5,85,276,141"/>
-<area shape="rect" id="node6" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#aa64ede3652f3e1ff0a96e7a76c82a4fb" title="比较两个类型是否完全相同" alt="" coords="45,165,236,221"/>
-</map>

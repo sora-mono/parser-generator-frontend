@@ -1,5 +1,0 @@
-<map id="frontend::parser::dfa_parser::DfaParser::SetInputFile" name="frontend::parser::dfa_parser::DfaParser::SetInputFile">
-<area shape="rect" id="node1" title="设置输入文件" alt="" coords="363,5,589,47"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1parser_1_1syntax__parser_1_1SyntaxParser.html#ac3c6b4ae872fd522352015f9410801a6" title="分析代码文件并构建AST" alt="" coords="108,5,315,47"/>
-<area shape="rect" id="node3" href="$Parser_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4" title="Parser.cpp : 此文件包含 &quot;main&quot; 函数。程序执行将在此处开始并结束。" alt="" coords="5,13,60,39"/>
-</map>

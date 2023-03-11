@@ -1,6 +1,0 @@
-<map id="c_parser_frontend::type_system::PointerType::IsSameObject" name="c_parser_frontend::type_system::PointerType::IsSameObject">
-<area shape="rect" id="node1" title=" " alt="" coords="5,45,196,101"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1PointerType.html#a8fe1e202c2f1f5482701b35707a4205b" title="获取指针指向的对象的const状态" alt="" coords="250,5,441,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#a3027817a00d7034165ddc0fd56281da2" title=" " alt="" coords="244,85,447,141"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1type__system_1_1TypeInterface.html#ae80e4319279851922698bef4223b1872" title="获取类型节点的类型" alt="" coords="495,85,697,141"/>
-</map>

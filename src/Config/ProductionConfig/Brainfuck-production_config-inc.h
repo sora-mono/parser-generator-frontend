@@ -1,0 +1,25 @@
+#include "Generator/SyntaxGenerator/syntax_generate.h"
+
+GENERATOR_DEFINE_KEY_WORD(RightMovePointer, ">")
+GENERATOR_DEFINE_KEY_WORD(LeftMovePointer, "<")
+GENERATOR_DEFINE_KEY_WORD(ValuePlusOne, "+")
+GENERATOR_DEFINE_KEY_WORD(ValueMinusOne, "-")
+GENERATOR_DEFINE_KEY_WORD(OutputValue, ".")
+GENERATOR_DEFINE_KEY_WORD(InputValue, ",")
+GENERATOR_DEFINE_KEY_WORD(WhileNotZero, "[")
+GENERATOR_DEFINE_KEY_WORD(WhileEnd, "]")
+
+
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(SingleOperate, brainfuck::SingleOperateRightMovePointer, RightMovePointer)
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(SingleOperate, brainfuck::SingleOperateLeftMovePointer, LeftMovePointer)
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(SingleOperate, brainfuck::SingleOperateValuePlusOne, ValuePlusOne)
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(SingleOperate, brainfuck::SingleOperateValueMinusOne, ValueMinusOne)
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(SingleOperate, brainfuck::SingleOperateOutputValue, OutputValue)
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(SingleOperate, brainfuck::SingleOperateInputValue, InputValue)
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(WhileBegin, brainfuck::WhileBegin, WhileNotZero)
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(WhileSentence, brainfuck::WhileSentence, WhileBegin, Operates, WhileEnd)
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(SingleOperate, brainfuck::SingleOperateWhileSentence, WhileSentence)
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(Operates, brainfuck::Operates, SingleOperate)
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(Operates, brainfuck::OperatesExtend, Operates, SingleOperate)
+GENERATOR_DEFINE_NONTERMINAL_PRODUCTION(Root, brainfuck::Root, Operates)
+GENERATOR_DEFINE_ROOT_PRODUCTION(Root)

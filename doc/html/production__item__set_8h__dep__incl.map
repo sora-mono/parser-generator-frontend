@@ -1,8 +1,0 @@
-<map id="src/Generator/SyntaxGenerator/production_item_set.h" name="src/Generator/SyntaxGenerator/production_item_set.h">
-<area shape="rect" id="node1" title="存储项集与向前看符号的类" alt="" coords="359,5,583,47"/>
-<area shape="rect" id="node2" href="$syntax__generator_8h.html" title="语法分析机配置生成器" alt="" coords="235,95,459,136"/>
-<area shape="rect" id="node6" href="$production__item__set_8cpp.html" title=" " alt="" coords="483,95,707,136"/>
-<area shape="rect" id="node3" href="$Generator_8cpp.html" title=" " alt="" coords="5,191,211,218"/>
-<area shape="rect" id="node4" href="$config__construct_8cpp.html" title="定义添加构建配置所需外围信息的函数ConfigConstruct" alt="" coords="235,184,459,225"/>
-<area shape="rect" id="node5" href="$syntax__generator_8cpp.html" title=" " alt="" coords="483,184,707,225"/>
-</map>

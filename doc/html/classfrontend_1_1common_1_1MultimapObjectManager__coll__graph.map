@@ -1,5 +1,0 @@
-<map id="frontend::common::MultimapObjectManager&lt; T &gt;" name="frontend::common::MultimapObjectManager&lt; T &gt;">
-<area shape="rect" id="node1" title="管理对象，允许多个ID对应一个对象" alt="" coords="681,20,893,61"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1common_1_1ExplicitIdWrapper.html" title=" " alt="" coords="287,13,531,69"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1BaseIdWrapper.html" title=" " alt="" coords="5,5,237,76"/>
-</map>

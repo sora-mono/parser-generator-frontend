@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::type_system::StructureTypeInterface::SetStructureMembers" name="c_parser_frontend::type_system::StructureTypeInterface::SetStructureMembers">
-<area shape="rect" id="node1" title="按容器设置结构化类型的成员数据" alt="" coords="236,45,465,101"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1type__system_1_1StructType.html#a691906f522876f91f7467db61b9989ee" title="按容器设置结构体成员信息" alt="" coords="5,5,188,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1type__system_1_1UnionType.html#a0a2258d0c66f4dcc4ec927786882716f" title="按容器设置共用体成员信息" alt="" coords="5,85,188,141"/>
-</map>

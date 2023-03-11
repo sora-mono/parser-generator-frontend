@@ -1,5 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxGenerator::GetProductionNodeIdInBody" name="frontend::generator::syntax_generator::SyntaxGenerator::GetProductionNodeIdInBody">
-<area shape="rect" id="node1" title="获取产生式体中指定位置的产生式节点ID" alt="" coords="5,66,237,137"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="285,29,552,85"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a59f98cd7ca7b0906985c8bc053e92e65" title="根据给定产生式体和下一个移入的产生式位置获取下一个移入的产生式ID" alt="" coords="290,110,547,181"/>
-</map>

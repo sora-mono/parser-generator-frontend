@@ -1,8 +1,0 @@
-<map id="c_parser_frontend::parse_functions::EnumReturnData::GetMaxValue" name="c_parser_frontend::parse_functions::EnumReturnData::GetMaxValue">
-<area shape="rect" id="node1" title=" " alt="" coords="549,125,763,181"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1parse__functions_1_1EnumReturnData.html#adcbda97027125f4bde934b7639301d35" title="返回插入位置的迭代器和是否插入" alt="" coords="288,125,501,181"/>
-<area shape="rect" id="node3" href="$namespacec__parser__frontend_1_1parse__functions.html#aba732856d9385b4e6961f36ba02458ee" title="NotEmptyEnumArguments &#45;&gt; Id &quot;=&quot; Num" alt="" coords="5,5,240,61"/>
-<area shape="rect" id="node4" href="$namespacec__parser__frontend_1_1parse__functions.html#ad5bb663d37528e58d31f384be7cce9a8" title=" " alt="" coords="5,85,240,141"/>
-<area shape="rect" id="node5" href="$namespacec__parser__frontend_1_1parse__functions.html#a27bf74ce8a3aa45bc555400b12c21366" title="NotEmptyEnumArguments &#45;&gt; Id" alt="" coords="5,165,240,221"/>
-<area shape="rect" id="node6" href="$namespacec__parser__frontend_1_1parse__functions.html#a3998e46ab32acbce5a0241c734f07c46" title=" " alt="" coords="5,245,240,301"/>
-</map>

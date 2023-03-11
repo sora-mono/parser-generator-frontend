@@ -1,5 +1,0 @@
-<map id="frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaInit" name="frontend::generator::dfa_generator::nfa_generator::NfaGenerator::NfaInit">
-<area shape="rect" id="node1" title="NFA初始化" alt="" coords="5,24,193,95"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1common_1_1MultimapObjectManager.html#a497a7c5bc722e5d3393c14b39b1e451e" title="创建对象并自动选择最佳位置放置对象" alt="" coords="283,5,510,47"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1MultimapObjectManager.html#a46a3c456a48f53594855815131f9dbf9" title="初始化，如果容器中存在对象则全部释放" alt="" coords="241,71,552,112"/>
-</map>

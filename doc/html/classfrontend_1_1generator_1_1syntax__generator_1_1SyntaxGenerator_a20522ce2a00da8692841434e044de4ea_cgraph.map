@@ -1,6 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxGenerator::GetProcessFunctionClass" name="frontend::generator::syntax_generator::SyntaxGenerator::GetProcessFunctionClass">
-<area shape="rect" id="node1" title="获取规约某个产生式使用的包装处理函数的类的实例化对象ID" alt="" coords="5,117,219,188"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1NonTerminalProductionNode.html#a2da2c02fb9e05291c9dcc1401d865586" title="获取指定产生式体包装规约用函数的类的实例化对象ID" alt="" coords="281,5,519,76"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a0a8350f404bbf14d9360f7d95ec4e787" title="根据产生式节点ID获取产生式节点" alt="" coords="267,125,533,181"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1BaseProductionNode.html#a1aa8dcd59b8c2220d5af4db2c656d23b" title="获取产生式类型" alt="" coords="291,205,509,261"/>
-</map>

@@ -1,9 +1,0 @@
-<map id="c_parser_frontend::CParserFrontend::DefineVariety" name="c_parser_frontend::CParserFrontend::DefineVariety">
-<area shape="rect" id="node1" title="定义变量" alt="" coords="5,156,229,197"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#ae2ea8a43f08c51a83b198a6fb8b1c132" title="定义变量" alt="" coords="277,141,444,212"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a2c8bdb9a8a217b69bccc63d08ac48fc3" title="定义变量或初始化常量" alt="" coords="492,141,675,212"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a7ac1dd24d92bf630f4969bd35bec6860" title="获取当前作用域等级" alt="" coords="775,5,941,76"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1operator__node_1_1VarietyOperatorNode.html#acafd6685785e1759e4e9bf0fe16c42e9" title="获取变量名" alt="" coords="745,101,971,157"/>
-<area shape="rect" id="node6" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a4fff2178d35bc39a63f972e82b66d6a5" title="获取存储变量/函数名到节点指针的映射的容器" alt="" coords="723,181,993,266"/>
-<area shape="rect" id="node7" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a01d1f19c1a4d3a5b26427cb46b63b6e4" title="获取变量栈" alt="" coords="775,291,941,361"/>
-</map>

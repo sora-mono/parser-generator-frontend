@@ -1,5 +1,0 @@
-<map id="c_parser_frontend::operator_node::MemberAccessOperatorNode::SetNodeToAccess" name="c_parser_frontend::operator_node::MemberAccessOperatorNode::SetNodeToAccess">
-<area shape="rect" id="node1" title="设置要访问的结构化数据节点" alt="" coords="5,5,240,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1operator__node_1_1MemberAccessOperatorNode.html#a548bfce6c0ae11b7a9570b82938eb490" title="检查给定节点是否可以作为被访问成员的节点" alt="" coords="288,5,575,61"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1operator__node_1_1OperatorNodeInterface.html#a9b53f7340627ba67b3088e559961b47e" title="获取最终结果的类型" alt="" coords="623,5,851,61"/>
-</map>

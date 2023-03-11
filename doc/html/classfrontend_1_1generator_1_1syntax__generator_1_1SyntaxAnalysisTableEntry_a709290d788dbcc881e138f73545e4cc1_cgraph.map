@@ -1,5 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::SetTerminalNodeActionAndAttachedData" name="frontend::generator::syntax_generator::SyntaxAnalysisTableEntry::SetTerminalNodeActionAndAttachedData">
-<area shape="rect" id="node1" title="设置该条目在给定终结节点下的动作和目标节点" alt="" coords="5,67,301,138"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html#a771a6314c7763f7ceff0aab9d0a75fd9" title="获取动作类型" alt="" coords="349,5,592,91"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxAnalysisTableEntry_1_1ActionAndAttachedDataInterface.html#a328aa5ff55eabb2a5070ed982037f562" title="判断两个对象是否相应部分相同" alt="" coords="349,115,592,200"/>
-</map>

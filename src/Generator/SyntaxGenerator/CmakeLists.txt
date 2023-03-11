@@ -3,15 +3,17 @@ Project(SyntaxGenerator)
 aux_source_directory(. SYNTAX_GENERATOR_SRCS)
 
 add_library(syntax_analysis_table "syntax_analysis_table.cpp")
+target_compile_options(syntax_analysis_table PRIVATE /std:c++latest)
 target_link_libraries(syntax_analysis_table CONAN_PKG::boost export_types)
 
 add_library(production_item_set "production_item_set.cpp")
+target_compile_options(production_item_set PRIVATE /std:c++latest)
 target_link_libraries(production_item_set export_types)
 
 add_library(production_node "production_node.cpp")
+target_compile_options(production_node PRIVATE /std:c++latest)
 target_link_libraries(production_node export_types)
 
 add_library(syntax_generator "syntax_generator.cpp" "config_construct.cpp")
-target_include_directories(syntax_generator PRIVATE ${GRAPHVIZ_INCLUDE_DIR})
-target_link_libraries(syntax_generator syntax_analysis_table production_item_set production_node dfa_generator CONAN_PKG::boost c_parser_frontend ${CGRAPH_LIBRARY} ${GVC_LIBRARY})
-install(TARGETS syntax_generator RUNTIME)
+target_compile_options(syntax_generator PRIVATE /std:c++latest)
+target_link_libraries(syntax_generator syntax_analysis_table production_item_set production_node dfa_generator CONAN_PKG::boost ${UserLibraries})

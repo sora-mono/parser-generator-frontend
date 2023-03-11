@@ -1,4 +1,0 @@
-<map id="c_parser_frontend::flow_control::FlowInterface::SetFlowType" name="c_parser_frontend::flow_control::FlowInterface::SetFlowType">
-<area shape="rect" id="node1" title="设置流程控制类型" alt="" coords="232,5,431,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1IfSentence.html#a442ab486f6788e6508d6947e7f9393bd" title="将该节点转化为if&#45;else语句" alt="" coords="5,5,184,61"/>
-</map>

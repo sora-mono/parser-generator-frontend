@@ -1,4 +1,0 @@
-<map id="frontend::common::MultimapObjectManager::GetInsideId" name="frontend::common::MultimapObjectManager::GetInsideId">
-<area shape="rect" id="node1" title="获取外部ID对应的内部ID" alt="" coords="280,13,492,54"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1common_1_1MultimapObjectManager.html#a533e7b18b83514f9782c24c1781646b2" title="通过一个id查询引用相同底层对象的所有id" alt="" coords="5,5,232,61"/>
-</map>

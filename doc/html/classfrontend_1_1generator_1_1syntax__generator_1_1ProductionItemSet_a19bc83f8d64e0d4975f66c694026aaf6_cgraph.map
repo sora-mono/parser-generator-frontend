@@ -1,6 +1,0 @@
-<map id="frontend::generator::syntax_generator::ProductionItemSet::AddItemAndForwardNodeIds" name="frontend::generator::syntax_generator::ProductionItemSet::AddItemAndForwardNodeIds">
-<area shape="rect" id="node1" title="向项集中插入项和对应的向前看符号" alt="" coords="5,53,236,124"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#aa4c65d18edde8ef3e0a24e7e762fb944" title="向给定项中添加向前看符号" alt="" coords="284,5,511,76"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#a3ff0fee566735401041a4e71cd8f48ce" title="获取该项集求的闭包是否有效" alt="" coords="292,100,503,171"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1syntax__generator_1_1ProductionItemSet.html#ab2846ee0686a10fa320b574031676d58" title="获取全部指向核心项的迭代器" alt="" coords="559,5,793,76"/>
-</map>

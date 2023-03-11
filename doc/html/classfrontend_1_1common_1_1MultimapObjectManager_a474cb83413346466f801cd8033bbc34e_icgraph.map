@@ -1,8 +1,0 @@
-<map id="frontend::common::MultimapObjectManager::RemoveObject" name="frontend::common::MultimapObjectManager::RemoveObject">
-<area shape="rect" id="node1" title=" " alt="" coords="1283,57,1508,99"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#ac8852c9c0a00070c87e253e996644c59" title="根据输入生成可选字符结构" alt="" coords="1047,5,1235,76"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1generator_1_1dfa__generator_1_1nfa__generator_1_1NfaGenerator.html#afd38661549adcda0d029c24112c485d0" title="解析正则" alt="" coords="811,43,999,113"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1dfa__generator_1_1DfaGenerator.html#a676342993bb701a3c1c9574f9ae7e441" title="添加单词的正则" alt="" coords="545,50,763,106"/>
-<area shape="rect" id="node5" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a4dc1e67e686137062266790650bbe67a" title="添加终结产生式" alt="" coords="276,43,497,113"/>
-<area shape="rect" id="node6" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#a36db9122a028b29ec3c60e13c4837583" title="添加关键字" alt="" coords="5,50,228,106"/>
-</map>

@@ -1,8 +1,0 @@
-<map id="c_parser_frontend::flow_control::FlowControlSystem::GetActiveFunctionReference" name="c_parser_frontend::flow_control::FlowControlSystem::GetActiveFunctionReference">
-<area shape="rect" id="node1" title="获取当前活跃函数节点的引用" alt="" coords="961,53,1197,109"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1CParserFrontend.html#a6c14bf77496f247c9347800d6b83df04" title="做一些完成函数构建后的清理操作" alt="" coords="684,13,913,69"/>
-<area shape="rect" id="node6" href="$classc__parser__frontend_1_1CParserFrontend.html#adc9957b818c91254717fe933afa6146e" title="获取当前活跃函数（正在构建的函数）" alt="" coords="699,93,899,149"/>
-<area shape="rect" id="node3" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a1d17eb37f21f42079ed3c066802389a4" title="弹出所有高于给定作用域等级的变量和流程控制语句" alt="" coords="469,5,636,76"/>
-<area shape="rect" id="node4" href="$classc__parser__frontend_1_1action__scope__system_1_1ActionScopeSystem.html#a27ee94c6536eb57c0b2401774d2a6ce7" title="弹出一级作用域" alt="" coords="255,5,421,76"/>
-<area shape="rect" id="node5" href="$classc__parser__frontend_1_1CParserFrontend.html#ad9ded9d6fde588d61a9ff71076489fed" title="弹出一级作用域" alt="" coords="5,13,207,69"/>
-</map>

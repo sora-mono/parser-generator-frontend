@@ -1,6 +1,0 @@
-<map id="frontend::generator::syntax_generator::SyntaxGenerator::GetProductionNodeIdFromNodeSymbol" name="frontend::generator::syntax_generator::SyntaxGenerator::GetProductionNodeIdFromNodeSymbol">
-<area shape="rect" id="node1" title="根据产生式名获取产生式节点ID" alt="" coords="5,42,237,113"/>
-<area shape="rect" id="node2" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#afa97ab3763b61a50e57a7f06eb87f85b" title="根据产生式名获取对应ID" alt="" coords="285,5,544,61"/>
-<area shape="rect" id="node4" href="$classfrontend_1_1generator_1_1syntax__generator_1_1SyntaxGenerator.html#ae482dcdd29e61fc9ca3dab48827f83fa" title="根据产生式名ID获取对应产生式节点ID" alt="" coords="299,86,531,157"/>
-<area shape="rect" id="node3" href="$classfrontend_1_1common_1_1UnorderedStructManager.html#a8843e773f9b1f958e9beb2373084704d" title="根据对象获取其ID" alt="" coords="592,13,869,54"/>
-</map>

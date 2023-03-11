@@ -1,4 +1,0 @@
-<map id="c_parser_frontend::flow_control::IfSentence::GetTrueBranchSentences" name="c_parser_frontend::flow_control::IfSentence::GetTrueBranchSentences">
-<area shape="rect" id="node1" title="获取真分支执行的全部语句" alt="" coords="5,5,197,61"/>
-<area shape="rect" id="node2" href="$classc__parser__frontend_1_1flow__control_1_1ConditionBlockInterface.html#a0b470bb6d1f6d180504d13028efaddd1" title="获取所有已添加的语句" alt="" coords="245,5,452,61"/>
-</map>
