@@ -1,9 +1,9 @@
-/// @file dfa_generator.h
-/// @brief DFAÅäÖÃÉú³ÉÆ÷
+ï»¿/// @file dfa_generator.h
+/// @brief DFAé…ç½®ç”Ÿæˆå™¨
 /// @details
-/// DFAÅäÖÃÉú³ÉÆ÷Ê¹ÓÃ×Ó¼¯¹¹Ôì·¨ÔÚNFAÅäÖÃ»ù´¡ÉÏ¹¹½¨DFAÅäÖÃÒÔÌá¸ßËÙ¶È
-/// DFA Generator¹¹½¨ÅäÖÃÊ±ÏÈÍ¨¹ı×Ó¼¯¹¹Ôì·¨Éú³ÉÖĞ¼ä½Úµã£¨IntermediateDfaNode£©£¬
-/// Ã¿¸öÖĞ¼ä½Úµã¶ÔÓ¦×Ó¼¯¹¹Ôì·¨ÖĞÎ¨Ò»µÄÒ»¸ö¼¯ºÏ£»È»ºóÍ¨¹ıÖĞ¼ä½Úµã¹¹ÔìDFA×ªÒÆ±í
+/// DFAé…ç½®ç”Ÿæˆå™¨ä½¿ç”¨å­é›†æ„é€ æ³•åœ¨NFAé…ç½®åŸºç¡€ä¸Šæ„å»ºDFAé…ç½®ä»¥æé«˜é€Ÿåº¦
+/// DFA Generatoræ„å»ºé…ç½®æ—¶å…ˆé€šè¿‡å­é›†æ„é€ æ³•ç”Ÿæˆä¸­é—´èŠ‚ç‚¹ï¼ˆIntermediateDfaNodeï¼‰ï¼Œ
+/// æ¯ä¸ªä¸­é—´èŠ‚ç‚¹å¯¹åº”å­é›†æ„é€ æ³•ä¸­å”¯ä¸€çš„ä¸€ä¸ªé›†åˆï¼›ç„¶åé€šè¿‡ä¸­é—´èŠ‚ç‚¹æ„é€ DFAè½¬ç§»è¡¨
 #ifndef GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
 #define GENERATOR_DFAGENERATOR_DFAGENERATOR_H_
 
@@ -22,18 +22,18 @@ using frontend::common::ObjectManager;
 using frontend::generator::dfa_generator::nfa_generator::NfaGenerator;
 
 /// @class DfaGenerator dfa_generator.h
-/// @brief DFAÅäÖÃÉú³ÉÆ÷
+/// @brief DFAé…ç½®ç”Ÿæˆå™¨
 class DfaGenerator {
-  // @brief Ç°ÏòÉùÃ÷ÖĞ¼ä½ÚµãÒÔ¶¨ÒåIntermediateNodeId
+  // @brief å‰å‘å£°æ˜ä¸­é—´èŠ‚ç‚¹ä»¥å®šä¹‰IntermediateNodeId
   struct IntermediateDfaNode;
 
  public:
-  /// @brief Nfa½ÚµãID
+  /// @brief NfaèŠ‚ç‚¹ID
   using NfaNodeId = NfaGenerator::NfaNodeId;
-  /// @brief ×Ó¼¯¹¹Ôì·¨Ê¹ÓÃµÄ¼¯ºÏµÄÀàĞÍ
+  /// @brief å­é›†æ„é€ æ³•ä½¿ç”¨çš„é›†åˆçš„ç±»å‹
   using SetType = std::unordered_set<NfaNodeId>;
   /// @class UnorderedSetHasher dfa_generator.h
-  /// @brief ¹şÏ£SetType¼¯ºÏµÄÀà£¬ÓÃÓÚÊµÀı»¯UnorderedStructManager
+  /// @brief å“ˆå¸ŒSetTypeé›†åˆçš„ç±»ï¼Œç”¨äºå®ä¾‹åŒ–UnorderedStructManager
   struct UnorderedSetHasher {
     size_t operator()(const SetType& set) const {
       size_t result = 1;
@@ -43,81 +43,81 @@ class DfaGenerator {
       return result;
     }
   };
-  /// @brief Î²½ÚµãÊı¾İ
+  /// @brief å°¾èŠ‚ç‚¹æ•°æ®
   using TailNodeData = NfaGenerator::TailNodeData;
-  /// @brief Î²½ÚµãÓÅÏÈ¼¶
-  /// @details Êı×ÖÔ½´óÓÅÏÈ¼¶Ô½¸ß
-  /// ËùÓĞÖÕ½á²úÉúÊ½µÄµ¥´Ê¶¼ÓĞ¸Ã²ÎÊı
-  /// ÓëÔËËã·û½ÚµãµÄÓÅÏÈ¼¶ÒâÒå²»Í¬£¬¸ÃÓÅÏÈ¼¶¾ö¶¨ÔÚ¶à¸öÕıÔòÍ¬Ê±Æ¥Åä³É¹¦Ê±Ñ¡ÔñÄÄ¸ö
-  /// ÕıÔòµÃ³ö´ÊºÍ¸½ÊôÊı¾İ
-  /// @note ÆÕÍ¨µ¥´ÊÊ¹ÓÃÓÅÏÈ¼¶0£¬ÔËËã·ûÊ¹ÓÃÓÅÏÈ¼¶1£¬¹Ø¼ü×ÖÊ¹ÓÃÓÅÏÈ¼¶2
+  /// @brief å°¾èŠ‚ç‚¹ä¼˜å…ˆçº§
+  /// @details æ•°å­—è¶Šå¤§ä¼˜å…ˆçº§è¶Šé«˜
+  /// æ‰€æœ‰ç»ˆç»“äº§ç”Ÿå¼çš„å•è¯éƒ½æœ‰è¯¥å‚æ•°
+  /// ä¸è¿ç®—ç¬¦èŠ‚ç‚¹çš„ä¼˜å…ˆçº§æ„ä¹‰ä¸åŒï¼Œè¯¥ä¼˜å…ˆçº§å†³å®šåœ¨å¤šä¸ªæ­£åˆ™åŒæ—¶åŒ¹é…æˆåŠŸæ—¶é€‰æ‹©å“ªä¸ª
+  /// æ­£åˆ™å¾—å‡ºè¯å’Œé™„å±æ•°æ®
+  /// @note æ™®é€šå•è¯ä½¿ç”¨ä¼˜å…ˆçº§0ï¼Œè¿ç®—ç¬¦ä½¿ç”¨ä¼˜å…ˆçº§1ï¼Œå…³é”®å­—ä½¿ç”¨ä¼˜å…ˆçº§2
   using WordPriority = nfa_generator::WordPriority;
-  /// @brief ½âÎö³öµ¥´ÊºóËæµ¥´Ê·µ»ØµÄ¸½ÊôÊı¾İ
+  /// @brief è§£æå‡ºå•è¯åéšå•è¯è¿”å›çš„é™„å±æ•°æ®
   using WordAttachedData = nfa_generator::WordAttachedData;
-  /// @brief ¹ÜÀí×Ó¼¯¹¹Ôì·¨Ê¹ÓÃµÄ¼¯ºÏµÄ½á¹¹
+  /// @brief ç®¡ç†å­é›†æ„é€ æ³•ä½¿ç”¨çš„é›†åˆçš„ç»“æ„
   using SetManagerType =
       frontend::common::UnorderedStructManager<SetType, UnorderedSetHasher>;
-  /// @brief ×Ó¼¯¹¹Ôì·¨Ê¹ÓÃµÄ¼¯ºÏµÄID
+  /// @brief å­é›†æ„é€ æ³•ä½¿ç”¨çš„é›†åˆçš„ID
   using SetId = SetManagerType::ObjectId;
-  /// @brief DFAÖĞ¼ä½ÚµãID
+  /// @brief DFAä¸­é—´èŠ‚ç‚¹ID
   using IntermediateNodeId = ObjectManager<IntermediateDfaNode>::ObjectId;
 
   DfaGenerator() = default;
   DfaGenerator(const DfaGenerator&) = delete;
   DfaGenerator(DfaGenerator&&) = delete;
 
-  /// @brief ³õÊ¼»¯
-  /// @note ¸Ãº¯Êı¿ÉÓÃÓÚÇå³ıËùÓĞÒÑÌí¼Óµ¥´Ê
+  /// @brief åˆå§‹åŒ–
+  /// @note è¯¥å‡½æ•°å¯ç”¨äºæ¸…é™¤æ‰€æœ‰å·²æ·»åŠ å•è¯
   void DfaInit();
 
-  /// @brief Ìí¼Ó´¿µ¥´Ê
-  /// @param[in] word £º´ıÌí¼ÓµÄµ¥´Ê
-  /// @param[in] word_attached_data £ºµ¥´ÊµÄ¸½ÊôÊı¾İ
-  /// @param[in] priority_tag £ºµ¥´ÊµÄÓÅÏÈ¼¶
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦
-  /// @retval false £ºÌí¼ÓÊ§°Ü
-  /// @note µ¥´ÊÓÅÏÈ¼¶¶¨Òå¼ûWordPriorityËµÃ÷
-  /// @attention ¸Ãº¯Êı½«wordÊÓÎª´¿µ¥´Ê¶ø²»ÊÇÕıÔò±í´ïÊ½½øĞĞÌí¼Ó
+  /// @brief æ·»åŠ çº¯å•è¯
+  /// @param[in] word ï¼šå¾…æ·»åŠ çš„å•è¯
+  /// @param[in] word_attached_data ï¼šå•è¯çš„é™„å±æ•°æ®
+  /// @param[in] priority_tag ï¼šå•è¯çš„ä¼˜å…ˆçº§
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸ
+  /// @retval false ï¼šæ·»åŠ å¤±è´¥
+  /// @note å•è¯ä¼˜å…ˆçº§å®šä¹‰è§WordPriorityè¯´æ˜
+  /// @attention è¯¥å‡½æ•°å°†wordè§†ä¸ºçº¯å•è¯è€Œä¸æ˜¯æ­£åˆ™è¡¨è¾¾å¼è¿›è¡Œæ·»åŠ 
   bool AddWord(const std::string& word, WordAttachedData&& word_attached_data,
                WordPriority priority_tag);
-  /// @brief Ìí¼Óµ¥´ÊµÄÕıÔò
-  /// @param[in] regex_str £º´ıÌí¼Óµ¥´ÊµÄÕıÔò±í´ïÊ½
-  /// @param[in] regex_attached_data £ºµ¥´ÊµÄ¸½ÊôÊı¾İ
-  /// @param[in] regex_priority £ºµ¥´ÊµÄÓÅÏÈ¼¶
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦
-  /// @retval false £ºÌí¼ÓÊ§°Ü
-  /// @note µ¥´ÊÓÅÏÈ¼¶¶¨Òå¼ûWordPriorityËµÃ÷
+  /// @brief æ·»åŠ å•è¯çš„æ­£åˆ™
+  /// @param[in] regex_str ï¼šå¾…æ·»åŠ å•è¯çš„æ­£åˆ™è¡¨è¾¾å¼
+  /// @param[in] regex_attached_data ï¼šå•è¯çš„é™„å±æ•°æ®
+  /// @param[in] regex_priority ï¼šå•è¯çš„ä¼˜å…ˆçº§
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸ
+  /// @retval false ï¼šæ·»åŠ å¤±è´¥
+  /// @note å•è¯ä¼˜å…ˆçº§å®šä¹‰è§WordPriorityè¯´æ˜
   bool AddRegexpression(const std::string& regex_str,
                         WordAttachedData&& regex_attached_data,
                         WordPriority regex_priority);
-  /// @brief ÉèÖÃµ½´ïÎÄ¼şÎ²Ê±·µ»ØµÄÊı¾İ
-  /// @param[in] saved_data £ºµ½´ïÎÄ¼şÎ²·µ»ØµÄÊı¾İ
-  /// @attention ½öÔÚÎ´»ñÈ¡µ½ÈÎºÎµ¥´ÊÇÒµ½´ïÎÄ¼şÎ²Ê±·µ»Ø
-  /// Èç¹ûÒÑ¾­»ñÈ¡ÁËÒ»Ğ©×Ö·ûºóÓöµ½ÎÄ¼şÎ²Ôò·µ»ØÕâĞ©×Ö·û¶ÔÓ¦µÄµ¥´Ê
+  /// @brief è®¾ç½®åˆ°è¾¾æ–‡ä»¶å°¾æ—¶è¿”å›çš„æ•°æ®
+  /// @param[in] saved_data ï¼šåˆ°è¾¾æ–‡ä»¶å°¾è¿”å›çš„æ•°æ®
+  /// @attention ä»…åœ¨æœªè·å–åˆ°ä»»ä½•å•è¯ä¸”åˆ°è¾¾æ–‡ä»¶å°¾æ—¶è¿”å›
+  /// å¦‚æœå·²ç»è·å–äº†ä¸€äº›å­—ç¬¦åé‡åˆ°æ–‡ä»¶å°¾åˆ™è¿”å›è¿™äº›å­—ç¬¦å¯¹åº”çš„å•è¯
   void SetEndOfFileSavedData(WordAttachedData&& saved_data) {
     file_end_saved_data_ = std::move(saved_data);
   }
-  /// @brief »ñÈ¡µ½´ïÎÄ¼şÎ²Ê±·µ»ØµÄÊı¾İ
-  /// @return ·µ»Øµ½´ïÎÄ¼şÎ²Ê±·µ»ØµÄÊı¾İµÄconstÒıÓÃ
+  /// @brief è·å–åˆ°è¾¾æ–‡ä»¶å°¾æ—¶è¿”å›çš„æ•°æ®
+  /// @return è¿”å›åˆ°è¾¾æ–‡ä»¶å°¾æ—¶è¿”å›çš„æ•°æ®çš„constå¼•ç”¨
   const WordAttachedData& GetEndOfFileSavedData() const {
     return file_end_saved_data_;
   }
-  /// @brief ¹¹½¨DFAÅäÖÃ
-  /// @note ¸Ãº¯Êı½öÉú³ÉDFAÅäÖÃ£¬²»»á×Ô¶¯±£´æÅäÖÃµ½ÎÄ¼ş
+  /// @brief æ„å»ºDFAé…ç½®
+  /// @note è¯¥å‡½æ•°ä»…ç”ŸæˆDFAé…ç½®ï¼Œä¸ä¼šè‡ªåŠ¨ä¿å­˜é…ç½®åˆ°æ–‡ä»¶
   bool DfaConstruct();
-  /// @brief ±£´æDFAÅäÖÃ
-  /// @param[in] DFAÅäÖÃ±£´æÂ·¾¶£¨²»º¬ÎÄ¼şÃû£¬ÒÔ'/'½áÎ²£©
-  /// @details DFAÅäÖÃÊä³öÎÄ¼şÃûÎªfrontend::common::kDfaConfigFileName
+  /// @brief ä¿å­˜DFAé…ç½®
+  /// @param[in] DFAé…ç½®ä¿å­˜è·¯å¾„ï¼ˆä¸å«æ–‡ä»¶åï¼Œä»¥'/'ç»“å°¾ï¼‰
+  /// @details DFAé…ç½®è¾“å‡ºæ–‡ä»¶åä¸ºfrontend::common::kDfaConfigFileName
   void SaveConfig(const std::string& config_file_output_path = "./") const;
 
  private:
-  /// @brief ÉùÃ÷ÓÑÔª£¬ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ³ÉÔ±
+  /// @brief å£°æ˜å‹å…ƒï¼Œå…è®¸åºåˆ—åŒ–ç±»è®¿é—®æˆå‘˜
   friend class boost::serialization::access;
 
   /// @class PairOfIntermediateNodeIdAndWordAttachedDataHasher dfa_generator.h
-  /// @brief ¹şÏ£ÖĞ¼ä½ÚµãIDºÍµ¥´ÊÊı¾İµÄ½áºÏÌåµÄ½á¹¹£¬ÓÃÓÚSubDataMinimize
+  /// @brief å“ˆå¸Œä¸­é—´èŠ‚ç‚¹IDå’Œå•è¯æ•°æ®çš„ç»“åˆä½“çš„ç»“æ„ï¼Œç”¨äºSubDataMinimize
   struct PairOfIntermediateNodeIdAndWordAttachedDataHasher {
     size_t operator()(const std::pair<IntermediateNodeId, WordAttachedData>&
                           data_to_hash) const {
@@ -125,23 +125,23 @@ class DfaGenerator {
     }
   };
 
-  /// @brief ĞòÁĞ»¯ÅäÖÃµÄº¯Êı
-  /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-  /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-  /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+  /// @brief åºåˆ—åŒ–é…ç½®çš„å‡½æ•°
+  /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+  /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+  /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
   template <class Archive>
   void save(Archive& ar, const unsigned int version) const {
     ar << dfa_config_;
     ar << root_transform_array_id_;
     ar << file_end_saved_data_;
   }
-  /// ·Ö¸îsaveºÍload²Ù×÷£¬DFAÅäÖÃÉú³ÉÆ÷Ö»ÄÜÖ´ĞĞsave²Ù×÷£¬²»ÄÜÖ´ĞĞload²Ù×÷
+  /// åˆ†å‰²saveå’Œloadæ“ä½œï¼ŒDFAé…ç½®ç”Ÿæˆå™¨åªèƒ½æ‰§è¡Œsaveæ“ä½œï¼Œä¸èƒ½æ‰§è¡Œloadæ“ä½œ
   BOOST_SERIALIZATION_SPLIT_MEMBER()
 
   /// @class IntermediateDfaNode dfa_generator.h
-  /// @brief DFAÅäÖÃÉú³ÉÆ÷µÄÖĞ¼ä½Úµã
+  /// @brief DFAé…ç½®ç”Ÿæˆå™¨çš„ä¸­é—´èŠ‚ç‚¹
   /// @details
-  /// ÖĞ¼ä½ÚµãÓë×Ó¼¯¹¹Ôì·¨µÄ¼¯ºÏÒ»Ò»¶ÔÓ¦£¬Ã¿¸ö½Úµã´æ´¢Ò»¸öÌõ¼ş×ªÒÆ±í
+  /// ä¸­é—´èŠ‚ç‚¹ä¸å­é›†æ„é€ æ³•çš„é›†åˆä¸€ä¸€å¯¹åº”ï¼Œæ¯ä¸ªèŠ‚ç‚¹å­˜å‚¨ä¸€ä¸ªæ¡ä»¶è½¬ç§»è¡¨
   struct IntermediateDfaNode {
     template <class AttachedData>
     IntermediateDfaNode(SetId handler = SetId::InvalidId(),
@@ -151,135 +151,135 @@ class DfaGenerator {
       SetAllUntransable();
     }
 
-    /// @brief ÉèÖÃ¸Ã½ÚµãÔÚÈÎºÎ×Ö·ûÏÂ¾ù²»¿É×ªÒÆ
+    /// @brief è®¾ç½®è¯¥èŠ‚ç‚¹åœ¨ä»»ä½•å­—ç¬¦ä¸‹å‡ä¸å¯è½¬ç§»
     void SetAllUntransable() {
       forward_nodes.fill(IntermediateNodeId::InvalidId());
     }
-    /// @brief »ñÈ¡¸Ã½Úµã¶ÔÓ¦¼¯ºÏµÄID
-    /// @return ·µ»Ø¸Ã½Úµã¶ÔÓ¦¼¯ºÏµÄID
+    /// @brief è·å–è¯¥èŠ‚ç‚¹å¯¹åº”é›†åˆçš„ID
+    /// @return è¿”å›è¯¥èŠ‚ç‚¹å¯¹åº”é›†åˆçš„ID
     SetId GetSetHandler() const { return set_handler; }
-    /// @brief ÉèÖÃ¸Ã½Úµã¶ÔÓ¦µ¥´ÊµÄÊı¾İ
-    /// @param[in] data £º¶ÔÓ¦µ¥´ÊÊı¾İ
-    /// @note ¸Ãº¯Êı½ö½ÓÊÜWordAttachedDataµÄconstÒıÓÃºÍÓÒÖµÒıÓÃ
+    /// @brief è®¾ç½®è¯¥èŠ‚ç‚¹å¯¹åº”å•è¯çš„æ•°æ®
+    /// @param[in] data ï¼šå¯¹åº”å•è¯æ•°æ®
+    /// @note è¯¥å‡½æ•°ä»…æ¥å—WordAttachedDataçš„constå¼•ç”¨å’Œå³å€¼å¼•ç”¨
     template <class AttachedData>
     void SetWordAttachedData(AttachedData&& data) {
       word_attached_data = std::forward<AttachedData>(data);
     }
 
-    /// @brief ¸Ã½ÚµãµÄ×ªÒÆÌõ¼ş£¬´æ´¢IntermediateDfaNode½Úµã¾ä±ú
-    /// @note ¿ÉÒÔÖ±½ÓÊ¹ÓÃCHAR_MIN~CHAR_MAXÈÎÒâÖµ·ÃÎÊ£¬²»»á´æÔÚÏÂ±ê´íÎó
+    /// @brief è¯¥èŠ‚ç‚¹çš„è½¬ç§»æ¡ä»¶ï¼Œå­˜å‚¨IntermediateDfaNodeèŠ‚ç‚¹å¥æŸ„
+    /// @note å¯ä»¥ç›´æ¥ä½¿ç”¨CHAR_MIN~CHAR_MAXä»»æ„å€¼è®¿é—®ï¼Œä¸ä¼šå­˜åœ¨ä¸‹æ ‡é”™è¯¯
     TransformArrayManager<IntermediateNodeId> forward_nodes;
-    /// @brief ¸Ã½Úµã¶ÔÓ¦µ¥´ÊµÄÊı¾İ
+    /// @brief è¯¥èŠ‚ç‚¹å¯¹åº”å•è¯çš„æ•°æ®
     WordAttachedData word_attached_data;
-    /// ¸Ã½Úµã¶ÔÓ¦µÄ¼¯ºÏID
+    /// è¯¥èŠ‚ç‚¹å¯¹åº”çš„é›†åˆID
     SetId set_handler;
   };
 
-  /// @brief ¹¹½¨×îĞ¡»¯DFA
-  /// @note ¸Ãº¯ÊıÔÚDfaConstruct²Ù×÷ºóµ÷ÓÃ£¬ºÏ²¢ÏàÍ¬×ªÒÆÏî²¢Ìî³äDFAÅäÖÃ±í
+  /// @brief æ„å»ºæœ€å°åŒ–DFA
+  /// @note è¯¥å‡½æ•°åœ¨DfaConstructæ“ä½œåè°ƒç”¨ï¼Œåˆå¹¶ç›¸åŒè½¬ç§»é¡¹å¹¶å¡«å……DFAé…ç½®è¡¨
   bool DfaMinimize();
-  /// @brief »ñÈ¡ÖĞ¼ä½ÚµãÒıÓÃ
-  /// @param[in] id £ºÖĞ¼ä½ÚµãID
-  /// @return ·µ»Ø¶ÔÓ¦µÄÖĞ¼ä½ÚµãÒıÓÃ
-  /// @note id±ØĞë¶ÔÓ¦ÒÑ´æÔÚµÄÖĞ¼ä½Úµã
+  /// @brief è·å–ä¸­é—´èŠ‚ç‚¹å¼•ç”¨
+  /// @param[in] id ï¼šä¸­é—´èŠ‚ç‚¹ID
+  /// @return è¿”å›å¯¹åº”çš„ä¸­é—´èŠ‚ç‚¹å¼•ç”¨
+  /// @note idå¿…é¡»å¯¹åº”å·²å­˜åœ¨çš„ä¸­é—´èŠ‚ç‚¹
   IntermediateDfaNode& GetIntermediateNode(IntermediateNodeId id) {
     return node_manager_intermediate_node_.GetObject(id);
   }
-  /// @brief »ñÈ¡ÖĞ¼ä½ÚµãconstÒıÓÃ
-  /// @param[in] id £ºÖĞ¼ä½ÚµãID
-  /// @return ·µ»Ø¶ÔÓ¦µÄÖĞ¼ä½ÚµãconstÒıÓÃ
-  /// @note id±ØĞë¶ÔÓ¦ÒÑ´æÔÚµÄÖĞ¼ä½Úµã
+  /// @brief è·å–ä¸­é—´èŠ‚ç‚¹constå¼•ç”¨
+  /// @param[in] id ï¼šä¸­é—´èŠ‚ç‚¹ID
+  /// @return è¿”å›å¯¹åº”çš„ä¸­é—´èŠ‚ç‚¹constå¼•ç”¨
+  /// @note idå¿…é¡»å¯¹åº”å·²å­˜åœ¨çš„ä¸­é—´èŠ‚ç‚¹
   const IntermediateDfaNode& GetIntermediateNode(IntermediateNodeId id) const {
     return node_manager_intermediate_node_.GetObject(id);
   }
-  /// @brief »ñÈ¡×Ó¼¯¹¹Ôì·¨µÄ¼¯ºÏµÄÒıÓÃ
-  /// @param[in] set_id £º¼¯ºÏID
-  /// @return ·µ»Ø¼¯ºÏµÄÒıÓÃ
-  /// @note set_id±ØĞë¶ÔÓ¦ÒÑ´æÔÚµÄ¼¯ºÏ
+  /// @brief è·å–å­é›†æ„é€ æ³•çš„é›†åˆçš„å¼•ç”¨
+  /// @param[in] set_id ï¼šé›†åˆID
+  /// @return è¿”å›é›†åˆçš„å¼•ç”¨
+  /// @note set_idå¿…é¡»å¯¹åº”å·²å­˜åœ¨çš„é›†åˆ
   SetType& GetSetObject(SetId set_id) {
     return node_manager_set_.GetObject(set_id);
   }
-  /// @brief »ñÈ¡NFA½Úµã¼¯ºÏÔÚ¸ø¶¨×Ö·ûÏÂµÄ×ªÒÆ½á¹û
-  /// @param[in] set_src £º×ªÒÆÆğµãµÄNFA½ÚµãIDµÄ¼¯ºÏ
-  /// @param[in] c_transform £º×ªÒÆÌõ¼ş
-  /// @return ·µ»ØÖµÇ°°ë²¿·ÖÎª¶ÔÓ¦ÖĞ¼ä½Úµã¾ä±ú£¬ºó°ë²¿·Ö±íÊ¾ÊÇ·ñĞÂ´´½¨ÁË¼¯ºÏ
+  /// @brief è·å–NFAèŠ‚ç‚¹é›†åˆåœ¨ç»™å®šå­—ç¬¦ä¸‹çš„è½¬ç§»ç»“æœ
+  /// @param[in] set_src ï¼šè½¬ç§»èµ·ç‚¹çš„NFAèŠ‚ç‚¹IDçš„é›†åˆ
+  /// @param[in] c_transform ï¼šè½¬ç§»æ¡ä»¶
+  /// @return è¿”å›å€¼å‰åŠéƒ¨åˆ†ä¸ºå¯¹åº”ä¸­é—´èŠ‚ç‚¹å¥æŸ„ï¼ŒååŠéƒ¨åˆ†è¡¨ç¤ºæ˜¯å¦æ–°åˆ›å»ºäº†é›†åˆ
   /// @retval std::pair(IntermediateNodeId::InvalidId(), false)
-  /// £º¸Ã¼¯ºÏÔÚ¸ø¶¨Ìõ¼şÏÂÎŞ·¨×ªÒÆ
+  /// ï¼šè¯¥é›†åˆåœ¨ç»™å®šæ¡ä»¶ä¸‹æ— æ³•è½¬ç§»
   std::pair<IntermediateNodeId, bool> SetGoto(SetId set_src, char c_transform);
-  /// @brief ²éÑ¯DFAÖĞ¼ä½ÚµãÔÚ¸ø¶¨Ìõ¼şÏÂµÄ×ªÒÆÇé¿ö
-  /// @param[in] dfa_src £º×ªÒÆÆğµãµÄDFAÖĞ¼ä½Úµã
-  /// @param[in] c_transform £º×ªÒÆÌõ¼ş
-  /// @return ·µ»Ø×ªÒÆµ½µÄDFAÖĞ¼ä½ÚµãID
+  /// @brief æŸ¥è¯¢DFAä¸­é—´èŠ‚ç‚¹åœ¨ç»™å®šæ¡ä»¶ä¸‹çš„è½¬ç§»æƒ…å†µ
+  /// @param[in] dfa_src ï¼šè½¬ç§»èµ·ç‚¹çš„DFAä¸­é—´èŠ‚ç‚¹
+  /// @param[in] c_transform ï¼šè½¬ç§»æ¡ä»¶
+  /// @return è¿”å›è½¬ç§»åˆ°çš„DFAä¸­é—´èŠ‚ç‚¹ID
   /// @retval IntermediateNodeId::InvalidId()
-  /// £º¸Ã½ÚµãÔÚc_transformÌõ¼şÏÂÎŞ·¨×ªÒÆ
-  /// @note ¸Ãº¯Êı½ö²éÑ¯£¬SetGotoÈç¹û²»´æÔÚ»á´´½¨ĞÂ¼¯ºÏºÍÖĞ¼ä½Úµã
+  /// ï¼šè¯¥èŠ‚ç‚¹åœ¨c_transformæ¡ä»¶ä¸‹æ— æ³•è½¬ç§»
+  /// @note è¯¥å‡½æ•°ä»…æŸ¥è¯¢ï¼ŒSetGotoå¦‚æœä¸å­˜åœ¨ä¼šåˆ›å»ºæ–°é›†åˆå’Œä¸­é—´èŠ‚ç‚¹
   IntermediateNodeId IntermediateGoto(IntermediateNodeId dfa_src,
                                       char c_transform) const;
-  /// @brief ÉèÖÃDFAÖĞ¼ä½ÚµãÌõ¼ş×ªÒÆ
-  /// @param[in] node_intermediate_src £ºÔ´½Úµã
-  /// @param[in] c_transform £º×ªÒÆÌõ¼ş
-  /// @param[in] node_intermediate_dst £ºÄ¿µÄ½Úµã
-  /// @return ·µ»ØÊÇ·ñÉèÖÃ³É¹¦
-  /// @retval true £ºÉèÖÃ³É¹¦
-  /// @retval false £ºÉèÖÃÊ§°Ü
-  /// @note Ò»¶¨·µ»Øtrue
+  /// @brief è®¾ç½®DFAä¸­é—´èŠ‚ç‚¹æ¡ä»¶è½¬ç§»
+  /// @param[in] node_intermediate_src ï¼šæºèŠ‚ç‚¹
+  /// @param[in] c_transform ï¼šè½¬ç§»æ¡ä»¶
+  /// @param[in] node_intermediate_dst ï¼šç›®çš„èŠ‚ç‚¹
+  /// @return è¿”å›æ˜¯å¦è®¾ç½®æˆåŠŸ
+  /// @retval true ï¼šè®¾ç½®æˆåŠŸ
+  /// @retval false ï¼šè®¾ç½®å¤±è´¥
+  /// @note ä¸€å®šè¿”å›true
   bool SetIntermediateNodeTransform(IntermediateNodeId node_intermediate_src,
                                     char c_transform,
                                     IntermediateNodeId node_intermediate_dst);
-  /// @brief »ñÈ¡¼¯ºÏ¶ÔÓ¦µÄÖĞ¼ä½ÚµãID£¬Èç¹û²»´æÔÚÔò´´½¨ĞÂµÄÖĞ¼ä½Úµã
-  /// @param[in] uset £º»ñÈ¡¶ÔÓ¦ÖĞ¼ä½ÚµãµÄ¼¯ºÏ
-  /// @param[in] word_attached_data £ºÈç¹û´´½¨ÖĞ¼ä½ÚµãÔò¸ÃÖĞ¼ä½ÚµãÊ¹ÓÃ¸Ãµ¥´ÊÊı¾İ
+  /// @brief è·å–é›†åˆå¯¹åº”çš„ä¸­é—´èŠ‚ç‚¹IDï¼Œå¦‚æœä¸å­˜åœ¨åˆ™åˆ›å»ºæ–°çš„ä¸­é—´èŠ‚ç‚¹
+  /// @param[in] uset ï¼šè·å–å¯¹åº”ä¸­é—´èŠ‚ç‚¹çš„é›†åˆ
+  /// @param[in] word_attached_data ï¼šå¦‚æœåˆ›å»ºä¸­é—´èŠ‚ç‚¹åˆ™è¯¥ä¸­é—´èŠ‚ç‚¹ä½¿ç”¨è¯¥å•è¯æ•°æ®
   /// @return
-  /// ·µ»Ø»ñÈ¡µ½µÄÖĞ¼ä½ÚµãIDºÍÊÇ·ñĞÂ²åÈë¸Ã¼¯ºÏ£¨ÊÇ·ñĞÂ½¨ÖĞ¼ä½Úµã£©
-  /// @note IntermediateNodeSet½öÖ§³ÖSetTypeµÄconst×óÖµÒıÓÃ»òÓÒÖµÒıÓÃ
+  /// è¿”å›è·å–åˆ°çš„ä¸­é—´èŠ‚ç‚¹IDå’Œæ˜¯å¦æ–°æ’å…¥è¯¥é›†åˆï¼ˆæ˜¯å¦æ–°å»ºä¸­é—´èŠ‚ç‚¹ï¼‰
+  /// @note IntermediateNodeSetä»…æ”¯æŒSetTypeçš„constå·¦å€¼å¼•ç”¨æˆ–å³å€¼å¼•ç”¨
   template <class IntermediateNodeSet>
   std::pair<IntermediateNodeId, bool> InOrInsert(
       IntermediateNodeSet&& uset,
       WordAttachedData&& word_attached_data = WordAttachedData());
 
-  /// @brief ¶ÔÖĞ¼ä½Úµã½øĞĞ·ÖÀà
-  /// @param[in] node_ids £º´ı·ÖÀàµÄ½Úµã¼¯ºÏ
-  /// @param[in] c_transform £º±¾ÂÖ·ÖÀàÊ¹ÓÃµÄ×ªÒÆ×Ö·û
+  /// @brief å¯¹ä¸­é—´èŠ‚ç‚¹è¿›è¡Œåˆ†ç±»
+  /// @param[in] node_ids ï¼šå¾…åˆ†ç±»çš„èŠ‚ç‚¹é›†åˆ
+  /// @param[in] c_transform ï¼šæœ¬è½®åˆ†ç±»ä½¿ç”¨çš„è½¬ç§»å­—ç¬¦
   /// @details
-  /// ¸Ãº¯ÊıÃ¿´Îµ÷ÓÃ¶¼¶Ôµ±Ç°ÖĞ¼ä½Úµã¸ù¾İÔÚµ±Ç°×ªÒÆ×Ö·ûÏÂµÄ×ªÒÆ½á¹û½øĞĞ·ÖÀà
-  /// ·ÖÀà·½·¨£º
-  /// Ã¿ÂÖ·ÖÀàºóµÃµ½>=1¸ö×Ó¼¯ºÏ£¬Èç¹û×Ó¼¯ºÏÄÚº¬ÓĞ¶à¸ö½ÚµãÇÒc_transform!=CHAR_MIN
-  /// ÔòÊ¹ÓÃc_transform+1ºÍÃ¿¸öº¬ÓĞ¶à¸öÔªËØµÄ¼¯ºÏµ÷ÓÃ¸Ãº¯Êı½øĞĞÏÂÒ»ÂÖ·ÖÀà
-  /// ·ñÔòÃ¿¸ö×Ó¼¯ºÏÓ³ÉäÎªÒ»ÌõDFA×ªÒÆ±íÌõÄ¿£¬Õâ¸ö¼¯ºÏÄÚËùÓĞ½ÚµãµÈĞ§
-  /// µ÷ÓÃ·½Ê½£º
-  /// ³õ´Îµ÷ÓÃÊ±c_transform´ú±íµÚÒ»¸ö¿ªÊ¼ÅĞ¶ÏµÄ×Ö·û
-  /// Ã¿ÂÖµ÷ÓÃºóÈç¹ûĞèÒª½øĞĞÏÂÒ»ÂÖ·ÖÀàÔò×Ô¶¯µ÷ÓÃ£¬ÎŞĞèÊÖ¶¯¿ØÖÆ
-  /// @note Ã¿Ò»ÂÖ×ªÒÆ½á¹û¶¼ÏàÍ¬µÄÖĞ¼ä½ÚµãÎªµÈĞ§½Úµã£¬¿ÉÒÔºÏ²¢
-  /// ¸Ãº¯Êı»áÌîĞ´intermediate_node_to_final_node_ºÍtransform_array_size_
-  /// @attention node_idsËùÓĞÔªËØ²»ÔÊĞíÖØ¸´
+  /// è¯¥å‡½æ•°æ¯æ¬¡è°ƒç”¨éƒ½å¯¹å½“å‰ä¸­é—´èŠ‚ç‚¹æ ¹æ®åœ¨å½“å‰è½¬ç§»å­—ç¬¦ä¸‹çš„è½¬ç§»ç»“æœè¿›è¡Œåˆ†ç±»
+  /// åˆ†ç±»æ–¹æ³•ï¼š
+  /// æ¯è½®åˆ†ç±»åå¾—åˆ°>=1ä¸ªå­é›†åˆï¼Œå¦‚æœå­é›†åˆå†…å«æœ‰å¤šä¸ªèŠ‚ç‚¹ä¸”c_transform!=CHAR_MIN
+  /// åˆ™ä½¿ç”¨c_transform+1å’Œæ¯ä¸ªå«æœ‰å¤šä¸ªå…ƒç´ çš„é›†åˆè°ƒç”¨è¯¥å‡½æ•°è¿›è¡Œä¸‹ä¸€è½®åˆ†ç±»
+  /// å¦åˆ™æ¯ä¸ªå­é›†åˆæ˜ å°„ä¸ºä¸€æ¡DFAè½¬ç§»è¡¨æ¡ç›®ï¼Œè¿™ä¸ªé›†åˆå†…æ‰€æœ‰èŠ‚ç‚¹ç­‰æ•ˆ
+  /// è°ƒç”¨æ–¹å¼ï¼š
+  /// åˆæ¬¡è°ƒç”¨æ—¶c_transformä»£è¡¨ç¬¬ä¸€ä¸ªå¼€å§‹åˆ¤æ–­çš„å­—ç¬¦
+  /// æ¯è½®è°ƒç”¨åå¦‚æœéœ€è¦è¿›è¡Œä¸‹ä¸€è½®åˆ†ç±»åˆ™è‡ªåŠ¨è°ƒç”¨ï¼Œæ— éœ€æ‰‹åŠ¨æ§åˆ¶
+  /// @note æ¯ä¸€è½®è½¬ç§»ç»“æœéƒ½ç›¸åŒçš„ä¸­é—´èŠ‚ç‚¹ä¸ºç­‰æ•ˆèŠ‚ç‚¹ï¼Œå¯ä»¥åˆå¹¶
+  /// è¯¥å‡½æ•°ä¼šå¡«å†™intermediate_node_to_final_node_å’Œtransform_array_size_
+  /// @attention node_idsæ‰€æœ‰å…ƒç´ ä¸å…è®¸é‡å¤
   void IntermediateNodeClassify(std::list<IntermediateNodeId>&& node_ids,
                                 char c_transform = CHAR_MIN);
 
-  /// @brief DFAÅäÖÃ
-  /// @note Ğ´ÈëÅäÖÃÎÄ¼ş
+  /// @brief DFAé…ç½®
+  /// @note å†™å…¥é…ç½®æ–‡ä»¶
   DfaConfigType dfa_config_;
-  /// @brief DFA×ªÒÆ±í³õÊ¼ÌõÄ¿ĞòºÅ
-  /// @note Ğ´ÈëÅäÖÃÎÄ¼ş
+  /// @brief DFAè½¬ç§»è¡¨åˆå§‹æ¡ç›®åºå·
+  /// @note å†™å…¥é…ç½®æ–‡ä»¶
   TransformArrayId root_transform_array_id_;
-  /// @brief Óöµ½ÎÄ¼şÎ²Ê±·µ»ØµÄÊı¾İ
-  /// @note Ğ´ÈëÅäÖÃÎÄ¼ş
+  /// @brief é‡åˆ°æ–‡ä»¶å°¾æ—¶è¿”å›çš„æ•°æ®
+  /// @note å†™å…¥é…ç½®æ–‡ä»¶
   WordAttachedData file_end_saved_data_;
 
-  /// @brief NFAÅäÖÃÉú³ÉÆ÷
+  /// @brief NFAé…ç½®ç”Ÿæˆå™¨
   NfaGenerator nfa_generator_;
-  /// @brief ÖĞ¼ä½Úµã³õÊ¼½ÚµãID
+  /// @brief ä¸­é—´èŠ‚ç‚¹åˆå§‹èŠ‚ç‚¹ID
   IntermediateNodeId root_intermediate_node_id_;
-  /// @brief DFA×ªÒÆ±íÌõÄ¿Êı
+  /// @brief DFAè½¬ç§»è¡¨æ¡ç›®æ•°
   size_t transform_array_size_ = 0;
 
-  /// @brief ´æ´¢DFAÖĞ¼ä½Úµãµ½×ªÒÆ±íÌõÄ¿µÄÓ³Éä
+  /// @brief å­˜å‚¨DFAä¸­é—´èŠ‚ç‚¹åˆ°è½¬ç§»è¡¨æ¡ç›®çš„æ˜ å°„
   std::unordered_map<IntermediateNodeId, TransformArrayId>
       intermediate_node_to_final_node_;
-  /// @brief ´æ´¢ÖĞ¼ä½Úµã
+  /// @brief å­˜å‚¨ä¸­é—´èŠ‚ç‚¹
   ObjectManager<IntermediateDfaNode> node_manager_intermediate_node_;
-  /// @brief ¹ÜÀíÖĞ¼ä½Úµã¶ÔÓ¦µÄ¼¯ºÏ
+  /// @brief ç®¡ç†ä¸­é—´èŠ‚ç‚¹å¯¹åº”çš„é›†åˆ
   SetManagerType node_manager_set_;
-  /// @brief ´æ´¢¼¯ºÏIDµ½ÖĞ¼ä½ÚµãIDµÄÓ³Éä
+  /// @brief å­˜å‚¨é›†åˆIDåˆ°ä¸­é—´èŠ‚ç‚¹IDçš„æ˜ å°„
   std::unordered_map<SetId, IntermediateNodeId> setid_to_intermediate_nodeid_;
 };
 

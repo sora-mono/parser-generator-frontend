@@ -1,75 +1,84 @@
-/// @file process_function_interface.h
-/// @brief ¸ÃÎÄ¼ş¶¨Òå°ü×°ÓÃ»§¶¨Òå¹æÔ¼º¯ÊıµÄÀàµÄ»ùÀà
+ï»¿/// @file process_function_interface.h
+/// @brief è¯¥æ–‡ä»¶å®šä¹‰åŒ…è£…ç”¨æˆ·å®šä¹‰è§„çº¦å‡½æ•°çš„ç±»çš„åŸºç±»
 #ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_H_
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_H_
 #include <any>
 #include <boost/serialization/base_object.hpp>
 #include <cassert>
 #include <memory>
+#include <string>
 #include <vector>
 
 namespace frontend::generator::syntax_generator {
 /// @class ProcessFunctionInterface process_function_interface.h
-/// @brief ËùÓĞ°ü×°ÓÃ»§¶¨Òåº¯ÊıµÄÀà¾ù´Ó¸ÃÀàÅÉÉú
+/// @brief æ‰€æœ‰åŒ…è£…ç”¨æˆ·å®šä¹‰å‡½æ•°çš„ç±»å‡ä»è¯¥ç±»æ´¾ç”Ÿ
 /// @details
-/// ËùÓĞÅÉÉúÀà±ØĞëÇÒ½öÔÊĞíÖØÔØReductº¯Êı£¬¸Ãº¯Êı·µ»Ø¹æÔ¼ºóÓÃ»§·µ»ØµÄÊı¾İ
-/// ¸ÃÊı¾İÔÚÏÂÒ»´Î¹æÔ¼Ê±Ê¹ÓÃ
+/// æ‰€æœ‰æ´¾ç”Ÿç±»å¿…é¡»ä¸”ä»…å…è®¸é‡è½½Reductå‡½æ•°ï¼Œè¯¥å‡½æ•°è¿”å›è§„çº¦åç”¨æˆ·è¿”å›çš„æ•°æ®
+/// è¯¥æ•°æ®åœ¨ä¸‹ä¸€æ¬¡è§„çº¦æ—¶ä½¿ç”¨
 class ProcessFunctionInterface {
  public:
   virtual ~ProcessFunctionInterface() {}
 
-  /// @brief µ÷ÓÃÓÃ»§¶¨ÒåµÄ¹æÔ¼º¯Êı
-  /// @param[in] word_data £º¹æÔ¼µÄ²úÉúÊ½ÌåÖĞÃ¿¸ö²úÉúÊ½µÄÊı¾İ
-  /// @return ·µ»ØÓÃ»§¹æÔ¼ºó·µ»ØµÄÊı¾İ
+  /// @brief è°ƒç”¨ç”¨æˆ·å®šä¹‰çš„è§„çº¦å‡½æ•°
+  /// @param[in] word_data ï¼šè§„çº¦çš„äº§ç”Ÿå¼ä½“ä¸­æ¯ä¸ªäº§ç”Ÿå¼çš„æ•°æ®
+  /// @return è¿”å›ç”¨æˆ·è§„çº¦åè¿”å›çš„æ•°æ®
   /// @details
-  /// word_dataÖĞÊı¾İË³ĞòÎª²úÉúÊ½¶¨ÒåË³Ğò
-  /// @note ¿Õ¹æÔ¼½Úµã´æ´¢std::monostate
+  /// word_dataä¸­æ•°æ®é¡ºåºä¸ºäº§ç”Ÿå¼å®šä¹‰é¡ºåº
+  /// @note ç©ºè§„çº¦èŠ‚ç‚¹å­˜å‚¨std::monostate
   virtual std::any Reduct(std::vector<std::any>&& word_data) const = 0;
+  /// @brief è·å–ç”¨æˆ·å®šä¹‰çš„è§„çº¦å‡½æ•°åç§°
+  virtual std::string GetReductFunctionName() const = 0;
 
  private:
-  /// @brief ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ
+  /// @brief å…è®¸åºåˆ—åŒ–ç±»è®¿é—®
   friend class boost::serialization::access;
 
-  /// @brief ĞòÁĞ»¯¸ÃÀàµÄº¯Êı
-  /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-  /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-  /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
-  /// ËùÓĞÅÉÉúÀà¾ùĞèÖØĞ´¸Ãº¯Êı
+  /// @brief åºåˆ—åŒ–è¯¥ç±»çš„å‡½æ•°
+  /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+  /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+  /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
+  /// æ‰€æœ‰æ´¾ç”Ÿç±»å‡éœ€é‡å†™è¯¥å‡½æ•°
   template <class Archive>
   void serialize(Archive&& ar, const unsigned int version) {}
 };
 
 /// @class RootReductClass process_function_interface.h
-/// @brief ÄÚ²¿ÊµÏÖÓÃ¸ù½ÚµãµÄ¹æÔ¼º¯Êı
+/// @brief å†…éƒ¨å®ç°ç”¨æ ¹èŠ‚ç‚¹çš„è§„çº¦å‡½æ•°
 /// @details
-/// Óï·¨·ÖÎö»úÅäÖÃÉú³ÉÊ±»á×Ô¶¯´´½¨Ò»¸öÄÚ²¿¸ù½Úµã£¬¸Ã¸ù½ÚµãÎª·ÇÖÕ½á²úÉúÊ½£¬
-/// ÆäÎ¨Ò»µÄ²úÉúÊ½ÌåÎªÓÃ»§¶¨ÒåµÄ¸ù²úÉúÊ½£»
-/// ¸Ã²úÉúÊ½½öÖ§³ÖActionType::kAccept²Ù×÷
-/// RootReductClassÓÃÀ´°ü×°¸ÃÀàµÄ¹æÔ¼º¯Êı
+/// è¯­æ³•åˆ†ææœºé…ç½®ç”Ÿæˆæ—¶ä¼šè‡ªåŠ¨åˆ›å»ºä¸€ä¸ªå†…éƒ¨æ ¹èŠ‚ç‚¹ï¼Œè¯¥æ ¹èŠ‚ç‚¹ä¸ºéç»ˆç»“äº§ç”Ÿå¼ï¼Œ
+/// å…¶å”¯ä¸€çš„äº§ç”Ÿå¼ä½“ä¸ºç”¨æˆ·å®šä¹‰çš„æ ¹äº§ç”Ÿå¼ï¼›
+/// è¯¥äº§ç”Ÿå¼ä»…æ”¯æŒActionType::kAcceptæ“ä½œ
+/// RootReductClassç”¨æ¥åŒ…è£…è¯¥ç±»çš„è§„çº¦å‡½æ•°
 class RootReductClass : public ProcessFunctionInterface {
-  /// @brief µ÷ÓÃÄÚ²¿¸ù½ÚµãµÄ¹æÔ¼º¯Êı
-  /// @param[in] word_data £º¹æÔ¼µÄ²úÉúÊ½ÌåÖĞÃ¿¸ö²úÉúÊ½µÄÊı¾İ
-  /// @return ·µ»ØUserData()
+  /// @brief è°ƒç”¨å†…éƒ¨æ ¹èŠ‚ç‚¹çš„è§„çº¦å‡½æ•°
+  /// @param[in] word_data ï¼šè§„çº¦çš„äº§ç”Ÿå¼ä½“ä¸­æ¯ä¸ªäº§ç”Ÿå¼çš„æ•°æ®
+  /// @return è¿”å›UserData()
   /// @details
-  /// word_dataÖĞÊı¾İË³ĞòÎª²úÉúÊ½¶¨ÒåË³Ğò
-  /// @note ¿Õ¹æÔ¼½Úµã´æ´¢std::monostate
-  /// @attention ÄÚ²¿¸ù½Úµã½öÔÊĞíActionType::kAccept£¬²»ÔÊĞí¹æÔ¼²Ù×÷
-  /// µ÷ÓÃ¸Ãº¯Êı»áµ¼ÖÂ´¥·¢assert(false)
+  /// word_dataä¸­æ•°æ®é¡ºåºä¸ºäº§ç”Ÿå¼å®šä¹‰é¡ºåº
+  /// @note ç©ºè§„çº¦èŠ‚ç‚¹å­˜å‚¨std::monostate
+  /// @attention å†…éƒ¨æ ¹èŠ‚ç‚¹ä»…å…è®¸ActionType::kAcceptï¼Œä¸å…è®¸è§„çº¦æ“ä½œ
+  /// è°ƒç”¨è¯¥å‡½æ•°ä¼šå¯¼è‡´è§¦å‘assert(false)
   virtual std::any Reduct(std::vector<std::any>&& word_data) const override {
     assert(false);
-    // ·ÀÖ¹¾¯¸æ
+    // é˜²æ­¢è­¦å‘Š
     return std::any();
   }
 
+  virtual std::string GetReductFunctionName() const override {
+    assert(false);
+    // é˜²æ­¢è­¦å‘Š
+    return "";
+  }
+
  private:
-  /// @brief ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ
+  /// @brief å…è®¸åºåˆ—åŒ–ç±»è®¿é—®
   friend class boost::serialization::access;
 
-  /// @brief ĞòÁĞ»¯¸ÃÀàµÄº¯Êı
-  /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-  /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-  /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
-  /// ËùÓĞÅÉÉúÀà¾ùĞèÖØĞ´¸Ãº¯Êı
+  /// @brief åºåˆ—åŒ–è¯¥ç±»çš„å‡½æ•°
+  /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+  /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+  /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
+  /// æ‰€æœ‰æ´¾ç”Ÿç±»å‡éœ€é‡å†™è¯¥å‡½æ•°
   template <class Archive>
   void serialize(Archive&& ar, const unsigned int version) {
     ar& boost::serialization::base_object<ProcessFunctionInterface>(*this);

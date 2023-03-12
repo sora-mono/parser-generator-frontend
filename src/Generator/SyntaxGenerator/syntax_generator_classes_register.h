@@ -1,5 +1,5 @@
-/// ¸ÃÎÄ¼şÎªĞèÒªĞòÁĞ»¯µÄSyntaxGeneratorÖĞ¶¨ÒåµÄÄÚ²¿ÊµÏÖĞèÒªµÄÀàµÄ×¢²á´úÂë
-/// ×¢²áÕâĞ©ÀàÒÔ±ãboost::serialization¿ÉÒÔĞòÁĞ»¯ÕâĞ©Àà
+ï»¿/// è¯¥æ–‡ä»¶ä¸ºéœ€è¦åºåˆ—åŒ–çš„SyntaxGeneratorä¸­å®šä¹‰çš„å†…éƒ¨å®ç°éœ€è¦çš„ç±»çš„æ³¨å†Œä»£ç 
+/// æ³¨å†Œè¿™äº›ç±»ä»¥ä¾¿boost::serializationå¯ä»¥åºåˆ—åŒ–è¿™äº›ç±»
 #ifndef GENERATOR_SYNTAXGENERATOR_SYNTAX_GENERATOR_CLASSES_REGISTER_H_
 #define GENERATOR_SYNTAXGENERATOR_SYNTAX_GENERATOR_CLASSES_REGISTER_H_
 
@@ -8,7 +8,7 @@
 #include "Generator/export_types.h"
 #include "syntax_analysis_table.h"
 
-/// ×¢²áĞòÁĞ»¯ĞèÒªÊ¹ÓÃµÄÀà
+/// æ³¨å†Œåºåˆ—åŒ–éœ€è¦ä½¿ç”¨çš„ç±»
 BOOST_CLASS_EXPORT_GUID(
     frontend::generator::syntax_generator::ProductionNodeId,
     "frontend::generator::syntax_generator::ProductionNodeId")

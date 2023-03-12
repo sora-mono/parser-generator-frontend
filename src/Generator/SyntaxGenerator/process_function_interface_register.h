@@ -1,8 +1,8 @@
-/// @file process_function_interface_register.h
-/// @brief ×¢²áprocess_function_interface.hÖĞÅÉÉúÀàµÄºê
+ï»¿/// @file process_function_interface_register.h
+/// @brief æ³¨å†Œprocess_function_interface.hä¸­æ´¾ç”Ÿç±»çš„å®
 /// @details
-/// boostĞòÁĞ»¯¿âĞòÁĞ»¯ÅÉÉúÀàÇ°±ØĞëÏÈ×¢²á£¬·ñÔò»áÅ×Òì³£
-/// ¸ÃÎÄ¼şÄÚÎª×¢²áprocess_function_interface.hÖĞÅÉÉúÀàµÄºê
+/// booståºåˆ—åŒ–åº“åºåˆ—åŒ–æ´¾ç”Ÿç±»å‰å¿…é¡»å…ˆæ³¨å†Œï¼Œå¦åˆ™ä¼šæŠ›å¼‚å¸¸
+/// è¯¥æ–‡ä»¶å†…ä¸ºæ³¨å†Œprocess_function_interface.hä¸­æ´¾ç”Ÿç±»çš„å®
 #ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_REGISTER_H_
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTION_INTERFACE_REGISTER_H_
 

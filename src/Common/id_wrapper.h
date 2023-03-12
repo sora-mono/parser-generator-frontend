@@ -1,13 +1,13 @@
-/// @file id_wrapper.h
-/// @brief ID°ü×°Æ÷£¬°ü×°IDÒÔ±ÜÃâID»ìÓÃµ¼ÖÂÔËĞĞÊ±´íÎó
+ï»¿/// @file id_wrapper.h
+/// @brief IDåŒ…è£…å™¨ï¼ŒåŒ…è£…IDä»¥é¿å…IDæ··ç”¨å¯¼è‡´è¿è¡Œæ—¶é”™è¯¯
 /// @details
-/// ¸ÃÍ·ÎÄ¼ş°üº¬boost-serialization¿âµÄÍ·ÎÄ¼ş£¬´Ó¶øÔÊĞí±»ĞòÁĞ»¯
-/// ¸ÃÍ·ÎÄ¼ş¶¨ÒåÁËËÄ¸öÉú³É²»Í¬µÄID°ü×°ÀàµÄÄ£°åÀà
-/// Õ¼ÓÃ¿Õ¼äÓë²»°ü×°ÏàÍ¬£¬±àÒëÆ÷ÓÅ»¯¹»ºÃÔò²»»áµ¼ÖÂ¶îÍâµÄ¿ªÏú
-/// ÎŞ²Î¹¹Ôìº¯Êı»á½«Öµ¸³Îªdefault_invalid_valueÇÒIsValid()·µ»Øfalse
-/// default_invalid_valueÄ¬ÈÏÎªIdType(-1)
-/// Èç¹ûĞèÒªÊ¹ÓÃboostĞòÁĞ»¯¹¦ÄÜ£¬Çë°üº¬Í·ÎÄ¼ş£ºid_wrapper_serializer.h
-/// TODO ÌØ»¯std::swap
+/// è¯¥å¤´æ–‡ä»¶åŒ…å«boost-serializationåº“çš„å¤´æ–‡ä»¶ï¼Œä»è€Œå…è®¸è¢«åºåˆ—åŒ–
+/// è¯¥å¤´æ–‡ä»¶å®šä¹‰äº†å››ä¸ªç”Ÿæˆä¸åŒçš„IDåŒ…è£…ç±»çš„æ¨¡æ¿ç±»
+/// å ç”¨ç©ºé—´ä¸ä¸åŒ…è£…ç›¸åŒï¼Œç¼–è¯‘å™¨ä¼˜åŒ–å¤Ÿå¥½åˆ™ä¸ä¼šå¯¼è‡´é¢å¤–çš„å¼€é”€
+/// æ— å‚æ„é€ å‡½æ•°ä¼šå°†å€¼èµ‹ä¸ºdefault_invalid_valueä¸”IsValid()è¿”å›false
+/// default_invalid_valueé»˜è®¤ä¸ºIdType(-1)
+/// å¦‚æœéœ€è¦ä½¿ç”¨booståºåˆ—åŒ–åŠŸèƒ½ï¼Œè¯·åŒ…å«å¤´æ–‡ä»¶ï¼šid_wrapper_serializer.h
+/// TODO ç‰¹åŒ–std::swap
 #ifndef COMMON_ID_WRAPPER_H_
 #define COMMON_ID_WRAPPER_H_
 
@@ -16,14 +16,14 @@
 namespace frontend::common {
 
 /// @class BaseIdWrapper id_wrapper.h
-/// @attention »ù´¡ID°ü×°Æ÷Àà£¬²»Ó¦Ö±½ÓÊ¹ÓÃ
-/// @param[in] IdType_ £º Òª°ü×°µÄIDµÄÊµ¼ÊÀàĞÍ
-/// @param[in] LabelEnum_ £º·Ö·¢±êÇ©µÄÃ¶¾ÙÀàĞÍ£¬Óëlabel_¹²Í¬¾ö¶¨Î¨Ò»µÄID
+/// @attention åŸºç¡€IDåŒ…è£…å™¨ç±»ï¼Œä¸åº”ç›´æ¥ä½¿ç”¨
+/// @param[in] IdType_ ï¼š è¦åŒ…è£…çš„IDçš„å®é™…ç±»å‹
+/// @param[in] LabelEnum_ ï¼šåˆ†å‘æ ‡ç­¾çš„æšä¸¾ç±»å‹ï¼Œä¸label_å…±åŒå†³å®šå”¯ä¸€çš„ID
 /// @param[in] label_
-/// £º·Ö·¢±êÇ©Ã¶¾ÙÀàĞÍÖĞµÄ¾ßÌåÃ¶¾Ù£¬ÓëLabelEnum_¹²Í¬¾ö¶¨Î¨Ò»µÄIDÀàĞÍ
-/// @param[in] invalid_value_ £ºµÚËÄ¸ö²ÎÊıÎªÎŞĞ§Öµ
+/// ï¼šåˆ†å‘æ ‡ç­¾æšä¸¾ç±»å‹ä¸­çš„å…·ä½“æšä¸¾ï¼Œä¸LabelEnum_å…±åŒå†³å®šå”¯ä¸€çš„IDç±»å‹
+/// @param[in] invalid_value_ ï¼šç¬¬å››ä¸ªå‚æ•°ä¸ºæ— æ•ˆå€¼
 /// @details
-/// Ê¹ÓÃÀı£º
+/// ä½¿ç”¨ä¾‹ï¼š
 ///  enum class ExampleEnum { kExampleType };
 ///  using Id = BaseIdWrapper<size_t,ExampleEnum,ExampleEnum::kExampleType,
 ///                               static_cast<size_t>(-1)>;
@@ -31,11 +31,11 @@ template <class IdType_, class LabelEnum_, const LabelEnum_ label_,
           const IdType_ invalid_value_>
 class BaseIdWrapper {
  public:
-  /// @brief Ìá¹©Ê¹ÓÃµÄIDÔ­Ê¼ÀàĞÍ
+  /// @brief æä¾›ä½¿ç”¨çš„IDåŸå§‹ç±»å‹
   using IdType = IdType_;
-  /// @brief Ìá¹©¶¨ÒåÊ±Ê¹ÓÃµÄÃ¶¾ÙÀàĞÍ
+  /// @brief æä¾›å®šä¹‰æ—¶ä½¿ç”¨çš„æšä¸¾ç±»å‹
   using LabelEnum = LabelEnum_;
-  /// @brief Ìá¹©¶¨ÒåÊ±Ê¹ÓÃµÄÃ¶¾ÙÖĞ¾ßÌåÃ¶¾Ù
+  /// @brief æä¾›å®šä¹‰æ—¶ä½¿ç”¨çš„æšä¸¾ä¸­å…·ä½“æšä¸¾
   static constexpr LabelEnum_ label = label_;
 
   BaseIdWrapper() : id_(invalid_value_) {}
@@ -61,23 +61,23 @@ class BaseIdWrapper {
   bool operator!=(const BaseIdWrapper& id_wrapper) const {
     return !operator==(id_wrapper);
   }
-  /// @brief »ñÈ¡Î´°ü×°µÄÔ­Ê¼Öµ
-  /// @return Ô­Ê¼ÀàĞÍµÄÔ­Ê¼Öµ
+  /// @brief è·å–æœªåŒ…è£…çš„åŸå§‹å€¼
+  /// @return åŸå§‹ç±»å‹çš„åŸå§‹å€¼
   IdType GetRawValue() const { return id_; }
-  /// @brief ÉèÖÃÊ¹ÓÃµÄID
-  /// @param[in] production_node_id £ºÒª±£´æµÄÔ­Ê¼ID
+  /// @brief è®¾ç½®ä½¿ç”¨çš„ID
+  /// @param[in] production_node_id ï¼šè¦ä¿å­˜çš„åŸå§‹ID
   void SetId(IdType production_node_id) { id_ = production_node_id; }
-  /// @brief ½»»»Á½¸öIDÈİÆ÷
-  /// @param[in] id_wrapper £ºÖ¸ÏòÒª½»»»µÄÈİÆ÷µÄÖ¸Õë
-  /// @note ÔÊĞí´«µİthis×÷Îª²ÎÊı
+  /// @brief äº¤æ¢ä¸¤ä¸ªIDå®¹å™¨
+  /// @param[in] id_wrapper ï¼šæŒ‡å‘è¦äº¤æ¢çš„å®¹å™¨çš„æŒ‡é’ˆ
+  /// @note å…è®¸ä¼ é€’thisä½œä¸ºå‚æ•°
   void Swap(BaseIdWrapper* id_wrapper) { std::swap(id_, id_wrapper->id_); }
-  /// @brief ÅĞ¶Ïµ±Ç°´æ´¢µÄÖµÊÇ·ñÓĞĞ§
+  /// @brief åˆ¤æ–­å½“å‰å­˜å‚¨çš„å€¼æ˜¯å¦æœ‰æ•ˆ
   bool IsValid() const { return id_ != invalid_value_; }
-  /// @brief »ñÈ¡Ô­Ê¼µÄÎŞĞ§Öµ
-  /// @return Ô­Ê¼ÀàĞÍµÄÎŞĞ§Öµ
+  /// @brief è·å–åŸå§‹çš„æ— æ•ˆå€¼
+  /// @return åŸå§‹ç±»å‹çš„æ— æ•ˆå€¼
   static constexpr IdType InvalidValue() { return invalid_value_; }
-  /// @brief »ñÈ¡´æ´¢ÎŞĞ§ÖµµÄÈİÆ÷
-  /// @return ´æ´¢ÎŞĞ§ÖµµÄÈİÆ÷£¬ÎŞĞ§ÖµÍ¬InvalidValue
+  /// @brief è·å–å­˜å‚¨æ— æ•ˆå€¼çš„å®¹å™¨
+  /// @return å­˜å‚¨æ— æ•ˆå€¼çš„å®¹å™¨ï¼Œæ— æ•ˆå€¼åŒInvalidValue
   static constexpr BaseIdWrapper InvalidId() {
     return BaseIdWrapper<IdType, LabelEnum, label, InvalidValue()>(
         InvalidValue());
@@ -85,34 +85,34 @@ class BaseIdWrapper {
 
  private:
   /// @var id_
-  /// @brief IDµÄÖµ
+  /// @brief IDçš„å€¼
   IdType id_;
 };
 
 /// @class ExplicitIdWrapper id_wrapper.h
-/// @brief Ç¿ÖÆÏÔÊ½µ÷ÓÃ¹¹Ôìº¯ÊıÇÒÊ¹ÓÃÄ¬ÈÏÎŞĞ§Öµ°æWrapper
-/// @param[in] IdType_ £º Òª°ü×°µÄIDµÄÊµ¼ÊÀàĞÍ
-/// @param[in] LabelEnum_ £º·Ö·¢±êÇ©µÄÃ¶¾ÙÀàĞÍ£¬Óëlabel_¹²Í¬¾ö¶¨Î¨Ò»µÄID
+/// @brief å¼ºåˆ¶æ˜¾å¼è°ƒç”¨æ„é€ å‡½æ•°ä¸”ä½¿ç”¨é»˜è®¤æ— æ•ˆå€¼ç‰ˆWrapper
+/// @param[in] IdType_ ï¼š è¦åŒ…è£…çš„IDçš„å®é™…ç±»å‹
+/// @param[in] LabelEnum_ ï¼šåˆ†å‘æ ‡ç­¾çš„æšä¸¾ç±»å‹ï¼Œä¸label_å…±åŒå†³å®šå”¯ä¸€çš„ID
 /// @param[in] label_
-/// £º·Ö·¢±êÇ©Ã¶¾ÙÀàĞÍÖĞµÄ¾ßÌåÃ¶¾Ù£¬ÓëLabelEnum_¹²Í¬¾ö¶¨Î¨Ò»µÄIDÀàĞÍ
+/// ï¼šåˆ†å‘æ ‡ç­¾æšä¸¾ç±»å‹ä¸­çš„å…·ä½“æšä¸¾ï¼Œä¸LabelEnum_å…±åŒå†³å®šå”¯ä¸€çš„IDç±»å‹
 /// @details
-/// Ê¹ÓÃÀı£º
+/// ä½¿ç”¨ä¾‹ï¼š
 ///  enum class ExampleEnum { kExampleType };
 ///  using Id = ExplicitIdWrapper<size_t,ExampleEnum,ExampleEnum::kExampleType>;
 template <class IdType_, class LabelEnum_, const LabelEnum_ label_>
 class ExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
                                                static_cast<IdType_>(-1)> {
  private:
-  /// @brief Ê¹ÓÃµÄ»ùÀà
+  /// @brief ä½¿ç”¨çš„åŸºç±»
   using MyBase =
       BaseIdWrapper<IdType_, LabelEnum_, label_, static_cast<IdType_>(-1)>;
 
  public:
-  /// @brief Ìá¹©Ê¹ÓÃµÄIDÔ­Ê¼ÀàĞÍ
+  /// @brief æä¾›ä½¿ç”¨çš„IDåŸå§‹ç±»å‹
   using IdType = MyBase::IdType;
-  /// @brief Ìá¹©¶¨ÒåÊ±Ê¹ÓÃµÄÃ¶¾ÙÀàĞÍ
+  /// @brief æä¾›å®šä¹‰æ—¶ä½¿ç”¨çš„æšä¸¾ç±»å‹
   using LabelEnum = MyBase::LabelEnum;
-  /// @brief Ìá¹©¶¨ÒåÊ±Ê¹ÓÃµÄÃ¶¾ÙÖĞ¾ßÌåÃ¶¾Ù
+  /// @brief æä¾›å®šä¹‰æ—¶ä½¿ç”¨çš„æšä¸¾ä¸­å…·ä½“æšä¸¾
   static const LabelEnum label = MyBase::label;
 
   ExplicitIdWrapper() {}
@@ -137,21 +137,21 @@ class ExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   bool operator!=(const ExplicitIdWrapper& id_wrapper) {
     return MyBase::operator!=(id_wrapper);
   }
-  /// @brief »ñÈ¡´æ´¢ÎŞĞ§ÖµµÄÈİÆ÷
-  /// @return ´æ´¢ÎŞĞ§ÖµµÄÈİÆ÷£¬ÎŞĞ§ÖµÍ¬InvalidValue
+  /// @brief è·å–å­˜å‚¨æ— æ•ˆå€¼çš„å®¹å™¨
+  /// @return å­˜å‚¨æ— æ•ˆå€¼çš„å®¹å™¨ï¼Œæ— æ•ˆå€¼åŒInvalidValue
   static constexpr ExplicitIdWrapper InvalidId() {
     return ExplicitIdWrapper<IdType, LabelEnum, label>(MyBase::InvalidValue());
   }
 };
 
 /// @class ExplicitIdWrapperCustomizeInvalidValue id_wrapper.h
-/// @briefÇ¿ÖÆÏÔÊ¾µ÷ÓÃ¹¹Ôìº¯Êı²»Ê¹ÓÃÄ¬ÈÏÎŞĞ§Öµ°æ
-/// @param[in] IdType_ £º Òª°ü×°µÄIDµÄÊµ¼ÊÀàĞÍ
-/// @param[in] LabelEnum_ £º·Ö·¢±êÇ©µÄÃ¶¾ÙÀàĞÍ£¬Óëlabel_¹²Í¬¾ö¶¨Î¨Ò»µÄID
+/// @briefå¼ºåˆ¶æ˜¾ç¤ºè°ƒç”¨æ„é€ å‡½æ•°ä¸ä½¿ç”¨é»˜è®¤æ— æ•ˆå€¼ç‰ˆ
+/// @param[in] IdType_ ï¼š è¦åŒ…è£…çš„IDçš„å®é™…ç±»å‹
+/// @param[in] LabelEnum_ ï¼šåˆ†å‘æ ‡ç­¾çš„æšä¸¾ç±»å‹ï¼Œä¸label_å…±åŒå†³å®šå”¯ä¸€çš„ID
 /// @param[in] label_
-/// £º·Ö·¢±êÇ©Ã¶¾ÙÀàĞÍÖĞµÄ¾ßÌåÃ¶¾Ù£¬ÓëLabelEnum_¹²Í¬¾ö¶¨Î¨Ò»µÄIDÀàĞÍ
-/// @param[in] invalid_value_ £º×Ô¶¨ÒåµÄÎŞĞ§Öµ
-/// Àı£º
+/// ï¼šåˆ†å‘æ ‡ç­¾æšä¸¾ç±»å‹ä¸­çš„å…·ä½“æšä¸¾ï¼Œä¸LabelEnum_å…±åŒå†³å®šå”¯ä¸€çš„IDç±»å‹
+/// @param[in] invalid_value_ ï¼šè‡ªå®šä¹‰çš„æ— æ•ˆå€¼
+/// ä¾‹ï¼š
 ///  enum class ExampleEnum { kExampleType };
 ///  using Id = ExplicitIdWrapper<size_t,ExampleEnum,ExampleEnum::kExampleType>;
 template <class IdType_, class LabelEnum_, const LabelEnum_ label_,
@@ -159,7 +159,7 @@ template <class IdType_, class LabelEnum_, const LabelEnum_ label_,
 class ExplicitIdWrapperCustomizeInvalidValue
     : public BaseIdWrapper<IdType_, LabelEnum_, label_, invalid_value_> {
  private:
-  /// @brief Ê¹ÓÃµÄ»ùÀà
+  /// @brief ä½¿ç”¨çš„åŸºç±»
   using MyBase = BaseIdWrapper<IdType_, LabelEnum_, label_, invalid_value_>;
 
  public:
@@ -195,8 +195,8 @@ class ExplicitIdWrapperCustomizeInvalidValue
   bool operator!=(const ExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
     return MyBase::operator!=(id_wrapper);
   }
-  /// @brief »ñÈ¡´æ´¢ÎŞĞ§ÖµµÄÈİÆ÷
-  /// @return ´æ´¢ÎŞĞ§ÖµµÄÈİÆ÷£¬ÎŞĞ§ÖµÍ¬InvalidValue
+  /// @brief è·å–å­˜å‚¨æ— æ•ˆå€¼çš„å®¹å™¨
+  /// @return å­˜å‚¨æ— æ•ˆå€¼çš„å®¹å™¨ï¼Œæ— æ•ˆå€¼åŒInvalidValue
   static constexpr ExplicitIdWrapperCustomizeInvalidValue InvalidId() {
     return ExplicitIdWrapperCustomizeInvalidValue<IdType, LabelEnum, label,
                                                   static_cast<IdType>(-1)>(
@@ -205,12 +205,12 @@ class ExplicitIdWrapperCustomizeInvalidValue
 };
 
 /// @class NonExplicitIdWrapper id_wrapper.h
-/// @brief ²»Ç¿ÖÆÏÔÊ¾µ÷ÓÃ¹¹Ôìº¯ÊıÊ¹ÓÃÄ¬ÈÏÎŞĞ§Öµ°æ
-/// @param[in] IdType_ £º Òª°ü×°µÄIDµÄÊµ¼ÊÀàĞÍ
-/// @param[in] LabelEnum_ £º·Ö·¢±êÇ©µÄÃ¶¾ÙÀàĞÍ£¬Óëlabel_¹²Í¬¾ö¶¨Î¨Ò»µÄID
+/// @brief ä¸å¼ºåˆ¶æ˜¾ç¤ºè°ƒç”¨æ„é€ å‡½æ•°ä½¿ç”¨é»˜è®¤æ— æ•ˆå€¼ç‰ˆ
+/// @param[in] IdType_ ï¼š è¦åŒ…è£…çš„IDçš„å®é™…ç±»å‹
+/// @param[in] LabelEnum_ ï¼šåˆ†å‘æ ‡ç­¾çš„æšä¸¾ç±»å‹ï¼Œä¸label_å…±åŒå†³å®šå”¯ä¸€çš„ID
 /// @param[in] label_
-/// £º·Ö·¢±êÇ©Ã¶¾ÙÀàĞÍÖĞµÄ¾ßÌåÃ¶¾Ù£¬ÓëLabelEnum_¹²Í¬¾ö¶¨Î¨Ò»µÄIDÀàĞÍ
-/// Àı£º
+/// ï¼šåˆ†å‘æ ‡ç­¾æšä¸¾ç±»å‹ä¸­çš„å…·ä½“æšä¸¾ï¼Œä¸LabelEnum_å…±åŒå†³å®šå”¯ä¸€çš„IDç±»å‹
+/// ä¾‹ï¼š
 ///  enum class ExampleEnum { kExampleType };
 ///  using Id = NonExplicitIdWrapper<size_t,ExampleEnum,
 ///                                  ExampleEnum::kExampleType>;
@@ -218,16 +218,16 @@ template <class IdType_, class LabelEnum_, const LabelEnum_ label_>
 class NonExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
                                                   static_cast<IdType_>(-1)> {
  private:
-  /// @brief Ê¹ÓÃµÄ»ùÀà
+  /// @brief ä½¿ç”¨çš„åŸºç±»
   using MyBase =
       BaseIdWrapper<IdType_, LabelEnum_, label_, static_cast<IdType_>(-1)>;
 
  public:
-  /// @brief Ìá¹©Ê¹ÓÃµÄIDÔ­Ê¼ÀàĞÍ
+  /// @brief æä¾›ä½¿ç”¨çš„IDåŸå§‹ç±»å‹
   using IdType = MyBase::IdType;
-  /// @brief Ìá¹©¶¨ÒåÊ±Ê¹ÓÃµÄÃ¶¾ÙÀàĞÍ
+  /// @brief æä¾›å®šä¹‰æ—¶ä½¿ç”¨çš„æšä¸¾ç±»å‹
   using LabelEnum = MyBase::LabelEnum;
-  /// @brief Ìá¹©¶¨ÒåÊ±Ê¹ÓÃµÄÃ¶¾ÙÖĞ¾ßÌåÃ¶¾Ù
+  /// @brief æä¾›å®šä¹‰æ—¶ä½¿ç”¨çš„æšä¸¾ä¸­å…·ä½“æšä¸¾
   static const LabelEnum label = MyBase::label;
 
   NonExplicitIdWrapper() {}
@@ -254,8 +254,8 @@ class NonExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
   bool operator!=(const NonExplicitIdWrapper& id_wrapper) {
     return MyBase::operator!=(id_wrapper);
   }
-  /// @brief »ñÈ¡´æ´¢ÎŞĞ§ÖµµÄÈİÆ÷
-  /// @return ´æ´¢ÎŞĞ§ÖµµÄÈİÆ÷£¬ÎŞĞ§ÖµÍ¬InvalidValue
+  /// @brief è·å–å­˜å‚¨æ— æ•ˆå€¼çš„å®¹å™¨
+  /// @return å­˜å‚¨æ— æ•ˆå€¼çš„å®¹å™¨ï¼Œæ— æ•ˆå€¼åŒInvalidValue
   static constexpr NonExplicitIdWrapper InvalidId() {
     return NonExplicitIdWrapper<IdType, LabelEnum, label>(
         MyBase::InvalidValue());
@@ -263,13 +263,13 @@ class NonExplicitIdWrapper : public BaseIdWrapper<IdType_, LabelEnum_, label_,
 };
 
 /// @class NonExplicitIdWrapperCustomizeInvalidValue id_wrapper.h
-/// @brief ²»Ç¿ÖÆÏÔÊ¾µ÷ÓÃ¹¹Ôìº¯Êı²»Ê¹ÓÃÄ¬ÈÏÎŞĞ§Öµ°æ
-/// @param[in] IdType_ £º Òª°ü×°µÄIDµÄÊµ¼ÊÀàĞÍ
-/// @param[in] LabelEnum_ £º·Ö·¢±êÇ©µÄÃ¶¾ÙÀàĞÍ£¬Óëlabel_¹²Í¬¾ö¶¨Î¨Ò»µÄID
+/// @brief ä¸å¼ºåˆ¶æ˜¾ç¤ºè°ƒç”¨æ„é€ å‡½æ•°ä¸ä½¿ç”¨é»˜è®¤æ— æ•ˆå€¼ç‰ˆ
+/// @param[in] IdType_ ï¼š è¦åŒ…è£…çš„IDçš„å®é™…ç±»å‹
+/// @param[in] LabelEnum_ ï¼šåˆ†å‘æ ‡ç­¾çš„æšä¸¾ç±»å‹ï¼Œä¸label_å…±åŒå†³å®šå”¯ä¸€çš„ID
 /// @param[in] label_
-/// £º·Ö·¢±êÇ©Ã¶¾ÙÀàĞÍÖĞµÄ¾ßÌåÃ¶¾Ù£¬ÓëLabelEnum_¹²Í¬¾ö¶¨Î¨Ò»µÄIDÀàĞÍ
-/// @param[in] invalid_value_ £º×Ô¶¨ÒåµÄÎŞĞ§Öµ
-/// Àı£º
+/// ï¼šåˆ†å‘æ ‡ç­¾æšä¸¾ç±»å‹ä¸­çš„å…·ä½“æšä¸¾ï¼Œä¸LabelEnum_å…±åŒå†³å®šå”¯ä¸€çš„IDç±»å‹
+/// @param[in] invalid_value_ ï¼šè‡ªå®šä¹‰çš„æ— æ•ˆå€¼
+/// ä¾‹ï¼š
 ///  enum class ExampleEnum { kExampleType };
 ///  using Id = NonExplicitIdWrapper<size_t,ExampleEnum,
 ///                                  ExampleEnum::kExampleType,
@@ -279,15 +279,15 @@ template <class IdType_, class LabelEnum_, const LabelEnum_ label_,
 class NonExplicitIdWrapperCustomizeInvalidValue
     : public BaseIdWrapper<IdType_, LabelEnum_, label_, invalid_value_> {
  private:
-  /// @brief Ê¹ÓÃµÄ»ùÀà
+  /// @brief ä½¿ç”¨çš„åŸºç±»
   using MyBase = BaseIdWrapper<IdType_, LabelEnum_, label_, invalid_value_>;
 
  public:
-  /// @brief Ìá¹©Ê¹ÓÃµÄIDÔ­Ê¼ÀàĞÍ
+  /// @brief æä¾›ä½¿ç”¨çš„IDåŸå§‹ç±»å‹
   using IdType = MyBase::IdType;
-  /// @brief Ìá¹©¶¨ÒåÊ±Ê¹ÓÃµÄÃ¶¾ÙÀàĞÍ
+  /// @brief æä¾›å®šä¹‰æ—¶ä½¿ç”¨çš„æšä¸¾ç±»å‹
   using LabelEnum = MyBase::LabelEnum;
-  /// @brief Ìá¹©¶¨ÒåÊ±Ê¹ÓÃµÄÃ¶¾ÙÖĞ¾ßÌåÃ¶¾Ù
+  /// @brief æä¾›å®šä¹‰æ—¶ä½¿ç”¨çš„æšä¸¾ä¸­å…·ä½“æšä¸¾
   static const LabelEnum label = MyBase::label;
 
   NonExplicitIdWrapperCustomizeInvalidValue() {}
@@ -318,8 +318,8 @@ class NonExplicitIdWrapperCustomizeInvalidValue
   bool operator!=(const NonExplicitIdWrapperCustomizeInvalidValue& id_wrapper) {
     return MyBase::operator!=(id_wrapper);
   }
-  /// @brief »ñÈ¡´æ´¢ÎŞĞ§ÖµµÄÈİÆ÷
-  /// @return ´æ´¢ÎŞĞ§ÖµµÄÈİÆ÷£¬ÎŞĞ§ÖµÍ¬InvalidValue
+  /// @brief è·å–å­˜å‚¨æ— æ•ˆå€¼çš„å®¹å™¨
+  /// @return å­˜å‚¨æ— æ•ˆå€¼çš„å®¹å™¨ï¼Œæ— æ•ˆå€¼åŒInvalidValue
   static constexpr NonExplicitIdWrapperCustomizeInvalidValue InvalidId() {
     return NonExplicitIdWrapperCustomizeInvalidValue<IdType, LabelEnum, label,
                                                      static_cast<IdType>(-1)>(
@@ -331,8 +331,8 @@ class NonExplicitIdWrapperCustomizeInvalidValue
 
 namespace std {
 /// @brief
-/// ¾ßÌå»¯hashÄ£°å£¬·ñÔòÊ¹ÓÃunorderedÏµÁĞÈİÆ÷Ê±±àÒëÆ÷ÎŞ·¨×Ô¶¯½«ÀàÀàĞÍ×ª»»Îª
-/// IdTypeÀàĞÍµ¼ÖÂ±¨´í
+/// å…·ä½“åŒ–hashæ¨¡æ¿ï¼Œå¦åˆ™ä½¿ç”¨unorderedç³»åˆ—å®¹å™¨æ—¶ç¼–è¯‘å™¨æ— æ³•è‡ªåŠ¨å°†ç±»ç±»å‹è½¬æ¢ä¸º
+/// IdTypeç±»å‹å¯¼è‡´æŠ¥é”™
 template <class IdType_, class LabelEnum_, LabelEnum_ label_>
 struct hash<frontend::common::ExplicitIdWrapper<IdType_, LabelEnum_, label_>> {
   size_t operator()(
@@ -349,8 +349,8 @@ struct hash<frontend::common::ExplicitIdWrapper<IdType_, LabelEnum_, label_>> {
 };
 
 /// @brief
-/// ¾ßÌå»¯hashÄ£°å£¬·ñÔòÊ¹ÓÃunorderedÏµÁĞÈİÆ÷Ê±±àÒëÆ÷ÎŞ·¨×Ô¶¯½«ÀàÀàĞÍ×ª»»Îª
-/// IdTypeÀàĞÍµ¼ÖÂ±¨´í
+/// å…·ä½“åŒ–hashæ¨¡æ¿ï¼Œå¦åˆ™ä½¿ç”¨unorderedç³»åˆ—å®¹å™¨æ—¶ç¼–è¯‘å™¨æ— æ³•è‡ªåŠ¨å°†ç±»ç±»å‹è½¬æ¢ä¸º
+/// IdTypeç±»å‹å¯¼è‡´æŠ¥é”™
 template <class IdType_, class LabelEnum_, LabelEnum_ label_,
           IdType_ invalid_value_>
 struct hash<frontend::common::ExplicitIdWrapperCustomizeInvalidValue<
@@ -370,8 +370,8 @@ struct hash<frontend::common::ExplicitIdWrapperCustomizeInvalidValue<
 };
 
 /// @brief
-/// ¾ßÌå»¯hashÄ£°å£¬·ñÔòÊ¹ÓÃunorderedÏµÁĞÈİÆ÷Ê±±àÒëÆ÷ÎŞ·¨×Ô¶¯½«ÀàÀàĞÍ×ª»»Îª
-/// IdTypeÀàĞÍµ¼ÖÂ±¨´í
+/// å…·ä½“åŒ–hashæ¨¡æ¿ï¼Œå¦åˆ™ä½¿ç”¨unorderedç³»åˆ—å®¹å™¨æ—¶ç¼–è¯‘å™¨æ— æ³•è‡ªåŠ¨å°†ç±»ç±»å‹è½¬æ¢ä¸º
+/// IdTypeç±»å‹å¯¼è‡´æŠ¥é”™
 template <class IdType_, class LabelEnum_, LabelEnum_ label_>
 struct hash<
     frontend::common::NonExplicitIdWrapper<IdType_, LabelEnum_, label_>> {
@@ -389,8 +389,8 @@ struct hash<
 };
 
 /// @brief
-/// ¾ßÌå»¯hashÄ£°å£¬·ñÔòÊ¹ÓÃunorderedÏµÁĞÈİÆ÷Ê±±àÒëÆ÷ÎŞ·¨×Ô¶¯½«ÀàÀàĞÍ×ª»»Îª
-/// IdTypeÀàĞÍµ¼ÖÂ±¨´í
+/// å…·ä½“åŒ–hashæ¨¡æ¿ï¼Œå¦åˆ™ä½¿ç”¨unorderedç³»åˆ—å®¹å™¨æ—¶ç¼–è¯‘å™¨æ— æ³•è‡ªåŠ¨å°†ç±»ç±»å‹è½¬æ¢ä¸º
+/// IdTypeç±»å‹å¯¼è‡´æŠ¥é”™
 template <class IdType_, class LabelEnum_, LabelEnum_ label_,
           IdType_ invalid_value_>
 struct hash<frontend::common::NonExplicitIdWrapperCustomizeInvalidValue<

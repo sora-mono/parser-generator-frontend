@@ -1,6 +1,6 @@
-/// @file unordered_struct_manager.h
-/// @brief ½«¶àÔªËØ½á¹¹¹şÏ£´æ´¢µÄÀà
-/// @note ¸ÃÀà½öÖ§³Ö²åÈë¶ÔÏóºÍÈ«²¿Çå¿Õ£¬²»Ö§³ÖÉ¾³ıµ¥¸ö¶ÔÏó
+ï»¿/// @file unordered_struct_manager.h
+/// @brief å°†å¤šå…ƒç´ ç»“æ„å“ˆå¸Œå­˜å‚¨çš„ç±»
+/// @note è¯¥ç±»ä»…æ”¯æŒæ’å…¥å¯¹è±¡å’Œå…¨éƒ¨æ¸…ç©ºï¼Œä¸æ”¯æŒåˆ é™¤å•ä¸ªå¯¹è±¡
 #ifndef COMMON_UNORDERED_STRUCT_MANAGER_H_
 #define COMMON_UNORDERED_STRUCT_MANAGER_H_
 
@@ -11,88 +11,88 @@
 
 namespace frontend::common {
 
-/// TODO ÉèÖÃÊ¹ÓÃstd::stringÊ±µÄÌØ»¯
-/// @brief ½¨Á¢stlÎ´Ìá¹©hash·½·¨µÄ½á¹¹µÄ¹şÏ£´æ´¢,Í¨¹ıIDÒ»Ò»±êÊ¶¶ÔÏó
+/// TODO è®¾ç½®ä½¿ç”¨std::stringæ—¶çš„ç‰¹åŒ–
+/// @brief å»ºç«‹stlæœªæä¾›hashæ–¹æ³•çš„ç»“æ„çš„å“ˆå¸Œå­˜å‚¨,é€šè¿‡IDä¸€ä¸€æ ‡è¯†å¯¹è±¡
 /// @class UnorderedStructManager unordered_struct_manager.h
-/// @tparam StructType £ºÒª¹ÜÀíµÄ¶ÔÏóÀàĞÍ
-/// @tparam Hasher £º¹şÏ£StructTypeµÄº¯ÊıµÄ°ü×°Àà
+/// @tparam StructType ï¼šè¦ç®¡ç†çš„å¯¹è±¡ç±»å‹
+/// @tparam Hasher ï¼šå“ˆå¸ŒStructTypeçš„å‡½æ•°çš„åŒ…è£…ç±»
 template <class StructType, class Hasher = std::hash<StructType>>
 class UnorderedStructManager {
  public:
   enum class WrapperLabel { kObjectHashType };
-  /// @brief ±êÊ¶¶ÔÏóµÄID
+  /// @brief æ ‡è¯†å¯¹è±¡çš„ID
   using ObjectId = ObjectManager<StructType>::ObjectId;
-  /// @brief ¶ÔÏóhashºóµÃµ½µÄÀàĞÍ
+  /// @brief å¯¹è±¡hashåå¾—åˆ°çš„ç±»å‹
   using ObjectHashType =
       ExplicitIdWrapper<size_t, WrapperLabel, WrapperLabel::kObjectHashType>;
 
   UnorderedStructManager() {}
   ~UnorderedStructManager() {}
 
-  /// @brief ·µ»ØÖ¸Ïò¹ÜÀíµÄ¶ÔÏóµÄÒıÓÃ
-  /// @param[in] object_id £ºÒª»ñÈ¡µÄ¶ÔÏóµÄID
-  /// @return ·µ»Øobject_id¶ÔÓ¦µÄ¶ÔÏóµÄÒıÓÃ
-  /// @attention Èë²Î±ØĞë¶ÔÓ¦´æÔÚµÄ¶ÔÏó
+  /// @brief è¿”å›æŒ‡å‘ç®¡ç†çš„å¯¹è±¡çš„å¼•ç”¨
+  /// @param[in] object_id ï¼šè¦è·å–çš„å¯¹è±¡çš„ID
+  /// @return è¿”å›object_idå¯¹åº”çš„å¯¹è±¡çš„å¼•ç”¨
+  /// @attention å…¥å‚å¿…é¡»å¯¹åº”å­˜åœ¨çš„å¯¹è±¡
   StructType& GetObject(ObjectId object_id) {
     return const_cast<StructType&>(
         static_cast<const UnorderedStructManager&>(*this).GetObject(
             object_id));
   }
-  /// @brief ·µ»ØÖ¸Ïò¹ÜÀíµÄ¶ÔÏóµÄconstÒıÓÃ
-  /// @param[in] object_id £ºÒª»ñÈ¡µÄ¶ÔÏóµÄID
-  /// @return ·µ»Øobject_id¶ÔÓ¦µÄ¶ÔÏóµÄconstÒıÓÃ
-  /// @attention Èë²Î±ØĞë¶ÔÓ¦´æÔÚµÄ¶ÔÏó
+  /// @brief è¿”å›æŒ‡å‘ç®¡ç†çš„å¯¹è±¡çš„constå¼•ç”¨
+  /// @param[in] object_id ï¼šè¦è·å–çš„å¯¹è±¡çš„ID
+  /// @return è¿”å›object_idå¯¹åº”çš„å¯¹è±¡çš„constå¼•ç”¨
+  /// @attention å…¥å‚å¿…é¡»å¯¹åº”å­˜åœ¨çš„å¯¹è±¡
   const StructType& GetObject(ObjectId object_id) const {
     return *id_to_object_[object_id];
   }
-  /// @brief ²åÈëÒ»¸ö´ı¹ÜÀíµÄ¶ÔÏó
-  /// @param[in,out] args £º¹¹½¨´ı¹ÜÀíµÄ¶ÔÏóµÄ²ÎÊı
-  /// @return Ç°°ë²¿·ÖÎª¶ÔÏóID£¬ºó°ë²¿·ÖÎªÊÇ·ñÖ´ĞĞÁË²åÈë²Ù×÷
-  /// @note Èç¹ûÌá¹©const×óÖµÒıÓÃÔò»á¸´ÖÆÒ»·İ¶ÔÏó´æ´¢£¬
-  /// Èç¹ûÌá¹©ÓÒÖµÒıÓÃÔò»áÒÆ¶¯¹¹Ôì¸Ã¶ÔÏó
-  /// Èç¹û´ı²åÈë¶ÔÏóÒÑ´æÔÚÔò»á·µ»ØÒÑ´æÔÚµÄ¶ÔÏóµÄID
-  /// @attention ¸ÃÀà²»»á¹ÜÀí´«ÈëµÄ²ÎÊı£¬ÕæÕı¹ÜÀíµÄÊÇ¸ù¾İ´«Èë²ÎÊı¹¹ÔìµÄĞÂ¶ÔÏó
+  /// @brief æ’å…¥ä¸€ä¸ªå¾…ç®¡ç†çš„å¯¹è±¡
+  /// @param[in,out] args ï¼šæ„å»ºå¾…ç®¡ç†çš„å¯¹è±¡çš„å‚æ•°
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºå¯¹è±¡IDï¼ŒååŠéƒ¨åˆ†ä¸ºæ˜¯å¦æ‰§è¡Œäº†æ’å…¥æ“ä½œ
+  /// @note å¦‚æœæä¾›constå·¦å€¼å¼•ç”¨åˆ™ä¼šå¤åˆ¶ä¸€ä»½å¯¹è±¡å­˜å‚¨ï¼Œ
+  /// å¦‚æœæä¾›å³å€¼å¼•ç”¨åˆ™ä¼šç§»åŠ¨æ„é€ è¯¥å¯¹è±¡
+  /// å¦‚æœå¾…æ’å…¥å¯¹è±¡å·²å­˜åœ¨åˆ™ä¼šè¿”å›å·²å­˜åœ¨çš„å¯¹è±¡çš„ID
+  /// @attention è¯¥ç±»ä¸ä¼šç®¡ç†ä¼ å…¥çš„å‚æ•°ï¼ŒçœŸæ­£ç®¡ç†çš„æ˜¯æ ¹æ®ä¼ å…¥å‚æ•°æ„é€ çš„æ–°å¯¹è±¡
   template <class... Args>
   std::pair<ObjectId, bool> EmplaceObject(Args&&... args);
-  /// @brief Í¨¹ıÖ¸Ïò¶ÔÏóµÄÖ¸Õë»ñÈ¡¶ÔÏóµÄID
-  /// @param[in] object_pointer £ºÖ¸Ïò£¨´æ´¢ÓÚnode_manager_ÖĞµÄ£©¶ÔÏóµÄÖ¸Õë
-  /// @return ·µ»Ø¶ÔÏóµÄID
-  /// @retval ObjectId::InvalidId() £º¶ÔÏó²»´æÔÚ
+  /// @brief é€šè¿‡æŒ‡å‘å¯¹è±¡çš„æŒ‡é’ˆè·å–å¯¹è±¡çš„ID
+  /// @param[in] object_pointer ï¼šæŒ‡å‘ï¼ˆå­˜å‚¨äºnode_manager_ä¸­çš„ï¼‰å¯¹è±¡çš„æŒ‡é’ˆ
+  /// @return è¿”å›å¯¹è±¡çš„ID
+  /// @retval ObjectId::InvalidId() ï¼šå¯¹è±¡ä¸å­˜åœ¨
   ObjectId GetObjectIdFromObjectPointer(const StructType* object_pointer) const;
-  /// @brief ¸ù¾İ¶ÔÏó»ñÈ¡ÆäID
-  /// @param[in] object £ºÒª»ñÈ¡IDµÄ¶ÔÏó
-  /// @return »ñÈ¡µ½µÄ¶ÔÏóID
-  /// @retval ObjectId::InvalidId() £º¸Ã¶ÔÏó²»´æÔÚ
+  /// @brief æ ¹æ®å¯¹è±¡è·å–å…¶ID
+  /// @param[in] object ï¼šè¦è·å–IDçš„å¯¹è±¡
+  /// @return è·å–åˆ°çš„å¯¹è±¡ID
+  /// @retval ObjectId::InvalidId() ï¼šè¯¥å¯¹è±¡ä¸å­˜åœ¨
   ObjectId GetObjectIdFromObject(const StructType& object) const;
-  /// @brief ³õÊ¼»¯ÈİÆ÷
-  /// @note Èç¹ûÈİÆ÷ÖĞ´æÔÚ¶ÔÏóÔòÈ«²¿ÊÍ·Å
+  /// @brief åˆå§‹åŒ–å®¹å™¨
+  /// @note å¦‚æœå®¹å™¨ä¸­å­˜åœ¨å¯¹è±¡åˆ™å…¨éƒ¨é‡Šæ”¾
   void StructManagerInit() {
     node_manager_.clear();
     id_to_object_.clear();
   }
-  /// @brief ¸ù¾İ¶ÔÏóID»ñÈ¡¶ÔÏóÒıÓÃ
-  /// @param[in] object_id £ºÒª»ñÈ¡ÒıÓÃµÄ¶ÔÏóID
-  /// @return ·µ»Ø»ñÈ¡µ½µÄ¶ÔÏóÒıÓÃ
-  /// @note ÓïÒåÍ¬GetObject
-  /// @attention Èë²Î±ØĞë¶ÔÓ¦´æÔÚµÄ¶ÔÏó
+  /// @brief æ ¹æ®å¯¹è±¡IDè·å–å¯¹è±¡å¼•ç”¨
+  /// @param[in] object_id ï¼šè¦è·å–å¼•ç”¨çš„å¯¹è±¡ID
+  /// @return è¿”å›è·å–åˆ°çš„å¯¹è±¡å¼•ç”¨
+  /// @note è¯­ä¹‰åŒGetObject
+  /// @attention å…¥å‚å¿…é¡»å¯¹åº”å­˜åœ¨çš„å¯¹è±¡
   StructType& operator[](ObjectId object_id) {
     return GetObject(object_id);
   }
-  /// @brief ¸ù¾İ¶ÔÏóID»ñÈ¡¶ÔÏóconstÒıÓÃ
-  /// @param[in] object_id £ºÒª»ñÈ¡ÒıÓÃµÄ¶ÔÏóID
-  /// @return ·µ»Ø»ñÈ¡µ½µÄ¶ÔÏóconstÒıÓÃ
-  /// @note ÓïÒåÍ¬GetObject
-  /// @attention Èë²Î±ØĞë¶ÔÓ¦´æÔÚµÄ¶ÔÏó
+  /// @brief æ ¹æ®å¯¹è±¡IDè·å–å¯¹è±¡constå¼•ç”¨
+  /// @param[in] object_id ï¼šè¦è·å–å¼•ç”¨çš„å¯¹è±¡ID
+  /// @return è¿”å›è·å–åˆ°çš„å¯¹è±¡constå¼•ç”¨
+  /// @note è¯­ä¹‰åŒGetObject
+  /// @attention å…¥å‚å¿…é¡»å¯¹åº”å­˜åœ¨çš„å¯¹è±¡
   const StructType& operator[](ObjectId object_id) const {
     return GetObject(object_id);
   }
 
  private:
-  /// @brief ´æ´¢ËùÓĞ¹ÜÀíµÄ¶ÔÏó
+  /// @brief å­˜å‚¨æ‰€æœ‰ç®¡ç†çš„å¯¹è±¡
   std::unordered_set<StructType, Hasher> node_manager_;
-  /// @brief ´æ´¢¹ÜÀíµÄ¶ÔÏóµÄµØÖ·µ½IDµÄÓ³Éä
+  /// @brief å­˜å‚¨ç®¡ç†çš„å¯¹è±¡çš„åœ°å€åˆ°IDçš„æ˜ å°„
   std::unordered_map<const StructType*, ObjectId> object_pointer_to_id_;
-  /// @brief ´æ´¢IDµ½Ö¸Ïò¹ÜÀíµÄ¶ÔÏóµÄµü´úÆ÷Ó³Éä
+  /// @brief å­˜å‚¨IDåˆ°æŒ‡å‘ç®¡ç†çš„å¯¹è±¡çš„è¿­ä»£å™¨æ˜ å°„
   std::vector<typename std::unordered_set<StructType, Hasher>::iterator>
       id_to_object_;
 };

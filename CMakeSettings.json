@@ -23,6 +23,11 @@
           "name": "CMAKE_EXE_LINKER_FLAGS_DEBUG",
           "value": "/debug /INCREMENTAL",
           "type": "STRING"
+        },
+        {
+          "name": "CMAKE_CXX_FLAGS",
+          "value": "/DWIN32 /D_WINDOWS /W3 /GR /EHsc /utf-8",
+          "type": "STRING"
         }
       ]
     },

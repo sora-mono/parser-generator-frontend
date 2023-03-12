@@ -1,24 +1,24 @@
-/// @file config_construct.cpp
-/// @brief ¶¨ÒåÌí¼Ó¹¹½¨ÅäÖÃËùĞèÍâÎ§ĞÅÏ¢µÄº¯ÊıConfigConstruct
+ï»¿/// @file config_construct.cpp
+/// @brief å®šä¹‰æ·»åŠ æ„å»ºé…ç½®æ‰€éœ€å¤–å›´ä¿¡æ¯çš„å‡½æ•°ConfigConstruct
 /// @details
-/// ¸ÃÎÄ¼ş½«ÓÃ»§Í¨¹ıºê¶¨ÒåµÄ²úÉúÊ½×ª»¯ÎªC++´úÂëÀ´¿ØÖÆ¹¹½¨Óï·¨·ÖÎö»úÅäÖÃµÄ¹ı³Ì
-/// °üº¬µÄÎÄ¼şprocess_functions_classes.hÖĞ¶¨Òå°ü×°ÓÃ»§¶¨ÒåµÄ¹æÔ¼º¯ÊıµÄÀà
-/// ÕâĞ©ÀàÓÃÓÚAddNonTerminalNode
+/// è¯¥æ–‡ä»¶å°†ç”¨æˆ·é€šè¿‡å®å®šä¹‰çš„äº§ç”Ÿå¼è½¬åŒ–ä¸ºC++ä»£ç æ¥æ§åˆ¶æ„å»ºè¯­æ³•åˆ†ææœºé…ç½®çš„è¿‡ç¨‹
+/// åŒ…å«çš„æ–‡ä»¶process_functions_classes.hä¸­å®šä¹‰åŒ…è£…ç”¨æˆ·å®šä¹‰çš„è§„çº¦å‡½æ•°çš„ç±»
+/// è¿™äº›ç±»ç”¨äºAddNonTerminalNode
 #include "process_functions_classes.h"
 #include "syntax_generator.h"
 #include "Common/common.h"
 #include "Config/ProductionConfig/user_defined_functions.h"
 
 namespace frontend::generator::syntax_generator {
-/// @brief Ìí¼Ó¹¹½¨ÅäÖÃËùĞèÍâÎ§ĞÅÏ¢
+/// @brief æ·»åŠ æ„å»ºé…ç½®æ‰€éœ€å¤–å›´ä¿¡æ¯
 /// @details
-/// ¸Ãº¯ÊıÍ¨¹ıºê½«Config/ProductionConfig/production_config-inc.hÄÚÒÔºêµÄĞÎÊ½
-/// ¶¨ÒåµÄ²úÉúÊ½×ª»¯ÎªAddKeyWord¡¢AddTerminalNode¡¢AddBinaryOperatorNode¡¢
-/// AddLeftUnaryOperatorNode¡¢AddBinaryUnaryOperatorNode¡¢AddNonTerminalNode
-/// µÈº¯ÊıÀ´Ìí¼Ó¹¹½¨ÅäÖÃËùĞèµÄÍâÎ§ĞÅÏ¢
+/// è¯¥å‡½æ•°é€šè¿‡å®å°†Config/ProductionConfig/production_config-inc.hå†…ä»¥å®çš„å½¢å¼
+/// å®šä¹‰çš„äº§ç”Ÿå¼è½¬åŒ–ä¸ºAddKeyWordã€AddTerminalNodeã€AddBinaryOperatorNodeã€
+/// AddLeftUnaryOperatorNodeã€AddBinaryUnaryOperatorNodeã€AddNonTerminalNode
+/// ç­‰å‡½æ•°æ¥æ·»åŠ æ„å»ºé…ç½®æ‰€éœ€çš„å¤–å›´ä¿¡æ¯
 void SyntaxGenerator::ConfigConstruct() {
-  // ÏÂÃæµÄºê½«°üº¬µÄÎÄ¼şÖĞÓÃ»§¶¨ÒåµÄ²úÉúÊ½×ª»¯Îª²úÉúÊ½¹¹½¨ÅäÖÃ
-  // ÈçAddTerminalNode¡¢AddNonTerminalNodeµÈ
+  // ä¸‹é¢çš„å®å°†åŒ…å«çš„æ–‡ä»¶ä¸­ç”¨æˆ·å®šä¹‰çš„äº§ç”Ÿå¼è½¬åŒ–ä¸ºäº§ç”Ÿå¼æ„å»ºé…ç½®
+  // å¦‚AddTerminalNodeã€AddNonTerminalNodeç­‰
 #define GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_
 #include "Config/ProductionConfig/production_config-inc.h"
 #undef GENERATOR_SYNTAXGENERATOR_CONFIG_CONSTRUCT_

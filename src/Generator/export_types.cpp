@@ -1,9 +1,9 @@
-#include "export_types.h"
+ï»¿#include "export_types.h"
 
 namespace frontend::generator::dfa_generator::nfa_generator {
 
-/// ¸ù¾İÉÏÒ»¸ö²Ù×÷ÊÇ·ñÎª¹æÔ¼ÅĞ¶ÏÊ¹ÓÃ×ó²àµ¥Ä¿ÔËËã·ûÓÅÏÈ¼¶»¹ÊÇË«Ä¿ÔËËã·ûÓÅÏÈ¼¶
-/// ·µ»Ø»ñÈ¡µ½µÄ½áºÏÀàĞÍºÍÓÅÏÈ¼¶
+/// æ ¹æ®ä¸Šä¸€ä¸ªæ“ä½œæ˜¯å¦ä¸ºè§„çº¦åˆ¤æ–­ä½¿ç”¨å·¦ä¾§å•ç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§è¿˜æ˜¯åŒç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
+/// è¿”å›è·å–åˆ°çš„ç»“åˆç±»å‹å’Œä¼˜å…ˆçº§
 
 std::pair<WordAttachedData::OperatorAssociatityType,
           WordAttachedData::OperatorPriority>
@@ -14,23 +14,23 @@ WordAttachedData::GetAssociatityTypeAndPriority(
       frontend::generator::syntax_generator::ProductionNodeType::kOperatorNode);
   if (binary_operator_priority != -1) {
     if (unary_operator_priority != -1) {
-      /// Á½ÖÖÓïÒå¾ù´æÔÚ
+      /// ä¸¤ç§è¯­ä¹‰å‡å­˜åœ¨
       if (is_last_operate_reduct) {
-        /// ÉÏ´Î²Ù×÷Îª¹æÔ¼£¬Ó¦Ê¹ÓÃ×ó²àµ¥Ä¿ÔËËã·ûÓïÒå
+        /// ä¸Šæ¬¡æ“ä½œä¸ºè§„çº¦ï¼Œåº”ä½¿ç”¨å·¦ä¾§å•ç›®è¿ç®—ç¬¦è¯­ä¹‰
         return std::make_pair(unary_operator_associate_type,
                               unary_operator_priority);
       } else {
-        /// ÉÏ´Î²Ù×÷ÎªÒÆÈë£¬Ó¦Ê¹ÓÃË«Ä¿ÔËËã·ûÓïÒå
+        /// ä¸Šæ¬¡æ“ä½œä¸ºç§»å…¥ï¼Œåº”ä½¿ç”¨åŒç›®è¿ç®—ç¬¦è¯­ä¹‰
         return std::make_pair(binary_operator_associate_type,
                               binary_operator_priority);
       }
     } else {
-      /// ½ö´æÔÚË«Ä¿ÔËËã·ûÓïÒå£¬Ö±½Ó·µ»Ø
+      /// ä»…å­˜åœ¨åŒç›®è¿ç®—ç¬¦è¯­ä¹‰ï¼Œç›´æ¥è¿”å›
       return std::make_pair(binary_operator_associate_type,
                             binary_operator_priority);
     }
   } else {
-    /// ½ö´æÔÚµ¥Ä¿ÔËËã·ûÓïÒå£¬Ö±½Ó·µ»Ø
+    /// ä»…å­˜åœ¨å•ç›®è¿ç®—ç¬¦è¯­ä¹‰ï¼Œç›´æ¥è¿”å›
     return std::make_pair(unary_operator_associate_type,
                           unary_operator_priority);
   }

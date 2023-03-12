@@ -1,3 +1,6 @@
+#ifndef LOGGER_LOGGER_H_
+#define LOGGER_LOGGER_H_
+
 #include <iostream>
 
 template <class Arg>
@@ -18,3 +21,5 @@ void Log(const char prefix[], Arg&& arg) {
 #define LOG_ERROR(...)
 
 #endif  // ENABLE_LOG
+
+#endif  // !LOGGER_LOGGER_H_

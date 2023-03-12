@@ -1,7 +1,7 @@
-/// @file syntax_analysis_table.h
-/// @brief Óï·¨·ÖÎö±í
+ï»¿/// @file syntax_analysis_table.h
+/// @brief è¯­æ³•åˆ†æè¡¨
 /// @details
-/// Óï·¨·ÖÎö±íĞòÁĞ»¯µ½ÎÄ¼şÖĞ£¬Ê¹ÓÃÊ±Ö»Ğè·´ĞòÁĞ»¯
+/// è¯­æ³•åˆ†æè¡¨åºåˆ—åŒ–åˆ°æ–‡ä»¶ä¸­ï¼Œä½¿ç”¨æ—¶åªéœ€ååºåˆ—åŒ–
 #ifndef GENERATOR_SYNTAXGENERATOR_SYNTAX_ANALYSIS_TABLE_H_
 #define GENERATOR_SYNTAXGENERATOR_SYNTAX_ANALYSIS_TABLE_H_
 
@@ -15,21 +15,21 @@
 namespace frontend::generator::syntax_generator {
 
 /// @class SynatxAnalysisTableEntry syntax_analysis_table.h
-/// @brief Óï·¨·ÖÎö±íµ¥¸öÌõÄ¿
+/// @brief è¯­æ³•åˆ†æè¡¨å•ä¸ªæ¡ç›®
 class SyntaxAnalysisTableEntry {
  public:
-  // Ç°ÏòÉùÃ÷ÈıÖÖÅÉÉúÀà£¬ÎªÁËĞéº¯Êı¿ÉÒÔ·µ»ØÏàÓ¦µÄÀàĞÍ
+  // å‰å‘å£°æ˜ä¸‰ç§æ´¾ç”Ÿç±»ï¼Œä¸ºäº†è™šå‡½æ•°å¯ä»¥è¿”å›ç›¸åº”çš„ç±»å‹
   class ShiftAttachedData;
   class ReductAttachedData;
   class ShiftReductAttachedData;
 
   /// @class ActionAndAttachedDataInterface syntax_analysis_table.h
-  /// @brief ¶¯×÷ºÍ¸½ÊôÊı¾İ»ùÀà
+  /// @brief åŠ¨ä½œå’Œé™„å±æ•°æ®åŸºç±»
   /// @details
-  /// ¶¯×÷ÊÇ¸ù¾İÏòÇ°¿´·ûºÅ¾ö¶¨ÒÆÈë/¹æÔ¼/½ÓÊÜ/±¨´íµÈ
-  /// ¸½ÊôÊı¾İÊÇÍê³É¶¯×÷ºóÎ¬³Ö×´Ì¬»ú»ù´¡ĞÔÖÊËùĞèÒªµÄÊı¾İ£¬ÀıÈçÒÆÈëµ¥´Êºó×ªÒÆµ½µÄ
-  /// ÏÂÒ»¸öÌõÄ¿£¬¹æÔ¼ºóµÃµ½µÄ·ÇÖÕ½á²úÉúÊ½IDµÈ
-  /// @attention ËùÓĞµÄ¶¯×÷ºÍ¸½ÊôÊı¾İ¾ùÓ¦´Ó¸ÃÀàÅÉÉú
+  /// åŠ¨ä½œæ˜¯æ ¹æ®å‘å‰çœ‹ç¬¦å·å†³å®šç§»å…¥/è§„çº¦/æ¥å—/æŠ¥é”™ç­‰
+  /// é™„å±æ•°æ®æ˜¯å®ŒæˆåŠ¨ä½œåç»´æŒçŠ¶æ€æœºåŸºç¡€æ€§è´¨æ‰€éœ€è¦çš„æ•°æ®ï¼Œä¾‹å¦‚ç§»å…¥å•è¯åè½¬ç§»åˆ°çš„
+  /// ä¸‹ä¸€ä¸ªæ¡ç›®ï¼Œè§„çº¦åå¾—åˆ°çš„éç»ˆç»“äº§ç”Ÿå¼IDç­‰
+  /// @attention æ‰€æœ‰çš„åŠ¨ä½œå’Œé™„å±æ•°æ®å‡åº”ä»è¯¥ç±»æ´¾ç”Ÿ
   class ActionAndAttachedDataInterface {
    public:
     ActionAndAttachedDataInterface(ActionType action_type)
@@ -46,90 +46,90 @@ class SyntaxAnalysisTableEntry {
       return action_type_ == attached_data_interface.action_type_;
     }
 
-    /// @brief »ñÈ¡ÒÆÈë²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»ØÒÆÈë²Ù×÷µÄ¸½ÊôÊı¾İµÄconstÒıÓÃ
-    /// @attention ±ØĞë´æÔÚÒÆÈë¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–ç§»å…¥æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›ç§»å…¥æ“ä½œçš„é™„å±æ•°æ®çš„constå¼•ç”¨
+    /// @attention å¿…é¡»å­˜åœ¨ç§»å…¥é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual const ShiftAttachedData& GetShiftAttachedData() const;
-    /// @brief »ñÈ¡¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»Ø¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İµÄconstÒıÓÃ
-    /// @attention ±ØĞë´æÔÚ¹æÔ¼¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–è§„çº¦æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›è§„çº¦æ“ä½œçš„é™„å±æ•°æ®çš„constå¼•ç”¨
+    /// @attention å¿…é¡»å­˜åœ¨è§„çº¦é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual const ReductAttachedData& GetReductAttachedData() const;
-    /// @brief »ñÈ¡ÒÆÈëºÍ¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»ØÒÆÈëºÍ¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İµÄconstÒıÓÃ
-    /// @note ÓÉÓÚ¶şÒåĞÔÎÄ·¨£¬ÓĞÊ±ÔÚÒ»¸ö×´Ì¬ÏÂ¼È¿ÉÒÔÒÆÈëÒ²¿ÉÒÔ¹æÔ¼
-    /// @attention ±ØĞë´æÔÚÒÆÈëºÍ¹æÔ¼¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–ç§»å…¥å’Œè§„çº¦æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›ç§»å…¥å’Œè§„çº¦æ“ä½œçš„é™„å±æ•°æ®çš„constå¼•ç”¨
+    /// @note ç”±äºäºŒä¹‰æ€§æ–‡æ³•ï¼Œæœ‰æ—¶åœ¨ä¸€ä¸ªçŠ¶æ€ä¸‹æ—¢å¯ä»¥ç§»å…¥ä¹Ÿå¯ä»¥è§„çº¦
+    /// @attention å¿…é¡»å­˜åœ¨ç§»å…¥å’Œè§„çº¦é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual const ShiftReductAttachedData& GetShiftReductAttachedData() const;
-    /// @brief ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñÏàÓ¦²¿·ÖÏàÍ¬
-    /// @param[in] action_and_attached_data £ºÓÃÀ´±È½ÏµÄÁíÒ»²¿·ÖÊı¾İ
+    /// @brief åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸åº”éƒ¨åˆ†ç›¸åŒ
+    /// @param[in] action_and_attached_data ï¼šç”¨æ¥æ¯”è¾ƒçš„å¦ä¸€éƒ¨åˆ†æ•°æ®
     /// @attention
-    /// Óëoperator==()ÔÚShiftReductAttachedDataÓïÒåÉÏ²»Í¬
-    /// operator==()±È½ÏÁ½¸ö¶ÔÏóÊÇ·ñÍêÈ«ÏàÍ¬£¬IsSameOrPartÈë²ÎÈç¹ûÊÇ
-    /// ShiftAttachedData»òReductAttachedDataÔòÖ»±È½ÏÏàÓ¦²¿·Ö
+    /// ä¸operator==()åœ¨ShiftReductAttachedDataè¯­ä¹‰ä¸Šä¸åŒ
+    /// operator==()æ¯”è¾ƒä¸¤ä¸ªå¯¹è±¡æ˜¯å¦å®Œå…¨ç›¸åŒï¼ŒIsSameOrPartå…¥å‚å¦‚æœæ˜¯
+    /// ShiftAttachedDataæˆ–ReductAttachedDataåˆ™åªæ¯”è¾ƒç›¸åº”éƒ¨åˆ†
     virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
                                   action_and_attached_data) const = 0;
 
-    /// @brief »ñÈ¡¶¯×÷ÀàĞÍ
-    /// @return ·µ»Ø¶¯×÷ÀàĞÍ
-    /// @retval ActionType::kShift £ºÒÆÈë
-    /// @retval ActionType::kReduct £º¹æÔ¼
-    /// @retval ActionType::kShiftReduct £ºÒÆÈëºÍ¹æÔ¼
-    /// @retval ActionType::kError £º±¨´í
-    /// @retval ActionType::kAccept £º½ÓÊÜ
+    /// @brief è·å–åŠ¨ä½œç±»å‹
+    /// @return è¿”å›åŠ¨ä½œç±»å‹
+    /// @retval ActionType::kShift ï¼šç§»å…¥
+    /// @retval ActionType::kReduct ï¼šè§„çº¦
+    /// @retval ActionType::kShiftReduct ï¼šç§»å…¥å’Œè§„çº¦
+    /// @retval ActionType::kError ï¼šæŠ¥é”™
+    /// @retval ActionType::kAccept ï¼šæ¥å—
     ActionType GetActionType() const { return action_type_; }
-    /// @brief ÉèÖÃ¶¯×÷ÀàĞÍ
-    /// @param[in] action_type £º´ıÉèÖÃµÄ¶¯×÷ÀàĞÍ
+    /// @brief è®¾ç½®åŠ¨ä½œç±»å‹
+    /// @param[in] action_type ï¼šå¾…è®¾ç½®çš„åŠ¨ä½œç±»å‹
     void SetActionType(ActionType action_type) { action_type_ = action_type; }
 
-    /// @brief ĞòÁĞ»¯¸ÃÀàµÄº¯Êı
-    /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-    /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-    /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+    /// @brief åºåˆ—åŒ–è¯¥ç±»çš„å‡½æ•°
+    /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+    /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+    /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
     template <class Archive>
     void serialize(Archive& ar, const unsigned int version) {
       ar& action_type_;
     }
 
    private:
-    /// @brief Ìá¹©Ä¬ÈÏ¹¹Ôìº¯Êı¹©ĞòÁĞ»¯Ê±¹¹½¨¶ÔÏó
+    /// @brief æä¾›é»˜è®¤æ„é€ å‡½æ•°ä¾›åºåˆ—åŒ–æ—¶æ„å»ºå¯¹è±¡
     ActionAndAttachedDataInterface() = default;
 
-    /// @brief ÔÊĞíĞòÁĞ»¯ÓÃµÄÀà·ÃÎÊ
+    /// @brief å…è®¸åºåˆ—åŒ–ç”¨çš„ç±»è®¿é—®
     friend class boost::serialization::access;
-    /// @brief ÔÊĞíÓï·¨·ÖÎö±íÌõÄ¿µ÷ÓÃÄÚ²¿½Ó¿Ú
+    /// @brief å…è®¸è¯­æ³•åˆ†æè¡¨æ¡ç›®è°ƒç”¨å†…éƒ¨æ¥å£
     friend class SyntaxAnalysisTableEntry;
 
-    /// @brief »ñÈ¡ÒÆÈë²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»ØÒÆÈë²Ù×÷µÄ¸½ÊôÊı¾İµÄÒıÓÃ
-    /// @attention ±ØĞë´æÔÚÒÆÈë¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–ç§»å…¥æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›ç§»å…¥æ“ä½œçš„é™„å±æ•°æ®çš„å¼•ç”¨
+    /// @attention å¿…é¡»å­˜åœ¨ç§»å…¥é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual ShiftAttachedData& GetShiftAttachedData() {
       return const_cast<ShiftAttachedData&>(
           static_cast<const ActionAndAttachedDataInterface&>(*this)
               .GetShiftAttachedData());
     }
-    /// @brief »ñÈ¡¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»Ø¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İµÄÒıÓÃ
-    /// @attention ±ØĞë´æÔÚ¹æÔ¼¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–è§„çº¦æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›è§„çº¦æ“ä½œçš„é™„å±æ•°æ®çš„å¼•ç”¨
+    /// @attention å¿…é¡»å­˜åœ¨è§„çº¦é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual ReductAttachedData& GetReductAttachedData() {
       return const_cast<ReductAttachedData&>(
           static_cast<const ActionAndAttachedDataInterface&>(*this)
               .GetReductAttachedData());
     }
-    /// @brief »ñÈ¡ÒÆÈëºÍ¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»ØÒÆÈëºÍ¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İµÄÒıÓÃ
-    /// @note ÓÉÓÚ¶şÒåĞÔÎÄ·¨£¬ÓĞÊ±ÔÚÒ»¸ö×´Ì¬ÏÂ¼È¿ÉÒÔÒÆÈëÒ²¿ÉÒÔ¹æÔ¼
-    /// @attention ±ØĞë´æÔÚÒÆÈëºÍ¹æÔ¼¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–ç§»å…¥å’Œè§„çº¦æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›ç§»å…¥å’Œè§„çº¦æ“ä½œçš„é™„å±æ•°æ®çš„å¼•ç”¨
+    /// @note ç”±äºäºŒä¹‰æ€§æ–‡æ³•ï¼Œæœ‰æ—¶åœ¨ä¸€ä¸ªçŠ¶æ€ä¸‹æ—¢å¯ä»¥ç§»å…¥ä¹Ÿå¯ä»¥è§„çº¦
+    /// @attention å¿…é¡»å­˜åœ¨ç§»å…¥å’Œè§„çº¦é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual ShiftReductAttachedData& GetShiftReductAttachedData() {
       return const_cast<ShiftReductAttachedData&>(
           static_cast<const ActionAndAttachedDataInterface&>(*this)
               .GetShiftReductAttachedData());
     }
 
-    /// @brief ¶¯×÷ÀàĞÍ
+    /// @brief åŠ¨ä½œç±»å‹
     ActionType action_type_;
   };
 
   /// @class ShiftAttachedData syntax_analysis_table.h
-  /// @brief Ö´ĞĞÒÆÈë¶¯×÷Ê±µÄ¸½ÊôÊı¾İ
+  /// @brief æ‰§è¡Œç§»å…¥åŠ¨ä½œæ—¶çš„é™„å±æ•°æ®
   class ShiftAttachedData : public ActionAndAttachedDataInterface {
    public:
     ShiftAttachedData(SyntaxAnalysisTableEntryId next_entry_id)
@@ -141,48 +141,48 @@ class SyntaxAnalysisTableEntry {
     virtual bool operator==(const ActionAndAttachedDataInterface&
                                 shift_attached_data) const override;
 
-    /// @brief »ñÈ¡ÒÆÈë²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»ØÒÆÈë²Ù×÷µÄ¸½ÊôÊı¾İµÄconstÒıÓÃ
-    /// @attention ±ØĞë´æÔÚÒÆÈë¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–ç§»å…¥æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›ç§»å…¥æ“ä½œçš„é™„å±æ•°æ®çš„constå¼•ç”¨
+    /// @attention å¿…é¡»å­˜åœ¨ç§»å…¥é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual const ShiftAttachedData& GetShiftAttachedData() const override {
       return *this;
     }
-    /// @brief ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñÏàÓ¦²¿·ÖÏàÍ¬
-    /// @param[in] shift_attached_data £ºÓÃÀ´±È½ÏµÄÁíÒ»²¿·ÖÊı¾İ
+    /// @brief åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸åº”éƒ¨åˆ†ç›¸åŒ
+    /// @param[in] shift_attached_data ï¼šç”¨æ¥æ¯”è¾ƒçš„å¦ä¸€éƒ¨åˆ†æ•°æ®
     /// @attention
-    /// Óëoperator==()ÔÚthisÎªShiftReductAttachedDataÀàĞÍÊ±ÓïÒåÉÏ²»Í¬
-    /// operator==()±È½ÏÁ½¸ö¶ÔÏóÊÇ·ñÍêÈ«ÏàÍ¬£¬IsSameOrPartÈë²ÎÈç¹ûÊÇ
-    /// ShiftAttachedData»òReductAttachedDataÔòÖ»±È½ÏÏàÓ¦²¿·Ö
+    /// ä¸operator==()åœ¨thisä¸ºShiftReductAttachedDataç±»å‹æ—¶è¯­ä¹‰ä¸Šä¸åŒ
+    /// operator==()æ¯”è¾ƒä¸¤ä¸ªå¯¹è±¡æ˜¯å¦å®Œå…¨ç›¸åŒï¼ŒIsSameOrPartå…¥å‚å¦‚æœæ˜¯
+    /// ShiftAttachedDataæˆ–ReductAttachedDataåˆ™åªæ¯”è¾ƒç›¸åº”éƒ¨åˆ†
     virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
                                   shift_attached_data) const override {
       return operator==(shift_attached_data);
     }
 
-    /// @brief »ñÈ¡ÒÆÈëµ¥´Êºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
-    /// @return ·µ»ØÒÆÈëµ¥´Êºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
+    /// @brief è·å–ç§»å…¥å•è¯åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+    /// @return è¿”å›ç§»å…¥å•è¯åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
     SyntaxAnalysisTableEntryId GetNextSyntaxAnalysisTableEntryId() const {
       return next_entry_id_;
     }
-    /// @brief ÉèÖÃÒÆÈëµ¥´Êºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
-    /// @param[in] next_entry_id £ºÒÆÈëµ¥´Êºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
+    /// @brief è®¾ç½®ç§»å…¥å•è¯åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+    /// @param[in] next_entry_id ï¼šç§»å…¥å•è¯åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
     void SetNextSyntaxAnalysisTableEntryId(
         SyntaxAnalysisTableEntryId next_entry_id) {
       next_entry_id_ = next_entry_id;
     }
 
    private:
-    /// @brief Ìá¹©Ä¬ÈÏ¹¹Ôìº¯Êı¹©ĞòÁĞ»¯Ê±¹¹½¨¶ÔÏó
+    /// @brief æä¾›é»˜è®¤æ„é€ å‡½æ•°ä¾›åºåˆ—åŒ–æ—¶æ„å»ºå¯¹è±¡
     ShiftAttachedData() = default;
 
-    /// @brief ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ
+    /// @brief å…è®¸åºåˆ—åŒ–ç±»è®¿é—®
     friend class boost::serialization::access;
-    /// @brief ÔÊĞíÓï·¨·ÖÎö±íÌõÄ¿·ÃÎÊÄÚ²¿½Ó¿Ú
+    /// @brief å…è®¸è¯­æ³•åˆ†æè¡¨æ¡ç›®è®¿é—®å†…éƒ¨æ¥å£
     friend class SyntaxAnalysisTableEntry;
 
-    /// @brief ĞòÁĞ»¯¸ÃÀàµÄº¯Êı
-    /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-    /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-    /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+    /// @brief åºåˆ—åŒ–è¯¥ç±»çš„å‡½æ•°
+    /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+    /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+    /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
     template <class Archive>
     void serialize(Archive& ar, const unsigned int version) {
       ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
@@ -190,17 +190,17 @@ class SyntaxAnalysisTableEntry {
       ar& next_entry_id_;
     }
 
-    /// @brief »ñÈ¡ÒÆÈë²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»ØÒÆÈë²Ù×÷µÄ¸½ÊôÊı¾İµÄÒıÓÃ
-    /// @attention ±ØĞë´æÔÚÒÆÈë¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–ç§»å…¥æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›ç§»å…¥æ“ä½œçš„é™„å±æ•°æ®çš„å¼•ç”¨
+    /// @attention å¿…é¡»å­˜åœ¨ç§»å…¥é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual ShiftAttachedData& GetShiftAttachedData() override { return *this; }
 
-    /// @brief ÒÆÈë¸Ãµ¥´Êºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
+    /// @brief ç§»å…¥è¯¥å•è¯åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
     SyntaxAnalysisTableEntryId next_entry_id_;
   };
 
   /// @class ReductAttachedData syntax_analysis_table.h
-  /// @brief Ö´ĞĞ¹æÔ¼¶¯×÷Ê±µÄ¸½ÊôÊı¾İ
+  /// @brief æ‰§è¡Œè§„çº¦åŠ¨ä½œæ—¶çš„é™„å±æ•°æ®
   class ReductAttachedData : public ActionAndAttachedDataInterface {
    public:
     template <class ProductionBody>
@@ -219,72 +219,72 @@ class SyntaxAnalysisTableEntry {
     virtual bool operator==(const ActionAndAttachedDataInterface&
                                 reduct_attached_data) const override;
 
-    /// @brief »ñÈ¡¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»Ø¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İµÄconstÒıÓÃ
-    /// @attention ±ØĞë´æÔÚ¹æÔ¼¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–è§„çº¦æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›è§„çº¦æ“ä½œçš„é™„å±æ•°æ®çš„constå¼•ç”¨
+    /// @attention å¿…é¡»å­˜åœ¨è§„çº¦é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual const ReductAttachedData& GetReductAttachedData() const override {
       return *this;
     }
-    /// @brief ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñÏàÓ¦²¿·ÖÏàÍ¬
-    /// @param[in] reduct_attached_data £ºÓÃÀ´±È½ÏµÄÁíÒ»²¿·ÖÊı¾İ
+    /// @brief åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸åº”éƒ¨åˆ†ç›¸åŒ
+    /// @param[in] reduct_attached_data ï¼šç”¨æ¥æ¯”è¾ƒçš„å¦ä¸€éƒ¨åˆ†æ•°æ®
     /// @attention
-    /// Óëoperator==()ÔÚthisÎªShiftReductAttachedDataÀàĞÍÊ±ÓïÒåÉÏ²»Í¬
-    /// operator==()±È½ÏÁ½¸ö¶ÔÏóÊÇ·ñÍêÈ«ÏàÍ¬£¬IsSameOrPartÈë²ÎÈç¹ûÊÇ
-    /// ShiftAttachedData»òReductAttachedDataÔòÖ»±È½ÏÏàÓ¦²¿·Ö
+    /// ä¸operator==()åœ¨thisä¸ºShiftReductAttachedDataç±»å‹æ—¶è¯­ä¹‰ä¸Šä¸åŒ
+    /// operator==()æ¯”è¾ƒä¸¤ä¸ªå¯¹è±¡æ˜¯å¦å®Œå…¨ç›¸åŒï¼ŒIsSameOrPartå…¥å‚å¦‚æœæ˜¯
+    /// ShiftAttachedDataæˆ–ReductAttachedDataåˆ™åªæ¯”è¾ƒç›¸åº”éƒ¨åˆ†
     virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
                                   reduct_attached_data) const override {
       return operator==(reduct_attached_data);
     }
 
-    /// @brief »ñÈ¡¹æÔ¼µÃµ½µÄ·ÇÖÕ½á²úÉúÊ½ID
-    /// @return ·µ»Ø¹æÔ¼ºóµÃµ½µÄ·ÇÖÕ½á²úÉúÊ½ID
+    /// @brief è·å–è§„çº¦å¾—åˆ°çš„éç»ˆç»“äº§ç”Ÿå¼ID
+    /// @return è¿”å›è§„çº¦åå¾—åˆ°çš„éç»ˆç»“äº§ç”Ÿå¼ID
     ProductionNodeId GetReductedNonTerminalNodeId() const {
       return reducted_nonterminal_node_id_;
     }
-    /// @brief ÉèÖÃ¹æÔ¼ºóµÃµ½µÄ·ÇÖÕ½á²úÉúÊ½ID
+    /// @brief è®¾ç½®è§„çº¦åå¾—åˆ°çš„éç»ˆç»“äº§ç”Ÿå¼ID
     /// @param[in] reducted_nonterminal_node_id
-    /// £º´ıÉèÖÃµÄ¹æÔ¼ºóµÃµ½µÄ·ÇÖÕ½á²úÉúÊ½ID
+    /// ï¼šå¾…è®¾ç½®çš„è§„çº¦åå¾—åˆ°çš„éç»ˆç»“äº§ç”Ÿå¼ID
     void SetReductedNonTerminalNodeId(
         ProductionNodeId reducted_nonterminal_node_id) {
       reducted_nonterminal_node_id_ = reducted_nonterminal_node_id;
     }
-    /// @brief »ñÈ¡°ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
-    /// @return ·µ»Ø°ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏó
+    /// @brief è·å–åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
+    /// @return è¿”å›åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡
     ProcessFunctionClassId GetProcessFunctionClassId() const {
       return process_function_class_id_;
     }
-    /// @brief ÉèÖÃ°ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
+    /// @brief è®¾ç½®åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
     /// @param[in] process_function_class_id
-    /// £º´ıÉèÖÃµÄ°ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
+    /// ï¼šå¾…è®¾ç½®çš„åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
     void SetProcessFunctionClassId(
         ProcessFunctionClassId process_function_class_id) {
       process_function_class_id_ = process_function_class_id;
     }
-    /// @brief »ñÈ¡²úÉúÊ½Ìå
-    /// @return ·µ»Ø²úÉúÊ½ÌåµÄconstÒıÓÃ
-    /// @note ²úÉúÊ½ÌåÓÃÓÚºË¶Ô»ñÈ¡µ½ÁËÄÄĞ©µ¥´Ê£¬´Ó¶øÅĞ¶ÏÄÄĞ©²úÉúÊ½¿Õ¹æÔ¼
+    /// @brief è·å–äº§ç”Ÿå¼ä½“
+    /// @return è¿”å›äº§ç”Ÿå¼ä½“çš„constå¼•ç”¨
+    /// @note äº§ç”Ÿå¼ä½“ç”¨äºæ ¸å¯¹è·å–åˆ°äº†å“ªäº›å•è¯ï¼Œä»è€Œåˆ¤æ–­å“ªäº›äº§ç”Ÿå¼ç©ºè§„çº¦
     const std::vector<ProductionNodeId>& GetProductionBody() const {
       return production_body_;
     }
-    /// @brief ÉèÖÃ²úÉúÊ½Ìå
-    /// @param[in] production_body £º´ıÉèÖÃµÄ²úÉúÊ½Ìå
+    /// @brief è®¾ç½®äº§ç”Ÿå¼ä½“
+    /// @param[in] production_body ï¼šå¾…è®¾ç½®çš„äº§ç”Ÿå¼ä½“
     void SetProductionBody(std::vector<ProductionNodeId>&& production_body) {
       production_body_ = std::move(production_body);
     }
 
    private:
-    /// @brief Ìá¹©Ä¬ÈÏ¹¹Ôìº¯Êı¹©ĞòÁĞ»¯Ê±¹¹½¨¶ÔÏó
+    /// @brief æä¾›é»˜è®¤æ„é€ å‡½æ•°ä¾›åºåˆ—åŒ–æ—¶æ„å»ºå¯¹è±¡
     ReductAttachedData() = default;
 
-    /// @brief ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ
+    /// @brief å…è®¸åºåˆ—åŒ–ç±»è®¿é—®
     friend class boost::serialization::access;
-    /// @brief ÔÊĞíÓï·¨·ÖÎö±íÌõÄ¿·ÃÎÊÄÚ²¿½Ó¿Ú
+    /// @brief å…è®¸è¯­æ³•åˆ†æè¡¨æ¡ç›®è®¿é—®å†…éƒ¨æ¥å£
     friend class SyntaxAnalysisTableEntry;
 
-    /// @brief ĞòÁĞ»¯¸ÃÀàµÄº¯Êı
-    /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-    /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-    /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+    /// @brief åºåˆ—åŒ–è¯¥ç±»çš„å‡½æ•°
+    /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+    /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+    /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
     template <class Archive>
     void serialize(Archive& ar, const unsigned int version) {
       ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
@@ -294,25 +294,25 @@ class SyntaxAnalysisTableEntry {
       ar& production_body_;
     }
 
-    /// @brief »ñÈ¡¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»Ø¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İµÄÒıÓÃ
-    /// @attention ±ØĞë´æÔÚ¹æÔ¼¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–è§„çº¦æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›è§„çº¦æ“ä½œçš„é™„å±æ•°æ®çš„å¼•ç”¨
+    /// @attention å¿…é¡»å­˜åœ¨è§„çº¦é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual ReductAttachedData& GetReductAttachedData() override {
       return *this;
     }
 
-    /// @brief ¹æÔ¼ºóµÃµ½µÄ·ÇÖÕ½á½ÚµãµÄID
+    /// @brief è§„çº¦åå¾—åˆ°çš„éç»ˆç»“èŠ‚ç‚¹çš„ID
     ProductionNodeId reducted_nonterminal_node_id_;
-    /// @brief Ö´ĞĞ¹æÔ¼²Ù×÷Ê±Ê¹ÓÃµÄ¶ÔÏóµÄID
+    /// @brief æ‰§è¡Œè§„çº¦æ“ä½œæ—¶ä½¿ç”¨çš„å¯¹è±¡çš„ID
     ProcessFunctionClassId process_function_class_id_;
-    /// @brief ¹æÔ¼ËùÓÃ²úÉúÊ½£¬ÓÃÓÚºË¶Ô¸Ã²úÉúÊ½°üº¬ÄÄĞ©½Úµã
-    /// @note ²»Ê¹ÓÃ¿Õ¹æÔ¼¹¦ÄÜÔò¿É¸ÄÎª²úÉúÊ½½ÚµãÊıÄ¿
+    /// @brief è§„çº¦æ‰€ç”¨äº§ç”Ÿå¼ï¼Œç”¨äºæ ¸å¯¹è¯¥äº§ç”Ÿå¼åŒ…å«å“ªäº›èŠ‚ç‚¹
+    /// @note ä¸ä½¿ç”¨ç©ºè§„çº¦åŠŸèƒ½åˆ™å¯æ”¹ä¸ºäº§ç”Ÿå¼èŠ‚ç‚¹æ•°ç›®
     std::vector<ProductionNodeId> production_body_;
   };
 
   /// @class ShiftReductAttachedData syntax_analysis_table.h
-  /// @brief ÒÆÈëÓë¹æÔ¼¶¯×÷µÄ¸½ÊôÊı¾İ
-  /// @note Ê¹ÓÃ¶şÒåĞÔÎÄ·¨Ê±Ä³Ğ©×´Ì¬ÏÂ¼È¿ÉÒÔÒÆÈëÒ²¿ÉÒÔ¹æÔ¼
+  /// @brief ç§»å…¥ä¸è§„çº¦åŠ¨ä½œçš„é™„å±æ•°æ®
+  /// @note ä½¿ç”¨äºŒä¹‰æ€§æ–‡æ³•æ—¶æŸäº›çŠ¶æ€ä¸‹æ—¢å¯ä»¥ç§»å…¥ä¹Ÿå¯ä»¥è§„çº¦
   class ShiftReductAttachedData : public ActionAndAttachedDataInterface {
    public:
     template <class ShiftData, class ReductData>
@@ -327,59 +327,59 @@ class SyntaxAnalysisTableEntry {
     virtual bool operator==(
         const ActionAndAttachedDataInterface& attached_data) const override;
 
-    /// @brief »ñÈ¡ÒÆÈë²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»ØÒÆÈë²Ù×÷µÄ¸½ÊôÊı¾İµÄconstÒıÓÃ
-    /// @attention ±ØĞë´æÔÚÒÆÈë¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–ç§»å…¥æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›ç§»å…¥æ“ä½œçš„é™„å±æ•°æ®çš„constå¼•ç”¨
+    /// @attention å¿…é¡»å­˜åœ¨ç§»å…¥é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual const ShiftAttachedData& GetShiftAttachedData() const override {
       return shift_attached_data_;
     }
-    /// @brief »ñÈ¡¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»Ø¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İµÄconstÒıÓÃ
-    /// @attention ±ØĞë´æÔÚ¹æÔ¼¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–è§„çº¦æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›è§„çº¦æ“ä½œçš„é™„å±æ•°æ®çš„constå¼•ç”¨
+    /// @attention å¿…é¡»å­˜åœ¨è§„çº¦é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual const ReductAttachedData& GetReductAttachedData() const override {
       return reduct_attached_data_;
     }
-    /// @brief »ñÈ¡ÒÆÈëºÍ¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»ØÒÆÈëºÍ¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İµÄconstÒıÓÃ
-    /// @note ÓÉÓÚ¶şÒåĞÔÎÄ·¨£¬ÓĞÊ±ÔÚÒ»¸ö×´Ì¬ÏÂ¼È¿ÉÒÔÒÆÈëÒ²¿ÉÒÔ¹æÔ¼
-    /// @attention ±ØĞë´æÔÚÒÆÈëºÍ¹æÔ¼¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–ç§»å…¥å’Œè§„çº¦æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›ç§»å…¥å’Œè§„çº¦æ“ä½œçš„é™„å±æ•°æ®çš„constå¼•ç”¨
+    /// @note ç”±äºäºŒä¹‰æ€§æ–‡æ³•ï¼Œæœ‰æ—¶åœ¨ä¸€ä¸ªçŠ¶æ€ä¸‹æ—¢å¯ä»¥ç§»å…¥ä¹Ÿå¯ä»¥è§„çº¦
+    /// @attention å¿…é¡»å­˜åœ¨ç§»å…¥å’Œè§„çº¦é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual const ShiftReductAttachedData& GetShiftReductAttachedData()
         const override {
       return *this;
     }
-    /// @brief ÅĞ¶ÏÁ½¸ö¶ÔÏóÊÇ·ñÏàÓ¦²¿·ÖÏàÍ¬
-    /// @param[in] attached_data £ºÓÃÀ´±È½ÏµÄÁíÒ»²¿·ÖÊı¾İ
+    /// @brief åˆ¤æ–­ä¸¤ä¸ªå¯¹è±¡æ˜¯å¦ç›¸åº”éƒ¨åˆ†ç›¸åŒ
+    /// @param[in] attached_data ï¼šç”¨æ¥æ¯”è¾ƒçš„å¦ä¸€éƒ¨åˆ†æ•°æ®
     /// @attention
-    /// Óëoperator==()ÔÚthisÎªShiftReductAttachedDataÀàĞÍÊ±ÓïÒåÉÏ²»Í¬
-    /// operator==()±È½ÏÁ½¸ö¶ÔÏóÊÇ·ñÍêÈ«ÏàÍ¬£¬IsSameOrPartÈë²ÎÈç¹ûÊÇ
-    /// ShiftAttachedData»òReductAttachedDataÔòÖ»±È½ÏÏàÓ¦²¿·Ö
+    /// ä¸operator==()åœ¨thisä¸ºShiftReductAttachedDataç±»å‹æ—¶è¯­ä¹‰ä¸Šä¸åŒ
+    /// operator==()æ¯”è¾ƒä¸¤ä¸ªå¯¹è±¡æ˜¯å¦å®Œå…¨ç›¸åŒï¼ŒIsSameOrPartå…¥å‚å¦‚æœæ˜¯
+    /// ShiftAttachedDataæˆ–ReductAttachedDataåˆ™åªæ¯”è¾ƒç›¸åº”éƒ¨åˆ†
     virtual bool IsSameOrPart(
         const ActionAndAttachedDataInterface& attached_data) const override;
 
-    /// @brief ÉèÖÃÒÆÈë¸½ÊôÊı¾İ
-    /// @param[in] shift_attached_data £º´ıÉèÖÃµÄÒÆÈëÊı¾İ
+    /// @brief è®¾ç½®ç§»å…¥é™„å±æ•°æ®
+    /// @param[in] shift_attached_data ï¼šå¾…è®¾ç½®çš„ç§»å…¥æ•°æ®
     void SetShiftAttachedData(ShiftAttachedData&& shift_attached_data) {
       shift_attached_data_ = std::move(shift_attached_data);
     }
-    /// @brief ÉèÖÃ¹æÔ¼¸½ÊôÊı¾İ
-    /// @param[in] reduct_attached_data £º´ıÉèÖÃµÄ¹æÔ¼Êı¾İ
+    /// @brief è®¾ç½®è§„çº¦é™„å±æ•°æ®
+    /// @param[in] reduct_attached_data ï¼šå¾…è®¾ç½®çš„è§„çº¦æ•°æ®
     void SetReductAttachedData(ReductAttachedData&& reduct_attached_data) {
       reduct_attached_data_ = std::move(reduct_attached_data);
     }
 
    private:
-    /// @brief Ìá¹©Ä¬ÈÏ¹¹Ôìº¯Êı¹©ĞòÁĞ»¯Ê±¹¹½¨¶ÔÏó
+    /// @brief æä¾›é»˜è®¤æ„é€ å‡½æ•°ä¾›åºåˆ—åŒ–æ—¶æ„å»ºå¯¹è±¡
     ShiftReductAttachedData() = default;
 
-    /// @brief ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ
+    /// @brief å…è®¸åºåˆ—åŒ–ç±»è®¿é—®
     friend class boost::serialization::access;
-    /// @brief ÔÊĞíÓï·¨·ÖÎö±íÌõÄ¿·ÃÎÊÄÚ²¿½Ó¿Ú
+    /// @brief å…è®¸è¯­æ³•åˆ†æè¡¨æ¡ç›®è®¿é—®å†…éƒ¨æ¥å£
     friend class SyntaxAnalysisTableEntry;
 
-    /// @brief ĞòÁĞ»¯¸ÃÀàµÄº¯Êı
-    /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-    /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-    /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+    /// @brief åºåˆ—åŒ–è¯¥ç±»çš„å‡½æ•°
+    /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+    /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+    /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
     template <class Archive>
     void serialize(Archive& ar, const unsigned int version) {
       ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
@@ -387,35 +387,35 @@ class SyntaxAnalysisTableEntry {
       ar& shift_attached_data_;
       ar& reduct_attached_data_;
     }
-    /// @brief »ñÈ¡ÒÆÈë²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»ØÒÆÈë²Ù×÷µÄ¸½ÊôÊı¾İµÄÒıÓÃ
-    /// @attention ±ØĞë´æÔÚÒÆÈë¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–ç§»å…¥æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›ç§»å…¥æ“ä½œçš„é™„å±æ•°æ®çš„å¼•ç”¨
+    /// @attention å¿…é¡»å­˜åœ¨ç§»å…¥é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual ShiftAttachedData& GetShiftAttachedData() override {
       return shift_attached_data_;
     }
-    /// @brief »ñÈ¡¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»Ø¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İµÄÒıÓÃ
-    /// @attention ±ØĞë´æÔÚ¹æÔ¼¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–è§„çº¦æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›è§„çº¦æ“ä½œçš„é™„å±æ•°æ®çš„å¼•ç”¨
+    /// @attention å¿…é¡»å­˜åœ¨è§„çº¦é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual ReductAttachedData& GetReductAttachedData() override {
       return reduct_attached_data_;
     }
 
-    /// @brief »ñÈ¡ÒÆÈëºÍ¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İ
-    /// @return ·µ»ØÒÆÈëºÍ¹æÔ¼²Ù×÷µÄ¸½ÊôÊı¾İµÄÒıÓÃ
-    /// @note ÓÉÓÚ¶şÒåĞÔÎÄ·¨£¬ÓĞÊ±ÔÚÒ»¸ö×´Ì¬ÏÂ¼È¿ÉÒÔÒÆÈëÒ²¿ÉÒÔ¹æÔ¼
-    /// @attention ±ØĞë´æÔÚÒÆÈëºÍ¹æÔ¼¸½ÊôÊı¾İ²Å¿ÉÒÔµ÷ÓÃ¸Ãº¯Êı
+    /// @brief è·å–ç§»å…¥å’Œè§„çº¦æ“ä½œçš„é™„å±æ•°æ®
+    /// @return è¿”å›ç§»å…¥å’Œè§„çº¦æ“ä½œçš„é™„å±æ•°æ®çš„å¼•ç”¨
+    /// @note ç”±äºäºŒä¹‰æ€§æ–‡æ³•ï¼Œæœ‰æ—¶åœ¨ä¸€ä¸ªçŠ¶æ€ä¸‹æ—¢å¯ä»¥ç§»å…¥ä¹Ÿå¯ä»¥è§„çº¦
+    /// @attention å¿…é¡»å­˜åœ¨ç§»å…¥å’Œè§„çº¦é™„å±æ•°æ®æ‰å¯ä»¥è°ƒç”¨è¯¥å‡½æ•°
     virtual ShiftReductAttachedData& GetShiftReductAttachedData() override {
       return *this;
     }
 
-    /// @brief ÒÆÈë¸½ÊôÊı¾İ
+    /// @brief ç§»å…¥é™„å±æ•°æ®
     ShiftAttachedData shift_attached_data_;
-    /// @brief ¹æÔ¼¸½ÊôÊı¾İ
+    /// @brief è§„çº¦é™„å±æ•°æ®
     ReductAttachedData reduct_attached_data_;
   };
 
   /// @class AcceptAttachedData syntax_analysis_table.h
-  /// @brief ±íÊ¾Accept¶¯×÷µÄ½Úµã
+  /// @brief è¡¨ç¤ºAcceptåŠ¨ä½œçš„èŠ‚ç‚¹
   class AcceptAttachedData : public ActionAndAttachedDataInterface {
    public:
     AcceptAttachedData()
@@ -426,29 +426,29 @@ class SyntaxAnalysisTableEntry {
     AcceptAttachedData& operator=(const AcceptAttachedData&) = delete;
     AcceptAttachedData& operator=(AcceptAttachedData&&) = delete;
 
-    /// @attention AcceptÓïÒåÏÂ²»Ö§³Ö¸Ã²Ù×÷
+    /// @attention Acceptè¯­ä¹‰ä¸‹ä¸æ”¯æŒè¯¥æ“ä½œ
     virtual bool operator==(
         const ActionAndAttachedDataInterface&) const override {
       assert(false);
-      /// ·ÀÖ¹¾¯¸æ
+      /// é˜²æ­¢è­¦å‘Š
       return false;
     }
-    /// @attention AcceptÓïÒåÏÂ²»Ö§³Ö¸Ã²Ù×÷
+    /// @attention Acceptè¯­ä¹‰ä¸‹ä¸æ”¯æŒè¯¥æ“ä½œ
     virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
                                   accept_attached_data) const override {
       assert(false);
-      /// ·ÀÖ¹¾¯¸æ
+      /// é˜²æ­¢è­¦å‘Š
       return false;
     }
 
    private:
-    /// @brief ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ
+    /// @brief å…è®¸åºåˆ—åŒ–ç±»è®¿é—®
     friend class boost::serialization::access;
 
-    /// @brief ĞòÁĞ»¯¸ÃÀàµÄº¯Êı
-    /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-    /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-    /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+    /// @brief åºåˆ—åŒ–è¯¥ç±»çš„å‡½æ•°
+    /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+    /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+    /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
     template <class Archive>
     void serialize(Archive& ar, const unsigned int version) {
       ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
@@ -456,8 +456,8 @@ class SyntaxAnalysisTableEntry {
     }
   };
 
-  /// @brief Óï·¨·ÖÎö±íÌõÄ¿ÖĞ´æ´¢ÏòÇ°¿´·ûºÅ¶ÔÓ¦µÄ¶¯×÷ºÍ¸½ÊôÊı¾İµÄÈİÆ÷
-  /// @note ¼üÖµÎª´ıÒÆÈë½ÚµãID£¬ÖµÎªÖ¸Ïò¶¯×÷ºÍ¸½ÊôÊı¾İµÄÖ¸Õë
+  /// @brief è¯­æ³•åˆ†æè¡¨æ¡ç›®ä¸­å­˜å‚¨å‘å‰çœ‹ç¬¦å·å¯¹åº”çš„åŠ¨ä½œå’Œé™„å±æ•°æ®çš„å®¹å™¨
+  /// @note é”®å€¼ä¸ºå¾…ç§»å…¥èŠ‚ç‚¹IDï¼Œå€¼ä¸ºæŒ‡å‘åŠ¨ä½œå’Œé™„å±æ•°æ®çš„æŒ‡é’ˆ
   using ActionAndTargetContainer =
       std::unordered_map<ProductionNodeId,
                          std::unique_ptr<ActionAndAttachedDataInterface>>;
@@ -474,14 +474,14 @@ class SyntaxAnalysisTableEntry {
   SyntaxAnalysisTableEntry& operator=(
       SyntaxAnalysisTableEntry&& syntax_analysis_table_entry);
 
-  /// @brief ÉèÖÃ¸ÃÌõÄ¿ÔÚ¸ø¶¨ÖÕ½á½ÚµãÏÂµÄ¶¯×÷ºÍÄ¿±ê½Úµã
-  /// @param[in] node_id £º´ı´¦ÀíµÄÖÕ½á½ÚµãID
-  /// @param[in] attached_data £ºÖÕ½á½ÚµãµÄ¸½ÊôÊı¾İ
+  /// @brief è®¾ç½®è¯¥æ¡ç›®åœ¨ç»™å®šç»ˆç»“èŠ‚ç‚¹ä¸‹çš„åŠ¨ä½œå’Œç›®æ ‡èŠ‚ç‚¹
+  /// @param[in] node_id ï¼šå¾…å¤„ç†çš„ç»ˆç»“èŠ‚ç‚¹ID
+  /// @param[in] attached_data ï¼šç»ˆç»“èŠ‚ç‚¹çš„é™„å±æ•°æ®
   /// @details
-  /// ¸Ãº¯ÊıÉèÖÃÔÚÃæ¶Ônode_id´ú±íµÄÖÕ½á½ÚµãÊ±ĞèÒª×öµÄ²Ù×÷ºÍ²Ù×÷µÄ¸½ÊôÊı¾İ
-  /// µÚ¶ş¸ö²ÎÊı½öÖ§³ÖShiftAttachedData¡¢ReductAttachedDataºÍAcceptAttachedData
-  /// @note ´ıÌí¼ÓµÄ²Ù×÷ÀàĞÍ±ØĞëÓënode_idÒÑÓĞµÄ¶¯×÷ÀàĞÍ²»Í¬£¬»ò¶¯×÷ÀàĞÍºÍ
-  /// ¸½ÊôÊı¾İÍêÈ«ÏàÍ¬
+  /// è¯¥å‡½æ•°è®¾ç½®åœ¨é¢å¯¹node_idä»£è¡¨çš„ç»ˆç»“èŠ‚ç‚¹æ—¶éœ€è¦åšçš„æ“ä½œå’Œæ“ä½œçš„é™„å±æ•°æ®
+  /// ç¬¬äºŒä¸ªå‚æ•°ä»…æ”¯æŒShiftAttachedDataã€ReductAttachedDataå’ŒAcceptAttachedData
+  /// @note å¾…æ·»åŠ çš„æ“ä½œç±»å‹å¿…é¡»ä¸node_idå·²æœ‰çš„åŠ¨ä½œç±»å‹ä¸åŒï¼Œæˆ–åŠ¨ä½œç±»å‹å’Œ
+  /// é™„å±æ•°æ®å®Œå…¨ç›¸åŒ
   template <class AttachedData>
     requires std::is_same_v<std::decay_t<AttachedData>,
                             SyntaxAnalysisTableEntry::ShiftAttachedData> ||
@@ -491,90 +491,90 @@ class SyntaxAnalysisTableEntry {
                             SyntaxAnalysisTableEntry::AcceptAttachedData>
   void SetTerminalNodeActionAndAttachedData(ProductionNodeId node_id,
                                             AttachedData&& attached_data);
-  /// @brief ÉèÖÃ¸ÃÌõÄ¿ÒÆÈë·ÇÖÕ½á½Úµãºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
-  /// @param[in] node_id £º´ı´¦ÀíµÄ·ÇÖÕ½á½ÚµãID
+  /// @brief è®¾ç½®è¯¥æ¡ç›®ç§»å…¥éç»ˆç»“èŠ‚ç‚¹åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+  /// @param[in] node_id ï¼šå¾…å¤„ç†çš„éç»ˆç»“èŠ‚ç‚¹ID
   /// @param[in] next_analysis_table_entry_id
-  /// £ºÒÆÈë¸Ã·ÇÖÕ½á½Úµãºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
+  /// ï¼šç§»å…¥è¯¥éç»ˆç»“èŠ‚ç‚¹åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   void SetNonTerminalNodeTransformId(
       ProductionNodeId node_id,
       SyntaxAnalysisTableEntryId next_analysis_table_entry_id) {
     nonterminal_node_transform_table_[node_id] = next_analysis_table_entry_id;
   }
-  /// @brief ĞŞ¸ÄÓï·¨·ÖÎö±íÖĞËùÓĞÖ¸¶¨µÄÓï·¨·ÖÎö±íIDÎªĞÂID
-  /// @param[in] old_id_to_new_id £º´æ´¢´ıĞŞ¸ÄµÄIDµ½ĞÂIDµÄÓ³Éä
-  /// @note old_id_to_new_id½öĞè´æ´¢ĞèÒª¸ü¸ÄµÄID£¬²»¸Ä±äµÄIDÎŞĞè´æ´¢
+  /// @brief ä¿®æ”¹è¯­æ³•åˆ†æè¡¨ä¸­æ‰€æœ‰æŒ‡å®šçš„è¯­æ³•åˆ†æè¡¨IDä¸ºæ–°ID
+  /// @param[in] old_id_to_new_id ï¼šå­˜å‚¨å¾…ä¿®æ”¹çš„IDåˆ°æ–°IDçš„æ˜ å°„
+  /// @note old_id_to_new_idä»…éœ€å­˜å‚¨éœ€è¦æ›´æ”¹çš„IDï¼Œä¸æ”¹å˜çš„IDæ— éœ€å­˜å‚¨
   void ResetEntryId(
       const std::unordered_map<SyntaxAnalysisTableEntryId,
                                SyntaxAnalysisTableEntryId>& old_id_to_new_id);
-  /// @brief »ñÈ¡ÔÚ¸ø¶¨´ı´¦ÀíÖÕ½á½ÚµãIDÏÂµÄ¶¯×÷Óë¸½ÊôÊı¾İ
-  /// @param[in] node_id £º´ı´¦ÀíµÄÖÕ½á½ÚµãID
-  /// @return ·µ»ØÖ¸Ïò¶¯×÷Óë¸½ÊôÊı¾İµÄconstÖ¸Õë
-  /// @retval nullptr £º¸ÃÖÕ½á½ÚµãÏÂ²»´æÔÚ¿ÉÒÔÖ´ĞĞµÄ¶¯×÷£¨Óï·¨´íÎó£©
+  /// @brief è·å–åœ¨ç»™å®šå¾…å¤„ç†ç»ˆç»“èŠ‚ç‚¹IDä¸‹çš„åŠ¨ä½œä¸é™„å±æ•°æ®
+  /// @param[in] node_id ï¼šå¾…å¤„ç†çš„ç»ˆç»“èŠ‚ç‚¹ID
+  /// @return è¿”å›æŒ‡å‘åŠ¨ä½œä¸é™„å±æ•°æ®çš„constæŒ‡é’ˆ
+  /// @retval nullptr ï¼šè¯¥ç»ˆç»“èŠ‚ç‚¹ä¸‹ä¸å­˜åœ¨å¯ä»¥æ‰§è¡Œçš„åŠ¨ä½œï¼ˆè¯­æ³•é”™è¯¯ï¼‰
   const ActionAndAttachedDataInterface* AtTerminalNode(
       ProductionNodeId node_id) const {
     auto iter = action_and_attached_data_.find(node_id);
     return iter == action_and_attached_data_.end() ? nullptr
                                                    : iter->second.get();
   }
-  /// @brief »ñÈ¡ÒÆÈë¸ø¶¨·ÇÖÕ½á½Úµãºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
-  /// @param[in] node_id £º´ıÒÆÈëµÄ·ÇÖÕ½á½ÚµãID
-  /// @return ·µ»ØÒÆÈëºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
+  /// @brief è·å–ç§»å…¥ç»™å®šéç»ˆç»“èŠ‚ç‚¹åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+  /// @param[in] node_id ï¼šå¾…ç§»å…¥çš„éç»ˆç»“èŠ‚ç‚¹ID
+  /// @return è¿”å›ç§»å…¥åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   /// @retval SyntaxAnalysisTableEntryId::InvalidId()
-  /// £º¸Ã·ÇÖÕ½á½ÚµãÎŞ·¨ÒÆÈë£¨Óï·¨´íÎó£©
+  /// ï¼šè¯¥éç»ˆç»“èŠ‚ç‚¹æ— æ³•ç§»å…¥ï¼ˆè¯­æ³•é”™è¯¯ï¼‰
   SyntaxAnalysisTableEntryId AtNonTerminalNode(ProductionNodeId node_id) const {
     auto iter = nonterminal_node_transform_table_.find(node_id);
     return iter == nonterminal_node_transform_table_.end()
                ? SyntaxAnalysisTableEntryId::InvalidId()
                : iter->second;
   }
-  /// @brief »ñÈ¡È«²¿ÖÕ½á½ÚµãµÄ¶¯×÷ºÍ¸½ÊôÊı¾İ
-  /// @return ·µ»Ø´æ´¢È«²¿ÖÕ½á½ÚµãµÄ¶¯×÷ºÍ¸½ÊôÊı¾İµÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–å…¨éƒ¨ç»ˆç»“èŠ‚ç‚¹çš„åŠ¨ä½œå’Œé™„å±æ•°æ®
+  /// @return è¿”å›å­˜å‚¨å…¨éƒ¨ç»ˆç»“èŠ‚ç‚¹çš„åŠ¨ä½œå’Œé™„å±æ•°æ®çš„å®¹å™¨çš„constå¼•ç”¨
   const ActionAndTargetContainer& GetAllActionAndAttachedData() const {
     return action_and_attached_data_;
   }
-  /// @brief »ñÈ¡È«²¿·ÇÖÕ½á½Úµã×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
+  /// @brief è·å–å…¨éƒ¨éç»ˆç»“èŠ‚ç‚¹è½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   /// @return
-  /// ·µ»Ø´æ´¢È«²¿·ÇÖÕ½á½ÚµãÒÆÈëºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿IDµÄÈİÆ÷µÄconstÒıÓÃ
+  /// è¿”å›å­˜å‚¨å…¨éƒ¨éç»ˆç»“èŠ‚ç‚¹ç§»å…¥åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®IDçš„å®¹å™¨çš„constå¼•ç”¨
   const std::unordered_map<ProductionNodeId, SyntaxAnalysisTableEntryId>&
   GetAllNonTerminalNodeTransformTarget() const {
     return nonterminal_node_transform_table_;
   }
-  /// @brief ÉèÖÃÔÚÎÄ¼şÎ²ÏòÇ°¿´½ÚµãÏÂÖ´ĞĞAccept¶¯×÷
-  /// @param[in] eof_node_id £ºÎÄ¼şÎ²ÏòÇ°¿´½Úµã
-  /// @note ÎÄ¼şÎ²½ÚµãÓÀÔ¶²»»á±»ÒÆÈë
-  /// @attention ½öÔÊĞí¶ÔÄÚÖÃ¸ùÌõÄ¿Ö´ĞĞ¸Ã²Ù×÷
+  /// @brief è®¾ç½®åœ¨æ–‡ä»¶å°¾å‘å‰çœ‹èŠ‚ç‚¹ä¸‹æ‰§è¡ŒAcceptåŠ¨ä½œ
+  /// @param[in] eof_node_id ï¼šæ–‡ä»¶å°¾å‘å‰çœ‹èŠ‚ç‚¹
+  /// @note æ–‡ä»¶å°¾èŠ‚ç‚¹æ°¸è¿œä¸ä¼šè¢«ç§»å…¥
+  /// @attention ä»…å…è®¸å¯¹å†…ç½®æ ¹æ¡ç›®æ‰§è¡Œè¯¥æ“ä½œ
   void SetAcceptInEofForwardNode(ProductionNodeId eof_node_id) {
     SetTerminalNodeActionAndAttachedData(eof_node_id, AcceptAttachedData());
   }
-  /// @brief Çå³ı¸ÃÌõÄ¿ÖĞËùÓĞÊı¾İ
+  /// @brief æ¸…é™¤è¯¥æ¡ç›®ä¸­æ‰€æœ‰æ•°æ®
   void Clear() {
     action_and_attached_data_.clear();
     nonterminal_node_transform_table_.clear();
   }
 
  private:
-  /// @brief ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ
+  /// @brief å…è®¸åºåˆ—åŒ–ç±»è®¿é—®
   friend class boost::serialization::access;
 
-  /// @brief ĞòÁĞ»¯¸ÃÀàµÄº¯Êı
-  /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-  /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-  /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+  /// @brief åºåˆ—åŒ–è¯¥ç±»çš„å‡½æ•°
+  /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+  /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+  /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
   template <class Archive>
   void serialize(Archive& ar, const unsigned int version) {
     ar& action_and_attached_data_;
     ar& nonterminal_node_transform_table_;
   }
 
-  /// @brief »ñÈ¡È«²¿ÖÕ½á½ÚµãµÄ¶¯×÷ºÍ¸½ÊôÊı¾İ
-  /// @return ·µ»Ø´æ´¢È«²¿ÖÕ½á½ÚµãµÄ¶¯×÷ºÍ¸½ÊôÊı¾İµÄÈİÆ÷µÄÒıÓÃ
+  /// @brief è·å–å…¨éƒ¨ç»ˆç»“èŠ‚ç‚¹çš„åŠ¨ä½œå’Œé™„å±æ•°æ®
+  /// @return è¿”å›å­˜å‚¨å…¨éƒ¨ç»ˆç»“èŠ‚ç‚¹çš„åŠ¨ä½œå’Œé™„å±æ•°æ®çš„å®¹å™¨çš„å¼•ç”¨
   ActionAndTargetContainer& GetAllActionAndAttachedData() {
     return const_cast<ActionAndTargetContainer&>(
         static_cast<const SyntaxAnalysisTableEntry&>(*this)
             .GetAllActionAndAttachedData());
   }
-  /// @brief »ñÈ¡È«²¿·ÇÖÕ½á½Úµã×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
-  /// @return ·µ»Ø´æ´¢È«²¿·ÇÖÕ½á½ÚµãÒÆÈëºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿IDµÄÈİÆ÷µÄÒıÓÃ
+  /// @brief è·å–å…¨éƒ¨éç»ˆç»“èŠ‚ç‚¹è½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+  /// @return è¿”å›å­˜å‚¨å…¨éƒ¨éç»ˆç»“èŠ‚ç‚¹ç§»å…¥åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®IDçš„å®¹å™¨çš„å¼•ç”¨
   std::unordered_map<ProductionNodeId, SyntaxAnalysisTableEntryId>&
   GetAllNonTerminalNodeTransformTarget() {
     return const_cast<
@@ -583,9 +583,9 @@ class SyntaxAnalysisTableEntry {
             .GetAllNonTerminalNodeTransformTarget());
   }
 
-  /// @brief ÏòÇ°¿´·ûºÅIDÏÂµÄ²Ù×÷ºÍÄ¿±ê½Úµã
+  /// @brief å‘å‰çœ‹ç¬¦å·IDä¸‹çš„æ“ä½œå’Œç›®æ ‡èŠ‚ç‚¹
   ActionAndTargetContainer action_and_attached_data_;
-  /// @brief ÒÆÈë·ÇÖÕ½á½Úµãºó×ªÒÆµ½µÄ²úÉúÊ½ÌåĞòºÅ
+  /// @brief ç§»å…¥éç»ˆç»“èŠ‚ç‚¹åè½¬ç§»åˆ°çš„äº§ç”Ÿå¼ä½“åºå·
   std::unordered_map<ProductionNodeId, SyntaxAnalysisTableEntryId>
       nonterminal_node_transform_table_;
 };
@@ -601,9 +601,9 @@ void SyntaxAnalysisTableEntry::SetTerminalNodeActionAndAttachedData(
     ProductionNodeId node_id, AttachedData&& attached_data) {
   if constexpr (std::is_same_v<std::decay_t<AttachedData>,
                                SyntaxAnalysisTableEntry::AcceptAttachedData>) {
-    // ´«²¥ÏòÇ°¿´·ûºÅºó£¬¸ùÓï·¨·ÖÎö±íÌõÄ¿ÒÆÈëÓÃ»§¶¨ÒåµÄ¸ù½Úµãºóµ½´ïµÄÌõÄ¿ÔÚÏòÇ°¿´·ûºÅ
-    // ÊÇÎÄ¼şÎ²½ÚµãÊ±Ö´ĞĞ¹æÔ¼²Ù×÷£¬ĞèÒªÉèÖÃÎª½ÓÊÜ²Ù×÷
-    // »òÕßÔÚ¿ÕÊäÈëÊ±Ö±½Ó¹æÔ¼³É¹¦
+    // ä¼ æ’­å‘å‰çœ‹ç¬¦å·åï¼Œæ ¹è¯­æ³•åˆ†æè¡¨æ¡ç›®ç§»å…¥ç”¨æˆ·å®šä¹‰çš„æ ¹èŠ‚ç‚¹ååˆ°è¾¾çš„æ¡ç›®åœ¨å‘å‰çœ‹ç¬¦å·
+    // æ˜¯æ–‡ä»¶å°¾èŠ‚ç‚¹æ—¶æ‰§è¡Œè§„çº¦æ“ä½œï¼Œéœ€è¦è®¾ç½®ä¸ºæ¥å—æ“ä½œ
+    // æˆ–è€…åœ¨ç©ºè¾“å…¥æ—¶ç›´æ¥è§„çº¦æˆåŠŸ
     assert(action_and_attached_data_.find(node_id) ==
                action_and_attached_data_.end() ||
            action_and_attached_data_.find(node_id)->second->GetActionType() ==
@@ -614,41 +614,41 @@ void SyntaxAnalysisTableEntry::SetTerminalNodeActionAndAttachedData(
   } else {
     static_assert(
         !std::is_same_v<std::decay_t<AttachedData>, ShiftReductAttachedData>,
-        "¸ÃÀàĞÍ½öÔÊĞíÍ¨¹ıÔÚÒÑÓĞÒ»ÖÖ¶¯×÷µÄ»ù´¡ÉÏ²¹È«È±ÉÙµÄÁíÒ»°ëºó×ª»»µÃµ½£¬²»ÔÊ"
-        "ĞíÖ±½Ó´«Èë");
-    // Ê¹ÓÃ¶şÒåĞÔÎÄ·¨£¬Óï·¨·ÖÎö±íÄ³Ğ©Çé¿öÏÂĞèÒª¶ÔÍ¬Ò»¸ö½ÚµãÖ§³ÖÒÆÈëºÍ¹æÔ¼²Ù×÷²¢´æ
+        "è¯¥ç±»å‹ä»…å…è®¸é€šè¿‡åœ¨å·²æœ‰ä¸€ç§åŠ¨ä½œçš„åŸºç¡€ä¸Šè¡¥å…¨ç¼ºå°‘çš„å¦ä¸€åŠåè½¬æ¢å¾—åˆ°ï¼Œä¸å…"
+        "è®¸ç›´æ¥ä¼ å…¥");
+    // ä½¿ç”¨äºŒä¹‰æ€§æ–‡æ³•ï¼Œè¯­æ³•åˆ†æè¡¨æŸäº›æƒ…å†µä¸‹éœ€è¦å¯¹åŒä¸€ä¸ªèŠ‚ç‚¹æ”¯æŒç§»å…¥å’Œè§„çº¦æ“ä½œå¹¶å­˜
     auto iter = action_and_attached_data_.find(node_id);
     if (iter == action_and_attached_data_.end()) {
-      // ĞÂ²åÈë×ªÒÆ½Úµã
+      // æ–°æ’å…¥è½¬ç§»èŠ‚ç‚¹
       action_and_attached_data_.emplace(
           node_id, std::make_unique<std::decay_t<AttachedData>>(
                        std::forward<AttachedData>(attached_data)));
     } else {
-      // ´ı²åÈëµÄ×ªÒÆÌõ¼şÒÑ´æÔÚ
-      // »ñÈ¡ÒÑ¾­´æ´¢µÄÊı¾İ
+      // å¾…æ’å…¥çš„è½¬ç§»æ¡ä»¶å·²å­˜åœ¨
+      // è·å–å·²ç»å­˜å‚¨çš„æ•°æ®
       ActionAndAttachedDataInterface& data_already_in = *iter->second;
-      // ÒªÃ´ĞŞ¸ÄÒÑÓĞµÄ¹æÔ¼ºóµÃµ½µÄ½Úµã£¬ÒªÃ´²¹È«ÒÆÈë/¹æÔ¼µÄÁíÒ»²¿·Ö£¨¹æÔ¼/ÒÆÈë£©
-      // ²»Ó¦ĞŞ¸ÄÒÑÓĞµÄÒÆÈëºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿
+      // è¦ä¹ˆä¿®æ”¹å·²æœ‰çš„è§„çº¦åå¾—åˆ°çš„èŠ‚ç‚¹ï¼Œè¦ä¹ˆè¡¥å…¨ç§»å…¥/è§„çº¦çš„å¦ä¸€éƒ¨åˆ†ï¼ˆè§„çº¦/ç§»å…¥ï¼‰
+      // ä¸åº”ä¿®æ”¹å·²æœ‰çš„ç§»å…¥åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®
       switch (data_already_in.GetActionType()) {
         case ActionType::kShift:
           if constexpr (std::is_same_v<std::decay_t<AttachedData>,
                                        ReductAttachedData>) {
-            // Ìá¹©µÄÊı¾İÊÇ¹æÔ¼Êı¾İ£¬×ª»»ÎªShiftReductAttachedData
+            // æä¾›çš„æ•°æ®æ˜¯è§„çº¦æ•°æ®ï¼Œè½¬æ¢ä¸ºShiftReductAttachedData
             iter->second = std::make_unique<ShiftReductAttachedData>(
                 std::move(iter->second->GetShiftAttachedData()),
                 std::forward<AttachedData>(attached_data));
           } else {
-            // Ìá¹©µÄÊÇÒÆÈëÊı¾İ£¬ÒªÇó±ØĞëÓëÒÑÓĞµÄÊı¾İÏàÍ¬
+            // æä¾›çš„æ˜¯ç§»å…¥æ•°æ®ï¼Œè¦æ±‚å¿…é¡»ä¸å·²æœ‰çš„æ•°æ®ç›¸åŒ
             static_assert(
                 std::is_same_v<std::decay_t<AttachedData>, ShiftAttachedData>);
-            // ¼ì²éÌá¹©µÄÒÆÈëÊı¾İÊÇ·ñÓëÒÑÓĞµÄÒÆÈëÊı¾İÏàÍ¬
-            // ²»ÄÜĞ´·´£¬·ñÔòµ±data_already_inÎªShiftReductAttachedDataÊ±
-            // ÎŞ·¨»ñµÃÓëÆäËü¸½ÊôÊı¾İ±È½ÏµÄÕıÈ·ÓïÒå
+            // æ£€æŸ¥æä¾›çš„ç§»å…¥æ•°æ®æ˜¯å¦ä¸å·²æœ‰çš„ç§»å…¥æ•°æ®ç›¸åŒ
+            // ä¸èƒ½å†™åï¼Œå¦åˆ™å½“data_already_inä¸ºShiftReductAttachedDataæ—¶
+            // æ— æ³•è·å¾—ä¸å…¶å®ƒé™„å±æ•°æ®æ¯”è¾ƒçš„æ­£ç¡®è¯­ä¹‰
             if (!data_already_in.IsSameOrPart(attached_data)) [[unlikely]] {
-              // ÉèÖÃÏàÍ¬Ìõ¼ş²»Í¬²úÉúÊ½ÏÂ¹æÔ¼
+              // è®¾ç½®ç›¸åŒæ¡ä»¶ä¸åŒäº§ç”Ÿå¼ä¸‹è§„çº¦
               std::cerr << std::format(
-                  "Ò»¸öÏî¼¯ÔÚÏàÍ¬Ìõ¼şÏÂÖ»ÄÜ¹æÔ¼Ò»ÖÖ²úÉúÊ½£¬Çë²Î¿¼¸ÃÏî"
-                  "¼¯Çó±Õ°üÊ±µÄÊä³öĞÅÏ¢¼ì²é²úÉúÊ½");
+                  "ä¸€ä¸ªé¡¹é›†åœ¨ç›¸åŒæ¡ä»¶ä¸‹åªèƒ½è§„çº¦ä¸€ç§äº§ç”Ÿå¼ï¼Œè¯·å‚è€ƒè¯¥é¡¹"
+                  "é›†æ±‚é—­åŒ…æ—¶çš„è¾“å‡ºä¿¡æ¯æ£€æŸ¥äº§ç”Ÿå¼");
               exit(-1);
             }
           }
@@ -656,31 +656,31 @@ void SyntaxAnalysisTableEntry::SetTerminalNodeActionAndAttachedData(
         case ActionType::kReduct:
           if constexpr (std::is_same_v<std::decay_t<AttachedData>,
                                        ShiftAttachedData>) {
-            // Ìá¹©µÄÊı¾İÎªÒÆÈë²¿·ÖÊı¾İ£¬×ª»»ÎªShiftReductAttachedData
+            // æä¾›çš„æ•°æ®ä¸ºç§»å…¥éƒ¨åˆ†æ•°æ®ï¼Œè½¬æ¢ä¸ºShiftReductAttachedData
             iter->second = std::make_unique<ShiftReductAttachedData>(
                 std::forward<AttachedData>(attached_data),
                 std::move(iter->second->GetReductAttachedData()));
           } else {
-            // Ìá¹©µÄÊÇÒÆÈëÊı¾İ£¬ĞèÒª¼ì²éÊÇ·ñÓëÒÑÓĞµÄÊı¾İÏàÍ¬
+            // æä¾›çš„æ˜¯ç§»å…¥æ•°æ®ï¼Œéœ€è¦æ£€æŸ¥æ˜¯å¦ä¸å·²æœ‰çš„æ•°æ®ç›¸åŒ
             static_assert(
                 std::is_same_v<std::decay_t<AttachedData>, ReductAttachedData>);
-            // ²»ÄÜĞ´·´£¬·ñÔòµ±data_already_inÎªShiftReductAttachedDataÊ±
-            // ÎŞ·¨»ñµÃÓëÆäËü¸½ÊôÊı¾İ±È½ÏµÄÕıÈ·ÓïÒå
+            // ä¸èƒ½å†™åï¼Œå¦åˆ™å½“data_already_inä¸ºShiftReductAttachedDataæ—¶
+            // æ— æ³•è·å¾—ä¸å…¶å®ƒé™„å±æ•°æ®æ¯”è¾ƒçš„æ­£ç¡®è¯­ä¹‰
             if (!data_already_in.IsSameOrPart(attached_data)) [[unlikely]] {
-              // ÉèÖÃÏàÍ¬Ìõ¼ş²»Í¬²úÉúÊ½ÏÂ¹æÔ¼
+              // è®¾ç½®ç›¸åŒæ¡ä»¶ä¸åŒäº§ç”Ÿå¼ä¸‹è§„çº¦
               std::cerr << std::format(
-                  "Ò»¸öÏî¼¯ÔÚÏàÍ¬Ìõ¼şÏÂÖ»ÄÜ¹æÔ¼Ò»ÖÖ²úÉúÊ½£¬Çë²Î¿¼¸ÃÏî"
-                  "¼¯Çó±Õ°üÊ±µÄÊä³öĞÅÏ¢¼ì²é²úÉúÊ½");
+                  "ä¸€ä¸ªé¡¹é›†åœ¨ç›¸åŒæ¡ä»¶ä¸‹åªèƒ½è§„çº¦ä¸€ç§äº§ç”Ÿå¼ï¼Œè¯·å‚è€ƒè¯¥é¡¹"
+                  "é›†æ±‚é—­åŒ…æ—¶çš„è¾“å‡ºä¿¡æ¯æ£€æŸ¥äº§ç”Ÿå¼");
               exit(-1);
             }
           }
           break;
         case ActionType::kShiftReduct: {
           if (!data_already_in.IsSameOrPart(attached_data)) [[unlikely]] {
-            // ÉèÖÃÏàÍ¬Ìõ¼ş²»Í¬²úÉúÊ½ÏÂ¹æÔ¼
+            // è®¾ç½®ç›¸åŒæ¡ä»¶ä¸åŒäº§ç”Ÿå¼ä¸‹è§„çº¦
             std::cerr << std::format(
-                "Ò»¸öÏî¼¯ÔÚÏàÍ¬Ìõ¼şÏÂÖ»ÄÜ¹æÔ¼Ò»ÖÖ²úÉúÊ½£¬Çë²Î¿¼¸ÃÏî"
-                "¼¯Çó±Õ°üÊ±µÄÊä³öĞÅÏ¢¼ì²é²úÉúÊ½");
+                "ä¸€ä¸ªé¡¹é›†åœ¨ç›¸åŒæ¡ä»¶ä¸‹åªèƒ½è§„çº¦ä¸€ç§äº§ç”Ÿå¼ï¼Œè¯·å‚è€ƒè¯¥é¡¹"
+                "é›†æ±‚é—­åŒ…æ—¶çš„è¾“å‡ºä¿¡æ¯æ£€æŸ¥äº§ç”Ÿå¼");
             exit(-1);
           }
           break;

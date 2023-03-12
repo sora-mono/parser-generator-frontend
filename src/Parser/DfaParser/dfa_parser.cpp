@@ -1,6 +1,9 @@
-#include "Parser/DfaParser/dfa_parser.h"
+ï»¿#include "Parser/DfaParser/dfa_parser.h"
 
 #include <format>
+
+#define ENABLE_LOG
+#include "Logger/logger.h"
 
 namespace frontend::parser::dfa_parser {
 bool DfaParser::SetInputFile(const std::string filename) {
@@ -18,38 +21,38 @@ bool DfaParser::SetInputFile(const std::string filename) {
 DfaParser::WordInfo DfaParser::GetNextWord() {
   std::string symbol;
   WordInfo return_data;
-  // µ±Ç°×´Ì¬×ªÒÆ±íID
+  // å½“å‰çŠ¶æ€è½¬ç§»è¡¨ID
   TransformArrayId transform_array_id = root_transform_array_id_;
-  // Ìø¹ı¿Õ°××Ö·û
+  // è·³è¿‡ç©ºç™½å­—ç¬¦
   while (std::isspace(GetCharacterNow())) {
     if (GetCharacterNow() == '\n') [[unlikely]] {
-      // ĞĞÊı+1
+      // è¡Œæ•°+1
       SetLine(GetLine() + 1);
-      // ÖØÖÃÁĞÊıÎª0
+      // é‡ç½®åˆ—æ•°ä¸º0
       SetColumn(0);
     }
     SetCharacterNow(fgetc(file_));
     SetColumn(GetColumn() + 1);
   }
   while (true) {
-    // ÅĞ¶ÏÌØÊâÇé¿ö
+    // åˆ¤æ–­ç‰¹æ®Šæƒ…å†µ
     switch (GetCharacterNow()) {
       case EOF:
         if (feof(file_)) {
           if (!symbol.empty()) {
-            // Èç¹ûÒÑ¾­»ñÈ¡µ½ÁËµ¥´ÊÔò·µ»Øµ¥´ÊĞ¯´øµÄÊı¾İ¶ø²»ÊÇÖ±½Ó·µ»ØÎÄ¼şÎ²Êı¾İ
+            // å¦‚æœå·²ç»è·å–åˆ°äº†å•è¯åˆ™è¿”å›å•è¯æºå¸¦çš„æ•°æ®è€Œä¸æ˜¯ç›´æ¥è¿”å›æ–‡ä»¶å°¾æ•°æ®
             return WordInfo(dfa_config_[transform_array_id].second,
                             std::move(symbol));
           } else {
-            // Ã»ÓĞ»ñÈ¡µ½µ¥´Ê£¬Ö±½Ó·µ»ØÎÄ¼şÎ²Êı¾İ
+            // æ²¡æœ‰è·å–åˆ°å•è¯ï¼Œç›´æ¥è¿”å›æ–‡ä»¶å°¾æ•°æ®
             return WordInfo(GetEndOfFileSavedData(), std::string());
           }
         }
         break;
       case '\n':
-        // ĞĞÊı+1
+        // è¡Œæ•°+1
         SetLine(GetLine() + 1);
-        // ÖØÖÃÁĞÊıÎª0
+        // é‡ç½®åˆ—æ•°ä¸º0
         SetColumn(0);
         SetCharacterNow(fgetc(file_));
         continue;
@@ -60,17 +63,17 @@ DfaParser::WordInfo DfaParser::GetNextWord() {
     TransformArrayId next_array_id =
         dfa_config_[transform_array_id].first[GetCharacterNow()];
     if (!next_array_id.IsValid()) {
-      // ÎŞ·¨ÒÆÈëµ±Ç°×Ö·û
+      // æ— æ³•ç§»å…¥å½“å‰å­—ç¬¦
       break;
     } else {
-      // ¿ÉÒÔÒÆÈë
+      // å¯ä»¥ç§»å…¥
       symbol += GetCharacterNow();
       transform_array_id = next_array_id;
       SetCharacterNow(fgetc(file_));
       SetColumn(GetColumn() + 1);
     }
   }
-  std::cout << symbol << std::endl;
+  LOG_INFO("DFA Parser", std::format("Parsed Word \"{:}\"", symbol))
   return WordInfo(dfa_config_[transform_array_id].second, std::move(symbol));
 }
 

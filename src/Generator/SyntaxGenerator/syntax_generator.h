@@ -1,16 +1,16 @@
-/// @file syntax_generator.h
-/// @brief Óï·¨·ÖÎö»úÅäÖÃÉú³ÉÆ÷
+ï»¿/// @file syntax_generator.h
+/// @brief è¯­æ³•åˆ†ææœºé…ç½®ç”Ÿæˆå™¨
 /// @details
-/// 1.Óï·¨·ÖÎö»úÅäÖÃÉú³ÉÆ÷Ê¹ÓÃLALR(1)Óï·¨
-/// 2.Ö§³Ö·ÇÖÕ½á²úÉúÊ½¿Õ¹æÔ¼
-/// 3.Ö§³ÖÔËËã·ûÓÅÏÈ¼¶£¨¶şÒåĞÔÎÄ·¨£©
-/// 4.Ö§³ÖË«Ä¿ºÍ×ó²àµ¥Ä¿ÓïÒå¹²´æ
-/// 5.Ö§³Ö²úÉúÊ½Ñ­»·ÒıÓÃ
-/// 6.ÏòÇ°¿´·ûºÅ²»ÊÇÔËËã·ûÊ±²ÉÓÃÒÆÈëÓÅÏÈÔ­Ôò
-/// Àı£º
+/// 1.è¯­æ³•åˆ†ææœºé…ç½®ç”Ÿæˆå™¨ä½¿ç”¨LALR(1)è¯­æ³•
+/// 2.æ”¯æŒéç»ˆç»“äº§ç”Ÿå¼ç©ºè§„çº¦
+/// 3.æ”¯æŒè¿ç®—ç¬¦ä¼˜å…ˆçº§ï¼ˆäºŒä¹‰æ€§æ–‡æ³•ï¼‰
+/// 4.æ”¯æŒåŒç›®å’Œå·¦ä¾§å•ç›®è¯­ä¹‰å…±å­˜
+/// 5.æ”¯æŒäº§ç”Ÿå¼å¾ªç¯å¼•ç”¨
+/// 6.å‘å‰çœ‹ç¬¦å·ä¸æ˜¯è¿ç®—ç¬¦æ—¶é‡‡ç”¨ç§»å…¥ä¼˜å…ˆåŸåˆ™
+/// ä¾‹ï¼š
 /// IF -> if() {} else
 ///       if() {}
-/// ÓÅÏÈÑ¡Ôñif-elseÂ·¾¶
+/// ä¼˜å…ˆé€‰æ‹©if-elseè·¯å¾„
 #ifndef GENERATOR_SYNTAXGENERATOR_SYNTAX_GENERATOR_H_
 #define GENERATOR_SYNTAXGENERATOR_SYNTAX_GENERATOR_H_
 
@@ -33,24 +33,24 @@
 #include "production_node.h"
 #include "syntax_analysis_table.h"
 
-/// TODO Ìí¼ÓÉ¾³ıÎ´Ê¹ÓÃ²úÉúÊ½µÄ¹¦ÄÜ
+/// TODO æ·»åŠ åˆ é™¤æœªä½¿ç”¨äº§ç”Ÿå¼çš„åŠŸèƒ½
 namespace frontend::generator::syntax_generator {
 
 /// @class SyntaxGenerator syntax_generator.h
-/// @brief Óï·¨·ÖÎö»úÅäÖÃÉú³ÉÆ÷
+/// @brief è¯­æ³•åˆ†ææœºé…ç½®ç”Ÿæˆå™¨
 class SyntaxGenerator {
  private:
-  /// @brief ´Ê·¨·ÖÎöÖĞ´ÊµÄÓÅÏÈ¼¶
+  /// @brief è¯æ³•åˆ†æä¸­è¯çš„ä¼˜å…ˆçº§
   using WordPriority =
       frontend::generator::dfa_generator::DfaGenerator::WordPriority;
-  /// @brief ±íÊ¾ÏîµÄÊı¾İ½á¹¹
+  /// @brief è¡¨ç¤ºé¡¹çš„æ•°æ®ç»“æ„
   using ProductionItem = ProductionItemSet::ProductionItem;
-  /// @brief ¹şÏ£ProductionItemSetµÄÀà
+  /// @brief å“ˆå¸ŒProductionItemSetçš„ç±»
   using ProductionItemHasher = ProductionItemSet::ProductionItemHasher;
-  /// @brief ÏîÓëÏòÇ°¿´½ÚµãµÄÈİÆ÷
+  /// @brief é¡¹ä¸å‘å‰çœ‹èŠ‚ç‚¹çš„å®¹å™¨
   using ProductionItemAndForwardNodesContainer =
       ProductionItemSet::ProductionItemAndForwardNodesContainer;
-  /// @brief ´æ´¢ÏòÇ°¿´½ÚµãµÄÈİÆ÷
+  /// @brief å­˜å‚¨å‘å‰çœ‹èŠ‚ç‚¹çš„å®¹å™¨
   using ForwardNodesContainer = ProductionItemSet::ForwardNodesContainer;
 
  public:
@@ -59,95 +59,95 @@ class SyntaxGenerator {
 
   SyntaxGenerator& operator=(const SyntaxGenerator&) = delete;
 
-  /// @brief ¹¹½¨²¢±£´æ±àÒëÆ÷Ç°¶ËÅäÖÃ
-  /// @note ×Ô¶¯¹¹½¨Óï·¨·ÖÎöºÍDFAÅäÖÃ²¢±£´æ
+  /// @brief æ„å»ºå¹¶ä¿å­˜ç¼–è¯‘å™¨å‰ç«¯é…ç½®
+  /// @note è‡ªåŠ¨æ„å»ºè¯­æ³•åˆ†æå’ŒDFAé…ç½®å¹¶ä¿å­˜
   void ConstructSyntaxConfig();
 
  private:
-  /// @brief ³õÊ¼»¯
+  /// @brief åˆå§‹åŒ–
   void SyntaxGeneratorInit();
-  /// @brief Ìí¼Ó¹¹½¨ÅäÖÃËùĞèµÄ¸÷ÖÖÍâÎ§ĞÅÏ¢
-  /// @note ¸Ãº¯Êı¶¨ÒåÔÚconfig_construct.cppÖĞ
+  /// @brief æ·»åŠ æ„å»ºé…ç½®æ‰€éœ€çš„å„ç§å¤–å›´ä¿¡æ¯
+  /// @note è¯¥å‡½æ•°å®šä¹‰åœ¨config_construct.cppä¸­
   void ConfigConstruct();
-  /// @brief ¹¹½¨Óï·¨·ÖÎö±í
+  /// @brief æ„å»ºè¯­æ³•åˆ†æè¡¨
   void SyntaxAnalysisTableConstruct();
 
-  /// @brief Ìí¼Ó²úÉúÊ½Ãû
-  /// @param[in] node_symbol £º²úÉúÊ½Ãû
-  /// @return Ç°°ë²¿·ÖÎª²úÉúÊ½ÃûID£¬ºó°ë²¿·ÖÎªÊÇ·ñÌí¼ÓÁËĞÂµÄ²úÉúÊ½Ãû
-  /// @note Èç¹û²úÉúÊ½ÃûÒÑ¾­Ìí¼Ó¹ıÔò·µ»ØÖµºó°ë²¿·Ö·µ»Øfalse
-  /// @attention ²»ÔÊĞíÊäÈë¿Õ×Ö·û´®
+  /// @brief æ·»åŠ äº§ç”Ÿå¼å
+  /// @param[in] node_symbol ï¼šäº§ç”Ÿå¼å
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºäº§ç”Ÿå¼åIDï¼ŒååŠéƒ¨åˆ†ä¸ºæ˜¯å¦æ·»åŠ äº†æ–°çš„äº§ç”Ÿå¼å
+  /// @note å¦‚æœäº§ç”Ÿå¼åå·²ç»æ·»åŠ è¿‡åˆ™è¿”å›å€¼ååŠéƒ¨åˆ†è¿”å›false
+  /// @attention ä¸å…è®¸è¾“å…¥ç©ºå­—ç¬¦ä¸²
   std::pair<SymbolId, bool> AddNodeSymbol(const std::string& node_symbol) {
     assert(node_symbol.size() != 0);
     return manager_node_symbol_.EmplaceObject(node_symbol);
   }
-  /// @brief Ìí¼Ó²úÉúÊ½Ìå×Ö·û´®
-  /// @param[in] body_symbol £º²úÉúÊ½Ìå×Ö·û´®
+  /// @brief æ·»åŠ äº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²
+  /// @param[in] body_symbol ï¼šäº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²
   /// @return
-  /// Ç°°ë²¿·ÖÎª²úÉúÊ½Ìå×Ö·û´®µÄID£¬ºó°ë²¿·ÖÎªÊÇ·ñÌí¼ÓÁËĞÂµÄ²úÉúÊ½Ìå×Ö·û´®
-  /// @note Èç¹û²úÉúÊ½Ìå×Ö·û´®ÒÑ¾­Ìí¼Ó¹ıÔò·µ»ØÖµºó°ë²¿·Ö·µ»Øfalse
-  /// @attention ²»ÔÊĞíÊäÈë¿Õ×Ö·û´®
+  /// å‰åŠéƒ¨åˆ†ä¸ºäº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²çš„IDï¼ŒååŠéƒ¨åˆ†ä¸ºæ˜¯å¦æ·»åŠ äº†æ–°çš„äº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²
+  /// @note å¦‚æœäº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²å·²ç»æ·»åŠ è¿‡åˆ™è¿”å›å€¼ååŠéƒ¨åˆ†è¿”å›false
+  /// @attention ä¸å…è®¸è¾“å…¥ç©ºå­—ç¬¦ä¸²
   std::pair<SymbolId, bool> AddBodySymbol(const std::string& body_symbol) {
     assert(body_symbol.size() != 0);
     return manager_terminal_body_symbol_.EmplaceObject(body_symbol);
   }
-  /// @brief ¸ù¾İ²úÉúÊ½Ãû»ñÈ¡¶ÔÓ¦ID
-  /// @param[in] node_symbol £º²úÉúÊ½Ãû
-  /// @return ·µ»Ø²úÉúÊ½Ãû¶ÔÓ¦ID
-  /// @retval SymbolId::InvalidId() £º¸ø¶¨µÄ²úÉúÊ½ÃûÎ´Ìí¼Ó¹ı
+  /// @brief æ ¹æ®äº§ç”Ÿå¼åè·å–å¯¹åº”ID
+  /// @param[in] node_symbol ï¼šäº§ç”Ÿå¼å
+  /// @return è¿”å›äº§ç”Ÿå¼åå¯¹åº”ID
+  /// @retval SymbolId::InvalidId() ï¼šç»™å®šçš„äº§ç”Ÿå¼åæœªæ·»åŠ è¿‡
   SymbolId GetNodeSymbolId(const std::string& node_symbol) const {
     assert(node_symbol.size() != 0);
     return manager_node_symbol_.GetObjectIdFromObject(node_symbol);
   }
-  /// @brief ¸ù¾İ²úÉúÊ½Ìå×Ö·û´®»ñÈ¡¶ÔÓ¦ID
-  /// @param[in] body_symbol £º²úÉúÊ½Ìå×Ö·û´®
-  /// @return ·µ»Ø²úÉúÊ½Ìå×Ö·û´®¶ÔÓ¦µÄID
-  /// @retval SymbolId::InvalidId() £º¸ø¶¨µÄ²úÉúÊ½Ìå×Ö·û´®Î´Ìí¼Ó¹ı
+  /// @brief æ ¹æ®äº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²è·å–å¯¹åº”ID
+  /// @param[in] body_symbol ï¼šäº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²
+  /// @return è¿”å›äº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²å¯¹åº”çš„ID
+  /// @retval SymbolId::InvalidId() ï¼šç»™å®šçš„äº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²æœªæ·»åŠ è¿‡
   SymbolId GetBodySymbolId(const std::string& body_symbol) const {
     assert(body_symbol.size() != 0);
     return manager_terminal_body_symbol_.GetObjectIdFromObject(body_symbol);
   }
-  /// @brief ¸ù¾İ²úÉúÊ½ÃûID»ñÈ¡¶ÔÓ¦²úÉúÊ½Ãû
-  /// @param[in] node_symbol_id £º²úÉúÊ½ÃûID
-  /// @return ·µ»Ø²úÉúÊ½ÃûID¶ÔÓ¦µÄ²úÉúÊ½ÃûµÄconstÒıÓÃ
-  /// @note ÒªÇó¸ø¶¨µÄnode_symbol_idÓĞĞ§
+  /// @brief æ ¹æ®äº§ç”Ÿå¼åIDè·å–å¯¹åº”äº§ç”Ÿå¼å
+  /// @param[in] node_symbol_id ï¼šäº§ç”Ÿå¼åID
+  /// @return è¿”å›äº§ç”Ÿå¼åIDå¯¹åº”çš„äº§ç”Ÿå¼åçš„constå¼•ç”¨
+  /// @note è¦æ±‚ç»™å®šçš„node_symbol_idæœ‰æ•ˆ
   const std::string& GetNodeSymbolStringFromId(SymbolId node_symbol_id) const {
     assert(node_symbol_id.IsValid());
     return manager_node_symbol_.GetObject(node_symbol_id);
   }
-  /// @brief ¸ù¾İ²úÉúÊ½Ìå×Ö·û´®ID»ñÈ¡²úÉúÊ½Ìå×Ö·û´®
-  /// @param[in] body_symbol_id £º²úÉúÊ½Ìå×Ö·û´®ID
-  /// @return ·µ»Ø²úÉúÊ½Ìå×Ö·û´®µÄconstÒıÓÃ
-  /// @note ÒªÇó¸ø¶¨µÄbody_symbol_idÓĞĞ§
+  /// @brief æ ¹æ®äº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²IDè·å–äº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²
+  /// @param[in] body_symbol_id ï¼šäº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²ID
+  /// @return è¿”å›äº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²çš„constå¼•ç”¨
+  /// @note è¦æ±‚ç»™å®šçš„body_symbol_idæœ‰æ•ˆ
   const std::string& GetBodySymbolStringFromId(SymbolId body_symbol_id) const {
     assert(body_symbol_id.IsValid());
     return manager_terminal_body_symbol_.GetObject(body_symbol_id);
   }
-  /// @brief Í¨¹ı²úÉúÊ½½ÚµãID»ñÈ¡²úÉúÊ½Ãû
-  /// @param[in] production_node_id £º²úÉúÊ½½ÚµãID
-  /// @return ·µ»Ø²úÉúÊ½ÃûµÄconstÒıÓÃ
-  /// @note ¸ø¶¨µÄ²úÉúÊ½½ÚµãID¶ÔÓ¦µÄ²úÉúÊ½½Úµã±ØĞëÒÑÉèÖÃÓĞĞ§µÄ²úÉúÊ½ÃûID
+  /// @brief é€šè¿‡äº§ç”Ÿå¼èŠ‚ç‚¹IDè·å–äº§ç”Ÿå¼å
+  /// @param[in] production_node_id ï¼šäº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @return è¿”å›äº§ç”Ÿå¼åçš„constå¼•ç”¨
+  /// @note ç»™å®šçš„äº§ç”Ÿå¼èŠ‚ç‚¹IDå¯¹åº”çš„äº§ç”Ÿå¼èŠ‚ç‚¹å¿…é¡»å·²è®¾ç½®æœ‰æ•ˆçš„äº§ç”Ÿå¼åID
   const std::string& GetNodeSymbolStringFromProductionNodeId(
       ProductionNodeId production_node_id) const {
     return GetNodeSymbolStringFromId(
         GetProductionNode(production_node_id).GetNodeSymbolId());
   }
-  /// @brief ²éÑ¯ÏîÖĞÏÂÒ»¸öÒÆÈëµÄ²úÉúÊ½Ãû
-  /// @param[in] production_node_id £º²úÉúÊ½½ÚµãID
-  /// @param[in] production_body_id £º²úÉúÊ½ÌåID
-  /// @param[in] next_word_to_shift_index £ºÏÂÒ»¸öÒÆÈëµÄ½ÚµãÔÚ²úÉúÊ½ÌåµÄÏÂ±ê
-  /// @return ·µ»Ø¸ø¶¨ÏîÏÂÒ»¸öÒÆÈëµÄ²úÉúÊ½ÃûµÄconstÒıÓÃ
-  /// @note ÒªÇó¸ø¶¨Ïî±ØĞë´æÔÚÇÒ¸ø¶¨Ïî´æÔÚ¿ÉÒÔÒÆÈëµÄ²úÉúÊ½
+  /// @brief æŸ¥è¯¢é¡¹ä¸­ä¸‹ä¸€ä¸ªç§»å…¥çš„äº§ç”Ÿå¼å
+  /// @param[in] production_node_id ï¼šäº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in] production_body_id ï¼šäº§ç”Ÿå¼ä½“ID
+  /// @param[in] next_word_to_shift_index ï¼šä¸‹ä¸€ä¸ªç§»å…¥çš„èŠ‚ç‚¹åœ¨äº§ç”Ÿå¼ä½“çš„ä¸‹æ ‡
+  /// @return è¿”å›ç»™å®šé¡¹ä¸‹ä¸€ä¸ªç§»å…¥çš„äº§ç”Ÿå¼åçš„constå¼•ç”¨
+  /// @note è¦æ±‚ç»™å®šé¡¹å¿…é¡»å­˜åœ¨ä¸”ç»™å®šé¡¹å­˜åœ¨å¯ä»¥ç§»å…¥çš„äº§ç”Ÿå¼
   const std::string& GetNextNodeToShiftSymbolString(
       ProductionNodeId production_node_id, ProductionBodyId production_body_id,
       NextWordToShiftIndex next_word_to_shift_index) const {
     return GetNodeSymbolStringFromProductionNodeId(GetProductionNodeIdInBody(
         production_node_id, production_body_id, next_word_to_shift_index));
   }
-  /// @brief Í¨¹ıÏî²éÑ¯ÏÂÒ»¸öÒÆÈëµÄ½ÚµãÃû
-  /// @param[in] production_item £»Ïî
-  /// @return ·µ»Ø¸ø¶¨ÏîÏÂÒ»¸öÒÆÈëµÄ²úÉúÊ½ÃûµÄconstÒıÓÃ
-  /// @note ÒªÇó¸ø¶¨Ïî´æÔÚ¿ÉÒÔÒÆÈëµÄ²úÉúÊ½
+  /// @brief é€šè¿‡é¡¹æŸ¥è¯¢ä¸‹ä¸€ä¸ªç§»å…¥çš„èŠ‚ç‚¹å
+  /// @param[in] production_item ï¼›é¡¹
+  /// @return è¿”å›ç»™å®šé¡¹ä¸‹ä¸€ä¸ªç§»å…¥çš„äº§ç”Ÿå¼åçš„constå¼•ç”¨
+  /// @note è¦æ±‚ç»™å®šé¡¹å­˜åœ¨å¯ä»¥ç§»å…¥çš„äº§ç”Ÿå¼
   const std::string& GetNextNodeToShiftSymbolString(
       const ProductionItem& production_item) const {
     auto& [production_node_id, production_body_id, next_word_to_shift_index] =
@@ -155,87 +155,87 @@ class SyntaxGenerator {
     return GetNextNodeToShiftSymbolString(
         production_node_id, production_body_id, next_word_to_shift_index);
   }
-  /// @brief ÉèÖÃ²úÉúÊ½ÃûIDµ½²úÉúÊ½½ÚµãIDµÄÓ³Éä
-  /// @param[in] node_symbol_id £º²úÉúÊ½ÃûID
-  /// @param[in] node_id £º²úÉúÊ½½ÚµãID
-  /// @note Èç¹ûÒÑ´æÔÚ¾ÉÓ³ÉäÔò»á¸²¸Ç
+  /// @brief è®¾ç½®äº§ç”Ÿå¼åIDåˆ°äº§ç”Ÿå¼èŠ‚ç‚¹IDçš„æ˜ å°„
+  /// @param[in] node_symbol_id ï¼šäº§ç”Ÿå¼åID
+  /// @param[in] node_id ï¼šäº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @note å¦‚æœå·²å­˜åœ¨æ—§æ˜ å°„åˆ™ä¼šè¦†ç›–
   void SetNodeSymbolIdToProductionNodeIdMapping(SymbolId node_symbol_id,
                                                 ProductionNodeId node_id) {
     assert(node_symbol_id.IsValid() && node_id.IsValid());
     node_symbol_id_to_node_id_[node_symbol_id] = node_id;
   }
-  /// @brief ÉèÖÃ²úÉúÊ½Ìå×Ö·û´®IDµ½²úÉúÊ½½ÚµãIDµÄÓ³Éä
-  /// @param[in] body_symbol_id £º²úÉúÊ½Ìå×Ö·û´®ID
-  /// @param[in] node_id £º²úÉúÊ½½ÚµãID
-  /// @note Èç¹ûÒÑ´æÔÚ¾ÉÓ³ÉäÔò»á¸²¸Ç
+  /// @brief è®¾ç½®äº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²IDåˆ°äº§ç”Ÿå¼èŠ‚ç‚¹IDçš„æ˜ å°„
+  /// @param[in] body_symbol_id ï¼šäº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²ID
+  /// @param[in] node_id ï¼šäº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @note å¦‚æœå·²å­˜åœ¨æ—§æ˜ å°„åˆ™ä¼šè¦†ç›–
   void SetBodySymbolIdToProductionNodeIdMapping(SymbolId body_symbol_id,
                                                 ProductionNodeId node_id) {
     assert(body_symbol_id.IsValid() && node_id.IsValid());
     production_body_symbol_id_to_node_id_[body_symbol_id] = node_id;
   }
-  /// @brief ¸ù¾İ²úÉúÊ½ÃûID»ñÈ¡¶ÔÓ¦²úÉúÊ½½ÚµãID
-  /// @param[in] node_symbol_id £º²úÉúÊ½ÃûID
-  /// @return ·µ»Ø²úÉúÊ½½ÚµãID
-  /// @retval ProductionNodeId::InvalidId() £º¸ø¶¨µÄ²úÉúÊ½ÃûID²»´æÔÚ
+  /// @brief æ ¹æ®äº§ç”Ÿå¼åIDè·å–å¯¹åº”äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in] node_symbol_id ï¼šäº§ç”Ÿå¼åID
+  /// @return è¿”å›äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @retval ProductionNodeId::InvalidId() ï¼šç»™å®šçš„äº§ç”Ÿå¼åIDä¸å­˜åœ¨
   ProductionNodeId GetProductionNodeIdFromNodeSymbolId(SymbolId node_symbol_id);
-  /// @brief ¸ù¾İ²úÉúÊ½Ìå×Ö·û´®ID»ñÈ¡²úÉúÊ½½ÚµãID
-  /// @param[in] body_symbol_id £º²úÉúÊ½×Ö·û´®ID
-  /// @return ·µ»Ø²úÉúÊ½½ÚµãID
-  /// @retval ProductionNodeId::InvalidId() £º¸ø¶¨²úÉúÊ½Ìå×Ö·û´®ID²»´æÔÚ
+  /// @brief æ ¹æ®äº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²IDè·å–äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in] body_symbol_id ï¼šäº§ç”Ÿå¼å­—ç¬¦ä¸²ID
+  /// @return è¿”å›äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @retval ProductionNodeId::InvalidId() ï¼šç»™å®šäº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²IDä¸å­˜åœ¨
   ProductionNodeId GetProductionNodeIdFromBodySymbolId(SymbolId body_symbol_id);
-  /// @brief ¸ù¾İ²úÉúÊ½Ãû»ñÈ¡²úÉúÊ½½ÚµãID
-  /// @param[in] node_symbol £º²úÉúÊ½ÃûID
-  /// @return ·µ»Ø²úÉúÊ½½ÚµãID
-  /// @retval ProductionNodeId::InvalidId() £º²úÉúÊ½ÃûÎ´Ìí¼Ó¹ı
+  /// @brief æ ¹æ®äº§ç”Ÿå¼åè·å–äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in] node_symbol ï¼šäº§ç”Ÿå¼åID
+  /// @return è¿”å›äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @retval ProductionNodeId::InvalidId() ï¼šäº§ç”Ÿå¼åæœªæ·»åŠ è¿‡
   ProductionNodeId GetProductionNodeIdFromNodeSymbol(
       const std::string& node_symbol);
-  /// @brief ½«²úÉúÊ½Ìå·ûºÅ×ª»»Îª²úÉúÊ½½ÚµãID
-  /// @param[in] body_symbol £º²úÉúÊ½Ìå×Ö·û´®ID
-  /// @return ·µ»Ø²úÉúÊ½½ÚµãID
-  /// @retval ProductionNodeId::InvalidId() £º²úÉúÊ½Ìå×Ö·û´®Î´Ìí¼Ó¹ı
+  /// @brief å°†äº§ç”Ÿå¼ä½“ç¬¦å·è½¬æ¢ä¸ºäº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in] body_symbol ï¼šäº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²ID
+  /// @return è¿”å›äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @retval ProductionNodeId::InvalidId() ï¼šäº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²æœªæ·»åŠ è¿‡
   ProductionNodeId GetProductionNodeIdFromBodySymbol(
       const std::string& body_symbol);
-  /// @brief »ñÈ¡²úÉúÊ½ÌåÖĞÖ¸¶¨Î»ÖÃµÄ²úÉúÊ½½ÚµãID
-  /// @param[in] production_node_id £º²úÉúÊ½½ÚµãID
-  /// @param[in] production_body_id £º²úÉúÊ½ÌåID
-  /// @param[in] next_word_to_shift_index £ºÒª»ñÈ¡µÄ²úÉúÊ½½ÚµãIDµÄÎ»ÖÃ
-  /// @return ·µ»Ø²úÉúÊ½½ÚµãID
+  /// @brief è·å–äº§ç”Ÿå¼ä½“ä¸­æŒ‡å®šä½ç½®çš„äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in] production_node_id ï¼šäº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in] production_body_id ï¼šäº§ç”Ÿå¼ä½“ID
+  /// @param[in] next_word_to_shift_index ï¼šè¦è·å–çš„äº§ç”Ÿå¼èŠ‚ç‚¹IDçš„ä½ç½®
+  /// @return è¿”å›äº§ç”Ÿå¼èŠ‚ç‚¹ID
   /// @retval ProductionNodeId::InvalidId()
-  /// £ºnext_word_to_shift_index´óÓÚµÈÓÚÖ¸¶¨µÄ²úÉúÊ½ÌåÖĞº¬ÓĞµÄ²úÉúÊ½ÊıÄ¿
-  /// @note production_node_idºÍproduction_body_id±ØĞëÓĞĞ§
-  /// ÖÕ½á½ÚµãºÍÔËËã·û½ÚµãÖĞproduction_body_id±ØĞëÊ¹ÓÃ0
+  /// ï¼šnext_word_to_shift_indexå¤§äºç­‰äºæŒ‡å®šçš„äº§ç”Ÿå¼ä½“ä¸­å«æœ‰çš„äº§ç”Ÿå¼æ•°ç›®
+  /// @note production_node_idå’Œproduction_body_idå¿…é¡»æœ‰æ•ˆ
+  /// ç»ˆç»“èŠ‚ç‚¹å’Œè¿ç®—ç¬¦èŠ‚ç‚¹ä¸­production_body_idå¿…é¡»ä½¿ç”¨0
   ProductionNodeId GetProductionNodeIdInBody(
       ProductionNodeId production_node_id, ProductionBodyId production_body_id,
       NextWordToShiftIndex next_word_to_shift_index) const {
     return GetProductionNode(production_node_id)
         .GetProductionNodeInBody(production_body_id, next_word_to_shift_index);
   }
-  /// @brief ÉèÖÃÓÃ»§¶¨ÒåµÄ¸ù²úÉúÊ½½ÚµãID
-  /// @param[in] root_production_node_id £ºÓÃ»§¶¨ÒåµÄ¸ù²úÉúÊ½½ÚµãID
+  /// @brief è®¾ç½®ç”¨æˆ·å®šä¹‰çš„æ ¹äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in] root_production_node_id ï¼šç”¨æˆ·å®šä¹‰çš„æ ¹äº§ç”Ÿå¼èŠ‚ç‚¹ID
   void SetRootProductionNodeId(ProductionNodeId root_production_node_id) {
     root_production_node_id_ = root_production_node_id;
   }
-  /// @brief »ñÈ¡ÓÃ»§¶¨ÒåµÄ¸ù²úÉúÊ½ID
-  /// @return ·µ»ØÓÃ»§¶¨ÒåµÄ¸ù²úÉúÊ½ID
+  /// @brief è·å–ç”¨æˆ·å®šä¹‰çš„æ ¹äº§ç”Ÿå¼ID
+  /// @return è¿”å›ç”¨æˆ·å®šä¹‰çš„æ ¹äº§ç”Ÿå¼ID
   /// @retval ProductionNodeId::InvalidId()
-  /// £ºÎ´ÉèÖÃ¹ı¸ù²úÉúÊ½ID»òÖ÷¶¯ÉèÖÃÎªÕâ¸öÖµ
+  /// ï¼šæœªè®¾ç½®è¿‡æ ¹äº§ç”Ÿå¼IDæˆ–ä¸»åŠ¨è®¾ç½®ä¸ºè¿™ä¸ªå€¼
   ProductionNodeId GetRootProductionNodeId() {
     return root_production_node_id_;
   }
-  /// @brief ÊµÀı»¯°ü×°´¦Àíº¯ÊıµÄÀà¶ÔÏó
-  /// @tparam ProcessFunctionClass £º°ü×°´¦Àíº¯ÊıµÄÀà¶ÔÏóµÄÀàÃû
-  /// @return ·µ»Ø°ü×°´¦Àíº¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóµÄID
-  /// @note ²»¼ì²éÊÇ·ñÖØ¸´£¬µ«ÊÇÊ¹ÓÃÊ±Ò»¸öÀà½öÔÊĞíÊµÀı»¯Ò»´Î
+  /// @brief å®ä¾‹åŒ–åŒ…è£…å¤„ç†å‡½æ•°çš„ç±»å¯¹è±¡
+  /// @tparam ProcessFunctionClass ï¼šåŒ…è£…å¤„ç†å‡½æ•°çš„ç±»å¯¹è±¡çš„ç±»å
+  /// @return è¿”å›åŒ…è£…å¤„ç†å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡çš„ID
+  /// @note ä¸æ£€æŸ¥æ˜¯å¦é‡å¤ï¼Œä½†æ˜¯ä½¿ç”¨æ—¶ä¸€ä¸ªç±»ä»…å…è®¸å®ä¾‹åŒ–ä¸€æ¬¡
   template <class ProcessFunctionClass>
   ProcessFunctionClassId CreateProcessFunctionClassObject() {
     return manager_process_function_class_
         .EmplaceObject<ProcessFunctionClass>();
   }
-  /// @brief »ñÈ¡¹æÔ¼Ä³¸ö²úÉúÊ½Ê¹ÓÃµÄ°ü×°´¦Àíº¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
-  /// @param[in] production_node_id £º²úÉúÊ½ID
-  /// @param[in] production_body_id £º²úÉúÊ½ÌåID
-  /// @return ·µ»Ø°ü×°´¦Àíº¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
-  /// @note ½öÔÊĞí¶Ô·ÇÖÕ½á²úÉúÊ½½ÚµãÖ´ĞĞ¸Ã²Ù×÷£¬ÒªÇóproduction_node_idÓĞĞ§
+  /// @brief è·å–è§„çº¦æŸä¸ªäº§ç”Ÿå¼ä½¿ç”¨çš„åŒ…è£…å¤„ç†å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
+  /// @param[in] production_node_id ï¼šäº§ç”Ÿå¼ID
+  /// @param[in] production_body_id ï¼šäº§ç”Ÿå¼ä½“ID
+  /// @return è¿”å›åŒ…è£…å¤„ç†å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
+  /// @note ä»…å…è®¸å¯¹éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹æ‰§è¡Œè¯¥æ“ä½œï¼Œè¦æ±‚production_node_idæœ‰æ•ˆ
   ProcessFunctionClassId GetProcessFunctionClass(
       ProductionNodeId production_node_id,
       ProductionBodyId production_body_id) {
@@ -245,230 +245,230 @@ class SyntaxGenerator {
     assert(production_node.GetType() == ProductionNodeType::kNonTerminalNode);
     return production_node.GetBodyProcessFunctionClassId(production_body_id);
   }
-  /// @brief Ìí¼ÓÒòÎª²úÉúÊ½ÌåÖĞÄ³¸ö²úÉúÊ½Î´¶¨Òå¶øµ¼ÖÂ²»ÄÜ¼ÌĞøÌí¼ÓµÄ¼ÇÂ¼
-  /// @param[in] undefined_symbol £ºÎ´¶¨ÒåµÄ²úÉúÊ½Ãû
-  /// @param[in] node_symbol £º´ıÌí¼ÓµÄ²úÉúÊ½Ãû
-  /// @param[in] subnode_symbols £º²úÉúÊ½Ìå
-  /// @param[in] class_id £º°ü×°´¦Àíº¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
+  /// @brief æ·»åŠ å› ä¸ºäº§ç”Ÿå¼ä½“ä¸­æŸä¸ªäº§ç”Ÿå¼æœªå®šä¹‰è€Œå¯¼è‡´ä¸èƒ½ç»§ç»­æ·»åŠ çš„è®°å½•
+  /// @param[in] undefined_symbol ï¼šæœªå®šä¹‰çš„äº§ç”Ÿå¼å
+  /// @param[in] node_symbol ï¼šå¾…æ·»åŠ çš„äº§ç”Ÿå¼å
+  /// @param[in] subnode_symbols ï¼šäº§ç”Ÿå¼ä½“
+  /// @param[in] class_id ï¼šåŒ…è£…å¤„ç†å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
   /// @note
-  /// 1.node_symbol¡¢subnode_symbols¡¢class_idÍ¬AddNonTerminalNodeµ÷ÓÃ²ÎÊı
-  /// 2.º¯Êı»á¸´ÖÆ/ÒÆ¶¯¹¹ÔìÒ»·İ¸±±¾£¬ÎŞĞè±£³ÖÔ­À´µÄ²ÎÊıµÄÉúÃüÖÜÆÚ
-  /// 3.¸Ãº¯Êı½â¾ö²úÉúÊ½Ñ­»·ÒıÓÃ¹¦ÄÜÎŞ·¨±ÜÃâÊ¹ÓÃÎ´Ìí¼ÓµÄ²úÉúÊ½×÷Îª²úÉúÊ½ÌåÄÚÈİ
+  /// 1.node_symbolã€subnode_symbolsã€class_idåŒAddNonTerminalNodeè°ƒç”¨å‚æ•°
+  /// 2.å‡½æ•°ä¼šå¤åˆ¶/ç§»åŠ¨æ„é€ ä¸€ä»½å‰¯æœ¬ï¼Œæ— éœ€ä¿æŒåŸæ¥çš„å‚æ•°çš„ç”Ÿå‘½å‘¨æœŸ
+  /// 3.è¯¥å‡½æ•°è§£å†³äº§ç”Ÿå¼å¾ªç¯å¼•ç”¨åŠŸèƒ½æ— æ³•é¿å…ä½¿ç”¨æœªæ·»åŠ çš„äº§ç”Ÿå¼ä½œä¸ºäº§ç”Ÿå¼ä½“å†…å®¹
   void AddUnableContinueNonTerminalNode(
       const std::string& undefined_symbol, std::string&& node_symbol,
       std::vector<std::string>&& subnode_symbols,
       ProcessFunctionClassId class_id);
   /// @brief
-  /// ¼ì²éÒÑÌí¼Ó¸ø¶¨µÄ²úÉúÊ½½ÚµãºóÊÇ·ñ¿ÉÒÔÖØÆôÒòÎª¸Ã²úÉúÊ½ÌåÎ´¶¨Òå¶ø¸éÖÃµÄ
-  /// ·ÇÖÕ½á²úÉúÊ½Ìí¼Ó¹ı³Ì£¬Èç¹û¿ÉÒÔÔòÖØÆôÈ«²¿Ìí¼Ó¹ı³Ì
-  /// @param[in] node_symbol £ºÒÑÌí¼ÓµÄ²úÉúÊ½Ãû
+  /// æ£€æŸ¥å·²æ·»åŠ ç»™å®šçš„äº§ç”Ÿå¼èŠ‚ç‚¹åæ˜¯å¦å¯ä»¥é‡å¯å› ä¸ºè¯¥äº§ç”Ÿå¼ä½“æœªå®šä¹‰è€Œæç½®çš„
+  /// éç»ˆç»“äº§ç”Ÿå¼æ·»åŠ è¿‡ç¨‹ï¼Œå¦‚æœå¯ä»¥åˆ™é‡å¯å…¨éƒ¨æ·»åŠ è¿‡ç¨‹
+  /// @param[in] node_symbol ï¼šå·²æ·»åŠ çš„äº§ç”Ÿå¼å
   /// @note
-  /// 1.¸Ãº¯ÊıÓëAddUnableContinueNonTerminalNodeÅäÌ×Ê¹ÓÃ
-  /// 2.ÖØÆôÌí¼Ó¹ı³ÌÍ¨¹ıÊ¹ÓÃ±£´æµÄ²ÎÊıÖØĞÂµ÷ÓÃAddNonTerminalNodeÊµÏÖ
+  /// 1.è¯¥å‡½æ•°ä¸AddUnableContinueNonTerminalNodeé…å¥—ä½¿ç”¨
+  /// 2.é‡å¯æ·»åŠ è¿‡ç¨‹é€šè¿‡ä½¿ç”¨ä¿å­˜çš„å‚æ•°é‡æ–°è°ƒç”¨AddNonTerminalNodeå®ç°
   void CheckNonTerminalNodeCanContinue(const std::string& node_symbol);
-  /// @brief ¼ì²éÊÇ·ñ´æÔÚÎ´¶¨ÒåµÄ²úÉúÊ½Ìå
+  /// @brief æ£€æŸ¥æ˜¯å¦å­˜åœ¨æœªå®šä¹‰çš„äº§ç”Ÿå¼ä½“
   /// @note
-  /// 1.Íê³ÉËùÓĞ²úÉúÊ½Ìí¼Óºó¼ì²é
-  /// 2.Èç¹ûÓĞÔòÊä³ö´íÎóĞÅÏ¢ºóÍË³ö
+  /// 1.å®Œæˆæ‰€æœ‰äº§ç”Ÿå¼æ·»åŠ åæ£€æŸ¥
+  /// 2.å¦‚æœæœ‰åˆ™è¾“å‡ºé”™è¯¯ä¿¡æ¯åé€€å‡º
   void CheckUndefinedProductionRemained();
-  /// @brief Ìí¼Ó¹Ø¼ü×Ö
-  /// @param[in] node_symbol £º²úÉúÊ½Ãû
-  /// @param[in] key_word £º¹Ø¼ü×Ö×Ö·û´®
+  /// @brief æ·»åŠ å…³é”®å­—
+  /// @param[in] node_symbol ï¼šäº§ç”Ÿå¼å
+  /// @param[in] key_word ï¼šå…³é”®å­—å­—ç¬¦ä¸²
   /// @note
-  /// 1.Ö§³ÖÕıÔò
-  /// 2.¹Ø¼ü×ÖÒÑ´æÔÚÔòÊä³ö´íÎóĞÅÏ¢
+  /// 1.æ”¯æŒæ­£åˆ™
+  /// 2.å…³é”®å­—å·²å­˜åœ¨åˆ™è¾“å‡ºé”™è¯¯ä¿¡æ¯
   void AddKeyWord(std::string node_symbol, std::string key_word);
-  /// @brief Ìí¼ÓÆÕÍ¨ÖÕ½á²úÉúÊ½
-  /// @param[in] node_symbol £º²úÉúÊ½Ãû
-  /// @param[in] regex_string £º²úÉúÊ½µÄÕıÔò±íÊ¾
+  /// @brief æ·»åŠ æ™®é€šç»ˆç»“äº§ç”Ÿå¼
+  /// @param[in] node_symbol ï¼šäº§ç”Ÿå¼å
+  /// @param[in] regex_string ï¼šäº§ç”Ÿå¼çš„æ­£åˆ™è¡¨ç¤º
   void AddSimpleTerminalProduction(std::string node_symbol,
                                    std::string regex_string);
-  /// @brief Ìí¼ÓÖÕ½á²úÉúÊ½£¨¹Ø¼ü×Ö¡¢ÔËËã·û¡¢ÆÕÍ¨ÖÕ½á²úÉúÊ½£©
-  /// @param[in] node_symbol £ºÖÕ½á²úÉúÊ½Ãû
-  /// @param[in] body_symbol £º²úÉúÊ½Ìå×Ö·û´®£¨ÕıÔòĞÎÊ½£©
-  /// @param[in] node_priority £º²úÉúÊ½ÌåµÄµ¥´ÊÓÅÏÈ¼¶
-  /// @param[in] is_key_word £º¸Ã²úÉúÊ½ÊÇ·ñÊÇ¹Ø¼ü×Ö
-  /// @return ·µ»ØÖÕ½á½ÚµãID
-  /// @retval ProductionNodeId::Invalid() £º´ıÌí¼ÓÖÕ½á²úÉúÊ½Ãû»òÌå×Ö·û´®ÒÑ´æÔÚ
+  /// @brief æ·»åŠ ç»ˆç»“äº§ç”Ÿå¼ï¼ˆå…³é”®å­—ã€è¿ç®—ç¬¦ã€æ™®é€šç»ˆç»“äº§ç”Ÿå¼ï¼‰
+  /// @param[in] node_symbol ï¼šç»ˆç»“äº§ç”Ÿå¼å
+  /// @param[in] body_symbol ï¼šäº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²ï¼ˆæ­£åˆ™å½¢å¼ï¼‰
+  /// @param[in] node_priority ï¼šäº§ç”Ÿå¼ä½“çš„å•è¯ä¼˜å…ˆçº§
+  /// @param[in] is_key_word ï¼šè¯¥äº§ç”Ÿå¼æ˜¯å¦æ˜¯å…³é”®å­—
+  /// @return è¿”å›ç»ˆç»“èŠ‚ç‚¹ID
+  /// @retval ProductionNodeId::Invalid() ï¼šå¾…æ·»åŠ ç»ˆç»“äº§ç”Ÿå¼åæˆ–ä½“å­—ç¬¦ä¸²å·²å­˜åœ¨
   /// @note
-  /// 1.½ÚµãÒÑ´æÔÚ»ò¸ø¶¨symbol_id²»Í¬ÓÚÒÑÓĞIDÔòÊä³ö´íÎóĞÅÏ¢²¢·µ»Ø
+  /// 1.èŠ‚ç‚¹å·²å­˜åœ¨æˆ–ç»™å®šsymbol_idä¸åŒäºå·²æœ‰IDåˆ™è¾“å‡ºé”™è¯¯ä¿¡æ¯å¹¶è¿”å›
   /// ProductionNodeId::InvalidId()
-  /// 2.µ¥´ÊÓÅÏÈ¼¶£º0±£ÁôÎªÆÕÍ¨´ÊµÄÓÅÏÈ¼¶£¬1±£ÁôÎªÔËËã·ûÓÅÏÈ¼¶£¬2±£ÁôÎª¹Ø¼ü×Ö
-  /// ÓÅÏÈ¼¶£¬ÆäÓàµÄÓÅÏÈ¼¶ÉĞÎ´Ö¸¶¨
-  /// @attention ´ÊÓÅÏÈ¼¶ÓëÔËËã·ûÓÅÏÈ¼¶²»Í¬£¬Çë×¢ÒâÇø·Ö
+  /// 2.å•è¯ä¼˜å…ˆçº§ï¼š0ä¿ç•™ä¸ºæ™®é€šè¯çš„ä¼˜å…ˆçº§ï¼Œ1ä¿ç•™ä¸ºè¿ç®—ç¬¦ä¼˜å…ˆçº§ï¼Œ2ä¿ç•™ä¸ºå…³é”®å­—
+  /// ä¼˜å…ˆçº§ï¼Œå…¶ä½™çš„ä¼˜å…ˆçº§å°šæœªæŒ‡å®š
+  /// @attention è¯ä¼˜å…ˆçº§ä¸è¿ç®—ç¬¦ä¼˜å…ˆçº§ä¸åŒï¼Œè¯·æ³¨æ„åŒºåˆ†
   ProductionNodeId AddTerminalProduction(std::string&& node_symbol,
                                          std::string&& body_symbol,
                                          WordPriority node_priority,
                                          bool regex_allowed);
-  /// @brief AddTerminalProductionµÄ×Ó¹ı³Ì£¬½öÓÃÓÚ´´½¨ÖÕ½á½Úµã
-  /// @param[in] node_symbol_id £ºÖÕ½á½ÚµãÃûID
-  /// @param[in] body_symbol_id £ºÖÕ½á½ÚµãÌå×Ö·û´®ID
-  /// @return ·µ»ØĞÂ½¨µÄÖÕ½á²úÉúÊ½½ÚµãID
+  /// @brief AddTerminalProductionçš„å­è¿‡ç¨‹ï¼Œä»…ç”¨äºåˆ›å»ºç»ˆç»“èŠ‚ç‚¹
+  /// @param[in] node_symbol_id ï¼šç»ˆç»“èŠ‚ç‚¹åID
+  /// @param[in] body_symbol_id ï¼šç»ˆç»“èŠ‚ç‚¹ä½“å­—ç¬¦ä¸²ID
+  /// @return è¿”å›æ–°å»ºçš„ç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹ID
   /// @note
-  /// 1.×Ô¶¯Îª½ÚµãÀàÉèÖÃ½ÚµãID
-  /// 2.×Ô¶¯¸üĞÂ½ÚµãÃûIDµ½½ÚµãIDµÄÓ³Éä
-  /// 3.×Ô¶¯¸üĞÂ½ÚµãÌåIDµ½½ÚµãIDµÄÓ³Éä
+  /// 1.è‡ªåŠ¨ä¸ºèŠ‚ç‚¹ç±»è®¾ç½®èŠ‚ç‚¹ID
+  /// 2.è‡ªåŠ¨æ›´æ–°èŠ‚ç‚¹åIDåˆ°èŠ‚ç‚¹IDçš„æ˜ å°„
+  /// 3.è‡ªåŠ¨æ›´æ–°èŠ‚ç‚¹ä½“IDåˆ°èŠ‚ç‚¹IDçš„æ˜ å°„
   ProductionNodeId SubAddTerminalNode(SymbolId node_symbol_id,
                                       SymbolId body_symbol_id);
-  /// @brief Ìí¼ÓË«Ä¿ÔËËã·û
-  /// @param[in] operator_symbol £ºÔËËã·ûÃû£¨Ö§³ÖÕıÔò£©
-  /// @param[in] binary_operator_associatity_type £ºË«Ä¿ÔËËã·û½áºÏĞÔ
-  /// @param[in] binary_operator_priority £ºË«Ä¿ÔËËã·ûµÄÔËËã·ûÓÅÏÈ¼¶
-  /// @return ·µ»ØË«Ä¿ÔËËã·û½ÚµãID
+  /// @brief æ·»åŠ åŒç›®è¿ç®—ç¬¦
+  /// @param[in] operator_symbol ï¼šè¿ç®—ç¬¦åï¼ˆæ”¯æŒæ­£åˆ™ï¼‰
+  /// @param[in] binary_operator_associatity_type ï¼šåŒç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @param[in] binary_operator_priority ï¼šåŒç›®è¿ç®—ç¬¦çš„è¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @return è¿”å›åŒç›®è¿ç®—ç¬¦èŠ‚ç‚¹ID
   /// @note
-  /// 1.½ÚµãÒÑ´æÔÚÔò·µ»ØProductionNodeId::InvalidId()
-  /// 2.ÔËËã·û´Ê·¨·ÖÎöÓÅÏÈ¼¶¸ßÓÚÆÕÍ¨ÖÕ½á²úÉúÊ½µÍÓÚ¹Ø¼ü×Ö
+  /// 1.èŠ‚ç‚¹å·²å­˜åœ¨åˆ™è¿”å›ProductionNodeId::InvalidId()
+  /// 2.è¿ç®—ç¬¦è¯æ³•åˆ†æä¼˜å…ˆçº§é«˜äºæ™®é€šç»ˆç»“äº§ç”Ÿå¼ä½äºå…³é”®å­—
   ProductionNodeId AddBinaryOperator(
       std::string node_symbol, std::string operator_symbol,
       OperatorAssociatityType binary_operator_associatity_type,
       OperatorPriority binary_operator_priority);
-  /// @brief Ìí¼Óµ¥Ä¿ÔËËã·û
-  /// @param[in] operator_symbol £ºÔËËã·ûÃû£¨Ö§³ÖÕıÔò£©
-  /// @param[in] unary_operator_associatity_type £ºµ¥Ä¿ÔËËã·û½áºÏĞÔ
-  /// @param[in] unary_operator_priority £ºµ¥Ä¿ÔËËã·ûµÄÔËËã·ûÓÅÏÈ¼¶
-  /// @return ·µ»Øµ¥Ä¿ÔËËã·û½ÚµãID
+  /// @brief æ·»åŠ å•ç›®è¿ç®—ç¬¦
+  /// @param[in] operator_symbol ï¼šè¿ç®—ç¬¦åï¼ˆæ”¯æŒæ­£åˆ™ï¼‰
+  /// @param[in] unary_operator_associatity_type ï¼šå•ç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @param[in] unary_operator_priority ï¼šå•ç›®è¿ç®—ç¬¦çš„è¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @return è¿”å›å•ç›®è¿ç®—ç¬¦èŠ‚ç‚¹ID
   /// @note
-  /// 1.½ÚµãÒÑ´æÔÚÔò·µ»ØProductionNodeId::InvalidId()
-  /// 2.ÔËËã·û´Ê·¨·ÖÎöÓÅÏÈ¼¶¸ßÓÚÆÕÍ¨ÖÕ½á²úÉúÊ½µÍÓÚ¹Ø¼ü×Ö
-  /// @attention ½öÖ§³Ö×ó²àµ¥Ä¿ÔËËã·û£¬²»Ö§³ÖÓÒ²àµ¥Ä¿ÔËËã·û
+  /// 1.èŠ‚ç‚¹å·²å­˜åœ¨åˆ™è¿”å›ProductionNodeId::InvalidId()
+  /// 2.è¿ç®—ç¬¦è¯æ³•åˆ†æä¼˜å…ˆçº§é«˜äºæ™®é€šç»ˆç»“äº§ç”Ÿå¼ä½äºå…³é”®å­—
+  /// @attention ä»…æ”¯æŒå·¦ä¾§å•ç›®è¿ç®—ç¬¦ï¼Œä¸æ”¯æŒå³ä¾§å•ç›®è¿ç®—ç¬¦
   ProductionNodeId AddLeftUnaryOperator(
       std::string node_symbol, std::string operator_symbol,
       OperatorAssociatityType unary_operator_associatity_type,
       OperatorPriority unary_operator_priority);
-  /// @brief Ìí¼Ó¾ßÓĞË«Ä¿ÔËËã·ûºÍ×ó²àµ¥Ä¿ÔËËã·ûÓïÒåµÄÔËËã·û
-  /// @param[in] operator_symbol £ºÔËËã·ûÃû£¨Ö§³ÖÕıÔò£©
-  /// @param[in] binary_operator_associatity_type £ºË«Ä¿ÔËËã·û½áºÏĞÔ
-  /// @param[in] binary_operator_priority £ºË«Ä¿ÔËËã·ûµÄÔËËã·ûÓÅÏÈ¼¶
-  /// @param[in] unary_operator_associatity_type £ºµ¥Ä¿ÔËËã·û½áºÏĞÔ
-  /// @param[in] unary_operator_priority £ºµ¥Ä¿ÔËËã·ûµÄÔËËã·ûÓÅÏÈ¼¶
-  /// @return ·µ»ØÔËËã·û½ÚµãID
+  /// @brief æ·»åŠ å…·æœ‰åŒç›®è¿ç®—ç¬¦å’Œå·¦ä¾§å•ç›®è¿ç®—ç¬¦è¯­ä¹‰çš„è¿ç®—ç¬¦
+  /// @param[in] operator_symbol ï¼šè¿ç®—ç¬¦åï¼ˆæ”¯æŒæ­£åˆ™ï¼‰
+  /// @param[in] binary_operator_associatity_type ï¼šåŒç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @param[in] binary_operator_priority ï¼šåŒç›®è¿ç®—ç¬¦çš„è¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @param[in] unary_operator_associatity_type ï¼šå•ç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @param[in] unary_operator_priority ï¼šå•ç›®è¿ç®—ç¬¦çš„è¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @return è¿”å›è¿ç®—ç¬¦èŠ‚ç‚¹ID
   /// @note
-  /// 1.½ÚµãÒÑ´æÔÚÔò·µ»ØProductionNodeId::InvalidId()
-  /// 2.ÔËËã·û´Ê·¨·ÖÎöÓÅÏÈ¼¶¸ßÓÚÆÕÍ¨ÖÕ½á²úÉúÊ½µÍÓÚ¹Ø¼ü×Ö
-  /// 3.Ò»¸öÔËËã·û½Úµãº¬ÓĞÁ½ÖÖÓïÒå
+  /// 1.èŠ‚ç‚¹å·²å­˜åœ¨åˆ™è¿”å›ProductionNodeId::InvalidId()
+  /// 2.è¿ç®—ç¬¦è¯æ³•åˆ†æä¼˜å…ˆçº§é«˜äºæ™®é€šç»ˆç»“äº§ç”Ÿå¼ä½äºå…³é”®å­—
+  /// 3.ä¸€ä¸ªè¿ç®—ç¬¦èŠ‚ç‚¹å«æœ‰ä¸¤ç§è¯­ä¹‰
   ProductionNodeId AddBinaryLeftUnaryOperator(
       std::string node_symbol, std::string operator_symbol,
       OperatorAssociatityType binary_operator_associatity_type,
       OperatorPriority binary_operator_priority,
       OperatorAssociatityType unary_operator_associatity_type,
       OperatorPriority unary_operator_priority);
-  /// @brief AddBinaryOperatorNodeµÄ×Ó¹ı³Ì
-  /// @param[in] node_symbol_id £º´ıÌí¼ÓµÄÔËËã·û·ûºÅID
-  /// @param[in] binary_associatity_type £ºË«Ä¿ÔËËã·û½áºÏĞÔ
-  /// @param[in] binary_priority £ºË«Ä¿ÔËËã·ûÓÅÏÈ¼¶
+  /// @brief AddBinaryOperatorNodeçš„å­è¿‡ç¨‹
+  /// @param[in] node_symbol_id ï¼šå¾…æ·»åŠ çš„è¿ç®—ç¬¦ç¬¦å·ID
+  /// @param[in] binary_associatity_type ï¼šåŒç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @param[in] binary_priority ï¼šåŒç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
   /// @details
-  /// ¸Ã×Ó¹ı³Ì½öÓÃÓÚ´´½¨½Úµã
-  /// ×Ô¶¯Îª½ÚµãÀàÉèÖÃ½ÚµãID
-  /// ×Ô¶¯¸üĞÂ½ÚµãÃûIDµ½½ÚµãIDµÄÓ³Éä±í
-  /// ×Ô¶¯¸üĞÂ½ÚµãÌåIDµ½½ÚµãIDµÄÓ³Éä
+  /// è¯¥å­è¿‡ç¨‹ä»…ç”¨äºåˆ›å»ºèŠ‚ç‚¹
+  /// è‡ªåŠ¨ä¸ºèŠ‚ç‚¹ç±»è®¾ç½®èŠ‚ç‚¹ID
+  /// è‡ªåŠ¨æ›´æ–°èŠ‚ç‚¹åIDåˆ°èŠ‚ç‚¹IDçš„æ˜ å°„è¡¨
+  /// è‡ªåŠ¨æ›´æ–°èŠ‚ç‚¹ä½“IDåˆ°èŠ‚ç‚¹IDçš„æ˜ å°„
   /// @note
-  /// ÔËËã·ûÓÅÏÈ¼¶Óëµ¥´ÊÓÅÏÈ¼¶²»Í¬£¬Çë×¢ÒâÇø·Ö
+  /// è¿ç®—ç¬¦ä¼˜å…ˆçº§ä¸å•è¯ä¼˜å…ˆçº§ä¸åŒï¼Œè¯·æ³¨æ„åŒºåˆ†
   ProductionNodeId SubAddBinaryOperatorNode(
       SymbolId node_symbol_id, OperatorAssociatityType binary_associatity_type,
       OperatorPriority binary_priority);
-  /// @brief AddUnaryOperatorNodeµÄ×Ó¹ı³Ì
-  /// @param[in] node_symbol_id £º´ıÌí¼ÓµÄÔËËã·û·ûºÅID
-  /// @param[in] unary_associatity_type £ºµ¥Ä¿ÔËËã·û½áºÏĞÔ
-  /// @param[in] unary_priority £ºµ¥Ä¿ÔËËã·ûÓÅÏÈ¼¶
+  /// @brief AddUnaryOperatorNodeçš„å­è¿‡ç¨‹
+  /// @param[in] node_symbol_id ï¼šå¾…æ·»åŠ çš„è¿ç®—ç¬¦ç¬¦å·ID
+  /// @param[in] unary_associatity_type ï¼šå•ç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @param[in] unary_priority ï¼šå•ç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
   /// @details
-  /// ¸Ã×Ó¹ı³Ì½öÓÃÓÚ´´½¨½Úµã
-  /// ×Ô¶¯Îª½ÚµãÀàÉèÖÃ½ÚµãID
-  /// ×Ô¶¯¸üĞÂ½ÚµãÃûIDµ½½ÚµãIDµÄÓ³Éä±í
-  /// ×Ô¶¯¸üĞÂ½ÚµãÌåIDµ½½ÚµãIDµÄÓ³Éä
+  /// è¯¥å­è¿‡ç¨‹ä»…ç”¨äºåˆ›å»ºèŠ‚ç‚¹
+  /// è‡ªåŠ¨ä¸ºèŠ‚ç‚¹ç±»è®¾ç½®èŠ‚ç‚¹ID
+  /// è‡ªåŠ¨æ›´æ–°èŠ‚ç‚¹åIDåˆ°èŠ‚ç‚¹IDçš„æ˜ å°„è¡¨
+  /// è‡ªåŠ¨æ›´æ–°èŠ‚ç‚¹ä½“IDåˆ°èŠ‚ç‚¹IDçš„æ˜ å°„
   /// @note
-  /// ÔËËã·ûÓÅÏÈ¼¶Óëµ¥´ÊÓÅÏÈ¼¶²»Í¬£¬Çë×¢ÒâÇø·Ö
+  /// è¿ç®—ç¬¦ä¼˜å…ˆçº§ä¸å•è¯ä¼˜å…ˆçº§ä¸åŒï¼Œè¯·æ³¨æ„åŒºåˆ†
   ProductionNodeId SubAddUnaryOperatorNode(
       SymbolId node_symbol_id, OperatorAssociatityType unary_associatity_type,
       OperatorPriority unary_priority);
-  /// @brief AddBinaryUnaryOperatorNodeµÄ×Ó¹ı³Ì
-  /// @param[in] node_symbol_id £º´ıÌí¼ÓµÄÔËËã·û·ûºÅID
-  /// @param[in] binary_associatity_type £ºË«Ä¿ÔËËã·û½áºÏĞÔ
-  /// @param[in] binary_priority £ºË«Ä¿ÔËËã·ûÓÅÏÈ¼¶
-  /// @param[in] unary_associatity_type £ºµ¥Ä¿ÔËËã·û½áºÏĞÔ
-  /// @param[in] unary_priority £ºµ¥Ä¿ÔËËã·ûÓÅÏÈ¼¶
+  /// @brief AddBinaryUnaryOperatorNodeçš„å­è¿‡ç¨‹
+  /// @param[in] node_symbol_id ï¼šå¾…æ·»åŠ çš„è¿ç®—ç¬¦ç¬¦å·ID
+  /// @param[in] binary_associatity_type ï¼šåŒç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @param[in] binary_priority ï¼šåŒç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @param[in] unary_associatity_type ï¼šå•ç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @param[in] unary_priority ï¼šå•ç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
   /// @details
-  /// ¸Ã×Ó¹ı³Ì½öÓÃÓÚ´´½¨½Úµã
-  /// ×Ô¶¯Îª½ÚµãÀàÉèÖÃ½ÚµãID
-  /// ×Ô¶¯¸üĞÂ½ÚµãÃûIDµ½½ÚµãIDµÄÓ³Éä±í
-  /// ×Ô¶¯¸üĞÂ½ÚµãÌåIDµ½½ÚµãIDµÄÓ³Éä
+  /// è¯¥å­è¿‡ç¨‹ä»…ç”¨äºåˆ›å»ºèŠ‚ç‚¹
+  /// è‡ªåŠ¨ä¸ºèŠ‚ç‚¹ç±»è®¾ç½®èŠ‚ç‚¹ID
+  /// è‡ªåŠ¨æ›´æ–°èŠ‚ç‚¹åIDåˆ°èŠ‚ç‚¹IDçš„æ˜ å°„è¡¨
+  /// è‡ªåŠ¨æ›´æ–°èŠ‚ç‚¹ä½“IDåˆ°èŠ‚ç‚¹IDçš„æ˜ å°„
   /// @note
-  /// ÔËËã·ûÓÅÏÈ¼¶Óëµ¥´ÊÓÅÏÈ¼¶²»Í¬£¬Çë×¢ÒâÇø·Ö
+  /// è¿ç®—ç¬¦ä¼˜å…ˆçº§ä¸å•è¯ä¼˜å…ˆçº§ä¸åŒï¼Œè¯·æ³¨æ„åŒºåˆ†
   ProductionNodeId SubAddBinaryUnaryOperatorNode(
       SymbolId node_symbol_id, OperatorAssociatityType binary_associatity_type,
       OperatorPriority binary_priority,
       OperatorAssociatityType unary_associatity_type,
       OperatorPriority unary_priority);
-  /// @brief Ìí¼Ó·ÇÖÕ½á²úÉúÊ½
-  /// @tparam ProcessFunctionClass £º°ü×°¹æÔ¼º¯ÊıµÄÀà
-  /// @param[in] node_symbol £º·ÇÖÕ½á²úÉúÊ½Ãû
-  /// @param[in] subnode_symbols £º·ÇÖÕ½á²úÉúÊ½Ìå
-  /// @return ·µ»Ø·ÇÖÕ½á²úÉúÊ½½ÚµãID
+  /// @brief æ·»åŠ éç»ˆç»“äº§ç”Ÿå¼
+  /// @tparam ProcessFunctionClass ï¼šåŒ…è£…è§„çº¦å‡½æ•°çš„ç±»
+  /// @param[in] node_symbol ï¼šéç»ˆç»“äº§ç”Ÿå¼å
+  /// @param[in] subnode_symbols ï¼šéç»ˆç»“äº§ç”Ÿå¼ä½“
+  /// @return è¿”å›éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹ID
   /// @details
-  /// ²ğ³ÉÄ£°åº¯ÊıºÍ·ÇÄ£°åº¯Êı´Ó¶ø½µµÍ´úÂëÉú³ÉÁ¿£¬×èÖ¹´úÂëÅòÕÍ£¬¶şÕßµÈ¼Û
+  /// æ‹†æˆæ¨¡æ¿å‡½æ•°å’Œéæ¨¡æ¿å‡½æ•°ä»è€Œé™ä½ä»£ç ç”Ÿæˆé‡ï¼Œé˜»æ­¢ä»£ç è†¨èƒ€ï¼ŒäºŒè€…ç­‰ä»·
   template <class ProcessFunctionClass>
   ProductionNodeId AddNonTerminalProduction(std::string node_symbol,
                                             std::string subnode_symbols);
-  /// @brief Ìí¼Ó·ÇÖÕ½á²úÉúÊ½
-  /// @param[in] node_symbol £º·ÇÖÕ½á²úÉúÊ½Ãû
-  /// @param[in] subnode_symbols £º·ÇÖÕ½á²úÉúÊ½Ìå
-  /// @param[in] class_id £º°ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
-  /// @return ·µ»Ø·ÇÖÕ½á²úÉúÊ½½ÚµãID
+  /// @brief æ·»åŠ éç»ˆç»“äº§ç”Ÿå¼
+  /// @param[in] node_symbol ï¼šéç»ˆç»“äº§ç”Ÿå¼å
+  /// @param[in] subnode_symbols ï¼šéç»ˆç»“äº§ç”Ÿå¼ä½“
+  /// @param[in] class_id ï¼šåŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
+  /// @return è¿”å›éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹ID
   ProductionNodeId AddNonTerminalProduction(
       std::string&& node_symbol, std::vector<std::string>&& subnode_symbols,
       ProcessFunctionClassId class_id);
-  /// @brief AddNonTerminalProductionµÄ×Ó¹ı³Ì£¬½öÓÃÓÚ´´½¨½Úµã
-  /// @param[in] symbol_id £º·ÇÖÕ½á²úÉúÊ½ÃûID
-  /// @return ·µ»Ø´´½¨µÄ·ÇÖÕ½á²úÉúÊ½½ÚµãID
+  /// @brief AddNonTerminalProductionçš„å­è¿‡ç¨‹ï¼Œä»…ç”¨äºåˆ›å»ºèŠ‚ç‚¹
+  /// @param[in] symbol_id ï¼šéç»ˆç»“äº§ç”Ÿå¼åID
+  /// @return è¿”å›åˆ›å»ºçš„éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹ID
   /// @note
-  /// ×Ô¶¯¸üĞÂ½ÚµãÃûIDµ½½ÚµãIDµÄÓ³Éä±í
-  /// ×Ô¶¯Îª½ÚµãÀàÉèÖÃ½ÚµãID
+  /// è‡ªåŠ¨æ›´æ–°èŠ‚ç‚¹åIDåˆ°èŠ‚ç‚¹IDçš„æ˜ å°„è¡¨
+  /// è‡ªåŠ¨ä¸ºèŠ‚ç‚¹ç±»è®¾ç½®èŠ‚ç‚¹ID
   ProductionNodeId SubAddNonTerminalNode(SymbolId symbol_id);
-  /// @brief ÉèÖÃ·ÇÖÕ½á²úÉúÊ½¿ÉÒÔ¿Õ¹æÔ¼
-  /// @param[in] nonterminal_node_symbol £º·ÇÖÕ½á²úÉúÊ½Ãû
-  /// @note Ö¸¶¨µÄ·ÇÖÕ½á²úÉúÊ½±ØĞëÒÑÌí¼Ó¹ı£¬·ñÔòÊä³ö´íÎóĞÅÏ¢ºóÍË³ö
+  /// @brief è®¾ç½®éç»ˆç»“äº§ç”Ÿå¼å¯ä»¥ç©ºè§„çº¦
+  /// @param[in] nonterminal_node_symbol ï¼šéç»ˆç»“äº§ç”Ÿå¼å
+  /// @note æŒ‡å®šçš„éç»ˆç»“äº§ç”Ÿå¼å¿…é¡»å·²æ·»åŠ è¿‡ï¼Œå¦åˆ™è¾“å‡ºé”™è¯¯ä¿¡æ¯åé€€å‡º
   void SetNonTerminalNodeCouldEmptyReduct(
       const std::string& nonterminal_node_symbol);
-  /// @brief ĞÂ½¨ÎÄ¼şÎ²½Úµã
-  /// @return ·µ»ØÎ²½ÚµãID
+  /// @brief æ–°å»ºæ–‡ä»¶å°¾èŠ‚ç‚¹
+  /// @return è¿”å›å°¾èŠ‚ç‚¹ID
   ProductionNodeId AddEndNode();
-  /// @brief ÉèÖÃÓÃ»§¶¨ÒåµÄ²úÉúÊ½¸ù½Úµã
-  /// @param[in] production_node_name £º²úÉúÊ½Ãû
-  /// @note production_node_name¶ÔÓ¦µÄ²úÉúÊ½±ØĞëÒÑÌí¼Ó£¬·ñÔòÊä³ö´íÎóĞÅÏ¢ºóÍË³ö
+  /// @brief è®¾ç½®ç”¨æˆ·å®šä¹‰çš„äº§ç”Ÿå¼æ ¹èŠ‚ç‚¹
+  /// @param[in] production_node_name ï¼šäº§ç”Ÿå¼å
+  /// @note production_node_nameå¯¹åº”çš„äº§ç”Ÿå¼å¿…é¡»å·²æ·»åŠ ï¼Œå¦åˆ™è¾“å‡ºé”™è¯¯ä¿¡æ¯åé€€å‡º
   void SetRootProduction(const std::string& production_node_name);
 
-  /// @brief ¸ù¾İ²úÉúÊ½½ÚµãID»ñÈ¡²úÉúÊ½½Úµã
-  /// @param[in] production_node_id £º²úÉúÊ½½ÚµãID
-  /// @return ·µ»Ø²úÉúÊ½½ÚµãµÄÒıÓÃ
-  /// @note ¸ø¶¨µÄ²úÉúÊ½½ÚµãID±ØĞëÓĞĞ§
+  /// @brief æ ¹æ®äº§ç”Ÿå¼èŠ‚ç‚¹IDè·å–äº§ç”Ÿå¼èŠ‚ç‚¹
+  /// @param[in] production_node_id ï¼šäº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @return è¿”å›äº§ç”Ÿå¼èŠ‚ç‚¹çš„å¼•ç”¨
+  /// @note ç»™å®šçš„äº§ç”Ÿå¼èŠ‚ç‚¹IDå¿…é¡»æœ‰æ•ˆ
   BaseProductionNode& GetProductionNode(ProductionNodeId production_node_id);
-  /// @brief ¸ù¾İ²úÉúÊ½½ÚµãID»ñÈ¡²úÉúÊ½½Úµã
-  /// @param[in] production_node_id £º²úÉúÊ½½ÚµãID
-  /// @return ·µ»Ø²úÉúÊ½½ÚµãµÄconstÒıÓÃ
-  /// @note ¸ø¶¨µÄ²úÉúÊ½½ÚµãID±ØĞëÓĞĞ§
+  /// @brief æ ¹æ®äº§ç”Ÿå¼èŠ‚ç‚¹IDè·å–äº§ç”Ÿå¼èŠ‚ç‚¹
+  /// @param[in] production_node_id ï¼šäº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @return è¿”å›äº§ç”Ÿå¼èŠ‚ç‚¹çš„constå¼•ç”¨
+  /// @note ç»™å®šçš„äº§ç”Ÿå¼èŠ‚ç‚¹IDå¿…é¡»æœ‰æ•ˆ
   const BaseProductionNode& GetProductionNode(
       ProductionNodeId production_node_id) const;
-  /// @brief ¸ù¾İ²úÉúÊ½ÃûID»ñÈ¡²úÉúÊ½½Úµã
-  /// @param[in] symbol_id £º²úÉúÊ½ÃûID
-  /// @return ·µ»Ø²úÉúÊ½½ÚµãµÄÒıÓÃ
-  /// @note ¸ø¶¨µÄ²úÉúÊ½ÃûID±ØĞëÓĞĞ§
+  /// @brief æ ¹æ®äº§ç”Ÿå¼åIDè·å–äº§ç”Ÿå¼èŠ‚ç‚¹
+  /// @param[in] symbol_id ï¼šäº§ç”Ÿå¼åID
+  /// @return è¿”å›äº§ç”Ÿå¼èŠ‚ç‚¹çš„å¼•ç”¨
+  /// @note ç»™å®šçš„äº§ç”Ÿå¼åIDå¿…é¡»æœ‰æ•ˆ
   BaseProductionNode& GetProductionNodeFromNodeSymbolId(SymbolId symbol_id);
-  /// @brief ¸ù¾İ²úÉúÊ½Ìå×Ö·û´®ID»ñÈ¡²úÉúÊ½½Úµã
-  /// @param[in] symbol_id £º²úÉúÊ½Ìå×Ö·û´®ID
-  /// @return ·µ»Ø²úÉúÊ½½ÚµãµÄÒıÓÃ
-  /// @note ¸ø¶¨µÄ²úÉúÊ½Ìå×Ö·û´®ID±ØĞëÓĞĞ§
+  /// @brief æ ¹æ®äº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²IDè·å–äº§ç”Ÿå¼èŠ‚ç‚¹
+  /// @param[in] symbol_id ï¼šäº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²ID
+  /// @return è¿”å›äº§ç”Ÿå¼èŠ‚ç‚¹çš„å¼•ç”¨
+  /// @note ç»™å®šçš„äº§ç”Ÿå¼ä½“å­—ç¬¦ä¸²IDå¿…é¡»æœ‰æ•ˆ
   BaseProductionNode& GetProductionNodeFromBodySymbolId(SymbolId symbol_id);
-  /// @brief »ñÈ¡·ÇÖÕ½á½ÚµãÖĞµÄÒ»¸ö²úÉúÊ½Ìå
-  /// @param[in] production_node_id £º·ÇÖÕ½á²úÉúÊ½½ÚµãID
-  /// @param[in] production_body_id £º²úÉúÊ½ÌåID
-  /// @return ·µ»Ø²úÉúÊ½ÌåµÄconstÒıÓÃ
-  /// @note ±ØĞëÊ¹ÓÃÓĞĞ§µÄ·ÇÖÕ½á²úÉúÊ½½ÚµãºÍÅäÌ×µÄÓĞĞ§µÄ²úÉúÊ½ÌåID
+  /// @brief è·å–éç»ˆç»“èŠ‚ç‚¹ä¸­çš„ä¸€ä¸ªäº§ç”Ÿå¼ä½“
+  /// @param[in] production_node_id ï¼šéç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in] production_body_id ï¼šäº§ç”Ÿå¼ä½“ID
+  /// @return è¿”å›äº§ç”Ÿå¼ä½“çš„constå¼•ç”¨
+  /// @note å¿…é¡»ä½¿ç”¨æœ‰æ•ˆçš„éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹å’Œé…å¥—çš„æœ‰æ•ˆçš„äº§ç”Ÿå¼ä½“ID
   const std::vector<ProductionNodeId>& GetProductionBody(
       ProductionNodeId production_node_id, ProductionBodyId production_body_id);
-  /// @brief Ïò·ÇÖÕ½á½ÚµãÖĞÌí¼Ó²úÉúÊ½Ìå
-  /// @param[in] node_id £º´ıÌí¼Ó²úÉúÊ½µÄ·ÇÖÕ½á½ÚµãID
-  /// @param[in] body £º²úÉúÊ½Ìå
-  /// @return ·µ»Ø²úÉúÊ½ÌåID
-  /// @note ±ØĞëÊäÈë·ÇÖÕ½á²úÉúÊ½½ÚµãµÄID
+  /// @brief å‘éç»ˆç»“èŠ‚ç‚¹ä¸­æ·»åŠ äº§ç”Ÿå¼ä½“
+  /// @param[in] node_id ï¼šå¾…æ·»åŠ äº§ç”Ÿå¼çš„éç»ˆç»“èŠ‚ç‚¹ID
+  /// @param[in] body ï¼šäº§ç”Ÿå¼ä½“
+  /// @return è¿”å›äº§ç”Ÿå¼ä½“ID
+  /// @note å¿…é¡»è¾“å…¥éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹çš„ID
   template <class IdType>
   ProductionBodyId AddNonTerminalNodeBody(ProductionNodeId node_id,
                                           IdType&& body) {
@@ -478,97 +478,97 @@ class SyntaxGenerator {
                .AddBody,
            (std::forward<IdType>(body));
   }
-  /// @brief Ìí¼ÓÒ»ÌõÓï·¨·ÖÎö±íÌõÄ¿
-  /// @return ·µ»ØĞÂÌí¼ÓµÄÓï·¨·ÖÎö±íÌõÄ¿ID
+  /// @brief æ·»åŠ ä¸€æ¡è¯­æ³•åˆ†æè¡¨æ¡ç›®
+  /// @return è¿”å›æ–°æ·»åŠ çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   SyntaxAnalysisTableEntryId AddSyntaxAnalysisTableEntry() {
     SyntaxAnalysisTableEntryId syntax_analysis_table_entry_id(
         syntax_analysis_table_.size());
     syntax_analysis_table_.emplace_back();
     return syntax_analysis_table_entry_id;
   }
-  /// @brief ¸ù¾İÏî¼¯ID»ñÈ¡Ïî¼¯
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
-  /// @return ·µ»ØÏî¼¯µÄconstÒıÓÃ
-  /// @note ¸ø¶¨Ïî¼¯ID±ØĞëÓĞĞ§
+  /// @brief æ ¹æ®é¡¹é›†IDè·å–é¡¹é›†
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
+  /// @return è¿”å›é¡¹é›†çš„constå¼•ç”¨
+  /// @note ç»™å®šé¡¹é›†IDå¿…é¡»æœ‰æ•ˆ
   const ProductionItemSet& GetProductionItemSet(
       ProductionItemSetId production_item_set_id) const {
     assert(production_item_set_id < production_item_sets_.Size());
     return production_item_sets_[production_item_set_id];
   }
-  /// @brief ¸ù¾İÏî¼¯ID»ñÈ¡Ïî¼¯
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
-  /// @return ·µ»ØÏî¼¯µÄÒıÓÃ
-  /// @note ¸ø¶¨Ïî¼¯ID±ØĞëÓĞĞ§
+  /// @brief æ ¹æ®é¡¹é›†IDè·å–é¡¹é›†
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
+  /// @return è¿”å›é¡¹é›†çš„å¼•ç”¨
+  /// @note ç»™å®šé¡¹é›†IDå¿…é¡»æœ‰æ•ˆ
   ProductionItemSet& GetProductionItemSet(
       ProductionItemSetId production_item_set_id) {
     return const_cast<ProductionItemSet&>(
         static_cast<const SyntaxGenerator&>(*this).GetProductionItemSet(
             production_item_set_id));
   }
-  /// @brief ÉèÖÃÓï·¨·ÖÎö±íÌõÄ¿IDµ½Ïî¼¯IDµÄÓ³Éä
-  /// @param[in] syntax_analysis_table_entry_id £ºÓï·¨·ÖÎö±íÌõÄ¿ID
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
-  /// @note Èç¹û´æÔÚ¾ÉÓ³ÉäÔò¸²¸Ç
+  /// @brief è®¾ç½®è¯­æ³•åˆ†æè¡¨æ¡ç›®IDåˆ°é¡¹é›†IDçš„æ˜ å°„
+  /// @param[in] syntax_analysis_table_entry_id ï¼šè¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
+  /// @note å¦‚æœå­˜åœ¨æ—§æ˜ å°„åˆ™è¦†ç›–
   void SetSyntaxAnalysisTableEntryIdToProductionItemSetIdMapping(
       SyntaxAnalysisTableEntryId syntax_analysis_table_entry_id,
       ProductionItemSetId production_item_set_id) {
     syntax_analysis_table_entry_id_to_production_item_set_id_
         [syntax_analysis_table_entry_id] = production_item_set_id;
   }
-  /// @brief »ñÈ¡Óï·¨·ÖÎö±íÌõÄ¿ID¶ÔÓ¦µÄÏî¼¯ID
-  /// @param[in] syntax_analysis_table_entry_id £ºÓï·¨·ÖÎö±íÌõÄ¿ID
-  /// @return ·µ»ØÏî¼¯ID
-  /// @note Óï·¨·ÖÎö±íÌõÄ¿ID±ØĞëÓĞĞ§
+  /// @brief è·å–è¯­æ³•åˆ†æè¡¨æ¡ç›®IDå¯¹åº”çš„é¡¹é›†ID
+  /// @param[in] syntax_analysis_table_entry_id ï¼šè¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+  /// @return è¿”å›é¡¹é›†ID
+  /// @note è¯­æ³•åˆ†æè¡¨æ¡ç›®IDå¿…é¡»æœ‰æ•ˆ
   ProductionItemSetId GetProductionItemSetIdFromSyntaxAnalysisTableEntryId(
       SyntaxAnalysisTableEntryId syntax_analysis_table_entry_id);
-  /// @brief Ìí¼ÓĞÂµÄÏî¼¯
-  /// @return ·µ»ØĞÂÌí¼ÓµÄÏî¼¯µÄID
-  /// @note ×Ô¶¯¸üĞÂÓï·¨·ÖÎö±íÌõÄ¿µ½Ïî¼¯IDµÄÓ³Éä
+  /// @brief æ·»åŠ æ–°çš„é¡¹é›†
+  /// @return è¿”å›æ–°æ·»åŠ çš„é¡¹é›†çš„ID
+  /// @note è‡ªåŠ¨æ›´æ–°è¯­æ³•åˆ†æè¡¨æ¡ç›®åˆ°é¡¹é›†IDçš„æ˜ å°„
   ProductionItemSetId EmplaceProductionItemSet();
-  /// @brief ÏòÏî¼¯ÖĞÌí¼ÓÏîºÍÏîµÄÏòÇ°¿´·ûºÅ
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
-  /// @param[in] production_item £ºÏî
-  /// @param[in] forward_node_ids £ºÏîµÄÏòÇ°¿´·ûºÅ
-  /// @return Ç°°ë²¿·ÖÎª²åÈëµÄÎ»ÖÃ£¬ºó°ë²¿·ÖÎªÊÇ·ñ²åÈëĞÂÏî
+  /// @brief å‘é¡¹é›†ä¸­æ·»åŠ é¡¹å’Œé¡¹çš„å‘å‰çœ‹ç¬¦å·
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
+  /// @param[in] production_item ï¼šé¡¹
+  /// @param[in] forward_node_ids ï¼šé¡¹çš„å‘å‰çœ‹ç¬¦å·
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæ’å…¥çš„ä½ç½®ï¼ŒååŠéƒ¨åˆ†ä¸ºæ˜¯å¦æ’å…¥æ–°é¡¹
   /// @note
-  /// 1.Èç¹ûÌí¼ÓÁËĞÂÏòÇ°¿´·ûºÅÔòÉèÖÃ±Õ°üÎŞĞ§
-  /// 2.ÒÑ¾­Çó¹ı±Õ°üµÄÏî¼¯½öÔÊĞí¶ÔÏîÌí¼ÓÏòÇ°¿´·ûºÅ£¬²»ÔÊĞíÌí¼ÓĞÂÏî
-  /// 3.Èç¹û¸ø¶¨ÏîÒÑ´æÔÚÔò·µ»ØÖµºó°ë²¿·ÖÒ»¶¨·µ»Øfalse
+  /// 1.å¦‚æœæ·»åŠ äº†æ–°å‘å‰çœ‹ç¬¦å·åˆ™è®¾ç½®é—­åŒ…æ— æ•ˆ
+  /// 2.å·²ç»æ±‚è¿‡é—­åŒ…çš„é¡¹é›†ä»…å…è®¸å¯¹é¡¹æ·»åŠ å‘å‰çœ‹ç¬¦å·ï¼Œä¸å…è®¸æ·»åŠ æ–°é¡¹
+  /// 3.å¦‚æœç»™å®šé¡¹å·²å­˜åœ¨åˆ™è¿”å›å€¼ååŠéƒ¨åˆ†ä¸€å®šè¿”å›false
   template <class ForwardNodeIdContainer>
   std::pair<ProductionItemAndForwardNodesContainer::iterator, bool>
   AddItemAndForwardNodeIdsToProductionItem(
       ProductionItemSetId production_item_set_id,
       const ProductionItem& production_item,
       ForwardNodeIdContainer&& forward_node_ids);
-  /// @brief ÏòÏî¼¯ÖĞÌí¼ÓºËĞÄÏîºÍºËĞÄÏîµÄÏòÇ°¿´·ûºÅ
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
-  /// @param[in] production_item £ººËĞÄÏî
-  /// @param[in] forward_node_ids £ººËĞÄÏîµÄÏòÇ°¿´·ûºÅ
-  /// @return Ç°°ë²¿·ÖÎª²åÈëµÄÎ»ÖÃ£¬ºó°ë²¿·ÖÎªÊÇ·ñ²åÈëĞÂÏî
+  /// @brief å‘é¡¹é›†ä¸­æ·»åŠ æ ¸å¿ƒé¡¹å’Œæ ¸å¿ƒé¡¹çš„å‘å‰çœ‹ç¬¦å·
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
+  /// @param[in] production_item ï¼šæ ¸å¿ƒé¡¹
+  /// @param[in] forward_node_ids ï¼šæ ¸å¿ƒé¡¹çš„å‘å‰çœ‹ç¬¦å·
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæ’å…¥çš„ä½ç½®ï¼ŒååŠéƒ¨åˆ†ä¸ºæ˜¯å¦æ’å…¥æ–°é¡¹
   /// @note
-  /// 1.forward_node_idsÖ§³Ö´æ´¢IDµÄÈİÆ÷Ò²Ö§³ÖÎ´°ü×°µÄID
-  /// 2.Èç¹ûÌí¼ÓÁËĞÂÏòÇ°¿´·ûºÅÔòÉèÖÃ±Õ°üÎŞĞ§
-  /// 3.Èç¹û¸ø¶¨ÏîÒÑ´æÔÚÔò·µ»ØÖµºó°ë²¿·ÖÒ»¶¨·µ»Øfalse
-  /// 4.Ìí¼ÓÁËĞÂÏîÔò×Ô¶¯¸üĞÂ¸ÃÏîËù´æÔÚµÄÏî¼¯µÄIDµÄ¼ÇÂ¼
-  /// @attention ²»ÔÊĞí¶ÔÒÑÇó¹ı±Õ°üµÄÏî¼¯Ö´ĞĞ¸Ã²Ù×÷
+  /// 1.forward_node_idsæ”¯æŒå­˜å‚¨IDçš„å®¹å™¨ä¹Ÿæ”¯æŒæœªåŒ…è£…çš„ID
+  /// 2.å¦‚æœæ·»åŠ äº†æ–°å‘å‰çœ‹ç¬¦å·åˆ™è®¾ç½®é—­åŒ…æ— æ•ˆ
+  /// 3.å¦‚æœç»™å®šé¡¹å·²å­˜åœ¨åˆ™è¿”å›å€¼ååŠéƒ¨åˆ†ä¸€å®šè¿”å›false
+  /// 4.æ·»åŠ äº†æ–°é¡¹åˆ™è‡ªåŠ¨æ›´æ–°è¯¥é¡¹æ‰€å­˜åœ¨çš„é¡¹é›†çš„IDçš„è®°å½•
+  /// @attention ä¸å…è®¸å¯¹å·²æ±‚è¿‡é—­åŒ…çš„é¡¹é›†æ‰§è¡Œè¯¥æ“ä½œ
   template <class ForwardNodeIdContainer>
   std::pair<ProductionItemAndForwardNodesContainer::iterator, bool>
   AddMainItemAndForwardNodeIdsToProductionItem(
       ProductionItemSetId production_item_set_id,
       const ProductionItem& production_item,
       ForwardNodeIdContainer&& forward_node_ids);
-  /// @brief Ïò¸ø¶¨ºËĞÄÏîÖĞÌí¼ÓÏòÇ°¿´·ûºÅ
-  /// @param[in] production_item_set_id £ºÏîËùÔÚµÄÏî¼¯ID
-  /// @param[in] production_item £ººËĞÄÏî
-  /// @param[in] forward_node_ids £ººËĞÄÏîµÄÏòÇ°¿´·ûºÅ
-  /// @return ·µ»ØÊÇ·ñÌí¼ÓĞÂµÄÏòÇ°¿´·ûºÅ
-  /// @retval true £ºÌí¼ÓÁËĞÂµÄÏòÇ°¿´·ûºÅ
-  /// @retval false £ºÎ´Ìí¼ÓĞÂµÄÏòÇ°¿´·ûºÅ
+  /// @brief å‘ç»™å®šæ ¸å¿ƒé¡¹ä¸­æ·»åŠ å‘å‰çœ‹ç¬¦å·
+  /// @param[in] production_item_set_id ï¼šé¡¹æ‰€åœ¨çš„é¡¹é›†ID
+  /// @param[in] production_item ï¼šæ ¸å¿ƒé¡¹
+  /// @param[in] forward_node_ids ï¼šæ ¸å¿ƒé¡¹çš„å‘å‰çœ‹ç¬¦å·
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æ–°çš„å‘å‰çœ‹ç¬¦å·
+  /// @retval true ï¼šæ·»åŠ äº†æ–°çš„å‘å‰çœ‹ç¬¦å·
+  /// @retval false ï¼šæœªæ·»åŠ æ–°çš„å‘å‰çœ‹ç¬¦å·
   /// @note
-  /// 1.forward_node_idsÖ§³Ö´æ´¢IDµÄÈİÆ÷Ò²Ö§³ÖÎ´°ü×°µÄID
-  /// 2.ÒªÇóÏîÒÑ¾­´æÔÚ£¬·ñÔòÓ¦µ÷ÓÃAddItemAndForwardNodeIds»òÍ¬Ààº¯Êı
-  /// 3.Èç¹ûÌí¼ÓÁËĞÂµÄÏòÇ°¿´·ûºÅÔòÉèÖÃ±Õ°üÎŞĞ§
-  /// 4.production_item±ØĞëÊÇºËĞÄÏî
+  /// 1.forward_node_idsæ”¯æŒå­˜å‚¨IDçš„å®¹å™¨ä¹Ÿæ”¯æŒæœªåŒ…è£…çš„ID
+  /// 2.è¦æ±‚é¡¹å·²ç»å­˜åœ¨ï¼Œå¦åˆ™åº”è°ƒç”¨AddItemAndForwardNodeIdsæˆ–åŒç±»å‡½æ•°
+  /// 3.å¦‚æœæ·»åŠ äº†æ–°çš„å‘å‰çœ‹ç¬¦å·åˆ™è®¾ç½®é—­åŒ…æ— æ•ˆ
+  /// 4.production_itemå¿…é¡»æ˜¯æ ¸å¿ƒé¡¹
   template <class ForwardNodeIdContainer>
   bool AddForwardNodes(ProductionItemSetId production_item_set_id,
                        const ProductionItem& production_item,
@@ -577,39 +577,39 @@ class SyntaxGenerator {
         .AddForwardNodes(production_item, std::forward<ForwardNodeIdContainer>(
                                               forward_node_ids));
   }
-  /// @brief Ìí¼ÓºËĞÄÏîËùÊôµÄÏî¼¯ID
-  /// @param[in] production_item £ºÏî
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
-  /// @note production_item_set_id±ØĞëÎ´ÔøÌí¼Óµ½production_itemËùÊôÏî¼¯ÖĞ
+  /// @brief æ·»åŠ æ ¸å¿ƒé¡¹æ‰€å±çš„é¡¹é›†ID
+  /// @param[in] production_item ï¼šé¡¹
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
+  /// @note production_item_set_idå¿…é¡»æœªæ›¾æ·»åŠ åˆ°production_itemæ‰€å±é¡¹é›†ä¸­
   void AddProductionItemBelongToProductionItemSetId(
       const ProductionItem& production_item,
       ProductionItemSetId production_item_set_id);
-  /// @brief »ñÈ¡Ïî¼¯µÄÈ«²¿ºËĞÄÏî
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
-  /// @return ·µ»Ø´æ´¢Ïî¼¯µÄÈ«²¿ºËĞÄÏîµÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–é¡¹é›†çš„å…¨éƒ¨æ ¸å¿ƒé¡¹
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
+  /// @return è¿”å›å­˜å‚¨é¡¹é›†çš„å…¨éƒ¨æ ¸å¿ƒé¡¹çš„å®¹å™¨çš„constå¼•ç”¨
   const std::list<ProductionItemAndForwardNodesContainer::const_iterator>
   GetProductionItemSetMainItems(
       ProductionItemSetId production_item_set_id) const {
     return GetProductionItemSet(production_item_set_id).GetMainItemIters();
   }
-  /// @brief »ñÈ¡µ¥¸öºËĞÄÏîËùÊôµÄÈ«²¿Ïî¼¯
-  /// @param[in] production_node_id £º·ÇÖÕ½á²úÉúÊ½½ÚµãID
-  /// @param[in] body_id £º²úÉúÊ½ÌåID
-  /// @param[in] next_word_to_shift_index £ºÏÂÒ»¸öÒÆÈëµÄ²úÉúÊ½ÏÂ±ê
-  /// @return ·µ»Ø´æ´¢ºËĞÄÏîËùÊôµÄÈ«²¿Ïî¼¯µÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–å•ä¸ªæ ¸å¿ƒé¡¹æ‰€å±çš„å…¨éƒ¨é¡¹é›†
+  /// @param[in] production_node_id ï¼šéç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in] body_id ï¼šäº§ç”Ÿå¼ä½“ID
+  /// @param[in] next_word_to_shift_index ï¼šä¸‹ä¸€ä¸ªç§»å…¥çš„äº§ç”Ÿå¼ä¸‹æ ‡
+  /// @return è¿”å›å­˜å‚¨æ ¸å¿ƒé¡¹æ‰€å±çš„å…¨éƒ¨é¡¹é›†çš„å®¹å™¨çš„constå¼•ç”¨
   /// @note
-  /// 1.ÈİÆ÷ÖĞ´¢´æµÄID²»ÖØ¸´
-  /// 2.Èı¸ö²ÎÊı¹²Í¬¾ö¶¨Ò»¸öÏî
-  /// @attention ½ö¼ÇÂ¼¸ø¶¨Ïî×÷ÎªºËĞÄÏî´æÔÚµÄÏî¼¯ID
+  /// 1.å®¹å™¨ä¸­å‚¨å­˜çš„IDä¸é‡å¤
+  /// 2.ä¸‰ä¸ªå‚æ•°å…±åŒå†³å®šä¸€ä¸ªé¡¹
+  /// @attention ä»…è®°å½•ç»™å®šé¡¹ä½œä¸ºæ ¸å¿ƒé¡¹å­˜åœ¨çš„é¡¹é›†ID
   const std::list<ProductionItemSetId>&
   GetProductionItemSetIdFromProductionItem(
       ProductionNodeId production_node_id, ProductionBodyId body_id,
       NextWordToShiftIndex next_word_to_shift_index);
-  /// @brief »ñÈ¡ÏîµÄÏòÇ°¿´·ûºÅ
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
-  /// @param[in] production_item £ºÏî
-  /// @return ·µ»Ø´æ´¢ÏòÇ°¿´·ûºÅµÄÈİÆ÷µÄconstÒıÓÃ
-  /// @note ¸ø¶¨Ïî±ØĞë´æÔÚÓÚ¸ø¶¨Ïî¼¯
+  /// @brief è·å–é¡¹çš„å‘å‰çœ‹ç¬¦å·
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
+  /// @param[in] production_item ï¼šé¡¹
+  /// @return è¿”å›å­˜å‚¨å‘å‰çœ‹ç¬¦å·çš„å®¹å™¨çš„constå¼•ç”¨
+  /// @note ç»™å®šé¡¹å¿…é¡»å­˜åœ¨äºç»™å®šé¡¹é›†
   const ForwardNodesContainer& GetForwardNodeIds(
       ProductionItemSetId production_item_set_id,
       const ProductionItem& production_item) const {
@@ -618,249 +618,249 @@ class SyntaxGenerator {
         .at(production_item);
   }
 
-  /// @brief FirstµÄ×Ó¹ı³Ì£¬ÌáÈ¡Ò»¸ö·ÇÖÕ½á½ÚµãÈ«²¿µÚÒ»¸ö¿ÉÒÆÈëµÄ²úÉúÊ½½ÚµãID
-  /// @param[in] production_node_id £º·ÇÖÕ½á²úÉúÊ½½ÚµãID
-  /// @param[in,out] result £º´æ´¢ÌáÈ¡µ½µÄ½ÚµãID
-  /// @param[in,out] processed_nodes £ºÒÑÌáÈ¡µÄ·ÇÖÕ½á²úÉúÊ½½Úµã
+  /// @brief Firstçš„å­è¿‡ç¨‹ï¼Œæå–ä¸€ä¸ªéç»ˆç»“èŠ‚ç‚¹å…¨éƒ¨ç¬¬ä¸€ä¸ªå¯ç§»å…¥çš„äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in] production_node_id ï¼šéç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in,out] result ï¼šå­˜å‚¨æå–åˆ°çš„èŠ‚ç‚¹ID
+  /// @param[in,out] processed_nodes ï¼šå·²æå–çš„éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹
   /// @details
-  /// ÌáÈ¡¿ÉÒÔ¹æÔ¼Îª¸ø¶¨·ÇÖÕ½á²úÉúÊ½µÄËùÓĞ²úÉúÊ½×éºÏÖĞÃ¿¸ö×éºÏµÄµÚÒ»¸ö²úÉúÊ½ID
-  /// ÌáÈ¡µ½µÄËùÓĞ½ÚµãID´æµ½resultÖĞ
+  /// æå–å¯ä»¥è§„çº¦ä¸ºç»™å®šéç»ˆç»“äº§ç”Ÿå¼çš„æ‰€æœ‰äº§ç”Ÿå¼ç»„åˆä¸­æ¯ä¸ªç»„åˆçš„ç¬¬ä¸€ä¸ªäº§ç”Ÿå¼ID
+  /// æå–åˆ°çš„æ‰€æœ‰èŠ‚ç‚¹IDå­˜åˆ°resultä¸­
   /// @note
-  /// 1.processed_nodes´æ´¢ÒÑ¾­ÌáÈ¡¹ıµÄ²úÉúÊ½½ÚµãID£¬ÕâĞ©½Úµã²»»á±»ÔÙ´ÎÌáÈ¡
-  /// 2.¸Ãº¯ÊıÖ»»á½«½á¹ûÌí¼Óµ½resultÖĞ£¬²»»áÇå¿ÕresultÒÑÓĞµÄÄÚÈİ
+  /// 1.processed_nodeså­˜å‚¨å·²ç»æå–è¿‡çš„äº§ç”Ÿå¼èŠ‚ç‚¹IDï¼Œè¿™äº›èŠ‚ç‚¹ä¸ä¼šè¢«å†æ¬¡æå–
+  /// 2.è¯¥å‡½æ•°åªä¼šå°†ç»“æœæ·»åŠ åˆ°resultä¸­ï¼Œä¸ä¼šæ¸…ç©ºresultå·²æœ‰çš„å†…å®¹
   /// @attention
-  /// production_node_id±ØĞëÓĞĞ§£¬result²»½ÓÊÜnullptr
+  /// production_node_idå¿…é¡»æœ‰æ•ˆï¼Œresultä¸æ¥å—nullptr
   void GetNonTerminalNodeFirstNodeIds(
       ProductionNodeId production_node_id, ForwardNodesContainer* result,
       std::unordered_set<ProductionNodeId>&& processed_nodes =
           std::unordered_set<ProductionNodeId>());
-  /// @brief ±Õ°ü²Ù×÷ÖĞµÄfirst²Ù×÷£¬ÓÃÀ´ÌáÈ¡·ÇÖÕ½á²úÉúÊ½µÄÏòÇ°¿´½Úµã
-  /// @param[in] production_node_id £º·ÇÖÕ½á²úÉúÊ½½ÚµãID
-  /// @param[in] production_body_id £º·ÇÖÕ½á²úÉúÊ½ÌåID
+  /// @brief é—­åŒ…æ“ä½œä¸­çš„firstæ“ä½œï¼Œç”¨æ¥æå–éç»ˆç»“äº§ç”Ÿå¼çš„å‘å‰çœ‹èŠ‚ç‚¹
+  /// @param[in] production_node_id ï¼šéç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @param[in] production_body_id ï¼šéç»ˆç»“äº§ç”Ÿå¼ä½“ID
   /// @param[in] next_word_to_shift_index
-  /// £ºÖ¸ÏòÌáÈ¡ÏòÇ°¿´·ûºÅµÄÆğÊ¼²úÉúÊ½Î»ÖÃ£¨·ÇÖÕ½á²úÉúÊ½µÄÏÂÒ»¸öÎ»ÖÃ£©
+  /// ï¼šæŒ‡å‘æå–å‘å‰çœ‹ç¬¦å·çš„èµ·å§‹äº§ç”Ÿå¼ä½ç½®ï¼ˆéç»ˆç»“äº§ç”Ÿå¼çš„ä¸‹ä¸€ä¸ªä½ç½®ï¼‰
   /// @param[in] next_node_ids
-  /// £ºÌáÈ¡µ½´ï·ÇÖÕ½á²úÉúÊ½³¬Î²Ê±½«¸ÃÈİÆ÷µÄÄÚÈİÌí¼Óµ½·µ»Ø½á¹ûÖĞ
-  /// £¨´ıÕ¹¿ªµÄ·ÇÖÕ½á²úÉúÊ½ËùÔÚµÄ·ÇÖÕ½á²úÉúÊ½µÄÏòÇ°¿´·ûºÅ£©
-  /// @return ·µ»Ø´æ´¢»ñÈ¡µ½µÄÏòÇ°¿´·ûºÅIDµÄÈİÆ÷
+  /// ï¼šæå–åˆ°è¾¾éç»ˆç»“äº§ç”Ÿå¼è¶…å°¾æ—¶å°†è¯¥å®¹å™¨çš„å†…å®¹æ·»åŠ åˆ°è¿”å›ç»“æœä¸­
+  /// ï¼ˆå¾…å±•å¼€çš„éç»ˆç»“äº§ç”Ÿå¼æ‰€åœ¨çš„éç»ˆç»“äº§ç”Ÿå¼çš„å‘å‰çœ‹ç¬¦å·ï¼‰
+  /// @return è¿”å›å­˜å‚¨è·å–åˆ°çš„å‘å‰çœ‹ç¬¦å·IDçš„å®¹å™¨
   /// @details
-  /// 1.production_node_id¡¢production_body_idºÍnext_word_to_shift_index±êÖ¾
-  /// ¦ÂµÄÎ»ÖÃ£¨ÌáÈ¡ÏòÇ°¿´·ûºÅµÄÎ»ÖÃ£©
-  /// 2.×Ô¶¯µİ¹é´¦Àí¿ÉÒÔ¿Õ¹æÔ¼µÄ·ÇÖÕ½á²úÉúÊ½
-  /// 3.ÒòÎª·ÇÖÕ½á½Úµã¿ÉÄÜ¿Õ¹æÔ¼£¬ĞèÒªÏòÏÂ²éÕÒ²úÉúÊ½£¬
-  /// ËùÒÔÇ°Èı¸ö²ÎÊı²»ÄÜºÏ²¢Îª´ıÕ¹¿ªµÄ²úÉúÊ½ID
+  /// 1.production_node_idã€production_body_idå’Œnext_word_to_shift_indexæ ‡å¿—
+  /// Î²çš„ä½ç½®ï¼ˆæå–å‘å‰çœ‹ç¬¦å·çš„ä½ç½®ï¼‰
+  /// 2.è‡ªåŠ¨é€’å½’å¤„ç†å¯ä»¥ç©ºè§„çº¦çš„éç»ˆç»“äº§ç”Ÿå¼
+  /// 3.å› ä¸ºéç»ˆç»“èŠ‚ç‚¹å¯èƒ½ç©ºè§„çº¦ï¼Œéœ€è¦å‘ä¸‹æŸ¥æ‰¾äº§ç”Ÿå¼ï¼Œ
+  /// æ‰€ä»¥å‰ä¸‰ä¸ªå‚æ•°ä¸èƒ½åˆå¹¶ä¸ºå¾…å±•å¼€çš„äº§ç”Ÿå¼ID
   ForwardNodesContainer First(ProductionNodeId production_node_id,
                               ProductionBodyId production_body_id,
                               NextWordToShiftIndex next_word_to_shift_index,
                               const ForwardNodesContainer& next_node_ids);
-  /// @brief »ñÈ¡Ïî¼¯µÄÈ«²¿ÏîºÍÏîµÄÏòÇ°¿´·ûºÅ
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
-  /// @return ·µ»Ø´æ´¢ÏîºÍ¶ÔÓ¦ÏòÇ°¿´·ûºÅµÄÈİÆ÷µÄconstÒıÓÃ
-  /// @note ÒªÇóproduction_item_set_idÓĞĞ§
+  /// @brief è·å–é¡¹é›†çš„å…¨éƒ¨é¡¹å’Œé¡¹çš„å‘å‰çœ‹ç¬¦å·
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
+  /// @return è¿”å›å­˜å‚¨é¡¹å’Œå¯¹åº”å‘å‰çœ‹ç¬¦å·çš„å®¹å™¨çš„constå¼•ç”¨
+  /// @note è¦æ±‚production_item_set_idæœ‰æ•ˆ
   const ProductionItemAndForwardNodesContainer&
   GetProductionItemsAndForwardNodes(
       ProductionItemSetId production_item_set_id) {
     return GetProductionItemSet(production_item_set_id)
         .GetItemsAndForwardNodeIds();
   }
-  /// @brief »ñÈ¡Óï·¨·ÖÎö±íÌõÄ¿
-  /// @param[in] syntax_analysis_table_entry_id £ºÓï·¨·ÖÎö±íÌõÄ¿ID
-  /// @return ·µ»ØÓï·¨·ÖÎö±íÌõÄ¿µÄÒıÓÃ
-  /// @note ÒªÇósyntax_analysis_table_entry_idÓĞĞ§
+  /// @brief è·å–è¯­æ³•åˆ†æè¡¨æ¡ç›®
+  /// @param[in] syntax_analysis_table_entry_id ï¼šè¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+  /// @return è¿”å›è¯­æ³•åˆ†æè¡¨æ¡ç›®çš„å¼•ç”¨
+  /// @note è¦æ±‚syntax_analysis_table_entry_idæœ‰æ•ˆ
   SyntaxAnalysisTableEntry& GetSyntaxAnalysisTableEntry(
       SyntaxAnalysisTableEntryId syntax_analysis_table_entry_id) {
     assert(syntax_analysis_table_entry_id < syntax_analysis_table_.size());
     return syntax_analysis_table_[syntax_analysis_table_entry_id];
   }
-  /// @brief ÉèÖÃ¸ùÓï·¨·ÖÎö±íÌõÄ¿ID
-  /// @param[in] root_syntax_analysis_table_entry_id £º¸ùÓï·¨·ÖÎö±íÌõÄ¿ID
+  /// @brief è®¾ç½®æ ¹è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+  /// @param[in] root_syntax_analysis_table_entry_id ï¼šæ ¹è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   void SetRootSyntaxAnalysisTableEntryId(
       SyntaxAnalysisTableEntryId root_syntax_analysis_table_entry_id) {
     root_syntax_analysis_table_entry_id_ = root_syntax_analysis_table_entry_id;
   }
-  /// @brief ÉèÖÃÏî¼¯±Õ°üÓĞĞ§
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
+  /// @brief è®¾ç½®é¡¹é›†é—­åŒ…æœ‰æ•ˆ
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
   /// @note
-  /// ±Õ°üÓĞĞ§µÄÏî¼¯ÔÚµ÷ÓÃProductionItemSetClosureÊ±Ö±½Ó·µ»Ø£¬²»»áÖØÇó±Õ°ü
-  /// @attention ½öÓ¦ÓÉProductionItemSetClosureµ÷ÓÃ
+  /// é—­åŒ…æœ‰æ•ˆçš„é¡¹é›†åœ¨è°ƒç”¨ProductionItemSetClosureæ—¶ç›´æ¥è¿”å›ï¼Œä¸ä¼šé‡æ±‚é—­åŒ…
+  /// @attention ä»…åº”ç”±ProductionItemSetClosureè°ƒç”¨
   void SetProductionItemSetClosureAvailable(
       ProductionItemSetId production_item_set_id) {
     GetProductionItemSet(production_item_set_id).SetClosureAvailable();
   }
-  /// @brief ²éÑ¯Ò»¸öÏî¼¯ÊÇ·ñ±Õ°üÓĞĞ§
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
-  /// @return ·µ»Ø¸ø¶¨Ïî¼¯ÊÇ·ñ±Õ°üÓĞĞ§
-  /// @retval true £º±Õ°üÓĞĞ§
-  /// @retval false £º±Õ°üÎŞĞ§
+  /// @brief æŸ¥è¯¢ä¸€ä¸ªé¡¹é›†æ˜¯å¦é—­åŒ…æœ‰æ•ˆ
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
+  /// @return è¿”å›ç»™å®šé¡¹é›†æ˜¯å¦é—­åŒ…æœ‰æ•ˆ
+  /// @retval true ï¼šé—­åŒ…æœ‰æ•ˆ
+  /// @retval false ï¼šé—­åŒ…æ— æ•ˆ
   bool IsClosureAvailable(ProductionItemSetId production_item_set_id) {
     return GetProductionItemSet(production_item_set_id).IsClosureAvailable();
   }
-  /// @brief ¶ÔÏî¼¯Çó±Õ°ü£¬Í¬Ê±¹¹½¨Óï·¨·ÖÎö±íreduct²Ù×÷²¿·Ö
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
-  /// @return ·µ»ØÊÇ·ñÖØÇó±Õ°ü
-  /// @retval true £ºÖØÇó±Õ°ü
-  /// @retval false £º±Õ°üÓĞĞ§£¬ÎŞĞèÖØÇó
+  /// @brief å¯¹é¡¹é›†æ±‚é—­åŒ…ï¼ŒåŒæ—¶æ„å»ºè¯­æ³•åˆ†æè¡¨reductæ“ä½œéƒ¨åˆ†
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
+  /// @return è¿”å›æ˜¯å¦é‡æ±‚é—­åŒ…
+  /// @retval true ï¼šé‡æ±‚é—­åŒ…
+  /// @retval false ï¼šé—­åŒ…æœ‰æ•ˆï¼Œæ— éœ€é‡æ±‚
   /// @note
-  /// 1.×Ô¶¯Ìí¼ÓËùÓĞµ±Ç°Î»ÖÃ¿ÉÒÔ¿Õ¹æÔ¼µÄÏîµÄºóĞøÏî
-  /// 2.ÖØÇó±Õ°üÇ°»áÇå¿ÕÓï·¨·ÖÎö±íÌõÄ¿ºÍ·ÇºËĞÄÏî
-  /// 3.Çó±Õ°ü¹ı³ÌÖĞ×Ô¶¯ÌîĞ´Óï·¨·ÖÎö±íÖĞ¿É¹æÔ¼µÄÏî
+  /// 1.è‡ªåŠ¨æ·»åŠ æ‰€æœ‰å½“å‰ä½ç½®å¯ä»¥ç©ºè§„çº¦çš„é¡¹çš„åç»­é¡¹
+  /// 2.é‡æ±‚é—­åŒ…å‰ä¼šæ¸…ç©ºè¯­æ³•åˆ†æè¡¨æ¡ç›®å’Œéæ ¸å¿ƒé¡¹
+  /// 3.æ±‚é—­åŒ…è¿‡ç¨‹ä¸­è‡ªåŠ¨å¡«å†™è¯­æ³•åˆ†æè¡¨ä¸­å¯è§„çº¦çš„é¡¹
   bool ProductionItemSetClosure(ProductionItemSetId production_item_set_id);
-  /// @brief »ñÈ¡¸ø¶¨ÏîÒÆÈëÏàÍ¬²úÉúÊ½ºó¹¹³ÉµÄÏî¼¯
-  /// @param[in] items £ºÖ¸Ïò×ªÒÆÇ°µÄÏîµÄµü´úÆ÷
-  /// @return ·µ»Ø»ñÈ¡µ½µÄÏî¼¯ID
+  /// @brief è·å–ç»™å®šé¡¹ç§»å…¥ç›¸åŒäº§ç”Ÿå¼åæ„æˆçš„é¡¹é›†
+  /// @param[in] items ï¼šæŒ‡å‘è½¬ç§»å‰çš„é¡¹çš„è¿­ä»£å™¨
+  /// @return è¿”å›è·å–åˆ°çš„é¡¹é›†ID
   /// @retval ProductionItemSetId::InvalidId()
-  /// £º¸ø¶¨ÏîÒÆÈëÏàÍ¬²úÉúÊ½ºóÎ´¹¹³ÉÒÑÓĞÏî¼¯
+  /// ï¼šç»™å®šé¡¹ç§»å…¥ç›¸åŒäº§ç”Ÿå¼åæœªæ„æˆå·²æœ‰é¡¹é›†
   /// @details
-  /// ²éÕÒÏî¼¯£¬¸ø¶¨ÏîÒÆÈëÏàÍ¬²úÉúÊ½ºó¸ÃÏî¼¯ÓĞÇÒ½öÓĞÕâĞ©ÏîÊÇºËĞÄÏî
+  /// æŸ¥æ‰¾é¡¹é›†ï¼Œç»™å®šé¡¹ç§»å…¥ç›¸åŒäº§ç”Ÿå¼åè¯¥é¡¹é›†æœ‰ä¸”ä»…æœ‰è¿™äº›é¡¹æ˜¯æ ¸å¿ƒé¡¹
   ProductionItemSetId GetProductionItemSetIdFromProductionItems(
       const std::list<std::unordered_map<
           ProductionItem, std::unordered_set<ProductionNodeId>,
           ProductionItemSet::ProductionItemHasher>::const_iterator>& items);
-  /// @brief ´«²¥ÏòÇ°¿´·ûºÅ£¬Í¬Ê±ÔÚ´«²¥¹ı³ÌÖĞ¹¹½¨Óï·¨·ÖÎö±íshift²Ù×÷µÄ²¿·Ö
-  /// @param[in] production_item_set_id £º´ı´«²¥ÏòÇ°¿´·ûºÅµÄÏî¼¯ID
-  /// @return ·µ»ØÊÇ·ñÖ´ĞĞÁË´«²¥¹ı³Ì
-  /// @retval true £ºÖ´ĞĞÁË´«²¥ÏòÇ°¿´·ûºÅµÄ¹ı³Ì
-  /// @retval false £ºÎŞĞèÖ´ĞĞ´«²¥ÏòÇ°¿´·ûºÅµÄ¹ı³Ì
+  /// @brief ä¼ æ’­å‘å‰çœ‹ç¬¦å·ï¼ŒåŒæ—¶åœ¨ä¼ æ’­è¿‡ç¨‹ä¸­æ„å»ºè¯­æ³•åˆ†æè¡¨shiftæ“ä½œçš„éƒ¨åˆ†
+  /// @param[in] production_item_set_id ï¼šå¾…ä¼ æ’­å‘å‰çœ‹ç¬¦å·çš„é¡¹é›†ID
+  /// @return è¿”å›æ˜¯å¦æ‰§è¡Œäº†ä¼ æ’­è¿‡ç¨‹
+  /// @retval true ï¼šæ‰§è¡Œäº†ä¼ æ’­å‘å‰çœ‹ç¬¦å·çš„è¿‡ç¨‹
+  /// @retval false ï¼šæ— éœ€æ‰§è¡Œä¼ æ’­å‘å‰çœ‹ç¬¦å·çš„è¿‡ç¨‹
   /// @details
-  /// ±Õ°üÓĞĞ§ËµÃ÷¸ÃÏî¼¯ºÍ¶ÔÓ¦µÄÓï·¨·ÖÎö±íÌõÄ¿Î´ĞŞ¸Ä£¬ÎŞĞèÖØĞÂ´«²¥ÏòÇ°¿´·ûºÅ
+  /// é—­åŒ…æœ‰æ•ˆè¯´æ˜è¯¥é¡¹é›†å’Œå¯¹åº”çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®æœªä¿®æ”¹ï¼Œæ— éœ€é‡æ–°ä¼ æ’­å‘å‰çœ‹ç¬¦å·
   bool SpreadLookForwardSymbolAndConstructSyntaxAnalysisTableEntry(
       ProductionItemSetId production_item_set_id);
-  /// @brief ¶ÔËùÓĞ²úÉúÊ½½Úµã°´ÕÕProductionNodeType·ÖÀà
-  /// @return ·µ»Ø´æ´¢²»Í¬ÀàĞÍ½ÚµãµÄÈİÆ÷
+  /// @brief å¯¹æ‰€æœ‰äº§ç”Ÿå¼èŠ‚ç‚¹æŒ‰ç…§ProductionNodeTypeåˆ†ç±»
+  /// @return è¿”å›å­˜å‚¨ä¸åŒç±»å‹èŠ‚ç‚¹çš„å®¹å™¨
   /// @note
-  /// ProductionNodeTypeÖĞÀàĞÍµÄÖµ×÷ÎªÏÂ±ê·ÃÎÊarrayÒÔµÃµ½¸ÃÀàĞÍµÄËùÓĞ²úÉúÊ½½Úµã
+  /// ProductionNodeTypeä¸­ç±»å‹çš„å€¼ä½œä¸ºä¸‹æ ‡è®¿é—®arrayä»¥å¾—åˆ°è¯¥ç±»å‹çš„æ‰€æœ‰äº§ç”Ÿå¼èŠ‚ç‚¹
   std::array<std::vector<ProductionNodeId>, 4> ClassifyProductionNodes() const;
-  /// @brief ·ÖÀàÔÚÖÕ½á²úÉúÊ½×÷ÎªÏòÇ°¿´·ûºÅÊ±ÏÂ¶¯×÷ÏàÍ¬µÄÓï·¨·ÖÎö±íÌõÄ¿
-  /// @param[in] terminal_node_ids £ºÓÃÀ´·ÖÀàµÄÖÕ½á²úÉúÊ½½Úµã
+  /// @brief åˆ†ç±»åœ¨ç»ˆç»“äº§ç”Ÿå¼ä½œä¸ºå‘å‰çœ‹ç¬¦å·æ—¶ä¸‹åŠ¨ä½œç›¸åŒçš„è¯­æ³•åˆ†æè¡¨æ¡ç›®
+  /// @param[in] terminal_node_ids ï¼šç”¨æ¥åˆ†ç±»çš„ç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹
   /// @param[in] index
-  /// £º±¾ÂÖÓÃÀ´·ÖÀàµÄÖÕ½á²úÉúÊ½½ÚµãIDÔÚterminal_node_idsÖĞµÄÎ»ÖÃ
-  /// @param[in] syntax_analysis_table_entry_ids £º´ı·ÖÀàµÄÓï·¨·ÖÎö±íÌõÄ¿
-  /// @param[in,out] equivalent_ids £ºµÈ¼ÛµÄÓï·¨·ÖÎö±íÌõÄ¿
+  /// ï¼šæœ¬è½®ç”¨æ¥åˆ†ç±»çš„ç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹IDåœ¨terminal_node_idsä¸­çš„ä½ç½®
+  /// @param[in] syntax_analysis_table_entry_ids ï¼šå¾…åˆ†ç±»çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®
+  /// @param[in,out] equivalent_ids ï¼šç­‰ä»·çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®
   /// @details
-  /// 1.Ê×´Îµ÷ÓÃÊ±indexÒ»°ãÊ¹ÓÃ0
-  /// 2.¸Ãº¯ÊıÖ»Ïòequivalent_ids°´×éĞ´ÈëµÈ¼ÛµÄÓï·¨·ÖÎö±íÌõÄ¿ID£¬²»ºÏ²¢ÕâĞ©ÌõÄ¿
-  /// 3.²»»áĞ´ÈëÖ»ÓĞÒ»¸öÏîµÄ×é
-  /// 4.¸Ãº¯ÊıÊÇSyntaxAnalysisTableEntryClassifyµÄ×Ó¹ı³Ì
+  /// 1.é¦–æ¬¡è°ƒç”¨æ—¶indexä¸€èˆ¬ä½¿ç”¨0
+  /// 2.è¯¥å‡½æ•°åªå‘equivalent_idsæŒ‰ç»„å†™å…¥ç­‰ä»·çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®IDï¼Œä¸åˆå¹¶è¿™äº›æ¡ç›®
+  /// 3.ä¸ä¼šå†™å…¥åªæœ‰ä¸€ä¸ªé¡¹çš„ç»„
+  /// 4.è¯¥å‡½æ•°æ˜¯SyntaxAnalysisTableEntryClassifyçš„å­è¿‡ç¨‹
   void SyntaxAnalysisTableTerminalNodeClassify(
       const std::vector<ProductionNodeId>& terminal_node_ids, size_t index,
       std::list<SyntaxAnalysisTableEntryId>&& syntax_analysis_table_entry_ids,
       std::vector<std::list<SyntaxAnalysisTableEntryId>>* equivalent_ids);
-  /// @brief ·ÖÀà·ÇÖÕ½á²úÉúÊ½×÷ÎªÏòÇ°¿´·ûºÅÊ±ÏÂ¶¯×÷ÏàÍ¬µÄÓï·¨·ÖÎö±íÌõÄ¿
-  /// @param[in] nonterminal_node_ids £ºÓÃÀ´·ÖÀàµÄ·ÇÖÕ½á²úÉúÊ½½Úµã
+  /// @brief åˆ†ç±»éç»ˆç»“äº§ç”Ÿå¼ä½œä¸ºå‘å‰çœ‹ç¬¦å·æ—¶ä¸‹åŠ¨ä½œç›¸åŒçš„è¯­æ³•åˆ†æè¡¨æ¡ç›®
+  /// @param[in] nonterminal_node_ids ï¼šç”¨æ¥åˆ†ç±»çš„éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹
   /// @param[in] index
-  /// £º±¾ÂÖÓÃÀ´·ÖÀàµÄ·ÇÖÕ½á²úÉúÊ½½ÚµãIDÔÚnonterminal_node_idsÖĞµÄÎ»ÖÃ
-  /// @param[in] syntax_analysis_table_entry_ids £º´ı·ÖÀàµÄÓï·¨·ÖÎö±íÌõÄ¿
-  /// @param[in,out] equivalent_ids £ºµÈ¼ÛµÄÓï·¨·ÖÎö±íÌõÄ¿
+  /// ï¼šæœ¬è½®ç”¨æ¥åˆ†ç±»çš„éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹IDåœ¨nonterminal_node_idsä¸­çš„ä½ç½®
+  /// @param[in] syntax_analysis_table_entry_ids ï¼šå¾…åˆ†ç±»çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®
+  /// @param[in,out] equivalent_ids ï¼šç­‰ä»·çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®
   /// @details
-  /// 1.Ê×´Îµ÷ÓÃÊ±indexÒ»°ãÊ¹ÓÃ0
-  /// 2.¸Ãº¯ÊıÖ»Ïòequivalent_ids°´×éĞ´ÈëµÈ¼ÛµÄÓï·¨·ÖÎö±íÌõÄ¿ID£¬²»ºÏ²¢ÕâĞ©ÌõÄ¿
-  /// 3.²»»áĞ´ÈëÖ»ÓĞÒ»¸öÏîµÄ×é
-  /// 4.¸Ãº¯ÊıÊÇSyntaxAnalysisTableEntryClassifyµÄ×Ó¹ı³Ì
+  /// 1.é¦–æ¬¡è°ƒç”¨æ—¶indexä¸€èˆ¬ä½¿ç”¨0
+  /// 2.è¯¥å‡½æ•°åªå‘equivalent_idsæŒ‰ç»„å†™å…¥ç­‰ä»·çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®IDï¼Œä¸åˆå¹¶è¿™äº›æ¡ç›®
+  /// 3.ä¸ä¼šå†™å…¥åªæœ‰ä¸€ä¸ªé¡¹çš„ç»„
+  /// 4.è¯¥å‡½æ•°æ˜¯SyntaxAnalysisTableEntryClassifyçš„å­è¿‡ç¨‹
   void SyntaxAnalysisTableNonTerminalNodeClassify(
       const std::vector<ProductionNodeId>& nonterminal_node_ids, size_t index,
       std::list<SyntaxAnalysisTableEntryId>&& syntax_analysis_table_entry_ids,
       std::vector<std::list<SyntaxAnalysisTableEntryId>>* equivalent_ids);
-  /// @brief ·ÖÀàµÈ¼ÛµÄÓï·¨·ÖÎö±íÌõÄ¿
-  /// @param[in] operator_node_ids £ºËùÓĞÔËËã·û½ÚµãID
-  /// @param[in] terminal_node_ids £ºËùÓĞÖÕ½á½ÚµãID
-  /// @param[in] nonterminal_node_ids £ºËùÓĞ·ÇÖÕ½á½ÚµãID
-  /// @return ·µ»Ø¿ÉÒÔºÏ²¢µÄÓï·¨·ÖÎö±íÌõÄ¿×é£¬ËùÓĞ×é¾ùÓĞÖÁÉÙÁ½¸öÌõÄ¿
-  /// @details SyntaxAnalysisTableMergeOptimizeµÄ×Ó¹ı³Ì
+  /// @brief åˆ†ç±»ç­‰ä»·çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®
+  /// @param[in] operator_node_ids ï¼šæ‰€æœ‰è¿ç®—ç¬¦èŠ‚ç‚¹ID
+  /// @param[in] terminal_node_ids ï¼šæ‰€æœ‰ç»ˆç»“èŠ‚ç‚¹ID
+  /// @param[in] nonterminal_node_ids ï¼šæ‰€æœ‰éç»ˆç»“èŠ‚ç‚¹ID
+  /// @return è¿”å›å¯ä»¥åˆå¹¶çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ç»„ï¼Œæ‰€æœ‰ç»„å‡æœ‰è‡³å°‘ä¸¤ä¸ªæ¡ç›®
+  /// @details SyntaxAnalysisTableMergeOptimizeçš„å­è¿‡ç¨‹
   std::vector<std::list<SyntaxAnalysisTableEntryId>>
   SyntaxAnalysisTableEntryClassify(
       std::vector<ProductionNodeId>&& operator_node_ids,
       std::vector<ProductionNodeId>&& terminal_node_ids,
       std::vector<ProductionNodeId>&& nonterminal_node_ids);
-  /// @brief ÖØÓ³ÉäÓï·¨·ÖÎö±íÄÚÊ¹ÓÃµÄID
-  /// @param[in] old_id_to_new_id £º¾ÉIDµ½ĞÂIDµÄÓ³Éä
-  /// @note old_id_to_new_id½ö´æ´¢ĞèÒªĞŞ¸ÄµÄID£¬²»¸Ä±äµÄIDÎŞĞè´æ´¢
+  /// @brief é‡æ˜ å°„è¯­æ³•åˆ†æè¡¨å†…ä½¿ç”¨çš„ID
+  /// @param[in] old_id_to_new_id ï¼šæ—§IDåˆ°æ–°IDçš„æ˜ å°„
+  /// @note old_id_to_new_idä»…å­˜å‚¨éœ€è¦ä¿®æ”¹çš„IDï¼Œä¸æ”¹å˜çš„IDæ— éœ€å­˜å‚¨
   void RemapSyntaxAnalysisTableEntryId(
       const std::unordered_map<SyntaxAnalysisTableEntryId,
                                SyntaxAnalysisTableEntryId>& old_id_to_new_id);
-  /// @brief ½«Ïî¼¯Êä³öÎªmarkdownÃèÊöµÄÍ¼±í
-  /// @param[in] root_production_set_id £º¸ùÏî¼¯ID
-  /// @param[in] image_output_path £ºÎÄ¼şÊä³öÂ·¾¶£¨²»º¬ÎÄ¼şÃû£¬ ÒÔ'/'½áÎ²£©
+  /// @brief å°†é¡¹é›†è¾“å‡ºä¸ºmarkdownæè¿°çš„å›¾è¡¨
+  /// @param[in] root_production_set_id ï¼šæ ¹é¡¹é›†ID
+  /// @param[in] image_output_path ï¼šæ–‡ä»¶è¾“å‡ºè·¯å¾„ï¼ˆä¸å«æ–‡ä»¶åï¼Œ ä»¥'/'ç»“å°¾ï¼‰
   void FormatProductionItemSetToMarkdown(
       ProductionItemSetId root_production_item_set_id,
       const std::string& image_output_path = "./");
-  /// @brief ºÏ²¢Óï·¨·ÖÎö±íÄÚµÈ¼ÛÌõÄ¿ÒÔËõ¼õÓï·¨·ÖÎö±í´óĞ¡
+  /// @brief åˆå¹¶è¯­æ³•åˆ†æè¡¨å†…ç­‰ä»·æ¡ç›®ä»¥ç¼©å‡è¯­æ³•åˆ†æè¡¨å¤§å°
   void SyntaxAnalysisTableMergeOptimize();
 
-  /// @brief ½«Óï·¨·ÖÎö±íÅäÖÃĞ´ÈëÎÄ¼ş
+  /// @brief å°†è¯­æ³•åˆ†æè¡¨é…ç½®å†™å…¥æ–‡ä»¶
   /// @param[in] config_file_output_path
-  /// £ºÅäÖÃÎÄ¼şÊä³öÂ·¾¶£¨²»º¬ÎÄ¼şÃû£¬ÒÔ'/'½áÎ²£©
-  /// @details ÔÚÖ¸¶¨Â·¾¶´¦Êä³öÓï·¨·ÖÎö±íºÍ´Ê·¨·ÖÎö±í£¬
-  /// Óï·¨·ÖÎö±íÅäÖÃÎÄ¼şÃûÎªfrontend::common::kSyntaxConfigFileName£¬
-  /// ´Ê·¨·ÖÎö±íÅäÖÃÎÄ¼şÃûÎªfrontend::common::kDfaConfigFileName
+  /// ï¼šé…ç½®æ–‡ä»¶è¾“å‡ºè·¯å¾„ï¼ˆä¸å«æ–‡ä»¶åï¼Œä»¥'/'ç»“å°¾ï¼‰
+  /// @details åœ¨æŒ‡å®šè·¯å¾„å¤„è¾“å‡ºè¯­æ³•åˆ†æè¡¨å’Œè¯æ³•åˆ†æè¡¨ï¼Œ
+  /// è¯­æ³•åˆ†æè¡¨é…ç½®æ–‡ä»¶åä¸ºfrontend::common::kSyntaxConfigFileNameï¼Œ
+  /// è¯æ³•åˆ†æè¡¨é…ç½®æ–‡ä»¶åä¸ºfrontend::common::kDfaConfigFileName
   void SaveConfig(const std::string& config_file_output_path = "./") const;
 
-  /// @brief ¸ñÊ½»¯²úÉúÊ½
-  /// @param[in] nonterminal_node_id £º·ÇÖÕ½á²úÉúÊ½ID
-  /// @param[in] production_body_id £º·ÇÖÕ½á²úÉúÊ½ÌåID
-  /// @return ·µ»Ø¸ñÊ½»¯ºóµÄ×Ö·û´®
-  /// @details ¸ñÊ½»¯nonterminal_node_idºÍproduction_body_idÖ¸¶¨µÄ²úÉúÊ½
-  /// @note ·µ»ØÖµÀı£º IdOrEquivence -> IdOrEquivence [ Num ]
+  /// @brief æ ¼å¼åŒ–äº§ç”Ÿå¼
+  /// @param[in] nonterminal_node_id ï¼šéç»ˆç»“äº§ç”Ÿå¼ID
+  /// @param[in] production_body_id ï¼šéç»ˆç»“äº§ç”Ÿå¼ä½“ID
+  /// @return è¿”å›æ ¼å¼åŒ–åçš„å­—ç¬¦ä¸²
+  /// @details æ ¼å¼åŒ–nonterminal_node_idå’Œproduction_body_idæŒ‡å®šçš„äº§ç”Ÿå¼
+  /// @note è¿”å›å€¼ä¾‹ï¼š IdOrEquivence -> IdOrEquivence [ Num ]
   std::string FormatSingleProductionBody(
       ProductionNodeId nonterminal_node_id,
       ProductionBodyId production_body_id) const;
-  /// @brief ¸ñÊ½»¯Ïî
-  /// @param[in] production_item £º´ı¸ñÊ½»¯µÄÏî
-  /// @return ·µ»Ø¸ñÊ½»¯ºóµÄ×Ö·û´®
+  /// @brief æ ¼å¼åŒ–é¡¹
+  /// @param[in] production_item ï¼šå¾…æ ¼å¼åŒ–çš„é¡¹
+  /// @return è¿”å›æ ¼å¼åŒ–åçš„å­—ç¬¦ä¸²
   /// @details
-  /// ·µ»ØÖµÀı£ºIdOrEquivence -> IdOrEquivence ¡¤ [ Num ]
-  /// ¡¤ÓÒ²àÎªÏÂÒ»¸öÒÆÈëµÄ²úÉúÊ½
+  /// è¿”å›å€¼ä¾‹ï¼šIdOrEquivence -> IdOrEquivence Â· [ Num ]
+  /// Â·å³ä¾§ä¸ºä¸‹ä¸€ä¸ªç§»å…¥çš„äº§ç”Ÿå¼
   std::string FormatProductionItem(const ProductionItem& production_item) const;
-  /// @brief ¸ñÊ½»¯ÏòÇ°¿´·ûºÅ¼¯
-  /// @param[in] look_forward_node_ids £º´ı¸ñÊ½»¯µÄÏòÇ°¿´·ûºÅ¼¯
-  /// @return ·µ»Ø¸ñÊ½»¯ºóµÄ×Ö·û´®
+  /// @brief æ ¼å¼åŒ–å‘å‰çœ‹ç¬¦å·é›†
+  /// @param[in] look_forward_node_ids ï¼šå¾…æ ¼å¼åŒ–çš„å‘å‰çœ‹ç¬¦å·é›†
+  /// @return è¿”å›æ ¼å¼åŒ–åçš„å­—ç¬¦ä¸²
   /// @details
-  /// 1.ÏòÇ°¿´·ûºÅ¼äÍ¨¹ı¿Õ¸ñ·Ö¸ô
-  /// 2.·ûºÅÁ½±ß²»¼ÓË«ÒıºÅ
-  /// 3.×îºóÒ»¸ö·ûºÅºóÎŞ¿Õ¸ñ
-  /// @note ·µ»ØÖµÀı£ºconst Id * ( [ )
+  /// 1.å‘å‰çœ‹ç¬¦å·é—´é€šè¿‡ç©ºæ ¼åˆ†éš”
+  /// 2.ç¬¦å·ä¸¤è¾¹ä¸åŠ åŒå¼•å·
+  /// 3.æœ€åä¸€ä¸ªç¬¦å·åæ— ç©ºæ ¼
+  /// @note è¿”å›å€¼ä¾‹ï¼šconst Id * ( [ )
   std::string FormatLookForwardSymbols(
       const ForwardNodesContainer& look_forward_node_ids) const;
-  /// @brief ¸ñÊ½»¯ÏîºÍÏîµÄÏòÇ°¿´·ûºÅ
-  /// @param[in] production_item £ºÏî
-  /// @param[in] look_forward_node_ids £ºÏîµÄÏòÇ°¿´·ûºÅ
-  /// @return ·µ»Ø¸ñÊ½»¯ºóµÄ×Ö·û´®
+  /// @brief æ ¼å¼åŒ–é¡¹å’Œé¡¹çš„å‘å‰çœ‹ç¬¦å·
+  /// @param[in] production_item ï¼šé¡¹
+  /// @param[in] look_forward_node_ids ï¼šé¡¹çš„å‘å‰çœ‹ç¬¦å·
+  /// @return è¿”å›æ ¼å¼åŒ–åçš„å­—ç¬¦ä¸²
   /// @details
-  /// 1.¸ñÊ½»¯¸ø¶¨Ïîºó½Ó" ÏòÇ°¿´·ûºÅ£º"ºó½ÓÈ«²¿ÏòÇ°¿´·ûºÅ
-  /// 2.¸ø¶¨Ïî¸ñÊ½Í¬FormatProductionItem
-  /// 3.ÏòÇ°¿´·ûºÅ¸ñÊ½Í¬FormatLookForwardSymbols
-  /// 4.·µ»ØÖµÀı£ºStructType -> ¡¤ StructureDefine ÏòÇ°¿´·ûºÅ£ºconst Id * ( [ )
+  /// 1.æ ¼å¼åŒ–ç»™å®šé¡¹åæ¥" å‘å‰çœ‹ç¬¦å·ï¼š"åæ¥å…¨éƒ¨å‘å‰çœ‹ç¬¦å·
+  /// 2.ç»™å®šé¡¹æ ¼å¼åŒFormatProductionItem
+  /// 3.å‘å‰çœ‹ç¬¦å·æ ¼å¼åŒFormatLookForwardSymbols
+  /// 4.è¿”å›å€¼ä¾‹ï¼šStructType -> Â· StructureDefine å‘å‰çœ‹ç¬¦å·ï¼šconst Id * ( [ )
   std::string FormatProductionItemAndLookForwardSymbols(
       const ProductionItem& production_item,
       const ForwardNodesContainer& look_forward_node_ids) const;
-  /// @brief ¸ñÊ½»¯Ïî¼¯ÖĞÈ«²¿Ïî¼°Ïî¶ÔÓ¦µÄÏòÇ°¿´·ûºÅ
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
-  /// @return ·µ»Ø¸ñÊ½»¯ºóµÄ×Ö·û´®
+  /// @brief æ ¼å¼åŒ–é¡¹é›†ä¸­å…¨éƒ¨é¡¹åŠé¡¹å¯¹åº”çš„å‘å‰çœ‹ç¬¦å·
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
+  /// @return è¿”å›æ ¼å¼åŒ–åçš„å­—ç¬¦ä¸²
   /// @details
-  /// 1.²úÉúÊ½¸ñÊ½Í¬FormatProductionItem
-  /// 2.ÏîÓëÏîÖ®¼äÍ¨¹ıline_feed·Ö¸ô
-  /// 3.×îºóÒ»ÏîºóÎŞline_feed
-  /// 4.·µ»ØÖµÀı£¨line_feedÎª"\n"£©£º
-  /// StructureDefineHead -> union ¡¤ ÏòÇ°¿´·ûºÅ£º{
-  /// StructureAnnounce -> union ¡¤ Id ÏòÇ°¿´·ûºÅ£ºconst , Id * ( { [ )
+  /// 1.äº§ç”Ÿå¼æ ¼å¼åŒFormatProductionItem
+  /// 2.é¡¹ä¸é¡¹ä¹‹é—´é€šè¿‡line_feedåˆ†éš”
+  /// 3.æœ€åä¸€é¡¹åæ— line_feed
+  /// 4.è¿”å›å€¼ä¾‹ï¼ˆline_feedä¸º"\n"ï¼‰ï¼š
+  /// StructureDefineHead -> union Â· å‘å‰çœ‹ç¬¦å·ï¼š{
+  /// StructureAnnounce -> union Â· Id å‘å‰çœ‹ç¬¦å·ï¼šconst , Id * ( { [ )
   std::string FormatProductionItems(ProductionItemSetId production_item_set_id,
                                     std::string line_feed = "\n") const;
 
-  /// @brief ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ
+  /// @brief å…è®¸åºåˆ—åŒ–ç±»è®¿é—®
   friend class boost::serialization::access;
-  /// @brief boost-serializationÓÃÀ´±£´æÓï·¨·ÖÎö±íÅäÖÃµÄº¯Êı
-  /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-  /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-  /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+  /// @brief boost-serializationç”¨æ¥ä¿å­˜è¯­æ³•åˆ†æè¡¨é…ç½®çš„å‡½æ•°
+  /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+  /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+  /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
   template <class Archive>
   void save(Archive& ar, const unsigned int version) const;
-  /// ½«ĞòÁĞ»¯·ÖÎª±£´æÓë¼ÓÔØ£¬Generator½ö±£´æÅäÖÃ£¬²»¼ÓÔØ
+  /// å°†åºåˆ—åŒ–åˆ†ä¸ºä¿å­˜ä¸åŠ è½½ï¼ŒGeneratorä»…ä¿å­˜é…ç½®ï¼Œä¸åŠ è½½
   BOOST_SERIALIZATION_SPLIT_MEMBER()
 
   /// @class SyntaxAnalysisTableEntryIdAndProcessFunctionClassIdHasher
   /// syntax_generator.h
-  /// @brief ¹şÏ£Óï·¨·ÖÎö±íÌõÄ¿IDÓë¹æÔ¼º¯ÊıIDµÄÀà
+  /// @brief å“ˆå¸Œè¯­æ³•åˆ†æè¡¨æ¡ç›®IDä¸è§„çº¦å‡½æ•°IDçš„ç±»
   /// @note
-  /// ÓÃÓÚSyntaxAnalysisTableTerminalNodeClassifyÖĞ·ÖÀàÍ¬Ê±Ö§³Ö¹æÔ¼ÓëÒÆÈëµÄÊı¾İ
+  /// ç”¨äºSyntaxAnalysisTableTerminalNodeClassifyä¸­åˆ†ç±»åŒæ—¶æ”¯æŒè§„çº¦ä¸ç§»å…¥çš„æ•°æ®
   struct SyntaxAnalysisTableEntryIdAndProcessFunctionClassIdHasher {
     size_t operator()(
         const std::pair<SyntaxAnalysisTableEntryId, ProcessFunctionClassId>&
@@ -869,46 +869,46 @@ class SyntaxGenerator {
     }
   };
 
-  /// @brief ´æ´¢ÓÉÓÚÎ´¶¨Òå²úÉúÊ½¶øÍÆ³ÙÌí¼ÓµÄ²úÉúÊ½Êı¾İ
+  /// @brief å­˜å‚¨ç”±äºæœªå®šä¹‰äº§ç”Ÿå¼è€Œæ¨è¿Ÿæ·»åŠ çš„äº§ç”Ÿå¼æ•°æ®
   /// @details
-  /// ¼üÊÇÎ´¶¨ÒåµÄ²úÉúÊ½Ãû
-  /// tupleÄÚµÄstd::stringÊÇ·ÇÖÕ½á²úÉúÊ½Ãû
+  /// é”®æ˜¯æœªå®šä¹‰çš„äº§ç”Ÿå¼å
+  /// tupleå†…çš„std::stringæ˜¯éç»ˆç»“äº§ç”Ÿå¼å
   /// std::tuple<std::string, std::vector<std::string>,ProcessFunctionClassId>
-  /// Îª´ıÌí¼ÓµÄ²úÉúÊ½ÌåĞÅÏ¢
-  /// ProcessFunctionClassIdÊÇ°ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
+  /// ä¸ºå¾…æ·»åŠ çš„äº§ç”Ÿå¼ä½“ä¿¡æ¯
+  /// ProcessFunctionClassIdæ˜¯åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
   std::unordered_multimap<
       std::string,
       std::tuple<std::string, std::vector<std::string>, ProcessFunctionClassId>>
       undefined_productions_;
-  /// @brief ´æ´¢²úÉúÊ½½Úµã
+  /// @brief å­˜å‚¨äº§ç”Ÿå¼èŠ‚ç‚¹
   ObjectManager<BaseProductionNode> manager_nodes_;
-  /// @brief ´æ´¢²úÉúÊ½Ãû£¨ÖÕ½á/·ÇÖÕ½á/ÔËËã·û£©
+  /// @brief å­˜å‚¨äº§ç”Ÿå¼åï¼ˆç»ˆç»“/éç»ˆç»“/è¿ç®—ç¬¦ï¼‰
   UnorderedStructManager<std::string, std::hash<std::string>>
       manager_node_symbol_;
-  /// @brief ´æ´¢ÖÕ½á½Úµã²úÉúÊ½ÌåµÄ·ûºÅ£¬ÓÃÀ´·ÀÖ¹¶à´ÎÌí¼ÓÍ¬Ò»ÕıÔò
+  /// @brief å­˜å‚¨ç»ˆç»“èŠ‚ç‚¹äº§ç”Ÿå¼ä½“çš„ç¬¦å·ï¼Œç”¨æ¥é˜²æ­¢å¤šæ¬¡æ·»åŠ åŒä¸€æ­£åˆ™
   UnorderedStructManager<std::string, std::hash<std::string>>
       manager_terminal_body_symbol_;
-  /// @brief ²úÉúÊ½ÃûIDµ½¶ÔÓ¦²úÉúÊ½½ÚµãµÄÓ³Éä
+  /// @brief äº§ç”Ÿå¼åIDåˆ°å¯¹åº”äº§ç”Ÿå¼èŠ‚ç‚¹çš„æ˜ å°„
   std::unordered_map<SymbolId, ProductionNodeId> node_symbol_id_to_node_id_;
-  /// @brief ÖÕ½á²úÉúÊ½Ìå·ûºÅIDµ½¶ÔÓ¦½ÚµãIDµÄÓ³Éä
+  /// @brief ç»ˆç»“äº§ç”Ÿå¼ä½“ç¬¦å·IDåˆ°å¯¹åº”èŠ‚ç‚¹IDçš„æ˜ å°„
   std::unordered_map<SymbolId, ProductionNodeId>
       production_body_symbol_id_to_node_id_;
-  /// @brief ´æ´¢Ïî¼¯
+  /// @brief å­˜å‚¨é¡¹é›†
   ObjectManager<ProductionItemSet> production_item_sets_;
-  /// @brief ´æ´¢Óï·¨·ÖÎö±íÌõÄ¿IDµ½Ïî¼¯IDµÄÓ³Éä
+  /// @brief å­˜å‚¨è¯­æ³•åˆ†æè¡¨æ¡ç›®IDåˆ°é¡¹é›†IDçš„æ˜ å°„
   std::unordered_map<SyntaxAnalysisTableEntryId, ProductionItemSetId>
       syntax_analysis_table_entry_id_to_production_item_set_id_;
-  /// @brief ÓÃ»§¶¨ÒåµÄ¸ù·ÇÖÕ½á²úÉúÊ½½ÚµãID
+  /// @brief ç”¨æˆ·å®šä¹‰çš„æ ¹éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹ID
   ProductionNodeId root_production_node_id_ = ProductionNodeId::InvalidId();
-  /// @brief ³õÊ¼Óï·¨·ÖÎö±íÌõÄ¿ID£¬ÅäÖÃĞ´ÈëÎÄ¼ş
+  /// @brief åˆå§‹è¯­æ³•åˆ†æè¡¨æ¡ç›®IDï¼Œé…ç½®å†™å…¥æ–‡ä»¶
   SyntaxAnalysisTableEntryId root_syntax_analysis_table_entry_id_;
-  /// @brief Óï·¨·ÖÎö±í£¬ÅäÖÃĞ´ÈëÎÄ¼ş
+  /// @brief è¯­æ³•åˆ†æè¡¨ï¼Œé…ç½®å†™å…¥æ–‡ä»¶
   SyntaxAnalysisTableType syntax_analysis_table_;
-  /// @brief °ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏó£¬ÅäÖÃĞ´ÈëÎÄ¼ş
+  /// @brief åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ï¼Œé…ç½®å†™å…¥æ–‡ä»¶
   /// @details
-  /// Ã¿¸ö¹æÔ¼Êı¾İ¶¼±ØĞë¹ØÁªÎ¨Ò»µÄ°ü×°¹æÔ¼º¯ÊıµÄÊµÀı»¯¶ÔÏó£¬²»ÔÊĞíÖØÓÃ¶ÔÏó
+  /// æ¯ä¸ªè§„çº¦æ•°æ®éƒ½å¿…é¡»å…³è”å”¯ä¸€çš„åŒ…è£…è§„çº¦å‡½æ•°çš„å®ä¾‹åŒ–å¯¹è±¡ï¼Œä¸å…è®¸é‡ç”¨å¯¹è±¡
   ProcessFunctionClassManagerType manager_process_function_class_;
-  /// @brief DFAÅäÖÃÉú³ÉÆ÷£¬ÅäÖÃĞ´ÈëÎÄ¼ş
+  /// @brief DFAé…ç½®ç”Ÿæˆå™¨ï¼Œé…ç½®å†™å…¥æ–‡ä»¶
   frontend::generator::dfa_generator::DfaGenerator dfa_generator_;
 };
 
@@ -916,7 +916,7 @@ template <class IdType>
 inline ProductionBodyId NonTerminalProductionNode::AddBody(
     IdType&& body, ProcessFunctionClassId class_for_reduct_id) {
   ProductionBodyId body_id(nonterminal_bodys_.size());
-  // ½«ÊäÈë²åÈëµ½²úÉúÊ½ÌåÏòÁ¿ÖĞ£¬ÎŞÉ¾³ıÏàÍ¬²úÉúÊ½¹¦ÄÜ
+  // å°†è¾“å…¥æ’å…¥åˆ°äº§ç”Ÿå¼ä½“å‘é‡ä¸­ï¼Œæ— åˆ é™¤ç›¸åŒäº§ç”Ÿå¼åŠŸèƒ½
   nonterminal_bodys_.emplace_back(std::forward<IdType>(body),
                                   class_for_reduct_id);
   return body_id;
@@ -925,11 +925,11 @@ inline ProductionBodyId NonTerminalProductionNode::AddBody(
 template <class ProcessFunctionClass>
 inline ProductionNodeId SyntaxGenerator::AddNonTerminalProduction(
     std::string node_symbol, std::string subnode_symbols) {
-  // ÊÜ#__VA_ARGS__¹æÔòËùÏŞ£¬Ö»ÄÜ½«__VA_ARGS__´ú±íµÄËùÓĞÄÚÈİ×ªÎªÒ»¸ö×Ö·û´®£¬ĞèÒªÊÖ¶¯·Ö¸î
+  // å—#__VA_ARGS__è§„åˆ™æ‰€é™ï¼Œåªèƒ½å°†__VA_ARGS__ä»£è¡¨çš„æ‰€æœ‰å†…å®¹è½¬ä¸ºä¸€ä¸ªå­—ç¬¦ä¸²ï¼Œéœ€è¦æ‰‹åŠ¨åˆ†å‰²
   std::vector<std::string> splited_subnode_symbols(1);
   for (char c : subnode_symbols) {
     if (c == ',') {
-      // µ±Ç°×Ö·û´®½áÊø£¬×¼±¸´¦ÀíÏÂÒ»¸ö×Ö·û´®
+      // å½“å‰å­—ç¬¦ä¸²ç»“æŸï¼Œå‡†å¤‡å¤„ç†ä¸‹ä¸€ä¸ªå­—ç¬¦ä¸²
       splited_subnode_symbols.emplace_back();
     } else if (!isblank(c)) {
         // [a-zA-Z_][a-zA-Z0-9_]*
@@ -970,7 +970,7 @@ SyntaxGenerator::AddMainItemAndForwardNodeIdsToProductionItem(
                         production_item,
                         std::forward<ForwardNodeIdContainer>(forward_node_ids));
   if (result.second) {
-    // ÏòÏî¼¯ÖĞ²åÈëÁËĞÂµÄÏîÔò¸üĞÂ¸ÃÏîÊôÓÚµÄÏî¼¯
+    // å‘é¡¹é›†ä¸­æ’å…¥äº†æ–°çš„é¡¹åˆ™æ›´æ–°è¯¥é¡¹å±äºçš„é¡¹é›†
     AddProductionItemBelongToProductionItemSetId(production_item,
                                                  production_item_set_id);
   }

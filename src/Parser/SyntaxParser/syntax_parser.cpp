@@ -1,4 +1,4 @@
-#include "syntax_parser.h"
+ï»¿#include "syntax_parser.h"
 
 #include <format>
 namespace frontend::parser::syntax_parser {
@@ -12,21 +12,21 @@ void SyntaxParser::LoadConfig() {
 bool SyntaxParser::Parse(const std::string& filename) {
   bool result = dfa_parser_.SetInputFile(filename);
   if (result == false) [[unlikely]] {
-    fprintf(stderr, "´ò¿ªÎÄ¼ş\"%s\"Ê§°Ü£¬Çë¼ì²é\n", filename.c_str());
+    LOG_ERROR("Parser", std::format("æ‰“å¼€æ–‡ä»¶\"%s\"å¤±è´¥ï¼Œè¯·æ£€æŸ¥\n", filename));
     return false;
   }
   GetNextWord();
-  // Çå¿Õ½âÎöÊı¾İÕ»
+  // æ¸…ç©ºè§£ææ•°æ®æ ˆ
   auto old_parsing_stack = std::stack<ParsingData>();
   parsing_stack_.swap(old_parsing_stack);
-  // Ñ¹ÈëÉÚ±ø£¬±ÜÃâReductº¯ÊıÖĞÃ¿´Îµ¯³öÕ»ÖĞÊı¾İ¶¼ĞèÒªÅĞ¶ÏÊÇ·ñÕ»¿Õ
+  // å‹å…¥å“¨å…µï¼Œé¿å…Reductå‡½æ•°ä¸­æ¯æ¬¡å¼¹å‡ºæ ˆä¸­æ•°æ®éƒ½éœ€è¦åˆ¤æ–­æ˜¯å¦æ ˆç©º
   PushParsingData(ParsingData());
-  // ³õÊ¼»¯½âÎöÊı¾İÕ»£¬Ñ¹Èëµ±Ç°½âÎöÊı¾İ
+  // åˆå§‹åŒ–è§£ææ•°æ®æ ˆï¼Œå‹å…¥å½“å‰è§£ææ•°æ®
   PushParsingData(
       ParsingData{.syntax_analysis_table_entry_id = GetRootParsingEntryId(),
                   .operator_priority = OperatorPriority(0)});
   while (GetParsingStackSize() != 1) {
-    // TODO Ìí¼ÓÓÃ»§µ÷ÓÃÇå¿ÕÊı¾İÕ»µÄ¹¦ÄÜ
+    // TODO æ·»åŠ ç”¨æˆ·è°ƒç”¨æ¸…ç©ºæ•°æ®æ ˆçš„åŠŸèƒ½
     TerminalWordWaitingProcess();
   }
   return true;
@@ -45,13 +45,13 @@ void SyntaxParser::TerminalWordWaitingProcess() {
       *GetActionAndTarget(GetParsingDataNow().syntax_analysis_table_entry_id,
                           production_node_to_shift_id);
   switch (action_and_attached_data.GetActionType()) {
-    // TODO Ìí¼Ó½ÓÊÜÊ±µÄºóĞø´¦Àí
+    // TODO æ·»åŠ æ¥å—æ—¶çš„åç»­å¤„ç†
     [[unlikely]] case ActionType::kAccept:
       exit(0);
       break;
-    // TODO Ìí¼Ó´íÎó´¦Àí¹¦ÄÜ
+    // TODO æ·»åŠ é”™è¯¯å¤„ç†åŠŸèƒ½
     [[unlikely]] case ActionType::kError:
-      std::cerr << std::format("Óï·¨´íÎó") << std::endl;
+      LOG_ERROR("Parser", std::format("è¯­æ³•é”™è¯¯"))
       exit(-1);
       break;
     case ActionType::kReduct:
@@ -61,43 +61,43 @@ void SyntaxParser::TerminalWordWaitingProcess() {
       ShiftTerminalWord(action_and_attached_data.GetShiftAttachedData());
       break;
     case ActionType::kShiftReduct: {
-      // ĞèÒª¸ù¾İÊµ¼ÊÇé¿öÅĞ¶ÏÒÆÈë»¹ÊÇ¹æÔ¼
+      // éœ€è¦æ ¹æ®å®é™…æƒ…å†µåˆ¤æ–­ç§»å…¥è¿˜æ˜¯è§„çº¦
       auto& terminal_node_info =
           GetWaitingProcessWordInfo().word_attached_data_;
       switch (terminal_node_info.node_type) {
         case ProductionNodeType::kTerminalNode:
-          // ·ÇÔËËã·û½ÚµãÊ¹ÓÃÌ°ĞÄ²ßÂÔ£¬·ÀÖ¹ÓĞ¹«¹²Ç°×ºµÄ²úÉúÊ½Ö»ÓĞ×î¶ÌµÄÄÇÌõÓĞĞ§
+          // éè¿ç®—ç¬¦èŠ‚ç‚¹ä½¿ç”¨è´ªå¿ƒç­–ç•¥ï¼Œé˜²æ­¢æœ‰å…¬å…±å‰ç¼€çš„äº§ç”Ÿå¼åªæœ‰æœ€çŸ­çš„é‚£æ¡æœ‰æ•ˆ
           ShiftTerminalWord(action_and_attached_data.GetShiftAttachedData());
           break;
         case ProductionNodeType::kOperatorNode: {
-          // ÔËËã·ûÓÅÏÈ¼¶±ØĞë²»Îª0
+          // è¿ç®—ç¬¦ä¼˜å…ˆçº§å¿…é¡»ä¸ä¸º0
           OperatorPriority priority_now = GetParsingDataNow().operator_priority;
           auto [operator_associate_type, operator_priority] =
               terminal_node_info.GetAssociatityTypeAndPriority(
                   LastOperateIsReduct());
           if (priority_now > operator_priority) {
-            // µ±Ç°ÓÅÏÈ¼¶¸ßÓÚ´ı´¦ÀíµÄÔËËã·ûµÄÓÅÏÈ¼¶£¬Ö´ĞĞ¹æÔ¼²Ù×÷
+            // å½“å‰ä¼˜å…ˆçº§é«˜äºå¾…å¤„ç†çš„è¿ç®—ç¬¦çš„ä¼˜å…ˆçº§ï¼Œæ‰§è¡Œè§„çº¦æ“ä½œ
             Reduct(action_and_attached_data.GetReductAttachedData());
           } else if (priority_now == operator_priority) {
-            // µ±Ç°ÓÅÏÈ¼¶µÈÓÚ´ı´¦ÀíµÄÔËËã·ûµÄÓÅÏÈ¼¶£¬ĞèÒªÅĞ¶¨½áºÏĞÔ
+            // å½“å‰ä¼˜å…ˆçº§ç­‰äºå¾…å¤„ç†çš„è¿ç®—ç¬¦çš„ä¼˜å…ˆçº§ï¼Œéœ€è¦åˆ¤å®šç»“åˆæ€§
             if (operator_associate_type ==
                 OperatorAssociatityType::kLeftToRight) {
-              // ÔËËã·ûÎª´Ó×óµ½ÓÒ½áºÏ£¬Ö´ĞĞ¹æÔ¼²Ù×÷
+              // è¿ç®—ç¬¦ä¸ºä»å·¦åˆ°å³ç»“åˆï¼Œæ‰§è¡Œè§„çº¦æ“ä½œ
               Reduct(action_and_attached_data.GetReductAttachedData());
             } else {
-              // ÔËËã·ûÎª´ÓÓÒµ½×ó½áºÏ£¬Ö´ĞĞÒÆÈë²Ù×÷
+              // è¿ç®—ç¬¦ä¸ºä»å³åˆ°å·¦ç»“åˆï¼Œæ‰§è¡Œç§»å…¥æ“ä½œ
               ShiftTerminalWord(
                   action_and_attached_data.GetShiftAttachedData());
             }
           } else {
-            // µ±Ç°ÓÅÏÈ¼¶µÍÓÚ´ı´¦ÀíµÄÔËËã·ûµÄÓÅÏÈ¼¶£¬Ö´ĞĞÒÆÈë²Ù×÷
+            // å½“å‰ä¼˜å…ˆçº§ä½äºå¾…å¤„ç†çš„è¿ç®—ç¬¦çš„ä¼˜å…ˆçº§ï¼Œæ‰§è¡Œç§»å…¥æ“ä½œ
             ShiftTerminalWord(action_and_attached_data.GetShiftAttachedData());
           }
         } break;
         case ProductionNodeType::kEndNode:
-          // EndNodeÔÚ×ªÒÆ±íÀïµÄ¶¯×÷Ö»ÄÜ¹æÔ¼²»ÄÜÒÆÈë
+          // EndNodeåœ¨è½¬ç§»è¡¨é‡Œçš„åŠ¨ä½œåªèƒ½è§„çº¦ä¸èƒ½ç§»å…¥
         case ProductionNodeType::kNonTerminalNode:
-          // NonTerminalNodeÔÚ²úÉúºó¾Í±»Reductº¯Êıµ÷ÓÃShiftNonTerminalNodeÏûºÄ
+          // NonTerminalNodeåœ¨äº§ç”Ÿåå°±è¢«Reductå‡½æ•°è°ƒç”¨ShiftNonTerminalNodeæ¶ˆè€—
         default:
           assert(false);
           break;
@@ -113,13 +113,13 @@ inline void SyntaxParser::ShiftTerminalWord(
     const ShiftAttachedData& action_and_target) {
   ParsingData& parsing_data_now = GetParsingDataNow();
   WordInfo& word_info = GetWaitingProcessWordInfo();
-  // ¹¹½¨µ±Ç°µ¥´ÊµÄÊı¾İ
-  // ´ıÒÆÈë½ÚµãµÄID
+  // æ„å»ºå½“å‰å•è¯çš„æ•°æ®
+  // å¾…ç§»å…¥èŠ‚ç‚¹çš„ID
   parsing_data_now.shift_node_id =
       word_info.word_attached_data_.production_node_id;
-  // Ìí¼Ó´ıÒÆÈë½ÚµãĞÅÏ¢µ½µ±Ç°½âÎöÓÃĞÅÏ¢
+  // æ·»åŠ å¾…ç§»å…¥èŠ‚ç‚¹ä¿¡æ¯åˆ°å½“å‰è§£æç”¨ä¿¡æ¯
   parsing_data_now.word_data_to_user = std::move(word_info.symbol_);
-  // Èç¹ûÒÆÈëÁËÔËËã·ûÔò¸üĞÂÓÅÏÈ¼¶ÎªĞÂµÄÓÅÏÈ¼¶
+  // å¦‚æœç§»å…¥äº†è¿ç®—ç¬¦åˆ™æ›´æ–°ä¼˜å…ˆçº§ä¸ºæ–°çš„ä¼˜å…ˆçº§
   OperatorPriority new_parsing_data_priority;
   if (word_info.word_attached_data_.node_type ==
       ProductionNodeType::kOperatorNode) {
@@ -128,17 +128,17 @@ inline void SyntaxParser::ShiftTerminalWord(
             .GetAssociatityTypeAndPriority(LastOperateIsReduct())
             .second;
   } else {
-    // ·ñÔòÊ¹ÓÃÔ­À´µÄÓÅÏÈ¼¶
+    // å¦åˆ™ä½¿ç”¨åŸæ¥çš„ä¼˜å…ˆçº§
     new_parsing_data_priority = parsing_data_now.operator_priority;
   }
-  // Ñ¹ÈëÒÆÈë¸Ãµ¥´ÊºóµÃµ½µÄ½âÎöÊı¾İ
+  // å‹å…¥ç§»å…¥è¯¥å•è¯åå¾—åˆ°çš„è§£ææ•°æ®
   PushParsingData(
       ParsingData{.syntax_analysis_table_entry_id =
                       action_and_target.GetNextSyntaxAnalysisTableEntryId(),
                   .operator_priority = new_parsing_data_priority});
-  // »ñÈ¡ÏÂÒ»¸öµ¥´Ê
+  // è·å–ä¸‹ä¸€ä¸ªå•è¯
   GetNextWord();
-  // Ö´ĞĞÁËÒÆÈë²Ù×÷£¬ĞèÒªÉèÖÃÉÏÒ»²½Îª·Ç¹æÔ¼²Ù×÷
+  // æ‰§è¡Œäº†ç§»å…¥æ“ä½œï¼Œéœ€è¦è®¾ç½®ä¸Šä¸€æ­¥ä¸ºéè§„çº¦æ“ä½œ
   SetLastOperateIsNotReduct();
 }
 
@@ -148,52 +148,56 @@ void SyntaxParser::Reduct(const ReductAttachedData& action_and_target) {
   const ProcessFunctionInterface& process_function_object =
       GetProcessFunctionClass(reduct_attached_data.GetProcessFunctionClassId());
   const auto& production_body = reduct_attached_data.GetProductionBody();
-  // ´«µİ¸øÓÃ»§¶¨Òåº¯ÊıµÄÊı¾İ
+  // ä¼ é€’ç»™ç”¨æˆ·å®šä¹‰å‡½æ•°çš„æ•°æ®
   std::vector<std::any> word_data_to_user(production_body.size());
 
-  // µ¯³öÕ»¶¥Êı¾İ£¬Â¶³öword_data_to_user´æ´¢ÓĞĞ§Êı¾İµÄ²¿·Ö
-  // ³ıÁËÕâÀïÈÎºÎÊ±ºòÕ»¶¥Êı¾İµÄword_data_to_user¶¼²»°üº¬ÓĞĞ§Êı¾İ
+  // å¼¹å‡ºæ ˆé¡¶æ•°æ®ï¼Œéœ²å‡ºword_data_to_userå­˜å‚¨æœ‰æ•ˆæ•°æ®çš„éƒ¨åˆ†
+  // é™¤äº†è¿™é‡Œä»»ä½•æ—¶å€™æ ˆé¡¶æ•°æ®çš„word_data_to_useréƒ½ä¸åŒ…å«æœ‰æ•ˆæ•°æ®
   ParsingData old_parsing_data = std::move(GetParsingDataNow());
   PopTopParsingData();
-  // Éú³É¹æÔ¼Êı¾İ£¬Êı×éÄÚÊı¾İË³ĞòÎª²úÉúÊ½ÊéĞ´Ë³Ğò
-  // ´ÓºóÏòÇ°Ìí¼ÓÊı¾İ
+  // ç”Ÿæˆè§„çº¦æ•°æ®ï¼Œæ•°ç»„å†…æ•°æ®é¡ºåºä¸ºäº§ç”Ÿå¼ä¹¦å†™é¡ºåº
+  // ä»åå‘å‰æ·»åŠ æ•°æ®
   auto production_node_id_iter = production_body.rbegin();
   for (auto user_data_iter = word_data_to_user.rbegin();
        user_data_iter != word_data_to_user.rend(); ++production_node_id_iter) {
     if (GetParsingDataNow().shift_node_id == *production_node_id_iter)
         [[likely]] {
-      // µ±Ç°²úÉúÊ½Õı³£²ÎÓë¹æÔ¼£¬»ñÈ¡Ö®Ç°±£´æÏÂÀ´Ìá¹©¸øÓÃ»§¹æÔ¼Ê¹ÓÃµÄÊı¾İ
+      // å½“å‰äº§ç”Ÿå¼æ­£å¸¸å‚ä¸è§„çº¦ï¼Œè·å–ä¹‹å‰ä¿å­˜ä¸‹æ¥æä¾›ç»™ç”¨æˆ·è§„çº¦ä½¿ç”¨çš„æ•°æ®
       *user_data_iter = std::move(GetParsingDataNow().word_data_to_user);
-      // µ¯³ö½âÎöÊı¾İÕ»¶¥²¿ÎŞ¸½ÊôÊı¾İµÄ²¿·Ö£¬Â¶³öÖ®Ç°´æÈëµÄ½âÎöÊı¾İ
+      // å¼¹å‡ºè§£ææ•°æ®æ ˆé¡¶éƒ¨æ— é™„å±æ•°æ®çš„éƒ¨åˆ†ï¼Œéœ²å‡ºä¹‹å‰å­˜å…¥çš„è§£ææ•°æ®
       old_parsing_data = std::move(GetParsingDataNow());
       PopTopParsingData();
-      // ÓÉÓÚÓĞÉÚ±ø£¬½âÎöÊı¾İÕ»ÓÀÔ¶²»¿Õ
+      // ç”±äºæœ‰å“¨å…µï¼Œè§£ææ•°æ®æ ˆæ°¸è¿œä¸ç©º
       assert(GetParsingStackSize() != 0);
     }
     ++user_data_iter;
   }
-  // »Ö¸´Õ»¶¥Êı¾İ
-  // Õ»¶¥Êı¾İ´¢´æÓĞĞ§ĞÅÏ¢£ºµ±Ç°Óï·¨·ÖÎö±íÌõÄ¿ºÍÔËËã·ûÓÅÏÈ¼¶
+  // æ¢å¤æ ˆé¡¶æ•°æ®
+  // æ ˆé¡¶æ•°æ®å‚¨å­˜æœ‰æ•ˆä¿¡æ¯ï¼šå½“å‰è¯­æ³•åˆ†æè¡¨æ¡ç›®å’Œè¿ç®—ç¬¦ä¼˜å…ˆçº§
   PushParsingData(std::move(old_parsing_data));
   ShiftNonTerminalWord(
       process_function_object.Reduct(std::move(word_data_to_user)),
       reduct_attached_data.GetReductedNonTerminalNodeId());
-  // Ö´ĞĞÁËÒ»´ÎÍêÕûµÄ¹æÔ¼²Ù×÷£¬ĞèÒªÉèÖÃÉÏÒ»²½Ö´ĞĞÁË¹æÔ¼²Ù×÷µÄ±ê¼Ç
+  // æ‰§è¡Œäº†ä¸€æ¬¡å®Œæ•´çš„è§„çº¦æ“ä½œï¼Œéœ€è¦è®¾ç½®ä¸Šä¸€æ­¥æ‰§è¡Œäº†è§„çº¦æ“ä½œçš„æ ‡è®°
   SetLastOperateIsReduct();
+
+  LOG_INFO("Parser",
+           std::format("Reduct Function Called: {:}",
+                       process_function_object.GetReductFunctionName()))
 }
 
 void SyntaxParser::ShiftNonTerminalWord(
     std::any&& non_terminal_word_data,
     ProductionNodeId reducted_nonterminal_node_id) {
   ParsingData& parsing_data_now = GetParsingDataNow();
-  // »ñÈ¡ÒÆÈë·ÇÖÕ½á½Úµãºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿
+  // è·å–ç§»å…¥éç»ˆç»“èŠ‚ç‚¹åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®
   SyntaxAnalysisTableEntryId next_entry_id =
       GetNextEntryId(parsing_data_now.syntax_analysis_table_entry_id,
                      reducted_nonterminal_node_id);
-  // ¸üĞÂÒÆÈë½ÚµãµÄIDºÍ¸½ÊôÊı¾İ
+  // æ›´æ–°ç§»å…¥èŠ‚ç‚¹çš„IDå’Œé™„å±æ•°æ®
   parsing_data_now.shift_node_id = reducted_nonterminal_node_id;
   parsing_data_now.word_data_to_user = std::move(non_terminal_word_data);
-  // ÒÆÈë·ÇÖÕ½á½Úµã²»¸Ä±äÔËËã·ûÓÅÏÈ¼¶
+  // ç§»å…¥éç»ˆç»“èŠ‚ç‚¹ä¸æ”¹å˜è¿ç®—ç¬¦ä¼˜å…ˆçº§
   PushParsingData(
       ParsingData{.syntax_analysis_table_entry_id = next_entry_id,
                   .operator_priority = parsing_data_now.operator_priority});

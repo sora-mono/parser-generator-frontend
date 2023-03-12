@@ -1,22 +1,22 @@
-/// @file production_node.h
-/// @brief ÃèÊö²úÉúÊ½µÄÀà
+ï»¿/// @file production_node.h
+/// @brief æè¿°äº§ç”Ÿå¼çš„ç±»
 /// @details
-/// ¸ÃÎÄ¼şÖĞ¶¨Òå¶à¸öÃèÊö²úÉúÊ½µÄÀà
-/// TerminalProductionNode £ºÖÕ½á²úÉúÊ½
-/// OperatorProductionNode £ºÔËËã·û
-/// NonTerminalProductionNode £º·ÇÖÕ½á²úÉúÊ½
-/// EndNode £ºÎÄ¼şÎ²
-/// ÕâĞ©ÀàÓÃÀ´±íÊ¾²»Í¬²úÉúÊ½
+/// è¯¥æ–‡ä»¶ä¸­å®šä¹‰å¤šä¸ªæè¿°äº§ç”Ÿå¼çš„ç±»
+/// TerminalProductionNode ï¼šç»ˆç»“äº§ç”Ÿå¼
+/// OperatorProductionNode ï¼šè¿ç®—ç¬¦
+/// NonTerminalProductionNode ï¼šéç»ˆç»“äº§ç”Ÿå¼
+/// EndNode ï¼šæ–‡ä»¶å°¾
+/// è¿™äº›ç±»ç”¨æ¥è¡¨ç¤ºä¸åŒäº§ç”Ÿå¼
 #ifndef GENERATOR_SYNTAXGENERATOR_PRODUCTION_NODE_H_
 #define GENERATOR_SYNTAXGENERATOR_PRODUCTION_NODE_H_
 #include "Generator/export_types.h"
 
 namespace frontend::generator::syntax_generator {
 /// @class BaseProductionNode production_node.h
-/// @brief ¸ÃÀàÊÇËùÓĞ±íÊ¾¾ßÌå²úÉúÊ½Àà±ğµÄÅÉÉúÀàµÄ»ùÀà
+/// @brief è¯¥ç±»æ˜¯æ‰€æœ‰è¡¨ç¤ºå…·ä½“äº§ç”Ÿå¼ç±»åˆ«çš„æ´¾ç”Ÿç±»çš„åŸºç±»
 /// @details
-/// ¸ÃÀàÖĞ°üº¬£º½ÚµãÀàĞÍ¡¢½ÚµãID¡¢²úÉúÊ½ÃûID
-/// @attention ËùÓĞ±íÊ¾¾ßÌå²úÉúÊ½µÄÅÉÉúÀà¶¼Ó¦¼Ì³Ğ×Ô¸ÃÀà
+/// è¯¥ç±»ä¸­åŒ…å«ï¼šèŠ‚ç‚¹ç±»å‹ã€èŠ‚ç‚¹IDã€äº§ç”Ÿå¼åID
+/// @attention æ‰€æœ‰è¡¨ç¤ºå…·ä½“äº§ç”Ÿå¼çš„æ´¾ç”Ÿç±»éƒ½åº”ç»§æ‰¿è‡ªè¯¥ç±»
 class BaseProductionNode {
  public:
   BaseProductionNode(ProductionNodeType type, SymbolId symbol_id)
@@ -32,73 +32,73 @@ class BaseProductionNode {
   BaseProductionNode& operator=(BaseProductionNode&& base_production_node);
   virtual ~BaseProductionNode() {}
 
-  /// @brief ÉèÖÃ²úÉúÊ½ÀàĞÍ
-  /// @param[in] type £º²úÉúÊ½ÀàĞÍ
+  /// @brief è®¾ç½®äº§ç”Ÿå¼ç±»å‹
+  /// @param[in] type ï¼šäº§ç”Ÿå¼ç±»å‹
   void SetType(ProductionNodeType type) { base_type_ = type; }
-  /// @brief »ñÈ¡²úÉúÊ½ÀàĞÍ
-  /// @return ·µ»Ø²úÉúÊ½ÀàĞÍ
+  /// @brief è·å–äº§ç”Ÿå¼ç±»å‹
+  /// @return è¿”å›äº§ç”Ÿå¼ç±»å‹
   ProductionNodeType GetType() const { return base_type_; }
-  /// @brief ÉèÖÃ¸Ã½ÚµãID
-  /// @param[in] production_node_id £º´ıÉèÖÃµÄ½ÚµãID
+  /// @brief è®¾ç½®è¯¥èŠ‚ç‚¹ID
+  /// @param[in] production_node_id ï¼šå¾…è®¾ç½®çš„èŠ‚ç‚¹ID
   void SetNodeId(ProductionNodeId production_node_id) {
     base_id_ = production_node_id;
   }
-  /// @brief »ñÈ¡¸Ã½ÚµãID
-  /// @return ·µ»Ø¸Ã½ÚµãID
+  /// @brief è·å–è¯¥èŠ‚ç‚¹ID
+  /// @return è¿”å›è¯¥èŠ‚ç‚¹ID
   ProductionNodeId GetNodeId() const { return base_id_; }
-  /// @brief ÉèÖÃ¸Ã½Úµã±íÊ¾µÄ²úÉúÊ½ÃûID
-  /// @param[in] production_node_id £º´ıÉèÖÃµÄ²úÉúÊ½ÃûID
+  /// @brief è®¾ç½®è¯¥èŠ‚ç‚¹è¡¨ç¤ºçš„äº§ç”Ÿå¼åID
+  /// @param[in] production_node_id ï¼šå¾…è®¾ç½®çš„äº§ç”Ÿå¼åID
   void SetSymbolId(SymbolId production_node_id) {
     base_symbol_id_ = production_node_id;
   }
-  /// @brief »ñÈ¡¸Ã½Úµã±íÊ¾µÄ²úÉúÊ½ÃûID
-  /// @return ·µ»Ø¸Ã½Úµã±íÊ¾µÄ²úÉúÊ½ÃûID
+  /// @brief è·å–è¯¥èŠ‚ç‚¹è¡¨ç¤ºçš„äº§ç”Ÿå¼åID
+  /// @return è¿”å›è¯¥èŠ‚ç‚¹è¡¨ç¤ºçš„äº§ç”Ÿå¼åID
   SymbolId GetNodeSymbolId() const { return base_symbol_id_; }
 
-  /// @brief ¸ù¾İ¸ø¶¨²úÉúÊ½ÌåºÍÏÂÒ»¸öÒÆÈëµÄ²úÉúÊ½Î»ÖÃ»ñÈ¡ÏÂÒ»¸öÒÆÈëµÄ²úÉúÊ½ID
-  /// @param[in] production_body_id £º×Ó²úÉúÊ½Ìå±êºÅ
-  /// @param[in] next_word_to_shift_index £º²úÉúÊ½ÌåÖĞ²úÉúÊ½IDµÄÎ»ÖÃ
-  /// @return ·µ»Øproduction_body_idºÍnext_word_to_shift_indexÖ¸¶¨µÄ²úÉúÊ½ID
+  /// @brief æ ¹æ®ç»™å®šäº§ç”Ÿå¼ä½“å’Œä¸‹ä¸€ä¸ªç§»å…¥çš„äº§ç”Ÿå¼ä½ç½®è·å–ä¸‹ä¸€ä¸ªç§»å…¥çš„äº§ç”Ÿå¼ID
+  /// @param[in] production_body_id ï¼šå­äº§ç”Ÿå¼ä½“æ ‡å·
+  /// @param[in] next_word_to_shift_index ï¼šäº§ç”Ÿå¼ä½“ä¸­äº§ç”Ÿå¼IDçš„ä½ç½®
+  /// @return è¿”å›production_body_idå’Œnext_word_to_shift_indexæŒ‡å®šçš„äº§ç”Ÿå¼ID
   /// @details
-  /// point_indexÔ½½ç£¨´óÓÚµÈÓÚproduction_body_idÖ¸¶¨µÄ×Ó²úÉúÊ½ÖĞ²úÉúÊ½ÊıÄ¿£©Ê±
-  /// ·µ»ØProducNodeId::InvalidId()
-  /// production_body_id²»µÃ³¬³ö¸Ã²úÉúÊ½ÓµÓĞµÄ²úÉúÊ½Ìå¸öÊı
-  /// ÖÕ½á²úÉúÊ½ºÍÔËËã·û²úÉúÊ½Ö»´æÔÚÒ»¸ö×Ó²úÉúÊ½£¬×Ó²úÉúÊ½ÖĞÖ»º¬ÓĞÒ»¸ö²úÉúÊ½£¬
-  /// ËùÒÔÓ¦Ê¹ÓÃ
-  /// ProductionBodyId(0),NextWordToShiftIndex(0)²Å¿ÉÒÔ»ñÈ¡ÓĞĞ§²úÉúÊ½ID
+  /// point_indexè¶Šç•Œï¼ˆå¤§äºç­‰äºproduction_body_idæŒ‡å®šçš„å­äº§ç”Ÿå¼ä¸­äº§ç”Ÿå¼æ•°ç›®ï¼‰æ—¶
+  /// è¿”å›ProducNodeId::InvalidId()
+  /// production_body_idä¸å¾—è¶…å‡ºè¯¥äº§ç”Ÿå¼æ‹¥æœ‰çš„äº§ç”Ÿå¼ä½“ä¸ªæ•°
+  /// ç»ˆç»“äº§ç”Ÿå¼å’Œè¿ç®—ç¬¦äº§ç”Ÿå¼åªå­˜åœ¨ä¸€ä¸ªå­äº§ç”Ÿå¼ï¼Œå­äº§ç”Ÿå¼ä¸­åªå«æœ‰ä¸€ä¸ªäº§ç”Ÿå¼ï¼Œ
+  /// æ‰€ä»¥åº”ä½¿ç”¨
+  /// ProductionBodyId(0),NextWordToShiftIndex(0)æ‰å¯ä»¥è·å–æœ‰æ•ˆäº§ç”Ÿå¼ID
   /// @note
-  /// Ê¹ÓÃ¾ÙÀı£º
-  ///   ²úÉúÊ½Àı£º
+  /// ä½¿ç”¨ä¸¾ä¾‹ï¼š
+  ///   äº§ç”Ÿå¼ä¾‹ï¼š
   ///   IdOrEquivence -> ConstTag Id
   ///   IdOrEquivence -> IdOrEquivence "[" Num "]"
   ///   IdOrEquivence -> IdOrEquivence "[" "]"
   ///   IdOrEquivence -> ConstTag "*" IdOrEquivence
-  /// »ñÈ¡IdOrEquivence²úÉúÊ½ÄÚµÚ¶ş¸ö×Ó²úÉúÊ½ÖĞµÚÈı¸ö²úÉúÊ½£¨"Num"£©µÄID
+  /// è·å–IdOrEquivenceäº§ç”Ÿå¼å†…ç¬¬äºŒä¸ªå­äº§ç”Ÿå¼ä¸­ç¬¬ä¸‰ä¸ªäº§ç”Ÿå¼ï¼ˆ"Num"ï¼‰çš„ID
   /// @code{.cpp}
   ///   NonTerminalProductionNode example_node;
   ///   example_node.GetProductionNodeInBody(ProductionBodyId(1),
   ///                                        NextWordToShiftIndex(2));
   /// @endcode
-  /// @attention ËùÓĞÅÉÉúÀà¾ùÓ¦ÖØĞ´¸Ãº¯Êı£¬²»µÃ¸Ä±äÔ­Ê¼ÓïÒå
+  /// @attention æ‰€æœ‰æ´¾ç”Ÿç±»å‡åº”é‡å†™è¯¥å‡½æ•°ï¼Œä¸å¾—æ”¹å˜åŸå§‹è¯­ä¹‰
   virtual ProductionNodeId GetProductionNodeInBody(
       ProductionBodyId production_body_id,
       NextWordToShiftIndex next_word_to_shift_index) const = 0;
 
  private:
-  /// @brief ²úÉúÊ½ÀàĞÍ
+  /// @brief äº§ç”Ÿå¼ç±»å‹
   ProductionNodeType base_type_;
-  /// @brief ½ÚµãID
+  /// @brief èŠ‚ç‚¹ID
   ProductionNodeId base_id_;
-  /// @brief ²úÉúÊ½ÃûID
+  /// @brief äº§ç”Ÿå¼åID
   SymbolId base_symbol_id_;
 };
 
 /// @class TerminalProductionNode production_node.h
-/// @brief ±íÊ¾ÖÕ½á²úÉúÊ½
+/// @brief è¡¨ç¤ºç»ˆç»“äº§ç”Ÿå¼
 /// @note
-/// ÖÕ½á²úÉúÊ½£º
+/// ç»ˆç»“äº§ç”Ÿå¼ï¼š
 /// Id    ->    [a-zA-Z_][a-zA-Z0-9_]*
-/// ^²úÉúÊ½Ãû   ^²úÉúÊ½ÌåÃû
+/// ^äº§ç”Ÿå¼å   ^äº§ç”Ÿå¼ä½“å
 class TerminalProductionNode : public BaseProductionNode {
  public:
   TerminalProductionNode(SymbolId node_symbol_id, SymbolId body_symbol_id)
@@ -117,68 +117,68 @@ class TerminalProductionNode : public BaseProductionNode {
     return *this;
   }
 
-  /// @brief »ñÈ¡²úÉúÊ½ÌåÃûID
-  /// @return ·µ»Ø²úÉúÊ½ÌåÃûID
+  /// @brief è·å–äº§ç”Ÿå¼ä½“åID
+  /// @return è¿”å›äº§ç”Ÿå¼ä½“åID
   SymbolId GetBodySymbolId() const { return body_symbol_id_; }
-  /// @brief ÉèÖÃ²úÉúÊ½ÌåÃûID
-  /// @param[in] body_symbol_id £º´ıÉèÖÃµÄ²úÉúÊ½ÌåÃûID
+  /// @brief è®¾ç½®äº§ç”Ÿå¼ä½“åID
+  /// @param[in] body_symbol_id ï¼šå¾…è®¾ç½®çš„äº§ç”Ÿå¼ä½“åID
   void SetBodySymbolId(SymbolId body_symbol_id) {
     body_symbol_id_ = body_symbol_id;
   }
-  /// @brief »ñÈ¡²úÉúÊ½ÌåÄÚµÄ²úÉúÊ½
-  /// @param[in] production_body_id £º´ı»ñÈ¡µÄ²úÉúÊ½ÌåID
-  /// @param[in] next_word_to_shift_index £º´ı»ñÈ¡µÄ×Ó²úÉúÊ½Î»ÖÃ
-  /// @attention ÖÕ½á½Úµãµ÷ÓÃ¸Ãº¯ÊıÊ±production_body_id±ØĞëÎª0
-  /// next_word_to_shift_index²»ÊÇ0Ê±Ôò·µ»ØNextWordToShiftIndex::InvalidId()
+  /// @brief è·å–äº§ç”Ÿå¼ä½“å†…çš„äº§ç”Ÿå¼
+  /// @param[in] production_body_id ï¼šå¾…è·å–çš„äº§ç”Ÿå¼ä½“ID
+  /// @param[in] next_word_to_shift_index ï¼šå¾…è·å–çš„å­äº§ç”Ÿå¼ä½ç½®
+  /// @attention ç»ˆç»“èŠ‚ç‚¹è°ƒç”¨è¯¥å‡½æ•°æ—¶production_body_idå¿…é¡»ä¸º0
+  /// next_word_to_shift_indexä¸æ˜¯0æ—¶åˆ™è¿”å›NextWordToShiftIndex::InvalidId()
   virtual ProductionNodeId GetProductionNodeInBody(
       ProductionBodyId production_body_id,
       NextWordToShiftIndex next_word_to_shift_index) const override;
 
  private:
-  /// @brief ²úÉúÊ½ÌåÃû
+  /// @brief äº§ç”Ÿå¼ä½“å
   SymbolId body_symbol_id_;
 };
 
 /// @class OperatorNodeInterface production_node.h
-/// @brief ±íÊ¾ÔËËã·ûµÄÀàµÄ»ùÀà
+/// @brief è¡¨ç¤ºè¿ç®—ç¬¦çš„ç±»çš„åŸºç±»
 /// @details
-/// ÔËËã·ûÖ§³ÖÇø·ÖË«Ä¿ÔËËã·ûÓïÒåºÍµ¥Ä¿ÔËËã·ûÓïÒå
-/// Ë«Ä¿ÔËËã·ûÓïÒåÊ¹ÓÃÊ±ÔËËã·ûËùÔÚµÄ²úÉúÊ½ÌåÖĞÁ½²à¶¼Ó¦´æÔÚ²úÉúÊ½
-/// Àı£º
+/// è¿ç®—ç¬¦æ”¯æŒåŒºåˆ†åŒç›®è¿ç®—ç¬¦è¯­ä¹‰å’Œå•ç›®è¿ç®—ç¬¦è¯­ä¹‰
+/// åŒç›®è¿ç®—ç¬¦è¯­ä¹‰ä½¿ç”¨æ—¶è¿ç®—ç¬¦æ‰€åœ¨çš„äº§ç”Ÿå¼ä½“ä¸­ä¸¤ä¾§éƒ½åº”å­˜åœ¨äº§ç”Ÿå¼
+/// ä¾‹ï¼š
 /// Example-> Example1 "+" Example2
-/// ÆäÖĞ"+"ÎªÔËËã·û£¬ÕâÀïÊ¹ÓÃË«Ä¿ÔËËã·ûÓïÒå
-/// µ¥Ä¿ÔËËã·ûÓïÒå½öÖ§³Ö×ó²àµ¥Ä¿ÔËËã·ûÓïÒå£¬²»Ö§³ÖÓÒ²àµ¥Ä¿ÔËËã·ûÓïÒå
-/// Àı£º
+/// å…¶ä¸­"+"ä¸ºè¿ç®—ç¬¦ï¼Œè¿™é‡Œä½¿ç”¨åŒç›®è¿ç®—ç¬¦è¯­ä¹‰
+/// å•ç›®è¿ç®—ç¬¦è¯­ä¹‰ä»…æ”¯æŒå·¦ä¾§å•ç›®è¿ç®—ç¬¦è¯­ä¹‰ï¼Œä¸æ”¯æŒå³ä¾§å•ç›®è¿ç®—ç¬¦è¯­ä¹‰
+/// ä¾‹ï¼š
 /// Assignable -> "!" Assignable
-/// ÆäÖĞ"!"ÎªÔËËã·û£¬ÕâÀïÊ¹ÓÃµ¥Ä¿ÔËËã·ûÓïÒå
-/// @attention ËùÓĞ±íÊ¾ÔËËã·ûµÄÀà¶¼Ó¦´Ó¸ÃÀàÅÉÉú
+/// å…¶ä¸­"!"ä¸ºè¿ç®—ç¬¦ï¼Œè¿™é‡Œä½¿ç”¨å•ç›®è¿ç®—ç¬¦è¯­ä¹‰
+/// @attention æ‰€æœ‰è¡¨ç¤ºè¿ç®—ç¬¦çš„ç±»éƒ½åº”ä»è¯¥ç±»æ´¾ç”Ÿ
 class OperatorNodeInterface : public BaseProductionNode {
  public:
   enum class OperatorType {
-    kBinary,     ///< Ë«Ä¿ÔËËã·û
-    kLeftUnary,  ///< ×ó²àµ¥Ä¿ÔËËã·û
-    kBinaryLeftUnary  ///< Í¬Ê±¾ßÓĞË«Ä¿ÔËËã·ûÓïÒåºÍ×ó²àµ¥Ä¿ÔËËã·ûÓïÒåµÄÔËËã·û
+    kBinary,     ///< åŒç›®è¿ç®—ç¬¦
+    kLeftUnary,  ///< å·¦ä¾§å•ç›®è¿ç®—ç¬¦
+    kBinaryLeftUnary  ///< åŒæ—¶å…·æœ‰åŒç›®è¿ç®—ç¬¦è¯­ä¹‰å’Œå·¦ä¾§å•ç›®è¿ç®—ç¬¦è¯­ä¹‰çš„è¿ç®—ç¬¦
   };
-  /// @brief »ñÈ¡²úÉúÊ½ÌåÄÚµÄ²úÉúÊ½
-  /// @param[in] production_body_id £º´ı»ñÈ¡µÄ²úÉúÊ½ÌåID
-  /// @param[in] next_word_to_shift_index £º´ı»ñÈ¡µÄ×Ó²úÉúÊ½Î»ÖÃ
-  /// @attention ÖÕ½á½Úµãµ÷ÓÃ¸Ãº¯ÊıÊ±production_body_id±ØĞëÎª0
-  /// next_word_to_shift_index²»ÊÇ0Ê±Ôò·µ»ØNextWordToShiftIndex::InvalidId()
+  /// @brief è·å–äº§ç”Ÿå¼ä½“å†…çš„äº§ç”Ÿå¼
+  /// @param[in] production_body_id ï¼šå¾…è·å–çš„äº§ç”Ÿå¼ä½“ID
+  /// @param[in] next_word_to_shift_index ï¼šå¾…è·å–çš„å­äº§ç”Ÿå¼ä½ç½®
+  /// @attention ç»ˆç»“èŠ‚ç‚¹è°ƒç”¨è¯¥å‡½æ•°æ—¶production_body_idå¿…é¡»ä¸º0
+  /// next_word_to_shift_indexä¸æ˜¯0æ—¶åˆ™è¿”å›NextWordToShiftIndex::InvalidId()
   virtual ProductionNodeId GetProductionNodeInBody(
       ProductionBodyId production_body_id,
       NextWordToShiftIndex next_word_to_shift_index) const final;
 
-  /// @brief ÉèÖÃÔËËã·ûÀàĞÍ
-  /// @param[in] operator_type £ºĞÂµÄÔËËã·ûÀàĞÍ
+  /// @brief è®¾ç½®è¿ç®—ç¬¦ç±»å‹
+  /// @param[in] operator_type ï¼šæ–°çš„è¿ç®—ç¬¦ç±»å‹
   void SetOperatorType(OperatorType operator_type) {
     operator_type_ = operator_type;
   }
-  /// @brief »ñÈ¡ÔËËã·ûÀàĞÍ
-  /// @return ·µ»ØÔËËã·ûÀàĞÍ
-  /// @retval OperatorType::kBinary £ºË«Ä¿ÔËËã·û
-  /// @retval OperatorType::kLeftUnary £º×ó²àµ¥Ä¿ÔËËã·û
+  /// @brief è·å–è¿ç®—ç¬¦ç±»å‹
+  /// @return è¿”å›è¿ç®—ç¬¦ç±»å‹
+  /// @retval OperatorType::kBinary ï¼šåŒç›®è¿ç®—ç¬¦
+  /// @retval OperatorType::kLeftUnary ï¼šå·¦ä¾§å•ç›®è¿ç®—ç¬¦
   /// @retval OperatorType::kBinaryLeftUnary
-  /// £ºÍ¬Ê±¾ßÓĞË«Ä¿ÔËËã·ûÓë×ó²àµ¥Ä¿ÔËËã·ûÓïÒå
+  /// ï¼šåŒæ—¶å…·æœ‰åŒç›®è¿ç®—ç¬¦ä¸å·¦ä¾§å•ç›®è¿ç®—ç¬¦è¯­ä¹‰
   OperatorType GetOperatorType() const { return operator_type_; }
 
  protected:
@@ -199,7 +199,7 @@ class OperatorNodeInterface : public BaseProductionNode {
 };
 
 /// @class BinaryOperatorNode production_node.h
-/// @brief ±íÊ¾Ë«Ä¿ÔËËã·û
+/// @brief è¡¨ç¤ºåŒç›®è¿ç®—ç¬¦
 class BinaryOperatorNode : public OperatorNodeInterface {
  public:
   BinaryOperatorNode(SymbolId operator_symbol_id,
@@ -209,42 +209,42 @@ class BinaryOperatorNode : public OperatorNodeInterface {
         unary_operator_associatity_type_(binary_operator_associatity_type),
         unary_operator_priority_(binary_operator_priority) {}
 
-  /// @brief ÉèÖÃÔËËã·û½áºÏĞÔ
-  /// @param[in] type £º´ıÉèÖÃµÄÔËËã·û½áºÏĞÔ
+  /// @brief è®¾ç½®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @param[in] type ï¼šå¾…è®¾ç½®çš„è¿ç®—ç¬¦ç»“åˆæ€§
   /// @note
-  /// ÔËËã·û½áºÏĞÔ·Ö´Ó×óµ½ÓÒ½áºÏºÍ´ÓÓÒµ½×ó½áºÏ
+  /// è¿ç®—ç¬¦ç»“åˆæ€§åˆ†ä»å·¦åˆ°å³ç»“åˆå’Œä»å³åˆ°å·¦ç»“åˆ
   void SetAssociatityType(OperatorAssociatityType type) {
     unary_operator_associatity_type_ = type;
   }
-  /// @brief »ñÈ¡ÔËËã·û½áºÏĞÔ
-  /// @return ·µ»ØÔËËã·û½áºÏĞÔ
-  /// @retval OperatorAssociatityType::kLeftToRight £º´Ó×óµ½ÓÒ½áºÏ
-  /// @retval OperatorAssociatityType::kRightToLeft £º´ÓÓÒµ½×ó½áºÏ
+  /// @brief è·å–è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @return è¿”å›è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @retval OperatorAssociatityType::kLeftToRight ï¼šä»å·¦åˆ°å³ç»“åˆ
+  /// @retval OperatorAssociatityType::kRightToLeft ï¼šä»å³åˆ°å·¦ç»“åˆ
   OperatorAssociatityType GetAssociatityType() const {
     return unary_operator_associatity_type_;
   }
-  /// @brief ÉèÖÃÔËËã·ûÓÅÏÈ¼¶µÈ¼¶
-  /// @param[in] priority £º´ıÉèÖÃµÄÔËËã·ûÓÅÏÈ¼¶µÈ¼¶
-  /// @attention ÔËËã·ûÓÅÏÈ¼¶Óëµ¥´ÊÓÅÏÈ¼¶ÒâÒå²»Í¬
-  /// ÔËËã·ûÓÅÏÈ¼¶¹¤×÷ÔÚÓï·¨·ÖÎö£¬Ö»ÓĞÔËËã·ûÓµÓĞ
-  /// µ¥´ÊÓÅÏÈ¼¶¹¤×÷ÔÚ´Ê·¨·ÖÎö£¬Ã¿¸öµ¥´Ê¶¼ÓĞ
+  /// @brief è®¾ç½®è¿ç®—ç¬¦ä¼˜å…ˆçº§ç­‰çº§
+  /// @param[in] priority ï¼šå¾…è®¾ç½®çš„è¿ç®—ç¬¦ä¼˜å…ˆçº§ç­‰çº§
+  /// @attention è¿ç®—ç¬¦ä¼˜å…ˆçº§ä¸å•è¯ä¼˜å…ˆçº§æ„ä¹‰ä¸åŒ
+  /// è¿ç®—ç¬¦ä¼˜å…ˆçº§å·¥ä½œåœ¨è¯­æ³•åˆ†æï¼Œåªæœ‰è¿ç®—ç¬¦æ‹¥æœ‰
+  /// å•è¯ä¼˜å…ˆçº§å·¥ä½œåœ¨è¯æ³•åˆ†æï¼Œæ¯ä¸ªå•è¯éƒ½æœ‰
   void SetPriority(OperatorPriority priority) {
     unary_operator_priority_ = priority;
   }
-  /// @brief »ñÈ¡ÔËËã·ûÓÅÏÈ¼¶
-  /// @return ·µ»ØÔËËã·ûÓÅÏÈ¼¶
+  /// @brief è·å–è¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @return è¿”å›è¿ç®—ç¬¦ä¼˜å…ˆçº§
   OperatorPriority GetPriority() const { return unary_operator_priority_; }
 
  private:
-  /// @brief ÔËËã·û½áºÏĞÔ
+  /// @brief è¿ç®—ç¬¦ç»“åˆæ€§
   OperatorAssociatityType unary_operator_associatity_type_;
-  /// @brief ÔËËã·ûÓÅÏÈ¼¶
+  /// @brief è¿ç®—ç¬¦ä¼˜å…ˆçº§
   OperatorPriority unary_operator_priority_;
 };
 
 /// @class UnaryOperatorNode production_node.h
-/// @brief ±íÊ¾µ¥Ä¿ÔËËã·û
-/// @attention ½öÖ§³Ö×ó²àµ¥Ä¿ÔËËã·û
+/// @brief è¡¨ç¤ºå•ç›®è¿ç®—ç¬¦
+/// @attention ä»…æ”¯æŒå·¦ä¾§å•ç›®è¿ç®—ç¬¦
 class UnaryOperatorNode : public OperatorNodeInterface {
  public:
   UnaryOperatorNode(SymbolId operator_symbol_id,
@@ -254,42 +254,42 @@ class UnaryOperatorNode : public OperatorNodeInterface {
         unary_operator_associatity_type_(unary_operator_associatity_type),
         unary_operator_priority_(unary_operator_priority) {}
 
-  /// @brief ÉèÖÃÔËËã·û½áºÏĞÔ
-  /// @param[in] type £º´ıÉèÖÃµÄÔËËã·û½áºÏĞÔ
+  /// @brief è®¾ç½®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @param[in] type ï¼šå¾…è®¾ç½®çš„è¿ç®—ç¬¦ç»“åˆæ€§
   /// @note
-  /// ÔËËã·û½áºÏĞÔ·Ö´Ó×óµ½ÓÒ½áºÏºÍ´ÓÓÒµ½×ó½áºÏ
+  /// è¿ç®—ç¬¦ç»“åˆæ€§åˆ†ä»å·¦åˆ°å³ç»“åˆå’Œä»å³åˆ°å·¦ç»“åˆ
   void SetAssociatityType(OperatorAssociatityType type) {
     unary_operator_associatity_type_ = type;
   }
-  /// @brief »ñÈ¡ÔËËã·û½áºÏĞÔ
-  /// @return ·µ»ØÔËËã·û½áºÏĞÔ
-  /// @retval OperatorAssociatityType::kLeftToRight £º´Ó×óµ½ÓÒ½áºÏ
-  /// @retval OperatorAssociatityType::kRightToLeft £º´ÓÓÒµ½×ó½áºÏ
+  /// @brief è·å–è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @return è¿”å›è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @retval OperatorAssociatityType::kLeftToRight ï¼šä»å·¦åˆ°å³ç»“åˆ
+  /// @retval OperatorAssociatityType::kRightToLeft ï¼šä»å³åˆ°å·¦ç»“åˆ
   OperatorAssociatityType GetAssociatityType() const {
     return unary_operator_associatity_type_;
   }
-  /// @brief ÉèÖÃÔËËã·ûÓÅÏÈ¼¶µÈ¼¶
-  /// @param[in] priority £º´ıÉèÖÃµÄÔËËã·ûÓÅÏÈ¼¶µÈ¼¶
-  /// @attention ÔËËã·ûÓÅÏÈ¼¶Óëµ¥´ÊÓÅÏÈ¼¶ÒâÒå²»Í¬
-  /// ÔËËã·ûÓÅÏÈ¼¶¹¤×÷ÔÚÓï·¨·ÖÎö£¬Ö»ÓĞÔËËã·ûÓµÓĞ
-  /// µ¥´ÊÓÅÏÈ¼¶¹¤×÷ÔÚ´Ê·¨·ÖÎö£¬Ã¿¸öµ¥´Ê¶¼ÓĞ
+  /// @brief è®¾ç½®è¿ç®—ç¬¦ä¼˜å…ˆçº§ç­‰çº§
+  /// @param[in] priority ï¼šå¾…è®¾ç½®çš„è¿ç®—ç¬¦ä¼˜å…ˆçº§ç­‰çº§
+  /// @attention è¿ç®—ç¬¦ä¼˜å…ˆçº§ä¸å•è¯ä¼˜å…ˆçº§æ„ä¹‰ä¸åŒ
+  /// è¿ç®—ç¬¦ä¼˜å…ˆçº§å·¥ä½œåœ¨è¯­æ³•åˆ†æï¼Œåªæœ‰è¿ç®—ç¬¦æ‹¥æœ‰
+  /// å•è¯ä¼˜å…ˆçº§å·¥ä½œåœ¨è¯æ³•åˆ†æï¼Œæ¯ä¸ªå•è¯éƒ½æœ‰
   void SetPriority(OperatorPriority priority) {
     unary_operator_priority_ = priority;
   }
-  /// @brief »ñÈ¡ÔËËã·ûÓÅÏÈ¼¶
-  /// @return ·µ»ØÔËËã·ûÓÅÏÈ¼¶
+  /// @brief è·å–è¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @return è¿”å›è¿ç®—ç¬¦ä¼˜å…ˆçº§
   OperatorPriority GetPriority() const { return unary_operator_priority_; }
 
  private:
-  /// @brief ÔËËã·û½áºÏĞÔ
+  /// @brief è¿ç®—ç¬¦ç»“åˆæ€§
   OperatorAssociatityType unary_operator_associatity_type_;
-  /// @brief ÔËËã·ûÓÅÏÈ¼¶
+  /// @brief è¿ç®—ç¬¦ä¼˜å…ˆçº§
   OperatorPriority unary_operator_priority_;
 };
 
 /// @class BinaryUnaryOperatorNode production_node.h
-/// @brief ±íÊ¾Í¬Ê±¾ßÓĞË«Ä¿ÔËËã·ûºÍµ¥Ä¿ÔËËã·ûÓïÒåµÄÔËËã·û
-/// @attention ½öÖ§³Ö×ó²àµ¥Ä¿ÔËËã·û
+/// @brief è¡¨ç¤ºåŒæ—¶å…·æœ‰åŒç›®è¿ç®—ç¬¦å’Œå•ç›®è¿ç®—ç¬¦è¯­ä¹‰çš„è¿ç®—ç¬¦
+/// @attention ä»…æ”¯æŒå·¦ä¾§å•ç›®è¿ç®—ç¬¦
 class BinaryUnaryOperatorNode : public OperatorNodeInterface {
  public:
   BinaryUnaryOperatorNode(
@@ -305,78 +305,78 @@ class BinaryUnaryOperatorNode : public OperatorNodeInterface {
         unary_operator_associatity_type_(unary_operator_associatity_type),
         unary_operator_priority_(unary_operator_priority) {}
 
-  /// @brief ÉèÖÃË«Ä¿ÔËËã·û½áºÏĞÔ
-  /// @param[in] type £º´ıÉèÖÃµÄÔËËã·û½áºÏĞÔ
+  /// @brief è®¾ç½®åŒç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @param[in] type ï¼šå¾…è®¾ç½®çš„è¿ç®—ç¬¦ç»“åˆæ€§
   /// @note
-  /// ÔËËã·û½áºÏĞÔ·Ö´Ó×óµ½ÓÒ½áºÏºÍ´ÓÓÒµ½×ó½áºÏ
+  /// è¿ç®—ç¬¦ç»“åˆæ€§åˆ†ä»å·¦åˆ°å³ç»“åˆå’Œä»å³åˆ°å·¦ç»“åˆ
   void SetBinaryOperatorAssociatityType(OperatorAssociatityType type) {
     binary_operator_associatity_type_ = type;
   }
-  /// @brief ÉèÖÃµ¥Ä¿ÔËËã·û½áºÏĞÔ
-  /// @param[in] type £º´ıÉèÖÃµÄµ¥Ä¿ÔËËã·û½áºÏĞÔ
+  /// @brief è®¾ç½®å•ç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @param[in] type ï¼šå¾…è®¾ç½®çš„å•ç›®è¿ç®—ç¬¦ç»“åˆæ€§
   /// @note
-  /// ÔËËã·û½áºÏĞÔ·Ö´Ó×óµ½ÓÒ½áºÏºÍ´ÓÓÒµ½×ó½áºÏ
+  /// è¿ç®—ç¬¦ç»“åˆæ€§åˆ†ä»å·¦åˆ°å³ç»“åˆå’Œä»å³åˆ°å·¦ç»“åˆ
   void SetUnaryOperatorAssociatityType(OperatorAssociatityType type) {
     unary_operator_associatity_type_ = type;
   }
-  /// @brief »ñÈ¡Ë«Ä¿ÔËËã·û½áºÏĞÔ
-  /// @return ·µ»ØË«Ä¿ÔËËã·û½áºÏĞÔ
-  /// @retval OperatorAssociatityType::kLeftToRight £º´Ó×óµ½ÓÒ½áºÏ
-  /// @retval OperatorAssociatityType::kRightToLeft £º´ÓÓÒµ½×ó½áºÏ
+  /// @brief è·å–åŒç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @return è¿”å›åŒç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @retval OperatorAssociatityType::kLeftToRight ï¼šä»å·¦åˆ°å³ç»“åˆ
+  /// @retval OperatorAssociatityType::kRightToLeft ï¼šä»å³åˆ°å·¦ç»“åˆ
   OperatorAssociatityType GetBinaryOperatorAssociatityType() const {
     return binary_operator_associatity_type_;
   }
-  /// @brief »ñÈ¡µ¥Ä¿ÔËËã·û½áºÏĞÔ
-  /// @return ·µ»Øµ¥Ä¿ÔËËã·û½áºÏĞÔ
-  /// @retval OperatorAssociatityType::kLeftToRight £º´Ó×óµ½ÓÒ½áºÏ
-  /// @retval OperatorAssociatityType::kRightToLeft £º´ÓÓÒµ½×ó½áºÏ
+  /// @brief è·å–å•ç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @return è¿”å›å•ç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @retval OperatorAssociatityType::kLeftToRight ï¼šä»å·¦åˆ°å³ç»“åˆ
+  /// @retval OperatorAssociatityType::kRightToLeft ï¼šä»å³åˆ°å·¦ç»“åˆ
   OperatorAssociatityType GetUnaryOperatorAssociatityType() const {
     return unary_operator_associatity_type_;
   }
-  /// @brief ÉèÖÃË«Ä¿ÔËËã·ûÓÅÏÈ¼¶µÈ¼¶
-  /// @param[in] priority £º´ıÉèÖÃµÄË«Ä¿ÔËËã·ûÓÅÏÈ¼¶µÈ¼¶
-  /// @attention ÔËËã·ûÓÅÏÈ¼¶Óëµ¥´ÊÓÅÏÈ¼¶ÒâÒå²»Í¬
-  /// ÔËËã·ûÓÅÏÈ¼¶¹¤×÷ÔÚÓï·¨·ÖÎö£¬Ö»ÓĞÔËËã·ûÓµÓĞ
-  /// µ¥´ÊÓÅÏÈ¼¶¹¤×÷ÔÚ´Ê·¨·ÖÎö£¬Ã¿¸öµ¥´Ê¶¼ÓĞ
+  /// @brief è®¾ç½®åŒç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§ç­‰çº§
+  /// @param[in] priority ï¼šå¾…è®¾ç½®çš„åŒç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§ç­‰çº§
+  /// @attention è¿ç®—ç¬¦ä¼˜å…ˆçº§ä¸å•è¯ä¼˜å…ˆçº§æ„ä¹‰ä¸åŒ
+  /// è¿ç®—ç¬¦ä¼˜å…ˆçº§å·¥ä½œåœ¨è¯­æ³•åˆ†æï¼Œåªæœ‰è¿ç®—ç¬¦æ‹¥æœ‰
+  /// å•è¯ä¼˜å…ˆçº§å·¥ä½œåœ¨è¯æ³•åˆ†æï¼Œæ¯ä¸ªå•è¯éƒ½æœ‰
   void SetBinaryOperatorPriority(OperatorPriority priority) {
     binary_operator_priority_ = priority;
   }
-  /// @brief ÉèÖÃµ¥Ä¿ÔËËã·ûÓÅÏÈ¼¶µÈ¼¶
-  /// @param[in] priority £º´ıÉèÖÃµÄµ¥Ä¿ÔËËã·ûÓÅÏÈ¼¶µÈ¼¶
-  /// @attention ÔËËã·ûÓÅÏÈ¼¶Óëµ¥´ÊÓÅÏÈ¼¶ÒâÒå²»Í¬
-  /// ÔËËã·ûÓÅÏÈ¼¶¹¤×÷ÔÚÓï·¨·ÖÎö£¬Ö»ÓĞÔËËã·ûÓµÓĞ
-  /// µ¥´ÊÓÅÏÈ¼¶¹¤×÷ÔÚ´Ê·¨·ÖÎö£¬Ã¿¸öµ¥´Ê¶¼ÓĞ
+  /// @brief è®¾ç½®å•ç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§ç­‰çº§
+  /// @param[in] priority ï¼šå¾…è®¾ç½®çš„å•ç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§ç­‰çº§
+  /// @attention è¿ç®—ç¬¦ä¼˜å…ˆçº§ä¸å•è¯ä¼˜å…ˆçº§æ„ä¹‰ä¸åŒ
+  /// è¿ç®—ç¬¦ä¼˜å…ˆçº§å·¥ä½œåœ¨è¯­æ³•åˆ†æï¼Œåªæœ‰è¿ç®—ç¬¦æ‹¥æœ‰
+  /// å•è¯ä¼˜å…ˆçº§å·¥ä½œåœ¨è¯æ³•åˆ†æï¼Œæ¯ä¸ªå•è¯éƒ½æœ‰
   void SetUnaryOperatorPriority(OperatorPriority priority) {
     unary_operator_priority_ = priority;
   }
-  /// @brief »ñÈ¡Ë«Ä¿ÔËËã·ûÓÅÏÈ¼¶
-  /// @return ·µ»ØË«Ä¿ÔËËã·ûÓÅÏÈ¼¶
+  /// @brief è·å–åŒç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @return è¿”å›åŒç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
   OperatorPriority GetBinaryOperatorPriority() const {
     return binary_operator_priority_;
   }
-  /// @brief »ñÈ¡µ¥Ä¿ÔËËã·ûÓÅÏÈ¼¶
-  /// @return ·µ»Øµ¥Ä¿ÔËËã·ûÓÅÏÈ¼¶
+  /// @brief è·å–å•ç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @return è¿”å›å•ç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
   OperatorPriority GetUnaryOperatorPriority() const {
     return unary_operator_priority_;
   }
 
  private:
-  /// @brief Ë«Ä¿ÔËËã·ûÓïÒåÏÂµÄ½áºÏĞÔ
+  /// @brief åŒç›®è¿ç®—ç¬¦è¯­ä¹‰ä¸‹çš„ç»“åˆæ€§
   OperatorAssociatityType binary_operator_associatity_type_;
-  /// @brief Ë«Ä¿ÔËËã·ûÓïÒåÏÂµÄÓÅÏÈ¼¶
+  /// @brief åŒç›®è¿ç®—ç¬¦è¯­ä¹‰ä¸‹çš„ä¼˜å…ˆçº§
   OperatorPriority binary_operator_priority_;
-  /// @brief µ¥Ä¿ÔËËã·ûÓïÒåÏÂµÄ½áºÏĞÔ
+  /// @brief å•ç›®è¿ç®—ç¬¦è¯­ä¹‰ä¸‹çš„ç»“åˆæ€§
   OperatorAssociatityType unary_operator_associatity_type_;
-  /// @brief µ¥Ä¿ÔËËã·ûÓïÒåÏÂµÄÓÅÏÈ¼¶
+  /// @brief å•ç›®è¿ç®—ç¬¦è¯­ä¹‰ä¸‹çš„ä¼˜å…ˆçº§
   OperatorPriority unary_operator_priority_;
 };
 
 /// @class NonTerminalProductionNode production_node.h
-/// @brief ±íÊ¾·ÇÖÕ½á²úÉúÊ½
+/// @brief è¡¨ç¤ºéç»ˆç»“äº§ç”Ÿå¼
 class NonTerminalProductionNode : public BaseProductionNode {
  public:
   /// @class ProductionBodyType production_node.h
-  /// @brief ±íÊ¾µ¥¸ö·ÇÖÕ½á²úÉúÊ½Ìå
+  /// @brief è¡¨ç¤ºå•ä¸ªéç»ˆç»“äº§ç”Ÿå¼ä½“
   struct ProductionBodyType {
     template <class BodyContainer>
     ProductionBodyType(BodyContainer&& production_body_,
@@ -386,20 +386,20 @@ class NonTerminalProductionNode : public BaseProductionNode {
       cores_items_in_.resize(production_body.size() + 1);
     }
 
-    /// @brief ²úÉúÊ½Ìå
+    /// @brief äº§ç”Ÿå¼ä½“
     std::vector<ProductionNodeId> production_body;
-    /// @brief Ã¿¸ö²úÉúÊ½Ìå¶ÔÓ¦µÄËùÓĞÏîËù´æÔÚµÄÏî¼¯
+    /// @brief æ¯ä¸ªäº§ç”Ÿå¼ä½“å¯¹åº”çš„æ‰€æœ‰é¡¹æ‰€å­˜åœ¨çš„é¡¹é›†
     /// @note
-    /// ´óĞ¡Îªproduction_body.size() + 1
-    /// ·ÃÎÊÊ±Ê¹ÓÃµÄÏÂ±êÀı£º
-    /// Ê¹ÓÃÏÂ±ê0£º
-    /// IdOrEquivence -> ¡¤ IdOrEquivence "[" Num "]"
-    /// Ê¹ÓÃÏÂ±ê3£º
-    /// IdOrEquivence -> IdOrEquivence "[" Num ¡¤ "]"
-    /// Ê¹ÓÃÏÂ±ê4£º
-    /// IdOrEquivence -> IdOrEquivence "[" Num "]" ¡¤
+    /// å¤§å°ä¸ºproduction_body.size() + 1
+    /// è®¿é—®æ—¶ä½¿ç”¨çš„ä¸‹æ ‡ä¾‹ï¼š
+    /// ä½¿ç”¨ä¸‹æ ‡0ï¼š
+    /// IdOrEquivence -> Â· IdOrEquivence "[" Num "]"
+    /// ä½¿ç”¨ä¸‹æ ‡3ï¼š
+    /// IdOrEquivence -> IdOrEquivence "[" Num Â· "]"
+    /// ä½¿ç”¨ä¸‹æ ‡4ï¼š
+    /// IdOrEquivence -> IdOrEquivence "[" Num "]" Â·
     std::vector<std::list<ProductionItemSetId>> cores_items_in_;
-    /// @brief ¹æÔ¼²úÉúÊ½Ê¹ÓÃµÄ°ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
+    /// @brief è§„çº¦äº§ç”Ÿå¼ä½¿ç”¨çš„åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
     ProcessFunctionClassId class_for_reduct_id;
   };
 
@@ -423,89 +423,89 @@ class NonTerminalProductionNode : public BaseProductionNode {
     return *this;
   }
 
-  /// @brief »ñÈ¡²úÉúÊ½ÌåÄÚµÄ²úÉúÊ½
-  /// @param[in] production_body_id £º´ı»ñÈ¡µÄ²úÉúÊ½ÌåID
-  /// @param[in] next_word_to_shift_index £º´ı»ñÈ¡µÄ×Ó²úÉúÊ½Î»ÖÃ
-  /// @attention ÖÕ½á½Úµãµ÷ÓÃ¸Ãº¯ÊıÊ±production_body_id±ØĞëÎª0
-  /// next_word_to_shift_index²»ÊÇ0Ê±Ôò·µ»ØNextWordToShiftIndex::InvalidId()
+  /// @brief è·å–äº§ç”Ÿå¼ä½“å†…çš„äº§ç”Ÿå¼
+  /// @param[in] production_body_id ï¼šå¾…è·å–çš„äº§ç”Ÿå¼ä½“ID
+  /// @param[in] next_word_to_shift_index ï¼šå¾…è·å–çš„å­äº§ç”Ÿå¼ä½ç½®
+  /// @attention ç»ˆç»“èŠ‚ç‚¹è°ƒç”¨è¯¥å‡½æ•°æ—¶production_body_idå¿…é¡»ä¸º0
+  /// next_word_to_shift_indexä¸æ˜¯0æ—¶åˆ™è¿”å›NextWordToShiftIndex::InvalidId()
   virtual ProductionNodeId GetProductionNodeInBody(
       ProductionBodyId production_body_id,
       NextWordToShiftIndex next_word_to_shift_index) const override;
 
-  /// @brief Ìí¼ÓÒ»¸ö²úÉúÊ½Ìå
-  /// @tparam IdType ´æ´¢²úÉúÊ½ÌåÖĞ¸÷²úÉúÊ½IDµÄÈİÆ÷£¬½öÖ§³Övector
-  /// @param[in] body £º´ıÌí¼ÓµÄ²úÉúÊ½Ìå
+  /// @brief æ·»åŠ ä¸€ä¸ªäº§ç”Ÿå¼ä½“
+  /// @tparam IdType å­˜å‚¨äº§ç”Ÿå¼ä½“ä¸­å„äº§ç”Ÿå¼IDçš„å®¹å™¨ï¼Œä»…æ”¯æŒvector
+  /// @param[in] body ï¼šå¾…æ·»åŠ çš„äº§ç”Ÿå¼ä½“
   /// @param[in] class_for_reduct_id
-  /// £º°ü×°¹æÔ¼¸Ã²úÉúÊ½ÌåµÄº¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
-  /// @return ·µ»Ø¸Ã²úÉúÊ½ÌåÔÚ·ÇÖÕ½á½ÚµãÄÚµÄID
-  /// @note bodyÄÚµÄ¸÷²úÉúÊ½ID°´ÊéĞ´Ë³ĞòÅÅÁĞ
-  /// ¸Ãº¯ÊıÎŞ¼ì²âÖØ¸´¹¦ÄÜ
+  /// ï¼šåŒ…è£…è§„çº¦è¯¥äº§ç”Ÿå¼ä½“çš„å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
+  /// @return è¿”å›è¯¥äº§ç”Ÿå¼ä½“åœ¨éç»ˆç»“èŠ‚ç‚¹å†…çš„ID
+  /// @note bodyå†…çš„å„äº§ç”Ÿå¼IDæŒ‰ä¹¦å†™é¡ºåºæ’åˆ—
+  /// è¯¥å‡½æ•°æ— æ£€æµ‹é‡å¤åŠŸèƒ½
   template <class IdType>
   ProductionBodyId AddBody(IdType&& body,
                            ProcessFunctionClassId class_for_reduct_id);
-  /// @brief »ñÈ¡²úÉúÊ½µÄÒ»¸öÌå
-  /// @param[in] production_body_id £ºÒª»ñÈ¡µÄ²úÉúÊ½ÌåID
-  /// @return ·µ»Ø²úÉúÊ½ÌåµÄconstÒıÓÃ
-  /// @note production_body_id±ØĞë¶ÔÓ¦´æÔÚµÄ²úÉúÊ½Ìå
+  /// @brief è·å–äº§ç”Ÿå¼çš„ä¸€ä¸ªä½“
+  /// @param[in] production_body_id ï¼šè¦è·å–çš„äº§ç”Ÿå¼ä½“ID
+  /// @return è¿”å›äº§ç”Ÿå¼ä½“çš„constå¼•ç”¨
+  /// @note production_body_idå¿…é¡»å¯¹åº”å­˜åœ¨çš„äº§ç”Ÿå¼ä½“
   const ProductionBodyType& GetProductionBody(
       ProductionBodyId production_body_id) const {
     assert(production_body_id < nonterminal_bodys_.size());
     return nonterminal_bodys_[production_body_id];
   }
-  /// @brief ÉèÖÃ¸ø¶¨²úÉúÊ½ÌåID¹æÔ¼Ê¹ÓÃµÄ¶ÔÏóµÄID
-  /// @param[in] body_id £º´ıÉèÖÃ¹æÔ¼ÓÃ¶ÔÏóIDµÄ²úÉúÊ½ÌåID
-  /// @param[in] class_for_reduct_id £º´ıÉèÖÃµÄ¹æÔ¼ÓÃ¶ÔÏóID
+  /// @brief è®¾ç½®ç»™å®šäº§ç”Ÿå¼ä½“IDè§„çº¦ä½¿ç”¨çš„å¯¹è±¡çš„ID
+  /// @param[in] body_id ï¼šå¾…è®¾ç½®è§„çº¦ç”¨å¯¹è±¡IDçš„äº§ç”Ÿå¼ä½“ID
+  /// @param[in] class_for_reduct_id ï¼šå¾…è®¾ç½®çš„è§„çº¦ç”¨å¯¹è±¡ID
   void SetBodyProcessFunctionClassId(
       ProductionBodyId body_id, ProcessFunctionClassId class_for_reduct_id) {
     assert(body_id < nonterminal_bodys_.size());
     nonterminal_bodys_[body_id].class_for_reduct_id = class_for_reduct_id;
   }
-  /// @brief »ñÈ¡²úÉúÊ½Ìå
-  /// @param[in] body_id £º´ı»ñÈ¡µÄ²úÉúÊ½ÌåID
-  /// @return ·µ»Ø»ñÈ¡µ½µÄ²úÉúÊ½ÌåÊı¾İ½á¹¹constÒıÓÃ
-  /// @note body_id±ØĞë¶ÔÓ¦ÓĞĞ§µÄ²úÉúÊ½Ìå
+  /// @brief è·å–äº§ç”Ÿå¼ä½“
+  /// @param[in] body_id ï¼šå¾…è·å–çš„äº§ç”Ÿå¼ä½“ID
+  /// @return è¿”å›è·å–åˆ°çš„äº§ç”Ÿå¼ä½“æ•°æ®ç»“æ„constå¼•ç”¨
+  /// @note body_idå¿…é¡»å¯¹åº”æœ‰æ•ˆçš„äº§ç”Ÿå¼ä½“
   const ProductionBodyType& GetBody(ProductionBodyId body_id) const {
     return nonterminal_bodys_[body_id];
   }
-  /// @brief »ñÈ¡È«²¿²úÉúÊ½Ìå
-  /// @return ·µ»Ø´æ´¢²úÉúÊ½ÌåµÄÈİÆ÷constÒıÓÃ
+  /// @brief è·å–å…¨éƒ¨äº§ç”Ÿå¼ä½“
+  /// @return è¿”å›å­˜å‚¨äº§ç”Ÿå¼ä½“çš„å®¹å™¨constå¼•ç”¨
   const std::vector<ProductionBodyType>& GetAllBody() const {
     return nonterminal_bodys_;
   }
-  /// @brief »ñÈ¡È«²¿ÓĞĞ§µÄ²úÉúÊ½ÌåID
-  /// @return ·µ»Ø´æ´¢È«²¿ÓĞĞ§µÄ²úÉúÊ½ÌåIDµÄvectorÈİÆ÷
+  /// @brief è·å–å…¨éƒ¨æœ‰æ•ˆçš„äº§ç”Ÿå¼ä½“ID
+  /// @return è¿”å›å­˜å‚¨å…¨éƒ¨æœ‰æ•ˆçš„äº§ç”Ÿå¼ä½“IDçš„vectorå®¹å™¨
   std::vector<ProductionBodyId> GetAllBodyIds() const;
-  /// @brief ÉèÖÃ¸Ã²úÉúÊ½²»¿ÉÒÔ¿Õ¹æÔ¼
+  /// @brief è®¾ç½®è¯¥äº§ç”Ÿå¼ä¸å¯ä»¥ç©ºè§„çº¦
   void SetProductionShouldNotEmptyReduct() { could_empty_reduct_ = false; }
-  /// @brief ÉèÖÃ¸Ã²úÉúÊ½¿ÉÒÔ¿Õ¹æÔ¼
+  /// @brief è®¾ç½®è¯¥äº§ç”Ÿå¼å¯ä»¥ç©ºè§„çº¦
   void SetProductionCouldBeEmptyRedut() { could_empty_reduct_ = true; }
-  /// @brief ²éÑ¯¸Ã²úÉúÊ½ÊÇ·ñ¿ÉÒÔ¿Õ¹æÔ¼
-  /// @return ·µ»Ø¸Ã²úÉúÊ½ÊÇ·ñ¿ÉÒÔ¿Õ¹æÔ¼
-  /// @retval true £º¸Ã²úÉúÊ½¿ÉÒÔ¿Õ¹æÔ¼
-  /// @retval false £º¸Ã²úÉúÊ½²»¿ÉÒÔ¿Õ¹æÔ¼
+  /// @brief æŸ¥è¯¢è¯¥äº§ç”Ÿå¼æ˜¯å¦å¯ä»¥ç©ºè§„çº¦
+  /// @return è¿”å›è¯¥äº§ç”Ÿå¼æ˜¯å¦å¯ä»¥ç©ºè§„çº¦
+  /// @retval true ï¼šè¯¥äº§ç”Ÿå¼å¯ä»¥ç©ºè§„çº¦
+  /// @retval false ï¼šè¯¥äº§ç”Ÿå¼ä¸å¯ä»¥ç©ºè§„çº¦
   bool CouldBeEmptyReduct() const { return could_empty_reduct_; }
-  /// @brief Ìí¼Ó²úÉúÊ½ÖĞÄ³ÏîËùÊôµÄÏî¼¯ID
-  /// @param[in] body_id £º´ıÌí¼ÓÏîËùÊôµÄ²úÉúÊ½ÌåID
-  /// @param[in] next_word_to_shift_index £ºÖ¸Ïò¸ÃÏîÏÂÒ»¸öÒÆÈëµÄµ¥´ÊµÄÎ»ÖÃ
-  /// @param[in] production_item_set_id £º¸ÃÏîËùÊôµÄÏî¼¯ID
-  /// @details body_idÓënext_word_to_shift_index¹²Í¬Ö¸¶¨ÒªÌí¼ÓËùÊôÏî¼¯IDµÄÏî
-  /// @note ÎŞÈ¥ÖØ¹¦ÄÜ£¬ÒªÇó²»ÓëÒÑÌí¼Ó¹ıµÄµÄÏî¼¯IDÖØ¸´
+  /// @brief æ·»åŠ äº§ç”Ÿå¼ä¸­æŸé¡¹æ‰€å±çš„é¡¹é›†ID
+  /// @param[in] body_id ï¼šå¾…æ·»åŠ é¡¹æ‰€å±çš„äº§ç”Ÿå¼ä½“ID
+  /// @param[in] next_word_to_shift_index ï¼šæŒ‡å‘è¯¥é¡¹ä¸‹ä¸€ä¸ªç§»å…¥çš„å•è¯çš„ä½ç½®
+  /// @param[in] production_item_set_id ï¼šè¯¥é¡¹æ‰€å±çš„é¡¹é›†ID
+  /// @details body_idä¸next_word_to_shift_indexå…±åŒæŒ‡å®šè¦æ·»åŠ æ‰€å±é¡¹é›†IDçš„é¡¹
+  /// @note æ— å»é‡åŠŸèƒ½ï¼Œè¦æ±‚ä¸ä¸å·²æ·»åŠ è¿‡çš„çš„é¡¹é›†IDé‡å¤
   void AddProductionItemBelongToProductionItemSetId(
       ProductionBodyId body_id, NextWordToShiftIndex next_word_to_shift_index,
       ProductionItemSetId production_item_set_id);
-  /// @brief »ñÈ¡Ö¸¶¨ÏîËùÊôµÄÈ«²¿Ïî¼¯µÄID
-  /// @param[in] body_id £ºÖ¸¶¨ÏîËùÊôµÄ²úÉúÊ½ÌåID
-  /// @param[in] next_word_to_shift_index £ºÖ¸Ïò¸ÃÏîÏÂÒ»¸öÒÆÈëµ¥´ÊµÄÎ»ÖÃ
-  /// @return ·µ»Ø´æ´¢¸ÃÏîËùÊôµÄÈ«²¿Ïî¼¯IDµÄÈİÆ÷
-  /// @note body_idÓënext_word_to_shift_index¹²Í¬Ö¸¶¨Ò»¸öÏî
+  /// @brief è·å–æŒ‡å®šé¡¹æ‰€å±çš„å…¨éƒ¨é¡¹é›†çš„ID
+  /// @param[in] body_id ï¼šæŒ‡å®šé¡¹æ‰€å±çš„äº§ç”Ÿå¼ä½“ID
+  /// @param[in] next_word_to_shift_index ï¼šæŒ‡å‘è¯¥é¡¹ä¸‹ä¸€ä¸ªç§»å…¥å•è¯çš„ä½ç½®
+  /// @return è¿”å›å­˜å‚¨è¯¥é¡¹æ‰€å±çš„å…¨éƒ¨é¡¹é›†IDçš„å®¹å™¨
+  /// @note body_idä¸next_word_to_shift_indexå…±åŒæŒ‡å®šä¸€ä¸ªé¡¹
   const std::list<ProductionItemSetId>&
   GetProductionItemSetIdFromProductionItem(
       ProductionBodyId body_id, NextWordToShiftIndex next_word_to_shift_index) {
     return nonterminal_bodys_[body_id]
         .cores_items_in_[next_word_to_shift_index];
   }
-  /// @brief »ñÈ¡Ö¸¶¨²úÉúÊ½Ìå°ü×°¹æÔ¼ÓÃº¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
-  /// @return ·µ»Ø°ü×°¹æÔ¼ÓÃº¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
+  /// @brief è·å–æŒ‡å®šäº§ç”Ÿå¼ä½“åŒ…è£…è§„çº¦ç”¨å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
+  /// @return è¿”å›åŒ…è£…è§„çº¦ç”¨å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
   ProcessFunctionClassId GetBodyProcessFunctionClassId(
       ProductionBodyId body_id) const {
     assert(body_id < nonterminal_bodys_.size());
@@ -513,14 +513,14 @@ class NonTerminalProductionNode : public BaseProductionNode {
   }
 
  private:
-  /// @brief ´æ´¢²úÉúÊ½Ìå
+  /// @brief å­˜å‚¨äº§ç”Ÿå¼ä½“
   std::vector<ProductionBodyType> nonterminal_bodys_;
-  /// @brief ±êÖ¾¸Ã²úÉúÊ½ÊÇ·ñ¿ÉÄÜÎª¿Õ
+  /// @brief æ ‡å¿—è¯¥äº§ç”Ÿå¼æ˜¯å¦å¯èƒ½ä¸ºç©º
   bool could_empty_reduct_ = false;
 };
 
 /// @class EndNode production_node.h
-/// @brief ±íÊ¾ÎÄ¼şÎ²
+/// @brief è¡¨ç¤ºæ–‡ä»¶å°¾
 class EndNode : public BaseProductionNode {
  public:
   EndNode()
@@ -533,7 +533,7 @@ class EndNode : public BaseProductionNode {
     BaseProductionNode::operator=(std::move(end_node));
     return *this;
   }
-  /// @attention ¸Ãº¯Êı²»Ó¦±»µ÷ÓÃ£¬EndNode²»´æÔÚ¸ÃÓïÒå
+  /// @attention è¯¥å‡½æ•°ä¸åº”è¢«è°ƒç”¨ï¼ŒEndNodeä¸å­˜åœ¨è¯¥è¯­ä¹‰
   virtual ProductionNodeId GetProductionNodeInBody(
       ProductionBodyId production_body_id,
       NextWordToShiftIndex point_index) const override {

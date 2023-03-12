@@ -1,26 +1,26 @@
-/// @file line_and_column.h
-/// @brief ´æ´¢µ±Ç°½âÎöµ½µÄÔ´ÎÄ¼şĞĞÊıºÍÁĞÊı
-/// @note ±íÊ¾ĞĞÊıÓëÁĞÊıµÄ±äÁ¿¶¼ÊÇthread_loaclĞŞÊÎµÄÈ«¾Ö±äÁ¿
+ï»¿/// @file line_and_column.h
+/// @brief å­˜å‚¨å½“å‰è§£æåˆ°çš„æºæ–‡ä»¶è¡Œæ•°å’Œåˆ—æ•°
+/// @note è¡¨ç¤ºè¡Œæ•°ä¸åˆ—æ•°çš„å˜é‡éƒ½æ˜¯thread_loaclä¿®é¥°çš„å…¨å±€å˜é‡
 #ifndef PARSER_LINE_AND_COLUMN_H_
 #define PARSER_LINE_AND_COLUMN_H_
 
 namespace frontend::parser {
 
-/// @brief »ñÈ¡µ±Ç°ĞĞÊı
-/// @return ·µ»Øµ±Ç°ĞĞÊı
-/// @note ´Ó0¿ªÊ¼¼ÆËã
+/// @brief è·å–å½“å‰è¡Œæ•°
+/// @return è¿”å›å½“å‰è¡Œæ•°
+/// @note ä»0å¼€å§‹è®¡ç®—
 extern inline size_t GetLine();
-/// @brief »ñÈ¡µ±Ç°ÁĞÊı
-/// @return ·µ»Øµ±Ç°ĞĞÊı
-/// @note ´Ó0¿ªÊ¼¼ÆËã
+/// @brief è·å–å½“å‰åˆ—æ•°
+/// @return è¿”å›å½“å‰è¡Œæ•°
+/// @note ä»0å¼€å§‹è®¡ç®—
 extern inline size_t GetColumn();
-/// @brief ÉèÖÃµ±Ç°ĞĞÊı
-/// @param[in] line £º´ıÉèÖÃµÄĞĞÊı
-/// @note ´Ó0¿ªÊ¼¼ÆËã
+/// @brief è®¾ç½®å½“å‰è¡Œæ•°
+/// @param[in] line ï¼šå¾…è®¾ç½®çš„è¡Œæ•°
+/// @note ä»0å¼€å§‹è®¡ç®—
 extern inline void SetLine(size_t line);
-/// @brief ÉèÖÃµ±Ç°ÁĞÊı
-/// @param[in] column £º´ıÉèÖÃµÄÁĞÊı
-/// @note ´Ó0¿ªÊ¼¼ÆËã
+/// @brief è®¾ç½®å½“å‰åˆ—æ•°
+/// @param[in] column ï¼šå¾…è®¾ç½®çš„åˆ—æ•°
+/// @note ä»0å¼€å§‹è®¡ç®—
 extern inline void SetColumn(size_t column);
 
 }  // namespace frontend::parser

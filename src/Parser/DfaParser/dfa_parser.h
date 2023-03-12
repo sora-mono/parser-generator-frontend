@@ -1,5 +1,5 @@
-/// @file dfa_parser.h
-/// @brief DFA½âÎöÆ÷
+ï»¿/// @file dfa_parser.h
+/// @brief DFAè§£æå™¨
 #ifndef PARSER_DFAPARSER_DFAPARSER_H_
 #define PARSER_DFAPARSER_DFAPARSER_H_
 
@@ -15,7 +15,7 @@
 namespace frontend::parser::dfa_parser {
 
 /// @class DfaParser dfa_parser.h
-/// @brief DFA½âÎöÆ÷
+/// @brief DFAè§£æå™¨
 class DfaParser {
   using DfaConfigType = frontend::generator::dfa_generator::DfaConfigType;
   using WordAttachedData = frontend::generator::dfa_generator::WordAttachedData;
@@ -32,7 +32,7 @@ class DfaParser {
   DfaParser& operator=(const DfaParser&) = delete;
 
   /// @class WordInfo dfa_parser.h
-  /// @brief µ¥´ÊÊı¾İ
+  /// @brief å•è¯æ•°æ®
   struct WordInfo {
     WordInfo() = default;
     template <class SavedDataType>
@@ -47,84 +47,84 @@ class DfaParser {
       symbol_ = std::move(return_data.symbol_);
       return *this;
     }
-    /// @brief µ¥´ÊµÄ¸½ÊôÊı¾İ£¨Ìí¼Óµ¥´ÊÊ±´æ´¢£©
+    /// @brief å•è¯çš„é™„å±æ•°æ®ï¼ˆæ·»åŠ å•è¯æ—¶å­˜å‚¨ï¼‰
     WordAttachedData word_attached_data_;
-    /// @brief »ñÈ¡µ½µÄµ¥´Ê
+    /// @brief è·å–åˆ°çš„å•è¯
     std::string symbol_;
   };
 
-  /// @brief ÉèÖÃÊäÈëÎÄ¼ş
-  /// @param[in] filename £ºÊäÈëÎÄ¼şÃû
-  /// @return ·µ»Ø´ò¿ªÎÄ¼şÊÇ·ñ³É¹¦
-  /// @retval true ³É¹¦´ò¿ªÎÄ¼ş
-  /// @retval false ´ò¿ªÎÄ¼şÊ§°Ü
-  /// @note ×Ô¶¯¶ÁÈ¡ÊäÈëÎÄ¼şµÄµÚÒ»¸ö×Ö·ûµ½character_now
+  /// @brief è®¾ç½®è¾“å…¥æ–‡ä»¶
+  /// @param[in] filename ï¼šè¾“å…¥æ–‡ä»¶å
+  /// @return è¿”å›æ‰“å¼€æ–‡ä»¶æ˜¯å¦æˆåŠŸ
+  /// @retval true æˆåŠŸæ‰“å¼€æ–‡ä»¶
+  /// @retval false æ‰“å¼€æ–‡ä»¶å¤±è´¥
+  /// @note è‡ªåŠ¨è¯»å–è¾“å…¥æ–‡ä»¶çš„ç¬¬ä¸€ä¸ªå­—ç¬¦åˆ°character_now
   bool SetInputFile(const std::string filename);
-  /// @brief »ñÈ¡ÏÂÒ»¸öµ¥´Ê
-  /// @return ·µ»Ø»ñÈ¡µ½µÄµ¥´ÊÊı¾İ
+  /// @brief è·å–ä¸‹ä¸€ä¸ªå•è¯
+  /// @return è¿”å›è·å–åˆ°çš„å•è¯æ•°æ®
   /// @retval WordInfo(GetEndOfFileSavedData,std::string())
-  /// ´ïµ½ÎÄ¼şÎ²ÇÒÎ´»ñÈ¡µ½µ¥´Ê
+  /// è¾¾åˆ°æ–‡ä»¶å°¾ä¸”æœªè·å–åˆ°å•è¯
   /// @note
-  /// Èç¹û»ñÈ¡µ¥´ÊÊ±´ïµ½ÎÄ¼şÎ²Ôò·µ»Ø»ñÈ¡µ½µÄµ¥´ÊºÍ¸½ÊôÊı¾İ
+  /// å¦‚æœè·å–å•è¯æ—¶è¾¾åˆ°æ–‡ä»¶å°¾åˆ™è¿”å›è·å–åˆ°çš„å•è¯å’Œé™„å±æ•°æ®
   WordInfo GetNextWord();
 
-  /// @brief ÖØÖÃ×´Ì¬
+  /// @brief é‡ç½®çŠ¶æ€
   void Reset() {
     file_ = nullptr;
     SetLine(0);
     SetColumn(0);
   }
-  /// @brief ÉèÖÃ´ïµ½ÎÄ¼şÎ²ÇÒÎ´»ñÈ¡µ½ÈÎºÎµ¥´ÊÊ±·µ»ØµÄµ¥´ÊÊı¾İ
-  /// @param[in] word_attached_data £ºµ¥´ÊÊı¾İ
+  /// @brief è®¾ç½®è¾¾åˆ°æ–‡ä»¶å°¾ä¸”æœªè·å–åˆ°ä»»ä½•å•è¯æ—¶è¿”å›çš„å•è¯æ•°æ®
+  /// @param[in] word_attached_data ï¼šå•è¯æ•°æ®
   void SetEndOfFileSavedData(const WordAttachedData& word_attached_data) {
     file_end_saved_data_ = word_attached_data;
   }
-  /// @brief »ñÈ¡´ïµ½ÎÄ¼şÎ²ÇÒÎ´»ñÈ¡µ½ÈÎºÎµ¥´ÊÊ±·µ»ØµÄµ¥´ÊÊı¾İ
-  /// @return ·µ»Ø´ïµ½ÎÄ¼şÎ²ÇÒÎ´»ñÈ¡µ½ÈÎºÎµ¥´ÊÊ±·µ»ØµÄµ¥´ÊÊı¾İ
+  /// @brief è·å–è¾¾åˆ°æ–‡ä»¶å°¾ä¸”æœªè·å–åˆ°ä»»ä½•å•è¯æ—¶è¿”å›çš„å•è¯æ•°æ®
+  /// @return è¿”å›è¾¾åˆ°æ–‡ä»¶å°¾ä¸”æœªè·å–åˆ°ä»»ä½•å•è¯æ—¶è¿”å›çš„å•è¯æ•°æ®
   const WordAttachedData& GetEndOfFileSavedData() const {
     return file_end_saved_data_;
   }
-  /// @brief ¼ÓÔØÅäÖÃ
-  /// @note ÅäÖÃÎÄ¼şÃûÎªfrontend::common::kDfaConfigFileName
+  /// @brief åŠ è½½é…ç½®
+  /// @note é…ç½®æ–‡ä»¶åä¸ºfrontend::common::kDfaConfigFileName
   void LoadConfig() {
     std::ifstream config_file(frontend::common::kDfaConfigFileName,
                               std::ios_base::binary);
     boost::archive::binary_iarchive iarchive(config_file);
     iarchive >> *this;
   }
-  /// @brief ÉèÖÃµ±Ç°´ı´¦Àí×Ö·û
-  /// @param[in] character_now £ºµ±Ç°´ı´¦Àí×Ö·û
+  /// @brief è®¾ç½®å½“å‰å¾…å¤„ç†å­—ç¬¦
+  /// @param[in] character_now ï¼šå½“å‰å¾…å¤„ç†å­—ç¬¦
   void SetCharacterNow(char character_now) { character_now_ = character_now; }
-  /// @brief »ñÈ¡µ±Ç°´ı´¦Àí×Ö·û
-  /// @return ·µ»Øµ±Ç°´ı´¦Àí×Ö·û
+  /// @brief è·å–å½“å‰å¾…å¤„ç†å­—ç¬¦
+  /// @return è¿”å›å½“å‰å¾…å¤„ç†å­—ç¬¦
   char GetCharacterNow() const { return character_now_; }
 
  private:
-  /// @brief ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ³ÉÔ±
+  /// @brief å…è®¸åºåˆ—åŒ–ç±»è®¿é—®æˆå‘˜
   friend class boost::serialization::access;
 
-  /// @brief boost-serialization¼ÓÔØDFAÅäÖÃµÄº¯Êı
-  /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-  /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-  /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+  /// @brief boost-serializationåŠ è½½DFAé…ç½®çš„å‡½æ•°
+  /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+  /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+  /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
   template <class Archive>
   void load(Archive& ar, const unsigned int version) {
     ar >> dfa_config_;
     ar >> root_transform_array_id_;
     ar >> file_end_saved_data_;
   }
-  /// ½«ĞòÁĞ»¯·ÖÎª±£´æÓë¼ÓÔØ£¬Parser½ö¼ÓÔØÅäÖÃ£¬²»±£´æ
+  /// å°†åºåˆ—åŒ–åˆ†ä¸ºä¿å­˜ä¸åŠ è½½ï¼ŒParserä»…åŠ è½½é…ç½®ï¼Œä¸ä¿å­˜
   BOOST_SERIALIZATION_SPLIT_MEMBER()
 
-  /// @brief ÆğÊ¼DFA·ÖÎö±íID
+  /// @brief èµ·å§‹DFAåˆ†æè¡¨ID
   TransformArrayId root_transform_array_id_;
-  /// @brief DFAÅäÖÃ
+  /// @brief DFAé…ç½®
   DfaConfigType dfa_config_;
-  /// @brief Óöµ½ÎÄ¼şÎ²ÇÒÎ´»ñÈ¡µ½µ¥´ÊÊ±·µ»ØµÄÊı¾İ
+  /// @brief é‡åˆ°æ–‡ä»¶å°¾ä¸”æœªè·å–åˆ°å•è¯æ—¶è¿”å›çš„æ•°æ®
   WordAttachedData file_end_saved_data_;
-  /// @brief µ±Ç°ÊäÈëÎÄ¼ş
+  /// @brief å½“å‰è¾“å…¥æ–‡ä»¶
   FILE* file_ = nullptr;
-  /// @brief µ±Ç°´ı´¦Àí×Ö·û
+  /// @brief å½“å‰å¾…å¤„ç†å­—ç¬¦
   char character_now_;
 };
 

@@ -1,9 +1,9 @@
-/// @file object_manager.h
-/// @brief ¹ÜÀí¶ÔÏó£¬Í¨¹ı¸ø¶¨ID±êÊ¶¶ÔÏó£¬IDÓë¶ÔÏóÊÇÒ»Ò»Ó³ÉäµÄ¹ØÏµ
+ï»¿/// @file object_manager.h
+/// @brief ç®¡ç†å¯¹è±¡ï¼Œé€šè¿‡ç»™å®šIDæ ‡è¯†å¯¹è±¡ï¼ŒIDä¸å¯¹è±¡æ˜¯ä¸€ä¸€æ˜ å°„çš„å…³ç³»
 /// @details
-/// ¸ÃÀàµÄÉè¼Æ³õÖÔÎªÁËÍ¨¹ıÕûĞÍ±êÊ¶¶ÔÏó£¬´Ó¶ø¿ÉÒÔÊ¹ÓÃunorderedÈİÆ÷À´´æ´¢±êÊ¶·ûÌá¸ßĞ§ÂÊ
+/// è¯¥ç±»çš„è®¾è®¡åˆè¡·ä¸ºäº†é€šè¿‡æ•´å‹æ ‡è¯†å¯¹è±¡ï¼Œä»è€Œå¯ä»¥ä½¿ç”¨unorderedå®¹å™¨æ¥å­˜å‚¨æ ‡è¯†ç¬¦æé«˜æ•ˆç‡
 /// @attention
-/// ÎªÁËÖ§³ÖĞòÁĞ»¯¶øÊ¹ÓÃÁËboost::serialization£¬±àÒëÊ±ĞèÒªÓëboost¿âÁ´½Ó
+/// ä¸ºäº†æ”¯æŒåºåˆ—åŒ–è€Œä½¿ç”¨äº†boost::serializationï¼Œç¼–è¯‘æ—¶éœ€è¦ä¸booståº“é“¾æ¥
 #ifndef COMMON_OBJECT_MANAGER_H_
 #define COMMON_OBJECT_MANAGER_H_
 
@@ -21,13 +21,13 @@
 namespace frontend::common {
 
 /// @class ObjectManager object_manager.h
-/// @brief ¹ÜÀí¶ÔÏó£¬¶ÔÏóÓëIDÒ»Ò»¶ÔÓ¦
+/// @brief ç®¡ç†å¯¹è±¡ï¼Œå¯¹è±¡ä¸IDä¸€ä¸€å¯¹åº”
 template <class T>
 class ObjectManager {
  public:
-  /// @brief ÓÃÀ´¶¨ÒåObjectIdÀàĞÍµÄ·Ö·¢±êÇ©
+  /// @brief ç”¨æ¥å®šä¹‰ObjectIdç±»å‹çš„åˆ†å‘æ ‡ç­¾
   enum class WrapperLabel { kObjectId };
-  /// @brief ±êÊ¶¶ÔÏóµÄID£¬Óë¶ÔÏóÒ»Ò»¶ÔÓ¦
+  /// @brief æ ‡è¯†å¯¹è±¡çš„IDï¼Œä¸å¯¹è±¡ä¸€ä¸€å¯¹åº”
   using ObjectId =
       ExplicitIdWrapper<size_t, WrapperLabel, WrapperLabel::kObjectId>;
 
@@ -37,7 +37,7 @@ class ObjectManager {
   ~ObjectManager();
 
   /// @class ObjectManager::Iterator object_manager.h
-  /// @brief ¸ÃÈİÆ÷µÄµü´úÆ÷
+  /// @brief è¯¥å®¹å™¨çš„è¿­ä»£å™¨
   class Iterator {
    public:
     Iterator() : manager_pointer_(nullptr), id_(ObjectId::InvalidId()) {}
@@ -46,77 +46,77 @@ class ObjectManager {
     Iterator(const Iterator& iter)
         : manager_pointer_(iter.manager_pointer_), id_(iter.id_) {}
 
-    /// @brief »ñÈ¡¸Ãµü´úÆ÷µÈĞ§µÄID
-    /// @return ·µ»Ø¸Ãµü´úÆ÷µÈĞ§µÄID
-    /// @note Èç¹û¸Ãµü´úÆ÷Îª³¬Î²Ôò·µ»ØObjectId::InvalidId()
+    /// @brief è·å–è¯¥è¿­ä»£å™¨ç­‰æ•ˆçš„ID
+    /// @return è¿”å›è¯¥è¿­ä»£å™¨ç­‰æ•ˆçš„ID
+    /// @note å¦‚æœè¯¥è¿­ä»£å™¨ä¸ºè¶…å°¾åˆ™è¿”å›ObjectId::InvalidId()
     ObjectId GetId() const { return id_; }
-    /// @brief ÉèÖÃ¸Ãµü´úÆ÷°ó¶¨µ½µÄÈİÆ÷
-    /// @param[in] manager_pointer £º¸Ãµü´úÆ÷°ó¶¨µ½µÄÈİÆ÷
-    /// @attention ²»ÔÊĞíÊäÈënullptr
+    /// @brief è®¾ç½®è¯¥è¿­ä»£å™¨ç»‘å®šåˆ°çš„å®¹å™¨
+    /// @param[in] manager_pointer ï¼šè¯¥è¿­ä»£å™¨ç»‘å®šåˆ°çš„å®¹å™¨
+    /// @attention ä¸å…è®¸è¾“å…¥nullptr
     void SetManagerPointer(ObjectManager<T>* manager_pointer) {
       assert(manager_pointer);
       manager_pointer_ = manager_pointer;
     }
-    /// @brief ÉèÖÃ¸Ãµü´úÆ÷µÈĞ§µÄID
-    /// @param[in] id £ºÒªÉèÖÃµÄID
-    /// @attention ±ØĞëÊ¹ÓÃÓĞĞ§ID£¬²¢ÇÒÒÑ¾­ÉèÖÃ°ó¶¨µ½µÄÈİÆ÷
+    /// @brief è®¾ç½®è¯¥è¿­ä»£å™¨ç­‰æ•ˆçš„ID
+    /// @param[in] id ï¼šè¦è®¾ç½®çš„ID
+    /// @attention å¿…é¡»ä½¿ç”¨æœ‰æ•ˆIDï¼Œå¹¶ä¸”å·²ç»è®¾ç½®ç»‘å®šåˆ°çš„å®¹å™¨
     void SetId(ObjectId id);
 
-    /// @brief ÏòºóÒÆ¶¯µü´úÆ÷Ö±ÖÁÏÂÒ»¸öÓĞĞ§¶ÔÏó»ò³¬Î²£¬Ê¹ÓÃÇ°×º++ÓïÒå
-    /// @return ·µ»ØÒÆ¶¯ºóµÄµü´úÆ÷µÄÒıÓÃ£¨*this£©
-    /// @attention µ÷ÓÃ¸Ãº¯ÊıÇ°±ØĞëÒÑ¾­ÉèÖÃµÈĞ§IDºÍ°ó¶¨µ½µÄÈİÆ÷
-    /// ²»ÔÊĞí¶Ô³¬Î²µ÷ÓÃ¸Ãº¯Êı
+    /// @brief å‘åç§»åŠ¨è¿­ä»£å™¨ç›´è‡³ä¸‹ä¸€ä¸ªæœ‰æ•ˆå¯¹è±¡æˆ–è¶…å°¾ï¼Œä½¿ç”¨å‰ç¼€++è¯­ä¹‰
+    /// @return è¿”å›ç§»åŠ¨åçš„è¿­ä»£å™¨çš„å¼•ç”¨ï¼ˆ*thisï¼‰
+    /// @attention è°ƒç”¨è¯¥å‡½æ•°å‰å¿…é¡»å·²ç»è®¾ç½®ç­‰æ•ˆIDå’Œç»‘å®šåˆ°çš„å®¹å™¨
+    /// ä¸å…è®¸å¯¹è¶…å°¾è°ƒç”¨è¯¥å‡½æ•°
     Iterator& operator++();
-    /// @brief ÏòºóÒÆ¶¯µü´úÆ÷Ö±ÖÁÏÂÒ»¸öÓĞĞ§¶ÔÏó»ò³¬Î²£¬Ê¹ÓÃºó×º++ÓïÒå
-    /// @return ·µ»ØÒÆ¶¯Ç°µÄµü´úÆ÷
-    /// @attention µ÷ÓÃ¸Ãº¯ÊıÇ°±ØĞëÒÑ¾­ÉèÖÃµÈĞ§IDºÍ°ó¶¨µ½µÄÈİÆ÷
-    /// ²»ÔÊĞí¶Ô³¬Î²µ÷ÓÃ¸Ãº¯Êı
+    /// @brief å‘åç§»åŠ¨è¿­ä»£å™¨ç›´è‡³ä¸‹ä¸€ä¸ªæœ‰æ•ˆå¯¹è±¡æˆ–è¶…å°¾ï¼Œä½¿ç”¨åç¼€++è¯­ä¹‰
+    /// @return è¿”å›ç§»åŠ¨å‰çš„è¿­ä»£å™¨
+    /// @attention è°ƒç”¨è¯¥å‡½æ•°å‰å¿…é¡»å·²ç»è®¾ç½®ç­‰æ•ˆIDå’Œç»‘å®šåˆ°çš„å®¹å™¨
+    /// ä¸å…è®¸å¯¹è¶…å°¾è°ƒç”¨è¯¥å‡½æ•°
     Iterator operator++(int);
-    /// @brief ÏòÇ°ÒÆ¶¯µü´úÆ÷Ö±ÖÁÉÏÒ»¸öÓĞĞ§¶ÔÏó£¬Ê¹ÓÃÇ°×º--ÓïÒå
-    /// @return ·µ»ØÒÆ¶¯ºóµÄµü´úÆ÷µÄÒıÓÃ£¨*this£©
-    /// @attention µ÷ÓÃ¸Ãº¯ÊıÇ°±ØĞëÒÑ¾­ÉèÖÃµÈĞ§IDºÍ°ó¶¨µ½µÄÈİÆ÷
-    /// ²»ÔÊĞí¶ÔÖ¸ÏòµÚÒ»¸öÓĞĞ§¶ÔÏóµÄµü´úÆ÷µ÷ÓÃ¸Ãº¯Êı
+    /// @brief å‘å‰ç§»åŠ¨è¿­ä»£å™¨ç›´è‡³ä¸Šä¸€ä¸ªæœ‰æ•ˆå¯¹è±¡ï¼Œä½¿ç”¨å‰ç¼€--è¯­ä¹‰
+    /// @return è¿”å›ç§»åŠ¨åçš„è¿­ä»£å™¨çš„å¼•ç”¨ï¼ˆ*thisï¼‰
+    /// @attention è°ƒç”¨è¯¥å‡½æ•°å‰å¿…é¡»å·²ç»è®¾ç½®ç­‰æ•ˆIDå’Œç»‘å®šåˆ°çš„å®¹å™¨
+    /// ä¸å…è®¸å¯¹æŒ‡å‘ç¬¬ä¸€ä¸ªæœ‰æ•ˆå¯¹è±¡çš„è¿­ä»£å™¨è°ƒç”¨è¯¥å‡½æ•°
     Iterator& operator--();
-    /// @brief ÏòÇ°ÒÆ¶¯µü´úÆ÷Ö±ÖÁÉÏÒ»¸öÓĞĞ§¶ÔÏó£¬Ê¹ÓÃºó×º--ÓïÒå
-    /// @return ·µ»ØÒÆ¶¯Ç°µÄµü´úÆ÷
-    /// @attention µ÷ÓÃ¸Ãº¯ÊıÇ°±ØĞëÒÑ¾­ÉèÖÃµÈĞ§IDºÍ°ó¶¨µ½µÄÈİÆ÷
-    /// ²»ÔÊĞí¶ÔÖ¸ÏòµÚÒ»¸öÓĞĞ§¶ÔÏóµÄµü´úÆ÷µ÷ÓÃ¸Ãº¯Êı
+    /// @brief å‘å‰ç§»åŠ¨è¿­ä»£å™¨ç›´è‡³ä¸Šä¸€ä¸ªæœ‰æ•ˆå¯¹è±¡ï¼Œä½¿ç”¨åç¼€--è¯­ä¹‰
+    /// @return è¿”å›ç§»åŠ¨å‰çš„è¿­ä»£å™¨
+    /// @attention è°ƒç”¨è¯¥å‡½æ•°å‰å¿…é¡»å·²ç»è®¾ç½®ç­‰æ•ˆIDå’Œç»‘å®šåˆ°çš„å®¹å™¨
+    /// ä¸å…è®¸å¯¹æŒ‡å‘ç¬¬ä¸€ä¸ªæœ‰æ•ˆå¯¹è±¡çš„è¿­ä»£å™¨è°ƒç”¨è¯¥å‡½æ•°
     Iterator operator--(int);
-    /// @brief ¶Ôµü´úÆ÷½âÒıÓÃ
-    /// @return ·µ»Øµü´úÆ÷Ö¸ÏòµÄ¶ÔÏóµÄÒıÓÃ
-    /// @attention µ÷ÓÃ¸Ãº¯ÊıÇ°±ØĞëÒÑ¾­ÉèÖÃµÈĞ§IDºÍ°ó¶¨µ½µÄÈİÆ÷
+    /// @brief å¯¹è¿­ä»£å™¨è§£å¼•ç”¨
+    /// @return è¿”å›è¿­ä»£å™¨æŒ‡å‘çš„å¯¹è±¡çš„å¼•ç”¨
+    /// @attention è°ƒç”¨è¯¥å‡½æ•°å‰å¿…é¡»å·²ç»è®¾ç½®ç­‰æ•ˆIDå’Œç»‘å®šåˆ°çš„å®¹å™¨
     T& operator*() const;
-    /// @brief ¶Ôµü´úÆ÷½âÒıÓÃ
-    /// @return ·µ»Øµü´úÆ÷Ö¸ÏòµÄ¶ÔÏóµÄÖ¸Õë
-    /// @attention µ÷ÓÃ¸Ãº¯ÊıÇ°±ØĞëÒÑ¾­ÉèÖÃµÈĞ§IDºÍ°ó¶¨µ½µÄÈİÆ÷
+    /// @brief å¯¹è¿­ä»£å™¨è§£å¼•ç”¨
+    /// @return è¿”å›è¿­ä»£å™¨æŒ‡å‘çš„å¯¹è±¡çš„æŒ‡é’ˆ
+    /// @attention è°ƒç”¨è¯¥å‡½æ•°å‰å¿…é¡»å·²ç»è®¾ç½®ç­‰æ•ˆIDå’Œç»‘å®šåˆ°çš„å®¹å™¨
     T* operator->() const;
-    /// @brief ÅĞ¶ÏÁ½¸öµü´úÆ÷ÊÇ·ñÏàÍ¬£¨ÓëÏàÍ¬ÈİÆ÷°ó¶¨ÇÒÖ¸ÏòÏàÍ¬Î»ÖÃ£©
-    /// @param[in] iter £º´ıÅĞ¶ÏµÄÁíÒ»¸öµü´úÆ÷
-    /// @return Á½¸öµü´úÆ÷ÊÇ·ñÏàÍ¬
-    /// @retval true £ºÁ½¸öµü´úÆ÷ÏàÍ¬
-    /// @retval false £ºÁ½¸öµü´úÆ÷²»Í¬
-    /// @note ÔÊĞí´«Èë*this
+    /// @brief åˆ¤æ–­ä¸¤ä¸ªè¿­ä»£å™¨æ˜¯å¦ç›¸åŒï¼ˆä¸ç›¸åŒå®¹å™¨ç»‘å®šä¸”æŒ‡å‘ç›¸åŒä½ç½®ï¼‰
+    /// @param[in] iter ï¼šå¾…åˆ¤æ–­çš„å¦ä¸€ä¸ªè¿­ä»£å™¨
+    /// @return ä¸¤ä¸ªè¿­ä»£å™¨æ˜¯å¦ç›¸åŒ
+    /// @retval true ï¼šä¸¤ä¸ªè¿­ä»£å™¨ç›¸åŒ
+    /// @retval false ï¼šä¸¤ä¸ªè¿­ä»£å™¨ä¸åŒ
+    /// @note å…è®¸ä¼ å…¥*this
     bool operator==(const Iterator& iter) const {
       return manager_pointer_ == iter.manager_pointer_ && id_ == iter.id_;
     }
-    /// @brief ÅĞ¶ÏÁ½¸öµü´úÆ÷ÊÇ·ñ²»Í¬£¨Óë²»Í¬ÈİÆ÷°ó¶¨»òÖ¸Ïò²»Í¬Î»ÖÃ£©
-    /// @param[in] iter £º´ıÅĞ¶ÏµÄÁíÒ»¸öµü´úÆ÷
-    /// @return Á½¸öµü´úÆ÷ÊÇ·ñ²»Í¬
-    /// @retval true £ºÁ½¸öµü´úÆ÷²»Í¬
-    /// @retval false £ºÁ½¸öµü´úÆ÷ÏàÍ¬
-    /// @note ÔÊĞí´«Èë*this
+    /// @brief åˆ¤æ–­ä¸¤ä¸ªè¿­ä»£å™¨æ˜¯å¦ä¸åŒï¼ˆä¸ä¸åŒå®¹å™¨ç»‘å®šæˆ–æŒ‡å‘ä¸åŒä½ç½®ï¼‰
+    /// @param[in] iter ï¼šå¾…åˆ¤æ–­çš„å¦ä¸€ä¸ªè¿­ä»£å™¨
+    /// @return ä¸¤ä¸ªè¿­ä»£å™¨æ˜¯å¦ä¸åŒ
+    /// @retval true ï¼šä¸¤ä¸ªè¿­ä»£å™¨ä¸åŒ
+    /// @retval false ï¼šä¸¤ä¸ªè¿­ä»£å™¨ç›¸åŒ
+    /// @note å…è®¸ä¼ å…¥*this
     bool operator!=(const Iterator& iter) const {
       return !this->operator==(iter);
     }
 
    private:
-    /// @brief µü´úÆ÷°ó¶¨µ½µÄÈİÆ÷
+    /// @brief è¿­ä»£å™¨ç»‘å®šåˆ°çš„å®¹å™¨
     ObjectManager<T>* manager_pointer_;
-    /// @brief µü´úÆ÷Ö¸ÏòµÄ¶ÔÏóÎ»ÖÃ
+    /// @brief è¿­ä»£å™¨æŒ‡å‘çš„å¯¹è±¡ä½ç½®
     ObjectId id_;
   };
   /// @class ObjectManager::ConstIterator object_manager.h
-  /// @brief ¸ÃÈİÆ÷µÄconstµü´úÆ÷
+  /// @brief è¯¥å®¹å™¨çš„constè¿­ä»£å™¨
   class ConstIterator {
    public:
     ConstIterator() : manager_pointer_(nullptr), id_(ObjectId::InvalidId()) {}
@@ -127,250 +127,250 @@ class ObjectManager {
     ConstIterator(const ConstIterator& iter)
         : manager_pointer_(iter.manager_pointer_), id_(iter.id_) {}
 
-    /// @brief »ñÈ¡¸Ãµü´úÆ÷µÈĞ§µÄID
-    /// @return ·µ»Ø¸Ãµü´úÆ÷µÈĞ§µÄID
-    /// @note Èç¹û¸Ãµü´úÆ÷Îª³¬Î²Ôò·µ»ØObjectId::InvalidId()
+    /// @brief è·å–è¯¥è¿­ä»£å™¨ç­‰æ•ˆçš„ID
+    /// @return è¿”å›è¯¥è¿­ä»£å™¨ç­‰æ•ˆçš„ID
+    /// @note å¦‚æœè¯¥è¿­ä»£å™¨ä¸ºè¶…å°¾åˆ™è¿”å›ObjectId::InvalidId()
     ObjectId GetId() const { return id_; }
-    /// @brief ÉèÖÃ¸Ãµü´úÆ÷°ó¶¨µ½µÄÈİÆ÷
-    /// @param[in] manager_pointer £º¸Ãµü´úÆ÷°ó¶¨µ½µÄÈİÆ÷
-    /// @attention ²»ÔÊĞíÊäÈënullptr
+    /// @brief è®¾ç½®è¯¥è¿­ä»£å™¨ç»‘å®šåˆ°çš„å®¹å™¨
+    /// @param[in] manager_pointer ï¼šè¯¥è¿­ä»£å™¨ç»‘å®šåˆ°çš„å®¹å™¨
+    /// @attention ä¸å…è®¸è¾“å…¥nullptr
     void SetManagerPointer(const ObjectManager<T>* manager_pointer) {
       manager_pointer_ = manager_pointer;
     }
-    /// @brief ÉèÖÃ¸Ãµü´úÆ÷µÈĞ§µÄID
-    /// @param[in] id £ºÒªÉèÖÃµÄID
-    /// @attention ±ØĞëÊ¹ÓÃÓĞĞ§ID£¬²¢ÇÒÒÑ¾­ÉèÖÃ°ó¶¨µ½µÄÈİÆ÷
+    /// @brief è®¾ç½®è¯¥è¿­ä»£å™¨ç­‰æ•ˆçš„ID
+    /// @param[in] id ï¼šè¦è®¾ç½®çš„ID
+    /// @attention å¿…é¡»ä½¿ç”¨æœ‰æ•ˆIDï¼Œå¹¶ä¸”å·²ç»è®¾ç½®ç»‘å®šåˆ°çš„å®¹å™¨
     void SetId(ObjectId id) {
       assert(manager_pointer_ != nullptr &&
              id < manager_pointer_->nodes_.size());
       id_ = id;
     }
 
-    /// @brief ÏòºóÒÆ¶¯µü´úÆ÷Ö±ÖÁÏÂÒ»¸öÓĞĞ§¶ÔÏó»ò³¬Î²£¬Ê¹ÓÃÇ°×º++ÓïÒå
-    /// @return ·µ»ØÒÆ¶¯ºóµÄµü´úÆ÷µÄÒıÓÃ£¨*this£©
-    /// @attention µ÷ÓÃ¸Ãº¯ÊıÇ°±ØĞëÒÑ¾­ÉèÖÃµÈĞ§IDºÍ°ó¶¨µ½µÄÈİÆ÷
-    /// ²»ÔÊĞí¶Ô³¬Î²µ÷ÓÃ¸Ãº¯Êı
+    /// @brief å‘åç§»åŠ¨è¿­ä»£å™¨ç›´è‡³ä¸‹ä¸€ä¸ªæœ‰æ•ˆå¯¹è±¡æˆ–è¶…å°¾ï¼Œä½¿ç”¨å‰ç¼€++è¯­ä¹‰
+    /// @return è¿”å›ç§»åŠ¨åçš„è¿­ä»£å™¨çš„å¼•ç”¨ï¼ˆ*thisï¼‰
+    /// @attention è°ƒç”¨è¯¥å‡½æ•°å‰å¿…é¡»å·²ç»è®¾ç½®ç­‰æ•ˆIDå’Œç»‘å®šåˆ°çš„å®¹å™¨
+    /// ä¸å…è®¸å¯¹è¶…å°¾è°ƒç”¨è¯¥å‡½æ•°
     ConstIterator& operator++();
-    /// @brief ÏòºóÒÆ¶¯µü´úÆ÷Ö±ÖÁÏÂÒ»¸öÓĞĞ§¶ÔÏó»ò³¬Î²£¬Ê¹ÓÃºó×º++ÓïÒå
-    /// @return ·µ»ØÒÆ¶¯Ç°µÄµü´úÆ÷
-    /// @attention µ÷ÓÃ¸Ãº¯ÊıÇ°±ØĞëÒÑ¾­ÉèÖÃµÈĞ§IDºÍ°ó¶¨µ½µÄÈİÆ÷
-    /// ²»ÔÊĞí¶Ô³¬Î²µ÷ÓÃ¸Ãº¯Êı
+    /// @brief å‘åç§»åŠ¨è¿­ä»£å™¨ç›´è‡³ä¸‹ä¸€ä¸ªæœ‰æ•ˆå¯¹è±¡æˆ–è¶…å°¾ï¼Œä½¿ç”¨åç¼€++è¯­ä¹‰
+    /// @return è¿”å›ç§»åŠ¨å‰çš„è¿­ä»£å™¨
+    /// @attention è°ƒç”¨è¯¥å‡½æ•°å‰å¿…é¡»å·²ç»è®¾ç½®ç­‰æ•ˆIDå’Œç»‘å®šåˆ°çš„å®¹å™¨
+    /// ä¸å…è®¸å¯¹è¶…å°¾è°ƒç”¨è¯¥å‡½æ•°
     ConstIterator operator++(int);
-    /// @brief ÏòÇ°ÒÆ¶¯µü´úÆ÷Ö±ÖÁÉÏÒ»¸öÓĞĞ§¶ÔÏó£¬Ê¹ÓÃÇ°×º--ÓïÒå
-    /// @return ·µ»ØÒÆ¶¯ºóµÄµü´úÆ÷µÄÒıÓÃ£¨*this£©
-    /// @attention µ÷ÓÃ¸Ãº¯ÊıÇ°±ØĞëÒÑ¾­ÉèÖÃµÈĞ§IDºÍ°ó¶¨µ½µÄÈİÆ÷
-    /// ²»ÔÊĞí¶ÔÖ¸ÏòµÚÒ»¸öÓĞĞ§¶ÔÏóµÄµü´úÆ÷µ÷ÓÃ¸Ãº¯Êı
+    /// @brief å‘å‰ç§»åŠ¨è¿­ä»£å™¨ç›´è‡³ä¸Šä¸€ä¸ªæœ‰æ•ˆå¯¹è±¡ï¼Œä½¿ç”¨å‰ç¼€--è¯­ä¹‰
+    /// @return è¿”å›ç§»åŠ¨åçš„è¿­ä»£å™¨çš„å¼•ç”¨ï¼ˆ*thisï¼‰
+    /// @attention è°ƒç”¨è¯¥å‡½æ•°å‰å¿…é¡»å·²ç»è®¾ç½®ç­‰æ•ˆIDå’Œç»‘å®šåˆ°çš„å®¹å™¨
+    /// ä¸å…è®¸å¯¹æŒ‡å‘ç¬¬ä¸€ä¸ªæœ‰æ•ˆå¯¹è±¡çš„è¿­ä»£å™¨è°ƒç”¨è¯¥å‡½æ•°
     ConstIterator& operator--();
-    /// @brief ÏòÇ°ÒÆ¶¯µü´úÆ÷Ö±ÖÁÉÏÒ»¸öÓĞĞ§¶ÔÏó£¬Ê¹ÓÃºó×º--ÓïÒå
-    /// @return ·µ»ØÒÆ¶¯Ç°µÄµü´úÆ÷
-    /// @attention µ÷ÓÃ¸Ãº¯ÊıÇ°±ØĞëÒÑ¾­ÉèÖÃµÈĞ§IDºÍ°ó¶¨µ½µÄÈİÆ÷
-    /// ²»ÔÊĞí¶ÔÖ¸ÏòµÚÒ»¸öÓĞĞ§¶ÔÏóµÄµü´úÆ÷µ÷ÓÃ¸Ãº¯Êı
+    /// @brief å‘å‰ç§»åŠ¨è¿­ä»£å™¨ç›´è‡³ä¸Šä¸€ä¸ªæœ‰æ•ˆå¯¹è±¡ï¼Œä½¿ç”¨åç¼€--è¯­ä¹‰
+    /// @return è¿”å›ç§»åŠ¨å‰çš„è¿­ä»£å™¨
+    /// @attention è°ƒç”¨è¯¥å‡½æ•°å‰å¿…é¡»å·²ç»è®¾ç½®ç­‰æ•ˆIDå’Œç»‘å®šåˆ°çš„å®¹å™¨
+    /// ä¸å…è®¸å¯¹æŒ‡å‘ç¬¬ä¸€ä¸ªæœ‰æ•ˆå¯¹è±¡çš„è¿­ä»£å™¨è°ƒç”¨è¯¥å‡½æ•°
     ConstIterator operator--(int);
-    /// @brief ¶Ôµü´úÆ÷½âÒıÓÃ
-    /// @return ·µ»Øµü´úÆ÷Ö¸ÏòµÄ¶ÔÏóµÄconstÒıÓÃ
-    /// @attention µ÷ÓÃ¸Ãº¯ÊıÇ°±ØĞëÒÑ¾­ÉèÖÃµÈĞ§IDºÍ°ó¶¨µ½µÄÈİÆ÷
+    /// @brief å¯¹è¿­ä»£å™¨è§£å¼•ç”¨
+    /// @return è¿”å›è¿­ä»£å™¨æŒ‡å‘çš„å¯¹è±¡çš„constå¼•ç”¨
+    /// @attention è°ƒç”¨è¯¥å‡½æ•°å‰å¿…é¡»å·²ç»è®¾ç½®ç­‰æ•ˆIDå’Œç»‘å®šåˆ°çš„å®¹å™¨
     const T& operator*() const { return manager_pointer_->GetObject(id_); }
-    /// @brief ¶Ôµü´úÆ÷½âÒıÓÃ
-    /// @return ·µ»Øµü´úÆ÷Ö¸ÏòµÄ¶ÔÏóµÄconstÖ¸Õë
-    /// @attention µ÷ÓÃ¸Ãº¯ÊıÇ°±ØĞëÒÑ¾­ÉèÖÃµÈĞ§IDºÍ°ó¶¨µ½µÄÈİÆ÷
+    /// @brief å¯¹è¿­ä»£å™¨è§£å¼•ç”¨
+    /// @return è¿”å›è¿­ä»£å™¨æŒ‡å‘çš„å¯¹è±¡çš„constæŒ‡é’ˆ
+    /// @attention è°ƒç”¨è¯¥å‡½æ•°å‰å¿…é¡»å·²ç»è®¾ç½®ç­‰æ•ˆIDå’Œç»‘å®šåˆ°çš„å®¹å™¨
     const T* operator->() const { return &manager_pointer_->GetObject(id_); }
-    /// @brief ÅĞ¶ÏÁ½¸öµü´úÆ÷ÊÇ·ñÏàÍ¬£¨ÓëÏàÍ¬ÈİÆ÷°ó¶¨ÇÒÖ¸ÏòÏàÍ¬Î»ÖÃ£©
-    /// @param[in] iter £º´ıÅĞ¶ÏµÄÁíÒ»¸öµü´úÆ÷
-    /// @return Á½¸öµü´úÆ÷ÊÇ·ñÏàÍ¬
-    /// @retval true £ºÁ½¸öµü´úÆ÷ÏàÍ¬
-    /// @retval false £ºÁ½¸öµü´úÆ÷²»Í¬
-    /// @note ÔÊĞí´«Èë*this
+    /// @brief åˆ¤æ–­ä¸¤ä¸ªè¿­ä»£å™¨æ˜¯å¦ç›¸åŒï¼ˆä¸ç›¸åŒå®¹å™¨ç»‘å®šä¸”æŒ‡å‘ç›¸åŒä½ç½®ï¼‰
+    /// @param[in] iter ï¼šå¾…åˆ¤æ–­çš„å¦ä¸€ä¸ªè¿­ä»£å™¨
+    /// @return ä¸¤ä¸ªè¿­ä»£å™¨æ˜¯å¦ç›¸åŒ
+    /// @retval true ï¼šä¸¤ä¸ªè¿­ä»£å™¨ç›¸åŒ
+    /// @retval false ï¼šä¸¤ä¸ªè¿­ä»£å™¨ä¸åŒ
+    /// @note å…è®¸ä¼ å…¥*this
     bool operator==(const ConstIterator& iter) const {
       return manager_pointer_ == iter.manager_pointer_ && id_ == iter.id_;
     }
-    /// @brief ÅĞ¶ÏÁ½¸öµü´úÆ÷ÊÇ·ñ²»Í¬£¨Óë²»Í¬ÈİÆ÷°ó¶¨»òÖ¸Ïò²»Í¬Î»ÖÃ£©
-    /// @param[in] iter £º´ıÅĞ¶ÏµÄÁíÒ»¸öµü´úÆ÷
-    /// @return Á½¸öµü´úÆ÷ÊÇ·ñ²»Í¬
-    /// @retval true £ºÁ½¸öµü´úÆ÷²»Í¬
-    /// @retval false £ºÁ½¸öµü´úÆ÷ÏàÍ¬
-    /// @note ÔÊĞí´«Èë*this
+    /// @brief åˆ¤æ–­ä¸¤ä¸ªè¿­ä»£å™¨æ˜¯å¦ä¸åŒï¼ˆä¸ä¸åŒå®¹å™¨ç»‘å®šæˆ–æŒ‡å‘ä¸åŒä½ç½®ï¼‰
+    /// @param[in] iter ï¼šå¾…åˆ¤æ–­çš„å¦ä¸€ä¸ªè¿­ä»£å™¨
+    /// @return ä¸¤ä¸ªè¿­ä»£å™¨æ˜¯å¦ä¸åŒ
+    /// @retval true ï¼šä¸¤ä¸ªè¿­ä»£å™¨ä¸åŒ
+    /// @retval false ï¼šä¸¤ä¸ªè¿­ä»£å™¨ç›¸åŒ
+    /// @note å…è®¸ä¼ å…¥*this
     bool operator!=(const ConstIterator& iter) const {
       return !this->operator==(iter);
     }
 
    private:
-    /// @brief µü´úÆ÷°ó¶¨µ½µÄÈİÆ÷
+    /// @brief è¿­ä»£å™¨ç»‘å®šåˆ°çš„å®¹å™¨
     const ObjectManager<T>* manager_pointer_;
-    /// @brief µü´úÆ÷Ö¸ÏòµÄ¶ÔÏóÎ»ÖÃ
+    /// @brief è¿­ä»£å™¨æŒ‡å‘çš„å¯¹è±¡ä½ç½®
     ObjectId id_;
   };
 
-  /// @brief Ä¬ÈÏÓÃÀ´ºÏ²¢Á½¸ö¶ÔÏóµÄº¯Êı
-  /// @param[in] node_dst £ººÏ²¢µ½µÄ¶ÔÏó£¬¸Ã¶ÔÏóÔÚ³É¹¦ºÏ²¢ºó»á±»±£Áô
-  /// @param[in] node_src £º±»ºÏ²¢µÄ¶ÔÏó£¬¸Ã¶ÔÏóÔÚ³É¹¦ºÏ²¢ºó»á±»É¾³ı
-  /// @return ·µ»ØºÏ²¢ÊÇ·ñ³É¹¦
-  /// @retval true £ººÏ²¢³É¹¦
-  /// @retval false £ººÏ²¢Ê§°Ü
+  /// @brief é»˜è®¤ç”¨æ¥åˆå¹¶ä¸¤ä¸ªå¯¹è±¡çš„å‡½æ•°
+  /// @param[in] node_dst ï¼šåˆå¹¶åˆ°çš„å¯¹è±¡ï¼Œè¯¥å¯¹è±¡åœ¨æˆåŠŸåˆå¹¶åä¼šè¢«ä¿ç•™
+  /// @param[in] node_src ï¼šè¢«åˆå¹¶çš„å¯¹è±¡ï¼Œè¯¥å¯¹è±¡åœ¨æˆåŠŸåˆå¹¶åä¼šè¢«åˆ é™¤
+  /// @return è¿”å›åˆå¹¶æ˜¯å¦æˆåŠŸ
+  /// @retval true ï¼šåˆå¹¶æˆåŠŸ
+  /// @retval false ï¼šåˆå¹¶å¤±è´¥
   static bool DefaultMergeFunction2(T& node_dst, T& node_src) {
     return node_dst.MergeNode(node_src);
   }
-  /// @brief Ä¬ÈÏÓÃÀ´ÔÚ¹ÜÀíÆ÷²ÎÓëÏÂºÏ²¢Á½¸ö¶ÔÏóµÄº¯Êı
-  /// @param[in] node_dst £ººÏ²¢µ½µÄ¶ÔÏó£¬¸Ã¶ÔÏóÔÚ³É¹¦ºÏ²¢ºó»á±»±£Áô
-  /// @param[in] node_src £º±»ºÏ²¢µÄ¶ÔÏó£¬¸Ã¶ÔÏóÔÚ³É¹¦ºÏ²¢ºó»á±»É¾³ı
-  /// @param[in,out] manager £ºÉÏ²ã¹ÜÀíÆ÷£¬¿ØÖÆºÏ²¢¹ı³Ì
-  /// @return ·µ»ØºÏ²¢ÊÇ·ñ³É¹¦
-  /// @retval true £ººÏ²¢³É¹¦
-  /// @retval false £ººÏ²¢Ê§°Ü
+  /// @brief é»˜è®¤ç”¨æ¥åœ¨ç®¡ç†å™¨å‚ä¸ä¸‹åˆå¹¶ä¸¤ä¸ªå¯¹è±¡çš„å‡½æ•°
+  /// @param[in] node_dst ï¼šåˆå¹¶åˆ°çš„å¯¹è±¡ï¼Œè¯¥å¯¹è±¡åœ¨æˆåŠŸåˆå¹¶åä¼šè¢«ä¿ç•™
+  /// @param[in] node_src ï¼šè¢«åˆå¹¶çš„å¯¹è±¡ï¼Œè¯¥å¯¹è±¡åœ¨æˆåŠŸåˆå¹¶åä¼šè¢«åˆ é™¤
+  /// @param[in,out] manager ï¼šä¸Šå±‚ç®¡ç†å™¨ï¼Œæ§åˆ¶åˆå¹¶è¿‡ç¨‹
+  /// @return è¿”å›åˆå¹¶æ˜¯å¦æˆåŠŸ
+  /// @retval true ï¼šåˆå¹¶æˆåŠŸ
+  /// @retval false ï¼šåˆå¹¶å¤±è´¥
   template <class Manager>
   static bool DefaultMergeFunction3(T& node_dst, T& node_src,
                                     Manager& manager) {
     return manager.MergeNodes(node_dst, node_src);
   }
-  /// @brief »ñÈ¡¶ÔÏóµÄconstÒıÓÃ
-  /// @param[in] id £ºÒª»ñÈ¡constÒıÓÃµÄ¶ÔÏóµÄID
-  /// @return ·µ»Ø»ñÈ¡µ½µÄ¶ÔÏóµÄconstÒıÓÃ
-  /// @attention id±ØĞëÖ¸ÏòÓĞĞ§µÄµÄ¶ÔÏó
+  /// @brief è·å–å¯¹è±¡çš„constå¼•ç”¨
+  /// @param[in] id ï¼šè¦è·å–constå¼•ç”¨çš„å¯¹è±¡çš„ID
+  /// @return è¿”å›è·å–åˆ°çš„å¯¹è±¡çš„constå¼•ç”¨
+  /// @attention idå¿…é¡»æŒ‡å‘æœ‰æ•ˆçš„çš„å¯¹è±¡
   const T& GetObject(ObjectId id) const;
-  /// @brief »ñÈ¡¶ÔÏóµÄÒıÓÃ
-  /// @param[in] id £ºÒª»ñÈ¡ÒıÓÃµÄ¶ÔÏóµÄID
-  /// @return ·µ»Ø»ñÈ¡µ½µÄ¶ÔÏóµÄÒıÓÃ
-  /// @attention id±ØĞëÖ¸ÏòÓĞĞ§µÄµÄ¶ÔÏó
+  /// @brief è·å–å¯¹è±¡çš„å¼•ç”¨
+  /// @param[in] id ï¼šè¦è·å–å¼•ç”¨çš„å¯¹è±¡çš„ID
+  /// @return è¿”å›è·å–åˆ°çš„å¯¹è±¡çš„å¼•ç”¨
+  /// @attention idå¿…é¡»æŒ‡å‘æœ‰æ•ˆçš„çš„å¯¹è±¡
   T& GetObject(ObjectId id);
-  /// @brief »ñÈ¡¶ÔÏóµÄconstÒıÓÃ
-  /// @param[in] id £ºÒª»ñÈ¡constÒıÓÃµÄ¶ÔÏóµÄID
-  /// @return ·µ»Ø»ñÈ¡µ½µÄ¶ÔÏóµÄconstÒıÓÃ
-  /// @note ÓëGetObjectµÈĞ§
-  /// @attention id±ØĞëÖ¸ÏòÓĞĞ§µÄµÄ¶ÔÏó
+  /// @brief è·å–å¯¹è±¡çš„constå¼•ç”¨
+  /// @param[in] id ï¼šè¦è·å–constå¼•ç”¨çš„å¯¹è±¡çš„ID
+  /// @return è¿”å›è·å–åˆ°çš„å¯¹è±¡çš„constå¼•ç”¨
+  /// @note ä¸GetObjectç­‰æ•ˆ
+  /// @attention idå¿…é¡»æŒ‡å‘æœ‰æ•ˆçš„çš„å¯¹è±¡
   const T& operator[](ObjectId id) const;
-  /// @brief »ñÈ¡¶ÔÏóµÄÒıÓÃ
-  /// @param[in] id £ºÒª»ñÈ¡ÒıÓÃµÄ¶ÔÏóµÄID
-  /// @return ·µ»Ø»ñÈ¡µ½µÄ¶ÔÏóµÄÒıÓÃ
-  /// @note ÓëGetObjectµÈĞ§
-  /// @attention id±ØĞëÖ¸ÏòÓĞĞ§µÄµÄ¶ÔÏó
+  /// @brief è·å–å¯¹è±¡çš„å¼•ç”¨
+  /// @param[in] id ï¼šè¦è·å–å¼•ç”¨çš„å¯¹è±¡çš„ID
+  /// @return è¿”å›è·å–åˆ°çš„å¯¹è±¡çš„å¼•ç”¨
+  /// @note ä¸GetObjectç­‰æ•ˆ
+  /// @attention idå¿…é¡»æŒ‡å‘æœ‰æ•ˆçš„çš„å¯¹è±¡
   T& operator[](ObjectId id);
 
-  /// @brief ÏµÍ³×ÔĞĞÑ¡Ôñ×î¼ÑÎ»ÖÃ·ÅÖÃ¶ÔÏó
-  /// @param[in,out] args £º¶ÔÏó¹¹Ôìº¯ÊıÊ¹ÓÃµÄ²ÎÊı
-  /// @return ·µ»ØÎ¨Ò»¶ÔÓ¦ÓÚ¶ÔÏóµÄID
+  /// @brief ç³»ç»Ÿè‡ªè¡Œé€‰æ‹©æœ€ä½³ä½ç½®æ”¾ç½®å¯¹è±¡
+  /// @param[in,out] args ï¼šå¯¹è±¡æ„é€ å‡½æ•°ä½¿ç”¨çš„å‚æ•°
+  /// @return è¿”å›å”¯ä¸€å¯¹åº”äºå¯¹è±¡çš„ID
   template <class ObjectType = T, class... Args>
   ObjectId EmplaceObject(Args&&... args);
 
-  /// @brief ½öÉ¾³ı½Úµã¼ÇÂ¼µ«²»ÊÍ·Å½ÚµãÄÚ´æ
-  /// @param[in] id £ºÒªÉ¾³ıµÄ¶ÔÏóµÄID
-  /// @return ·µ»ØÖ¸Ïò¶ÔÏóµÄÖ¸Õë
-  /// @attention Èë²Î±ØĞëÖ¸ÏòÓĞĞ§µÄ¶ÔÏó
+  /// @brief ä»…åˆ é™¤èŠ‚ç‚¹è®°å½•ä½†ä¸é‡Šæ”¾èŠ‚ç‚¹å†…å­˜
+  /// @param[in] id ï¼šè¦åˆ é™¤çš„å¯¹è±¡çš„ID
+  /// @return è¿”å›æŒ‡å‘å¯¹è±¡çš„æŒ‡é’ˆ
+  /// @attention å…¥å‚å¿…é¡»æŒ‡å‘æœ‰æ•ˆçš„å¯¹è±¡
   [[nodiscard]] T* RemoveObjectNoDelete(ObjectId id);
-  /// @brief É¾³ı½Úµã²¢ÊÍ·Å½ÚµãÄÚ´æ£¨Ä¬ÈÏÉ¾³ıÓïÒå£©
-  /// @param[in] id £ºÒªÉ¾³ıµÄ¶ÔÏóµÄID
-  /// @return Ò»¶¨·µ»Øtrue
-  /// @attention Èë²Î±ØĞëÖ¸ÏòÓĞĞ§µÄ¶ÔÏó
+  /// @brief åˆ é™¤èŠ‚ç‚¹å¹¶é‡Šæ”¾èŠ‚ç‚¹å†…å­˜ï¼ˆé»˜è®¤åˆ é™¤è¯­ä¹‰ï¼‰
+  /// @param[in] id ï¼šè¦åˆ é™¤çš„å¯¹è±¡çš„ID
+  /// @return ä¸€å®šè¿”å›true
+  /// @attention å…¥å‚å¿…é¡»æŒ‡å‘æœ‰æ•ˆçš„å¯¹è±¡
   bool RemoveObject(ObjectId id);
 
-  /// @brief ºÏ²¢Á½¸ö¶ÔÏó£¬ºÏ²¢³É¹¦»áÉ¾³ıid_src¶ÔÏó
-  /// @param[in] id_dst £ºÒªºÏ²¢µ½µÄ¶ÔÏó£¨ºÏ²¢ºó±£Áô£©
-  /// @param[in] id_src £ºÓÃÀ´ºÏ²¢µÄ¶ÔÏó£¨³É¹¦ºÏ²¢ºóÉ¾³ı£©
+  /// @brief åˆå¹¶ä¸¤ä¸ªå¯¹è±¡ï¼Œåˆå¹¶æˆåŠŸä¼šåˆ é™¤id_srcå¯¹è±¡
+  /// @param[in] id_dst ï¼šè¦åˆå¹¶åˆ°çš„å¯¹è±¡ï¼ˆåˆå¹¶åä¿ç•™ï¼‰
+  /// @param[in] id_src ï¼šç”¨æ¥åˆå¹¶çš„å¯¹è±¡ï¼ˆæˆåŠŸåˆå¹¶ååˆ é™¤ï¼‰
   /// @param[in] merge_function
-  /// £º¿ØÖÆºÏ²¢¹ı³ÌµÄº¯Êı£¬µÚÒ»¸ö²ÎÊıÎªid_dst¶ÔÓ¦µÄ¶ÔÏó
-  /// µÚ¶ş¸ö²ÎÊıÎªid_src¶ÔÓ¦µÄ¶ÔÏó
-  /// @return ·µ»ØÊÇ·ñºÏ²¢³É¹¦
+  /// ï¼šæ§åˆ¶åˆå¹¶è¿‡ç¨‹çš„å‡½æ•°ï¼Œç¬¬ä¸€ä¸ªå‚æ•°ä¸ºid_dstå¯¹åº”çš„å¯¹è±¡
+  /// ç¬¬äºŒä¸ªå‚æ•°ä¸ºid_srcå¯¹åº”çš„å¯¹è±¡
+  /// @return è¿”å›æ˜¯å¦åˆå¹¶æˆåŠŸ
   /// @retval false
-  /// £ººÏ²¢Í¬Ò»¸ö¶ÔÏó»òid_src¶ÔÓ¦µÄ½Úµã²»ÔÊĞíºÏ²¢»òmerge_function·µ»Øfalse
-  /// @retval true £ººÏ²¢³É¹¦
-  /// @attention ºÏ²¢Ê§°ÜÔò²»»áÉ¾³ıÔ´¶ÔÏó£¬id_dstºÍid_src±ØĞëÖ¸ÏòÒÑ´æÔÚµÄ¶ÔÏó
+  /// ï¼šåˆå¹¶åŒä¸€ä¸ªå¯¹è±¡æˆ–id_srcå¯¹åº”çš„èŠ‚ç‚¹ä¸å…è®¸åˆå¹¶æˆ–merge_functionè¿”å›false
+  /// @retval true ï¼šåˆå¹¶æˆåŠŸ
+  /// @attention åˆå¹¶å¤±è´¥åˆ™ä¸ä¼šåˆ é™¤æºå¯¹è±¡ï¼Œid_dstå’Œid_srcå¿…é¡»æŒ‡å‘å·²å­˜åœ¨çš„å¯¹è±¡
   bool MergeObjects(ObjectId id_dst, ObjectId id_src,
                     const std::function<bool(T&, T&)>& merge_function =
                         DefaultMergeFunction2);
-  /// @brief ºÏ²¢Á½¸ö¶ÔÏó£¬ºÏ²¢³É¹¦»áÉ¾³ıid_src½Úµã
-  /// @param[in] id_dst £ºÒªºÏ²¢µ½µÄ¶ÔÏó£¨ºÏ²¢ºó±£Áô£©
-  /// @param[in] id_src £ºÓÃÀ´ºÏ²¢µÄ¶ÔÏó£¨³É¹¦ºÏ²¢ºóÉ¾³ı£©
-  /// @param[in] manager £ººÏ²¢¹ÜÀíÆ÷£¬ÔÚµ÷ÓÃmerge_functionÊ±Ê¹ÓÃ
+  /// @brief åˆå¹¶ä¸¤ä¸ªå¯¹è±¡ï¼Œåˆå¹¶æˆåŠŸä¼šåˆ é™¤id_srcèŠ‚ç‚¹
+  /// @param[in] id_dst ï¼šè¦åˆå¹¶åˆ°çš„å¯¹è±¡ï¼ˆåˆå¹¶åä¿ç•™ï¼‰
+  /// @param[in] id_src ï¼šç”¨æ¥åˆå¹¶çš„å¯¹è±¡ï¼ˆæˆåŠŸåˆå¹¶ååˆ é™¤ï¼‰
+  /// @param[in] manager ï¼šåˆå¹¶ç®¡ç†å™¨ï¼Œåœ¨è°ƒç”¨merge_functionæ—¶ä½¿ç”¨
   /// @param[in] merge_function
-  /// £º¿ØÖÆºÏ²¢¹ı³ÌµÄº¯Êı£¬µÚÒ»¸ö²ÎÊıÎªid_dst¶ÔÓ¦µÄ¶ÔÏó
-  /// µÚ¶ş¸ö²ÎÊıÎªid_src¶ÔÓ¦µÄ¶ÔÏó£¬µÚÈı¸ö²ÎÊıÎª´«ÈëµÄmanager
-  /// @return ·µ»ØÊÇ·ñºÏ²¢³É¹¦
+  /// ï¼šæ§åˆ¶åˆå¹¶è¿‡ç¨‹çš„å‡½æ•°ï¼Œç¬¬ä¸€ä¸ªå‚æ•°ä¸ºid_dstå¯¹åº”çš„å¯¹è±¡
+  /// ç¬¬äºŒä¸ªå‚æ•°ä¸ºid_srcå¯¹åº”çš„å¯¹è±¡ï¼Œç¬¬ä¸‰ä¸ªå‚æ•°ä¸ºä¼ å…¥çš„manager
+  /// @return è¿”å›æ˜¯å¦åˆå¹¶æˆåŠŸ
   /// @retval false
-  /// £ººÏ²¢Í¬Ò»¸ö¶ÔÏó»òid_src¶ÔÓ¦µÄ½Úµã²»ÔÊĞíºÏ²¢»òmerge_function·µ»Øfalse
-  /// @retval true £ººÏ²¢³É¹¦
-  /// @attention ºÏ²¢Ê§°ÜÔò²»»áÉ¾³ıÔ´¶ÔÏó£¬id_dstºÍid_src±ØĞëÖ¸ÏòÒÑ´æÔÚµÄ¶ÔÏó
+  /// ï¼šåˆå¹¶åŒä¸€ä¸ªå¯¹è±¡æˆ–id_srcå¯¹åº”çš„èŠ‚ç‚¹ä¸å…è®¸åˆå¹¶æˆ–merge_functionè¿”å›false
+  /// @retval true ï¼šåˆå¹¶æˆåŠŸ
+  /// @attention åˆå¹¶å¤±è´¥åˆ™ä¸ä¼šåˆ é™¤æºå¯¹è±¡ï¼Œid_dstå’Œid_srcå¿…é¡»æŒ‡å‘å·²å­˜åœ¨çš„å¯¹è±¡
   template <class Manager>
   bool MergeObjectsWithManager(ObjectId id_dst, ObjectId id_src,
                                Manager& manager,
                                const std::function<bool(T&, T&, Manager&)>&
                                    merge_function = DefaultMergeFunction3);
-  /// @brief ²éÑ¯ID¶ÔÓ¦µÄ½ÚµãÊÇ·ñ¿ÉºÏ²¢
-  /// @param[in] id £º´ı²éÑ¯µÄ½ÚµãID
-  /// @return ¸ø¶¨½ÚµãÊÇ·ñ¿ÉºÏ²¢
-  /// @retval true £º¿ÉÒÔºÏ²¢
-  /// @retval false £º²»¿ÉÒÔºÏ²¢
-  /// @attention ´«ÈëµÄ²ÎÊı±ØĞëÖ¸ÏòÒÑ´æÔÚµÄ¶ÔÏó
+  /// @brief æŸ¥è¯¢IDå¯¹åº”çš„èŠ‚ç‚¹æ˜¯å¦å¯åˆå¹¶
+  /// @param[in] id ï¼šå¾…æŸ¥è¯¢çš„èŠ‚ç‚¹ID
+  /// @return ç»™å®šèŠ‚ç‚¹æ˜¯å¦å¯åˆå¹¶
+  /// @retval true ï¼šå¯ä»¥åˆå¹¶
+  /// @retval false ï¼šä¸å¯ä»¥åˆå¹¶
+  /// @attention ä¼ å…¥çš„å‚æ•°å¿…é¡»æŒ‡å‘å·²å­˜åœ¨çš„å¯¹è±¡
   bool CanBeSourceInMerge(ObjectId id) const {
     assert(id < nodes_can_be_source_in_merge.size() && nodes_[id] != nullptr);
     return nodes_can_be_source_in_merge[id];
   }
-  /// @brief ÉèÖÃ¸ø¶¨¶ÔÏóÔÚºÏ²¢Ê±¿ÉÒÔ×÷ÎªÔ´¶ÔÏó£¨ºÏ²¢³É¹¦ÔòÔ´¶ÔÏó±»ÊÍ·Å£©
-  /// @param[in] id £º´ıÉèÖÃµÄ¶ÔÏóID
-  /// @return Ò»¶¨·µ»Øtrue
-  /// @attention ´«ÈëµÄ²ÎÊı±ØĞëÖ¸ÏòÒÑ´æÔÚµÄ¶ÔÏó
+  /// @brief è®¾ç½®ç»™å®šå¯¹è±¡åœ¨åˆå¹¶æ—¶å¯ä»¥ä½œä¸ºæºå¯¹è±¡ï¼ˆåˆå¹¶æˆåŠŸåˆ™æºå¯¹è±¡è¢«é‡Šæ”¾ï¼‰
+  /// @param[in] id ï¼šå¾…è®¾ç½®çš„å¯¹è±¡ID
+  /// @return ä¸€å®šè¿”å›true
+  /// @attention ä¼ å…¥çš„å‚æ•°å¿…é¡»æŒ‡å‘å·²å­˜åœ¨çš„å¯¹è±¡
   bool SetObjectCanBeSourceInMerge(ObjectId id);
-  /// ÉèÖÃ¸ø¶¨¶ÔÏóÔÚºÏ²¢Ê±²»ÄÜ×÷ÎªÔ´¶ÔÏó£¨ºÏ²¢³É¹¦ÔòÔ´¶ÔÏó±»ÊÍ·Å£©
-  /// @param[in] id £º´ıÉèÖÃµÄ¶ÔÏóID
-  /// @return Ò»¶¨·µ»Øtrue
-  /// @attention ´«ÈëµÄ²ÎÊı±ØĞëÖ¸ÏòÒÑ´æÔÚµÄ¶ÔÏó
+  /// è®¾ç½®ç»™å®šå¯¹è±¡åœ¨åˆå¹¶æ—¶ä¸èƒ½ä½œä¸ºæºå¯¹è±¡ï¼ˆåˆå¹¶æˆåŠŸåˆ™æºå¯¹è±¡è¢«é‡Šæ”¾ï¼‰
+  /// @param[in] id ï¼šå¾…è®¾ç½®çš„å¯¹è±¡ID
+  /// @return ä¸€å®šè¿”å›true
+  /// @attention ä¼ å…¥çš„å‚æ•°å¿…é¡»æŒ‡å‘å·²å­˜åœ¨çš„å¯¹è±¡
   bool SetObjectCanNotBeSourceInMerge(ObjectId id);
-  /// @brief ÉèÖÃËùÓĞ¶ÔÏóÔÚºÏ²¢Ê±¾ù¿ÉÒÔ×÷ÎªÔ´¶ÔÏó£¨ºÏ²¢³É¹¦ÔòÔ´¶ÔÏó±»ÊÍ·Å£©
+  /// @brief è®¾ç½®æ‰€æœ‰å¯¹è±¡åœ¨åˆå¹¶æ—¶å‡å¯ä»¥ä½œä¸ºæºå¯¹è±¡ï¼ˆåˆå¹¶æˆåŠŸåˆ™æºå¯¹è±¡è¢«é‡Šæ”¾ï¼‰
   void SetAllObjectsCanBeSourceInMerge();
-  /// @brief ÉèÖÃËùÓĞ¶ÔÏóÔÚºÏ²¢Ê±¾ù²»¿ÉÒÔ×÷ÎªÔ´¶ÔÏó£¨ºÏ²¢³É¹¦ÔòÔ´¶ÔÏó±»ÊÍ·Å£©
+  /// @brief è®¾ç½®æ‰€æœ‰å¯¹è±¡åœ¨åˆå¹¶æ—¶å‡ä¸å¯ä»¥ä½œä¸ºæºå¯¹è±¡ï¼ˆåˆå¹¶æˆåŠŸåˆ™æºå¯¹è±¡è¢«é‡Šæ”¾ï¼‰
   void SetAllObjectsCanNotBeSourceInMerge();
 
-  /// @brief ÅĞ¶ÏÁ½¸öIDÊÇ·ñÖ¸ÏòÍ¬Ò»¶ÔÏó
-  /// @param[in] id1 £ºÒªÅĞ¶ÏµÄÒ»¸öID
-  /// @param[in] id2 £ºÒªÅĞ¶ÏµÄÁíÒ»¸öID
-  /// @return ·µ»ØÁ½¸öIDÊÇ·ñÖ¸ÏòÏàÍ¬¶ÔÏó
-  /// @retval true £ºÁ½¸öIDÖ¸ÏòÏàÍ¬¶ÔÏó
-  /// @retval false £ºÁ½¸öIDÖ¸Ïò²»Í¬¶ÔÏó
-  /// @note ÔÊĞíÊäÈëÏàÍ¬ID
+  /// @brief åˆ¤æ–­ä¸¤ä¸ªIDæ˜¯å¦æŒ‡å‘åŒä¸€å¯¹è±¡
+  /// @param[in] id1 ï¼šè¦åˆ¤æ–­çš„ä¸€ä¸ªID
+  /// @param[in] id2 ï¼šè¦åˆ¤æ–­çš„å¦ä¸€ä¸ªID
+  /// @return è¿”å›ä¸¤ä¸ªIDæ˜¯å¦æŒ‡å‘ç›¸åŒå¯¹è±¡
+  /// @retval true ï¼šä¸¤ä¸ªIDæŒ‡å‘ç›¸åŒå¯¹è±¡
+  /// @retval false ï¼šä¸¤ä¸ªIDæŒ‡å‘ä¸åŒå¯¹è±¡
+  /// @note å…è®¸è¾“å…¥ç›¸åŒID
   bool IsSame(ObjectId id1, ObjectId id2) const { return id1 == id2; }
 
-  /// @brief ½»»»Á½¸öÈİÆ÷µÄÄÚÈİ
-  /// @param[in,out] manager_other £ºÒª½»»»µÄÁíÒ»¸öÈİÆ÷
-  /// @note ÔÊĞí´«Èëthis£¬µ«»áÖ´ĞĞÍêÕûµÄ½»»»Á÷³Ì
-  /// @attention ²»ÔÊĞí´«Èë¿ÕÖ¸Õë
+  /// @brief äº¤æ¢ä¸¤ä¸ªå®¹å™¨çš„å†…å®¹
+  /// @param[in,out] manager_other ï¼šè¦äº¤æ¢çš„å¦ä¸€ä¸ªå®¹å™¨
+  /// @note å…è®¸ä¼ å…¥thisï¼Œä½†ä¼šæ‰§è¡Œå®Œæ•´çš„äº¤æ¢æµç¨‹
+  /// @attention ä¸å…è®¸ä¼ å…¥ç©ºæŒ‡é’ˆ
   void Swap(ObjectManager* manager_other);
 
-  /// @brief »ñÈ¡ÈİÆ÷ÄÜ´æ´¢µÄ¶ÔÏó¸öÊı
-  /// @return ·µ»ØÈİÆ÷ÄÜ´æ´¢µÄ¶ÔÏó¸öÊı
+  /// @brief è·å–å®¹å™¨èƒ½å­˜å‚¨çš„å¯¹è±¡ä¸ªæ•°
+  /// @return è¿”å›å®¹å™¨èƒ½å­˜å‚¨çš„å¯¹è±¡ä¸ªæ•°
   size_t Capacity() const { return nodes_.size(); }
-  /// @brief »ñÈ¡ÈİÆ÷Êµ¼Ê´æ´¢µÄÓĞĞ§¶ÔÏóÊıÁ¿
-  /// @return ·µ»ØÈİÆ÷ÖĞÊµ¼Ê´æ´¢µÄÓĞĞ§¶ÔÏó¸öÊı
+  /// @brief è·å–å®¹å™¨å®é™…å­˜å‚¨çš„æœ‰æ•ˆå¯¹è±¡æ•°é‡
+  /// @return è¿”å›å®¹å™¨ä¸­å®é™…å­˜å‚¨çš„æœ‰æ•ˆå¯¹è±¡ä¸ªæ•°
   size_t Size() const;
 
-  /// @brief ³õÊ¼»¯£¬Èç¹ûÈİÆ÷ÖĞ´æÔÚ½ÚµãÔòÈ«²¿ÊÍ·Å
+  /// @brief åˆå§‹åŒ–ï¼Œå¦‚æœå®¹å™¨ä¸­å­˜åœ¨èŠ‚ç‚¹åˆ™å…¨éƒ¨é‡Šæ”¾
   void ObjectManagerInit();
-  /// @brief Çå³ıËùÓĞ½Úµã¼ÇÂ¼µ«²»ÊÍ·Å
+  /// @brief æ¸…é™¤æ‰€æœ‰èŠ‚ç‚¹è®°å½•ä½†ä¸é‡Šæ”¾
   void ClearNoRelease();
-  /// @brief µ÷ÓÃ³ÉÔ±±äÁ¿µÄshrink_to_fitÀ´½ÚÊ¡¿Õ¼ä
+  /// @brief è°ƒç”¨æˆå‘˜å˜é‡çš„shrink_to_fitæ¥èŠ‚çœç©ºé—´
   void ShrinkToFit();
 
-  /// @brief »ñÈ¡Ö¸Ïò³¬Î²µÄµü´úÆ÷
-  /// @return ·µ»ØÖ¸Ïò³¬Î²µÄµü´úÆ÷
+  /// @brief è·å–æŒ‡å‘è¶…å°¾çš„è¿­ä»£å™¨
+  /// @return è¿”å›æŒ‡å‘è¶…å°¾çš„è¿­ä»£å™¨
   Iterator End() { return Iterator(this, ObjectId(nodes_.size())); }
-  /// @brief »ñÈ¡Ö¸ÏòµÚÒ»¸öÓĞĞ§½ÚµãµÄµü´úÆ÷
-  /// @return ·µ»ØÖ¸ÏòµÚÒ»¸öÓĞĞ§½ÚµãµÄµü´úÆ÷
-  /// @attention Èç¹û²»´æÔÚÓĞĞ§½ÚµãÔò·µ»ØEnd()
+  /// @brief è·å–æŒ‡å‘ç¬¬ä¸€ä¸ªæœ‰æ•ˆèŠ‚ç‚¹çš„è¿­ä»£å™¨
+  /// @return è¿”å›æŒ‡å‘ç¬¬ä¸€ä¸ªæœ‰æ•ˆèŠ‚ç‚¹çš„è¿­ä»£å™¨
+  /// @attention å¦‚æœä¸å­˜åœ¨æœ‰æ•ˆèŠ‚ç‚¹åˆ™è¿”å›End()
   Iterator Begin();
-  /// @brief »ñÈ¡Ö¸Ïò³¬Î²µÄconstµü´úÆ÷
-  /// @return ·µ»ØÖ¸Ïò³¬Î²µÄconstµü´úÆ÷
+  /// @brief è·å–æŒ‡å‘è¶…å°¾çš„constè¿­ä»£å™¨
+  /// @return è¿”å›æŒ‡å‘è¶…å°¾çš„constè¿­ä»£å™¨
   ConstIterator ConstEnd() const {
     return ConstIterator(this, ObjectId(nodes_.size()));
   }
-  /// @brief »ñÈ¡Ö¸ÏòµÚÒ»¸öÓĞĞ§½ÚµãµÄconstµü´úÆ÷
-  /// @return ·µ»ØÖ¸ÏòµÚÒ»¸öÓĞĞ§½ÚµãµÄconstµü´úÆ÷
-  /// @attention Èç¹û²»´æÔÚÓĞĞ§½ÚµãÔò·µ»ØConstEnd()
+  /// @brief è·å–æŒ‡å‘ç¬¬ä¸€ä¸ªæœ‰æ•ˆèŠ‚ç‚¹çš„constè¿­ä»£å™¨
+  /// @return è¿”å›æŒ‡å‘ç¬¬ä¸€ä¸ªæœ‰æ•ˆèŠ‚ç‚¹çš„constè¿­ä»£å™¨
+  /// @attention å¦‚æœä¸å­˜åœ¨æœ‰æ•ˆèŠ‚ç‚¹åˆ™è¿”å›ConstEnd()
   ConstIterator ConstBegin() const;
 
  private:
-  /// @brief ÉùÃ÷ÓÑÔªÒÔÔÊĞíboost-serialization¿â·ÃÎÊÄÚ²¿³ÉÔ±
+  /// @brief å£°æ˜å‹å…ƒä»¥å…è®¸boost-serializationåº“è®¿é—®å†…éƒ¨æˆå‘˜
   friend class boost::serialization::access;
 
-  /// @brief ĞòÁĞ»¯ÈİÆ÷
-  /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-  /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-  /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+  /// @brief åºåˆ—åŒ–å®¹å™¨
+  /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+  /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+  /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
   template <class Archive>
   void serialize(Archive& ar, const unsigned int version) {
     ar& nodes_;
@@ -378,34 +378,34 @@ class ObjectManager {
     ar& nodes_can_be_source_in_merge;
   }
 
-  /// @brief ÔÚÖ¸¶¨Î»ÖÃ·ÅÖÃ¶ÔÏó
-  /// @tparam ObjectType £º·ÅÖÃµÄ¶ÔÏóÀàĞÍ£¬Ä¬ÈÏÊ¹ÓÃÈİÆ÷ÉùÃ÷Ê±Ö¸¶¨µÄ¶ÔÏóÀàĞÍ
-  /// ÔÊĞíÊ¹ÓÃ¸ÃÀàĞÍµÄÅÉÉúÀàÀàĞÍ
-  /// @param[in] id £ºÒª·ÅÖÃ¶ÔÏóµÄÎ»ÖÃ£¬¿ÉÒÔÎª´óÓÚµÈÓÚnodes_.size()µÄÖµ
-  /// @param[in] args £º¶ÔÏóµÄ¹¹Ôìº¯Êı²ÎÊı
-  /// @return ·µ»Øid
+  /// @brief åœ¨æŒ‡å®šä½ç½®æ”¾ç½®å¯¹è±¡
+  /// @tparam ObjectType ï¼šæ”¾ç½®çš„å¯¹è±¡ç±»å‹ï¼Œé»˜è®¤ä½¿ç”¨å®¹å™¨å£°æ˜æ—¶æŒ‡å®šçš„å¯¹è±¡ç±»å‹
+  /// å…è®¸ä½¿ç”¨è¯¥ç±»å‹çš„æ´¾ç”Ÿç±»ç±»å‹
+  /// @param[in] id ï¼šè¦æ”¾ç½®å¯¹è±¡çš„ä½ç½®ï¼Œå¯ä»¥ä¸ºå¤§äºç­‰äºnodes_.size()çš„å€¼
+  /// @param[in] args ï¼šå¯¹è±¡çš„æ„é€ å‡½æ•°å‚æ•°
+  /// @return è¿”å›id
   template <class ObjectType = T, class... Args>
   ObjectId EmplaceObjectIndex(ObjectId id, Args&&... args);
-  /// @brief ÔÚÖ¸¶¨Î»ÖÃ·ÅÖÃÖ¸Õë
-  /// @param[in] id £º·ÅÖÃ¶ÔÏóµÄÎ»ÖÃ
-  /// @param[in] pointer £º¶ÔÏóµÄÖ¸Õë
-  /// @return ·µ»Øid
-  /// @attention ²»ÔÊĞí´«Èë¿ÕÖ¸Õë
+  /// @brief åœ¨æŒ‡å®šä½ç½®æ”¾ç½®æŒ‡é’ˆ
+  /// @param[in] id ï¼šæ”¾ç½®å¯¹è±¡çš„ä½ç½®
+  /// @param[in] pointer ï¼šå¯¹è±¡çš„æŒ‡é’ˆ
+  /// @return è¿”å›id
+  /// @attention ä¸å…è®¸ä¼ å…¥ç©ºæŒ‡é’ˆ
   ObjectId EmplacePointerIndex(ObjectId id, T* pointer);
 
-  /// @brief »ñÈ¡µ±Ç°×î¼Ñ¿ÉÓÃID
-  /// @return ·µ»Øµ±Ç°×î¼Ñ¿ÉÓÃID
-  /// @note ÓÅÏÈÑ¡Ôñremoved_ids_ÖĞµÄID£¬Èç¹û²»´æÔÚÔò·µ»Ønodes_.size()
+  /// @brief è·å–å½“å‰æœ€ä½³å¯ç”¨ID
+  /// @return è¿”å›å½“å‰æœ€ä½³å¯ç”¨ID
+  /// @note ä¼˜å…ˆé€‰æ‹©removed_ids_ä¸­çš„IDï¼Œå¦‚æœä¸å­˜åœ¨åˆ™è¿”å›nodes_.size()
   ObjectId GetBestEmptyIndex();
-  /// @brief Ìí¼ÓÒÑÒÆ³ıµÄID
-  /// @param[in] id £ºÒÑÒÆ³ıµÄ¶ÔÏó¶ÔÓ¦µÄID
+  /// @brief æ·»åŠ å·²ç§»é™¤çš„ID
+  /// @param[in] id ï¼šå·²ç§»é™¤çš„å¯¹è±¡å¯¹åº”çš„ID
   void AddRemovedIndex(ObjectId id) { removed_ids_.push_back(id); }
 
-  /// @brief ´æ·ÅÖ¸Ïò½ÚµãµÄÖ¸Õë£¬½Úµã²»´æÔÚÔòÖÃÎªnullptr
+  /// @brief å­˜æ”¾æŒ‡å‘èŠ‚ç‚¹çš„æŒ‡é’ˆï¼ŒèŠ‚ç‚¹ä¸å­˜åœ¨åˆ™ç½®ä¸ºnullptr
   std::vector<T*> nodes_;
-  /// @brief ´æ·ÅËùÓĞ±»É¾³ı½Úµã¶ÔÓ¦µÄID£¨¿ÉÄÜ´óÓÚnodes_.size()£©
+  /// @brief å­˜æ”¾æ‰€æœ‰è¢«åˆ é™¤èŠ‚ç‚¹å¯¹åº”çš„IDï¼ˆå¯èƒ½å¤§äºnodes_.size()ï¼‰
   std::vector<ObjectId> removed_ids_;
-  /// @brief ´æ´¢½ÚµãÔÚºÏ²¢Ê±ÊÇ·ñÔÊĞí×÷ÎªÔ´½Úµã
+  /// @brief å­˜å‚¨èŠ‚ç‚¹åœ¨åˆå¹¶æ—¶æ˜¯å¦å…è®¸ä½œä¸ºæºèŠ‚ç‚¹
   std::vector<bool> nodes_can_be_source_in_merge;
 };
 
@@ -443,7 +443,7 @@ inline T* ObjectManager<T>::RemoveObjectNoDelete(ObjectId id) {
   AddRemovedIndex(id);
   nodes_can_be_source_in_merge[id] = false;
   while (nodes_.size() > 0 && nodes_.back() == nullptr) {
-    nodes_.pop_back();  /// ÇåÀíÄ©Î²ÎŞĞ§ID
+    nodes_.pop_back();  /// æ¸…ç†æœ«å°¾æ— æ•ˆID
     nodes_can_be_source_in_merge.pop_back();
   }
   return temp_pointer;
@@ -482,7 +482,7 @@ inline ObjectManager<T>::ObjectId ObjectManager<T>::EmplacePointerIndex(
       removed_ids_.push_back(ObjectId(i));
     }
   }
-  /// ²»¿ÉÒÔ¸²¸ÇÒÑÓĞ·Ç¿ÕÇÒ²»Í¬µÄÖ¸Õë
+  /// ä¸å¯ä»¥è¦†ç›–å·²æœ‰éç©ºä¸”ä¸åŒçš„æŒ‡é’ˆ
   assert(!(nodes_[id] != nullptr && nodes_[id] != pointer));
   nodes_[id] = pointer;
   return id;
@@ -529,18 +529,18 @@ template <class T>
 inline bool ObjectManager<T>::MergeObjects(
     ObjectId id_dst, ObjectId id_src,
     const std::function<bool(T&, T&)>& merge_function) {
-  // ¼ì²éÊÇ·ñºÏ²¢Í¬Ò»¸ö½Úµã
+  // æ£€æŸ¥æ˜¯å¦åˆå¹¶åŒä¸€ä¸ªèŠ‚ç‚¹
   if (id_dst == id_src) [[unlikely]] {
     return false;
   }
   T& object_dst = GetObject(id_dst);
   T& object_src = GetObject(id_src);
   if (!CanBeSourceInMerge(id_src)) {
-    /// ¸ø¶¨Ô´½Úµã²»ÔÊĞí×÷ÎªºÏ²¢Ê±µÄÔ´½Úµã
+    /// ç»™å®šæºèŠ‚ç‚¹ä¸å…è®¸ä½œä¸ºåˆå¹¶æ—¶çš„æºèŠ‚ç‚¹
     return false;
   }
   if (!merge_function(object_dst, object_src)) {
-    /// ºÏ²¢Ê§°Ü
+    /// åˆå¹¶å¤±è´¥
     return false;
   }
   RemoveObject(id_src);
@@ -556,11 +556,11 @@ bool ObjectManager<T>::MergeObjectsWithManager(
   T& object_dst = GetObject(id_dst);
   T& object_src = GetObject(id_src);
   if (!CanBeSourceInMerge(id_src)) {
-    /// ¸ø¶¨Ô´½Úµã²»ÔÊĞí×÷ÎªºÏ²¢Ê±µÄÔ´½Úµã
+    /// ç»™å®šæºèŠ‚ç‚¹ä¸å…è®¸ä½œä¸ºåˆå¹¶æ—¶çš„æºèŠ‚ç‚¹
     return false;
   }
   if (!merge_function(object_dst, object_src, manager)) {
-    /// ºÏ²¢Ê§°Ü
+    /// åˆå¹¶å¤±è´¥
     return false;
   }
   RemoveObject(id_src);
@@ -607,7 +607,7 @@ template <class T>
 inline ObjectManager<T>::ObjectId ObjectManager<T>::GetBestEmptyIndex() {
   ObjectId id = ObjectId::InvalidId();
   if (removed_ids_.size() != 0) {
-    while (!id.IsValid() && removed_ids_.size() != 0)  /// ²éÕÒÓĞĞ§ID
+    while (!id.IsValid() && removed_ids_.size() != 0)  /// æŸ¥æ‰¾æœ‰æ•ˆID
     {
       if (removed_ids_.back() < nodes_.size()) {
         id = removed_ids_.back();
@@ -615,7 +615,7 @@ inline ObjectManager<T>::ObjectId ObjectManager<T>::GetBestEmptyIndex() {
       removed_ids_.pop_back();
     }
   }
-  if (!id.IsValid())  /// ÎŞÓĞĞ§ÒÑÉ¾³ıID
+  if (!id.IsValid())  /// æ— æœ‰æ•ˆå·²åˆ é™¤ID
   {
     id = ObjectId(nodes_.size());
   }

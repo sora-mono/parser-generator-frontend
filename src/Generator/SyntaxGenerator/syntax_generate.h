@@ -257,11 +257,17 @@ using namespace frontend::generator::syntax_generator::type_register;
         std::vector<std::any>&& word_data) const override {                   \
       static_assert(CountTypeSize<__VA_ARGS__>() ==                           \
                         FunctionTraits<decltype(reduct_function)>::arg_size,  \
-                    "Arguments number required by reduct function doesn't match subproduction number");  \
+                    "Arguments number required by reduct function doesn't "   \
+                    "match subproduction number");                            \
       static_assert(                                                          \
           FunctionCallableWithArgs<decltype(reduct_function), __VA_ARGS__>,   \
-          "Argument types required by reduct function can't be converted from one or more subproduction reduct result type");  \
+          "Argument types required by reduct function can't be converted "    \
+          "from one or more subproduction reduct result type");               \
       return CallReductFunction<__VA_ARGS__>::DoCall(std::move(word_data));   \
+    }                                                                         \
+                                                                              \
+    virtual std::string GetReductFunctionName() const override {              \
+      return #reduct_function;                                                \
     }                                                                         \
                                                                               \
    private:                                                                   \

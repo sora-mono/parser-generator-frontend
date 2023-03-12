@@ -1,5 +1,5 @@
-/// @file common.h
-/// @brief ´æ´¢¹«¿ªµÄ¶¨ÒåºÍÀàĞÍ
+ï»¿/// @file common.h
+/// @brief å­˜å‚¨å…¬å¼€çš„å®šä¹‰å’Œç±»å‹
 
 #ifndef COMMON_COMMON_H_
 #define COMMON_COMMON_H_
@@ -7,14 +7,14 @@
 #include <climits>
 
 namespace frontend::common {
-/// @brief Óï·¨·ÖÎö»úÅäÖÃÎÄ¼şÃû
+/// @brief è¯­æ³•åˆ†ææœºé…ç½®æ–‡ä»¶å
 constexpr const char* kSyntaxConfigFileName = "syntax_config.conf";
-/// @brief ´Ê·¨·ÖÎö»úÅäÖÃÎÄ¼şÃû
+/// @brief è¯æ³•åˆ†ææœºé…ç½®æ–‡ä»¶å
 constexpr const char* kDfaConfigFileName = "dfa_config.conf";
-/// @brief char¿ÉÄÜÈ¡ÖµµÄÊıÄ¿
+/// @brief charå¯èƒ½å–å€¼çš„æ•°ç›®
 constexpr size_t kCharNum = CHAR_MAX - CHAR_MIN + 1;
 
-/// @brief ÔËËã·û½áºÏÀàĞÍ£º×ó½áºÏ£¬ÓÒ½áºÏ
+/// @brief è¿ç®—ç¬¦ç»“åˆç±»å‹ï¼šå·¦ç»“åˆï¼Œå³ç»“åˆ
 enum class OperatorAssociatityType { kLeftToRight, kRightToLeft };
 
 }  // namespace frontend::common

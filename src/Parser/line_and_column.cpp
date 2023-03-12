@@ -1,11 +1,11 @@
-#include "line_and_column.h"
+ï»¿#include "line_and_column.h"
 
 namespace frontend::parser {
-/// @brief Ïß³ÌÈ«¾Ö±äÁ¿£¬´æ´¢µ±Ç°½âÎöµ½µÄĞĞÊı
-/// @note ´Ó0¿ªÊ¼¼ÆÊı
+/// @brief çº¿ç¨‹å…¨å±€å˜é‡ï¼Œå­˜å‚¨å½“å‰è§£æåˆ°çš„è¡Œæ•°
+/// @note ä»0å¼€å§‹è®¡æ•°
 static thread_local size_t line_ = 0;
-/// @brief Ïß³ÌÈ«¾Ö±äÁ¿£¬´æ´¢µ±Ç°½âÎöµ½µÄÁĞÊı
-/// @note ´Ó0¿ªÊ¼¼ÆÊı
+/// @brief çº¿ç¨‹å…¨å±€å˜é‡ï¼Œå­˜å‚¨å½“å‰è§£æåˆ°çš„åˆ—æ•°
+/// @note ä»0å¼€å§‹è®¡æ•°
 static thread_local size_t column_ = 0;
 
 size_t GetLine() { return line_; }

@@ -1,4 +1,4 @@
-#include "dfa_generator.h"
+ï»¿#include "dfa_generator.h"
 
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/queue.hpp>
@@ -59,15 +59,15 @@ bool DfaGenerator::DfaConstruct() {
       auto [transformed_intermediate_node_id, inserted] =
           SetGoto(set_handler_now, static_cast<char>(i));
       if (!transformed_intermediate_node_id.IsValid()) {
-        // ¸Ã×Ö·ûÏÂ²»¿É×ªÒÆ
+        // è¯¥å­—ç¬¦ä¸‹ä¸å¯è½¬ç§»
         continue;
       }
-      // ÉèÖÃ×ªÒÆÌõ¼ş
+      // è®¾ç½®è½¬ç§»æ¡ä»¶
       GetIntermediateNode(intermediate_node_handler_now)
           .forward_nodes[static_cast<char>(i)] =
           transformed_intermediate_node_id;
       if (inserted) {
-        // ĞÂ¼¯ºÏ¶ÔÓ¦µÄÖĞ¼ä½ÚµãÒÔÇ°²»´æÔÚ£¬²åÈë¶ÓÁĞµÈ´ı´¦Àí
+        // æ–°é›†åˆå¯¹åº”çš„ä¸­é—´èŠ‚ç‚¹ä»¥å‰ä¸å­˜åœ¨ï¼Œæ’å…¥é˜Ÿåˆ—ç­‰å¾…å¤„ç†
         q.push(transformed_intermediate_node_id);
       }
     }
@@ -77,7 +77,7 @@ bool DfaGenerator::DfaConstruct() {
 }
 
 bool DfaGenerator::DfaMinimize() {
-  transform_array_size_ = 0;  // ÇåÁã×îÖÕÓĞĞ§½ÚµãÊı
+  transform_array_size_ = 0;  // æ¸…é›¶æœ€ç»ˆæœ‰æ•ˆèŠ‚ç‚¹æ•°
   std::list<IntermediateNodeId> nodes;
   for (auto iter = node_manager_intermediate_node_.Begin();
        iter != node_manager_intermediate_node_.End(); ++iter) {
@@ -86,24 +86,24 @@ bool DfaGenerator::DfaMinimize() {
   IntermediateNodeClassify(std::move(nodes));
   dfa_config_.resize(transform_array_size_);
   for (auto& p : dfa_config_) {
-    // Ìî³äÕû¸ö×ªÒÆ±íÎªÎŞ·¨×ªÒÆ×´Ì¬
+    // å¡«å……æ•´ä¸ªè½¬ç§»è¡¨ä¸ºæ— æ³•è½¬ç§»çŠ¶æ€
     p.first.fill(TransformArrayId::InvalidId());
   }
-  // ±ê¼Ç×ªÒÆ±íÌõÄ¿ÊÇ·ñÍê³É¹¹½¨
+  // æ ‡è®°è½¬ç§»è¡¨æ¡ç›®æ˜¯å¦å®Œæˆæ„å»º
   std::vector<bool> logged_index(transform_array_size_, false);
   for (auto& p : intermediate_node_to_final_node_) {
     TransformArrayId index = p.second;
     IntermediateDfaNode& intermediate_node = GetIntermediateNode(p.first);
     if (logged_index[index] == false) {
-      // ¸Ã×´Ì¬×ªÒÆ±íÌõÄ¿Î´ÅäÖÃ
+      // è¯¥çŠ¶æ€è½¬ç§»è¡¨æ¡ç›®æœªé…ç½®
       dfa_config_[index].second = intermediate_node.word_attached_data;
       for (int i = CHAR_MIN; i <= CHAR_MAX; i++) {
-        // Ñ°ÕÒÓĞĞ§½Úµã²¢ÉèÖÃÓï·¨·ÖÎö±íÖĞ¶ÔÓ¦Ïî
-        // ´Ó×îĞ¡µÄchar¿ªÊ¼
+        // å¯»æ‰¾æœ‰æ•ˆèŠ‚ç‚¹å¹¶è®¾ç½®è¯­æ³•åˆ†æè¡¨ä¸­å¯¹åº”é¡¹
+        // ä»æœ€å°çš„charå¼€å§‹
         IntermediateNodeId next_node_id =
             intermediate_node.forward_nodes[static_cast<char>(i)];
         if (next_node_id.IsValid()) [[unlikely]] {
-          // ¸ÃÌõ¼şÏÂ¿ÉÒÔ×ªÒÆ£¬²éÑ¯×ªÒÆµ½µÄÖĞ¼ä½Úµã¶ÔÓ¦×ªÒÆ±íÌõÄ¿ID
+          // è¯¥æ¡ä»¶ä¸‹å¯ä»¥è½¬ç§»ï¼ŒæŸ¥è¯¢è½¬ç§»åˆ°çš„ä¸­é—´èŠ‚ç‚¹å¯¹åº”è½¬ç§»è¡¨æ¡ç›®ID
           auto iter = intermediate_node_to_final_node_.find(next_node_id);
           assert(iter != intermediate_node_to_final_node_.end());
           dfa_config_[index].first[static_cast<char>(i)] = iter->second;
@@ -113,7 +113,7 @@ bool DfaGenerator::DfaMinimize() {
     }
   }
 #ifdef _DEBUG
-  // ¼ì²éÃ¿¸ö×ªÒÆ±íÌõÄ¿¶¼±»ÌîĞ´¹ı
+  // æ£€æŸ¥æ¯ä¸ªè½¬ç§»è¡¨æ¡ç›®éƒ½è¢«å¡«å†™è¿‡
   for (bool logged : logged_index) {
     assert(logged);
   }
@@ -138,7 +138,7 @@ std::pair<DfaGenerator::IntermediateNodeId, bool> DfaGenerator::SetGoto(
       continue;
     }
     set.merge(std::move(set_temp));
-    // ²»´æÔÚÎ²½Úµã±ê¼Ç»òĞÂµÄ±ê¼ÇÓÅÏÈ¼¶´óÓÚÔ­À´µÄ±ê¼ÇÔòĞŞ¸Ä
+    // ä¸å­˜åœ¨å°¾èŠ‚ç‚¹æ ‡è®°æˆ–æ–°çš„æ ‡è®°ä¼˜å…ˆçº§å¤§äºåŸæ¥çš„æ ‡è®°åˆ™ä¿®æ”¹
     if (tail_data_temp != NfaGenerator::kNotTailNodeTag) [[unlikely]] {
       if (tail_data == NfaGenerator::kNotTailNodeTag ||
           tail_data_temp.second > tail_data.second) {
@@ -168,8 +168,8 @@ inline bool DfaGenerator::SetIntermediateNodeTransform(
 
 void DfaGenerator::IntermediateNodeClassify(
     std::list<IntermediateNodeId>&& node_ids, char c_transform) {
-  // ´æ´¢²»Í¬·Ö×é£¬¼üÖµÎªµ±Ç°×ªÒÆÌõ¼şÏÂ×ªÒÆµ½µÄ½Úµã¾ä±ú
-  // ÎŞ·¨×ªÒÆµÄ½Úµã¼üÖµÇ°°ë²¿·ÖÊ¹ÓÃIntermediateNodeId::InvalidId()
+  // å­˜å‚¨ä¸åŒåˆ†ç»„ï¼Œé”®å€¼ä¸ºå½“å‰è½¬ç§»æ¡ä»¶ä¸‹è½¬ç§»åˆ°çš„èŠ‚ç‚¹å¥æŸ„
+  // æ— æ³•è½¬ç§»çš„èŠ‚ç‚¹é”®å€¼å‰åŠéƒ¨åˆ†ä½¿ç”¨IntermediateNodeId::InvalidId()
   std::unordered_map<std::pair<IntermediateNodeId, WordAttachedData>,
                      std::list<IntermediateNodeId>,
                      PairOfIntermediateNodeIdAndWordAttachedDataHasher>
@@ -181,25 +181,25 @@ void DfaGenerator::IntermediateNodeClassify(
         .push_back(handler);
   }
   if (c_transform == CHAR_MAX) [[unlikely]] {
-    // ×îºóÒ»¸ö×ªÒÆÌõ¼şÒÑ¾­ÅĞ¶Ï£¬Ó¦ÌîĞ´ÖĞ¼ä½Úµãµ½×ªÒÆ±íÌõÄ¿µÄÓ³Éä±í
+    // æœ€åä¸€ä¸ªè½¬ç§»æ¡ä»¶å·²ç»åˆ¤æ–­ï¼Œåº”å¡«å†™ä¸­é—´èŠ‚ç‚¹åˆ°è½¬ç§»è¡¨æ¡ç›®çš„æ˜ å°„è¡¨
     for (auto& group : transform_node_ids) {
       for (auto& intermediate_node_id : group.second) {
-        // µ±Ç°¾ßÓĞµÄ×ªÒÆ±íÌõÄ¿ÊıÎªĞÂ½¨ÌõÄ¿µÄÏÂ±ê
+        // å½“å‰å…·æœ‰çš„è½¬ç§»è¡¨æ¡ç›®æ•°ä¸ºæ–°å»ºæ¡ç›®çš„ä¸‹æ ‡
         intermediate_node_to_final_node_.emplace(intermediate_node_id,
                                                  transform_array_size_);
       }
       ++transform_array_size_;
     }
   } else {
-    // Î´´ïµ½×îºóÌõ¼ş£¨CHAR_MAX£©£¬Ó¦¼ÌĞø¶ÔÊıÄ¿´óÓÚ1µÄ×é·ÖÀà
-    // ĞŞ¸Ä×ªÒÆÌõ¼ş
+    // æœªè¾¾åˆ°æœ€åæ¡ä»¶ï¼ˆCHAR_MAXï¼‰ï¼Œåº”ç»§ç»­å¯¹æ•°ç›®å¤§äº1çš„ç»„åˆ†ç±»
+    // ä¿®æ”¹è½¬ç§»æ¡ä»¶
     ++c_transform;
     for (auto& group : transform_node_ids) {
       if (group.second.size() > 1) {
-        // ×éÄÚ³ÉÔ±´óÓÚ1¸ö£¬ĞèÒª¼ÌĞø·ÖÀà
+        // ç»„å†…æˆå‘˜å¤§äº1ä¸ªï¼Œéœ€è¦ç»§ç»­åˆ†ç±»
         IntermediateNodeClassify(std::move(group.second), c_transform);
       } else {
-        // ×éÄÚÖ»ÓĞÒ»¸ö³ÉÔ±£¬Ö±½ÓÌîĞ´ÖĞ¼ä½Úµãµ½×ªÒÆ±íÌõÄ¿µÄÓ³Éä±í
+        // ç»„å†…åªæœ‰ä¸€ä¸ªæˆå‘˜ï¼Œç›´æ¥å¡«å†™ä¸­é—´èŠ‚ç‚¹åˆ°è½¬ç§»è¡¨æ¡ç›®çš„æ˜ å°„è¡¨
         intermediate_node_to_final_node_.emplace(group.second.front(),
                                                  transform_array_size_);
         ++transform_array_size_;
@@ -214,7 +214,7 @@ void DfaGenerator::SaveConfig(
       config_file_output_path + frontend::common::kDfaConfigFileName,
       std::ios_base::binary | std::ios_base::out);
   assert(ofile.is_open());
-  // oarchiveÒªÔÚconfig_fileÎö¹¹Ç°Îö¹¹£¬·ñÔòÎÄ¼ş²»ÍêÕûÔÚ·´ĞòÁĞ»¯Ê±»áÅ×Òì³£
+  // oarchiveè¦åœ¨config_fileææ„å‰ææ„ï¼Œå¦åˆ™æ–‡ä»¶ä¸å®Œæ•´åœ¨ååºåˆ—åŒ–æ—¶ä¼šæŠ›å¼‚å¸¸
   {
     boost::archive::binary_oarchive oarchive(ofile);
     oarchive << *this;

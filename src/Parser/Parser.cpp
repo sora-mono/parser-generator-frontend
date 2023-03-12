@@ -5,6 +5,7 @@
 #include "SyntaxParser/syntax_parser.h"
 
 int main() {
+  system("CHCP 65001");
   frontend::parser::syntax_parser::SyntaxParser syntax_parser;
   syntax_parser.Parse("test.cpp");
 }

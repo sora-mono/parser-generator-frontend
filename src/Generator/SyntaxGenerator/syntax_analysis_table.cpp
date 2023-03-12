@@ -1,4 +1,4 @@
-#include "syntax_analysis_table.h"
+ï»¿#include "syntax_analysis_table.h"
 
 namespace frontend::generator::syntax_generator {
 
@@ -14,31 +14,31 @@ SyntaxAnalysisTableEntry& SyntaxAnalysisTableEntry::operator=(
 void SyntaxAnalysisTableEntry::ResetEntryId(
     const std::unordered_map<SyntaxAnalysisTableEntryId,
                              SyntaxAnalysisTableEntryId>& old_id_to_new_id) {
-  // ´¦ÀíÖÕ½á½ÚµãµÄ¶¯×÷
+  // å¤„ç†ç»ˆç»“èŠ‚ç‚¹çš„åŠ¨ä½œ
   for (auto& action_and_attached_data : GetAllActionAndAttachedData()) {
     switch (action_and_attached_data.second->GetActionType()) {
       case ActionType::kShift:
       case ActionType::kShiftReduct: {
-        // »ñÈ¡Ô­ÌõÄ¿IDµÄÒıÓÃ
+        // è·å–åŸæ¡ç›®IDçš„å¼•ç”¨
         ShiftAttachedData& shift_attached_data =
             action_and_attached_data.second->GetShiftAttachedData();
         auto iter = old_id_to_new_id.find(
             shift_attached_data.GetNextSyntaxAnalysisTableEntryId());
         if (iter != old_id_to_new_id.end()) [[unlikely]] {
-          // ¸üĞÂÎªĞÂµÄÌõÄ¿ID
+          // æ›´æ–°ä¸ºæ–°çš„æ¡ç›®ID
           shift_attached_data.SetNextSyntaxAnalysisTableEntryId(iter->second);
         }
       } break;
       case ActionType::kReduct:
       case ActionType::kAccept:
-        // ÎŞĞè×öÈÎºÎ¸ü¸Ä
+        // æ— éœ€åšä»»ä½•æ›´æ”¹
         break;
       default:
         assert(false);
         break;
     }
   }
-  // ´¦Àí·ÇÖÕ½á½ÚµãµÄ×ªÒÆ
+  // å¤„ç†éç»ˆç»“èŠ‚ç‚¹çš„è½¬ç§»
   for (auto& target : GetAllNonTerminalNodeTransformTarget()) {
     SyntaxAnalysisTableEntryId old_entry_id = target.second;
     auto iter = old_id_to_new_id.find(old_entry_id);
@@ -93,14 +93,14 @@ const SyntaxAnalysisTableEntry::ShiftAttachedData&
 SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface::GetShiftAttachedData()
     const {
   assert(false);
-  // ·ÀÖ¹¾¯¸æ
+  // é˜²æ­¢è­¦å‘Š
   return reinterpret_cast<const ShiftAttachedData&>(*this);
 }
 
 const SyntaxAnalysisTableEntry::ReductAttachedData& SyntaxAnalysisTableEntry::
     ActionAndAttachedDataInterface::GetReductAttachedData() const {
   assert(false);
-  // ·ÀÖ¹¾¯¸æ
+  // é˜²æ­¢è­¦å‘Š
   return reinterpret_cast<const ReductAttachedData&>(*this);
 }
 
@@ -108,7 +108,7 @@ const SyntaxAnalysisTableEntry::ShiftReductAttachedData&
 SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface::
     GetShiftReductAttachedData() const {
   assert(false);
-  // ·ÀÖ¹¾¯¸æ
+  // é˜²æ­¢è­¦å‘Š
   return reinterpret_cast<const ShiftReductAttachedData&>(*this);
 }
 bool SyntaxAnalysisTableEntry::ShiftReductAttachedData::IsSameOrPart(
@@ -127,7 +127,7 @@ bool SyntaxAnalysisTableEntry::ShiftReductAttachedData::IsSameOrPart(
       break;
     default:
       assert(false);
-      // ·ÀÖ¹¾¯¸æ
+      // é˜²æ­¢è­¦å‘Š
       return false;
       break;
   }

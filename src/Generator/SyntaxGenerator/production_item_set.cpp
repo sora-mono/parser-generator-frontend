@@ -1,4 +1,4 @@
-#include "production_item_set.h"
+ï»¿#include "production_item_set.h"
 
 namespace frontend::generator::syntax_generator {
 
@@ -35,7 +35,7 @@ bool ProductionItemSet::IsMainItem(const ProductionItem& item) {
 void ProductionItemSet::SetMainItem(
     ProductionItemAndForwardNodesContainer::const_iterator& item_iter) {
 #ifdef _DEBUG
-  // ²»ÔÊĞíÖØ¸´ÉèÖÃÒÑÓĞµÄºËĞÄÏîÎªºËĞÄÏî
+  // ä¸å…è®¸é‡å¤è®¾ç½®å·²æœ‰çš„æ ¸å¿ƒé¡¹ä¸ºæ ¸å¿ƒé¡¹
   for (const auto& main_item_already_in : GetMainItemIters()) {
     assert(item_iter->first != main_item_already_in->first);
   }

@@ -1,7 +1,7 @@
-#ifndef CONFIG_PRODUCTIONCONFIG_USER_DEFINED_FUNCTIONS_H_
+ï»¿#ifndef CONFIG_PRODUCTIONCONFIG_USER_DEFINED_FUNCTIONS_H_
 #define CONFIG_PRODUCTIONCONFIG_USER_DEFINED_FUNCTIONS_H_
 
-/// ÔÚÕâÀï²åÈëÓÃ»§¶¨ÒåµÄÍ·ÎÄ¼ş
+/// åœ¨è¿™é‡Œæ’å…¥ç”¨æˆ·å®šä¹‰çš„å¤´æ–‡ä»¶
 //#include "CParserFrontend/reduct_functions.h"
 #include "Brainfuck/reduct_functions.h"
 

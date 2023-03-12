@@ -1,5 +1,5 @@
-/// @file export_types.h
-/// @brief ´æ´¢ÏòÍâ±©Â¶µÄÒ»Ğ©Êı¾İÀàĞÍ
+ï»¿/// @file export_types.h
+/// @brief å­˜å‚¨å‘å¤–æš´éœ²çš„ä¸€äº›æ•°æ®ç±»å‹
 #ifndef COMMON_ENUM_AND_TYPES_H_
 #define COMMON_ENUM_AND_TYPES_H_
 
@@ -15,35 +15,35 @@
 #include "Common/unordered_struct_manager.h"
 
 namespace frontend::generator::syntax_generator {
-/// @brief ID°ü×°Æ÷ÓÃÀ´Çø±ğ²»Í¬IDµÄÃ¶¾Ù
+/// @brief IDåŒ…è£…å™¨ç”¨æ¥åŒºåˆ«ä¸åŒIDçš„æšä¸¾
 enum class WrapperLabel {
   kPriorityLevel,
   kNextWordToShiftIndex,
   kSyntaxAnalysisTableEntryId,
   kProductionBodyId,
 };
-/// @brief ÔËËã·û½áºÏĞÔ
+/// @brief è¿ç®—ç¬¦ç»“åˆæ€§
 using OperatorAssociatityType = frontend::common::OperatorAssociatityType;
-/// @brief ²úÉúÊ½½ÚµãÀàĞÍ
+/// @brief äº§ç”Ÿå¼èŠ‚ç‚¹ç±»å‹
 /// @details
-/// ÎªÁËÖ§³ÖClassfiyProductionNodes£¬ÔÊĞí×Ô¶¨ÒåÏîµÄÖµ
-/// Èç¹û×Ô¶¨ÒåÏîµÄÖµÔòËùÓĞÏîµÄÖµ¶¼±ØĞëĞ¡ÓÚsizeof(ProductionNodeType)
+/// ä¸ºäº†æ”¯æŒClassfiyProductionNodesï¼Œå…è®¸è‡ªå®šä¹‰é¡¹çš„å€¼
+/// å¦‚æœè‡ªå®šä¹‰é¡¹çš„å€¼åˆ™æ‰€æœ‰é¡¹çš„å€¼éƒ½å¿…é¡»å°äºsizeof(ProductionNodeType)
 enum class ProductionNodeType {
-  kTerminalNode,     ///< ÖÕ½á²úÉúÊ½½Úµã
-  kOperatorNode,     ///< ÔËËã·û½Úµã
-  kNonTerminalNode,  ///< ·ÇÖÕ½á²úÉúÊ½½Úµã
-  kEndNode           ///< ÎÄ¼şÎ²½Úµã
+  kTerminalNode,     ///< ç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹
+  kOperatorNode,     ///< è¿ç®—ç¬¦èŠ‚ç‚¹
+  kNonTerminalNode,  ///< éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹
+  kEndNode           ///< æ–‡ä»¶å°¾èŠ‚ç‚¹
 };
-/// @brief Óï·¨·ÖÎö¶¯×÷ÀàĞÍ
+/// @brief è¯­æ³•åˆ†æåŠ¨ä½œç±»å‹
 enum class ActionType {
-  kShift,        ///< ÒÆÈë
-  kReduct,       ///< ¹æÔ¼
-  kShiftReduct,  ///< ÒÆÈë»ò¹æÔ¼
-  kError,        ///< ±¨´í
-  kAccept        ///< ½ÓÊÜ
+  kShift,        ///< ç§»å…¥
+  kReduct,       ///< è§„çº¦
+  kShiftReduct,  ///< ç§»å…¥æˆ–è§„çº¦
+  kError,        ///< æŠ¥é”™
+  kAccept        ///< æ¥å—
 };
 
-// Ç°ÏòÉùÃ÷Àà£¬ÓÃÀ´»ñÈ¡¹ÜÀí¸ÃÀàµÄ½á¹¹¸ø³öµÄ±êÊ¶ID
+// å‰å‘å£°æ˜ç±»ï¼Œç”¨æ¥è·å–ç®¡ç†è¯¥ç±»çš„ç»“æ„ç»™å‡ºçš„æ ‡è¯†ID
 class BaseProductionNode;
 class ProductionItemSet;
 class ProcessFunctionInterface;
@@ -53,49 +53,49 @@ using frontend::common::ExplicitIdWrapper;
 using frontend::common::ObjectManager;
 using frontend::common::UnorderedStructManager;
 
-/// @brief ÔËËã·ûÓÅÏÈ¼¶
+/// @brief è¿ç®—ç¬¦ä¼˜å…ˆçº§
 /// @details
-/// 1.Êı×ÖÔ½´óÓÅÏÈ¼¶Ô½¸ß
-/// 2.ÒÆÈë¹æÔ¼³åÍ»ÇÒ´ıÒÆÈë½ÚµãÎªÔËËã·ûÊ±¸ù¾İÔËËã·ûÓÅÏÈ¼¶¾ö¶¨ÒÆÈë»¹ÊÇ¹é²¢
-/// 3.ÓëTailNodePriorityÒâÒå²»Í¬£¬¸ÃÓÅÏÈ¼¶Ó°ÏìÓï·¨·ÖÎö¹ı³Ì
+/// 1.æ•°å­—è¶Šå¤§ä¼˜å…ˆçº§è¶Šé«˜
+/// 2.ç§»å…¥è§„çº¦å†²çªä¸”å¾…ç§»å…¥èŠ‚ç‚¹ä¸ºè¿ç®—ç¬¦æ—¶æ ¹æ®è¿ç®—ç¬¦ä¼˜å…ˆçº§å†³å®šç§»å…¥è¿˜æ˜¯å½’å¹¶
+/// 3.ä¸TailNodePriorityæ„ä¹‰ä¸åŒï¼Œè¯¥ä¼˜å…ˆçº§å½±å“è¯­æ³•åˆ†æè¿‡ç¨‹
 using OperatorPriority =
     ExplicitIdWrapper<size_t, WrapperLabel, WrapperLabel::kPriorityLevel>;
-/// @brief ·ÇÖÕ½á½Úµã²úÉúÊ½Ìå±àºÅ
+/// @brief éç»ˆç»“èŠ‚ç‚¹äº§ç”Ÿå¼ä½“ç¼–å·
 using ProductionBodyId =
     ExplicitIdWrapper<size_t, WrapperLabel, WrapperLabel::kProductionBodyId>;
-/// @brief ÏîÖĞÏÂÒ»¸öÒÆÈëµÄµ¥´ÊµÄÎ»ÖÃ
+/// @brief é¡¹ä¸­ä¸‹ä¸€ä¸ªç§»å…¥çš„å•è¯çš„ä½ç½®
 using NextWordToShiftIndex =
     ExplicitIdWrapper<size_t, WrapperLabel,
                       WrapperLabel::kNextWordToShiftIndex>;
-/// @brief Óï·¨·ÖÎö±íÌõÄ¿ID
+/// @brief è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
 using SyntaxAnalysisTableEntryId =
     ExplicitIdWrapper<size_t, WrapperLabel,
                       WrapperLabel::kSyntaxAnalysisTableEntryId>;
-/// @brief ·ûºÅID
+/// @brief ç¬¦å·ID
 using SymbolId =
     UnorderedStructManager<std::string, std::hash<std::string>>::ObjectId;
-/// @brief ²úÉúÊ½½ÚµãID
+/// @brief äº§ç”Ÿå¼èŠ‚ç‚¹ID
 using ProductionNodeId = ObjectManager<BaseProductionNode>::ObjectId;
-/// @brief Ïî¼¯ID
+/// @brief é¡¹é›†ID
 using ProductionItemSetId = ObjectManager<ProductionItemSet>::ObjectId;
-/// @brief ¹ÜÀí°ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóµÄÈİÆ÷
+/// @brief ç®¡ç†åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡çš„å®¹å™¨
 using ProcessFunctionClassManagerType = ObjectManager<ProcessFunctionInterface>;
-/// @brief °ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
+/// @brief åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
 using ProcessFunctionClassId = ProcessFunctionClassManagerType::ObjectId;
-/// @brief Óï·¨·ÖÎö±íÀàĞÍ
+/// @brief è¯­æ³•åˆ†æè¡¨ç±»å‹
 using SyntaxAnalysisTableType = std::vector<SyntaxAnalysisTableEntry>;
 }  // namespace frontend::generator::syntax_generator
 
 namespace frontend::generator::dfa_generator {
 namespace nfa_generator {
-/// @brief ×Ô¶¨ÒåÀàĞÍµÄ·Ö·¢±êÇ©
+/// @brief è‡ªå®šä¹‰ç±»å‹çš„åˆ†å‘æ ‡ç­¾
 enum class WrapperLabel { kTailNodePriority, kTailNodeId };
-/// @brief µ¥´ÊÓÅÏÈ¼¶£¬ÓëÔËËã·ûÓÅÏÈ¼¶²»Í¬
+/// @brief å•è¯ä¼˜å…ˆçº§ï¼Œä¸è¿ç®—ç¬¦ä¼˜å…ˆçº§ä¸åŒ
 using WordPriority =
     frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
                                         WrapperLabel::kTailNodePriority>;
 /// @class WordAttachedData export_types.h
-/// @brief µ¥´Ê¸½ÊôÊı¾İ£¨ÔÚ¼ì²âµ½ÏàÓ¦µ¥´ÊÊ±·µ»Ø£©
+/// @brief å•è¯é™„å±æ•°æ®ï¼ˆåœ¨æ£€æµ‹åˆ°ç›¸åº”å•è¯æ—¶è¿”å›ï¼‰
 struct WordAttachedData {
   using ProductionNodeId =
       frontend::generator::syntax_generator::ProductionNodeId;
@@ -106,13 +106,13 @@ struct WordAttachedData {
   using OperatorPriority =
       frontend::generator::syntax_generator::OperatorPriority;
 
-  /// @brief ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ
+  /// @brief å…è®¸åºåˆ—åŒ–ç±»è®¿é—®
   friend class boost::serialization::access;
 
-  /// @brief ĞòÁĞ»¯ÅäÖÃµÄº¯Êı
-  /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-  /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-  /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+  /// @brief åºåˆ—åŒ–é…ç½®çš„å‡½æ•°
+  /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+  /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+  /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
   template <class Archive>
   void serialize(Archive& ar, const unsigned int version) {
     ar& production_node_id;
@@ -129,41 +129,41 @@ struct WordAttachedData {
     return !operator==(saved_data);
   }
 
-  /// @brief »ñÈ¡½áºÏĞÔºÍÔËËã·ûÓÅÏÈ¼¶
-  /// @return Ç°°ë²¿·ÖÎª½áºÏĞÔ£¬ºó°ë²¿·ÖÎªÔËËã·ûÓÅÏÈ¼¶
-  /// @details ¸ù¾İÉÏÒ»¸ö²Ù×÷ÊÇ·ñÎª¹æÔ¼È·¶¨Ê¹ÓÃ×ó²àµ¥Ä¿»¹ÊÇË«Ä¿ÔËËã·ûÓïÒå
+  /// @brief è·å–ç»“åˆæ€§å’Œè¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºç»“åˆæ€§ï¼ŒååŠéƒ¨åˆ†ä¸ºè¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @details æ ¹æ®ä¸Šä¸€ä¸ªæ“ä½œæ˜¯å¦ä¸ºè§„çº¦ç¡®å®šä½¿ç”¨å·¦ä¾§å•ç›®è¿˜æ˜¯åŒç›®è¿ç®—ç¬¦è¯­ä¹‰
   std::pair<OperatorAssociatityType, OperatorPriority>
   GetAssociatityTypeAndPriority(bool is_last_operate_reduct) const;
 
-  /// @brief ²úÉúÊ½½ÚµãID
-  /// @attention IDÊÇÎ¨Ò»µÄ£¬ÇÒÒ»¸öID¶ÔÓ¦µÄÆäÓàÊı¾İÎ¨Ò»
+  /// @brief äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @attention IDæ˜¯å”¯ä¸€çš„ï¼Œä¸”ä¸€ä¸ªIDå¯¹åº”çš„å…¶ä½™æ•°æ®å”¯ä¸€
   ProductionNodeId production_node_id = ProductionNodeId::InvalidId();
-  /// @brief ½ÚµãÀàĞÍ
+  /// @brief èŠ‚ç‚¹ç±»å‹
   ProductionNodeType node_type;
-  /// @brief Ë«Ä¿ÔËËã·û½áºÏĞÔ
-  /// @note ½ö¶ÔÔËËã·ûÓĞĞ§£¬·ÇÔËËã·ûÇëÊ¹ÓÃÄ¬ÈÏÖµÒÔ±£³Ö==ºÍ!=ÓïÒå
+  /// @brief åŒç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @note ä»…å¯¹è¿ç®—ç¬¦æœ‰æ•ˆï¼Œéè¿ç®—ç¬¦è¯·ä½¿ç”¨é»˜è®¤å€¼ä»¥ä¿æŒ==å’Œ!=è¯­ä¹‰
   OperatorAssociatityType binary_operator_associate_type =
       OperatorAssociatityType::kLeftToRight;
-  /// @brief Ë«Ä¿ÔËËã·ûÓÅÏÈ¼¶
-  /// @note ½ö¶ÔÔËËã·ûÓĞĞ§£¬·ÇÔËËã·ûÇëÊ¹ÓÃÄ¬ÈÏÖµÒÔ±£³Ö==ºÍ!=ÓïÒå
+  /// @brief åŒç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @note ä»…å¯¹è¿ç®—ç¬¦æœ‰æ•ˆï¼Œéè¿ç®—ç¬¦è¯·ä½¿ç”¨é»˜è®¤å€¼ä»¥ä¿æŒ==å’Œ!=è¯­ä¹‰
   OperatorPriority binary_operator_priority = OperatorPriority::InvalidId();
-  /// @brief ×ó²àµ¥Ä¿ÔËËã·û½áºÏĞÔ
-  /// @note ½ö¶ÔÔËËã·ûÓĞĞ§£¬·ÇÔËËã·ûÇëÊ¹ÓÃÄ¬ÈÏÖµÒÔ±£³Ö==ºÍ!=ÓïÒå
+  /// @brief å·¦ä¾§å•ç›®è¿ç®—ç¬¦ç»“åˆæ€§
+  /// @note ä»…å¯¹è¿ç®—ç¬¦æœ‰æ•ˆï¼Œéè¿ç®—ç¬¦è¯·ä½¿ç”¨é»˜è®¤å€¼ä»¥ä¿æŒ==å’Œ!=è¯­ä¹‰
   OperatorAssociatityType unary_operator_associate_type =
       OperatorAssociatityType::kLeftToRight;
-  /// @brief ×ó²àµ¥Ä¿ÔËËã·ûÓÅÏÈ¼¶
-  /// @note ½ö¶ÔÔËËã·ûÓĞĞ§£¬·ÇÔËËã·ûÇëÊ¹ÓÃÄ¬ÈÏÖµÒÔ±£³Ö==ºÍ!=ÓïÒå
+  /// @brief å·¦ä¾§å•ç›®è¿ç®—ç¬¦ä¼˜å…ˆçº§
+  /// @note ä»…å¯¹è¿ç®—ç¬¦æœ‰æ•ˆï¼Œéè¿ç®—ç¬¦è¯·ä½¿ç”¨é»˜è®¤å€¼ä»¥ä¿æŒ==å’Œ!=è¯­ä¹‰
   OperatorPriority unary_operator_priority = OperatorPriority::InvalidId();
 };
 }  // namespace nfa_generator
 
 /// @class TransformArrayManager export_types.h
-/// @brief ¹ÜÀí×ªÒÆ±í
-/// @tparam BasicObjectType £ºÄÚ²¿¶ÔÏóÀàĞÍ
+/// @brief ç®¡ç†è½¬ç§»è¡¨
+/// @tparam BasicObjectType ï¼šå†…éƒ¨å¯¹è±¡ç±»å‹
 /// @details
-/// 1.½öÓÃÓÚDfaGenerator£¬ÎªÁË±ÜÃâÊ¹ÓÃchar×÷ÏÂ±êÊ±Ê¹ÓÃ¸ºÏÂ±êÊı×éÔ½½ç
-/// 2.´æ´¢frontend::common::kCharNum¸öBasicObjectTypeÀàĞÍµÄ¶ÔÏó
-/// @note ¿ÉÒÔÖ±½ÓÊ¹ÓÃCHAR_MIN~CHAR_MAXÈÎÒâÖµ·ÃÎÊ
+/// 1.ä»…ç”¨äºDfaGeneratorï¼Œä¸ºäº†é¿å…ä½¿ç”¨charä½œä¸‹æ ‡æ—¶ä½¿ç”¨è´Ÿä¸‹æ ‡æ•°ç»„è¶Šç•Œ
+/// 2.å­˜å‚¨frontend::common::kCharNumä¸ªBasicObjectTypeç±»å‹çš„å¯¹è±¡
+/// @note å¯ä»¥ç›´æ¥ä½¿ç”¨CHAR_MIN~CHAR_MAXä»»æ„å€¼è®¿é—®
 template <class BasicObjectType>
 class TransformArrayManager {
  public:
@@ -175,39 +175,39 @@ class TransformArrayManager {
     return const_cast<BasicObjectType&>(
         static_cast<const TransformArrayManager&>(*this).operator[](c));
   }
-  /// @brief Ìî³ä×ªÒÆ±í
-  /// @param[in] fill_object £ºÓÃÀ´Ìî³äµÄ¶ÔÏó
+  /// @brief å¡«å……è½¬ç§»è¡¨
+  /// @param[in] fill_object ï¼šç”¨æ¥å¡«å……çš„å¯¹è±¡
   void fill(const BasicObjectType& fill_object) {
     transform_array_.fill(fill_object);
   }
 
  private:
-  /// @brief ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ
+  /// @brief å…è®¸åºåˆ—åŒ–ç±»è®¿é—®
   friend class boost::serialization::access;
 
-  /// @brief ĞòÁĞ»¯ÅäÖÃµÄº¯Êı
-  /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-  /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-  /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+  /// @brief åºåˆ—åŒ–é…ç½®çš„å‡½æ•°
+  /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+  /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+  /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
   template <class Archive>
   void serialize(Archive& ar, const unsigned int version) {
     ar& transform_array_;
   }
 
-  /// @brief ×ªÒÆ±í
+  /// @brief è½¬ç§»è¡¨
   std::array<BasicObjectType, frontend::common::kCharNum> transform_array_;
 };
-/// @brief µ¥´Ê¸½ÊôÊı¾İ£¨ÔÚ¼ì²âµ½ÏàÓ¦µ¥´ÊÊ±·µ»Ø£©
+/// @brief å•è¯é™„å±æ•°æ®ï¼ˆåœ¨æ£€æµ‹åˆ°ç›¸åº”å•è¯æ—¶è¿”å›ï¼‰
 using WordAttachedData = nfa_generator::WordAttachedData;
-/// @brief ID°ü×°Æ÷ÓÃÀ´Çø·Ö²»Í¬IDµÄÃ¶¾Ù
+/// @brief IDåŒ…è£…å™¨ç”¨æ¥åŒºåˆ†ä¸åŒIDçš„æšä¸¾
 enum class WrapperLabel { kTransformArrayId };
-/// @brief ×ªÒÆ±íID
+/// @brief è½¬ç§»è¡¨ID
 using TransformArrayId =
     frontend::common::ExplicitIdWrapper<size_t, WrapperLabel,
                                         WrapperLabel::kTransformArrayId>;
-/// @brief ×ªÒÆ±íÌõÄ¿
+/// @brief è½¬ç§»è¡¨æ¡ç›®
 using TransformArray = TransformArrayManager<TransformArrayId>;
-/// @brief DFAÅäÖÃÀàĞÍ
+/// @brief DFAé…ç½®ç±»å‹
 using DfaConfigType = std::vector<std::pair<TransformArray, WordAttachedData>>;
 }  // namespace frontend::generator::dfa_generator
 #endif  /// !COMMON_ENUM_AND_TYPES_H_

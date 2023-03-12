@@ -1,8 +1,8 @@
-/// @file process_functions_classes_register.h
-/// @brief Ïòboost-serialization×¢²áprocess_functions_classes.hÖĞ¶¨ÒåµÄÅÉÉúÀà
+ï»¿/// @file process_functions_classes_register.h
+/// @brief å‘boost-serializationæ³¨å†Œprocess_functions_classes.hä¸­å®šä¹‰çš„æ´¾ç”Ÿç±»
 /// @details
-/// boostĞòÁĞ»¯¿âĞòÁĞ»¯ÅÉÉúÀàÇ°±ØĞëÏÈ×¢²á£¬·ñÔò»áÅ×Òì³£
-/// ¸ÃÎÄ¼şÖĞ¶¨Òå×¢²áprocess_functions_classes.hÖĞÅÉÉúÀàµÄºê
+/// booståºåˆ—åŒ–åº“åºåˆ—åŒ–æ´¾ç”Ÿç±»å‰å¿…é¡»å…ˆæ³¨å†Œï¼Œå¦åˆ™ä¼šæŠ›å¼‚å¸¸
+/// è¯¥æ–‡ä»¶ä¸­å®šä¹‰æ³¨å†Œprocess_functions_classes.hä¸­æ´¾ç”Ÿç±»çš„å®
 #ifndef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER_H_
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER_H_
 
@@ -11,8 +11,8 @@
 #include "process_function_interface_register.h"
 #include "process_functions_classes.h"
 
-/// ÏÂÃæµÄºêÉú³Éprocess_functions_classes.hÖĞµÄÀàÔÚboost::serializationÖĞ×¢²á
-/// µÄ´úÂë
+/// ä¸‹é¢çš„å®ç”Ÿæˆprocess_functions_classes.hä¸­çš„ç±»åœ¨boost::serializationä¸­æ³¨å†Œ
+/// çš„ä»£ç 
 #define GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER
 #include "Config/ProductionConfig/production_config-inc.h"
 #undef GENERATOR_SYNTAXGENERATOR_PROCESS_FUNCTIONS_CLASSES_REGISTER

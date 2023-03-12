@@ -1,7 +1,7 @@
-/// @file reduct_type_register.h
-/// @brief ע����ս����ʽ��Լ������������
+﻿/// @file reduct_type_register.h
+/// @brief 注册非终结产生式规约函数返回类型
 /// @details
-/// ע����ս����ʽ��Լ�����������ͣ����ڹ�Լʱʵ���Զ�����ת�������ͼ��
+/// 注册非终结产生式规约函数返回类型，用于规约时实现自动类型转换和类型检查
 
 #ifndef GENERATOR_SYNTAXGENERATOR_REDUCT_TYPE_REGISTER_H_
 #define GENERATOR_SYNTAXGENERATOR_REDUCT_TYPE_REGISTER_H_

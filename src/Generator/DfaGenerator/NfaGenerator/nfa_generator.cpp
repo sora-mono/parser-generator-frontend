@@ -1,7 +1,10 @@
-#include "nfa_generator.h"
+ï»¿#include "nfa_generator.h"
 
 #include <format>
 #include <queue>
+
+#define ENABLE_LOG
+#include "Logger/logger.h"
 
 namespace frontend::generator::dfa_generator::nfa_generator {
 
@@ -54,28 +57,28 @@ NfaGenerator::Closure(NfaNodeId node_id) {
     auto [result_iter, inserted] = result_set.insert(id_now);
     assert(inserted);
     auto iter = tail_nodes_.find(id_now);
-    // ÅĞ¶ÏÊÇ·ñÎªÎ²½Úµã
+    // åˆ¤æ–­æ˜¯å¦ä¸ºå°¾èŠ‚ç‚¹
     if (iter != tail_nodes_.end()) {
       TailNodeData& tail_node_data_new = iter->second;
       WordPriority priority_old = word_attached_data.second;
       WordPriority priority_new = tail_node_data_new.second;
       if (word_attached_data == kNotTailNodeTag) {
-        // ÒÔÇ°ÎŞÎ²½Úµã¼ÇÂ¼
+        // ä»¥å‰æ— å°¾èŠ‚ç‚¹è®°å½•
         word_attached_data = tail_node_data_new;
       } else if (priority_new > priority_old) {
-        // µ±Ç°¼ÇÂ¼ÓÅÏÈ¼¶´óÓÚÒÔÇ°µÄÓÅÏÈ¼¶
+        // å½“å‰è®°å½•ä¼˜å…ˆçº§å¤§äºä»¥å‰çš„ä¼˜å…ˆçº§
         word_attached_data = tail_node_data_new;
       } else if (priority_new == priority_old &&
                  tail_node_data_new.first != word_attached_data.first) {
-        // Á½¸öÎ²½Úµã±ê¼ÇÓÅÏÈ¼¶ÏàÍ¬£¬¶ÔÓ¦Î²½Úµã²»Í¬
-        // Êä³ö´íÎóĞÅÏ¢
-        std::cerr
-            << std::format(
-                   "NfaGenerator "
-                   "Error:"
-                   "´æÔÚÁ½¸öÕıÔò±í´ïÊ½ÔÚÏàÍ¬µÄÊäÈëÏÂ¾ù¿É»ñÈ¡µ¥´Ê£¬ÇÒµ¥´ÊÓÅÏÈ¼¶"
-                   "ÏàÍ¬£¬²úÉúÆçÒå£¬Çë¼ì²éÖÕ½á½Úµã¶¨Òå/ÔËËã·û¶¨Òå²¿·Ö")
-            << std::endl;
+        // ä¸¤ä¸ªå°¾èŠ‚ç‚¹æ ‡è®°ä¼˜å…ˆçº§ç›¸åŒï¼Œå¯¹åº”å°¾èŠ‚ç‚¹ä¸åŒ
+        // è¾“å‡ºé”™è¯¯ä¿¡æ¯
+        LOG_ERROR(
+            "NFA Generator",
+            std::format(
+                "NfaGenerator "
+                "Error:"
+                "å­˜åœ¨ä¸¤ä¸ªæ­£åˆ™è¡¨è¾¾å¼åœ¨ç›¸åŒçš„è¾“å…¥ä¸‹å‡å¯è·å–å•è¯ï¼Œä¸”å•è¯ä¼˜å…ˆçº§"
+                "ç›¸åŒï¼Œäº§ç”Ÿæ­§ä¹‰ï¼Œè¯·æ£€æŸ¥ç»ˆç»“èŠ‚ç‚¹å®šä¹‰/è¿ç®—ç¬¦å®šä¹‰éƒ¨åˆ†"))
         assert(false);
         exit(-1);
       }
@@ -101,17 +104,17 @@ NfaGenerator::Goto(NfaNodeId id_src, char c_transform) {
 void NfaGenerator::NfaInit() {
   tail_nodes_.clear();
   node_manager_.MultimapObjectManagerInit();
-  head_node_id_ = node_manager_.EmplaceObject();  // Ìí¼ÓÍ·½áµã
+  head_node_id_ = node_manager_.EmplaceObject();  // æ·»åŠ å¤´ç»“ç‚¹
 }
 
 bool NfaGenerator::NfaNode::MergeNodes(NfaNode* node_src) {
   if (node_src == this) {
-    // ÏàÍ¬½ÚµãºÏ²¢ÔòÖ±½Ó·µ»Øfalse
+    // ç›¸åŒèŠ‚ç‚¹åˆå¹¶åˆ™ç›´æ¥è¿”å›false
     return false;
   }
-  // ¼ì²éÊÇ·ñ¿ÉÒÔºÏ²¢
-  // node_srcËùÓĞÌõ¼ş×ªÒÆÌõÄ¿±ØĞëÔÚthisÖĞ²»´æÔÚ
-  // »òÓëthisÖĞÏàÍ¬Ìõ¼şµÄ×ªÒÆÌõÄ¿×ªÒÆµ½µÄ½ÚµãIDÏàÍ¬
+  // æ£€æŸ¥æ˜¯å¦å¯ä»¥åˆå¹¶
+  // node_srcæ‰€æœ‰æ¡ä»¶è½¬ç§»æ¡ç›®å¿…é¡»åœ¨thisä¸­ä¸å­˜åœ¨
+  // æˆ–ä¸thisä¸­ç›¸åŒæ¡ä»¶çš„è½¬ç§»æ¡ç›®è½¬ç§»åˆ°çš„èŠ‚ç‚¹IDç›¸åŒ
   if (GetConditionalTransfers().size() != 0 &&
       node_src->GetConditionalTransfers().size() != 0) {
     for (const auto& transform : node_src->GetConditionalTransfers()) {
@@ -156,9 +159,9 @@ NfaGenerator::RegexConstruct(TailNodeData&& tail_node_data,
         auto [temp_head_id, temp_tail_id] =
             CreateSwitchTree(raw_regex_string, &next_character_index);
         if (!(temp_head_id.IsValid() && temp_tail_id.IsValid())) [[unlikely]] {
-          std::cerr << std::format("·Ç·¨ÕıÔò {:}\n{: >{}}", raw_regex_string,
-                                   '^', next_character_index + 9)
-                    << std::endl;
+          LOG_ERROR("NFA Generator",
+                    std::format("éæ³•æ­£åˆ™ {:}\n{: >{}}", raw_regex_string, '^',
+                                next_character_index + 9))
           exit(-1);
         }
         GetNfaNode(tail_id).AddNoconditionTransfer(temp_head_id);
@@ -166,7 +169,7 @@ NfaGenerator::RegexConstruct(TailNodeData&& tail_node_data,
         tail_id = temp_tail_id;
       } break;
       case ']':
-        // regex_constructº¯Êı²»Ó¦¸Ã´¦Àí]×Ö·û£¬Ó¦½»¸øcreate_switch_tree´¦Àí
+        // regex_constructå‡½æ•°ä¸åº”è¯¥å¤„ç†]å­—ç¬¦ï¼Œåº”äº¤ç»™create_switch_treeå¤„ç†
         assert(false);
         break;
       case '(': {
@@ -174,9 +177,9 @@ NfaGenerator::RegexConstruct(TailNodeData&& tail_node_data,
             RegexConstruct(std::move(tail_node_data), raw_regex_string,
                            std::move(next_character_index), false);
         if (!(temp_head_id.IsValid() && temp_tail_id.IsValid())) [[unlikely]] {
-          std::cerr << std::format("·Ç·¨ÕıÔò {:}\n{: >{}}", raw_regex_string,
-                                   '^', next_character_index + 9)
-                    << std::endl;
+          LOG_ERROR("NFA Generator",
+                    std::format("éæ³•æ­£åˆ™ {:}\n{: >{}}", raw_regex_string, '^',
+                                next_character_index + 9))
           exit(-1);
         }
         GetNfaNode(tail_id).AddNoconditionTransfer(temp_head_id);
@@ -186,21 +189,21 @@ NfaGenerator::RegexConstruct(TailNodeData&& tail_node_data,
       case ')':
         return std::make_pair(head_id, tail_id);
         break;
-      case '+':  // ¶Ôµ¥¸ö×Ö·ûºÍ×éºÏ½á¹¹¾ùÉúĞ§
+      case '+':  // å¯¹å•ä¸ªå­—ç¬¦å’Œç»„åˆç»“æ„å‡ç”Ÿæ•ˆ
         GetNfaNode(tail_id).AddNoconditionTransfer(pre_tail_id);
         break;
-      case '*':  // ¶Ôµ¥¸ö×Ö·ûºÍ×éºÏ½á¹¹¾ùÉúĞ§
+      case '*':  // å¯¹å•ä¸ªå­—ç¬¦å’Œç»„åˆç»“æ„å‡ç”Ÿæ•ˆ
         GetNfaNode(tail_id).AddNoconditionTransfer(pre_tail_id);
         GetNfaNode(pre_tail_id).AddNoconditionTransfer(tail_id);
         break;
-      case '?':  // ¶Ôµ¥¸ö×Ö·ûºÍ×éºÏ½á¹¹¾ùÉúĞ§
+      case '?':  // å¯¹å•ä¸ªå­—ç¬¦å’Œç»„åˆç»“æ„å‡ç”Ÿæ•ˆ
         GetNfaNode(pre_tail_id).AddNoconditionTransfer(tail_id);
         break;
-      case '\\':  // ½ö¶Ôµ¥¸ö×Ö·ûÉúĞ§
+      case '\\':  // ä»…å¯¹å•ä¸ªå­—ç¬¦ç”Ÿæ•ˆ
         if (next_character_index >= raw_regex_string.size()) [[unlikely]] {
-          std::cerr << std::format("·Ç·¨ÕıÔò {:}\n{: >{}}", raw_regex_string,
-                                   '^', next_character_index + 9)
-                    << std::endl;
+          LOG_ERROR("NFA Generator",
+                    std::format("éæ³•æ­£åˆ™ {:}\n{: >{}}", raw_regex_string, '^',
+                                next_character_index + 9))
           exit(-1);
         }
         c_now = raw_regex_string[next_character_index];
@@ -209,7 +212,7 @@ NfaGenerator::RegexConstruct(TailNodeData&& tail_node_data,
         tail_id = node_manager_.EmplaceObject();
         GetNfaNode(pre_tail_id).SetConditionTransfer(c_now, tail_id);
         break;
-      case '.':  // ½ö¶Ôµ¥¸ö×Ö·ûÉúĞ§
+      case '.':  // ä»…å¯¹å•ä¸ªå­—ç¬¦ç”Ÿæ•ˆ
         pre_tail_id = tail_id;
         tail_id = node_manager_.EmplaceObject();
         for (char transform_char = CHAR_MIN; transform_char != CHAR_MAX;
@@ -264,36 +267,36 @@ void NfaGenerator::MergeOptimization() {
     if (!node_manager_.CanBeSourceInMerge(id_now)) {
       continue;
     }
-    // ¼ì²éÃ¿Ò»¸öÓëµ±Ç°´¦Àí½ÚµãµÈ¼ÛµÄ½Úµã£¨¾ÍÊÇµ±Ç°½Úµã¿ÉÒÔÎŞÌõ¼ş×ªÒÆµ½µÄ½Úµã£©
-    // Èç¹ûµ±Ç°½Úµã×ªÒÆ±íÖĞµÄÏîÔÚµÈ¼Û½ÚµãÖĞ´æÔÚÔò¿ÉÒÔ´Óµ±Ç°½Úµã×ªÒÆ±íÖĞÉ¾³ı
+    // æ£€æŸ¥æ¯ä¸€ä¸ªä¸å½“å‰å¤„ç†èŠ‚ç‚¹ç­‰ä»·çš„èŠ‚ç‚¹ï¼ˆå°±æ˜¯å½“å‰èŠ‚ç‚¹å¯ä»¥æ— æ¡ä»¶è½¬ç§»åˆ°çš„èŠ‚ç‚¹ï¼‰
+    // å¦‚æœå½“å‰èŠ‚ç‚¹è½¬ç§»è¡¨ä¸­çš„é¡¹åœ¨ç­‰ä»·èŠ‚ç‚¹ä¸­å­˜åœ¨åˆ™å¯ä»¥ä»å½“å‰èŠ‚ç‚¹è½¬ç§»è¡¨ä¸­åˆ é™¤
     for (auto equal_node_id :
          GetNfaNode(id_now).GetUnconditionTransferNodesIds()) {
       if (equal_node_id == id_now) [[unlikely]] {
-        // Ìø¹ı×ªÒÆµ½×Ô¼ºµÄÇé¿ö
+        // è·³è¿‡è½¬ç§»åˆ°è‡ªå·±çš„æƒ…å†µ
         continue;
       }
       auto& equal_node = GetNfaNode(equal_node_id);
-      // ´¦ÀíÎŞÌõ¼ş×ªÒÆ±í
+      // å¤„ç†æ— æ¡ä»¶è½¬ç§»è¡¨
       const auto& equal_node_unconditional_transfer_node_ids =
           equal_node.GetUnconditionTransferNodesIds();
       for (auto iter = node_now.GetUnconditionTransferNodesIds().cbegin();
            iter != node_now.GetUnconditionTransferNodesIds().cend();) {
         if (equal_node_unconditional_transfer_node_ids.find(*iter) !=
             equal_node_unconditional_transfer_node_ids.end()) {
-          // µ±Ç°½Úµã×ªÒÆ±íÖĞµÄÏîÔÚµÈ¼Û½ÚµãÖĞ´æÔÚ
-          // ÒÆ³ı¸ÃÏî
+          // å½“å‰èŠ‚ç‚¹è½¬ç§»è¡¨ä¸­çš„é¡¹åœ¨ç­‰ä»·èŠ‚ç‚¹ä¸­å­˜åœ¨
+          // ç§»é™¤è¯¥é¡¹
           if (*iter != equal_node_id) [[likely]] {
-            // Èç¹û´æÔÚµÈ¼Û½ÚµãµÄÎŞÌõ¼ş×Ô»·½ÚµãÔò²»ÄÜÒÆ³ı
-            // ·ñÔò»áÊ§È¥Ö¸ÏòµÈ¼Û½ÚµãµÄ¼ÇÂ¼£¬µ¼ÖÂÕıÔò²»ÍêÕû¡¢ÄÚ´æĞ¹Â©µÈ
+            // å¦‚æœå­˜åœ¨ç­‰ä»·èŠ‚ç‚¹çš„æ— æ¡ä»¶è‡ªç¯èŠ‚ç‚¹åˆ™ä¸èƒ½ç§»é™¤
+            // å¦åˆ™ä¼šå¤±å»æŒ‡å‘ç­‰ä»·èŠ‚ç‚¹çš„è®°å½•ï¼Œå¯¼è‡´æ­£åˆ™ä¸å®Œæ•´ã€å†…å­˜æ³„æ¼ç­‰
             ++iter;
             node_now.RemoveConditionlessTransfer(*iter);
-            // continue·ÀÖ¹¶îÍâÇ°ÒÆiter
+            // continueé˜²æ­¢é¢å¤–å‰ç§»iter
             continue;
           }
         }
         ++iter;
       }
-      // ´¦ÀíÌõ¼ş×ªÒÆ±í
+      // å¤„ç†æ¡ä»¶è½¬ç§»è¡¨
       const auto& equal_node_conditional_transfers =
           equal_node.GetConditionalTransfers();
       for (auto iter = node_now.GetConditionalTransfers().cbegin();
@@ -302,27 +305,27 @@ void NfaGenerator::MergeOptimization() {
             equal_node_conditional_transfers.find(iter->first);
         if (equal_node_iter != equal_node_conditional_transfers.cend() &&
             iter->second == equal_node_iter->second) {
-          // µ±Ç°½Úµã×ªÒÆ±íÖĞµÄÏîÔÚµÈ¼Û½ÚµãÖĞ´æÔÚ
-          // ÒÆ³ı¸ÃÏî
+          // å½“å‰èŠ‚ç‚¹è½¬ç§»è¡¨ä¸­çš„é¡¹åœ¨ç­‰ä»·èŠ‚ç‚¹ä¸­å­˜åœ¨
+          // ç§»é™¤è¯¥é¡¹
           ++iter;
           node_now.RemoveConditionalTransfer(iter->first);
-          // continue·ÀÖ¹¶îÍâÇ°ÒÆiter
+          // continueé˜²æ­¢é¢å¤–å‰ç§»iter
           continue;
         }
         ++iter;
       }
-      // Ñ¹ÈëµÈĞ§½ÚµãµÈ´ı´¦Àí
+      // å‹å…¥ç­‰æ•ˆèŠ‚ç‚¹ç­‰å¾…å¤„ç†
       q.push(equal_node_id);
-      // Ñ¹Èëµ±Ç°½ÚµãµÄËùÓĞ¿ÉÒÔÌõ¼ş×ªÒÆµ½µÄ½ÚµãµÈ´ı´¦Àí
+      // å‹å…¥å½“å‰èŠ‚ç‚¹çš„æ‰€æœ‰å¯ä»¥æ¡ä»¶è½¬ç§»åˆ°çš„èŠ‚ç‚¹ç­‰å¾…å¤„ç†
       for (const auto& conditional_transfer :
            node_now.GetConditionalTransfers()) {
         q.push(conditional_transfer.second);
       }
     }
-    // ¼ì²éÊÇ·ñ¿ÉÒÔ½«node_nowÓënode_nowÎ¨Ò»¿ÉÎŞÌõ¼ş×ªÒÆµ½µÄ½ÚµãºÏ²¢
+    // æ£€æŸ¥æ˜¯å¦å¯ä»¥å°†node_nowä¸node_nowå”¯ä¸€å¯æ— æ¡ä»¶è½¬ç§»åˆ°çš„èŠ‚ç‚¹åˆå¹¶
     if (node_now.GetConditionalTransfers().empty() &&
         node_now.GetUnconditionTransferNodesIds().size() == 1) [[unlikely]] {
-      // Ö»Ê£Ò»ÌõÎŞÌõ¼ş×ªÒÆÂ·¾¶£¬¸Ã½Úµã¿ÉÒÔÓëÎŞÌõ¼ş×ªÒÆµ½µÄ½ÚµãºÏ²¢
+      // åªå‰©ä¸€æ¡æ— æ¡ä»¶è½¬ç§»è·¯å¾„ï¼Œè¯¥èŠ‚ç‚¹å¯ä»¥ä¸æ— æ¡ä»¶è½¬ç§»åˆ°çš„èŠ‚ç‚¹åˆå¹¶
       NfaNodeId dst_node_id =
           *node_now.GetUnconditionTransferNodesIds().cbegin();
       const NfaGenerator::TailNodeData& dst_tag = GetTailNodeData(dst_node_id);
@@ -330,8 +333,8 @@ void NfaGenerator::MergeOptimization() {
       if (dst_tag != NfaGenerator::kNotTailNodeTag &&
           src_tag != NfaGenerator::kNotTailNodeTag &&
           dst_tag.second == src_tag.second && dst_tag.first != src_tag.first) {
-        std::cerr << std::format("Á½¸öÎ²½Úµã¾ßÓĞÏàÍ¬ÓÅÏÈ¼¶ÇÒ²»¶ÔÓ¦Í¬Ò»¸ö½Úµã")
-                  << std::endl;
+        LOG_ERROR("NFA Generator",
+                  std::format("ä¸¤ä¸ªå°¾èŠ‚ç‚¹å…·æœ‰ç›¸åŒä¼˜å…ˆçº§ä¸”ä¸å¯¹åº”åŒä¸€ä¸ªèŠ‚ç‚¹"))
         exit(-1);
       }
       bool result = GetNfaNode(dst_node_id).MergeNodes(&GetNfaNode(id_now));
@@ -347,14 +350,14 @@ void NfaGenerator::MergeOptimization() {
       }
 
     } else {
-      // Ã»ÓĞÖ´ĞĞÈÎºÎ²Ù×÷£¬²»´æÔÚ´Ó¸Ã½Úµã¿ªÊ¼µÄºÏ²¢²Ù×÷
-      // ÉèÖÃ¸Ã½ÚµãÔÚºÏ²¢Ê±²»ÄÜ×÷ÎªÔ´½Úµã
+      // æ²¡æœ‰æ‰§è¡Œä»»ä½•æ“ä½œï¼Œä¸å­˜åœ¨ä»è¯¥èŠ‚ç‚¹å¼€å§‹çš„åˆå¹¶æ“ä½œ
+      // è®¾ç½®è¯¥èŠ‚ç‚¹åœ¨åˆå¹¶æ—¶ä¸èƒ½ä½œä¸ºæºèŠ‚ç‚¹
       node_manager_.SetObjectCanNotBeSourceInMerge(id_now);
     }
   }
 }
 
-// @brief Ìí¼ÓÎ²½ÚµãĞÅÏ¢
+// @brief æ·»åŠ å°¾èŠ‚ç‚¹ä¿¡æ¯
 
 std::pair<NfaGenerator::NfaNodeId, NfaGenerator::NfaNodeId>
 NfaGenerator::CreateSwitchTree(const std::string& raw_regex_string,
@@ -363,13 +366,13 @@ NfaGenerator::CreateSwitchTree(const std::string& raw_regex_string,
   NfaNodeId tail_id = node_manager_.EmplaceObject();
   NfaNode& head_node = GetNfaNode(head_id);
   char character_pre;
-  // ³õÊ¼»¯³É²»ÊÇ']'µÄÖµ´Ó¶ø¿ÉÒÔ½øÈëÑ­»·
+  // åˆå§‹åŒ–æˆä¸æ˜¯']'çš„å€¼ä»è€Œå¯ä»¥è¿›å…¥å¾ªç¯
   char character_now = '[';
   while (character_now != ']') {
     if (*next_character_index >= raw_regex_string.size()) [[unlikely]] {
-      std::cerr << std::format("·Ç·¨ÕıÔò {:}\n{: >{}}", raw_regex_string, '^',
-                               *next_character_index + 9)
-                << std::endl;
+      LOG_ERROR("NFA Generator",
+                std::format("éæ³•æ­£åˆ™ {:}\n{: >{}}", raw_regex_string, '^',
+                            *next_character_index + 9))
       exit(-1);
     }
     character_pre = character_now;
@@ -377,17 +380,17 @@ NfaGenerator::CreateSwitchTree(const std::string& raw_regex_string,
     ++*next_character_index;
     switch (character_now) {
       case '-': {
-        // ¶ÁÈëÁíÒ»¶ËµÄ×Ö·û
+        // è¯»å…¥å¦ä¸€ç«¯çš„å­—ç¬¦
         if (*next_character_index >= raw_regex_string.size()) [[unlikely]] {
-          std::cerr << std::format("·Ç·¨ÕıÔò {:}\n{: >{}}", raw_regex_string,
-                                   '^', *next_character_index + 9)
-                    << std::endl;
+          LOG_ERROR("NFA Generator",
+                    std::format("éæ³•æ­£åˆ™ {:}\n{: >{}}", raw_regex_string, '^',
+                                *next_character_index + 9))
           exit(-1);
         }
         character_now = raw_regex_string[*next_character_index];
         ++*next_character_index;
         if (character_now == ']') [[unlikely]] {
-          // [+-]ÕâÖÖÕıÔò±í´ïÊ½
+          // [+-]è¿™ç§æ­£åˆ™è¡¨è¾¾å¼
           break;
         }
         char bigger_character = std::max(character_now, character_pre);
@@ -395,14 +398,14 @@ NfaGenerator::CreateSwitchTree(const std::string& raw_regex_string,
              smaller_character < bigger_character; smaller_character++) {
           head_node.SetConditionTransfer(smaller_character, tail_id);
         }
-        // ·ÀÖ¹bigger_character == CHAR_MAXµ¼ÖÂ»Ø»·£¬ÎŞ·¨ÍË³öÉÏÃæÑ­»·
+        // é˜²æ­¢bigger_character == CHAR_MAXå¯¼è‡´å›ç¯ï¼Œæ— æ³•é€€å‡ºä¸Šé¢å¾ªç¯
         head_node.SetConditionTransfer(bigger_character, tail_id);
       } break;
       case '\\':
         if (*next_character_index >= raw_regex_string.size()) [[unlikely]] {
-          std::cerr << std::format("·Ç·¨ÕıÔò {:}\n{: >{}}", raw_regex_string,
-                                   '^', *next_character_index + 9)
-                    << std::endl;
+          LOG_ERROR("NFA Generator",
+                    std::format("éæ³•æ­£åˆ™ {:}\n{: >{}}", raw_regex_string, '^',
+                                *next_character_index + 9))
           exit(-1);
         }
         character_now = raw_regex_string[*next_character_index];
@@ -418,9 +421,9 @@ NfaGenerator::CreateSwitchTree(const std::string& raw_regex_string,
   }
   if (head_node.GetConditionalTransfers().empty()) [[unlikely]] {
     node_manager_.RemoveObject(head_id);
-    std::cerr << std::format("·Ç·¨ÕıÔò {:}\n{: >{}}\n[]ÖĞÎª¿Õ",
-                             raw_regex_string, '^', *next_character_index + 9)
-              << std::endl;
+    LOG_ERROR("NFA Generator",
+              std::format("éæ³•æ­£åˆ™ {:}\n{: >{}}\n[]ä¸­ä¸ºç©º", raw_regex_string,
+                          '^', *next_character_index + 9))
     exit(-1);
   }
   return std::make_pair(head_id, tail_id);

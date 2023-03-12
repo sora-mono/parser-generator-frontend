@@ -1,7 +1,7 @@
-/// @file production_item_set.h
-/// @brief ´æ´¢Ïî¼¯ÓëÏòÇ°¿´·ûºÅµÄÀà
+ï»¿/// @file production_item_set.h
+/// @brief å­˜å‚¨é¡¹é›†ä¸å‘å‰çœ‹ç¬¦å·çš„ç±»
 /// @details
-/// ¸ÃÀàÔÚ¹¹ÔìÓï·¨·ÖÎöÅäÖÃÖĞÊ¹ÓÃ
+/// è¯¥ç±»åœ¨æ„é€ è¯­æ³•åˆ†æé…ç½®ä¸­ä½¿ç”¨
 #ifndef GENERATOR_SYNTAXGENERATOR_PRODUCTION_ITEM_SET_H_
 #define GENERATOR_SYNTAXGENERATOR_PRODUCTION_ITEM_SET_H_
 
@@ -10,17 +10,17 @@
 #include "Generator/export_types.h"
 namespace frontend::generator::syntax_generator {
 /// @class ProductionItemSet production_item_set.h
-/// @brief ´æ´¢Ïî¼¯ÓëÏòÇ°¿´·ûºÅµÄÀà
+/// @brief å­˜å‚¨é¡¹é›†ä¸å‘å‰çœ‹ç¬¦å·çš„ç±»
 class ProductionItemSet {
  public:
-  /// @brief Ïî¼¯ÄÚµ¥¸öÏî£¬ÄÚÈİ´Ó×óµ½ÓÒÒÀ´ÎÎª
-  /// ²úÉúÊ½½ÚµãID£¬²úÉúÊ½ÌåID£¬ÏÂÒ»¸öÒÆÈëµÄµ¥´ÊµÄÎ»ÖÃ
+  /// @brief é¡¹é›†å†…å•ä¸ªé¡¹ï¼Œå†…å®¹ä»å·¦åˆ°å³ä¾æ¬¡ä¸º
+  /// äº§ç”Ÿå¼èŠ‚ç‚¹IDï¼Œäº§ç”Ÿå¼ä½“IDï¼Œä¸‹ä¸€ä¸ªç§»å…¥çš„å•è¯çš„ä½ç½®
   using ProductionItem =
       std::tuple<ProductionNodeId, ProductionBodyId, NextWordToShiftIndex>;
-  /// @brief ÏòÇ°¿´·ûºÅÈİÆ÷
+  /// @brief å‘å‰çœ‹ç¬¦å·å®¹å™¨
   using ForwardNodesContainer = std::unordered_set<ProductionNodeId>;
-  /// @brief ¹şÏ£ProductionItemµÄÀà
-  /// Í¨¹ı¸ÃÀàÔÊĞíProductionItem¿ÉÒÔ×÷Îªstd::unordered_map¼üÖµ
+  /// @brief å“ˆå¸ŒProductionItemçš„ç±»
+  /// é€šè¿‡è¯¥ç±»å…è®¸ProductionItemå¯ä»¥ä½œä¸ºstd::unordered_mapé”®å€¼
   struct ProductionItemHasher {
     size_t operator()(const ProductionItem& production_item) const {
       return std::get<ProductionNodeId>(production_item) *
@@ -28,7 +28,7 @@ class ProductionItemSet {
              std::get<NextWordToShiftIndex>(production_item);
     }
   };
-  /// @brief ´æ´¢ÏîºÍÏòÇ°¿´½ÚµãµÄÈİÆ÷
+  /// @brief å­˜å‚¨é¡¹å’Œå‘å‰çœ‹èŠ‚ç‚¹çš„å®¹å™¨
   using ProductionItemAndForwardNodesContainer =
       std::unordered_map<ProductionItem, ForwardNodesContainer,
                          ProductionItemHasher>;
@@ -56,31 +56,31 @@ class ProductionItemSet {
             std::move(production_item_set.item_and_forward_node_ids_)) {}
   ProductionItemSet& operator=(ProductionItemSet&& production_item_set);
 
-  /// @brief ÏòÏî¼¯ÖĞ²åÈëÏîºÍ¶ÔÓ¦µÄÏòÇ°¿´·ûºÅ
-  /// @param[in] item £º´ı²åÈëµÄÏî
-  /// @param[in] forward_node_ids £º´ı²åÈëµÄÏîµÄÏòÇ°¿´·ûºÅ
-  /// @return ·µ»ØÖ¸Ïò¸ø¶¨ItemµÄiteratorºÍÊÇ·ñ²åÈëÁËĞÂÏî
+  /// @brief å‘é¡¹é›†ä¸­æ’å…¥é¡¹å’Œå¯¹åº”çš„å‘å‰çœ‹ç¬¦å·
+  /// @param[in] item ï¼šå¾…æ’å…¥çš„é¡¹
+  /// @param[in] forward_node_ids ï¼šå¾…æ’å…¥çš„é¡¹çš„å‘å‰çœ‹ç¬¦å·
+  /// @return è¿”å›æŒ‡å‘ç»™å®šItemçš„iteratorå’Œæ˜¯å¦æ’å…¥äº†æ–°é¡¹
   /// @note
-  /// Èç¹ûItemÒÑ´æÔÚÔò½öÌí¼ÓÏòÇ°¿´·ûºÅÇÒµÚ¶ş¸ö·µ»Ø²ÎÊıÎªfalse
-  /// ¿ÉÒÔÊ¹ÓÃµ¥¸öÎ´°ü×°ID
-  /// @attention ²åÈëÊ±¸ÃÏî¼¯±ØĞëÃ»Çó¹ı±Õ°ü£¬ÒòÎªÇó¹ı±Õ°üµÄÏî¼¯¿ÉÄÜÔÚÖ®ºóµÄ¹¹½¨
-  /// ¹ı³ÌÖĞ±»ÔÙ´ÎÒıÓÃ
-  /// forward_node_ids±ØĞë²»Îª¿Õ£¬ËùÓĞÏî¶¼Ò»¶¨ÓĞÏòÇ°¿´·ûºÅ
+  /// å¦‚æœItemå·²å­˜åœ¨åˆ™ä»…æ·»åŠ å‘å‰çœ‹ç¬¦å·ä¸”ç¬¬äºŒä¸ªè¿”å›å‚æ•°ä¸ºfalse
+  /// å¯ä»¥ä½¿ç”¨å•ä¸ªæœªåŒ…è£…ID
+  /// @attention æ’å…¥æ—¶è¯¥é¡¹é›†å¿…é¡»æ²¡æ±‚è¿‡é—­åŒ…ï¼Œå› ä¸ºæ±‚è¿‡é—­åŒ…çš„é¡¹é›†å¯èƒ½åœ¨ä¹‹åçš„æ„å»º
+  /// è¿‡ç¨‹ä¸­è¢«å†æ¬¡å¼•ç”¨
+  /// forward_node_idså¿…é¡»ä¸ä¸ºç©ºï¼Œæ‰€æœ‰é¡¹éƒ½ä¸€å®šæœ‰å‘å‰çœ‹ç¬¦å·
   template <class ForwardNodeIdContainer>
   std::pair<ProductionItemAndForwardNodesContainer::iterator, bool>
   AddItemAndForwardNodeIds(const ProductionItem& item,
                            ForwardNodeIdContainer&& forward_node_ids);
-  /// @brief ÏòÏî¼¯ÖĞ²åÈëºËĞÄÏîºÍ¶ÔÓ¦µÄÏòÇ°¿´·ûºÅ
-  /// @param[in] item £º´ı²åÈëµÄÏî
-  /// @param[in] forward_node_ids £º´ı²åÈëµÄÏîµÄÏòÇ°¿´·ûºÅ
-  /// @return ·µ»ØÖ¸Ïò¸ø¶¨ItemµÄiteratorºÍÊÇ·ñ²åÈëÁËĞÂÏî
+  /// @brief å‘é¡¹é›†ä¸­æ’å…¥æ ¸å¿ƒé¡¹å’Œå¯¹åº”çš„å‘å‰çœ‹ç¬¦å·
+  /// @param[in] item ï¼šå¾…æ’å…¥çš„é¡¹
+  /// @param[in] forward_node_ids ï¼šå¾…æ’å…¥çš„é¡¹çš„å‘å‰çœ‹ç¬¦å·
+  /// @return è¿”å›æŒ‡å‘ç»™å®šItemçš„iteratorå’Œæ˜¯å¦æ’å…¥äº†æ–°é¡¹
   /// @note
-  /// Èç¹ûItemÒÑ´æÔÚÔò½öÌí¼ÓÏòÇ°¿´·ûºÅÇÒµÚ¶ş¸ö·µ»Ø²ÎÊıÎªfalse
-  /// ¿ÉÒÔÊ¹ÓÃµ¥¸öÎ´°ü×°ID
-  /// ÔÚÇó±Õ°üÊ±´ÓºËĞÄÏî¿ªÊ¼Õ¹¿ª
-  /// @attention ²åÈëÊ±¸ÃÏî¼¯±ØĞëÃ»Çó¹ı±Õ°ü£¬ÒòÎªÇó¹ı±Õ°üµÄÏî¼¯¿ÉÄÜÔÚÖ®ºóµÄ¹¹½¨
-  /// ¹ı³ÌÖĞ±»ÔÙ´ÎÒıÓÃ
-  /// forward_node_ids±ØĞë²»Îª¿Õ£¬ËùÓĞÏî¶¼Ò»¶¨ÓĞÏòÇ°¿´·ûºÅ
+  /// å¦‚æœItemå·²å­˜åœ¨åˆ™ä»…æ·»åŠ å‘å‰çœ‹ç¬¦å·ä¸”ç¬¬äºŒä¸ªè¿”å›å‚æ•°ä¸ºfalse
+  /// å¯ä»¥ä½¿ç”¨å•ä¸ªæœªåŒ…è£…ID
+  /// åœ¨æ±‚é—­åŒ…æ—¶ä»æ ¸å¿ƒé¡¹å¼€å§‹å±•å¼€
+  /// @attention æ’å…¥æ—¶è¯¥é¡¹é›†å¿…é¡»æ²¡æ±‚è¿‡é—­åŒ…ï¼Œå› ä¸ºæ±‚è¿‡é—­åŒ…çš„é¡¹é›†å¯èƒ½åœ¨ä¹‹åçš„æ„å»º
+  /// è¿‡ç¨‹ä¸­è¢«å†æ¬¡å¼•ç”¨
+  /// forward_node_idså¿…é¡»ä¸ä¸ºç©ºï¼Œæ‰€æœ‰é¡¹éƒ½ä¸€å®šæœ‰å‘å‰çœ‹ç¬¦å·
   template <class ForwardNodeIdContainer>
   std::pair<ProductionItemAndForwardNodesContainer::iterator, bool>
   AddMainItemAndForwardNodeIds(const ProductionItem& item,
@@ -91,132 +91,132 @@ class ProductionItemSet {
     return result;
   }
 
-  /// @brief ÅĞ¶Ï¸ø¶¨ÏîÊÇ·ñÔÚ¸ÃÏî¼¯ÄÚ
-  /// @return ·µ»Ø¸ø¶¨ÏîÊÇ·ñÔÚ¸ÃÏî¼¯ÄÚ
-  /// @retval true £º¸ø¶¨ÏîÔÚ¸ÃÏî¼¯ÄÚ
-  /// @retval false £º¸ø¶¨Ïî²»ÔÚ¸ÃÏî¼¯ÄÚ
+  /// @brief åˆ¤æ–­ç»™å®šé¡¹æ˜¯å¦åœ¨è¯¥é¡¹é›†å†…
+  /// @return è¿”å›ç»™å®šé¡¹æ˜¯å¦åœ¨è¯¥é¡¹é›†å†…
+  /// @retval true ï¼šç»™å®šé¡¹åœ¨è¯¥é¡¹é›†å†…
+  /// @retval false ï¼šç»™å®šé¡¹ä¸åœ¨è¯¥é¡¹é›†å†…
   bool IsItemIn(const ProductionItem& item) const {
     return item_and_forward_node_ids_.find(item) !=
            item_and_forward_node_ids_.end();
   }
-  /// @brief »ñÈ¡¸ÃÏî¼¯ÇóµÄ±Õ°üÊÇ·ñÓĞĞ§
-  /// @return ·µ»Ø¸ÃÏî¼¯ÇóµÄ±Õ°üÊÇ·ñÓĞĞ§
-  /// @retval true £º¸ÃÏî¼¯±Õ°üÓĞĞ§£¬ÎŞĞèÖØÇó
-  /// @retval false £º¸ÃÏî¼¯±Õ°üÎŞĞ§£¬ĞèÒªÇó±Õ°ü²ÅÄÜÊ¹ÓÃ
+  /// @brief è·å–è¯¥é¡¹é›†æ±‚çš„é—­åŒ…æ˜¯å¦æœ‰æ•ˆ
+  /// @return è¿”å›è¯¥é¡¹é›†æ±‚çš„é—­åŒ…æ˜¯å¦æœ‰æ•ˆ
+  /// @retval true ï¼šè¯¥é¡¹é›†é—­åŒ…æœ‰æ•ˆï¼Œæ— éœ€é‡æ±‚
+  /// @retval false ï¼šè¯¥é¡¹é›†é—­åŒ…æ— æ•ˆï¼Œéœ€è¦æ±‚é—­åŒ…æ‰èƒ½ä½¿ç”¨
   bool IsClosureAvailable() const {
     return production_item_set_closure_available_;
   }
-  /// @brief ÉèÖÃÏî¼¯ID
-  /// @param[in] production_item_set_id £ºÏî¼¯ID
+  /// @brief è®¾ç½®é¡¹é›†ID
+  /// @param[in] production_item_set_id ï¼šé¡¹é›†ID
   void SetProductionItemSetId(ProductionItemSetId production_item_set_id) {
     production_item_set_id_ = production_item_set_id;
   }
-  /// @brief »ñÈ¡Ïî¼¯ID
-  /// @return ·µ»ØÏî¼¯ID
+  /// @brief è·å–é¡¹é›†ID
+  /// @return è¿”å›é¡¹é›†ID
   ProductionItemSetId GetProductionItemSetId() const {
     return production_item_set_id_;
   }
 
-  /// @brief ÉèÖÃ¸ÃÏî¼¯ÇóµÄ±Õ°üÓĞĞ§
-  /// @attention ¸Ãº¯Êı½öÓ¦ÓÉ±Õ°üº¯Êıµ÷ÓÃ
+  /// @brief è®¾ç½®è¯¥é¡¹é›†æ±‚çš„é—­åŒ…æœ‰æ•ˆ
+  /// @attention è¯¥å‡½æ•°ä»…åº”ç”±é—­åŒ…å‡½æ•°è°ƒç”¨
   void SetClosureAvailable() { production_item_set_closure_available_ = true; }
-  /// @brief »ñÈ¡È«²¿Ö¸ÏòºËĞÄÏîµÄµü´úÆ÷
-  /// @return ·µ»ØÈ«²¿Ö¸ÏòºËĞÄÏîµÄµü´úÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–å…¨éƒ¨æŒ‡å‘æ ¸å¿ƒé¡¹çš„è¿­ä»£å™¨
+  /// @return è¿”å›å…¨éƒ¨æŒ‡å‘æ ¸å¿ƒé¡¹çš„è¿­ä»£å™¨çš„constå¼•ç”¨
   const std::list<ProductionItemAndForwardNodesContainer::const_iterator>&
   GetMainItemIters() const {
     return main_items_;
   }
-  /// @brief »ñÈ¡È«²¿ÏîºÍ¶ÔÓ¦µÄÏòÇ°¿´½Úµã
-  /// @return ·µ»ØÈ«²¿ÏîºÍ¶ÔÓ¦µÄÏòÇ°¿´½ÚµãµÄconstÒıÓÃ
+  /// @brief è·å–å…¨éƒ¨é¡¹å’Œå¯¹åº”çš„å‘å‰çœ‹èŠ‚ç‚¹
+  /// @return è¿”å›å…¨éƒ¨é¡¹å’Œå¯¹åº”çš„å‘å‰çœ‹èŠ‚ç‚¹çš„constå¼•ç”¨
   const ProductionItemAndForwardNodesContainer& GetItemsAndForwardNodeIds()
       const {
     return item_and_forward_node_ids_;
   }
-  /// @brief »ñÈ¡¸ÃÏî¼¯¶ÔÓ¦µÄÓï·¨·ÖÎö±íÌõÄ¿ID
-  /// @return ¸ÃÏî¼¯¶ÔÓ¦µÄÓï·¨·ÖÎö±íÌõÄ¿ID
+  /// @brief è·å–è¯¥é¡¹é›†å¯¹åº”çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+  /// @return è¯¥é¡¹é›†å¯¹åº”çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   SyntaxAnalysisTableEntryId GetSyntaxAnalysisTableEntryId() const {
     return syntax_analysis_table_entry_id_;
   }
-  /// @brief ÉèÖÃ¸ÃÏî¼¯¶ÔÓ¦µÄÓï·¨·ÖÎö±íÌõÄ¿ID
-  /// @param[in] syntax_analysis_table_entry_id £º¸ÃÏî¼¯¶ÔÓ¦µÄÓï·¨·ÖÎö±íÌõÄ¿ID
+  /// @brief è®¾ç½®è¯¥é¡¹é›†å¯¹åº”çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+  /// @param[in] syntax_analysis_table_entry_id ï¼šè¯¥é¡¹é›†å¯¹åº”çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   void SetSyntaxAnalysisTableEntryId(
       SyntaxAnalysisTableEntryId syntax_analysis_table_entry_id) {
     syntax_analysis_table_entry_id_ = syntax_analysis_table_entry_id;
   }
-  /// @brief Ïò¸ø¶¨ÏîÖĞÌí¼ÓÏòÇ°¿´·ûºÅ
-  /// @param[in] item £º´ıÌí¼ÓÏòÇ°¿´·ûºÅµÄÏî
-  /// @param[in] forward_node_id_container £º´ıÌí¼ÓµÄÏòÇ°¿´·ûºÅ
-  /// @return ·µ»ØÊÇ·ñÌí¼ÓÁËÏòÇ°¿´·ûºÅ
-  /// @retval true £ºÌí¼ÓÁËÏòÇ°¿´·ûºÅ
-  /// @retval false £ºforward_node_id_containerÖĞÈ«²¿ÏòÇ°¿´·ûºÅ¾ùÒÑ´æÔÚ
+  /// @brief å‘ç»™å®šé¡¹ä¸­æ·»åŠ å‘å‰çœ‹ç¬¦å·
+  /// @param[in] item ï¼šå¾…æ·»åŠ å‘å‰çœ‹ç¬¦å·çš„é¡¹
+  /// @param[in] forward_node_id_container ï¼šå¾…æ·»åŠ çš„å‘å‰çœ‹ç¬¦å·
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ äº†å‘å‰çœ‹ç¬¦å·
+  /// @retval true ï¼šæ·»åŠ äº†å‘å‰çœ‹ç¬¦å·
+  /// @retval false ï¼šforward_node_id_containerä¸­å…¨éƒ¨å‘å‰çœ‹ç¬¦å·å‡å·²å­˜åœ¨
   /// @note
-  /// 1.forward_node_id_containerÖ§³ÖÊäÈëµ¥¸öÏòÇ°¿´·ûºÅºÍ´æ´¢ÏòÇ°¿´·ûºÅµÄÈİÆ÷
-  /// 2.item±ØĞëÎªºËĞÄÏî£¬·ñÔòÇëµ÷ÓÃAddItemAndForwardNodeIds¼°ÀàËÆº¯Êı
-  /// 3.Èç¹ûÌí¼ÓÁËĞÂµÄÏòÇ°¿´·ûºÅÔòÉèÖÃ±Õ°üÎŞĞ§
-  /// @attention item±ØĞëÒÑ¾­Ìí¼Óµ½¸ÃÏî¼¯ÖĞ
+  /// 1.forward_node_id_containeræ”¯æŒè¾“å…¥å•ä¸ªå‘å‰çœ‹ç¬¦å·å’Œå­˜å‚¨å‘å‰çœ‹ç¬¦å·çš„å®¹å™¨
+  /// 2.itemå¿…é¡»ä¸ºæ ¸å¿ƒé¡¹ï¼Œå¦åˆ™è¯·è°ƒç”¨AddItemAndForwardNodeIdsåŠç±»ä¼¼å‡½æ•°
+  /// 3.å¦‚æœæ·»åŠ äº†æ–°çš„å‘å‰çœ‹ç¬¦å·åˆ™è®¾ç½®é—­åŒ…æ— æ•ˆ
+  /// @attention itemå¿…é¡»å·²ç»æ·»åŠ åˆ°è¯¥é¡¹é›†ä¸­
   template <class ForwardNodeIdContainer>
   bool AddForwardNodes(const ProductionItem& item,
                        ForwardNodeIdContainer&& forward_node_id_container);
-  /// @brief Çå¿ÕËùÓĞ·ÇºËĞÄÏî
+  /// @brief æ¸…ç©ºæ‰€æœ‰éæ ¸å¿ƒé¡¹
   void ClearNotMainItem();
-  /// @brief ÅĞ¶Ï¸ø¶¨ÏîÊÇ·ñÎª¸ÃÏî¼¯µÄºËĞÄÏî
-  /// @param[in] item £º´ıÅĞ¶ÏµÄÏî
-  /// @return ·µ»Ø¸ø¶¨ÏîÊÇ·ñÎª¸ÃÏî¼¯µÄºËĞÄÏîµÄÅĞ¶Ï½á¹û
-  /// @retval true ¸ø¶¨ÏîÊÇ¸ÃÏî¼¯µÄºËĞÄÏî
-  /// @retval false ¸ø¶¨Ïî²»ÊÇ¸ÃÏî¼¯µÄºËĞÄÏî»ò²»´æÔÚÓÚ¸ÃÏî¼¯
-  /// @warning Ê±¼ä¸´ÔÓ¶ÈO(n)£¬nÎª¸ÃÏî¼¯ºËĞÄÏîÊı
+  /// @brief åˆ¤æ–­ç»™å®šé¡¹æ˜¯å¦ä¸ºè¯¥é¡¹é›†çš„æ ¸å¿ƒé¡¹
+  /// @param[in] item ï¼šå¾…åˆ¤æ–­çš„é¡¹
+  /// @return è¿”å›ç»™å®šé¡¹æ˜¯å¦ä¸ºè¯¥é¡¹é›†çš„æ ¸å¿ƒé¡¹çš„åˆ¤æ–­ç»“æœ
+  /// @retval true ç»™å®šé¡¹æ˜¯è¯¥é¡¹é›†çš„æ ¸å¿ƒé¡¹
+  /// @retval false ç»™å®šé¡¹ä¸æ˜¯è¯¥é¡¹é›†çš„æ ¸å¿ƒé¡¹æˆ–ä¸å­˜åœ¨äºè¯¥é¡¹é›†
+  /// @warning æ—¶é—´å¤æ‚åº¦O(n)ï¼Œnä¸ºè¯¥é¡¹é›†æ ¸å¿ƒé¡¹æ•°
   bool IsMainItem(const ProductionItem& item);
-  /// @brief »ñÈ¡Ïî¼¯ÖĞÏîµÄ¸öÊı
-  /// @return ·µ»ØÏîµÄ¸öÊı
+  /// @brief è·å–é¡¹é›†ä¸­é¡¹çš„ä¸ªæ•°
+  /// @return è¿”å›é¡¹çš„ä¸ªæ•°
   size_t Size() const { return item_and_forward_node_ids_.size(); }
-  /// @brief »ñÈ¡ºËĞÄÏî¼¯¸öÊı
+  /// @brief è·å–æ ¸å¿ƒé¡¹é›†ä¸ªæ•°
   size_t MainItemSize() const { return GetMainItemIters().size(); }
 
  private:
-  /// @brief ÉèÖÃÒ»ÏîÎªºËĞÄÏî
-  /// @param[in] item_iter £ºÖ¸ÏòÒª±»ÉèÖÃÎªºËĞÄÏîµÄÏîµÄµü´úÆ÷
+  /// @brief è®¾ç½®ä¸€é¡¹ä¸ºæ ¸å¿ƒé¡¹
+  /// @param[in] item_iter ï¼šæŒ‡å‘è¦è¢«è®¾ç½®ä¸ºæ ¸å¿ƒé¡¹çš„é¡¹çš„è¿­ä»£å™¨
   /// @note
-  /// ÒªÇóÖ¸¶¨µÄÏîÎ´±»ÉèÖÃ³ÉºËĞÄÏî¹ı
-  /// ×Ô¶¯ÉèÖÃ±Õ°üÎŞĞ§
+  /// è¦æ±‚æŒ‡å®šçš„é¡¹æœªè¢«è®¾ç½®æˆæ ¸å¿ƒé¡¹è¿‡
+  /// è‡ªåŠ¨è®¾ç½®é—­åŒ…æ— æ•ˆ
   void SetMainItem(
       ProductionItemAndForwardNodesContainer ::const_iterator& item_iter);
-  /// @brief Ïò¸ø¶¨ÏîÖĞÌí¼ÓÏòÇ°¿´·ûºÅ
-  /// @param[in] iter £º´ıÌí¼ÓÏòÇ°¿´·ûºÅµÄÏî
-  /// @param[in] forward_node_id_container £º´ıÌí¼ÓµÄÏòÇ°¿´·ûºÅ
-  /// @return ·µ»ØÊÇ·ñÌí¼ÓÁËĞÂµÄÏòÇ°¿´·ûºÅ
-  /// @retval true £ºÌí¼ÓÁËÏòÇ°¿´·ûºÅ
-  /// @retval false £ºforward_node_id_containerÖĞÈ«²¿ÏòÇ°¿´·ûºÅ¾ùÒÑ´æÔÚ
+  /// @brief å‘ç»™å®šé¡¹ä¸­æ·»åŠ å‘å‰çœ‹ç¬¦å·
+  /// @param[in] iter ï¼šå¾…æ·»åŠ å‘å‰çœ‹ç¬¦å·çš„é¡¹
+  /// @param[in] forward_node_id_container ï¼šå¾…æ·»åŠ çš„å‘å‰çœ‹ç¬¦å·
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ äº†æ–°çš„å‘å‰çœ‹ç¬¦å·
+  /// @retval true ï¼šæ·»åŠ äº†å‘å‰çœ‹ç¬¦å·
+  /// @retval false ï¼šforward_node_id_containerä¸­å…¨éƒ¨å‘å‰çœ‹ç¬¦å·å‡å·²å­˜åœ¨
   /// @note
-  /// 1.ÏòÒÑÓĞµÄÏî¼¯ÖĞÌí¼ÓÏòÇ°¿´·ûºÅ×îÖÕ¶¼Ó¦×ß¸Ã½Ó¿Ú
-  /// 2.forward_node_id_containerÖ§³ÖÊäÈëµ¥¸öÏòÇ°¿´·ûºÅºÍ´æ´¢ÏòÇ°¿´·ûºÅµÄÈİÆ÷
-  /// 3.Èç¹ûÌí¼ÓÁËĞÂµÄÏòÇ°¿´·ûºÅÔòÉèÖÃ±Õ°üÎŞĞ§
+  /// 1.å‘å·²æœ‰çš„é¡¹é›†ä¸­æ·»åŠ å‘å‰çœ‹ç¬¦å·æœ€ç»ˆéƒ½åº”èµ°è¯¥æ¥å£
+  /// 2.forward_node_id_containeræ”¯æŒè¾“å…¥å•ä¸ªå‘å‰çœ‹ç¬¦å·å’Œå­˜å‚¨å‘å‰çœ‹ç¬¦å·çš„å®¹å™¨
+  /// 3.å¦‚æœæ·»åŠ äº†æ–°çš„å‘å‰çœ‹ç¬¦å·åˆ™è®¾ç½®é—­åŒ…æ— æ•ˆ
   template <class ForwardNodeIdContainer>
   bool AddForwardNodes(
       const ProductionItemAndForwardNodesContainer::iterator& iter,
       ForwardNodeIdContainer&& forward_node_id_container);
-  /// @brief ÉèÖÃ±Õ°üÎŞĞ§
-  /// @note Ã¿¸öĞŞ¸ÄÁËÏî/ÏîµÄÏòÇ°¿´·ûºÅµÄº¯Êı¶¼Ó¦ÉèÖÃ±Õ°üÎŞĞ§
+  /// @brief è®¾ç½®é—­åŒ…æ— æ•ˆ
+  /// @note æ¯ä¸ªä¿®æ”¹äº†é¡¹/é¡¹çš„å‘å‰çœ‹ç¬¦å·çš„å‡½æ•°éƒ½åº”è®¾ç½®é—­åŒ…æ— æ•ˆ
   void SetClosureNotAvailable() {
     production_item_set_closure_available_ = false;
   }
-  /// @brief »ñÈ¡È«²¿Ö¸ÏòºËĞÄÏîµÄµü´úÆ÷
-  /// @return ·µ»ØÈ«²¿Ö¸ÏòºËĞÄÏîµÄµü´úÆ÷µÄÒıÓÃ
+  /// @brief è·å–å…¨éƒ¨æŒ‡å‘æ ¸å¿ƒé¡¹çš„è¿­ä»£å™¨
+  /// @return è¿”å›å…¨éƒ¨æŒ‡å‘æ ¸å¿ƒé¡¹çš„è¿­ä»£å™¨çš„å¼•ç”¨
   std::list<ProductionItemAndForwardNodesContainer::const_iterator>&
   GetMainItemIters() {
     return main_items_;
   }
 
-  /// @brief ´æ´¢Ö¸ÏòºËĞÄÏîµÄµü´úÆ÷
+  /// @brief å­˜å‚¨æŒ‡å‘æ ¸å¿ƒé¡¹çš„è¿­ä»£å™¨
   std::list<ProductionItemAndForwardNodesContainer::const_iterator> main_items_;
-  /// @brief ¸ÃÏî¼¯ÇóµÄ±Õ°üÊÇ·ñÓĞĞ§£¨Çó¹ı±Õ°üÇÒÎ´¸ü¸Ä¹ıÔòÎªtrue£©
+  /// @brief è¯¥é¡¹é›†æ±‚çš„é—­åŒ…æ˜¯å¦æœ‰æ•ˆï¼ˆæ±‚è¿‡é—­åŒ…ä¸”æœªæ›´æ”¹è¿‡åˆ™ä¸ºtrueï¼‰
   bool production_item_set_closure_available_ = false;
-  /// @brief Ïî¼¯ID
+  /// @brief é¡¹é›†ID
   ProductionItemSetId production_item_set_id_ =
       ProductionItemSetId::InvalidId();
-  /// @brief Ïî¼¯¶ÔÓ¦µÄÓï·¨·ÖÎö±íÌõÄ¿ID
+  /// @brief é¡¹é›†å¯¹åº”çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   SyntaxAnalysisTableEntryId syntax_analysis_table_entry_id_ =
       SyntaxAnalysisTableEntryId::InvalidId();
-  /// @brief ÏîºÍ¶ÔÓ¦µÄÏòÇ°¿´·ûºÅ
+  /// @brief é¡¹å’Œå¯¹åº”çš„å‘å‰çœ‹ç¬¦å·
   ProductionItemAndForwardNodesContainer item_and_forward_node_ids_;
 };
 
@@ -225,9 +225,9 @@ std::pair<ProductionItemSet::ProductionItemAndForwardNodesContainer::iterator,
           bool>
 ProductionItemSet::AddItemAndForwardNodeIds(
     const ProductionItem& item, ForwardNodeIdContainer&& forward_node_ids) {
-  // ÒÑ¾­Çó¹ı±Õ°üµÄÏî¼¯²»ÄÜÌí¼ÓĞÂÏî
+  // å·²ç»æ±‚è¿‡é—­åŒ…çš„é¡¹é›†ä¸èƒ½æ·»åŠ æ–°é¡¹
   assert(!IsClosureAvailable());
-  // ÈÎºÎÏî¶¼±ØĞëĞ¯´øÏòÇ°¿´·ûºÅ
+  // ä»»ä½•é¡¹éƒ½å¿…é¡»æºå¸¦å‘å‰çœ‹ç¬¦å·
   assert(forward_node_ids.size() != 0);
   auto iter = item_and_forward_node_ids_.find(item);
   if (iter == item_and_forward_node_ids_.end()) {
@@ -246,7 +246,7 @@ inline bool ProductionItemSet::AddForwardNodes(
     const ProductionItem& item,
     ForwardNodeIdContainer&& forward_node_id_container) {
 #ifdef _DEBUG
-  // ¼ì²é¸ø¶¨ÏîÊÇºËĞÄÏî
+  // æ£€æŸ¥ç»™å®šé¡¹æ˜¯æ ¸å¿ƒé¡¹
   bool is_main_item = false;
   for (const auto& main_item_iter : GetMainItemIters()) {
     if (main_item_iter->first == item) [[unlikely]] {
@@ -270,19 +270,19 @@ inline bool ProductionItemSet::AddForwardNodes(
   bool result;
   if constexpr (std::is_same_v<std::decay_t<ForwardNodeIdContainer>,
                                ProductionNodeId>) {
-    // ¶Ôµ¥¸öÏòÇ°¿´·ûºÅÌØ»¯
+    // å¯¹å•ä¸ªå‘å‰çœ‹ç¬¦å·ç‰¹åŒ–
     result = iter->second
                  .emplace(std::forward<ForwardNodeIdContainer>(
                      forward_node_id_container))
                  .second;
   } else {
-    // ¶ÔÈİÆ÷ÌØ»¯
+    // å¯¹å®¹å™¨ç‰¹åŒ–
     result = false;
     for (auto& forward_node_id : forward_node_id_container) {
       result |= iter->second.insert(forward_node_id).second;
     }
   }
-  // Èç¹ûÌí¼ÓÁËĞÂµÄÏòÇ°¿´½ÚµãÔòÉèÖÃ±Õ°üÎŞĞ§
+  // å¦‚æœæ·»åŠ äº†æ–°çš„å‘å‰çœ‹èŠ‚ç‚¹åˆ™è®¾ç½®é—­åŒ…æ— æ•ˆ
   if (result) {
     SetClosureNotAvailable();
   }

@@ -1,5 +1,5 @@
-/// @file syntax_parser.h
-/// @brief Óï·¨·ÖÎö»ú
+ï»¿/// @file syntax_parser.h
+/// @brief è¯­æ³•åˆ†ææœº
 #ifndef PARSER_SYNTAXPARSER_SYNTAXPARSER_H_
 #define PARSER_SYNTAXPARSER_SYNTAXPARSER_H_
 #include <any>
@@ -11,68 +11,70 @@
 #include "Generator/SyntaxGenerator/syntax_analysis_table.h"
 #include "Generator/export_types.h"
 #include "Parser/DfaParser/dfa_parser.h"
+#define ENABLE_LOG
+#include "Logger/logger.h"
 
 namespace frontend::parser::syntax_parser {
 
 /// @class SyntaxParser syntax_parser.h
-/// @brief Óï·¨·ÖÎö»ú
+/// @brief è¯­æ³•åˆ†ææœº
 class SyntaxParser {
   using DfaParser = frontend::parser::dfa_parser::DfaParser;
 
  public:
-  /// @brief DFAÒıÇæ·µ»ØµÄµ¥´ÊĞÅÏ¢
+  /// @brief DFAå¼•æ“è¿”å›çš„å•è¯ä¿¡æ¯
   using WordInfo = DfaParser::WordInfo;
-  /// @brief Óï·¨·ÖÎö±íÌõÄ¿ID
+  /// @brief è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   using SyntaxAnalysisTableEntryId =
       frontend::generator::syntax_generator::SyntaxAnalysisTableEntryId;
-  /// @brief Óï·¨·ÖÎö±í
+  /// @brief è¯­æ³•åˆ†æè¡¨
   using SyntaxAnalysisTableType =
       frontend::generator::syntax_generator::SyntaxAnalysisTableType;
-  /// @brief ²úÉúÊ½ID
+  /// @brief äº§ç”Ÿå¼ID
   using ProductionNodeId =
       frontend::generator::syntax_generator::ProductionNodeId;
-  /// @brief ²úÉúÊ½½ÚµãÀàĞÍ
+  /// @brief äº§ç”Ÿå¼èŠ‚ç‚¹ç±»å‹
   using ProductionNodeType =
       frontend::generator::syntax_generator::ProductionNodeType;
-  /// @brief ÔËËã·û½áºÏĞÔ
+  /// @brief è¿ç®—ç¬¦ç»“åˆæ€§
   using OperatorAssociatityType =
       frontend::generator::syntax_generator::OperatorAssociatityType;
-  /// @brief °ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏó¹ÜÀíÆ÷
+  /// @brief åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ç®¡ç†å™¨
   using ProcessFunctionClassManagerType =
       frontend::generator::syntax_generator::ProcessFunctionClassManagerType;
-  /// @brief °ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóID
+  /// @brief åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡ID
   using ProcessFunctionClassId =
       frontend::generator::syntax_generator::ProcessFunctionClassId;
-  /// @brief °ü×°¹æÔ¼º¯ÊıµÄÀàµÄ»ùÀà
+  /// @brief åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„åŸºç±»
   using ProcessFunctionInterface =
       frontend::generator::syntax_generator::ProcessFunctionInterface;
-  /// @brief ¶¯×÷ºÍ¸½ÊôÊı¾İµÄ»ùÀà
+  /// @brief åŠ¨ä½œå’Œé™„å±æ•°æ®çš„åŸºç±»
   using ActionAndAttachedDataInterface = frontend::generator::syntax_generator::
       SyntaxAnalysisTableEntry::ActionAndAttachedDataInterface;
-  /// @brief Ãæ¶ÔÏòÇ°¿´·ûºÅÊ±µÄ¶¯×÷
+  /// @brief é¢å¯¹å‘å‰çœ‹ç¬¦å·æ—¶çš„åŠ¨ä½œ
   using ActionType = frontend::generator::syntax_generator::ActionType;
-  /// @brief ÒÆÈë¶¯×÷µÄÊı¾İ
+  /// @brief ç§»å…¥åŠ¨ä½œçš„æ•°æ®
   using ShiftAttachedData = frontend::generator::syntax_generator::
       SyntaxAnalysisTableEntry::ShiftAttachedData;
-  /// @brief ¹éÔ¼¶¯×÷µÄÊı¾İ
+  /// @brief å½’çº¦åŠ¨ä½œçš„æ•°æ®
   using ReductAttachedData = frontend::generator::syntax_generator::
       SyntaxAnalysisTableEntry::ReductAttachedData;
   /// @brief
-  /// ÔËËã·ûÓÅÏÈ¼¶£¬µÈÓÚÒÑÒÆÈëµÄ×î¸ßÓÅÏÈ¼¶ÔËËã·ûÓÅÏÈ¼¶£¬0±£ÁôÎª·ÇÔËËã·ûÓÅÏÈ¼¶
+  /// è¿ç®—ç¬¦ä¼˜å…ˆçº§ï¼Œç­‰äºå·²ç§»å…¥çš„æœ€é«˜ä¼˜å…ˆçº§è¿ç®—ç¬¦ä¼˜å…ˆçº§ï¼Œ0ä¿ç•™ä¸ºéè¿ç®—ç¬¦ä¼˜å…ˆçº§
   using OperatorPriority =
       frontend::generator::syntax_generator::OperatorPriority;
 
   /// @class ParsingData syntax_parser.h
-  /// @brief ½âÎöÊ±Ê¹ÓÃµÄÊı¾İ
+  /// @brief è§£ææ—¶ä½¿ç”¨çš„æ•°æ®
   struct ParsingData {
-    /// @brief µ±Ç°Óï·¨·ÖÎö±íÌõÄ¿ID
+    /// @brief å½“å‰è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
     SyntaxAnalysisTableEntryId syntax_analysis_table_entry_id;
-    /// @brief ÔÚsyntax_analysis_table_entry_idÌõÄ¿µÄ»ù´¡ÉÏÒÆÈëµÄ²úÉúÊ½½ÚµãµÄID
-    /// @note Ìá¹©¸ÃÏîÎªÁËÖ§³Ö¿Õ¹æÔ¼¹¦ÄÜ
+    /// @brief åœ¨syntax_analysis_table_entry_idæ¡ç›®çš„åŸºç¡€ä¸Šç§»å…¥çš„äº§ç”Ÿå¼èŠ‚ç‚¹çš„ID
+    /// @note æä¾›è¯¥é¡¹ä¸ºäº†æ”¯æŒç©ºè§„çº¦åŠŸèƒ½
     ProductionNodeId shift_node_id = ProductionNodeId::InvalidId();
-    /// @brief ÒÆÈëµÄÖÕ½á½ÚµãÊı¾İ»ò·ÇÖÕ½á½Úµã¹æÔ¼ºóÓÃ»§·µ»ØµÄÊı¾İ
+    /// @brief ç§»å…¥çš„ç»ˆç»“èŠ‚ç‚¹æ•°æ®æˆ–éç»ˆç»“èŠ‚ç‚¹è§„çº¦åç”¨æˆ·è¿”å›çš„æ•°æ®
     std::any word_data_to_user;
-    /// @brief ·ÇÔËËã·ûÓÅÏÈ¼¶Îª0
+    /// @brief éè¿ç®—ç¬¦ä¼˜å…ˆçº§ä¸º0
     OperatorPriority operator_priority = OperatorPriority(0);
   };
 
@@ -80,145 +82,145 @@ class SyntaxParser {
   SyntaxParser(const SyntaxParser&) = delete;
   SyntaxParser& operator=(SyntaxParser&&) = delete;
 
-  /// @brief ¼ÓÔØÅäÖÃ
+  /// @brief åŠ è½½é…ç½®
   void LoadConfig();
-  /// @brief ÉèÖÃDFA·µ»ØµÄ´ıÒÆÈëµ¥´ÊÊı¾İ
-  /// @param[in] dfa_return_data £ºDFA·µ»ØµÄ´ıÒÆÈëµ¥´ÊÊı¾İ
+  /// @brief è®¾ç½®DFAè¿”å›çš„å¾…ç§»å…¥å•è¯æ•°æ®
+  /// @param[in] dfa_return_data ï¼šDFAè¿”å›çš„å¾…ç§»å…¥å•è¯æ•°æ®
   void SetDfaReturnData(WordInfo&& dfa_return_data) {
     dfa_return_data_ = std::move(dfa_return_data);
   }
-  /// @brief »ñÈ¡DFA·µ»ØµÄ´ıÒÆÈëµ¥´ÊµÄÊı¾İ
+  /// @brief è·å–DFAè¿”å›çš„å¾…ç§»å…¥å•è¯çš„æ•°æ®
   WordInfo& GetWaitingProcessWordInfo() { return dfa_return_data_; }
-  /// @brief »ñÈ¡ÏÂÒ»¸öµ¥´ÊµÄÊı¾İ²¢´æÔÚdfa_return_data_ÖĞ
+  /// @brief è·å–ä¸‹ä¸€ä¸ªå•è¯çš„æ•°æ®å¹¶å­˜åœ¨dfa_return_data_ä¸­
   void GetNextWord() { SetDfaReturnData(dfa_parser_.GetNextWord()); }
-  /// @brief »ñÈ¡¸ùÓï·¨·ÖÎö±íÌõÄ¿D
-  /// @return ·µ»Ø¸ùÓï·¨·ÖÎö±íÌõÄ¿ID
+  /// @brief è·å–æ ¹è¯­æ³•åˆ†æè¡¨æ¡ç›®D
+  /// @return è¿”å›æ ¹è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   SyntaxAnalysisTableEntryId GetRootParsingEntryId() const {
     return root_parsing_entry_id_;
   }
-  /// @brief »ñÈ¡°ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏó
-  /// @return ·µ»Ø°ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóµÄconstÒıÓÃ
+  /// @brief è·å–åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡
+  /// @return è¿”å›åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡çš„constå¼•ç”¨
   const ProcessFunctionInterface& GetProcessFunctionClass(
       ProcessFunctionClassId class_id) const {
     return manager_process_function_class_[class_id];
   }
-  /// @brief »ñÈ¡ÔÚ¸ø¶¨ÏòÇ°¿´²úÉúÊ½½ÚµãÌõ¼şÏÂµÄ¶¯×÷ºÍ¸½ÊôÊı¾İ
-  /// @param[in] src_entry_id £ºÆğÊ¼Óï·¨·ÖÎö±íÌõÄ¿ID
-  /// @param[in] node_id £ºÏòÇ°¿´²úÉúÊ½½ÚµãID
-  /// @return ·µ»ØÖ¸Ïò¶¯×÷ºÍ¸½ÊôÊı¾İ»ùÀàµÄconstÖ¸Õë
-  /// @retval nullptr ²»´æÔÚ¸Ã×ªÒÆÌõ¼şÔò·µ»Ø¿ÕÖ¸Õë
+  /// @brief è·å–åœ¨ç»™å®šå‘å‰çœ‹äº§ç”Ÿå¼èŠ‚ç‚¹æ¡ä»¶ä¸‹çš„åŠ¨ä½œå’Œé™„å±æ•°æ®
+  /// @param[in] src_entry_id ï¼šèµ·å§‹è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+  /// @param[in] node_id ï¼šå‘å‰çœ‹äº§ç”Ÿå¼èŠ‚ç‚¹ID
+  /// @return è¿”å›æŒ‡å‘åŠ¨ä½œå’Œé™„å±æ•°æ®åŸºç±»çš„constæŒ‡é’ˆ
+  /// @retval nullptr ä¸å­˜åœ¨è¯¥è½¬ç§»æ¡ä»¶åˆ™è¿”å›ç©ºæŒ‡é’ˆ
   const ActionAndAttachedDataInterface* GetActionAndTarget(
       SyntaxAnalysisTableEntryId src_entry_id, ProductionNodeId node_id) const {
     assert(src_entry_id.IsValid());
     return syntax_analysis_table_[src_entry_id].AtTerminalNode(node_id);
   }
-  /// @brief »ñÈ¡ÒÆÈë·ÇÖÕ½á²úÉúÊ½½Úµãºóµ½´ïµÄ²úÉúÊ½ÌõÄ¿
-  /// @param[in] src_entry_id £ºÆğÊ¼Óï·¨·ÖÎö±íÌõÄ¿ID
-  /// @param[in] node_id £ºÒÆÈëµÄ·ÇÖÕ½á²úÉúÊ½½Úµã
-  /// @return ·µ»ØÒÆÈë·ÇÖÕ½á²úÉúÊ½ºó×ªÒÆµ½µÄÓï·¨·ÖÎö±íÌõÄ¿ID
+  /// @brief è·å–ç§»å…¥éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹ååˆ°è¾¾çš„äº§ç”Ÿå¼æ¡ç›®
+  /// @param[in] src_entry_id ï¼šèµ·å§‹è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
+  /// @param[in] node_id ï¼šç§»å…¥çš„éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹
+  /// @return è¿”å›ç§»å…¥éç»ˆç»“äº§ç”Ÿå¼åè½¬ç§»åˆ°çš„è¯­æ³•åˆ†æè¡¨æ¡ç›®ID
   /// @return SyntaxAnalysisTableEntryId::InvalidId()
-  /// ÎŞ·¨ÒÆÈë¸ø¶¨µÄ·ÇÖÕ½á²úÉúÊ½½ÚµãID
+  /// æ— æ³•ç§»å…¥ç»™å®šçš„éç»ˆç»“äº§ç”Ÿå¼èŠ‚ç‚¹ID
   SyntaxAnalysisTableEntryId GetNextEntryId(
       SyntaxAnalysisTableEntryId src_entry_id, ProductionNodeId node_id) const {
     assert(src_entry_id.IsValid());
     return syntax_analysis_table_[src_entry_id].AtNonTerminalNode(node_id);
   }
-  /// @brief »ñÈ¡µ±Ç°»îÔ¾µÄ½âÎöÊı¾İ£¨½âÎöÊı¾İÕ»¶¥¶ÔÏó£©
-  /// @return ·µ»Ø½âÎöÊı¾İÕ»¶¥²ã¶ÔÏóµÄÒıÓÃ
+  /// @brief è·å–å½“å‰æ´»è·ƒçš„è§£ææ•°æ®ï¼ˆè§£ææ•°æ®æ ˆé¡¶å¯¹è±¡ï¼‰
+  /// @return è¿”å›è§£ææ•°æ®æ ˆé¡¶å±‚å¯¹è±¡çš„å¼•ç”¨
   ParsingData& GetParsingDataNow() { return parsing_stack_.top(); }
-  /// @brief ½«Êı¾İÑ¹Èë½âÎöÊı¾İÕ»
-  /// @param[in] parsing_data £º½âÎöÊı¾İ
-  /// @note ½öÖ§³ÖParsingDataÀàĞÍµÄparsing_data×÷Îª²ÎÊı
+  /// @brief å°†æ•°æ®å‹å…¥è§£ææ•°æ®æ ˆ
+  /// @param[in] parsing_data ï¼šè§£ææ•°æ®
+  /// @note ä»…æ”¯æŒParsingDataç±»å‹çš„parsing_dataä½œä¸ºå‚æ•°
   template <class ParsingDataType>
   void PushParsingData(ParsingDataType&& parsing_data) {
     parsing_stack_.push(std::forward<ParsingDataType>(parsing_data));
   }
-  /// @brief µ¯³ö½âÎöÊı¾İÕ»¶¥²¿Êı¾İ
+  /// @brief å¼¹å‡ºè§£ææ•°æ®æ ˆé¡¶éƒ¨æ•°æ®
   void PopTopParsingData() { parsing_stack_.pop(); }
-  /// @brief ²éÑ¯½âÎöÊı¾İÕ»Êı¾İÊıÄ¿
-  /// @return ·µ»Ø½âÎöÊı¾İÕ»ÖĞÊı¾İÊıÄ¿
+  /// @brief æŸ¥è¯¢è§£ææ•°æ®æ ˆæ•°æ®æ•°ç›®
+  /// @return è¿”å›è§£ææ•°æ®æ ˆä¸­æ•°æ®æ•°ç›®
   size_t GetParsingStackSize() const { return parsing_stack_.size(); }
-  /// @brief ·ÖÎö´úÂëÎÄ¼ş²¢¹¹½¨AST
-  /// @param[in] filename £º´úÂëÎÄ¼şÃû
-  /// @return ½âÎöÊÇ·ñ³É¹¦
-  /// @retval true ½âÎö³É¹¦
-  /// @retval false ÎŞ·¨´ò¿ªÎÄ¼ş/½âÎöÊ§°Ü
+  /// @brief åˆ†æä»£ç æ–‡ä»¶å¹¶æ„å»ºAST
+  /// @param[in] filename ï¼šä»£ç æ–‡ä»¶å
+  /// @return è§£ææ˜¯å¦æˆåŠŸ
+  /// @retval true è§£ææˆåŠŸ
+  /// @retval false æ— æ³•æ‰“å¼€æ–‡ä»¶/è§£æå¤±è´¥
   bool Parse(const std::string& filename);
 
  private:
-  /// @brief ÔÊĞíĞòÁĞ»¯Àà·ÃÎÊ
+  /// @brief å…è®¸åºåˆ—åŒ–ç±»è®¿é—®
   friend class boost::serialization::access;
 
-  /// @brief boost-serialization¼ÓÔØÓï·¨·ÖÎöÅäÖÃµÄº¯Êı
-  /// @param[in,out] ar £ºĞòÁĞ»¯Ê¹ÓÃµÄµµ°¸
-  /// @param[in] version £ºĞòÁĞ»¯ÎÄ¼ş°æ±¾
-  /// @attention ¸Ãº¯ÊıÓ¦ÓÉboost¿âµ÷ÓÃ¶ø·ÇÊÖ¶¯µ÷ÓÃ
+  /// @brief boost-serializationåŠ è½½è¯­æ³•åˆ†æé…ç½®çš„å‡½æ•°
+  /// @param[in,out] ar ï¼šåºåˆ—åŒ–ä½¿ç”¨çš„æ¡£æ¡ˆ
+  /// @param[in] version ï¼šåºåˆ—åŒ–æ–‡ä»¶ç‰ˆæœ¬
+  /// @attention è¯¥å‡½æ•°åº”ç”±booståº“è°ƒç”¨è€Œéæ‰‹åŠ¨è°ƒç”¨
   template <class Archive>
   void load(Archive& ar, const unsigned int version) {
-    // ×ª³ıconstÒÔÔÊĞíĞòÁĞ»¯´úÂë¶ÁÈ¡ÅäÖÃ
+    // è½¬é™¤constä»¥å…è®¸åºåˆ—åŒ–ä»£ç è¯»å–é…ç½®
     ar >> const_cast<SyntaxAnalysisTableEntryId&>(root_parsing_entry_id_);
     ar >> const_cast<SyntaxAnalysisTableType&>(syntax_analysis_table_);
     ar >> const_cast<ProcessFunctionClassManagerType&>(
               manager_process_function_class_);
   }
-  /// ½«ĞòÁĞ»¯·ÖÎª±£´æÓë¼ÓÔØ£¬Parser½ö¼ÓÔØÅäÖÃ£¬²»±£´æ
+  /// å°†åºåˆ—åŒ–åˆ†ä¸ºä¿å­˜ä¸åŠ è½½ï¼ŒParserä»…åŠ è½½é…ç½®ï¼Œä¸ä¿å­˜
   BOOST_SERIALIZATION_SPLIT_MEMBER()
 
-  /// @brief ´¦Àí´ıÒÆÈëµ¥´ÊÊÇÖÕ½á½ÚµãµÄÇé¿ö
+  /// @brief å¤„ç†å¾…ç§»å…¥å•è¯æ˜¯ç»ˆç»“èŠ‚ç‚¹çš„æƒ…å†µ
   /// @details
-  /// 1.×Ô¶¯Ñ¡ÔñÒÆÈëºÍ¹é²¢
-  /// 2.ÒÆÈëºóÖ´ĞĞGetNextWord()
-  /// 3.¹é²¢ºó½«µÃµ½µÄ·ÇÖÕ½á½ÚµãÒÆÈë
+  /// 1.è‡ªåŠ¨é€‰æ‹©ç§»å…¥å’Œå½’å¹¶
+  /// 2.ç§»å…¥åæ‰§è¡ŒGetNextWord()
+  /// 3.å½’å¹¶åå°†å¾—åˆ°çš„éç»ˆç»“èŠ‚ç‚¹ç§»å…¥
   void TerminalWordWaitingProcess();
-  /// @brief ´¦ÀíÏòÇ°¿´·ûºÅ´ıÒÆÈëµÄÇé¿ö
-  /// @param[in] action_and_target £ºÒÆÈë¶¯×÷ºÍ¸½ÊôÊı¾İ
+  /// @brief å¤„ç†å‘å‰çœ‹ç¬¦å·å¾…ç§»å…¥çš„æƒ…å†µ
+  /// @param[in] action_and_target ï¼šç§»å…¥åŠ¨ä½œå’Œé™„å±æ•°æ®
   /// @note
-  /// 1.´¦Àíºó×Ô¶¯Ö´ĞĞGetNextWord()
-  /// 2.¸Ãº¯ÊıÎªTerminalWordWaitingShiftº¯ÊıµÄ×Ó¹ı³Ì
+  /// 1.å¤„ç†åè‡ªåŠ¨æ‰§è¡ŒGetNextWord()
+  /// 2.è¯¥å‡½æ•°ä¸ºTerminalWordWaitingShiftå‡½æ•°çš„å­è¿‡ç¨‹
   void ShiftTerminalWord(const ShiftAttachedData& action_and_target);
-  /// @brief ´¦Àí²úÉúÊ½´ı¹æÔ¼µÄÇé¿ö
-  /// @param[in] action_and_target £º¹æÔ¼¶¯×÷ºÍ¸½ÊôÊı¾İ
+  /// @brief å¤„ç†äº§ç”Ÿå¼å¾…è§„çº¦çš„æƒ…å†µ
+  /// @param[in] action_and_target ï¼šè§„çº¦åŠ¨ä½œå’Œé™„å±æ•°æ®
   /// @note
-  /// 1.¹æÔ¼ºó×Ô¶¯ÒÆÈëµÃµ½µÄ·ÇÖÕ½á½Úµã²¢GetNextWord()
-  /// 2.TerminalWordWaitingShiftº¯ÊıµÄ×Ó¹ı³Ì
+  /// 1.è§„çº¦åè‡ªåŠ¨ç§»å…¥å¾—åˆ°çš„éç»ˆç»“èŠ‚ç‚¹å¹¶GetNextWord()
+  /// 2.TerminalWordWaitingShiftå‡½æ•°çš„å­è¿‡ç¨‹
   void Reduct(const ReductAttachedData& action_and_target);
-  /// @brief ÒÆÈë·ÇÖÕ½á½Úµã
-  /// @param[in] non_terminal_word_data £º¹æÔ¼ºóÓÃ»§·µ»ØµÄÊı¾İ
-  /// @param[in] reducted_nonterminal_node_id £º¹æÔ¼ºóµÃµ½µÄ·ÇÖÕ½á²úÉúÊ½ID
+  /// @brief ç§»å…¥éç»ˆç»“èŠ‚ç‚¹
+  /// @param[in] non_terminal_word_data ï¼šè§„çº¦åç”¨æˆ·è¿”å›çš„æ•°æ®
+  /// @param[in] reducted_nonterminal_node_id ï¼šè§„çº¦åå¾—åˆ°çš„éç»ˆç»“äº§ç”Ÿå¼ID
   void ShiftNonTerminalWord(std::any&& non_terminal_word_data,
                             ProductionNodeId reducted_nonterminal_node_id);
-  /// @brief ÉèÖÃÉÏÒ»´ÎÊÇ¹æÔ¼²Ù×÷
+  /// @brief è®¾ç½®ä¸Šä¸€æ¬¡æ˜¯è§„çº¦æ“ä½œ
   /// @note
-  /// Ó°ÏìË«ÓïÒåÔËËã·ûÓïÒåµÄÑ¡Ôñ£¬ÉÏÒ»´ÎÎª¹æÔ¼²Ù×÷ÔòÊ¹ÓÃ×ó²àµ¥Ä¿ÓïÒå
-  /// ·ñÔòÊ¹ÓÃË«Ä¿ÓïÒå
+  /// å½±å“åŒè¯­ä¹‰è¿ç®—ç¬¦è¯­ä¹‰çš„é€‰æ‹©ï¼Œä¸Šä¸€æ¬¡ä¸ºè§„çº¦æ“ä½œåˆ™ä½¿ç”¨å·¦ä¾§å•ç›®è¯­ä¹‰
+  /// å¦åˆ™ä½¿ç”¨åŒç›®è¯­ä¹‰
   void SetLastOperateIsReduct() { last_operate_is_reduct_ = true; }
-  /// @brief ÉèÖÃÉÏÒ»´Î²Ù×÷²»ÊÇ¹æÔ¼²Ù×÷
+  /// @brief è®¾ç½®ä¸Šä¸€æ¬¡æ“ä½œä¸æ˜¯è§„çº¦æ“ä½œ
   /// @note
-  /// Ó°ÏìË«ÓïÒåÔËËã·ûÓïÒåµÄÑ¡Ôñ£¬ÉÏÒ»´ÎÎª¹æÔ¼²Ù×÷ÔòÊ¹ÓÃ×ó²àµ¥Ä¿ÓïÒå
-  /// ·ñÔòÊ¹ÓÃË«Ä¿ÓïÒå
+  /// å½±å“åŒè¯­ä¹‰è¿ç®—ç¬¦è¯­ä¹‰çš„é€‰æ‹©ï¼Œä¸Šä¸€æ¬¡ä¸ºè§„çº¦æ“ä½œåˆ™ä½¿ç”¨å·¦ä¾§å•ç›®è¯­ä¹‰
+  /// å¦åˆ™ä½¿ç”¨åŒç›®è¯­ä¹‰
   void SetLastOperateIsNotReduct() { last_operate_is_reduct_ = false; }
-  /// @brief ÅĞ¶ÏÉÏÒ»´Î²Ù×÷ÊÇ·ñÎª¹æÔ¼²Ù×÷
-  /// @return ·µ»ØÉÏÒ»´Î²Ù×÷ÊÇ·ñÎª¹æÔ¼²Ù×÷
-  /// @retval true ÉÏÒ»´Î²Ù×÷ÊÇ¹æÔ¼²Ù×÷
-  /// @retval false ÉÏÒ»´Î²Ù×÷²»ÊÇ¹æÔ¼²Ù×÷
+  /// @brief åˆ¤æ–­ä¸Šä¸€æ¬¡æ“ä½œæ˜¯å¦ä¸ºè§„çº¦æ“ä½œ
+  /// @return è¿”å›ä¸Šä¸€æ¬¡æ“ä½œæ˜¯å¦ä¸ºè§„çº¦æ“ä½œ
+  /// @retval true ä¸Šä¸€æ¬¡æ“ä½œæ˜¯è§„çº¦æ“ä½œ
+  /// @retval false ä¸Šä¸€æ¬¡æ“ä½œä¸æ˜¯è§„çº¦æ“ä½œ
   bool LastOperateIsReduct() const { return last_operate_is_reduct_; }
 
-  /// @brief DFA·ÖÎö»ú
+  /// @brief DFAåˆ†ææœº
   DfaParser dfa_parser_;
-  /// @brief ¸ù·ÖÎö±íÌõÄ¿ID£¬Ö»ÓĞ¼ÓÔØÅäÖÃÊ±¿ÉÒÔĞŞ¸Ä
+  /// @brief æ ¹åˆ†æè¡¨æ¡ç›®IDï¼Œåªæœ‰åŠ è½½é…ç½®æ—¶å¯ä»¥ä¿®æ”¹
   const SyntaxAnalysisTableEntryId root_parsing_entry_id_;
-  /// @brief °ü×°¹æÔ¼º¯ÊıµÄÀàµÄÊµÀı»¯¶ÔÏóµÄ¹ÜÀíÆ÷£¬Ö»ÓĞ¼ÓÔØÅäÖÃÊ±¿ÉÒÔĞŞ¸Ä
+  /// @brief åŒ…è£…è§„çº¦å‡½æ•°çš„ç±»çš„å®ä¾‹åŒ–å¯¹è±¡çš„ç®¡ç†å™¨ï¼Œåªæœ‰åŠ è½½é…ç½®æ—¶å¯ä»¥ä¿®æ”¹
   const ProcessFunctionClassManagerType manager_process_function_class_;
-  /// @brief Óï·¨·ÖÎö±í£¬Ö»ÓĞ¼ÓÔØÅäÖÃÊ±¿ÉÒÔĞŞ¸Ä
+  /// @brief è¯­æ³•åˆ†æè¡¨ï¼Œåªæœ‰åŠ è½½é…ç½®æ—¶å¯ä»¥ä¿®æ”¹
   const SyntaxAnalysisTableType syntax_analysis_table_;
 
-  /// @brief DFA·µ»ØµÄÊı¾İ
+  /// @brief DFAè¿”å›çš„æ•°æ®
   WordInfo dfa_return_data_;
-  /// @brief ½âÎöÓÃÊı¾İÕ»£¬Õ»¶¥Îªµ±Ç°½âÎöÊı¾İ
+  /// @brief è§£æç”¨æ•°æ®æ ˆï¼Œæ ˆé¡¶ä¸ºå½“å‰è§£ææ•°æ®
   std::stack<ParsingData> parsing_stack_;
-  /// @brief ±ê¼ÇÉÏ´Î²Ù×÷ÊÇ·ñÎª¹æÔ¼²Ù×÷
+  /// @brief æ ‡è®°ä¸Šæ¬¡æ“ä½œæ˜¯å¦ä¸ºè§„çº¦æ“ä½œ
   /// @note
-  /// ÓÃÀ´Ö§³ÖÔËËã·ûÓÅÏÈ¼¶Ê±Í¬Ò»¸öÔËËã·û¿ÉÒÔÏ¸·ÖÎª×ó²àµ¥Ä¿ÔËËã·ûºÍË«Ä¿ÔËËã·û¹¦ÄÜ
+  /// ç”¨æ¥æ”¯æŒè¿ç®—ç¬¦ä¼˜å…ˆçº§æ—¶åŒä¸€ä¸ªè¿ç®—ç¬¦å¯ä»¥ç»†åˆ†ä¸ºå·¦ä¾§å•ç›®è¿ç®—ç¬¦å’ŒåŒç›®è¿ç®—ç¬¦åŠŸèƒ½
   bool last_operate_is_reduct_ = true;
 };
 
