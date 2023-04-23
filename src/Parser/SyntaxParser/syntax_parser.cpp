@@ -53,7 +53,8 @@ void SyntaxParser::TerminalWordWaitingProcess() {
       break;
     // TODO 添加错误处理功能
     [[unlikely]] case ActionType::kError:
-      LOG_ERROR("Parser", std::format("语法错误"))
+      LOG_ERROR("Parser", std::format("Line: {:} Column: {:}: Syntax Error!",
+                                      GetLine() + 1, GetColumn() + 1))
       exit(-1);
       break;
     case ActionType::kReduct:

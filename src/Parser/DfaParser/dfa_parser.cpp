@@ -73,6 +73,11 @@ DfaParser::WordInfo DfaParser::GetNextWord() {
       SetColumn(GetColumn() + 1);
     }
   }
+
+  if (symbol.empty()) {
+    LOG_ERROR("DFA Parser", std::format("Line: {:} Column: {:}: Grammar Error!", GetLine() + 1, GetColumn() + 1))
+    exit(-1);
+  }
   LOG_INFO("DFA Parser", std::format("Parsed Word \"{:}\"", symbol))
   return WordInfo(dfa_config_[transform_array_id].second, std::move(symbol));
 }
