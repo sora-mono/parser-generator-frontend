@@ -13,47 +13,46 @@ ProductionNodeId SyntaxGenerator::AddTerminalProduction(
   auto [node_symbol_id, node_symbol_inserted] = AddNodeSymbol(node_symbol);
   auto [body_symbol_id, body_symbol_inserted] = AddBodySymbol(body_symbol);
   ProductionNodeId production_node_id;
-  if (body_symbol_inserted) {
-    ProductionNodeId old_node_symbol_id =
-        GetProductionNodeIdFromNodeSymbolId(node_symbol_id);
-    if (old_node_symbol_id.IsValid()) {
-      // 该终结节点名已被使用
-      LOG_ERROR("SyntaxGenerator",
-                std::format("终结节点名已定义：{:}", node_symbol))
-      return ProductionNodeId::InvalidId();
-    }
-    // 需要添加一个新的终结节点
-    production_node_id = SubAddTerminalNode(node_symbol_id, body_symbol_id);
-    frontend::generator::dfa_generator::DfaGenerator::WordAttachedData
-        word_attached_data;
-    word_attached_data.production_node_id = production_node_id;
-    word_attached_data.node_type = ProductionNodeType::kTerminalNode;
-    // 向DFA生成器注册关键词
-    bool result;
-    if (regex_allowed) [[likely]] {
-      assert(node_priority == 0);
-      result = dfa_generator_.AddRegexpression(
-          body_symbol, std::move(word_attached_data), node_priority);
-    } else {
-      assert(node_priority == 1 || node_priority == 2);
-      result = dfa_generator_.AddWord(
-          body_symbol, std::move(word_attached_data), node_priority);
-    }
-    if (!result) [[unlikely]] {
-      LOG_ERROR(
-          "SyntaxGenerator",
-          std::format("内部错误：无法添加终结节点正则表达式 {:}", body_symbol));
-      exit(-1);
-    }
-  } else {
-    // 该终结节点的内容已存在，不应重复添加
-    LOG_ERROR("SyntaxGenerator",
-              std::format("多次声明同一正则：{:}", body_symbol));
-    return ProductionNodeId::InvalidId();
+  ProductionNodeId old_node_symbol_id =
+      GetProductionNodeIdFromNodeSymbolId(node_symbol_id);
+
+  if (!body_symbol_inserted) {
+    // 该终结节点的正则已添加过，可能写错
+    LOG_WARNING("DFAGenerator",
+                std::format("多次声明同一正则：{:}", body_symbol));
   }
+
+  if (old_node_symbol_id.IsValid()) {
+    // 该终结节点名已被使用
+    LOG_ERROR("DFAGenerator", std::format("终结节点名已定义：{:}", node_symbol))
+    exit(-1);
+  }
+  // 需要添加一个新的终结节点
+  production_node_id = SubAddTerminalNode(node_symbol_id, body_symbol_id);
+  frontend::generator::dfa_generator::DfaGenerator::WordAttachedData
+      word_attached_data;
+  word_attached_data.production_node_id = production_node_id;
+  word_attached_data.node_type = ProductionNodeType::kTerminalNode;
+  // 向DFA生成器注册关键词
+  bool result;
+  if (regex_allowed) [[likely]] {
+    assert(node_priority == 0);
+    result = dfa_generator_.AddRegexpression(
+        body_symbol, std::move(word_attached_data), node_priority);
+  } else {
+    assert(node_priority == 1 || node_priority == 2);
+    result = dfa_generator_.AddWord(body_symbol, std::move(word_attached_data),
+                                    node_priority);
+  }
+  if (!result) [[unlikely]] {
+    LOG_ERROR("DFAGenerator",
+              std::format("无法添加终结节点正则表达式 {:}", body_symbol));
+    exit(-1);
+  }
+
   // 输出构建过程
-  LOG_INFO("SyntaxGenerator", std::format("成功添加终结产生式： {:} -> {:}",
-                                          node_symbol, body_symbol));
+  LOG_INFO("DFAGenerator", std::format("成功添加终结产生式： {:} -> {:}",
+                                       node_symbol, body_symbol));
   LOG_INFO(
       "SyntaxGenerator",
       std::format(

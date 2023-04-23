@@ -36,7 +36,9 @@ bool DfaGenerator::AddRegexpression(const std::string& regex_str,
                                     WordPriority regex_priority) {
   auto [head_node_id, tail_node_id] = nfa_generator_.RegexConstruct(
       TailNodeData(std::move(regex_attached_data), regex_priority), regex_str);
-  assert(head_node_id.IsValid() && tail_node_id.IsValid());
+  if (!head_node_id.IsValid() || !tail_node_id.IsValid()) [[unlikely]] {
+    return false;
+  }
   return true;
 }
 

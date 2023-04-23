@@ -1,14 +1,14 @@
-/// @file type_system.h
-/// @brief ÀàĞÍÏµÍ³
+ï»¿/// @file type_system.h
+/// @brief ç±»å‹ç³»ç»Ÿ
 /// @details
-/// 1.ÀàĞÍÏµÍ³Í¨¹ı¡°ÀàĞÍÁ´¡±±íÊ¾Ò»¸ö¶ÔÏóµÄÀàĞÍ
-/// 2.±íÊ¾ÀàĞÍµÄ×îĞ¡µ¥Î»Îª½Úµã£¬Ò»¸ö½Úµã¿ÉÒÔÊÇÒ»ÖØÖ¸Õë(Êı×é)¡¢º¯ÊıÍ·¡¢
-///   »ù´¡ÀàĞÍ£¨ÄÚÖÃÀàĞÍ/×Ô¶¨Òå½á¹¹£©µÈ£¬½ÚµãÍ¨¹ıµ¥ÏòÁ´±í´®³ÉÒ»´®µÃµ½ÀàĞÍÁ´
-/// 3.ÀàĞÍÁ´¹¹ÔìË³ĞòÍ¬±äÁ¿¶¨ÒåÊ±¹æÔ¼µÄË³Ğò£¬Í·½áµãÊÇ×î¿¿½ü±äÁ¿ÃûµÄ²¿·Ö
-/// 4.ËùÓĞÀàĞÍÁ´Î²²¿¶¼¹²ÓÃÒ»¸öÉÚ±ø
-/// 5.ÀàĞÍÁ´Àı£º
+/// 1.ç±»å‹ç³»ç»Ÿé€šè¿‡â€œç±»å‹é“¾â€è¡¨ç¤ºä¸€ä¸ªå¯¹è±¡çš„ç±»å‹
+/// 2.è¡¨ç¤ºç±»å‹çš„æœ€å°å•ä½ä¸ºèŠ‚ç‚¹ï¼Œä¸€ä¸ªèŠ‚ç‚¹å¯ä»¥æ˜¯ä¸€é‡æŒ‡é’ˆ(æ•°ç»„)ã€å‡½æ•°å¤´ã€
+///   åŸºç¡€ç±»å‹ï¼ˆå†…ç½®ç±»å‹/è‡ªå®šä¹‰ç»“æ„ï¼‰ç­‰ï¼ŒèŠ‚ç‚¹é€šè¿‡å•å‘é“¾è¡¨ä¸²æˆä¸€ä¸²å¾—åˆ°ç±»å‹é“¾
+/// 3.ç±»å‹é“¾æ„é€ é¡ºåºåŒå˜é‡å®šä¹‰æ—¶è§„çº¦çš„é¡ºåºï¼Œå¤´ç»“ç‚¹æ˜¯æœ€é è¿‘å˜é‡åçš„éƒ¨åˆ†
+/// 4.æ‰€æœ‰ç±»å‹é“¾å°¾éƒ¨éƒ½å…±ç”¨ä¸€ä¸ªå“¨å…µ
+/// 5.ç±»å‹é“¾ä¾‹ï¼š
 ///       const double* (*func(unsigned int x, const short y))(float z);
-/// ×¢£ºargument_infos_´æÔÚ¼ò»¯£¬½öÌåÏÖÀàĞÍ²¿·Ö
+/// æ³¨ï¼šargument_infos_å­˜åœ¨ç®€åŒ–ï¼Œä»…ä½“ç°ç±»å‹éƒ¨åˆ†
 ///
 /// ********************************                      [0].variety_type_
 /// * type_ =                      *argument_infos_*****************************
@@ -19,9 +19,9 @@
 /// * return_type_const_tag_ =     *               * built_in_type_ =          *
 /// *         ConstTag::kNonConst  *               *       BuiltInType::kInt32 *
 /// ********************************               * sign_tag_ =               *
-///             ©¦                                 *        SignTag::kUnSigned *
-///             ©¦return_type_                     *****************************
-///             ¡ı                                       [1].variety_type_
+///             â”‚                                 *        SignTag::kUnSigned *
+///             â”‚return_type_                     *****************************
+///             â†“                                       [1].variety_type_
 /// ********************************               *****************************
 /// * type_ =                      *               * type_ =                   *
 /// * StructOrBasicType::kPointer  *               * StructOrBasicType::kBasic *
@@ -29,9 +29,9 @@
 /// * variety_const_tag_ =         *               *     EndType::GetEndType() *
 /// *          ConstTag::kNonConst *               * built_in_type_ =          *
 /// ********************************               *       BuiltInType::kInt16 *
-///              ©¦                                * sign_tag_ =               *
-///              ©¦next_type_node_                 *          SignTag::kSigned *
-///              ¡ı                                *****************************
+///              â”‚                                * sign_tag_ =               *
+///              â”‚next_type_node_                 *          SignTag::kSigned *
+///              â†“                                *****************************
 /// ********************************
 /// * type_ =                      *                    [0].variety_type_
 /// *  StructOrBasicType::kFunction*argument_infos_*****************************
@@ -41,9 +41,9 @@
 /// * return_type_const_tag_ =     *               *     EndType::GetEndType() *
 /// *             ConstTag::kConst *               * built_in_type_ =          *
 /// ********************************               *     BuiltInType::kFloat32 *
-///              ©¦                                * sign_tag_ =               *
-///              ©¦return_type_                    *          SignTag::kSigned *
-///              ¡ı                                *****************************
+///              â”‚                                * sign_tag_ =               *
+///              â”‚return_type_                    *          SignTag::kSigned *
+///              â†“                                *****************************
 /// ********************************
 /// * type_ =                      *
 /// *  StructOrBasicType::kPointer *
@@ -51,9 +51,9 @@
 /// * variety_const_tag_ =         *
 /// *          ConstTag::kNonConst *
 /// ********************************
-///              ©¦
-///              ©¦next_type_node_
-///              ¡ı
+///              â”‚
+///              â”‚next_type_node_
+///              â†“
 /// ********************************
 /// * type_ =                      *
 /// * StructOrBasicType::kBasic    *
@@ -77,38 +77,38 @@
 #include "Common/id_wrapper.h"
 
 namespace c_parser_frontend::operator_node {
-// Ç°ÏòÉùÃ÷ListInitializeOperatorNode£¬ÓÃÓÚÊµÏÖAssignedByInitializeList
+// å‰å‘å£°æ˜ListInitializeOperatorNodeï¼Œç”¨äºå®ç°AssignedByInitializeList
 class ListInitializeOperatorNode;
-// Ç°ÏòÉùÃ÷VarietyOperatorNode£¬ÓÃÓÚ¶¨Òåº¯Êı²ÎÊı
+// å‰å‘å£°æ˜VarietyOperatorNodeï¼Œç”¨äºå®šä¹‰å‡½æ•°å‚æ•°
 class VarietyOperatorNode;
 }  // namespace c_parser_frontend::operator_node
 
 namespace c_parser_frontend::type_system {
-/// @brief const±ê¼Ç
+/// @brief constæ ‡è®°
 enum class ConstTag { kNonConst = 0, kConst };
-/// @brief ·ûºÅ±ê¼Ç
+/// @brief ç¬¦å·æ ‡è®°
 enum class SignTag { kSigned = 0, kUnsigned };
 
-/// @brief ¿í·ºµÄ±äÁ¿ÀàĞÍ
+/// @brief å®½æ³›çš„å˜é‡ç±»å‹
 enum class StructOrBasicType {
-  kBasic,           ///< »ù±¾ÀàĞÍ
-  kPointer,         ///< Ö¸Õë£¨*£©
-  kFunction,        ///< º¯Êı
-  kStruct,          ///< ½á¹¹Ìå
-  kUnion,           ///< ¹²ÓÃÌå
-  kEnum,            ///< Ã¶¾Ù
-  kInitializeList,  ///< ³õÊ¼»¯ÁĞ±í
-  kEnd,             ///< ÀàĞÍÏµÍ³½áÎ²£¬ÓÃÓÚÓÅ»¯ÅĞ¶ÏÂß¼­
-  kNotSpecified  ///< Î´È·¶¨ÀàĞÍ£¬Ê¹ÓÃ±ê×¼ÀàĞÍ²éÕÒ¹æÔò£¬ÓÃÓÚ²éÕÒÃû³Æ¶ÔÓ¦µÄ±äÁ¿
+  kBasic,           ///< åŸºæœ¬ç±»å‹
+  kPointer,         ///< æŒ‡é’ˆï¼ˆ*ï¼‰
+  kFunction,        ///< å‡½æ•°
+  kStruct,          ///< ç»“æ„ä½“
+  kUnion,           ///< å…±ç”¨ä½“
+  kEnum,            ///< æšä¸¾
+  kInitializeList,  ///< åˆå§‹åŒ–åˆ—è¡¨
+  kEnd,             ///< ç±»å‹ç³»ç»Ÿç»“å°¾ï¼Œç”¨äºä¼˜åŒ–åˆ¤æ–­é€»è¾‘
+  kNotSpecified  ///< æœªç¡®å®šç±»å‹ï¼Œä½¿ç”¨æ ‡å‡†ç±»å‹æŸ¥æ‰¾è§„åˆ™ï¼Œç”¨äºæŸ¥æ‰¾åç§°å¯¹åº”çš„å˜é‡
 };
-/// @brief ÄÚÖÃ±äÁ¿ÀàĞÍ
+/// @brief å†…ç½®å˜é‡ç±»å‹
 /// @details
-/// voidÀàĞÍ½ö¿ÉÉùÃ÷Îªº¯ÊıµÄ·µ»ØÀàĞÍ£¬±äÁ¿ÉùÃ÷ÖĞ±ØĞëÉùÃ÷ÎªÖ¸Õë
-/// CÓïÑÔÃ»ÓĞÕıÊ½Ö§³Öbool£¬bool½öÓ¦³öÏÖÔÚÌõ¼şÅĞ¶Ï½á¹ûÖĞ
-/// void½öÔÚº¯Êı·µ»ØÖµÖĞ¿ÉÒÔ×÷Îª¶ÔÏó³öÏÖ£¬·ñÔò±ØĞëÎªÖ¸ÕëÀàĞÍµÄÏÂÒ»¸ö½Úµã
-/// kBuiltInTypeSize´æ´¢¸÷ÖÖÀàĞÍËùÕ¼¿Õ¼ä´óĞ¡
-/// @attention ±ØĞëÎ¬³ÖµÍÖµÃ¶¾ÙÏî¿ÉÒÔÒşÊ½×ª»»Îª¸ßÖµµÄÔ­Ôò£¬ÕâÑùÉè¼ÆÓÃÓÚ¼ÓËÙÅĞ¶Ï
-/// Ò»ÖÖÀàĞÍÊÇ·ñ¿ÉÒÔÒşÊ½×ª»»ÎªÁíÒ»ÖÖÀàĞÍ
+/// voidç±»å‹ä»…å¯å£°æ˜ä¸ºå‡½æ•°çš„è¿”å›ç±»å‹ï¼Œå˜é‡å£°æ˜ä¸­å¿…é¡»å£°æ˜ä¸ºæŒ‡é’ˆ
+/// Cè¯­è¨€æ²¡æœ‰æ­£å¼æ”¯æŒboolï¼Œboolä»…åº”å‡ºç°åœ¨æ¡ä»¶åˆ¤æ–­ç»“æœä¸­
+/// voidä»…åœ¨å‡½æ•°è¿”å›å€¼ä¸­å¯ä»¥ä½œä¸ºå¯¹è±¡å‡ºç°ï¼Œå¦åˆ™å¿…é¡»ä¸ºæŒ‡é’ˆç±»å‹çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
+/// kBuiltInTypeSizeå­˜å‚¨å„ç§ç±»å‹æ‰€å ç©ºé—´å¤§å°
+/// @attention å¿…é¡»ç»´æŒä½å€¼æšä¸¾é¡¹å¯ä»¥éšå¼è½¬æ¢ä¸ºé«˜å€¼çš„åŸåˆ™ï¼Œè¿™æ ·è®¾è®¡ç”¨äºåŠ é€Ÿåˆ¤æ–­
+/// ä¸€ç§ç±»å‹æ˜¯å¦å¯ä»¥éšå¼è½¬æ¢ä¸ºå¦ä¸€ç§ç±»å‹
 enum class BuiltInType {
   kInt1,     /// bool
   kInt8,     /// char
@@ -118,86 +118,86 @@ enum class BuiltInType {
   kFloat64,  /// double
   kVoid      /// void
 };
-/// @brief ¼ì²éÊÇ·ñ¿ÉÒÔ¸³ÖµµÄ½á¹û
+/// @brief æ£€æŸ¥æ˜¯å¦å¯ä»¥èµ‹å€¼çš„ç»“æœ
 enum class AssignableCheckResult {
-  /// ¿ÉÒÔ¸³ÖµµÄÇé¿ö
-  kNonConvert,    /// Á½ÖÖÀàĞÍÏàÍ¬£¬ÎŞĞè×ª»»¼´¿É¸³Öµ
-  kUpperConvert,  /// ÓÃÀ´¸³ÖµµÄÀàĞÍ×ª»»Îª´ı±»¸³ÖµÀàĞÍ
-  kConvertToVoidPointer,  /// ±»¸³ÖµµÄ¶ÔÏóÎªvoidÖ¸Õë£¬¸³ÖµµÄ¶ÔÏóÎªÍ¬µÈÎ¬ÊıÖ¸Õë
-  kZeroConvertToPointer,  /// 0Öµ×ª»»ÎªÖ¸Õë
-  kUnsignedToSigned,  /// ÎŞ·ûºÅÖµ¸³Öµ¸øÓĞ·ûºÅÖµ£¬½¨ÒéÊ¹ÓÃ¾¯¸æ
-  kSignedToUnsigned,  /// ÓĞ·ûºÅÖµ¸³Öµ¸øÎŞ·ûºÅÖµ£¬½¨ÒéÊ¹ÓÃ¾¯¸æ
-  /// ĞèÒª¾ßÌåÅĞ¶ÏµÄÇé¿ö
-  kMayBeZeroToPointer,  /// Èç¹ûÊÇ½«0¸³Öµ¸øÖ¸ÕëÔòºÏ·¨£¬·ñÔò·Ç·¨
-  kInitializeList,  /// Ê¹ÓÃ³õÊ¼»¯ÁĞ±í£¬ĞèÒª½áºÏ¸ø¶¨Öµ¾ßÌåÅĞ¶Ï
-                    /// ½öÔÚCanBeAssignedByÖĞ·µ»Ø
-  /// ²»¿É¸³ÖµµÄÇé¿ö
-  kLowerConvert,         /// ÓÃÀ´¸³ÖµµÄÀàĞÍ·¢ÉúËõÕ­×ª»»
-  kCanNotConvert,        /// ²»¿É×ª»»
-  kAssignedNodeIsConst,  /// ±»¸³Öµ¶ÔÏóÎªconst
-  kAssignToRightValue,  /// ±»¸³Öµ¶ÔÏóÎªÓÒÖµ£¬CÓïÑÔ²»ÔÊĞí¸³Öµ¸øÓÒÖµ
-  kArgumentsFull,  /// º¯Êı²ÎÊıÒÑÂú£¬²»ÄÜÌí¼Ó¸ü¶à²ÎÊı
-  kInitializeListTooLarge  /// ³õÊ¼»¯ÁĞ±íÖĞ¸ø³öµÄÊı¾İÊıÄ¿¶àÓÚÖ¸ÕëÉùÃ÷Ê±´óĞ¡
+  /// å¯ä»¥èµ‹å€¼çš„æƒ…å†µ
+  kNonConvert,    /// ä¸¤ç§ç±»å‹ç›¸åŒï¼Œæ— éœ€è½¬æ¢å³å¯èµ‹å€¼
+  kUpperConvert,  /// ç”¨æ¥èµ‹å€¼çš„ç±»å‹è½¬æ¢ä¸ºå¾…è¢«èµ‹å€¼ç±»å‹
+  kConvertToVoidPointer,  /// è¢«èµ‹å€¼çš„å¯¹è±¡ä¸ºvoidæŒ‡é’ˆï¼Œèµ‹å€¼çš„å¯¹è±¡ä¸ºåŒç­‰ç»´æ•°æŒ‡é’ˆ
+  kZeroConvertToPointer,  /// 0å€¼è½¬æ¢ä¸ºæŒ‡é’ˆ
+  kUnsignedToSigned,  /// æ— ç¬¦å·å€¼èµ‹å€¼ç»™æœ‰ç¬¦å·å€¼ï¼Œå»ºè®®ä½¿ç”¨è­¦å‘Š
+  kSignedToUnsigned,  /// æœ‰ç¬¦å·å€¼èµ‹å€¼ç»™æ— ç¬¦å·å€¼ï¼Œå»ºè®®ä½¿ç”¨è­¦å‘Š
+  /// éœ€è¦å…·ä½“åˆ¤æ–­çš„æƒ…å†µ
+  kMayBeZeroToPointer,  /// å¦‚æœæ˜¯å°†0èµ‹å€¼ç»™æŒ‡é’ˆåˆ™åˆæ³•ï¼Œå¦åˆ™éæ³•
+  kInitializeList,  /// ä½¿ç”¨åˆå§‹åŒ–åˆ—è¡¨ï¼Œéœ€è¦ç»“åˆç»™å®šå€¼å…·ä½“åˆ¤æ–­
+                    /// ä»…åœ¨CanBeAssignedByä¸­è¿”å›
+  /// ä¸å¯èµ‹å€¼çš„æƒ…å†µ
+  kLowerConvert,         /// ç”¨æ¥èµ‹å€¼çš„ç±»å‹å‘ç”Ÿç¼©çª„è½¬æ¢
+  kCanNotConvert,        /// ä¸å¯è½¬æ¢
+  kAssignedNodeIsConst,  /// è¢«èµ‹å€¼å¯¹è±¡ä¸ºconst
+  kAssignToRightValue,  /// è¢«èµ‹å€¼å¯¹è±¡ä¸ºå³å€¼ï¼ŒCè¯­è¨€ä¸å…è®¸èµ‹å€¼ç»™å³å€¼
+  kArgumentsFull,  /// å‡½æ•°å‚æ•°å·²æ»¡ï¼Œä¸èƒ½æ·»åŠ æ›´å¤šå‚æ•°
+  kInitializeListTooLarge  /// åˆå§‹åŒ–åˆ—è¡¨ä¸­ç»™å‡ºçš„æ•°æ®æ•°ç›®å¤šäºæŒ‡é’ˆå£°æ˜æ—¶å¤§å°
 };
-/// @brief ÍÆ¶ÏÊıÑ§ÔËËãÀàĞÍµÄ½á¹û
+/// @brief æ¨æ–­æ•°å­¦è¿ç®—ç±»å‹çš„ç»“æœ
 enum class DeclineMathematicalComputeTypeResult {
-  /// ¿ÉÒÔ¼ÆËãµÄÇé¿ö
-  kComputable,              /// ¿ÉÒÔ¼ÆËã
-  kLeftPointerRightOffset,  /// ×óÀàĞÍÎªÖ¸Õë£¬ÓÒÀàĞÍÎªÆ«ÒÆÁ¿
-  kLeftOffsetRightPointer,  /// ×óÀàĞÍÎªÆ«ÒÆÁ¿£¬ÓÒÀàĞÍÎªÖ¸Õë
-  kConvertToLeft,           /// ÌáÉıÓÒÀàĞÍµ½×óÀàĞÍºóÔËËã
-  kConvertToRight,          /// ÌáÉı×óÀàĞÍµ½ÓÒÀàĞÍºóÔËËã
-  /// ²»¿ÉÒÔ¼ÆËãµÄÇé¿ö
-  kLeftNotComputableType,   /// ×óÀàĞÍ²»ÊÇ¿ÉÒÔ¼ÆËãµÄÀàĞÍ
-  kRightNotComputableType,  /// ÓÒÀàĞÍ²»ÊÇ¿ÉÒÔ¼ÆËãµÄÀàĞÍ
-  kLeftRightBothPointer,    /// ×óÓÒÀàĞÍ¾ùÎªÖ¸Õë
-  kLeftNotIntger,  /// ÓÒÀàĞÍÊÇÖ¸Õë£¬×óÀàĞÍ²»ÊÇÊÇÕûÊı²»ÄÜ×÷ÎªÆ«ÒÆÁ¿Ê¹ÓÃ
-  kRightNotIntger  /// ×óÀàĞÍÊÇÖ¸Õë£¬ÓÒÀàĞÍ²»ÊÇÊÇÕûÊı²»ÄÜ×÷ÎªÆ«ÒÆÁ¿Ê¹ÓÃ
+  /// å¯ä»¥è®¡ç®—çš„æƒ…å†µ
+  kComputable,              /// å¯ä»¥è®¡ç®—
+  kLeftPointerRightOffset,  /// å·¦ç±»å‹ä¸ºæŒ‡é’ˆï¼Œå³ç±»å‹ä¸ºåç§»é‡
+  kLeftOffsetRightPointer,  /// å·¦ç±»å‹ä¸ºåç§»é‡ï¼Œå³ç±»å‹ä¸ºæŒ‡é’ˆ
+  kConvertToLeft,           /// æå‡å³ç±»å‹åˆ°å·¦ç±»å‹åè¿ç®—
+  kConvertToRight,          /// æå‡å·¦ç±»å‹åˆ°å³ç±»å‹åè¿ç®—
+  /// ä¸å¯ä»¥è®¡ç®—çš„æƒ…å†µ
+  kLeftNotComputableType,   /// å·¦ç±»å‹ä¸æ˜¯å¯ä»¥è®¡ç®—çš„ç±»å‹
+  kRightNotComputableType,  /// å³ç±»å‹ä¸æ˜¯å¯ä»¥è®¡ç®—çš„ç±»å‹
+  kLeftRightBothPointer,    /// å·¦å³ç±»å‹å‡ä¸ºæŒ‡é’ˆ
+  kLeftNotIntger,  /// å³ç±»å‹æ˜¯æŒ‡é’ˆï¼Œå·¦ç±»å‹ä¸æ˜¯æ˜¯æ•´æ•°ä¸èƒ½ä½œä¸ºåç§»é‡ä½¿ç”¨
+  kRightNotIntger  /// å·¦ç±»å‹æ˜¯æŒ‡é’ˆï¼Œå³ç±»å‹ä¸æ˜¯æ˜¯æ•´æ•°ä¸èƒ½ä½œä¸ºåç§»é‡ä½¿ç”¨
 };
-/// @brief Ìí¼ÓÀàĞÍµÄ½á¹û
+/// @brief æ·»åŠ ç±»å‹çš„ç»“æœ
 enum class AddTypeResult {
-  /// ³É¹¦Ìí¼ÓµÄÇé¿ö
-  kAbleToAdd,  /// ¿ÉÒÔÌí¼Ó£¬½öÔÚCheckFunctionDefineAddResultÖĞÊ¹ÓÃ
-               /// ×îÖÕ·µ»ØÊ±±»×ª»»Îª¸ü¾ßÌåµÄÖµ
-  kNew,        /// ÒÔÇ°²»´æÔÚ¸ÃÀàĞÍÃû£¬±ÈkFunctionDefineÓÅÏÈ·µ»Ø
-  kFunctionDefine,  /// Ìí¼ÓÁËº¯Êı¶¨Òå
-  kShiftToVector,  /// Ìí¼ÓÇ°¸ÃÀàĞÍÃû¶ÔÓ¦Ò»¸öÀàĞÍ£¬Ìí¼Óºó×ª»»Îªvector´æ´¢
-  kAddToVector,  /// Ìí¼ÓÇ°¸ÃÀàĞÍÃû¶ÔÓ¦ÖÁÉÙ2¸öÀàĞÍ
-  kAnnounceOrDefineBeforeFunctionAnnounce,  /// º¯ÊıÉùÃ÷Ç°ÒÑÓĞÉùÃ÷/¶¨Òå
-  /// Ìí¼ÓÊ§°ÜµÄÇé¿ö
-  kTypeAlreadyIn,  /// ´ıÌí¼ÓµÄÀàĞÍËùÊô´óÀàÒÑ¾­ÓĞÒ»ÖÖÍ¬ÃûÀàĞÍ
-  kDoubleAnnounceFunction,  /// ÉùÃ÷ÒÑ¾­¶¨Òå/ÉùÃ÷µÄº¯Êı
-  kOverrideFunction         /// ÊÔÍ¼ÖØÔØº¯Êı
+  /// æˆåŠŸæ·»åŠ çš„æƒ…å†µ
+  kAbleToAdd,  /// å¯ä»¥æ·»åŠ ï¼Œä»…åœ¨CheckFunctionDefineAddResultä¸­ä½¿ç”¨
+               /// æœ€ç»ˆè¿”å›æ—¶è¢«è½¬æ¢ä¸ºæ›´å…·ä½“çš„å€¼
+  kNew,        /// ä»¥å‰ä¸å­˜åœ¨è¯¥ç±»å‹åï¼Œæ¯”kFunctionDefineä¼˜å…ˆè¿”å›
+  kFunctionDefine,  /// æ·»åŠ äº†å‡½æ•°å®šä¹‰
+  kShiftToVector,  /// æ·»åŠ å‰è¯¥ç±»å‹åå¯¹åº”ä¸€ä¸ªç±»å‹ï¼Œæ·»åŠ åè½¬æ¢ä¸ºvectorå­˜å‚¨
+  kAddToVector,  /// æ·»åŠ å‰è¯¥ç±»å‹åå¯¹åº”è‡³å°‘2ä¸ªç±»å‹
+  kAnnounceOrDefineBeforeFunctionAnnounce,  /// å‡½æ•°å£°æ˜å‰å·²æœ‰å£°æ˜/å®šä¹‰
+  /// æ·»åŠ å¤±è´¥çš„æƒ…å†µ
+  kTypeAlreadyIn,  /// å¾…æ·»åŠ çš„ç±»å‹æ‰€å±å¤§ç±»å·²ç»æœ‰ä¸€ç§åŒåç±»å‹
+  kDoubleAnnounceFunction,  /// å£°æ˜å·²ç»å®šä¹‰/å£°æ˜çš„å‡½æ•°
+  kOverrideFunction         /// è¯•å›¾é‡è½½å‡½æ•°
 };
-/// @brief ¸ù¾İÃû³Æ»ñÈ¡ÀàĞÍµÄ½á¹û
+/// @brief æ ¹æ®åç§°è·å–ç±»å‹çš„ç»“æœ
 enum class GetTypeResult {
-  /// ³É¹¦Æ¥ÅäµÄÇé¿ö
-  kSuccess,  /// ³É¹¦Æ¥Åä
-  /// Æ¥ÅäÊ§°ÜµÄÇé¿ö
-  kTypeNameNotFound,   /// ÀàĞÍÃû²»´æÔÚ
-  kNoMatchTypePrefer,  /// ²»´æÔÚÆ¥ÅäÀàĞÍÑ¡ÔñÇãÏòµÄÀàĞÍÁ´Ö¸Õë
-  kSeveralSameLevelMatches  /// Æ¥Åäµ½¶à¸öÆ½¼¶½á¹û
+  /// æˆåŠŸåŒ¹é…çš„æƒ…å†µ
+  kSuccess,  /// æˆåŠŸåŒ¹é…
+  /// åŒ¹é…å¤±è´¥çš„æƒ…å†µ
+  kTypeNameNotFound,   /// ç±»å‹åä¸å­˜åœ¨
+  kNoMatchTypePrefer,  /// ä¸å­˜åœ¨åŒ¹é…ç±»å‹é€‰æ‹©å€¾å‘çš„ç±»å‹é“¾æŒ‡é’ˆ
+  kSeveralSameLevelMatches  /// åŒ¹é…åˆ°å¤šä¸ªå¹³çº§ç»“æœ
 };
 
-/// @brief Ö¸ÕëÀàĞÍ´óĞ¡
+/// @brief æŒ‡é’ˆç±»å‹å¤§å°
 constexpr size_t kPointerSize = 4;
-/// @brief ÄÚÖÃÀàĞÍ´óĞ¡£¨µ¥Î»£º×Ö½Ú£©
+/// @brief å†…ç½®ç±»å‹å¤§å°ï¼ˆå•ä½ï¼šå­—èŠ‚ï¼‰
 constexpr size_t kBuiltInTypeSize[7] = {1, 1, 2, 4, 4, 8, 4};
 
-/// @brief ¼ÆËã´æ´¢¸ø¶¨ÖµËùĞèµÄ×îĞ¡ÀàĞÍ
-/// @param[in] value £º´ı¼ÆËã´æ´¢ËùĞè×îĞ¡ÀàĞÍµÄÖµ
-/// @return ·µ»Ø´æ´¢¸ø¶¨ÖµËùĞèµÄ×îĞ¡ÀàĞÍ
-/// @retval BuiltInType::kVoid £ºvalue³¬³ö×î´ó¿É´æ´¢Öµ´óĞ¡
+/// @brief è®¡ç®—å­˜å‚¨ç»™å®šå€¼æ‰€éœ€çš„æœ€å°ç±»å‹
+/// @param[in] value ï¼šå¾…è®¡ç®—å­˜å‚¨æ‰€éœ€æœ€å°ç±»å‹çš„å€¼
+/// @return è¿”å›å­˜å‚¨ç»™å®šå€¼æ‰€éœ€çš„æœ€å°ç±»å‹
+/// @retval BuiltInType::kVoid ï¼švalueè¶…å‡ºæœ€å¤§å¯å­˜å‚¨å€¼å¤§å°
 /// @note
-/// ²»»áÍÆ¶Ï³öBuiltInType::kInt1ÀàĞÍ£¬×îĞ¡ÍÆ¶Ï³öBuiltInType::kInt8
+/// ä¸ä¼šæ¨æ–­å‡ºBuiltInType::kInt1ç±»å‹ï¼Œæœ€å°æ¨æ–­å‡ºBuiltInType::kInt8
 BuiltInType CalculateBuiltInType(const std::string& value);
 
-// Ç°ÏòÉùÃ÷Ö¸Õë±äÁ¿Àà£¬ÓÃÓÚTypeInterface::ObtainAddressÉú³ÉÖ¸ÕëÀàĞÍ
+// å‰å‘å£°æ˜æŒ‡é’ˆå˜é‡ç±»ï¼Œç”¨äºTypeInterface::ObtainAddressç”ŸæˆæŒ‡é’ˆç±»å‹
 class PointerType;
 
 /// @class TypeInterface type_system.h
-/// @brief ÀàĞÍ»ùÀà
-/// @note ËùÓĞÀàĞÍ¾ù´Ó¸Ã»ùÀàÅÉÉú
+/// @brief ç±»å‹åŸºç±»
+/// @note æ‰€æœ‰ç±»å‹å‡ä»è¯¥åŸºç±»æ´¾ç”Ÿ
 class TypeInterface {
  public:
   TypeInterface(StructOrBasicType type) : type_(type){};
@@ -206,76 +206,76 @@ class TypeInterface {
       : type_(type), next_type_node_(next_type_node) {}
   virtual ~TypeInterface() {}
 
-  /// @brief ±È½ÏÁ½¸öÀàĞÍÊÇ·ñÍêÈ«ÏàÍ¬
-  /// @param[in] type_interface £º´ı±È½ÏµÄÁ½¸öÀàĞÍ
-  /// @return ·µ»ØÁ½¸öÀàĞÍÊÇ·ñÍêÈ«ÏàÍ¬
-  /// @retval true £ºÁ½¸öÀàĞÍÍêÈ«ÏàÍ¬
-  /// @retval false £ºÁ½¸öÀàĞÍ²»ÍêÈ«ÏàÍ¬
-  /// @note ×Ô¶¯µ÷ÓÃÏÂÒ»¼¶±È½Ïº¯Êı
+  /// @brief æ¯”è¾ƒä¸¤ä¸ªç±»å‹æ˜¯å¦å®Œå…¨ç›¸åŒ
+  /// @param[in] type_interface ï¼šå¾…æ¯”è¾ƒçš„ä¸¤ä¸ªç±»å‹
+  /// @return è¿”å›ä¸¤ä¸ªç±»å‹æ˜¯å¦å®Œå…¨ç›¸åŒ
+  /// @retval true ï¼šä¸¤ä¸ªç±»å‹å®Œå…¨ç›¸åŒ
+  /// @retval false ï¼šä¸¤ä¸ªç±»å‹ä¸å®Œå…¨ç›¸åŒ
+  /// @note è‡ªåŠ¨è°ƒç”¨ä¸‹ä¸€çº§æ¯”è¾ƒå‡½æ•°
   virtual bool operator==(const TypeInterface& type_interface) const = 0;
-  /// @brief ÅĞ¶Ï¸ø¶¨ÀàĞÍÊÇ·ñ¿ÉÒÔ¸ø¸Ã¶ÔÏó¸³Öµ
-  /// @param[in] type_interface £º´ıÅĞ¶ÏµÄÀàĞÍ
-  /// @return ·µ»Ø¼ì²é½á¹û
-  /// @note ·µ»ØÖµµÄÒâÒå¼ûÆä¶¨Òå
+  /// @brief åˆ¤æ–­ç»™å®šç±»å‹æ˜¯å¦å¯ä»¥ç»™è¯¥å¯¹è±¡èµ‹å€¼
+  /// @param[in] type_interface ï¼šå¾…åˆ¤æ–­çš„ç±»å‹
+  /// @return è¿”å›æ£€æŸ¥ç»“æœ
+  /// @note è¿”å›å€¼çš„æ„ä¹‰è§å…¶å®šä¹‰
   virtual AssignableCheckResult CanBeAssignedBy(
       const TypeInterface& type_interface) const = 0;
-  /// @brief »ñÈ¡´æ´¢¸ÃÀàĞÍ±äÁ¿ËùĞè¿Õ¼äµÄ´óĞ¡
-  /// @return ·µ»Ø´æ´¢¸ÃÀàĞÍ±äÁ¿ËùĞè¿Õ¼ä´óĞ¡
-  /// @note Ö¸Õë¾ùÎªkPointerSize×Ö½Ú
+  /// @brief è·å–å­˜å‚¨è¯¥ç±»å‹å˜é‡æ‰€éœ€ç©ºé—´çš„å¤§å°
+  /// @return è¿”å›å­˜å‚¨è¯¥ç±»å‹å˜é‡æ‰€éœ€ç©ºé—´å¤§å°
+  /// @note æŒ‡é’ˆå‡ä¸ºkPointerSizeå­—èŠ‚
   virtual size_t GetTypeStoreSize() const = 0;
-  /// @brief »ñÈ¡sizeofÓïÒåÏÂÀàĞÍµÄ´óĞ¡
-  /// @return ·µ»ØsizeofÓïÒåÏÂÀàĞÍµÄ´óĞ¡
-  /// @note Ö¸ÏòÊı×éµÄÖ¸Õë½á¹ûÎªÀàĞÍ´óĞ¡³ËÒÔ¸÷Î¬¶È´óĞ¡
+  /// @brief è·å–sizeofè¯­ä¹‰ä¸‹ç±»å‹çš„å¤§å°
+  /// @return è¿”å›sizeofè¯­ä¹‰ä¸‹ç±»å‹çš„å¤§å°
+  /// @note æŒ‡å‘æ•°ç»„çš„æŒ‡é’ˆç»“æœä¸ºç±»å‹å¤§å°ä¹˜ä»¥å„ç»´åº¦å¤§å°
   virtual size_t TypeSizeOf() const = 0;
 
-  /// @note operator==()µÄ×Ó¹ı³Ì£¬½ö±È½Ï¸Ã¼¶ÀàĞÍ£¬²»µ÷ÓÃÏÂÒ»¼¶±È½Ïº¯Êı
-  /// @param[in] type_interface £º´ı±È½ÏµÄÀàĞÍ
+  /// @note operator==()çš„å­è¿‡ç¨‹ï¼Œä»…æ¯”è¾ƒè¯¥çº§ç±»å‹ï¼Œä¸è°ƒç”¨ä¸‹ä¸€çº§æ¯”è¾ƒå‡½æ•°
+  /// @param[in] type_interface ï¼šå¾…æ¯”è¾ƒçš„ç±»å‹
   /// @details
-  /// ÅÉÉúÀà¾ùÓ¦ÖØĞ´¸Ãº¯Êı£¬ÏÈµ÷ÓÃ»ùÀàµÄÍ¬Ãûº¯Êı£¬ºóÅĞ¶ÏÅÉÉúÀàĞÂÔö²¿·Ö
-  /// ´Ó¶øÊµÏÖÎª½ÓÊÜÒ»¸ö»ùÀàÊäÈëÇÒ¿ÉÒÔ°²È«Êä³ö½á¹ûµÄº¯Êı
-  /// ²»Ê¹ÓÃĞéº¯Êı¿ÉÒÔÌáÉıĞÔÄÜ
-  /// @note if·ÖÖ§¶à£¬½¨ÒéÄÚÁª
+  /// æ´¾ç”Ÿç±»å‡åº”é‡å†™è¯¥å‡½æ•°ï¼Œå…ˆè°ƒç”¨åŸºç±»çš„åŒåå‡½æ•°ï¼Œååˆ¤æ–­æ´¾ç”Ÿç±»æ–°å¢éƒ¨åˆ†
+  /// ä»è€Œå®ç°ä¸ºæ¥å—ä¸€ä¸ªåŸºç±»è¾“å…¥ä¸”å¯ä»¥å®‰å…¨è¾“å‡ºç»“æœçš„å‡½æ•°
+  /// ä¸ä½¿ç”¨è™šå‡½æ•°å¯ä»¥æå‡æ€§èƒ½
+  /// @note ifåˆ†æ”¯å¤šï¼Œå»ºè®®å†…è”
   bool IsSameObject(const TypeInterface& type_interface) const {
-    /// Ò»°ãÇé¿öÏÂĞ´´úÂë£¬ĞèÒª±È½ÏµÄÀàĞÍ¶¼ÊÇÏàÍ¬µÄ£¬³ö´íÔ¶ÉÙÓÚÕıÈ·
+    /// ä¸€èˆ¬æƒ…å†µä¸‹å†™ä»£ç ï¼Œéœ€è¦æ¯”è¾ƒçš„ç±»å‹éƒ½æ˜¯ç›¸åŒçš„ï¼Œå‡ºé”™è¿œå°‘äºæ­£ç¡®
     return GetType() == type_interface.GetType();
   }
 
-  /// @brief ÉèÖÃÀàĞÍ½ÚµãµÄÀàĞÍ
-  /// @param[in] type £ºÀàĞÍ½ÚµãµÄÀàĞÍ
+  /// @brief è®¾ç½®ç±»å‹èŠ‚ç‚¹çš„ç±»å‹
+  /// @param[in] type ï¼šç±»å‹èŠ‚ç‚¹çš„ç±»å‹
   void SetType(StructOrBasicType type) { type_ = type; }
-  /// @brief »ñÈ¡ÀàĞÍ½ÚµãµÄÀàĞÍ
-  /// @return ·µ»ØÀàĞÍ½ÚµãµÄÀàĞÍ
+  /// @brief è·å–ç±»å‹èŠ‚ç‚¹çš„ç±»å‹
+  /// @return è¿”å›ç±»å‹èŠ‚ç‚¹çš„ç±»å‹
   StructOrBasicType GetType() const { return type_; }
 
-  /// @brief »ñÈ¡ÏÂÒ»¸öÀàĞÍ½ÚµãµÄÖ¸Õë
-  /// @return ·µ»ØÖ¸ÏòÏÂÒ»¸öÀàĞÍ½ÚµãµÄconstÖ¸Õë
+  /// @brief è·å–ä¸‹ä¸€ä¸ªç±»å‹èŠ‚ç‚¹çš„æŒ‡é’ˆ
+  /// @return è¿”å›æŒ‡å‘ä¸‹ä¸€ä¸ªç±»å‹èŠ‚ç‚¹çš„constæŒ‡é’ˆ
   std::shared_ptr<const TypeInterface> GetNextNodePointer() const {
     return next_type_node_;
   }
-  /// @brief ÉèÖÃÏÂÒ»¸ö½Úµã
-  /// @param[in] next_type_node £ºÖ¸ÏòÏÂÒ»¸ö½ÚµãµÄconstÖ¸Õë
+  /// @brief è®¾ç½®ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
+  /// @param[in] next_type_node ï¼šæŒ‡å‘ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„constæŒ‡é’ˆ
   void SetNextNode(const std::shared_ptr<const TypeInterface>& next_type_node) {
     next_type_node_ = next_type_node;
   }
-  /// @brief »ñÈ¡ÏÂÒ»¸ö½ÚµãµÄÒıÓÃ
-  /// @return ·µ»ØÏÂÒ»¸ö½ÚµãµÄconstÒıÓÃ
+  /// @brief è·å–ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„å¼•ç”¨
+  /// @return è¿”å›ä¸‹ä¸€ä¸ªèŠ‚ç‚¹çš„constå¼•ç”¨
   const TypeInterface& GetNextNodeReference() const { return *next_type_node_; }
 
-  /// @brief »ñÈ¡¸ø¶¨ÀàĞÍÈ¡µØÖ·ºóµÃµ½µÄÀàĞÍ
-  /// @param[in] type_interface £ºÈ¡µØÖ·Ç°µÄÀàĞÍ
-  /// @param[in] variety_const_tag £º±»È¡µØÖ·µÄ±äÁ¿×ÔÉíµÄconst±ê¼Ç
-  /// @return ·µ»ØÈ¡µØÖ·ºóµÄÀàĞÍ
+  /// @brief è·å–ç»™å®šç±»å‹å–åœ°å€åå¾—åˆ°çš„ç±»å‹
+  /// @param[in] type_interface ï¼šå–åœ°å€å‰çš„ç±»å‹
+  /// @param[in] variety_const_tag ï¼šè¢«å–åœ°å€çš„å˜é‡è‡ªèº«çš„constæ ‡è®°
+  /// @return è¿”å›å–åœ°å€åçš„ç±»å‹
   static std::shared_ptr<const PointerType> ObtainAddressOperatorNode(
       const std::shared_ptr<const TypeInterface>& type_interface,
       ConstTag variety_const_tag) {
-    // ×ª³ıtype_interfaceµÄconstÎªÁË¹¹½¨PointerType£¬²»»áĞŞ¸Ä¸ÃÖ¸ÕëÖ¸ÏòµÄÄÚÈİ
+    // è½¬é™¤type_interfaceçš„constä¸ºäº†æ„å»ºPointerTypeï¼Œä¸ä¼šä¿®æ”¹è¯¥æŒ‡é’ˆæŒ‡å‘çš„å†…å®¹
     return std::make_shared<PointerType>(variety_const_tag, 0, type_interface);
   }
-  /// @brief ÍÆ¶ÏÁ½¸öÀàĞÍ½øĞĞÊıÑ§ÔËËãºóµÃµ½µÄÀàĞÍºÍÔËËãÇé¿ö
-  /// @param[in] left_compute_type £ºÔËËã·û×ó²à¶ÔÏóµÄÀàĞÍ
-  /// @param[in] right_compute_type £ºÔËËã·ûÓÒ²à¶ÔÏóµÄÀàĞÍ
-  /// @return Ç°°ë²¿·ÖÎªÔËËãºóµÃµ½µÄÀàĞÍ£¬ºó°ë²¿·ÖÎªÔËËãÇé¿ö
-  /// @note Á½ÖÓÀàĞÍ²»Ò»¶¨¿ÉÒÔÔËËã£¬±ØĞëÏÈ¼ì²éÍÆ¶Ï½á¹û
+  /// @brief æ¨æ–­ä¸¤ä¸ªç±»å‹è¿›è¡Œæ•°å­¦è¿ç®—åå¾—åˆ°çš„ç±»å‹å’Œè¿ç®—æƒ…å†µ
+  /// @param[in] left_compute_type ï¼šè¿ç®—ç¬¦å·¦ä¾§å¯¹è±¡çš„ç±»å‹
+  /// @param[in] right_compute_type ï¼šè¿ç®—ç¬¦å³ä¾§å¯¹è±¡çš„ç±»å‹
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºè¿ç®—åå¾—åˆ°çš„ç±»å‹ï¼ŒååŠéƒ¨åˆ†ä¸ºè¿ç®—æƒ…å†µ
+  /// @note ä¸¤é’Ÿç±»å‹ä¸ä¸€å®šå¯ä»¥è¿ç®—ï¼Œå¿…é¡»å…ˆæ£€æŸ¥æ¨æ–­ç»“æœ
   static std::pair<std::shared_ptr<const TypeInterface>,
                    DeclineMathematicalComputeTypeResult>
   DeclineMathematicalComputeResult(
@@ -283,58 +283,58 @@ class TypeInterface {
       const std::shared_ptr<const TypeInterface>& right_compute_type);
 
  private:
-  /// @brief ÀàĞÍ½ÚµãµÄÀàĞÍ
+  /// @brief ç±»å‹èŠ‚ç‚¹çš„ç±»å‹
   StructOrBasicType type_;
-  /// @brief Ö¸ÏòÏÂÒ»¸öÀàĞÍ½ÚµãµÄÖ¸Õë
+  /// @brief æŒ‡å‘ä¸‹ä¸€ä¸ªç±»å‹èŠ‚ç‚¹çš„æŒ‡é’ˆ
   /// @details
-  /// ½âÒıÓÃ¡¢È¡µØÖ·¶¼ÊÇÒıÓÃÍ¬Ò»ÌõÀàĞÍÁ´²»Í¬²¿·Ö£¬¹²ÓÃ½Úµã¿ÉÒÔ½ÚÊ¡ÄÚ´æ
-  /// Ê¹ÓÃshared_ptrÒÔÖ§³Ö¹²ÏíÀàĞÍÁ´½ÚµãºÍ½öÊÍ·ÅÀàĞÍÁ´²¿·Ö½ÚµãµÄ¹¦ÄÜ
+  /// è§£å¼•ç”¨ã€å–åœ°å€éƒ½æ˜¯å¼•ç”¨åŒä¸€æ¡ç±»å‹é“¾ä¸åŒéƒ¨åˆ†ï¼Œå…±ç”¨èŠ‚ç‚¹å¯ä»¥èŠ‚çœå†…å­˜
+  /// ä½¿ç”¨shared_pträ»¥æ”¯æŒå…±äº«ç±»å‹é“¾èŠ‚ç‚¹å’Œä»…é‡Šæ”¾ç±»å‹é“¾éƒ¨åˆ†èŠ‚ç‚¹çš„åŠŸèƒ½
   std::shared_ptr<const TypeInterface> next_type_node_;
 };
 
-/// @brief ±È½Ï½ÚµãÖ¸ÕëÖ¸ÏòµÄ½ÚµãÊÇ·ñÏàÍ¬
-/// @param[in] type_interface1 £ºÒ»¸öÀàĞÍ½Úµã
-/// @param[in] type_interface2 £ºÁíÒ»¸öÀàĞÍ½Úµã
-/// @return ·µ»ØÁ½¸ö½ÚµãÊÇ·ñÍêÈ«ÏàÍ¬
-/// @retval true £ºÁ½¸ö½ÚµãÍêÈ«ÏàÍ¬
-/// @retval false £ºÁ½¸ö½Úµã²»ÍêÈ«ÏàÍ¬
-/// @note ÓÃÓÚFunctionType±È½Ïº¯Êı²ÎÊıÁĞ±í£¬±È½Ï½Úµã¶ø·Ç±È½ÏÖ¸Ïò½ÚµãµÄÖ¸Õë
+/// @brief æ¯”è¾ƒèŠ‚ç‚¹æŒ‡é’ˆæŒ‡å‘çš„èŠ‚ç‚¹æ˜¯å¦ç›¸åŒ
+/// @param[in] type_interface1 ï¼šä¸€ä¸ªç±»å‹èŠ‚ç‚¹
+/// @param[in] type_interface2 ï¼šå¦ä¸€ä¸ªç±»å‹èŠ‚ç‚¹
+/// @return è¿”å›ä¸¤ä¸ªèŠ‚ç‚¹æ˜¯å¦å®Œå…¨ç›¸åŒ
+/// @retval true ï¼šä¸¤ä¸ªèŠ‚ç‚¹å®Œå…¨ç›¸åŒ
+/// @retval false ï¼šä¸¤ä¸ªèŠ‚ç‚¹ä¸å®Œå…¨ç›¸åŒ
+/// @note ç”¨äºFunctionTypeæ¯”è¾ƒå‡½æ•°å‚æ•°åˆ—è¡¨ï¼Œæ¯”è¾ƒèŠ‚ç‚¹è€Œéæ¯”è¾ƒæŒ‡å‘èŠ‚ç‚¹çš„æŒ‡é’ˆ
 bool operator==(const std::shared_ptr<TypeInterface>& type_interface1,
                 const std::shared_ptr<TypeInterface>& type_interface2);
 
 /// @class EndType type_system.h
-/// @brief ÀàĞÍÁ´Î²²¿ÉÚ±ø½Úµã
-/// @details ±ÜÃâ±È½ÏÀàĞÍÁ´ÊÇ·ñÏàÍ¬Ê±ĞèÒªÅĞ¶ÏÏÂÒ»¸ö½ÚµãÖ¸ÕëÊÇ·ñÎª¿Õ
-/// @note ¸Ã½ÚµãµÄÏÂÒ»¸ö½ÚµãÎªnullptr
+/// @brief ç±»å‹é“¾å°¾éƒ¨å“¨å…µèŠ‚ç‚¹
+/// @details é¿å…æ¯”è¾ƒç±»å‹é“¾æ˜¯å¦ç›¸åŒæ—¶éœ€è¦åˆ¤æ–­ä¸‹ä¸€ä¸ªèŠ‚ç‚¹æŒ‡é’ˆæ˜¯å¦ä¸ºç©º
+/// @note è¯¥èŠ‚ç‚¹çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹ä¸ºnullptr
 class EndType : public TypeInterface {
  public:
   EndType() : TypeInterface(StructOrBasicType::kEnd, nullptr) {}
 
   virtual bool operator==(const TypeInterface& type_interface) const override {
-    // EndTypeÖĞ²»»áµ÷ÓÃÏÂÒ»¼¶ÀàĞÍ½ÚµãµÄoperator==()
-    // Ëü×ÔÉíÊÇ½áÎ²£¬Ò²Ã»ÓĞÏÂÒ»¼¶ÀàĞÍ½Úµã
+    // EndTypeä¸­ä¸ä¼šè°ƒç”¨ä¸‹ä¸€çº§ç±»å‹èŠ‚ç‚¹çš„operator==()
+    // å®ƒè‡ªèº«æ˜¯ç»“å°¾ï¼Œä¹Ÿæ²¡æœ‰ä¸‹ä¸€çº§ç±»å‹èŠ‚ç‚¹
     return IsSameObject(type_interface);
   }
   virtual AssignableCheckResult CanBeAssignedBy(
       const TypeInterface& type_interface) const override {
     return AssignableCheckResult::kNonConvert;
   }
-  /// @attention ¸Ãº¯Êı²»Ó¦±»µ÷ÓÃ
+  /// @attention è¯¥å‡½æ•°ä¸åº”è¢«è°ƒç”¨
   virtual size_t GetTypeStoreSize() const override {
     assert(false);
-    // ·ÀÖ¹¾¯¸æ
+    // é˜²æ­¢è­¦å‘Š
     return size_t();
   }
-  /// @attention ¸Ãº¯Êı²»Ó¦±»µ÷ÓÃ
+  /// @attention è¯¥å‡½æ•°ä¸åº”è¢«è°ƒç”¨
   virtual size_t TypeSizeOf() const override {
     assert(false);
-    // ·ÀÖ¹¾¯¸æ
+    // é˜²æ­¢è­¦å‘Š
     return size_t();
   }
 
-  /// @brief »ñÈ¡EndType½ÚµãÖ¸Õë
-  /// @return ·µ»ØÖ¸ÏòÈ«¾Ö¹²ÓÃµÄEndType½ÚµãµÄconstÖ¸Õë
-  /// @note È«¾Ö¹²ÓÃÒ»¸ö½Úµã£¬½ÚÊ¡ÄÚ´æ
+  /// @brief è·å–EndTypeèŠ‚ç‚¹æŒ‡é’ˆ
+  /// @return è¿”å›æŒ‡å‘å…¨å±€å…±ç”¨çš„EndTypeèŠ‚ç‚¹çš„constæŒ‡é’ˆ
+  /// @note å…¨å±€å…±ç”¨ä¸€ä¸ªèŠ‚ç‚¹ï¼ŒèŠ‚çœå†…å­˜
   static std::shared_ptr<const EndType> GetEndType() {
     static std::shared_ptr<EndType> end_type_pointer =
         std::make_shared<EndType>();
@@ -342,17 +342,17 @@ class EndType : public TypeInterface {
   }
 
   bool IsSameObject(const TypeInterface& type_interface) const {
-    // this == &type_interfaceÊÇÓÅ»¯ÊÖ¶Î
-    // ÀàĞÍÏµÍ³Éè¼ÆË¼Â·ÊÇ¾¡¿ÉÄÜ¶àµÄ¹²ÏíÒ»ÌõÀàĞÍÁ´
-    // ËùÒÔÈİÒ×³öÏÖÖ¸ÏòÍ¬Ò»¸ö½ÚµãµÄÇé¿ö
+    // this == &type_interfaceæ˜¯ä¼˜åŒ–æ‰‹æ®µ
+    // ç±»å‹ç³»ç»Ÿè®¾è®¡æ€è·¯æ˜¯å°½å¯èƒ½å¤šçš„å…±äº«ä¸€æ¡ç±»å‹é“¾
+    // æ‰€ä»¥å®¹æ˜“å‡ºç°æŒ‡å‘åŒä¸€ä¸ªèŠ‚ç‚¹çš„æƒ…å†µ
     return this == &type_interface ||
            TypeInterface::IsSameObject(type_interface);
   }
 };
 
 /// @class BasicType type_system.h
-/// @brief Ô¤¶¨ÒåµÄ»ù´¡ÀàĞÍ
-/// @details ¸Ã½ÚµãºóÁ¬½ÓµÄÊÇEndType½Úµã
+/// @brief é¢„å®šä¹‰çš„åŸºç¡€ç±»å‹
+/// @details è¯¥èŠ‚ç‚¹åè¿æ¥çš„æ˜¯EndTypeèŠ‚ç‚¹
 class BasicType : public TypeInterface {
  public:
   BasicType(BuiltInType built_in_type, SignTag sign_tag)
@@ -368,31 +368,31 @@ class BasicType : public TypeInterface {
     return BasicType::GetTypeStoreSize();
   }
 
-  /// @brief ÉèÖÃÄÚÖÃÀàĞÍ
-  /// @param[in] built_in_type £º´ıÉèÖÃµÄÄÚÖÃÀàĞÍ
+  /// @brief è®¾ç½®å†…ç½®ç±»å‹
+  /// @param[in] built_in_type ï¼šå¾…è®¾ç½®çš„å†…ç½®ç±»å‹
   void SetBuiltInType(BuiltInType built_in_type) {
     built_in_type_ = built_in_type;
   }
-  /// @brief »ñÈ¡ÄÚÖÃÀàĞÍ
-  /// @return ·µ»ØÄÚÖÃÀàĞÍ
+  /// @brief è·å–å†…ç½®ç±»å‹
+  /// @return è¿”å›å†…ç½®ç±»å‹
   BuiltInType GetBuiltInType() const { return built_in_type_; }
-  /// @brief ÉèÖÃÄÚÖÃÀàĞÍµÄ·ûºÅÊôĞÔ£¨ÓĞ·ûºÅ/ÎŞ·ûºÅ£©
-  /// @param[in] sign_tag £º·ûºÅ±ê¼Ç
+  /// @brief è®¾ç½®å†…ç½®ç±»å‹çš„ç¬¦å·å±æ€§ï¼ˆæœ‰ç¬¦å·/æ— ç¬¦å·ï¼‰
+  /// @param[in] sign_tag ï¼šç¬¦å·æ ‡è®°
   void SetSignTag(SignTag sign_tag) { sign_tag_ = sign_tag; }
-  /// @brief »ñÈ¡ÄÚÖÃÀàĞÍµÄ·ûºÅ±ê¼Ç
-  /// @return ·µ»Ø·ûºÅ±ê¼Ç
+  /// @brief è·å–å†…ç½®ç±»å‹çš„ç¬¦å·æ ‡è®°
+  /// @return è¿”å›ç¬¦å·æ ‡è®°
   SignTag GetSignTag() const { return sign_tag_; }
 
   bool IsSameObject(const TypeInterface& type_interface) const;
 
  private:
-  /// @brief ÄÚÖÃÀàĞÍ
+  /// @brief å†…ç½®ç±»å‹
   BuiltInType built_in_type_;
-  /// @brief ·ûºÅ±ê¼Ç
+  /// @brief ç¬¦å·æ ‡è®°
   SignTag sign_tag_;
 };
 
-/// Ö¸ÕëÀàĞÍ£¬Ò»¸ö*¶ÔÓ¦Ò»¸ö½Úµã
+/// æŒ‡é’ˆç±»å‹ï¼Œä¸€ä¸ª*å¯¹åº”ä¸€ä¸ªèŠ‚ç‚¹
 class PointerType : public TypeInterface {
  public:
   PointerType(ConstTag const_tag, size_t array_size)
@@ -411,61 +411,61 @@ class PointerType : public TypeInterface {
   virtual size_t GetTypeStoreSize() const override { return kPointerSize; }
   virtual size_t TypeSizeOf() const override;
 
-  /// @brief ÉèÖÃÖ¸ÕëÖ¸ÏòµÄ¶ÔÏóµÄconst×´Ì¬
-  /// @param[in] const_tag £ºconst±ê¼Ç
-  /// @note ¸Ã±ê¼Ç±íÊ¾½âÒıÓÃºóµÃµ½µÄÒıÓÃÊÇ·ñ¿ÉÒÔĞŞ¸Ä
+  /// @brief è®¾ç½®æŒ‡é’ˆæŒ‡å‘çš„å¯¹è±¡çš„constçŠ¶æ€
+  /// @param[in] const_tag ï¼šconstæ ‡è®°
+  /// @note è¯¥æ ‡è®°è¡¨ç¤ºè§£å¼•ç”¨åå¾—åˆ°çš„å¼•ç”¨æ˜¯å¦å¯ä»¥ä¿®æ”¹
   void SetConstTag(ConstTag const_tag) { variety_const_tag_ = const_tag; }
-  /// @brief »ñÈ¡Ö¸ÕëÖ¸ÏòµÄ¶ÔÏóµÄconst×´Ì¬
-  /// @return ·µ»Ø½âÒıÓÃºóµÃµ½µÄ¶ÔÏóµÄconst±ê¼Ç
-  /// @note ¸Ã±ê¼Ç±íÊ¾½âÒıÓÃºóµÃµ½µÄÒıÓÃÊÇ·ñ¿ÉÒÔĞŞ¸Ä
+  /// @brief è·å–æŒ‡é’ˆæŒ‡å‘çš„å¯¹è±¡çš„constçŠ¶æ€
+  /// @return è¿”å›è§£å¼•ç”¨åå¾—åˆ°çš„å¯¹è±¡çš„constæ ‡è®°
+  /// @note è¯¥æ ‡è®°è¡¨ç¤ºè§£å¼•ç”¨åå¾—åˆ°çš„å¼•ç”¨æ˜¯å¦å¯ä»¥ä¿®æ”¹
   ConstTag GetConstTag() const { return variety_const_tag_; }
-  /// @brief ÉèÖÃÖ¸ÕëÖ¸ÏòµÄÊı×é´óĞ¡
-  /// @param[in] array_size £ºÊı×é´óĞ¡
+  /// @brief è®¾ç½®æŒ‡é’ˆæŒ‡å‘çš„æ•°ç»„å¤§å°
+  /// @param[in] array_size ï¼šæ•°ç»„å¤§å°
   /// @details
-  /// 0 £º´¿Ö¸Õë
-  /// -1 £º´ı¸ù¾İºóÃæµÄÊı×é³õÊ¼»¯ÁĞ±íÌîĞ´Êı×é´óĞ¡
-  /// ÆäËü£º´óĞ¡Îªarray_sizeµÄÊı×é
+  /// 0 ï¼šçº¯æŒ‡é’ˆ
+  /// -1 ï¼šå¾…æ ¹æ®åé¢çš„æ•°ç»„åˆå§‹åŒ–åˆ—è¡¨å¡«å†™æ•°ç»„å¤§å°
+  /// å…¶å®ƒï¼šå¤§å°ä¸ºarray_sizeçš„æ•°ç»„
   void SetArraySize(size_t array_size) { array_size_ = array_size; }
-  /// @brief »ñÈ¡Ö¸ÕëÖ¸ÏòµÄÊı×é´óĞ¡
-  /// @return ·µ»ØÖ¸ÕëÖ¸ÏòµÄÊı×é´óĞ¡
-  /// @retval 0 £º´¿Ö¸Õë
-  /// @retval -1 £º´ı¸ù¾İºóÃæµÄÊı×é³õÊ¼»¯ÁĞ±íÌîĞ´Êı×é´óĞ¡
-  /// @retval ÆäËü£º´óĞ¡Îªarray_sizeµÄÊı×é
+  /// @brief è·å–æŒ‡é’ˆæŒ‡å‘çš„æ•°ç»„å¤§å°
+  /// @return è¿”å›æŒ‡é’ˆæŒ‡å‘çš„æ•°ç»„å¤§å°
+  /// @retval 0 ï¼šçº¯æŒ‡é’ˆ
+  /// @retval -1 ï¼šå¾…æ ¹æ®åé¢çš„æ•°ç»„åˆå§‹åŒ–åˆ—è¡¨å¡«å†™æ•°ç»„å¤§å°
+  /// @retval å…¶å®ƒï¼šå¤§å°ä¸ºarray_sizeçš„æ•°ç»„
   size_t GetArraySize() const { return array_size_; }
   bool IsSameObject(const TypeInterface& type_interface) const;
-  /// @brief »ñÈ¡¸ÃÖ¸Õë½âÒıÓÃºóµÃµ½µÄÀàĞÍ
-  /// @return Ç°°ë²¿·ÖÎª½âÒıÓÃºóµÄÀàĞÍ£¬ºó°ë²¿·ÖÎª½âÒıÓÃµÃµ½µÄ¶ÔÏóÊÇ·ñÎªconst
+  /// @brief è·å–è¯¥æŒ‡é’ˆè§£å¼•ç”¨åå¾—åˆ°çš„ç±»å‹
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºè§£å¼•ç”¨åçš„ç±»å‹ï¼ŒååŠéƒ¨åˆ†ä¸ºè§£å¼•ç”¨å¾—åˆ°çš„å¯¹è±¡æ˜¯å¦ä¸ºconst
   std::pair<std::shared_ptr<const TypeInterface>, ConstTag> DeReference()
       const {
     return std::make_pair(GetNextNodePointer(), GetConstTag());
   }
 
  private:
-  /// @brief ½âÒıÓÃºóµÄ¶ÔÏóÊÇ·ñÎªconst±ê¼Ç
+  /// @brief è§£å¼•ç”¨åçš„å¯¹è±¡æ˜¯å¦ä¸ºconstæ ‡è®°
   ConstTag variety_const_tag_;
-  /// @brief Ö¸ÕëÖ¸ÏòµÄÊı×éÖĞ¶ÔÏó¸öÊı
-  /// 0 £º´¿Ö¸Õë
-  /// -1 £º´ı¸ù¾İºóÃæµÄÊı×é³õÊ¼»¯ÁĞ±íÌîĞ´Êı×é´óĞ¡£¨½öÏŞÉùÃ÷ÖĞ£©
-  /// ÆäËü £º´óĞ¡Îªarray_size_µÄÊı×é
+  /// @brief æŒ‡é’ˆæŒ‡å‘çš„æ•°ç»„ä¸­å¯¹è±¡ä¸ªæ•°
+  /// 0 ï¼šçº¯æŒ‡é’ˆ
+  /// -1 ï¼šå¾…æ ¹æ®åé¢çš„æ•°ç»„åˆå§‹åŒ–åˆ—è¡¨å¡«å†™æ•°ç»„å¤§å°ï¼ˆä»…é™å£°æ˜ä¸­ï¼‰
+  /// å…¶å®ƒ ï¼šå¤§å°ä¸ºarray_size_çš„æ•°ç»„
   size_t array_size_;
 };
 
 /// @class FunctionType type_system.h
-/// @brief º¯ÊıÀàĞÍ
+/// @brief å‡½æ•°ç±»å‹
 class FunctionType : public TypeInterface {
   /// @class ArgumentInfo type_system.h
-  /// @brief ´æ´¢º¯Êı²ÎÊıĞÅÏ¢
+  /// @brief å­˜å‚¨å‡½æ•°å‚æ•°ä¿¡æ¯
   struct ArgumentInfo {
     bool operator==(const ArgumentInfo& argument_info) const;
 
-    /// @brief Ö¸Ïò±äÁ¿ÃûµÄÖ¸Õë²»ÎÈ¶¨
+    /// @brief æŒ‡å‘å˜é‡åçš„æŒ‡é’ˆä¸ç¨³å®š
     /// @details
-    /// º¯ÊıÉùÃ÷ÔÚÉùÃ÷½áÊøºó±»Çå³ı
-    /// º¯Êı¶¨ÒåÔÚ¶¨Òå½áÊøºó±»Çå³ı
+    /// å‡½æ•°å£°æ˜åœ¨å£°æ˜ç»“æŸåè¢«æ¸…é™¤
+    /// å‡½æ•°å®šä¹‰åœ¨å®šä¹‰ç»“æŸåè¢«æ¸…é™¤
     std::shared_ptr<const c_parser_frontend::operator_node::VarietyOperatorNode>
         variety_operator_node;
   };
-  /// @brief ´æ´¢²ÎÊıĞÅÏ¢µÄÈİÆ÷
+  /// @brief å­˜å‚¨å‚æ•°ä¿¡æ¯çš„å®¹å™¨
   using ArgumentInfoContainer = std::vector<ArgumentInfo>;
 
  public:
@@ -493,156 +493,156 @@ class FunctionType : public TypeInterface {
       const TypeInterface& type_interface) const override;
   virtual size_t GetTypeStoreSize() const override {
     assert(false);
-    // ·ÀÖ¹¾¯¸æ
+    // é˜²æ­¢è­¦å‘Š
     return size_t();
   }
   virtual size_t TypeSizeOf() const override {
     assert(false);
-    // ·ÀÖ¹¾¯¸æ
+    // é˜²æ­¢è­¦å‘Š
     return size_t();
   }
   bool IsSameObject(const TypeInterface& type_interface) const {
-    // º¯ÊıÀàĞÍÎ¨Ò»£¬Ö»ÓĞÖ¸ÏòÍ¬Ò»¸öFunctionType¶ÔÏó²ÅÊÇÍ¬Ò»¸öº¯Êı
+    // å‡½æ•°ç±»å‹å”¯ä¸€ï¼Œåªæœ‰æŒ‡å‘åŒä¸€ä¸ªFunctionTypeå¯¹è±¡æ‰æ˜¯åŒä¸€ä¸ªå‡½æ•°
     return this == &type_interface;
   }
-  /// @brief ±È½ÏÁ½¸öº¯ÊıÇ©ÃûÊÇ·ñÏàÍ¬
-  /// @param[in] function_type £ºÓÃÀ´±È½ÏµÄÁíÒ»¸öº¯Êı
-  /// @return ·µ»ØÁ½¸öº¯ÊıÇ©ÃûÊÇ·ñÏàÍ¬
-  /// @retval true £ºÁ½¸öº¯ÊıÇ©ÃûÏàÍ¬
-  /// @retval false £ºÁ½¸öº¯ÊıÇ©Ãû²»Í¬
+  /// @brief æ¯”è¾ƒä¸¤ä¸ªå‡½æ•°ç­¾åæ˜¯å¦ç›¸åŒ
+  /// @param[in] function_type ï¼šç”¨æ¥æ¯”è¾ƒçš„å¦ä¸€ä¸ªå‡½æ•°
+  /// @return è¿”å›ä¸¤ä¸ªå‡½æ•°ç­¾åæ˜¯å¦ç›¸åŒ
+  /// @retval true ï¼šä¸¤ä¸ªå‡½æ•°ç­¾åç›¸åŒ
+  /// @retval false ï¼šä¸¤ä¸ªå‡½æ•°ç­¾åä¸åŒ
   /// @details
-  /// ¼ì²éÁ½¸öº¯ÊıÀàĞÍµÄº¯ÊıÃû¡¢º¯Êı²ÎÊı¡¢·µ»ØÀàĞÍÊÇ·ñÏàÍ¬
-  /// @note Ö»¼ì²éº¯ÊıÇ©ÃûÊÇ·ñÏàÍ¬£¬²»¼ì²éº¯ÊıÄÚÖ´ĞĞµÄÓï¾ä
+  /// æ£€æŸ¥ä¸¤ä¸ªå‡½æ•°ç±»å‹çš„å‡½æ•°åã€å‡½æ•°å‚æ•°ã€è¿”å›ç±»å‹æ˜¯å¦ç›¸åŒ
+  /// @note åªæ£€æŸ¥å‡½æ•°ç­¾åæ˜¯å¦ç›¸åŒï¼Œä¸æ£€æŸ¥å‡½æ•°å†…æ‰§è¡Œçš„è¯­å¥
   bool IsSameSignature(const FunctionType& function_type) const {
     return GetFunctionName() == function_type.GetFunctionName() &&
            GetArguments() == function_type.GetArguments() &&
            GetReturnTypeReference() == function_type.GetReturnTypeReference();
   }
-  /// @brief ÉèÖÃº¯Êı·µ»ØÀàĞÍ
-  /// @param[in] return_type £ºÖ¸Ïòº¯Êı·µ»ØÀàĞÍÀàĞÍÁ´Í·½áµãµÄÖ¸Õë
+  /// @brief è®¾ç½®å‡½æ•°è¿”å›ç±»å‹
+  /// @param[in] return_type ï¼šæŒ‡å‘å‡½æ•°è¿”å›ç±»å‹ç±»å‹é“¾å¤´ç»“ç‚¹çš„æŒ‡é’ˆ
   void SetReturnTypePointer(
       const std::shared_ptr<const TypeInterface>& return_type) {
     return_type_ = return_type;
   }
-  /// @brief »ñÈ¡º¯ÊıµÄ·µ»ØÀàĞÍÁ´
-  /// @return ·µ»ØÖ¸Ïòº¯ÊıµÄ·µ»ØÀàĞÍÁ´Í·½áµãµÄÖ¸Õë
+  /// @brief è·å–å‡½æ•°çš„è¿”å›ç±»å‹é“¾
+  /// @return è¿”å›æŒ‡å‘å‡½æ•°çš„è¿”å›ç±»å‹é“¾å¤´ç»“ç‚¹çš„æŒ‡é’ˆ
   std::shared_ptr<const TypeInterface> GetReturnTypePointer() const {
     return return_type_;
   }
-  /// @brief »ñÈ¡º¯ÊıµÄ·µ»ØÀàĞÍÁ´Í·½áµãÒıÓÃ
-  /// @return ·µ»Øº¯ÊıµÄ·µ»ØÀàĞÍÁ´Í·½áµãµÄconstÒıÓÃ
+  /// @brief è·å–å‡½æ•°çš„è¿”å›ç±»å‹é“¾å¤´ç»“ç‚¹å¼•ç”¨
+  /// @return è¿”å›å‡½æ•°çš„è¿”å›ç±»å‹é“¾å¤´ç»“ç‚¹çš„constå¼•ç”¨
   const TypeInterface& GetReturnTypeReference() const { return *return_type_; }
-  /// @brief ÉèÖÃº¯Êı·µ»ØÀàĞÍµÄconst±ê¼Ç
-  /// @param[in] return_type_const_tag £ºº¯Êı·µ»ØÀàĞÍµÄconst±ê¼Ç
+  /// @brief è®¾ç½®å‡½æ•°è¿”å›ç±»å‹çš„constæ ‡è®°
+  /// @param[in] return_type_const_tag ï¼šå‡½æ•°è¿”å›ç±»å‹çš„constæ ‡è®°
   /// @details
-  /// ¸ÃÊôĞÔ¾ö¶¨·µ»ØµÄ¶ÔÏóÊÇ·ñ²»¿ÉĞŞ¸Ä
+  /// è¯¥å±æ€§å†³å®šè¿”å›çš„å¯¹è±¡æ˜¯å¦ä¸å¯ä¿®æ”¹
   void SetReturnTypeConstTag(ConstTag return_type_const_tag) {
     return_type_const_tag_ = return_type_const_tag;
   }
-  /// @brief »ñÈ¡º¯Êı·µ»Ø¶ÔÏóµÄconst±ê¼Ç
-  /// @return ·µ»Øº¯Êı·µ»Ø¶ÔÏóµÄconst±ê¼Ç
+  /// @brief è·å–å‡½æ•°è¿”å›å¯¹è±¡çš„constæ ‡è®°
+  /// @return è¿”å›å‡½æ•°è¿”å›å¯¹è±¡çš„constæ ‡è®°
   ConstTag GetReturnTypeConstTag() const { return return_type_const_tag_; }
-  /// @brief Ìí¼Óº¯Êı²ÎÊı
-  /// @param[in] argument £º¸ù¾İ²ÎÊıÀàĞÍºÍ²ÎÊıÃû¹¹½¨µÄ²ÎÊı±äÁ¿½Úµã
+  /// @brief æ·»åŠ å‡½æ•°å‚æ•°
+  /// @param[in] argument ï¼šæ ¹æ®å‚æ•°ç±»å‹å’Œå‚æ•°åæ„å»ºçš„å‚æ•°å˜é‡èŠ‚ç‚¹
   void AddFunctionCallArgument(
       const std::shared_ptr<
           const c_parser_frontend::operator_node::VarietyOperatorNode>&
           argument);
-  /// @brief »ñÈ¡´æ´¢²ÎÊı½ÚµãµÄÈİÆ÷
-  /// @return ·µ»Ø´æ´¢²ÎÊı½ÚµãµÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–å­˜å‚¨å‚æ•°èŠ‚ç‚¹çš„å®¹å™¨
+  /// @return è¿”å›å­˜å‚¨å‚æ•°èŠ‚ç‚¹çš„å®¹å™¨çš„constå¼•ç”¨
   const ArgumentInfoContainer& GetArguments() const { return argument_infos_; }
-  /// @brief ÉèÖÃº¯ÊıÃû
-  /// @param[in] function_name £ºº¯ÊıÃû
+  /// @brief è®¾ç½®å‡½æ•°å
+  /// @param[in] function_name ï¼šå‡½æ•°å
   void SetFunctionName(const std::string& function_name) {
     function_name_ = function_name;
   }
-  /// @brief »ñÈ¡º¯ÊıÃû
-  /// @return ·µ»Øº¯ÊıÃûµÄconstÒıÓÃ
+  /// @brief è·å–å‡½æ•°å
+  /// @return è¿”å›å‡½æ•°åçš„constå¼•ç”¨
   const std::string& GetFunctionName() const { return function_name_; }
-  /// @brief »ñÈ¡º¯ÊıÀàĞÍµÄº¯ÊıÖ¸ÕëĞÎÊ½
-  /// @param[in] function_type £º´ı»ñÈ¡Ö¸ÕëĞÎÊ½µÄº¯ÊıÀàĞÍ½Úµã
-  /// @return ·µ»Øº¯ÊıµÄÒ»ÖØº¯ÊıÖ¸ÕëĞÎÊ½
+  /// @brief è·å–å‡½æ•°ç±»å‹çš„å‡½æ•°æŒ‡é’ˆå½¢å¼
+  /// @param[in] function_type ï¼šå¾…è·å–æŒ‡é’ˆå½¢å¼çš„å‡½æ•°ç±»å‹èŠ‚ç‚¹
+  /// @return è¿”å›å‡½æ•°çš„ä¸€é‡å‡½æ•°æŒ‡é’ˆå½¢å¼
   /// @details
-  /// ·µ»ØÒ»¸öconstÖ¸Õë½Úµã£¬Õâ¸öÖ¸Õë½ÚµãÖ¸Ïòfunction_type½Úµã
+  /// è¿”å›ä¸€ä¸ªconstæŒ‡é’ˆèŠ‚ç‚¹ï¼Œè¿™ä¸ªæŒ‡é’ˆèŠ‚ç‚¹æŒ‡å‘function_typeèŠ‚ç‚¹
   static std::shared_ptr<const PointerType> ConvertToFunctionPointer(
       const std::shared_ptr<const TypeInterface>& function_type) {
     assert(function_type->GetType() == StructOrBasicType::kFunction);
-    /// ×ª³ıconstÎªÁË¿ÉÒÔ¹¹ÔìÖ¸Õë½Úµã£¬²»»áĞŞ¸Äfunction_type
+    /// è½¬é™¤constä¸ºäº†å¯ä»¥æ„é€ æŒ‡é’ˆèŠ‚ç‚¹ï¼Œä¸ä¼šä¿®æ”¹function_type
     return std::make_shared<const PointerType>(ConstTag::kConst, 0,
                                                function_type);
   }
 
  private:
-  /// @brief º¯ÊıÃû
+  /// @brief å‡½æ•°å
   std::string function_name_;
-  /// @brief ·µ»ØÖµµÄconst±ê¼Ç
+  /// @brief è¿”å›å€¼çš„constæ ‡è®°
   ConstTag return_type_const_tag_;
-  /// @brief º¯Êı·µ»ØÀàĞÍ
+  /// @brief å‡½æ•°è¿”å›ç±»å‹
   std::shared_ptr<const TypeInterface> return_type_;
-  /// @brief ²ÎÊıÀàĞÍºÍ²ÎÊıÃû
+  /// @brief å‚æ•°ç±»å‹å’Œå‚æ•°å
   ArgumentInfoContainer argument_infos_;
 };
 
 /// @class StructureTypeInterface type_system.h
-/// @brief ½á¹¹»¯ÀàĞÍ£¨½á¹¹Ìå/¹²ÓÃÌå£©µÄ»ùÀà
-/// @note Ã¶¾Ù²»´Ó¸ÃÀàÅÉÉú
+/// @brief ç»“æ„åŒ–ç±»å‹ï¼ˆç»“æ„ä½“/å…±ç”¨ä½“ï¼‰çš„åŸºç±»
+/// @note æšä¸¾ä¸ä»è¯¥ç±»æ´¾ç”Ÿ
 class StructureTypeInterface : public TypeInterface {
  protected:
   /// @class StructureMemberContainer type_system.h
-  /// @brief ´æ´¢½á¹¹»¯ÀàĞÍ³ÉÔ±
+  /// @brief å­˜å‚¨ç»“æ„åŒ–ç±»å‹æˆå‘˜
   /// @details
-  /// ¼üÖµÎª³ÉÔ±Ãû£¬ÖµÇ°°ë²¿·ÖÎª³ÉÔ±ÀàĞÍ£¬ºó°ë²¿·ÖÎª³ÉÔ±const±ê¼Ç
+  /// é”®å€¼ä¸ºæˆå‘˜åï¼Œå€¼å‰åŠéƒ¨åˆ†ä¸ºæˆå‘˜ç±»å‹ï¼ŒååŠéƒ¨åˆ†ä¸ºæˆå‘˜constæ ‡è®°
   class StructureMemberContainer {
     enum class IdWrapper { kMemberIndex };
 
    public:
-    /// @brief ´æ´¢³ÉÔ±ĞÅÏ¢µÄÈİÆ÷
+    /// @brief å­˜å‚¨æˆå‘˜ä¿¡æ¯çš„å®¹å™¨
     using MemberContainer =
         std::vector<std::pair<std::shared_ptr<const TypeInterface>, ConstTag>>;
-    /// @brief ³ÉÔ±ÔÚ½á¹¹»¯ÀàĞÍÖĞµÄÏÂ±ê£¬´ÓÉÏµ½ÏÂµİÔö
+    /// @brief æˆå‘˜åœ¨ç»“æ„åŒ–ç±»å‹ä¸­çš„ä¸‹æ ‡ï¼Œä»ä¸Šåˆ°ä¸‹é€’å¢
     /// @details
     /// struct {
-    ///   int x;    // ÏÂ±ê£º0
-    ///   char y;   // ÏÂ±ê£º1
-    ///   double z; // ÏÂ±ê£º2
+    ///   int x;    // ä¸‹æ ‡ï¼š0
+    ///   char y;   // ä¸‹æ ‡ï¼š1
+    ///   double z; // ä¸‹æ ‡ï¼š2
     /// }
     using MemberIndex =
         frontend::common::ExplicitIdWrapper<size_t, IdWrapper,
                                             IdWrapper::kMemberIndex>;
-    /// @brief ²éÑ¯³ÉÔ±ÔÚ½á¹¹»¯ÀàĞÍÖĞµÄÏÂ±ê
-    /// @param[in] member_name £º³ÉÔ±Ãû
-    /// @return ·µ»Ø³ÉÔ±ÔÚ½á¹¹»¯ÀàĞÍÖĞµÄÏÂ±ê
-    /// @retval MemberIndex::InvalidId() £º²»´æÔÚ¸Ã³ÉÔ±
+    /// @brief æŸ¥è¯¢æˆå‘˜åœ¨ç»“æ„åŒ–ç±»å‹ä¸­çš„ä¸‹æ ‡
+    /// @param[in] member_name ï¼šæˆå‘˜å
+    /// @return è¿”å›æˆå‘˜åœ¨ç»“æ„åŒ–ç±»å‹ä¸­çš„ä¸‹æ ‡
+    /// @retval MemberIndex::InvalidId() ï¼šä¸å­˜åœ¨è¯¥æˆå‘˜
     MemberIndex GetMemberIndex(const std::string& member_name) const;
-    /// @brief ¸ù¾İ³ÉÔ±ÏÂ±ê»ñÈ¡³ÉÔ±ĞÅÏ¢
-    /// @param[in] member_index £º³ÉÔ±ÏÂ±ê
-    /// @return Ç°°ë²¿·ÖÎª³ÉÔ±ÀàĞÍ£¬ºó°ë²¿·ÖÎª³ÉÔ±µÄconst±ê¼Ç
-    /// @note member_index±ØĞëÓĞĞ§
+    /// @brief æ ¹æ®æˆå‘˜ä¸‹æ ‡è·å–æˆå‘˜ä¿¡æ¯
+    /// @param[in] member_index ï¼šæˆå‘˜ä¸‹æ ‡
+    /// @return å‰åŠéƒ¨åˆ†ä¸ºæˆå‘˜ç±»å‹ï¼ŒååŠéƒ¨åˆ†ä¸ºæˆå‘˜çš„constæ ‡è®°
+    /// @note member_indexå¿…é¡»æœ‰æ•ˆ
     const std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&
     GetMemberInfo(MemberIndex member_index) const {
       assert(member_index.IsValid());
       assert(member_index < members_.size());
       return members_[member_index];
     }
-    /// @brief Ìí¼Ó³ÉÔ±
-    /// @param[in] member_name £º³ÉÔ±Ãû
-    /// @param[in] member_type £º³ÉÔ±ÀàĞÍ
-    /// @param[in] member_const_tag £º³ÉÔ±µÄconst±ê¼Ç
-    /// @return ·µ»Ø³ÉÔ±µÄÏÂ±ê
-    /// @retval MemberIndex::InvalidId() £º´ıÌí¼Ó³ÉÔ±ÃûÒÑ´æÔÚ
+    /// @brief æ·»åŠ æˆå‘˜
+    /// @param[in] member_name ï¼šæˆå‘˜å
+    /// @param[in] member_type ï¼šæˆå‘˜ç±»å‹
+    /// @param[in] member_const_tag ï¼šæˆå‘˜çš„constæ ‡è®°
+    /// @return è¿”å›æˆå‘˜çš„ä¸‹æ ‡
+    /// @retval MemberIndex::InvalidId() ï¼šå¾…æ·»åŠ æˆå‘˜åå·²å­˜åœ¨
     template <class MemberName>
     MemberIndex AddMember(
         MemberName&& member_name,
         const std::shared_ptr<const TypeInterface>& member_type,
         ConstTag member_const_tag);
-    /// @brief »ñÈ¡´æ´¢³ÉÔ±ĞÅÏ¢µÄÈİÆ÷
-    /// @return ·µ»Ø´æ´¢³ÉÔ±ĞÅÏ¢µÄÈİÆ÷µÄconstÒıÓÃ
+    /// @brief è·å–å­˜å‚¨æˆå‘˜ä¿¡æ¯çš„å®¹å™¨
+    /// @return è¿”å›å­˜å‚¨æˆå‘˜ä¿¡æ¯çš„å®¹å™¨çš„constå¼•ç”¨
     const auto& GetMembers() const { return members_; }
 
    private:
-    /// @brief ³ÉÔ±Ãûµ½ÏÂ±êµÄÓ³Éä
+    /// @brief æˆå‘˜ååˆ°ä¸‹æ ‡çš„æ˜ å°„
     std::unordered_map<std::string, MemberIndex> member_name_to_index_;
-    /// @brief ´æ´¢³ÉÔ±ÀàĞÍÓëconst±ê¼Ç
+    /// @brief å­˜å‚¨æˆå‘˜ç±»å‹ä¸constæ ‡è®°
     MemberContainer members_;
   };
 
@@ -664,35 +664,35 @@ class StructureTypeInterface : public TypeInterface {
     }
   }
 
-  /// @brief »ñÈ¡½á¹¹»¯ÀàĞÍÃû
-  /// @return ·µ»Ø½á¹¹»¯ÀàĞÍÃûµÄconstÒıÓÃ
+  /// @brief è·å–ç»“æ„åŒ–ç±»å‹å
+  /// @return è¿”å›ç»“æ„åŒ–ç±»å‹åçš„constå¼•ç”¨
   const std::string& GetStructureName() const { return structure_name_; }
-  /// @brief ÉèÖÃ½á¹¹»¯ÀàĞÍÃû
-  /// @param[in] structure_name £º½á¹¹»¯ÀàĞÍÃû
+  /// @brief è®¾ç½®ç»“æ„åŒ–ç±»å‹å
+  /// @param[in] structure_name ï¼šç»“æ„åŒ–ç±»å‹å
   void SetStructureName(const std::string& structure_name) {
     structure_name_ = structure_name;
   }
-  /// @brief °´ÈİÆ÷ÉèÖÃ½á¹¹»¯ÀàĞÍµÄ³ÉÔ±Êı¾İ
-  /// @tparam MemberContainer £ºStructureMemberContainerµÄ²»Í¬ÒıÓÃ
-  /// @param[in] structure_members £º´æ´¢½á¹¹»¯ÀàĞÍ³ÉÔ±Êı¾İµÄÈİÆ÷
+  /// @brief æŒ‰å®¹å™¨è®¾ç½®ç»“æ„åŒ–ç±»å‹çš„æˆå‘˜æ•°æ®
+  /// @tparam MemberContainer ï¼šStructureMemberContainerçš„ä¸åŒå¼•ç”¨
+  /// @param[in] structure_members ï¼šå­˜å‚¨ç»“æ„åŒ–ç±»å‹æˆå‘˜æ•°æ®çš„å®¹å™¨
   template <class MemberContainer>
   requires std::is_same_v<std::decay_t<MemberContainer>,
                           StructureMemberContainer>
   void SetStructureMembers(MemberContainer&& structure_members) {
     structure_member_container_ = structure_members;
   }
-  /// @brief »ñÈ¡½á¹¹»¯ÀàĞÍ´æ´¢³ÉÔ±ĞÅÏ¢µÄÈİÆ÷
-  /// @return ·µ»Ø½á¹¹»¯ÀàĞÍ´æ´¢³ÉÔ±ĞÅÏ¢µÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–ç»“æ„åŒ–ç±»å‹å­˜å‚¨æˆå‘˜ä¿¡æ¯çš„å®¹å™¨
+  /// @return è¿”å›ç»“æ„åŒ–ç±»å‹å­˜å‚¨æˆå‘˜ä¿¡æ¯çš„å®¹å™¨çš„constå¼•ç”¨
   const auto& GetStructureMemberContainer() const {
     return structure_member_container_;
   }
-  /// @brief Ìí¼Ó½á¹¹»¯ÀàĞÍµÄ³ÉÔ±
-  /// @param[in] member_name £º³ÉÔ±Ãû
-  /// @param[in] member_type £º³ÉÔ±ÀàĞÍ
-  /// @param[in] member_const_tag £º³ÉÔ±µÄconst±ê¼Ç
-  /// @return ·µ»Ø³ÉÔ±µÄÏÂ±ê
-  /// @retval MemberIndex::InvalidId() £º´ıÌí¼Ó³ÉÔ±ÃûÒÑ´æÔÚ
-  /// @note ÏòÒÑÓĞ³ÉÔ±ÁĞ±íµÄÎ²²¿Ìí¼Ó
+  /// @brief æ·»åŠ ç»“æ„åŒ–ç±»å‹çš„æˆå‘˜
+  /// @param[in] member_name ï¼šæˆå‘˜å
+  /// @param[in] member_type ï¼šæˆå‘˜ç±»å‹
+  /// @param[in] member_const_tag ï¼šæˆå‘˜çš„constæ ‡è®°
+  /// @return è¿”å›æˆå‘˜çš„ä¸‹æ ‡
+  /// @retval MemberIndex::InvalidId() ï¼šå¾…æ·»åŠ æˆå‘˜åå·²å­˜åœ¨
+  /// @note å‘å·²æœ‰æˆå‘˜åˆ—è¡¨çš„å°¾éƒ¨æ·»åŠ 
   template <class MemberName>
   MemberIndex AddStructureMember(
       MemberName&& member_name,
@@ -701,48 +701,48 @@ class StructureTypeInterface : public TypeInterface {
     return GetStructureMemberContainer().AddMember(
         std::forward<MemberName>(member_name), member_type, member_const_tag);
   }
-  /// @brief ²éÑ¯½á¹¹»¯ÀàĞÍ³ÉÔ±µÄÏÂ±ê
-  /// @param[in] member_name £º³ÉÔ±Ãû
-  /// @return ·µ»Ø½á¹¹»¯ÀàĞÍ³ÉÔ±µÄÏÂ±ê
-  /// @retval StructMemberIndex::InvalidId() £º¸ø¶¨³ÉÔ±Ãû²»´æÔÚ
+  /// @brief æŸ¥è¯¢ç»“æ„åŒ–ç±»å‹æˆå‘˜çš„ä¸‹æ ‡
+  /// @param[in] member_name ï¼šæˆå‘˜å
+  /// @return è¿”å›ç»“æ„åŒ–ç±»å‹æˆå‘˜çš„ä¸‹æ ‡
+  /// @retval StructMemberIndex::InvalidId() ï¼šç»™å®šæˆå‘˜åä¸å­˜åœ¨
   MemberIndex GetStructureMemberIndex(const std::string& member_name) const {
     return GetStructureMemberContainer().GetMemberIndex(member_name);
   }
-  /// @brief »ñÈ¡½á¹¹»¯ÀàĞÍ³ÉÔ±µÄĞÅÏ¢
-  /// @param[in] member_index £º³ÉÔ±ÏÂ±ê
-  /// @return Ç°°ë²¿·ÖÎª³ÉÔ±ÀàĞÍ£¬ºó°ë²¿·ÖÎª³ÉÔ±const±ê¼Ç
-  /// @note member_index±ØĞëÓĞĞ§
+  /// @brief è·å–ç»“æ„åŒ–ç±»å‹æˆå‘˜çš„ä¿¡æ¯
+  /// @param[in] member_index ï¼šæˆå‘˜ä¸‹æ ‡
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæˆå‘˜ç±»å‹ï¼ŒååŠéƒ¨åˆ†ä¸ºæˆå‘˜constæ ‡è®°
+  /// @note member_indexå¿…é¡»æœ‰æ•ˆ
   const std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&
   GetStructureMemberInfo(MemberIndex member_index) const {
     assert(member_index.IsValid());
     return GetStructureMemberContainer().GetMemberInfo(member_index);
   }
-  /// @brief »ñÈ¡´æ´¢³ÉÔ±ĞÅÏ¢µÄÈİÆ÷
-  /// @return ·µ»Ø´æ´¢³ÉÔ±ĞÅÏ¢µÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–å­˜å‚¨æˆå‘˜ä¿¡æ¯çš„å®¹å™¨
+  /// @return è¿”å›å­˜å‚¨æˆå‘˜ä¿¡æ¯çš„å®¹å™¨çš„constå¼•ç”¨
   const StructureMemberContainer::MemberContainer& GetStructureMembers() const {
     return GetStructureMemberContainer().GetMembers();
   }
   bool IsSameObject(const TypeInterface& type_interface) const;
 
  private:
-  /// @brief »ñÈ¡´æ´¢³ÉÔ±ĞÅÏ¢µÄÈİÆ÷
-  /// @return ·µ»Ø´æ´¢³ÉÔ±ĞÅÏ¢µÄÈİÆ÷µÄÒıÓÃ
+  /// @brief è·å–å­˜å‚¨æˆå‘˜ä¿¡æ¯çš„å®¹å™¨
+  /// @return è¿”å›å­˜å‚¨æˆå‘˜ä¿¡æ¯çš„å®¹å™¨çš„å¼•ç”¨
   StructureMemberContainer& GetStructureMemberContainer() {
     return structure_member_container_;
   }
-  /// @brief ½á¹¹»¯ÀàĞÍÃû
+  /// @brief ç»“æ„åŒ–ç±»å‹å
   std::string structure_name_;
-  /// @brief ½á¹¹»¯ÀàĞÍ³ÉÔ±ÈİÆ÷
+  /// @brief ç»“æ„åŒ–ç±»å‹æˆå‘˜å®¹å™¨
   StructureMemberContainer structure_member_container_;
 };
 
 /// @class StructType type_system.h
-/// @brief ½á¹¹ÌåÀàĞÍ
+/// @brief ç»“æ„ä½“ç±»å‹
 class StructType : public StructureTypeInterface {
  public:
-  /// @brief ´æ´¢³ÉÔ±µÄ½á¹¹ÀàĞÍ
+  /// @brief å­˜å‚¨æˆå‘˜çš„ç»“æ„ç±»å‹
   using StructMemberContainerType = StructureMemberContainer;
-  /// @brief ³ÉÔ±ÔÚÈİÆ÷ÖĞµÄÏÂ±ê
+  /// @brief æˆå‘˜åœ¨å®¹å™¨ä¸­çš„ä¸‹æ ‡
   using StructMemberIndex = StructMemberContainerType::MemberIndex;
 
   StructType(const std::string& struct_name)
@@ -758,22 +758,22 @@ class StructType : public StructureTypeInterface {
     return StructType::GetTypeStoreSize();
   }
 
-  /// @brief °´ÈİÆ÷ÉèÖÃ½á¹¹Ìå³ÉÔ±ĞÅÏ¢
-  /// @tparam StructMembers £ºStructMemberContainerType²»Í¬ÒıÓÃ
-  /// @param[in] members £º³ÉÔ±ĞÅÏ¢
+  /// @brief æŒ‰å®¹å™¨è®¾ç½®ç»“æ„ä½“æˆå‘˜ä¿¡æ¯
+  /// @tparam StructMembers ï¼šStructMemberContainerTypeä¸åŒå¼•ç”¨
+  /// @param[in] members ï¼šæˆå‘˜ä¿¡æ¯
   template <class StructMembers>
   requires std::is_same_v<std::decay_t<StructMembers>,
                           StructMemberContainerType>
   void SetStructMembers(StructMembers&& members) {
     SetStructureMembers(std::forward<StructMembers>(members));
   }
-  /// @brief Ìí¼Ó½á¹¹Ìå³ÉÔ±
-  /// @param[in] member_name £º³ÉÔ±Ãû
-  /// @param[in] member_type_pointer £º³ÉÔ±ÀàĞÍ
-  /// @param[in] member_const_tag £º³ÉÔ±µÄconst±ê¼Ç
-  /// @return ·µ»Ø³ÉÔ±µÄÏÂ±ê
-  /// @retval MemberIndex::InvalidId() £º´ıÌí¼Ó³ÉÔ±ÃûÒÑ´æÔÚ
-  /// @note ÏòÒÑÓĞ³ÉÔ±ÁĞ±íµÄÎ²²¿Ìí¼Ó
+  /// @brief æ·»åŠ ç»“æ„ä½“æˆå‘˜
+  /// @param[in] member_name ï¼šæˆå‘˜å
+  /// @param[in] member_type_pointer ï¼šæˆå‘˜ç±»å‹
+  /// @param[in] member_const_tag ï¼šæˆå‘˜çš„constæ ‡è®°
+  /// @return è¿”å›æˆå‘˜çš„ä¸‹æ ‡
+  /// @retval MemberIndex::InvalidId() ï¼šå¾…æ·»åŠ æˆå‘˜åå·²å­˜åœ¨
+  /// @note å‘å·²æœ‰æˆå‘˜åˆ—è¡¨çš„å°¾éƒ¨æ·»åŠ 
   template <class MemberName>
   StructMemberIndex AddStructMember(
       MemberName&& member_name,
@@ -782,30 +782,30 @@ class StructType : public StructureTypeInterface {
     return AddStructureMember(std::forward<MemberName>(member_name),
                               member_type_pointer, member_const_tag);
   }
-  /// @brief ²éÑ¯³ÉÔ±µÄÏÂ±ê
-  /// @param[in] member_name £º³ÉÔ±Ãû
-  /// @return ·µ»Ø³ÉÔ±ÏÂ±ê
-  /// @retval StructMemberIndex::InvalidId() ¸ø¶¨³ÉÔ±Ãû²»´æÔÚ
+  /// @brief æŸ¥è¯¢æˆå‘˜çš„ä¸‹æ ‡
+  /// @param[in] member_name ï¼šæˆå‘˜å
+  /// @return è¿”å›æˆå‘˜ä¸‹æ ‡
+  /// @retval StructMemberIndex::InvalidId() ç»™å®šæˆå‘˜åä¸å­˜åœ¨
   StructMemberIndex GetStructMemberIndex(const std::string& member_name) const {
     return GetStructureMemberIndex(member_name);
   }
-  /// @brief ¸ù¾İ³ÉÔ±ÏÂ±ê»ñÈ¡³ÉÔ±ĞÅÏ¢
-  /// @param[in] member_index £º³ÉÔ±ÏÂ±ê
-  /// @return Ç°°ë²¿·ÖÎª³ÉÔ±ÀàĞÍ£¬ºó°ë²¿·ÖÎª³ÉÔ±µÄconst±ê¼Ç
-  /// @note member_index±ØĞëÓĞĞ§
+  /// @brief æ ¹æ®æˆå‘˜ä¸‹æ ‡è·å–æˆå‘˜ä¿¡æ¯
+  /// @param[in] member_index ï¼šæˆå‘˜ä¸‹æ ‡
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæˆå‘˜ç±»å‹ï¼ŒååŠéƒ¨åˆ†ä¸ºæˆå‘˜çš„constæ ‡è®°
+  /// @note member_indexå¿…é¡»æœ‰æ•ˆ
   const std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&
   GetStructMemberInfo(StructMemberIndex member_index) const {
     assert(member_index.IsValid());
     return GetStructureMemberInfo(member_index);
   }
-  /// @brief ÉèÖÃ½á¹¹ÌåÃû
-  /// @param[in] struct_name £º½á¹¹ÌåÃû
-  /// @note ÔÊĞíÊ¹ÓÃ¿ÕÃû×ÖÒÔ±íÊ¾ÄäÃû½á¹¹Ìå
+  /// @brief è®¾ç½®ç»“æ„ä½“å
+  /// @param[in] struct_name ï¼šç»“æ„ä½“å
+  /// @note å…è®¸ä½¿ç”¨ç©ºåå­—ä»¥è¡¨ç¤ºåŒ¿åç»“æ„ä½“
   void SetStructName(const std::string& struct_name) {
     SetStructureName(struct_name);
   }
-  /// @brief »ñÈ¡½á¹¹ÌåÃû
-  /// @return ·µ»Ø½á¹¹ÌåÃûµÄconstÒıÓÃ
+  /// @brief è·å–ç»“æ„ä½“å
+  /// @return è¿”å›ç»“æ„ä½“åçš„constå¼•ç”¨
   const std::string& GetStructName() const { return GetStructureName(); }
 
   bool IsSameObject(const TypeInterface& type_interface) const {
@@ -815,9 +815,9 @@ class StructType : public StructureTypeInterface {
 
 class UnionType : public StructureTypeInterface {
  public:
-  /// @brief ´æ´¢³ÉÔ±µÄ½á¹¹ÀàĞÍ
+  /// @brief å­˜å‚¨æˆå‘˜çš„ç»“æ„ç±»å‹
   using UnionMemberContainerType = StructureMemberContainer;
-  /// @brief ³ÉÔ±ÔÚÈİÆ÷ÖĞµÄÏÂ±ê
+  /// @brief æˆå‘˜åœ¨å®¹å™¨ä¸­çš„ä¸‹æ ‡
   using UnionMemberIndex = UnionMemberContainerType::MemberIndex;
 
   UnionType(const std::string& union_name)
@@ -833,21 +833,21 @@ class UnionType : public StructureTypeInterface {
     return UnionType::GetTypeStoreSize();
   }
 
-  /// @brief °´ÈİÆ÷ÉèÖÃ¹²ÓÃÌå³ÉÔ±ĞÅÏ¢
-  /// @tparam UnionMembers £ºUnionMemberContainerType²»Í¬ÒıÓÃ
-  /// @param[in] union_members £º³ÉÔ±ĞÅÏ¢
+  /// @brief æŒ‰å®¹å™¨è®¾ç½®å…±ç”¨ä½“æˆå‘˜ä¿¡æ¯
+  /// @tparam UnionMembers ï¼šUnionMemberContainerTypeä¸åŒå¼•ç”¨
+  /// @param[in] union_members ï¼šæˆå‘˜ä¿¡æ¯
   template <class UnionMembers>
   requires std::is_same_v<std::decay_t<UnionMembers>, UnionMemberContainerType>
   void SetUnionMembers(UnionMembers&& union_members) {
     SetStructureMembers(std::forward<UnionMembers>(union_members));
   }
-  /// @brief Ìí¼Ó¹²ÓÃÌå³ÉÔ±
-  /// @param[in] member_name £º³ÉÔ±Ãû
-  /// @param[in] member_type_pointer £º³ÉÔ±ÀàĞÍ
-  /// @param[in] member_const_tag £º³ÉÔ±µÄconst±ê¼Ç
-  /// @return ·µ»Ø³ÉÔ±µÄÏÂ±ê
-  /// @retval MemberIndex::InvalidId() £º´ıÌí¼Ó³ÉÔ±ÃûÒÑ´æÔÚ
-  /// @note ÏòÒÑÓĞ³ÉÔ±ÁĞ±íµÄÎ²²¿Ìí¼Ó
+  /// @brief æ·»åŠ å…±ç”¨ä½“æˆå‘˜
+  /// @param[in] member_name ï¼šæˆå‘˜å
+  /// @param[in] member_type_pointer ï¼šæˆå‘˜ç±»å‹
+  /// @param[in] member_const_tag ï¼šæˆå‘˜çš„constæ ‡è®°
+  /// @return è¿”å›æˆå‘˜çš„ä¸‹æ ‡
+  /// @retval MemberIndex::InvalidId() ï¼šå¾…æ·»åŠ æˆå‘˜åå·²å­˜åœ¨
+  /// @note å‘å·²æœ‰æˆå‘˜åˆ—è¡¨çš„å°¾éƒ¨æ·»åŠ 
   template <class MemberName>
   auto AddUnionMember(
       MemberName&& member_name,
@@ -856,29 +856,29 @@ class UnionType : public StructureTypeInterface {
     return AddStructureMember(std::forward<MemberName>(member_name),
                               member_type_pointer, member_const_tag);
   }
-  /// @brief ²éÑ¯³ÉÔ±µÄÏÂ±ê
-  /// @param[in] member_name £º³ÉÔ±Ãû
-  /// @return ·µ»Ø³ÉÔ±ÏÂ±ê
-  /// @retval StructMemberIndex::InvalidId() ¸ø¶¨³ÉÔ±Ãû²»´æÔÚ
+  /// @brief æŸ¥è¯¢æˆå‘˜çš„ä¸‹æ ‡
+  /// @param[in] member_name ï¼šæˆå‘˜å
+  /// @return è¿”å›æˆå‘˜ä¸‹æ ‡
+  /// @retval StructMemberIndex::InvalidId() ç»™å®šæˆå‘˜åä¸å­˜åœ¨
   UnionMemberIndex GetUnionMemberIndex(const std::string& member_name) const {
     return GetStructureMemberIndex(member_name);
   }
-  /// @brief ¸ù¾İ³ÉÔ±ÏÂ±ê»ñÈ¡³ÉÔ±ĞÅÏ¢
-  /// @param[in] member_index £º³ÉÔ±ÏÂ±ê
-  /// @return Ç°°ë²¿·ÖÎª³ÉÔ±ÀàĞÍ£¬ºó°ë²¿·ÖÎª³ÉÔ±µÄconst±ê¼Ç
-  /// @note member_index±ØĞëÓĞĞ§
+  /// @brief æ ¹æ®æˆå‘˜ä¸‹æ ‡è·å–æˆå‘˜ä¿¡æ¯
+  /// @param[in] member_index ï¼šæˆå‘˜ä¸‹æ ‡
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæˆå‘˜ç±»å‹ï¼ŒååŠéƒ¨åˆ†ä¸ºæˆå‘˜çš„constæ ‡è®°
+  /// @note member_indexå¿…é¡»æœ‰æ•ˆ
   const auto& GetUnionMemberInfo(UnionMemberIndex member_index) const {
     assert(member_index.IsValid());
     return GetStructureMemberInfo(member_index);
   }
-  /// @brief ÉèÖÃ¹²ÓÃÌåÃû
-  /// @param[in] union_name £º¹²ÓÃÌåÃû
-  /// @note ÔÊĞíÊ¹ÓÃ¿ÕÃû×ÖÒÔ±íÊ¾ÄäÃû¹²ÓÃÌå
+  /// @brief è®¾ç½®å…±ç”¨ä½“å
+  /// @param[in] union_name ï¼šå…±ç”¨ä½“å
+  /// @note å…è®¸ä½¿ç”¨ç©ºåå­—ä»¥è¡¨ç¤ºåŒ¿åå…±ç”¨ä½“
   void SetUnionName(const std::string& union_name) {
     SetStructureName(union_name);
   }
-  /// @brief »ñÈ¡¹²ÓÃÌåÃû
-  /// @return ·µ»Ø¹²ÓÃÌåÃûµÄconstÒıÓÃ
+  /// @brief è·å–å…±ç”¨ä½“å
+  /// @return è¿”å›å…±ç”¨ä½“åçš„constå¼•ç”¨
   const std::string& GetUnionName() const { return GetStructureName(); }
   bool IsSameObject(const TypeInterface& type_interface) const {
     return StructureTypeInterface::IsSameObject(type_interface);
@@ -886,10 +886,10 @@ class UnionType : public StructureTypeInterface {
 };
 
 /// @class EnumType type_system.h
-/// @brief Ã¶¾ÙÀàĞÍ
+/// @brief æšä¸¾ç±»å‹
 class EnumType : public TypeInterface {
  public:
-  /// @brief Ã¶¾ÙÄÚ²¿´æ´¢³ÉÔ±ÃûºÍ¶ÔÓ¦ÖµµÄ½á¹¹
+  /// @brief æšä¸¾å†…éƒ¨å­˜å‚¨æˆå‘˜åå’Œå¯¹åº”å€¼çš„ç»“æ„
   using EnumContainerType = std::unordered_map<std::string, long long>;
 
   EnumType(const std::string& enum_name)
@@ -917,81 +917,81 @@ class EnumType : public TypeInterface {
     return EnumType::GetTypeStoreSize();
   }
 
-  /// @brief °´ÈİÆ÷Éè¶¨Ã¶¾Ù³ÉÔ±
-  /// @tparam EnumMembers £ºEnumContainerTypeµÄ²»Í¬ÒıÓÃ
-  /// @param[in] enum_members £º´æ´¢Ã¶¾Ù³ÉÔ±ĞÅÏ¢µÄÈİÆ÷
+  /// @brief æŒ‰å®¹å™¨è®¾å®šæšä¸¾æˆå‘˜
+  /// @tparam EnumMembers ï¼šEnumContainerTypeçš„ä¸åŒå¼•ç”¨
+  /// @param[in] enum_members ï¼šå­˜å‚¨æšä¸¾æˆå‘˜ä¿¡æ¯çš„å®¹å™¨
   template <class EnumMembers>
   requires std::is_same_v<std::decay_t<EnumMembers>, EnumContainerType>
   void SetEnumMembers(EnumMembers&& enum_members) {
     enum_members_ = std::forward<EnumMembers>(enum_members);
   }
-  /// @brief Ìí¼ÓÃ¶¾Ù³ÉÔ±
-  /// @param[in] enum_member_name £ºÃ¶¾Ù³ÉÔ±Ãû
-  /// @param[in] value £ºÃ¶¾Ù³ÉÔ±Öµ
-  /// @return Ç°°ë²¿·ÖÎªÖ¸ÏòÊı¾İµÄµü´úÆ÷£¬ºó°ë²¿·ÖÎªÊÇ·ñ²åÈë
-  /// @retval (...,false) enum_member_nameÒÑ´æÔÚ
+  /// @brief æ·»åŠ æšä¸¾æˆå‘˜
+  /// @param[in] enum_member_name ï¼šæšä¸¾æˆå‘˜å
+  /// @param[in] value ï¼šæšä¸¾æˆå‘˜å€¼
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæŒ‡å‘æ•°æ®çš„è¿­ä»£å™¨ï¼ŒååŠéƒ¨åˆ†ä¸ºæ˜¯å¦æ’å…¥
+  /// @retval (...,false) enum_member_nameå·²å­˜åœ¨
   template <class EnumMemberName>
   auto AddEnumMember(EnumMemberName&& enum_member_name, long long value) {
     return enum_members_.emplace(
         std::make_pair(std::forward<EnumMemberName>(enum_member_name), value));
   }
-  /// @brief »ñÈ¡Ã¶¾Ù³ÉÔ±ĞÅÏ¢
-  /// @param[in] member_name £º³ÉÔ±Ãû
-  /// @return Ç°°ë²¿·ÖÎªÖ¸Ïò³ÉÔ±ĞÅÏ¢µÄµü´úÆ÷£¬ºó°ë²¿·ÖÎª³ÉÔ±ÊÇ·ñ´æÔÚ
-  /// @retval (...,false) ³ÉÔ±Ãû²»´æÔÚ
+  /// @brief è·å–æšä¸¾æˆå‘˜ä¿¡æ¯
+  /// @param[in] member_name ï¼šæˆå‘˜å
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæŒ‡å‘æˆå‘˜ä¿¡æ¯çš„è¿­ä»£å™¨ï¼ŒååŠéƒ¨åˆ†ä¸ºæˆå‘˜æ˜¯å¦å­˜åœ¨
+  /// @retval (...,false) æˆå‘˜åä¸å­˜åœ¨
   std::pair<EnumContainerType::const_iterator, bool> GetEnumMemberInfo(
       const std::string& member_name) const {
     auto iter = GetEnumMembers().find(member_name);
     return std::make_pair(iter, iter != GetEnumMembers().end());
   }
-  /// @brief »ñÈ¡´¢´æÃ¶¾ÙÖµµÄÀàĞÍ¶ÔÓ¦µÄÀàĞÍÁ´
-  /// @return ·µ»ØÖ¸Ïò´æ´¢Ã¶¾ÙÖµµÄÀàĞÍÁ´Í·½áµãµÄconstÖ¸Õë
+  /// @brief è·å–å‚¨å­˜æšä¸¾å€¼çš„ç±»å‹å¯¹åº”çš„ç±»å‹é“¾
+  /// @return è¿”å›æŒ‡å‘å­˜å‚¨æšä¸¾å€¼çš„ç±»å‹é“¾å¤´ç»“ç‚¹çš„constæŒ‡é’ˆ
   std::shared_ptr<const TypeInterface> GetContainerTypePointer() const {
     return container_type_;
   }
-  /// @brief »ñÈ¡´¢´æÃ¶¾ÙÖµµÄÀàĞÍ¶ÔÓ¦µÄÀàĞÍÁ´
-  /// @return ·µ»ØÖ¸Ïò´æ´¢Ã¶¾ÙÖµµÄÀàĞÍÁ´Í·½áµãµÄconstÒıÓÃ
+  /// @brief è·å–å‚¨å­˜æšä¸¾å€¼çš„ç±»å‹å¯¹åº”çš„ç±»å‹é“¾
+  /// @return è¿”å›æŒ‡å‘å­˜å‚¨æšä¸¾å€¼çš„ç±»å‹é“¾å¤´ç»“ç‚¹çš„constå¼•ç”¨
   const TypeInterface& GetContainerTypeReference() const {
     return *container_type_;
   }
-  /// @brief ÉèÖÃÃ¶¾ÙÃû
-  /// @param[in] enum_name £ºÃ¶¾ÙÃû
+  /// @brief è®¾ç½®æšä¸¾å
+  /// @param[in] enum_name ï¼šæšä¸¾å
   void SetEnumName(const std::string& enum_name) { enum_name_ = enum_name; }
-  /// @brief »ñÈ¡Ã¶¾ÙÃû
-  /// @return ·µ»ØÃ¶¾ÙÃûµÄconstÒıÓÃ
+  /// @brief è·å–æšä¸¾å
+  /// @return è¿”å›æšä¸¾åçš„constå¼•ç”¨
   const std::string& GetEnumName() const { return enum_name_; }
   bool IsSameObject(const TypeInterface& type_interface) const;
 
  private:
-  /// @brief »ñÈ¡´æ´¢³ÉÔ±µÄÈİÆ÷
-  /// @return ·µ»Ø´æ´¢³ÉÔ±µÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–å­˜å‚¨æˆå‘˜çš„å®¹å™¨
+  /// @return è¿”å›å­˜å‚¨æˆå‘˜çš„å®¹å™¨çš„constå¼•ç”¨
   const EnumContainerType& GetEnumMembers() const { return enum_members_; }
-  /// @brief »ñÈ¡´æ´¢³ÉÔ±µÄÈİÆ÷
-  /// @return ·µ»Ø´æ´¢³ÉÔ±µÄÈİÆ÷µÄÒıÓÃ
+  /// @brief è·å–å­˜å‚¨æˆå‘˜çš„å®¹å™¨
+  /// @return è¿”å›å­˜å‚¨æˆå‘˜çš„å®¹å™¨çš„å¼•ç”¨
   EnumContainerType& GetEnumMembers() { return enum_members_; }
-  /// @brief ÉèÖÃ´æ´¢Ã¶¾ÙÖµµÄÀàĞÍ¶ÔÓ¦µÄÀàĞÍÁ´
-  /// @param[in] container_type £º´æ´¢Ã¶¾ÙÖµµÄÀàĞÍ¶ÔÓ¦ÀàĞÍÁ´Í·½áµãÖ¸Õë
-  /// @note ²»¼ì²éÊ¹ÓÃµÄÀàĞÍÄÜ·ñ´æ´¢ËùÓĞÃ¶¾ÙÖµ
+  /// @brief è®¾ç½®å­˜å‚¨æšä¸¾å€¼çš„ç±»å‹å¯¹åº”çš„ç±»å‹é“¾
+  /// @param[in] container_type ï¼šå­˜å‚¨æšä¸¾å€¼çš„ç±»å‹å¯¹åº”ç±»å‹é“¾å¤´ç»“ç‚¹æŒ‡é’ˆ
+  /// @note ä¸æ£€æŸ¥ä½¿ç”¨çš„ç±»å‹èƒ½å¦å­˜å‚¨æ‰€æœ‰æšä¸¾å€¼
   void SetContainerType(
       const std::shared_ptr<const TypeInterface>& container_type) {
     container_type_ = container_type;
   }
 
-  /// @brief Ã¶¾ÙÃû
+  /// @brief æšä¸¾å
   std::string enum_name_;
-  /// @brief ´æ´¢Ã¶¾Ù³ÉÔ±µÄÈİÆ÷
-  /// @note Ç°°ë²¿·ÖÎª³ÉÔ±Ãû£¬ºó°ë²¿·ÖÎªÃ¶¾Ù¶ÔÓ¦µÄÖµ
+  /// @brief å­˜å‚¨æšä¸¾æˆå‘˜çš„å®¹å™¨
+  /// @note å‰åŠéƒ¨åˆ†ä¸ºæˆå‘˜åï¼ŒååŠéƒ¨åˆ†ä¸ºæšä¸¾å¯¹åº”çš„å€¼
   EnumContainerType enum_members_;
-  /// @brief ´æ´¢Ã¶¾ÙÖµµÄÀàĞÍ
-  /// @note ²»ÊÇÃ¶¾ÙµÄÀàĞÍ
+  /// @brief å­˜å‚¨æšä¸¾å€¼çš„ç±»å‹
+  /// @note ä¸æ˜¯æšä¸¾çš„ç±»å‹
   std::shared_ptr<const TypeInterface> container_type_;
 };
 
 /// @class InitializeListType type_system.h
-/// @brief ³õÊ¼»¯ÁĞ±íÀàĞÍ
+/// @brief åˆå§‹åŒ–åˆ—è¡¨ç±»å‹
 class InitializeListType : public TypeInterface {
  public:
-  /// @brief ´¢´æ³õÊ¼»¯ĞÅÏ¢µÄÁĞ±íÀàĞÍ
+  /// @brief å‚¨å­˜åˆå§‹åŒ–ä¿¡æ¯çš„åˆ—è¡¨ç±»å‹
   using InitializeListContainerType =
       std::list<std::shared_ptr<const TypeInterface>>;
 
@@ -1012,67 +1012,67 @@ class InitializeListType : public TypeInterface {
   }
   virtual AssignableCheckResult CanBeAssignedBy(
       const TypeInterface& type_interface) const override {
-    /// ³õÊ¼»¯ÁĞ±í²»ÄÜ±»¸³Öµ
+    /// åˆå§‹åŒ–åˆ—è¡¨ä¸èƒ½è¢«èµ‹å€¼
     return AssignableCheckResult::kCanNotConvert;
   }
   virtual size_t GetTypeStoreSize() const override {
     assert(false);
-    /// ·ÀÖ¹¾¯¸æ
+    /// é˜²æ­¢è­¦å‘Š
     return size_t();
   }
   virtual size_t TypeSizeOf() const override {
     assert(false);
-    /// ·ÀÖ¹¾¯¸æ
+    /// é˜²æ­¢è­¦å‘Š
     return size_t();
   }
 
-  /// @brief Ìí¼Ó³õÊ¼»¯ÁĞ±íÄÚµÄÀàĞÍ
-  /// @param[in] type_pointer £ºÖ¸ÏòÀàĞÍÁ´Í·½áµãµÄÖ¸Õë
-  /// @note Ìí¼Óµ½ÒÑÓĞÀàĞÍµÄºóÃæ
+  /// @brief æ·»åŠ åˆå§‹åŒ–åˆ—è¡¨å†…çš„ç±»å‹
+  /// @param[in] type_pointer ï¼šæŒ‡å‘ç±»å‹é“¾å¤´ç»“ç‚¹çš„æŒ‡é’ˆ
+  /// @note æ·»åŠ åˆ°å·²æœ‰ç±»å‹çš„åé¢
   void AddListType(const std::shared_ptr<const TypeInterface>& type_pointer) {
     list_types_.emplace_back(type_pointer);
   }
-  /// @brief »ñÈ¡³õÊ¼»¯ÁĞ±íÖĞËùÓĞµÄÀàĞÍ
-  /// @return ·µ»Ø´æ´¢ÀàĞÍµÄÈİÆ÷
+  /// @brief è·å–åˆå§‹åŒ–åˆ—è¡¨ä¸­æ‰€æœ‰çš„ç±»å‹
+  /// @return è¿”å›å­˜å‚¨ç±»å‹çš„å®¹å™¨
   const auto& GetListTypes() const { return list_types_; }
   bool IsSameObject(const TypeInterface& type_interface) const;
 
  private:
-  /// @brief ³õÊ¼»¯ÁĞ±íÖĞµÄÀàĞÍ
+  /// @brief åˆå§‹åŒ–åˆ—è¡¨ä¸­çš„ç±»å‹
   InitializeListContainerType list_types_;
 };
 
-/// @brief ³£ÓÃÀàĞÍ½ÚµãµÄÉú³ÉÆ÷
-/// @note È«¾Ö¹²ÏíÒ»·İ½ÚµãÒÔ½ÚÊ¡ÄÚ´æºÍ±ÜÃâ¶à´Î·ÖÅäµÄÏûºÄ
+/// @brief å¸¸ç”¨ç±»å‹èŠ‚ç‚¹çš„ç”Ÿæˆå™¨
+/// @note å…¨å±€å…±äº«ä¸€ä»½èŠ‚ç‚¹ä»¥èŠ‚çœå†…å­˜å’Œé¿å…å¤šæ¬¡åˆ†é…çš„æ¶ˆè€—
 class CommonlyUsedTypeGenerator {
  public:
-  /// @brief »ñÈ¡»ù´¡ÀàĞÍµÄÀàĞÍÁ´
-  /// @tparam built_in_type £ºÄÚÖÃÀàĞÍ
-  /// @tparam sign_tag £ºÀàĞÍµÄ·ûºÅ±ê¼Ç
-  /// @return ·µ»ØÖ¸ÏòÀàĞÍÁ´Í·½áµãµÄconstÖ¸Õë
+  /// @brief è·å–åŸºç¡€ç±»å‹çš„ç±»å‹é“¾
+  /// @tparam built_in_type ï¼šå†…ç½®ç±»å‹
+  /// @tparam sign_tag ï¼šç±»å‹çš„ç¬¦å·æ ‡è®°
+  /// @return è¿”å›æŒ‡å‘ç±»å‹é“¾å¤´ç»“ç‚¹çš„constæŒ‡é’ˆ
   /// @details
-  /// ·µ»ØµÄÖ¸ÕëÖ¸ÏòÈ«¾Ö¹²ÏíµÄÒ»¸öÀàĞÍ½Úµã¶ÔÏó
-  /// @note voidÀàĞÍºÍboolÀàĞÍÊ¹ÓÃSignTag::kUnsigned
+  /// è¿”å›çš„æŒ‡é’ˆæŒ‡å‘å…¨å±€å…±äº«çš„ä¸€ä¸ªç±»å‹èŠ‚ç‚¹å¯¹è±¡
+  /// @note voidç±»å‹å’Œboolç±»å‹ä½¿ç”¨SignTag::kUnsigned
   template <BuiltInType built_in_type, SignTag sign_tag>
   static std::shared_ptr<const BasicType> GetBasicType() {
     static std::shared_ptr<BasicType> basic_type =
         std::make_shared<BasicType>(built_in_type, sign_tag);
     return basic_type;
   }
-  /// @brief »ñÈ¡»ù´¡ÀàĞÍµÄÀàĞÍÁ´
-  /// @param[in] built_in_type £ºÄÚÖÃÀàĞÍ
-  /// @param[in] sign_tag £ºÀàĞÍµÄ·ûºÅ±ê¼Ç
-  /// @return ·µ»ØÖ¸ÏòÀàĞÍÁ´Í·½áµãµÄconstÖ¸Õë
+  /// @brief è·å–åŸºç¡€ç±»å‹çš„ç±»å‹é“¾
+  /// @param[in] built_in_type ï¼šå†…ç½®ç±»å‹
+  /// @param[in] sign_tag ï¼šç±»å‹çš„ç¬¦å·æ ‡è®°
+  /// @return è¿”å›æŒ‡å‘ç±»å‹é“¾å¤´ç»“ç‚¹çš„constæŒ‡é’ˆ
   /// @details
-  /// ·µ»ØµÄÖ¸ÕëÖ¸ÏòÈ«¾Ö¹²ÏíµÄÒ»¸öÀàĞÍ½Úµã¶ÔÏó
-  /// ¸Ãº¯ÊıÓÃÓÚÔËĞĞÆÚµ÷ÓÃÍ¬ÃûÄ£°åº¯Êı
-  /// @note voidÀàĞÍºÍboolÀàĞÍÊ¹ÓÃSignTag::kUnsigned
+  /// è¿”å›çš„æŒ‡é’ˆæŒ‡å‘å…¨å±€å…±äº«çš„ä¸€ä¸ªç±»å‹èŠ‚ç‚¹å¯¹è±¡
+  /// è¯¥å‡½æ•°ç”¨äºè¿è¡ŒæœŸè°ƒç”¨åŒåæ¨¡æ¿å‡½æ•°
+  /// @note voidç±»å‹å’Œboolç±»å‹ä½¿ç”¨SignTag::kUnsigned
   static std::shared_ptr<const BasicType> GetBasicTypeNotTemplate(
       BuiltInType built_in_type, SignTag sign_tag);
 
-  /// @brief »ñÈ¡³õÊ¼»¯ÓÃ×Ö·û´®ÀàĞÍ£¨const char*£©
-  /// @return ·µ»ØÖ¸ÏòÀàĞÍÁ´µÄconstÖ¸Õë
-  /// @note È«¾Ö¹²ÏíÒ»ÌõÀàĞÍÁ´
+  /// @brief è·å–åˆå§‹åŒ–ç”¨å­—ç¬¦ä¸²ç±»å‹ï¼ˆconst char*ï¼‰
+  /// @return è¿”å›æŒ‡å‘ç±»å‹é“¾çš„constæŒ‡é’ˆ
+  /// @note å…¨å±€å…±äº«ä¸€æ¡ç±»å‹é“¾
   static std::shared_ptr<const PointerType> GetConstExprStringType() {
     static std::shared_ptr<PointerType> constexpr_string_type =
         std::make_shared<PointerType>(
@@ -1083,69 +1083,69 @@ class CommonlyUsedTypeGenerator {
 };
 
 /// @class TypeSystem type_system.h
-/// @brief ÀàĞÍÏµÍ³
+/// @brief ç±»å‹ç³»ç»Ÿ
 /// @details
-/// 1.ÀàĞÍÏµÍ³´æ´¢×Ô¶¨ÒåÀàĞÍÃûµ½ÀàĞÍÃû¶ÔÓ¦µÄÀàĞÍÁ´µÄÓ³Éä
-/// 2.ÔÊĞíÒ»¸öÀàĞÍÃû°ó¶¨¶à¸öÀàĞÍ£¬ÕâÖÖÇé¿öÏÂÈç¹û¸ù¾İÀàĞÍÃû»ñÈ¡ÀàĞÍÁ´Ê±²»Ö¸¶¨¾ßÌå
-///   ÀàĞÍÔòÎŞ·¨»ñÈ¡
-/// 3.¸ù¾İTypeSystem::TypeData::IsSameKindÅĞ¶ÏÁ½¸öÀàĞÍÊÇ·ñÊôÓÚÍ¬Ò»´óÀà£¬
-///   StructOrBasicTypeÖĞ³ıÁËBasicTypeºÍPointerTypeÊôÓÚÍ¬Ò»´óÀàÒÔÍâ£¬ÆäÓàÀàĞÍ
-///   ¸÷×Ô³ÉÒ»´óÀà
-/// 4.½öµ±´ıÌí¼ÓµÄÀàĞÍÓëÒÑÓĞÀàĞÍ¾ù²»ÊôÓÚÍ¬Ò»´óÀàÊ±¿ÉÒÔÌí¼Ó£¨³ıÏàÍ¬Ç©Ãûº¯ÊıÀàĞÍ£©
-/// 5.ËùÓĞÀàĞÍ¾ùÓĞÈ«¾Ö¶¨ÒåÓò
+/// 1.ç±»å‹ç³»ç»Ÿå­˜å‚¨è‡ªå®šä¹‰ç±»å‹ååˆ°ç±»å‹åå¯¹åº”çš„ç±»å‹é“¾çš„æ˜ å°„
+/// 2.å…è®¸ä¸€ä¸ªç±»å‹åç»‘å®šå¤šä¸ªç±»å‹ï¼Œè¿™ç§æƒ…å†µä¸‹å¦‚æœæ ¹æ®ç±»å‹åè·å–ç±»å‹é“¾æ—¶ä¸æŒ‡å®šå…·ä½“
+///   ç±»å‹åˆ™æ— æ³•è·å–
+/// 3.æ ¹æ®TypeSystem::TypeData::IsSameKindåˆ¤æ–­ä¸¤ä¸ªç±»å‹æ˜¯å¦å±äºåŒä¸€å¤§ç±»ï¼Œ
+///   StructOrBasicTypeä¸­é™¤äº†BasicTypeå’ŒPointerTypeå±äºåŒä¸€å¤§ç±»ä»¥å¤–ï¼Œå…¶ä½™ç±»å‹
+///   å„è‡ªæˆä¸€å¤§ç±»
+/// 4.ä»…å½“å¾…æ·»åŠ çš„ç±»å‹ä¸å·²æœ‰ç±»å‹å‡ä¸å±äºåŒä¸€å¤§ç±»æ—¶å¯ä»¥æ·»åŠ ï¼ˆé™¤ç›¸åŒç­¾åå‡½æ•°ç±»å‹ï¼‰
+/// 5.æ‰€æœ‰ç±»å‹å‡æœ‰å…¨å±€å®šä¹‰åŸŸ
 class TypeSystem {
   /// @class TypeData type_system.h
-  /// @brief ´æ´¢Ä³¸öÀàĞÍÃûÏÂµÄ²»Í¬ÀàĞÍÁ´ĞÅÏ¢
+  /// @brief å­˜å‚¨æŸä¸ªç±»å‹åä¸‹çš„ä¸åŒç±»å‹é“¾ä¿¡æ¯
   class TypeData {
    public:
-    /// @brief Ìí¼ÓÒ»¸öÀàĞÍ
-    /// @param[in] type_to_add £º´ıÌí¼ÓµÄÀàĞÍÁ´
-    /// @return ·µ»ØÌí¼Ó½á¹û£¬¾ßÌå½âÊÍ¼ûAddTypeResult¶¨Òå
+    /// @brief æ·»åŠ ä¸€ä¸ªç±»å‹
+    /// @param[in] type_to_add ï¼šå¾…æ·»åŠ çš„ç±»å‹é“¾
+    /// @return è¿”å›æ·»åŠ ç»“æœï¼Œå…·ä½“è§£é‡Šè§AddTypeResultå®šä¹‰
     /// @details
-    /// 1.Ìí¼ÓÄ³¸öÀàĞÍÃûÏÂµÄÒ»¸öÀàĞÍ£¬Èç¹ûĞèÒª´Óµ¥¸öÖ¸Õë×ª»»ÎªlistÔò×Ô¶¯´¦Àí
-    /// 2.Í¬ÀàĞÍÃûÏÂÃ¿ÖÖÀàĞÍ´óÀà½öÔÊĞíÌí¼ÓÒ»ÖÖÀàĞÍ£¬¸ù¾İ
-    ///   TypeSystem::TypeData::IsSameKindÅĞ¶ÏÁ½¸öÀàĞÍÊÇ·ñÊôÓÚÍ¬Ò»´óÀà£¬
-    ///   StructOrBasicTypeÖĞ³ıÁËBasicTypeºÍPointerTypeÊôÓÚÍ¬Ò»´óÀàÒÔÍâ£¬ÆäÓà
-    ///   ÀàĞÍ¸÷×Ô³ÉÒ»´óÀà
-    /// 3.Ö»ÓĞº¯ÊıÇ©ÃûÏàÍ¬Ê±²ÅÔÊĞíÖØ¸´Ìí¼Óº¯ÊıÀàĞÍ£¬ºóÌí¼ÓµÄº¯ÊıÀàĞÍ»á¸²¸ÇÒÑÓĞ
-    ///   µÄº¯ÊıÀàĞÍ
+    /// 1.æ·»åŠ æŸä¸ªç±»å‹åä¸‹çš„ä¸€ä¸ªç±»å‹ï¼Œå¦‚æœéœ€è¦ä»å•ä¸ªæŒ‡é’ˆè½¬æ¢ä¸ºliståˆ™è‡ªåŠ¨å¤„ç†
+    /// 2.åŒç±»å‹åä¸‹æ¯ç§ç±»å‹å¤§ç±»ä»…å…è®¸æ·»åŠ ä¸€ç§ç±»å‹ï¼Œæ ¹æ®
+    ///   TypeSystem::TypeData::IsSameKindåˆ¤æ–­ä¸¤ä¸ªç±»å‹æ˜¯å¦å±äºåŒä¸€å¤§ç±»ï¼Œ
+    ///   StructOrBasicTypeä¸­é™¤äº†BasicTypeå’ŒPointerTypeå±äºåŒä¸€å¤§ç±»ä»¥å¤–ï¼Œå…¶ä½™
+    ///   ç±»å‹å„è‡ªæˆä¸€å¤§ç±»
+    /// 3.åªæœ‰å‡½æ•°ç­¾åç›¸åŒæ—¶æ‰å…è®¸é‡å¤æ·»åŠ å‡½æ•°ç±»å‹ï¼Œåæ·»åŠ çš„å‡½æ•°ç±»å‹ä¼šè¦†ç›–å·²æœ‰
+    ///   çš„å‡½æ•°ç±»å‹
     AddTypeResult AddType(
         const std::shared_ptr<const TypeInterface>& type_to_add);
-    /// @brief ¸ù¾İÀàĞÍÆ«ºÃ»ñÈ¡ÀàĞÍ
-    /// @param[in] type_prefer £ºÀàĞÍÆ«ºÃ
-    /// @return Ç°°ë²¿·ÖÎª»ñÈ¡µ½µÄÀàĞÍÁ´Í·½áµãÖ¸Õë£¬ºó°ë²¿·ÖÎª»ñÈ¡½á¹û
+    /// @brief æ ¹æ®ç±»å‹åå¥½è·å–ç±»å‹
+    /// @param[in] type_prefer ï¼šç±»å‹åå¥½
+    /// @return å‰åŠéƒ¨åˆ†ä¸ºè·å–åˆ°çš„ç±»å‹é“¾å¤´ç»“ç‚¹æŒ‡é’ˆï¼ŒååŠéƒ¨åˆ†ä¸ºè·å–ç»“æœ
     /// @details
-    /// 1.ÎŞÀàĞÍÆ«ºÃÊ±Ê¹ÓÃStructOrBasicType::kNotSpecified
-    /// 2.º¬ÓĞ¶àÖÖÀàĞÍÊ±Èç¹û²»Ö¸¶¨Òª»ñÈ¡µÄÀàĞÍÔò·µ»ØÊôÓÚ
-    ///   StructOrBasicType::kBasic/kPointer´óÀàµÄÀàĞÍ£¬²»´æÔÚ¸Ã´óÀàµÄÀàĞÍÔò·µ»Ø
+    /// 1.æ— ç±»å‹åå¥½æ—¶ä½¿ç”¨StructOrBasicType::kNotSpecified
+    /// 2.å«æœ‰å¤šç§ç±»å‹æ—¶å¦‚æœä¸æŒ‡å®šè¦è·å–çš„ç±»å‹åˆ™è¿”å›å±äº
+    ///   StructOrBasicType::kBasic/kPointerå¤§ç±»çš„ç±»å‹ï¼Œä¸å­˜åœ¨è¯¥å¤§ç±»çš„ç±»å‹åˆ™è¿”å›
     ///   GetTypeResult::kSeveralSameLevelMatches
-    /// 3.Ö¸¶¨ÀàĞÍ²»´æÔÚÊ±·µ»ØGetTypeResult::kSeveralSameLevelMatches
+    /// 3.æŒ‡å®šç±»å‹ä¸å­˜åœ¨æ—¶è¿”å›GetTypeResult::kSeveralSameLevelMatches
     std::pair<std::shared_ptr<const TypeInterface>, GetTypeResult> GetType(
         StructOrBasicType type_prefer) const;
-    /// @brief ²éÑ¯ÈİÆ÷ÊÇ·ñÎª¿Õ
-    /// @return ·µ»ØÈİÆ÷ÊÇ·ñÎª¿Õ
-    /// @retval true £ºÈİÆ÷¿Õ
-    /// @retval false £ºÈİÆ÷²»¿Õ
+    /// @brief æŸ¥è¯¢å®¹å™¨æ˜¯å¦ä¸ºç©º
+    /// @return è¿”å›å®¹å™¨æ˜¯å¦ä¸ºç©º
+    /// @retval true ï¼šå®¹å™¨ç©º
+    /// @retval false ï¼šå®¹å™¨ä¸ç©º
     bool Empty() const {
       return std::get_if<std::monostate>(&type_data_) != nullptr;
     }
 
-    /// @brief ¼ì²éÁ½ÖÖÀàĞÍÊÇ·ñÊôÓÚÍ¬Ò»´óÀà
-    /// @param[in] type1 £ºÒ»ÖÖÀàĞÍ
-    /// @param[in] type2 £ºÁíÒ»ÖÖÀàĞÍ
-    /// @return ·µ»ØÁ½ÖÖÀàĞÍÊÇ·ñÊôÓÚÍ¬Ò»´óÀà
-    /// @retval true £ºÁ½ÖÖÀàĞÍÊôÓÚÍ¬Ò»´óÀà
-    /// @retval false £ºÁ½ÖÖÀàĞÍ²»ÊôÓÚÍ¬Ò»´óÀà
+    /// @brief æ£€æŸ¥ä¸¤ç§ç±»å‹æ˜¯å¦å±äºåŒä¸€å¤§ç±»
+    /// @param[in] type1 ï¼šä¸€ç§ç±»å‹
+    /// @param[in] type2 ï¼šå¦ä¸€ç§ç±»å‹
+    /// @return è¿”å›ä¸¤ç§ç±»å‹æ˜¯å¦å±äºåŒä¸€å¤§ç±»
+    /// @retval true ï¼šä¸¤ç§ç±»å‹å±äºåŒä¸€å¤§ç±»
+    /// @retval false ï¼šä¸¤ç§ç±»å‹ä¸å±äºåŒä¸€å¤§ç±»
     /// @details
-    /// StructOrBasicType::kBasicºÍStructOrBasicType::kPointerÊôÓÚÍ¬Ò»´óÀà
-    /// ³ı´ËÒÔÍâÀàĞÍ¸÷×Ô³ÉÒ»´óÀà
+    /// StructOrBasicType::kBasicå’ŒStructOrBasicType::kPointerå±äºåŒä¸€å¤§ç±»
+    /// é™¤æ­¤ä»¥å¤–ç±»å‹å„è‡ªæˆä¸€å¤§ç±»
     static bool IsSameKind(StructOrBasicType type1, StructOrBasicType type2);
-    /// @brief ¼ì²éÒÑ´æÔÚº¯ÊıÉùÃ÷/¶¨ÒåÌõ¼şÏÂÌí¼ÓÍ¬Ãûº¯ÊıÉùÃ÷/¶¨ÒåµÄ´íÎóÇé¿ö
-    /// @param[in] function_type_exist £ºÒÑ´æÔÚµÄº¯ÊıÀàĞÍ
-    /// @param[in] function_type_to_add £º´ıÌí¼ÓµÄº¯ÊıÀàĞÍ
-    /// @retval AddTypeResult::kTypeAlreadyIn ÒÑ´æÔÚÏàÍ¬µÄº¯ÊıÀàĞÍ
-    /// @retval AddTypeResult::kOverrideFunction ÒÑ´æÔÚ²ÎÊı²»Í¬µÄº¯ÊıÀàĞÍ
-    /// @attention ¸Ãº¯Êı½ö·µ»ØÒÔÉÏÁ½ÖÖ½á¹û
+    /// @brief æ£€æŸ¥å·²å­˜åœ¨å‡½æ•°å£°æ˜/å®šä¹‰æ¡ä»¶ä¸‹æ·»åŠ åŒåå‡½æ•°å£°æ˜/å®šä¹‰çš„é”™è¯¯æƒ…å†µ
+    /// @param[in] function_type_exist ï¼šå·²å­˜åœ¨çš„å‡½æ•°ç±»å‹
+    /// @param[in] function_type_to_add ï¼šå¾…æ·»åŠ çš„å‡½æ•°ç±»å‹
+    /// @retval AddTypeResult::kTypeAlreadyIn å·²å­˜åœ¨ç›¸åŒçš„å‡½æ•°ç±»å‹
+    /// @retval AddTypeResult::kOverrideFunction å·²å­˜åœ¨å‚æ•°ä¸åŒçš„å‡½æ•°ç±»å‹
+    /// @attention è¯¥å‡½æ•°ä»…è¿”å›ä»¥ä¸Šä¸¤ç§ç»“æœ
     static AddTypeResult CheckFunctionDefineAddResult(
         const FunctionType& function_type_exist,
         const FunctionType& function_type_to_add) {
@@ -1157,56 +1157,56 @@ class TypeSystem {
     }
 
    private:
-    /// @brief ´æ´¢Ä³ÀàĞÍÃûÏÂµÄÈ«²¿ÀàĞÍ
+    /// @brief å­˜å‚¨æŸç±»å‹åä¸‹çš„å…¨éƒ¨ç±»å‹
     /// @details
-    /// ³õÊ¼¹¹½¨Ê±Îª¿Õ£¬Ìí¼ÓÀàĞÍÖ¸Õëºó¸ù¾İÌí¼ÓµÄÊıÁ¿Ê¹ÓÃÖ±½Ó´æ´¢»òlist´æ´¢
-    /// ½«StructOrBasicType::kBasic/kPointerÀàĞÍµÄÖ¸Õë·Åµ½×îÇ°Ãæ´Ó¶ø
-    /// ÔÚÎŞÀàĞÍÆ«ºÃÊ±¼ÓËÙ²éÕÒ£¬ÎŞĞè±éÀúÈ«²¿´æ´¢µÄÖ¸Õë
-    /// StructOrBasicType::kBasic/kPointerÖ»ÔÊĞíÉùÃ÷Ò»ÖÖ£¬·ÀÖ¹ÆçÒå
+    /// åˆå§‹æ„å»ºæ—¶ä¸ºç©ºï¼Œæ·»åŠ ç±»å‹æŒ‡é’ˆåæ ¹æ®æ·»åŠ çš„æ•°é‡ä½¿ç”¨ç›´æ¥å­˜å‚¨æˆ–listå­˜å‚¨
+    /// å°†StructOrBasicType::kBasic/kPointerç±»å‹çš„æŒ‡é’ˆæ”¾åˆ°æœ€å‰é¢ä»è€Œ
+    /// åœ¨æ— ç±»å‹åå¥½æ—¶åŠ é€ŸæŸ¥æ‰¾ï¼Œæ— éœ€éå†å…¨éƒ¨å­˜å‚¨çš„æŒ‡é’ˆ
+    /// StructOrBasicType::kBasic/kPointeråªå…è®¸å£°æ˜ä¸€ç§ï¼Œé˜²æ­¢æ­§ä¹‰
     std::variant<
         std::monostate, std::shared_ptr<const TypeInterface>,
         std::unique_ptr<std::list<std::shared_ptr<const TypeInterface>>>>
         type_data_;
   };
-  /// @brief ´æ´¢ÀàĞÍÃûµ½ÀàĞÍÁ´ÈİÆ÷µÄÓ³Éä
+  /// @brief å­˜å‚¨ç±»å‹ååˆ°ç±»å‹é“¾å®¹å™¨çš„æ˜ å°„
   using TypeNodeContainerType = std::unordered_map<std::string, TypeData>;
 
  public:
-  /// @brief Ö¸ÏòÀàĞÍÃûºÍ¶ÔÓ¦ÀàĞÍÁ´µÄµü´úÆ÷
+  /// @brief æŒ‡å‘ç±»å‹åå’Œå¯¹åº”ç±»å‹é“¾çš„è¿­ä»£å™¨
   using TypeNodeContainerIter = TypeNodeContainerType::const_iterator;
-  /// @brief ÏòÀàĞÍÏµÍ³ÖĞÌí¼ÓÀàĞÍ
-  /// @param[in] type_name £ºÀàĞÍÃû
-  /// @param[in] type_pointer £ºÀàĞÍÁ´Í·½áµãÖ¸Õë
-  /// @return Ç°°ë²¿·ÖÎªÖ¸Ïò²åÈëÎ»ÖÃµÄµü´úÆ÷£¬ºó°ë²¿·ÖÎªÌí¼Ó½á¹û
-  /// @note Ìí¼ÓÀàĞÍµÄ¹æÔò¼ûTypeData::AddTypeµÄ×¢ÊÍ
+  /// @brief å‘ç±»å‹ç³»ç»Ÿä¸­æ·»åŠ ç±»å‹
+  /// @param[in] type_name ï¼šç±»å‹å
+  /// @param[in] type_pointer ï¼šç±»å‹é“¾å¤´ç»“ç‚¹æŒ‡é’ˆ
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæŒ‡å‘æ’å…¥ä½ç½®çš„è¿­ä»£å™¨ï¼ŒååŠéƒ¨åˆ†ä¸ºæ·»åŠ ç»“æœ
+  /// @note æ·»åŠ ç±»å‹çš„è§„åˆ™è§TypeData::AddTypeçš„æ³¨é‡Š
   /// @ref TypeData::AddType
   template <class TypeName>
   std::pair<TypeNodeContainerType::const_iterator, AddTypeResult> DefineType(
       TypeName&& type_name,
       const std::shared_ptr<const TypeInterface>& type_pointer);
-  /// @brief ÉùÃ÷º¯ÊıÀàĞÍ
-  /// @param[in] function_type £ºº¯ÊıÀàĞÍÁ´Í·½áµã
-  /// @return Ç°°ë²¿·ÖÎªÖ¸Ïò²åÈëÎ»ÖÃµÄµü´úÆ÷£¬ºó°ë²¿·ÖÎªÌí¼Ó½á¹û
+  /// @brief å£°æ˜å‡½æ•°ç±»å‹
+  /// @param[in] function_type ï¼šå‡½æ•°ç±»å‹é“¾å¤´ç»“ç‚¹
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæŒ‡å‘æ’å…¥ä½ç½®çš„è¿­ä»£å™¨ï¼ŒååŠéƒ¨åˆ†ä¸ºæ·»åŠ ç»“æœ
   std::pair<TypeNodeContainerType::const_iterator, AddTypeResult>
   AnnounceFunctionType(
       const std::shared_ptr<const FunctionType>& function_type) {
     assert(function_type->GetType() == StructOrBasicType::kFunction);
     return DefineType(function_type->GetFunctionName(), function_type);
   }
-  /// @brief ¸ù¾İÀàĞÍÃûºÍÀàĞÍµÄÑ¡ÔñÇãÏò»ñÈ¡ÀàĞÍ
-  /// @param[in] type_name £ºÀàĞÍÃû
-  /// @param[in] type_prefer £ºÀàĞÍÑ¡ÔñÇãÏò
-  /// @return Ç°°ë²¿·ÖÎªÖ¸Ïò»ñÈ¡µ½µÄÀàĞÍÁ´Í·½áµãÖ¸Õë£¬ºó°ë²¿·ÖÎª»ñÈ¡½á¹û
-  /// @note Ìí¼ÓÀàĞÍµÄ¹æÔò¼ûTypeData::AddTypeµÄ×¢ÊÍ
+  /// @brief æ ¹æ®ç±»å‹åå’Œç±»å‹çš„é€‰æ‹©å€¾å‘è·å–ç±»å‹
+  /// @param[in] type_name ï¼šç±»å‹å
+  /// @param[in] type_prefer ï¼šç±»å‹é€‰æ‹©å€¾å‘
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæŒ‡å‘è·å–åˆ°çš„ç±»å‹é“¾å¤´ç»“ç‚¹æŒ‡é’ˆï¼ŒååŠéƒ¨åˆ†ä¸ºè·å–ç»“æœ
+  /// @note æ·»åŠ ç±»å‹çš„è§„åˆ™è§TypeData::AddTypeçš„æ³¨é‡Š
   /// @ref TypeData::AddType
   std::pair<std::shared_ptr<const TypeInterface>, GetTypeResult> GetType(
       const std::string& type_name, StructOrBasicType type_prefer);
 
  private:
-  /// @brief »ñÈ¡È«²¿ÀàĞÍÃûµ½ÀàĞÍÁ´µÄÓ³Éä
-  /// @return ·µ»Ø´æ´¢ÀàĞÍÃûµ½ÀàĞÍÁ´Ó³ÉäÈİÆ÷µÄÒıÓÃ
+  /// @brief è·å–å…¨éƒ¨ç±»å‹ååˆ°ç±»å‹é“¾çš„æ˜ å°„
+  /// @return è¿”å›å­˜å‚¨ç±»å‹ååˆ°ç±»å‹é“¾æ˜ å°„å®¹å™¨çš„å¼•ç”¨
   TypeNodeContainerType& GetTypeNameToNode() { return type_name_to_node_; }
-  /// @brief ±£´æÀàĞÍÃûµ½ÀàĞÍÁ´µÄÓ³Éä
+  /// @brief ä¿å­˜ç±»å‹ååˆ°ç±»å‹é“¾çš„æ˜ å°„
   TypeNodeContainerType type_name_to_node_;
 };
 
@@ -1231,7 +1231,7 @@ StructureTypeInterface::StructureMemberContainer::AddMember(
     ConstTag member_const_tag) {
   auto [iter, inserted] = member_name_to_index_.emplace(
       std::forward<MemberName>(member_name), MemberIndex(members_.size()));
-  // ÒÑ´æÔÚ¸ø¶¨Ãû×ÖµÄ³ÉÔ±
+  // å·²å­˜åœ¨ç»™å®šåå­—çš„æˆå‘˜
   if (!inserted) [[unlikely]] {
     return MemberIndex::InvalidId();
   } else {

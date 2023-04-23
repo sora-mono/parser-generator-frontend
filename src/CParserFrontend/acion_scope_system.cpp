@@ -1,10 +1,10 @@
-#include <format>
+ï»¿#include <format>
 
 #include "action_scope_system.h"
 namespace c_parser_frontend::action_scope_system {
-// Ìí¼ÓÒ»ÌõÊı¾İ£¬ÈçĞè×ª»»³ÉÕ»Ôò×Ô¶¯Ö´ĞĞ
-// ½¨ÒéÏÈ´´½¨¿Õ½Úµãºóµ÷ÓÃ¸Ãº¯Êı£¬¿ÉÒÔÌáÉıĞÔÄÜ
-// ·µ»ØÖµº¬Òå¼û¸ÃÀàĞÍ¶¨Òå´¦
+// æ·»åŠ ä¸€æ¡æ•°æ®ï¼Œå¦‚éœ€è½¬æ¢æˆæ ˆåˆ™è‡ªåŠ¨æ‰§è¡Œ
+// å»ºè®®å…ˆåˆ›å»ºç©ºèŠ‚ç‚¹åè°ƒç”¨è¯¥å‡½æ•°ï¼Œå¯ä»¥æå‡æ€§èƒ½
+// è¿”å›å€¼å«ä¹‰è§è¯¥ç±»å‹å®šä¹‰å¤„
 
 inline DefineVarietyResult ActionScopeSystem::VarietyData::AddVarietyOrInitData(
     const std::shared_ptr<const OperatorNodeInterface>& operator_node,
@@ -17,36 +17,36 @@ inline DefineVarietyResult ActionScopeSystem::VarietyData::AddVarietyOrInitData(
   std::monostate* empty_status_pointer =
       std::get_if<std::monostate>(&variety_data);
   if (empty_status_pointer != nullptr) [[likely]] {
-    // Î´´æ´¢ÈÎºÎ¶«Î÷£¬Ïòvariety_data_ÖĞ´æ´¢µ¥¸öÖ¸Õë
+    // æœªå­˜å‚¨ä»»ä½•ä¸œè¥¿ï¼Œå‘variety_data_ä¸­å­˜å‚¨å•ä¸ªæŒ‡é’ˆ
     variety_data.emplace<SinglePointerType>(operator_node, action_scope_level);
     return DefineVarietyResult::kNew;
   } else {
     auto* single_object = std::get_if<SinglePointerType>(&variety_data);
     if (single_object != nullptr) [[likely]] {
-      // ¼ì²éÊÇ·ñ´æÔÚÖØ¶¨Òå
+      // æ£€æŸ¥æ˜¯å¦å­˜åœ¨é‡å®šä¹‰
       if (single_object->second == action_scope_level) [[unlikely]] {
-        // ¸Ã×÷ÓÃÓòµÈ¼¶ÒÑ¾­¶¨ÒåÍ¬Ãû±äÁ¿
+        // è¯¥ä½œç”¨åŸŸç­‰çº§å·²ç»å®šä¹‰åŒåå˜é‡
         return DefineVarietyResult::kReDefine;
       }
-      // Ô­À´´æ´¢µ¥¸öshared_ptr£¬ĞÂÔöÒ»¸öÖ¸Õë×ª»¯ÎªÖ¸ÕëÕ»
-      // ½«Ô­À´µÄ´æ´¢·½Ê½¸ÄÎªÕ»´æ´¢
+      // åŸæ¥å­˜å‚¨å•ä¸ªshared_ptrï¼Œæ–°å¢ä¸€ä¸ªæŒ‡é’ˆè½¬åŒ–ä¸ºæŒ‡é’ˆæ ˆ
+      // å°†åŸæ¥çš„å­˜å‚¨æ–¹å¼æ”¹ä¸ºæ ˆå­˜å‚¨
       auto stack_pointer = std::make_unique<PointerStackType>();
-      // Ìí¼ÓÔ­ÓĞµÄÖ¸Õë
+      // æ·»åŠ åŸæœ‰çš„æŒ‡é’ˆ
       stack_pointer->emplace(std::move(*single_object));
-      // Ìí¼ÓĞÂÔöµÄÖ¸Õë
+      // æ·»åŠ æ–°å¢çš„æŒ‡é’ˆ
       stack_pointer->emplace(operator_node, action_scope_level);
-      // ÖØĞÂÉèÖÃvariety_dataµÄÄÚÈİ
+      // é‡æ–°è®¾ç½®variety_dataçš„å†…å®¹
       variety_data = std::move(stack_pointer);
       return DefineVarietyResult::kShiftToStack;
     } else {
       auto& stack_pointer =
           *std::get_if<std::unique_ptr<PointerStackType>>(&variety_data);
-      // ¼ì²éÊÇ·ñ´æÔÚÖØ¶¨Òå
+      // æ£€æŸ¥æ˜¯å¦å­˜åœ¨é‡å®šä¹‰
       if (stack_pointer->top().second == action_scope_level) [[unlikely]] {
-        // ¸Ã×÷ÓÃÓòµÈ¼¶ÒÑ¾­¶¨ÒåÍ¬Ãû±äÁ¿
+        // è¯¥ä½œç”¨åŸŸç­‰çº§å·²ç»å®šä¹‰åŒåå˜é‡
         return DefineVarietyResult::kReDefine;
       }
-      // ÒÑ¾­½¨Á¢Ö¸ÕëÕ»£¬ÏòÖ¸ÕëÕ»ÖĞÌí¼Ó¸ø¶¨Ö¸Õë
+      // å·²ç»å»ºç«‹æŒ‡é’ˆæ ˆï¼Œå‘æŒ‡é’ˆæ ˆä¸­æ·»åŠ ç»™å®šæŒ‡é’ˆ
       stack_pointer->emplace(operator_node, action_scope_level);
       return DefineVarietyResult::kAddToStack;
     }
@@ -56,16 +56,16 @@ bool ActionScopeSystem::VarietyData::PopTopData() {
   auto& variety_data = GetVarietyData();
   auto* single_pointer = std::get_if<SinglePointerType>(&variety_data);
   if (single_pointer != nullptr) [[likely]] {
-    // ·µ»Øtrue´ú±íËùÓĞÊı¾İÒÑ¾­É¾³ı£¬Ó¦ÒÆ³ı¸Ã½Úµã
+    // è¿”å›trueä»£è¡¨æ‰€æœ‰æ•°æ®å·²ç»åˆ é™¤ï¼Œåº”ç§»é™¤è¯¥èŠ‚ç‚¹
     return true;
   } else {
     auto& stack_pointer =
         *std::get_if<std::unique_ptr<PointerStackType>>(&variety_data);
     stack_pointer->pop();
     if (stack_pointer->size() == 1) {
-      // Õ»ÖĞÖ»Ê£Ò»¸öÖ¸Õë£¬ÍË»¯»ØÖ»´æ´¢¸ÃÖ¸ÕëµÄ½á¹¹
-      // ÖØĞÂ¸³Öµvariety_data_£¬ÔòÕ»×Ô¶¯Ïú»Ù
-      // ´Ë´¦²»¿ÉÊ¹ÓÃÒÆ¶¯ÓïÒå£¬·ÀÖ¹¸³ÖµÇ°Õ»ÒÑ¾­Ïú»Ù
+      // æ ˆä¸­åªå‰©ä¸€ä¸ªæŒ‡é’ˆï¼Œé€€åŒ–å›åªå­˜å‚¨è¯¥æŒ‡é’ˆçš„ç»“æ„
+      // é‡æ–°èµ‹å€¼variety_data_ï¼Œåˆ™æ ˆè‡ªåŠ¨é”€æ¯
+      // æ­¤å¤„ä¸å¯ä½¿ç”¨ç§»åŠ¨è¯­ä¹‰ï¼Œé˜²æ­¢èµ‹å€¼å‰æ ˆå·²ç»é”€æ¯
       variety_data = SinglePointerType(stack_pointer->top());
     }
     return false;
@@ -87,12 +87,12 @@ ActionScopeSystem::VarietyData::GetTopData() const {
 
 ActionScopeSystem::~ActionScopeSystem() {
   if (!flow_control_stack_.empty()) {
-    // ĞèÒªÕıÈ·µ¯³öÕ»ÖĞµÄº¯Êı¶ÔÏóÖ¸Õë£¬·ÀÖ¹ÊÍ·ÅÎŞ¹ÜÏ½È¨µÄÖ¸Õë
+    // éœ€è¦æ­£ç¡®å¼¹å‡ºæ ˆä¸­çš„å‡½æ•°å¯¹è±¡æŒ‡é’ˆï¼Œé˜²æ­¢é‡Šæ”¾æ— ç®¡è¾–æƒçš„æŒ‡é’ˆ
     while (flow_control_stack_.size() > 1) {
       flow_control_stack_.pop();
     }
-    // µ±Ç°Á÷³Ì¿ØÖÆÓï¾äÕ»½öÊ£ÕıÔÚ¹¹½¨µÄº¯Êı¶ÔÏóÖ¸Õë
-    // release¸ÃÖ¸ÕëÒÔ·ÀÖ¹±»ÊÍ·Å
+    // å½“å‰æµç¨‹æ§åˆ¶è¯­å¥æ ˆä»…å‰©æ­£åœ¨æ„å»ºçš„å‡½æ•°å¯¹è±¡æŒ‡é’ˆ
+    // releaseè¯¥æŒ‡é’ˆä»¥é˜²æ­¢è¢«é‡Šæ”¾
     flow_control_stack_.top().first.release();
   }
 }
@@ -128,11 +128,11 @@ ActionScopeSystem::DefineVarietyOrInitValue(
     case DefineVarietyResult::kNew:
     case DefineVarietyResult::kAddToStack:
     case DefineVarietyResult::kShiftToStack:
-      // È«¾Ö±äÁ¿²»»á±»µ¯³ö£¬ÎŞĞèÈëÕ»
+      // å…¨å±€å˜é‡ä¸ä¼šè¢«å¼¹å‡ºï¼Œæ— éœ€å…¥æ ˆ
       if (GetActionScopeLevel() != 0) [[likely]] {
-        // Ìí¼Ó¸Ã½ÚµãµÄĞÅÏ¢£¬ÒÔ±ã×÷ÓÃÓòÊ§Ğ§Ê±¾«È·µ¯³ö
-        // ¿ÉÒÔ±ÜÃâÓÃ»§Ìá¹©ĞèÒªµ¯³öµÄĞòÁĞ£¬¼ò»¯²Ù×÷
-        // Í¬Ê±±ÜÃâ±éÀúÕû¸ö±äÁ¿Ãûµ½½ÚµãÓ³Éä±í£¬Ò²ÎŞĞèÃ¿¸öÖ¸Õë¶¼´æ´¢¶ÔÓ¦µÄlevel
+        // æ·»åŠ è¯¥èŠ‚ç‚¹çš„ä¿¡æ¯ï¼Œä»¥ä¾¿ä½œç”¨åŸŸå¤±æ•ˆæ—¶ç²¾ç¡®å¼¹å‡º
+        // å¯ä»¥é¿å…ç”¨æˆ·æä¾›éœ€è¦å¼¹å‡ºçš„åºåˆ—ï¼Œç®€åŒ–æ“ä½œ
+        // åŒæ—¶é¿å…éå†æ•´ä¸ªå˜é‡ååˆ°èŠ‚ç‚¹æ˜ å°„è¡¨ï¼Œä¹Ÿæ— éœ€æ¯ä¸ªæŒ‡é’ˆéƒ½å­˜å‚¨å¯¹åº”çš„level
         GetVarietyStack().emplace(iter);
       }
       break;
@@ -161,22 +161,22 @@ bool ActionScopeSystem::PushFunctionFlowControlNode(
     c_parser_frontend::flow_control::FunctionDefine* function_data) {
   assert(function_data);
   if (GetActionScopeLevel() != 0) [[unlikely]] {
-    // º¯ÊıÖ»ÄÜ¶¨ÒåÔÚ0¼¶£¨È«¾Ö£©×÷ÓÃÓò
+    // å‡½æ•°åªèƒ½å®šä¹‰åœ¨0çº§ï¼ˆå…¨å±€ï¼‰ä½œç”¨åŸŸ
     return false;
   }
-  // ¶¨ÒåÈ«¾Ö³õÊ¼»¯³£Á¿£¬ÔÚ¸øº¯ÊıÖ¸Õë¸³ÖµÊ±Ê¹ÓÃ
+  // å®šä¹‰å…¨å±€åˆå§‹åŒ–å¸¸é‡ï¼Œåœ¨ç»™å‡½æ•°æŒ‡é’ˆèµ‹å€¼æ—¶ä½¿ç”¨
   auto [ignore_iter, define_variety_result] = DefineVarietyOrInitValue(
       function_data->GetFunctionTypeReference().GetFunctionName(),
       std::make_shared<operator_node::BasicTypeInitializeOperatorNode>(
           function_data->GetFunctionTypePointer()));
-  // ÔÚ´ËÖ®Ç°Ó¦¸ÃÒÑ¾­ÅĞ¶Ï¹ıÊÇ·ñ´æÔÚÖØ¶¨Òå/ÖØÔØÎÊÌâ£¨ÔÚÌí¼Óµ½FlowControlSystemÊ±£©
+  // åœ¨æ­¤ä¹‹å‰åº”è¯¥å·²ç»åˆ¤æ–­è¿‡æ˜¯å¦å­˜åœ¨é‡å®šä¹‰/é‡è½½é—®é¢˜ï¼ˆåœ¨æ·»åŠ åˆ°FlowControlSystemæ—¶ï¼‰
   assert(define_variety_result != DefineVarietyResult::kReDefine);
-  // ½«º¯ÊıÊı¾İÖ¸ÕëÑ¹ÈëÕ»£¬¸ÃÖ¸Õë¹ÜÏ½È¨²»ÔÚActionScopeSystem
-  // ¶øÔÚFlowControlSystem£¬ËùÒÔµ¯³öÊ±Òªµ÷ÓÃrelease·ÀÖ¹Êı¾İ±»unique_ptrÊÍ·Å
+  // å°†å‡½æ•°æ•°æ®æŒ‡é’ˆå‹å…¥æ ˆï¼Œè¯¥æŒ‡é’ˆç®¡è¾–æƒä¸åœ¨ActionScopeSystem
+  // è€Œåœ¨FlowControlSystemï¼Œæ‰€ä»¥å¼¹å‡ºæ—¶è¦è°ƒç”¨releaseé˜²æ­¢æ•°æ®è¢«unique_ptré‡Šæ”¾
   bool push_result = PushFlowControlSentence(
       std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>(
           function_data));
-  // Èç¹ûÑ¹Èë²»³É¹¦»áµ¼ÖÂunique_ptrÔÚº¯Êı½áÊøÎö¹¹Ê±Å×Òì³£
+  // å¦‚æœå‹å…¥ä¸æˆåŠŸä¼šå¯¼è‡´unique_ptråœ¨å‡½æ•°ç»“æŸææ„æ—¶æŠ›å¼‚å¸¸
   assert(push_result);
   return true;
 }
@@ -184,18 +184,18 @@ bool ActionScopeSystem::PushFunctionFlowControlNode(
 bool ActionScopeSystem::SetFunctionToConstruct(
     c_parser_frontend::flow_control::FunctionDefine* function_data) {
   assert(function_data != nullptr);
-  // Ìí¼ÓÈ«¾ÖµÄº¯ÊıÀàĞÍ±äÁ¿£¬ÓÃÓÚº¯ÊıÖ¸Õë¸³Öµ
-  // ²¢½«º¯ÊıµÄflow_control½ÚµãÑ¹Èë×÷ÓÃÓòÕ»µ×
+  // æ·»åŠ å…¨å±€çš„å‡½æ•°ç±»å‹å˜é‡ï¼Œç”¨äºå‡½æ•°æŒ‡é’ˆèµ‹å€¼
+  // å¹¶å°†å‡½æ•°çš„flow_controlèŠ‚ç‚¹å‹å…¥ä½œç”¨åŸŸæ ˆåº•
   bool result = PushFunctionFlowControlNode(function_data);
   if (!result) [[unlikely]] {
     return false;
   }
-  // ½«º¯Êı²ÎÊıÌí¼Óµ½×÷ÓÃÓòÖĞ
+  // å°†å‡½æ•°å‚æ•°æ·»åŠ åˆ°ä½œç”¨åŸŸä¸­
   for (auto& argument_node :
        function_data->GetFunctionTypeReference().GetArguments()) {
     const std::string& argument_name =
         argument_node.variety_operator_node->GetVarietyName();
-    // Èç¹û²ÎÊıÓĞÃûÔòÌí¼Óµ½×÷ÓÃÓòÖĞ
+    // å¦‚æœå‚æ•°æœ‰ååˆ™æ·»åŠ åˆ°ä½œç”¨åŸŸä¸­
     if (!argument_name.empty()) [[likely]] {
       DefineVariety(argument_node.variety_operator_node);
     }
@@ -206,7 +206,7 @@ bool ActionScopeSystem::SetFunctionToConstruct(
 bool ActionScopeSystem::PushFlowControlSentence(
     std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
         flow_control_sentence) {
-  // Á÷³Ì¿ØÖÆÕ»ÖĞÓĞÇÒ½öÓĞÒ»¸öº¯ÊıÁ÷³Ì¿ØÖÆ½Úµã£¬Î»ÓÚµ×²¿£¬×÷ÓÃÓòµÈ¼¶Îª1
+  // æµç¨‹æ§åˆ¶æ ˆä¸­æœ‰ä¸”ä»…æœ‰ä¸€ä¸ªå‡½æ•°æµç¨‹æ§åˆ¶èŠ‚ç‚¹ï¼Œä½äºåº•éƒ¨ï¼Œä½œç”¨åŸŸç­‰çº§ä¸º1
   if (flow_control_sentence->GetFlowType() !=
       flow_control::FlowType::kFunctionDefine) [[likely]] {
     if (flow_control_stack_.empty()) {
@@ -215,8 +215,8 @@ bool ActionScopeSystem::PushFlowControlSentence(
   } else if (!flow_control_stack_.empty()) [[unlikely]] {
     return false;
   }
-  // ÏÈÌáÉı×÷ÓÃÓòµÈ¼¶£¬ºóÉèÖÃÁ÷³Ì¿ØÖÆÓï¾äµÄ×÷ÓÃÓòµÈ¼¶
-  // ÕâÑùÔÚµ¯³ö×÷ÓÃÓòµÈ¼¶Ê±¿ÉÒÔÒ»²¢µ¯³öÁ÷³Ì¿ØÖÆÓï¾ä
+  // å…ˆæå‡ä½œç”¨åŸŸç­‰çº§ï¼Œåè®¾ç½®æµç¨‹æ§åˆ¶è¯­å¥çš„ä½œç”¨åŸŸç­‰çº§
+  // è¿™æ ·åœ¨å¼¹å‡ºä½œç”¨åŸŸç­‰çº§æ—¶å¯ä»¥ä¸€å¹¶å¼¹å‡ºæµç¨‹æ§åˆ¶è¯­å¥
   AddActionScopeLevel();
   flow_control_stack_.emplace(
       std::make_pair(std::move(flow_control_sentence), GetActionScopeLevel()));

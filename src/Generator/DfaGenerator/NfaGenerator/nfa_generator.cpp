@@ -26,7 +26,7 @@ inline void NfaGenerator::NfaNode::SetConditionTransfer(
 
 inline void NfaGenerator::NfaNode::AddNoconditionTransfer(NfaNodeId node_id) {
   auto [iter, inserted] = conditionless_transfer_nodes_id.insert(node_id);
-  assert(inserted);
+  //assert(inserted);
 }
 
 inline size_t NfaGenerator::NfaNode::RemoveConditionalTransfer(
@@ -160,8 +160,10 @@ NfaGenerator::RegexConstruct(TailNodeData&& tail_node_data,
             CreateSwitchTree(raw_regex_string, &next_character_index);
         if (!(temp_head_id.IsValid() && temp_tail_id.IsValid())) [[unlikely]] {
           LOG_ERROR("NFA Generator",
-                    std::format("非法正则 {:}\n{: >{}}", raw_regex_string, '^',
+                    std::format("非法正则 {:}", raw_regex_string, '^',
                                 next_character_index + 9))
+          LOG_ERROR("NFA Generator",
+                    std::format("{: >{}}", '^', next_character_index + 9))
           exit(-1);
         }
         GetNfaNode(tail_id).AddNoconditionTransfer(temp_head_id);
@@ -178,8 +180,9 @@ NfaGenerator::RegexConstruct(TailNodeData&& tail_node_data,
                            std::move(next_character_index), false);
         if (!(temp_head_id.IsValid() && temp_tail_id.IsValid())) [[unlikely]] {
           LOG_ERROR("NFA Generator",
-                    std::format("非法正则 {:}\n{: >{}}", raw_regex_string, '^',
-                                next_character_index + 9))
+                    std::format("非法正则 {:}", raw_regex_string))
+          LOG_ERROR("NFA Generator",
+                    std::format("{: >{}}", '^', next_character_index + 9))
           exit(-1);
         }
         GetNfaNode(tail_id).AddNoconditionTransfer(temp_head_id);
@@ -202,8 +205,9 @@ NfaGenerator::RegexConstruct(TailNodeData&& tail_node_data,
       case '\\':  // 仅对单个字符生效
         if (next_character_index >= raw_regex_string.size()) [[unlikely]] {
           LOG_ERROR("NFA Generator",
-                    std::format("非法正则 {:}\n{: >{}}", raw_regex_string, '^',
-                                next_character_index + 9))
+                    std::format("非法正则 {:}", raw_regex_string))
+          LOG_ERROR("NFA Generator",
+                    std::format("{: >{}}", '^', next_character_index + 9))
           exit(-1);
         }
         c_now = raw_regex_string[next_character_index];

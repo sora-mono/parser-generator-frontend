@@ -1,8 +1,8 @@
-#include "c_parser_frontend.h"
+ï»¿#include "c_parser_frontend.h"
 
 #include <format>
-// »ñÈ¡º¯ÊıĞÅÏ¢
-// Èç¹û²»´æÔÚ¸ø¶¨Ãû³ÆµÄº¯ÊıÔò·µ»Ø¿ÕÖ¸Õë
+// è·å–å‡½æ•°ä¿¡æ¯
+// å¦‚æœä¸å­˜åœ¨ç»™å®šåç§°çš„å‡½æ•°åˆ™è¿”å›ç©ºæŒ‡é’ˆ
 namespace c_parser_frontend {
 
 thread_local CParserFrontend c_parser_controller;
@@ -31,16 +31,16 @@ CParserFrontend::AnnounceFunction(
       break;
     default:
       assert(false);
-      // ·ÀÖ¹¾¯¸æ
+      // é˜²æ­¢è­¦å‘Š
       return std::make_pair(TypeSystem::TypeNodeContainerIter(),
                             AddTypeResult());
       break;
   }
 }
 
-// ÉèÖÃµ±Ç°´ı¹¹½¨º¯Êı
-// ÔÚ×÷ÓÃÓòÄÚÉùÃ÷º¯ÊıµÄÈ«²¿²ÎÊıºÍº¯ÊıÀàĞÍµÄ¶ÔÏóÇÒ×Ô¶¯ÌáÉı×÷ÓÃÓòµÈ¼¶
-// ·µ»ØÊÇ·ñÉèÖÃ³É¹¦
+// è®¾ç½®å½“å‰å¾…æ„å»ºå‡½æ•°
+// åœ¨ä½œç”¨åŸŸå†…å£°æ˜å‡½æ•°çš„å…¨éƒ¨å‚æ•°å’Œå‡½æ•°ç±»å‹çš„å¯¹è±¡ä¸”è‡ªåŠ¨æå‡ä½œç”¨åŸŸç­‰çº§
+// è¿”å›æ˜¯å¦è®¾ç½®æˆåŠŸ
 
 bool CParserFrontend::SetFunctionToConstruct(
     const std::shared_ptr<const FunctionType>& function_to_construct) {
@@ -67,13 +67,13 @@ bool CParserFrontend::PushFlowControlSentence(
 namespace c_parser_frontend::action_scope_system {
 void ActionScopeSystem::PopOverLevel(ActionScopeLevel level) {
   auto& variety_stack = GetVarietyStack();
-  // ÒòÎª´æÔÚÉÚ±ø£¬ËùÒÔÎŞĞèÅĞ¶ÏÕ»ÊÇ·ñÎª¿Õ
-  // µ¯³ö±äÁ¿
+  // å› ä¸ºå­˜åœ¨å“¨å…µï¼Œæ‰€ä»¥æ— éœ€åˆ¤æ–­æ ˆæ˜¯å¦ä¸ºç©º
+  // å¼¹å‡ºå˜é‡
   while (variety_stack.top()->second.GetTopData().second > level) {
     bool should_erase_this_node = variety_stack.top()->second.PopTopData();
     if (should_erase_this_node) [[likely]] {
-      // ¸Ã±äÁ¿Ãû²¢²»ÓëÈÎºÎ½Úµã°ó¶¨
-      // É¾³ı¸ÃÊı¾İ½Úµã
+      // è¯¥å˜é‡åå¹¶ä¸ä¸ä»»ä½•èŠ‚ç‚¹ç»‘å®š
+      // åˆ é™¤è¯¥æ•°æ®èŠ‚ç‚¹
       GetVarietyOrFunctionNameToOperatorNodePointer().erase(
           variety_stack.top());
     }
@@ -81,21 +81,21 @@ void ActionScopeSystem::PopOverLevel(ActionScopeLevel level) {
   }
   while (!flow_control_stack_.empty() &&
          flow_control_stack_.top().second > level) {
-    // µ¯³öÁ÷³Ì¿ØÖÆÓï¾ä
+    // å¼¹å‡ºæµç¨‹æ§åˆ¶è¯­å¥
     auto flow_control_sentence = std::move(flow_control_stack_.top().first);
     flow_control_stack_.pop();
     if (!flow_control_stack_.empty()) [[likely]] {
-      // Èç¹ûÕ»²»¿ÕÔòÌí¼Óµ½Õ»¶¥µÄÁ÷³Ì¿ØÖÆÓï¾äÖĞ
+      // å¦‚æœæ ˆä¸ç©ºåˆ™æ·»åŠ åˆ°æ ˆé¡¶çš„æµç¨‹æ§åˆ¶è¯­å¥ä¸­
       AddSentence(std::move(flow_control_sentence));
     } else {
-      // Èç¹ûÕ»¿ÕÔòËµÃ÷µ±Ç°¹¹½¨µÄº¯ÊıÒÑÍê³É
-      // º¯Êı¹¹½¨Íê³É£¬´´½¨¹¹½¨Íê³ÉµÄº¯ÊıÀàĞÍ¶ÔÏó²¢Ìí¼Óµ½È«¾Ö³ÉÔ±µÄ×÷ÓÃÓò
+      // å¦‚æœæ ˆç©ºåˆ™è¯´æ˜å½“å‰æ„å»ºçš„å‡½æ•°å·²å®Œæˆ
+      // å‡½æ•°æ„å»ºå®Œæˆï¼Œåˆ›å»ºæ„å»ºå®Œæˆçš„å‡½æ•°ç±»å‹å¯¹è±¡å¹¶æ·»åŠ åˆ°å…¨å±€æˆå‘˜çš„ä½œç”¨åŸŸ
       assert(flow_control_sentence->GetFlowType() ==
              c_parser_frontend::flow_control::FlowType::kFunctionDefine);
-      // ÊÍ·ÅÖ¸Ïòº¯ÊıÊı¾İµÄÖ¸Õë£¬·ÀÖ¹¸ÃÖ¸ÕëÔÚflow_control_sentenceÎö¹¹Ê±±»ÊÍ·Å
-      // ¸ÃÖ¸Õë¹ÜÏ½È¨ÔÚFlowControlSystem
+      // é‡Šæ”¾æŒ‡å‘å‡½æ•°æ•°æ®çš„æŒ‡é’ˆï¼Œé˜²æ­¢è¯¥æŒ‡é’ˆåœ¨flow_control_sentenceææ„æ—¶è¢«é‡Šæ”¾
+      // è¯¥æŒ‡é’ˆç®¡è¾–æƒåœ¨FlowControlSystem
       flow_control_sentence.release();
-      // Í¨Öª¿ØÖÆÆ÷Íê³Éº¯Êı¹¹½¨
+      // é€šçŸ¥æ§åˆ¶å™¨å®Œæˆå‡½æ•°æ„å»º
       c_parser_frontend::c_parser_controller.FinishFunctionConstruct();
     }
   }

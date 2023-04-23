@@ -1,5 +1,5 @@
-/// @file action_scope_system.h
-/// @brief ×÷ÓÃÓòÏµÍ³
+ï»¿/// @file action_scope_system.h
+/// @brief ä½œç”¨åŸŸç³»ç»Ÿ
 #ifndef CPARSESRFRONTEND_ACTION_SCOPE_SYSTEM_H_
 #define CPARSESRFRONTEND_ACTION_SCOPE_SYSTEM_H_
 #include <memory>
@@ -12,113 +12,113 @@
 #include "operator_node.h"
 
 namespace c_parser_frontend::action_scope_system {
-/// @brief ¶¨Òå±äÁ¿µÄ¼ì²é½á¹û
+/// @brief å®šä¹‰å˜é‡çš„æ£€æŸ¥ç»“æœ
 enum class DefineVarietyResult {
-  ///< ¿ÉÒÔÌí¼ÓµÄÇé¿ö
-  kNew,           ///< ĞÂÔöÖ¸Õë£¬¸Ã½Úµã²»Ôø´æ´¢Ö¸Õë
-  kShiftToStack,  ///< ¸Ã½ÚµãÒÔÇ°´æ´¢ÁËÒ»¸öÖ¸Õë£¬ÏÖÔÚ´æ´¢µÚ¶ş¸ö£¬×ª»¯ÎªÖ¸ÕëÕ»
-  kAddToStack,    ///< ÏòÖ¸ÕëÕ»ÖĞÌí¼ÓÒ»¸öÖ¸Õë
-  ///< ²»¿ÉÒÔÌí¼ÓµÄÇé¿ö
-  kReDefine,  ///< ÖØ¶¨Òå
+  ///< å¯ä»¥æ·»åŠ çš„æƒ…å†µ
+  kNew,           ///< æ–°å¢æŒ‡é’ˆï¼Œè¯¥èŠ‚ç‚¹ä¸æ›¾å­˜å‚¨æŒ‡é’ˆ
+  kShiftToStack,  ///< è¯¥èŠ‚ç‚¹ä»¥å‰å­˜å‚¨äº†ä¸€ä¸ªæŒ‡é’ˆï¼Œç°åœ¨å­˜å‚¨ç¬¬äºŒä¸ªï¼Œè½¬åŒ–ä¸ºæŒ‡é’ˆæ ˆ
+  kAddToStack,    ///< å‘æŒ‡é’ˆæ ˆä¸­æ·»åŠ ä¸€ä¸ªæŒ‡é’ˆ
+  ///< ä¸å¯ä»¥æ·»åŠ çš„æƒ…å†µ
+  kReDefine,  ///< é‡å®šä¹‰
 };
 /// @class ActionScopeSystem action_scope_system.h
-/// @brief ×÷ÓÃÓòÏµÍ³
+/// @brief ä½œç”¨åŸŸç³»ç»Ÿ
 /// @details
-/// 1.×÷ÓÃÓòÏµÍ³¹ÜÀí±äÁ¿µÄ×÷ÓÃÓò/¿É¼ûÓòºÍÁ÷³Ì¿ØÖÆÓï¾äµÄ¹¹½¨
-/// 2.¸ù¾İ×÷ÓÃÓòµÄ±ä»¯×Ô¶¯µ¯³ö×÷ÓÃÓò³¬³ö·¶Î§µÄ±äÁ¿ºÍ¹¹½¨Íê³ÉµÄÁ÷³Ì¿ØÖÆÓï¾ä
-/// 3.Ã¿¸ö±äÁ¿/Á÷³Ì¿ØÖÆÓï¾ä¶¼ÓĞ×Ô¼ºµÄ×÷ÓÃÓòµÈ¼¶£¬×÷ÓÃÓòµÈ¼¶µÈÓÚÉùÃ÷´¦ÍâÃæµÄÁ÷³Ì
-///   ¿ØÖÆÓï¾ä£¨»¨À¨ºÅ£©²ãÊı£¬È«¾Ö±äÁ¿Îª0¼¶£¬ÕıÔÚ¹¹½¨µÄº¯ÊıÎª1¼¶
+/// 1.ä½œç”¨åŸŸç³»ç»Ÿç®¡ç†å˜é‡çš„ä½œç”¨åŸŸ/å¯è§åŸŸå’Œæµç¨‹æ§åˆ¶è¯­å¥çš„æ„å»º
+/// 2.æ ¹æ®ä½œç”¨åŸŸçš„å˜åŒ–è‡ªåŠ¨å¼¹å‡ºä½œç”¨åŸŸè¶…å‡ºèŒƒå›´çš„å˜é‡å’Œæ„å»ºå®Œæˆçš„æµç¨‹æ§åˆ¶è¯­å¥
+/// 3.æ¯ä¸ªå˜é‡/æµç¨‹æ§åˆ¶è¯­å¥éƒ½æœ‰è‡ªå·±çš„ä½œç”¨åŸŸç­‰çº§ï¼Œä½œç”¨åŸŸç­‰çº§ç­‰äºå£°æ˜å¤„å¤–é¢çš„æµç¨‹
+///   æ§åˆ¶è¯­å¥ï¼ˆèŠ±æ‹¬å·ï¼‰å±‚æ•°ï¼Œå…¨å±€å˜é‡ä¸º0çº§ï¼Œæ­£åœ¨æ„å»ºçš„å‡½æ•°ä¸º1çº§
 /// @attention
-/// ×÷ÓÃÓòÏµÍ³ÔÚ¹¹½¨º¯ÊıÊ±´ÓFlowControlSystemÌáÈ¡Ö¸Ïòµ±Ç°»îÔ¾º¯Êı½ÚµãµÄÖ¸Õë²¢ÓÃ
-/// unique_ptr´æ´¢¸ÃÖ¸Õë£¬½«ËüÑ¹ÈëÁ÷³Ì¿ØÖÆÕ»ÖĞ£¬µ±Ç°º¯Êı¹¹½¨Íê±Ïºóµ¯³ö¸ÃÖ¸Õë²»
-/// ÊÍ·ÅÄÚ´æ£¬ÕâÑù¿ÉÒÔ±ÜÃâÃ¿´ÎÌí¼ÓÓï¾äÊ±¶¼ĞèÒªÅĞ¶ÏÁ÷³Ì¿ØÖÆÕ»ÊÇ·ñÎª¿Õ£¬º¯Êı½Úµã
-/// µÄ¿ØÖÆÈ¨Ò»Ö±ÊôÓÚFlowControlSystem£¬×÷ÓÃÓòÏµÍ³Ö»ÓµÓĞ·ÃÎÊÈ¨
+/// ä½œç”¨åŸŸç³»ç»Ÿåœ¨æ„å»ºå‡½æ•°æ—¶ä»FlowControlSystemæå–æŒ‡å‘å½“å‰æ´»è·ƒå‡½æ•°èŠ‚ç‚¹çš„æŒ‡é’ˆå¹¶ç”¨
+/// unique_ptrå­˜å‚¨è¯¥æŒ‡é’ˆï¼Œå°†å®ƒå‹å…¥æµç¨‹æ§åˆ¶æ ˆä¸­ï¼Œå½“å‰å‡½æ•°æ„å»ºå®Œæ¯•åå¼¹å‡ºè¯¥æŒ‡é’ˆä¸
+/// é‡Šæ”¾å†…å­˜ï¼Œè¿™æ ·å¯ä»¥é¿å…æ¯æ¬¡æ·»åŠ è¯­å¥æ—¶éƒ½éœ€è¦åˆ¤æ–­æµç¨‹æ§åˆ¶æ ˆæ˜¯å¦ä¸ºç©ºï¼Œå‡½æ•°èŠ‚ç‚¹
+/// çš„æ§åˆ¶æƒä¸€ç›´å±äºFlowControlSystemï¼Œä½œç”¨åŸŸç³»ç»Ÿåªæ‹¥æœ‰è®¿é—®æƒ
 class ActionScopeSystem {
   using OperatorNodeInterface =
       c_parser_frontend::operator_node::OperatorNodeInterface;
   using VarietyOperatorNode =
       c_parser_frontend::operator_node::VarietyOperatorNode;
-  /// @brief ×÷ÓÃÓòµÈ¼¶µÄ·Ö·¢±êÇ©
+  /// @brief ä½œç”¨åŸŸç­‰çº§çš„åˆ†å‘æ ‡ç­¾
   enum IdWrapperLabel { kActionScopeLevelType };
-  /// @brief ´æ´¢µ±Ç°×÷ÓÃÓòµÈ¼¶µÄÀàĞÍ
+  /// @brief å­˜å‚¨å½“å‰ä½œç”¨åŸŸç­‰çº§çš„ç±»å‹
   using ActionScopeLevel = frontend::common::ExplicitIdWrapper<
       size_t, IdWrapperLabel, IdWrapperLabel::kActionScopeLevelType>;
   /// @class VarietyData action_scope_system.h
-  /// @brief ¹ÜÀí±äÁ¿ĞÅÏ¢µÄ´æ´¢
+  /// @brief ç®¡ç†å˜é‡ä¿¡æ¯çš„å­˜å‚¨
   /// @details
-  /// 1.Ä¬ÈÏ´æ´¢Ö¸Ïò±äÁ¿½ÚµãµÄÖ¸Õë
-  /// 2.´æÔÚÍ¬Ãû±äÁ¿¸²¸ÇÇ³²ã±äÁ¿µÄÇé¿öÊ±×ª»»ÎªÕ»
-  /// 3.µ¯³öÍ¬Ãû±äÁ¿ºó×Ô¶¯»Ö¸´µ¥¸öÖ¸Õë´æ´¢
+  /// 1.é»˜è®¤å­˜å‚¨æŒ‡å‘å˜é‡èŠ‚ç‚¹çš„æŒ‡é’ˆ
+  /// 2.å­˜åœ¨åŒåå˜é‡è¦†ç›–æµ…å±‚å˜é‡çš„æƒ…å†µæ—¶è½¬æ¢ä¸ºæ ˆ
+  /// 3.å¼¹å‡ºåŒåå˜é‡åè‡ªåŠ¨æ¢å¤å•ä¸ªæŒ‡é’ˆå­˜å‚¨
   class VarietyData {
    public:
-    /// @brief ´æ´¢µ¥¸öÖ¸ÕëµÄÀàĞÍ
+    /// @brief å­˜å‚¨å•ä¸ªæŒ‡é’ˆçš„ç±»å‹
     using SinglePointerType =
         std::pair<std::shared_ptr<const OperatorNodeInterface>,
                   ActionScopeLevel>;
-    /// @brief ´æ´¢¶à¸öÖ¸ÕëµÄÕ»ÀàĞÍ
+    /// @brief å­˜å‚¨å¤šä¸ªæŒ‡é’ˆçš„æ ˆç±»å‹
     using PointerStackType = std::stack<SinglePointerType>;
 
     VarietyData() = default;
     template <class Data>
     VarietyData(Data&& data) : variety_data_(std::forward<Data>(data)) {}
 
-    /// @brief Ìí¼ÓÒ»Ìõ±äÁ¿Êı¾İ»ò³õÊ¼»¯Êı¾İ
-    /// @param[in] operator_node £º±äÁ¿Êı¾İ»ò³õÊ¼»¯Êı¾İ½Úµã
-    /// @param[in] action_scope_level £º×÷ÓÃÓòµÈ¼¶
-    /// @return ·µ»Ø¼ì²é½á¹û£¬ÒâÒå¼û¶¨Òå
+    /// @brief æ·»åŠ ä¸€æ¡å˜é‡æ•°æ®æˆ–åˆå§‹åŒ–æ•°æ®
+    /// @param[in] operator_node ï¼šå˜é‡æ•°æ®æˆ–åˆå§‹åŒ–æ•°æ®èŠ‚ç‚¹
+    /// @param[in] action_scope_level ï¼šä½œç”¨åŸŸç­‰çº§
+    /// @return è¿”å›æ£€æŸ¥ç»“æœï¼Œæ„ä¹‰è§å®šä¹‰
     /// @details
-    /// ½¨ÒéÏÈ´´½¨¿Õ½Úµãºóµ÷ÓÃ¸Ãº¯Êı£¬¿ÉÒÔÌáÉıĞÔÄÜ
-    /// @note ÈçĞè×ª»»³ÉÕ»Ôò×Ô¶¯Ö´ĞĞ
+    /// å»ºè®®å…ˆåˆ›å»ºç©ºèŠ‚ç‚¹åè°ƒç”¨è¯¥å‡½æ•°ï¼Œå¯ä»¥æå‡æ€§èƒ½
+    /// @note å¦‚éœ€è½¬æ¢æˆæ ˆåˆ™è‡ªåŠ¨æ‰§è¡Œ
     DefineVarietyResult AddVarietyOrInitData(
         const std::shared_ptr<const OperatorNodeInterface>& operator_node,
         ActionScopeLevel action_scope_level);
-    /// @brief µ¯³ö×î¶¥²ãÊı¾İ
-    /// @return ·µ»ØÊÇ·ñÓ¦¸ÃÉ¾³ıVarietyData½Úµã
-    /// @retval true £ºËùÓĞÊı¾İ¾ùµ¯³ö£¬Ó¦É¾³ı¸Ã½Úµã
-    /// @retval false £º½ÚµãÖĞÈÔÓĞÊı¾İ
-    /// @note ×Ô¶¯´¦Àí×ª»»
+    /// @brief å¼¹å‡ºæœ€é¡¶å±‚æ•°æ®
+    /// @return è¿”å›æ˜¯å¦åº”è¯¥åˆ é™¤VarietyDataèŠ‚ç‚¹
+    /// @retval true ï¼šæ‰€æœ‰æ•°æ®å‡å¼¹å‡ºï¼Œåº”åˆ é™¤è¯¥èŠ‚ç‚¹
+    /// @retval false ï¼šèŠ‚ç‚¹ä¸­ä»æœ‰æ•°æ®
+    /// @note è‡ªåŠ¨å¤„ç†è½¬æ¢
     bool PopTopData();
-    /// @brief »ñÈ¡×î¶¥²ã±äÁ¿Ö¸Õë
-    /// @return ·µ»Ø±äÁ¿Ö¸Õë
+    /// @brief è·å–æœ€é¡¶å±‚å˜é‡æŒ‡é’ˆ
+    /// @return è¿”å›å˜é‡æŒ‡é’ˆ
     SinglePointerType GetTopData() const;
-    /// @brief ÅĞ¶ÏÈİÆ÷ÊÇ·ñÎ´´æ´¢ÈÎºÎÖ¸Õë
-    /// @return ·µ»ØÈİÆ÷ÊÇ·ñÎ´´æ´¢ÈÎºÎÖ¸Õë
-    /// @retval true ÈİÆ÷ÄÚÎ´´æ´¢ÈÎºÎÖ¸Õë
-    /// @retval false ÈİÆ÷ÄÚ´æ´¢ÖÁÉÙÒ»¸öÖ¸Õë
+    /// @brief åˆ¤æ–­å®¹å™¨æ˜¯å¦æœªå­˜å‚¨ä»»ä½•æŒ‡é’ˆ
+    /// @return è¿”å›å®¹å™¨æ˜¯å¦æœªå­˜å‚¨ä»»ä½•æŒ‡é’ˆ
+    /// @retval true å®¹å™¨å†…æœªå­˜å‚¨ä»»ä½•æŒ‡é’ˆ
+    /// @retval false å®¹å™¨å†…å­˜å‚¨è‡³å°‘ä¸€ä¸ªæŒ‡é’ˆ
     bool Empty() const {
       return std::get_if<std::monostate>(&variety_data_) != nullptr;
     }
 
    private:
-    /// @brief »ñÈ¡´æ´¢Ö¸ÕëµÄÈİÆ÷
-    /// @return ·µ»Ø´æ´¢Ö¸ÕëµÄÈİÆ÷µÄÒıÓÃ
+    /// @brief è·å–å­˜å‚¨æŒ‡é’ˆçš„å®¹å™¨
+    /// @return è¿”å›å­˜å‚¨æŒ‡é’ˆçš„å®¹å™¨çš„å¼•ç”¨
     auto& GetVarietyData() { return variety_data_; }
-    /// @brief »ñÈ¡´æ´¢Ö¸ÕëµÄÈİÆ÷
-    /// @return ·µ»Ø´æ´¢Ö¸ÕëµÄÈİÆ÷µÄÒıÓÃ
+    /// @brief è·å–å­˜å‚¨æŒ‡é’ˆçš„å®¹å™¨
+    /// @return è¿”å›å­˜å‚¨æŒ‡é’ˆçš„å®¹å™¨çš„å¼•ç”¨
     const auto& GetVarietyData() const { return variety_data_; }
 
-    /// @brief ´æ´¢Ö¸Ïò½ÚµãµÄÖ¸Õë£¬std::monostateÎªÈİÆ÷¿ÕÊ±±£´æµÄÄÚÈİ
+    /// @brief å­˜å‚¨æŒ‡å‘èŠ‚ç‚¹çš„æŒ‡é’ˆï¼Œstd::monostateä¸ºå®¹å™¨ç©ºæ—¶ä¿å­˜çš„å†…å®¹
     std::variant<std::monostate, SinglePointerType,
                  std::unique_ptr<PointerStackType>>
         variety_data_;
   };
 
  public:
-  /// @brief ´æ´¢²»Í¬×÷ÓÃÓò±äÁ¿µÄ½á¹¹
+  /// @brief å­˜å‚¨ä¸åŒä½œç”¨åŸŸå˜é‡çš„ç»“æ„
   using ActionScopeContainerType = std::unordered_map<std::string, VarietyData>;
 
   ActionScopeSystem() { VarietyScopeSystemInit(); }
   ~ActionScopeSystem();
 
-  /// @brief ³õÊ¼»¯±äÁ¿ÏµÍ³
+  /// @brief åˆå§‹åŒ–å˜é‡ç³»ç»Ÿ
   void VarietyScopeSystemInit() {
     action_scope_level_ = ActionScopeLevel(0);
     variety_or_function_name_to_operator_node_pointer_.clear();
     while (!variety_stack_.empty()) {
       variety_stack_.pop();
     }
-    // Ñ¹ÈëÉÚ±ø£¬µ¯³öËùÓĞ¸ßÓÚ¸ø¶¨²ãÊı»¨À¨ºÅµÄ±äÁ¿Ê±ÎŞĞèÅĞ¶ÏÕ»ÊÇ·ñÎª¿Õ
-    // ±äÁ¿Õ»ÖĞÓĞÇÒ½öÓĞÕâÒ»¸ö×÷ÓÃÓòµÈ¼¶Îª0µÄ±äÁ¿
+    // å‹å…¥å“¨å…µï¼Œå¼¹å‡ºæ‰€æœ‰é«˜äºç»™å®šå±‚æ•°èŠ±æ‹¬å·çš„å˜é‡æ—¶æ— éœ€åˆ¤æ–­æ ˆæ˜¯å¦ä¸ºç©º
+    // å˜é‡æ ˆä¸­æœ‰ä¸”ä»…æœ‰è¿™ä¸€ä¸ªä½œç”¨åŸŸç­‰çº§ä¸º0çš„å˜é‡
     auto [iter, inserted] =
         variety_or_function_name_to_operator_node_pointer_.emplace(
             std::string(),
@@ -127,79 +127,79 @@ class ActionScopeSystem {
     variety_stack_.emplace(std::move(iter));
   }
 
-  /// @brief Ôö¼ÓÒ»¼¶×÷ÓÃÓòµÈ¼¶
+  /// @brief å¢åŠ ä¸€çº§ä½œç”¨åŸŸç­‰çº§
   void AddActionScopeLevel() { ++action_scope_level_; }
-  /// @brief ¶¨Òå±äÁ¿
-  /// @param[in] variety_node_pointer £ºÖ¸Ïò±äÁ¿½ÚµãµÄÖ¸Õë
-  /// @return Ç°°ë²¿·ÖÎª²åÈëÎ»ÖÃµÄµü´úÆ÷£¬ºó°ë²¿·ÖÎª¼ì²é½á¹û
-  /// @note ±äÁ¿±ØĞëÒÑ¾­ÉèÖÃ±äÁ¿Ãû
-  /// ÓëDefineVarietyOrInitValueÔÚ¶¨Òå±äÁ¿Ê±µÈ¼Û
+  /// @brief å®šä¹‰å˜é‡
+  /// @param[in] variety_node_pointer ï¼šæŒ‡å‘å˜é‡èŠ‚ç‚¹çš„æŒ‡é’ˆ
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæ’å…¥ä½ç½®çš„è¿­ä»£å™¨ï¼ŒååŠéƒ¨åˆ†ä¸ºæ£€æŸ¥ç»“æœ
+  /// @note å˜é‡å¿…é¡»å·²ç»è®¾ç½®å˜é‡å
+  /// ä¸DefineVarietyOrInitValueåœ¨å®šä¹‰å˜é‡æ—¶ç­‰ä»·
   std::pair<ActionScopeContainerType::const_iterator, DefineVarietyResult>
   DefineVariety(
       const std::shared_ptr<const VarietyOperatorNode>& variety_node_pointer);
-  /// @brief ¶¨Òå±äÁ¿»ò³õÊ¼»¯³£Á¿
-  /// @param[in] name £º±äÁ¿Ãû/³õÊ¼»¯³£Á¿
-  /// @param[in] operator_node_pointer £ºÖ¸Ïò±äÁ¿½ÚµãµÄÖ¸Õë
-  /// @return Ç°°ë²¿·ÖÎª²åÈëÎ»ÖÃµÄµü´úÆ÷£¬ºó°ë²¿·ÖÎª¼ì²é½á¹û
-  /// @note ±äÁ¿±ØĞëÒÑ¾­ÉèÖÃ±äÁ¿Ãû
-  /// DefineVarietyÎŞ·¨¶¨Òå³õÊ¼»¯Öµ£¬ÒòÎª³õÊ¼»¯Öµ²»¸½´øÃû×Ö£¬ĞèÒª´ÓÍâ´«Èë
-  /// ¶¨Òå±äÁ¿Ê±Ìá¹©µÄÃû×Ö±ØĞëÓë±äÁ¿½ÚµãÖĞ´¢´æµÄÃû×ÖÏàÍ¬
+  /// @brief å®šä¹‰å˜é‡æˆ–åˆå§‹åŒ–å¸¸é‡
+  /// @param[in] name ï¼šå˜é‡å/åˆå§‹åŒ–å¸¸é‡
+  /// @param[in] operator_node_pointer ï¼šæŒ‡å‘å˜é‡èŠ‚ç‚¹çš„æŒ‡é’ˆ
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæ’å…¥ä½ç½®çš„è¿­ä»£å™¨ï¼ŒååŠéƒ¨åˆ†ä¸ºæ£€æŸ¥ç»“æœ
+  /// @note å˜é‡å¿…é¡»å·²ç»è®¾ç½®å˜é‡å
+  /// DefineVarietyæ— æ³•å®šä¹‰åˆå§‹åŒ–å€¼ï¼Œå› ä¸ºåˆå§‹åŒ–å€¼ä¸é™„å¸¦åå­—ï¼Œéœ€è¦ä»å¤–ä¼ å…¥
+  /// å®šä¹‰å˜é‡æ—¶æä¾›çš„åå­—å¿…é¡»ä¸å˜é‡èŠ‚ç‚¹ä¸­å‚¨å­˜çš„åå­—ç›¸åŒ
   std::pair<ActionScopeContainerType::const_iterator, DefineVarietyResult>
   DefineVarietyOrInitValue(const std::string& name,
                            const std::shared_ptr<const OperatorNodeInterface>&
                                operator_node_pointer);
-  /// @brief ¸ù¾İÃû×Ö»ñÈ¡±äÁ¿»òº¯ÊıÃû
-  /// @param[in] variety_name £º²éÑ¯µÄÃû×Ö
-  /// @return Ç°°ë²¿·ÖÎªÖ¸Ïò±äÁ¿»òº¯Êı½ÚµãµÄÖ¸Õë£¬ºó°ë²¿·ÖÎª½ÚµãÊÇ·ñ´æÔÚ
+  /// @brief æ ¹æ®åå­—è·å–å˜é‡æˆ–å‡½æ•°å
+  /// @param[in] variety_name ï¼šæŸ¥è¯¢çš„åå­—
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæŒ‡å‘å˜é‡æˆ–å‡½æ•°èŠ‚ç‚¹çš„æŒ‡é’ˆï¼ŒååŠéƒ¨åˆ†ä¸ºèŠ‚ç‚¹æ˜¯å¦å­˜åœ¨
   std::pair<std::shared_ptr<const OperatorNodeInterface>, bool>
   GetVarietyOrFunction(const std::string& variety_name) const;
-  /// @brief ÉèÖÃµ±Ç°´ı¹¹½¨º¯Êı
-  /// @param[in] function_data £ºÖ¸Ïò´ı¹¹½¨µÄº¯Êı½ÚµãµÄÖ¸Õë
-  /// @return ·µ»ØÊÇ·ñÉèÖÃ³É¹¦
-  /// @retval true £ºÉèÖÃ³É¹¦
-  /// @retval false £ºµ±Ç°¶¨ÒåÓòµÈ¼¶²»ÊÇ0¼¶£¬²»ÔÊĞíÇ¶Ì×¶¨Òåº¯Êı
+  /// @brief è®¾ç½®å½“å‰å¾…æ„å»ºå‡½æ•°
+  /// @param[in] function_data ï¼šæŒ‡å‘å¾…æ„å»ºçš„å‡½æ•°èŠ‚ç‚¹çš„æŒ‡é’ˆ
+  /// @return è¿”å›æ˜¯å¦è®¾ç½®æˆåŠŸ
+  /// @retval true ï¼šè®¾ç½®æˆåŠŸ
+  /// @retval false ï¼šå½“å‰å®šä¹‰åŸŸç­‰çº§ä¸æ˜¯0çº§ï¼Œä¸å…è®¸åµŒå¥—å®šä¹‰å‡½æ•°
   /// @details
-  /// 1.function_dataµÄ¿ØÖÆÈ¨¹éÊôÓÚFlowControlSystem£¬ActionScopeSystem
-  /// ½öÓĞfunction_dataµÄ·ÃÎÊÈ¨£¬Ã»ÓĞ¿ØÖÆÈ¨£¬½ûÖ¹delete¸ÃÖ¸Õë
-  /// 2.ÎªÁËÄÜ½«¸ÃÖ¸Õë·ÅÈëÁ÷³Ì¿ØÖÆ½ÚµãÕ»ÖĞ£¬Ê¹ÓÃstd::unique_ptr<FlowInterface>
-  ///   °ü×°ºóÑ¹ÈëÕ»£¬ÔÚµ¯³öÊ±releaseÖ¸Õë·ÀÖ¹±»ÊÍ·Å
-  /// 3.ÉèÖÃºó×Ô¶¯Ôö¼ÓÒ»¼¶×÷ÓÃÓòµÈ¼¶
+  /// 1.function_dataçš„æ§åˆ¶æƒå½’å±äºFlowControlSystemï¼ŒActionScopeSystem
+  /// ä»…æœ‰function_dataçš„è®¿é—®æƒï¼Œæ²¡æœ‰æ§åˆ¶æƒï¼Œç¦æ­¢deleteè¯¥æŒ‡é’ˆ
+  /// 2.ä¸ºäº†èƒ½å°†è¯¥æŒ‡é’ˆæ”¾å…¥æµç¨‹æ§åˆ¶èŠ‚ç‚¹æ ˆä¸­ï¼Œä½¿ç”¨std::unique_ptr<FlowInterface>
+  ///   åŒ…è£…åå‹å…¥æ ˆï¼Œåœ¨å¼¹å‡ºæ—¶releaseæŒ‡é’ˆé˜²æ­¢è¢«é‡Šæ”¾
+  /// 3.è®¾ç½®åè‡ªåŠ¨å¢åŠ ä¸€çº§ä½œç”¨åŸŸç­‰çº§
   bool SetFunctionToConstruct(
       c_parser_frontend::flow_control::FunctionDefine* function_data);
-  /// @brief »ñÈ¡µ±Ç°×÷ÓÃÓòµÈ¼¶
-  /// @return ·µ»Øµ±Ç°×÷ÓÃÓòµÈ¼¶
+  /// @brief è·å–å½“å‰ä½œç”¨åŸŸç­‰çº§
+  /// @return è¿”å›å½“å‰ä½œç”¨åŸŸç­‰çº§
   ActionScopeLevel GetActionScopeLevel() const { return action_scope_level_; }
-  /// @brief Ñ¹ÈëÁ÷³Ì¿ØÖÆ½Úµã
-  /// @param[in] flow_control_sentence £º´ıÑ¹ÈëµÄÁ÷³Ì¿ØÖÆ½Úµã
-  /// @return ·µ»ØÊÇ·ñÑ¹Èë³É¹¦
-  /// @retval true £ºÑ¹Èë³É¹¦
-  /// @retval false £ºÎ´Ñ¹Èëº¯Êı½Úµã×÷ÎªÁ÷³Ì¿ØÖÆÕ»µ×²¿¾ÍÑ¹ÈëÆäËüÁ÷³Ì¿ØÖÆ½Úµã»ò
-  /// Õ»²»¿ÕÊ±Ñ¹Èëº¯Êı½Úµã£¨Ç¶Ì×¶¨Òåº¯Êı£©
+  /// @brief å‹å…¥æµç¨‹æ§åˆ¶èŠ‚ç‚¹
+  /// @param[in] flow_control_sentence ï¼šå¾…å‹å…¥çš„æµç¨‹æ§åˆ¶èŠ‚ç‚¹
+  /// @return è¿”å›æ˜¯å¦å‹å…¥æˆåŠŸ
+  /// @retval true ï¼šå‹å…¥æˆåŠŸ
+  /// @retval false ï¼šæœªå‹å…¥å‡½æ•°èŠ‚ç‚¹ä½œä¸ºæµç¨‹æ§åˆ¶æ ˆåº•éƒ¨å°±å‹å…¥å…¶å®ƒæµç¨‹æ§åˆ¶èŠ‚ç‚¹æˆ–
+  /// æ ˆä¸ç©ºæ—¶å‹å…¥å‡½æ•°èŠ‚ç‚¹ï¼ˆåµŒå¥—å®šä¹‰å‡½æ•°ï¼‰
   /// @details
-  /// 1.×Ô¶¯Ôö¼ÓÒ»¼¶×÷ÓÃÓòµÈ¼¶
-  /// 2.ÏÈÔö¼ÓÒ»¼¶×÷ÓÃÓòµÈ¼¶ºóÑ¹ÈëÁ÷³Ì¿ØÖÆ½Úµã£¬ÕâÑùÔÚµ¯³ö¸Ã¼¶×÷ÓÃÓòÊ±¾ÍÄÜ¹»Ò»²¢
-  ///   µ¯³ö¹¹½¨Íê³ÉµÄÁ÷³Ì¿ØÖÆ½Úµã
-  /// @attention ±ØĞëÑ¹Èë¿ÉÒÔ´æ´¢Á÷³Ì¿ØÖÆ½ÚµãµÄÁ÷³Ì¿ØÖÆÓï¾ä
+  /// 1.è‡ªåŠ¨å¢åŠ ä¸€çº§ä½œç”¨åŸŸç­‰çº§
+  /// 2.å…ˆå¢åŠ ä¸€çº§ä½œç”¨åŸŸç­‰çº§åå‹å…¥æµç¨‹æ§åˆ¶èŠ‚ç‚¹ï¼Œè¿™æ ·åœ¨å¼¹å‡ºè¯¥çº§ä½œç”¨åŸŸæ—¶å°±èƒ½å¤Ÿä¸€å¹¶
+  ///   å¼¹å‡ºæ„å»ºå®Œæˆçš„æµç¨‹æ§åˆ¶èŠ‚ç‚¹
+  /// @attention å¿…é¡»å‹å…¥å¯ä»¥å­˜å‚¨æµç¨‹æ§åˆ¶èŠ‚ç‚¹çš„æµç¨‹æ§åˆ¶è¯­å¥
   bool PushFlowControlSentence(
       std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
           flow_control_sentence);
-  /// @brief µ¯³öÒ»¼¶×÷ÓÃÓò
+  /// @brief å¼¹å‡ºä¸€çº§ä½œç”¨åŸŸ
   /// @details
-  /// 1.µ¯³ö¸Ã×÷ÓÃÓòÄÚËùÓĞµÄ±äÁ¿ºÍÁ÷³Ì¿ØÖÆÓï¾ä£¬×Ô¶¯Ìí¼Óµ¯³öµÄÁ÷³Ì¿ØÖÆÓï¾ä
-  /// 2.µ÷ÓÃºó×÷ÓÃÓòµÈ¼¶¼õ1
+  /// 1.å¼¹å‡ºè¯¥ä½œç”¨åŸŸå†…æ‰€æœ‰çš„å˜é‡å’Œæµç¨‹æ§åˆ¶è¯­å¥ï¼Œè‡ªåŠ¨æ·»åŠ å¼¹å‡ºçš„æµç¨‹æ§åˆ¶è¯­å¥
+  /// 2.è°ƒç”¨åä½œç”¨åŸŸç­‰çº§å‡1
   void PopActionScope() {
     assert(action_scope_level_ > 0);
     --action_scope_level_;
     PopOverLevel(GetActionScopeLevel());
   }
-  /// @brief »ñÈ¡×î¶¥²ãÁ÷³Ì¿ØÖÆÓï¾ä
-  /// @return ·µ»Ø×î¶¥²ãÁ÷³Ì¿ØÖÆÓï¾äµÄÒıÓÃ
+  /// @brief è·å–æœ€é¡¶å±‚æµç¨‹æ§åˆ¶è¯­å¥
+  /// @return è¿”å›æœ€é¡¶å±‚æµç¨‹æ§åˆ¶è¯­å¥çš„å¼•ç”¨
   auto& GetTopFlowControlSentence() const {
     assert(!flow_control_stack_.empty());
     return *flow_control_stack_.top().first;
   }
-  /// @brief ½«Á÷³Ì¿ØÖÆÓï¾äÕ»¶¥µÄifÁ÷³Ì¿ØÖÆÓï¾ä×ª»¯Îªif-elseÓï¾ä
-  /// @note ¶¥²¿µÄÁ÷³Ì¿ØÖÆÓï¾ä±ØĞëÊÇifÁ÷³Ì¿ØÖÆÓï¾ä
+  /// @brief å°†æµç¨‹æ§åˆ¶è¯­å¥æ ˆé¡¶çš„ifæµç¨‹æ§åˆ¶è¯­å¥è½¬åŒ–ä¸ºif-elseè¯­å¥
+  /// @note é¡¶éƒ¨çš„æµç¨‹æ§åˆ¶è¯­å¥å¿…é¡»æ˜¯ifæµç¨‹æ§åˆ¶è¯­å¥
   void ConvertIfSentenceToIfElseSentence() {
     assert(flow_control_stack_.top().first->GetFlowType() ==
            c_parser_frontend::flow_control::FlowType::kIfSentence);
@@ -207,26 +207,26 @@ class ActionScopeSystem {
         *flow_control_stack_.top().first)
         .ConvertToIfElse();
   }
-  /// @brief ÏòswitchÓï¾äÖĞÌí¼ÓÆÕÍ¨case
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦
-  /// @retval false µ±Ç°¶¥²ã¿ØÖÆÓï¾ä²»Îªswitch»òÓëÒÑÓĞµÄÖµÖØ¸´
+  /// @brief å‘switchè¯­å¥ä¸­æ·»åŠ æ™®é€šcase
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸ
+  /// @retval false å½“å‰é¡¶å±‚æ§åˆ¶è¯­å¥ä¸ä¸ºswitchæˆ–ä¸å·²æœ‰çš„å€¼é‡å¤
   bool AddSwitchSimpleCase(
       const std::shared_ptr<
           c_parser_frontend::flow_control::BasicTypeInitializeOperatorNode>&
           case_value);
-  /// @brief ÏòswitchÓï¾äÖĞÌí¼Ódefault±êÇ©
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦
-  /// @retval false £ºÒÑÌí¼Ó¹ıdefault±êÇ©»òµ±Ç°¶¥²ã¿ØÖÆÓï¾ä²»Îªswitch
+  /// @brief å‘switchè¯­å¥ä¸­æ·»åŠ defaultæ ‡ç­¾
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸ
+  /// @retval false ï¼šå·²æ·»åŠ è¿‡defaultæ ‡ç­¾æˆ–å½“å‰é¡¶å±‚æ§åˆ¶è¯­å¥ä¸ä¸ºswitch
   bool AddSwitchDefaultCase();
-  /// @brief Ïòµ±Ç°»îÔ¾µÄÁ÷³Ì¿ØÖÆÓï¾äÄÚÌí¼ÓÒ»ÌõÓï¾ä
-  /// @param[in] sentence £º´ıÌí¼ÓµÄÓï¾ä
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦£¬¶áÈ¡sentence¿ØÖÆÈ¨
+  /// @brief å‘å½“å‰æ´»è·ƒçš„æµç¨‹æ§åˆ¶è¯­å¥å†…æ·»åŠ ä¸€æ¡è¯­å¥
+  /// @param[in] sentence ï¼šå¾…æ·»åŠ çš„è¯­å¥
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸï¼Œå¤ºå–sentenceæ§åˆ¶æƒ
   /// @retval false
-  /// £ºÎŞ»îÔ¾µÄÁ÷³Ì¿ØÖÆÓï¾ä»ò¸ø¶¨Óï¾äÎŞ·¨Ìí¼Óµ½µ±Ç°µÄÁ÷³Ì¿ØÖÆ½ÚµãÖĞ£¬²»ĞŞ¸Ä²ÎÊı
-  /// @note Ìí¼Óµ½ÒÑÓĞµÄÁ÷³ÌÓï¾äºó
+  /// ï¼šæ— æ´»è·ƒçš„æµç¨‹æ§åˆ¶è¯­å¥æˆ–ç»™å®šè¯­å¥æ— æ³•æ·»åŠ åˆ°å½“å‰çš„æµç¨‹æ§åˆ¶èŠ‚ç‚¹ä¸­ï¼Œä¸ä¿®æ”¹å‚æ•°
+  /// @note æ·»åŠ åˆ°å·²æœ‰çš„æµç¨‹è¯­å¥å
   bool AddSentence(
       std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>&&
           sentence) {
@@ -236,61 +236,61 @@ class ActionScopeSystem {
     return flow_control_stack_.top().first->AddMainSentence(
         std::move(sentence));
   }
-  /// @brief Ïòµ±Ç°»îÔ¾µÄÁ÷³Ì¿ØÖÆÓï¾äÄÚÌí¼Ó¶àÌõÓï¾ä
-  /// @param[in] sentence_container £º´æ´¢´ıÌí¼ÓµÄÓï¾äµÄÈİÆ÷
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
+  /// @brief å‘å½“å‰æ´»è·ƒçš„æµç¨‹æ§åˆ¶è¯­å¥å†…æ·»åŠ å¤šæ¡è¯­å¥
+  /// @param[in] sentence_container ï¼šå­˜å‚¨å¾…æ·»åŠ çš„è¯­å¥çš„å®¹å™¨
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
   /// @retval true
-  /// £ºÌí¼Ó³É¹¦£¬½«sentence_containerÖĞËùÓĞÓï¾äÒÆ¶¯µ½»îÔ¾Á÷³Ì¿ØÖÆÓï¾äµÄÖ÷ÈİÆ÷ÖĞ
-  /// @retval false £º¸ø¶¨Óï¾äÎŞ·¨Ìí¼Óµ½µ±Ç°µÄÁ÷³Ì¿ØÖÆ½ÚµãÖĞ£¬²»ĞŞ¸Ä²ÎÊı
-  /// @note °´begin->endµÄË³ĞòÌí¼Ó£¬Ìí¼Óµ½ÒÑÓĞµÄÁ÷³ÌÓï¾äºó
+  /// ï¼šæ·»åŠ æˆåŠŸï¼Œå°†sentence_containerä¸­æ‰€æœ‰è¯­å¥ç§»åŠ¨åˆ°æ´»è·ƒæµç¨‹æ§åˆ¶è¯­å¥çš„ä¸»å®¹å™¨ä¸­
+  /// @retval false ï¼šç»™å®šè¯­å¥æ— æ³•æ·»åŠ åˆ°å½“å‰çš„æµç¨‹æ§åˆ¶èŠ‚ç‚¹ä¸­ï¼Œä¸ä¿®æ”¹å‚æ•°
+  /// @note æŒ‰begin->endçš„é¡ºåºæ·»åŠ ï¼Œæ·»åŠ åˆ°å·²æœ‰çš„æµç¨‹è¯­å¥å
   bool AddSentences(
       std::list<
           std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>>&&
           sentence_container);
 
  private:
-  /// @brief µ¯³öËùÓĞ¸ßÓÚ¸ø¶¨×÷ÓÃÓòµÈ¼¶µÄ±äÁ¿ºÍÁ÷³Ì¿ØÖÆÓï¾ä
-  /// @param[in] level £ºµ¯³öËùÓĞ¸ßÓÚ¸ÃµÈ¼¶µÄ±äÁ¿ºÍÁ÷³Ì¿ØÖÆÓï¾ä
+  /// @brief å¼¹å‡ºæ‰€æœ‰é«˜äºç»™å®šä½œç”¨åŸŸç­‰çº§çš„å˜é‡å’Œæµç¨‹æ§åˆ¶è¯­å¥
+  /// @param[in] level ï¼šå¼¹å‡ºæ‰€æœ‰é«˜äºè¯¥ç­‰çº§çš„å˜é‡å’Œæµç¨‹æ§åˆ¶è¯­å¥
   void PopOverLevel(ActionScopeLevel level);
-  /// @brief »ñÈ¡´æ´¢±äÁ¿/º¯ÊıÃûµ½½ÚµãÖ¸ÕëµÄÓ³ÉäµÄÈİÆ÷
-  /// @return ·µ»ØÈİÆ÷µÄÒıÓÃ
+  /// @brief è·å–å­˜å‚¨å˜é‡/å‡½æ•°ååˆ°èŠ‚ç‚¹æŒ‡é’ˆçš„æ˜ å°„çš„å®¹å™¨
+  /// @return è¿”å›å®¹å™¨çš„å¼•ç”¨
   ActionScopeContainerType& GetVarietyOrFunctionNameToOperatorNodePointer() {
     return variety_or_function_name_to_operator_node_pointer_;
   }
-  /// @brief »ñÈ¡´æ´¢±äÁ¿/º¯ÊıÃûµ½½ÚµãÖ¸ÕëµÄÓ³ÉäµÄÈİÆ÷
-  /// @return ·µ»ØÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–å­˜å‚¨å˜é‡/å‡½æ•°ååˆ°èŠ‚ç‚¹æŒ‡é’ˆçš„æ˜ å°„çš„å®¹å™¨
+  /// @return è¿”å›å®¹å™¨çš„constå¼•ç”¨
   const ActionScopeContainerType&
   GetVarietyOrFunctionNameToOperatorNodePointer() const {
     return variety_or_function_name_to_operator_node_pointer_;
   }
-  /// @brief »ñÈ¡±äÁ¿Õ»
-  /// @return ·µ»Ø±äÁ¿Õ»µÄÒıÓÃ
+  /// @brief è·å–å˜é‡æ ˆ
+  /// @return è¿”å›å˜é‡æ ˆçš„å¼•ç”¨
   auto& GetVarietyStack() { return variety_stack_; }
-  /// @brief ´´½¨º¯Êı¶¨Òå¿ØÖÆ¿é²¢Ñ¹ÈëÁ÷³Ì¿ØÖÆ½ÚµãÕ»ÖĞ
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦
-  /// @retval false £ºµ±Ç°×÷ÓÃÓòµÈ¼¶²»ÊÇ0¼¶£¬²»ÔÊĞíÇ¶Ì×¶¨Òåº¯Êı
+  /// @brief åˆ›å»ºå‡½æ•°å®šä¹‰æ§åˆ¶å—å¹¶å‹å…¥æµç¨‹æ§åˆ¶èŠ‚ç‚¹æ ˆä¸­
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸ
+  /// @retval false ï¼šå½“å‰ä½œç”¨åŸŸç­‰çº§ä¸æ˜¯0çº§ï¼Œä¸å…è®¸åµŒå¥—å®šä¹‰å‡½æ•°
   /// @details
-  /// 1.¸Ãº¯Êı»¹´´½¨º¯ÊıÀàĞÍµÄ³õÊ¼»¯Öµ²¢Ìí¼ÓÎªÈ«¾Ö±äÁ¿£¬¹©¸³ÖµÊ¹ÓÃ
-  /// 2.´Ó×÷ÓÃÓòµÈ¼¶0ÌáÉıµ½1
+  /// 1.è¯¥å‡½æ•°è¿˜åˆ›å»ºå‡½æ•°ç±»å‹çš„åˆå§‹åŒ–å€¼å¹¶æ·»åŠ ä¸ºå…¨å±€å˜é‡ï¼Œä¾›èµ‹å€¼ä½¿ç”¨
+  /// 2.ä»ä½œç”¨åŸŸç­‰çº§0æå‡åˆ°1
   bool PushFunctionFlowControlNode(
       c_parser_frontend::flow_control::FunctionDefine* function_data);
 
-  /// @brief ´æ´¢±äÁ¿/º¯ÊıÃûºÍµ½½ÚµãÖ¸ÕëµÄÓ³Éä
+  /// @brief å­˜å‚¨å˜é‡/å‡½æ•°åå’Œåˆ°èŠ‚ç‚¹æŒ‡é’ˆçš„æ˜ å°„
   /// @details
-  /// ¼üÖµÎª±äÁ¿Ãû
-  /// ÔÚ·¢Éú¸²¸ÇÊ±´´½¨±äÁ¿Õ»×ª»»½á¹¹¿ÉÒÔ½µµÍÄÚ´æÕ¼ÓÃºÍstackµÄĞÔÄÜÏûºÄ
+  /// é”®å€¼ä¸ºå˜é‡å
+  /// åœ¨å‘ç”Ÿè¦†ç›–æ—¶åˆ›å»ºå˜é‡æ ˆè½¬æ¢ç»“æ„å¯ä»¥é™ä½å†…å­˜å ç”¨å’Œstackçš„æ€§èƒ½æ¶ˆè€—
   ActionScopeContainerType variety_or_function_name_to_operator_node_pointer_;
-  /// @brief °´Ë³Ğò´æ´¢Ìí¼ÓµÄ±äÁ¿
+  /// @brief æŒ‰é¡ºåºå­˜å‚¨æ·»åŠ çš„å˜é‡
   /// @details
-  /// ÓÃÀ´Ö§³Ö×÷ÓÃÓòÖÕ½áºóÇå³ı¸Ã×÷ÓÃÓòÄÚÈ«²¿±äÁ¿
-  /// iteratorÖ¸Ïò±äÁ¿ºÍ¶ÔÓ¦Êı¾İ
+  /// ç”¨æ¥æ”¯æŒä½œç”¨åŸŸç»ˆç»“åæ¸…é™¤è¯¥ä½œç”¨åŸŸå†…å…¨éƒ¨å˜é‡
+  /// iteratoræŒ‡å‘å˜é‡å’Œå¯¹åº”æ•°æ®
   std::stack<ActionScopeContainerType::iterator> variety_stack_;
-  /// @brief µ±Ç°×÷ÓÃÓòµÈ¼¶
-  /// @note È«¾Ö±äÁ¿Îª0¼¶£¬Ã¿¸ö{»òÁ÷³Ì¿ØÖÆÓï¾äÔö¼Ó1¼¶
+  /// @brief å½“å‰ä½œç”¨åŸŸç­‰çº§
+  /// @note å…¨å±€å˜é‡ä¸º0çº§ï¼Œæ¯ä¸ª{æˆ–æµç¨‹æ§åˆ¶è¯­å¥å¢åŠ 1çº§
   ActionScopeLevel action_scope_level_ = ActionScopeLevel(0);
-  /// @brief ´æ´¢µ±Ç°ËùÓĞÕıÔÚ¹¹½¨µÄÁ÷³ÌÓï¾äºÍÁ÷³ÌÓï¾äµÄ×÷ÓÃÓòµÈ¼¶
-  /// @note ×îµ×²ãÎªµ±Ç°ËùÔÚº¯Êı£¬×÷ÓÃÓòµÈ¼¶Îª1
+  /// @brief å­˜å‚¨å½“å‰æ‰€æœ‰æ­£åœ¨æ„å»ºçš„æµç¨‹è¯­å¥å’Œæµç¨‹è¯­å¥çš„ä½œç”¨åŸŸç­‰çº§
+  /// @note æœ€åº•å±‚ä¸ºå½“å‰æ‰€åœ¨å‡½æ•°ï¼Œä½œç”¨åŸŸç­‰çº§ä¸º1
   std::stack<
       std::pair<std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>,
                 ActionScopeLevel>>

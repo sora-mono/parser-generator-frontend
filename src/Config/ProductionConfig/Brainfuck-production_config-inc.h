@@ -1,4 +1,4 @@
-#include "Generator/SyntaxGenerator/syntax_generate.h"
+﻿#include "Generator/SyntaxGenerator/syntax_generate.h"
 
 GENERATOR_DEFINE_KEY_WORD(RightMovePointer, ">")
 GENERATOR_DEFINE_KEY_WORD(LeftMovePointer, "<")

@@ -1,4 +1,4 @@
-#ifndef CPARSERFRONTEND_PARSE_FUNCTIONS_H_
+ï»¿#ifndef CPARSERFRONTEND_PARSE_FUNCTIONS_H_
 #define CPARSERFRONTEND_PARSE_FUNCTIONS_H_
 #include <format>
 #include <iostream>
@@ -9,7 +9,7 @@
 #include "operator_node.h"
 #include "type_system.h"
 namespace c_parser_frontend {
-// ÉùÃ÷Ïß³ÌÈ«¾Ö±äÁ¿£ºCÓïÑÔ±àÒëÆ÷Ç°¶ËµÄÀà¶ÔÏó
+// å£°æ˜çº¿ç¨‹å…¨å±€å˜é‡ï¼šCè¯­è¨€ç¼–è¯‘å™¨å‰ç«¯çš„ç±»å¯¹è±¡
 extern thread_local CParserFrontend c_parser_controller;
 }  // namespace c_parser_frontend
 
@@ -70,106 +70,106 @@ using DeclineMathematicalComputeTypeResult = c_parser_frontend::operator_node::
     MathematicalOperatorNode::DeclineMathematicalComputeTypeResult;
 
 class ObjectConstructData;
-// ¹¹½¨½á¹¹Êı¾İÊ±Ê¹ÓÃµÄÈ«¾Ö±äÁ¿£¬ÓÃÓÚÓÅ»¯Ö´ĞĞÂß¼­
-// ±£´æÕıÔÚ¹¹½¨µÄ½á¹¹Êı¾İÀàĞÍ
+// æ„å»ºç»“æ„æ•°æ®æ—¶ä½¿ç”¨çš„å…¨å±€å˜é‡ï¼Œç”¨äºä¼˜åŒ–æ‰§è¡Œé€»è¾‘
+// ä¿å­˜æ­£åœ¨æ„å»ºçš„ç»“æ„æ•°æ®ç±»å‹
 static thread_local std::shared_ptr<StructureTypeInterface>
     structure_type_constructuring;
-// ¹¹½¨º¯ÊıÀàĞÍÊ±Ê¹ÓÃµÄÈ«¾Ö±äÁ¿£¬ÓÃÓÚÓÅ»¯Ö´ĞĞÂß¼­
-// ±£´æ¹ÜÀí¹¹½¨Êı¾İµÄÀà
+// æ„å»ºå‡½æ•°ç±»å‹æ—¶ä½¿ç”¨çš„å…¨å±€å˜é‡ï¼Œç”¨äºä¼˜åŒ–æ‰§è¡Œé€»è¾‘
+// ä¿å­˜ç®¡ç†æ„å»ºæ•°æ®çš„ç±»
 static thread_local std::shared_ptr<ObjectConstructData>
     function_type_construct_data;
-// ¹¹½¨º¯Êıµ÷ÓÃ½ÚµãÊ±Ê¹ÓÃµÄÈ«¾Ö±äÁ¿£¬ÓÃÓÚÓÅ»¯Ö´ĞĞÂß¼­
+// æ„å»ºå‡½æ•°è°ƒç”¨èŠ‚ç‚¹æ—¶ä½¿ç”¨çš„å…¨å±€å˜é‡ï¼Œç”¨äºä¼˜åŒ–æ‰§è¡Œé€»è¾‘
 static thread_local std::shared_ptr<FunctionCallOperatorNode>
     function_call_operator_node;
 
-// ¹¹½¨±äÁ¿¶ÔÏó/º¯Êı¶ÔÏóÊ±Ê¹ÓÃµÄÊı¾İ
+// æ„å»ºå˜é‡å¯¹è±¡/å‡½æ•°å¯¹è±¡æ—¶ä½¿ç”¨çš„æ•°æ®
 class ObjectConstructData {
  public:
-  // ¶ÔÀàĞÍÁ´¹¹½¨¹ı³ÌµÄ¼ì²é½á¹û
+  // å¯¹ç±»å‹é“¾æ„å»ºè¿‡ç¨‹çš„æ£€æŸ¥ç»“æœ
   enum class CheckResult {
-    // ³É¹¦µÄÇé¿ö
+    // æˆåŠŸçš„æƒ…å†µ
     kSuccess,
-    // Ê§°ÜµÄÇé¿ö
-    kAttachToTerminalType,  // Î²½ÚµãÒÑ¾­ÊÇÖÕ½áÀàĞÍ£¨½á¹¹Àà/»ù´¡ÀàĞÍ£©
-                            // ²»ÄÜÁ¬½ÓÏÂÒ»¸ö½Úµã
-    kPointerEnd,      // ÀàĞÍÁ´Î²²¿ÎªÖ¸Õë¶ø²»ÊÇÖÕ½áÀàĞÍ
-    kReturnFunction,  // º¯ÊıÊÔÍ¼·µ»Øº¯Êı¶ø·Çº¯ÊıÖ¸Õë
-    kEmptyChain,      // ÀàĞÍÁ´ÎŞÈÎºÎÊı¾İ
-    kConstTagNotSame  // ÉùÃ÷POD±äÁ¿Ê±ÀàĞÍ×ó²àÓëÀàĞÍÓÒ²àµÄConstTagÀàĞÍ²»Í¬
+    // å¤±è´¥çš„æƒ…å†µ
+    kAttachToTerminalType,  // å°¾èŠ‚ç‚¹å·²ç»æ˜¯ç»ˆç»“ç±»å‹ï¼ˆç»“æ„ç±»/åŸºç¡€ç±»å‹ï¼‰
+                            // ä¸èƒ½è¿æ¥ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
+    kPointerEnd,      // ç±»å‹é“¾å°¾éƒ¨ä¸ºæŒ‡é’ˆè€Œä¸æ˜¯ç»ˆç»“ç±»å‹
+    kReturnFunction,  // å‡½æ•°è¯•å›¾è¿”å›å‡½æ•°è€Œéå‡½æ•°æŒ‡é’ˆ
+    kEmptyChain,      // ç±»å‹é“¾æ— ä»»ä½•æ•°æ®
+    kConstTagNotSame  // å£°æ˜PODå˜é‡æ—¶ç±»å‹å·¦ä¾§ä¸ç±»å‹å³ä¾§çš„ConstTagç±»å‹ä¸åŒ
   };
 
-  // ½ûÖ¹Ê¹ÓÃEndType::GetEndType()£¬·ÀÖ¹ĞŞ¸ÄÈ«¾Ö¹²ÏíµÄ½Úµã
+  // ç¦æ­¢ä½¿ç”¨EndType::GetEndType()ï¼Œé˜²æ­¢ä¿®æ”¹å…¨å±€å…±äº«çš„èŠ‚ç‚¹
   template <class ObjectName>
   ObjectConstructData(ObjectName&& object_name)
       : object_name_(std::forward<ObjectName>(object_name)),
         type_chain_head_(std::make_shared<EndType>()),
         type_chain_tail_(type_chain_head_) {}
 
-  // ¹¹½¨Ö¸¶¨¶ÔÏó
-  // ½ö½ÓÊÜ¹¹½¨VarietyOperatorNode£¨±äÁ¿½Úµã£©
-  // ºÍFunctionDefine£¨º¯ÊıÍ·£©
-  // ¹¹½¨µÄ¶ÔÏóĞ´Èëobjec_¸²¸ÇÔ­ÓĞÖ¸Õë
+  // æ„å»ºæŒ‡å®šå¯¹è±¡
+  // ä»…æ¥å—æ„å»ºVarietyOperatorNodeï¼ˆå˜é‡èŠ‚ç‚¹ï¼‰
+  // å’ŒFunctionDefineï¼ˆå‡½æ•°å¤´ï¼‰
+  // æ„å»ºçš„å¯¹è±¡å†™å…¥objec_è¦†ç›–åŸæœ‰æŒ‡é’ˆ
   template <class BasicObjectType, class... Args>
     requires std::is_same_v<BasicObjectType, VarietyOperatorNode> ||
              std::is_same_v<BasicObjectType,
                             c_parser_frontend::flow_control::FunctionDefine>
   CheckResult ConstructBasicObjectPart(Args... args);
 
-  // ÔÚÎ²½ÚµãºóÁ¬½ÓÒ»¸ö½Úµã£¬µ÷ÓÃºó×Ô¶¯ÉèÖÃÎ²½ÚµãÖ¸ÏòĞÂÌí¼ÓµÄ½Úµã
-  // Ìí¼ÓÒ»¸öFunctionTypeºóÔÙ´Îµ÷ÓÃ¸Ãº¯ÊıÊ±»á½«½Úµã²åµ½º¯ÊıµÄ·µ»ØÀàĞÍ²¿·Ö
-  // µ÷ÓÃÒ»´ÎÖ»ÄÜÌí¼ÓÒ»¸ö½Úµã
-  // µ÷ÓÃ²ÎÊıÖĞµÄ½Úµã±ØĞëÎ´ÉèÖÃnext_node£¬·ñÔò»á±»¸²¸Ç
-  // ×îÖÕµÄ½ÚµãÓ¦ÓÉConstructObjectÍê³É
-  // ÕâÃ´×ö¿ÉÒÔ¾«È·ÉèÖÃÖ¸Õë/±äÁ¿/º¯Êı·µ»ØÖµµÄconst±ê¼Ç
+  // åœ¨å°¾èŠ‚ç‚¹åè¿æ¥ä¸€ä¸ªèŠ‚ç‚¹ï¼Œè°ƒç”¨åè‡ªåŠ¨è®¾ç½®å°¾èŠ‚ç‚¹æŒ‡å‘æ–°æ·»åŠ çš„èŠ‚ç‚¹
+  // æ·»åŠ ä¸€ä¸ªFunctionTypeåå†æ¬¡è°ƒç”¨è¯¥å‡½æ•°æ—¶ä¼šå°†èŠ‚ç‚¹æ’åˆ°å‡½æ•°çš„è¿”å›ç±»å‹éƒ¨åˆ†
+  // è°ƒç”¨ä¸€æ¬¡åªèƒ½æ·»åŠ ä¸€ä¸ªèŠ‚ç‚¹
+  // è°ƒç”¨å‚æ•°ä¸­çš„èŠ‚ç‚¹å¿…é¡»æœªè®¾ç½®next_nodeï¼Œå¦åˆ™ä¼šè¢«è¦†ç›–
+  // æœ€ç»ˆçš„èŠ‚ç‚¹åº”ç”±ConstructObjectå®Œæˆ
+  // è¿™ä¹ˆåšå¯ä»¥ç²¾ç¡®è®¾ç½®æŒ‡é’ˆ/å˜é‡/å‡½æ•°è¿”å›å€¼çš„constæ ‡è®°
   template <class NextNodeType, class... Args>
   CheckResult AttachSingleNodeToTailNodeEmplace(Args&&... args) {
     auto new_node = std::make_shared<NextNodeType>(std::forward<Args>(args)...);
     return AttachSingleNodeToTailNodePointer(std::move(new_node));
   }
-  // ÓïÒåÍ¬AttachSingleNodeToTailNodeEmplace£¬²ÎÊıÊ¹ÓÃÒÑ¾­¹¹½¨ºÃµÄ½Úµã
+  // è¯­ä¹‰åŒAttachSingleNodeToTailNodeEmplaceï¼Œå‚æ•°ä½¿ç”¨å·²ç»æ„å»ºå¥½çš„èŠ‚ç‚¹
   CheckResult AttachSingleNodeToTailNodePointer(
       std::shared_ptr<const TypeInterface>&& next_node);
-  // Íê³É¹¹½¨¹ı³Ì£¬·µ»ØÁ÷³Ì¶ÔÏó
-  // º¯Êı²ÎÊı£ºÖÕ½áÀàĞÍ×ó±ßµÄConstTag¡¢×îºóÁ¬½ÓµÄ½Úµã
-  // Á½¸ö²ÎÊıÓÃÀ´×¼È·µÄÉèÖÃº¯Êı·µ»ØÖµ/±äÁ¿/Ö¸ÕëµÄconst±ê¼Ç
-  // ²»»áÔÚÎ²²¿Á¬½ÓÉÚ±ø½Úµã£¨Ó¦ÔÚÖÕ½áÀà½Úµã¹¹½¨Ê±×Ô¶¯ÉèÖÃÏÂÒ»¸ö½ÚµãÎªEndType£©
-  // ×Ô¶¯´¦Àí»ñÈ¡±äÁ¿ÃûÖ¸ÕëµÄ¹ı³Ì
-  // Ö»µ÷ÓÃAnnounceº¯Êı£¬²»µ÷ÓÃDefineº¯Êı£¬Defineº¯ÊıÓÉÉÏÎ»º¯Êı¾ö¶¨ÈçºÎµ÷ÓÃ
+  // å®Œæˆæ„å»ºè¿‡ç¨‹ï¼Œè¿”å›æµç¨‹å¯¹è±¡
+  // å‡½æ•°å‚æ•°ï¼šç»ˆç»“ç±»å‹å·¦è¾¹çš„ConstTagã€æœ€åè¿æ¥çš„èŠ‚ç‚¹
+  // ä¸¤ä¸ªå‚æ•°ç”¨æ¥å‡†ç¡®çš„è®¾ç½®å‡½æ•°è¿”å›å€¼/å˜é‡/æŒ‡é’ˆçš„constæ ‡è®°
+  // ä¸ä¼šåœ¨å°¾éƒ¨è¿æ¥å“¨å…µèŠ‚ç‚¹ï¼ˆåº”åœ¨ç»ˆç»“ç±»èŠ‚ç‚¹æ„å»ºæ—¶è‡ªåŠ¨è®¾ç½®ä¸‹ä¸€ä¸ªèŠ‚ç‚¹ä¸ºEndTypeï¼‰
+  // è‡ªåŠ¨å¤„ç†è·å–å˜é‡åæŒ‡é’ˆçš„è¿‡ç¨‹
+  // åªè°ƒç”¨Announceå‡½æ•°ï¼Œä¸è°ƒç”¨Defineå‡½æ•°ï¼ŒDefineå‡½æ•°ç”±ä¸Šä½å‡½æ•°å†³å®šå¦‚ä½•è°ƒç”¨
   std::pair<std::unique_ptr<FlowInterface>, CheckResult> ConstructObject(
       ConstTag const_tag_before_final_type,
       std::shared_ptr<const TypeInterface>&& final_node_to_attach);
-  // ÏòÎ²²¿½ÚµãÌí¼Óº¯Êı²ÎÊı£¬ÒªÇóÎ²²¿½ÚµãÎªº¯ÊıÀàĞÍ
+  // å‘å°¾éƒ¨èŠ‚ç‚¹æ·»åŠ å‡½æ•°å‚æ•°ï¼Œè¦æ±‚å°¾éƒ¨èŠ‚ç‚¹ä¸ºå‡½æ•°ç±»å‹
   void AddFunctionTypeArgument(
       const std::shared_ptr<const VarietyOperatorNode>& argument) {
     assert(type_chain_tail_->GetType() == StructOrBasicType::kFunction);
     return static_cast<FunctionType&>(*type_chain_tail_)
         .AddFunctionCallArgument(argument);
   }
-  // ÔÚÍê³É¹æÔ¼Ç°»ñÈ¡±£´æµÄ¶ÔÏóÃûÒÔ±ãÌí¼Óµ½Ó³Éä±íÖĞ
-  // ·µ»ØÓÒÖµÒıÓÃ£¬¿ÉÒÔÓÃÓÚÓ³Éä±í½ÚµãÃûµÄÒÆ¶¯¹¹Ôì
+  // åœ¨å®Œæˆè§„çº¦å‰è·å–ä¿å­˜çš„å¯¹è±¡åä»¥ä¾¿æ·»åŠ åˆ°æ˜ å°„è¡¨ä¸­
+  // è¿”å›å³å€¼å¼•ç”¨ï¼Œå¯ä»¥ç”¨äºæ˜ å°„è¡¨èŠ‚ç‚¹åçš„ç§»åŠ¨æ„é€ 
   std::string&& GetObjectName() { return std::move(object_name_); }
-  // »ñÈ¡ÀàĞÍÁ´Ö÷ÀàĞÍ£¨ÀàĞÍÁ´Í·½áµãµÄÀàĞÍ£©
+  // è·å–ç±»å‹é“¾ä¸»ç±»å‹ï¼ˆç±»å‹é“¾å¤´ç»“ç‚¹çš„ç±»å‹ï¼‰
   StructOrBasicType GetMainType() const {
     return type_chain_head_->GetNextNodeReference().GetType();
   }
 
  private:
-  // ´´½¨µÄ¶ÔÏó
+  // åˆ›å»ºçš„å¯¹è±¡
   std::unique_ptr<FlowInterface> object_;
-  // ´´½¨µÄ¶ÔÏóÃû£¬½ö×öÁÙÊ±´æ´¢
+  // åˆ›å»ºçš„å¯¹è±¡åï¼Œä»…åšä¸´æ—¶å­˜å‚¨
   std::string object_name_;
-  // Ö¸ÏòÀàĞÍÁ´µÄÍ·½áµã
-  // È«³ÌÖ¸ÏòÍ·²¿ÉÚ±ø½Úµã
+  // æŒ‡å‘ç±»å‹é“¾çš„å¤´ç»“ç‚¹
+  // å…¨ç¨‹æŒ‡å‘å¤´éƒ¨å“¨å…µèŠ‚ç‚¹
   const std::shared_ptr<TypeInterface> type_chain_head_;
-  // Ö¸ÏòÀàĞÍÁ´µÄÎ²½Úµã
+  // æŒ‡å‘ç±»å‹é“¾çš„å°¾èŠ‚ç‚¹
   std::shared_ptr<TypeInterface> type_chain_tail_;
 };
 
-// Ã¶¾Ù²ÎÊı¹æÔ¼Ê±µÃµ½µÄÊı¾İ
+// æšä¸¾å‚æ•°è§„çº¦æ—¶å¾—åˆ°çš„æ•°æ®
 class EnumReturnData {
  public:
   EnumType::EnumContainerType& GetContainer() { return enum_container_; }
-  // ·µ»Ø²åÈëÎ»ÖÃµÄµü´úÆ÷ºÍÊÇ·ñ²åÈë
+  // è¿”å›æ’å…¥ä½ç½®çš„è¿­ä»£å™¨å’Œæ˜¯å¦æ’å…¥
   std::pair<EnumType::EnumContainerType::iterator, bool> AddMember(
       std::string&& member_name, long long value);
   long long GetMaxValue() const { return max_value_; }
@@ -181,85 +181,85 @@ class EnumReturnData {
   void SetMinValue(long long min_value) { min_value_ = min_value; }
   void SetLastValue(long long last_value) { last_value_ = last_value; }
 
-  // Ã¶¾ÙÃûÓëÖµµÄ¹ØÁªÈİÆ÷
+  // æšä¸¾åä¸å€¼çš„å…³è”å®¹å™¨
   EnumType::EnumContainerType enum_container_;
-  // ×î´óµÄÃ¶¾ÙÖµ
+  // æœ€å¤§çš„æšä¸¾å€¼
   long long max_value_ = LLONG_MIN;
-  // ×îĞ¡µÄÃ¶¾ÙÖµ
+  // æœ€å°çš„æšä¸¾å€¼
   long long min_value_ = LLONG_MAX;
-  // ÉÏ´ÎÌí¼ÓµÄÃ¶¾ÙÖµ
+  // ä¸Šæ¬¡æ·»åŠ çš„æšä¸¾å€¼
   long long last_value_;
 };
 
-// ±äÁ¿/º¯Êı¹¹½¨¹ı³Ì±¨´íÓÃ
-// ÊäÈë´íÎóÇé¿öºÍ¹¹½¨µÄ¶ÔÏóÃû
+// å˜é‡/å‡½æ•°æ„å»ºè¿‡ç¨‹æŠ¥é”™ç”¨
+// è¾“å…¥é”™è¯¯æƒ…å†µå’Œæ„å»ºçš„å¯¹è±¡å
 void VarietyOrFunctionConstructError(
     ObjectConstructData::CheckResult check_result,
     const std::string& object_name);
 
-// ¸ù¾İÉùÃ÷Ê±µÄ³õÊ¼ÀàĞÍ»ñÈ¡Ò»´ÎÉùÃ÷ÖĞ·ÇµÚÒ»¸ö±äÁ¿µÄÀàĞÍ
+// æ ¹æ®å£°æ˜æ—¶çš„åˆå§‹ç±»å‹è·å–ä¸€æ¬¡å£°æ˜ä¸­éç¬¬ä¸€ä¸ªå˜é‡çš„ç±»å‹
 std::shared_ptr<const TypeInterface> GetExtendAnnounceType(
     const std::shared_ptr<const TypeInterface>& source_type);
-// ¼ì²é¸³ÖµÊ±ÀàĞÍ¼ì²é½á¹û£¬Êä³öÏàÓ¦µÄ´íÎóĞÅÏ¢£¬Èç¹ûÊÇerrorÔò²»·µ»Ø
+// æ£€æŸ¥èµ‹å€¼æ—¶ç±»å‹æ£€æŸ¥ç»“æœï¼Œè¾“å‡ºç›¸åº”çš„é”™è¯¯ä¿¡æ¯ï¼Œå¦‚æœæ˜¯erroråˆ™ä¸è¿”å›
 void CheckAssignableCheckResult(AssignableCheckResult assignable_check_result);
-// ¼ì²éÉú³ÉÊıÑ§ÔËËã½ÚµãµÄ½á¹û£¬Êä³öÏàÓ¦´íÎóĞÅÏ¢£¬Èç¹ûÊÇerrorÔò²»·µ»Ø
+// æ£€æŸ¥ç”Ÿæˆæ•°å­¦è¿ç®—èŠ‚ç‚¹çš„ç»“æœï¼Œè¾“å‡ºç›¸åº”é”™è¯¯ä¿¡æ¯ï¼Œå¦‚æœæ˜¯erroråˆ™ä¸è¿”å›
 void CheckMathematicalComputeTypeResult(
     DeclineMathematicalComputeTypeResult
         decline_mathematical_compute_type_result);
-// ¼ì²éÉùÃ÷/¶¨ÒåÀàĞÍÊ±µÄ½á¹û£¬Êä³öÏàÓ¦´íÎóĞÅÏ¢£¬Èç¹ûÊÇerrorÔò²»·µ»Ø
+// æ£€æŸ¥å£°æ˜/å®šä¹‰ç±»å‹æ—¶çš„ç»“æœï¼Œè¾“å‡ºç›¸åº”é”™è¯¯ä¿¡æ¯ï¼Œå¦‚æœæ˜¯erroråˆ™ä¸è¿”å›
 void CheckAddTypeResult(AddTypeResult add_type_result);
-// Êä³ö´íÎóĞÅÏ¢
+// è¾“å‡ºé”™è¯¯ä¿¡æ¯
 void OutputError(const std::string& error);
-// Êä³ö¾¯¸æĞÅÏ¢
+// è¾“å‡ºè­¦å‘Šä¿¡æ¯
 void OutputWarning(const std::string& warning);
-// Êä³öinfoĞÅÏ¢
+// è¾“å‡ºinfoä¿¡æ¯
 void OutputInfo(const std::string& info);
 
-// ´¦Àíº¯ÊıÄÚÖ´ĞĞÁ÷³ÌÖĞÉùÃ÷±äÁ¿²»¸³³õÊ¼ÖµµÄ±äÁ¿×¢²áºÍ»ñÈ¡À©Õ¹ÉùÃ÷ÓÃÀàĞÍµÄ²½Öè
-// ·µ»ØÀ©Õ¹ÉùÃ÷Ê±±äÁ¿µÄÀàĞÍ£¨ÏÈÈ¥µôÊı×éÎ¬Êı²ãÖ¸Õë£¬È»ºóÈç¹ûÈÔÎªÓĞÖ¸ÕëÀàĞÍÔòÈ¥µô
-// Ò»ÖØÖ¸Õë£¬·ñÔò²»±ä£©
-// ±äÁ¿µÄConstTagºÍ»ñÈ¡±äÁ¿Ê±Ê¹ÓÃµÄ²Ù×÷
-// Èç¹ûÊÇºÏ·¨µÄÉùÃ÷ÔòÌí¼Ó±äÁ¿¶¨Òå²¢´´½¨¿Õ¼ä·ÖÅä½Úµã
+// å¤„ç†å‡½æ•°å†…æ‰§è¡Œæµç¨‹ä¸­å£°æ˜å˜é‡ä¸èµ‹åˆå§‹å€¼çš„å˜é‡æ³¨å†Œå’Œè·å–æ‰©å±•å£°æ˜ç”¨ç±»å‹çš„æ­¥éª¤
+// è¿”å›æ‰©å±•å£°æ˜æ—¶å˜é‡çš„ç±»å‹ï¼ˆå…ˆå»æ‰æ•°ç»„ç»´æ•°å±‚æŒ‡é’ˆï¼Œç„¶åå¦‚æœä»ä¸ºæœ‰æŒ‡é’ˆç±»å‹åˆ™å»æ‰
+// ä¸€é‡æŒ‡é’ˆï¼Œå¦åˆ™ä¸å˜ï¼‰
+// å˜é‡çš„ConstTagå’Œè·å–å˜é‡æ—¶ä½¿ç”¨çš„æ“ä½œ
+// å¦‚æœæ˜¯åˆæ³•çš„å£°æ˜åˆ™æ·»åŠ å˜é‡å®šä¹‰å¹¶åˆ›å»ºç©ºé—´åˆ†é…èŠ‚ç‚¹
 std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
            std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 VarietyAnnounceNoAssign(std::shared_ptr<VarietyOperatorNode>&& variety_node);
-// ´¦Àíº¯ÊıÄÚÖ´ĞĞÁ÷³ÌÖĞÉùÃ÷±äÁ¿ÇÒ¸³³õÊ¼ÖµµÄ±äÁ¿×¢²áºÍ»ñÈ¡À©Õ¹ÉùÃ÷ÓÃÀàĞÍ²½Öè
-// ·µ»ØÀ©Õ¹ÉùÃ÷Ê±±äÁ¿µÄÀàĞÍ£¨ÏÈÈ¥µôÊı×éÎ¬Êı²ãÖ¸Õë£¬È»ºóÈç¹ûÈÔÎªÓĞÖ¸ÕëÀàĞÍÔòÈ¥µô
-// Ò»ÖØÖ¸Õë£¬·ñÔò²»±ä£©
-// ±äÁ¿µÄConstTagºÍ»ñÈ¡±äÁ¿Ê±Ê¹ÓÃµÄ²Ù×÷
-// Èç¹ûÊÇºÏ·¨µÄÉùÃ÷ÔòÌí¼Ó±äÁ¿¶¨Òå²¢´´½¨¿Õ¼ä·ÖÅä½ÚµãºÍ¸³Öµ½Úµã
+// å¤„ç†å‡½æ•°å†…æ‰§è¡Œæµç¨‹ä¸­å£°æ˜å˜é‡ä¸”èµ‹åˆå§‹å€¼çš„å˜é‡æ³¨å†Œå’Œè·å–æ‰©å±•å£°æ˜ç”¨ç±»å‹æ­¥éª¤
+// è¿”å›æ‰©å±•å£°æ˜æ—¶å˜é‡çš„ç±»å‹ï¼ˆå…ˆå»æ‰æ•°ç»„ç»´æ•°å±‚æŒ‡é’ˆï¼Œç„¶åå¦‚æœä»ä¸ºæœ‰æŒ‡é’ˆç±»å‹åˆ™å»æ‰
+// ä¸€é‡æŒ‡é’ˆï¼Œå¦åˆ™ä¸å˜ï¼‰
+// å˜é‡çš„ConstTagå’Œè·å–å˜é‡æ—¶ä½¿ç”¨çš„æ“ä½œ
+// å¦‚æœæ˜¯åˆæ³•çš„å£°æ˜åˆ™æ·»åŠ å˜é‡å®šä¹‰å¹¶åˆ›å»ºç©ºé—´åˆ†é…èŠ‚ç‚¹å’Œèµ‹å€¼èŠ‚ç‚¹
 std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
            std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 VarietyAnnounceWithAssign(
     std::shared_ptr<VarietyOperatorNode>&& variety_node,
     const std::shared_ptr<const OperatorNodeInterface>& node_for_assign);
-// ´¦ÀíÇ°×º++/--µÄÇé¿ö
-// ÊäÈëÊ¹ÓÃµÄÔËËã·û£¨½öÏŞ++/--£©¡¢´ıÔËËãµÄ½ÚµãºÍ´æ´¢»ñÈ¡½á¹ûµÄ²Ù×÷µÄÈİÆ÷
-// Ïò¸ø¶¨ÈİÆ÷ÖĞÌí¼Ó²Ù×÷½Úµã
-// ·µ»ØÔËËãºóµÄ¿ÉÔËËã½Úµã
+// å¤„ç†å‰ç¼€++/--çš„æƒ…å†µ
+// è¾“å…¥ä½¿ç”¨çš„è¿ç®—ç¬¦ï¼ˆä»…é™++/--ï¼‰ã€å¾…è¿ç®—çš„èŠ‚ç‚¹å’Œå­˜å‚¨è·å–ç»“æœçš„æ“ä½œçš„å®¹å™¨
+// å‘ç»™å®šå®¹å™¨ä¸­æ·»åŠ æ“ä½œèŠ‚ç‚¹
+// è¿”å›è¿ç®—åçš„å¯è¿ç®—èŠ‚ç‚¹
 std::shared_ptr<const OperatorNodeInterface> PrefixPlusOrMinus(
     MathematicalOperation mathematical_operation,
     const std::shared_ptr<const OperatorNodeInterface>& node_to_operate,
     std::list<std::unique_ptr<FlowInterface>>* flow_control_node_container);
-// ´¦Àíºó×º++/--µÄÇé¿ö
-// ÊäÈëÊ¹ÓÃµÄÔËËã·û£¨½öÏŞ++/--£©¡¢´ıÔËËãµÄ½ÚµãºÍ´æ´¢»ñÈ¡½á¹ûµÄ²Ù×÷µÄÈİÆ÷
-// Ïò¸ø¶¨ÈİÆ÷ÖĞÌí¼Ó²Ù×÷½Úµã
-// ·µ»ØÔËËãºóµÃµ½µÄ¿ÉÔËËã½Úµã
+// å¤„ç†åç¼€++/--çš„æƒ…å†µ
+// è¾“å…¥ä½¿ç”¨çš„è¿ç®—ç¬¦ï¼ˆä»…é™++/--ï¼‰ã€å¾…è¿ç®—çš„èŠ‚ç‚¹å’Œå­˜å‚¨è·å–ç»“æœçš„æ“ä½œçš„å®¹å™¨
+// å‘ç»™å®šå®¹å™¨ä¸­æ·»åŠ æ“ä½œèŠ‚ç‚¹
+// è¿”å›è¿ç®—åå¾—åˆ°çš„å¯è¿ç®—èŠ‚ç‚¹
 std::shared_ptr<const OperatorNodeInterface> SuffixPlusOrMinus(
     MathematicalOperation mathematical_operation,
     const std::shared_ptr<const OperatorNodeInterface>& node_to_operate,
     std::list<std::unique_ptr<FlowInterface>>* flow_control_node_container);
 
-// ²úÉúÊ½¹æÔ¼Ê±Ê¹ÓÃµÄº¯Êı
-// ²»Ê¹ÓÃstd::unique_ptrÒòÎªÎŞ·¨¸´ÖÆ£¬ÎŞ·¨ÓÃÓÚ¹¹Ôìstd::any&&
-// ËùÓĞÀàÍâº¯Êı±ØĞë¶¨ÒåÔÚ.cppÎÄ¼şÖĞ£¬·ñÔò±àÒë±¨´íLNK2005ÖØ¸´¶¨Òå
+// äº§ç”Ÿå¼è§„çº¦æ—¶ä½¿ç”¨çš„å‡½æ•°
+// ä¸ä½¿ç”¨std::unique_ptrå› ä¸ºæ— æ³•å¤åˆ¶ï¼Œæ— æ³•ç”¨äºæ„é€ std::any&&
+// æ‰€æœ‰ç±»å¤–å‡½æ•°å¿…é¡»å®šä¹‰åœ¨.cppæ–‡ä»¶ä¸­ï¼Œå¦åˆ™ç¼–è¯‘æŠ¥é”™LNK2005é‡å¤å®šä¹‰
 
 // SingleConstexprValue -> Char
-// ÊôĞÔ£ºInitializeType::kBasic£¬BuiltInType::kChar£¬SignTag::kSigned
+// å±æ€§ï¼šInitializeType::kBasicï¼ŒBuiltInType::kCharï¼ŒSignTag::kSigned
 std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueChar(
     std::string&& word_data);
 // SingleConstexprValue -> Str "[" Num "]"
-// ÊôĞÔ£ºInitializeType::kBasic£¬BuiltInType::kChar£¬SignTag::kSigned
+// å±æ€§ï¼šInitializeType::kBasicï¼ŒBuiltInType::kCharï¼ŒSignTag::kSigned
 std::shared_ptr<BasicTypeInitializeOperatorNode>
 SingleConstexprValueIndexedString(std::string&& str,
                                   std::string&& left_square_bracket,
@@ -269,7 +269,7 @@ SingleConstexprValueIndexedString(std::string&& str,
 std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueNum(
     std::string&& num);
 // SingleConstexprValue -> Str
-// ÊôĞÔ£ºInitializeType::String£¬TypeInterface:: const char*
+// å±æ€§ï¼šInitializeType::Stringï¼ŒTypeInterface:: const char*
 std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueString(
     std::string&& str);
 // FundamentalType -> "char"
@@ -293,7 +293,7 @@ SignTag SignTagUnSigned(std::string&& str);
 // ConstTag -> "const"
 ConstTag ConstTagConst(std::string&& str);
 // IdOrEquivence -> ConstTag Id
-// Ê¹ÓÃstd::shared_ptr°ü×°£¬std::any²»ÄÜ´æ´¢²»Ö§³Ö¸´ÖÆµÄÀàĞÍ
+// ä½¿ç”¨std::shared_ptråŒ…è£…ï¼Œstd::anyä¸èƒ½å­˜å‚¨ä¸æ”¯æŒå¤åˆ¶çš„ç±»å‹
 std::shared_ptr<ObjectConstructData> IdOrEquivenceConstTagId(ConstTag const_tag,
                                                              std::string&& id);
 // IdOrEquivence -> IdOrEquivence "[" Num "]"
@@ -302,7 +302,7 @@ std::shared_ptr<ObjectConstructData>&& IdOrEquivenceNumAddressing(
     std::string&& left_square_bracket, std::string&& num,
     std::string&& right_square_bracket);
 // IdOrEquivence -> IdOrEquivence "[" "]"
-// ÉèÖÃĞÂÌí¼ÓµÄÖ¸ÕëËù¶ÔÓ¦Êı×é´óĞ¡Îª-1À´±ê¼Ç´Ë´¦Êı×é´óĞ¡ĞèÒª¸ù¾İ¸³Öµ½á¹ûÍÆ¶Ï
+// è®¾ç½®æ–°æ·»åŠ çš„æŒ‡é’ˆæ‰€å¯¹åº”æ•°ç»„å¤§å°ä¸º-1æ¥æ ‡è®°æ­¤å¤„æ•°ç»„å¤§å°éœ€è¦æ ¹æ®èµ‹å€¼ç»“æœæ¨æ–­
 std::shared_ptr<ObjectConstructData>&& IdOrEquivenceAnonymousAddressing(
     std::shared_ptr<ObjectConstructData>&& sub_reduct_result,
     std::string&& left_square_bracket, std::string&& right_square_bracket);
@@ -316,7 +316,7 @@ std::shared_ptr<ObjectConstructData>&& IdOrEquivenceInBrackets(
     std::shared_ptr<ObjectConstructData>&& sub_reduct_result,
     std::string&& right_bracket);
 // AnonymousIdOrEquivence -> "const"
-// Ê¹ÓÃstd::shared_ptr£¬std::any²»ÄÜ´æ´¢²»Ö§³Ö¸´ÖÆµÄÀàĞÍ
+// ä½¿ç”¨std::shared_ptrï¼Œstd::anyä¸èƒ½å­˜å‚¨ä¸æ”¯æŒå¤åˆ¶çš„ç±»å‹
 std::shared_ptr<ObjectConstructData> AnonymousIdOrEquivenceConst(
     std::string&& str_const);
 // AnonymousIdOrEquivence -> AnonymousIdOrEquivence "[" Num "]"
@@ -365,16 +365,16 @@ std::shared_ptr<EnumType> EnumAnonymousDefine(
     std::shared_ptr<EnumReturnData>&& enum_data,
     std::string&& right_curly_bracket);
 // EnumAnnounce -> "enum" Id
-// ·µ»ØÉùÃ÷µÄ½á¹¹ÃûÓë½á¹¹ÀàĞÍ£¨kStruct£©
-// ¶îÍâ·µ»ØÀàĞÍÎªÁËÓë½á¹¹ÌåºÍ¹²ÓÃÌåÉùÃ÷·µ»ØÀàĞÍ±£³ÖÒ»ÖÂ
+// è¿”å›å£°æ˜çš„ç»“æ„åä¸ç»“æ„ç±»å‹ï¼ˆkStructï¼‰
+// é¢å¤–è¿”å›ç±»å‹ä¸ºäº†ä¸ç»“æ„ä½“å’Œå…±ç”¨ä½“å£°æ˜è¿”å›ç±»å‹ä¿æŒä¸€è‡´
 std::pair<std::string, StructOrBasicType> EnumAnnounce(std::string&& str_enum,
                                                        std::string&& id);
 // StructureAnnounce -> "struct" Id
-// ·µ»ØÉùÃ÷µÄ½á¹¹ÃûÓë½á¹¹ÀàĞÍ£¨kStruct£©
+// è¿”å›å£°æ˜çš„ç»“æ„åä¸ç»“æ„ç±»å‹ï¼ˆkStructï¼‰
 std::pair<std::string, StructOrBasicType> StructureAnnounceStructId(
     std::string&& str_struct, std::string&& id);
 // StructureAnnounce -> "union" Id
-// ·µ»ØÉùÃ÷µÄ½á¹¹ÃûÓë½á¹¹ÀàĞÍ£¨kUnion£©
+// è¿”å›å£°æ˜çš„ç»“æ„åä¸ç»“æ„ç±»å‹ï¼ˆkUnionï¼‰
 std::pair<std::string, StructOrBasicType> StructureAnnounceUnionId(
     std::string&& str_union, std::string&& id);
 // StructureDefineHead -> "struct"
@@ -384,19 +384,19 @@ std::pair<std::string, StructOrBasicType> StructureDefineHeadStruct(
 std::pair<std::string, StructOrBasicType> StructureDefineHeadUnion(
     std::string&& str_union);
 // StructureDefineHead -> StructureAnnounce
-// ·µ»ØÖµÒâÒå¼ûStructureAnnounce
+// è¿”å›å€¼æ„ä¹‰è§StructureAnnounce
 std::pair<std::string, StructOrBasicType>&&
 StructureDefineHeadStructureAnnounce(
     std::pair<std::string, StructOrBasicType>&& struct_data);
 // StructureDefineInitHead -> StructureDefineHead "{"
-// Ö´ĞĞÒ»Ğ©³õÊ¼»¯¹¤×÷
-// ·µ»Ø½á¹¹Êı¾İÀàĞÍ½Úµã
+// æ‰§è¡Œä¸€äº›åˆå§‹åŒ–å·¥ä½œ
+// è¿”å›ç»“æ„æ•°æ®ç±»å‹èŠ‚ç‚¹
 std::shared_ptr<StructureTypeInterface> StructureDefineInitHead(
     std::pair<std::string, StructOrBasicType>&& struct_data,
     std::string&& left_purly_bracket);
 // StructureDefine -> StructureDefineInitHead StructureBody "}"
-// ·µ»ØÖµÀàĞÍ£ºstd::shared_ptr<StructureTypeInterface>
-// ·µ»Ø½á¹¹Êı¾İÀàĞÍ½Úµã
+// è¿”å›å€¼ç±»å‹ï¼šstd::shared_ptr<StructureTypeInterface>
+// è¿”å›ç»“æ„æ•°æ®ç±»å‹èŠ‚ç‚¹
 std::shared_ptr<StructureTypeInterface>&& StructureDefine(
     std::shared_ptr<StructureTypeInterface>&& struct_data, std::nullptr_t,
     std::string&& right_curly_bracket);
@@ -404,33 +404,33 @@ std::shared_ptr<StructureTypeInterface>&& StructureDefine(
 std::shared_ptr<const StructureTypeInterface> StructTypeStructDefine(
     std::shared_ptr<StructureTypeInterface>&& struct_data);
 // StructType -> StructAnnounce
-// ·µ»Ø»ñÈ¡µ½µÄ½á¹¹»¯Êı¾İÀàĞÍ
+// è¿”å›è·å–åˆ°çš„ç»“æ„åŒ–æ•°æ®ç±»å‹
 std::shared_ptr<const StructureTypeInterface> StructTypeStructAnnounce(
     std::pair<std::string, StructOrBasicType>&& struct_data);
 // BasicType -> ConstTag SignTag FundamentalType
-// ·µ»Ø»ñÈ¡µ½µÄÀàĞÍÓëConstTag
+// è¿”å›è·å–åˆ°çš„ç±»å‹ä¸ConstTag
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeFundamental(
     ConstTag const_tag, SignTag sign_tag, BuiltInType builtin_type);
 // BasicType -> ConstTag StructType
-// ·µ»Ø»ñÈ¡µ½µÄÀàĞÍÓëConstTag
+// è¿”å›è·å–åˆ°çš„ç±»å‹ä¸ConstTag
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeStructType(
     ConstTag const_tag,
     std::shared_ptr<const StructureTypeInterface>&& struct_data);
 //// BasicType -> ConstTag Id
-//// ·µ»Ø»ñÈ¡µ½µÄÀàĞÍÓëConstTag
+//// è¿”å›è·å–åˆ°çš„ç±»å‹ä¸ConstTag
 // std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeId(
 //    std::vector<WordDataToUser>&& word_data);
 // BasicType -> ConstTag EnumAnnounce
-// ·µ»Ø»ñÈ¡µ½µÄÀàĞÍÓëConstTag
+// è¿”å›è·å–åˆ°çš„ç±»å‹ä¸ConstTag
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeEnumAnnounce(
     ConstTag const_tag, std::pair<std::string, StructOrBasicType>&& enum_data);
 // FunctionRelaventBasePartFunctionInit -> IdOrEquivence "("
-// ×öÒ»Ğ©³õÊ¼»¯¹¤×÷
+// åšä¸€äº›åˆå§‹åŒ–å·¥ä½œ
 std::shared_ptr<ObjectConstructData>&& FunctionRelaventBasePartFunctionInitBase(
     std::shared_ptr<ObjectConstructData>&& construct_data,
     std::string&& left_bracket);
 // FunctionRelaventBasePartFunctionInit -> FunctionRelaventBasePart "("
-// ×öÒ»Ğ©ÉùÃ÷º¯Êı/º¯ÊıÖ¸ÕëÊ±µÄ³õÊ¼»¯¹¤×÷
+// åšä¸€äº›å£°æ˜å‡½æ•°/å‡½æ•°æŒ‡é’ˆæ—¶çš„åˆå§‹åŒ–å·¥ä½œ
 std::shared_ptr<ObjectConstructData>&&
 FunctionRelaventBasePartFunctionInitExtend(
     std::shared_ptr<ObjectConstructData>&& construct_data,
@@ -441,49 +441,49 @@ std::shared_ptr<ObjectConstructData>&& FunctionRelaventBasePartFunction(
     std::shared_ptr<ObjectConstructData>&& construct_data, std::nullptr_t&&,
     std::string&& right_bracket);
 // FunctionRelaventBasePart -> ConstTag "*" FunctionRelaventBasePart
-// ·µ»ØÖµÀàĞÍ£ºstd::shared_ptr<ObjectConstructData>
+// è¿”å›å€¼ç±»å‹ï¼šstd::shared_ptr<ObjectConstructData>
 std::shared_ptr<ObjectConstructData>&& FunctionRelaventBasePartPointer(
     ConstTag const_tag, std::string&& str_pointer,
     std::shared_ptr<ObjectConstructData>&& construct_data);
 // FunctionRelaventBasePart -> "(" FunctionRelaventBasePart ")"
-// ·µ»ØÖµÀàĞÍ£ºstd::shared_ptr<ObjectConstructData>
+// è¿”å›å€¼ç±»å‹ï¼šstd::shared_ptr<ObjectConstructData>
 std::shared_ptr<ObjectConstructData>&& FunctionRelaventBasePartBranckets(
     std::string&& left_bracket,
     std::shared_ptr<ObjectConstructData>&& construct_data,
     std::string&& right_bracket);
 // FunctionRelavent -> BasicType FunctionRelaventBasePart
-// ·µ»ØÖµ°ü×°µÄÖ¸ÕëÖ»¿ÉÄÜÎªstd::shared_ptr<FunctionType>£¨º¯ÊıÉùÃ÷£©
-// »òstd::shared_ptr<VarietyOperatorNode>£¨±äÁ¿ÉùÃ÷£©
-// Define²Ù×÷½»¸øÉÏÎ»º¯Êı½øĞĞ
+// è¿”å›å€¼åŒ…è£…çš„æŒ‡é’ˆåªå¯èƒ½ä¸ºstd::shared_ptr<FunctionType>ï¼ˆå‡½æ•°å£°æ˜ï¼‰
+// æˆ–std::shared_ptr<VarietyOperatorNode>ï¼ˆå˜é‡å£°æ˜ï¼‰
+// Defineæ“ä½œäº¤ç»™ä¸Šä½å‡½æ•°è¿›è¡Œ
 std::shared_ptr<FlowInterface> FunctionRelavent(
     std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& basic_type_data,
     std::shared_ptr<ObjectConstructData>&& construct_data);
 // SingleAnnounceNoAssign -> BasicType IdOrEquivence
 // AnonymousSingleAnnounceNoAssign -> BasicType AnonymousIdOrEquivence
-// Á½¸ö²úÉúÊ½¹²ÓÃ¸Ã¹æÔ¼º¯Êı£¬Í¨¹ıis_anonymous¿ØÖÆÏ¸Î¢²î±ğ
-// is_anonymous¿ØÖÆÊÇ·ñÔÚÉùÃ÷ÄäÃû±äÁ¿£¨ÄäÃû±äÁ¿ÊÇÀàĞÍ£©
-// ·µ»ØÖµ°ü×°µÄÖ¸ÕëÖ»¿ÉÄÜÎªstd::shared_ptr<FunctionType>£¨º¯ÊıÉùÃ÷£©
-// »òstd::shared_ptr<VarietyOperatorNode>£¨±äÁ¿ÉùÃ÷£©
-// ²»Ö´ĞĞDefineVariety/DefineTypeÒ²²»Ìí¼Ó¿Õ¼ä·ÖÅä½Úµã
+// ä¸¤ä¸ªäº§ç”Ÿå¼å…±ç”¨è¯¥è§„çº¦å‡½æ•°ï¼Œé€šè¿‡is_anonymousæ§åˆ¶ç»†å¾®å·®åˆ«
+// is_anonymousæ§åˆ¶æ˜¯å¦åœ¨å£°æ˜åŒ¿åå˜é‡ï¼ˆåŒ¿åå˜é‡æ˜¯ç±»å‹ï¼‰
+// è¿”å›å€¼åŒ…è£…çš„æŒ‡é’ˆåªå¯èƒ½ä¸ºstd::shared_ptr<FunctionType>ï¼ˆå‡½æ•°å£°æ˜ï¼‰
+// æˆ–std::shared_ptr<VarietyOperatorNode>ï¼ˆå˜é‡å£°æ˜ï¼‰
+// ä¸æ‰§è¡ŒDefineVariety/DefineTypeä¹Ÿä¸æ·»åŠ ç©ºé—´åˆ†é…èŠ‚ç‚¹
 template <bool is_anonymous>
 std::shared_ptr<FlowInterface> SingleAnnounceNoAssignVariety(
     std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& basic_type_data,
     std::shared_ptr<ObjectConstructData>&& construct_data);
 // SingleAnnounceNoAssign -> ConstTag Id IdOrEquivence
-// ²»Ö´ĞĞDefineVariety/DefineTypeÒ²²»Ìí¼Ó¿Õ¼ä·ÖÅä½Úµã
+// ä¸æ‰§è¡ŒDefineVariety/DefineTypeä¹Ÿä¸æ·»åŠ ç©ºé—´åˆ†é…èŠ‚ç‚¹
 std::shared_ptr<FlowInterface> SingleAnnounceNoAssignNotPodVariety(
     ConstTag const_tag, std::string&& id,
     std::shared_ptr<ObjectConstructData>&& construct_data);
 // SingleAnnounceNoAssign -> FunctionRelavent
 // AnonymousSingleAnnounceNoAssign -> FunctionRelavent
-// Á½¸ö²úÉúÊ½¹²ÓÃ¸Ã¹æÔ¼º¯Êı£¬Í¨¹ıis_anonymous¿ØÖÆÏ¸Î¢²î±ğ
-// is_anonymous¿ØÖÆÊÇ·ñÔÚÉùÃ÷ÄäÃû±äÁ¿£¨ÄäÃû±äÁ¿ÊÇÀàĞÍ£©
-// ²»Ö´ĞĞDefineVariety/DefineTypeÒ²²»Ìí¼Ó¿Õ¼ä·ÖÅä½Úµã
+// ä¸¤ä¸ªäº§ç”Ÿå¼å…±ç”¨è¯¥è§„çº¦å‡½æ•°ï¼Œé€šè¿‡is_anonymousæ§åˆ¶ç»†å¾®å·®åˆ«
+// is_anonymousæ§åˆ¶æ˜¯å¦åœ¨å£°æ˜åŒ¿åå˜é‡ï¼ˆåŒ¿åå˜é‡æ˜¯ç±»å‹ï¼‰
+// ä¸æ‰§è¡ŒDefineVariety/DefineTypeä¹Ÿä¸æ·»åŠ ç©ºé—´åˆ†é…èŠ‚ç‚¹
 template <bool is_anonymous>
 std::shared_ptr<FlowInterface>&& SingleAnnounceNoAssignFunctionRelavent(
     std::shared_ptr<FlowInterface>&& flow_control_node);
 // TypeDef -> "typedef" SingleAnnounceNoAssign
-// ²»·µ»ØÊı¾İ
+// ä¸è¿”å›æ•°æ®
 std::nullptr_t TypeDef(std::string&& str_typedef,
                        std::shared_ptr<FlowInterface>&& flow_control_node);
 // NotEmptyFunctionRelaventArguments -> SingleAnnounceNoAssign
@@ -505,25 +505,25 @@ std::nullptr_t NotEmptyFunctionRelaventArgumentsAnonymousExtend(
 // FunctionRelaventArguments -> NotEmptyFunctionRelaventArguments
 std::nullptr_t FunctionRelaventArguments(std::nullptr_t);
 // FunctionDefineHead -> FunctionRelavent "{"
-// ¶Ôº¯Êı×ÔÉíºÍÃ¿¸ö²ÎÊıÖ´ĞĞDefine²¢×¢²áº¯ÊıÀàĞÍºÍº¯Êı¶ÔÓ¦µÄ±äÁ¿£¨ÀûÓÚ²éÕÒ£©
+// å¯¹å‡½æ•°è‡ªèº«å’Œæ¯ä¸ªå‚æ•°æ‰§è¡ŒDefineå¹¶æ³¨å†Œå‡½æ•°ç±»å‹å’Œå‡½æ•°å¯¹åº”çš„å˜é‡ï¼ˆåˆ©äºæŸ¥æ‰¾ï¼‰
 std::shared_ptr<c_parser_frontend::flow_control::FunctionDefine>
 FunctionDefineHead(std::shared_ptr<FlowInterface>&& function_head,
                    std::string&& left_curly_bracket);
 // FunctionDefine -> FunctionDefineHead Statements "}"
-// ·µ»ØÖµÀàĞÍ£ºstd::shared_ptr<FunctionDefine>
-// ¼ì²éÌí¼ÓµÄº¯ÊıÌåÊÇ·ñÎª¿Õ£¬Èç¹ûÎª¿ÕÔòÌí¼ÓÎŞ·µ»ØÖµÓï¾ä»òError
-// µ¯³ö×îºóÒ»²ã×÷ÓÃÓò£¬ÖØÖÃµ±Ç°»îÔ¾º¯Êı
-// ²»·µ»ØÈÎºÎÊı¾İ
+// è¿”å›å€¼ç±»å‹ï¼šstd::shared_ptr<FunctionDefine>
+// æ£€æŸ¥æ·»åŠ çš„å‡½æ•°ä½“æ˜¯å¦ä¸ºç©ºï¼Œå¦‚æœä¸ºç©ºåˆ™æ·»åŠ æ— è¿”å›å€¼è¯­å¥æˆ–Error
+// å¼¹å‡ºæœ€åä¸€å±‚ä½œç”¨åŸŸï¼Œé‡ç½®å½“å‰æ´»è·ƒå‡½æ•°
+// ä¸è¿”å›ä»»ä½•æ•°æ®
 std::nullptr_t FunctionDefine(
     std::shared_ptr<c_parser_frontend::flow_control::FunctionDefine>&&,
     std::nullptr_t, std::string&& right_curly_bracket);
 // SingleStructureBody -> SingleAnnounceNoAssign
-// ·µ»ØÀ©Õ¹ÉùÃ÷µÄIDÊ¹ÓÃµÄÀàĞÍºÍ±äÁ¿±¾ÉíµÄConstTag
+// è¿”å›æ‰©å±•å£°æ˜çš„IDä½¿ç”¨çš„ç±»å‹å’Œå˜é‡æœ¬èº«çš„ConstTag
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag>
 SingleStructureBodyBase(std::shared_ptr<FlowInterface>&& flow_control_node);
 // SingleStructureBody -> SingleStructureBody "," Id
-// ·µ»ØÖµÀàĞÍ£ºstd::pair<std::shared_ptr<const TypeInterface>, ConstTag>
-// ·µ»ØÀ©Õ¹ÉùÃ÷µÄIDÊ¹ÓÃµÄÀàĞÍºÍ±äÁ¿±¾ÉíµÄConstTag
+// è¿”å›å€¼ç±»å‹ï¼šstd::pair<std::shared_ptr<const TypeInterface>, ConstTag>
+// è¿”å›æ‰©å±•å£°æ˜çš„IDä½¿ç”¨çš„ç±»å‹å’Œå˜é‡æœ¬èº«çš„ConstTag
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&&
 SingleStructureBodyExtend(
     std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& struct_data,
@@ -572,24 +572,24 @@ AnnounceAssignableAssignable(
               std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
         value);
 // AnnounceAssignable -> InitializeList
-// ·µ»Ø¿ÕÈİÆ÷
+// è¿”å›ç©ºå®¹å™¨
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 AnnounceAssignableInitializeList(
     std::shared_ptr<ListInitializeOperatorNode>&& initialize_list);
 // SingleAnnounceAndAssign -> SingleAnnounceNoAssign
-// ·µ»ØÀ©Õ¹ÉùÃ÷Ê±±äÁ¿µÄÀàĞÍ£¨ÏÈÈ¥µôÊı×éÎ¬Êı²ãÖ¸Õë£¬
-// Èç¹ûÈÔÎªÓĞÖ¸ÕëÀàĞÍÔòÈ¥µôÒ»ÖØÖ¸Õë£©
-// ±äÁ¿µÄConstTagºÍ»ñÈ¡±äÁ¿Ê¹ÓÃµÄ²Ù×÷
-// Èç¹ûÊÇºÏ·¨µÄÉùÃ÷ÔòÌí¼Ó±äÁ¿¶¨Òå²¢´´½¨¿Õ¼ä·ÖÅä½Úµã
+// è¿”å›æ‰©å±•å£°æ˜æ—¶å˜é‡çš„ç±»å‹ï¼ˆå…ˆå»æ‰æ•°ç»„ç»´æ•°å±‚æŒ‡é’ˆï¼Œ
+// å¦‚æœä»ä¸ºæœ‰æŒ‡é’ˆç±»å‹åˆ™å»æ‰ä¸€é‡æŒ‡é’ˆï¼‰
+// å˜é‡çš„ConstTagå’Œè·å–å˜é‡ä½¿ç”¨çš„æ“ä½œ
+// å¦‚æœæ˜¯åˆæ³•çš„å£°æ˜åˆ™æ·»åŠ å˜é‡å®šä¹‰å¹¶åˆ›å»ºç©ºé—´åˆ†é…èŠ‚ç‚¹
 std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
            std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 SingleAnnounceAndAssignNoAssignBase(
     std::shared_ptr<FlowInterface>&& flow_control_node);
 // SingleAnnounceAndAssign -> SingleAnnounceNoAssign "=" AnnounceAssignable
-// ·µ»ØÀ©Õ¹ÉùÃ÷Ê±±äÁ¿µÄÀàĞÍ£¨Èç¹û×î³õÎªÓĞÖ¸ÕëÀàĞÍÔòÈ¥µôÒ»ÖØÖ¸Õë£¬·ñÔò²»±ä£©
-// ±äÁ¿µÄConstTagºÍ»ñÈ¡±äÁ¿Ê¹ÓÃµÄ²Ù×÷
-// Èç¹ûÊÇºÏ·¨µÄÉùÃ÷ÔòÌí¼Ó±äÁ¿¶¨Òå²¢´´½¨¿Õ¼ä·ÖÅä½ÚµãºÍ¸³Öµ½Úµã
+// è¿”å›æ‰©å±•å£°æ˜æ—¶å˜é‡çš„ç±»å‹ï¼ˆå¦‚æœæœ€åˆä¸ºæœ‰æŒ‡é’ˆç±»å‹åˆ™å»æ‰ä¸€é‡æŒ‡é’ˆï¼Œå¦åˆ™ä¸å˜ï¼‰
+// å˜é‡çš„ConstTagå’Œè·å–å˜é‡ä½¿ç”¨çš„æ“ä½œ
+// å¦‚æœæ˜¯åˆæ³•çš„å£°æ˜åˆ™æ·»åŠ å˜é‡å®šä¹‰å¹¶åˆ›å»ºç©ºé—´åˆ†é…èŠ‚ç‚¹å’Œèµ‹å€¼èŠ‚ç‚¹
 std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
            std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 SingleAnnounceAndAssignWithAssignBase(
@@ -599,8 +599,8 @@ SingleAnnounceAndAssignWithAssignBase(
               std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
         container);
 // SingleAnnounceAndAssign -> SingleAnnounceAndAssign "," Id
-// ·µ»ØÀ©Õ¹ÉùÃ÷Ê±±äÁ¿µÄÀàĞÍ£¨Èç¹û×î³õÎªÓĞÖ¸ÕëÀàĞÍÔòÈ¥µôÒ»ÖØÖ¸Õë£¬·ñÔò²»±ä£©
-// ±äÁ¿µÄConstTagºÍ»ñÈ¡±äÁ¿Ê¹ÓÃµÄ²Ù×÷
+// è¿”å›æ‰©å±•å£°æ˜æ—¶å˜é‡çš„ç±»å‹ï¼ˆå¦‚æœæœ€åˆä¸ºæœ‰æŒ‡é’ˆç±»å‹åˆ™å»æ‰ä¸€é‡æŒ‡é’ˆï¼Œå¦åˆ™ä¸å˜ï¼‰
+// å˜é‡çš„ConstTagå’Œè·å–å˜é‡ä½¿ç”¨çš„æ“ä½œ
 std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
            std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
 SingleAnnounceAndAssignNoAssignExtend(
@@ -610,7 +610,7 @@ SingleAnnounceAndAssignNoAssignExtend(
     std::string&& str_comma, std::string&& variety_name);
 // SingleAnnounceAndAssign -> SingleAnnounceAndAssign "," Id "="
 // AnnounceAssignable
-// Èç¹ûÊÇºÏ·¨µÄÉùÃ÷ÔòÌí¼Ó±äÁ¿¶¨Òå²¢´´½¨¿Õ¼ä·ÖÅä½ÚµãºÍ¸³Öµ½Úµã
+// å¦‚æœæ˜¯åˆæ³•çš„å£°æ˜åˆ™æ·»åŠ å˜é‡å®šä¹‰å¹¶åˆ›å»ºç©ºé—´åˆ†é…èŠ‚ç‚¹å’Œèµ‹å€¼èŠ‚ç‚¹
 std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
            std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
 SingleAnnounceAndAssignWithAssignExtend(
@@ -623,125 +623,125 @@ SingleAnnounceAndAssignWithAssignExtend(
               std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
         assigned_container);
 // Type -> BasicType
-// ·µ»ØÀàĞÍºÍ±äÁ¿µÄConstTag
-// ·µ»ØÖµÀàĞÍ£ºstd::pair<std::shared_ptr<const TypeInterface>, ConstTag>
+// è¿”å›ç±»å‹å’Œå˜é‡çš„ConstTag
+// è¿”å›å€¼ç±»å‹ï¼šstd::pair<std::shared_ptr<const TypeInterface>, ConstTag>
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& TypeBasicType(
     std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& type_data);
 // Type -> FunctionRelavent
-// ·µ»ØÀàĞÍºÍ±äÁ¿µÄConstTag
+// è¿”å›ç±»å‹å’Œå˜é‡çš„ConstTag
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> TypeFunctionRelavent(
     std::shared_ptr<FlowInterface>&& flow_control_node);
 // MathematicalOperator -> "+"
-// ·µ»ØÊıÑ§ÔËËã·û
+// è¿”å›æ•°å­¦è¿ç®—ç¬¦
 MathematicalOperation MathematicalOperatorPlus(std::string&& str_operator);
 // MathematicalOperator -> "-"
-// ·µ»ØÊıÑ§ÔËËã·û
+// è¿”å›æ•°å­¦è¿ç®—ç¬¦
 MathematicalOperation MathematicalOperatorMinus(std::string&& str_operator);
 // MathematicalOperator -> "*"
-// ·µ»ØÊıÑ§ÔËËã·û
+// è¿”å›æ•°å­¦è¿ç®—ç¬¦
 MathematicalOperation MathematicalOperatorMultiple(std::string&& str_operator);
 // MathematicalOperator -> "/"
-// ·µ»ØÊıÑ§ÔËËã·û
+// è¿”å›æ•°å­¦è¿ç®—ç¬¦
 MathematicalOperation MathematicalOperatorDivide(std::string&& str_operator);
 // MathematicalOperator -> "%"
-// ·µ»ØÊıÑ§ÔËËã·û
+// è¿”å›æ•°å­¦è¿ç®—ç¬¦
 MathematicalOperation MathematicalOperatorMod(std::string&& str_operator);
 // MathematicalOperator -> "<<"
-// ·µ»ØÊıÑ§ÔËËã·û
+// è¿”å›æ•°å­¦è¿ç®—ç¬¦
 MathematicalOperation MathematicalOperatorLeftShift(std::string&& str_operator);
 // MathematicalOperator -> ">>"
-// ·µ»ØÊıÑ§ÔËËã·û
+// è¿”å›æ•°å­¦è¿ç®—ç¬¦
 MathematicalOperation MathematicalOperatorRightShift(
     std::string&& str_operator);
 // MathematicalOperator -> "&"
-// ·µ»ØÊıÑ§ÔËËã·û
+// è¿”å›æ•°å­¦è¿ç®—ç¬¦
 MathematicalOperation MathematicalOperatorAnd(std::string&& str_operator);
 // MathematicalOperator -> "|"
-// ·µ»ØÊıÑ§ÔËËã·û
+// è¿”å›æ•°å­¦è¿ç®—ç¬¦
 MathematicalOperation MathematicalOperatorOr(std::string&& str_operator);
 // MathematicalOperator -> "^"
-// ·µ»ØÊıÑ§ÔËËã·û
+// è¿”å›æ•°å­¦è¿ç®—ç¬¦
 MathematicalOperation MathematicalOperatorXor(std::string&& str_operator);
 // MathematicalOperator -> "!"
-// ·µ»ØÊıÑ§ÔËËã·û
+// è¿”å›æ•°å­¦è¿ç®—ç¬¦
 MathematicalOperation MathematicalOperatorNot(std::string&& str_operator);
 // MathematicalAndAssignOperator -> "+="
-// ·µ»ØÊıÑ§¸³ÖµÔËËã·û
+// è¿”å›æ•°å­¦èµ‹å€¼è¿ç®—ç¬¦
 MathematicalAndAssignOperation MathematicalAndAssignOperatorPlusAssign(
     std::string&& str_operator);
 // MathematicalAndAssignOperator -> "-="
-// ·µ»ØÊıÑ§¸³ÖµÔËËã·û
+// è¿”å›æ•°å­¦èµ‹å€¼è¿ç®—ç¬¦
 MathematicalAndAssignOperation MathematicalAndAssignOperatorMinusAssign(
     std::string&& str_operator);
 // MathematicalAndAssignOperator -> "*="
-// ·µ»ØÊıÑ§¸³ÖµÔËËã·û
+// è¿”å›æ•°å­¦èµ‹å€¼è¿ç®—ç¬¦
 MathematicalAndAssignOperation MathematicalAndAssignOperatorMultipleAssign(
     std::string&& str_operator);
 // MathematicalAndAssignOperator -> "/="
-// ·µ»ØÊıÑ§¸³ÖµÔËËã·û
+// è¿”å›æ•°å­¦èµ‹å€¼è¿ç®—ç¬¦
 MathematicalAndAssignOperation MathematicalAndAssignOperatorDivideAssign(
     std::string&& str_operator);
 // MathematicalAndAssignOperator -> "%="
-// ·µ»ØÊıÑ§¸³ÖµÔËËã·û
+// è¿”å›æ•°å­¦èµ‹å€¼è¿ç®—ç¬¦
 MathematicalAndAssignOperation MathematicalAndAssignOperatorModAssign(
     std::string&& str_operator);
 // MathematicalAndAssignOperator -> "<<="
-// ·µ»ØÊıÑ§¸³ÖµÔËËã·û
+// è¿”å›æ•°å­¦èµ‹å€¼è¿ç®—ç¬¦
 MathematicalAndAssignOperation MathematicalAndAssignOperatorLeftShiftAssign(
     std::string&& str_operator);
 // MathematicalAndAssignOperator -> ">>="
-// ·µ»ØÊıÑ§¸³ÖµÔËËã·û
+// è¿”å›æ•°å­¦èµ‹å€¼è¿ç®—ç¬¦
 MathematicalAndAssignOperation MathematicalAndAssignOperatorRightShiftAssign(
     std::string&& str_operator);
 // MathematicalAndAssignOperator -> "&="
-// ·µ»ØÊıÑ§¸³ÖµÔËËã·û
+// è¿”å›æ•°å­¦èµ‹å€¼è¿ç®—ç¬¦
 MathematicalAndAssignOperation MathematicalAndAssignOperatorAndAssign(
     std::string&& str_operator);
 // MathematicalAndAssignOperator -> "|="
-// ·µ»ØÊıÑ§¸³ÖµÔËËã·û
+// è¿”å›æ•°å­¦èµ‹å€¼è¿ç®—ç¬¦
 MathematicalAndAssignOperation MathematicalAndAssignOperatorOrAssign(
     std::string&& str_operator);
 // MathematicalAndAssignOperator -> "^="
-// ·µ»ØÊıÑ§¸³ÖµÔËËã·û
+// è¿”å›æ•°å­¦èµ‹å€¼è¿ç®—ç¬¦
 MathematicalAndAssignOperation MathematicalAndAssignOperatorXorAssign(
     std::string&& str_operator);
 // LogicalOperator -> "&&"
-// ·µ»ØÂß¼­ÔËËã·û
+// è¿”å›é€»è¾‘è¿ç®—ç¬¦
 LogicalOperation LogicalOperatorAndAnd(std::string&& str_operator);
 // LogicalOperator -> "||"
-// ·µ»ØÂß¼­ÔËËã·û
+// è¿”å›é€»è¾‘è¿ç®—ç¬¦
 LogicalOperation LogicalOperatorOrOr(std::string&& str_operator);
 // LogicalOperator -> ">"
-// ·µ»ØÂß¼­ÔËËã·û
+// è¿”å›é€»è¾‘è¿ç®—ç¬¦
 LogicalOperation LogicalOperatorGreater(std::string&& str_operator);
 // LogicalOperator -> ">="
-// ·µ»ØÂß¼­ÔËËã·û
+// è¿”å›é€»è¾‘è¿ç®—ç¬¦
 LogicalOperation LogicalOperatorGreaterEqual(std::string&& str_operator);
 // LogicalOperator -> "<"
-// ·µ»ØÂß¼­ÔËËã·û
+// è¿”å›é€»è¾‘è¿ç®—ç¬¦
 LogicalOperation LogicalOperatorLess(std::string&& str_operator);
 // LogicalOperator -> "<="
-// ·µ»ØÂß¼­ÔËËã·û
+// è¿”å›é€»è¾‘è¿ç®—ç¬¦
 LogicalOperation LogicalOperatorLessEqual(std::string&& str_operator);
 // LogicalOperator -> "=="
-// ·µ»ØÂß¼­ÔËËã·û
+// è¿”å›é€»è¾‘è¿ç®—ç¬¦
 LogicalOperation LogicalOperatorEqual(std::string&& str_operator);
 // LogicalOperator -> "!="
-// ·µ»ØÂß¼­ÔËËã·û
+// è¿”å›é€»è¾‘è¿ç®—ç¬¦
 LogicalOperation LogicalOperatorNotEqual(std::string&& str_operator);
 // Assignable -> SingleConstexprValue
-// ·µ»ØÕâÒ»²½µÃµ½µÄ×îÖÕ¿ÉÔËËã½ÚµãºÍ»ñÈ¡¹ı³ÌµÄ²Ù×÷
+// è¿”å›è¿™ä¸€æ­¥å¾—åˆ°çš„æœ€ç»ˆå¯è¿ç®—èŠ‚ç‚¹å’Œè·å–è¿‡ç¨‹çš„æ“ä½œ
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 AssignableConstexprValue(
     std::shared_ptr<BasicTypeInitializeOperatorNode>&& value);
 // Assignable -> Id
-// ·µ»ØÕâÒ»²½µÃµ½µÄ×îÖÕ¿ÉÔËËã½ÚµãºÍ»ñÈ¡¹ı³ÌµÄ²Ù×÷
+// è¿”å›è¿™ä¸€æ­¥å¾—åˆ°çš„æœ€ç»ˆå¯è¿ç®—èŠ‚ç‚¹å’Œè·å–è¿‡ç¨‹çš„æ“ä½œ
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 AssignableId(std::string&& variety_name);
 // Assignable -> TemaryOperator
-// ·µ»ØÕâÒ»²½µÃµ½µÄ×îÖÕ¿ÉÔËËã½ÚµãºÍ»ñÈ¡¹ı³ÌµÄ²Ù×÷
+// è¿”å›è¿™ä¸€æ­¥å¾—åˆ°çš„æœ€ç»ˆå¯è¿ç®—èŠ‚ç‚¹å’Œè·å–è¿‡ç¨‹çš„æ“ä½œ
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
 AssignableTemaryOperator(
@@ -756,7 +756,7 @@ AssignableFunctionCall(
               std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
         value);
 // Assignable -> "sizeof" "(" Type ")"
-// ·µ»ØÕâÒ»²½µÃµ½µÄ×îÖÕ¿ÉÔËËã½ÚµãºÍ¿ÕÈİÆ÷£¨sizeofÓïÒå£©
+// è¿”å›è¿™ä¸€æ­¥å¾—åˆ°çš„æœ€ç»ˆå¯è¿ç®—èŠ‚ç‚¹å’Œç©ºå®¹å™¨ï¼ˆsizeofè¯­ä¹‰ï¼‰
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 AssignableSizeOfType(
@@ -764,7 +764,7 @@ AssignableSizeOfType(
     std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& type_data,
     std::string&& str_right_bracket);
 // Assignable -> "sizeof" "(" Assignable ")"
-// ·µ»ØÕâÒ»²½µÃµ½µÄ×îÖÕ¿ÉÔËËã½ÚµãºÍ¿ÕÈİÆ÷£¨sizeofÓïÒå£©
+// è¿”å›è¿™ä¸€æ­¥å¾—åˆ°çš„æœ€ç»ˆå¯è¿ç®—èŠ‚ç‚¹å’Œç©ºå®¹å™¨ï¼ˆsizeofè¯­ä¹‰ï¼‰
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 AssignableSizeOfAssignable(
@@ -790,8 +790,8 @@ AssignablePointerMemberAccess(
         variety_data,
     std::string&& str_member_access, std::string&& member_name);
 // Assignable -> "(" Assignable ")"
-// ·µ»ØÕâÒ»²½µÃµ½µÄ×îÖÕ¿ÉÔËËã½ÚµãºÍ»ñÈ¡¹ı³ÌµÄ²Ù×÷
-// ·µ»ØÖµÀàĞÍ£ºstd::pair<std::shared_ptr<const OperatorNodeInterface>,
+// è¿”å›è¿™ä¸€æ­¥å¾—åˆ°çš„æœ€ç»ˆå¯è¿ç®—èŠ‚ç‚¹å’Œè·å–è¿‡ç¨‹çš„æ“ä½œ
+// è¿”å›å€¼ç±»å‹ï¼šstd::pair<std::shared_ptr<const OperatorNodeInterface>,
 //                   std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
@@ -802,7 +802,7 @@ AssignableBracket(
         value,
     std::string&& right_bracket);
 // Assignable -> "(" Type ")" Assignable
-// ·µ»ØÕâÒ»²½µÃµ½µÄ×îÖÕ¿ÉÔËËã½ÚµãºÍ»ñÈ¡¹ı³ÌµÄ²Ù×÷
+// è¿”å›è¿™ä¸€æ­¥å¾—åˆ°çš„æœ€ç»ˆå¯è¿ç®—èŠ‚ç‚¹å’Œè·å–è¿‡ç¨‹çš„æ“ä½œ
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 AssignableTypeConvert(
@@ -978,8 +978,8 @@ std::nullptr_t NotEmptyFunctionCallArgumentsExtend(
 // FunctionCallArguments -> NotEmptyFunctionCallArguments
 std::nullptr_t FunctionCallArguments(std::nullptr_t);
 // FunctionCallInit -> Assignable "("
-// ×öÒ»Ğ©³õÊ¼»¯¹¤×÷
-// ·µ»Øº¯Êıµ÷ÓÃ¶ÔÏóºÍ»ñÈ¡¿Éµ÷ÓÃ¶ÔÏóµÄ²Ù×÷£¬Í¬Ê±ÉèÖÃÈ«¾Ö±äÁ¿
+// åšä¸€äº›åˆå§‹åŒ–å·¥ä½œ
+// è¿”å›å‡½æ•°è°ƒç”¨å¯¹è±¡å’Œè·å–å¯è°ƒç”¨å¯¹è±¡çš„æ“ä½œï¼ŒåŒæ—¶è®¾ç½®å…¨å±€å˜é‡
 std::pair<std::shared_ptr<FunctionCallOperatorNode>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 FunctionCallInitAssignable(
@@ -988,14 +988,14 @@ FunctionCallInitAssignable(
         call_target,
     std::string&& left_bracket);
 // FunctionCallInit -> Id "("
-// ×öÒ»Ğ©³õÊ¼»¯¹¤×÷
-// ·µ»Øº¯Êıµ÷ÓÃ¶ÔÏóºÍ»ñÈ¡¿Éµ÷ÓÃ¶ÔÏóµÄ²Ù×÷£¬Í¬Ê±ÉèÖÃÈ«¾Ö±äÁ¿
+// åšä¸€äº›åˆå§‹åŒ–å·¥ä½œ
+// è¿”å›å‡½æ•°è°ƒç”¨å¯¹è±¡å’Œè·å–å¯è°ƒç”¨å¯¹è±¡çš„æ“ä½œï¼ŒåŒæ—¶è®¾ç½®å…¨å±€å˜é‡
 std::pair<std::shared_ptr<FunctionCallOperatorNode>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 FunctionCallInitId(std::string&& function_name, std::string&& str_left_bracket);
 // FunctionCall -> FunctionCallInit FunctionCallArguments ")"
-// ·µ»Øº¯Êıµ÷ÓÃ¶ÔÏó
-// µÚ¶ş¸ö²ÎÊı´æ´¢»ñÈ¡¿Éµ÷ÓÃ¶ÔÏó²Ù×÷ºÍ¶Ô¿Éµ÷ÓÃ¶ÔÏóµÄµ÷ÓÃ
+// è¿”å›å‡½æ•°è°ƒç”¨å¯¹è±¡
+// ç¬¬äºŒä¸ªå‚æ•°å­˜å‚¨è·å–å¯è°ƒç”¨å¯¹è±¡æ“ä½œå’Œå¯¹å¯è°ƒç”¨å¯¹è±¡çš„è°ƒç”¨
 std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 FunctionCall(
@@ -1004,7 +1004,7 @@ FunctionCall(
         function_call_data,
     std::nullptr_t, std::string&& right_bracket);
 // Assignables -> Assignable
-// ·µ»Ø±£´æÔËËã¹ı³ÌµÄ½ÚµãÈİÆ÷
+// è¿”å›ä¿å­˜è¿ç®—è¿‡ç¨‹çš„èŠ‚ç‚¹å®¹å™¨
 std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&& AssignablesBase(
     std::pair<std::shared_ptr<const OperatorNodeInterface>,
               std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
@@ -1018,45 +1018,45 @@ std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&& AssignablesExtend(
               std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
         value_data);
 // Break -> "break" ";"
-// ·µ»ØÌø×ªÓï¾ä£¨Ê¹ÓÃshared_ptr°ü×°ÒòÎªstd::any&&²»Ö§³Ö´æ´¢²»¿É¸´ÖÆµÄÖµ£©
+// è¿”å›è·³è½¬è¯­å¥ï¼ˆä½¿ç”¨shared_ptråŒ…è£…å› ä¸ºstd::any&&ä¸æ”¯æŒå­˜å‚¨ä¸å¯å¤åˆ¶çš„å€¼ï¼‰
 std::shared_ptr<std::unique_ptr<Jmp>> Break(std::string&& str_break,
                                             std::string&& str_semicolon);
 // Continue -> "continue" ";"
-// ·µ»ØÌø×ªÓï¾ä£¨Ê¹ÓÃshared_ptr°ü×°ÒòÎªstd::any&&²»Ö§³Ö´æ´¢²»¿É¸´ÖÆµÄÖµ£©
+// è¿”å›è·³è½¬è¯­å¥ï¼ˆä½¿ç”¨shared_ptråŒ…è£…å› ä¸ºstd::any&&ä¸æ”¯æŒå­˜å‚¨ä¸å¯å¤åˆ¶çš„å€¼ï¼‰
 std::shared_ptr<std::unique_ptr<Jmp>> Continue(std::string&& str_continue,
                                                std::string&& str_semicolon);
 // SingleStatement -> If
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t SingleStatementIf(std::nullptr_t);
 // SingleStatement -> DoWhile
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t SingleStatementDoWhile(std::nullptr_t);
 // SingleStatement -> While
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t SingleStatementWhile(std::nullptr_t);
 // SingleStatement -> For
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t SingleStatementFor(std::nullptr_t);
 // SingleStatement -> Switch
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t SingleStatementSwitch(std::nullptr_t);
 // SingleStatement -> Assignable ";"
-// Ìí¼Ó»ñÈ¡AssignableµÄÁ÷³Ì¿ØÖÆÓï¾ä
+// æ·»åŠ è·å–Assignableçš„æµç¨‹æ§åˆ¶è¯­å¥
 std::nullptr_t SingleStatementAssignable(
     std::pair<std::shared_ptr<const OperatorNodeInterface>,
               std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
         expression,
     std::string&& str_semicolon);
 // SingleStatement -> SingleAnnounceAndAssign ";"
-// Ìí¼ÓÉùÃ÷±äÁ¿¹ı³ÌÖĞµÄÁ÷³Ì¿ØÖÆÓï¾ä
-// ²»·µ»ØÈÎºÎÖµ
+// æ·»åŠ å£°æ˜å˜é‡è¿‡ç¨‹ä¸­çš„æµç¨‹æ§åˆ¶è¯­å¥
+// ä¸è¿”å›ä»»ä½•å€¼
 std::nullptr_t SingleStatementAnnounce(
     std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
         announce_statement,
     std::string&& str_semicolon);
 // SingleStatement -> Return
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t SingleStatementReturn(std::nullptr_t);
 // SingleStatement -> Break
 std::nullptr_t SingleStatementBreak(
@@ -1065,12 +1065,12 @@ std::nullptr_t SingleStatementBreak(
 std::nullptr_t SingleStatementContinue(
     std::shared_ptr<std::unique_ptr<Jmp>>&& jmp_sentence);
 // SingleStatement -> ";"
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t SingleStatementEmptyStatement(std::string&& str_semicolon);
 // IfCondition -> "if" "(" Assignable ")"
-// ·µ»ØifÌõ¼ş½ÚµãºÍ»ñÈ¡ifÌõ¼ş¹ı³ÌÖĞÊ¹ÓÃµÄ²Ù×÷
-// Ïò¿ØÖÆÆ÷£¨parser_frontend£©×¢²áÁ÷³Ì¿ØÖÆÓï¾ä
-// ²»·µ»ØÈÎºÎÖµ
+// è¿”å›ifæ¡ä»¶èŠ‚ç‚¹å’Œè·å–ifæ¡ä»¶è¿‡ç¨‹ä¸­ä½¿ç”¨çš„æ“ä½œ
+// å‘æ§åˆ¶å™¨ï¼ˆparser_frontendï¼‰æ³¨å†Œæµç¨‹æ§åˆ¶è¯­å¥
+// ä¸è¿”å›ä»»ä½•å€¼
 std::nullptr_t IfCondition(
     std::string&& str_if, std::string&& str_left_bracket,
     std::pair<std::shared_ptr<const OperatorNodeInterface>,
@@ -1078,7 +1078,7 @@ std::nullptr_t IfCondition(
         condition,
     std::string&& str_right_bracket);
 // IfWithElse -> IfCondition ProcessControlSentenceBody "else"
-// ×ª»»³Éif-elseÓï¾ä
+// è½¬æ¢æˆif-elseè¯­å¥
 std::nullptr_t IfWithElse(std::nullptr_t, std::nullptr_t, std::string str_else);
 // If->IfWithElse ProcessControlSentenceBody
 std::nullptr_t IfElseSence(std::nullptr_t, std::nullptr_t);
@@ -1098,11 +1098,11 @@ ForInitSentenceAnnounce(
                std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>&&
         announce_data);
 // ForInitHead -> "for"
-// ×öÒ»Ğ©×¼±¸¹¤×÷
+// åšä¸€äº›å‡†å¤‡å·¥ä½œ
 std::nullptr_t ForInitHead(std::string&& str_for);
 // ForHead -> ForInitHead "(" ForInitSentence ";"
 //            Assignable ";" ForRenewSentence ")"
-// ¹æÔ¼forÓï¾äµÄÈıÒªËØ
+// è§„çº¦forè¯­å¥çš„ä¸‰è¦ç´ 
 std::nullptr_t ForHead(
     std::nullptr_t, std::string&& str_left_bracket,
     std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&&
@@ -1116,7 +1116,7 @@ std::nullptr_t ForHead(
         for_renew_sentences,
     std::string&& str_right_bracket);
 // For -> ForHead ProcessControlSentenceBody
-// µ¯³ö×÷ÓÃÓò
+// å¼¹å‡ºä½œç”¨åŸŸ
 std::nullptr_t For(std::nullptr_t, std::nullptr_t);
 // WhileInitHead -> "while" "(" Assignable ")"
 std::nullptr_t WhileInitHead(
@@ -1126,10 +1126,10 @@ std::nullptr_t WhileInitHead(
         condition,
     std::string&& str_right_bracket);
 // While -> WhileInitHead ProcessControlSentenceBody
-// µ¯³ö×÷ÓÃÓò
+// å¼¹å‡ºä½œç”¨åŸŸ
 std::nullptr_t While(std::nullptr_t, std::nullptr_t);
 // DoWhileInitHead -> "do"
-// ×öÒ»Ğ©×¼±¸¹¤×÷
+// åšä¸€äº›å‡†å¤‡å·¥ä½œ
 std::nullptr_t DoWhileInitHead(std::string&& str_do);
 // DoWhile -> DoWhileInitHead ProcessControlSentenceBody
 // "while" "(" Assignable ")" ";"
@@ -1149,13 +1149,13 @@ std::nullptr_t SwitchCaseSimple(
 std::nullptr_t SwitchCaseDefault(std::string&& str_default,
                                  std::string&& str_colon);
 // SingleSwitchStatement -> SwitchCase
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t SingleSwitchStatementCase(std::nullptr_t);
 // SingleSwitchStatement -> Statements
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t SingleSwitchStatementStatements(std::nullptr_t);
 // SwitchStatements -> SwitchStatements SingleSwitchStatement
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t SwitchStatements(std::nullptr_t, std::nullptr_t);
 // SwitchCondition -> "switch" "(" Assignable ")"
 std::nullptr_t SwitchCondition(
@@ -1165,34 +1165,34 @@ std::nullptr_t SwitchCondition(
         condition,
     std::string&& str_right_bracket);
 // Switch -> SwitchCondition "{" SwitchStatements "}"
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t Switch(std::nullptr_t, std::string&& str_left_curly_bracket,
                       std::nullptr_t, std::string&& str_right_curly_bracket);
 // Statements -> Statements SingleStatement
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t StatementsSingleStatement(std::nullptr_t, std::nullptr_t);
 // StatementsLeftBrace -> Statements "{"
-// ÌáÉı×÷ÓÃÓòµÈ¼¶
+// æå‡ä½œç”¨åŸŸç­‰çº§
 std::nullptr_t StatementsLeftBrace(std::nullptr_t,
                                    std::string&& left_curly_bracket);
 // Statements -> StatementsLeftBrace Statements "}"
-// µ¯³ö×÷ÓÃÓò
+// å¼¹å‡ºä½œç”¨åŸŸ
 std::nullptr_t StatementsBrace(std::nullptr_t, std::nullptr_t,
                                std::string&& right_curly_bracket);
 // ProcessControlSentenceBody -> SingleStatement
-// ²»µ¯³ö×÷ÓÃÓò
+// ä¸å¼¹å‡ºä½œç”¨åŸŸ
 std::nullptr_t ProcessControlSentenceBodySingleStatement(std::nullptr_t);
 // ProcessControlSentenceBody -> "{" Statements "}"
-// ²»µ¯³ö×÷ÓÃÓò
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸å¼¹å‡ºä½œç”¨åŸŸ
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t ProcessControlSentenceBodyStatements(
     std::string&& str_left_curly_bracket, std::nullptr_t,
     std::string&& str_right_curly_bracket);
-// ¸ù²úÉúÊ½
+// æ ¹äº§ç”Ÿå¼
 // Root -> Root FunctionDefine
-// ²»×öÈÎºÎ²Ù×÷
+// ä¸åšä»»ä½•æ“ä½œ
 std::nullptr_t RootFunctionDefine(std::nullptr_t, std::nullptr_t);
-// ¸ù²úÉúÊ½
+// æ ¹äº§ç”Ÿå¼
 // Root -> Root SingleAnnounceNoAssign ";"
 std::nullptr_t RootAnnounce(std::nullptr_t,
                             std::shared_ptr<FlowInterface>&& flow_control_node,
@@ -1205,14 +1205,14 @@ template <class BasicObjectType, class... Args>
 ObjectConstructData::CheckResult ObjectConstructData::ConstructBasicObjectPart(
     Args... args) {
   if constexpr (std::is_same_v<BasicObjectType, VarietyOperatorNode>) {
-    // ¹¹½¨±äÁ¿Êı¾İ
+    // æ„å»ºå˜é‡æ•°æ®
     auto object = std::make_unique<SimpleSentence>();
     bool result = object->SetSentenceOperateNode(
         std::make_shared<VarietyOperatorNode>(std::forward<Args>(args)...));
     assert(result);
     object_ = std::move(object);
   } else {
-    // ¹¹½¨º¯ÊıÊı¾İ
+    // æ„å»ºå‡½æ•°æ•°æ®
     object_ = std::make_unique<c_parser_frontend::flow_control::FunctionDefine>(
         std::forward<Args>(args)...);
   }
@@ -1225,7 +1225,7 @@ std::shared_ptr<FlowInterface> SingleAnnounceNoAssignVariety(
   auto& [final_type, const_tag_before_final_type] = basic_type_data;
   if constexpr (is_anonymous) {
     if (construct_data == nullptr) [[likely]] {
-      // º¯Êı»òº¯ÊıÖ¸ÕëÉùÃ÷ÖĞÊ¡ÂÔ²ÎÊıÃû
+      // å‡½æ•°æˆ–å‡½æ•°æŒ‡é’ˆå£°æ˜ä¸­çœç•¥å‚æ•°å
       construct_data = std::make_shared<ObjectConstructData>(std::string());
       construct_data->ConstructBasicObjectPart<VarietyOperatorNode>(
           std::string(), const_tag_before_final_type,
@@ -1235,13 +1235,13 @@ std::shared_ptr<FlowInterface> SingleAnnounceNoAssignVariety(
     }
   } else {
     if (construct_data->GetObjectName().empty()) [[unlikely]] {
-      OutputError(std::format("ÉùÃ÷µÄ±äÁ¿±ØĞëÓĞÃû"));
+      OutputError(std::format("å£°æ˜çš„å˜é‡å¿…é¡»æœ‰å"));
       exit(-1);
     }
   }
   auto [flow_control_node, construct_result] = construct_data->ConstructObject(
       const_tag_before_final_type, std::move(final_type));
-  // ¼ì²éÊÇ·ñ¹¹½¨³É¹¦
+  // æ£€æŸ¥æ˜¯å¦æ„å»ºæˆåŠŸ
   if (construct_result != ObjectConstructData::CheckResult::kSuccess)
       [[unlikely]] {
     VarietyOrFunctionConstructError(construct_result,
@@ -1252,10 +1252,10 @@ std::shared_ptr<FlowInterface> SingleAnnounceNoAssignVariety(
 
 // SingleAnnounceNoAssign -> FunctionRelavent
 // AnonymousSingleAnnounceNoAssign -> FunctionRelavent
-// Á½¸ö²úÉúÊ½¹²ÓÃ¸Ã¹æÔ¼º¯Êı£¬Í¨¹ıis_anonymous¿ØÖÆÏ¸Î¢²î±ğ
-// is_anonymous¿ØÖÆÊÇ·ñÔÚÉùÃ÷ÄäÃû±äÁ¿£¨ÄäÃû±äÁ¿ÊÇÀàĞÍ£©
-// ·µ»ØÖµÀàĞÍ£ºstd::shared_ptr<FlowInterface>
-// ²»Ö´ĞĞDefineVariety/DefineTypeÒ²²»Ìí¼Ó¿Õ¼ä·ÖÅä½Úµã
+// ä¸¤ä¸ªäº§ç”Ÿå¼å…±ç”¨è¯¥è§„çº¦å‡½æ•°ï¼Œé€šè¿‡is_anonymousæ§åˆ¶ç»†å¾®å·®åˆ«
+// is_anonymousæ§åˆ¶æ˜¯å¦åœ¨å£°æ˜åŒ¿åå˜é‡ï¼ˆåŒ¿åå˜é‡æ˜¯ç±»å‹ï¼‰
+// è¿”å›å€¼ç±»å‹ï¼šstd::shared_ptr<FlowInterface>
+// ä¸æ‰§è¡ŒDefineVariety/DefineTypeä¹Ÿä¸æ·»åŠ ç©ºé—´åˆ†é…èŠ‚ç‚¹
 template <bool is_anonymous>
 std::shared_ptr<FlowInterface>&& SingleAnnounceNoAssignFunctionRelavent(
     std::shared_ptr<FlowInterface>&& flow_control_node) {
@@ -1284,13 +1284,13 @@ std::shared_ptr<FlowInterface>&& SingleAnnounceNoAssignFunctionRelavent(
         break;
     }
     if (variety_name->empty()) [[unlikely]] {
-      OutputError(std::format("ÉùÃ÷µÄ±äÁ¿±ØĞëÓĞÃû"));
+      OutputError(std::format("å£°æ˜çš„å˜é‡å¿…é¡»æœ‰å"));
       exit(-1);
     }
   }
   return std::move(flow_control_node);
 }
-// ÓïÒåÍ¬AttachSingleNodeToTailNodeEmplace£¬²ÎÊıÊ¹ÓÃÒÑ¾­¹¹½¨ºÃµÄ½Úµã
+// è¯­ä¹‰åŒAttachSingleNodeToTailNodeEmplaceï¼Œå‚æ•°ä½¿ç”¨å·²ç»æ„å»ºå¥½çš„èŠ‚ç‚¹
 
 }  // namespace c_parser_frontend::parse_functions
 #endif

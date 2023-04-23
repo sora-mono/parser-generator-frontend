@@ -1,7 +1,7 @@
-# ÕâÀïÉèÖÃ¶¨Òå¹æÔ¼º¯ÊıµÄÎÄ¼ş¼Ğ
-#add_subdirectory(${CMAKE_SOURCE_DIR}/src/CParserFrontend)
-add_subdirectory(${CMAKE_SOURCE_DIR}/src/Brainfuck)
+ï»¿# è¿™é‡Œè®¾ç½®å®šä¹‰è§„çº¦å‡½æ•°çš„æ–‡ä»¶å¤¹
+add_subdirectory(${CMAKE_SOURCE_DIR}/src/CParserFrontend)
+#add_subdirectory(${CMAKE_SOURCE_DIR}/src/Brainfuck)
 
-# ÕâÀïÉèÖÃ¹æÔ¼º¯Êı±àÒë³öÀ´µÄ¿âÃû£¬¿ÉÒÔÉèÖÃ¶à¸ö¿â£¬µ«ÊÇ±ØĞëÉèÖÃµ½ÃûÎª"UserLibraires"µÄ±äÁ¿
-#set(UserLibraries c_parser_frontend)
-set(UserLibraries brainfuck)
+# è¿™é‡Œè®¾ç½®è§„çº¦å‡½æ•°ç¼–è¯‘å‡ºæ¥çš„åº“åï¼Œå¯ä»¥è®¾ç½®å¤šä¸ªåº“ï¼Œä½†æ˜¯å¿…é¡»è®¾ç½®åˆ°åä¸º"UserLibraires"çš„å˜é‡
+set(UserLibraries c_parser_frontend)
+#set(UserLibraries brainfuck)

@@ -1,8 +1,8 @@
-/// @file c_parser_frontend.h
-/// @brief CÓïÑÔ±àÒëÆ÷Ç°¶Ë¿ØÖÆÆ÷
+ï»¿/// @file c_parser_frontend.h
+/// @brief Cè¯­è¨€ç¼–è¯‘å™¨å‰ç«¯æ§åˆ¶å™¨
 /// @details
-/// CParserFrontend¹ÜÀíËùÓĞ¹©¹æÔ¼º¯Êıµ÷ÓÃµÄ½Ó¿Ú£¬ÕûºÏTypeSystem¡¢
-/// ActionScopeSystemºÍFlowControlSystem¹¦ÄÜ£¬Ìá¹©ÉÏ²ã½Ó¿Ú
+/// CParserFrontendç®¡ç†æ‰€æœ‰ä¾›è§„çº¦å‡½æ•°è°ƒç”¨çš„æ¥å£ï¼Œæ•´åˆTypeSystemã€
+/// ActionScopeSystemå’ŒFlowControlSystemåŠŸèƒ½ï¼Œæä¾›ä¸Šå±‚æ¥å£
 #ifndef CPARSERFRONTEND_C_PARSER_FRONTEND_H_
 #define CPARSERFRONTEND_C_PARSER_FRONTEND_H_
 
@@ -16,15 +16,15 @@
 #include "type_system.h"
 
 namespace c_parser_frontend {
-/// @brief »ñÈ¡µ±Ç°ĞĞÊı
-/// @note ´Ó0¿ªÊ¼¼ÆËã
+/// @brief è·å–å½“å‰è¡Œæ•°
+/// @note ä»0å¼€å§‹è®¡ç®—
 inline size_t GetLine() { return frontend::parser::GetLine(); }
-/// @brief »ñÈ¡µ±Ç°ÁĞÊı
-/// @note ´Ó0¿ªÊ¼¼ÆËã
+/// @brief è·å–å½“å‰åˆ—æ•°
+/// @note ä»0å¼€å§‹è®¡ç®—
 inline size_t GetColumn() { return frontend::parser::GetColumn(); }
 
 class CParserFrontend {
-  // ÒıÓÃÒ»Ğ©ÀàĞÍµÄ¶¨Òå
+  // å¼•ç”¨ä¸€äº›ç±»å‹çš„å®šä¹‰
   using DefineVarietyResult =
       c_parser_frontend::action_scope_system::DefineVarietyResult;
   using ActionScopeSystem =
@@ -42,13 +42,13 @@ class CParserFrontend {
   using FlowInterface = c_parser_frontend::flow_control::FlowInterface;
 
  public:
-  /// @brief ¶¨ÒåÀàĞÍ
-  /// @param[in] type_name £ºÀàĞÍÃû
-  /// @param[in] type_pointer £ºÀàĞÍÁ´Í·½áµãÖ¸Õë
-  /// @return Ç°°ë²¿·ÖÎªÖ¸ÏòÌí¼ÓÎ»ÖÃµÄµü´úÆ÷£¬ºó°ë²¿·ÖÎªÌí¼Ó½á¹û
+  /// @brief å®šä¹‰ç±»å‹
+  /// @param[in] type_name ï¼šç±»å‹å
+  /// @param[in] type_pointer ï¼šç±»å‹é“¾å¤´ç»“ç‚¹æŒ‡é’ˆ
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæŒ‡å‘æ·»åŠ ä½ç½®çš„è¿­ä»£å™¨ï¼ŒååŠéƒ¨åˆ†ä¸ºæ·»åŠ ç»“æœ
   /// @note
-  /// º¯ÊıµÄÉùÃ÷Óë¶¨Òå¾ù×ß¸Ã½Ó¿Ú£¬½ö´æÔÚÉùÃ÷Ê±¿ÉÒÔ¶à´ÎÉùÃ÷£¬¶¨Òå¿ÉÒÔ¸²¸ÇÉùÃ÷
-  /// ÒÑ´æÔÚ¶¨ÒåÔò·µ»ØAddTypeResult::kAlreadyIn
+  /// å‡½æ•°çš„å£°æ˜ä¸å®šä¹‰å‡èµ°è¯¥æ¥å£ï¼Œä»…å­˜åœ¨å£°æ˜æ—¶å¯ä»¥å¤šæ¬¡å£°æ˜ï¼Œå®šä¹‰å¯ä»¥è¦†ç›–å£°æ˜
+  /// å·²å­˜åœ¨å®šä¹‰åˆ™è¿”å›AddTypeResult::kAlreadyIn
   template <class TypeName>
   std::pair<TypeSystem::TypeNodeContainerIter, AddTypeResult> DefineType(
       TypeName&& type_name,
@@ -56,158 +56,158 @@ class CParserFrontend {
     return type_system_.DefineType(std::forward<TypeName>(type_name),
                                    type_pointer);
   }
-  /// @brief ¸ù¾İÀàĞÍÃû»ñÈ¡ÀàĞÍÁ´
-  /// @param[in] type_name £ºÀàĞÍÃû
-  /// @param[in] type_prefer £ºÀàĞÍÑ¡ÔñÇãÏò
-  /// @return Ç°°ë²¿·ÖÎªÖ¸Ïò»ñÈ¡µ½µÄÀàĞÍÁ´Í·½áµãÖ¸Õë£¬ºó°ë²¿·ÖÎª»ñÈ¡½á¹û
+  /// @brief æ ¹æ®ç±»å‹åè·å–ç±»å‹é“¾
+  /// @param[in] type_name ï¼šç±»å‹å
+  /// @param[in] type_prefer ï¼šç±»å‹é€‰æ‹©å€¾å‘
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæŒ‡å‘è·å–åˆ°çš„ç±»å‹é“¾å¤´ç»“ç‚¹æŒ‡é’ˆï¼ŒååŠéƒ¨åˆ†ä¸ºè·å–ç»“æœ
   /// @ref c_parser_frontend::type_system::TypeSystem::GetType
   std::pair<std::shared_ptr<const TypeInterface>, GetTypeResult> GetType(
       const std::string& type_name, StructOrBasicType type_prefer) {
     return type_system_.GetType(type_name, type_prefer);
   }
-  /// @brief ÉùÃ÷º¯ÊıÊ¹ÓÃ¸Ã½Ó¿Ú
-  /// @param[in] function_type £º´ıÉùÃ÷µÄº¯ÊıÀàĞÍ
-  /// @return Ç°°ë²¿·ÖÎªÖ¸ÏòÌí¼ÓÎ»ÖÃµÄµü´úÆ÷£¬ºó°ë²¿·ÖÎªÌí¼Ó½á¹û
-  /// @note ÉùÃ÷º¯Êı²»»á½«¸Ãº¯ÊıÉèÖÃÎªµ±Ç°»îÔ¾º¯Êı
+  /// @brief å£°æ˜å‡½æ•°ä½¿ç”¨è¯¥æ¥å£
+  /// @param[in] function_type ï¼šå¾…å£°æ˜çš„å‡½æ•°ç±»å‹
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæŒ‡å‘æ·»åŠ ä½ç½®çš„è¿­ä»£å™¨ï¼ŒååŠéƒ¨åˆ†ä¸ºæ·»åŠ ç»“æœ
+  /// @note å£°æ˜å‡½æ•°ä¸ä¼šå°†è¯¥å‡½æ•°è®¾ç½®ä¸ºå½“å‰æ´»è·ƒå‡½æ•°
   std::pair<TypeSystem::TypeNodeContainerIter, AddTypeResult> AnnounceFunction(
       const std::shared_ptr<const FunctionType>& function_type);
-  /// @brief ¶¨Òå±äÁ¿
-  /// @param[in] operator_node £º±äÁ¿½Úµã
-  /// @return Ç°°ë²¿·ÖÎªÖ¸Ïò²åÈëÎ»ÖÃµÄµü´úÆ÷£¬ºó°ë²¿·ÖÎªÌí¼Ó½á¹û
-  /// @note operator_node±ØĞëÒÑ¾­ÉèÖÃ±äÁ¿Ãû
+  /// @brief å®šä¹‰å˜é‡
+  /// @param[in] operator_node ï¼šå˜é‡èŠ‚ç‚¹
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæŒ‡å‘æ’å…¥ä½ç½®çš„è¿­ä»£å™¨ï¼ŒååŠéƒ¨åˆ†ä¸ºæ·»åŠ ç»“æœ
+  /// @note operator_nodeå¿…é¡»å·²ç»è®¾ç½®å˜é‡å
   std::pair<ActionScopeSystem::ActionScopeContainerType::const_iterator,
             DefineVarietyResult>
   DefineVariety(
       const std::shared_ptr<const VarietyOperatorNode>& operator_node) {
     return action_scope_system_.DefineVariety(operator_node);
   }
-  /// @brief ¸ù¾İÃû×Ö»ñÈ¡±äÁ¿»òº¯ÊıÃû
-  /// @param[in] variety_name £º²éÑ¯µÄÃû×Ö
-  /// @return Ç°°ë²¿·ÖÎªÖ¸Ïò±äÁ¿»òº¯Êı½ÚµãµÄÖ¸Õë£¬ºó°ë²¿·ÖÎª½ÚµãÊÇ·ñ´æÔÚ
+  /// @brief æ ¹æ®åå­—è·å–å˜é‡æˆ–å‡½æ•°å
+  /// @param[in] variety_name ï¼šæŸ¥è¯¢çš„åå­—
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºæŒ‡å‘å˜é‡æˆ–å‡½æ•°èŠ‚ç‚¹çš„æŒ‡é’ˆï¼ŒååŠéƒ¨åˆ†ä¸ºèŠ‚ç‚¹æ˜¯å¦å­˜åœ¨
   std::pair<std::shared_ptr<const operator_node::OperatorNodeInterface>, bool>
   GetVarietyOrFunction(const std::string& variety_name) const {
     return action_scope_system_.GetVarietyOrFunction(variety_name);
   }
-  /// @brief Ôö¼ÓÒ»¼¶×÷ÓÃÓòµÈ¼¶
+  /// @brief å¢åŠ ä¸€çº§ä½œç”¨åŸŸç­‰çº§
   void AddActionScopeLevel() { action_scope_system_.AddActionScopeLevel(); }
-  /// @brief µ¯³öÒ»¼¶×÷ÓÃÓò
+  /// @brief å¼¹å‡ºä¸€çº§ä½œç”¨åŸŸ
   /// @details
-  /// ×Ô¶¯µ¯³öÊ§Ğ§×÷ÓÃÓòÄÚËùÓĞµÄ±äÁ¿ºÍÁ÷³Ì¿ØÖÆÓï¾ä£¬²¢ÏòÉÏ¼¶Óï¾äÌí¼Óµ¯³öµÄ
-  /// £¨¹¹½¨Íê³ÉµÄ£©Á÷³Ì¿ØÖÆÓï¾ä
-  /// @note ½áÊøº¯Êı¹¹½¨Ê±½öĞèµ÷ÓÃ¸Ãº¯Êı£¬ÎŞĞèµ÷ÓÃÆäËüº¯Êı
+  /// è‡ªåŠ¨å¼¹å‡ºå¤±æ•ˆä½œç”¨åŸŸå†…æ‰€æœ‰çš„å˜é‡å’Œæµç¨‹æ§åˆ¶è¯­å¥ï¼Œå¹¶å‘ä¸Šçº§è¯­å¥æ·»åŠ å¼¹å‡ºçš„
+  /// ï¼ˆæ„å»ºå®Œæˆçš„ï¼‰æµç¨‹æ§åˆ¶è¯­å¥
+  /// @note ç»“æŸå‡½æ•°æ„å»ºæ—¶ä»…éœ€è°ƒç”¨è¯¥å‡½æ•°ï¼Œæ— éœ€è°ƒç”¨å…¶å®ƒå‡½æ•°
   void PopActionScope() { action_scope_system_.PopActionScope(); }
   size_t GetActionScopeLevel() const {
     return action_scope_system_.GetActionScopeLevel();
   }
-  /// @brief ÉèÖÃµ±Ç°´ı¹¹½¨º¯Êı
-  /// @param[in] function_to_construct £º´ı¹¹½¨º¯ÊıµÄÀàĞÍ
-  /// @return ·µ»ØÊÇ·ñÉèÖÃ³É¹¦
-  /// @retval true £ºÉèÖÃ³É¹¦
-  /// @retval false £º´æÔÚÕıÔÚ¹¹½¨µÄº¯Êı£¬²»ÔÊĞíÇ¶Ì×¶¨Òåº¯Êı»òÖØ¶¨Òå/ÖØÉùÃ÷º¯Êı
+  /// @brief è®¾ç½®å½“å‰å¾…æ„å»ºå‡½æ•°
+  /// @param[in] function_to_construct ï¼šå¾…æ„å»ºå‡½æ•°çš„ç±»å‹
+  /// @return è¿”å›æ˜¯å¦è®¾ç½®æˆåŠŸ
+  /// @retval true ï¼šè®¾ç½®æˆåŠŸ
+  /// @retval false ï¼šå­˜åœ¨æ­£åœ¨æ„å»ºçš„å‡½æ•°ï¼Œä¸å…è®¸åµŒå¥—å®šä¹‰å‡½æ•°æˆ–é‡å®šä¹‰/é‡å£°æ˜å‡½æ•°
   /// @details
-  /// ÔÚ×÷ÓÃÓòÄÚÉùÃ÷º¯ÊıµÄÈ«²¿²ÎÊıºÍº¯ÊıÀàĞÍµÄ³õÊ¼»¯Êı¾İÇÒ×Ô¶¯ÌáÉı1¼¶×÷ÓÃÓòµÈ¼¶
-  /// @attention ½ûÖ¹Ê¹ÓÃPushFlowControlSentenceÉèÖÃ´ı¹¹½¨º¯Êı
+  /// åœ¨ä½œç”¨åŸŸå†…å£°æ˜å‡½æ•°çš„å…¨éƒ¨å‚æ•°å’Œå‡½æ•°ç±»å‹çš„åˆå§‹åŒ–æ•°æ®ä¸”è‡ªåŠ¨æå‡1çº§ä½œç”¨åŸŸç­‰çº§
+  /// @attention ç¦æ­¢ä½¿ç”¨PushFlowControlSentenceè®¾ç½®å¾…æ„å»ºå‡½æ•°
   bool SetFunctionToConstruct(
       const std::shared_ptr<const FunctionType>& function_to_construct);
-  /// @brief ½«Á÷³Ì¿ØÖÆÓï¾äÑ¹ÈëÕ»
-  /// @param[in] flow_control_sentence £º´ıÈëÕ»µÄ¿ØÖÆÓï¾ä
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦
-  /// @retval false £ºÎŞÕıÔÚ¹¹½¨µÄº¯Êı£¬ÎŞ·¨Ñ¹ÈëÁ÷³Ì¿ØÖÆ½Úµã
-  /// @attention ±ØĞëÑ¹Èë¿ÉÒÔ´æ´¢Á÷³Ì¿ØÖÆ½ÚµãµÄÁ÷³Ì¿ØÖÆÓï¾ä
+  /// @brief å°†æµç¨‹æ§åˆ¶è¯­å¥å‹å…¥æ ˆ
+  /// @param[in] flow_control_sentence ï¼šå¾…å…¥æ ˆçš„æ§åˆ¶è¯­å¥
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸ
+  /// @retval false ï¼šæ— æ­£åœ¨æ„å»ºçš„å‡½æ•°ï¼Œæ— æ³•å‹å…¥æµç¨‹æ§åˆ¶èŠ‚ç‚¹
+  /// @attention å¿…é¡»å‹å…¥å¯ä»¥å­˜å‚¨æµç¨‹æ§åˆ¶èŠ‚ç‚¹çš„æµç¨‹æ§åˆ¶è¯­å¥
   bool PushFlowControlSentence(
       std::unique_ptr<FlowInterface>&& flow_control_sentence);
-  /// @brief »ñÈ¡×î¶¥²ãµÄ¿ØÖÆÓï¾ä
-  /// @return ·µ»ØÁ÷³Ì¿ØÖÆÓï¾äµÄÒıÓÃ
-  /// @note ÓÃÓÚÍêÉÆdo-whileÓï¾äÎ²²¿ºÍforÓï¾äÍ·²¿
-  /// @attention ±ØĞë´æÔÚÕıÔÚ¹¹½¨µÄÁ÷³Ì¿ØÖÆÓï¾ä»òº¯Êı
+  /// @brief è·å–æœ€é¡¶å±‚çš„æ§åˆ¶è¯­å¥
+  /// @return è¿”å›æµç¨‹æ§åˆ¶è¯­å¥çš„å¼•ç”¨
+  /// @note ç”¨äºå®Œå–„do-whileè¯­å¥å°¾éƒ¨å’Œforè¯­å¥å¤´éƒ¨
+  /// @attention å¿…é¡»å­˜åœ¨æ­£åœ¨æ„å»ºçš„æµç¨‹æ§åˆ¶è¯­å¥æˆ–å‡½æ•°
   FlowInterface& GetTopFlowControlSentence() {
     return action_scope_system_.GetTopFlowControlSentence();
   }
-  /// @brief »ñÈ¡µ±Ç°»îÔ¾º¯Êı£¨ÕıÔÚ¹¹½¨µÄº¯Êı£©
-  /// @return ·µ»ØÖ¸Ïòµ±Ç°»îÔ¾º¯ÊıµÄconstÖ¸Õë
-  /// @retval nullptr £ºµ±Ç°Ã»ÓĞ»îÔ¾º¯Êı
+  /// @brief è·å–å½“å‰æ´»è·ƒå‡½æ•°ï¼ˆæ­£åœ¨æ„å»ºçš„å‡½æ•°ï¼‰
+  /// @return è¿”å›æŒ‡å‘å½“å‰æ´»è·ƒå‡½æ•°çš„constæŒ‡é’ˆ
+  /// @retval nullptr ï¼šå½“å‰æ²¡æœ‰æ´»è·ƒå‡½æ•°
   const FunctionDefine* GetActiveFunctionPointer() const {
     return flow_control_system_.GetActiveFunctionPointer();
   }
-  /// @brief »ñÈ¡µ±Ç°»îÔ¾º¯Êı£¨ÕıÔÚ¹¹½¨µÄº¯Êı£©
-  /// @return ·µ»Øµ±Ç°»îÔ¾º¯ÊıµÄconstÒıÓÃ
-  /// @note ±ØĞë´æÔÚ»îÔ¾º¯Êı
+  /// @brief è·å–å½“å‰æ´»è·ƒå‡½æ•°ï¼ˆæ­£åœ¨æ„å»ºçš„å‡½æ•°ï¼‰
+  /// @return è¿”å›å½“å‰æ´»è·ƒå‡½æ•°çš„constå¼•ç”¨
+  /// @note å¿…é¡»å­˜åœ¨æ´»è·ƒå‡½æ•°
   const FunctionDefine& GetActiveFunctionReference() const {
     return flow_control_system_.GetActiveFunctionReference();
   }
-  /// @brief Ïò¶¥²ãÁ÷³Ì¿ØÖÆÓï¾äÄÚÌí¼ÓÓï¾ä
-  /// @param[in] sentence £º´ıÌí¼ÓµÄÓï¾ä
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦£¬¶áÈ¡sentence¿ØÖÆÈ¨
+  /// @brief å‘é¡¶å±‚æµç¨‹æ§åˆ¶è¯­å¥å†…æ·»åŠ è¯­å¥
+  /// @param[in] sentence ï¼šå¾…æ·»åŠ çš„è¯­å¥
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸï¼Œå¤ºå–sentenceæ§åˆ¶æƒ
   /// @retval false
-  /// £ºÎŞ»îÔ¾µÄÁ÷³Ì¿ØÖÆÓï¾ä»ò¸ø¶¨Óï¾äÎŞ·¨Ìí¼Óµ½µ±Ç°µÄÁ÷³Ì¿ØÖÆ½ÚµãÖĞ£¬²»ĞŞ¸Ä²ÎÊı
-  /// @note Ìí¼Óµ½ÒÑÓĞµÄÓï¾äºó
+  /// ï¼šæ— æ´»è·ƒçš„æµç¨‹æ§åˆ¶è¯­å¥æˆ–ç»™å®šè¯­å¥æ— æ³•æ·»åŠ åˆ°å½“å‰çš„æµç¨‹æ§åˆ¶èŠ‚ç‚¹ä¸­ï¼Œä¸ä¿®æ”¹å‚æ•°
+  /// @note æ·»åŠ åˆ°å·²æœ‰çš„è¯­å¥å
   bool AddSentence(std::unique_ptr<FlowInterface>&& sentence) {
     return action_scope_system_.AddSentence(std::move(sentence));
   }
-  /// @brief Ïòµ±Ç°»îÔ¾µÄÁ÷³Ì¿ØÖÆÓï¾äÄÚÌí¼Ó¶àÌõÓï¾ä
-  /// @param[in] sentence_container £º´æ´¢´ıÌí¼ÓµÄÓï¾äµÄÈİÆ÷
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
+  /// @brief å‘å½“å‰æ´»è·ƒçš„æµç¨‹æ§åˆ¶è¯­å¥å†…æ·»åŠ å¤šæ¡è¯­å¥
+  /// @param[in] sentence_container ï¼šå­˜å‚¨å¾…æ·»åŠ çš„è¯­å¥çš„å®¹å™¨
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
   /// @retval true
-  /// £ºÌí¼Ó³É¹¦£¬½«sentence_containerÖĞËùÓĞÓï¾äÒÆ¶¯µ½»îÔ¾Á÷³Ì¿ØÖÆÓï¾äµÄÖ÷ÈİÆ÷ÖĞ
-  /// @retval false £º¸ø¶¨Óï¾äÎŞ·¨Ìí¼Óµ½µ±Ç°µÄÁ÷³Ì¿ØÖÆ½ÚµãÖĞ£¬²»ĞŞ¸Ä²ÎÊı
-  /// @note °´begin->endµÄË³ĞòÌí¼Ó£¬Ìí¼Óµ½ÒÑÓĞµÄÁ÷³ÌÓï¾äºó
+  /// ï¼šæ·»åŠ æˆåŠŸï¼Œå°†sentence_containerä¸­æ‰€æœ‰è¯­å¥ç§»åŠ¨åˆ°æ´»è·ƒæµç¨‹æ§åˆ¶è¯­å¥çš„ä¸»å®¹å™¨ä¸­
+  /// @retval false ï¼šç»™å®šè¯­å¥æ— æ³•æ·»åŠ åˆ°å½“å‰çš„æµç¨‹æ§åˆ¶èŠ‚ç‚¹ä¸­ï¼Œä¸ä¿®æ”¹å‚æ•°
+  /// @note æŒ‰begin->endçš„é¡ºåºæ·»åŠ ï¼Œæ·»åŠ åˆ°å·²æœ‰çš„æµç¨‹è¯­å¥å
   bool AddSentences(
       std::list<std::unique_ptr<FlowInterface> >&& sentence_container) {
     return action_scope_system_.AddSentences(std::move(sentence_container));
   }
 
-  /// @brief ½«¶¥²ãÁ÷³Ì¿ØÖÆÓï¾ä´ÓifÓï¾ä×ª»»Îªif-elseÓï¾ä
-  /// @note ×ª»»ºóÖ´ĞĞAddSentenceÏµÁĞº¯ÊıÊ±Ìí¼ÓÓï¾äµ½¼Ù·ÖÖ§ÖĞ
-  /// @attention ¶¥²ãÁ÷³Ì¿ØÖÆÓï¾ä±ØĞëÊÇifÓï¾ä
+  /// @brief å°†é¡¶å±‚æµç¨‹æ§åˆ¶è¯­å¥ä»ifè¯­å¥è½¬æ¢ä¸ºif-elseè¯­å¥
+  /// @note è½¬æ¢åæ‰§è¡ŒAddSentenceç³»åˆ—å‡½æ•°æ—¶æ·»åŠ è¯­å¥åˆ°å‡åˆ†æ”¯ä¸­
+  /// @attention é¡¶å±‚æµç¨‹æ§åˆ¶è¯­å¥å¿…é¡»æ˜¯ifè¯­å¥
   void ConvertIfSentenceToIfElseSentence() {
     action_scope_system_.ConvertIfSentenceToIfElseSentence();
   }
-  /// @brief Ìí¼ÓswitchÆÕÍ¨case
-  /// @param[in] case_value £º·ÖÖ§µÄÖµ
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦
-  /// @retval false £º´ıÌí¼ÓµÄÖµÒÑ´æÔÚ»ò¶¥²ãÁ÷³Ì¿ØÖÆÓï¾ä²»Îªswitch
+  /// @brief æ·»åŠ switchæ™®é€šcase
+  /// @param[in] case_value ï¼šåˆ†æ”¯çš„å€¼
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸ
+  /// @retval false ï¼šå¾…æ·»åŠ çš„å€¼å·²å­˜åœ¨æˆ–é¡¶å±‚æµç¨‹æ§åˆ¶è¯­å¥ä¸ä¸ºswitch
   bool AddSwitchSimpleCase(
       const std::shared_ptr<
           c_parser_frontend::flow_control::BasicTypeInitializeOperatorNode>&
           case_value) {
     return action_scope_system_.AddSwitchSimpleCase(case_value);
   }
-  /// @brief Ìí¼ÓswitchµÄdefault·ÖÖ§±êÇ©
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦
-  /// @retval false £ºÒÑ¾­Ìí¼Ó¹ıdefault±êÇ©»ò¶¥²ãÁ÷³Ì¿ØÖÆÓï¾ä²»Îªswitch
+  /// @brief æ·»åŠ switchçš„defaultåˆ†æ”¯æ ‡ç­¾
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸ
+  /// @retval false ï¼šå·²ç»æ·»åŠ è¿‡defaultæ ‡ç­¾æˆ–é¡¶å±‚æµç¨‹æ§åˆ¶è¯­å¥ä¸ä¸ºswitch
   bool AddSwitchDefaultCase() {
     return action_scope_system_.AddSwitchDefaultCase();
   }
 
  private:
-  /// @brief ±ãÓÚ¸ÃÀàµ÷ÓÃFinishFunctionConstruct
+  /// @brief ä¾¿äºè¯¥ç±»è°ƒç”¨FinishFunctionConstruct
   friend ActionScopeSystem;
 
-  /// @brief ×öÒ»Ğ©Íê³Éº¯Êı¹¹½¨ºóµÄÇåÀí²Ù×÷
+  /// @brief åšä¸€äº›å®Œæˆå‡½æ•°æ„å»ºåçš„æ¸…ç†æ“ä½œ
   void FinishFunctionConstruct() {
-    // ÎŞÂÛÊÇ·ñÉùÃ÷¹ıº¯Êı£¬µ÷ÓÃ¸Ãº¯Êıºó¶¼»á±£Ö¤¸Ãº¯ÊıÀàĞÍ´æÔÚ
+    // æ— è®ºæ˜¯å¦å£°æ˜è¿‡å‡½æ•°ï¼Œè°ƒç”¨è¯¥å‡½æ•°åéƒ½ä¼šä¿è¯è¯¥å‡½æ•°ç±»å‹å­˜åœ¨
     type_system_.AnnounceFunctionType(
         flow_control_system_.GetActiveFunctionReference()
             .GetFunctionTypePointer());
     flow_control_system_.FinishFunctionConstruct();
   }
 
-  /// @brief ÀàĞÍÏµÍ³
+  /// @brief ç±»å‹ç³»ç»Ÿ
   TypeSystem type_system_;
-  /// @brief ×÷ÓÃÓòÏµÍ³
+  /// @brief ä½œç”¨åŸŸç³»ç»Ÿ
   ActionScopeSystem action_scope_system_;
-  /// @brief Á÷³Ì¿ØÖÆÏµÍ³
+  /// @brief æµç¨‹æ§åˆ¶ç³»ç»Ÿ
   FlowControlSystem flow_control_system_;
 };
 
-/// @brief È«¾ÖCParserFrontend±äÁ¿
+/// @brief å…¨å±€CParserFrontendå˜é‡
 /// @details
-/// ÓÃÓÚ×ÓÏµÍ³½»»¥ºÍÓÃ»§·ÃÎÊ
-/// Ïß³Ì¼ä¶ÀÁ¢
+/// ç”¨äºå­ç³»ç»Ÿäº¤äº’å’Œç”¨æˆ·è®¿é—®
+/// çº¿ç¨‹é—´ç‹¬ç«‹
 extern thread_local CParserFrontend c_parser_controller;
 
 }  // namespace c_parser_frontend

@@ -107,12 +107,19 @@ class SyntaxParser {
   /// @brief 获取在给定向前看产生式节点条件下的动作和附属数据
   /// @param[in] src_entry_id ：起始语法分析表条目ID
   /// @param[in] node_id ：向前看产生式节点ID
-  /// @return 返回指向动作和附属数据基类的const指针
-  /// @retval nullptr 不存在该转移条件则返回空指针
-  const ActionAndAttachedDataInterface* GetActionAndTarget(
+  /// @return 返回指向动作和附属数据基类的const引用
+  const ActionAndAttachedDataInterface& GetActionAndTarget(
       SyntaxAnalysisTableEntryId src_entry_id, ProductionNodeId node_id) const {
     assert(src_entry_id.IsValid());
-    return syntax_analysis_table_[src_entry_id].AtTerminalNode(node_id);
+    const ActionAndAttachedDataInterface* action_and_attached_data =
+        syntax_analysis_table_[src_entry_id].AtTerminalNode(node_id);
+    if (!action_and_attached_data) {
+      // 语法错误
+      static const frontend::generator::syntax_generator::
+          SyntaxAnalysisTableEntry::ErrorAttachedData error_attached_data;
+      action_and_attached_data = &error_attached_data;
+    }
+    return *action_and_attached_data;
   }
   /// @brief 获取移入非终结产生式节点后到达的产生式条目
   /// @param[in] src_entry_id ：起始语法分析表条目ID

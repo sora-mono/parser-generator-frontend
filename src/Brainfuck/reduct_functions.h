@@ -1,4 +1,4 @@
-#include <string>
+﻿#include <string>
 
 namespace brainfuck {
 std::nullptr_t SingleOperateRightMovePointer(std::string&& str_operator);

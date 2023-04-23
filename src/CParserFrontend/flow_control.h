@@ -1,7 +1,7 @@
-/// @file flow_control.h
-/// @brief Á÷³Ì¿ØÖÆ
+ï»¿/// @file flow_control.h
+/// @brief æµç¨‹æ§åˆ¶
 /// @details
-/// ±¾ÎÄ¼şÖĞ¶¨ÒåÁ÷³Ì¿ØÖÆ½Úµã£¬¾ßÌå½ÚµãÀàĞÍ²Î¿¼FlowType
+/// æœ¬æ–‡ä»¶ä¸­å®šä¹‰æµç¨‹æ§åˆ¶èŠ‚ç‚¹ï¼Œå…·ä½“èŠ‚ç‚¹ç±»å‹å‚è€ƒFlowType
 #ifndef CPARSERFRONTEND_FLOW_CONTROL_H_
 #define CPARSERFRONTEND_FLOW_CONTROL_H_
 
@@ -14,22 +14,22 @@
 #include "type_system.h"
 
 namespace c_parser_frontend::flow_control {
-/// @brief Á÷³Ì¿ØÖÆ½ÚµãÀàĞÍ
+/// @brief æµç¨‹æ§åˆ¶èŠ‚ç‚¹ç±»å‹
 enum class FlowType {
-  kFunctionDefine,   ///< º¯Êı¶¨Òå
-  kSimpleSentence,   ///< »ù´¡·ÇÁ÷³Ì¿ØÖÆÓï¾ä
-  kLabel,            ///< Ìí¼Ó±êÇ©Óï¾ä
-  kJmp,              ///< Ìø×ªÓï¾ä
-  kReturn,           ///< ·µ»ØÓï¾ä
-  kIfSentence,       ///< ifÓï¾ä
-  kIfElseSentence,   ///< if-elseÓï¾ä
-  kWhileSentence,    ///< whileÓï¾ä
-  kDoWhileSentence,  ///< do-whileÓï¾ä
-  kForSentence,      ///< forÓï¾ä
-  kSwitchSentence    ///< switchÓï¾ä
+  kFunctionDefine,   ///< å‡½æ•°å®šä¹‰
+  kSimpleSentence,   ///< åŸºç¡€éæµç¨‹æ§åˆ¶è¯­å¥
+  kLabel,            ///< æ·»åŠ æ ‡ç­¾è¯­å¥
+  kJmp,              ///< è·³è½¬è¯­å¥
+  kReturn,           ///< è¿”å›è¯­å¥
+  kIfSentence,       ///< ifè¯­å¥
+  kIfElseSentence,   ///< if-elseè¯­å¥
+  kWhileSentence,    ///< whileè¯­å¥
+  kDoWhileSentence,  ///< do-whileè¯­å¥
+  kForSentence,      ///< forè¯­å¥
+  kSwitchSentence    ///< switchè¯­å¥
 };
 
-// ÒıÓÃ²Ù×÷½ÚµãºÍ¸½ÊôÊı¾İÀàĞÍµÄ¶¨Òå
+// å¼•ç”¨æ“ä½œèŠ‚ç‚¹å’Œé™„å±æ•°æ®ç±»å‹çš„å®šä¹‰
 using c_parser_frontend::operator_node::AllocateOperatorNode;
 using c_parser_frontend::operator_node::AssignOperatorNode;
 using c_parser_frontend::operator_node::BasicTypeInitializeOperatorNode;
@@ -53,93 +53,93 @@ using c_parser_frontend::type_system::StructOrBasicType;
 using c_parser_frontend::type_system::TypeInterface;
 
 /// @class FlowInterface flow_control.h
-/// @brief Á÷³Ì¿ØÖÆ½Úµã»ùÀà
+/// @brief æµç¨‹æ§åˆ¶èŠ‚ç‚¹åŸºç±»
 /// @details
-/// ËùÓĞÁ÷³Ì¿ØÖÆ½Úµã¾ù´Ó¸ÃÀàÅÉÉú
+/// æ‰€æœ‰æµç¨‹æ§åˆ¶èŠ‚ç‚¹å‡ä»è¯¥ç±»æ´¾ç”Ÿ
 class FlowInterface {
-  /// @brief Á÷³Ì½ÚµãIDµÄ·Ö·¢±êÇ©
+  /// @brief æµç¨‹èŠ‚ç‚¹IDçš„åˆ†å‘æ ‡ç­¾
   enum class IdWrapper { kFlowNodeId };
 
  public:
-  /// @brief Á÷³Ì½ÚµãID
+  /// @brief æµç¨‹èŠ‚ç‚¹ID
   using FlowId = frontend::common::ExplicitIdWrapper<size_t, IdWrapper,
                                                      IdWrapper::kFlowNodeId>;
 
   FlowInterface(FlowType flow_type) : flow_type_(flow_type){};
   virtual ~FlowInterface() {}
 
-  /// @brief ÏòÁ÷³ÌÓï¾äÖ÷ÌåÖĞÖĞÌí¼Óµ¥ÌõÓï¾ä
-  /// @param[in] sentence £º´ıÌí¼ÓµÄÓï¾ä
-  /// @return ·µ»ØÌí¼ÓÊÇ·ñ³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦
-  /// @retval false £ºsentence²»ÄÜÌí¼Óµ½Á÷³Ì¿ØÖÆÓï¾äÖĞ
+  /// @brief å‘æµç¨‹è¯­å¥ä¸»ä½“ä¸­ä¸­æ·»åŠ å•æ¡è¯­å¥
+  /// @param[in] sentence ï¼šå¾…æ·»åŠ çš„è¯­å¥
+  /// @return è¿”å›æ·»åŠ æ˜¯å¦æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸ
+  /// @retval false ï¼šsentenceä¸èƒ½æ·»åŠ åˆ°æµç¨‹æ§åˆ¶è¯­å¥ä¸­
   /// @details
-  /// 1.¶Ôdo-while/while/forµ÷ÓÃ¸Ãº¯ÊıÊ±Ìí¼Óµ½Ñ­»·ÌåÖĞ
-  /// 2.¶ÔifÓï¾äµ÷ÓÃÊ±Ìí¼Óµ½if³ÉÁ¢Ê±Ö´ĞĞµÄÓï¾äÄÚ
-  /// 3.¶Ôif-elseÓï¾äµ÷ÓÃÊ±Ìí¼Óµ½else³ÉÁ¢Ê±Ö´ĞĞµÄÓï¾äÄÚ
-  /// 4.¶ÔswitchÓï¾äµ÷ÓÃÊ±Ìí¼Óµ½switchÖ÷ÌåÄÚ
-  /// @note Ìí¼ÓÓï¾äÊ±Ìí¼Óµ½ÒÑÓĞµÄÓï¾äºó
+  /// 1.å¯¹do-while/while/forè°ƒç”¨è¯¥å‡½æ•°æ—¶æ·»åŠ åˆ°å¾ªç¯ä½“ä¸­
+  /// 2.å¯¹ifè¯­å¥è°ƒç”¨æ—¶æ·»åŠ åˆ°ifæˆç«‹æ—¶æ‰§è¡Œçš„è¯­å¥å†…
+  /// 3.å¯¹if-elseè¯­å¥è°ƒç”¨æ—¶æ·»åŠ åˆ°elseæˆç«‹æ—¶æ‰§è¡Œçš„è¯­å¥å†…
+  /// 4.å¯¹switchè¯­å¥è°ƒç”¨æ—¶æ·»åŠ åˆ°switchä¸»ä½“å†…
+  /// @note æ·»åŠ è¯­å¥æ—¶æ·»åŠ åˆ°å·²æœ‰çš„è¯­å¥å
   virtual bool AddMainSentence(std::unique_ptr<FlowInterface>&& sentence) = 0;
-  /// @brief ÏòÁ÷³ÌÓï¾äÖ÷ÌåÖĞÖĞÌí¼Ó¶àÌõÓï¾ä
-  /// @param[in] sentences £º´ıÌí¼ÓµÄÓï¾ä
-  /// @return ·µ»ØÌí¼ÓÊÇ·ñ³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦
-  /// @retval false £ºsentencesÖĞº¬ÓĞ²»ÄÜÌí¼Óµ½Á÷³Ì¿ØÖÆÓï¾äµÄÓï¾ä
+  /// @brief å‘æµç¨‹è¯­å¥ä¸»ä½“ä¸­ä¸­æ·»åŠ å¤šæ¡è¯­å¥
+  /// @param[in] sentences ï¼šå¾…æ·»åŠ çš„è¯­å¥
+  /// @return è¿”å›æ·»åŠ æ˜¯å¦æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸ
+  /// @retval false ï¼šsentencesä¸­å«æœ‰ä¸èƒ½æ·»åŠ åˆ°æµç¨‹æ§åˆ¶è¯­å¥çš„è¯­å¥
   /// @details
-  /// 1.¶Ôdo-while/while/forµ÷ÓÃ¸Ãº¯ÊıÊ±Ìí¼Óµ½Ñ­»·ÌåÖĞ
-  /// 2.¶ÔifÓï¾äµ÷ÓÃÊ±Ìí¼Óµ½if³ÉÁ¢Ê±Ö´ĞĞµÄÓï¾äÄÚ
-  /// 3.¶Ôif-elseÓï¾äµ÷ÓÃÊ±Ìí¼Óµ½else³ÉÁ¢Ê±Ö´ĞĞµÄÓï¾äÄÚ
-  /// 4.¶ÔswitchÓï¾äµ÷ÓÃÊ±Ìí¼Óµ½switchÖ÷ÌåÄÚ
-  /// @note Ìí¼ÓÓï¾äÊ±Ìí¼Óµ½ÒÑÓĞµÄÓï¾äºó
+  /// 1.å¯¹do-while/while/forè°ƒç”¨è¯¥å‡½æ•°æ—¶æ·»åŠ åˆ°å¾ªç¯ä½“ä¸­
+  /// 2.å¯¹ifè¯­å¥è°ƒç”¨æ—¶æ·»åŠ åˆ°ifæˆç«‹æ—¶æ‰§è¡Œçš„è¯­å¥å†…
+  /// 3.å¯¹if-elseè¯­å¥è°ƒç”¨æ—¶æ·»åŠ åˆ°elseæˆç«‹æ—¶æ‰§è¡Œçš„è¯­å¥å†…
+  /// 4.å¯¹switchè¯­å¥è°ƒç”¨æ—¶æ·»åŠ åˆ°switchä¸»ä½“å†…
+  /// @note æ·»åŠ è¯­å¥æ—¶æ·»åŠ åˆ°å·²æœ‰çš„è¯­å¥å
   virtual bool AddMainSentences(
       std::list<std::unique_ptr<FlowInterface>>&& sentences) = 0;
 
-  /// @brief »ñÈ¡Á÷³Ì¿ØÖÆÀàĞÍ
-  /// @return ·µ»ØÁ÷³Ì¿ØÖÆÀàĞÍ
+  /// @brief è·å–æµç¨‹æ§åˆ¶ç±»å‹
+  /// @return è¿”å›æµç¨‹æ§åˆ¶ç±»å‹
   FlowType GetFlowType() const { return flow_type_; }
-  /// @brief »ñÈ¡Á÷³Ì¿ØÖÆ½ÚµãID
-  /// @return ·µ»ØÁ÷³Ì¿ØÖÆ½ÚµãID
-  /// @note ËùÓĞÁ÷³Ì¿ØÖÆ½Úµã¶¼ÓĞÒ»¸öÏß³Ì¶ÀÁ¢µÄID
+  /// @brief è·å–æµç¨‹æ§åˆ¶èŠ‚ç‚¹ID
+  /// @return è¿”å›æµç¨‹æ§åˆ¶èŠ‚ç‚¹ID
+  /// @note æ‰€æœ‰æµç¨‹æ§åˆ¶èŠ‚ç‚¹éƒ½æœ‰ä¸€ä¸ªçº¿ç¨‹ç‹¬ç«‹çš„ID
   FlowId GetFlowId() const { return flow_id_; }
 
  protected:
-  /// @brief ÉèÖÃÁ÷³Ì¿ØÖÆÀàĞÍ
+  /// @brief è®¾ç½®æµç¨‹æ§åˆ¶ç±»å‹
   void SetFlowType(FlowType flow_type) { flow_type_ = flow_type; }
 
  private:
-  /// @brief »ñÈ¡Ò»¸ö´ÓÎ´±»·ÖÅä¹ıµÄÁ÷³Ì¿ØÖÆ½ÚµãID
-  /// @return ·µ»ØÁ÷³Ì¿ØÖÆ½ÚµãID
-  /// @note Á÷³Ì¿ØÖÆ½ÚµãÏß³Ì¶ÀÁ¢
+  /// @brief è·å–ä¸€ä¸ªä»æœªè¢«åˆ†é…è¿‡çš„æµç¨‹æ§åˆ¶èŠ‚ç‚¹ID
+  /// @return è¿”å›æµç¨‹æ§åˆ¶èŠ‚ç‚¹ID
+  /// @note æµç¨‹æ§åˆ¶èŠ‚ç‚¹çº¿ç¨‹ç‹¬ç«‹
   static FlowId GetNewFlowId() {
     static thread_local FlowId flow_id(0);
     return flow_id++;
   }
 
-  /// @brief Á÷³Ì¿ØÖÆ½ÚµãID
+  /// @brief æµç¨‹æ§åˆ¶èŠ‚ç‚¹ID
   const FlowId flow_id_ = GetNewFlowId();
-  /// @brief Á÷³Ì¿ØÖÆ½ÚµãÀàĞÍ
+  /// @brief æµç¨‹æ§åˆ¶èŠ‚ç‚¹ç±»å‹
   FlowType flow_type_;
 };
 
 /// @class Label flow_control.h
-/// @brief ±êÇ©
+/// @brief æ ‡ç­¾
 /// @details
-/// 1.±êÇ©ÓÃÓÚÌø×ªÓï¾ä£¬Ã¿¸öÌø×ªÓï¾ä¶¼Ó¦°ó¶¨Ò»¸ö±êÇ©
-/// 2.Ê¹ÓÃ·½·¨ÀàËÆÓÚ»ã±à±êÇ©/gotoÓï¾äÌø×ª
-/// 3.Ã¿¸ö±êÇ©Ö»ÓĞ±êÇ©ÃûÕâÒ»³ÉÔ±
-/// @note ÏàÍ¬±êÇ©ÃûµÄ±êÇ©ÊÓ×÷Ò»¸ö±êÇ©
+/// 1.æ ‡ç­¾ç”¨äºè·³è½¬è¯­å¥ï¼Œæ¯ä¸ªè·³è½¬è¯­å¥éƒ½åº”ç»‘å®šä¸€ä¸ªæ ‡ç­¾
+/// 2.ä½¿ç”¨æ–¹æ³•ç±»ä¼¼äºæ±‡ç¼–æ ‡ç­¾/gotoè¯­å¥è·³è½¬
+/// 3.æ¯ä¸ªæ ‡ç­¾åªæœ‰æ ‡ç­¾åè¿™ä¸€æˆå‘˜
+/// @note ç›¸åŒæ ‡ç­¾åçš„æ ‡ç­¾è§†ä½œä¸€ä¸ªæ ‡ç­¾
 class Label : public FlowInterface {
  public:
   virtual bool AddMainSentence(
       std::unique_ptr<FlowInterface>&& sentence) override {
     assert(false);
-    /// ·ÀÖ¹¾¯¸æ
+    /// é˜²æ­¢è­¦å‘Š
     return false;
   }
   virtual bool AddMainSentences(
       std::list<std::unique_ptr<FlowInterface>>&& sentences) override {
     assert(false);
-    /// ·ÀÖ¹¾¯¸æ
+    /// é˜²æ­¢è­¦å‘Š
     return false;
   }
 
@@ -153,25 +153,25 @@ class Label : public FlowInterface {
   Label& operator=(const Label&) = default;
   Label& operator=(Label&&) = default;
 
-  /// @brief ÉèÖÃ±êÇ©Ãû
-  /// @param[in] label_name £º±êÇ©Ãû
+  /// @brief è®¾ç½®æ ‡ç­¾å
+  /// @param[in] label_name ï¼šæ ‡ç­¾å
   template <class LabelName>
   void SetLabelName(LabelName&& label_name) {
     label_name_ = std::forward<LabelName>(label_name);
   }
-  /// @brief »ñÈ¡±êÇ©Ãû
-  /// @return ·µ»Ø±êÇ©ÃûµÄconstÒıÓÃ
+  /// @brief è·å–æ ‡ç­¾å
+  /// @return è¿”å›æ ‡ç­¾åçš„constå¼•ç”¨
   const std::string& GetLabelName() const { return label_name_; }
 
  private:
-  /// @brief ±êÇ©Ãû
+  /// @brief æ ‡ç­¾å
   std::string label_name_;
 };
 
 /// @class Jmp flow_control.h
-/// @brief Ìø×ª
+/// @brief è·³è½¬
 /// @details
-/// Ã¿¸öÌø×ªÓï¾ä¶¼°ó¶¨Ìø×ªµ½µÄ±êÇ©
+/// æ¯ä¸ªè·³è½¬è¯­å¥éƒ½ç»‘å®šè·³è½¬åˆ°çš„æ ‡ç­¾
 class Jmp : public FlowInterface {
  public:
   Jmp(std::unique_ptr<Label>&& target_label)
@@ -180,28 +180,28 @@ class Jmp : public FlowInterface {
   virtual bool AddMainSentence(
       std::unique_ptr<FlowInterface>&& sentence) override {
     assert(false);
-    /// ·ÀÖ¹¾¯¸æ
+    /// é˜²æ­¢è­¦å‘Š
     return false;
   }
   virtual bool AddMainSentences(
       std::list<std::unique_ptr<FlowInterface>>&& sentences) override {
     assert(false);
-    /// ·ÀÖ¹¾¯¸æ
+    /// é˜²æ­¢è­¦å‘Š
     return false;
   }
 
-  /// @brief »ñÈ¡Ìø×ªÓï¾ä°ó¶¨µÄ±êÇ©
-  /// @return ·µ»ØÌø×ªÓï¾ä°ó¶¨µÄ±êÇ©µÄconstÒıÓÃ
+  /// @brief è·å–è·³è½¬è¯­å¥ç»‘å®šçš„æ ‡ç­¾
+  /// @return è¿”å›è·³è½¬è¯­å¥ç»‘å®šçš„æ ‡ç­¾çš„constå¼•ç”¨
   const Label& GetTargetLabel() const { return *target_label_; }
 
  private:
-  /// Ìø×ªÖ¸ÁîÒªÌøµ½µÄ±êÇ©
+  /// è·³è½¬æŒ‡ä»¤è¦è·³åˆ°çš„æ ‡ç­¾
   std::unique_ptr<Label> target_label_;
 };
 
 /// @class FunctionDefine flow_control.h
-/// @brief º¯Êı¶¨Òå
-/// @attention º¯ÊıÌå²»º¬Ö´ĞĞÓï¾äÊ±Ó¦²åÈëÒ»ÌõreturnÓï¾äÕ¼Î»£¬·ñÔòÊÓÎªº¯ÊıÉùÃ÷
+/// @brief å‡½æ•°å®šä¹‰
+/// @attention å‡½æ•°ä½“ä¸å«æ‰§è¡Œè¯­å¥æ—¶åº”æ’å…¥ä¸€æ¡returnè¯­å¥å ä½ï¼Œå¦åˆ™è§†ä¸ºå‡½æ•°å£°æ˜
 class FunctionDefine : public FlowInterface {
  public:
   FunctionDefine(const std::shared_ptr<const FunctionType>& function_type)
@@ -217,73 +217,73 @@ class FunctionDefine : public FlowInterface {
     return AddSentence(std::move(sentence));
   }
 
-  /// @brief Ìí¼ÓÒ»Ìõº¯ÊıÄÚÖ´ĞĞµÄÓï¾ä
-  /// @param[in] sentence_to_add £º´ıÌí¼ÓµÄÓï¾ä
-  /// @return ·µ»ØÌí¼ÓÊÇ·ñ³É¹¦
-  /// @retval true Ìí¼Ó³É¹¦£¬¶áÈ¡sentences_to_add¿ØÖÆÈ¨
-  /// @retval false ²»ÄÜÌí¼Ó£¬²»ĞŞ¸ÄÈë²Î
+  /// @brief æ·»åŠ ä¸€æ¡å‡½æ•°å†…æ‰§è¡Œçš„è¯­å¥
+  /// @param[in] sentence_to_add ï¼šå¾…æ·»åŠ çš„è¯­å¥
+  /// @return è¿”å›æ·»åŠ æ˜¯å¦æˆåŠŸ
+  /// @retval true æ·»åŠ æˆåŠŸï¼Œå¤ºå–sentences_to_addæ§åˆ¶æƒ
+  /// @retval false ä¸èƒ½æ·»åŠ ï¼Œä¸ä¿®æ”¹å…¥å‚
   /// @details
-  /// 1.¶ÔÓï¾äµÄÒªÇó²Î¿¼CheckSentenceInFunctionValid
-  /// 2.Ìí¼Óµ½ÒÑÌí¼ÓµÄÓï¾äÎ²²¿
+  /// 1.å¯¹è¯­å¥çš„è¦æ±‚å‚è€ƒCheckSentenceInFunctionValid
+  /// 2.æ·»åŠ åˆ°å·²æ·»åŠ çš„è¯­å¥å°¾éƒ¨
   bool AddSentence(std::unique_ptr<FlowInterface>&& sentence_to_add);
-  /// @brief Ìí¼ÓÒ»¸öÈİÆ÷ÄÚµÄÈ«²¿Óï¾ä
-  /// @param[in] sentence_container £º´æ´¢´ıÌí¼ÓÓï¾äµÄÈİÆ÷
-  /// @return ·µ»ØÌí¼ÓÊÇ·ñ³É¹¦
-  /// @retval true ³É¹¦Ìí¼Ó£¬ÒÆ¶¯sentence_containerÖĞËùÓĞ½Úµãµ½º¯ÊıÖ´ĞĞÓï¾äÈİÆ÷
-  /// @retval false ÈİÆ÷ÖĞ´æÔÚ·Ç·¨Óï¾ä£¬²»ÄÜÌí¼Ó£¬²»ĞŞ¸Äsentence_container
+  /// @brief æ·»åŠ ä¸€ä¸ªå®¹å™¨å†…çš„å…¨éƒ¨è¯­å¥
+  /// @param[in] sentence_container ï¼šå­˜å‚¨å¾…æ·»åŠ è¯­å¥çš„å®¹å™¨
+  /// @return è¿”å›æ·»åŠ æ˜¯å¦æˆåŠŸ
+  /// @retval true æˆåŠŸæ·»åŠ ï¼Œç§»åŠ¨sentence_containerä¸­æ‰€æœ‰èŠ‚ç‚¹åˆ°å‡½æ•°æ‰§è¡Œè¯­å¥å®¹å™¨
+  /// @retval false å®¹å™¨ä¸­å­˜åœ¨éæ³•è¯­å¥ï¼Œä¸èƒ½æ·»åŠ ï¼Œä¸ä¿®æ”¹sentence_container
   /// @details
-  /// 1.°´ÕÕ¸ø¶¨µü´úÆ÷begin->endË³ĞòÌí¼Ó
-  /// 2.¶ÔÓï¾äµÄÒªÇó²Î¿¼CheckSentenceInFunctionValid
+  /// 1.æŒ‰ç…§ç»™å®šè¿­ä»£å™¨begin->endé¡ºåºæ·»åŠ 
+  /// 2.å¯¹è¯­å¥çš„è¦æ±‚å‚è€ƒCheckSentenceInFunctionValid
   bool AddSentences(
       std::list<std::unique_ptr<FlowInterface>>&& sentence_container);
-  /// @brief »ñÈ¡º¯ÊıÌåÖ´ĞĞµÄÓï¾ä
-  /// @return ·µ»Ø´æ´¢Óï¾äµÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–å‡½æ•°ä½“æ‰§è¡Œçš„è¯­å¥
+  /// @return è¿”å›å­˜å‚¨è¯­å¥çš„å®¹å™¨çš„constå¼•ç”¨
   const std::list<std::unique_ptr<FlowInterface>>& GetSentences() const {
     return sentences_in_function_;
   }
-  /// @brief ¼ì²éÊÇ·ñÎªº¯ÊıÉùÃ÷
-  /// @return ·µ»ØÊÇ·ñÎªº¯ÊıÉùÃ÷
+  /// @brief æ£€æŸ¥æ˜¯å¦ä¸ºå‡½æ•°å£°æ˜
+  /// @return è¿”å›æ˜¯å¦ä¸ºå‡½æ•°å£°æ˜
   /// @details
-  /// º¯ÊıÉùÃ÷ÖĞ²»´æÔÚÈÎºÎÁ÷³Ì¿ØÖÆÓï¾ä
-  /// @attention ¿Õº¯ÊıÌåÄÚÓ¦°üº¬Ò»ÌõreturnÓï¾ä
+  /// å‡½æ•°å£°æ˜ä¸­ä¸å­˜åœ¨ä»»ä½•æµç¨‹æ§åˆ¶è¯­å¥
+  /// @attention ç©ºå‡½æ•°ä½“å†…åº”åŒ…å«ä¸€æ¡returnè¯­å¥
   bool IsFunctionAnnounce() const { return GetSentences().empty(); }
-  /// @brief ÉèÖÃº¯ÊıÀàĞÍ
-  /// @param[in] function_type £ºº¯ÊıÀàĞÍ
+  /// @brief è®¾ç½®å‡½æ•°ç±»å‹
+  /// @param[in] function_type ï¼šå‡½æ•°ç±»å‹
   void SetFunctionType(
       const std::shared_ptr<const FunctionType>& function_type) {
     function_type_ = function_type;
   }
-  /// @brief »ñÈ¡º¯ÊıÀàĞÍ
-  /// @return ·µ»ØÖ¸Ïòº¯ÊıÀàĞÍµÄconstÖ¸Õë
+  /// @brief è·å–å‡½æ•°ç±»å‹
+  /// @return è¿”å›æŒ‡å‘å‡½æ•°ç±»å‹çš„constæŒ‡é’ˆ
   std::shared_ptr<const FunctionType> GetFunctionTypePointer() const {
     return function_type_;
   }
-  /// @brief »ñÈ¡º¯ÊıÀàĞÍ
-  /// @return ·µ»Øº¯ÊıÀàĞÍµÄconstÒıÓÃ
+  /// @brief è·å–å‡½æ•°ç±»å‹
+  /// @return è¿”å›å‡½æ•°ç±»å‹çš„constå¼•ç”¨
   const FunctionType& GetFunctionTypeReference() const {
     return *function_type_;
   }
 
-  /// @brief ¼ì²é¸ø¶¨Óï¾äÊÇ·ñ¿ÉÒÔ×÷Îªº¯ÊıÄÚÖ´ĞĞµÄÓï¾ä
-  /// @param[in] flow_interface £º´ı¼ì²éµÄÓï¾ä
-  /// @return ·µ»Ø¸ø¶¨Óï¾äÊÇ·ñ¿ÉÒÔ×÷Îªº¯ÊıÄÚÖ´ĞĞµÄÓï¾ä
-  /// @retval true ÔÊĞíÔÚº¯ÊıÄÚÖ´ĞĞ
-  /// @retval false ²»ÔÊĞíÔÚº¯ÊıÄÚÖ´ĞĞ
+  /// @brief æ£€æŸ¥ç»™å®šè¯­å¥æ˜¯å¦å¯ä»¥ä½œä¸ºå‡½æ•°å†…æ‰§è¡Œçš„è¯­å¥
+  /// @param[in] flow_interface ï¼šå¾…æ£€æŸ¥çš„è¯­å¥
+  /// @return è¿”å›ç»™å®šè¯­å¥æ˜¯å¦å¯ä»¥ä½œä¸ºå‡½æ•°å†…æ‰§è¡Œçš„è¯­å¥
+  /// @retval true å…è®¸åœ¨å‡½æ•°å†…æ‰§è¡Œ
+  /// @retval false ä¸å…è®¸åœ¨å‡½æ•°å†…æ‰§è¡Œ
   /// @details
-  /// ¼ì²é·µ»ØÓï¾äµÄ·µ»ØÖµÊÇ·ñÓëº¯Êı¶¨ÒåµÄ·µ»ØÖµÆ¥Åä
-  /// ²»ÔÊĞíÇ¶Ì×ÉùÃ÷º¯Êı
+  /// æ£€æŸ¥è¿”å›è¯­å¥çš„è¿”å›å€¼æ˜¯å¦ä¸å‡½æ•°å®šä¹‰çš„è¿”å›å€¼åŒ¹é…
+  /// ä¸å…è®¸åµŒå¥—å£°æ˜å‡½æ•°
   bool CheckSentenceInFunctionValid(const FlowInterface& flow_interface) const;
 
  private:
-  /// @brief º¯ÊıµÄÀàĞÍ
+  /// @brief å‡½æ•°çš„ç±»å‹
   std::shared_ptr<const FunctionType> function_type_;
-  /// @brief º¯ÊıÌåÖĞÖ´ĞĞµÄÓï¾ä
+  /// @brief å‡½æ•°ä½“ä¸­æ‰§è¡Œçš„è¯­å¥
   std::list<std::unique_ptr<FlowInterface>> sentences_in_function_;
 };
 
 /// @class Return flow_control.h
-/// @brief ´Óº¯ÊıÖĞ·µ»Ø
-/// @note ²»¼ì²é·µ»ØµÄÖµ£¬¼ì²é²½ÖèÔÚÌí¼Óµ½º¯ÊıÌåÊ±Ö´ĞĞ
+/// @brief ä»å‡½æ•°ä¸­è¿”å›
+/// @note ä¸æ£€æŸ¥è¿”å›çš„å€¼ï¼Œæ£€æŸ¥æ­¥éª¤åœ¨æ·»åŠ åˆ°å‡½æ•°ä½“æ—¶æ‰§è¡Œ
 class Return : public FlowInterface {
  public:
   Return(const std::shared_ptr<const OperatorNodeInterface>& return_target =
@@ -293,148 +293,148 @@ class Return : public FlowInterface {
   virtual bool AddMainSentence(
       std::unique_ptr<FlowInterface>&& sentence) override {
     assert(false);
-    /// ·ÀÖ¹¾¯¸æ
+    /// é˜²æ­¢è­¦å‘Š
     return false;
   }
   virtual bool AddMainSentences(
       std::list<std::unique_ptr<FlowInterface>>&& sentences) override {
     assert(false);
-    /// ·ÀÖ¹¾¯¸æ
+    /// é˜²æ­¢è­¦å‘Š
     return false;
   }
 
-  /// @brief ÉèÖÃ·µ»ØÖµ
-  /// @param[in] return_target £º·µ»ØÖµ£¬²»´æÔÚÔòÊ¹ÓÃnullptr
+  /// @brief è®¾ç½®è¿”å›å€¼
+  /// @param[in] return_target ï¼šè¿”å›å€¼ï¼Œä¸å­˜åœ¨åˆ™ä½¿ç”¨nullptr
   void SetReturnValue(const std::shared_ptr<const OperatorNodeInterface>&
                           return_target = nullptr) {
     return_target_ = return_target;
   }
-  /// @brief »ñÈ¡·µ»ØµÄÖµ
-  /// @return ·µ»ØÖ¸Ïò·µ»ØµÄÖµµÄconstÖ¸Õë
+  /// @brief è·å–è¿”å›çš„å€¼
+  /// @return è¿”å›æŒ‡å‘è¿”å›çš„å€¼çš„constæŒ‡é’ˆ
   std::shared_ptr<const OperatorNodeInterface> GetReturnValuePointer() const {
     return return_target_;
   }
-  /// @brief »ñÈ¡·µ»ØµÄÖµ
-  /// @return ·µ»ØÖ¸Ïò·µ»ØµÄÖµµÄconstÖ¸Õë
+  /// @brief è·å–è¿”å›çš„å€¼
+  /// @return è¿”å›æŒ‡å‘è¿”å›çš„å€¼çš„constæŒ‡é’ˆ
   const OperatorNodeInterface& GetReturnValueReference() const {
     return *return_target_;
   }
 
  private:
-  /// @brief ·µ»ØÖµ£¬nullptr´ú±íÎŞ·µ»ØÖµ
+  /// @brief è¿”å›å€¼ï¼Œnullpträ»£è¡¨æ— è¿”å›å€¼
   std::shared_ptr<const OperatorNodeInterface> return_target_;
 };
 
 /// @class ConditionBlockInterface flow_control.h
-/// @brief Ìõ¼ş¿ØÖÆ¿é»ùÀà£¨if¡¢for¡¢while¡¢switchµÈ£©
+/// @brief æ¡ä»¶æ§åˆ¶å—åŸºç±»ï¼ˆifã€forã€whileã€switchç­‰ï¼‰
 /// @details
-/// 1.¿ØÖÆ¿éÖ÷ÌåÀı£º
-///   if(condition) { // Ö÷Ìå } else { // Ö÷Ìå }
-///   for(int i = 0;i < x;i++){ // Ö÷Ìå }
-/// 2.¿ØÖÆ¿éÌõ¼şÖ¸ÅĞ¶Ï¿ØÖÆ¿éÊÇ·ñÖ´ĞĞ/Ìø×ª·½ÏòµÄÓï¾ä£¬Èç1ÖĞifÓï¾äµÄcondition£¬
-///   forÖĞµÄi < x;
-/// @attention ÅÉÉúÀà²»Ó¦ĞŞ¸Ä½Ó¿ÚÓïÒåÇÒ²»¿ÉÒÔÈÎºÎ·½Ê½ÖØĞ´»òÈÆ¹ı½Ó¿Ú
+/// 1.æ§åˆ¶å—ä¸»ä½“ä¾‹ï¼š
+///   if(condition) { // ä¸»ä½“ } else { // ä¸»ä½“ }
+///   for(int i = 0;i < x;i++){ // ä¸»ä½“ }
+/// 2.æ§åˆ¶å—æ¡ä»¶æŒ‡åˆ¤æ–­æ§åˆ¶å—æ˜¯å¦æ‰§è¡Œ/è·³è½¬æ–¹å‘çš„è¯­å¥ï¼Œå¦‚1ä¸­ifè¯­å¥çš„conditionï¼Œ
+///   forä¸­çš„i < x;
+/// @attention æ´¾ç”Ÿç±»ä¸åº”ä¿®æ”¹æ¥å£è¯­ä¹‰ä¸”ä¸å¯ä»¥ä»»ä½•æ–¹å¼é‡å†™æˆ–ç»•è¿‡æ¥å£
 class ConditionBlockInterface : public FlowInterface {
  public:
   ConditionBlockInterface(FlowType flow_type) : FlowInterface(flow_type) {}
 
-  /// @brief Éè¶¨Ìõ¼ş¿ØÖÆÓï¾äµÄÌõ¼şÓë»ñÈ¡Ìõ¼şµÄ²Ù×÷
-  /// @param[in] condition £ºÌõ¼ş½Úµã
-  /// @param[in] sentences_to_get_condition £º»ñÈ¡Ìõ¼şµÄ²Ù×÷
-  /// @return ·µ»ØÊÇ·ñÉèÖÃ³É¹¦
-  /// @retval true £ºÉèÖÃ³É¹¦
-  /// @retval false £ºcondition²»ÄÜ×÷ÎªÌõ¼ş¿ØÖÆÓï¾äµÄÌõ¼ş
+  /// @brief è®¾å®šæ¡ä»¶æ§åˆ¶è¯­å¥çš„æ¡ä»¶ä¸è·å–æ¡ä»¶çš„æ“ä½œ
+  /// @param[in] condition ï¼šæ¡ä»¶èŠ‚ç‚¹
+  /// @param[in] sentences_to_get_condition ï¼šè·å–æ¡ä»¶çš„æ“ä½œ
+  /// @return è¿”å›æ˜¯å¦è®¾ç½®æˆåŠŸ
+  /// @retval true ï¼šè®¾ç½®æˆåŠŸ
+  /// @retval false ï¼šconditionä¸èƒ½ä½œä¸ºæ¡ä»¶æ§åˆ¶è¯­å¥çš„æ¡ä»¶
   /// @details
-  /// 1.ÎŞ·¨ÉèÖÃÔò²»»áÉèÖÃ
-  /// 2.³É¹¦ÉèÖÃºó¶áÈ¡conditionµÄ¿ØÖÆÈ¨
-  /// 3.²»ÄÜÉèÖÃÔò²»ĞŞ¸Äcondition
-  /// 4.¶ÔÌõ¼ş½ÚµãµÄÒªÇó²Î¿¼DefaultConditionCheck
+  /// 1.æ— æ³•è®¾ç½®åˆ™ä¸ä¼šè®¾ç½®
+  /// 2.æˆåŠŸè®¾ç½®åå¤ºå–conditionçš„æ§åˆ¶æƒ
+  /// 3.ä¸èƒ½è®¾ç½®åˆ™ä¸ä¿®æ”¹condition
+  /// 4.å¯¹æ¡ä»¶èŠ‚ç‚¹çš„è¦æ±‚å‚è€ƒDefaultConditionCheck
   bool SetCondition(
       const std::shared_ptr<const OperatorNodeInterface>& condition,
       std::list<std::unique_ptr<FlowInterface>>&& sentences_to_get_condition);
-  /// @brief »ñÈ¡µÃµ½Ìõ¼ş½ÚµãµÄ²Ù×÷
-  /// @return ·µ»Ø´æ´¢²Ù×÷µÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–å¾—åˆ°æ¡ä»¶èŠ‚ç‚¹çš„æ“ä½œ
+  /// @return è¿”å›å­˜å‚¨æ“ä½œçš„å®¹å™¨çš„constå¼•ç”¨
   const std::list<std::unique_ptr<FlowInterface>>& GetSentenceToGetCondition()
       const {
     return sentence_to_get_condition_;
   }
-  /// @brief »ñÈ¡Ìõ¼ş½Úµã
-  /// @return ·µ»ØÖ¸ÏòÌõ¼ş½ÚµãµÄconstÖ¸Õë
+  /// @brief è·å–æ¡ä»¶èŠ‚ç‚¹
+  /// @return è¿”å›æŒ‡å‘æ¡ä»¶èŠ‚ç‚¹çš„constæŒ‡é’ˆ
   std::shared_ptr<const OperatorNodeInterface> GetConditionPointer() const {
     return condition_;
   }
-  /// @brief »ñÈ¡Ìõ¼ş½Úµã
-  /// @return ·µ»ØÌõ¼ş½ÚµãµÄconstÒıÓÃ
+  /// @brief è·å–æ¡ä»¶èŠ‚ç‚¹
+  /// @return è¿”å›æ¡ä»¶èŠ‚ç‚¹çš„constå¼•ç”¨
   const OperatorNodeInterface& GetConditionReference() const {
     return *condition_;
   }
-  /// @brief ÏòÖ÷ÌåÄÚÌí¼ÓÒ»ÌõÓï¾ä
-  /// @param[in] sentence £º´ıÌí¼ÓµÄÓï¾ä
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦
-  /// @retval false £º¸ÃÓï¾ä²»ÄÜÌí¼Óµ½Ìõ¼ş¿ØÖÆÓï¾äÖ÷ÌåÖĞ
+  /// @brief å‘ä¸»ä½“å†…æ·»åŠ ä¸€æ¡è¯­å¥
+  /// @param[in] sentence ï¼šå¾…æ·»åŠ çš„è¯­å¥
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸ
+  /// @retval false ï¼šè¯¥è¯­å¥ä¸èƒ½æ·»åŠ åˆ°æ¡ä»¶æ§åˆ¶è¯­å¥ä¸»ä½“ä¸­
   /// @details
-  /// 1.ÎŞ·¨Ìí¼ÓÔò²»ĞŞ¸Äsentence
-  /// 2.³É¹¦Ìí¼ÓÔò¶áÈ¡sentence¿ØÖÆÈ¨
-  /// 3.ËùÓĞÓï¾äÌí¼Óµ½ÒÑÓĞµÄÓï¾äºó
-  /// 4.¶ÔÓï¾äµÄÒªÇó²Î¿¼DefaultMainBlockSentenceCheck
+  /// 1.æ— æ³•æ·»åŠ åˆ™ä¸ä¿®æ”¹sentence
+  /// 2.æˆåŠŸæ·»åŠ åˆ™å¤ºå–sentenceæ§åˆ¶æƒ
+  /// 3.æ‰€æœ‰è¯­å¥æ·»åŠ åˆ°å·²æœ‰çš„è¯­å¥å
+  /// 4.å¯¹è¯­å¥çš„è¦æ±‚å‚è€ƒDefaultMainBlockSentenceCheck
   bool AddSentence(std::unique_ptr<FlowInterface>&& sentence);
-  /// @brief ÏòÖ÷ÌåÄÚÌí¼Ó¶àÌõÓï¾ä
-  /// @param[in] sentences £º´æ´¢´ıÌí¼ÓµÄÓï¾äµÄÈİÆ÷
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true £ºÌí¼Ó³É¹¦
-  /// @retval false £º¸ÃÓï¾ä²»ÄÜÌí¼Óµ½Ìõ¼ş¿ØÖÆÓï¾äÖ÷ÌåÖĞ
+  /// @brief å‘ä¸»ä½“å†…æ·»åŠ å¤šæ¡è¯­å¥
+  /// @param[in] sentences ï¼šå­˜å‚¨å¾…æ·»åŠ çš„è¯­å¥çš„å®¹å™¨
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸ
+  /// @retval false ï¼šè¯¥è¯­å¥ä¸èƒ½æ·»åŠ åˆ°æ¡ä»¶æ§åˆ¶è¯­å¥ä¸»ä½“ä¸­
   /// @details
-  /// 1.ÎŞ·¨Ìí¼ÓÔò²»ĞŞ¸Äsentence
-  /// 2.³É¹¦Ìí¼ÓÔò¶áÈ¡sentence¿ØÖÆÈ¨
-  /// 3.ËùÓĞÓï¾äÌí¼Óµ½ÒÑÓĞµÄÓï¾äºó
-  /// 4.°´begin->endµÄË³ĞòÌí¼ÓÈİÆ÷ÄÚµÄÓï¾ä
-  /// 5.¶ÔÓï¾äµÄÒªÇó²Î¿¼DefaultMainBlockSentenceCheck
+  /// 1.æ— æ³•æ·»åŠ åˆ™ä¸ä¿®æ”¹sentence
+  /// 2.æˆåŠŸæ·»åŠ åˆ™å¤ºå–sentenceæ§åˆ¶æƒ
+  /// 3.æ‰€æœ‰è¯­å¥æ·»åŠ åˆ°å·²æœ‰çš„è¯­å¥å
+  /// 4.æŒ‰begin->endçš„é¡ºåºæ·»åŠ å®¹å™¨å†…çš„è¯­å¥
+  /// 5.å¯¹è¯­å¥çš„è¦æ±‚å‚è€ƒDefaultMainBlockSentenceCheck
   bool AddSentences(std::list<std::unique_ptr<FlowInterface>>&& sentences);
-  /// @brief »ñÈ¡ËùÓĞÒÑÌí¼ÓµÄÓï¾ä
-  /// @return ·µ»Ø´æ´¢Óï¾äµÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–æ‰€æœ‰å·²æ·»åŠ çš„è¯­å¥
+  /// @return è¿”å›å­˜å‚¨è¯­å¥çš„å®¹å™¨çš„constå¼•ç”¨
   const auto& GetSentences() const { return main_block_; }
-  /// @brief »ñÈ¡¿éÆğÊ¼´¦±êÇ©
-  /// @return ·µ»Ø¿éÆğÊ¼´¦±êÇ©
+  /// @brief è·å–å—èµ·å§‹å¤„æ ‡ç­¾
+  /// @return è¿”å›å—èµ·å§‹å¤„æ ‡ç­¾
   std::unique_ptr<Label> GetSentenceStartLabel() const {
     return std::make_unique<Label>(
         std::format("condition_block_{:}_start", GetFlowId().GetRawValue()));
   }
-  /// @brief »ñÈ¡¿é½áÊø´¦±êÇ©
-  /// @return ·µ»Ø¿é½áÊø´¦±êÇ©
+  /// @brief è·å–å—ç»“æŸå¤„æ ‡ç­¾
+  /// @return è¿”å›å—ç»“æŸå¤„æ ‡ç­¾
   std::unique_ptr<Label> GetSentenceEndLabel() const {
     return std::make_unique<Label>(
         std::format("condition_block_{:}_end", GetFlowId().GetRawValue()));
   }
 
-  /// @brief Ä¬ÈÏ¶ÔÑ­»·Ìõ¼ş½Úµã½øĞĞÀàĞÍ¼ì²éµÄº¯Êı
-  /// @param[in] condition_node £º´ı¼ì²éµÄÌõ¼ş½Úµã
-  /// @return ·µ»Ø¸ø¶¨½ÚµãÊÇ·ñ¿ÉÒÔ×÷ÎªÌõ¼ş¿ØÖÆÓï¾äµÄÌõ¼ş
-  /// @retval true ¸ø¶¨½ÚµãÔÊĞí×÷ÎªÌõ¼ş¿ØÖÆÓï¾äµÄÌõ¼ş
-  /// @retval false ¸ø¶¨½Úµã²»ÄÜ×÷ÎªÌõ¼ş¿ØÖÆÓï¾äµÄÌõ¼ş
+  /// @brief é»˜è®¤å¯¹å¾ªç¯æ¡ä»¶èŠ‚ç‚¹è¿›è¡Œç±»å‹æ£€æŸ¥çš„å‡½æ•°
+  /// @param[in] condition_node ï¼šå¾…æ£€æŸ¥çš„æ¡ä»¶èŠ‚ç‚¹
+  /// @return è¿”å›ç»™å®šèŠ‚ç‚¹æ˜¯å¦å¯ä»¥ä½œä¸ºæ¡ä»¶æ§åˆ¶è¯­å¥çš„æ¡ä»¶
+  /// @retval true ç»™å®šèŠ‚ç‚¹å…è®¸ä½œä¸ºæ¡ä»¶æ§åˆ¶è¯­å¥çš„æ¡ä»¶
+  /// @retval false ç»™å®šèŠ‚ç‚¹ä¸èƒ½ä½œä¸ºæ¡ä»¶æ§åˆ¶è¯­å¥çš„æ¡ä»¶
   static bool DefaultConditionCheck(
       const OperatorNodeInterface& condition_node);
-  /// @brief Ä¬ÈÏ¼ì²éÖ÷ÌåÄÚÓï¾äµÄº¯Êı
-  /// @param[in] flow_interface £º´ı¼ì²éµÄÓï¾ä
-  /// @return ·µ»Ø¸ø¶¨Á÷³Ì¿ØÖÆ½ÚµãÊÇ·ñ¿ÉÒÔ×÷ÎªÌõ¼ş¿ØÖÆÓï¾äÖ÷ÌåµÄÄÚÈİ
-  /// @retval true ¸ø¶¨½ÚµãÔÊĞí×÷ÎªÌõ¼ş¿ØÖÆÓï¾äÖ÷ÌåµÄÄÚÈİ
-  /// @retval false ¸ø¶¨½Úµã²»ÄÜ×÷ÎªÌõ¼ş¿ØÖÆÓï¾äÖ÷ÌåµÄÄÚÈİ
+  /// @brief é»˜è®¤æ£€æŸ¥ä¸»ä½“å†…è¯­å¥çš„å‡½æ•°
+  /// @param[in] flow_interface ï¼šå¾…æ£€æŸ¥çš„è¯­å¥
+  /// @return è¿”å›ç»™å®šæµç¨‹æ§åˆ¶èŠ‚ç‚¹æ˜¯å¦å¯ä»¥ä½œä¸ºæ¡ä»¶æ§åˆ¶è¯­å¥ä¸»ä½“çš„å†…å®¹
+  /// @retval true ç»™å®šèŠ‚ç‚¹å…è®¸ä½œä¸ºæ¡ä»¶æ§åˆ¶è¯­å¥ä¸»ä½“çš„å†…å®¹
+  /// @retval false ç»™å®šèŠ‚ç‚¹ä¸èƒ½ä½œä¸ºæ¡ä»¶æ§åˆ¶è¯­å¥ä¸»ä½“çš„å†…å®¹
   static bool DefaultMainBlockSentenceCheck(
       const FlowInterface& flow_interface);
 
  private:
-  /// @brief ¿ØÖÆ¿éµÄÌõ¼ş
+  /// @brief æ§åˆ¶å—çš„æ¡ä»¶
   std::shared_ptr<const OperatorNodeInterface> condition_;
-  /// @brief »ñÈ¡¿ØÖÆ¿éÌõ¼şµÄÓï¾ä
+  /// @brief è·å–æ§åˆ¶å—æ¡ä»¶çš„è¯­å¥
   std::list<std::unique_ptr<FlowInterface>> sentence_to_get_condition_;
-  /// @brief ¿ØÖÆ¿éÖ÷ÌåµÄÄÚÈİ
+  /// @brief æ§åˆ¶å—ä¸»ä½“çš„å†…å®¹
   std::list<std::unique_ptr<FlowInterface>> main_block_;
 };
 
 /// @class SimpleSentence flow_control.h
-/// @brief »ù´¡Óï¾ä
+/// @brief åŸºç¡€è¯­å¥
 /// @details
-/// ËùÓĞ¼Ì³Ğ×ÔOperatorNodeInterface¾ùÊôÓÚ¸ÃÀà
+/// æ‰€æœ‰ç»§æ‰¿è‡ªOperatorNodeInterfaceå‡å±äºè¯¥ç±»
 class SimpleSentence : public FlowInterface {
  public:
   SimpleSentence() : FlowInterface(FlowType::kSimpleSentence) {}
@@ -442,141 +442,141 @@ class SimpleSentence : public FlowInterface {
   virtual bool AddMainSentence(
       std::unique_ptr<FlowInterface>&& sentence) override {
     assert(false);
-    /// ·ÀÖ¹¾¯¸æ
+    /// é˜²æ­¢è­¦å‘Š
     return false;
   }
   virtual bool AddMainSentences(
       std::list<std::unique_ptr<FlowInterface>>&& sentences) override {
     assert(false);
-    /// ·ÀÖ¹¾¯¸æ
+    /// é˜²æ­¢è­¦å‘Š
     return false;
   }
 
-  /// @brief ÉèÖÃ¸ÃÓï¾ä±£´æµÄÓï¾ä
-  /// @param[in] sentence_operate_node £º´ı±£´æµÄ²Ù×÷
-  /// @return ·µ»ØÊÇ·ñÉèÖÃ³É¹¦
-  /// @retval true £ºÉèÖÃ³É¹¦
-  /// @retval false £º²»Ö§³Ö´ı±£´æµÄ²Ù×÷£¬ÎŞ·¨ÉèÖÃ
-  /// @note ¶Ô±£´æµÄ²Ù×÷µÄÒªÇó²Î¿¼CheckOperatorNodeValid
+  /// @brief è®¾ç½®è¯¥è¯­å¥ä¿å­˜çš„è¯­å¥
+  /// @param[in] sentence_operate_node ï¼šå¾…ä¿å­˜çš„æ“ä½œ
+  /// @return è¿”å›æ˜¯å¦è®¾ç½®æˆåŠŸ
+  /// @retval true ï¼šè®¾ç½®æˆåŠŸ
+  /// @retval false ï¼šä¸æ”¯æŒå¾…ä¿å­˜çš„æ“ä½œï¼Œæ— æ³•è®¾ç½®
+  /// @note å¯¹ä¿å­˜çš„æ“ä½œçš„è¦æ±‚å‚è€ƒCheckOperatorNodeValid
   bool SetSentenceOperateNode(
       const std::shared_ptr<OperatorNodeInterface>& sentence_operate_node);
-  /// @brief »ñÈ¡±£´æµÄ²Ù×÷
-  /// @return ·µ»ØÖ¸Ïò±£´æµÄ²Ù×÷½ÚµãµÄconstÖ¸Õë
+  /// @brief è·å–ä¿å­˜çš„æ“ä½œ
+  /// @return è¿”å›æŒ‡å‘ä¿å­˜çš„æ“ä½œèŠ‚ç‚¹çš„constæŒ‡é’ˆ
   std::shared_ptr<OperatorNodeInterface> GetSentenceOperateNodePointer() const {
     return sentence_operate_node_;
   }
-  /// @brief »ñÈ¡±£´æµÄ²Ù×÷
-  /// @return ·µ»Ø±£´æµÄ²Ù×÷½ÚµãµÄconstÒıÓÃ
+  /// @brief è·å–ä¿å­˜çš„æ“ä½œ
+  /// @return è¿”å›ä¿å­˜çš„æ“ä½œèŠ‚ç‚¹çš„constå¼•ç”¨
   OperatorNodeInterface& GetSentenceOperateNodeReference() const {
     return *sentence_operate_node_;
   }
 
-  /// @brief ¼ì²é¸ø¶¨½ÚµãÊÇ·ñ¿ÉÒÔ±£´æ
-  /// @param[in] operator_node £º±£´æµÄ²Ù×÷
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔ±£´æ
-  /// @retval true £º¿ÉÒÔ±£´æ
-  /// @retval false £º²»¿ÉÒÔ±£´æ
+  /// @brief æ£€æŸ¥ç»™å®šèŠ‚ç‚¹æ˜¯å¦å¯ä»¥ä¿å­˜
+  /// @param[in] operator_node ï¼šä¿å­˜çš„æ“ä½œ
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥ä¿å­˜
+  /// @retval true ï¼šå¯ä»¥ä¿å­˜
+  /// @retval false ï¼šä¸å¯ä»¥ä¿å­˜
   static bool CheckOperatorNodeValid(
       const OperatorNodeInterface& operator_node);
 
  private:
-  /// @brief ²Ù×÷½Úµã
+  /// @brief æ“ä½œèŠ‚ç‚¹
   std::shared_ptr<OperatorNodeInterface> sentence_operate_node_;
 };
 
 /// @class IfSentence flow_control.h
-/// @brief ifºÍif-elseÓï¾ä
+/// @brief ifå’Œif-elseè¯­å¥
 class IfSentence : public ConditionBlockInterface {
  public:
-  // ¸Õ´´½¨Ê±Ö»ÓĞtrue·ÖÖ§
+  // åˆšåˆ›å»ºæ—¶åªæœ‰trueåˆ†æ”¯
   IfSentence() : ConditionBlockInterface(FlowType::kIfSentence) {}
 
   /// @details
-  /// ¸ù¾İifÓï¾äÀàĞÍÅĞ¶ÏÓ¦¸ÃÌí¼Óµ½ÄÄ¸ö²¿·Ö
-  /// Èç¹ûÊÇFlowType::kIfSentenceÔòÌí¼Óµ½true_branch
-  /// Èç¹ûÊÇFlowType::kIfElseSentenceÔòÌí¼Óµ½false_branch
+  /// æ ¹æ®ifè¯­å¥ç±»å‹åˆ¤æ–­åº”è¯¥æ·»åŠ åˆ°å“ªä¸ªéƒ¨åˆ†
+  /// å¦‚æœæ˜¯FlowType::kIfSentenceåˆ™æ·»åŠ åˆ°true_branch
+  /// å¦‚æœæ˜¯FlowType::kIfElseSentenceåˆ™æ·»åŠ åˆ°false_branch
   virtual bool AddMainSentence(
       std::unique_ptr<FlowInterface>&& sentence) override;
   /// @details
-  /// ¸ù¾İifÓï¾äÀàĞÍÅĞ¶ÏÓ¦¸ÃÌí¼Óµ½ÄÄ¸ö²¿·Ö
-  /// Èç¹ûÊÇFlowType::kIfSentenceÔòÌí¼Óµ½true_branch
-  /// Èç¹ûÊÇFlowType::kIfElseSentenceÔòÌí¼Óµ½false_branch
+  /// æ ¹æ®ifè¯­å¥ç±»å‹åˆ¤æ–­åº”è¯¥æ·»åŠ åˆ°å“ªä¸ªéƒ¨åˆ†
+  /// å¦‚æœæ˜¯FlowType::kIfSentenceåˆ™æ·»åŠ åˆ°true_branch
+  /// å¦‚æœæ˜¯FlowType::kIfElseSentenceåˆ™æ·»åŠ åˆ°false_branch
   virtual bool AddMainSentences(
       std::list<std::unique_ptr<FlowInterface>>&& sentences) override;
 
-  /// @brief ½«¸Ã½Úµã×ª»¯Îªif-elseÓï¾ä
-  /// @note ×Ô¶¯·ÖÅäelse¿éµÄ´æ´¢½á¹¹
+  /// @brief å°†è¯¥èŠ‚ç‚¹è½¬åŒ–ä¸ºif-elseè¯­å¥
+  /// @note è‡ªåŠ¨åˆ†é…elseå—çš„å­˜å‚¨ç»“æ„
   void ConvertToIfElse();
-  /// @brief Ìí¼ÓÕæ·ÖÖ§ÄÚÖ´ĞĞµÄÒ»ÌõÓï¾ä
-  /// @param[in] if_body_sentence £º´ıÌí¼ÓµÄÓï¾ä
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔÌí¼Ó
-  /// @retval true Ìí¼Ó³É¹¦£¬¶áÈ¡if_body_sentence¿ØÖÆÈ¨
-  /// @retval false ¸ø¶¨Óï¾ä²»ÄÜÌí¼Óµ½Õæ·ÖÖ§ÄÚ£¬²»»áÌí¼ÓÇÒ²»ĞŞ¸Ä²ÎÊı
-  /// @note Ìí¼Óµ½ÒÑ´æÔÚµÄÓï¾äºó
-  /// ¶ÔÓï¾äµÄÒªÇó²Î¿¼AddSentenceµÄÒªÇó
+  /// @brief æ·»åŠ çœŸåˆ†æ”¯å†…æ‰§è¡Œçš„ä¸€æ¡è¯­å¥
+  /// @param[in] if_body_sentence ï¼šå¾…æ·»åŠ çš„è¯­å¥
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥æ·»åŠ 
+  /// @retval true æ·»åŠ æˆåŠŸï¼Œå¤ºå–if_body_sentenceæ§åˆ¶æƒ
+  /// @retval false ç»™å®šè¯­å¥ä¸èƒ½æ·»åŠ åˆ°çœŸåˆ†æ”¯å†…ï¼Œä¸ä¼šæ·»åŠ ä¸”ä¸ä¿®æ”¹å‚æ•°
+  /// @note æ·»åŠ åˆ°å·²å­˜åœ¨çš„è¯­å¥å
+  /// å¯¹è¯­å¥çš„è¦æ±‚å‚è€ƒAddSentenceçš„è¦æ±‚
   bool AddTrueBranchSentence(
       std::unique_ptr<FlowInterface>&& if_body_sentence) {
-    // ÔÚAddMainBlockSentenceÖĞ¼ì²é
+    // åœ¨AddMainBlockSentenceä¸­æ£€æŸ¥
     return AddSentence(std::move(if_body_sentence));
   }
-  /// @brief Ìí¼ÓÕæ·ÖÖ§ÄÚÖ´ĞĞµÄ¶àÌõÓï¾ä
-  /// @param[in] if_body_sentences £º´æ´¢´ıÌí¼ÓµÄÓï¾äµÄÈİÆ÷
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔÌí¼Ó
-  /// @retval true £ºÌí¼Ó³É¹¦£¬½«if_body_sentencesÄÚÓï¾äÒÆ¶¯µ½Õæ·ÖÖ§Óï¾äÈİÆ÷ÄÚ
-  /// @retval false £ºÈİÆ÷ÄÚÄ³ÌõÓï¾ä²»ÄÜÌí¼Óµ½Õæ·ÖÖ§ÄÚ£¬²»»áÌí¼ÓÇÒ²»ĞŞ¸Ä²ÎÊı
-  /// @note ´Óbegin->endË³ĞòÌí¼Ó£¬Ìí¼Óµ½ÒÑ´æÔÚµÄÓï¾äºó
-  /// ¶ÔÓï¾äµÄÒªÇó²Î¿¼AddSentenceµÄÒªÇó
+  /// @brief æ·»åŠ çœŸåˆ†æ”¯å†…æ‰§è¡Œçš„å¤šæ¡è¯­å¥
+  /// @param[in] if_body_sentences ï¼šå­˜å‚¨å¾…æ·»åŠ çš„è¯­å¥çš„å®¹å™¨
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥æ·»åŠ 
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸï¼Œå°†if_body_sentenceså†…è¯­å¥ç§»åŠ¨åˆ°çœŸåˆ†æ”¯è¯­å¥å®¹å™¨å†…
+  /// @retval false ï¼šå®¹å™¨å†…æŸæ¡è¯­å¥ä¸èƒ½æ·»åŠ åˆ°çœŸåˆ†æ”¯å†…ï¼Œä¸ä¼šæ·»åŠ ä¸”ä¸ä¿®æ”¹å‚æ•°
+  /// @note ä»begin->endé¡ºåºæ·»åŠ ï¼Œæ·»åŠ åˆ°å·²å­˜åœ¨çš„è¯­å¥å
+  /// å¯¹è¯­å¥çš„è¦æ±‚å‚è€ƒAddSentenceçš„è¦æ±‚
   bool AddTrueBranchSentences(
       std::list<std::unique_ptr<FlowInterface>>&& if_body_sentences) {
     return AddSentences(std::move(if_body_sentences));
   }
-  /// @brief Ìí¼Ó¼Ù·ÖÖ§ÄÚÖ´ĞĞµÄÒ»ÌõÓï¾ä
-  /// @param[in] else_body_sentence £º´ıÌí¼ÓµÄÓï¾ä
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔÌí¼Ó
-  /// @retval true Ìí¼Ó³É¹¦£¬¶áÈ¡else_body_sentence¿ØÖÆÈ¨
-  /// @retval false ¸ø¶¨Óï¾ä²»ÄÜÌí¼Óµ½¼Ù·ÖÖ§ÄÚ£¬²»»áÌí¼ÓÇÒ²»ĞŞ¸Ä²ÎÊı
-  /// @note Ìí¼Óµ½ÒÑ´æÔÚµÄÓï¾äºó
-  /// ¶ÔÓï¾äµÄÒªÇó²Î¿¼CheckElseBodySentenceValid
-  /// @attention ±ØĞëµ÷ÓÃ¹ıConvertToIfElse
+  /// @brief æ·»åŠ å‡åˆ†æ”¯å†…æ‰§è¡Œçš„ä¸€æ¡è¯­å¥
+  /// @param[in] else_body_sentence ï¼šå¾…æ·»åŠ çš„è¯­å¥
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥æ·»åŠ 
+  /// @retval true æ·»åŠ æˆåŠŸï¼Œå¤ºå–else_body_sentenceæ§åˆ¶æƒ
+  /// @retval false ç»™å®šè¯­å¥ä¸èƒ½æ·»åŠ åˆ°å‡åˆ†æ”¯å†…ï¼Œä¸ä¼šæ·»åŠ ä¸”ä¸ä¿®æ”¹å‚æ•°
+  /// @note æ·»åŠ åˆ°å·²å­˜åœ¨çš„è¯­å¥å
+  /// å¯¹è¯­å¥çš„è¦æ±‚å‚è€ƒCheckElseBodySentenceValid
+  /// @attention å¿…é¡»è°ƒç”¨è¿‡ConvertToIfElse
   bool AddFalseBranchSentence(
       std::unique_ptr<FlowInterface>&& else_body_sentence);
-  /// @brief Ìí¼Ó¼Ù·ÖÖ§ÄÚÖ´ĞĞµÄ¶àÌõÓï¾ä
-  /// @param[in] else_body_sentences £º´æ´¢´ıÌí¼ÓµÄÓï¾äµÄÈİÆ÷
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔÌí¼Ó
-  /// @retval true £ºÌí¼Ó³É¹¦£¬½«else_body_sentencesÄÚÓï¾äÒÆ¶¯µ½¼Ù·ÖÖ§Óï¾äÈİÆ÷ÄÚ
-  /// @retval false £ºÈİÆ÷ÄÚÄ³ÌõÓï¾ä²»ÄÜÌí¼Óµ½¼Ù·ÖÖ§ÄÚ£¬²»»áÌí¼ÓÇÒ²»ĞŞ¸Ä²ÎÊı
-  /// @note ´Óbegin->endË³ĞòÌí¼Ó£¬Ìí¼Óµ½ÒÑ´æÔÚµÄÓï¾äºó
-  /// ¶ÔÓï¾äµÄÒªÇó²Î¿¼CheckElseBodySentenceValid
-  /// @attention ±ØĞëµ÷ÓÃ¹ıConvertToIfElse
+  /// @brief æ·»åŠ å‡åˆ†æ”¯å†…æ‰§è¡Œçš„å¤šæ¡è¯­å¥
+  /// @param[in] else_body_sentences ï¼šå­˜å‚¨å¾…æ·»åŠ çš„è¯­å¥çš„å®¹å™¨
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥æ·»åŠ 
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸï¼Œå°†else_body_sentenceså†…è¯­å¥ç§»åŠ¨åˆ°å‡åˆ†æ”¯è¯­å¥å®¹å™¨å†…
+  /// @retval false ï¼šå®¹å™¨å†…æŸæ¡è¯­å¥ä¸èƒ½æ·»åŠ åˆ°å‡åˆ†æ”¯å†…ï¼Œä¸ä¼šæ·»åŠ ä¸”ä¸ä¿®æ”¹å‚æ•°
+  /// @note ä»begin->endé¡ºåºæ·»åŠ ï¼Œæ·»åŠ åˆ°å·²å­˜åœ¨çš„è¯­å¥å
+  /// å¯¹è¯­å¥çš„è¦æ±‚å‚è€ƒCheckElseBodySentenceValid
+  /// @attention å¿…é¡»è°ƒç”¨è¿‡ConvertToIfElse
   bool AddFalseBranchSentences(
       std::list<std::unique_ptr<FlowInterface>>&& else_body_sentences);
-  /// @brief »ñÈ¡Õæ·ÖÖ§Ö´ĞĞµÄÈ«²¿Óï¾ä
-  /// @return ·µ»ØÖ¸Ïò´æ´¢Õæ·ÖÖ§Ö´ĞĞµÄÓï¾äµÄÈİÆ÷µÄconstÖ¸Õë
+  /// @brief è·å–çœŸåˆ†æ”¯æ‰§è¡Œçš„å…¨éƒ¨è¯­å¥
+  /// @return è¿”å›æŒ‡å‘å­˜å‚¨çœŸåˆ†æ”¯æ‰§è¡Œçš„è¯­å¥çš„å®¹å™¨çš„constæŒ‡é’ˆ
   const auto& GetTrueBranchSentences() const { return GetSentences(); }
-  /// @brief »ñÈ¡¼Ù·ÖÖ§Ö´ĞĞµÄÈ«²¿Óï¾ä
-  /// @return ·µ»Ø´æ´¢¼Ù·ÖÖ§Ö´ĞĞµÄÓï¾äµÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–å‡åˆ†æ”¯æ‰§è¡Œçš„å…¨éƒ¨è¯­å¥
+  /// @return è¿”å›å­˜å‚¨å‡åˆ†æ”¯æ‰§è¡Œçš„è¯­å¥çš„å®¹å™¨çš„constå¼•ç”¨
   const auto& GetFalseBranchSentences() const { return else_body_; }
 
-  /// @brief ¼ì²é¸ø¶¨Óï¾äÊÇ·ñ¿ÉÒÔÌí¼Óµ½¼Ù·ÖÖ§ÄÚ
-  /// @param[in] else_body_sentence £º´ı¼ì²éµÄÓï¾ä
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔÌí¼Ó
-  /// @retval true £º¿ÉÒÔÌí¼Ó
-  /// @retval false £º²»¿ÉÒÔÌí¼Ó
+  /// @brief æ£€æŸ¥ç»™å®šè¯­å¥æ˜¯å¦å¯ä»¥æ·»åŠ åˆ°å‡åˆ†æ”¯å†…
+  /// @param[in] else_body_sentence ï¼šå¾…æ£€æŸ¥çš„è¯­å¥
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥æ·»åŠ 
+  /// @retval true ï¼šå¯ä»¥æ·»åŠ 
+  /// @retval false ï¼šä¸å¯ä»¥æ·»åŠ 
   static bool CheckElseBodySentenceValid(
       const FlowInterface& else_body_sentence) {
-    // ifÓï¾äÓëelseÓï¾äµÄÒªÇóÏàÍ¬
+    // ifè¯­å¥ä¸elseè¯­å¥çš„è¦æ±‚ç›¸åŒ
     return ConditionBlockInterface::DefaultMainBlockSentenceCheck(
         else_body_sentence);
   }
 
  private:
-  /// @brief ¼Ù·ÖÖ§ÄÚÖ´ĞĞµÄÄÚÈİ£¬²»´æÔÚelse¿ØÖÆ¿éÔòÖÃÎªnullptr
+  /// @brief å‡åˆ†æ”¯å†…æ‰§è¡Œçš„å†…å®¹ï¼Œä¸å­˜åœ¨elseæ§åˆ¶å—åˆ™ç½®ä¸ºnullptr
   std::unique_ptr<std::list<std::unique_ptr<FlowInterface>>> else_body_ =
       nullptr;
 };
 
 /// @class LoopSentenceInterface flow_control.h
-/// @brief Ñ­»·Óï¾ä»ùÀà
+/// @brief å¾ªç¯è¯­å¥åŸºç±»
 class LoopSentenceInterface : public ConditionBlockInterface {
  protected:
   LoopSentenceInterface(FlowType flow_type)
@@ -587,21 +587,21 @@ class LoopSentenceInterface : public ConditionBlockInterface {
   }
 
  public:
-  /// @brief »ñÈ¡Ñ­»·¿éÑ­»·Ìõ¼şÅĞ¶Ï¿ªÊ¼´¦±êÇ©£¨¼´½«¿ªÊ¼ÅĞ¶ÏÑ­»·Ìõ¼ş£©
-  /// @return ·µ»ØÑ­»·¿éÑ­»·Ìõ¼şÅĞ¶Ï¿ªÊ¼´¦±êÇ©
+  /// @brief è·å–å¾ªç¯å—å¾ªç¯æ¡ä»¶åˆ¤æ–­å¼€å§‹å¤„æ ‡ç­¾ï¼ˆå³å°†å¼€å§‹åˆ¤æ–­å¾ªç¯æ¡ä»¶ï¼‰
+  /// @return è¿”å›å¾ªç¯å—å¾ªç¯æ¡ä»¶åˆ¤æ–­å¼€å§‹å¤„æ ‡ç­¾
   virtual std::unique_ptr<Label> GetLoopConditionStartLabel() const = 0;
-  /// @brief »ñÈ¡Ñ­»·¿éÑ­»·Ìõ¼şÅĞ¶Ï½áÊø´¦±êÇ©£¨¸Õ¸ÕÍê³ÉÑ­»·Ìõ¼şÅĞ¶Ï£©
-  /// @return ·µ»ØÑ­»·¿éÑ­»·Ìõ¼şÅĞ¶Ï½áÊø´¦±êÇ©
+  /// @brief è·å–å¾ªç¯å—å¾ªç¯æ¡ä»¶åˆ¤æ–­ç»“æŸå¤„æ ‡ç­¾ï¼ˆåˆšåˆšå®Œæˆå¾ªç¯æ¡ä»¶åˆ¤æ–­ï¼‰
+  /// @return è¿”å›å¾ªç¯å—å¾ªç¯æ¡ä»¶åˆ¤æ–­ç»“æŸå¤„æ ‡ç­¾
   virtual std::unique_ptr<Label> GetLoopConditionEndLabel() const = 0;
 
-  /// @brief »ñÈ¡Ñ­»·¿éÖ÷¿é¿ªÊ¼´¦±êÇ©£¨¼´½«¿ªÊ¼Ö´ĞĞÖ÷ÌåÄÚÈİ£©
-  /// @return ·µ»ØÑ­»·¿éÖ÷¿é¿ªÊ¼´¦±êÇ©
+  /// @brief è·å–å¾ªç¯å—ä¸»å—å¼€å§‹å¤„æ ‡ç­¾ï¼ˆå³å°†å¼€å§‹æ‰§è¡Œä¸»ä½“å†…å®¹ï¼‰
+  /// @return è¿”å›å¾ªç¯å—ä¸»å—å¼€å§‹å¤„æ ‡ç­¾
   std::unique_ptr<Label> GetLoopMainBlockStartLabel() const {
     return std::make_unique<Label>(
         std::format("loop_main_block_{:}_start", GetFlowId().GetRawValue()));
   }
-  /// @brief »ñÈ¡Ñ­»·Ö÷¿é½áÎ²´¦±êÇ©£¨¸Õ¸Õ½áÊøÖ÷ÌåÖ´ĞĞ£©
-  /// @return ·µ»ØÑ­»·Ö÷¿é½áÎ²´¦±êÇ©
+  /// @brief è·å–å¾ªç¯ä¸»å—ç»“å°¾å¤„æ ‡ç­¾ï¼ˆåˆšåˆšç»“æŸä¸»ä½“æ‰§è¡Œï¼‰
+  /// @return è¿”å›å¾ªç¯ä¸»å—ç»“å°¾å¤„æ ‡ç­¾
   std::unique_ptr<Label> GetLoopMainBlockEndLabel() const {
     return std::make_unique<Label>(
         std::format("loop_main_block_{:}_end", GetFlowId().GetRawValue()));
@@ -609,7 +609,7 @@ class LoopSentenceInterface : public ConditionBlockInterface {
 };
 
 /// @class WhileSentenceInterface flow_control.h
-/// @brief whileÑ­»·ºÍdo-whileÑ­»·µÄ»ùÀà
+/// @brief whileå¾ªç¯å’Œdo-whileå¾ªç¯çš„åŸºç±»
 class WhileSentenceInterface : public LoopSentenceInterface {
  protected:
   WhileSentenceInterface(FlowType while_type)
@@ -620,7 +620,7 @@ class WhileSentenceInterface : public LoopSentenceInterface {
 };
 
 /// @class WhileSentence flow_control.h
-/// @brief whileÑ­»·
+/// @brief whileå¾ªç¯
 class WhileSentence : public WhileSentenceInterface {
  public:
   WhileSentence() : WhileSentenceInterface(FlowType::kWhileSentence) {}
@@ -642,7 +642,7 @@ class WhileSentence : public WhileSentenceInterface {
 };
 
 /// @class DoWhileSentence flow_control.h
-/// @brief do-whileÑ­»·
+/// @brief do-whileå¾ªç¯
 class DoWhileSentence : public WhileSentenceInterface {
  public:
   DoWhileSentence() : WhileSentenceInterface(FlowType::kDoWhileSentence) {}
@@ -664,7 +664,7 @@ class DoWhileSentence : public WhileSentenceInterface {
 };
 
 /// @class ForSentence flow_control.h
-/// @brief forÑ­»·
+/// @brief forå¾ªç¯
 class ForSentence : public LoopSentenceInterface {
  public:
   ForSentence() : LoopSentenceInterface(FlowType::kForSentence) {}
@@ -684,65 +684,65 @@ class ForSentence : public LoopSentenceInterface {
     return GetLoopMainBlockStartLabel();
   }
 
-  /// @brief Ìí¼ÓÒ»ÌõforÓï¾äÖ´ĞĞÇ°µÄ³õÊ¼»¯Óï¾ä
-  /// @param[in] init_body_sentence £ºforÑ­»·³õÊ¼»¯Óï¾ä
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔÌí¼Ó
-  /// @retval true £ºÌí¼Ó³É¹¦£¬¶áÈ¡init_body_sentence¿ØÖÆÈ¨
-  /// @retval false £º²»¿ÉÒÔÌí¼Ó£¬²»»áÌí¼ÓÇÒ²»ĞŞ¸Ä²ÎÊı
-  /// @note ¶ÔÓï¾äµÄÒªÇó²Î¿¼AddSentence
-  /// Ìí¼Óµ½ÒÑÓĞµÄ³õÊ¼»¯Óï¾äºó
+  /// @brief æ·»åŠ ä¸€æ¡forè¯­å¥æ‰§è¡Œå‰çš„åˆå§‹åŒ–è¯­å¥
+  /// @param[in] init_body_sentence ï¼šforå¾ªç¯åˆå§‹åŒ–è¯­å¥
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥æ·»åŠ 
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸï¼Œå¤ºå–init_body_sentenceæ§åˆ¶æƒ
+  /// @retval false ï¼šä¸å¯ä»¥æ·»åŠ ï¼Œä¸ä¼šæ·»åŠ ä¸”ä¸ä¿®æ”¹å‚æ•°
+  /// @note å¯¹è¯­å¥çš„è¦æ±‚å‚è€ƒAddSentence
+  /// æ·»åŠ åˆ°å·²æœ‰çš„åˆå§‹åŒ–è¯­å¥å
   bool AddForInitSentence(std::unique_ptr<FlowInterface>&& init_body_sentence);
-  /// @brief Ìí¼Ó¶àÌõforÓï¾äÖ´ĞĞÇ°µÄ³õÊ¼»¯Óï¾ä
-  /// @param[in] init_body_sentences £º´æ´¢forÑ­»·³õÊ¼»¯Óï¾äµÄÈİÆ÷
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔÌí¼Ó
-  /// @retval true £ºÌí¼Ó³É¹¦£¬½«init_body_sentencesÖĞËùÓĞÓï¾äÒÆ¶¯µ½³õÊ¼»¯ÈİÆ÷ÖĞ
-  /// @retval false £º²»¿ÉÒÔÌí¼Ó£¬²»»áÌí¼ÓÇÒ²»ĞŞ¸Ä²ÎÊı
-  /// @note ¶ÔÓï¾äµÄÒªÇó²Î¿¼AddSentence
-  /// Ìí¼ÓË³Ğò£ºbegin->end£¬Ìí¼Óµ½ÒÑÓĞµÄ³õÊ¼»¯Óï¾äºó
+  /// @brief æ·»åŠ å¤šæ¡forè¯­å¥æ‰§è¡Œå‰çš„åˆå§‹åŒ–è¯­å¥
+  /// @param[in] init_body_sentences ï¼šå­˜å‚¨forå¾ªç¯åˆå§‹åŒ–è¯­å¥çš„å®¹å™¨
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥æ·»åŠ 
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸï¼Œå°†init_body_sentencesä¸­æ‰€æœ‰è¯­å¥ç§»åŠ¨åˆ°åˆå§‹åŒ–å®¹å™¨ä¸­
+  /// @retval false ï¼šä¸å¯ä»¥æ·»åŠ ï¼Œä¸ä¼šæ·»åŠ ä¸”ä¸ä¿®æ”¹å‚æ•°
+  /// @note å¯¹è¯­å¥çš„è¦æ±‚å‚è€ƒAddSentence
+  /// æ·»åŠ é¡ºåºï¼šbegin->endï¼Œæ·»åŠ åˆ°å·²æœ‰çš„åˆå§‹åŒ–è¯­å¥å
   bool AddForInitSentences(
       std::list<std::unique_ptr<FlowInterface>>&& init_body_sentences);
-  /// @brief Ìí¼ÓÒ»ÌõforÓï¾äÖ´ĞĞºó¸üĞÂÑ­»·Ìõ¼şµÄÓï¾ä
-  /// @param[in] after_body_sentence £ºforÖ´ĞĞºó¸üĞÂÑ­»·Ìõ¼şµÄÓï¾ä
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔÌí¼Ó
-  /// @retval true £ºÌí¼Ó³É¹¦£¬¶áÈ¡after_body_sentencesµÄ¿ØÖÆÈ¨
-  /// @retval false £º²»¿ÉÒÔÌí¼Ó£¬²»»áÌí¼ÓÇÒ²»ĞŞ¸Ä²ÎÊı
-  /// @note ¶ÔÓï¾äµÄÒªÇó²Î¿¼CheckForBodySentenceValid
-  /// Ìí¼Óµ½ÒÑÓĞµÄ³õÊ¼»¯Óï¾äºó
+  /// @brief æ·»åŠ ä¸€æ¡forè¯­å¥æ‰§è¡Œåæ›´æ–°å¾ªç¯æ¡ä»¶çš„è¯­å¥
+  /// @param[in] after_body_sentence ï¼šforæ‰§è¡Œåæ›´æ–°å¾ªç¯æ¡ä»¶çš„è¯­å¥
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥æ·»åŠ 
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸï¼Œå¤ºå–after_body_sentencesçš„æ§åˆ¶æƒ
+  /// @retval false ï¼šä¸å¯ä»¥æ·»åŠ ï¼Œä¸ä¼šæ·»åŠ ä¸”ä¸ä¿®æ”¹å‚æ•°
+  /// @note å¯¹è¯­å¥çš„è¦æ±‚å‚è€ƒCheckForBodySentenceValid
+  /// æ·»åŠ åˆ°å·²æœ‰çš„åˆå§‹åŒ–è¯­å¥å
   bool AddForRenewSentence(
       std::unique_ptr<FlowInterface>&& after_body_sentence);
-  /// @brief Ìí¼Ó¶àÌõforÓï¾äÖ´ĞĞºó¸üĞÂÑ­»·Ìõ¼şµÄÓï¾ä
-  /// @param[in] after_body_sentences £º´æ´¢forÖ´ĞĞºó¸üĞÂÑ­»·Ìõ¼şµÄÈİÆ÷
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔÌí¼Ó
-  /// @retval true £ºÌí¼Ó³É¹¦£¬½«after_body_sentencesÖĞËùÓĞÓï¾äÒÆ¶¯µ½³õÊ¼»¯ÈİÆ÷
-  /// @retval false £º²»¿ÉÒÔÌí¼Ó£¬²»»áÌí¼ÓÇÒ²»ĞŞ¸Ä²ÎÊı
-  /// @note ¶ÔÓï¾äµÄÒªÇó²Î¿¼CheckForBodySentenceValid
-  /// Ìí¼ÓË³Ğò£ºbegin->end£¬Ìí¼Óµ½ÒÑÓĞµÄ³õÊ¼»¯Óï¾äºó
+  /// @brief æ·»åŠ å¤šæ¡forè¯­å¥æ‰§è¡Œåæ›´æ–°å¾ªç¯æ¡ä»¶çš„è¯­å¥
+  /// @param[in] after_body_sentences ï¼šå­˜å‚¨foræ‰§è¡Œåæ›´æ–°å¾ªç¯æ¡ä»¶çš„å®¹å™¨
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥æ·»åŠ 
+  /// @retval true ï¼šæ·»åŠ æˆåŠŸï¼Œå°†after_body_sentencesä¸­æ‰€æœ‰è¯­å¥ç§»åŠ¨åˆ°åˆå§‹åŒ–å®¹å™¨
+  /// @retval false ï¼šä¸å¯ä»¥æ·»åŠ ï¼Œä¸ä¼šæ·»åŠ ä¸”ä¸ä¿®æ”¹å‚æ•°
+  /// @note å¯¹è¯­å¥çš„è¦æ±‚å‚è€ƒCheckForBodySentenceValid
+  /// æ·»åŠ é¡ºåºï¼šbegin->endï¼Œæ·»åŠ åˆ°å·²æœ‰çš„åˆå§‹åŒ–è¯­å¥å
   bool AddForRenewSentences(
       std::list<std::unique_ptr<FlowInterface>>&& after_body_sentences);
-  /// @brief »ñÈ¡forÖ÷ÌåÄÚËùÓĞÓï¾ä
-  /// @return ·µ»Ø´æ´¢Óï¾äµÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–forä¸»ä½“å†…æ‰€æœ‰è¯­å¥
+  /// @return è¿”å›å­˜å‚¨è¯­å¥çš„å®¹å™¨çš„constå¼•ç”¨
   const auto& GetForBody() const { return GetSentences(); }
-  /// @brief »ñÈ¡for³õÊ¼»¯Óï¾ä
-  /// @return ·µ»Ø´æ´¢³õÊ¼»¯Óï¾äµÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–foråˆå§‹åŒ–è¯­å¥
+  /// @return è¿”å›å­˜å‚¨åˆå§‹åŒ–è¯­å¥çš„å®¹å™¨çš„constå¼•ç”¨
   const auto& GetForInitSentences() const { return init_block_; }
-  /// @brief »ñÈ¡¸üĞÂÑ­»·Ìõ¼şµÄÓï¾ä
-  /// @return ·µ»Ø´æ´¢¸üĞÂÑ­»·Ìõ¼şµÄÓï¾äµÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–æ›´æ–°å¾ªç¯æ¡ä»¶çš„è¯­å¥
+  /// @return è¿”å›å­˜å‚¨æ›´æ–°å¾ªç¯æ¡ä»¶çš„è¯­å¥çš„å®¹å™¨çš„constå¼•ç”¨
   const auto& GetForAfterBodySentences() const { return renew_sentences_; }
 
-  /// @brief ¼ì²é¸ø¶¨½ÚµãÊÇ·ñ¿ÉÒÔ×÷ÎªforÌõ¼ş
-  /// @param[in] for_condition £º´ı¼ì²éµÄÌõ¼ş½Úµã
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔÌí¼Ó
-  /// @retval true £º¿ÉÒÔÌí¼Ó
-  /// @retval false £º²»¿ÉÒÔÌí¼Ó
+  /// @brief æ£€æŸ¥ç»™å®šèŠ‚ç‚¹æ˜¯å¦å¯ä»¥ä½œä¸ºforæ¡ä»¶
+  /// @param[in] for_condition ï¼šå¾…æ£€æŸ¥çš„æ¡ä»¶èŠ‚ç‚¹
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥æ·»åŠ 
+  /// @retval true ï¼šå¯ä»¥æ·»åŠ 
+  /// @retval false ï¼šä¸å¯ä»¥æ·»åŠ 
   static bool CheckForConditionValid(
       const OperatorNodeInterface& for_condition) {
     return ConditionBlockInterface::DefaultConditionCheck(for_condition);
   }
-  /// @brief ¼ì²é¸ø¶¨½ÚµãÊÇ·ñ¿ÉÒÔ×÷ÎªforÖ÷ÌåÄÚÖ´ĞĞµÄÓï¾ä
-  /// @param[in] for_body_sentence £º´ı¼ì²éµÄÌõ¼ş½Úµã
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔÌí¼Ó
-  /// @retval true £º¿ÉÒÔÌí¼Ó
-  /// @retval false £º²»¿ÉÒÔÌí¼Ó
+  /// @brief æ£€æŸ¥ç»™å®šèŠ‚ç‚¹æ˜¯å¦å¯ä»¥ä½œä¸ºforä¸»ä½“å†…æ‰§è¡Œçš„è¯­å¥
+  /// @param[in] for_body_sentence ï¼šå¾…æ£€æŸ¥çš„æ¡ä»¶èŠ‚ç‚¹
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥æ·»åŠ 
+  /// @retval true ï¼šå¯ä»¥æ·»åŠ 
+  /// @retval false ï¼šä¸å¯ä»¥æ·»åŠ 
   static bool CheckForBodySentenceValid(
       const FlowInterface& for_body_sentence) {
     return ConditionBlockInterface::DefaultMainBlockSentenceCheck(
@@ -750,14 +750,14 @@ class ForSentence : public LoopSentenceInterface {
   }
 
  private:
-  /// @brief ³õÊ¼»¯Óï¾ä
+  /// @brief åˆå§‹åŒ–è¯­å¥
   std::list<std::unique_ptr<FlowInterface>> init_block_;
-  /// @brief Ñ­»·½áÊøºó¸üĞÂÑ­»·Ìõ¼şµÄÓï¾ä
+  /// @brief å¾ªç¯ç»“æŸåæ›´æ–°å¾ªç¯æ¡ä»¶çš„è¯­å¥
   std::list<std::unique_ptr<FlowInterface>> renew_sentences_;
 };
 
 /// @class SwitchSentence flow_control.h
-/// @brief switch·ÖÖ§Óï¾ä
+/// @brief switchåˆ†æ”¯è¯­å¥
 class SwitchSentence : public ConditionBlockInterface {
  public:
   SwitchSentence() : ConditionBlockInterface(FlowType::kSwitchSentence) {}
@@ -771,120 +771,120 @@ class SwitchSentence : public ConditionBlockInterface {
     return AddSentences(std::move(sentences));
   }
 
-  /// @brief Ìí¼ÓÆÕÍ¨µÄcase
-  /// @param[in] case_value £º·ÖÖ§Ìõ¼ş£¨±àÒëÆÚ³£Á¿£©
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true Ìí¼Ó³É¹¦£¬¶áÈ¡case_value¿ØÖÆÈ¨
-  /// @retval false Ìí¼ÓÊ§°Ü£¬²»Ìí¼ÓÇÒ²»ĞŞ¸Ä²ÎÊı
-  /// @note ¶ÔcaseµÄÒªÇó²Î¿¼CheckSwitchCaseAbleToAdd
+  /// @brief æ·»åŠ æ™®é€šçš„case
+  /// @param[in] case_value ï¼šåˆ†æ”¯æ¡ä»¶ï¼ˆç¼–è¯‘æœŸå¸¸é‡ï¼‰
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true æ·»åŠ æˆåŠŸï¼Œå¤ºå–case_valueæ§åˆ¶æƒ
+  /// @retval false æ·»åŠ å¤±è´¥ï¼Œä¸æ·»åŠ ä¸”ä¸ä¿®æ”¹å‚æ•°
+  /// @note å¯¹caseçš„è¦æ±‚å‚è€ƒCheckSwitchCaseAbleToAdd
   bool AddSimpleCase(
       const std::shared_ptr<const BasicTypeInitializeOperatorNode>& case_value);
-  /// @brief Ìí¼Ódefault±êÇ©
-  /// @return ·µ»ØÊÇ·ñÌí¼Ó³É¹¦
-  /// @retval true Ìí¼Ó³É¹¦
-  /// @retval false Ìí¼ÓÊ§°Ü£¬¸Ãº¯ÊıÒÑ¾­±»µ÷ÓÃ¹ı
+  /// @brief æ·»åŠ defaultæ ‡ç­¾
+  /// @return è¿”å›æ˜¯å¦æ·»åŠ æˆåŠŸ
+  /// @retval true æ·»åŠ æˆåŠŸ
+  /// @retval false æ·»åŠ å¤±è´¥ï¼Œè¯¥å‡½æ•°å·²ç»è¢«è°ƒç”¨è¿‡
   bool AddDefaultCase();
-  /// @brief »ñÈ¡È«²¿ÆÕÍ¨case±êÇ©
-  /// @return ·µ»Ø´æ´¢ÆÕÍ¨case±êÇ©µÄÈİÆ÷µÄconstÒıÓÃ
+  /// @brief è·å–å…¨éƒ¨æ™®é€šcaseæ ‡ç­¾
+  /// @return è¿”å›å­˜å‚¨æ™®é€šcaseæ ‡ç­¾çš„å®¹å™¨çš„constå¼•ç”¨
   const auto& GetSimpleCases() const { return simple_cases_; }
-  /// @brief »ñÈ¡default·ÖÖ§±êÇ©
-  /// @return ·µ»ØÖ¸Ïòdefault·ÖÖ§±êÇ©µÄconstÖ¸Õë
-  /// @retval nullptr £ºÎ´µ÷ÓÃAddDefaultCase´´½¨²¢Ìí¼Ódefault±êÇ©
+  /// @brief è·å–defaultåˆ†æ”¯æ ‡ç­¾
+  /// @return è¿”å›æŒ‡å‘defaultåˆ†æ”¯æ ‡ç­¾çš„constæŒ‡é’ˆ
+  /// @retval nullptr ï¼šæœªè°ƒç”¨AddDefaultCaseåˆ›å»ºå¹¶æ·»åŠ defaultæ ‡ç­¾
   const Label* GetDefaultCase() const { return default_case_.get(); }
 
-  /// @brief ¼ì²é¸ø¶¨½ÚµãÊÇ·ñ¿ÉÒÔ×÷ÎªswitchÖ÷ÌåÄÚÖ´ĞĞµÄÓï¾ä
-  /// @param[in] switch_body_sentence £º´ı¼ì²éµÄÌõ¼ş½Úµã
-  /// @return ·µ»ØÊÇ·ñ¿ÉÒÔÌí¼Ó
-  /// @retval true £º¿ÉÒÔÌí¼Ó
-  /// @retval false £º²»¿ÉÒÔÌí¼Ó
+  /// @brief æ£€æŸ¥ç»™å®šèŠ‚ç‚¹æ˜¯å¦å¯ä»¥ä½œä¸ºswitchä¸»ä½“å†…æ‰§è¡Œçš„è¯­å¥
+  /// @param[in] switch_body_sentence ï¼šå¾…æ£€æŸ¥çš„æ¡ä»¶èŠ‚ç‚¹
+  /// @return è¿”å›æ˜¯å¦å¯ä»¥æ·»åŠ 
+  /// @retval true ï¼šå¯ä»¥æ·»åŠ 
+  /// @retval false ï¼šä¸å¯ä»¥æ·»åŠ 
   static bool CheckSwitchBodySentenceValid(
       const FlowInterface& switch_body_sentence) {
     return ConditionBlockInterface::DefaultMainBlockSentenceCheck(
         switch_body_sentence);
   }
-  /// @brief ¼ì²é¸ø¶¨caseÊÇ·ñ¿ÉÒÔ×÷ÎªswitchÄÚµÄ±êÇ©
-  /// @param[in] switch_node £ºÌí¼Óµ½µÄswitch½Úµã
-  /// @param[in] case_value £º±êÇ©µÄÖµ
-  /// @return ·µ»ØÄÜ·ñ×÷Îª×÷ÎªswitchÄÚµÄ±êÇ©Ê¹ÓÃ
-  /// @retval true £º¿ÉÒÔÌí¼Ó
-  /// @retval false £º±êÇ©²»ÊÇÁ¢¼´Êı»òÓëÒÑÓĞµÄcaseÖµÖØ¸´
+  /// @brief æ£€æŸ¥ç»™å®šcaseæ˜¯å¦å¯ä»¥ä½œä¸ºswitchå†…çš„æ ‡ç­¾
+  /// @param[in] switch_node ï¼šæ·»åŠ åˆ°çš„switchèŠ‚ç‚¹
+  /// @param[in] case_value ï¼šæ ‡ç­¾çš„å€¼
+  /// @return è¿”å›èƒ½å¦ä½œä¸ºä½œä¸ºswitchå†…çš„æ ‡ç­¾ä½¿ç”¨
+  /// @retval true ï¼šå¯ä»¥æ·»åŠ 
+  /// @retval false ï¼šæ ‡ç­¾ä¸æ˜¯ç«‹å³æ•°æˆ–ä¸å·²æœ‰çš„caseå€¼é‡å¤
   static bool CheckSwitchCaseAbleToAdd(
       const SwitchSentence& switch_node,
       const BasicTypeInitializeOperatorNode& case_value);
 
  private:
-  /// @brief ¸ù¾İcaseµÄÖµ´´½¨¶ÔÓ¦µÄ±êÇ©
-  /// @param[in] case_value £ºcaseµÄÖµ
-  /// @return Ç°°ë²¿·ÖÎªÌø×ªÓï¾äÖĞÊ¹ÓÃµÄ±êÇ©£¬ºó°ë²¿·ÖÎªswitchÖ÷ÌåÄÚÊ¹ÓÃµÄ±êÇ©
-  /// @note Ö»´´½¨²»ÉèÖÃ
+  /// @brief æ ¹æ®caseçš„å€¼åˆ›å»ºå¯¹åº”çš„æ ‡ç­¾
+  /// @param[in] case_value ï¼šcaseçš„å€¼
+  /// @return å‰åŠéƒ¨åˆ†ä¸ºè·³è½¬è¯­å¥ä¸­ä½¿ç”¨çš„æ ‡ç­¾ï¼ŒååŠéƒ¨åˆ†ä¸ºswitchä¸»ä½“å†…ä½¿ç”¨çš„æ ‡ç­¾
+  /// @note åªåˆ›å»ºä¸è®¾ç½®
   std::pair<std::unique_ptr<Label>, std::unique_ptr<Label>>
   ConvertCaseValueToLabel(
       const BasicTypeInitializeOperatorNode& case_value) const;
-  /// @brief ´´½¨default±êÇ©
-  /// @brief Ç°°ë²¿·ÖÎªÌø×ªÓï¾äÖĞÊ¹ÓÃµÄ±êÇ©£¬ºó°ë²¿·ÖÎªswitchÖ÷ÌåÄÚÊ¹ÓÃµÄ±êÇ©
-  /// @note Ö»´´½¨²»ÉèÖÃ
+  /// @brief åˆ›å»ºdefaultæ ‡ç­¾
+  /// @brief å‰åŠéƒ¨åˆ†ä¸ºè·³è½¬è¯­å¥ä¸­ä½¿ç”¨çš„æ ‡ç­¾ï¼ŒååŠéƒ¨åˆ†ä¸ºswitchä¸»ä½“å†…ä½¿ç”¨çš„æ ‡ç­¾
+  /// @note åªåˆ›å»ºä¸è®¾ç½®
   std::pair<std::unique_ptr<Label>, std::unique_ptr<Label>> CreateDefaultLabel()
       const;
 
-  /// @brief switchµÄ·ÖÖ§(case)
+  /// @brief switchçš„åˆ†æ”¯(case)
   /// @details
-  /// ¼üÎªcaseµÄÖµ
-  /// ÖµÇ°°ë²¿·ÖÎª±àÒëÆÚ³£Á¿½Úµã£¬ºó°ë²¿·ÖÎª¸ÃcaseµÄ±êÇ©
+  /// é”®ä¸ºcaseçš„å€¼
+  /// å€¼å‰åŠéƒ¨åˆ†ä¸ºç¼–è¯‘æœŸå¸¸é‡èŠ‚ç‚¹ï¼ŒååŠéƒ¨åˆ†ä¸ºè¯¥caseçš„æ ‡ç­¾
   std::unordered_map<
       std::string,
       std::pair<std::shared_ptr<const BasicTypeInitializeOperatorNode>,
                 std::unique_ptr<Label>>>
       simple_cases_;
-  /// @brief default·ÖÖ§±êÇ©
+  /// @brief defaultåˆ†æ”¯æ ‡ç­¾
   std::unique_ptr<Label> default_case_ = nullptr;
 };
 
 /// @class FlowControlSystem flow_control.h
-/// @brief Á÷³Ì¿ØÖÆÏµÍ³
+/// @brief æµç¨‹æ§åˆ¶ç³»ç»Ÿ
 /// @details
-/// 1.¸ÃÏµÍ³µ±Ç°½öÓÃÓÚ´æ´¢º¯Êı
-/// 2.ÒÑ¾­¹¹½¨Íê³ÉµÄº¯ÊıºÍÕıÔÚ¹¹½¨µÄº¯Êı¶¼ÔÚÕâÀï×¢²á
-/// 3.»îÔ¾º¯ÊıÖ¸ÕıÔÚ¹¹½¨µÄº¯Êı
-/// @attention ¹¹½¨º¯ÊıÊ±»áÌáÈ¡µ±Ç°¹¹½¨º¯ÊıµÄflow_control_node²¢Ìí¼Óµ½
-/// ActionScopeSystemÖĞ£¬FunctionDefineÁ÷³Ì½ÚµãµÄ¿ØÖÆÈ¨
-/// ÈÔÊôÓÚFlowControlSystem£¬ÏêÏ¸ĞÅÏ¢²Î¿¼ActionScopeSystem
+/// 1.è¯¥ç³»ç»Ÿå½“å‰ä»…ç”¨äºå­˜å‚¨å‡½æ•°
+/// 2.å·²ç»æ„å»ºå®Œæˆçš„å‡½æ•°å’Œæ­£åœ¨æ„å»ºçš„å‡½æ•°éƒ½åœ¨è¿™é‡Œæ³¨å†Œ
+/// 3.æ´»è·ƒå‡½æ•°æŒ‡æ­£åœ¨æ„å»ºçš„å‡½æ•°
+/// @attention æ„å»ºå‡½æ•°æ—¶ä¼šæå–å½“å‰æ„å»ºå‡½æ•°çš„flow_control_nodeå¹¶æ·»åŠ åˆ°
+/// ActionScopeSystemä¸­ï¼ŒFunctionDefineæµç¨‹èŠ‚ç‚¹çš„æ§åˆ¶æƒ
+/// ä»å±äºFlowControlSystemï¼Œè¯¦ç»†ä¿¡æ¯å‚è€ƒActionScopeSystem
 class FlowControlSystem {
  public:
-  /// @brief ÉùÃ÷/ÉèÖÃ»îÔ¾º¯ÊıÊ±·µ»ØµÄ½á¹û
+  /// @brief å£°æ˜/è®¾ç½®æ´»è·ƒå‡½æ•°æ—¶è¿”å›çš„ç»“æœ
   enum class FunctionCheckResult {
-    kSuccess,  ///< ³É¹¦ÉùÃ÷/ÉèÖÃµ±Ç°»îÔ¾º¯Êı
-    ///< Ê§°ÜµÄÇé¿ö
-    kOverrideFunction,  ///< ÊÔÍ¼ÖØÔØº¯Êı
-    kDoubleAnnounce,    ///< ÉùÃ÷ÒÑ¾­ÉùÃ÷/¶¨ÒåµÄº¯Êı
-    kFunctionConstructed  ///< ÊÔÍ¼ÉèÖÃÒÑ¾­¹¹½¨Íê³ÉµÄº¯ÊıÎª´ı¹¹½¨º¯Êı
+    kSuccess,  ///< æˆåŠŸå£°æ˜/è®¾ç½®å½“å‰æ´»è·ƒå‡½æ•°
+    ///< å¤±è´¥çš„æƒ…å†µ
+    kOverrideFunction,  ///< è¯•å›¾é‡è½½å‡½æ•°
+    kDoubleAnnounce,    ///< å£°æ˜å·²ç»å£°æ˜/å®šä¹‰çš„å‡½æ•°
+    kFunctionConstructed  ///< è¯•å›¾è®¾ç½®å·²ç»æ„å»ºå®Œæˆçš„å‡½æ•°ä¸ºå¾…æ„å»ºå‡½æ•°
   };
-  /// @brief ÉèÖÃµ±Ç°¹¹½¨µÄº¯Êı
-  /// @param[in] active_function £ºµ±Ç°¹¹½¨µÄº¯ÊıµÄÀàĞÍ
-  /// @return ·µ»Ø¹¹½¨º¯ÊıµÄÇé¿ö£¬ÒâÒå¼û¶¨Òå
-  /// @note ²»ÄÜÉèÖÃÔò²»»áÉèÖÃ
+  /// @brief è®¾ç½®å½“å‰æ„å»ºçš„å‡½æ•°
+  /// @param[in] active_function ï¼šå½“å‰æ„å»ºçš„å‡½æ•°çš„ç±»å‹
+  /// @return è¿”å›æ„å»ºå‡½æ•°çš„æƒ…å†µï¼Œæ„ä¹‰è§å®šä¹‰
+  /// @note ä¸èƒ½è®¾ç½®åˆ™ä¸ä¼šè®¾ç½®
   FunctionCheckResult SetFunctionToConstruct(
       const std::shared_ptr<const FunctionType>& active_function);
-  /// @brief »ñÈ¡Ö¸Ïòµ±Ç°»îÔ¾º¯Êı½ÚµãµÄÖ¸Õë
-  /// @return ·µ»ØÖ¸Ïòµ±Ç°»îÔ¾º¯Êı½ÚµãµÄÖ¸Õë
-  /// @retval nullptr £ºµ±Ç°ÎŞ»îÔ¾º¯Êı
-  /// @warning ½ûÖ¹delete·µ»ØµÄÖ¸Õë
+  /// @brief è·å–æŒ‡å‘å½“å‰æ´»è·ƒå‡½æ•°èŠ‚ç‚¹çš„æŒ‡é’ˆ
+  /// @return è¿”å›æŒ‡å‘å½“å‰æ´»è·ƒå‡½æ•°èŠ‚ç‚¹çš„æŒ‡é’ˆ
+  /// @retval nullptr ï¼šå½“å‰æ— æ´»è·ƒå‡½æ•°
+  /// @warning ç¦æ­¢deleteè¿”å›çš„æŒ‡é’ˆ
   FunctionDefine* GetActiveFunctionPointer() const {
     return active_function_ == functions_.end() ? nullptr
                                                 : &active_function_->second;
   }
-  /// @brief »ñÈ¡µ±Ç°»îÔ¾º¯Êı½ÚµãµÄÒıÓÃ
-  /// @return ·µ»Øµ±Ç°»îÔ¾º¯Êı½ÚµãµÄÒıÓÃ
-  /// @note ±ØĞë´æÔÚ»îÔ¾º¯Êı
+  /// @brief è·å–å½“å‰æ´»è·ƒå‡½æ•°èŠ‚ç‚¹çš„å¼•ç”¨
+  /// @return è¿”å›å½“å‰æ´»è·ƒå‡½æ•°èŠ‚ç‚¹çš„å¼•ç”¨
+  /// @note å¿…é¡»å­˜åœ¨æ´»è·ƒå‡½æ•°
   FunctionDefine& GetActiveFunctionReference() const {
     return active_function_->second;
   }
-  /// @brief Íê³Éº¯Êı¹¹½¨
-  /// @note Íê³Éº¯Êı¹¹½¨ºóµ÷ÓÃ¸Ãº¯Êı½øĞĞºóĞø´¦Àí
+  /// @brief å®Œæˆå‡½æ•°æ„å»º
+  /// @note å®Œæˆå‡½æ•°æ„å»ºåè°ƒç”¨è¯¥å‡½æ•°è¿›è¡Œåç»­å¤„ç†
   void FinishFunctionConstruct() { active_function_ = functions_.end(); }
-  /// @brief ²éÑ¯º¯ÊıÊı¾İ
-  /// @param[in] function_name £ºº¯ÊıÃû
-  /// @return ·µ»ØÖ¸Ïòº¯Êı½ÚµãµÄconstÖ¸Õë
-  /// @retval nullptr £º²»´æÔÚfunction_nameÖ¸¶¨µÄº¯Êı
+  /// @brief æŸ¥è¯¢å‡½æ•°æ•°æ®
+  /// @param[in] function_name ï¼šå‡½æ•°å
+  /// @return è¿”å›æŒ‡å‘å‡½æ•°èŠ‚ç‚¹çš„constæŒ‡é’ˆ
+  /// @retval nullptr ï¼šä¸å­˜åœ¨function_nameæŒ‡å®šçš„å‡½æ•°
   const FunctionDefine* GetFunction(const std::string& function_name) {
     auto iter = functions_.find(function_name);
     if (iter == functions_.end()) [[unlikely]] {
@@ -894,16 +894,16 @@ class FlowControlSystem {
     }
   }
 
-  /// @brief ÉùÃ÷º¯Êı
-  /// @param[in] function_type £º´ıÉùÃ÷º¯ÊıµÄÀàĞÍ
-  /// @note ²»»áÉèÖÃµ±Ç°»î¶¯µÄº¯Êı
+  /// @brief å£°æ˜å‡½æ•°
+  /// @param[in] function_type ï¼šå¾…å£°æ˜å‡½æ•°çš„ç±»å‹
+  /// @note ä¸ä¼šè®¾ç½®å½“å‰æ´»åŠ¨çš„å‡½æ•°
   FunctionCheckResult AnnounceFunction(
       const std::shared_ptr<const FunctionType>& function_type);
 
  private:
-  /// @brief ËùÓĞº¯Êı£¬¼üÎªº¯ÊıÃû£¬ÖµÎªº¯Êı¶ÔÏó£¨FunctionDefine£©
+  /// @brief æ‰€æœ‰å‡½æ•°ï¼Œé”®ä¸ºå‡½æ•°åï¼Œå€¼ä¸ºå‡½æ•°å¯¹è±¡ï¼ˆFunctionDefineï¼‰
   std::unordered_map<std::string, FunctionDefine> functions_;
-  /// @brief µ±Ç°»îÔ¾µÄº¯Êı£¨ÕıÔÚ±»¹¹½¨µÄº¯Êı£©
+  /// @brief å½“å‰æ´»è·ƒçš„å‡½æ•°ï¼ˆæ­£åœ¨è¢«æ„å»ºçš„å‡½æ•°ï¼‰
   std::unordered_map<std::string, FunctionDefine>::iterator active_function_ =
       functions_.end();
 };

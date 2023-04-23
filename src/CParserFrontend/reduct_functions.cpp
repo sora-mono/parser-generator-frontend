@@ -1,4 +1,4 @@
-#include "reduct_functions.h"
+ï»¿#include "reduct_functions.h"
 
 #include <optional>
 #include <tuple>
@@ -8,7 +8,7 @@ std::pair<EnumType::EnumContainerType::iterator, bool>
 EnumReturnData::AddMember(std::string&& member_name, long long value) {
   auto return_result = enum_container_.emplace(std::move(member_name), value);
   if (return_result.second == true) {
-    // ³É¹¦²åÈë£¬¸üĞÂÏà¹ØÊı¾İ
+    // æˆåŠŸæ’å…¥ï¼Œæ›´æ–°ç›¸å…³æ•°æ®
     SetLastValue(value);
     if (GetMaxValue() < value) {
       SetMaxValue(value);
@@ -27,19 +27,19 @@ void VarietyOrFunctionConstructError(
       break;
     case ObjectConstructData::CheckResult::kAttachToTerminalType:
       OutputError(std::format(
-          "´ı¹¹½¨¶ÔÏó{:}ÒÑ´æÔÚÖÕ½áÀàĞÍ£¬²»¿ÉÉùÃ÷¸ü¶àÀàĞÍ½á¹¹", object_name));
+          "å¾…æ„å»ºå¯¹è±¡{:}å·²å­˜åœ¨ç»ˆç»“ç±»å‹ï¼Œä¸å¯å£°æ˜æ›´å¤šç±»å‹ç»“æ„", object_name));
       exit(-1);
       break;
     case ObjectConstructData::CheckResult::kReturnFunction:
-      OutputError(std::format("º¯Êı{:}·µ»ØÖµ²»ÄÜÎªº¯Êı", object_name));
+      OutputError(std::format("å‡½æ•°{:}è¿”å›å€¼ä¸èƒ½ä¸ºå‡½æ•°", object_name));
       exit(-1);
       break;
     case ObjectConstructData::CheckResult::kPointerEnd:
-      OutputError(std::format("´ı¹¹½¨¶ÔÏó{:}È±ÉÙ¾ßÌåÀàĞÍ", object_name));
+      OutputError(std::format("å¾…æ„å»ºå¯¹è±¡{:}ç¼ºå°‘å…·ä½“ç±»å‹", object_name));
       exit(-1);
       break;
     case ObjectConstructData::CheckResult::kEmptyChain:
-      OutputError(std::format("Ã»ÓĞÎª´ı¹¹½¨¶ÔÏó{:}Ìá¹©ÈÎºÎÀàĞÍ", object_name));
+      OutputError(std::format("æ²¡æœ‰ä¸ºå¾…æ„å»ºå¯¹è±¡{:}æä¾›ä»»ä½•ç±»å‹", object_name));
       exit(-1);
       break;
     default:
@@ -48,14 +48,14 @@ void VarietyOrFunctionConstructError(
   }
 }
 
-// ¸ù¾İÉùÃ÷Ê±µÄ³õÊ¼ÀàĞÍ»ñÈ¡Ò»´ÎÉùÃ÷ÖĞ·ÇµÚÒ»¸ö±äÁ¿µÄÀàĞÍ
+// æ ¹æ®å£°æ˜æ—¶çš„åˆå§‹ç±»å‹è·å–ä¸€æ¬¡å£°æ˜ä¸­éç¬¬ä¸€ä¸ªå˜é‡çš„ç±»å‹
 std::shared_ptr<const TypeInterface> GetExtendAnnounceType(
     const std::shared_ptr<const TypeInterface>& source_type) {
   if (source_type->GetType() == StructOrBasicType::kPointer) [[unlikely]] {
-    // µÚÒ»¸öÉùÃ÷µÄ±äÁ¿Ê¹ÓÃÍêÈ«ÀàĞÍ£¬ÆäÓàµÄ±äÁ¿Ê¹ÓÃÈ¥µôÒ»ÖØÖ¸ÕëµÄÀàĞÍ
+    // ç¬¬ä¸€ä¸ªå£°æ˜çš„å˜é‡ä½¿ç”¨å®Œå…¨ç±»å‹ï¼Œå…¶ä½™çš„å˜é‡ä½¿ç”¨å»æ‰ä¸€é‡æŒ‡é’ˆçš„ç±»å‹
     return source_type->GetNextNodePointer();
   } else {
-    // µÚÒ»¸öÉùÃ÷µÄ±äÁ¿²»ÊÇÖ¸Õë£¬ÆäÓà±äÁ¿ÀàĞÍÓëµÚÒ»¸öÏàÍ¬
+    // ç¬¬ä¸€ä¸ªå£°æ˜çš„å˜é‡ä¸æ˜¯æŒ‡é’ˆï¼Œå…¶ä½™å˜é‡ç±»å‹ä¸ç¬¬ä¸€ä¸ªç›¸åŒ
     return source_type;
   }
 }
@@ -66,39 +66,39 @@ void CheckAssignableCheckResult(AssignableCheckResult assignable_check_result) {
     case AssignableCheckResult::kUpperConvert:
     case AssignableCheckResult::kConvertToVoidPointer:
     case AssignableCheckResult::kZeroConvertToPointer:
-      // Õı³£¿ÉÒÔ¸³ÖµµÄÇé¿ö
+      // æ­£å¸¸å¯ä»¥èµ‹å€¼çš„æƒ…å†µ
       break;
     case AssignableCheckResult::kUnsignedToSigned:
-      // Ê¹ÓÃ¾¯¸æ
-      OutputWarning(std::format("½«ÎŞ·ûºÅÀàĞÍ¸³Öµ¸øÓĞ·ûºÅÀàĞÍ"));
+      // ä½¿ç”¨è­¦å‘Š
+      OutputWarning(std::format("å°†æ— ç¬¦å·ç±»å‹èµ‹å€¼ç»™æœ‰ç¬¦å·ç±»å‹"));
       break;
     case AssignableCheckResult::kSignedToUnsigned:
-      // Ê¹ÓÃ¾¯¸æ
-      OutputWarning(std::format("½«ÓĞ·ûºÅÀàĞÍ¸³Öµ¸øÎŞ·ûºÅÀàĞÍ"));
+      // ä½¿ç”¨è­¦å‘Š
+      OutputWarning(std::format("å°†æœ‰ç¬¦å·ç±»å‹èµ‹å€¼ç»™æ— ç¬¦å·ç±»å‹"));
       break;
     case AssignableCheckResult::kLowerConvert:
-      OutputError(std::format("ÔÚ¸³ÖµÊ±·¢ÉúËõÕ­×ª»»"));
+      OutputError(std::format("åœ¨èµ‹å€¼æ—¶å‘ç”Ÿç¼©çª„è½¬æ¢"));
       exit(-1);
       break;
     case AssignableCheckResult::kCanNotConvert:
-      OutputError(std::format("ÎŞ·¨×ª»»ÀàĞÍ"));
+      OutputError(std::format("æ— æ³•è½¬æ¢ç±»å‹"));
       exit(-1);
       break;
     case AssignableCheckResult::kAssignedNodeIsConst:
-      OutputError(std::format("·ÇÉùÃ÷Ê±ÎŞ·¨¸øconst¶ÔÏó¸³Öµ"));
+      OutputError(std::format("éå£°æ˜æ—¶æ— æ³•ç»™constå¯¹è±¡èµ‹å€¼"));
       exit(-1);
       break;
     case AssignableCheckResult::kAssignToRightValue:
-      OutputError(std::format("ÎŞ·¨¸øÓÒÖµ¶ÔÏó¸³Öµ"));
+      OutputError(std::format("æ— æ³•ç»™å³å€¼å¯¹è±¡èµ‹å€¼"));
       exit(-1);
       break;
     case AssignableCheckResult::kArgumentsFull:
-      // TODO Ö§³Ö¿É±ä²ÎÊıº¯ÊıºóĞŞ¸Ä¸Ã±¨´í½øĞĞ¸ü¾ßÌåµÄÅĞ¶Ï
-      OutputError(std::format("Êµ²ÎÊıÁ¿³¬³öĞÎ²ÎÊıÁ¿"));
+      // TODO æ”¯æŒå¯å˜å‚æ•°å‡½æ•°åä¿®æ”¹è¯¥æŠ¥é”™è¿›è¡Œæ›´å…·ä½“çš„åˆ¤æ–­
+      OutputError(std::format("å®å‚æ•°é‡è¶…å‡ºå½¢å‚æ•°é‡"));
       exit(-1);
       break;
     case AssignableCheckResult::kMayBeZeroToPointer:
-      // ¸ÃÀàĞÍÔÚ·µ»ØÇ°Ó¦±»¾ßÌåÈ·ÈÏ²¢Ìæ»»³É¸ü¾«È·µÄ½á¹û
+      // è¯¥ç±»å‹åœ¨è¿”å›å‰åº”è¢«å…·ä½“ç¡®è®¤å¹¶æ›¿æ¢æˆæ›´ç²¾ç¡®çš„ç»“æœ
     default:
       assert(false);
       break;
@@ -114,26 +114,26 @@ void CheckMathematicalComputeTypeResult(
     case DeclineMathematicalComputeTypeResult::kConvertToRight:
     case DeclineMathematicalComputeTypeResult::kLeftOffsetRightPointer:
     case DeclineMathematicalComputeTypeResult::kLeftPointerRightOffset:
-      // ¿ÉÒÔÔËËã
+      // å¯ä»¥è¿ç®—
       break;
     case DeclineMathematicalComputeTypeResult::kLeftNotComputableType:
-      OutputError(std::format("×óÔËËãÊı²»ÊÇ¿ÉÔËËãÀàĞÍ"));
+      OutputError(std::format("å·¦è¿ç®—æ•°ä¸æ˜¯å¯è¿ç®—ç±»å‹"));
       exit(-1);
       break;
     case DeclineMathematicalComputeTypeResult::kLeftNotIntger:
-      OutputError(std::format("×óÔËËãÊı×÷ÎªÖ¸ÕëÆ«ÒÆÁ¿Ê±²»ÊÇÕûĞÍ"));
+      OutputError(std::format("å·¦è¿ç®—æ•°ä½œä¸ºæŒ‡é’ˆåç§»é‡æ—¶ä¸æ˜¯æ•´å‹"));
       exit(-1);
       break;
     case DeclineMathematicalComputeTypeResult::kLeftRightBothPointer:
-      OutputError(std::format("Á½¸öÖ¸ÕëÀàĞÍÎŞ·¨½øĞĞÊıÑ§ÔËËã"));
+      OutputError(std::format("ä¸¤ä¸ªæŒ‡é’ˆç±»å‹æ— æ³•è¿›è¡Œæ•°å­¦è¿ç®—"));
       exit(-1);
       break;
     case DeclineMathematicalComputeTypeResult::kRightNotComputableType:
-      OutputError(std::format("ÓÒÔËËãÊı²»ÊÇ¿ÉÔËËãÀàĞÍ"));
+      OutputError(std::format("å³è¿ç®—æ•°ä¸æ˜¯å¯è¿ç®—ç±»å‹"));
       exit(-1);
       break;
     case DeclineMathematicalComputeTypeResult::kRightNotIntger:
-      OutputError(std::format("ÓÒÔËËãÊı×÷ÎªÖ¸ÕëÆ«ÒÆÁ¿Ê±²»ÊÇÕûĞÍ"));
+      OutputError(std::format("å³è¿ç®—æ•°ä½œä¸ºæŒ‡é’ˆåç§»é‡æ—¶ä¸æ˜¯æ•´å‹"));
       exit(-1);
       break;
     default:
@@ -152,14 +152,14 @@ void CheckAddTypeResult(AddTypeResult add_type_result) {
       break;
     case c_parser_frontend::type_system::AddTypeResult::
         kAnnounceOrDefineBeforeFunctionAnnounce:
-      OutputWarning(std::format("ÖØ¸´ÉùÃ÷º¯Êı"));
+      OutputWarning(std::format("é‡å¤å£°æ˜å‡½æ•°"));
       break;
     case c_parser_frontend::type_system::AddTypeResult::kTypeAlreadyIn:
-      OutputError(std::format("ÒÑ´æÔÚÍ¬ÃûÀàĞÍ"));
+      OutputError(std::format("å·²å­˜åœ¨åŒåç±»å‹"));
       exit(-1);
       break;
     case c_parser_frontend::type_system::AddTypeResult::kDoubleAnnounceFunction:
-      OutputError(std::format("ÖØ¶¨Òåº¯Êı"));
+      OutputError(std::format("é‡å®šä¹‰å‡½æ•°"));
       exit(-1);
       break;
     default:
@@ -169,33 +169,33 @@ void CheckAddTypeResult(AddTypeResult add_type_result) {
 }
 
 void OutputError(const std::string& error) {
-  std::cerr << std::format("Compline Error: ĞĞÊı:{:} ÁĞÊı:{:} ", GetLine() + 1,
+  std::cerr << std::format("Compline Error: è¡Œæ•°:{:} åˆ—æ•°:{:} ", GetLine() + 1,
                            GetColumn() + 1)
             << error << std::endl;
 }
 
 void OutputWarning(const std::string& warning) {
-  std::cerr << std::format("Compline Warning: ĞĞÊı:{:} ÁĞÊı:{:} ",
+  std::cerr << std::format("Compline Warning: è¡Œæ•°:{:} åˆ—æ•°:{:} ",
                            GetLine() + 1, GetColumn() + 1)
             << warning << std::endl;
 }
 
 void OutputInfo(const std::string& info) {
-  std::cout << std::format("Compline Info: ĞĞÊı:{:} ÁĞÊı:{:} ", GetLine() + 1,
+  std::cout << std::format("Compline Info: è¡Œæ•°:{:} åˆ—æ•°:{:} ", GetLine() + 1,
                            GetColumn() + 1)
             << info << std::endl;
 }
 
 std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueChar(
     std::string&& word_data) {
-  // ''ÖĞ¼ĞÒ»¸ö×Ö·û»ò¼ĞÒ»¸ö´ø×ªÒå×Ö·ûµÄ×Ö·û
-  // ÌáÈ¡µ¥¸ö×Ö·û×÷ÎªÖµ
+  // ''ä¸­å¤¹ä¸€ä¸ªå­—ç¬¦æˆ–å¤¹ä¸€ä¸ªå¸¦è½¬ä¹‰å­—ç¬¦çš„å­—ç¬¦
+  // æå–å•ä¸ªå­—ç¬¦ä½œä¸ºå€¼
   std::string character;
   if (word_data.size() == 3) [[likely]] {
-    // ²»´ø×ªÒå×Ö·û
+    // ä¸å¸¦è½¬ä¹‰å­—ç¬¦
     character = std::to_string(word_data[1]);
   } else {
-    // ´ø×ªÒå×Ö·û
+    // å¸¦è½¬ä¹‰å­—ç¬¦
     character = std::to_string(word_data[2]);
   }
   auto initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
@@ -215,7 +215,7 @@ SingleConstexprValueIndexedString(std::string&& str,
 
   size_t converted_num;
   for (auto iter = str.begin(); iter < str.end(); iter++) {
-    // É¾³ı×ªÒå×Ö·û
+    // åˆ é™¤è½¬ä¹‰å­—ç¬¦
     if (*iter == '\\') [[unlikely]] {
       iter = str.erase(iter);
       if (*iter == '\\') [[unlikely]] {
@@ -224,20 +224,20 @@ SingleConstexprValueIndexedString(std::string&& str,
     }
   }
   size_t index = std::stoull(num, &converted_num);
-  // ¼ì²éÊ¹ÓÃµÄÏÂ±êÊÇ·ñÈ«²¿×ª»»
+  // æ£€æŸ¥ä½¿ç”¨çš„ä¸‹æ ‡æ˜¯å¦å…¨éƒ¨è½¬æ¢
   if (converted_num != num.size()) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨×ª»»ÏÂ±ê£¬¿ÉÄÜÎª¸¡µãÊı»ò³¬³ö¿ÉÓÃÏÂ±ê·¶Î§"));
+    OutputError(std::format("æ— æ³•è½¬æ¢ä¸‹æ ‡ï¼Œå¯èƒ½ä¸ºæµ®ç‚¹æ•°æˆ–è¶…å‡ºå¯ç”¨ä¸‹æ ‡èŒƒå›´"));
     exit(-1);
   }
-  // ¼ì²éÏÂ±êÊÇ·ñÔ½½ç
+  // æ£€æŸ¥ä¸‹æ ‡æ˜¯å¦è¶Šç•Œ
   char result;
   if (index > str.size()) [[unlikely]] {
-    OutputError(std::format("Ê¹ÓÃµÄÏÂ±ê´óÓÚ×Ö·û´®´óĞ¡"));
+    OutputError(std::format("ä½¿ç”¨çš„ä¸‹æ ‡å¤§äºå­—ç¬¦ä¸²å¤§å°"));
     exit(-1);
   } else if (index == str.size()) [[unlikely]] {
     result = '\0';
   } else {
-    // +1ÒÔÌø¹ı¿ªÍ·µÄ"
+    // +1ä»¥è·³è¿‡å¼€å¤´çš„"
     result = str[index + 1];
   }
   auto initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
@@ -259,10 +259,10 @@ std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueNum(
 }
 std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueString(
     std::string&& str) {
-  // ×Ö·û´®Ê¹ÓÃ""×÷Îª·Ö¸ô±ê¼Ç
+  // å­—ç¬¦ä¸²ä½¿ç”¨""ä½œä¸ºåˆ†éš”æ ‡è®°
   assert(str.front() == '"');
   assert(str.back() == '"');
-  // É¾³ı×ªÒå×Ö·û
+  // åˆ é™¤è½¬ä¹‰å­—ç¬¦
   for (auto iter = str.begin(); iter < str.end(); iter++) {
     if (*iter == '\\') [[unlikely]] {
       iter = str.erase(iter);
@@ -271,9 +271,9 @@ std::shared_ptr<BasicTypeInitializeOperatorNode> SingleConstexprValueString(
       }
     }
   }
-  // É¾³ıÎ²²¿µÄ"
+  // åˆ é™¤å°¾éƒ¨çš„"
   str.pop_back();
-  // É¾³ıÍ·²¿µÄ"
+  // åˆ é™¤å¤´éƒ¨çš„"
   str.erase(str.begin());
   auto initialize_node = std::make_shared<BasicTypeInitializeOperatorNode>(
       InitializeType::kString, std::move(str));
@@ -346,21 +346,21 @@ std::shared_ptr<ObjectConstructData>&& IdOrEquivenceNumAddressing(
   assert(left_square_bracket == "[");
   assert(right_square_bracket == "]");
 
-  // ×ª»»Îªlong longµÄ×Ö·ûÊı
+  // è½¬æ¢ä¸ºlong longçš„å­—ç¬¦æ•°
   size_t chars_converted_to_longlong;
   size_t array_size = std::stoull(num, &chars_converted_to_longlong);
-  // ¼ì²éÊÇ·ñËùÓĞµÄÊı×Ö¾ù²ÎÓë×ª»»
+  // æ£€æŸ¥æ˜¯å¦æ‰€æœ‰çš„æ•°å­—å‡å‚ä¸è½¬æ¢
   if (chars_converted_to_longlong != num.size()) [[unlikely]] {
-    // ²»ÊÇËùÓĞµÄÊı×Ö¶¼²ÎÓëÁË×ª»»£¬ËµÃ÷Ê¹ÓÃÁË¸¡µãÊı
+    // ä¸æ˜¯æ‰€æœ‰çš„æ•°å­—éƒ½å‚ä¸äº†è½¬æ¢ï¼Œè¯´æ˜ä½¿ç”¨äº†æµ®ç‚¹æ•°
     OutputError(std::format(
-        "{:}ÎŞ·¨×÷ÎªÊı×é´óĞ¡»òÆ«ÒÆÁ¿£¬Ô­Òò¿ÉÄÜÎª¸¡µãÊı¡¢ÊıÖµ¹ı´ó¡¢¸ºÊı", num));
+        "{:}æ— æ³•ä½œä¸ºæ•°ç»„å¤§å°æˆ–åç§»é‡ï¼ŒåŸå› å¯èƒ½ä¸ºæµ®ç‚¹æ•°ã€æ•°å€¼è¿‡å¤§ã€è´Ÿæ•°", num));
     exit(-1);
   }
-  // Ìí¼ÓÒ»²ãÖ¸ÕëºÍÖ¸ÕëÖ¸ÏòµÄÊı×é´óĞ¡
+  // æ·»åŠ ä¸€å±‚æŒ‡é’ˆå’ŒæŒ‡é’ˆæŒ‡å‘çš„æ•°ç»„å¤§å°
   auto result =
       sub_reduct_result->AttachSingleNodeToTailNodeEmplace<PointerType>(
           ConstTag::kNonConst, array_size);
-  // ¼ì²éÌí¼Ó½á¹û
+  // æ£€æŸ¥æ·»åŠ ç»“æœ
   if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
     VarietyOrFunctionConstructError(result, sub_reduct_result->GetObjectName());
   }
@@ -372,12 +372,12 @@ std::shared_ptr<ObjectConstructData>&& IdOrEquivenceAnonymousAddressing(
   assert(left_square_bracket == "[");
   assert(right_square_bracket == "]");
 
-  // Ìí¼ÓÒ»²ãÖ¸ÕëºÍÖ¸ÕëÖ¸ÏòµÄÊı×é´óĞ¡
-  // -1´ú±í´ıÍÆ¶Ï´óĞ¡
+  // æ·»åŠ ä¸€å±‚æŒ‡é’ˆå’ŒæŒ‡é’ˆæŒ‡å‘çš„æ•°ç»„å¤§å°
+  // -1ä»£è¡¨å¾…æ¨æ–­å¤§å°
   auto result =
       sub_reduct_result->AttachSingleNodeToTailNodeEmplace<PointerType>(
           ConstTag::kNonConst, -1);
-  // ¼ì²éÊÇ·ñ³É¹¦Ìí¼Ó
+  // æ£€æŸ¥æ˜¯å¦æˆåŠŸæ·»åŠ 
   if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
     VarietyOrFunctionConstructError(result, sub_reduct_result->GetObjectName());
   }
@@ -388,12 +388,12 @@ std::shared_ptr<ObjectConstructData>&& IdOrEquivencePointerAnnounce(
     std::shared_ptr<ObjectConstructData>&& sub_reduct_result) {
   assert(operator_pointer == "*");
 
-  // Ìí¼ÓÒ»²ãÖ¸ÕëºÍÖ¸ÕëÖ¸ÏòµÄÊı×é´óĞ¡
-  // 0´ú±í´¿Ö¸Õë
+  // æ·»åŠ ä¸€å±‚æŒ‡é’ˆå’ŒæŒ‡é’ˆæŒ‡å‘çš„æ•°ç»„å¤§å°
+  // 0ä»£è¡¨çº¯æŒ‡é’ˆ
   auto result =
       sub_reduct_result->AttachSingleNodeToTailNodeEmplace<PointerType>(
           const_tag, 0);
-  // ¼ì²éÌí¼Ó½á¹û
+  // æ£€æŸ¥æ·»åŠ ç»“æœ
   if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
     VarietyOrFunctionConstructError(result, sub_reduct_result->GetObjectName());
   }
@@ -457,7 +457,7 @@ std::shared_ptr<ObjectConstructData>&& AnonymousIdOrEquivenceInBrackets(
 
 std::shared_ptr<EnumReturnData> NotEmptyEnumArgumentsIdBase(std::string&& id) {
   auto enum_return_data = std::make_shared<EnumReturnData>();
-  // µÚÒ»¸öÃ¶¾ÙÖµÄ¬ÈÏ´Ó0¿ªÊ¼
+  // ç¬¬ä¸€ä¸ªæšä¸¾å€¼é»˜è®¤ä»0å¼€å§‹
   auto [iter, inserted] = enum_return_data->AddMember(std::move(id), 0);
   assert(inserted);
   return enum_return_data;
@@ -468,19 +468,19 @@ std::shared_ptr<EnumReturnData> NotEmptyEnumArgumentsIdAssignNumBase(
 
   auto enum_return_data = std::make_shared<EnumReturnData>();
   size_t chars_converted_to_longlong;
-  // Ã¶¾ÙÏîµÄÖµ
+  // æšä¸¾é¡¹çš„å€¼
   long long enum_member_value = std::stoll(num, &chars_converted_to_longlong);
   if (chars_converted_to_longlong != num.size()) [[unlikely]] {
-    // ´æÔÚ¸¡µãÊı£¬²»ÊÇËùÓĞµÄÖµ¶¼¿ÉÒÔ×÷ÎªÃ¶¾ÙÏîµÄÖµ
-    OutputError(std::format("{:}²»ÄÜ×÷ÎªÃ¶¾ÙÏîµÄÖµ£¬Ô­Òò¿ÉÄÜÎª¸¡µãÊı", num));
+    // å­˜åœ¨æµ®ç‚¹æ•°ï¼Œä¸æ˜¯æ‰€æœ‰çš„å€¼éƒ½å¯ä»¥ä½œä¸ºæšä¸¾é¡¹çš„å€¼
+    OutputError(std::format("{:}ä¸èƒ½ä½œä¸ºæšä¸¾é¡¹çš„å€¼ï¼ŒåŸå› å¯èƒ½ä¸ºæµ®ç‚¹æ•°", num));
     exit(-1);
   }
-  // Ìí¼Ó¸ø¶¨ÖµµÄÃ¶¾ÙÖµ
+  // æ·»åŠ ç»™å®šå€¼çš„æšä¸¾å€¼
   auto [iter, inserted] =
       enum_return_data->AddMember(std::move(id), enum_member_value);
   if (!inserted) [[unlikely]] {
-    // ²åÈëÊ§°Ü£¬´æÔÚÍ¬Ãû³ÉÔ±
-    OutputError(std::format("Ã¶¾ÙÏî£º{:}ÒÑ¶¨Òå", id));
+    // æ’å…¥å¤±è´¥ï¼Œå­˜åœ¨åŒåæˆå‘˜
+    OutputError(std::format("æšä¸¾é¡¹ï¼š{:}å·²å®šä¹‰", id));
     exit(-1);
   }
   return enum_return_data;
@@ -490,13 +490,13 @@ std::shared_ptr<EnumReturnData>&& NotEmptyEnumArgumentsIdExtend(
     std::string&& id) {
   assert(str_comma == ",");
 
-  // Î´Ö¸¶¨ÏîµÄÖµÔòË³ÑÓÉÏÒ»¸ö¶¨ÒåµÄÏîµÄÖµ
+  // æœªæŒ‡å®šé¡¹çš„å€¼åˆ™é¡ºå»¶ä¸Šä¸€ä¸ªå®šä¹‰çš„é¡¹çš„å€¼
   long long enum_member_value = enum_data->GetLastValue() + 1;
   auto [iter, inserted] =
       enum_data->AddMember(std::move(id), enum_member_value);
   if (!inserted) [[unlikely]] {
-    // ´ıÌí¼ÓµÄÏîµÄIDÒÑ¾­´æÔÚ
-    OutputError(std::format("Ã¶¾ÙÏî£º{:}ÒÑ¶¨Òå", id));
+    // å¾…æ·»åŠ çš„é¡¹çš„IDå·²ç»å­˜åœ¨
+    OutputError(std::format("æšä¸¾é¡¹ï¼š{:}å·²å®šä¹‰", id));
     exit(-1);
   }
   return std::move(enum_data);
@@ -508,21 +508,21 @@ std::shared_ptr<EnumReturnData>&& NotEmptyEnumArgumentsIdAssignNumExtend(
   assert(operator_assign == "=");
 
   size_t chars_converted_to_longlong;
-  // Î´Ö¸¶¨ÏîµÄÖµÔòË³ÑÓÉÏÒ»¸ö¶¨ÒåµÄÏîµÄÖµ
+  // æœªæŒ‡å®šé¡¹çš„å€¼åˆ™é¡ºå»¶ä¸Šä¸€ä¸ªå®šä¹‰çš„é¡¹çš„å€¼
   long long enum_member_value = std::stoll(num, &chars_converted_to_longlong);
   if (chars_converted_to_longlong != num.size()) [[unlikely]] {
-    // ¸ø¶¨ÏîµÄÖµ²»ÄÜÍêÈ«×ª»¯Îªlong long
+    // ç»™å®šé¡¹çš„å€¼ä¸èƒ½å®Œå…¨è½¬åŒ–ä¸ºlong long
     OutputError(
-        std::format("Ã¶¾ÙÏî{0:} = {1:}ÖĞ "
-                    "{1:}²»ÄÜ×÷ÎªÃ¶¾ÙÏîµÄÖµ£¬¿ÉÄÜÔ­ÒòÎª¸¡µãÊı",
+        std::format("æšä¸¾é¡¹{0:} = {1:}ä¸­ "
+                    "{1:}ä¸èƒ½ä½œä¸ºæšä¸¾é¡¹çš„å€¼ï¼Œå¯èƒ½åŸå› ä¸ºæµ®ç‚¹æ•°",
                     id, num));
     exit(-1);
   }
   auto [iter, inserted] =
       enum_data->AddMember(std::move(id), enum_member_value);
   if (!inserted) [[unlikely]] {
-    // ´ıÌí¼ÓµÄÏîµÄIDÒÑ¾­´æÔÚ
-    OutputError(std::format("Ã¶¾ÙÏî{0:} = {1:}ÖĞ Ã¶¾ÙÏî£º{0:}ÒÑ¶¨Òå", id, num));
+    // å¾…æ·»åŠ çš„é¡¹çš„IDå·²ç»å­˜åœ¨
+    OutputError(std::format("æšä¸¾é¡¹{0:} = {1:}ä¸­ æšä¸¾é¡¹ï¼š{0:}å·²å®šä¹‰", id, num));
     exit(-1);
   }
   return std::move(enum_data);
@@ -542,7 +542,7 @@ std::shared_ptr<EnumType> EnumDefine(
 
   std::shared_ptr<EnumType> enum_type =
       std::make_shared<EnumType>(id, std::move(enum_data->GetContainer()));
-  // Ìí¼Ó¸ÃÃ¶¾ÙµÄ¶¨Òå
+  // æ·»åŠ è¯¥æšä¸¾çš„å®šä¹‰
   auto [insert_iter, result] =
       c_parser_controller.DefineType(std::move(id), enum_type);
   CheckAddTypeResult(result);
@@ -559,7 +559,7 @@ std::shared_ptr<EnumType> EnumAnonymousDefine(
   std::shared_ptr<EnumType> enum_type = std::make_shared<EnumType>(
       std::string(), std::move(enum_data->GetContainer()));
   ;
-  // ÄäÃûÃ¶¾ÙÎŞĞè¶¨Òå
+  // åŒ¿åæšä¸¾æ— éœ€å®šä¹‰
   return enum_type;
 }
 
@@ -619,8 +619,8 @@ std::shared_ptr<StructureTypeInterface> StructureDefineInitHead(
       assert(false);
       break;
   }
-  // Èç¹ûÊÇ·ÇÄäÃû½á¹¹Ôò×¢²á½á¹¹Ìå/¹²ÓÃÌåÀàĞÍ
-  // ²»Ê¹ÓÃstruct_nameÒòÎªÒÑ¾­±»ÒÆ¶¯¹¹Ôì
+  // å¦‚æœæ˜¯éåŒ¿åç»“æ„åˆ™æ³¨å†Œç»“æ„ä½“/å…±ç”¨ä½“ç±»å‹
+  // ä¸ä½¿ç”¨struct_nameå› ä¸ºå·²ç»è¢«ç§»åŠ¨æ„é€ 
   if (!struct_name.empty()) [[likely]] {
     auto [iter, result] = c_parser_controller.DefineType(
         std::move(struct_name), structure_type_constructuring);
@@ -648,18 +648,18 @@ std::shared_ptr<const StructureTypeInterface> StructTypeStructAnnounce(
       c_parser_controller.GetType(struct_name, struct_type);
   switch (get_type_result) {
     case GetTypeResult::kSuccess:
-      // ³É¹¦»ñÈ¡
+      // æˆåŠŸè·å–
       break;
     case GetTypeResult::kTypeNameNotFound:
     case GetTypeResult::kNoMatchTypePrefer: {
-      // ÕÒ²»µ½¸ø¶¨Ãû³ÆµÄÀàĞÍ
+      // æ‰¾ä¸åˆ°ç»™å®šåç§°çš„ç±»å‹
       const char* type_name =
-          struct_type == StructOrBasicType::kStruct ? "½á¹¹Ìå" : "¹²ÓÃÌå";
-      OutputError(std::format("{:}{:}Î´¶¨Òå", type_name, struct_name));
+          struct_type == StructOrBasicType::kStruct ? "ç»“æ„ä½“" : "å…±ç”¨ä½“";
+      OutputError(std::format("{:}{:}æœªå®šä¹‰", type_name, struct_name));
       exit(-1);
     } break;
     case GetTypeResult::kSeveralSameLevelMatches:
-      // ¸ÃÇé¿ö½öÔÚÎŞÀàĞÍÑ¡ÔñÆ«ºÃÊ±ÓĞĞ§
+      // è¯¥æƒ…å†µä»…åœ¨æ— ç±»å‹é€‰æ‹©åå¥½æ—¶æœ‰æ•ˆ
     default:
       assert(false);
       break;
@@ -669,7 +669,7 @@ std::shared_ptr<const StructureTypeInterface> StructTypeStructAnnounce(
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeFundamental(
     ConstTag const_tag, SignTag sign_tag, BuiltInType builtin_type) {
   switch (builtin_type) {
-      // ÕâÁ½ÖÖÀàĞÍÖ»ÄÜÊ¹ÓÃÎŞ·ûºÅ
+      // è¿™ä¸¤ç§ç±»å‹åªèƒ½ä½¿ç”¨æ— ç¬¦å·
     case c_parser_frontend::type_system::BuiltInType::kVoid:
     case c_parser_frontend::type_system::BuiltInType::kInt1:
       assert(sign_tag == SignTag::kSigned);
@@ -689,30 +689,30 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeStructType(
 }
 
 //// BasicType->ConstTag Id
-//// ·µ»Ø»ñÈ¡µ½µÄÀàĞÍÓëConstTag
+//// è¿”å›è·å–åˆ°çš„ç±»å‹ä¸ConstTag
 // std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeId(
 //    std::vector<WordDataToUser>&& word_data) {
 //  assert(word_data.size() == 2);
 //  ConstTag const_tag = GetConstTag(word_data[0]);
 //  std::string& type_name = word_data[1].GetTerminalWordData().word;
 //  assert(!type_name.empty());
-//  // »ñÈ¡ID¶ÔÓ¦µÄÀàĞÍ
+//  // è·å–IDå¯¹åº”çš„ç±»å‹
 //  auto [type_pointer, result] =
 //      c_parser_frontend.GetType(type_name, StructOrBasicType::kNotSpecified);
 //  switch (result) {
 //    case GetTypeResult::kSuccess:
-//      // ³É¹¦»ñÈ¡±äÁ¿ÀàĞÍ
+//      // æˆåŠŸè·å–å˜é‡ç±»å‹
 //      break;
 //    case GetTypeResult::kSeveralSameLevelMatches:
-//      OutputError(std::format("ÀàĞÍÃû{:}¶ÔÓ¦¶à¸öÍ¬¼¶ÀàĞÍ", type_name));
+//      OutputError(std::format("ç±»å‹å{:}å¯¹åº”å¤šä¸ªåŒçº§ç±»å‹", type_name));
 //      exit(-1);
 //      break;
 //    case GetTypeResult::kTypeNameNotFound:
-//      OutputError(std::format("ÀàĞÍ{:}²»´æÔÚ", type_name));
+//      OutputError(std::format("ç±»å‹{:}ä¸å­˜åœ¨", type_name));
 //      exit(-1);
 //      break;
 //    case GetTypeResult::kNoMatchTypePrefer:
-//      // ÎŞÀàĞÍÑ¡ÔñÇãÏòÊ±²»ÄÜ·µ»Ø¸Ã½á¹û
+//      // æ— ç±»å‹é€‰æ‹©å€¾å‘æ—¶ä¸èƒ½è¿”å›è¯¥ç»“æœ
 //    default:
 //      assert(false);
 //      break;
@@ -727,18 +727,18 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag> BasicTypeEnumAnnounce(
       c_parser_controller.GetType(enum_name, StructOrBasicType::kNotSpecified);
   switch (result) {
     case GetTypeResult::kSuccess:
-      // ³É¹¦»ñÈ¡±äÁ¿ÀàĞÍ
+      // æˆåŠŸè·å–å˜é‡ç±»å‹
       break;
     case GetTypeResult::kSeveralSameLevelMatches:
-      OutputError(std::format("ÀàĞÍÃû{:}¶ÔÓ¦¶à¸öÍ¬¼¶ÀàĞÍ", enum_name));
+      OutputError(std::format("ç±»å‹å{:}å¯¹åº”å¤šä¸ªåŒçº§ç±»å‹", enum_name));
       exit(-1);
       break;
     case GetTypeResult::kTypeNameNotFound:
-      OutputError(std::format("ÀàĞÍ{:}²»´æÔÚ", enum_name));
+      OutputError(std::format("ç±»å‹{:}ä¸å­˜åœ¨", enum_name));
       exit(-1);
       break;
     case GetTypeResult::kNoMatchTypePrefer:
-      // ÎŞÀàĞÍÑ¡ÔñÇãÏòÊ±²»ÄÜ·µ»Ø¸Ã½á¹û
+      // æ— ç±»å‹é€‰æ‹©å€¾å‘æ—¶ä¸èƒ½è¿”å›è¯¥ç»“æœ
     default:
       assert(false);
       break;
@@ -751,13 +751,13 @@ std::shared_ptr<ObjectConstructData>&& FunctionRelaventBasePartFunctionInitBase(
     std::string&& left_bracket) {
   assert(left_bracket == "(");
 
-  // ÉèÖÃ¹¹½¨Êı¾İ£¬ÔÚ¹¹½¨º¯Êı²ÎÊıÊ±Ê¹ÓÃ
+  // è®¾ç½®æ„å»ºæ•°æ®ï¼Œåœ¨æ„å»ºå‡½æ•°å‚æ•°æ—¶ä½¿ç”¨
   function_type_construct_data = construct_data;
-  // ´´½¨ÄäÃûº¯ÊıÀàĞÍ²¢ÉèÖÃº¯Êı²ÎÊı
+  // åˆ›å»ºåŒ¿åå‡½æ•°ç±»å‹å¹¶è®¾ç½®å‡½æ•°å‚æ•°
   auto result =
       function_type_construct_data
           ->AttachSingleNodeToTailNodeEmplace<FunctionType>(std::string());
-  // ¼ì²éÌí¼Ó½á¹û
+  // æ£€æŸ¥æ·»åŠ ç»“æœ
   if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
     VarietyOrFunctionConstructError(
         result, function_type_construct_data->GetObjectName());
@@ -786,10 +786,10 @@ std::shared_ptr<ObjectConstructData>&& FunctionRelaventBasePartPointer(
     std::shared_ptr<ObjectConstructData>&& construct_data) {
   assert(str_pointer == "*");
 
-  // Ìí¼ÓÒ»¸öÖ¸Õë½Úµã
+  // æ·»åŠ ä¸€ä¸ªæŒ‡é’ˆèŠ‚ç‚¹
   auto result = construct_data->AttachSingleNodeToTailNodeEmplace<PointerType>(
       const_tag, 0);
-  // ¼ì²éÌí¼Ó½á¹û
+  // æ£€æŸ¥æ·»åŠ ç»“æœ
   if (result != ObjectConstructData::CheckResult::kSuccess) [[unlikely]] {
     VarietyOrFunctionConstructError(result, construct_data->GetObjectName());
   }
@@ -812,7 +812,7 @@ std::shared_ptr<FlowInterface> FunctionRelavent(
   auto& [final_type, const_tag_before_final_type] = basic_type_data;
   auto [flow_control_node, construct_result] = construct_data->ConstructObject(
       const_tag_before_final_type, std::move(final_type));
-  // ¼ì²é½Úµã¹¹½¨ÊÇ·ñ³É¹¦
+  // æ£€æŸ¥èŠ‚ç‚¹æ„å»ºæ˜¯å¦æˆåŠŸ
   if (construct_result != ObjectConstructData::CheckResult::kSuccess)
       [[unlikely]] {
     VarietyOrFunctionConstructError(construct_result,
@@ -825,7 +825,7 @@ std::shared_ptr<FlowInterface> SingleAnnounceNoAssignNotPodVariety(
     ConstTag const_tag, std::string&& id,
     std::shared_ptr<ObjectConstructData>&& construct_data) {
   if (construct_data->GetObjectName().empty()) [[unlikely]] {
-    OutputError(std::format("ÉùÃ÷µÄ±äÁ¿±ØĞëÓĞÃû"));
+    OutputError(std::format("å£°æ˜çš„å˜é‡å¿…é¡»æœ‰å"));
     exit(-1);
   }
   auto [final_type, result] =
@@ -833,11 +833,11 @@ std::shared_ptr<FlowInterface> SingleAnnounceNoAssignNotPodVariety(
   switch (result) {
     case GetTypeResult::kSeveralSameLevelMatches:
       OutputError(
-          std::format("ÀàĞÍÃû {:} ¶ÔÓ¦¶àÖÖÀàĞÍ£¬ÎŞ·¨È·¶¨ÒªÊ¹ÓÃµÄÀàĞÍ", id));
+          std::format("ç±»å‹å {:} å¯¹åº”å¤šç§ç±»å‹ï¼Œæ— æ³•ç¡®å®šè¦ä½¿ç”¨çš„ç±»å‹", id));
       exit(-1);
       break;
     case GetTypeResult::kTypeNameNotFound:
-      OutputError(std::format("²»´æÔÚÀàĞÍ {:}", id));
+      OutputError(std::format("ä¸å­˜åœ¨ç±»å‹ {:}", id));
       exit(-1);
       break;
     case GetTypeResult::kSuccess:
@@ -865,8 +865,8 @@ std::nullptr_t TypeDef(std::string&& str_typedef,
     case FlowType::kSimpleSentence:
       break;
     case FlowType::kFunctionDefine:
-      // ²»ÄÜ¸øº¯ÊıÆğ±ğÃû
-      OutputError(std::format("ÎŞ·¨¸øº¯ÊıÆğ±ğÃû"));
+      // ä¸èƒ½ç»™å‡½æ•°èµ·åˆ«å
+      OutputError(std::format("æ— æ³•ç»™å‡½æ•°èµ·åˆ«å"));
       exit(-1);
       break;
     default:
@@ -881,7 +881,7 @@ std::nullptr_t TypeDef(std::string&& str_typedef,
       c_parser_controller.DefineType(type_name, type_pointer);
   if (result == AddTypeResult::kTypeAlreadyIn) [[unlikely]] {
     OutputError(std::format(
-        "Ê¹ÓÃtypedef¶¨Òå±ğÃûÊ±Ê¹ÓÃµÄÃû×Ö{:}ÒÑ´æÔÚÏàÍ¬ÀàĞÍµÄ¶¨Òå", type_name));
+        "ä½¿ç”¨typedefå®šä¹‰åˆ«åæ—¶ä½¿ç”¨çš„åå­—{:}å·²å­˜åœ¨ç›¸åŒç±»å‹çš„å®šä¹‰", type_name));
     exit(-1);
   }
   return nullptr;
@@ -891,13 +891,13 @@ std::nullptr_t NotEmptyFunctionRelaventArgumentsBase(
     std::shared_ptr<FlowInterface>&& flow_control_node) {
   switch (flow_control_node->GetFlowType()) {
     case FlowType::kSimpleSentence:
-      // Ö»ÓĞ±äÁ¿¿ÉÒÔ×÷Îªº¯Êı²ÎÊı
+      // åªæœ‰å˜é‡å¯ä»¥ä½œä¸ºå‡½æ•°å‚æ•°
       break;
     case FlowType::kFunctionDefine:
-      // º¯Êı²»ÄÜ×÷Îªº¯ÊıÉùÃ÷Ê±µÄ²ÎÊı
-      OutputError(std::format("º¯Êı²»ÄÜ×÷ÎªÉùÃ÷Ê±º¯Êı²ÎÊı,ÇëÊ¹ÓÃº¯ÊıÖ¸Õë"));
+      // å‡½æ•°ä¸èƒ½ä½œä¸ºå‡½æ•°å£°æ˜æ—¶çš„å‚æ•°
+      OutputError(std::format("å‡½æ•°ä¸èƒ½ä½œä¸ºå£°æ˜æ—¶å‡½æ•°å‚æ•°,è¯·ä½¿ç”¨å‡½æ•°æŒ‡é’ˆ"));
       OutputError(std::format(
-          "´ËÕï¶Ï³öÏÖÔÚº¯Êı{:}´¦",
+          "æ­¤è¯Šæ–­å‡ºç°åœ¨å‡½æ•°{:}å¤„",
           static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
               *flow_control_node)
               .GetFunctionTypeReference()
@@ -911,7 +911,7 @@ std::nullptr_t NotEmptyFunctionRelaventArgumentsBase(
   auto variety_pointer = std::static_pointer_cast<VarietyOperatorNode>(
       static_cast<SimpleSentence&>(*flow_control_node)
           .GetSentenceOperateNodePointer());
-  // Ìí¼Óº¯Êı²ÎÊı
+  // æ·»åŠ å‡½æ•°å‚æ•°
   function_type_construct_data->AddFunctionTypeArgument(variety_pointer);
   return nullptr;
 }
@@ -928,13 +928,13 @@ std::nullptr_t NotEmptyFunctionRelaventArgumentsExtend(
 
   switch (flow_control_node->GetFlowType()) {
     case FlowType::kSimpleSentence:
-      // Ö»ÓĞ±äÁ¿¿ÉÒÔ×÷Îªº¯Êı²ÎÊı
+      // åªæœ‰å˜é‡å¯ä»¥ä½œä¸ºå‡½æ•°å‚æ•°
       break;
     case FlowType::kFunctionDefine:
-      // º¯Êı²»ÄÜ×÷Îªº¯ÊıµÄ²ÎÊı
-      OutputError(std::format("º¯Êı²»ÄÜ×÷ÎªÉùÃ÷Ê±º¯Êı²ÎÊı,ÇëÊ¹ÓÃº¯ÊıÖ¸Õë"));
+      // å‡½æ•°ä¸èƒ½ä½œä¸ºå‡½æ•°çš„å‚æ•°
+      OutputError(std::format("å‡½æ•°ä¸èƒ½ä½œä¸ºå£°æ˜æ—¶å‡½æ•°å‚æ•°,è¯·ä½¿ç”¨å‡½æ•°æŒ‡é’ˆ"));
       OutputError(std::format(
-          "´ËÕï¶Ï³öÏÖÔÚº¯Êı{:}´¦",
+          "æ­¤è¯Šæ–­å‡ºç°åœ¨å‡½æ•°{:}å¤„",
           static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
               *flow_control_node)
               .GetFunctionTypeReference()
@@ -948,7 +948,7 @@ std::nullptr_t NotEmptyFunctionRelaventArgumentsExtend(
   auto variety_pointer = std::static_pointer_cast<VarietyOperatorNode>(
       static_cast<SimpleSentence&>(*flow_control_node)
           .GetSentenceOperateNodePointer());
-  // Ìí¼Óº¯Êı²ÎÊı
+  // æ·»åŠ å‡½æ•°å‚æ•°
   function_type_construct_data->AddFunctionTypeArgument(variety_pointer);
   return nullptr;
 }
@@ -967,12 +967,12 @@ FunctionDefineHead(std::shared_ptr<FlowInterface>&& function_head,
                    std::string&& left_curly_bracket) {
   assert(left_curly_bracket == "{");
 
-  // ¼ì²éÊÇ·ñÎªº¯ÊıÍ·
+  // æ£€æŸ¥æ˜¯å¦ä¸ºå‡½æ•°å¤´
   switch (function_head->GetFlowType()) {
     case FlowType::kFunctionDefine:
       break;
     case FlowType::kSimpleSentence:
-      OutputError(std::format("º¯ÊıÉùÃ÷Óï·¨´íÎó"));
+      OutputError(std::format("å‡½æ•°å£°æ˜è¯­æ³•é”™è¯¯"));
       exit(-1);
       break;
     default:
@@ -983,14 +983,14 @@ FunctionDefineHead(std::shared_ptr<FlowInterface>&& function_head,
       static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
           *function_head)
           .GetFunctionTypePointer();
-  // ÉèÖÃµ±Ç°´ı¹¹½¨º¯Êı
+  // è®¾ç½®å½“å‰å¾…æ„å»ºå‡½æ•°
   bool set_result = c_parser_controller.SetFunctionToConstruct(
       std::shared_ptr<const FunctionType>(function_type));
   if (!set_result) [[unlikely]] {
     std::cerr << std::format(
-                     "ĞĞÊı{:} ÁĞÊı{:} "
-                     "ÎŞ·¨ÉùÃ÷/¶¨Òåº¯Êı£¬¿ÉÄÜÔ­ÒòÎª£ºº¯ÊıÄÚ²¿ÉùÃ÷/"
-                     "¶¨Òåº¯Êı¡¢¶¨ÒåÓëÒÑÉùÃ÷µÄÍ¬Ãûº¯ÊıÇ©Ãû²»Í¬µÄº¯Êı",
+                     "è¡Œæ•°{:} åˆ—æ•°{:} "
+                     "æ— æ³•å£°æ˜/å®šä¹‰å‡½æ•°ï¼Œå¯èƒ½åŸå› ä¸ºï¼šå‡½æ•°å†…éƒ¨å£°æ˜/"
+                     "å®šä¹‰å‡½æ•°ã€å®šä¹‰ä¸å·²å£°æ˜çš„åŒåå‡½æ•°ç­¾åä¸åŒçš„å‡½æ•°",
                      GetLine(), GetColumn())
               << std::endl;
     exit(-1);
@@ -1005,7 +1005,7 @@ std::nullptr_t FunctionDefine(
     std::nullptr_t, std::string&& right_curly_bracket) {
   assert(right_curly_bracket == "}");
 
-  // ¼ì²éº¯ÊıÌåÊÇ·ñÎª¿Õ£¬Èç¹ûÎª¿ÕÔòÌí¼ÓÎŞ·µ»ØÖµ·µ»ØÓï¾ä»ò±¨´í
+  // æ£€æŸ¥å‡½æ•°ä½“æ˜¯å¦ä¸ºç©ºï¼Œå¦‚æœä¸ºç©ºåˆ™æ·»åŠ æ— è¿”å›å€¼è¿”å›è¯­å¥æˆ–æŠ¥é”™
   auto& active_function = c_parser_controller.GetActiveFunctionReference();
   if (active_function.GetSentences().empty()) [[unlikely]] {
     auto& function_return_type =
@@ -1015,28 +1015,28 @@ std::nullptr_t FunctionDefine(
             GetBasicType<c_parser_frontend::type_system::BuiltInType::kVoid,
                          c_parser_frontend::type_system::SignTag::kUnsigned>())
         [[likely]] {
-      // º¯ÊıÎŞ·µ»ØÖµ
+      // å‡½æ•°æ— è¿”å›å€¼
       bool result = c_parser_controller.AddSentence(std::make_unique<Return>());
       assert(result);
     } else {
-      OutputError(std::format("º¯Êı±ØĞë·µ»ØÒ»¸öÖµ"));
+      OutputError(std::format("å‡½æ•°å¿…é¡»è¿”å›ä¸€ä¸ªå€¼"));
       exit(-1);
     }
   }
-  // Ìí¼Óº¯ÊıÄÚÓï¾äÒÑ¾­ÔÚSentences¹¹½¨¹ı³ÌÖĞÍê³É
-  // Ö»ĞèÇåÀí×÷ÓÃÓò
+  // æ·»åŠ å‡½æ•°å†…è¯­å¥å·²ç»åœ¨Sentencesæ„å»ºè¿‡ç¨‹ä¸­å®Œæˆ
+  // åªéœ€æ¸…ç†ä½œç”¨åŸŸ
   c_parser_controller.PopActionScope();
   return nullptr;
 }
 
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag>
 SingleStructureBodyBase(std::shared_ptr<FlowInterface>&& flow_control_node) {
-  // ¼ì²éÊÇ·ñÎª±äÁ¿ÉùÃ÷
+  // æ£€æŸ¥æ˜¯å¦ä¸ºå˜é‡å£°æ˜
   switch (flow_control_node->GetFlowType()) {
     case FlowType::kSimpleSentence:
       break;
     case FlowType::kFunctionDefine:
-      OutputError(std::format("º¯ÊıÉùÃ÷²»ÄÜ×÷Îª½á¹¹Êı¾İ³ÉÔ±"));
+      OutputError(std::format("å‡½æ•°å£°æ˜ä¸èƒ½ä½œä¸ºç»“æ„æ•°æ®æˆå‘˜"));
       exit(-1);
       break;
     default:
@@ -1046,12 +1046,12 @@ SingleStructureBodyBase(std::shared_ptr<FlowInterface>&& flow_control_node) {
       std::static_pointer_cast<VarietyOperatorNode>(
           static_cast<SimpleSentence&>(*flow_control_node)
               .GetSentenceOperateNodePointer());
-  // À©Õ¹ÉùÃ÷Ê±Ê¹ÓÃµÄÀàĞÍ£¨Èç¹ûÓĞÔòÈ¥³ıµÚÒ»ÖØÖ¸Õë£©
+  // æ‰©å±•å£°æ˜æ—¶ä½¿ç”¨çš„ç±»å‹ï¼ˆå¦‚æœæœ‰åˆ™å»é™¤ç¬¬ä¸€é‡æŒ‡é’ˆï¼‰
   std::shared_ptr<const TypeInterface> extend_type =
       GetExtendAnnounceType(variety_pointer->GetVarietyTypePointer());
-  // »ñÈ¡À©Õ¹ÉùÃ÷Ê±µÄ±äÁ¿ConstTag
+  // è·å–æ‰©å±•å£°æ˜æ—¶çš„å˜é‡ConstTag
   ConstTag extend_const_tag = variety_pointer->GetConstTag();
-  // Ïò½á¹¹Êı¾İ½ÚµãÖĞÌí¼Ó³ÉÔ±
+  // å‘ç»“æ„æ•°æ®èŠ‚ç‚¹ä¸­æ·»åŠ æˆå‘˜
   auto structure_member_index =
       structure_type_constructuring->AddStructureMember(
           variety_pointer->GetVarietyName(),
@@ -1071,9 +1071,9 @@ SingleStructureBodyExtend(
   auto structure_member_index =
       structure_type_constructuring->AddStructureMember(
           std::move(new_member_name), extend_type, extend_const_tag);
-  // ¼ì²é´ıÌí¼Ó³ÉÔ±ÃûÊÇ·ñÖØ¸´
+  // æ£€æŸ¥å¾…æ·»åŠ æˆå‘˜åæ˜¯å¦é‡å¤
   if (!structure_member_index.IsValid()) {
-    OutputError(std::format("ÖØ¶¨Òå³ÉÔ±{:}", new_member_name));
+    OutputError(std::format("é‡å®šä¹‰æˆå‘˜{:}", new_member_name));
     exit(-1);
   }
   return std::move(struct_data);
@@ -1101,13 +1101,13 @@ std::shared_ptr<ListInitializeOperatorNode> InitializeList(
         list_arguments,
     std::string&& right_curly_bracket) {
   auto initialize_list = std::make_shared<ListInitializeOperatorNode>();
-  // »ñÈ¡³õÊ¼»¯ÁĞ±í²ÎÊı
+  // è·å–åˆå§‹åŒ–åˆ—è¡¨å‚æ•°
   std::list<std::shared_ptr<const InitializeOperatorNodeInterface>>
       argument_pointers_to_add;
   for (auto& pointer : *list_arguments) {
     argument_pointers_to_add.emplace_back(std::move(pointer));
   }
-  // ½«³õÊ¼»¯ÁĞ±íµÄËùÓĞ²ÎÊıÌí¼Óµ½ÈİÆ÷ÖĞ
+  // å°†åˆå§‹åŒ–åˆ—è¡¨çš„æ‰€æœ‰å‚æ•°æ·»åŠ åˆ°å®¹å™¨ä¸­
   bool result =
       initialize_list->SetListValues(std::move(argument_pointers_to_add));
   return std::move(initialize_list);
@@ -1167,14 +1167,14 @@ AnnounceAssignableInitializeList(
 std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
            std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 VarietyAnnounceNoAssign(std::shared_ptr<VarietyOperatorNode>&& variety_node) {
-  // »ñÈ¡Ô­Ê¼ÉùÃ÷Ê¹ÓÃµÄÀàĞÍ
+  // è·å–åŸå§‹å£°æ˜ä½¿ç”¨çš„ç±»å‹
   auto raw_variety_type = variety_node->GetVarietyTypePointer();
-  // »ñÈ¡Ô­Ê¼ÉùÃ÷µÄConstTag
+  // è·å–åŸå§‹å£°æ˜çš„ConstTag
   ConstTag extend_const_tag = variety_node->GetConstTag();
-  // ´æ´¢»ñÈ¡±äÁ¿¹ı³Ì²Ù×÷µÄÈİÆ÷
+  // å­˜å‚¨è·å–å˜é‡è¿‡ç¨‹æ“ä½œçš„å®¹å™¨
   auto flow_control_node_container =
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>();
-  // ´´½¨²¢Ìí¼Ó¿Õ¼ä·ÖÅä½Úµã
+  // åˆ›å»ºå¹¶æ·»åŠ ç©ºé—´åˆ†é…èŠ‚ç‚¹
   auto allocate_space_node = std::make_shared<AllocateOperatorNode>();
   bool result = allocate_space_node->SetTargetVariety(
       std::shared_ptr<VarietyOperatorNode>(variety_node));
@@ -1185,24 +1185,24 @@ VarietyAnnounceNoAssign(std::shared_ptr<VarietyOperatorNode>&& variety_node) {
   assert(result);
   flow_control_node_container->emplace_back(
       std::move(allocate_flow_control_node));
-  // ¶¨Òå±äÁ¿
+  // å®šä¹‰å˜é‡
   c_parser_controller.DefineVariety(variety_node);
-  // »ñÈ¡À©Õ¹ÉùÃ÷Ê±µÄÀàĞÍ
+  // è·å–æ‰©å±•å£°æ˜æ—¶çš„ç±»å‹
   if (raw_variety_type->GetType() == StructOrBasicType::kPointer) {
-    // °şÀëÊı×éÎ¬Êı²ãÖ¸Õë
+    // å‰¥ç¦»æ•°ç»„ç»´æ•°å±‚æŒ‡é’ˆ
     while (raw_variety_type->GetType() == StructOrBasicType::kPointer &&
            std::static_pointer_cast<const PointerType>(raw_variety_type)
                    ->GetArraySize() != 0) {
       raw_variety_type = raw_variety_type->GetNextNodePointer();
     }
-    // Èç¹ûÊÇÖ¸ÕëÀàĞÍÔòÔÚÔ­Ê¼ÉùÃ÷ÀàĞÍ»ù´¡ÉÏÈ¥³ıÒ»ÖØÖ¸Õë
+    // å¦‚æœæ˜¯æŒ‡é’ˆç±»å‹åˆ™åœ¨åŸå§‹å£°æ˜ç±»å‹åŸºç¡€ä¸Šå»é™¤ä¸€é‡æŒ‡é’ˆ
     return std::make_tuple(
         raw_variety_type->GetType() == StructOrBasicType::kPointer
             ? raw_variety_type->GetNextNodePointer()
             : raw_variety_type,
         extend_const_tag, std::move(flow_control_node_container));
   } else {
-    // ²»ÊÇÖ¸ÕëÀàĞÍ£¬Ö±½Ó·µ»Ø
+    // ä¸æ˜¯æŒ‡é’ˆç±»å‹ï¼Œç›´æ¥è¿”å›
     return std::make_tuple(raw_variety_type, extend_const_tag,
                            std::move(flow_control_node_container));
   }
@@ -1213,58 +1213,58 @@ std::tuple<std::shared_ptr<const TypeInterface>, ConstTag,
 VarietyAnnounceWithAssign(
     std::shared_ptr<VarietyOperatorNode>&& variety_node,
     const std::shared_ptr<const OperatorNodeInterface>& node_for_assign) {
-  // »ñÈ¡Ô­Ê¼ÉùÃ÷Ê¹ÓÃµÄÀàĞÍ
+  // è·å–åŸå§‹å£°æ˜ä½¿ç”¨çš„ç±»å‹
   auto raw_variety_type = variety_node->GetVarietyTypePointer();
-  // »ñÈ¡Ô­Ê¼ÉùÃ÷µÄConstTag
+  // è·å–åŸå§‹å£°æ˜çš„ConstTag
   ConstTag extend_const_tag = variety_node->GetConstTag();
-  // ´æ´¢»ñÈ¡±äÁ¿¹ı³Ì²Ù×÷µÄÈİÆ÷
+  // å­˜å‚¨è·å–å˜é‡è¿‡ç¨‹æ“ä½œçš„å®¹å™¨
   auto flow_control_node_container =
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>();
-  // ´´½¨²¢Ìí¼Ó¿Õ¼ä·ÖÅä½Úµã
+  // åˆ›å»ºå¹¶æ·»åŠ ç©ºé—´åˆ†é…èŠ‚ç‚¹
   auto allocate_node = std::make_shared<AllocateOperatorNode>();
-  // ÉèÖÃÒª·ÖÅä¿Õ¼äµÄ½Úµã
+  // è®¾ç½®è¦åˆ†é…ç©ºé—´çš„èŠ‚ç‚¹
   bool result = allocate_node->SetTargetVariety(variety_node);
   assert(result);
-  // ½«·ÖÅä¿Õ¼äµÄ½Úµã°ü×°³ÉÁ÷³Ì½Úµã
+  // å°†åˆ†é…ç©ºé—´çš„èŠ‚ç‚¹åŒ…è£…æˆæµç¨‹èŠ‚ç‚¹
   auto allocate_flow_control_node = std::make_unique<SimpleSentence>();
   result = allocate_flow_control_node->SetSentenceOperateNode(allocate_node);
   assert(result);
-  // Ìí¼ÓÁ÷³ÌÓï¾ä
+  // æ·»åŠ æµç¨‹è¯­å¥
   flow_control_node_container->emplace_back(
       std::move(allocate_flow_control_node));
-  // ´´½¨²¢Ìí¼Ó¸³Öµ½Úµã
+  // åˆ›å»ºå¹¶æ·»åŠ èµ‹å€¼èŠ‚ç‚¹
   auto assign_node = std::make_shared<AssignOperatorNode>();
-  // ÉèÖÃ±»¸³ÖµµÄ½Úµã
+  // è®¾ç½®è¢«èµ‹å€¼çš„èŠ‚ç‚¹
   assign_node->SetNodeToBeAssigned(variety_node);
-  // ÉèÖÃÓÃÀ´¸³ÖµµÄ½Úµã
-  // µ±Ç°´¦ÓÚÉùÃ÷×´Ì¬
+  // è®¾ç½®ç”¨æ¥èµ‹å€¼çš„èŠ‚ç‚¹
+  // å½“å‰å¤„äºå£°æ˜çŠ¶æ€
   auto assignable_check_result =
       assign_node->SetNodeForAssign(node_for_assign, true);
   CheckAssignableCheckResult(assignable_check_result);
-  // ½«¸³Öµ½Úµã°ü×°³ÉÁ÷³Ì½Úµã
+  // å°†èµ‹å€¼èŠ‚ç‚¹åŒ…è£…æˆæµç¨‹èŠ‚ç‚¹
   auto assign_flow_control_node = std::make_unique<SimpleSentence>();
   result =
       assign_flow_control_node->SetSentenceOperateNode(std::move(assign_node));
   assert(result);
-  // Ìí¼ÓÁ÷³ÌÓï¾ä
+  // æ·»åŠ æµç¨‹è¯­å¥
   flow_control_node_container->emplace_back(
       std::move(assign_flow_control_node));
-  // ¶¨Òå±äÁ¿
+  // å®šä¹‰å˜é‡
   c_parser_controller.DefineVariety(variety_node);
-  // »ñÈ¡À©Õ¹ÉùÃ÷Ê±µÄÀàĞÍ
+  // è·å–æ‰©å±•å£°æ˜æ—¶çš„ç±»å‹
   if (raw_variety_type->GetType() == StructOrBasicType::kPointer) {
-    // °şÀëÊı×éÎ¬Êı²ãÖ¸Õë
+    // å‰¥ç¦»æ•°ç»„ç»´æ•°å±‚æŒ‡é’ˆ
     while (raw_variety_type->GetType() == StructOrBasicType::kPointer &&
            std::static_pointer_cast<const PointerType>(raw_variety_type)
                    ->GetArraySize() != 0) {
       raw_variety_type = raw_variety_type->GetNextNodePointer();
     }
-    // Èç¹ûÊÇÖ¸ÕëÀàĞÍÔòÔÚÔ­Ê¼ÉùÃ÷ÀàĞÍ»ù´¡ÉÏÈ¥³ıÒ»ÖØÖ¸Õë
+    // å¦‚æœæ˜¯æŒ‡é’ˆç±»å‹åˆ™åœ¨åŸå§‹å£°æ˜ç±»å‹åŸºç¡€ä¸Šå»é™¤ä¸€é‡æŒ‡é’ˆ
     return std::make_tuple(raw_variety_type->GetNextNodePointer(),
                            extend_const_tag,
                            std::move(flow_control_node_container));
   } else {
-    // ²»ÊÇÖ¸ÕëÀàĞÍ£¬Ö±½Ó·µ»Ø
+    // ä¸æ˜¯æŒ‡é’ˆç±»å‹ï¼Œç›´æ¥è¿”å›
     return std::make_tuple(raw_variety_type, extend_const_tag,
                            std::move(flow_control_node_container));
   }
@@ -1278,7 +1278,7 @@ SingleAnnounceAndAssignNoAssignBase(
     case FlowType::kSimpleSentence:
       break;
     case FlowType::kFunctionDefine:
-      OutputError(std::format("²»Ö§³ÖµÄÀ©Õ¹£ºº¯ÊıÄÚÉùÃ÷º¯Êı"));
+      OutputError(std::format("ä¸æ”¯æŒçš„æ‰©å±•ï¼šå‡½æ•°å†…å£°æ˜å‡½æ•°"));
       exit(-1);
       break;
     default:
@@ -1300,12 +1300,12 @@ SingleAnnounceAndAssignWithAssignBase(
         container) {
   assert(str_assign == "=");
 
-  // ¼ì²éÊÇ·ñÎª±äÁ¿ÉùÃ÷
+  // æ£€æŸ¥æ˜¯å¦ä¸ºå˜é‡å£°æ˜
   switch (flow_control_node->GetFlowType()) {
     case FlowType::kSimpleSentence:
       break;
     case FlowType::kFunctionDefine:
-      OutputError(std::format("²»Ö§³ÖµÄÀ©Õ¹£ºº¯ÊıÄÚÉùÃ÷º¯Êı"));
+      OutputError(std::format("ä¸æ”¯æŒçš„æ‰©å±•ï¼šå‡½æ•°å†…å£°æ˜å‡½æ•°"));
       exit(-1);
       break;
     default:
@@ -1333,14 +1333,14 @@ SingleAnnounceAndAssignNoAssignExtend(
 
   auto& [extend_announce_type, extend_const_tag, flow_control_node_container] =
       container;
-  // ¹¹½¨±äÁ¿½Úµã
+  // æ„å»ºå˜é‡èŠ‚ç‚¹
   auto variety_node = std::make_shared<VarietyOperatorNode>(
       std::move(variety_name), extend_const_tag, LeftRightValueTag::kLeftValue);
   variety_node->SetVarietyType(
       std::shared_ptr<const TypeInterface>(extend_announce_type));
   auto [ignore_type, ignore_const_tag, sub_flow_control_node_container] =
       VarietyAnnounceNoAssign(std::move(variety_node));
-  // ½«»ñÈ¡±äÁ¿µÄ²Ù×÷ºÏ²¢µ½Ö÷ÈİÆ÷ÖĞ
+  // å°†è·å–å˜é‡çš„æ“ä½œåˆå¹¶åˆ°ä¸»å®¹å™¨ä¸­
   flow_control_node_container->splice(
       flow_control_node_container->end(),
       std::move(*sub_flow_control_node_container));
@@ -1365,11 +1365,11 @@ SingleAnnounceAndAssignWithAssignExtend(
       container;
   auto& [node_for_assign, flow_control_nodes_to_get_node_for_assign] =
       assigned_container;
-  // ½«»ñÈ¡´ı¸³Öµ±äÁ¿µÄ²Ù×÷ºÏ²¢µ½Ö÷ÈİÆ÷ÖĞ
+  // å°†è·å–å¾…èµ‹å€¼å˜é‡çš„æ“ä½œåˆå¹¶åˆ°ä¸»å®¹å™¨ä¸­
   flow_control_node_container->splice(
       flow_control_node_container->end(),
       std::move(*flow_control_nodes_to_get_node_for_assign));
-  // ¹¹½¨±äÁ¿½Úµã
+  // æ„å»ºå˜é‡èŠ‚ç‚¹
   auto variety_node = std::make_shared<VarietyOperatorNode>(
       std::move(variety_name), extend_const_tag, LeftRightValueTag::kLeftValue);
   variety_node->SetVarietyType(
@@ -1377,7 +1377,7 @@ SingleAnnounceAndAssignWithAssignExtend(
   auto [ignore_type, ignore_const_tag, sub_flow_control_node_container] =
       VarietyAnnounceWithAssign(std::move(variety_node),
                                 std::move(node_for_assign));
-  // ½«³õÊ¼»¯±äÁ¿µÄ²Ù×÷ºÏ²¢µ½Ö÷ÈİÆ÷ÖĞ
+  // å°†åˆå§‹åŒ–å˜é‡çš„æ“ä½œåˆå¹¶åˆ°ä¸»å®¹å™¨ä¸­
   flow_control_node_container->splice(
       flow_control_node_container->end(),
       std::move(*sub_flow_control_node_container));
@@ -1391,19 +1391,19 @@ std::pair<std::shared_ptr<const TypeInterface>, ConstTag>&& TypeBasicType(
 
 std::pair<std::shared_ptr<const TypeInterface>, ConstTag> TypeFunctionRelavent(
     std::shared_ptr<FlowInterface>&& flow_control_node) {
-  // ¼ì²éÀàĞÍÊÇ·ñÎªº¯ÊıÉùÃ÷
+  // æ£€æŸ¥ç±»å‹æ˜¯å¦ä¸ºå‡½æ•°å£°æ˜
   if (flow_control_node->GetFlowType() == FlowType::kFunctionDefine)
       [[unlikely]] {
-    // º¯Êı²»ÄÜ×÷ÎªÀàĞÍÊ¹ÓÃ
-    OutputError(std::format("º¯ÊıÉùÃ÷/¶¨Òå²»ÄÜ×÷ÎªÀàĞÍ"));
+    // å‡½æ•°ä¸èƒ½ä½œä¸ºç±»å‹ä½¿ç”¨
+    OutputError(std::format("å‡½æ•°å£°æ˜/å®šä¹‰ä¸èƒ½ä½œä¸ºç±»å‹"));
     exit(-1);
   }
   auto operator_node = std::static_pointer_cast<VarietyOperatorNode>(
       static_cast<SimpleSentence&>(*flow_control_node)
           .GetSentenceOperateNodePointer());
-  // ¼ì²éÊÇ·ñÎªÄäÃûÖ¸ÕëÉùÃ÷
+  // æ£€æŸ¥æ˜¯å¦ä¸ºåŒ¿åæŒ‡é’ˆå£°æ˜
   if (!operator_node->GetVarietyName().empty()) [[unlikely]] {
-    OutputError(std::format("±äÁ¿ÉùÃ÷²»ÊÇÀàĞÍ"));
+    OutputError(std::format("å˜é‡å£°æ˜ä¸æ˜¯ç±»å‹"));
     exit(-1);
   }
   return std::make_pair(operator_node->GetVarietyTypePointer(),
@@ -1571,7 +1571,7 @@ std::pair<std::shared_ptr<const OperatorNodeInterface>,
           std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>>
 AssignableConstexprValue(
     std::shared_ptr<BasicTypeInitializeOperatorNode>&& value) {
-  // ¹¹½¨´æ´¢»ñÈ¡³£Á¿/±äÁ¿µÄ²Ù×÷µÄÈİÆ÷
+  // æ„å»ºå­˜å‚¨è·å–å¸¸é‡/å˜é‡çš„æ“ä½œçš„å®¹å™¨
   return std::make_pair(
       std::move(value),
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>());
@@ -1583,8 +1583,8 @@ AssignableId(std::string&& variety_name) {
   auto [variety_operator_node, found] =
       c_parser_controller.GetVarietyOrFunction(variety_name);
   if (!found) [[unlikely]] {
-    // Î´ÕÒµ½¸ø¶¨Ãû³ÆµÄ±äÁ¿
-    OutputError(std::format("ÕÒ²»µ½¶ÔÏó{:}", variety_name));
+    // æœªæ‰¾åˆ°ç»™å®šåç§°çš„å˜é‡
+    OutputError(std::format("æ‰¾ä¸åˆ°å¯¹è±¡{:}", variety_name));
     exit(-1);
   }
   return std::make_pair(
@@ -1631,22 +1631,22 @@ AssignableTypeConvert(
   if (old_operator_node->GetGeneralOperatorType() ==
           GeneralOperationType::kInitValue &&
       new_const_tag == ConstTag::kNonConst) [[unlikely]] {
-    OutputError("³õÊ¼»¯Êı¾İ²»ÄÜ×ª»¯Îª·ÇconstÀàĞÍ");
+    OutputError("åˆå§‹åŒ–æ•°æ®ä¸èƒ½è½¬åŒ–ä¸ºéconstç±»å‹");
     exit(-1);
   }
-  // ×ª»»½Úµã
+  // è½¬æ¢èŠ‚ç‚¹
   auto convert_operator_node =
       std::make_shared<TypeConvert>(old_operator_node, new_type, new_const_tag);
-  // ¾­¹ıÀàĞÍ×ª»»µÃµ½µÄ½Úµã
+  // ç»è¿‡ç±»å‹è½¬æ¢å¾—åˆ°çš„èŠ‚ç‚¹
   auto converted_operator_node =
       convert_operator_node->GetDestinationNodePointer();
-  // Ìí¼Ó×ª»»Á÷³Ì¿ØÖÆ½Úµã
+  // æ·»åŠ è½¬æ¢æµç¨‹æ§åˆ¶èŠ‚ç‚¹
   auto flow_control_node = std::make_unique<SimpleSentence>();
   bool result =
       flow_control_node->SetSentenceOperateNode(convert_operator_node);
   assert(result);
   flow_control_node_container->emplace_back(std::move(flow_control_node));
-  // ·µ»Ø¾­¹ı×ª»»µÄ½Úµã¶ø²»ÊÇ×ª»»½Úµã
+  // è¿”å›ç»è¿‡è½¬æ¢çš„èŠ‚ç‚¹è€Œä¸æ˜¯è½¬æ¢èŠ‚ç‚¹
   return std::make_pair(std::move(converted_operator_node),
                         std::move(flow_control_node_container));
 }
@@ -1667,24 +1667,24 @@ AssignableAssign(
       destination_variety_data;
   auto& [node_for_assign, statements_to_get_node_for_assign] =
       source_variety_data;
-  // »ñÈ¡ÕæÕıµÄ´ı¸³Öµ¶ÔÏó
+  // è·å–çœŸæ­£çš„å¾…èµ‹å€¼å¯¹è±¡
   auto real_node_to_be_assigned = node_to_be_assigned->GetResultOperatorNode();
   if (real_node_to_be_assigned == nullptr) {
     real_node_to_be_assigned = node_to_be_assigned;
   }
-  // »ñÈ¡ÕæÕıµÄ´ı¸³Öµ¶ÔÏó
+  // è·å–çœŸæ­£çš„å¾…èµ‹å€¼å¯¹è±¡
   auto real_node_for_assign = node_for_assign->GetResultOperatorNode();
   if (real_node_for_assign == nullptr) {
     real_node_for_assign = node_for_assign;
   }
   if (real_node_to_be_assigned->GetGeneralOperatorType() !=
       GeneralOperationType::kVariety) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨¶Ô·Ç±äÁ¿¸³Öµ"));
+    OutputError(std::format("æ— æ³•å¯¹éå˜é‡èµ‹å€¼"));
     exit(-1);
   } else if (static_cast<const VarietyOperatorNode&>(*real_node_to_be_assigned)
                  .GetLeftRightValueTag() != LeftRightValueTag::kLeftValue)
       [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨¶ÔÓÒÖµ¸³Öµ"));
+    OutputError(std::format("æ— æ³•å¯¹å³å€¼èµ‹å€¼"));
     exit(-1);
   }
   auto assign_node = std::make_shared<AssignOperatorNode>();
@@ -1692,7 +1692,7 @@ AssignableAssign(
   auto assignable_check_result =
       assign_node->SetNodeForAssign(real_node_for_assign, false);
   CheckAssignableCheckResult(assignable_check_result);
-  // ºÏ²¢»ñÈ¡¸³ÖµÓÃ½ÚµãºÍ±»¸³ÖµµÄ½Úµã¹ı³ÌÖĞ²úÉúµÄÓï¾ä
+  // åˆå¹¶è·å–èµ‹å€¼ç”¨èŠ‚ç‚¹å’Œè¢«èµ‹å€¼çš„èŠ‚ç‚¹è¿‡ç¨‹ä¸­äº§ç”Ÿçš„è¯­å¥
   statements_to_get_node_to_be_assigned->splice(
       statements_to_get_node_to_be_assigned->end(),
       std::move(*statements_to_get_node_for_assign));
@@ -1738,7 +1738,7 @@ AssignableSizeOfType(
       CommonlyUsedTypeGenerator::GetBasicTypeNotTemplate(
           return_constexpr_value_type, SignTag::kSigned));
   assert(result);
-  // ·µ»Ø¿ÕÈİÆ÷£¬¼Ì³ĞµÄÈİÆ÷×Ô¶¯ÊÍ·Å
+  // è¿”å›ç©ºå®¹å™¨ï¼Œç»§æ‰¿çš„å®¹å™¨è‡ªåŠ¨é‡Šæ”¾
   return std::make_pair(
       std::move(return_constexpr_value),
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>());
@@ -1769,7 +1769,7 @@ AssignableSizeOfAssignable(
       CommonlyUsedTypeGenerator::GetBasicTypeNotTemplate(
           return_constexpr_value_type, SignTag::kSigned));
   assert(result);
-  // ·µ»Ø¿ÕÈİÆ÷£¬¼Ì³ĞµÄÈİÆ÷×Ô¶¯ÊÍ·Å
+  // è¿”å›ç©ºå®¹å™¨ï¼Œç»§æ‰¿çš„å®¹å™¨è‡ªåŠ¨é‡Šæ”¾
   return std::make_pair(
       std::move(return_constexpr_value),
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>());
@@ -1788,12 +1788,12 @@ AssignableMemberAccess(
   auto member_access_node = std::make_shared<MemberAccessOperatorNode>();
   bool result = member_access_node->SetNodeToAccess(assignable);
   if (!result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨¶Ô·Ç½á¹¹Êı¾İ»òÃ¶¾ÙÀàĞÍ·ÃÎÊ³ÉÔ±"));
+    OutputError(std::format("æ— æ³•å¯¹éç»“æ„æ•°æ®æˆ–æšä¸¾ç±»å‹è®¿é—®æˆå‘˜"));
     exit(-1);
   }
   result = member_access_node->SetMemberName(std::move(member_name));
   if (!result) [[unlikely]] {
-    OutputError(std::format("¸ø¶¨½á¹¹Ìå²»´æÔÚ³ÉÔ±{:}", member_name));
+    OutputError(std::format("ç»™å®šç»“æ„ä½“ä¸å­˜åœ¨æˆå‘˜{:}", member_name));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
@@ -1814,26 +1814,26 @@ AssignablePointerMemberAccess(
   assert(str_member_access == "->");
 
   auto& [assignable, sentences_to_get_assignable] = variety_data;
-  // ¶ÔÖ¸Õë½âÒıÓÃºó·ÃÎÊ³ÉÔ±
+  // å¯¹æŒ‡é’ˆè§£å¼•ç”¨åè®¿é—®æˆå‘˜
   auto dereference_node = std::make_shared<DereferenceOperatorNode>();
   bool result = dereference_node->SetNodeToDereference(assignable);
   if (!result) [[unlikely]] {
-    OutputError(std::format("²»ÄÜ¶Ô·ÇÖ¸Õë¶ÔÏóÊ¹ÓÃ\"->\"ÔËËã·û"));
+    OutputError(std::format("ä¸èƒ½å¯¹éæŒ‡é’ˆå¯¹è±¡ä½¿ç”¨\"->\"è¿ç®—ç¬¦"));
     exit(-1);
   }
   auto dereferenced_node = dereference_node->GetDereferencedNodePointer();
   auto member_access_node = std::make_shared<MemberAccessOperatorNode>();
   result = member_access_node->SetNodeToAccess(dereferenced_node);
   if (!result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨¶Ô·Ç½á¹¹Êı¾İ»òÃ¶¾ÙÀàĞÍ·ÃÎÊ³ÉÔ±"));
+    OutputError(std::format("æ— æ³•å¯¹éç»“æ„æ•°æ®æˆ–æšä¸¾ç±»å‹è®¿é—®æˆå‘˜"));
     exit(-1);
   }
   result = member_access_node->SetMemberName(std::move(member_name));
   if (!result) [[unlikely]] {
-    OutputError(std::format("¸ø¶¨½á¹¹Êı¾İ²»´æÔÚ³ÉÔ±{:}", member_name));
+    OutputError(std::format("ç»™å®šç»“æ„æ•°æ®ä¸å­˜åœ¨æˆå‘˜{:}", member_name));
     exit(-1);
   }
-  // Ìí¼Ó½âÒıÓÃ½ÚµãºÍ³ÉÔ±·ÃÎÊ½Úµã
+  // æ·»åŠ è§£å¼•ç”¨èŠ‚ç‚¹å’Œæˆå‘˜è®¿é—®èŠ‚ç‚¹
   auto flow_control_node = std::make_unique<SimpleSentence>();
   result = flow_control_node->SetSentenceOperateNode(dereference_node);
   assert(result);
@@ -1865,24 +1865,24 @@ AssignableMathematicalOperate(
   bool left_operator_node_check_result =
       mathematical_operator_node->SetLeftOperatorNode(left_operator_node);
   if (!left_operator_node_check_result) [[unlikely]] {
-    OutputError(std::format("×óÔËËãÊıÎŞ·¨²ÎÓëÔËËã"));
+    OutputError(std::format("å·¦è¿ç®—æ•°æ— æ³•å‚ä¸è¿ç®—"));
     exit(-1);
   }
   DeclineMathematicalComputeTypeResult right_operator_node_check_result =
       mathematical_operator_node->SetRightOperatorNode(right_operator_node);
   CheckMathematicalComputeTypeResult(right_operator_node_check_result);
-  // Ìí¼ÓÁ÷³Ì¿ØÖÆ½Úµã
+  // æ·»åŠ æµç¨‹æ§åˆ¶èŠ‚ç‚¹
   auto flow_control_node = std::make_unique<SimpleSentence>();
   bool result =
       flow_control_node->SetSentenceOperateNode(mathematical_operator_node);
   assert(result);
-  // ½«Éú³ÉÓÒÔËËã½ÚµãµÄ²Ù×÷ºÏ²¢µ½×óÈİÆ÷ÖĞ
+  // å°†ç”Ÿæˆå³è¿ç®—èŠ‚ç‚¹çš„æ“ä½œåˆå¹¶åˆ°å·¦å®¹å™¨ä¸­
   left_flow_control_node_container->splice(
       left_flow_control_node_container->end(),
       std::move(*right_flow_control_node_container));
-  // Ìí¼ÓÊıÑ§ÔËËã½Úµã
+  // æ·»åŠ æ•°å­¦è¿ç®—èŠ‚ç‚¹
   left_flow_control_node_container->emplace_back(std::move(flow_control_node));
-  // ·µ»ØÔËËãµÃµ½µÄ½Úµã¶ø²»ÊÇÔËËã½Úµã
+  // è¿”å›è¿ç®—å¾—åˆ°çš„èŠ‚ç‚¹è€Œä¸æ˜¯è¿ç®—èŠ‚ç‚¹
   return std::make_pair(
       mathematical_operator_node->GetComputeResultNodePointer(),
       std::move(left_flow_control_node_container));
@@ -1902,33 +1902,33 @@ AssignableMathematicalAndAssignOperate(
       destination_variety_data;
   auto& [right_operator_node, right_flow_control_node_container] =
       source_variety_data;
-  // »ñÈ¡ÊıÑ§ÔËËã·û
+  // è·å–æ•°å­¦è¿ç®—ç¬¦
   MathematicalOperation mathematical_operation = c_parser_frontend::
       operator_node::MathematicalAndAssignOperationToMathematicalOperation(
           mathematical_and_assign_operation);
-  // Éú³ÉÔËËã½Úµã
+  // ç”Ÿæˆè¿ç®—èŠ‚ç‚¹
   auto mathematical_operator_node =
       std::make_shared<MathematicalOperatorNode>(mathematical_operation);
   bool left_operator_node_check_result =
       mathematical_operator_node->SetLeftOperatorNode(left_operator_node);
   if (!left_operator_node_check_result) [[unlikely]] {
-    OutputError(std::format("×óÔËËãÊıÎŞ·¨²ÎÓëÔËËã"));
+    OutputError(std::format("å·¦è¿ç®—æ•°æ— æ³•å‚ä¸è¿ç®—"));
     exit(-1);
   }
   DeclineMathematicalComputeTypeResult right_operator_node_check_result =
       mathematical_operator_node->SetRightOperatorNode(right_operator_node);
   CheckMathematicalComputeTypeResult(right_operator_node_check_result);
-  // Éú³É¸³Öµ½Úµã
+  // ç”Ÿæˆèµ‹å€¼èŠ‚ç‚¹
   auto assign_operator_node = std::make_shared<AssignOperatorNode>();
   assign_operator_node->SetNodeToBeAssigned(left_operator_node);
   AssignableCheckResult assignable_check_result =
       assign_operator_node->SetNodeForAssign(right_operator_node, false);
   CheckAssignableCheckResult(assignable_check_result);
-  // ½«Éú³ÉÓÒÔËËã½ÚµãµÄ²Ù×÷ºÏ²¢µ½×óÈİÆ÷ÖĞ
+  // å°†ç”Ÿæˆå³è¿ç®—èŠ‚ç‚¹çš„æ“ä½œåˆå¹¶åˆ°å·¦å®¹å™¨ä¸­
   left_flow_control_node_container->splice(
       left_flow_control_node_container->end(),
       std::move(*right_flow_control_node_container));
-  // Ìí¼ÓÔËËãÁ÷³Ì¿ØÖÆ½ÚµãºÍ¸³ÖµÁ÷³Ì¿ØÖÆ½Úµã
+  // æ·»åŠ è¿ç®—æµç¨‹æ§åˆ¶èŠ‚ç‚¹å’Œèµ‹å€¼æµç¨‹æ§åˆ¶èŠ‚ç‚¹
   auto flow_control_node_mathematical = std::make_unique<SimpleSentence>();
   bool result = flow_control_node_mathematical->SetSentenceOperateNode(
       mathematical_operator_node);
@@ -1941,7 +1941,7 @@ AssignableMathematicalAndAssignOperate(
   assert(result);
   left_flow_control_node_container->emplace_back(
       std::move(flow_control_node_assign));
-  // ·µ»ØÔËËãµÃµ½µÄ½Úµã¶ø²»ÊÇÔËËã½Úµã
+  // è¿”å›è¿ç®—å¾—åˆ°çš„èŠ‚ç‚¹è€Œä¸æ˜¯è¿ç®—èŠ‚ç‚¹
   return std::make_pair(assign_operator_node->GetResultOperatorNode(),
                         std::move(left_flow_control_node_container));
 }
@@ -1957,32 +1957,32 @@ AssignableLogicalOperate(
         rhr) {
   auto& [left_operator_node, left_flow_control_node_container] = lhr;
   auto& [right_operator_node, right_flow_control_node_container] = rhr;
-  // ¹¹½¨Âß¼­ÔËËã½Úµã
+  // æ„å»ºé€»è¾‘è¿ç®—èŠ‚ç‚¹
   auto logical_operator_node =
       std::make_shared<LogicalOperationOperatorNode>(logical_operation);
   bool check_result =
       logical_operator_node->SetLeftOperatorNode(left_operator_node);
   if (!check_result) [[unlikely]] {
-    OutputError(std::format("×ó²Ù×÷ÊıÎŞ·¨×÷ÎªÂß¼­ÔËËã½Úµã"));
+    OutputError(std::format("å·¦æ“ä½œæ•°æ— æ³•ä½œä¸ºé€»è¾‘è¿ç®—èŠ‚ç‚¹"));
     exit(-1);
   }
   check_result =
       logical_operator_node->SetRightOperatorNode(right_operator_node);
   if (!check_result) [[unlikely]] {
-    OutputError(std::format("ÓÒ²Ù×÷ÊıÎŞ·¨×÷ÎªÂß¼­ÔËËã½Úµã"));
+    OutputError(std::format("å³æ“ä½œæ•°æ— æ³•ä½œä¸ºé€»è¾‘è¿ç®—èŠ‚ç‚¹"));
     exit(-1);
   }
-  // ½«Éú³ÉÓÒÔËËã½ÚµãµÄ²Ù×÷ºÏ²¢µ½×óÈİÆ÷ÖĞ
+  // å°†ç”Ÿæˆå³è¿ç®—èŠ‚ç‚¹çš„æ“ä½œåˆå¹¶åˆ°å·¦å®¹å™¨ä¸­
   left_flow_control_node_container->splice(
       left_flow_control_node_container->end(),
       std::move(*right_flow_control_node_container));
-  // Ìí¼ÓÔËËãÁ÷³Ì½Úµã
+  // æ·»åŠ è¿ç®—æµç¨‹èŠ‚ç‚¹
   auto flow_control_node = std::make_unique<SimpleSentence>();
   check_result =
       flow_control_node->SetSentenceOperateNode(logical_operator_node);
   assert(check_result);
   left_flow_control_node_container->emplace_back(std::move(flow_control_node));
-  // ·µ»ØÔËËãµÃµ½µÄ½Úµã¶ø²»ÊÇÔËËã½Úµã
+  // è¿”å›è¿ç®—å¾—åˆ°çš„èŠ‚ç‚¹è€Œä¸æ˜¯è¿ç®—èŠ‚ç‚¹
   return std::make_pair(logical_operator_node->GetResultOperatorNode(),
                         std::move(left_flow_control_node_container));
 }
@@ -2002,14 +2002,14 @@ AssignableNot(
   bool check_result =
       not_operator_node->SetLeftOperatorNode(sub_assignable_node);
   if (!check_result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨½øĞĞÂß¼­·ÇÔËËã"));
+    OutputError(std::format("æ— æ³•è¿›è¡Œé€»è¾‘éè¿ç®—"));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
   check_result = flow_control_node->SetSentenceOperateNode(not_operator_node);
   assert(check_result);
   flow_control_node_container->emplace_back(std::move(flow_control_node));
-  // ·µ»ØÔËËãµÃµ½µÄ½Úµã¶ø²»ÊÇÔËËã½Úµã
+  // è¿”å›è¿ç®—å¾—åˆ°çš„èŠ‚ç‚¹è€Œä¸æ˜¯è¿ç®—èŠ‚ç‚¹
   return std::make_pair(not_operator_node->GetResultOperatorNode(),
                         std::move(flow_control_node_container));
 }
@@ -2029,14 +2029,14 @@ AssignableLogicalNegative(
   bool check_result =
       logic_negative_node->SetLeftOperatorNode(sub_assignable_node);
   if (!check_result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨½øĞĞ°´Î»È¡·´ÔËËã"));
+    OutputError(std::format("æ— æ³•è¿›è¡ŒæŒ‰ä½å–åè¿ç®—"));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
   check_result = flow_control_node->SetSentenceOperateNode(logic_negative_node);
   assert(check_result);
   flow_control_node_container->emplace_back(std::move(flow_control_node));
-  // ·µ»ØÔËËãµÃµ½µÄ½Úµã¶ø²»ÊÇÔËËã½Úµã
+  // è¿”å›è¿ç®—å¾—åˆ°çš„èŠ‚ç‚¹è€Œä¸æ˜¯è¿ç®—èŠ‚ç‚¹
   return std::make_pair(logic_negative_node->GetResultOperatorNode(),
                         std::move(flow_control_node_container));
 }
@@ -2056,14 +2056,14 @@ AssignableMathematicalNegative(
   bool check_result =
       math_negative_node->SetLeftOperatorNode(sub_assignable_node);
   if (!check_result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨½øĞĞÈ¡¸ºÔËËã"));
+    OutputError(std::format("æ— æ³•è¿›è¡Œå–è´Ÿè¿ç®—"));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
   check_result = flow_control_node->SetSentenceOperateNode(math_negative_node);
   assert(check_result);
   flow_control_node_container->emplace_back(std::move(flow_control_node));
-  // ·µ»ØÔËËãµÃµ½µÄ½Úµã¶ø²»ÊÇÔËËã½Úµã
+  // è¿”å›è¿ç®—å¾—åˆ°çš„èŠ‚ç‚¹è€Œä¸æ˜¯è¿ç®—èŠ‚ç‚¹
   return std::make_pair(math_negative_node->GetResultOperatorNode(),
                         std::move(flow_control_node_container));
 }
@@ -2080,29 +2080,29 @@ AssignableObtainAddress(
   auto& [sub_assignable_node, flow_control_node_container] = variety_data;
   auto node_to_obtain_address =
       std::static_pointer_cast<const VarietyOperatorNode>(sub_assignable_node);
-  // ¼ì²é±»È¡µØÖ·µÄ½Úµã
+  // æ£€æŸ¥è¢«å–åœ°å€çš„èŠ‚ç‚¹
   if (node_to_obtain_address->GetGeneralOperatorType() !=
       GeneralOperationType::kVariety) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨¶Ô·Ç±äÁ¿ÀàĞÍÈ¡µØÖ·"));
+    OutputError(std::format("æ— æ³•å¯¹éå˜é‡ç±»å‹å–åœ°å€"));
     exit(-1);
   } else if (node_to_obtain_address->GetLeftRightValueTag() !=
              LeftRightValueTag::kLeftValue) [[unlikely]] {
-    // ±»È¡µØÖ·µÄ½ÚµãÊÇÓÒÖµ
-    OutputError(std::format("ÎŞ·¨¶ÔÓÒÖµÈ¡µØÖ·"));
+    // è¢«å–åœ°å€çš„èŠ‚ç‚¹æ˜¯å³å€¼
+    OutputError(std::format("æ— æ³•å¯¹å³å€¼å–åœ°å€"));
     exit(-1);
   }
   auto obtain_address_node = std::make_shared<ObtainAddressOperatorNode>();
   bool result =
       obtain_address_node->SetNodeToObtainAddress(node_to_obtain_address);
   if (!result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨È¡µØÖ·"));
+    OutputError(std::format("æ— æ³•å–åœ°å€"));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
   result = flow_control_node->SetSentenceOperateNode(obtain_address_node);
   assert(result);
   flow_control_node_container->emplace_back(std::move(flow_control_node));
-  // ·µ»ØÔËËãµÃµ½µÄ½Úµã¶ø²»ÊÇÔËËã½Úµã
+  // è¿”å›è¿ç®—å¾—åˆ°çš„èŠ‚ç‚¹è€Œä¸æ˜¯è¿ç®—èŠ‚ç‚¹
   return std::make_pair(obtain_address_node->GetResultOperatorNode(),
                         std::move(flow_control_node_container));
 }
@@ -2120,14 +2120,14 @@ AssignableDereference(
   auto dereference_node = std::make_shared<DereferenceOperatorNode>();
   bool result = dereference_node->SetNodeToDereference(sub_assignable_node);
   if (!result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨½âÒıÓÃ"));
+    OutputError(std::format("æ— æ³•è§£å¼•ç”¨"));
     exit(-1);
   }
   auto flow_control_node = std::make_unique<SimpleSentence>();
   result = flow_control_node->SetSentenceOperateNode(dereference_node);
   assert(result);
   flow_control_node_container->emplace_back(std::move(flow_control_node));
-  // ·µ»ØÔËËãµÃµ½µÄ½Úµã¶ø²»ÊÇÔËËã½Úµã
+  // è¿”å›è¿ç®—å¾—åˆ°çš„èŠ‚ç‚¹è€Œä¸æ˜¯è¿ç®—èŠ‚ç‚¹
   return std::make_pair(dereference_node->GetResultOperatorNode(),
                         std::move(flow_control_node_container));
 }
@@ -2148,31 +2148,31 @@ AssignableArrayAccess(
 
   auto& [node_to_dereference, main_flow_control_node_container] = array_data;
   auto& [index_node, sub_flow_control_node_container] = index_data;
-  // ´´½¨½«Ö¸ÕëµØÖ·ÓëÆ«ÒÆÁ¿Ïà¼ÓµÄ½Úµã
+  // åˆ›å»ºå°†æŒ‡é’ˆåœ°å€ä¸åç§»é‡ç›¸åŠ çš„èŠ‚ç‚¹
   auto plus_operator_node =
       std::make_shared<MathematicalOperatorNode>(MathematicalOperation::kPlus);
   bool left_node_check_result =
       plus_operator_node->SetLeftOperatorNode(node_to_dereference);
   if (!left_node_check_result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨¼ä½ÓÑ°Ö·"));
+    OutputError(std::format("æ— æ³•é—´æ¥å¯»å€"));
     exit(-1);
   }
   auto right_node_check_result =
       plus_operator_node->SetRightOperatorNode(index_node);
   CheckMathematicalComputeTypeResult(right_node_check_result);
-  // ´´½¨¶Ô×îÖÕµØÖ·½âÒıÓÃµÄ½Úµã
+  // åˆ›å»ºå¯¹æœ€ç»ˆåœ°å€è§£å¼•ç”¨çš„èŠ‚ç‚¹
   auto dereference_operator_node = std::make_shared<DereferenceOperatorNode>();
   bool dereference_result = dereference_operator_node->SetNodeToDereference(
       plus_operator_node->GetResultOperatorNode());
   if (!dereference_result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨·ÃÎÊÊı×é£¬¿ÉÄÜÊ¹ÓÃÁË¸¡µãÊıÏÂ±ê"));
+    OutputError(std::format("æ— æ³•è®¿é—®æ•°ç»„ï¼Œå¯èƒ½ä½¿ç”¨äº†æµ®ç‚¹æ•°ä¸‹æ ‡"));
     exit(-1);
   }
-  // ºÏ²¢»ñÈ¡indexµÄ²Ù×÷µ½Ö÷ÈİÆ÷ÖĞ
+  // åˆå¹¶è·å–indexçš„æ“ä½œåˆ°ä¸»å®¹å™¨ä¸­
   main_flow_control_node_container->splice(
       main_flow_control_node_container->end(),
       std::move(*sub_flow_control_node_container));
-  // ´´½¨Á÷³Ì½Úµã
+  // åˆ›å»ºæµç¨‹èŠ‚ç‚¹
   auto plus_flow_control_node = std::make_unique<SimpleSentence>();
   bool result =
       plus_flow_control_node->SetSentenceOperateNode(plus_operator_node);
@@ -2185,7 +2185,7 @@ AssignableArrayAccess(
   assert(result);
   main_flow_control_node_container->emplace_back(
       std::move(dereference_flow_control_node));
-  // ·µ»ØÔËËãµÃµ½µÄ½Úµã¶ø²»ÊÇÔËËã½Úµã
+  // è¿”å›è¿ç®—å¾—åˆ°çš„èŠ‚ç‚¹è€Œä¸æ˜¯è¿ç®—èŠ‚ç‚¹
   return std::make_pair(dereference_operator_node->GetResultOperatorNode(),
                         std::move(main_flow_control_node_container));
 }
@@ -2196,10 +2196,10 @@ std::shared_ptr<const OperatorNodeInterface> PrefixPlusOrMinus(
     std::list<std::unique_ptr<FlowInterface>>* flow_control_node_container) {
   assert(mathematical_operation == MathematicalOperation::kPlus ||
          mathematical_operation == MathematicalOperation::kMinus);
-  // ´´½¨ÔËËã½Úµã
+  // åˆ›å»ºè¿ç®—èŠ‚ç‚¹
   auto mathematical_operator_node =
       std::make_shared<MathematicalOperatorNode>(mathematical_operation);
-  // ´´½¨++/--ÔËËãÊ¹ÓÃµÄÊıÖµ1
+  // åˆ›å»º++/--è¿ç®—ä½¿ç”¨çš„æ•°å€¼1
   auto constexpr_num_for_operate =
       std::make_shared<BasicTypeInitializeOperatorNode>(InitializeType::kBasic,
                                                         "1");
@@ -2209,34 +2209,34 @@ std::shared_ptr<const OperatorNodeInterface> PrefixPlusOrMinus(
   bool left_operator_node_check_result =
       mathematical_operator_node->SetLeftOperatorNode(node_to_operate);
   if (!left_operator_node_check_result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨¶Ô¸ÃÀàĞÍÊ¹ÓÃ++ÔËËã·û"));
+    OutputError(std::format("æ— æ³•å¯¹è¯¥ç±»å‹ä½¿ç”¨++è¿ç®—ç¬¦"));
     exit(-1);
   }
   auto right_operator_node_check_result =
       mathematical_operator_node->SetRightOperatorNode(
           constexpr_num_for_operate);
   CheckMathematicalComputeTypeResult(right_operator_node_check_result);
-  // Éú³É¸³Öµ½Úµã
+  // ç”Ÿæˆèµ‹å€¼èŠ‚ç‚¹
   auto assign_operator_node = std::make_shared<AssignOperatorNode>();
   assign_operator_node->SetNodeToBeAssigned(node_to_operate);
   auto assignable_check_result = assign_operator_node->SetNodeForAssign(
       mathematical_operator_node->GetResultOperatorNode(), false);
   CheckAssignableCheckResult(assignable_check_result);
-  // Éú³ÉÔËËãÁ÷³Ì¿ØÖÆ½Úµã
+  // ç”Ÿæˆè¿ç®—æµç¨‹æ§åˆ¶èŠ‚ç‚¹
   auto operate_flow_control_node = std::make_unique<SimpleSentence>();
   bool result = operate_flow_control_node->SetSentenceOperateNode(
       mathematical_operator_node);
   assert(result);
   flow_control_node_container->emplace_back(
       std::move(operate_flow_control_node));
-  // Éú³É¸³ÖµÁ÷³Ì¿ØÖÆ½Úµã
+  // ç”Ÿæˆèµ‹å€¼æµç¨‹æ§åˆ¶èŠ‚ç‚¹
   auto assign_flow_control_node = std::make_unique<SimpleSentence>();
   result =
       assign_flow_control_node->SetSentenceOperateNode(assign_operator_node);
   assert(result);
   flow_control_node_container->emplace_back(
       std::move(assign_flow_control_node));
-  // ·µ»ØÔËËãµÃµ½µÄ½Úµã¶ø²»ÊÇÔËËã½Úµã
+  // è¿”å›è¿ç®—å¾—åˆ°çš„èŠ‚ç‚¹è€Œä¸æ˜¯è¿ç®—èŠ‚ç‚¹
   return mathematical_operator_node->GetResultOperatorNode();
 }
 
@@ -2244,14 +2244,14 @@ std::shared_ptr<const OperatorNodeInterface> SuffixPlusOrMinus(
     MathematicalOperation mathematical_operation,
     const std::shared_ptr<const OperatorNodeInterface>& node_to_operate,
     std::list<std::unique_ptr<FlowInterface>>* flow_control_node_container) {
-  // ¹¹½¨ÖĞ¼ä±äÁ¿½ÚµãºÍ¸³Öµ½Úµã
-  // ¸´ÖÆÒ»·İ±äÁ¿ºó½«Ô­±äÁ¿+1/-1£¨µÈ¼ÛÓÚÖ´ĞĞÇ°×º++/--£©
+  // æ„å»ºä¸­é—´å˜é‡èŠ‚ç‚¹å’Œèµ‹å€¼èŠ‚ç‚¹
+  // å¤åˆ¶ä¸€ä»½å˜é‡åå°†åŸå˜é‡+1/-1ï¼ˆç­‰ä»·äºæ‰§è¡Œå‰ç¼€++/--ï¼‰
   auto temp_variety_node = std::make_shared<VarietyOperatorNode>(
       std::string(), ConstTag::kNonConst, LeftRightValueTag::kRightValue);
   bool set_temp_variety_type_result = temp_variety_node->SetVarietyType(
       node_to_operate->GetResultTypePointer());
   assert(set_temp_variety_type_result);
-  // ´´½¨¸´ÖÆ½Úµã£¬¸´ÖÆÔ´½Úµãµ½ÁÙÊ±±äÁ¿
+  // åˆ›å»ºå¤åˆ¶èŠ‚ç‚¹ï¼Œå¤åˆ¶æºèŠ‚ç‚¹åˆ°ä¸´æ—¶å˜é‡
   auto copy_assign_operator_node = std::make_shared<AssignOperatorNode>();
   copy_assign_operator_node->SetNodeToBeAssigned(temp_variety_node);
   auto copy_assign_node_check_result =
@@ -2262,10 +2262,10 @@ std::shared_ptr<const OperatorNodeInterface> SuffixPlusOrMinus(
       copy_flow_control_node->SetSentenceOperateNode(copy_assign_operator_node);
   assert(result);
   flow_control_node_container->emplace_back(std::move(copy_flow_control_node));
-  // ¶ÔÔ´½ÚµãÖ´ĞĞÇ°×º++/--²Ù×÷
+  // å¯¹æºèŠ‚ç‚¹æ‰§è¡Œå‰ç¼€++/--æ“ä½œ
   PrefixPlusOrMinus(mathematical_operation, node_to_operate,
                     flow_control_node_container);
-  // ·µ»Ø¸´ÖÆµÃµ½µÄ½Úµã
+  // è¿”å›å¤åˆ¶å¾—åˆ°çš„èŠ‚ç‚¹
   return copy_assign_operator_node->GetResultOperatorNode();
 }
 
@@ -2345,20 +2345,20 @@ std::nullptr_t ReturnWithValue(
   auto return_flow_control_node = std::make_unique<Return>();
   auto active_function = c_parser_controller.GetActiveFunctionPointer();
   if (active_function == nullptr) [[unlikely]] {
-    OutputError(std::format("µ±Ç°²»´¦ÓÚº¯ÊıÄÚ£¬ÎŞ·¨·µ»Ø"));
+    OutputError(std::format("å½“å‰ä¸å¤„äºå‡½æ•°å†…ï¼Œæ— æ³•è¿”å›"));
     exit(-1);
   }
   return_flow_control_node->SetReturnValue(return_target);
   bool result =
       c_parser_controller.AddSentences(std::move(*sentences_to_get_assignable));
   if (!result) [[unlikely]] {
-    OutputError(std::format("Éú³É·µ»ØÖµ¹ı³ÌÖĞ´æÔÚ·Ç·¨²Ù×÷"));
+    OutputError(std::format("ç”Ÿæˆè¿”å›å€¼è¿‡ç¨‹ä¸­å­˜åœ¨éæ³•æ“ä½œ"));
     exit(-1);
   }
   result = c_parser_controller.AddSentence(std::move(return_flow_control_node));
   if (!result) [[unlikely]] {
     OutputError(std::format(
-        "º¯Êı{:}±ØĞëÓĞ·µ»ØÖµ",
+        "å‡½æ•°{:}å¿…é¡»æœ‰è¿”å›å€¼",
         active_function->GetFunctionTypeReference().GetFunctionName()));
     exit(-1);
   }
@@ -2375,20 +2375,20 @@ std::nullptr_t ReturnWithoutValue(std::string&& str_return,
   auto return_flow_control_node = std::make_unique<Return>();
   auto active_function = c_parser_controller.GetActiveFunctionPointer();
   if (active_function == nullptr) [[unlikely]] {
-    OutputError(std::format("µ±Ç°²»´¦ÓÚº¯ÊıÄÚ£¬ÎŞ·¨·µ»Ø"));
+    OutputError(std::format("å½“å‰ä¸å¤„äºå‡½æ•°å†…ï¼Œæ— æ³•è¿”å›"));
     exit(-1);
   }
   return_flow_control_node->SetReturnValue(nullptr);
   bool result =
       c_parser_controller.AddSentences(std::move(*sentences_to_get_assignable));
   if (!result) [[unlikely]] {
-    OutputError(std::format("Éú³É·µ»ØÖµ¹ı³ÌÖĞ´æÔÚ·Ç·¨²Ù×÷"));
+    OutputError(std::format("ç”Ÿæˆè¿”å›å€¼è¿‡ç¨‹ä¸­å­˜åœ¨éæ³•æ“ä½œ"));
     exit(-1);
   }
   result = c_parser_controller.AddSentence(std::move(return_flow_control_node));
   if (!result) [[unlikely]] {
     OutputError(std::format(
-        "º¯Êı{:}±ØĞëÓĞ·µ»ØÖµ",
+        "å‡½æ•°{:}å¿…é¡»æœ‰è¿”å›å€¼",
         active_function->GetFunctionTypeReference().GetFunctionName()));
     exit(-1);
   }
@@ -2417,27 +2417,27 @@ TemaryOperator(
       true_value;
   auto& [temary_false_branch, false_branch_flow_control_node_container] =
       false_value;
-  // Éú³ÉÈıÄ¿ÔËËã·û½Úµã
+  // ç”Ÿæˆä¸‰ç›®è¿ç®—ç¬¦èŠ‚ç‚¹
   auto temary_operator_node = std::make_shared<TemaryOperatorNode>();
   bool condition_check_result = temary_operator_node->SetBranchCondition(
       temary_condition, condition_flow_control_node_container);
   if (!condition_check_result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨½«¸ø¶¨¶ÔÏó×÷ÎªÈıÄ¿ÔËËã·ûÌõ¼ş"));
+    OutputError(std::format("æ— æ³•å°†ç»™å®šå¯¹è±¡ä½œä¸ºä¸‰ç›®è¿ç®—ç¬¦æ¡ä»¶"));
     exit(-1);
   }
   bool true_branch_check_result = temary_operator_node->SetTrueBranch(
       temary_true_branch, true_branch_flow_control_node_container);
   if (!true_branch_check_result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨½«¸ø¶¨¶ÔÏó×÷ÎªÈıÄ¿ÔËËã·ûÕæ·ÖÖ§½á¹û"));
+    OutputError(std::format("æ— æ³•å°†ç»™å®šå¯¹è±¡ä½œä¸ºä¸‰ç›®è¿ç®—ç¬¦çœŸåˆ†æ”¯ç»“æœ"));
     exit(-1);
   }
   bool false_branch_check_result = temary_operator_node->SetFalseBranch(
       temary_false_branch, false_branch_flow_control_node_container);
   if (!false_branch_check_result) [[unlikely]] {
-    OutputError(std::format("ÎŞ·¨½«¸ø¶¨¶ÔÏó×÷ÎªÈıÄ¿ÔËËã·û¼Ù·ÖÖ§½á¹û"));
+    OutputError(std::format("æ— æ³•å°†ç»™å®šå¯¹è±¡ä½œä¸ºä¸‰ç›®è¿ç®—ç¬¦å‡åˆ†æ”¯ç»“æœ"));
     exit(-1);
   }
-  // Ìí¼ÓÈıÄ¿ÔËËã·ûÁ÷³Ì¿ØÖÆ½Úµã
+  // æ·»åŠ ä¸‰ç›®è¿ç®—ç¬¦æµç¨‹æ§åˆ¶èŠ‚ç‚¹
   auto temary_flow_control_node = std::make_unique<SimpleSentence>();
   bool set_sentence_check_result =
       temary_flow_control_node->SetSentenceOperateNode(temary_operator_node);
@@ -2446,7 +2446,7 @@ TemaryOperator(
       std::make_shared<std::list<std::unique_ptr<FlowInterface>>>();
   flow_control_node_container->emplace_back(
       std::move(temary_flow_control_node));
-  // ·µ»ØÈıÄ¿ÔËËã·û´¦Àíºó×îÖÕµÃµ½µÄ½Úµã
+  // è¿”å›ä¸‰ç›®è¿ç®—ç¬¦å¤„ç†åæœ€ç»ˆå¾—åˆ°çš„èŠ‚ç‚¹
   return std::make_pair(temary_operator_node->GetResultOperatorNode(),
                         std::move(flow_control_node_container));
 }
@@ -2490,11 +2490,11 @@ FunctionCallInitAssignable(
   assert(left_bracket == "(");
 
   auto function_call_node = std::make_shared<FunctionCallOperatorNode>();
-  // ÉèÖÃÈ«¾Ö±äÁ¿£¬ÒÔ±ãÌí¼Óº¯Êıµ÷ÓÃÊµ²ÎÊ±Ê¹ÓÃ
+  // è®¾ç½®å…¨å±€å˜é‡ï¼Œä»¥ä¾¿æ·»åŠ å‡½æ•°è°ƒç”¨å®å‚æ—¶ä½¿ç”¨
   function_call_operator_node = function_call_node;
   auto& [node_to_call, sentences_to_get_node_to_call] = call_target;
-  // ¼ì²éÊÇ·ñÎªº¯ÊıÀàĞÍ»òÒ»ÖØº¯ÊıÖ¸Õë£¬Èç¹ûÊÇÖ¸ÕëÔò×öÒ»´Î½âÒıÓÃ
-  // Í¬Ê±ÉèÖÃº¯Êıµ÷ÓÃ½ÚµãÓÃÀ´µ÷ÓÃµÄ¶ÔÏó
+  // æ£€æŸ¥æ˜¯å¦ä¸ºå‡½æ•°ç±»å‹æˆ–ä¸€é‡å‡½æ•°æŒ‡é’ˆï¼Œå¦‚æœæ˜¯æŒ‡é’ˆåˆ™åšä¸€æ¬¡è§£å¼•ç”¨
+  // åŒæ—¶è®¾ç½®å‡½æ•°è°ƒç”¨èŠ‚ç‚¹ç”¨æ¥è°ƒç”¨çš„å¯¹è±¡
   if (node_to_call->GetResultTypePointer()->GetType() !=
       StructOrBasicType::kFunction) {
     auto dereference_operator_node =
@@ -2504,23 +2504,23 @@ FunctionCallInitAssignable(
         dereference_operator_node->GetResultTypePointer()->GetType() !=
             StructOrBasicType::kFunction) [[unlikely]] {
       OutputError(
-          std::format("ÓÃÀ´µ÷ÓÃº¯ÊıµÄ¶ÔÏó¼È²»ÊÇº¯ÊıÃûÒ²²»ÊÇÒ»ÖØº¯ÊıÖ¸Õë"));
+          std::format("ç”¨æ¥è°ƒç”¨å‡½æ•°çš„å¯¹è±¡æ—¢ä¸æ˜¯å‡½æ•°åä¹Ÿä¸æ˜¯ä¸€é‡å‡½æ•°æŒ‡é’ˆ"));
       exit(-1);
     }
-    // °ü×°½âÒıÓÃ½Úµã
+    // åŒ…è£…è§£å¼•ç”¨èŠ‚ç‚¹
     auto dereference_flow_control_node = std::make_unique<SimpleSentence>();
     result = dereference_flow_control_node->SetSentenceOperateNode(
         dereference_operator_node);
     assert(result);
-    // Ìí¼Ó½âÒıÓÃ½Úµã
+    // æ·»åŠ è§£å¼•ç”¨èŠ‚ç‚¹
     sentences_to_get_node_to_call->emplace_back(
         std::move(dereference_flow_control_node));
-    // ÉèÖÃµ÷ÓÃµÄ½ÚµãÎª½âÒıÓÃºóµÃµ½µÄ½Úµã
+    // è®¾ç½®è°ƒç”¨çš„èŠ‚ç‚¹ä¸ºè§£å¼•ç”¨åå¾—åˆ°çš„èŠ‚ç‚¹
     result = function_call_operator_node->SetFunctionType(
         dereference_operator_node->GetResultOperatorNode());
     assert(result);
   } else {
-    // ¸ø¶¨½Úµã¿ÉÒÔÖ±½Óµ÷ÓÃ
+    // ç»™å®šèŠ‚ç‚¹å¯ä»¥ç›´æ¥è°ƒç”¨
     bool result = function_call_operator_node->SetFunctionType(node_to_call);
     assert(result);
   }
@@ -2536,17 +2536,17 @@ FunctionCallInitId(std::string&& function_name,
   assert(str_left_bracket == "(");
 
   auto function_call_node = std::make_shared<FunctionCallOperatorNode>();
-  // ÉèÖÃÈ«¾Ö±äÁ¿£¬ÒÔ±ãÌí¼Óº¯Êıµ÷ÓÃÊµ²ÎÊ±Ê¹ÓÃ
+  // è®¾ç½®å…¨å±€å˜é‡ï¼Œä»¥ä¾¿æ·»åŠ å‡½æ•°è°ƒç”¨å®å‚æ—¶ä½¿ç”¨
   function_call_operator_node = function_call_node;
   auto [node_to_call, exist] =
       c_parser_controller.GetVarietyOrFunction(function_name);
   if (!exist) {
     OutputError(
-        std::format("²»´æÔÚÃûÎª{:}µÄº¯Êı»òÒ»¼¶º¯ÊıÖ¸Õë", function_name));
+        std::format("ä¸å­˜åœ¨åä¸º{:}çš„å‡½æ•°æˆ–ä¸€çº§å‡½æ•°æŒ‡é’ˆ", function_name));
     exit(-1);
   }
-  // ¼ì²éÊÇ·ñÎªº¯ÊıÀàĞÍ»òÒ»ÖØº¯ÊıÖ¸Õë£¬Èç¹ûÊÇÖ¸ÕëÔò×öÒ»´Î½âÒıÓÃ
-  // Í¬Ê±ÉèÖÃº¯Êıµ÷ÓÃ½ÚµãÓÃÀ´µ÷ÓÃµÄ¶ÔÏó
+  // æ£€æŸ¥æ˜¯å¦ä¸ºå‡½æ•°ç±»å‹æˆ–ä¸€é‡å‡½æ•°æŒ‡é’ˆï¼Œå¦‚æœæ˜¯æŒ‡é’ˆåˆ™åšä¸€æ¬¡è§£å¼•ç”¨
+  // åŒæ—¶è®¾ç½®å‡½æ•°è°ƒç”¨èŠ‚ç‚¹ç”¨æ¥è°ƒç”¨çš„å¯¹è±¡
   if (node_to_call->GetResultTypePointer()->GetType() !=
       StructOrBasicType::kFunction) {
     auto dereference_operator_node =
@@ -2556,24 +2556,24 @@ FunctionCallInitId(std::string&& function_name,
         dereference_operator_node->GetResultTypePointer()->GetType() !=
             StructOrBasicType::kFunction) [[unlikely]] {
       OutputError(
-          std::format("ÓÃÀ´µ÷ÓÃº¯ÊıµÄ¶ÔÏó¼È²»ÊÇº¯ÊıÃûÒ²²»ÊÇÒ»ÖØº¯ÊıÖ¸Õë"));
+          std::format("ç”¨æ¥è°ƒç”¨å‡½æ•°çš„å¯¹è±¡æ—¢ä¸æ˜¯å‡½æ•°åä¹Ÿä¸æ˜¯ä¸€é‡å‡½æ•°æŒ‡é’ˆ"));
       exit(-1);
     }
-    // °ü×°½âÒıÓÃ½Úµã
+    // åŒ…è£…è§£å¼•ç”¨èŠ‚ç‚¹
     auto dereference_flow_control_node = std::make_unique<SimpleSentence>();
     result = dereference_flow_control_node->SetSentenceOperateNode(
         dereference_operator_node);
     assert(result);
-    // Ìí¼Ó½âÒıÓÃ½Úµã
+    // æ·»åŠ è§£å¼•ç”¨èŠ‚ç‚¹
     result = c_parser_controller.AddSentence(
         std::move(dereference_flow_control_node));
     assert(result);
-    // ÉèÖÃµ÷ÓÃµÄ½ÚµãÀàĞÍÎª½âÒıÓÃºóµÃµ½µÄº¯ÊıÀàĞÍ
+    // è®¾ç½®è°ƒç”¨çš„èŠ‚ç‚¹ç±»å‹ä¸ºè§£å¼•ç”¨åå¾—åˆ°çš„å‡½æ•°ç±»å‹
     result = function_call_operator_node->SetFunctionType(
         dereference_operator_node->GetResultOperatorNode());
     assert(result);
   } else {
-    // ¸ø¶¨½Úµã¿ÉÒÔÖ±½Óµ÷ÓÃ
+    // ç»™å®šèŠ‚ç‚¹å¯ä»¥ç›´æ¥è°ƒç”¨
     bool result = function_call_operator_node->SetFunctionType(node_to_call);
     assert(result);
   }
@@ -2593,14 +2593,14 @@ FunctionCall(
   assert(right_bracket == ")");
 
   auto& [node_to_call, sentences_to_get_node_to_call] = function_call_data;
-  // ´´½¨Á÷³Ì¿ØÖÆ½Úµã²¢Ìí¼Ó
+  // åˆ›å»ºæµç¨‹æ§åˆ¶èŠ‚ç‚¹å¹¶æ·»åŠ 
   auto function_call_flow_control_node = std::make_unique<SimpleSentence>();
   bool result = function_call_flow_control_node->SetSentenceOperateNode(
       function_call_operator_node);
   assert(result);
   sentences_to_get_node_to_call->emplace_back(
       std::move(function_call_flow_control_node));
-  // ·µ»Øº¯Êıµ÷ÓÃµÃµ½µÄ½Úµã
+  // è¿”å›å‡½æ•°è°ƒç”¨å¾—åˆ°çš„èŠ‚ç‚¹
   return std::make_pair(function_call_operator_node->GetResultOperatorNode(),
                         std::move(sentences_to_get_node_to_call));
 }
@@ -2621,9 +2621,9 @@ std::shared_ptr<std::list<std::unique_ptr<FlowInterface>>>&& AssignablesExtend(
         value_data) {
   assert(str_comma == ",");
 
-  // µ±Ç°Assignable²úÉúµÄ¿ØÖÆ½ÚµãµÄÈİÆ÷
+  // å½“å‰Assignableäº§ç”Ÿçš„æ§åˆ¶èŠ‚ç‚¹çš„å®¹å™¨
   auto& [ignore_assignable, now_control_node_container] = value_data;
-  // ºÏ²¢µ½Ö÷ÈİÆ÷ÖĞ
+  // åˆå¹¶åˆ°ä¸»å®¹å™¨ä¸­
   main_control_node_container->splice(main_control_node_container->end(),
                                       std::move(*now_control_node_container));
   return std::move(main_control_node_container);
@@ -2645,9 +2645,9 @@ std::shared_ptr<std::unique_ptr<Jmp>> Break(std::string&& str_break,
           top_flow_control_sentence.GetSentenceEndLabel()));
       break;
     default:
-      OutputError(std::format("ÎŞ·¨Ìø³ö·Çfor/while/do-while/switchÓï¾ä"));
+      OutputError(std::format("æ— æ³•è·³å‡ºéfor/while/do-while/switchè¯­å¥"));
       exit(-1);
-      // ·ÀÖ¹¾¯¸æ
+      // é˜²æ­¢è­¦å‘Š
       return std::shared_ptr<std::unique_ptr<Jmp>>();
       break;
   }
@@ -2668,9 +2668,9 @@ std::shared_ptr<std::unique_ptr<Jmp>> Continue(std::string&& str_continue,
           top_flow_control_sentence.GetLoopMainBlockEndLabel()));
       break;
     default:
-      OutputError(std::format("ÎŞ·¨ÔÚ·Çfor/while/do-whileÓï¾äÖĞÊ¹ÓÃcontinue"));
+      OutputError(std::format("æ— æ³•åœ¨éfor/while/do-whileè¯­å¥ä¸­ä½¿ç”¨continue"));
       exit(-1);
-      // ·ÀÖ¹¾¯¸æ
+      // é˜²æ­¢è­¦å‘Š
       return std::shared_ptr<std::unique_ptr<Jmp>>();
       break;
   }
@@ -2697,7 +2697,7 @@ std::nullptr_t SingleStatementAssignable(
   bool result =
       c_parser_controller.AddSentences(std::move(*flow_control_node_container));
   if (!result) [[unlikely]] {
-    OutputError(std::format("´ËÓï¾ä²»Ó¦³öÏÖÔÚ¸Ã·¶Î§ÄÚ"));
+    OutputError(std::format("æ­¤è¯­å¥ä¸åº”å‡ºç°åœ¨è¯¥èŒƒå›´å†…"));
     exit(-1);
   }
   return nullptr;
@@ -2715,7 +2715,7 @@ std::nullptr_t SingleStatementAnnounce(
   bool result =
       c_parser_controller.AddSentences(std::move(*flow_control_node_container));
   if (!result) [[unlikely]] {
-    OutputError(std::format("´ËÓï¾ä²»Ó¦³öÏÖÔÚ¸Ã·¶Î§ÄÚ"));
+    OutputError(std::format("æ­¤è¯­å¥ä¸åº”å‡ºç°åœ¨è¯¥èŒƒå›´å†…"));
     exit(-1);
   }
   return nullptr;
@@ -2726,7 +2726,7 @@ std::nullptr_t SingleStatementReturn(std::nullptr_t) { return nullptr; }
 std::nullptr_t SingleStatementBreak(
     std::shared_ptr<std::unique_ptr<Jmp>>&& jmp_sentence) {
   bool result = c_parser_controller.AddSentence(std::move(*jmp_sentence));
-  // ËùÓĞ±¨´íÓ¦ÔÚÕâ²½¹æÔ¼Ç°½øĞĞ
+  // æ‰€æœ‰æŠ¥é”™åº”åœ¨è¿™æ­¥è§„çº¦å‰è¿›è¡Œ
   assert(result);
   return nullptr;
 }
@@ -2734,7 +2734,7 @@ std::nullptr_t SingleStatementBreak(
 std::nullptr_t SingleStatementContinue(
     std::shared_ptr<std::unique_ptr<Jmp>>&& jmp_sentence) {
   bool result = c_parser_controller.AddSentence(std::move(*jmp_sentence));
-  // ËùÓĞ±¨´íÓ¦ÔÚÕâ²½¹æÔ¼Ç°½øĞĞ
+  // æ‰€æœ‰æŠ¥é”™åº”åœ¨è¿™æ­¥è§„çº¦å‰è¿›è¡Œ
   assert(result);
   return nullptr;
 }
@@ -2755,20 +2755,20 @@ std::nullptr_t IfCondition(
   assert(str_left_bracket == "(");
   assert(str_right_bracket == ")");
 
-  // ifÌõ¼şºÍ»ñÈ¡Ìõ¼şµÄ²Ù×÷
+  // ifæ¡ä»¶å’Œè·å–æ¡ä»¶çš„æ“ä½œ
   auto& [if_condition, sentences_to_get_if_condition] = condition;
   auto if_flow_control_node = std::make_unique<IfSentence>();
   bool result = if_flow_control_node->SetCondition(
       if_condition, std::move(*sentences_to_get_if_condition));
   if (!result) [[unlikely]] {
-    OutputError(std::format("¸ÃÌõ¼şÎŞ·¨×÷ÎªifÓï¾äÌõ¼ş"));
+    OutputError(std::format("è¯¥æ¡ä»¶æ— æ³•ä½œä¸ºifè¯­å¥æ¡ä»¶"));
     exit(-1);
   }
   bool push_result = c_parser_controller.PushFlowControlSentence(
       std::move(if_flow_control_node));
   if (!push_result) [[unlikely]] {
     std::cerr << std::format(
-                     "ĞĞÊı{:} ÁĞÊı{:} Á÷³Ì¿ØÖÆÓï¾ä±ØĞëÔÚº¯Êı¶¨ÒåÄÚ²¿Ê¹ÓÃ",
+                     "è¡Œæ•°{:} åˆ—æ•°{:} æµç¨‹æ§åˆ¶è¯­å¥å¿…é¡»åœ¨å‡½æ•°å®šä¹‰å†…éƒ¨ä½¿ç”¨",
                      GetLine(), GetColumn())
               << std::endl;
     exit(-1);
@@ -2780,7 +2780,7 @@ std::nullptr_t IfWithElse(std::nullptr_t, std::nullptr_t,
                           std::string str_else) {
   assert(str_else == "else");
 
-  // ×ª»»Îªif-elseÓï¾ä
+  // è½¬æ¢ä¸ºif-elseè¯­å¥
   c_parser_controller.ConvertIfSentenceToIfElseSentence();
   return nullptr;
 }
@@ -2823,7 +2823,7 @@ std::nullptr_t ForInitHead(std::string&& str_for) {
       std::make_unique<ForSentence>());
   if (!push_result) [[unlikely]] {
     std::cerr << std::format(
-                     "ĞĞÊı{:} ÁĞÊı{:} Á÷³Ì¿ØÖÆÓï¾ä±ØĞëÔÚº¯Êı¶¨ÒåÄÚ²¿Ê¹ÓÃ",
+                     "è¡Œæ•°{:} åˆ—æ•°{:} æµç¨‹æ§åˆ¶è¯­å¥å¿…é¡»åœ¨å‡½æ•°å®šä¹‰å†…éƒ¨ä½¿ç”¨",
                      GetLine(), GetColumn())
               << std::endl;
     exit(-1);
@@ -2855,18 +2855,18 @@ std::nullptr_t ForHead(
   bool result =
       for_sentence.AddForInitSentences(std::move(*for_init_sentences));
   if (!result) [[unlikely]] {
-    OutputError(std::format("¸ø¶¨Óï¾äÎŞ·¨×÷ÎªforÓï¾ä³õÊ¼»¯Ìõ¼ş"));
+    OutputError(std::format("ç»™å®šè¯­å¥æ— æ³•ä½œä¸ºforè¯­å¥åˆå§‹åŒ–æ¡ä»¶"));
     exit(-1);
   }
   result = for_sentence.SetCondition(
       for_condition, std::move(*sentences_to_get_for_condition));
   if (!result) [[unlikely]] {
-    OutputError(std::format("¸ø¶¨Óï¾äÎŞ·¨×÷ÎªforÓï¾äÑ­»·Ìõ¼ş"));
+    OutputError(std::format("ç»™å®šè¯­å¥æ— æ³•ä½œä¸ºforè¯­å¥å¾ªç¯æ¡ä»¶"));
     exit(-1);
   }
   result = for_sentence.AddForRenewSentences(std::move(*for_renew_sentences));
   if (!result) [[unlikely]] {
-    OutputError(std::format("¸ø¶¨Óï¾äÎŞ·¨ÓÃÔÚforÓï¾äÖĞ¸üĞÂÑ­»·Ìõ¼ş"));
+    OutputError(std::format("ç»™å®šè¯­å¥æ— æ³•ç”¨åœ¨forè¯­å¥ä¸­æ›´æ–°å¾ªç¯æ¡ä»¶"));
     exit(-1);
   }
   return nullptr;
@@ -2895,14 +2895,14 @@ std::nullptr_t WhileInitHead(
   bool result = while_sentence->SetCondition(
       while_condition, std::move(*sentences_to_get_condition));
   if (!result) [[unlikely]] {
-    OutputError(std::format("¸ø¶¨Ìõ¼şÎŞ·¨×÷ÎªwhileÑ­»·Óï¾äÌõ¼ş"));
+    OutputError(std::format("ç»™å®šæ¡ä»¶æ— æ³•ä½œä¸ºwhileå¾ªç¯è¯­å¥æ¡ä»¶"));
     exit(-1);
   }
   bool push_result =
       c_parser_controller.PushFlowControlSentence(std::move(while_sentence));
   if (!push_result) [[unlikely]] {
     std::cerr << std::format(
-                     "ĞĞÊı{:} ÁĞÊı{:} Á÷³Ì¿ØÖÆÓï¾ä±ØĞëÔÚº¯Êı¶¨ÒåÄÚ²¿Ê¹ÓÃ",
+                     "è¡Œæ•°{:} åˆ—æ•°{:} æµç¨‹æ§åˆ¶è¯­å¥å¿…é¡»åœ¨å‡½æ•°å®šä¹‰å†…éƒ¨ä½¿ç”¨",
                      GetLine(), GetColumn())
               << std::endl;
     exit(-1);
@@ -2922,7 +2922,7 @@ std::nullptr_t DoWhileInitHead(std::string&& str_do) {
       std::make_unique<DoWhileSentence>());
   if (!push_result) [[unlikely]] {
     std::cerr << std::format(
-                     "ĞĞÊı{:} ÁĞÊı{:} Á÷³Ì¿ØÖÆÓï¾ä±ØĞëÔÚº¯Êı¶¨ÒåÄÚ²¿Ê¹ÓÃ",
+                     "è¡Œæ•°{:} åˆ—æ•°{:} æµç¨‹æ§åˆ¶è¯­å¥å¿…é¡»åœ¨å‡½æ•°å®šä¹‰å†…éƒ¨ä½¿ç”¨",
                      GetLine(), GetColumn())
               << std::endl;
     exit(-1);
@@ -2946,7 +2946,7 @@ std::nullptr_t DoWhile(
   DoWhileSentence& do_while_sentence = static_cast<DoWhileSentence&>(
       c_parser_controller.GetTopFlowControlSentence());
   assert(do_while_sentence.GetFlowType() == FlowType::kDoWhileSentence);
-  // ÉèÖÃdo-whileÓï¾äÌõ¼ş
+  // è®¾ç½®do-whileè¯­å¥æ¡ä»¶
   do_while_sentence.SetCondition(assignable,
                                  std::move(*sentences_to_get_assignable));
   c_parser_controller.PopActionScope();
@@ -2963,7 +2963,7 @@ std::nullptr_t SwitchCaseSimple(
   bool result = c_parser_controller.AddSwitchSimpleCase(case_data);
   if (!result) [[unlikely]] {
     OutputError(std::format(
-        "ÎŞ·¨Ìí¼Ó¸ø¶¨µÄcaseÑ¡Ïî£¬¿ÉÄÜÊÇ²»Î»ÓÚswitchÓï¾äÄÚ»òcaseÌõ¼şÒÑ´æÔÚ"));
+        "æ— æ³•æ·»åŠ ç»™å®šçš„caseé€‰é¡¹ï¼Œå¯èƒ½æ˜¯ä¸ä½äºswitchè¯­å¥å†…æˆ–caseæ¡ä»¶å·²å­˜åœ¨"));
     exit(-1);
   }
   return nullptr;
@@ -2977,7 +2977,7 @@ std::nullptr_t SwitchCaseDefault(std::string&& str_default,
   bool result = c_parser_controller.AddSwitchDefaultCase();
   if (!result) [[unlikely]] {
     OutputError(std::format(
-        "ÎŞ·¨Ìí¼Ódefault±êÇ©£¬¿ÉÄÜ²»Î»ÓÚswitchÓï¾äÄÚ»òÒÑ´æÔÚdefault±êÇ©"));
+        "æ— æ³•æ·»åŠ defaultæ ‡ç­¾ï¼Œå¯èƒ½ä¸ä½äºswitchè¯­å¥å†…æˆ–å·²å­˜åœ¨defaultæ ‡ç­¾"));
     exit(-1);
   }
   return nullptr;
@@ -3008,14 +3008,14 @@ std::nullptr_t SwitchCondition(
   bool result = switch_sentence->SetCondition(
       assignable, std::move(*sentences_to_get_assignable));
   if (!result) [[unlikely]] {
-    OutputError(std::format("¸ø¶¨Ìõ¼şÎŞ·¨×÷Îªswitch·ÖÖ§Ìõ¼ş"));
+    OutputError(std::format("ç»™å®šæ¡ä»¶æ— æ³•ä½œä¸ºswitchåˆ†æ”¯æ¡ä»¶"));
     exit(-1);
   }
   bool push_result =
       c_parser_controller.PushFlowControlSentence(std::move(switch_sentence));
   if (!push_result) [[unlikely]] {
     std::cerr << std::format(
-                     "ĞĞÊı{:} ÁĞÊı{:} Á÷³Ì¿ØÖÆÓï¾ä±ØĞëÔÚº¯Êı¶¨ÒåÄÚ²¿Ê¹ÓÃ",
+                     "è¡Œæ•°{:} åˆ—æ•°{:} æµç¨‹æ§åˆ¶è¯­å¥å¿…é¡»åœ¨å‡½æ•°å®šä¹‰å†…éƒ¨ä½¿ç”¨",
                      GetLine(), GetColumn())
               << std::endl;
     exit(-1);
@@ -3073,16 +3073,16 @@ std::nullptr_t RootAnnounce(std::nullptr_t,
 
   switch (flow_control_node->GetFlowType()) {
     case FlowType::kSimpleSentence: {
-      // È«¾Ö±äÁ¿¶¨Òå
+      // å…¨å±€å˜é‡å®šä¹‰
       auto variety_operator_node =
           std::static_pointer_cast<VarietyOperatorNode>(
               static_cast<SimpleSentence&>(*flow_control_node)
                   .GetSentenceOperateNodePointer());
-      // Ìí¼Ó±äÁ¿¶¨Òå
+      // æ·»åŠ å˜é‡å®šä¹‰
       c_parser_controller.DefineVariety(variety_operator_node);
     } break;
     case FlowType::kFunctionDefine: {
-      // º¯ÊıÉùÃ÷
+      // å‡½æ•°å£°æ˜
       auto [ignore_iter, announce_result] =
           c_parser_controller.AnnounceFunction(
               static_cast<c_parser_frontend::flow_control::FunctionDefine&>(
@@ -3102,38 +3102,38 @@ ObjectConstructData::AttachSingleNodeToTailNodePointer(
     std::shared_ptr<const TypeInterface>&& next_node) {
   switch (type_chain_tail_->GetType()) {
     case StructOrBasicType::kFunction:
-      // º¯ÊıÖ¸Õë¹¹ÔìÓïÒå£¬½«ĞÂ²åÈëµÄ½Úµã·ÅÔÚ·µ»ØÖµµÄÎ»ÖÃ
+      // å‡½æ•°æŒ‡é’ˆæ„é€ è¯­ä¹‰ï¼Œå°†æ–°æ’å…¥çš„èŠ‚ç‚¹æ”¾åœ¨è¿”å›å€¼çš„ä½ç½®
       if (next_node->GetType() == StructOrBasicType::kFunction) {
-        // ´ı²åÈëµÄµÚÒ»¸ö·µ»ØÖµ½ÚµãÎªº¯Êı
-        // º¯Êı²»ÄÜ·µ»Øº¯Êı
+        // å¾…æ’å…¥çš„ç¬¬ä¸€ä¸ªè¿”å›å€¼èŠ‚ç‚¹ä¸ºå‡½æ•°
+        // å‡½æ•°ä¸èƒ½è¿”å›å‡½æ•°
         return CheckResult::kReturnFunction;
       }
       static_cast<FunctionType&>(*type_chain_tail_)
           .SetReturnTypePointer(next_node);
-      // ´Ë´¦ÎªÁË¹¹½¨ÀàĞÍÁ´Î¥·´constÔ­Ôò
+      // æ­¤å¤„ä¸ºäº†æ„å»ºç±»å‹é“¾è¿åconståŸåˆ™
       type_chain_tail_ = std::const_pointer_cast<TypeInterface>(next_node);
       break;
     case StructOrBasicType::kPointer:
-      // ĞèÒª¶îÍâ¼ì²éÊÇ·ñÔÚÉùÃ÷º¯ÊıÊı×é
+      // éœ€è¦é¢å¤–æ£€æŸ¥æ˜¯å¦åœ¨å£°æ˜å‡½æ•°æ•°ç»„
       if (std::static_pointer_cast<PointerType>(type_chain_tail_)
                   ->GetArraySize() != 0 &&
           next_node->GetType() == StructOrBasicType::kFunction) [[unlikely]] {
-        // ·Ç0´ú±íÉùÃ÷Êı×é
-        OutputError(std::format("²»Ö§³ÖÉùÃ÷º¯ÊıÊı×é"));
+        // é0ä»£è¡¨å£°æ˜æ•°ç»„
+        OutputError(std::format("ä¸æ”¯æŒå£°æ˜å‡½æ•°æ•°ç»„"));
         exit(-1);
       }
       [[fallthrough]];
     case StructOrBasicType::kEnd:
-      // ÆÕÍ¨½Úµã¹¹ÔìÓïÒå£¬ÔÚÔ­À´µÄ½á¹¹ÏÂÁ¬½Ó
+      // æ™®é€šèŠ‚ç‚¹æ„é€ è¯­ä¹‰ï¼Œåœ¨åŸæ¥çš„ç»“æ„ä¸‹è¿æ¥
       type_chain_tail_->SetNextNode(next_node);
-      // ´Ë´¦ÎªÁË¹¹½¨ÀàĞÍÁ´Î¥·´constÔ­Ôò
+      // æ­¤å¤„ä¸ºäº†æ„å»ºç±»å‹é“¾è¿åconståŸåˆ™
       type_chain_tail_ = std::const_pointer_cast<TypeInterface>(next_node);
       break;
     case StructOrBasicType::kBasic:
     case StructOrBasicType::kStruct:
     case StructOrBasicType::kUnion:
     case StructOrBasicType::kEnum:
-      // ÕâĞ©ÎªÖÕ½á½Úµã£¬²»ÄÜÁ¬½ÓÏÂÒ»¸ö½Úµã
+      // è¿™äº›ä¸ºç»ˆç»“èŠ‚ç‚¹ï¼Œä¸èƒ½è¿æ¥ä¸‹ä¸€ä¸ªèŠ‚ç‚¹
       return CheckResult::kAttachToTerminalType;
       break;
     default:
@@ -3149,47 +3149,47 @@ ObjectConstructData::ConstructObject(
     std::shared_ptr<const TypeInterface>&& final_node_to_attach) {
   switch (type_chain_tail_->GetType()) {
     case StructOrBasicType::kPointer: {
-      // ÀàĞÍÁ´Ä©¶ËÎªÖ¸Õë£¬ÉèÖÃ¸ÃÖ¸ÕëµÄconst_tag
+      // ç±»å‹é“¾æœ«ç«¯ä¸ºæŒ‡é’ˆï¼Œè®¾ç½®è¯¥æŒ‡é’ˆçš„const_tag
       auto& pointer_type = static_cast<PointerType&>(*type_chain_tail_);
       if (pointer_type.GetConstTag() == ConstTag::kConst &&
           const_tag_before_final_type == ConstTag::kConst) [[unlikely]] {
-        OutputWarning(std::format("ÔÚÀàĞÍÁ½²àÖØ¸´¶¨Òåconst"));
+        OutputWarning(std::format("åœ¨ç±»å‹ä¸¤ä¾§é‡å¤å®šä¹‰const"));
       }
       pointer_type.SetConstTag(const_tag_before_final_type);
     } break;
     case StructOrBasicType::kFunction:
-      // ÕâÖÖÇé¿öÏÂº¯Êı·µ»ØÖµÀàĞÍÖ»ÓĞÒ»¸öÓĞĞ§ÀàĞÍ½Úµã£¨final_node_to_attach£©
-      // ºÏ·¨µÄÓïÒåÏÂÕâ¸ö½ÚµãÓ¦¸ÃÊÇ»ù´¡ÀàĞÍ
+      // è¿™ç§æƒ…å†µä¸‹å‡½æ•°è¿”å›å€¼ç±»å‹åªæœ‰ä¸€ä¸ªæœ‰æ•ˆç±»å‹èŠ‚ç‚¹ï¼ˆfinal_node_to_attachï¼‰
+      // åˆæ³•çš„è¯­ä¹‰ä¸‹è¿™ä¸ªèŠ‚ç‚¹åº”è¯¥æ˜¯åŸºç¡€ç±»å‹
       static_cast<FunctionType&>(*type_chain_tail_)
           .SetReturnTypeConstTag(const_tag_before_final_type);
       break;
     case StructOrBasicType::kEnd:
-      // Ö®Ç°Î´´´½¨ÈÎºÎÀàĞÍ½Úµã
+      // ä¹‹å‰æœªåˆ›å»ºä»»ä½•ç±»å‹èŠ‚ç‚¹
       assert(static_cast<SimpleSentence&>(*object_)
                  .GetSentenceOperateNodeReference()
                  .GetGeneralOperatorType() == GeneralOperationType::kVariety);
       switch (final_node_to_attach->GetType()) {
         case StructOrBasicType::kBasic:
-          // ÉùÃ÷POD±äÁ¿
-          // ²»ÄÜÉùÃ÷voidÀàĞÍµÄ±äÁ¿
+          // å£°æ˜PODå˜é‡
+          // ä¸èƒ½å£°æ˜voidç±»å‹çš„å˜é‡
           if (static_cast<const BasicType&>(*final_node_to_attach)
                   .GetBuiltInType() == BuiltInType::kVoid) [[unlikely]] {
             OutputError(
-                std::format("±äÁ¿{:}²»ÄÜÉùÃ÷Îª\"void\"", GetObjectName()));
+                std::format("å˜é‡{:}ä¸èƒ½å£°æ˜ä¸º\"void\"", GetObjectName()));
             exit(-1);
           }
-          // ¼ì²éÉùÃ÷µÄ±äÁ¿µÄConstTagÓë×îÖÕ¹¹½¨Ê±µÄConstTagÊÇ·ñÏàÍ¬
+          // æ£€æŸ¥å£°æ˜çš„å˜é‡çš„ConstTagä¸æœ€ç»ˆæ„å»ºæ—¶çš„ConstTagæ˜¯å¦ç›¸åŒ
           if (const_tag_before_final_type == ConstTag::kConst &&
               static_cast<const VarietyOperatorNode&>(
                   static_cast<SimpleSentence&>(*object_)
                       .GetSentenceOperateNodeReference())
                       .GetConstTag() == const_tag_before_final_type)
               [[unlikely]] {
-            OutputWarning(std::format("ÔÚÀàĞÍÁ½²àÖØ¸´¶¨Òåconst"));
+            OutputWarning(std::format("åœ¨ç±»å‹ä¸¤ä¾§é‡å¤å®šä¹‰const"));
           }
           break;
         case StructOrBasicType::kFunction:
-          OutputError(std::format("º¯Êı{:}Î´ÉùÃ÷·µ»ØÖµ", GetObjectName()));
+          OutputError(std::format("å‡½æ•°{:}æœªå£°æ˜è¿”å›å€¼", GetObjectName()));
           exit(-1);
           break;
         case StructOrBasicType::kStruct:
@@ -3205,50 +3205,50 @@ ObjectConstructData::ConstructObject(
           .SetConstTag(const_tag_before_final_type);
       break;
     default:
-      // ´íÎóµÄÉùÃ÷¸ñÊ½£¬ÔÚÁ¬½ÓÏÂÒ»¸ö½ÚµãÊ±Ó¦±¨´í
+      // é”™è¯¯çš„å£°æ˜æ ¼å¼ï¼Œåœ¨è¿æ¥ä¸‹ä¸€ä¸ªèŠ‚ç‚¹æ—¶åº”æŠ¥é”™
       break;
   }
   AttachSingleNodeToTailNodePointer(std::move(final_node_to_attach));
   switch (type_chain_tail_->GetType()) {
     [[unlikely]] case StructOrBasicType::kPointer:
-      // Î´ÍêÈ«¹¹½¨ÀàĞÍÁ´µ¼ÖÂÀàĞÍÁ´ÒÔÖ¸Õë½áÎ²
+      // æœªå®Œå…¨æ„å»ºç±»å‹é“¾å¯¼è‡´ç±»å‹é“¾ä»¥æŒ‡é’ˆç»“å°¾
       return std::make_pair(std::unique_ptr<FlowInterface>(),
                             CheckResult::kPointerEnd);
       break;
     [[unlikely]] case StructOrBasicType::kEnd:
-      // ¿ÕÀàĞÍÁ´
+      // ç©ºç±»å‹é“¾
       return std::make_pair(std::unique_ptr<FlowInterface>(),
                             CheckResult::kEmptyChain);
       break;
     default:
       break;
   }
-  // Ìø¹ıÉÚ±ø½Úµã
+  // è·³è¿‡å“¨å…µèŠ‚ç‚¹
   auto final_type_chain = type_chain_head_->GetNextNodePointer();
-  // ÅĞ¶ÏÊÇ·ñÎªº¯ÊıÍ·
+  // åˆ¤æ–­æ˜¯å¦ä¸ºå‡½æ•°å¤´
   if (final_type_chain->GetType() == StructOrBasicType::kFunction)
       [[unlikely]] {
-    // Òª¹¹½¨µÄÀàĞÍÎªº¯Êı£¬½«object_´ÓÁ÷³ÌÀàĞÍ¡ª¡ª»ù´¡·ÇÁ÷³Ì
-    // ×ª»»ÎªÁ÷³ÌÀàĞÍ¡ª¡ªº¯Êı¶¨Òå
+    // è¦æ„å»ºçš„ç±»å‹ä¸ºå‡½æ•°ï¼Œå°†object_ä»æµç¨‹ç±»å‹â€”â€”åŸºç¡€éæµç¨‹
+    // è½¬æ¢ä¸ºæµç¨‹ç±»å‹â€”â€”å‡½æ•°å®šä¹‰
 
-    // »ñÈ¡×îÖÕÀàĞÍÁ´
-    // ÎªÁË¹¹½¨ÀàĞÍÁ´Î¥·´constÔ­Ôò
+    // è·å–æœ€ç»ˆç±»å‹é“¾
+    // ä¸ºäº†æ„å»ºç±»å‹é“¾è¿åconståŸåˆ™
     auto function_type_chain = std::const_pointer_cast<FunctionType>(
         std::static_pointer_cast<const FunctionType>(final_type_chain));
-    // »ñÈ¡±äÁ¿ÃûÖ¸ÕëºóÉèÖÃº¯ÊıÃû
+    // è·å–å˜é‡åæŒ‡é’ˆåè®¾ç½®å‡½æ•°å
     function_type_chain->SetFunctionName(std::move(GetObjectName()));
-    // ¹¹½¨º¯Êı¶¨Òå£¨FunctionDefineÁ÷³Ì£©
+    // æ„å»ºå‡½æ•°å®šä¹‰ï¼ˆFunctionDefineæµç¨‹ï¼‰
     ConstructBasicObjectPart<c_parser_frontend::flow_control::FunctionDefine>(
         std::move(function_type_chain));
   } else {
-    // Òª¹¹½¨µÄÀàĞÍÎª±äÁ¿£¬ÎŞĞè¶îÍâ×ª»»
+    // è¦æ„å»ºçš„ç±»å‹ä¸ºå˜é‡ï¼Œæ— éœ€é¢å¤–è½¬æ¢
     auto& variety_node = static_cast<VarietyOperatorNode&>(
         static_cast<SimpleSentence&>(*object_)
             .GetSentenceOperateNodeReference());
-    // ÉèÖÃ±äÁ¿µÄÀàĞÍ
+    // è®¾ç½®å˜é‡çš„ç±»å‹
     variety_node.SetVarietyType(
         std::move(type_chain_head_->GetNextNodePointer()));
-    // ÉèÖÃ±äÁ¿Ãû
+    // è®¾ç½®å˜é‡å
     variety_node.SetVarietyName(std::move(GetObjectName()));
   }
   return std::make_pair(std::move(object_), CheckResult::kSuccess);

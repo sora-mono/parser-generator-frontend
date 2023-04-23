@@ -456,6 +456,48 @@ class SyntaxAnalysisTableEntry {
     }
   };
 
+    /// @class ErrorAttachedData syntax_analysis_table.h
+  /// @brief 表示Error动作的节点
+  class ErrorAttachedData : public ActionAndAttachedDataInterface {
+   public:
+    ErrorAttachedData()
+        : ActionAndAttachedDataInterface(ActionType::kError) {}
+    ErrorAttachedData(const ErrorAttachedData&) = delete;
+    ErrorAttachedData(ErrorAttachedData&&) = default;
+
+    ErrorAttachedData& operator=(const ErrorAttachedData&) = delete;
+    ErrorAttachedData& operator=(ErrorAttachedData&&) = delete;
+
+    /// @attention Error语义下不支持该操作
+    virtual bool operator==(
+        const ActionAndAttachedDataInterface&) const override {
+      assert(false);
+      /// 防止警告
+      return false;
+    }
+    /// @attention Error语义下不支持该操作
+    virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
+                                  error_attached_data) const override {
+      assert(false);
+      /// 防止警告
+      return false;
+    }
+
+   private:
+    /// @brief 允许序列化类访问
+    friend class boost::serialization::access;
+
+    /// @brief 序列化该类的函数
+    /// @param[in,out] ar ：序列化使用的档案
+    /// @param[in] version ：序列化文件版本
+    /// @attention 该函数应由boost库调用而非手动调用
+    template <class Archive>
+    void serialize(Archive& ar, const unsigned int version) {
+      ar& boost::serialization::base_object<ActionAndAttachedDataInterface>(
+          *this);
+    }
+  };
+
   /// @brief 语法分析表条目中存储向前看符号对应的动作和附属数据的容器
   /// @note 键值为待移入节点ID，值为指向动作和附属数据的指针
   using ActionAndTargetContainer =

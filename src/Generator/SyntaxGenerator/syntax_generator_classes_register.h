@@ -42,5 +42,9 @@ BOOST_CLASS_EXPORT_GUID(frontend::generator::syntax_generator::
                             SyntaxAnalysisTableEntry::AcceptAttachedData,
                         "frontend::generator::syntax_generator::"
                         "SyntaxAnalysisTableEntry::AcceptAttachedData")
+BOOST_CLASS_EXPORT_GUID(frontend::generator::syntax_generator::
+                            SyntaxAnalysisTableEntry::ErrorAttachedData,
+                        "frontend::generator::syntax_generator::"
+                        "SyntaxAnalysisTableEntry::ErrorAttachedData")
 
 #endif  /// !GENERATOR_SYNTAXGENERATOR_SYNTAX_GENERATOR_CLASSES_REGISTER_H_

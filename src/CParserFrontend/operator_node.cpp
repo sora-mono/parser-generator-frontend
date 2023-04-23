@@ -1,4 +1,4 @@
-#include "operator_node.h"
+ï»¿#include "operator_node.h"
 
 #include <format>
 #include <iostream>
@@ -14,7 +14,7 @@ inline std::shared_ptr<OperatorNodeInterface> VarietyOperatorNode::SelfCopy(
 inline bool VarietyOperatorNode::SetVarietyType(
     const std::shared_ptr<const TypeInterface>& variety_type) {
   if (CheckVarietyTypeValid(*variety_type)) [[likely]] {
-    // ½öµ±·ûºÏ±äÁ¿µÄÀàĞÍµÄ±ê×¼Ê±²Å¿ÉÒÔÉèÖÃ
+    // ä»…å½“ç¬¦åˆå˜é‡çš„ç±»å‹çš„æ ‡å‡†æ—¶æ‰å¯ä»¥è®¾ç½®
     variety_type_ = variety_type;
     return true;
   } else {
@@ -37,16 +37,16 @@ inline bool VarietyOperatorNode::CheckVarietyTypeValid(
     const TypeInterface& variety_type) {
   switch (variety_type.GetType()) {
     case StructOrBasicType::kEnd:
-      // ¸ÃÀàĞÍ´ú±í×îÖÕÉÚ±ø½Úµã
+      // è¯¥ç±»å‹ä»£è¡¨æœ€ç»ˆå“¨å…µèŠ‚ç‚¹
     case StructOrBasicType::kNotSpecified:
-      // ¸ÃÑ¡Ïî½öÓ¦³öÏÖÔÚ¸ù¾İÀàĞÍÃû²éÑ¯ÀàĞÍÓÃº¯ÊıÖĞ
+      // è¯¥é€‰é¡¹ä»…åº”å‡ºç°åœ¨æ ¹æ®ç±»å‹åæŸ¥è¯¢ç±»å‹ç”¨å‡½æ•°ä¸­
       assert(false);
       return false;
       break;
     case StructOrBasicType::kFunction:
-    // º¯Êı²»ÄÜÉùÃ÷Îª±äÁ¿
+    // å‡½æ•°ä¸èƒ½å£°æ˜ä¸ºå˜é‡
     case StructOrBasicType::kInitializeList:
-      // ³õÊ¼»¯ÁĞ±í²»ÄÜÉùÃ÷Îª±äÁ¿
+      // åˆå§‹åŒ–åˆ—è¡¨ä¸èƒ½å£°æ˜ä¸ºå˜é‡
       return false;
       break;
     default:
@@ -60,7 +60,7 @@ BasicTypeInitializeOperatorNode::SelfCopy(
     const std::shared_ptr<const TypeInterface>& new_type,
     ConstTag new_const_tag) const {
   if (new_const_tag == ConstTag::kNonConst) [[unlikely]] {
-    // ²»ÔÊĞíÉèÖÃ³õÊ¼»¯Êı¾İÎªconst
+    // ä¸å…è®¸è®¾ç½®åˆå§‹åŒ–æ•°æ®ä¸ºconst
     return nullptr;
   }
   auto new_node = std::make_shared<BasicTypeInitializeOperatorNode>(*this);
@@ -95,7 +95,7 @@ inline bool BasicTypeInitializeOperatorNode::CheckBasicTypeInitializeValid(
   }
 }
 
-// ·µ»ØÊÇ·ñÎªÓĞĞ§µÄ³õÊ¼»¯Êı¾İÀàĞÍ£¬Èç¹ûÎŞĞ§Ôò²»Ìí¼Ó
+// è¿”å›æ˜¯å¦ä¸ºæœ‰æ•ˆçš„åˆå§‹åŒ–æ•°æ®ç±»å‹ï¼Œå¦‚æœæ— æ•ˆåˆ™ä¸æ·»åŠ 
 inline bool InitializeOperatorNodeInterface::SetInitValueType(
     const std::shared_ptr<const TypeInterface>& init_value_type) {
   if (CheckInitValueTypeValid(*init_value_type)) [[likely]] {
@@ -110,50 +110,50 @@ inline bool InitializeOperatorNodeInterface::CheckInitValueTypeValid(
     const TypeInterface& init_value_type) {
   switch (init_value_type.GetType()) {
     case StructOrBasicType::kBasic:
-      // Êı×Ö
+      // æ•°å­—
     case StructOrBasicType::kInitializeList:
-      // ³õÊ¼»¯ÁĞ±í
+      // åˆå§‹åŒ–åˆ—è¡¨
     case StructOrBasicType::kFunction:
-      // ÓÃÀ´¸øº¯ÊıÖ¸Õë¸³ÖµµÄ³õÊ¼»¯Öµ
+      // ç”¨æ¥ç»™å‡½æ•°æŒ‡é’ˆèµ‹å€¼çš„åˆå§‹åŒ–å€¼
       return true;
       break;
     case StructOrBasicType::kPointer:
-      // ¼ì²éÊÇ·ñÎª×Ö·û´®ÀàĞÍconst char*
+      // æ£€æŸ¥æ˜¯å¦ä¸ºå­—ç¬¦ä¸²ç±»å‹const char*
       return init_value_type ==
              *CommonlyUsedTypeGenerator::GetConstExprStringType();
       break;
     case StructOrBasicType::kEnd:
     case StructOrBasicType::kNotSpecified:
-      // ÒÔÉÏÁ½ÖÖÀàĞÍ²»Ó¦ÔÚÕâÀï³öÏÖ
+      // ä»¥ä¸Šä¸¤ç§ç±»å‹ä¸åº”åœ¨è¿™é‡Œå‡ºç°
       assert(false);
       [[fallthrough]];
     case StructOrBasicType::kEnum:
     case StructOrBasicType::kStruct:
     case StructOrBasicType::kUnion:
-      // cÓïÑÔÖĞÕâ¼¸ÖÖÀàĞÍ²»ÄÜÉùÃ÷Îª³õÊ¼»¯ÓÃ±äÁ¿
+      // cè¯­è¨€ä¸­è¿™å‡ ç§ç±»å‹ä¸èƒ½å£°æ˜ä¸ºåˆå§‹åŒ–ç”¨å˜é‡
       return false;
     default:
       assert(false);
-      // ·ÀÖ¹¾¯¸æ
+      // é˜²æ­¢è­¦å‘Š
       return false;
       break;
   }
 }
 
-// ·µ»ØÖµÊÇ·ñÎªÓĞĞ§µÄ³õÊ¼»¯ÁĞ±í¿ÉÓÃÀàĞÍ£¬Èç¹ûÀàĞÍÎŞĞ§Ôò²»Ö´ĞĞ²åÈë²Ù×÷
+// è¿”å›å€¼æ˜¯å¦ä¸ºæœ‰æ•ˆçš„åˆå§‹åŒ–åˆ—è¡¨å¯ç”¨ç±»å‹ï¼Œå¦‚æœç±»å‹æ— æ•ˆåˆ™ä¸æ‰§è¡Œæ’å…¥æ“ä½œ
 
 bool ListInitializeOperatorNode::SetListValues(
     std::list<std::shared_ptr<const InitializeOperatorNodeInterface>>&&
         list_values) {
-  // ´ıÌí¼ÓµÄËùÓĞÊı¾İµÄÀàĞÍ
+  // å¾…æ·»åŠ çš„æ‰€æœ‰æ•°æ®çš„ç±»å‹
   type_system::InitializeListType::InitializeListContainerType value_types;
-  // ¼ì²éÊÇ·ñËùÓĞµÄÖµ¶¼¿ÉÒÔ×÷Îª³õÊ¼»¯ÁĞ±íµÄÖµ
+  // æ£€æŸ¥æ˜¯å¦æ‰€æœ‰çš„å€¼éƒ½å¯ä»¥ä½œä¸ºåˆå§‹åŒ–åˆ—è¡¨çš„å€¼
   for (auto& list_value : list_values) {
     auto result_type_pointer = list_value->GetResultTypePointer();
     value_types.emplace_back(std::move(result_type_pointer));
     list_values_.emplace_back(std::move(list_value));
   }
-  // ÉèÖÃ³õÊ¼»¯ÁĞ±íÀàĞÍ
+  // è®¾ç½®åˆå§‹åŒ–åˆ—è¡¨ç±»å‹
   return SetInitValueType(std::make_shared<type_system::InitializeListType>(
       std::move(value_types)));
 }
@@ -163,13 +163,13 @@ bool MathematicalOperatorNode::SetLeftOperatorNode(
   switch (GetMathematicalOperation()) {
     case MathematicalOperation::kNot:
     case MathematicalOperation::kLogicalNegative: {
-      // °´Î»È¡·´ºÍÂß¼­·ÇÎªÒ»ÔªÔËËã·û£¬½á¹ûÀàĞÍÓëÔËËãÊıÀàĞÍÏàÍ¬
+      // æŒ‰ä½å–åå’Œé€»è¾‘éä¸ºä¸€å…ƒè¿ç®—ç¬¦ï¼Œç»“æœç±»å‹ä¸è¿ç®—æ•°ç±»å‹ç›¸åŒ
       auto compute_result_node = std::make_shared<VarietyOperatorNode>(
           std::string(), ConstTag::kNonConst, LeftRightValueTag::kRightValue);
       bool result = compute_result_node->SetVarietyType(
           left_operator_node->GetResultTypePointer());
       if (result) [[likely]] {
-        // left_operator_nodeÊÇºÏ·¨µÄ²ÎÓëÔËËãµÄ½ÚµãÔò¿ÉÒÔÉèÖÃ
+        // left_operator_nodeæ˜¯åˆæ³•çš„å‚ä¸è¿ç®—çš„èŠ‚ç‚¹åˆ™å¯ä»¥è®¾ç½®
         SetComputeResultNode(std::move(compute_result_node));
       } else {
         break;
@@ -189,7 +189,7 @@ MathematicalOperatorNode::SetRightOperatorNode(
   switch (GetMathematicalOperation()) {
     case MathematicalOperation::kNot:
     case MathematicalOperation::kLogicalNegative:
-      // Ò»ÔªÔËËã·û²»Ó¦µ÷ÓÃ´Ëº¯Êı
+      // ä¸€å…ƒè¿ç®—ç¬¦ä¸åº”è°ƒç”¨æ­¤å‡½æ•°
       assert(false);
       break;
     default:
@@ -199,7 +199,7 @@ MathematicalOperatorNode::SetRightOperatorNode(
       DeclineComputeResult(GetMathematicalOperation(),
                            GetLeftOperatorNodePointer(), right_operator_node);
   if (compute_result_node != nullptr) [[likely]] {
-    // ¿ÉÒÔÔËËã£¬ÉèÖÃÔËËãÓÒ½ÚµãºÍÔËËã½á¹û½Úµã
+    // å¯ä»¥è¿ç®—ï¼Œè®¾ç½®è¿ç®—å³èŠ‚ç‚¹å’Œè¿ç®—ç»“æœèŠ‚ç‚¹
     right_operator_node_ = right_operator_node;
     compute_result_node_ = std::move(compute_result_node);
   }
@@ -225,9 +225,9 @@ MathematicalOperatorNode::DeclineComputeResult(
     case DeclineMathematicalComputeTypeResult::kLeftOffsetRightPointer:
     case DeclineMathematicalComputeTypeResult::kConvertToLeft:
     case DeclineMathematicalComputeTypeResult::kConvertToRight:
-      // ¿ÉÒÔÔËËãµÄ¼¸ÖÖÇé¿ö
+      // å¯ä»¥è¿ç®—çš„å‡ ç§æƒ…å†µ
       {
-        // ´´½¨ÔËËã½á¹û½Úµã
+        // åˆ›å»ºè¿ç®—ç»“æœèŠ‚ç‚¹
         auto compute_result_node = std::make_shared<VarietyOperatorNode>(
             std::string(), ConstTag::kNonConst, LeftRightValueTag::kRightValue);
         compute_result_node->SetVarietyType(std::move(compute_result_type));
@@ -243,19 +243,19 @@ MathematicalOperatorNode::DeclineComputeResult(
 bool FunctionCallOperatorNode::SetFunctionType(
     const std::shared_ptr<const OperatorNodeInterface>&
         function_object_to_call) {
-  // ÅĞ¶ÏÀàĞÍÊÇ·ñºÏ·¨
+  // åˆ¤æ–­ç±»å‹æ˜¯å¦åˆæ³•
   auto function_type = function_object_to_call->GetResultTypePointer();
   if (CheckFunctionTypeValid(*function_type)) [[likely]] {
-    // »ñÈ¡×î¾«È·µÄÀàĞÍ
+    // è·å–æœ€ç²¾ç¡®çš„ç±»å‹
     auto exact_function_type = std::static_pointer_cast<
         const c_parser_frontend::type_system::FunctionType>(function_type);
-    // ³É¹¦ÉèÖÃº¯Êıµ÷ÓÃºó·µ»ØµÄÀàĞÍ
-    // Çå³ıÔ­À´Éú³ÉµÄº¯Êı²ÎÊı¶ÔÏóÖ¸Õë
+    // æˆåŠŸè®¾ç½®å‡½æ•°è°ƒç”¨åè¿”å›çš„ç±»å‹
+    // æ¸…é™¤åŸæ¥ç”Ÿæˆçš„å‡½æ•°å‚æ•°å¯¹è±¡æŒ‡é’ˆ
     function_arguments_offerred_.GetFunctionCallArguments().clear();
-    // ÉèÖÃº¯ÊıÀàĞÍ
+    // è®¾ç½®å‡½æ•°ç±»å‹
     function_type_ = exact_function_type;
-    // ¸ù¾İº¯ÊıÀàĞÍ´´½¨·µ»ØÀàĞÍ¶ÔÏó
-    // ·µ»ØÀàĞÍÄäÃû
+    // æ ¹æ®å‡½æ•°ç±»å‹åˆ›å»ºè¿”å›ç±»å‹å¯¹è±¡
+    // è¿”å›ç±»å‹åŒ¿å
     auto return_object = std::make_shared<VarietyOperatorNode>(
         std::string(), exact_function_type->GetReturnTypeConstTag(),
         LeftRightValueTag::kRightValue);
@@ -267,24 +267,24 @@ bool FunctionCallOperatorNode::SetFunctionType(
   }
 }
 
-// Ìí¼ÓÒ»¸ö²ÎÊı£¬²ÎÊıÌí¼ÓË³Ğò´Ó×óµ½ÓÒ
-// ·µ»Ø´ıÌí¼ÓµÄ²ÎÊıÊÇ·ñÍ¨¹ı¼ìÑé£¬Î´Í¨¹ı¼ìÑéÔò²»»áÌí¼Ó
+// æ·»åŠ ä¸€ä¸ªå‚æ•°ï¼Œå‚æ•°æ·»åŠ é¡ºåºä»å·¦åˆ°å³
+// è¿”å›å¾…æ·»åŠ çš„å‚æ•°æ˜¯å¦é€šè¿‡æ£€éªŒï¼Œæœªé€šè¿‡æ£€éªŒåˆ™ä¸ä¼šæ·»åŠ 
 
 AssignableCheckResult FunctionCallOperatorNode::AddFunctionCallArgument(
     const std::shared_ptr<const OperatorNodeInterface>& argument_node,
     const std::shared_ptr<std::list<
         std::unique_ptr<c_parser_frontend::flow_control::FlowInterface>>>&
         sentences_to_get_argument) {
-  // ½«Òª·ÅÖÃ½ÚµãµÄindex
+  // å°†è¦æ”¾ç½®èŠ‚ç‚¹çš„index
   size_t new_argument_index =
       function_arguments_offerred_.GetFunctionCallArguments().size();
   if (new_argument_index >= GetFunctionTypePointer()->GetArguments().size())
       [[unlikely]] {
-    // º¯Êı²ÎÊıÒÑÂú£¬²»ÄÜÌí¼Ó¸ü¶à²ÎÊı
-    // Ôİ²»Ö§³Ö¿É±ä²ÎÊı
+    // å‡½æ•°å‚æ•°å·²æ»¡ï¼Œä¸èƒ½æ·»åŠ æ›´å¤šå‚æ•°
+    // æš‚ä¸æ”¯æŒå¯å˜å‚æ•°
     return AssignableCheckResult::kArgumentsFull;
   }
-  // º¯Êı²ÎÊı´´½¨¹ı³ÌµÈÍ¬ÓÚÉùÃ÷²¢¸³Öµ
+  // å‡½æ•°å‚æ•°åˆ›å»ºè¿‡ç¨‹ç­‰åŒäºå£°æ˜å¹¶èµ‹å€¼
   AssignableCheckResult check_result = AssignOperatorNode::CheckAssignable(
       *GetFunctionTypePointer()
            ->GetArguments()[new_argument_index]
@@ -297,12 +297,12 @@ AssignableCheckResult FunctionCallOperatorNode::AddFunctionCallArgument(
     case AssignableCheckResult::kZeroConvertToPointer:
     case AssignableCheckResult::kUnsignedToSigned:
     case AssignableCheckResult::kSignedToUnsigned:
-      // ¿ÉÒÔÌí¼Ó
+      // å¯ä»¥æ·»åŠ 
       function_arguments_offerred_.AddFunctionCallArgument(
           argument_node, sentences_to_get_argument);
       break;
     default:
-      // ²»¿ÉÒÔÌí¼Ó
+      // ä¸å¯ä»¥æ·»åŠ 
       break;
   }
   return check_result;
@@ -320,7 +320,7 @@ bool AllocateOperatorNode::SetTargetVariety(
 
 bool MemberAccessOperatorNode::CheckNodeToAccessValid(
     const OperatorNodeInterface& node_to_access) {
-  // Ö»ÄÜ¶Ô½á¹¹ÀàĞÍ±äÁ¿·ÃÎÊ³ÉÔ±
+  // åªèƒ½å¯¹ç»“æ„ç±»å‹å˜é‡è®¿é—®æˆå‘˜
   switch (node_to_access.GetResultTypePointer()->GetType()) {
     case StructOrBasicType::kEnum:
     case StructOrBasicType::kStruct:
@@ -335,7 +335,7 @@ bool MemberAccessOperatorNode::CheckNodeToAccessValid(
 
 bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
     std::string&& member_name_to_set) {
-  // Òª±»·ÃÎÊ³ÉÔ±µÄ½ÚµãµÄÀàĞÍ
+  // è¦è¢«è®¿é—®æˆå‘˜çš„èŠ‚ç‚¹çš„ç±»å‹
   auto accessed_node_type = GetNodeToAccessReference().GetResultTypePointer();
   switch (accessed_node_type->GetType()) {
     case StructOrBasicType::kStruct: {
@@ -345,12 +345,12 @@ bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
       MemberIndex struct_member_index =
           struct_type.GetStructMemberIndex(member_name_to_set);
       if (!struct_member_index.IsValid()) [[unlikely]] {
-        // ²»´æÔÚ¸ø¶¨µÄ³ÉÔ±Ãû
+        // ä¸å­˜åœ¨ç»™å®šçš„æˆå‘˜å
         return false;
       }
       const auto& struct_member_info =
           struct_type.GetStructMemberInfo(struct_member_index);
-      // Éú³É·ÃÎÊ³ÉÔ±ºóµÃµ½µÄ½Úµã
+      // ç”Ÿæˆè®¿é—®æˆå‘˜åå¾—åˆ°çš„èŠ‚ç‚¹
       auto struct_node = std::make_shared<VarietyOperatorNode>(
           std::string(), struct_member_info.second,
           LeftRightValueTag::kLeftValue);
@@ -367,12 +367,12 @@ bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
       MemberIndex union_member_index =
           union_type.GetUnionMemberIndex(member_name_to_set);
       if (!union_member_index.IsValid()) [[unlikely]] {
-        // ²»´æÔÚ¸ø¶¨µÄ³ÉÔ±Ãû
+        // ä¸å­˜åœ¨ç»™å®šçš„æˆå‘˜å
         return false;
       }
       auto& union_member_info =
           union_type.GetUnionMemberInfo(union_member_index);
-      // Éú³É·ÃÎÊ³ÉÔ±ºóµÃµ½µÄ½Úµã
+      // ç”Ÿæˆè®¿é—®æˆå‘˜åå¾—åˆ°çš„èŠ‚ç‚¹
       auto union_node = std::make_shared<VarietyOperatorNode>(
           std::string(), union_member_info.second,
           LeftRightValueTag::kLeftValue);
@@ -389,10 +389,10 @@ bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
       auto [enum_member_info_iter, enum_member_exist] =
           enum_type.GetEnumMemberInfo(member_name_to_set);
       if (!enum_member_exist) [[unlikely]] {
-        // ²»´æÔÚ¸ø¶¨µÄ³ÉÔ±Ãû
+        // ä¸å­˜åœ¨ç»™å®šçš„æˆå‘˜å
         return false;
       }
-      // Éú³É·ÃÎÊ³ÉÔ±ºóµÃµ½µÄ½Úµã
+      // ç”Ÿæˆè®¿é—®æˆå‘˜åå¾—åˆ°çš„èŠ‚ç‚¹
       auto enum_node = std::make_shared<BasicTypeInitializeOperatorNode>(
           InitializeType::kBasic,
           std::to_string(enum_member_info_iter->second));
@@ -402,7 +402,7 @@ bool MemberAccessOperatorNode::SetAccessedNodeAndMemberName(
     } break;
     default:
       assert(false);
-      // ·ÀÖ¹¾¯¸æ
+      // é˜²æ­¢è­¦å‘Š
       return false;
       break;
   }
@@ -423,7 +423,7 @@ AssignableCheckResult AssignOperatorNode::SetNodeForAssign(
       node_for_assign_ = node_for_assign;
       break;
     default:
-      // ²»¿ÉÒÔ¸³ÖµµÄÇé¿ö£¬Ö±½Ó·µ»Ø
+      // ä¸å¯ä»¥èµ‹å€¼çš„æƒ…å†µï¼Œç›´æ¥è¿”å›
       break;
   }
   return assignable_check_result;
@@ -433,10 +433,10 @@ AssignableCheckResult AssignOperatorNode::CheckAssignable(
     const OperatorNodeInterface& node_to_be_assigned,
     const OperatorNodeInterface& node_for_assign, bool is_announce) {
   if (!is_announce) [[unlikely]] {
-    // ²»ÊÇÉùÃ÷Ê±¸³ÖµÔòÒª¼ì²é±»¸³ÖµµÄ½ÚµãÊÇ·ñÎªconst
+    // ä¸æ˜¯å£°æ˜æ—¶èµ‹å€¼åˆ™è¦æ£€æŸ¥è¢«èµ‹å€¼çš„èŠ‚ç‚¹æ˜¯å¦ä¸ºconst
     if (node_to_be_assigned.GetResultConstTag() == ConstTag::kConst)
         [[unlikely]] {
-      // ±»¸³ÖµµÄ½ÚµãÊÇconstÇÒ²»ÊÇÉùÃ÷Óï¾äÖĞ
+      // è¢«èµ‹å€¼çš„èŠ‚ç‚¹æ˜¯constä¸”ä¸æ˜¯å£°æ˜è¯­å¥ä¸­
       return AssignableCheckResult::kAssignedNodeIsConst;
     }
   }
@@ -444,19 +444,19 @@ AssignableCheckResult AssignOperatorNode::CheckAssignable(
   switch (node_to_be_assigned.GetGeneralOperatorType()) {
     case GeneralOperationType::kLogicalOperation:
     case GeneralOperationType::kMathematicalOperation:
-      // ÊıÖµÔËËãÓëÂß¼­ÔËËã½á¹û¾ùÎªÓÒÖµ£¬²»ÄÜ±»¸³Öµ
+      // æ•°å€¼è¿ç®—ä¸é€»è¾‘è¿ç®—ç»“æœå‡ä¸ºå³å€¼ï¼Œä¸èƒ½è¢«èµ‹å€¼
     case GeneralOperationType::kInitValue:
-      // ³õÊ¼»¯ÖµÎªÓÒÖµ£¬²»ÄÜ±»¸³Öµ
+      // åˆå§‹åŒ–å€¼ä¸ºå³å€¼ï¼Œä¸èƒ½è¢«èµ‹å€¼
     case GeneralOperationType::kFunctionCall:
-      // CÓïÑÔÖĞº¯Êı·µ»ØÖµÎªÓÒÖµ£¬²»ÄÜ±»¸³Öµ
+      // Cè¯­è¨€ä¸­å‡½æ•°è¿”å›å€¼ä¸ºå³å€¼ï¼Œä¸èƒ½è¢«èµ‹å€¼
       check_result = AssignableCheckResult::kAssignToRightValue;
       break;
     case GeneralOperationType::kVariety: {
       auto variety_node =
           static_cast<const VarietyOperatorNode&>(node_to_be_assigned);
-      // ÔÚ¹¹½¨±äÁ¿Ê±ºöÂÔ×óÓÒÖµ
+      // åœ¨æ„å»ºå˜é‡æ—¶å¿½ç•¥å·¦å³å€¼
       if (!is_announce) [[likely]] {
-        // ¸³ÖµÊ±±äÁ¿¿ÉÄÜÊÇ×óÖµÒ²¿ÉÄÜÊÇÓÒÖµ£¬ĞèÒª¼ìÑé
+        // èµ‹å€¼æ—¶å˜é‡å¯èƒ½æ˜¯å·¦å€¼ä¹Ÿå¯èƒ½æ˜¯å³å€¼ï¼Œéœ€è¦æ£€éªŒ
         if (variety_node.GetLeftRightValueTag() ==
             LeftRightValueTag::kRightValue) [[unlikely]] {
           check_result = AssignableCheckResult::kAssignToRightValue;
@@ -473,9 +473,9 @@ AssignableCheckResult AssignOperatorNode::CheckAssignable(
               *node_for_assign.GetResultTypePointer());
       switch (check_result) {
         case AssignableCheckResult::kNonConvert: {
-          // Èç¹û±»¸³ÖµµÄ½ÚµãÓëÓÃÀ´¸³ÖµµÄ½ÚµãÀàĞÍÍêÈ«ÏàÍ¬£¨operator==()£©
-          // ÇÒÎª±äÁ¿ÀàĞÍÔòÉèÖÃ±»¸³ÖµµÄ½ÚµãµÄÀàĞÍÁ´Ö¸ÕëÖ¸ÏòÓÃÀ´¸³ÖµµÄÀàĞÍÁ´
-          // ÒÔ½ÚÊ¡ÄÚ´æ£¨Î¥·´constÔ­Ôò£©
+          // å¦‚æœè¢«èµ‹å€¼çš„èŠ‚ç‚¹ä¸ç”¨æ¥èµ‹å€¼çš„èŠ‚ç‚¹ç±»å‹å®Œå…¨ç›¸åŒï¼ˆoperator==()ï¼‰
+          // ä¸”ä¸ºå˜é‡ç±»å‹åˆ™è®¾ç½®è¢«èµ‹å€¼çš„èŠ‚ç‚¹çš„ç±»å‹é“¾æŒ‡é’ˆæŒ‡å‘ç”¨æ¥èµ‹å€¼çš„ç±»å‹é“¾
+          // ä»¥èŠ‚çœå†…å­˜ï¼ˆè¿åconståŸåˆ™ï¼‰
           auto node_to_be_assigned_type_pointer =
               node_to_be_assigned.GetResultTypePointer();
           auto node_for_assign_type_pointer =
@@ -497,28 +497,28 @@ AssignableCheckResult AssignOperatorNode::CheckAssignable(
         case AssignableCheckResult::kSignedToUnsigned:
           break;
         case AssignableCheckResult::kMayBeZeroToPointer:
-          // Èç¹û¿ÉÄÜÊÇ½«0¸³Öµ¸øÖ¸ÕëÔòĞèÒª¶îÍâ¼ì²é
-          // ¼ì²éÓÃÀ´¸³ÖµµÄÊÇ·ñÎª±àÒëÆÚ³£Á¿
+          // å¦‚æœå¯èƒ½æ˜¯å°†0èµ‹å€¼ç»™æŒ‡é’ˆåˆ™éœ€è¦é¢å¤–æ£€æŸ¥
+          // æ£€æŸ¥ç”¨æ¥èµ‹å€¼çš„æ˜¯å¦ä¸ºç¼–è¯‘æœŸå¸¸é‡
           if (node_for_assign.GetGeneralOperatorType() ==
               GeneralOperationType::kInitValue) [[likely]] {
             const BasicTypeInitializeOperatorNode& initialize_node =
                 static_cast<const BasicTypeInitializeOperatorNode&>(
                     node_for_assign);
-            // È·ÈÏ³õÊ¼»¯ÖµÊÇ·ñÎª0
+            // ç¡®è®¤åˆå§‹åŒ–å€¼æ˜¯å¦ä¸º0
             if (initialize_node.GetInitializeType() == InitializeType::kBasic &&
                 initialize_node.GetValue() == "0") [[likely]] {
               check_result = AssignableCheckResult::kZeroConvertToPointer;
             } else {
-              // ²»ÄÜ½«³ıÁË0ÒÔÍâµÄÖµ¸³Öµ¸øÖ¸Õë
+              // ä¸èƒ½å°†é™¤äº†0ä»¥å¤–çš„å€¼èµ‹å€¼ç»™æŒ‡é’ˆ
               check_result = AssignableCheckResult::kCanNotConvert;
             }
           } else {
-            // ÎŞ·¨Ö±½Ó¸³Öµ£¬ĞèÒªÇ¿ÖÆÀàĞÍ×ª»»
+            // æ— æ³•ç›´æ¥èµ‹å€¼ï¼Œéœ€è¦å¼ºåˆ¶ç±»å‹è½¬æ¢
             check_result = AssignableCheckResult::kCanNotConvert;
           }
           break;
         case AssignableCheckResult::kInitializeList:
-          // ÓÃÀ´¸³ÖµµÄÊÇ³õÊ¼»¯ÁĞ±í£¬µ÷ÓÃÏàÓ¦µÄº¯Êı´¦Àí
+          // ç”¨æ¥èµ‹å€¼çš„æ˜¯åˆå§‹åŒ–åˆ—è¡¨ï¼Œè°ƒç”¨ç›¸åº”çš„å‡½æ•°å¤„ç†
           return VarietyAssignableByInitializeList(
               static_cast<const VarietyOperatorNode&>(node_to_be_assigned),
               static_cast<const ListInitializeOperatorNode&>(node_for_assign));
@@ -547,19 +547,19 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
   switch (variety_node.GetVarietyTypeReference().GetType()) {
     case StructOrBasicType::kBasic:
     case StructOrBasicType::kEnum: {
-      // ¶Ô»ù´¡±äÁ¿Ê¹ÓÃ³õÊ¼»¯ÁĞ±íÊ±³õÊ¼»¯ÁĞ±íÖĞÖ»ÄÜ´æÔÚÒ»¸öÖµ
-      // ÇÒÖ»Ê¹ÓÃÒ»²ã³õÊ¼»¯ÁĞ±í
+      // å¯¹åŸºç¡€å˜é‡ä½¿ç”¨åˆå§‹åŒ–åˆ—è¡¨æ—¶åˆå§‹åŒ–åˆ—è¡¨ä¸­åªèƒ½å­˜åœ¨ä¸€ä¸ªå€¼
+      // ä¸”åªä½¿ç”¨ä¸€å±‚åˆå§‹åŒ–åˆ—è¡¨
       auto initialize_members = list_initialize_operator_node.GetListValues();
-      // ¼ì²é³õÊ¼»¯ÁĞ±íÖĞÊÇ·ñÖ»´æÔÚÒ»¸öÖµ
+      // æ£€æŸ¥åˆå§‹åŒ–åˆ—è¡¨ä¸­æ˜¯å¦åªå­˜åœ¨ä¸€ä¸ªå€¼
       if (initialize_members.size() == 1) [[likely]] {
         auto& initialize_value = initialize_members.front();
-        // ¼ì²éÊÇ·ñÖ»Ê¹ÓÃÒ»²ã³õÊ¼»¯ÁĞ±í
+        // æ£€æŸ¥æ˜¯å¦åªä½¿ç”¨ä¸€å±‚åˆå§‹åŒ–åˆ—è¡¨
         if (initialize_value->GetInitializeType() !=
             InitializeType::kInitializeList) [[unlikely]] {
           return CheckAssignable(variety_node, *initialize_value, true);
         }
       }
-      // ²»·ûºÏÉÏÊöÌõ¼ş£¬ÎŞ·¨¸³Öµ
+      // ä¸ç¬¦åˆä¸Šè¿°æ¡ä»¶ï¼Œæ— æ³•èµ‹å€¼
       return AssignableCheckResult::kCanNotConvert;
     } break;
     case StructOrBasicType::kPointer: {
@@ -569,10 +569,10 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
       const auto& list_values = list_initialize_operator_node.GetListValues();
       size_t list_size = list_values.size();
       size_t pointer_array_size = pointer_type.GetArraySize();
-      // ¼ì²éÊÇ·ñÎª´¿Ö¸ÕëÊ¹ÓÃ³õÊ¼»¯ÁĞ±í³õÊ¼»¯
+      // æ£€æŸ¥æ˜¯å¦ä¸ºçº¯æŒ‡é’ˆä½¿ç”¨åˆå§‹åŒ–åˆ—è¡¨åˆå§‹åŒ–
       if (pointer_array_size == 0) {
-        // ´¿Ö¸Õë£¬Ê¹ÓÃ±äÁ¿¶Ô±äÁ¿¸³ÖµÓïÒå
-        // ¼ì²éÓÃÀ´¸³ÖµµÄ³õÊ¼»¯ÁĞ±íÊÇ·ñÖ»ÓĞÒ»¸öÖµÇÒÕâ¸öÖµ²»ÊÇ³õÊ¼»¯ÁĞ±í
+        // çº¯æŒ‡é’ˆï¼Œä½¿ç”¨å˜é‡å¯¹å˜é‡èµ‹å€¼è¯­ä¹‰
+        // æ£€æŸ¥ç”¨æ¥èµ‹å€¼çš„åˆå§‹åŒ–åˆ—è¡¨æ˜¯å¦åªæœ‰ä¸€ä¸ªå€¼ä¸”è¿™ä¸ªå€¼ä¸æ˜¯åˆå§‹åŒ–åˆ—è¡¨
         auto& value_for_assign =
             static_cast<const BasicTypeInitializeOperatorNode&>(
                 *list_values.front());
@@ -584,7 +584,7 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
           return AssignableCheckResult::kCanNotConvert;
         }
       }
-      // ¹¹½¨²ÎÓëÏÂÒ»ÂÖ±È½ÏµÄÁÙÊ±½Úµã
+      // æ„å»ºå‚ä¸ä¸‹ä¸€è½®æ¯”è¾ƒçš„ä¸´æ—¶èŠ‚ç‚¹
       auto [dereferenced_type, const_tag] = pointer_type.DeReference();
       auto sub_variety_node = std::make_unique<VarietyOperatorNode>(
           std::string(), const_tag, LeftRightValueTag::kLeftValue);
@@ -593,7 +593,7 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
               dereferenced_type);
       AssignableCheckResult check_result =
           AssignableCheckResult::kCanNotConvert;
-      // ¼ì²éÊÇ·ñ³õÊ¼»¯ÁĞ±íÖĞÃ¿Ò»¸öÖµ¶¼¿ÉÒÔ¸³Öµ
+      // æ£€æŸ¥æ˜¯å¦åˆå§‹åŒ–åˆ—è¡¨ä¸­æ¯ä¸€ä¸ªå€¼éƒ½å¯ä»¥èµ‹å€¼
       for (const auto& value : list_values) {
         check_result = CheckAssignable(*sub_variety_node, *value, true);
         switch (check_result) {
@@ -608,12 +608,12 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
           case AssignableCheckResult::kCanNotConvert:
           case AssignableCheckResult::kAssignedNodeIsConst:
           case AssignableCheckResult::kInitializeListTooLarge:
-            // ÎŞ·¨¸³ÖµµÄÇé¿ö
-            // Ö±½Ó·µ»Ø£¬²»¼ì²âÊ£Óà²¿·Ö
+            // æ— æ³•èµ‹å€¼çš„æƒ…å†µ
+            // ç›´æ¥è¿”å›ï¼Œä¸æ£€æµ‹å‰©ä½™éƒ¨åˆ†
             return check_result;
             break;
           case AssignableCheckResult::kInitializeList:
-            // ÔÚµ÷ÓÃ¸Ãº¯ÊıÇ°ÒÑ¾­±»CheckAssignableÀ¹½Øµô
+            // åœ¨è°ƒç”¨è¯¥å‡½æ•°å‰å·²ç»è¢«CheckAssignableæ‹¦æˆªæ‰
           case AssignableCheckResult::kAssignToRightValue:
           case AssignableCheckResult::kArgumentsFull:
           default:
@@ -621,13 +621,13 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
             break;
         }
       }
-      // ËùÓĞ½Úµã¾ùÍ¨¹ı²âÊÔ£¬¼ì²éÖ¸ÕëÖ¸ÏòµÄÊı×é´óĞ¡
+      // æ‰€æœ‰èŠ‚ç‚¹å‡é€šè¿‡æµ‹è¯•ï¼Œæ£€æŸ¥æŒ‡é’ˆæŒ‡å‘çš„æ•°ç»„å¤§å°
       if (pointer_array_size == -1) {
-        // ĞèÒª×Ô¶¯¼ÆËãÊı×é´óĞ¡
+        // éœ€è¦è‡ªåŠ¨è®¡ç®—æ•°ç»„å¤§å°
         const_cast<c_parser_frontend::type_system::PointerType&>(pointer_type)
             .SetArraySize(list_size);
       } else if (list_size > pointer_array_size) [[unlikely]] {
-        // ³õÊ¼»¯ÁĞ±í¸ø³öµÄÊı¾İÊıÄ¿´óÓÚÖ¸ÕëÉùÃ÷Ê±µÄÊı×é´óĞ¡
+        // åˆå§‹åŒ–åˆ—è¡¨ç»™å‡ºçš„æ•°æ®æ•°ç›®å¤§äºæŒ‡é’ˆå£°æ˜æ—¶çš„æ•°ç»„å¤§å°
         check_result = AssignableCheckResult::kInitializeListTooLarge;
       }
       return check_result;
@@ -639,11 +639,11 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
               const c_parser_frontend::type_system::StructureTypeInterface&>(
               variety_node.GetVarietyTypeReference())
               .TypeSizeOf();
-      // ¼ì²é³õÊ¼»¯ÁĞ±íÖĞÊÇ·ñÖ»´æ´¢ÁËÒ»¸ö³ÉÔ±ÇÒ¸Ã³ÉÔ±²»ÊÇ³õÊ¼»¯ÁĞ±í
+      // æ£€æŸ¥åˆå§‹åŒ–åˆ—è¡¨ä¸­æ˜¯å¦åªå­˜å‚¨äº†ä¸€ä¸ªæˆå‘˜ä¸”è¯¥æˆå‘˜ä¸æ˜¯åˆå§‹åŒ–åˆ—è¡¨
       if (list_values.size() == 1 && list_values.front()->GetInitializeType() !=
                                          InitializeType::kInitializeList)
           [[likely]] {
-        // ¼ì²éÓÃÀ´¸³ÖµµÄ¶ÔÏóÊÇ·ñĞ¡ÓÚµÈÓÚ¹²ÓÃÌåÄÚ×î´óµÄ¶ÔÏó
+        // æ£€æŸ¥ç”¨æ¥èµ‹å€¼çš„å¯¹è±¡æ˜¯å¦å°äºç­‰äºå…±ç”¨ä½“å†…æœ€å¤§çš„å¯¹è±¡
         if (union_size >=
             list_values.front()->GetResultTypePointer()->TypeSizeOf()) {
           return AssignableCheckResult::kNonConvert;
@@ -658,21 +658,21 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
               const c_parser_frontend::type_system::StructureTypeInterface&>(
               variety_node.GetVarietyTypeReference())
               .GetStructureMembers();
-      // ¹¹½¨±È½ÏÓÃÁÙÊ±½Úµã
+      // æ„å»ºæ¯”è¾ƒç”¨ä¸´æ—¶èŠ‚ç‚¹
       auto sub_variety_node = std::make_unique<VarietyOperatorNode>(
           std::string(), ConstTag::kNonConst, LeftRightValueTag::kLeftValue);
       if (list_values.size() > structure_members.size()) [[unlikely]] {
-        // ¸ø¶¨µÄ³õÊ¼»¯³ÉÔ±ÁĞ±í´óĞ¡´óÓÚ½á¹¹ÌåÄÚ³ÉÔ±ÊıÄ¿
+        // ç»™å®šçš„åˆå§‹åŒ–æˆå‘˜åˆ—è¡¨å¤§å°å¤§äºç»“æ„ä½“å†…æˆå‘˜æ•°ç›®
         return AssignableCheckResult::kInitializeListTooLarge;
       }
-      // ¼ìÑé³õÊ¼»¯ÁĞ±íÖĞµÄÖµÊÇ·ñ¿ÉÒÔ¸ø½á¹¹Ìå³ÉÔ±°´Ë³Ğò¸³Öµ
+      // æ£€éªŒåˆå§‹åŒ–åˆ—è¡¨ä¸­çš„å€¼æ˜¯å¦å¯ä»¥ç»™ç»“æ„ä½“æˆå‘˜æŒ‰é¡ºåºèµ‹å€¼
       AssignableCheckResult check_result =
           AssignableCheckResult::kCanNotConvert;
       auto structure_member_iter = structure_members.begin();
       auto list_iter = list_values.begin();
       for (; list_iter != list_values.end();
            ++list_iter, ++structure_member_iter) {
-        // ÉèÖÃ½á¹¹Ìå³ÉÔ±ÊôĞÔ
+        // è®¾ç½®ç»“æ„ä½“æˆå‘˜å±æ€§
         sub_variety_node->SetVarietyType(structure_member_iter->first);
         sub_variety_node->SetConstTag(structure_member_iter->second);
         check_result = CheckAssignable(*sub_variety_node, **list_iter, true);
@@ -688,7 +688,7 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
           case AssignableCheckResult::kCanNotConvert:
           case AssignableCheckResult::kAssignedNodeIsConst:
           case AssignableCheckResult::kInitializeListTooLarge:
-            // ÎŞ·¨¸³Öµ£¬ÎŞĞèÅĞ¶ÏÊ£Óà¶ÔÏóÖ±½Ó·µ»Ø
+            // æ— æ³•èµ‹å€¼ï¼Œæ— éœ€åˆ¤æ–­å‰©ä½™å¯¹è±¡ç›´æ¥è¿”å›
             return check_result;
             break;
           case AssignableCheckResult::kInitializeList:
@@ -700,40 +700,40 @@ AssignableCheckResult AssignOperatorNode::VarietyAssignableByInitializeList(
             break;
         }
       }
-      // ³õÊ¼»¯ÁĞ±íÖĞËùÓĞµÄÖµ¶¼¿ÉÒÔ¸ø½á¹¹Ìå³ÉÔ±¸³Öµ
+      // åˆå§‹åŒ–åˆ—è¡¨ä¸­æ‰€æœ‰çš„å€¼éƒ½å¯ä»¥ç»™ç»“æ„ä½“æˆå‘˜èµ‹å€¼
       return check_result;
     } break;
     case StructOrBasicType::kInitializeList:
     case StructOrBasicType::kFunction:
     default:
       assert(false);
-      // ·ÀÖ¹¾¯¸æ
+      // é˜²æ­¢è­¦å‘Š
       return AssignableCheckResult();
       break;
   }
 }
 
-// ·µ»ØÊÇ·ñ¿ÉÒÔÉèÖÃ£¬Èç¹û²»¿ÉÉèÖÃÔò²»»áÉèÖÃ
+// è¿”å›æ˜¯å¦å¯ä»¥è®¾ç½®ï¼Œå¦‚æœä¸å¯è®¾ç½®åˆ™ä¸ä¼šè®¾ç½®
 
 bool ObtainAddressOperatorNode::SetNodeToObtainAddress(
     const std::shared_ptr<const VarietyOperatorNode>& node_to_obtain_address) {
   bool check_result = CheckNodeToObtainAddress(*node_to_obtain_address);
   if (check_result) [[likely]] {
-    // ¿ÉÒÔÈ¡µØÖ·
-    // ÉèÖÃ½«Òª±»È¡µØÖ·µÄÖ¸Õë
+    // å¯ä»¥å–åœ°å€
+    // è®¾ç½®å°†è¦è¢«å–åœ°å€çš„æŒ‡é’ˆ
     node_to_obtain_address_ = node_to_obtain_address;
-    // Éú³ÉÈ¡µØÖ·ºóµÃµ½µÄ±äÁ¿µÄÀàĞÍ
+    // ç”Ÿæˆå–åœ°å€åå¾—åˆ°çš„å˜é‡çš„ç±»å‹
     auto obtained_type = TypeInterface::ObtainAddressOperatorNode(
         node_to_obtain_address->GetResultTypePointer(),
         node_to_obtain_address->GetConstTag());
-    // ´´½¨È¡µØÖ·ºóµÃµ½µÄ½Úµã£¨Éú³ÉÄäÃûÓÒÖµÖĞ¼ä±äÁ¿£©
+    // åˆ›å»ºå–åœ°å€åå¾—åˆ°çš„èŠ‚ç‚¹ï¼ˆç”ŸæˆåŒ¿åå³å€¼ä¸­é—´å˜é‡ï¼‰
     auto node_obtained_address = std::make_shared<VarietyOperatorNode>(
         std::string(), ConstTag::kNonConst, LeftRightValueTag::kRightValue);
-    // ÉèÖÃÈ¡µØÖ·ºóµÄ±äÁ¿½ÚµãÀàĞÍ
+    // è®¾ç½®å–åœ°å€åçš„å˜é‡èŠ‚ç‚¹ç±»å‹
     bool result =
         node_obtained_address->SetVarietyType(std::move(obtained_type));
     assert(result == true);
-    // ÉèÖÃÈ¡µØÖ·ºóµÃµ½µÄ½Úµã
+    // è®¾ç½®å–åœ°å€åå¾—åˆ°çš„èŠ‚ç‚¹
     SetNodeObtainedAddress(std::move(node_obtained_address));
   }
   return check_result;
@@ -757,13 +757,13 @@ inline bool ObtainAddressOperatorNode ::CheckNodeToObtainAddress(
 bool DereferenceOperatorNode::SetNodeToDereference(
     const std::shared_ptr<const OperatorNodeInterface>& node_to_dereference) {
   if (CheckNodeDereferenceAble(*node_to_dereference)) [[likely]] {
-    // ÉèÖÃ´ı½âÒıÓÃµÄ½Úµã
+    // è®¾ç½®å¾…è§£å¼•ç”¨çš„èŠ‚ç‚¹
     node_to_dereference_ = node_to_dereference;
-    // ´´½¨½âÒıÓÃºóµÃµ½µÄ½Úµã
+    // åˆ›å»ºè§£å¼•ç”¨åå¾—åˆ°çš„èŠ‚ç‚¹
     auto node_to_dereference_type = std::static_pointer_cast<
         const c_parser_frontend::type_system::PointerType>(
         node_to_dereference->GetResultTypePointer());
-    // »ñÈ¡½âÒıÓÃºóµÄÀàĞÍºÍ½âÒıÓÃµÄ½á¹û
+    // è·å–è§£å¼•ç”¨åçš„ç±»å‹å’Œè§£å¼•ç”¨çš„ç»“æœ
     auto [dereferenced_node_type, dereferenced_node_const_tag] =
         node_to_dereference_type->DeReference();
     auto dereferenced_node = std::make_shared<VarietyOperatorNode>(
@@ -781,11 +781,11 @@ bool DereferenceOperatorNode::SetNodeToDereference(
 
 inline bool DereferenceOperatorNode::CheckNodeDereferenceAble(
     const OperatorNodeInterface& node_to_dereference) {
-  // µ±ÇÒ½öµ±ÎªÖ¸ÕëÊ±¿ÉÒÔ½âÒıÓÃ
-  // ÇÒÒªÇó½âÒıÓÃµÃµ½µÄ²»ÊÇvoidÀàĞÍ
+  // å½“ä¸”ä»…å½“ä¸ºæŒ‡é’ˆæ—¶å¯ä»¥è§£å¼•ç”¨
+  // ä¸”è¦æ±‚è§£å¼•ç”¨å¾—åˆ°çš„ä¸æ˜¯voidç±»å‹
   auto result_type = node_to_dereference.GetResultTypePointer();
   bool result = result_type->GetType() == StructOrBasicType::kPointer;
-  // »ñÈ¡Ö¸Õë½ÚµãµÄÏÂÒ»¸ö½Úµã£¬ÅĞ¶ÏÊÇ·ñÎªvoidÀàĞÍ
+  // è·å–æŒ‡é’ˆèŠ‚ç‚¹çš„ä¸‹ä¸€ä¸ªèŠ‚ç‚¹ï¼Œåˆ¤æ–­æ˜¯å¦ä¸ºvoidç±»å‹
   auto& next_type_node = result_type->GetNextNodeReference();
   result &= !(next_type_node.GetType() == StructOrBasicType::kBasic &&
               static_cast<const c_parser_frontend::type_system::BasicType&>(
@@ -819,7 +819,7 @@ bool LogicalOperationOperatorNode::SetRightOperatorNode(
   }
 }
 
-// ¼ì²éÊÇ·ñ¿ÉÒÔ²ÎÓëÂß¼­ÔËËã
+// æ£€æŸ¥æ˜¯å¦å¯ä»¥å‚ä¸é€»è¾‘è¿ç®—
 
 inline bool LogicalOperationOperatorNode::CheckLogicalTypeValid(
     const TypeInterface& type_interface) {
@@ -837,15 +837,15 @@ inline bool LogicalOperationOperatorNode::CheckLogicalTypeValid(
 bool TypeConvert::GenerateDestinationNode(
     const std::shared_ptr<const TypeInterface>& new_type,
     ConstTag new_const_tag) {
-  // »ñÈ¡×îÖÕ½á¹û½Úµã×÷ÎªÓÃÀ´×ª»»µÄ½Úµã
+  // è·å–æœ€ç»ˆç»“æœèŠ‚ç‚¹ä½œä¸ºç”¨æ¥è½¬æ¢çš„èŠ‚ç‚¹
   auto node_for_convert = GetSourceNodeReference().GetResultOperatorNode();
-  // Èç¹û·µ»ØnullptrÔò´ú±í×ÔÉí¾ÍÊÇ½á¹û½Úµã£¬ÈçVarietyOperatorNode
+  // å¦‚æœè¿”å›nullptråˆ™ä»£è¡¨è‡ªèº«å°±æ˜¯ç»“æœèŠ‚ç‚¹ï¼Œå¦‚VarietyOperatorNode
   if (node_for_convert == nullptr) [[likely]] {
     node_for_convert = GetSourceNodePointer();
   }
-  // ¸´ÖÆÒ»·İ¶ÔÏó×÷Îª×ª»»ºóµÃµ½µÄ¶ÔÏó²¢ĞŞ¸ÄÀàĞÍÎª×ª»»µ½µÄÀàĞÍ
+  // å¤åˆ¶ä¸€ä»½å¯¹è±¡ä½œä¸ºè½¬æ¢åå¾—åˆ°çš„å¯¹è±¡å¹¶ä¿®æ”¹ç±»å‹ä¸ºè½¬æ¢åˆ°çš„ç±»å‹
   auto node_converted = node_for_convert->SelfCopy(new_type, new_const_tag);
-  // ÅĞ¶ÏÊÇ·ñ²»¿É¸´ÖÆ
+  // åˆ¤æ–­æ˜¯å¦ä¸å¯å¤åˆ¶
   if (node_converted == nullptr) [[unlikely]] {
     return false;
   }
@@ -875,7 +875,7 @@ bool TemaryOperatorNode::SetTrueBranch(
   assert(GetBranchConditionPointer() != nullptr);
   if (GetBranchConditionReference().GetGeneralOperatorType() !=
       GeneralOperationType::kInitValue) [[likely]] {
-    // ·ÖÖ§Ìõ¼ş²»Îª±àÒëÆÚ³£Á¿
+    // åˆ†æ”¯æ¡ä»¶ä¸ä¸ºç¼–è¯‘æœŸå¸¸é‡
     if (CheckBranchValid(*true_branch)) [[likely]] {
       true_branch_ = true_branch;
       true_branch_flow_control_node_container_ = flow_control_node_container;
@@ -884,7 +884,7 @@ bool TemaryOperatorNode::SetTrueBranch(
       return false;
     }
   } else {
-    // ·ÖÖ§Ìõ¼şÎª±àÒëÆÚ³£Á¿
+    // åˆ†æ”¯æ¡ä»¶ä¸ºç¼–è¯‘æœŸå¸¸é‡
     const auto& branch_condition =
         static_cast<const BasicTypeInitializeOperatorNode&>(
             GetBranchConditionReference());
@@ -893,18 +893,18 @@ bool TemaryOperatorNode::SetTrueBranch(
     const std::string& branch_value = branch_condition.GetValue();
     assert(branch_value == "0" || branch_value == "1");
     if (branch_value == "1") {
-      // Ñ¡ÔñÕæ·ÖÖ§£¬ĞèÒª¼ì²é
+      // é€‰æ‹©çœŸåˆ†æ”¯ï¼Œéœ€è¦æ£€æŸ¥
       if (CheckBranchValid(*true_branch)) [[likely]] {
         true_branch_ = true_branch;
         true_branch_flow_control_node_container_ = flow_control_node_container;
-        // Í¬Ê±ÉèÖÃ½á¹û·ÖÖ§½Úµã
+        // åŒæ—¶è®¾ç½®ç»“æœåˆ†æ”¯èŠ‚ç‚¹
         result_ = true_branch;
         return true;
       } else {
         return false;
       }
     } else {
-      // Ñ¡Ôñ¼Ù·ÖÖ§£¬Õæ·ÖÖ§ËæÒâÉèÖÃ
+      // é€‰æ‹©å‡åˆ†æ”¯ï¼ŒçœŸåˆ†æ”¯éšæ„è®¾ç½®
       true_branch_ = true_branch;
       true_branch_flow_control_node_container_ = flow_control_node_container;
       return true;
@@ -921,7 +921,7 @@ bool TemaryOperatorNode::SetFalseBranch(
   assert(GetBranchConditionPointer() != nullptr);
   if (GetBranchConditionReference().GetGeneralOperatorType() !=
       GeneralOperationType::kInitValue) [[likely]] {
-    // ·ÖÖ§Ìõ¼ş²»Îª±àÒëÆÚ³£Á¿
+    // åˆ†æ”¯æ¡ä»¶ä¸ä¸ºç¼–è¯‘æœŸå¸¸é‡
     if (CheckBranchValid(*false_branch)) [[likely]] {
       false_branch_ = false_branch;
       false_branch_flow_control_node_container_ = flow_control_node_container;
@@ -930,7 +930,7 @@ bool TemaryOperatorNode::SetFalseBranch(
       return false;
     }
   } else {
-    // ·ÖÖ§Ìõ¼şÎª±àÒëÆÚ³£Á¿
+    // åˆ†æ”¯æ¡ä»¶ä¸ºç¼–è¯‘æœŸå¸¸é‡
     const auto& branch_condition =
         static_cast<const BasicTypeInitializeOperatorNode&>(
             GetBranchConditionReference());
@@ -939,18 +939,18 @@ bool TemaryOperatorNode::SetFalseBranch(
     const std::string& branch_value = branch_condition.GetValue();
     assert(branch_value == "0" || branch_value == "1");
     if (branch_value == "0") {
-      // Ñ¡Ôñ¼Ù·ÖÖ§£¬ĞèÒª¼ì²é
+      // é€‰æ‹©å‡åˆ†æ”¯ï¼Œéœ€è¦æ£€æŸ¥
       if (CheckBranchValid(*false_branch)) [[likely]] {
         false_branch_ = false_branch;
         false_branch_flow_control_node_container_ = flow_control_node_container;
-        // Í¬Ê±ÉèÖÃ½á¹û·ÖÖ§½Úµã
+        // åŒæ—¶è®¾ç½®ç»“æœåˆ†æ”¯èŠ‚ç‚¹
         result_ = false_branch;
         return true;
       } else {
         return false;
       }
     } else {
-      // Ñ¡ÔñÕæ·ÖÖ§£¬¼Ù·ÖÖ§ËæÒâÉèÖÃ
+      // é€‰æ‹©çœŸåˆ†æ”¯ï¼Œå‡åˆ†æ”¯éšæ„è®¾ç½®
       false_branch_ = false_branch;
       false_branch_flow_control_node_container_ = flow_control_node_container;
       return true;
@@ -964,7 +964,7 @@ bool TemaryOperatorNode::CheckBranchConditionValid(
   auto result_type = branch_condition.GetResultTypePointer();
   switch (result_type->GetType()) {
     case StructOrBasicType::kBasic:
-      // ½øÒ»²½ÅĞ¶ÏÊÇ·ñÎªvoid
+      // è¿›ä¸€æ­¥åˆ¤æ–­æ˜¯å¦ä¸ºvoid
       return static_cast<const c_parser_frontend::type_system::BasicType&>(
                  *result_type)
                  .GetBuiltInType() != BuiltInType::kVoid;
@@ -979,15 +979,15 @@ bool TemaryOperatorNode::CheckBranchConditionValid(
 }
 
 bool TemaryOperatorNode::ConstructResultNode() {
-  // ¼ì²é·ÖÖ§Ìõ¼şÊÇ·ñÎª±àÒëÆÚ³£Á¿
-  // Èç¹ûÎª³£Á¿Ôò½á¹û½ÚµãÒÑÉèÖÃ
-  // ¼ì²éÊÇ·ñÒÑÉèÖÃÁ½·ÖÖ§
+  // æ£€æŸ¥åˆ†æ”¯æ¡ä»¶æ˜¯å¦ä¸ºç¼–è¯‘æœŸå¸¸é‡
+  // å¦‚æœä¸ºå¸¸é‡åˆ™ç»“æœèŠ‚ç‚¹å·²è®¾ç½®
+  // æ£€æŸ¥æ˜¯å¦å·²è®¾ç½®ä¸¤åˆ†æ”¯
   if (GetBranchConditionReference().GetGeneralOperatorType() !=
           GeneralOperationType::kInitValue &&
       GetTrueBranchPointer() != nullptr && GetFalseBranchPointer() != nullptr)
       [[likely]] {
-    // ½á¹û·ÖÖ§Î´´´½¨
-    // »ñÈ¡Á½¸ö·ÖÖ§¶¼¿ÉÒÔ×ª»»µ½µÄÀàĞÍ
+    // ç»“æœåˆ†æ”¯æœªåˆ›å»º
+    // è·å–ä¸¤ä¸ªåˆ†æ”¯éƒ½å¯ä»¥è½¬æ¢åˆ°çš„ç±»å‹
     std::shared_ptr<const TypeInterface> common_type;
     auto assignable_check_result = AssignOperatorNode::CheckAssignable(
         GetTrueBranchReference(), GetFalseBranchReference(), false);
@@ -1001,17 +1001,17 @@ bool TemaryOperatorNode::ConstructResultNode() {
         common_type = GetTrueBranchReference().GetResultTypePointer();
         break;
       case AssignableCheckResult::kLowerConvert:
-        // ¿ÉÒÔ·´Ïò×ª»»
+        // å¯ä»¥åå‘è½¬æ¢
         common_type = GetFalseBranchReference().GetResultTypePointer();
         break;
       case AssignableCheckResult::kInitializeList:
-        // ²»Ö§³ÖÔÚ·Ç±àÒëÆÚ³£Á¿Ìõ¼şÏÂÊ¹ÓÃ³õÊ¼»¯ÁĞ±í
+        // ä¸æ”¯æŒåœ¨éç¼–è¯‘æœŸå¸¸é‡æ¡ä»¶ä¸‹ä½¿ç”¨åˆå§‹åŒ–åˆ—è¡¨
         return false;
         break;
       case AssignableCheckResult::kCanNotConvert:
       case AssignableCheckResult::kAssignedNodeIsConst:
       case AssignableCheckResult::kAssignToRightValue:
-        // ÎŞ·¨´Ótrue·ÖÖ§×ª»»µ½false·ÖÖ§£¬³¢ÊÔ·´Ïò×ª»»
+        // æ— æ³•ä»trueåˆ†æ”¯è½¬æ¢åˆ°falseåˆ†æ”¯ï¼Œå°è¯•åå‘è½¬æ¢
         assignable_check_result = AssignOperatorNode::CheckAssignable(
             GetFalseBranchReference(), GetTrueBranchReference(), false);
         switch (assignable_check_result) {
@@ -1024,7 +1024,7 @@ bool TemaryOperatorNode::ConstructResultNode() {
           case AssignableCheckResult::kConvertToVoidPointer:
             common_type = GetFalseBranchReference().GetResultTypePointer();
             break;
-            // ÆäÓàÇé¿öÔÚÍâ²ãÒÑ´¦ÀíÍê±Ï»ò²»Ó¦³öÏÖ
+            // å…¶ä½™æƒ…å†µåœ¨å¤–å±‚å·²å¤„ç†å®Œæ¯•æˆ–ä¸åº”å‡ºç°
           default:
             assert(false);
             break;
@@ -1081,7 +1081,7 @@ MathematicalOperation MathematicalAndAssignOperationToMathematicalOperation(
       break;
     default:
       assert(false);
-      // ·ÀÖ¹¾¯¸æ
+      // é˜²æ­¢è­¦å‘Š
       return MathematicalOperation();
       break;
   }
@@ -1089,11 +1089,11 @@ MathematicalOperation MathematicalAndAssignOperationToMathematicalOperation(
 
 }  // namespace c_parser_frontend::operator_node
 
-// Ê¹ÓÃÇ°ÏòÉùÃ÷ºó¶¨ÒåÒÆµ½ÕâÀïÒÔÊ¹ÓÃÖÇÄÜÖ¸Õë
+// ä½¿ç”¨å‰å‘å£°æ˜åå®šä¹‰ç§»åˆ°è¿™é‡Œä»¥ä½¿ç”¨æ™ºèƒ½æŒ‡é’ˆ
 namespace c_parser_frontend::type_system {
 bool FunctionType::ArgumentInfo::operator==(
     const ArgumentInfo& argument_info) const {
-  // º¯Êı²ÎÊıÃû²»Ó°ÏìÊÇ·ñÎªÍ¬Ò»²ÎÊı£¬½ö±È½ÏÀàĞÍºÍÊÇ·ñÎªconst
+  // å‡½æ•°å‚æ•°åä¸å½±å“æ˜¯å¦ä¸ºåŒä¸€å‚æ•°ï¼Œä»…æ¯”è¾ƒç±»å‹å’Œæ˜¯å¦ä¸ºconst
   return variety_operator_node->GetConstTag() ==
              argument_info.variety_operator_node->GetConstTag() &&
          variety_operator_node->GetVarietyTypeReference() ==

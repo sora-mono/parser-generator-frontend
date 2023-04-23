@@ -39,11 +39,13 @@ void SyntaxParser::TerminalWordWaitingProcess() {
              ProductionNodeType::kOperatorNode ||
          GetWaitingProcessWordInfo().word_attached_data_.node_type ==
              ProductionNodeType::kEndNode);
+
   ProductionNodeId production_node_to_shift_id =
       GetWaitingProcessWordInfo().word_attached_data_.production_node_id;
   const ActionAndAttachedDataInterface& action_and_attached_data =
-      *GetActionAndTarget(GetParsingDataNow().syntax_analysis_table_entry_id,
-                          production_node_to_shift_id);
+      GetActionAndTarget(GetParsingDataNow().syntax_analysis_table_entry_id,
+                         production_node_to_shift_id);
+
   switch (action_and_attached_data.GetActionType()) {
     // TODO 添加接受时的后续处理
     [[unlikely]] case ActionType::kAccept:

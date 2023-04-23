@@ -1,12 +1,12 @@
-#include "type_system.h"
+ï»¿#include "type_system.h"
 
 namespace c_parser_frontend::type_system {
 BuiltInType CalculateBuiltInType(const std::string& value) {
-  // ×ª»»¹ı³ÌÖĞ×ª»»µÄ×Ö·ûÊı
+  // è½¬æ¢è¿‡ç¨‹ä¸­è½¬æ¢çš„å­—ç¬¦æ•°
   size_t converted_characters;
   uint64_t integer_value = std::stoull(value, &converted_characters);
   if (converted_characters == value.size()) {
-    // È«²¿×ª»»£¬value´ú±íÕûÊı
+    // å…¨éƒ¨è½¬æ¢ï¼Œvalueä»£è¡¨æ•´æ•°
     if (integer_value <= UINT16_MAX) {
       if (integer_value <= UINT8_MAX) {
         return BuiltInType::kInt8;
@@ -17,15 +17,15 @@ BuiltInType CalculateBuiltInType(const std::string& value) {
       if (integer_value <= UINT32_MAX) {
         return BuiltInType::kInt32;
       } else {
-        // CÓïÑÔ²»Ö§³Ölong long
+        // Cè¯­è¨€ä¸æ”¯æŒlong long
         return BuiltInType::kVoid;
       }
     }
   } else {
-    // Î´È«²¿×ª»»£¬¿ÉÄÜÊÇ¸¡µãÊıÒ²¿ÉÄÜÊÇ³¬³ö×î´óÖ§³ÖÊıÖµ´óĞ¡
+    // æœªå…¨éƒ¨è½¬æ¢ï¼Œå¯èƒ½æ˜¯æµ®ç‚¹æ•°ä¹Ÿå¯èƒ½æ˜¯è¶…å‡ºæœ€å¤§æ”¯æŒæ•°å€¼å¤§å°
     long double float_value = std::stold(value, &converted_characters);
     if (converted_characters != value.size()) [[unlikely]] {
-      // ³¬³ö×î´óÖ§³ÖÊıÖµ´óĞ¡
+      // è¶…å‡ºæœ€å¤§æ”¯æŒæ•°å€¼å¤§å°
       return BuiltInType::kVoid;
     }
     if (float_value <= FLT_MAX) {
@@ -33,7 +33,7 @@ BuiltInType CalculateBuiltInType(const std::string& value) {
     } else if (float_value <= DBL_MAX) {
       return BuiltInType::kFloat64;
     } else {
-      // CÓïÑÔ²»Ö§³Ölong double
+      // Cè¯­è¨€ä¸æ”¯æŒlong double
       return BuiltInType::kVoid;
     }
   }
@@ -56,9 +56,9 @@ TypeSystem::GetType(const std::string& type_name,
 
 bool TypeInterface::operator==(const TypeInterface& type_interface) const {
   if (IsSameObject(type_interface)) [[likely]] {
-    // ÈÎºÎÅÉÉúÀà¶¼Ó¦ÏÈµ÷ÓÃ×îµÍ¼¶¼Ì³ĞÀàµÄIsSameObject¶ø²»ÊÇoperator==()
-    // ËùÓĞÀàĞÍÁ´×îºó¶¼ÒÔStructOrBasicType::kEnd½áÎ²
-    // ¶ÔÓ¦µÄEndTypeÀàµÄoperator==()Ö±½Ó·µ»ØtrueÒÔÖÕ½áµ÷ÓÃÁ´
+    // ä»»ä½•æ´¾ç”Ÿç±»éƒ½åº”å…ˆè°ƒç”¨æœ€ä½çº§ç»§æ‰¿ç±»çš„IsSameObjectè€Œä¸æ˜¯operator==()
+    // æ‰€æœ‰ç±»å‹é“¾æœ€åéƒ½ä»¥StructOrBasicType::kEndç»“å°¾
+    // å¯¹åº”çš„EndTypeç±»çš„operator==()ç›´æ¥è¿”å›trueä»¥ç»ˆç»“è°ƒç”¨é“¾
     return GetNextNodeReference() == type_interface.GetNextNodeReference();
   } else {
     return false;
@@ -74,27 +74,27 @@ bool BasicType::operator==(const TypeInterface& type_interface) const {
 
 inline AssignableCheckResult BasicType::CanBeAssignedBy(
     const TypeInterface& type_interface) const {
-  // ³õ²½¼ì²éÓÃÀ´¸³ÖµµÄÀàĞÍ
+  // åˆæ­¥æ£€æŸ¥ç”¨æ¥èµ‹å€¼çš„ç±»å‹
   switch (type_interface.GetType()) {
-    // »ù´¡ÀàĞÍÖ»ÄÜÓÃ»ù´¡ÀàĞÍ¸³Öµ
-    // cÓïÑÔÖĞ²»ÄÜÊ¹ÓÃ³õÊ¼»¯ÁĞ±í³õÊ¼»¯»ù´¡ÀàĞÍ£¨´æÒÉ£©
+    // åŸºç¡€ç±»å‹åªèƒ½ç”¨åŸºç¡€ç±»å‹èµ‹å€¼
+    // cè¯­è¨€ä¸­ä¸èƒ½ä½¿ç”¨åˆå§‹åŒ–åˆ—è¡¨åˆå§‹åŒ–åŸºç¡€ç±»å‹ï¼ˆå­˜ç–‘ï¼‰
     case StructOrBasicType::kBasic:
       break;
     case StructOrBasicType::kNotSpecified:
-      // ¸ÃÀàĞÍ½ö¿É³öÏÖÔÚ¸ù¾İÀàĞÍÃû»ñÈ¡ÀàĞÍ²Ù×÷ÖĞ
+      // è¯¥ç±»å‹ä»…å¯å‡ºç°åœ¨æ ¹æ®ç±»å‹åè·å–ç±»å‹æ“ä½œä¸­
       assert(false);
       break;
     case StructOrBasicType::kInitializeList:
-      // ³õÊ¼»¯ÁĞ±í£¬½»¸øoperator_node´¦Àí
+      // åˆå§‹åŒ–åˆ—è¡¨ï¼Œäº¤ç»™operator_nodeå¤„ç†
       return AssignableCheckResult::kInitializeList;
       break;
     default:
       return AssignableCheckResult::kCanNotConvert;
       break;
   }
-  // ¼ì²é×ª»»·½·¨
+  // æ£€æŸ¥è½¬æ¢æ–¹æ³•
   const BasicType& basic_type = static_cast<const BasicType&>(type_interface);
-  // ¼ì²é·ûºÅÀàĞÍ
+  // æ£€æŸ¥ç¬¦å·ç±»å‹
   if (GetSignTag() != basic_type.GetSignTag()) [[unlikely]] {
     if (GetSignTag() == SignTag::kSigned) {
       return AssignableCheckResult::kUnsignedToSigned;
@@ -105,13 +105,13 @@ inline AssignableCheckResult BasicType::CanBeAssignedBy(
   int differ = static_cast<int>(GetBuiltInType()) -
                static_cast<int>(basic_type.GetBuiltInType());
   if (differ > 0) {
-    // ²ÎÊıÓÅÏÈ¼¶µÍ£¬Ó¦Ïò¸Ã¶ÔÏóµÄÀàĞÍ×ª»»
+    // å‚æ•°ä¼˜å…ˆçº§ä½ï¼Œåº”å‘è¯¥å¯¹è±¡çš„ç±»å‹è½¬æ¢
     return AssignableCheckResult::kUpperConvert;
   } else if (differ == 0) {
-    // ²ÎÊıÓë¸Ã¶ÔÏóÀàĞÍÏàÍ¬£¬ÎŞĞè×ª»»
+    // å‚æ•°ä¸è¯¥å¯¹è±¡ç±»å‹ç›¸åŒï¼Œæ— éœ€è½¬æ¢
     return AssignableCheckResult::kNonConvert;
   } else {
-    // ²ÎÊıÓÅÏÈ¼¶¸ß£¬Ó¦Ïò²ÎÊıÀàĞÍ×ª»»
+    // å‚æ•°ä¼˜å…ˆçº§é«˜ï¼Œåº”å‘å‚æ•°ç±»å‹è½¬æ¢
     return AssignableCheckResult::kLowerConvert;
   }
 }
@@ -119,7 +119,7 @@ inline AssignableCheckResult BasicType::CanBeAssignedBy(
 inline size_t BasicType::GetTypeStoreSize() const {
   switch (GetBuiltInType()) {
     case BuiltInType::kInt1:
-      // x86ÏÂboolÀàĞÍÒ²ÒªÊ¹ÓÃ1¸ö×Ö½Ú
+      // x86ä¸‹boolç±»å‹ä¹Ÿè¦ä½¿ç”¨1ä¸ªå­—èŠ‚
       return 1;
       break;
     case BuiltInType::kInt8:
@@ -138,20 +138,20 @@ inline size_t BasicType::GetTypeStoreSize() const {
       return 8;
       break;
     case BuiltInType::kVoid:
-      // ÓÃÓÚvoidÖ¸Õë
+      // ç”¨äºvoidæŒ‡é’ˆ
       return 4;
       break;
     default:
       assert(false);
-      // ·ÀÖ¹¾¯¸æ
+      // é˜²æ­¢è­¦å‘Š
       return size_t();
       break;
   }
 }
 
 inline bool BasicType::IsSameObject(const TypeInterface& type_interface) const {
-  // this == &basic_typeÊÇÓÅ»¯ÊÖ¶Î£¬ÀàĞÍÏµÍ³Éè¼ÆË¼Â·ÊÇ¾¡¿ÉÄÜ¶àµÄ¹²ÏíÒ»ÌõÀàĞÍÁ´
-  // ËùÒÔÈİÒ×³öÏÖÖ¸ÏòÍ¬Ò»¸ö½ÚµãµÄÇé¿ö
+  // this == &basic_typeæ˜¯ä¼˜åŒ–æ‰‹æ®µï¼Œç±»å‹ç³»ç»Ÿè®¾è®¡æ€è·¯æ˜¯å°½å¯èƒ½å¤šçš„å…±äº«ä¸€æ¡ç±»å‹é“¾
+  // æ‰€ä»¥å®¹æ˜“å‡ºç°æŒ‡å‘åŒä¸€ä¸ªèŠ‚ç‚¹çš„æƒ…å†µ
   const BasicType& basic_type = static_cast<const BasicType&>(type_interface);
   return this == &type_interface ||
          TypeInterface::IsSameObject(type_interface) &&
@@ -175,11 +175,11 @@ bool FunctionType::operator==(const TypeInterface& type_interface) const {
 }
 AssignableCheckResult FunctionType::CanBeAssignedBy(
     const TypeInterface& type_interface) const {
-  // ÔÚ¸³Öµ¸øº¯ÊıÖ¸ÕëµÄ¹ı³ÌÖĞµ÷ÓÃ
-  // º¯ÊıÀàĞÍÖ»ÄÜÊ¹ÓÃº¯Êı¸³Öµ
-  // ³õ²½¼ì²é»ù´¡Êı¾İÊÇ·ñÏàÍ¬
+  // åœ¨èµ‹å€¼ç»™å‡½æ•°æŒ‡é’ˆçš„è¿‡ç¨‹ä¸­è°ƒç”¨
+  // å‡½æ•°ç±»å‹åªèƒ½ä½¿ç”¨å‡½æ•°èµ‹å€¼
+  // åˆæ­¥æ£€æŸ¥åŸºç¡€æ•°æ®æ˜¯å¦ç›¸åŒ
   if (TypeInterface::IsSameObject(type_interface)) [[likely]] {
-    // ¼ì²éº¯ÊıÇ©ÃûÊÇ·ñÏàÍ¬
+    // æ£€æŸ¥å‡½æ•°ç­¾åæ˜¯å¦ç›¸åŒ
     if (IsSameSignature(static_cast<const FunctionType&>(type_interface)))
         [[likely]] {
       return AssignableCheckResult::kNonConvert;
@@ -188,20 +188,20 @@ AssignableCheckResult FunctionType::CanBeAssignedBy(
   return AssignableCheckResult::kCanNotConvert;
 }
 
-// ·µ»ØÊÇ·ñÎªº¯ÊıÉùÃ÷£¨º¯ÊıÉùÃ÷ÖĞ²»´æÔÚÈÎºÎÁ÷³Ì¿ØÖÆÓï¾ä£©
+// è¿”å›æ˜¯å¦ä¸ºå‡½æ•°å£°æ˜ï¼ˆå‡½æ•°å£°æ˜ä¸­ä¸å­˜åœ¨ä»»ä½•æµç¨‹æ§åˆ¶è¯­å¥ï¼‰
 
-// ¼ì²é¸ø¶¨Óï¾äÊÇ·ñ¿ÉÒÔ×÷Îªº¯ÊıÄÚ³öÏÖµÄÓï¾ä
+// æ£€æŸ¥ç»™å®šè¯­å¥æ˜¯å¦å¯ä»¥ä½œä¸ºå‡½æ•°å†…å‡ºç°çš„è¯­å¥
 
 AssignableCheckResult PointerType::CanBeAssignedBy(
     const TypeInterface& type_interface) const {
-  // ³õ²½¼ì²éÓÃÀ´¸³ÖµµÄÀàĞÍ
+  // åˆæ­¥æ£€æŸ¥ç”¨æ¥èµ‹å€¼çš„ç±»å‹
   switch (type_interface.GetType()) {
     case StructOrBasicType::kBasic:
-      // Èç¹ûÊÇ¸¡µãÊıÔòÒ»¶¨²»ÄÜ×ª»»ÎªÖ¸Õë
-      // ¼ì²éÊÇ·ñÎªÕûÊı
+      // å¦‚æœæ˜¯æµ®ç‚¹æ•°åˆ™ä¸€å®šä¸èƒ½è½¬æ¢ä¸ºæŒ‡é’ˆ
+      // æ£€æŸ¥æ˜¯å¦ä¸ºæ•´æ•°
       if (static_cast<const BasicType&>(type_interface).GetBuiltInType() <
           BuiltInType::kFloat32) [[likely]] {
-        // ½öµ±ÖµÎª0Ê±¿ÉÒÔ¸³Öµ¸øÖ¸Õë
+        // ä»…å½“å€¼ä¸º0æ—¶å¯ä»¥èµ‹å€¼ç»™æŒ‡é’ˆ
         return AssignableCheckResult::kMayBeZeroToPointer;
       } else {
         return AssignableCheckResult::kCanNotConvert;
@@ -210,58 +210,58 @@ AssignableCheckResult PointerType::CanBeAssignedBy(
     case StructOrBasicType::kPointer:
       break;
     case StructOrBasicType::kNotSpecified:
-      // ¸ÃÀàĞÍ½ö¿É³öÏÖÔÚ¸ù¾İÀàĞÍÃû»ñÈ¡ÀàĞÍ²Ù×÷ÖĞ
+      // è¯¥ç±»å‹ä»…å¯å‡ºç°åœ¨æ ¹æ®ç±»å‹åè·å–ç±»å‹æ“ä½œä¸­
       assert(false);
       break;
     case StructOrBasicType::kFunction:
-      // º¯Êı¿ÉÒÔ×÷ÎªÒ»¼¶º¯ÊıÖ¸Õë¶Ô´ı
+      // å‡½æ•°å¯ä»¥ä½œä¸ºä¸€çº§å‡½æ•°æŒ‡é’ˆå¯¹å¾…
       {
-        // ¼ì²éÊÇ·ñÏÂÒ»¸ö½ÚµãÎªº¯Êı½Úµã
+        // æ£€æŸ¥æ˜¯å¦ä¸‹ä¸€ä¸ªèŠ‚ç‚¹ä¸ºå‡½æ•°èŠ‚ç‚¹
         if (GetNextNodeReference().GetType() == StructOrBasicType::kFunction)
             [[likely]] {
           return GetNextNodeReference().CanBeAssignedBy(type_interface);
         } else {
-          // º¯ÊıÃûÖ»ÄÜ×÷ÎªÒ»ÖØº¯ÊıÖ¸ÕëÊ¹ÓÃ
+          // å‡½æ•°ååªèƒ½ä½œä¸ºä¸€é‡å‡½æ•°æŒ‡é’ˆä½¿ç”¨
           return AssignableCheckResult::kCanNotConvert;
         }
       }
       break;
     case StructOrBasicType::kInitializeList:
-      // ³õÊ¼»¯ÁĞ±íÔÚoperator_nodeÖĞ¼ì²é
+      // åˆå§‹åŒ–åˆ—è¡¨åœ¨operator_nodeä¸­æ£€æŸ¥
       return AssignableCheckResult::kInitializeList;
       break;
     default:
       return AssignableCheckResult::kCanNotConvert;
       break;
   }
-  // ¼ì²éconstÇé¿ö
+  // æ£€æŸ¥constæƒ…å†µ
   const PointerType& pointer_type =
       static_cast<const PointerType&>(type_interface);
   switch (static_cast<int>(GetConstTag()) -
           static_cast<int>(pointer_type.GetConstTag())) {
     case -1:
       [[unlikely]]
-      // ±»¸³ÖµµÄÀàĞÍÎª·Çconst£¬ÓÃÀ´¸³ÖµµÄÊÇconst
-      // ÕâÖÖÇé¿öÏÂ²»¿ÉÒÔ¸³Öµ
+      // è¢«èµ‹å€¼çš„ç±»å‹ä¸ºéconstï¼Œç”¨æ¥èµ‹å€¼çš„æ˜¯const
+      // è¿™ç§æƒ…å†µä¸‹ä¸å¯ä»¥èµ‹å€¼
       return AssignableCheckResult::kAssignedNodeIsConst;
       break;
     case 0:
     case 1:
-      // ÆäÓàÈıÖÖ¿ÉÒÔ¸³ÖµµÄÇé¿ö
+      // å…¶ä½™ä¸‰ç§å¯ä»¥èµ‹å€¼çš„æƒ…å†µ
       break;
     default:
       assert(false);
   }
   auto assignable_check_result = GetNextNodeReference().CanBeAssignedBy(
       type_interface.GetNextNodeReference());
-  // ¼ì²éÊÇ·ñÎª½«Ö¸Õë¸³Öµ¸øÍ¬µÈÎ¬ÊıµÄvoidÖ¸ÕëµÄ¹ı³Ì
+  // æ£€æŸ¥æ˜¯å¦ä¸ºå°†æŒ‡é’ˆèµ‹å€¼ç»™åŒç­‰ç»´æ•°çš„voidæŒ‡é’ˆçš„è¿‡ç¨‹
   if (assignable_check_result == AssignableCheckResult::kCanNotConvert)
       [[unlikely]] {
     if (GetNextNodeReference() ==
         *CommonlyUsedTypeGenerator::GetBasicType<BuiltInType::kVoid,
                                                  SignTag::kUnsigned>())
         [[likely]] {
-      // ±»¸³ÖµµÄ¶ÔÏóÎªvoidÖ¸Õë£¬¸³ÖµµÄ¶ÔÏóÎªÍ¬µÈÎ¬ÊıÖ¸Õë
+      // è¢«èµ‹å€¼çš„å¯¹è±¡ä¸ºvoidæŒ‡é’ˆï¼Œèµ‹å€¼çš„å¯¹è±¡ä¸ºåŒç­‰ç»´æ•°æŒ‡é’ˆ
       assignable_check_result = AssignableCheckResult::kConvertToVoidPointer;
     }
   }
@@ -272,10 +272,10 @@ size_t PointerType::TypeSizeOf() const {
   size_t array_size = GetArraySize();
   assert(array_size != -1);
   if (array_size == 0) {
-    // ´¿Ö¸Õë£¬Ö±½Ó·µ»ØÖ¸Õë´óĞ¡
+    // çº¯æŒ‡é’ˆï¼Œç›´æ¥è¿”å›æŒ‡é’ˆå¤§å°
     return PointerType::GetTypeStoreSize();
   } else {
-    // Ö¸ÏòÊı×éµÄÖ¸Õë£¬¸÷Î¬¶È´óĞ¡Ïà³Ë£¬×îºó³ËÒÔ»ù´¡µ¥Ôª´óĞ¡
+    // æŒ‡å‘æ•°ç»„çš„æŒ‡é’ˆï¼Œå„ç»´åº¦å¤§å°ç›¸ä¹˜ï¼Œæœ€åä¹˜ä»¥åŸºç¡€å•å…ƒå¤§å°
     return array_size * GetNextNodeReference().TypeSizeOf();
   }
 }
@@ -284,7 +284,7 @@ AssignableCheckResult StructType::CanBeAssignedBy(
     const TypeInterface& type_interface) const {
   if (type_interface.GetType() == StructOrBasicType::kInitializeList)
       [[likely]] {
-    // ¸³ÖµÓÃµÄÀàĞÍÎª³õÊ¼»¯ÁĞ±í£¬½»¸øopreator_node´¦Àí
+    // èµ‹å€¼ç”¨çš„ç±»å‹ä¸ºåˆå§‹åŒ–åˆ—è¡¨ï¼Œäº¤ç»™opreator_nodeå¤„ç†
     return AssignableCheckResult::kInitializeList;
   } else {
     return *this == type_interface ? AssignableCheckResult::kNonConvert
@@ -293,10 +293,10 @@ AssignableCheckResult StructType::CanBeAssignedBy(
 }
 
 size_t StructType::GetTypeStoreSize() const {
-  // É¨Ãè½á¹¹ÌåÒÔ»ñÈ¡×î´óµÄ³ÉÔ±
+  // æ‰«æç»“æ„ä½“ä»¥è·å–æœ€å¤§çš„æˆå‘˜
   const auto& struct_members = GetStructureMembers();
-  // CÓïÑÔ¿Õ½á¹¹Ìå´óĞ¡Îª0
-  // C++¿Õ½á¹¹Ìå´óĞ¡Îª1
+  // Cè¯­è¨€ç©ºç»“æ„ä½“å¤§å°ä¸º0
+  // C++ç©ºç»“æ„ä½“å¤§å°ä¸º1
   size_t biggest_member_size = 0;
   for (const auto& member : struct_members) {
     size_t member_size = member.first->GetTypeStoreSize();
@@ -304,21 +304,21 @@ size_t StructType::GetTypeStoreSize() const {
       biggest_member_size = member_size;
     }
   }
-  // »ñÈ¡ÏµÍ³»ù±¾×Ö½Úµ¥Î»Óë½á¹¹Ìå×î´ó³ÉÔ±µÄ×îĞ¡Öµ×÷Îª×Ö½Ú¶ÔÆëµÄµ¥Î»
+  // è·å–ç³»ç»ŸåŸºæœ¬å­—èŠ‚å•ä½ä¸ç»“æ„ä½“æœ€å¤§æˆå‘˜çš„æœ€å°å€¼ä½œä¸ºå­—èŠ‚å¯¹é½çš„å•ä½
   size_t aligen_size = std::min(size_t(4), biggest_member_size);
-  // CÓïÑÔ¿Õ½á¹¹Ìå´óĞ¡Îª0
+  // Cè¯­è¨€ç©ºç»“æ„ä½“å¤§å°ä¸º0
   size_t struct_size = 0;
-  // ÌîĞ´½á¹¹Ìå´óĞ¡
+  // å¡«å†™ç»“æ„ä½“å¤§å°
   for (const auto& member : struct_members) {
-    // ¾àÀë¶ÔÆëÊ£ÓàµÄ¿Õ¼ä
+    // è·ç¦»å¯¹é½å‰©ä½™çš„ç©ºé—´
     size_t rest_space_to_member_align = struct_size % aligen_size;
-    // ´æ´¢¸Ã³ÉÔ±ĞèÒªµÄ¿Õ¼ä
+    // å­˜å‚¨è¯¥æˆå‘˜éœ€è¦çš„ç©ºé—´
     size_t type_store_size = member.first->TypeSizeOf();
-    // Èç¹û¸Ã³ÉÔ±ËùĞè¿Õ¼ä´óÓÚ¾àÀë¶ÔÆëµÄ¿Õ¼ä£¬ÔòÕâ²¿·Ö¿Õ¼ä×÷ÎªÌî³ä¿Õ¼ä
+    // å¦‚æœè¯¥æˆå‘˜æ‰€éœ€ç©ºé—´å¤§äºè·ç¦»å¯¹é½çš„ç©ºé—´ï¼Œåˆ™è¿™éƒ¨åˆ†ç©ºé—´ä½œä¸ºå¡«å……ç©ºé—´
     if (rest_space_to_member_align < type_store_size) {
       struct_size += aligen_size - rest_space_to_member_align;
     }
-    // ÒÑ¾­¶ÔÆë£¬Ôö¼Ó´æ´¢ËùĞèµÄ¿Õ¼ä
+    // å·²ç»å¯¹é½ï¼Œå¢åŠ å­˜å‚¨æ‰€éœ€çš„ç©ºé—´
     struct_size += type_store_size;
   }
   return struct_size;
@@ -336,10 +336,10 @@ AssignableCheckResult UnionType::CanBeAssignedBy(
 }
 
 size_t UnionType::GetTypeStoreSize() const {
-  // É¨Ãè¹²ÓÃÌåÒÔ»ñÈ¡×î´óµÄ³ÉÔ±
+  // æ‰«æå…±ç”¨ä½“ä»¥è·å–æœ€å¤§çš„æˆå‘˜
   const auto& union_members = GetStructureMembers();
-  // CÓïÑÔ¿Õ¹²ÓÃÌå´óĞ¡Îª0
-  // C++¿Õ¹²ÓÃÌå´óĞ¡Îª1
+  // Cè¯­è¨€ç©ºå…±ç”¨ä½“å¤§å°ä¸º0
+  // C++ç©ºå…±ç”¨ä½“å¤§å°ä¸º1
   size_t biggest_member_size = 0;
   for (const auto& member : union_members) {
     size_t member_size = member.first->TypeSizeOf();
@@ -347,7 +347,7 @@ size_t UnionType::GetTypeStoreSize() const {
       biggest_member_size = member_size;
     }
   }
-  // »ñÈ¡ÏµÍ³»ù±¾×Ö½Úµ¥Î»Óë½á¹¹Ìå×î´ó³ÉÔ±µÄ×îĞ¡Öµ×÷Îª×Ö½Ú¶ÔÆëµÄµ¥Î»
+  // è·å–ç³»ç»ŸåŸºæœ¬å­—èŠ‚å•ä½ä¸ç»“æ„ä½“æœ€å¤§æˆå‘˜çš„æœ€å°å€¼ä½œä¸ºå­—èŠ‚å¯¹é½çš„å•ä½
   size_t aligen_size = std::min(size_t(4), biggest_member_size);
   size_t rest_space_to_aligen = biggest_member_size % aligen_size;
   if (rest_space_to_aligen != 0) {
@@ -369,11 +369,11 @@ AssignableCheckResult EnumType::CanBeAssignedBy(
 }
 
 bool EnumType::IsSameObject(const TypeInterface& type_interface) const {
-  // this == &type_interfaceÊÇÓÅ»¯ÊÖ¶Î
-  // ÀàĞÍÏµÍ³Éè¼ÆË¼Â·ÊÇ¾¡¿ÉÄÜ¶àµÄ¹²ÏíÒ»ÌõÀàĞÍÁ´
-  // ËùÒÔÈİÒ×³öÏÖÖ¸ÏòÍ¬Ò»¸ö½ÚµãµÄÇé¿ö
+  // this == &type_interfaceæ˜¯ä¼˜åŒ–æ‰‹æ®µ
+  // ç±»å‹ç³»ç»Ÿè®¾è®¡æ€è·¯æ˜¯å°½å¯èƒ½å¤šçš„å…±äº«ä¸€æ¡ç±»å‹é“¾
+  // æ‰€ä»¥å®¹æ˜“å‡ºç°æŒ‡å‘åŒä¸€ä¸ªèŠ‚ç‚¹çš„æƒ…å†µ
   if (this == &type_interface) [[likely]] {
-    // ¶şÕß¹²ÓÃÒ»¸ö½Úµã
+    // äºŒè€…å…±ç”¨ä¸€ä¸ªèŠ‚ç‚¹
     return true;
   } else if (TypeInterface::IsSameObject(type_interface)) [[likely]] {
     const EnumType& enum_type = static_cast<const EnumType&>(type_interface);
@@ -381,22 +381,22 @@ bool EnumType::IsSameObject(const TypeInterface& type_interface) const {
     const std::string& enum_name_argument = enum_type.GetEnumName();
     if (!enum_name_this.empty()) [[likely]] {
       if (!enum_name_argument.empty()) [[likely]] {
-        // ¶şÕß¶¼ÊÇ¾ßÃûÃ¶¾Ù
-        // CÓïÑÔÖĞ¾ßÃûÃ¶¾Ù¸ù¾İÃû×ÖÇø·Ö
+        // äºŒè€…éƒ½æ˜¯å…·åæšä¸¾
+        // Cè¯­è¨€ä¸­å…·åæšä¸¾æ ¹æ®åå­—åŒºåˆ†
         return enum_name_this == enum_name_argument;
       }
     }
-    // ¶şÕß¶¼ÊÇÄäÃûÃ¶¾Ù
-    // Èç¹ûÊÇÍ¬Ò»¸öÃ¶¾ÙÀàĞÍÓ¦¸ÃÔÚµÚÒ»¸öif·µ»Ø
+    // äºŒè€…éƒ½æ˜¯åŒ¿åæšä¸¾
+    // å¦‚æœæ˜¯åŒä¸€ä¸ªæšä¸¾ç±»å‹åº”è¯¥åœ¨ç¬¬ä¸€ä¸ªifè¿”å›
   }
   return false;
 }
 
 bool InitializeListType::IsSameObject(
     const TypeInterface& type_interface) const {
-  // this == &type_interfaceÊÇÓÅ»¯ÊÖ¶Î
-  // ÀàĞÍÏµÍ³Éè¼ÆË¼Â·ÊÇ¾¡¿ÉÄÜ¶àµÄ¹²ÏíÒ»ÌõÀàĞÍÁ´
-  // ËùÒÔÈİÒ×³öÏÖÖ¸ÏòÍ¬Ò»¸ö½ÚµãµÄÇé¿ö
+  // this == &type_interfaceæ˜¯ä¼˜åŒ–æ‰‹æ®µ
+  // ç±»å‹ç³»ç»Ÿè®¾è®¡æ€è·¯æ˜¯å°½å¯èƒ½å¤šçš„å…±äº«ä¸€æ¡ç±»å‹é“¾
+  // æ‰€ä»¥å®¹æ˜“å‡ºç°æŒ‡å‘åŒä¸€ä¸ªèŠ‚ç‚¹çš„æƒ…å†µ
   return this == &type_interface ||
          TypeInterface::IsSameObject(type_interface) &&
              GetListTypes() ==
@@ -405,8 +405,8 @@ bool InitializeListType::IsSameObject(
 }
 
 bool PointerType::IsSameObject(const TypeInterface& type_interface) const {
-  // this == &basic_typeÊÇÓÅ»¯ÊÖ¶Î£¬ÀàĞÍÏµÍ³Éè¼ÆË¼Â·ÊÇ¾¡¿ÉÄÜ¶àµÄ¹²ÏíÒ»ÌõÀàĞÍÁ´
-  // ËùÒÔÈİÒ×³öÏÖÖ¸ÏòÍ¬Ò»¸ö½ÚµãµÄÇé¿ö
+  // this == &basic_typeæ˜¯ä¼˜åŒ–æ‰‹æ®µï¼Œç±»å‹ç³»ç»Ÿè®¾è®¡æ€è·¯æ˜¯å°½å¯èƒ½å¤šçš„å…±äº«ä¸€æ¡ç±»å‹é“¾
+  // æ‰€ä»¥å®¹æ˜“å‡ºç°æŒ‡å‘åŒä¸€ä¸ªèŠ‚ç‚¹çš„æƒ…å†µ
   return this == &type_interface ||
          TypeInterface::IsSameObject(type_interface) &&
              GetConstTag() ==
@@ -512,7 +512,7 @@ CommonlyUsedTypeGenerator::GetBasicTypeNotTemplate(BuiltInType built_in_type,
       assert(false);
       break;
   }
-  // ·ÀÖ¹¾¯¸æ
+  // é˜²æ­¢è­¦å‘Š
   return GetBasicType<BuiltInType::kVoid, SignTag::kUnsigned>();
 }
 
@@ -527,27 +527,27 @@ TypeInterface::DeclineMathematicalComputeResult(
         case StructOrBasicType::kBasic:
           if (static_cast<long long>(left_compute_type->GetType()) >=
               static_cast<long long>(right_compute_type->GetType())) {
-            // ÓÒ²àÀàĞÍÌáÉıÖÁ×ó²à
+            // å³ä¾§ç±»å‹æå‡è‡³å·¦ä¾§
             return std::make_pair(
                 left_compute_type,
                 DeclineMathematicalComputeTypeResult::kConvertToLeft);
           } else {
-            // ×ó²àÀàĞÍÌáÉıÖÁÓÒ²à
+            // å·¦ä¾§ç±»å‹æå‡è‡³å³ä¾§
             return std::make_pair(
                 right_compute_type,
                 DeclineMathematicalComputeTypeResult::kConvertToRight);
           }
           break;
         case StructOrBasicType::kPointer:
-          // Ö¸ÕëÓëÆ«ÒÆÁ¿×éºÏ
+          // æŒ‡é’ˆä¸åç§»é‡ç»„åˆ
           if (static_cast<long long>(left_compute_type->GetType()) <
               static_cast<long long>(BuiltInType::kFloat32)) [[likely]] {
-            // Æ«ÒÆÁ¿ÊÇÕûĞÍ£¬¿ÉÒÔ×÷ÎªÖ¸ÕëµÄÆ«ÒÆÁ¿
+            // åç§»é‡æ˜¯æ•´å‹ï¼Œå¯ä»¥ä½œä¸ºæŒ‡é’ˆçš„åç§»é‡
             return std::make_pair(
                 right_compute_type,
                 DeclineMathematicalComputeTypeResult::kLeftOffsetRightPointer);
           } else {
-            // ¸¡µãÊıÀàĞÍµÄÆ«ÒÆÁ¿²»ÊÊÓÃÓÚÖ¸Õë
+            // æµ®ç‚¹æ•°ç±»å‹çš„åç§»é‡ä¸é€‚ç”¨äºæŒ‡é’ˆ
             return std::make_pair(
                 std::shared_ptr<const TypeInterface>(),
                 DeclineMathematicalComputeTypeResult::kLeftNotIntger);
@@ -563,22 +563,22 @@ TypeInterface::DeclineMathematicalComputeResult(
     case StructOrBasicType::kPointer: {
       switch (right_compute_type->GetType()) {
         case StructOrBasicType::kBasic:
-          // Ö¸ÕëÓëÆ«ÒÆÁ¿×éºÏ
+          // æŒ‡é’ˆä¸åç§»é‡ç»„åˆ
           if (static_cast<long long>(right_compute_type->GetType()) <
               static_cast<long long>(BuiltInType::kFloat32)) [[likely]] {
-            // Æ«ÒÆÁ¿ÊÇÕûĞÍ£¬¿ÉÒÔ×÷ÎªÖ¸ÕëµÄÆ«ÒÆÁ¿
+            // åç§»é‡æ˜¯æ•´å‹ï¼Œå¯ä»¥ä½œä¸ºæŒ‡é’ˆçš„åç§»é‡
             return std::make_pair(
                 left_compute_type,
                 DeclineMathematicalComputeTypeResult::kLeftPointerRightOffset);
           } else {
-            // ¸¡µãÊıÀàĞÍµÄÆ«ÒÆÁ¿²»ÊÊÓÃÓÚÖ¸Õë
+            // æµ®ç‚¹æ•°ç±»å‹çš„åç§»é‡ä¸é€‚ç”¨äºæŒ‡é’ˆ
             return std::make_pair(
                 std::shared_ptr<const TypeInterface>(),
                 DeclineMathematicalComputeTypeResult::kRightNotIntger);
           }
           break;
         case StructOrBasicType::kPointer:
-          // Ö¸ÕëÓëÖ¸Õë×éºÏ
+          // æŒ‡é’ˆä¸æŒ‡é’ˆç»„åˆ
           return std::make_pair(
               std::shared_ptr<const TypeInterface>(),
               DeclineMathematicalComputeTypeResult::kLeftRightBothPointer);
@@ -603,19 +603,19 @@ AddTypeResult TypeSystem::TypeData::AddType(
   std::monostate* empty_status_pointer =
       std::get_if<std::monostate>(&type_data_);
   if (empty_status_pointer != nullptr) [[likely]] {
-    // ¸Ã½ÚµãÎ´±£´æÈÎºÎÖ¸Õë
-    // ´æÈëµÚÒ»¸öÖ¸Õë
+    // è¯¥èŠ‚ç‚¹æœªä¿å­˜ä»»ä½•æŒ‡é’ˆ
+    // å­˜å…¥ç¬¬ä¸€ä¸ªæŒ‡é’ˆ
     type_data_ = type_to_add;
     return AddTypeResult::kNew;
   } else {
     std::shared_ptr<const TypeInterface>* shared_pointer =
         std::get_if<std::shared_ptr<const TypeInterface>>(&type_data_);
     if (shared_pointer != nullptr) [[likely]] {
-      // ¸Ã½Úµã±£´æÁËÒ»¸öÖ¸Õë£¬ĞÂÔöÒ»¸öºó×ªÎªvector´æ´¢
-      // ¼ì²éÒªÌí¼ÓµÄÀàĞÍÊÇ·ñÓëÒÑÓĞÀàĞÍÖØ¸´»òÕßÖØ¸´Ìí¼ÓkPointer/kBasicÒ»Àà
+      // è¯¥èŠ‚ç‚¹ä¿å­˜äº†ä¸€ä¸ªæŒ‡é’ˆï¼Œæ–°å¢ä¸€ä¸ªåè½¬ä¸ºvectorå­˜å‚¨
+      // æ£€æŸ¥è¦æ·»åŠ çš„ç±»å‹æ˜¯å¦ä¸å·²æœ‰ç±»å‹é‡å¤æˆ–è€…é‡å¤æ·»åŠ kPointer/kBasicä¸€ç±»
       if (IsSameKind((*shared_pointer)->GetType(), type_to_add->GetType()))
           [[unlikely]] {
-        // ¼ì²éÊÇ·ñÔÚÌí¼Óº¯ÊıÀàĞÍ
+        // æ£€æŸ¥æ˜¯å¦åœ¨æ·»åŠ å‡½æ•°ç±»å‹
         if (type_to_add->GetType() == StructOrBasicType::kFunction)
             [[unlikely]] {
           AddTypeResult function_define_add_result =
@@ -624,43 +624,43 @@ AddTypeResult TypeSystem::TypeData::AddType(
                   static_cast<const FunctionType&>(*type_to_add));
           if (function_define_add_result == AddTypeResult::kTypeAlreadyIn)
               [[likely]] {
-            // Èç¹ûº¯ÊıÇ©Ãû²»Í¬Ó¦·µ»ØAddTypeResult::kOverrideFunction
-            // Ê¹ÓÃĞÂµÄÖ¸ÕëÌæ»»Ô­ÓĞÖ¸Õë£¬´Ó¶ø¸üĞÂº¯Êı²ÎÊıÃû
+            // å¦‚æœå‡½æ•°ç­¾åä¸åŒåº”è¿”å›AddTypeResult::kOverrideFunction
+            // ä½¿ç”¨æ–°çš„æŒ‡é’ˆæ›¿æ¢åŸæœ‰æŒ‡é’ˆï¼Œä»è€Œæ›´æ–°å‡½æ•°å‚æ•°å
             *shared_pointer = type_to_add;
             function_define_add_result = AddTypeResult::kFunctionDefine;
           }
           return function_define_add_result;
         } else {
-          // ´ıÌí¼ÓµÄÀàĞÍÓëÒÑÓĞÀàĞÍÏàÍ¬£¬²úÉú³åÍ»
+          // å¾…æ·»åŠ çš„ç±»å‹ä¸å·²æœ‰ç±»å‹ç›¸åŒï¼Œäº§ç”Ÿå†²çª
           return AddTypeResult::kTypeAlreadyIn;
         }
       }
       auto pointers =
           std::make_unique<std::list<std::shared_ptr<const TypeInterface>>>();
-      // ½«StructOrBasicType::kBasic»òStructOrBasicType::kPointerÀàĞÍ·ÅÔÚ×îÇ°Ãæ
-      // ´Ó¶øÓÅ»¯²éÕÒÀàĞÍµÄËÙ¶È
+      // å°†StructOrBasicType::kBasicæˆ–StructOrBasicType::kPointerç±»å‹æ”¾åœ¨æœ€å‰é¢
+      // ä»è€Œä¼˜åŒ–æŸ¥æ‰¾ç±»å‹çš„é€Ÿåº¦
       if (IsSameKind(type_to_add->GetType(), StructOrBasicType::kBasic)) {
         pointers->emplace_back(type_to_add);
         pointers->emplace_back(std::move(*shared_pointer));
       } else {
-        // Ô­À´µÄÀàĞÍ²»Ò»¶¨ÊôÓÚ¸Ã´óÀà£¬µ«ĞÂÌí¼ÓµÄÀàĞÍÒ»¶¨²»ÊôÓÚ¸Ã´óÀà
+        // åŸæ¥çš„ç±»å‹ä¸ä¸€å®šå±äºè¯¥å¤§ç±»ï¼Œä½†æ–°æ·»åŠ çš„ç±»å‹ä¸€å®šä¸å±äºè¯¥å¤§ç±»
         pointers->emplace_back(std::move(*shared_pointer));
         pointers->emplace_back(type_to_add);
       }
       type_data_ = std::move(pointers);
       return AddTypeResult::kShiftToVector;
     } else {
-      // ¸Ã½ÚµãÒÑ¾­Ê¹ÓÃlist´æ´¢
+      // è¯¥èŠ‚ç‚¹å·²ç»ä½¿ç”¨listå­˜å‚¨
       std::unique_ptr<std::list<std::shared_ptr<const TypeInterface>>>&
           pointers = *std::get_if<
               std::unique_ptr<std::list<std::shared_ptr<const TypeInterface>>>>(
               &type_data_);
       assert(pointers != nullptr);
-      // ¼ì²é´ıÌí¼ÓµÄÀàĞÍÓëÒÑ´æÔÚµÄÀàĞÍÊÇ·ñÊôÓÚÍ¬Ò»´óÀà
+      // æ£€æŸ¥å¾…æ·»åŠ çš„ç±»å‹ä¸å·²å­˜åœ¨çš„ç±»å‹æ˜¯å¦å±äºåŒä¸€å¤§ç±»
       for (auto& stored_pointer : *pointers) {
         if (IsSameKind(stored_pointer->GetType(), type_to_add->GetType()))
             [[unlikely]] {
-          // ¼ì²éÊÇ·ñÔÚÌí¼Óº¯ÊıÀàĞÍ
+          // æ£€æŸ¥æ˜¯å¦åœ¨æ·»åŠ å‡½æ•°ç±»å‹
           if (type_to_add->GetType() == StructOrBasicType::kFunction)
               [[unlikely]] {
             AddTypeResult function_define_add_result =
@@ -669,21 +669,21 @@ AddTypeResult TypeSystem::TypeData::AddType(
                     static_cast<const FunctionType&>(*type_to_add));
             if (function_define_add_result == AddTypeResult::kTypeAlreadyIn)
                 [[likely]] {
-              // ÕâÖÖÇé¿öÎªÔÚº¯Êı¶¨ÒåÇ°ÒÑÌí¼Óº¯ÊıÉùÃ÷
-              // Ê¹ÓÃĞÂµÄÖ¸ÕëÌæ»»Ô­ÓĞÖ¸Õë
+              // è¿™ç§æƒ…å†µä¸ºåœ¨å‡½æ•°å®šä¹‰å‰å·²æ·»åŠ å‡½æ•°å£°æ˜
+              // ä½¿ç”¨æ–°çš„æŒ‡é’ˆæ›¿æ¢åŸæœ‰æŒ‡é’ˆ
               stored_pointer = type_to_add;
               return AddTypeResult::kFunctionDefine;
             }
             return function_define_add_result;
           }
-          // ´ıÌí¼ÓµÄÀàĞÍÓëÒÑÓĞÀàĞÍÏàÍ¬£¬²úÉú³åÍ»
+          // å¾…æ·»åŠ çš„ç±»å‹ä¸å·²æœ‰ç±»å‹ç›¸åŒï¼Œäº§ç”Ÿå†²çª
           return AddTypeResult::kTypeAlreadyIn;
         }
       }
       pointers->emplace_back(type_to_add);
       if (IsSameKind(type_to_add->GetType(), StructOrBasicType::kBasic)) {
-        // ĞÂ²åÈëµÄÀàĞÍÎªStructOrBasicType::kBasic/kPointer
-        // ½«¸ÃÀàĞÍ·Åµ½µÚÒ»¸öÎ»ÖÃÒÔ±ãÓÅ»¯ÎŞÀàĞÍÇãÏòĞÔÊ±µÄ²éÕÒÂß¼­
+        // æ–°æ’å…¥çš„ç±»å‹ä¸ºStructOrBasicType::kBasic/kPointer
+        // å°†è¯¥ç±»å‹æ”¾åˆ°ç¬¬ä¸€ä¸ªä½ç½®ä»¥ä¾¿ä¼˜åŒ–æ— ç±»å‹å€¾å‘æ€§æ—¶çš„æŸ¥æ‰¾é€»è¾‘
         std::swap(pointers->front(), pointers->back());
       }
       return AddTypeResult::kAddToVector;
@@ -694,46 +694,46 @@ AddTypeResult TypeSystem::TypeData::AddType(
 std::pair<std::shared_ptr<const TypeInterface>, GetTypeResult>
 TypeSystem::TypeData::GetType(StructOrBasicType type_prefer) const {
   if (std::get_if<std::monostate>(&type_data_) != nullptr) [[unlikely]] {
-    // Î´´æ´¢ÈÎºÎ½Úµã£¬µÈĞ§ÓÚ¸ÃÃû³Æ¶ÔÓ¦µÄÀàĞÍ²»´æÔÚ
+    // æœªå­˜å‚¨ä»»ä½•èŠ‚ç‚¹ï¼Œç­‰æ•ˆäºè¯¥åç§°å¯¹åº”çš„ç±»å‹ä¸å­˜åœ¨
     return std::make_pair(std::shared_ptr<TypeInterface>(),
                           GetTypeResult::kTypeNameNotFound);
   }
   const std::shared_ptr<const TypeInterface>* shared_pointer =
       std::get_if<std::shared_ptr<const TypeInterface>>(&type_data_);
   if (shared_pointer != nullptr) [[likely]] {
-    // ½ö´æ´¢1¸öÖ¸Õë
+    // ä»…å­˜å‚¨1ä¸ªæŒ‡é’ˆ
     if (type_prefer == StructOrBasicType::kNotSpecified ||
         (*shared_pointer)->GetType() == type_prefer) [[likely]] {
-      // ÎŞÀàĞÍÑ¡ÔñÇãÏò»òÕßÀàĞÍÑ¡ÔñÇãÏò·ûºÏ
+      // æ— ç±»å‹é€‰æ‹©å€¾å‘æˆ–è€…ç±»å‹é€‰æ‹©å€¾å‘ç¬¦åˆ
       return std::make_pair(*shared_pointer, GetTypeResult::kSuccess);
     } else {
-      // Ã»ÓĞÆ¥ÅäµÄÀàĞÍÑ¡ÔñÇãÏò
+      // æ²¡æœ‰åŒ¹é…çš„ç±»å‹é€‰æ‹©å€¾å‘
       return std::make_pair(std::shared_ptr<TypeInterface>(),
                             GetTypeResult::kNoMatchTypePrefer);
     }
   } else {
-    // ´æ´¢¶à¸öÖ¸Õë
+    // å­˜å‚¨å¤šä¸ªæŒ‡é’ˆ
     auto& pointers = *std::get_if<
         std::unique_ptr<std::list<std::shared_ptr<const TypeInterface>>>>(
         &type_data_);
-    // ÅĞ¶ÏÊÇ·ñÖ¸¶¨ÀàĞÍÑ¡ÔñÇãÏò
+    // åˆ¤æ–­æ˜¯å¦æŒ‡å®šç±»å‹é€‰æ‹©å€¾å‘
     if (type_prefer == StructOrBasicType::kNotSpecified) [[likely]] {
       if (pointers->front()->GetType() == StructOrBasicType::kBasic) {
-        // ÓÅÏÈÆ¥ÅäkBasic
+        // ä¼˜å…ˆåŒ¹é…kBasic
         return std::make_pair(pointers->front(), GetTypeResult::kSuccess);
       } else {
-        // vectorÖĞÃ»ÓĞkBasic£¬²¢ÇÒÒ»¶¨´æ´¢ÖÁÉÙÁ½¸öÖ¸Õë£¬ÕâĞ©Ö¸ÕëÍ¬¼¶
+        // vectorä¸­æ²¡æœ‰kBasicï¼Œå¹¶ä¸”ä¸€å®šå­˜å‚¨è‡³å°‘ä¸¤ä¸ªæŒ‡é’ˆï¼Œè¿™äº›æŒ‡é’ˆåŒçº§
         return std::make_pair(std::shared_ptr<const TypeInterface>(),
                               GetTypeResult::kSeveralSameLevelMatches);
       }
     } else {
-      // ±éÀúvectorËÑË÷Óë¸ø¶¨ÀàĞÍÑ¡ÔñÇãÏòÏàÍ¬µÄÖ¸Õë
+      // éå†vectoræœç´¢ä¸ç»™å®šç±»å‹é€‰æ‹©å€¾å‘ç›¸åŒçš„æŒ‡é’ˆ
       for (auto& pointer : *pointers) {
         if (pointer->GetType() == type_prefer) [[unlikely]] {
           return std::make_pair(pointer, GetTypeResult::kSuccess);
         }
       }
-      // Ã»ÓĞÆ¥ÅäµÄÀàĞÍÑ¡ÔñÇãÏò
+      // æ²¡æœ‰åŒ¹é…çš„ç±»å‹é€‰æ‹©å€¾å‘
       return std::make_pair(std::shared_ptr<const TypeInterface>(),
                             GetTypeResult::kNoMatchTypePrefer);
     }
@@ -748,7 +748,7 @@ bool TypeSystem::TypeData::IsSameKind(StructOrBasicType type1,
       static_cast<unsigned long long>(StructOrBasicType::kBasic);
   constexpr unsigned long long kPointerType =
       static_cast<unsigned long long>(StructOrBasicType::kPointer);
-  // µÚ¶ş²¿·ÖµÄÔËËãÓÃÀ´¼ì²âÊÇ·ñ¾ùÊôÓÚkPointer/kBasic
+  // ç¬¬äºŒéƒ¨åˆ†çš„è¿ç®—ç”¨æ¥æ£€æµ‹æ˜¯å¦å‡å±äºkPointer/kBasic
   return type1 == type2 || ((type1_ ^ kBasicType) |
                             (type1_ ^ kPointerType) & (type2_ ^ kBasicType) |
                             (type2_ ^ kPointerType));
@@ -766,11 +766,11 @@ StructureTypeInterface::StructureMemberContainer::GetMemberIndex(
 
 bool StructureTypeInterface::IsSameObject(
     const TypeInterface& type_interface) const {
-  // this == &type_interfaceÊÇÓÅ»¯ÊÖ¶Î
-  // ÀàĞÍÏµÍ³Éè¼ÆË¼Â·ÊÇ¾¡¿ÉÄÜ¶àµÄ¹²ÏíÒ»ÌõÀàĞÍÁ´
-  // ËùÒÔÈİÒ×³öÏÖÖ¸ÏòÍ¬Ò»¸ö½ÚµãµÄÇé¿ö
+  // this == &type_interfaceæ˜¯ä¼˜åŒ–æ‰‹æ®µ
+  // ç±»å‹ç³»ç»Ÿè®¾è®¡æ€è·¯æ˜¯å°½å¯èƒ½å¤šçš„å…±äº«ä¸€æ¡ç±»å‹é“¾
+  // æ‰€ä»¥å®¹æ˜“å‡ºç°æŒ‡å‘åŒä¸€ä¸ªèŠ‚ç‚¹çš„æƒ…å†µ
   if (this == &type_interface) [[likely]] {
-    // ¶şÕß¹²ÓÃÒ»¸ö½Úµã
+    // äºŒè€…å…±ç”¨ä¸€ä¸ªèŠ‚ç‚¹
     return true;
   } else if (TypeInterface::IsSameObject(type_interface)) [[likely]] {
     const StructureTypeInterface& structure_type =
@@ -780,13 +780,13 @@ bool StructureTypeInterface::IsSameObject(
         structure_type.GetStructureName();
     if (!structure_name_this.empty()) [[likely]] {
       if (!structure_name_another.empty()) [[likely]] {
-        // ¶şÕß¶¼ÊÇ¾ßÃû½á¹¹
-        // CÓïÑÔÖĞ¾ßÃû½á¹¹¸ù¾İÃû×ÖÇø·Ö
+        // äºŒè€…éƒ½æ˜¯å…·åç»“æ„
+        // Cè¯­è¨€ä¸­å…·åç»“æ„æ ¹æ®åå­—åŒºåˆ†
         return structure_name_this == structure_name_another;
       }
     }
-    // ¶şÕß¶¼ÊÇÄäÃû½á¹¹
-    // Èç¹ûÄäÃû½á¹¹ÏàÍ¬Ôò¶şÕßÊ¹ÓÃÏàÍ¬µÄÀàĞÍÖ¸Õë£¬ÔÚµÚÒ»¸öif¾Í·µ»Ø
+    // äºŒè€…éƒ½æ˜¯åŒ¿åç»“æ„
+    // å¦‚æœåŒ¿åç»“æ„ç›¸åŒåˆ™äºŒè€…ä½¿ç”¨ç›¸åŒçš„ç±»å‹æŒ‡é’ˆï¼Œåœ¨ç¬¬ä¸€ä¸ªifå°±è¿”å›
   }
   return false;
 }
