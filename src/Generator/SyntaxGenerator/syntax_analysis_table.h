@@ -42,7 +42,9 @@ class SyntaxAnalysisTableEntry {
         const ActionAndAttachedDataInterface&) = default;
 
     virtual bool operator==(const ActionAndAttachedDataInterface&
-                                attached_data_interface) const = 0 {
+                                attached_data_interface) const = delete;
+    virtual bool IsSame(
+        const ActionAndAttachedDataInterface& attached_data_interface) const = 0 {
       return action_type_ == attached_data_interface.action_type_;
     }
 
@@ -62,8 +64,8 @@ class SyntaxAnalysisTableEntry {
     /// @brief 判断两个对象是否相应部分相同
     /// @param[in] action_and_attached_data ：用来比较的另一部分数据
     /// @attention
-    /// 与operator==()在ShiftReductAttachedData语义上不同
-    /// operator==()比较两个对象是否完全相同，IsSameOrPart入参如果是
+    /// 与IsSame()在ShiftReductAttachedData语义上不同
+    /// IsSame()比较两个对象是否完全相同，IsSameOrPart入参如果是
     /// ShiftAttachedData或ReductAttachedData则只比较相应部分
     virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
                                   action_and_attached_data) const = 0;
@@ -138,7 +140,7 @@ class SyntaxAnalysisTableEntry {
     ShiftAttachedData(const ShiftAttachedData&) = default;
 
     ShiftAttachedData& operator=(const ShiftAttachedData&) = default;
-    virtual bool operator==(const ActionAndAttachedDataInterface&
+    virtual bool IsSame(const ActionAndAttachedDataInterface&
                                 shift_attached_data) const override;
 
     /// @brief 获取移入操作的附属数据
@@ -150,12 +152,12 @@ class SyntaxAnalysisTableEntry {
     /// @brief 判断两个对象是否相应部分相同
     /// @param[in] shift_attached_data ：用来比较的另一部分数据
     /// @attention
-    /// 与operator==()在this为ShiftReductAttachedData类型时语义上不同
-    /// operator==()比较两个对象是否完全相同，IsSameOrPart入参如果是
+    /// 与IsSame()在this为ShiftReductAttachedData类型时语义上不同
+    /// IsSame()比较两个对象是否完全相同，IsSameOrPart入参如果是
     /// ShiftAttachedData或ReductAttachedData则只比较相应部分
     virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
                                   shift_attached_data) const override {
-      return operator==(shift_attached_data);
+      return IsSame(shift_attached_data);
     }
 
     /// @brief 获取移入单词后转移到的语法分析表条目ID
@@ -216,7 +218,7 @@ class SyntaxAnalysisTableEntry {
 
     ReductAttachedData& operator=(const ReductAttachedData&) = default;
     ReductAttachedData& operator=(ReductAttachedData&&) = default;
-    virtual bool operator==(const ActionAndAttachedDataInterface&
+    virtual bool IsSame(const ActionAndAttachedDataInterface&
                                 reduct_attached_data) const override;
 
     /// @brief 获取规约操作的附属数据
@@ -228,12 +230,12 @@ class SyntaxAnalysisTableEntry {
     /// @brief 判断两个对象是否相应部分相同
     /// @param[in] reduct_attached_data ：用来比较的另一部分数据
     /// @attention
-    /// 与operator==()在this为ShiftReductAttachedData类型时语义上不同
-    /// operator==()比较两个对象是否完全相同，IsSameOrPart入参如果是
+    /// 与IsSame()在this为ShiftReductAttachedData类型时语义上不同
+    /// IsSame()比较两个对象是否完全相同，IsSameOrPart入参如果是
     /// ShiftAttachedData或ReductAttachedData则只比较相应部分
     virtual bool IsSameOrPart(const ActionAndAttachedDataInterface&
                                   reduct_attached_data) const override {
-      return operator==(reduct_attached_data);
+      return IsSame(reduct_attached_data);
     }
 
     /// @brief 获取规约得到的非终结产生式ID
@@ -324,7 +326,7 @@ class SyntaxAnalysisTableEntry {
               std::forward<ReductData>(reduct_attached_data)) {}
     ShiftReductAttachedData(const ShiftReductAttachedData&) = delete;
 
-    virtual bool operator==(
+    virtual bool IsSame(
         const ActionAndAttachedDataInterface& attached_data) const override;
 
     /// @brief 获取移入操作的附属数据
@@ -350,8 +352,8 @@ class SyntaxAnalysisTableEntry {
     /// @brief 判断两个对象是否相应部分相同
     /// @param[in] attached_data ：用来比较的另一部分数据
     /// @attention
-    /// 与operator==()在this为ShiftReductAttachedData类型时语义上不同
-    /// operator==()比较两个对象是否完全相同，IsSameOrPart入参如果是
+    /// 与IsSame()在this为ShiftReductAttachedData类型时语义上不同
+    /// IsSame()比较两个对象是否完全相同，IsSameOrPart入参如果是
     /// ShiftAttachedData或ReductAttachedData则只比较相应部分
     virtual bool IsSameOrPart(
         const ActionAndAttachedDataInterface& attached_data) const override;
@@ -427,7 +429,7 @@ class SyntaxAnalysisTableEntry {
     AcceptAttachedData& operator=(AcceptAttachedData&&) = delete;
 
     /// @attention Accept语义下不支持该操作
-    virtual bool operator==(
+    virtual bool IsSame(
         const ActionAndAttachedDataInterface&) const override {
       assert(false);
       /// 防止警告
@@ -456,12 +458,11 @@ class SyntaxAnalysisTableEntry {
     }
   };
 
-    /// @class ErrorAttachedData syntax_analysis_table.h
+  /// @class ErrorAttachedData syntax_analysis_table.h
   /// @brief 表示Error动作的节点
   class ErrorAttachedData : public ActionAndAttachedDataInterface {
    public:
-    ErrorAttachedData()
-        : ActionAndAttachedDataInterface(ActionType::kError) {}
+    ErrorAttachedData() : ActionAndAttachedDataInterface(ActionType::kError) {}
     ErrorAttachedData(const ErrorAttachedData&) = delete;
     ErrorAttachedData(ErrorAttachedData&&) = default;
 
@@ -469,7 +470,7 @@ class SyntaxAnalysisTableEntry {
     ErrorAttachedData& operator=(ErrorAttachedData&&) = delete;
 
     /// @attention Error语义下不支持该操作
-    virtual bool operator==(
+    virtual bool IsSame(
         const ActionAndAttachedDataInterface&) const override {
       assert(false);
       /// 防止警告

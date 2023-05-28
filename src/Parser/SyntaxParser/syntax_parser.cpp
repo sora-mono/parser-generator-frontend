@@ -12,7 +12,8 @@ void SyntaxParser::LoadConfig() {
 bool SyntaxParser::Parse(const std::string& filename) {
   bool result = dfa_parser_.SetInputFile(filename);
   if (result == false) [[unlikely]] {
-    LOG_ERROR("Parser", std::format("打开文件\"%s\"失败，请检查\n", filename));
+    LOG_ERROR("Parser",
+              std::format("打开文件\"{:}\"失败，请检查\n", filename));
     return false;
   }
   GetNextWord();

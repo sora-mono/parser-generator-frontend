@@ -5,7 +5,6 @@
 #include "SyntaxGenerator/syntax_generator_classes_register.h"
 
 int main() {
-  system("CHCP 65001");
   frontend::generator::syntax_generator::SyntaxGenerator syntax_generator;
   syntax_generator.ConstructSyntaxConfig();
 }

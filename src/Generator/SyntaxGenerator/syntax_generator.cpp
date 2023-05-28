@@ -324,7 +324,7 @@ ProductionNodeId SyntaxGenerator::AddNonTerminalProduction(
   ProductionBodyId body_id =
       production_node.AddBody(std::move(node_ids), class_id);
   LOG_INFO("SyntaxGenerator",
-           std::format("成功添加非终结节点 ") +
+           "成功添加非终结节点 " +
                FormatSingleProductionBody(production_node_id, body_id));
   LOG_INFO(
       "SyntaxGenerator",
@@ -1140,10 +1140,10 @@ void SyntaxGenerator::FormatProductionItemSetToMarkdown(
     return '_' + std::to_string(id.GetRawValue());
   };
 
-  std::string_view shift_edge_template =
-      reinterpret_cast<const char*>(u8"{:}--\"{:}\"-->{:}\n");
+  std::string_view shift_edge_template = "{:}--\"{:}\"-->{:}\n";
 
   std::ofstream output_file(image_output_path + "syntax_graph.md");
+  output_file.imbue(std::locale("Chinese"));
 
   output_file << "```mermaid\ngraph TB;\n";
 
@@ -1180,8 +1180,7 @@ void SyntaxGenerator::FormatProductionItemSetToMarkdown(
 
     std::string entry_node_name = get_node_name(syntax_analysis_table_entry_id);
 
-    std::string reduct_symbols =
-        reinterpret_cast<const char*>(u8"本条目在以下向前看符号下可规约： ");
+    std::string reduct_symbols = "本条目在以下向前看符号下可规约： ";
 
     std::string production_items =
         FormatProductionItems(production_item_set_id, "<br>");
@@ -1205,9 +1204,9 @@ void SyntaxGenerator::FormatProductionItemSetToMarkdown(
           std::string next_entry_node_name = get_node_name(next_entry_id);
 
           // 生成边的label
-          std::string edge_label = reinterpret_cast<const char*>(u8"移入 ") +
-                                   GetNodeSymbolStringFromProductionNodeId(
-                                       action_and_attached_data.first);
+          std::string edge_label =
+              "移入 " + GetNodeSymbolStringFromProductionNodeId(
+                            action_and_attached_data.first);
 
           output_file << std::vformat(
               shift_edge_template,
@@ -1242,9 +1241,9 @@ void SyntaxGenerator::FormatProductionItemSetToMarkdown(
       std::string next_entry_node_name = get_node_name(next_entry_id);
 
       // 生成边的label
-      std::string edge_label = reinterpret_cast<const char*>(u8"移入 ") +
-                               GetNodeSymbolStringFromProductionNodeId(
-                                   nonterminal_node_and_next_entry.first);
+      std::string edge_label =
+          "移入 " + GetNodeSymbolStringFromProductionNodeId(
+                        nonterminal_node_and_next_entry.first);
 
       output_file << std::vformat(
           shift_edge_template,
@@ -1254,8 +1253,8 @@ void SyntaxGenerator::FormatProductionItemSetToMarkdown(
       syntax_analysis_table_entry_id_waiting_output.push(next_entry_id);
     }
 
-    std::string_view node_label_template = reinterpret_cast<const char*>(
-        u8"{:}[\"语法分析表ID = {:}<br>{:}<br>{:}\"]\n");
+    std::string_view node_label_template =
+        "{:}[\"语法分析表ID = {:}<br>{:}<br>{:}\"]\n";
 
     output_file << std::vformat(
         node_label_template,
@@ -1388,7 +1387,7 @@ std::string SyntaxGenerator::FormatProductionItem(
         std::format(" {:}", GetNodeSymbolStringFromProductionNodeId(
                                 production_node_waiting_spread_body[i]));
   }
-  format_result += reinterpret_cast<const char*>(u8" ·");
+  format_result += " ·";
   for (size_t i = next_word_to_shift_index;
        i < production_node_waiting_spread_body.size(); i++) {
     format_result +=
@@ -1401,8 +1400,7 @@ std::string SyntaxGenerator::FormatProductionItem(
 std::string SyntaxGenerator::FormatProductionItemAndLookForwardSymbols(
     const ProductionItem& production_item,
     const ForwardNodesContainer& look_forward_node_ids) const {
-  return FormatProductionItem(production_item) +
-         reinterpret_cast<const char*>(u8" 向前看符号：") +
+  return FormatProductionItem(production_item) + " 向前看符号：" +
          FormatLookForwardSymbols(look_forward_node_ids);
 }
 
@@ -1429,7 +1427,7 @@ std::string SyntaxGenerator::FormatProductionItems(
   for (const auto& item_and_forward_nodes :
        production_item_set.GetItemsAndForwardNodeIds()) {
     format_result += FormatProductionItem(item_and_forward_nodes.first);
-    format_result += reinterpret_cast<const char*>(u8" 向前看符号：");
+    format_result += " 向前看符号：";
     format_result += FormatLookForwardSymbols(item_and_forward_nodes.second);
     format_result += line_feed;
   }

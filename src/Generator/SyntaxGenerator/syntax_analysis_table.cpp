@@ -50,18 +50,17 @@ void SyntaxAnalysisTableEntry::ResetEntryId(
   }
 }
 
-bool SyntaxAnalysisTableEntry::ShiftAttachedData::operator==(
+bool SyntaxAnalysisTableEntry::ShiftAttachedData::IsSame(
     const ActionAndAttachedDataInterface& shift_attached_data) const {
-  return ActionAndAttachedDataInterface::operator==(shift_attached_data) &&
+  return ActionAndAttachedDataInterface::IsSame(shift_attached_data) &&
          next_entry_id_ ==
              static_cast<const ShiftAttachedData&>(shift_attached_data)
                  .next_entry_id_;
 }
 
-bool SyntaxAnalysisTableEntry::ReductAttachedData::operator==(
+bool SyntaxAnalysisTableEntry::ReductAttachedData::IsSame(
     const ActionAndAttachedDataInterface& reduct_attached_data) const {
-  if (ActionAndAttachedDataInterface::operator==(reduct_attached_data))
-      [[likely]] {
+  if (ActionAndAttachedDataInterface::IsSame(reduct_attached_data)) [[likely]] {
     const ReductAttachedData& real_type_reduct_attached_data =
         static_cast<const ReductAttachedData&>(reduct_attached_data);
     return reducted_nonterminal_node_id_ ==
@@ -74,16 +73,15 @@ bool SyntaxAnalysisTableEntry::ReductAttachedData::operator==(
   }
 }
 
-bool SyntaxAnalysisTableEntry::ShiftReductAttachedData::operator==(
+bool SyntaxAnalysisTableEntry::ShiftReductAttachedData::IsSame(
     const ActionAndAttachedDataInterface& attached_data) const {
-  if (ActionAndAttachedDataInterface::operator==(attached_data)) [[likely]] {
-    return ActionAndAttachedDataInterface::operator==(attached_data) &&
-           shift_attached_data_ ==
+  if (ActionAndAttachedDataInterface::IsSame(attached_data)) [[likely]] {
+    return shift_attached_data_.IsSame(
                static_cast<const ShiftReductAttachedData&>(attached_data)
-                   .shift_attached_data_ &&
-           reduct_attached_data_ ==
+                   .shift_attached_data_) &&
+           reduct_attached_data_.IsSame(
                static_cast<const ShiftReductAttachedData&>(attached_data)
-                   .reduct_attached_data_;
+                   .reduct_attached_data_);
   } else {
     return false;
   }
@@ -115,15 +113,16 @@ bool SyntaxAnalysisTableEntry::ShiftReductAttachedData::IsSameOrPart(
     const ActionAndAttachedDataInterface& attached_data) const {
   switch (attached_data.GetActionType()) {
     case ActionType::kShift:
-      return shift_attached_data_ ==
-             static_cast<const ShiftAttachedData&>(attached_data);
+      return shift_attached_data_.IsSame(
+          static_cast<const ShiftAttachedData&>(attached_data));
       break;
     case ActionType::kReduct:
-      return reduct_attached_data_ ==
-             static_cast<const ReductAttachedData&>(attached_data);
+      return reduct_attached_data_
+          .IsSame(
+          static_cast<const ReductAttachedData&>(attached_data));
       break;
     case ActionType::kShiftReduct:
-      return operator==(attached_data);
+      return IsSame(attached_data);
       break;
     default:
       assert(false);
